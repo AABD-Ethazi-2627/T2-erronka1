@@ -114,8 +114,6 @@ NiFi-k Kafka Topicetik lerro bakoitza FlowFile bat gisa jasotzen du. Lerro baten
 
 NiFi flow bat osatu behar duzu.
 
-```
-
 ### Kibana Dashboarda
 
 Sortu dashboard bat honako bista-motekin:
