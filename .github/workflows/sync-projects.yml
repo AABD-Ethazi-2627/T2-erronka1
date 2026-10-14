@@ -1,0 +1,39 @@
+name: Sync B-taldea Project to central
+on:
+  schedule:
+    - cron: '17 */8 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Preview without changing Project 1
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: b-taldea-project-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Validate synchronizer
+        run: python3 -m unittest discover -s tests
+      - name: Synchronize Projects
+        env:
+          GH_TOKEN: ${{ secrets.PROJECTS_SYNC_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo '::error::Configure PROJECTS_SYNC_TOKEN with access to both organization Projects.'
+            exit 1
+          fi
+          if [ "$DRY_RUN" = 'true' ]; then
+            python3 scripts/sync_projects.py
+          else
+            python3 scripts/sync_projects.py --apply
+          fi

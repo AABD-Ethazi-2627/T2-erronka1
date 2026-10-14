@@ -43,3 +43,7 @@ cnc-guard/
 ## 4. Erronkaren dokumentua
 
 `ENUNTZIATUA.md` irakurri — hiru faseetan zer egin azaltzen du.
+
+## Planning automatikoa
+
+[Project #2 → #1 sinkronizazioa, 8 orduro](docs/PROJECTS_SYNC.md).
