@@ -16,6 +16,7 @@ El GITHUB_TOKEN del runner no basta para Projects de organización.
 Preferir una GitHub App; este workflow recibe un token ya disponible.
 Si se usa un PAT clásico, necesita scope `project` y acceso al repositorio
 (`repo` si es privado); respetar las políticas de autorización de la organización.
+La credencial necesita también permiso para actualizar campos de las issues.
 No copiar una sesión OAuth personal de `gh` al repositorio.
 
 Después ejecutar manualmente primero con `dry_run=true`, después con false.
@@ -58,3 +59,8 @@ Las mutaciones no son transaccionales: un fallo de red puede dejar una pasada
 parcial. Reejecutar es seguro y completa los cambios pendientes. Concurrency
 impide solapar ejecuciones de este workflow; si alguien edita durante la
 pasada, la comprobación final falla y pide reejecutar.
+
+Start date y Target date son campos compartidos de issue en esta organización.
+Se actualizan mediante updateIssueFieldValue y serán visibles también en #2.
+Las fechas vascas del #2 tienen prioridad; no editar fechas inglesas de forma
+contradictoria. La prioridad y el área se mantienen exclusivamente en #2.

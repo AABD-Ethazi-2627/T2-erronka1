@@ -41,7 +41,7 @@ def read_project(number):
     query = """query($org:String!, $number:Int!, $cursor:String) {
       organization(login:$org) { projectV2(number:$number) { id
         fields(first:100) { pageInfo { hasNextPage } nodes {
-          ... on ProjectV2Field { id name dataType }
+          ... on ProjectV2Field { id name dataType isIssueField issueField { ... on IssueFieldDate { id name } } }
           ... on ProjectV2SingleSelectField { id name options { id name } }
         } }
         items(first:100, after:$cursor) { pageInfo { hasNextPage endCursor } nodes {
@@ -52,6 +52,7 @@ def read_project(number):
           fieldValues(first:100) { pageInfo { hasNextPage } nodes {
             ... on ProjectV2ItemFieldSingleSelectValue { name field { ... on ProjectV2FieldCommon { name } } }
             ... on ProjectV2ItemFieldDateValue { date field { ... on ProjectV2FieldCommon { name } } }
+            ... on ProjectV2ItemIssueFieldValue { field { ... on ProjectV2FieldCommon { name } } issueFieldValue { ... on IssueFieldDateValue { value } } }
           } }
         } }
       } }
@@ -67,7 +68,9 @@ def read_project(number):
             if item["fieldValues"]["pageInfo"]["hasNextPage"]:
                 raise ValueError("Incomplete item fields; aborting")
             item["values"] = {
-                v["field"]["name"]: v.get("date", v.get("name"))
+                v["field"]["name"]: v.get("issueFieldValue", {}).get("value")
+                if v.get("issueFieldValue")
+                else v.get("date", v.get("name"))
                 for v in item["fieldValues"]["nodes"]
                 if "field" in v
             }
@@ -165,6 +168,12 @@ def plan(source, target):
     return changes
 
 
+def issue_field_input(field, value):
+    payload = {"fieldId": field["issueField"]["id"]}
+    payload.update({"delete": True} if value is None else {"dateValue": value["date"]})
+    return payload
+
+
 def apply(target, changes):
     for change in changes:
         item_id = change["item_id"]
@@ -182,7 +191,15 @@ def apply(target, changes):
                 "item": item_id,
                 "field": target["fields"][name]["id"],
             }
-            if value is None:
+            if target["fields"][name].get("isIssueField"):
+                graphql(
+                    """mutation($issue:ID!, $field:IssueFieldCreateOrUpdateInput!) {
+                  updateIssueFieldValue(input:{issueId:$issue,issueField:$field}) { clientMutationId }
+                }""",
+                    issue=change["content_id"],
+                    field=issue_field_input(target["fields"][name], value),
+                )
+            elif value is None:
                 graphql(
                     """mutation($project:ID!, $item:ID!, $field:ID!) {
                   clearProjectV2ItemFieldValue(input:{projectId:$project,itemId:$item,fieldId:$field}) { projectV2Item { id } }

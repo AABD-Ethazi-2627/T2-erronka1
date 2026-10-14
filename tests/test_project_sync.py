@@ -108,3 +108,23 @@ class SyncTests(unittest.TestCase):
             ),
         )
         self.assertEqual(changes[0]["values"], {"Start date": None})
+
+
+class IssueFieldTests(unittest.TestCase):
+    def test_issue_date_payload_uses_issue_field_id(self):
+        from scripts.sync_projects import issue_field_input
+
+        self.assertEqual(
+            issue_field_input(
+                {"issueField": {"id": "date-id"}}, {"date": "2026-10-14"}
+            ),
+            {"fieldId": "date-id", "dateValue": "2026-10-14"},
+        )
+
+    def test_clear_issue_date(self):
+        from scripts.sync_projects import issue_field_input
+
+        self.assertEqual(
+            issue_field_input({"issueField": {"id": "date-id"}}, None),
+            {"fieldId": "date-id", "delete": True},
+        )
