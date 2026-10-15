@@ -76,3 +76,5 @@ El cambio de nombre del repositorio no proporciona esa credencial. El filtro del
 script se ha actualizado a `T2-erronka1` y el dry-run local autenticado devolvió
 `0 items need changes; apply=False`, sin mutaciones. La activación de Actions
 sigue pendiente de un administrador; no se ha configurado ni copiado ningún token.
+
+Projects-en azken doikuntzen erregistroa: [2026-10-15 berrikuspena](PROJECTS_REVIEW_2026-10-15.md).
