@@ -1,0 +1,14 @@
+{
+  "event_id": "1313ba7be7d2eb67e44b3b32641b4cf58f0c513029f00899047b705e7ceb870e",
+  "machine_id": "CNC-039",
+  "timestamp": "2026-10-15T10:00:00Z",
+  "schema_version": "0.1.0",
+  "quality_flag": "OK",
+  "source": {
+    "kind": "lab_fixture",
+    "uri": "fixture:log",
+    "record_ref": "synthetic-example-1"
+  },
+  "code": "LAB_SAMPLE",
+  "raw_text": "2026-10-15T10:00:00Z CNC-039 code=LAB_SAMPLE fixture only"
+}

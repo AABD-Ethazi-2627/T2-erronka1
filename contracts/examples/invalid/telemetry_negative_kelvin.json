@@ -1,0 +1,19 @@
+{
+  "event_id": "cdd611fe38569f822079029b4359f0b69d942bb85db497563596aabe403ff088",
+  "machine_id": "CNC-039",
+  "timestamp": "2026-04-29T10:57:50Z",
+  "schema_version": "0.1.0",
+  "quality_flag": "OK",
+  "source": {
+    "kind": "statement_example",
+    "uri": "file:ENUNTZIATUA.md",
+    "record_ref": "NiFi CSV example",
+    "raw_record": "2026-04-29T10:57:50Z,CNC-039,L,299.0,308.6,1587,38.6,124,0,0,0,0,0,0"
+  },
+  "machine_type": "L",
+  "air_temp_K": -1,
+  "process_temp_K": 308.6,
+  "rpm": 1587,
+  "torque_Nm": 38.6,
+  "tool_wear_min": 124
+}

@@ -1,12 +1,17 @@
 # CNC Guard — Hasteko Argibideak
 
-## 1. NFS karpeta muntatu (behin bakarrik)
+## 1. SMB datu-iturria
+
+Une honetan behatutako baliabidea: `\\192.168.75.222\cnc-stream` (2026-10-15).
+Konexioa `.env` lokal pribatuan konfiguratzen da; eredua `.env.example` da.
+Ez igo credentzialik Git-era. Ez dago NFS muntaketa edo `sudo` beharrik irakurketa-probarako.
 
 ```bash
-sudo mkdir -p /mnt/cnc-stream
-sudo mount ZERBITZARI_IP:/opt/cnc-stream /mnt/cnc-stream
-ls /mnt/cnc-stream/   # CSV fitxategiak ikusi behar dituzu
+python -m scripts.check_smb_source
+python -m scripts.check_smb_source --download-dir data/stream_samples
 ```
+
+[Kontratuak, unitateak, adibideak eta SMB argibideak](contracts/README.md).
 
 ## 2. Zerbitzuak abiarazi
 

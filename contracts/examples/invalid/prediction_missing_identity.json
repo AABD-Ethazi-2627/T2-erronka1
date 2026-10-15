@@ -1,0 +1,22 @@
+{
+  "machine_id": "CNC-039",
+  "timestamp": "2026-04-29T10:57:50Z",
+  "schema_version": "0.1.0",
+  "quality_flag": "OK",
+  "source": {
+    "kind": "statement_example",
+    "uri": "file:ENUNTZIATUA.md",
+    "record_ref": "NiFi CSV example",
+    "raw_record": "2026-04-29T10:57:50Z,CNC-039,L,299.0,308.6,1587,38.6,124,0,0,0,0,0,0"
+  },
+  "failure_score": 0.0002466107439200986,
+  "risk_alert": false,
+  "anomaly_score": 0.42004900731222095,
+  "anomaly_alert": false,
+  "policy": "f1",
+  "model_version": "offline-ai4i-v2",
+  "scored_at": "2026-10-15T10:01:00Z",
+  "model_artifact_sha256": "0ef08777c0943c7b6ed9c9463933b01938a280ddc0072f65b3c9e9efebdfdfea",
+  "risk_threshold": 0.5506458333333333,
+  "anomaly_threshold": 0.6338224044766037
+}

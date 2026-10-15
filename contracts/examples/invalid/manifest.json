@@ -1,0 +1,62 @@
+[
+  {
+    "file": "telemetry_missing_rpm.json",
+    "schema": "telemetry",
+    "reason": "rpm is required"
+  },
+  {
+    "file": "telemetry_negative_kelvin.json",
+    "schema": "telemetry",
+    "reason": "Kelvin must be positive"
+  },
+  {
+    "file": "telemetry_local_time.json",
+    "schema": "telemetry",
+    "reason": "UTC Z is mandatory"
+  },
+  {
+    "file": "telemetry_impossible_date.json",
+    "schema": "telemetry",
+    "reason": "Impossible calendar date"
+  },
+  {
+    "file": "telemetry_leaked_label.json",
+    "schema": "telemetry",
+    "reason": "Training labels are forbidden in normalized telemetry"
+  },
+  {
+    "file": "telemetry_bad_quality.json",
+    "schema": "telemetry",
+    "reason": "Only validated OK events enter the inference contract"
+  },
+  {
+    "file": "telemetry_invented_vibration.json",
+    "schema": "telemetry",
+    "reason": "No vibration source is available"
+  },
+  {
+    "file": "maintenance_unknown_label.json",
+    "schema": "maintenance",
+    "reason": "Use null when unknown, not a fabricated boolean or string"
+  },
+  {
+    "file": "log_missing_raw_text.json",
+    "schema": "log",
+    "reason": "Original log text is mandatory"
+  },
+  {
+    "file": "prediction_out_of_range.json",
+    "schema": "prediction",
+    "reason": "Risk score must be in [0,1]"
+  },
+  {
+    "file": "prediction_bad_policy.json",
+    "schema": "prediction",
+    "reason": "Independent policies are f1/f2; no AND gate"
+  },
+  {
+    "file": "prediction_missing_identity.json",
+    "schema": "prediction",
+    "reason": "Prediction must preserve the source event identity"
+  }
+]

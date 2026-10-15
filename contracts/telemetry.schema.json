@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cnc-guard:contracts:0.1.0:telemetry",
+  "title": "CNC Guard telemetry — proposed 0.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "machine_id",
+    "timestamp",
+    "schema_version",
+    "quality_flag",
+    "source",
+    "machine_type",
+    "air_temp_K",
+    "process_temp_K",
+    "rpm",
+    "torque_Nm",
+    "tool_wear_min"
+  ],
+  "properties": {
+    "event_id": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/event_id"
+    },
+    "machine_id": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/machine_id"
+    },
+    "timestamp": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/timestamp"
+    },
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "quality_flag": {
+      "const": "OK"
+    },
+    "source": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/source"
+    },
+    "machine_type": {
+      "enum": [
+        "H",
+        "M",
+        "L"
+      ]
+    },
+    "air_temp_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "process_temp_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "rpm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "torque_Nm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tool_wear_min": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

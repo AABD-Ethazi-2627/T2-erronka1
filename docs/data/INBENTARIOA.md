@@ -92,3 +92,18 @@ PY
 ```
 
 CG03rako kontratuak eta CG01eko ANEXO1 talde-berrikuspena egiteke daude.
+
+## 2026-10-15eko eguneratzea — SMB egiaztatuta
+
+Erabiltzaileak helbidea zuzendu du: lehen 192.168.75.150, ondoren
+`\\192.168.75.222\cnc-stream` egungo SMB baliabidea. Azken helbide horretan
+zerrenda eta hiru CSV lote irakurri dira (30 erregistro guztira), idazketarik gabe.
+Aurreko 192.168.7.150 helbidearen timeout-a aurreko behaketa da, ez uneko egoera.
+
+Laginek timestamp UTC eta entrenamenduko 13 zutabeen headerra dute. Hashak,
+fitxategiak eta jatorria `contracts/source.smb.json`-en daude; kopiak
+`data/stream_samples/`-en. Ez dago mantentze edo log iturri errealik egiaztatuta.
+Ez dira laginak entrenamenduan edo test independente berritzat erabili.
+Denbora-markak simulazioarenak dira: 24 orduko aurreikuspena oraindik ez da balioztatu.
+Credentzialak `.env` pribatuan daude, Git-etik kanpo; kontratuen dokumentazioak
+konexioaren metadatuak soilik jasotzen ditu.

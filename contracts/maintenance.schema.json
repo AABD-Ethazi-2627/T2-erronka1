@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cnc-guard:contracts:0.1.0:maintenance",
+  "title": "CNC Guard maintenance — proposed 0.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "machine_id",
+    "timestamp",
+    "schema_version",
+    "quality_flag",
+    "source",
+    "action",
+    "failure_observed"
+  ],
+  "properties": {
+    "event_id": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/event_id"
+    },
+    "machine_id": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/machine_id"
+    },
+    "timestamp": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/timestamp"
+    },
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "quality_flag": {
+      "const": "OK"
+    },
+    "source": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/source"
+    },
+    "action": {
+      "enum": [
+        "inspection",
+        "repair",
+        "tool_change",
+        "unknown"
+      ]
+    },
+    "failure_observed": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  }
+}
