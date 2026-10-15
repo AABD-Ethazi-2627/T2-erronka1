@@ -1,5 +1,8 @@
 # Sincronización del planning B-taldea
 
+Repositorio actual: `AABD-Ethazi-2627/T2-erronka1` (antes `B-taldea`).
+El valor del campo de equipo sigue siendo `B-taldea`; no es el nombre del repositorio.
+
 Fuente: https://github.com/orgs/AABD-Ethazi-2627/projects/2
 Destino: https://github.com/orgs/AABD-Ethazi-2627/projects/1
 
@@ -48,7 +51,7 @@ al repositorio o conflictos de equipo abortan la operación.
 Python estándar, sin dependencias adicionales:
 
 ```bash
-python3 -m unittest discover -s tests
+python3 -m unittest discover -s tests -p 'test_project_sync.py'
 python3 scripts/sync_projects.py          # lectura, sin cambios
 python3 scripts/sync_projects.py --apply  # escritura y verificación posterior
 ```
@@ -64,3 +67,12 @@ Start date y Target date son campos compartidos de issue en esta organización.
 Se actualizan mediante updateIssueFieldValue y serán visibles también en #2.
 Las fechas vascas del #2 tienen prioridad; no editar fechas inglesas de forma
 contradictoria. La prioridad y el área se mantienen exclusivamente en #2.
+
+## Diagnóstico verificado el 2026-10-15
+
+La ejecución programada `38682511263` pasó las pruebas del sincronizador y falló
+con `Configure PROJECTS_SYNC_TOKEN with access to both organization Projects.`
+El cambio de nombre del repositorio no proporciona esa credencial. El filtro del
+script se ha actualizado a `T2-erronka1` y el dry-run local autenticado devolvió
+`0 items need changes; apply=False`, sin mutaciones. La activación de Actions
+sigue pendiente de un administrador; no se ha configurado ni copiado ningún token.

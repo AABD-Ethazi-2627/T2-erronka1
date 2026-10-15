@@ -72,3 +72,8 @@ python -m scripts.refine_model --jobs 2 --output models/offline-ai4i-v2
 ```
 
 Artefaktuak lehendik badaude, beste irteera-karpeta bat hautatu; ez dira gainidazten.
+
+## Balioztatzea eta CI
+
+[Merge aurreko eskuzko balioztatzea eta CI politika](docs/CI.md).
+Garapeneko push-ek eta PR irekierek ez dute CI abiarazten.

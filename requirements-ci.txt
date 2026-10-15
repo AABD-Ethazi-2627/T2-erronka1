@@ -1,0 +1,5 @@
+-r notebooks/requirements-offline.txt
+# Pin transitive numerical dependencies to the verified training environment.
+scipy==1.18.1
+threadpoolctl==3.6.0
+ruff==0.17.0
