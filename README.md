@@ -47,3 +47,28 @@ cnc-guard/
 ## Planning automatikoa
 
 [Project #2 → #1 sinkronizazioa, 8 orduro](docs/PROJECTS_SYNC.md).
+
+## Datuen inbentarioa
+
+[CG02: datu-iturrien eta etiketaren bideragarritasunaren azterketa](docs/data/INBENTARIOA.md).
+
+## Offline entrenamendua
+
+[AI4I entrenamendua, emaitzak eta mugak](docs/data/ENTRENAMENDUA.md).
+Notebook exekutatua: [02_training_AI4I.ipynb](notebooks/02_training_AI4I.ipynb).
+
+```bash
+python -m scripts.train_model
+python -m pytest -q
+```
+
+### RF fintzea eta Isolation Forest
+
+[F1/F2 emaitzak, mugak eta integrazio lokala](docs/data/FIN_SINTONIA.md).
+Notebook exekutatua: [03_refinement_AI4I.ipynb](notebooks/03_refinement_AI4I.ipynb).
+
+```bash
+python -m scripts.refine_model --jobs 2 --output models/offline-ai4i-v2
+```
+
+Artefaktuak lehendik badaude, beste irteera-karpeta bat hautatu; ez dira gainidazten.
