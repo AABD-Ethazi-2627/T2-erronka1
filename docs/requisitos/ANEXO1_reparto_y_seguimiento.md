@@ -15,17 +15,16 @@ Borrador del 16/10/2026 preparado a petición del equipo a partir de las asignac
 
 ## Correspondencia propuesta con la plantilla docente
 
-El usuario ha confirmado expresamente el 16/10/2026 las cuatro cuentas y su correspondencia con los roles técnicos de la tabla. Su correspondencia con los cargos de tutoría siguientes es una propuesta derivada del trabajo, pendiente de confirmación colectiva:
+El usuario ha confirmado expresamente el 16/10/2026 las cuatro cuentas y su correspondencia con los roles técnicos de la tabla. La corrección posterior del usuario concreta los cargos de tutoría: petiteiker es vocal y Niistal el único auxiliar.
 
 | Cargo ANEXO1 | Propuesta | Motivo |
 |---|---|---|
 | Coordinación | tears-mysthrala | Generalista ML/Project lead; coordinación de objetivos, contratos y evaluación |
-| Portavocía | Angiecrizu | Preparación de demo y defensa (#26) |
+| Vocal / portavocía | petiteiker | Cargo indicado por el usuario al refinar CG01 |
 | Secretaría | Angiecrizu | Memoria y documentación (#25) |
-| Apoyo 1 | Niistal | Desarrollo e integración; apoyo a la comunicación técnica y revisión cruzada |
-| Apoyo 2 | petiteiker | Infraestructura y pruebas; apoyo al seguimiento de tiempos y disponibilidad |
+| Auxiliar único | Niistal | Apoyo a la comunicación, tiempos y revisión técnica |
 
-La plantilla tiene cinco cargos y el equipo cuatro personas; se propone que diseño/documentación asuma portavocía y secretaría. Las funciones de apoyo de la plantilla (tono de comunicación y tiempo) se mantienen, además de las responsabilidades técnicas. Ser responsable de diseño no prueba por sí solo que una persona haya aceptado portavocía.
+La organización se adapta a cuatro cargos, sin duplicar portavocía y secretaría ni añadir un segundo auxiliar. El reparto técnico de issues se mantiene.
 
 Se mantienen las cuentas de GitHub confirmadas por el usuario como identificación en este borrador, sin inferir nombres civiles. Tutor/a y denominación oficial de grupo pendientes de confirmación. El equipo se identifica provisionalmente como CNC Guard; `T2` se marca para confirmar. El curso 2026–27 procede de la plantilla; las 11 semanas del enunciado no implican reiniciar el plazo a partir de hoy.
 
@@ -51,6 +50,6 @@ Propuesta de seguimiento: revisión semanal breve con responsable, estado real, 
 ## Pendientes para aprobar
 
 - Confirmar tutor/a, grupo y periodo oficial; las fechas se alinearán con la entrega del profesorado.
-- Ratificar la correspondencia de cargos de tutoría y las cuatro propuestas de compromiso.
+- Ratificar las cuatro propuestas de compromiso y recoger las firmas; el reparto de cargos refleja la corrección del usuario.
 - Revisar objetivos y calendario del borrador CG01, resolver las dudas de rúbrica con el tutor y recoger el acuerdo.
 - Firmar personalmente cuando corresponda y conservar evidencia de la entrega. El documento original se conserva intacto.

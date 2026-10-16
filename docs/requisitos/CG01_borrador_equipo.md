@@ -70,12 +70,11 @@ El reparto técnico de los issues abiertos ya permite identificar las cuatro ár
 | Cargo de ANEXO1 | Propuesta derivada del reparto |
 |---|---|
 | Coordinación | tears-mysthrala |
-| Portavocía | Angiecrizu |
+| Vocal / portavocía | petiteiker |
 | Secretaría | Angiecrizu |
-| Apoyo 1 | Niistal |
-| Apoyo 2 | petiteiker |
+| Auxiliar único | Niistal |
 
-La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La versión Markdown conserva el contenido de la plantilla y deja las firmas pendientes; no acredita entrega a Moodle/Classroom.
+La correspondencia con los cargos de tutoría incorpora la corrección expresa del usuario: petiteiker vocal y Niistal único auxiliar. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La versión Markdown conserva el contenido de la plantilla y deja las firmas pendientes; no acredita entrega a Moodle/Classroom.
 
 ## 5. Calendario operativo solicitado
 

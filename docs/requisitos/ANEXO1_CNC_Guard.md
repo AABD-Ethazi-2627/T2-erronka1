@@ -2,7 +2,7 @@
 
 **Zirriborroa — 2026ko urriaren 16a.** Bertsio hau da GitHuben berrikusi eta eguneratzeko dokumentu nagusia. Ikasgelako txantiloiaren edukia Markdownera egokituta dago; ez du jatorrizko maketazioa mantentzen.
 
-Erabiltzaileak lau GitHub kontuak eta rol teknikoak baieztatu ditu. Tutoretzako karguen banaketa, konpromisoak eta taldearen azken onespena baieztatzeko daude. Dokumentu honek ez du sinadurarik edo irakasleei egindako entregarik egiaztatzen.
+Erabiltzaileak lau GitHub kontuak eta rol teknikoak baieztatu ditu. Tutoretzako karguen banaketa erabiltzailearen zuzenketarekin eguneratuta dago; konpromisoak eta taldearen azken onespena jasotzeko daude. Dokumentu honek ez du sinadurarik edo irakasleei egindako entregarik egiaztatzen.
 
 ## Taldearen datuak
 
@@ -37,15 +37,14 @@ Erabiltzaileak lau GitHub kontuak eta rol teknikoak baieztatu ditu. Tutoretzako 
 
 ## Tutoretzako karguak eta betebeharrak
 
-Banaketa hau rol teknikoetatik eratorritako **proposamena** da, taldean baieztatzeko. Bost kargu eta lau kide daudenez, diseinuaren arduradunak bi kargu hartzea proposatzen da.
+Erabiltzaileak CG01 fintzean zuzendutako banaketa: lau kargu eta laguntzaile bakarra. Sinadurak eta konpromiso pertsonalen berrespena bereiz jasoko dira.
 
-| Kargua | Proposatutako kontua | Betebeharrak |
+| Kargua | Kontua | Betebeharrak |
 |---|---|---|
 | Koordinatzailea | tears-mysthrala | Bilerak moderatu, taldearen urratsak eta entregak antolatu, mendekotasunak jarraitu eta kideak animatu |
-| Bozeramailea | Angiecrizu | Taldearen izenean hitz egin, erabakiak komunikatu eta irakasleekin harremana bideratu |
+| Bozeramailea | petiteiker | Taldearen izenean hitz egin, erabakiak komunikatu eta irakasleekin harremana bideratu |
 | Idazkaria | Angiecrizu | Dokumentuak eta aktak idatzi, gorde eta partekatu; hizkuntza zaindu eta entregak prestatu |
-| Laguntzailea 1 | Niistal | Komunikazioaren tonua zaindu eta azalpen teknikoetan eta berrikuspenetan lagundu |
-| Laguntzailea 2 | petiteiker | Denborak kontrolatu eta erabilgarritasunaren eta blokeoen jarraipenean lagundu |
+| Laguntzailea | Niistal | Komunikazioaren tonua eta denborak zaindu; azalpen teknikoetan eta berrikuspenetan lagundu |
 
 ## Lan konpromisoen proposamena
 
@@ -79,7 +78,8 @@ Jatorrizko txantiloiak laguntza eskaintzea, ideiak ematea, besteen iritziak kont
 - [x] Lau kontuak eta rol teknikoak erabiltzaileak baieztatuta.
 - [x] Banaketa issue irekien esleipenekin kontrastatuta.
 - [ ] Tutorea, ikastaldea eta data ofizialak baieztatu.
-- [ ] Tutoretzako karguak eta konpromiso pertsonalak taldean berretsi.
+- [x] Tutoretzako karguen banaketa erabiltzailearen zuzenketarekin eguneratu: petiteiker bozeramaile eta Niistal laguntzaile bakarra.
+- [ ] Konpromiso pertsonalak taldean berretsi.
 - [ ] Helburuak, [urriaren 16tik azaroaren 6ra bitarteko lan-plana](../planificacion/README.md) eta errubrikaren zalantzak berrikusi.
 - [ ] Bileraren data, parte-hartzaileak, aldaketak eta akordioa jaso.
 - [ ] Sinadurak eta entrega egin, irakasleak eskatzen duen moduan, eta ebidentzia gorde.
