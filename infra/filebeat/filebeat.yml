@@ -1,0 +1,12 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /mnt/cnc-stream/*.csv
+
+output.kafka:
+  hosts: ["kafka:9092"]
+  topic: "cnc-raw-data"
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
