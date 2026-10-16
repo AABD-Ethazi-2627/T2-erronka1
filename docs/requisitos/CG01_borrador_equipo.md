@@ -65,7 +65,7 @@ Fuente: `01_Erronka1_CNC_Guard/materialak/ANEXO1-Eus.md` (plantilla original tam
 
 Objetivos colectivos propuestos: aprender a trabajar en equipo, ayudarnos a comprender cada parte y entregar un laboratorio reproducible dentro del plazo. Revisar el trabajo de otro compañero antes de dar una tarea por aceptada y registrar acuerdos y desacuerdos.
 
-El reparto técnico de los issues abiertos ya permite identificar las cuatro áreas: infra (`petiteiker`), diseño (`Angiecrizu`), dev (`Niistal`) y generalista ML/Project lead (`tears-mysthrala`). Ver [ANEXO1 cumplimentado y seguimiento](ANEXO1_reparto_y_seguimiento.md) y [copia editable en euskera](ANEXO1_CNC_Guard_zirriborroa.docx).
+El reparto técnico de los issues abiertos ya permite identificar las cuatro áreas: infra (`petiteiker`), diseño (`Angiecrizu`), dev (`Niistal`) y generalista ML/Project lead (`tears-mysthrala`). Ver [ANEXO1 cumplimentado y seguimiento](ANEXO1_reparto_y_seguimiento.md) y [versión principal en Markdown en euskera](ANEXO1_CNC_Guard.md).
 
 | Cargo de ANEXO1 | Propuesta derivada del reparto |
 |---|---|
@@ -75,7 +75,7 @@ El reparto técnico de los issues abiertos ya permite identificar las cuatro ár
 | Apoyo 1 | Niistal |
 | Apoyo 2 | petiteiker |
 
-La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La copia respeta la plantilla original y deja firmas vacías; no acredita entrega a Moodle/Classroom.
+La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La versión Markdown conserva el contenido de la plantilla y deja las firmas pendientes; no acredita entrega a Moodle/Classroom.
 
 ## 5. Calendario relativo de 11 semanas
 

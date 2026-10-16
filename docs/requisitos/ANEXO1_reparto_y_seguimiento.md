@@ -1,6 +1,6 @@
 # ANEXO1 CNC Guard — reparto y seguimiento
 
-Borrador del 16/10/2026 preparado a petición del equipo a partir de las asignaciones actuales de los issues abiertos. [Plantilla cumplimentada en euskera](ANEXO1_CNC_Guard_zirriborroa.docx). No acredita firma, consenso ni entrega al profesorado.
+Borrador del 16/10/2026 preparado a petición del equipo a partir de las asignaciones actuales de los issues abiertos. [ANEXO1 en Markdown en euskera](ANEXO1_CNC_Guard.md). No acredita firma, consenso ni entrega al profesorado.
 
 ## Reparto técnico observado
 
@@ -37,7 +37,7 @@ Se mantienen las cuentas de GitHub confirmadas por el usuario como identificaci�
 
 ## Compromisos de trabajo propuestos
 
-Las cuatro filas de compromisos de la copia DOCX resumen responsabilidades ya asignadas en los issues. Son propuestas para ratificar, no declaraciones personales firmadas. Ninguna firma se rellena automáticamente. La quinta fila queda libre, conforme a la plantilla original.
+Las cuatro filas de compromisos del ANEXO1 en Markdown resumen responsabilidades ya asignadas en los issues. Son propuestas para ratificar, no declaraciones personales firmadas. Ninguna firma se rellena automáticamente. Se conserva la posibilidad de ampliar los compromisos en Markdown.
 
 | Responsable | Compromiso propuesto | Evidencia de seguimiento |
 |---|---|---|
