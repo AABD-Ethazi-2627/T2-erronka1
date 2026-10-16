@@ -7,7 +7,7 @@ basada en AI4I se mantiene explícita. Los dos usos no se mezclan en esta entreg
 
 ## Reproducir y revisar
 
-Desde la raíz, con Python estándar; sin red, credenciales, pandas ni scikit-learn:
+Desde la raíz, con Python 3.11 o posterior y su biblioteca estándar; sin red, credenciales, pandas ni scikit-learn:
 
 ```bash
 python3 -m scripts.audit_cg02 --check
@@ -18,6 +18,8 @@ python3 -m unittest discover -s tests -v
 [inventario guardado](inventory.json). No modifica los inputs. Solo después de
 revisar un cambio intencionado de evidencia, `--write` regenera ese JSON derivado.
 El fichero original de entrenamiento nunca se sobrescribe.
+
+Guía de revisión para estudiantes y resultados locales: [BERRIKUSPENA.md](BERRIKUSPENA.md).
 
 Fuentes, origen, licencia, roles y disponibilidad: [sources.json](sources.json).
 Requisitos y decisiones de alcance: [CG02.md](../requisitos/CG02.md).
@@ -151,10 +153,9 @@ Trazabilidad con los requisitos:
 
 El PR permite revisar y aceptar la entrega técnica de CG02. Para marcarla resuelta:
 
-- [ ] Revisar este informe y la evidencia, y ejecutar `--check` y las pruebas.
+- [x] Revisión técnica local del informe/evidencia y ejecución de `--check` y 16 pruebas el 2026-10-16. La revisión independiente del equipo sigue pendiente.
 - [ ] Aceptar explícitamente la conclusión sobre el horizonte de 24 horas y el alcance de laboratorio.
-- [ ] Registrar o confirmar el acuerdo de alcance de CG01 (#1), que sigue abierta;
-  CG02 no afirma haber completado ese acuerdo por el resto del equipo.
+- [x] Dependencia CG01 (#1) cerrada: el usuario confirmó aprobación de todo el equipo en la reunión del 2026-10-16; documentación integrada por PR #34, merge `9be87b6`.
 - [ ] En el momento del merge, realizar la validación prevista por el equipo y fusionar el PR.
 - [ ] Cerrar CG02 y actualizar su estado solo después de esa aceptación.
 
