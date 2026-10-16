@@ -1,4 +1,4 @@
-name: Sync B-taldea Project to central
+name: Sync T2-erronka1 Project to central
 on:
   schedule:
     - cron: '17 */8 * * *'
@@ -11,7 +11,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: b-taldea-project-sync
+  group: t2-erronka1-project-sync
   cancel-in-progress: false
 jobs:
   sync:
