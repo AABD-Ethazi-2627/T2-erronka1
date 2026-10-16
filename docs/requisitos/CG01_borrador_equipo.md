@@ -29,6 +29,7 @@ Rutas relativas a la raíz del repositorio docente `bigdata`, situado fuera de e
 |---|---|---|
 | Ingesta y validación | Apache NiFi | `06_NiFi/materialak/01_01_ApacheNifi.pdf`, pp. 1–8 y casos de procesamiento de registros |
 | Transporte de eventos | Apache Kafka y consumidores Python | `07_Kafka/materialak/01_03_ApacheKafka.pdf`, pp. 1–6 y apartados de productores/consumidores |
+| Servicio de inferencia | FastAPI, Pydantic, serialización del modelo | Rúbrica docente `Zereginak!G41,G55,G61`; no es una incorporación externa |
 | Preparación y modelos | Python, pandas, scikit-learn; Random Forest | `05_BigData_Ingeniaritza/materialak/01_02_datuen_ingeniaritza.pdf`, p. 29; `03_ML_5072/materialak/5072_00_Sarrera.pdf`, apartado de herramientas; `03_ML_5072/materialak/5072_2_06_Random_Forest.pdf`, pp. 1–6 |
 | Anomalías | Isolation Forest | `03_ML_5072/materialak/5072_00_Sarrera.pdf`, p. 15, tabla de algoritmos (numeración impresa 16/22) |
 | Histórico y consulta | Parquet y DuckDB | `05_BigData_Ingeniaritza/materialak/01_02_datuen_ingeniaritza.pdf`, pp. 29–31 y 33–35 |
@@ -36,11 +37,11 @@ Rutas relativas a la raíz del repositorio docente `bigdata`, situado fuera de e
 | Consulta operativa y panel | Elasticsearch y Kibana | `05_BigData_Ingeniaritza/materialak/02_elastic_stack.pdf`, pp. 5–10 y apartados de consultas y visualización |
 | Ejecución local de servicios | Docker Compose | `05_BigData_Ingeniaritza/materialak/02_elastic_stack.pdf`, práctica de p. 10 |
 
-Recorrido propuesto para debatir: SMB → ingesta NiFi → Kafka → procesamiento Python → histórico Parquet/consulta DuckDB y resultados Elasticsearch → Kibana. El acceso concreto al SMB, la distribución de responsabilidades de archivo y las confirmaciones de consumo se concretarán en sus issues; este esquema no presupone un conector ya probado.
+Recorrido propuesto según la rúbrica: SMB → recogida de archivos/Filebeat → Kafka → NiFi (CSV→JSON, validación, InvokeHTTP) → FastAPI → NiFi → Elasticsearch → Kibana; histórico propio por capas en paralelo, con Parquet/DuckDB. La adaptación SMB frente al NFS citado por la rúbrica requiere confirmación del tutor. El acceso concreto al SMB, la distribución de responsabilidades de archivo y las confirmaciones de consumo se concretarán en sus issues; este esquema no presupone un conector ya probado.
 
-El patrón medallion se adapta del caso docente AEMET; no obliga a incorporar AEMET o MongoDB a CNC Guard. La retención de Kafka tampoco sustituye al histórico propio. No se añaden servicios o frameworks sin respaldo docente. FastAPI y Streamlit no forman parte de esta propuesta.
+El patrón medallion se adapta del caso docente AEMET; no obliga a incorporar AEMET o MongoDB a CNC Guard. La retención de Kafka tampoco sustituye al histórico propio. No se añaden servicios o frameworks sin respaldo docente. FastAPI sí forma parte de esta propuesta: lo exige expresamente la rúbrica docente, `Zereginak!G61`, con Pydantic en `G55`. Streamlit queda fuera.
 
-**Inconsistencia documental a resolver:** el README de planificación docente menciona una evolución con FastAPI, mientras que la tabla de selección de `soluzioak/Presentacion_Tecnologias/TRAZABILIDAD.md` lo excluye. Se ha utilizado el material docente original para esta propuesta; el equipo debe acordar el recorrido y actualizar la presentación/planificación después, sin tratar ninguno de esos snapshots como acuerdo humano vigente.
+**Corrección tras revisar la rúbrica original:** la exclusión anterior de FastAPI era incorrecta. La rúbrica específica del reto prevalece sobre la selección de nuestra presentación. Ver [objetivos, etapas y matriz para nivel avanzado](CG01_objetivos_rubrica.md). Este documento sigue siendo una propuesta pendiente de consenso.
 
 ## 3. Criterios de aceptación propuestos
 
@@ -80,21 +81,24 @@ Cada persona rellenará su compromiso en ANEXO1: **nombre / compromiso concreto 
 
 Propuesta revisable al confirmar fecha de inicio y entrega con el profesorado; las fechas antiguas de las issues no prueban trabajo realizado.
 
-| Semana | Resultado propuesto |
+| Semana | Resultado propuesto y puerta de revisión |
 |---|---|
-| 1 | Acordar CG01, roles y ANEXO1; revisar inventario CG02 |
-| 2 | Contratos de datos, calidad y comportamiento ante indisponibilidad del SMB |
-| 3 | Preparación reproducible y separación de datos para evaluación |
-| 4 | Referencia supervisada y primera evaluación de Random Forest |
-| 5 | Ajuste con validación, F1/F2 y análisis de errores; integración experimental de Isolation Forest |
-| 6 | Histórico propio por capas, Parquet y consultas DuckDB |
-| 7 | Integración NiFi/Kafka y pruebas de relectura e interrupciones |
-| 8 | Integración de inferencia y publicación de resultados operativos |
-| 9 | Panel Kibana, calidad y frescura de datos |
-| 10 | Prueba de extremo a extremo y reproducción por otro compañero |
-| 11 | Correcciones, memoria, demostración y retrospectiva/ANEXO1 |
+| 1 | Acuerdo CG01/ANEXO1 y validación de adaptación SMB y límites de datos con el tutor (E1) |
+| 2 | Inventario CG02, contratos y pruebas de calidad; EDA y diseño de evaluación (E2) |
+| 3 | Variables físicas, referencia inicial y prevención de fugas (E3) |
+| 4 | Validación cruzada, ajuste, costes, umbrales e Isolation Forest (E3) |
+| 5 | FastAPI real, modelo cargado al inicio y pruebas de contrato/alertas (E4) |
+| 6 | Recogida de archivos → Kafka → NiFi → API → Elasticsearch (E5) |
+| 7 | Histórico por capas y consultas; mappings, integridad y relectura (E5) |
+| 8 | Pruebas de interrupción, recuperación y carga con recuentos (E6) |
+| 9 | Panel Kibana y análisis de decisiones de mantenimiento (E7) |
+| 10 | Revisión transversal de seguridad/privacidad y reproducción integral (E8) |
+| 11 | Cierre de evidencias, presentación, defensa individual y ANEXO1 (E8) |
+
 
 Al aprobarlo, contrastar dependencias, disponibilidad y esfuerzo con las issues existentes; actualizar sus fechas y responsables en conjunto. El calendario no cierra ni reordena automáticamente el Project.
+
+Las etapas E1–E8 y sus evidencias se detallan en [la matriz de rúbrica](CG01_objetivos_rubrica.md). Seguridad, privacidad, documentación y seguimiento se trabajan desde E1, aunque se revisen al final.
 
 ## 6. Acta mínima para convertir el borrador en acuerdo
 
