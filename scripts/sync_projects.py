@@ -1,4 +1,4 @@
-"""Reconcile B-taldea Project #2 into #1; dry-run unless --apply."""
+"""Reconcile T2-erronka1 Project #2 into #1; dry-run unless --apply."""
 
 import argparse
 import json
@@ -6,9 +6,9 @@ import os
 import subprocess
 
 ORG = "AABD-Ethazi-2627"
-REPO = f"{ORG}/B-taldea"
+REPO = f"{ORG}/T2-erronka1"
 STATUS = {
-    "Egiteke": "Todo",
+    "Egiteke": "To do",
     "Lanean": "In Progress",
     "Berrikusten": "In Progress",
     "Blokeatuta": "In Progress",
@@ -125,7 +125,7 @@ def plan(source, target):
                 "Use repository issues/PRs instead of draft or inaccessible items"
             )
         if content["repository"]["nameWithOwner"] != REPO:
-            raise ValueError("Source contains content outside B-taldea")
+            raise ValueError("Source contains content outside T2-erronka1")
         values = item["values"]
         if values.get("Taldea") not in (None, "B-taldea"):
             raise ValueError("Source team conflicts with B-taldea")

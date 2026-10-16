@@ -18,7 +18,7 @@ def project(items=()):
                         "Berrikusten",
                         "Blokeatuta",
                         "Eginda",
-                        "Todo",
+                        "To do",
                         "In Progress",
                         "Done",
                     ]
@@ -33,7 +33,7 @@ def project(items=()):
     }
 
 
-def item(repo="AABD-Ethazi-2627/B-taldea", values=None):
+def item(repo="AABD-Ethazi-2627/T2-erronka1", values=None):
     return {
         "id": "i",
         "isArchived": False,
@@ -99,7 +99,7 @@ class SyncTests(unittest.TestCase):
                 [
                     item(
                         values={
-                            "Status": "Todo",
+                            "Status": "To do",
                             "Taldea": "B-taldea",
                             "Start date": "2026-10-14",
                         }
