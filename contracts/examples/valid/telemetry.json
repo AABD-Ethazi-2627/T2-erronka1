@@ -1,0 +1,19 @@
+{
+  "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+  "machine_id": "CNC-049",
+  "timestamp": "2026-10-15T08:09:06Z",
+  "schema_version": "0.1.0",
+  "quality_flag": "OK",
+  "source": {
+    "kind": "smb_csv",
+    "uri": "smb://192.168.75.222/cnc-stream",
+    "record_ref": "cnc_batch_20261015_080906_00001.csv:data-row-1",
+    "raw_record": "2026-10-15T08:09:06Z,CNC-049,L,300.5,309.8,1345,62.7,153,0,0,0,0,0,0"
+  },
+  "machine_type": "L",
+  "air_temp_K": 300.5,
+  "process_temp_K": 309.8,
+  "rpm": 1345.0,
+  "torque_Nm": 62.7,
+  "tool_wear_min": 153.0
+}

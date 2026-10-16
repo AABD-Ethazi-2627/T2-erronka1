@@ -93,6 +93,16 @@ def option(field, name):
     return matches[0]
 
 
+def central_status(field, name):
+    if name is None:
+        return None
+    aliases = ("Todo", "To do") if name == "Todo" else (name,)
+    matches = [value["name"] for value in field["options"] if value["name"] in aliases]
+    if len(matches) != 1:
+        raise ValueError(f"Unknown or ambiguous central status: {name}")
+    return matches[0]
+
+
 def source_date(values, primary, fallback):
     if (
         values.get(primary)
@@ -140,7 +150,7 @@ def plan(source, target):
         if name is not None and name not in STATUS:
             raise ValueError(f"Unknown source status: {name}")
         desired = {
-            "Status": STATUS.get(name),
+            "Status": central_status(target["fields"]["Status"], STATUS.get(name)),
             "Taldea": "B-taldea",
             "Start date": source_date(values, "Hasiera-data", "Start date"),
             "Target date": source_date(values, "Amaiera-data", "Target date"),

@@ -1,2 +1,7 @@
 __pycache__/
 *.py[cod]
+
+# Local connection credentials; publish only the empty template.
+.env
+.env.*
+!.env.example
