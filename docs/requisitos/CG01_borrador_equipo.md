@@ -41,7 +41,7 @@ Recorrido propuesto según la rúbrica: SMB → recogida de archivos/Filebeat �
 
 El patrón medallion se adapta del caso docente AEMET; no obliga a incorporar AEMET o MongoDB a CNC Guard. La retención de Kafka tampoco sustituye al histórico propio. No se añaden servicios o frameworks sin respaldo docente. FastAPI sí forma parte de esta propuesta: lo exige expresamente la rúbrica docente, `Zereginak!G61`, con Pydantic en `G55`. Streamlit queda fuera.
 
-**Corrección tras revisar la rúbrica original:** la exclusión anterior de FastAPI era incorrecta. La rúbrica específica del reto prevalece sobre la selección de nuestra presentación. Ver [objetivos, etapas y matriz para nivel avanzado](CG01_objetivos_rubrica.md). Este documento sigue siendo una propuesta pendiente de consenso.
+**Corrección tras revisar la rúbrica original:** la exclusión anterior de FastAPI era incorrecta. La rúbrica específica del reto prevalece sobre la selección de nuestra presentación. Ver [objetivos, etapas y matriz para nivel avanzado](../rubrica/OBJETIVOS_Y_ETAPAS.md). Este documento sigue siendo una propuesta pendiente de consenso.
 
 ## 3. Criterios de aceptación propuestos
 
@@ -98,7 +98,7 @@ Propuesta revisable al confirmar fecha de inicio y entrega con el profesorado; l
 
 Al aprobarlo, contrastar dependencias, disponibilidad y esfuerzo con las issues existentes; actualizar sus fechas y responsables en conjunto. El calendario no cierra ni reordena automáticamente el Project.
 
-Las etapas E1–E8 y sus evidencias se detallan en [la matriz de rúbrica](CG01_objetivos_rubrica.md). Seguridad, privacidad, documentación y seguimiento se trabajan desde E1, aunque se revisen al final.
+Las etapas E1–E8 y sus evidencias se detallan en [la matriz de rúbrica](../rubrica/OBJETIVOS_Y_ETAPAS.md). Seguridad, privacidad, documentación y seguimiento se trabajan desde E1, aunque se revisen al final.
 
 ## 6. Acta mínima para convertir el borrador en acuerdo
 

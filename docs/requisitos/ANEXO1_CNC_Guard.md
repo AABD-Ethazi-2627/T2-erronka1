@@ -21,7 +21,7 @@ Erabiltzaileak lau GitHub kontuak eta rol teknikoak baieztatu ditu. Tutoretzako 
 1. Lana taldean egiten ikastea eta kide guztien parte hartzea bermatzea.
 2. Elkar laguntzea, bakoitzak bere lana eta sistemaren ibilbide osoa ulertzeko.
 3. CNC Guard laborategia garatzea: datuen trazabilitatea, ML ereduak, integrazioa eta panela, emaitza erreproduzigarriekin eta mugak argi adierazita.
-4. [Errubrikako maila aurreratuko 40 deskribatzaileei](CG01_objetivos_rubrica.md) ebidentziak lotzea, nota edo industria-eraginkortasuna frogatu gabe baieztatu gabe.
+4. [Errubrikako maila aurreratuko 40 deskribatzaileei](../rubrica/OBJETIVOS_Y_ETAPAS.md) ebidentziak lotzea, nota edo industria-eraginkortasuna frogatu gabe baieztatu gabe.
 5. Etapak elkarrekin berrikustea eta azken defentsan norberaren ekarpena eta sistemaren funtzionamendua azaltzea.
 
 ## Baieztatutako rol teknikoak

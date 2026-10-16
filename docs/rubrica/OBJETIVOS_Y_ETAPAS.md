@@ -1,6 +1,6 @@
-# CG01 — Objetivos y etapas para aspirar al nivel avanzado (10)
+# Rúbrica — Objetivos y etapas para aspirar al nivel avanzado (10)
 
-Propuesta revisada el 16/10/2026. No acredita cumplimiento ni garantiza nota. Fuente primaria: `Erronka1_ikaslearen_errubrika.xlsx`, hoja `Zereginak`, columna G, cabecera `G3 = AURRERATUA (10)`. Se ha leído el Excel original local, no solo la presentación o la matriz técnica anterior. [Extracción trazable y SHA-256](CG01_rubrica_fuente.json): 40 descriptores avanzados no vacíos, con criterio, celda y peso tal como está almacenado. No se redistribuye la lista personal del enunciado.
+Propuesta revisada el 16/10/2026. No acredita cumplimiento ni garantiza nota. Fuente primaria: `Erronka1_ikaslearen_errubrika.xlsx`, hoja `Zereginak`, columna G, cabecera `G3 = AURRERATUA (10)`. Se ha leído el Excel original local, no solo la presentación o la matriz técnica anterior. [Extracción trazable y SHA-256](fuente.json): 40 descriptores avanzados no vacíos, con criterio, celda y peso tal como está almacenado. No se redistribuye la lista personal del enunciado.
 
 La copia está en Downloads; el enlace oficial figura en `01_Erronka1_CNC_Guard/materialak/MOODLE_URLs.md`. No se ha podido verificar la versión online: confirmar con el tutor que esta copia es la vigente antes de cerrar el acuerdo.
 

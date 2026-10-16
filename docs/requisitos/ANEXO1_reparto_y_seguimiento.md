@@ -32,7 +32,7 @@ Se mantienen las cuentas de GitHub confirmadas por el usuario como identificaci�
 ## Objetivos colectivos propuestos
 
 1. Aprender a trabajar en equipo y ayudarnos a comprender el sistema completo, como establece ANEXO1.
-2. Entregar el laboratorio CNC Guard con datos trazables, evaluaci처n reproducible, integraci처n y panel, ajustado a los [40 descriptores avanzados](CG01_objetivos_rubrica.md).
+2. Entregar el laboratorio CNC Guard con datos trazables, evaluaci처n reproducible, integraci처n y panel, ajustado a los [40 descriptores avanzados](../rubrica/OBJETIVOS_Y_ETAPAS.md).
 3. Revisar los resultados de cada etapa, registrar las limitaciones y preparar una defensa en la que cada integrante pueda explicar su contribuci처n y el recorrido completo.
 
 ## Compromisos de trabajo propuestos
