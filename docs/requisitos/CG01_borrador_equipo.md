@@ -65,17 +65,17 @@ Fuente: `01_Erronka1_CNC_Guard/materialak/ANEXO1-Eus.md` (plantilla original tam
 
 Objetivos colectivos propuestos: aprender a trabajar en equipo, ayudarnos a comprender cada parte y entregar un laboratorio reproducible dentro del plazo. Revisar el trabajo de otro compañero antes de dar una tarea por aceptada y registrar acuerdos y desacuerdos.
 
-| Rol de ANEXO1 | Responsabilidad de la plantilla | Persona |
-|---|---|---|
-| Coordinación | Moderar, seguir los pasos y fomentar la participación | Pendiente |
-| Portavocía | Comunicar acuerdos y hablar con el profesorado | Pendiente |
-| Secretaría | Redactar, conservar y organizar documentos y entregas; revisar el lenguaje | Pendiente |
-| Apoyo 1 | Cuidar el tono de comunicación | Pendiente |
-| Apoyo 2 | Controlar el tiempo | Pendiente |
+El reparto técnico de los issues abiertos ya permite identificar las cuatro áreas: infra (`petiteiker`), diseño (`Angiecrizu`), dev (`Niistal`) y generalista ML/Project lead (`tears-mysthrala`). Ver [ANEXO1 cumplimentado y seguimiento](ANEXO1_reparto_y_seguimiento.md) y [copia editable en euskera](ANEXO1_CNC_Guard_zirriborroa.docx).
 
-Asignar o adaptar los roles al número real de integrantes con el equipo/tutor. Estos roles organizativos no sustituyen a los responsables técnicos por issue. No se asignan nombres ni se presuponen compromisos personales.
+| Cargo de ANEXO1 | Propuesta derivada del reparto |
+|---|---|
+| Coordinación | tears-mysthrala |
+| Portavocía | Angiecrizu |
+| Secretaría | Angiecrizu |
+| Apoyo 1 | Niistal |
+| Apoyo 2 | petiteiker |
 
-Cada persona rellenará su compromiso en ANEXO1: **nombre / compromiso concreto / forma de seguimiento / firma cuando corresponda**. Registrar periodo, nombre del equipo, grupo y tutor en la plantilla oficial. La secretaría conservará el acta y preparará la entrega cuando corresponda; este borrador no acredita subida a Classroom ni firma.
+La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. Se mantienen las cuentas de GitHub hasta confirmar nombres completos, tutor/a y grupo. La copia respeta la plantilla original y deja firmas vacías; no acredita entrega a Moodle/Classroom.
 
 ## 5. Calendario relativo de 11 semanas
 
