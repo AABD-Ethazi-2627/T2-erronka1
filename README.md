@@ -47,3 +47,8 @@ cnc-guard/
 ## Planning automatikoa
 
 [Project #2 → #1 sinkronizazioa, 8 orduro](docs/PROJECTS_SYNC.md).
+
+## CG02 — Datu-iturrien inbentarioa
+
+[Iturriak, kalitatea, datak eta etiketaren bideragarritasuna](docs/cg02/README.md).
+Egiaztapen offlinea: `python3 -m scripts.audit_cg02 --check`.

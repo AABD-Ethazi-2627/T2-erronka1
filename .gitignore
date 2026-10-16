@@ -4,3 +4,8 @@ __pycache__/
 venv/
 .env
 
+
+# Local connection credentials; publish only the empty template.
+.env
+.env.*
+!.env.example
