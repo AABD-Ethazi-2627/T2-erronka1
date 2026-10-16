@@ -18,11 +18,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           persist-credentials: false
       - name: Validate synchronizer
-        run: python3 -m unittest discover -s tests
+        run: python3 -m unittest discover -s tests -p 'test_project_sync.py'
       - name: Synchronize Projects
         env:
           GH_TOKEN: ${{ secrets.PROJECTS_SYNC_TOKEN }}

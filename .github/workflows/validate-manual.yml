@@ -1,0 +1,45 @@
+name: Validate before merge (manual only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-validation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - name: Install verified validation environment
+        run: |
+          python -m pip install --only-binary=:all: -r requirements-ci.txt
+      - name: Check source style
+        run: |
+          ruff check scripts tests scoring/inference.py scoring/model_features.py
+          ruff format --check scripts tests scoring/inference.py scoring/model_features.py
+      - name: Unit and artifact integration tests
+        run: python -m unittest discover -s tests -v
+      - name: Execute delivered notebook code without retraining
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for path in sorted(Path('notebooks').glob('*_AI4I.ipynb')):
+              namespace = {}
+              notebook = json.loads(path.read_text())
+              for cell in notebook['cells']:
+                  if cell['cell_type'] == 'code':
+                      exec(compile(''.join(cell['source']), str(path), 'exec'), namespace)
+              print(f'Executed {path}')
+          PY

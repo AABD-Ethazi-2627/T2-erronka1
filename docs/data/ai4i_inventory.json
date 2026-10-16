@@ -1,0 +1,94 @@
+{
+  "source": "data/ai4i2020_train.csv",
+  "sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "rows": 8000,
+  "columns": [
+    "machine_id",
+    "machine_type",
+    "air_temp_K",
+    "process_temp_K",
+    "rpm",
+    "torque_Nm",
+    "tool_wear_min",
+    "machine_failure",
+    "failure_TWF",
+    "failure_HDF",
+    "failure_PWF",
+    "failure_OSF",
+    "failure_RNF"
+  ],
+  "missing": {
+    "machine_id": 0,
+    "machine_type": 0,
+    "air_temp_K": 0,
+    "process_temp_K": 0,
+    "rpm": 0,
+    "torque_Nm": 0,
+    "tool_wear_min": 0,
+    "machine_failure": 0,
+    "failure_TWF": 0,
+    "failure_HDF": 0,
+    "failure_PWF": 0,
+    "failure_OSF": 0,
+    "failure_RNF": 0
+  },
+  "duplicate_rows": 0,
+  "machines": 50,
+  "machine_types": {
+    "M": 2381,
+    "L": 4830,
+    "H": 789
+  },
+  "target_counts": {
+    "0": 7729,
+    "1": 271
+  },
+  "numeric_ranges": {
+    "air_temp_K": {
+      "min": 295.3,
+      "max": 304.5
+    },
+    "process_temp_K": {
+      "min": 305.7,
+      "max": 313.8
+    },
+    "rpm": {
+      "min": 1168.0,
+      "max": 2886.0
+    },
+    "torque_Nm": {
+      "min": 3.8,
+      "max": 76.6
+    },
+    "tool_wear_min": {
+      "min": 0.0,
+      "max": 253.0
+    },
+    "machine_failure": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "failure_TWF": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "failure_HDF": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "failure_PWF": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "failure_OSF": {
+      "min": 0.0,
+      "max": 1.0
+    },
+    "failure_RNF": {
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "failure_without_subtype": 7,
+  "subtype_without_failure": 14
+}

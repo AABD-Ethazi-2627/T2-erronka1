@@ -6,7 +6,7 @@ import os
 import subprocess
 
 ORG = "AABD-Ethazi-2627"
-REPO = f"{ORG}/B-taldea"
+REPO = f"{ORG}/T2-erronka1"
 STATUS = {
     "Egiteke": "Todo",
     "Lanean": "In Progress",
@@ -125,7 +125,7 @@ def plan(source, target):
                 "Use repository issues/PRs instead of draft or inaccessible items"
             )
         if content["repository"]["nameWithOwner"] != REPO:
-            raise ValueError("Source contains content outside B-taldea")
+            raise ValueError(f"Source contains content outside {REPO}")
         values = item["values"]
         if values.get("Taldea") not in (None, "B-taldea"):
             raise ValueError("Source team conflicts with B-taldea")
