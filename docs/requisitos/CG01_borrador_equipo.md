@@ -75,7 +75,7 @@ El reparto técnico de los issues abiertos ya permite identificar las cuatro ár
 | Apoyo 1 | Niistal |
 | Apoyo 2 | petiteiker |
 
-La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. Se mantienen las cuentas de GitHub hasta confirmar nombres completos, tutor/a y grupo. La copia respeta la plantilla original y deja firmas vacías; no acredita entrega a Moodle/Classroom.
+La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La copia respeta la plantilla original y deja firmas vacías; no acredita entrega a Moodle/Classroom.
 
 ## 5. Calendario relativo de 11 semanas
 

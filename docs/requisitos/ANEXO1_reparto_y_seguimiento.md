@@ -15,7 +15,7 @@ Borrador del 16/10/2026 preparado a petición del equipo a partir de las asignac
 
 ## Correspondencia propuesta con la plantilla docente
 
-Los cuatro roles técnicos los ha indicado el usuario. Su correspondencia con los cargos de tutoría siguientes es una propuesta derivada del trabajo, pendiente de confirmación colectiva:
+El usuario ha confirmado expresamente el 16/10/2026 las cuatro cuentas y su correspondencia con los roles técnicos de la tabla. Su correspondencia con los cargos de tutoría siguientes es una propuesta derivada del trabajo, pendiente de confirmación colectiva:
 
 | Cargo ANEXO1 | Propuesta | Motivo |
 |---|---|---|
@@ -27,7 +27,7 @@ Los cuatro roles técnicos los ha indicado el usuario. Su correspondencia con lo
 
 La plantilla tiene cinco cargos y el equipo cuatro personas; se propone que diseño/documentación asuma portavocía y secretaría. Las funciones de apoyo de la plantilla (tono de comunicación y tiempo) se mantienen, además de las responsabilidades técnicas. Ser responsable de diseño no prueba por sí solo que una persona haya aceptado portavocía.
 
-Se han usado cuentas de GitHub, sin inferir nombres civiles a partir de ellas. Nombre completo de cada integrante, tutor/a y denominación oficial de grupo pendientes de confirmación. El equipo se identifica provisionalmente como CNC Guard; `T2` se marca para confirmar. El curso 2026–27 procede de la plantilla; las 11 semanas del enunciado no implican reiniciar el plazo a partir de hoy.
+Se mantienen las cuentas de GitHub confirmadas por el usuario como identificación en este borrador, sin inferir nombres civiles. Tutor/a y denominación oficial de grupo pendientes de confirmación. El equipo se identifica provisionalmente como CNC Guard; `T2` se marca para confirmar. El curso 2026–27 procede de la plantilla; las 11 semanas del enunciado no implican reiniciar el plazo a partir de hoy.
 
 ## Objetivos colectivos propuestos
 
@@ -50,7 +50,7 @@ Propuesta de seguimiento: revisión semanal breve con responsable, estado real, 
 
 ## Pendientes para aprobar
 
-- Confirmar nombres, tutor/a, grupo y periodo oficial; las fechas se alinearán con la entrega del profesorado.
+- Confirmar tutor/a, grupo y periodo oficial; las fechas se alinearán con la entrega del profesorado.
 - Ratificar la correspondencia de cargos de tutoría y las cuatro propuestas de compromiso.
 - Revisar objetivos y calendario del borrador CG01, resolver las dudas de rúbrica con el tutor y recoger el acuerdo.
 - Firmar personalmente cuando corresponda y conservar evidencia de la entrega. El documento original se conserva intacto.
