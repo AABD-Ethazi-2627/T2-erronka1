@@ -57,4 +57,10 @@ Consultar la [rúbrica](../rubrica/README.md) y su [seguimiento de evidencias](.
 
 ## Cambios remotos y verificación
 
-Se actualizan únicamente las 27 issues del equipo: Hasiera-data/Amaiera-data del Project #2, Start date/Target date compartidos (visibles también en el Project central), fechas del bloque de planificación de cada issue y fechas de los tres milestones. Se conservan responsables, estados, dependencias y estimaciones de esfuerzo. No se modifica trabajo de otros equipos ni se ejecuta CI.
+Se actualizaron las fechas de las 27 issues iniciales del equipo: Hasiera-data/Amaiera-data del Project #2, Start date/Target date compartidos (visibles también en el Project central), fechas del bloque de planificación de cada issue y fechas de los tres milestones. Se conservan responsables, estados, dependencias y estimaciones de esfuerzo. No se modifica trabajo de otros equipos ni se ejecuta CI.
+
+## Desglose adicional para cubrir la rúbrica
+
+Las 27 issues existentes se han ampliado y se han creado CG28/#35 (FastAPI, Niistal), CG29/#36 (Filebeat, petiteiker) y CG30/#37 (justificación IA/ML, tears-mysthrala y Angiecrizu). Sus objetivos de fecha son 27/10, 21/10 y 19–26/10 respectivamente, con revisiones previas el mismo día cuando proceda. No se ha validado que el esfuerzo quepa en esos intervalos.
+
+Estimaciones brutas nuevas: 2 + 1 + 1,5 = 4,5 persona-días. Suma bruta 86,5 frente a 64 de capacidad teórica (desfase 22,5), antes de reestimar trabajo restante y descontar posible solapamiento con trabajo antes implícito. La fecha del 6/11 sigue como objetivo, no garantía. La [guía de issues](../issues/README.md) contiene el alcance revisado.

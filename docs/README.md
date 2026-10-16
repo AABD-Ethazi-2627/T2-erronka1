@@ -8,6 +8,10 @@ La [rúbrica del proyecto](rubrica/README.md) reúne los objetivos del nivel ava
 - [Seguimiento de criterios y evidencias](rubrica/SEGUIMIENTO.md): responsables propuestos, issues relacionados y pendientes.
 - [Fuente docente trazable](rubrica/fuente.json): descriptores originales, celdas y hash del Excel consultado.
 
+## Guías de trabajo para estudiantes
+
+[Índice de las 30 issues](issues/README.md): objetivo, pasos, ejemplos, rúbrica y evidencia de cierre por tarea.
+
 ## Alcance y equipo
 
 - [Borrador CG01](requisitos/CG01_borrador_equipo.md): alcance y tecnologías del curso.

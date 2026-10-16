@@ -175,7 +175,8 @@
       "target": "2026-10-23",
       "dependencies": [
         5,
-        13
+        13,
+        36
       ],
       "original_effort_person_days": 5.0,
       "issue_id": "I_kwDOUYD5Ac8AAAABW29aAA",
@@ -201,7 +202,9 @@
       "target": "2026-10-27",
       "dependencies": [
         10,
-        13
+        13,
+        14,
+        35
       ],
       "original_effort_person_days": 5.0,
       "issue_id": "I_kwDOUYD5Ac8AAAABW29lyw",
@@ -253,7 +256,10 @@
       "dependencies": [
         14,
         15,
-        19
+        16,
+        19,
+        35,
+        36
       ],
       "original_effort_person_days": 2.0,
       "issue_id": "I_kwDOUYD5Ac8AAAABW2-BHQ",
@@ -314,7 +320,8 @@
       "target": "2026-11-04",
       "dependencies": [
         23,
-        24
+        24,
+        37
       ],
       "original_effort_person_days": 4.0,
       "issue_id": "I_kwDOUYD5Ac8AAAABW2-k5w",
@@ -343,6 +350,47 @@
       "original_effort_person_days": 1.0,
       "issue_id": "I_kwDOUYD5Ac8AAAABW2-zYQ",
       "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQkM"
+    },
+    {
+      "issue": 35,
+      "cg": 28,
+      "title": "[CG28] FastAPI scoring zerbitzu sendoa",
+      "start": "2026-10-27",
+      "target": "2026-10-27",
+      "dependencies": [
+        3,
+        4,
+        8,
+        10
+      ],
+      "original_effort_person_days": 2,
+      "estimate_status": "Nueva estimacion bruta; revisar solapamiento con alcance antes implicito"
+    },
+    {
+      "issue": 36,
+      "cg": 29,
+      "title": "[CG29] Filebeat SMB fitxategietatik Kafka raw topicera",
+      "start": "2026-10-21",
+      "target": "2026-10-21",
+      "dependencies": [
+        5,
+        12,
+        13
+      ],
+      "original_effort_person_days": 1,
+      "estimate_status": "Nueva estimacion bruta; revisar solapamiento con alcance antes implicito"
+    },
+    {
+      "issue": 37,
+      "cg": 30,
+      "title": "[CG30] IA ML eta diseinu aukeren justifikazioa",
+      "start": "2026-10-19",
+      "target": "2026-10-26",
+      "dependencies": [
+        1
+      ],
+      "original_effort_person_days": 1.5,
+      "estimate_status": "Nueva estimacion bruta; revisar solapamiento con alcance antes implicito"
     }
   ],
   "capacity_review": {
@@ -351,7 +399,10 @@
     "theoretical_person_days": 64,
     "original_estimated_person_days": 82,
     "gap_person_days": 18,
-    "status": "Reestimar esfuerzo restante y disponibilidad; fecha objetivo no garantizada",
-    "excludes": "Festivos, clases, ausencias, revisiones y coordinacion reducen la capacidad real; no se ha cuantificado el trabajo reutilizable de PRs"
+    "status": "30 issues; reestimar restante, disponibilidad y solapamientos. No es compromiso de capacidad.",
+    "excludes": "Festivos, clases, ausencias, revisiones y coordinacion reducen la capacidad real; no se ha cuantificado el trabajo reutilizable de PRs",
+    "new_explicit_estimates_person_days": 4.5,
+    "gross_estimates_person_days": 86.5,
+    "gross_gap_person_days": 22.5
   }
 }

@@ -8,6 +8,8 @@ Este directorio mantiene el foco técnico del proyecto: qué exige el docente pa
 | [Seguimiento](SEGUIMIENTO.md) | Asociar criterio, responsable, issue y evidencia revisable |
 | [Fuente original extraída](fuente.json) | Consultar el texto docente exacto, coordenadas de celdas y SHA-256 |
 
+Las [30 guías de issues](../issues/README.md) concretan estos criterios en pasos y pruebas para estudiantes. CG28 (#35), CG29 (#36) y CG30 (#37) separan API, Filebeat y justificación conceptual.
+
 ## Cómo usarla durante el trabajo
 
 1. Al concretar una issue, identificar sus celdas de rúbrica y la evidencia que debe producir. Una issue puede cubrir varios criterios y un criterio puede necesitar varias issues.
