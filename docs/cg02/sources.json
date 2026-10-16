@@ -1,0 +1,45 @@
+{
+  "as_of": "2026-10-16",
+  "scope": "CG02 only: inventory and label feasibility, no new training or retention service",
+  "sources": [
+    {
+      "id": "ai4i_training",
+      "role": "exclusive_training_source",
+      "availability": "local_bytes_examined",
+      "path": "data/ai4i2020_train.csv",
+      "declared_origin": "AI4I 2020, per ENUNTZIATUA.md",
+      "primary_reference": "https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset",
+      "doi": "10.24432/C5HS5C",
+      "original_dataset_license": "CC BY 4.0; attribution and indication of modifications required",
+      "license_checked_on": "2026-10-16",
+      "known_differences_from_published_schema": ["8000 rows instead of original 10000", "renamed columns", "classroom machine_id rather than original UID/Product ID"],
+      "unknowns": ["Original split selection/seed", "Transformation code and identity mapping", "Byte-for-byte equivalence with any UCI subset"]
+    },
+    {
+      "id": "smb_machine_logs",
+      "role": "operational_machine_records_in_simulated_lab_not_training",
+      "availability": "authenticated_read_verified_2026-10-16; frozen evidence usable offline",
+      "last_verified_uri": "smb://192.168.75.150/cnc-stream",
+      "historical_uri": "smb://192.168.75.222/cnc-stream (2026-10-15)",
+      "ip_is_mutable": true,
+      "provenance": "AI4I-based simulator according to the user and classroom statement; not physical CNC observations",
+      "daily_operation": "User confirms batches generated when the server is switched on",
+      "retention": "User confirms server does not provide retention; own historical storage is required",
+      "retention_followup": "CG06: Parquet history, DuckDB queries; planned Bronze/raw, Silver/validated and Gold/derived organization, not implemented by CG02",
+      "sample_scope": "First and last preserved batch per observed day, 2026-10-15 and 2026-10-16; 4 files / 40 rows",
+      "sample_20261015_provenance": "Copied unchanged from Git commit bf9ce7d, PR30 data/stream_samples; original read was authenticated SMB",
+      "sample_20261016_provenance": "Read directly from SMB in read-only mode; listing metadata in docs/requisitos/evidencias/CG02_fechas_2026-10-16.json",
+      "license_scope": "AI4I original CC BY 4.0; complete simulator code and transformation lineage not supplied",
+      "unknowns": ["Same backend identity across changing IPs", "Complete daily coverage", "Stable physical meaning of machine_id across emissions/restarts", "Full overlap with source AI4I partitions"]
+    },
+    {
+      "id": "maintenance_ledger",
+      "role": "potential_independent_failure_onsets_and_context",
+      "availability": "not_supplied_for_this_audit",
+      "not_a_required_second_text_log_source": true,
+      "limitation": "Failure flags in the batches exist; they are contemporaneous labels, not a dated independent maintenance ledger"
+    }
+  ],
+  "credential_policy": "No usernames/passwords in this inventory, snapshots, commands or PR. Private .env remains ignored, mode 600.",
+  "attribution": "AI4I 2020 Predictive Maintenance Dataset [Dataset]. (2020). UCI Machine Learning Repository. https://doi.org/10.24432/C5HS5C. Original CC BY 4.0. Classroom adaptation with renamed fields, machine IDs and split; transformation details not supplied."
+}
