@@ -80,7 +80,7 @@ Jatorrizko txantiloiak laguntza eskaintzea, ideiak ematea, besteen iritziak kont
 - [x] Banaketa issue irekien esleipenekin kontrastatuta.
 - [ ] Tutorea, ikastaldea eta data ofizialak baieztatu.
 - [ ] Tutoretzako karguak eta konpromiso pertsonalak taldean berretsi.
-- [ ] Helburuak, [11 asteko plangintza](CG01_borrador_equipo.md) eta errubrikaren zalantzak berrikusi.
+- [ ] Helburuak, [urriaren 16tik azaroaren 6ra bitarteko lan-plana](../planificacion/README.md) eta errubrikaren zalantzak berrikusi.
 - [ ] Bileraren data, parte-hartzaileak, aldaketak eta akordioa jaso.
 - [ ] Sinadurak eta entrega egin, irakasleak eskatzen duen moduan, eta ebidentzia gorde.
 

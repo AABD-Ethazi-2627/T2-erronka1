@@ -77,28 +77,13 @@ El reparto técnico de los issues abiertos ya permite identificar las cuatro ár
 
 La correspondencia con los cargos de tutoría se propone para revisión del equipo; no se deduce su aceptación de la asignación técnica. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La versión Markdown conserva el contenido de la plantilla y deja las firmas pendientes; no acredita entrega a Moodle/Classroom.
 
-## 5. Calendario relativo de 11 semanas
+## 5. Calendario operativo solicitado
 
-Propuesta revisable al confirmar fecha de inicio y entrega con el profesorado; las fechas antiguas de las issues no prueban trabajo realizado.
+Inicio: **16 de octubre de 2026**. Entrega objetivo: **6 de noviembre de 2026**. El [plan fechado del Gantt](../planificacion/README.md) sustituye al calendario relativo anterior para organizar el trabajo actual y mantiene las puertas E1–E8 de la rúbrica.
 
-| Semana | Resultado propuesto y puerta de revisión |
-|---|---|
-| 1 | Acuerdo CG01/ANEXO1 y validación de adaptación SMB y límites de datos con el tutor (E1) |
-| 2 | Inventario CG02, contratos y pruebas de calidad; EDA y diseño de evaluación (E2) |
-| 3 | Variables físicas, referencia inicial y prevención de fugas (E3) |
-| 4 | Validación cruzada, ajuste, costes, umbrales e Isolation Forest (E3) |
-| 5 | FastAPI real, modelo cargado al inicio y pruebas de contrato/alertas (E4) |
-| 6 | Recogida de archivos → Kafka → NiFi → API → Elasticsearch (E5) |
-| 7 | Histórico por capas y consultas; mappings, integridad y relectura (E5) |
-| 8 | Pruebas de interrupción, recuperación y carga con recuentos (E6) |
-| 9 | Panel Kibana y análisis de decisiones de mantenimiento (E7) |
-| 10 | Revisión transversal de seguridad/privacidad y reproducción integral (E8) |
-| 11 | Cierre de evidencias, presentación, defensa individual y ANEXO1 (E8) |
+Las 11 semanas proceden del enunciado docente y no se reinician hoy. La nueva ventana contiene 16 días de lunes a viernes. Las estimaciones originales suman 82 persona-días frente a un máximo teórico de 64: la fecha objetivo exige reestimar esfuerzo restante, disponibilidad y apoyo entre roles. No se ha validado su factibilidad ni se rebajan criterios para encajar el plazo.
 
-
-Al aprobarlo, contrastar dependencias, disponibilidad y esfuerzo con las issues existentes; actualizar sus fechas y responsables en conjunto. El calendario no cierra ni reordena automáticamente el Project.
-
-Las etapas E1–E8 y sus evidencias se detallan en [la matriz de rúbrica](../rubrica/OBJETIVOS_Y_ETAPAS.md). Seguridad, privacidad, documentación y seguimiento se trabajan desde E1, aunque se revisen al final.
+Hitos objetivo: datos/modelos el 26 de octubre; integración y panel el 2 de noviembre; demo preparada el 5; cierre y defensa el 6. Ver fechas por issue, dependencias y riesgos en el plan.
 
 ## 6. Acta mínima para convertir el borrador en acuerdo
 
@@ -111,7 +96,7 @@ Las etapas E1–E8 y sus evidencias se detallan en [la matriz de rúbrica](../ru
 - Política de retención y revisión de capacidad: **pendientes**.
 - Persona que redacta el acta, revisión del equipo y enlace al ANEXO1: **pendientes**.
 
-CG01 podrá marcarse resuelta cuando estos acuerdos estén registrados y revisados, el alcance quede limitado al laboratorio y el calendario de 11 semanas esté confirmado. Preparar un documento o abrir un PR no equivale a que el equipo lo haya aprobado.
+CG01 podrá marcarse resuelta cuando estos acuerdos estén registrados y revisados, el alcance quede limitado al laboratorio y el calendario operativo y la disponibilidad estén confirmados. Preparar un documento o abrir un PR no equivale a que el equipo lo haya aprobado.
 
 ## Referencias de estado
 

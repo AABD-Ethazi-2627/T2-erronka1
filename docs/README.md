@@ -10,7 +10,8 @@ La [rúbrica del proyecto](rubrica/README.md) reúne los objetivos del nivel ava
 
 ## Alcance y equipo
 
-- [Borrador CG01](requisitos/CG01_borrador_equipo.md): alcance, tecnologías del curso y calendario de 11 semanas.
+- [Borrador CG01](requisitos/CG01_borrador_equipo.md): alcance y tecnologías del curso.
+- [Calendario operativo y Gantt](planificacion/README.md): 16 de octubre–6 de noviembre, hitos y riesgo de capacidad.
 - [ANEXO1](requisitos/ANEXO1_CNC_Guard.md): objetivos colectivos, roles y compromisos por confirmar.
 - [Reparto de issues y seguimiento del equipo](requisitos/ANEXO1_reparto_y_seguimiento.md).
 
