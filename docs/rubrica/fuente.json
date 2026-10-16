@@ -1,0 +1,290 @@
+{
+  "source_name": "Erronka1_ikaslearen_errubrika.xlsx",
+  "sha256": "e3e05d6fe408e163f6f8247cd7054f2a4ce4de6aa5757048ba432cd682139463",
+  "sheet": "Zereginak",
+  "level_header_cell": "G3",
+  "level_header": "AURRERATUA (10)",
+  "status": "Copia local recibida; no se ha podido verificar la version online",
+  "descriptors": [
+    {
+      "row": 5,
+      "criterion": "a) Sistema adimendunen funtsezko printzipioak identifikatu ditu.",
+      "advanced_cell": "G5",
+      "advanced_descriptor": "Bikain identifikatu eta justifikatu ditu printzipio guztiak: denbora errealeko inferentziaren eta offline ikaskuntzaren bereizketa, itxitako kontrol-begizta eta erabakiak hartzeko autonomia-mailak xehetasunez aztertuz.",
+      "weight_as_stored": "15%%"
+    },
+    {
+      "row": 10,
+      "criterion": "b) Adimen artifizialeko ereduak sailkatu ditu.",
+      "advanced_cell": "G10",
+      "advanced_descriptor": "Bikain eta sakon sailkatu ditu ereduak: algoritmo gainbegiratuak (Random Forest, Gradient Boosting) eta anomalia-detekzioko eredu ez-gainbegiratuak (Isolation Forest, Autoencoder) alderatu ditu, bakoitzaren abantailak eta erabilera-kasuak CNC telemetrian zehaztuz.",
+      "weight_as_stored": "7.5%"
+    },
+    {
+      "row": 14,
+      "criterion": "g) Ereduak problemak ebazteko sistemaren inplementaziora egokitzen diren baloratu du.",
+      "advanced_cell": "G14",
+      "advanced_descriptor": "Bikain baloratu du sistemaren egokitasuna: hutsegite baten kostu ekonomikoa (1.200 €/h) eta mantentze-kostuak kuantifikatu ditu, probabilitate-atalaseak arriskuaren arabera doitu ditu eta denbora errealeko scoring-erako bideragarritasuna guztiz frogatu du.",
+      "weight_as_stored": "7.5%"
+    },
+    {
+      "row": 16,
+      "criterion": "a) Adimen artifiziala aplikatzeak izan ditzakeen arrisku legalak eta etikoak argudiatu ditu.",
+      "advanced_cell": "G16",
+      "advanced_descriptor": "Bikain eta sakon argudiatu du: EBko AI Act-en sailkapena, CE markaketa eta erantzukizun zibilaren esleipena (fabrikatzailea vs erabiltzailea) xehetasunez jorratu ditu, eta mantentze prediktiboan langileen gaineko kontrol ezkutua ekiditeko irizpide etiko sendoak finkatu ditu.",
+      "weight_as_stored": 0.08
+    },
+    {
+      "row": 17,
+      "criterion": "b) Datuen pribatutasuna errespetatzeko beharra ezagutu du.",
+      "advanced_cell": "G17",
+      "advanced_descriptor": "Bikain ezagutu eta garatu du: Privacy by Design printzipioak txertatu ditu arkitekturan, industria-sekretuen babesa zorrotz definitu du, eta telemetria-datuak operadoreen lan-errendimenduarekin modu irregularrean ez gurutzatzeko berme legal eta teknikoak ezarri ditu.",
+      "weight_as_stored": 0.08
+    },
+    {
+      "row": 19,
+      "criterion": "d) Prozesuaren parte gisa integratu du aurreikus daitezkeen akats eta erasoetatik babestea (security by design).",
+      "advanced_cell": "G19",
+      "advanced_descriptor": "Diseinuaren atal osoan kontuan hartu eta horrela jaso da da.",
+      "weight_as_stored": 0.02
+    },
+    {
+      "row": 20,
+      "criterion": "e) Adimen artifizialaren (privacy by design) arlo guztietan arau legal eta etiko guztiak betetzen direla egiaztatu du.",
+      "advanced_cell": "G20",
+      "advanced_descriptor": "Diseinuaren atal osoan kontuan hartu eta horrela jaso da da.",
+      "weight_as_stored": 0.02
+    },
+    {
+      "row": 23,
+      "criterion": "a) Adimen artifizial indartsu eta ahularen berezitasunak zehaztu ditu.",
+      "advanced_cell": "G23",
+      "advanced_descriptor": "Berezitasun kontzeptual eta teknikoak sakonki aztertzen ditu; CNC Guard AA ahularen (ataza espezifikorako eredu optimizatua) paradigma gisa bikain justifikatzen du, AA orokorraren egungo mugekin eta industria-errealitatearekin alderatuz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 24,
+      "criterion": "b) Adimen artifizialaren eta ikaskuntza automatikoaren (Machine Learning) arteko oztopoak ezarri ditu.",
+      "advanced_cell": "G24",
+      "advanced_descriptor": "AI sinboliko/klasikoaren (arau estatikoak, atalase finkoak) eta Machine Learning-aren (patroi konplexuen ikaskuntza estatistikoa) arteko mugak, abantailak eta mugak sakonki arrazoitzen ditu CNC industriako mantentze-lanen ikuspegitik.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 31,
+      "criterion": "b) Ikaskuntza automatikoko sistemen motak eta erabilerak zehaztu ditu.",
+      "advanced_cell": "G31",
+      "advanced_descriptor": "Ikaskuntza mota bakoitzaren ezaugarriak, datu-beharrak eta industria-erabilerak sakonki zehazten ditu, CNC Guard-en zergatik aukeratu den ikaskuntza gainbegiratua (etiketatutako akats historikoak) beste moten aurrean bikain justifikatuz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 32,
+      "criterion": "c) Ikaskuntza automatikoko sistemen teknikak eta tresnak zehaztu ditu.",
+      "advanced_cell": "G32",
+      "advanced_descriptor": "Tresnen ekosistema osoa (datuen analisia, desoreka zuzentzea, modelizazioa, serializazioa eta inferentzia-zerbitzua) eta algoritmoak sakonki xehatzen ditu, teknologiak hautatzeko irizpideak bikain arrazoituz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 36,
+      "criterion": "a) Ereduari etiketatutako datuak eman dizkio.",
+      "advanced_cell": "G36",
+      "advanced_descriptor": "Datuen tratamendu eta azterketa sakona egin du (EDA), ezaugarriak ezin hobeto prestatuz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 38,
+      "criterion": "c) Entrenamendu-fasean datuak erabili ditu eredua eraikitzeko, lortutako ezaugarri garrantzitsuak aplikatuta.",
+      "advanced_cell": "G38",
+      "advanced_descriptor": "Datuen azterketa sakona egin du, feature engineering aurreratua garatu du (`temp_diff`, `power_est`), ezaugarrien garrantziaren interpretazio fisiko/industriala egin du eta datuen filtrazioa (data leakage) erabat saihestu du SMOTE entrenamenduan soilik aplikatuz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 39,
+      "criterion": "d) Eredua baliozkotze-fasean lortutako datuekin ebaluatu du.",
+      "advanced_cell": "G39",
+      "advanced_descriptor": "Ebaluazio ezin hobea: Recall, Precision eta Confusion Matrix sakonki interpretatu ditu.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 41,
+      "criterion": "f) Datu berriei buruzko iragarpenak egiteko eredua inplementatu du.",
+      "advanced_cell": "G41",
+      "advanced_descriptor": "Inplementazio profesional eta sendoa garatu du: APIak eredua memorian behin kargatzen du abioan, sarrerak zorrotz baliozkotzen ditu, erroreak kudeatzen ditu, alerta-mailak kalkulatzen ditu (`OK`, `AVISO`, `CRITICA`) eta NiFi fluxuarekin denbora errealean integratuta dago.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 45,
+      "criterion": "a) Planteatutako arazoak konpontzeko proposatutako algoritmoen egokitasuna baloratu du.",
+      "advanced_cell": "G45",
+      "advanced_descriptor": "Algoritmoen egokitasunaren balorazio bikaina: klase-desoreka larriaren aurrean Recall-a (%76+) lehenestea justifikatzen du, False Negative (1.200 €/h geldialdia) eta False Positive (alferrikako ikuskapena) kostu ekonomikoak alderatuz, eta ereduaren egokitasun industriala guztiz bermatuz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 46,
+      "criterion": "b) Sistema adimendunen oinarrizko printzipio eta tekniken aplikazio praktikoa ebaluatu du.",
+      "advanced_cell": "G46",
+      "advanced_descriptor": "Sistema adimendunaren aplikazio praktikoa bikain ebaluatu du: osagaien desakoplamendua (Kafka buffer), datu-galerarik gabeko transferentzia (NiFi), scoring-aren latentzia baxua, eta muturretik muturrerako fidagarritasuna (sentsoretik mantentze-alertara) sakonki baliozkotuz.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 49,
+      "criterion": "e) Datu-bolumen handietatik abiatuta, informazioa automatikoki ateratzeko ikaskuntza konputazionaleko teknikak garatu ditu.",
+      "advanced_cell": "G49",
+      "advanced_descriptor": "Ekoizpen-mailako ikaskuntza konputazional automatikoa garatu du: streaming etengabeko datu-bolumen handiak prozesatzen ditu (NFS -> Filebeat -> Kafka), NiFik atributuak automatikoki ateratzen ditu, ereduak denbora errealean balioesten du eta informazio egituratua (KPIak, agregazioak, alertak) indexatzen da Elasticsearchen giza esku-hartzerik gabe.",
+      "weight_as_stored": null
+    },
+    {
+      "row": 52,
+      "criterion": "b) Aplikazioa garatzeko programazio-lengoaia egokiena zehaztu du.",
+      "advanced_cell": "G52",
+      "advanced_descriptor": "Bikaintasunez eta sakonki justifikatzen du Python-en egokitasuna: datuen aurreprozesamendurako eta modelizaziorako liburutegiak, FastAPI-k eskaintzen duen asinkronia eta REST integrazio azkarra, eta industria-ingurunean pipeline osoarekin (NiFi, Docker) konektatzeko malgutasuna aztertzen ditu, beste aukera batzuekin konparazio arrazoitua eginez.",
+      "weight_as_stored": 0.1
+    },
+    {
+      "row": 55,
+      "criterion": "e) Informatika-programa baten egitura eta adimen artifizialaren aplikazioa garatzeko programazio-lengoaiaren oinarririk egokienak identifikatu ditu.",
+      "advanced_cell": "G55",
+      "advanced_descriptor": "Bikaintasunez egituratutako programa: arkitektura garbia eta modularra, entrenamendua eta ekoizpen-APIa erabat bereizita, Pydantic mota-egiaztapen sendoak, errore- eta salbuespen-kudeaketa aurreratua, eta kode-estilo garbia (PEP8 eta praktika onak errespetatuz).",
+      "weight_as_stored": 0.1
+    },
+    {
+      "row": 60,
+      "criterion": "c) Planteatutako arazoaren arabera inplementatu nahi den eredua definitu du.",
+      "advanced_cell": "G60",
+      "advanced_descriptor": "Bikaintasunez eta sakontasunez definitutako eredua: adibidez, ereduaren egokitasuna hiperplano ez-linealetan, datu-desorekaren efektu larriak (laginen %3,4 bakarrik hutsegiteak), SMOTE eta klase-pisuen eragina, eta negozioaren errealitatearekin bat datozen erabakiak (threshold tuning) eta metrikak (Recall eta ROC-AUC vs Accuracy tranpa) modu zehatzean definitu ditu.",
+      "weight_as_stored": 0.2
+    },
+    {
+      "row": 61,
+      "criterion": "d) Adimen artifizialaren aplikazioa inplementatu du.",
+      "advanced_cell": "G61",
+      "advanced_descriptor": "Bikaintasunez inplementatutako soluzioa: eredua hiperparametro egokiekin entrenatua, serializazio garbia, FastAPI zerbitzu sendoa `/health` eta `/predict` bideekin, alerta-atalase zehatzak (>=0.15 AVISO, >=0.7 CRITICA), eta denbora errealeko probekin egiaztatutako errendimendu sendoa. Threshold tuning egokiarekin findu du eredu matematikoa \"geldialdi programatuaren paradoxa\" justifikatuz.",
+      "weight_as_stored": 0.2
+    },
+    {
+      "row": 62,
+      "criterion": "e) Lortutako emaitzak ebaluatu ditu.",
+      "advanced_cell": "G62",
+      "advanced_descriptor": "Ereduaren hasierako emaitzak (Nahasmen-matrizea) ikusi ondoren, emaitzak hobetzeko aplikatu dezaketen \"teknika desberdin\" onenetarikoa aldagai berriak sortzea da (Feature Engineering). Makina bakoitzaren historikoa groupby bidez kalkulatzea emaitzak hobetzeko eta ebaluazio borobil bat egiteko ezinbesteko tresna da. Datu ezazagunen aurreko portaera aztertzeko balidazio-gurutzatua egin du. Justifikatu ditu ebaluazioak. Fine tuning bidez eta teknika desberdinak baliatuz ereduaren hiperparametroak doitu ditu. Nahasmen-matrizeak eta eta sailkapen-txostenen emaitzak aztertu eta interpretatu ditu erabakiak justifikatzeko (threshold tuning). ",
+      "weight_as_stored": 0.14
+    },
+    {
+      "row": 65,
+      "criterion": "b) Datu-bolumen handietatik abiatuta, informazioa eta ezagutza automatikoki atera ditu.",
+      "advanced_cell": "G65",
+      "advanced_descriptor": "Datuak automatikoki prozesatu eta informazio operatibo zein prediktibo bihurtzen ditu, sentsoreen datuak eta inferentziaren emaitzak uztartuz. Makinen arrisku-egoerak, joerak eta alertak identifikatzeko informazio erabilgarria eskaintzen du, mantentze-erabakiak errazteko.",
+      "weight_as_stored": 0.05
+    },
+    {
+      "row": 66,
+      "criterion": "c) Hainbat iturri eta datu mota konbinatu ditu.",
+      "advanced_cell": "G66",
+      "advanced_descriptor": "Datuen egitura osoan koherentzia bermatzen du, eta telemetria eta inferentziaren emaitzak integratzeko formatu egokia definitu eta egiaztatzen du.",
+      "weight_as_stored": 0.05
+    },
+    {
+      "row": 68,
+      "criterion": "f) Arazoaren beharrak asetzen dituzten informazio-sistemak hautatu eta integratu ditu.",
+      "advanced_cell": "G68",
+      "advanced_descriptor": "Indizeak eta ingest-pipelineak ezin hobeto sortu ditu datuak zuzen gordetzeko.",
+      "weight_as_stored": 0.025
+    },
+    {
+      "row": 71,
+      "criterion": "a) Informazioa irudikatzeko tekniken hainbat liburutegi eta inplementazio sailkatu ditu.",
+      "advanced_cell": "G71",
+      "advanced_descriptor": "Kibanako bistaratze-teknikak modu arrazoituan alderatu eta hautatu ditu, denbora-serieak, makinen arteko konparazioak eta alerta-adierazleak irudikatzeko. Grafikoen konfigurazioa (denbora-tarteak, agregazioak eta iragazkiak) egokia dela egiaztatu eta justifikatu du.",
+      "weight_as_stored": 0.1
+    },
+    {
+      "row": 72,
+      "criterion": "b) Lortu beharreko helburuari eta datuen izaerari buruzko informazioa gurutzatu du.",
+      "advanced_cell": "G72",
+      "advanced_descriptor": "Sentsoreen datuak eta negozio-helburua modu arrazoituan erlazionatzen ditu, eta monitorizazioaren emaitzetatik mantentze-erabaki erabilgarriak proposatzen ditu.",
+      "weight_as_stored": 0.09
+    },
+    {
+      "row": 77,
+      "criterion": "a) Hainbat iturritatik datuak atera eta biltegiratu ditu, hainbat agertokitan tratatzeko.",
+      "advanced_cell": "G77",
+      "advanced_descriptor": "Datuen erauzketa eta biltegiratze-prozesu sendoa garatzen du, telemetria eta alertak hainbat tratamendu-agertokitarako antolatuz, eta datuen osotasuna eta erabilgarritasuna egiaztatuz.",
+      "weight_as_stored": 0.07
+    },
+    {
+      "row": 80,
+      "criterion": "d) Datu-bolumen handiak kudeatzeko, biltegiratzeko eta prozesatzeko sistemak modu eraginkorrean eta seguruan garatu ditu, dagoen araudia kontuan hartuta.",
+      "advanced_cell": "G80",
+      "advanced_descriptor": "Sistemaren portaera karga-proba sinpleekin egiaztatu du, hobekuntza egokiak proposatu ditu eta segurtasun-neurri oinarrizkoak justifikatu ditu (sarbideak, portuak, kredentzialak eta datuen babesa).",
+      "weight_as_stored": 0.06
+    },
+    {
+      "row": 85,
+      "criterion": "c) Makina-kluster batean datu-bolumen handiak modu banatuan eta erredundantean biltegiratzearen garrantzia ezagutu du.",
+      "advanced_cell": "G85",
+      "advanced_descriptor": "Soluzioaren mugak aztertzen ditu, eta nodo bakarreko ingurunearen eta kluster erredundante baten arteko desberdintasunak teknikoki justifikatzen ditu.",
+      "weight_as_stored": 0.075
+    },
+    {
+      "row": 87,
+      "criterion": "f) Grafikoki adierazi nahi ditugun datuak bistaratzeko moduak baloratu ditu, eta, horrela, emaitzak aztertzeko eta aurkezteko zereginak erraztu ditu.",
+      "advanced_cell": "G87",
+      "advanced_descriptor": "Aginte-koadro oso eta argia garatu du, bistaratze egoki eta kalitatezkoekin.",
+      "weight_as_stored": 0.05
+    },
+    {
+      "row": 90,
+      "criterion": "b) Datuak irensteko prozedurak eta mekanismoak zehaztu ditu.",
+      "advanced_cell": "G90",
+      "advanced_descriptor": "Datu-irenste sistema sendoa garatu du, Kafka-ren desakoplamendu-funtzioa eta kontsumitzaile independenteak egoki erabiliz. Kontsumitzaileen etenaldiak eta berrabiarazteak probatu ditu, offset-en kudeaketa eta datuen jarraitutasuna egiaztatuz.",
+      "weight_as_stored": 0.03
+    },
+    {
+      "row": 92,
+      "criterion": "d) Biltegiratutako datuak prozesatu ditu.",
+      "advanced_cell": "G92",
+      "advanced_descriptor": "Datuen prozesamendu- eta inferentzia-fluxu osoa modu sendoan automatizatu du: datuak eraldatu eta balioztatzen ditu, InvokeHTTP bidez scoring-APIaren emaitzak jasotzen ditu, RouteOnAttribute edo baliokidea erabiliz arrisku-mailaren arabera bideratzen ditu, eta telemetria zein alertak Elasticsearch-en egoki biltegiratzen direla egiaztatzen du. Erroreen kudeaketa eta fluxuaren funtzionamendua probatu ditu.",
+      "weight_as_stored": 0.035
+    },
+    {
+      "row": 95,
+      "criterion": "a) Banatutako fitxategi-sistemetan datuen kalitateak duen garrantzia baloratu du.",
+      "advanced_cell": "G95",
+      "advanced_descriptor": "Datuen kalitate-kontrolak probatu eta dokumentatu ditu (balio falta direnak, formatu okerrak, bikoizketak), eta errore horiek ondorengo analisian eta inferentzian izan dezaketen eragina azaltzen du.",
+      "weight_as_stored": 0.085
+    },
+    {
+      "row": 96,
+      "criterion": "b) Datuen tratamendu-bolumena zenbat eta handiagoa izan datuen osotasunarekin lotutako arrisku handiagoa dagoela baloratu du.",
+      "advanced_cell": "G96",
+      "advanced_descriptor": "Etenaldi edo karga-probak egiten ditu, datu-galerak eta bikoizketa posibleak egiaztatzen ditu, eta horiek murrizteko neurri egokiak proposatu eta aplikatzen ditu.",
+      "weight_as_stored": 0.09
+    },
+    {
+      "row": 100,
+      "criterion": "a) Egituratutako eta egituratu gabeko datu ugari hautatu ditu, BIren funtzioa indartzeko.",
+      "advanced_cell": "G100",
+      "advanced_descriptor": "Datu-hautaketa estrategikoa egin du, sentsoreen neurketak, makinen metadatuak eta inferentziaren emaitzak (hutsegite-probabilitatea eta alerta-maila) integratuz. Aldagai bakoitzaren erabilgarritasuna justifikatu du eta hautatutako datuek mantentze prediktiboaren analisian eta erabakiak hartzeko prozesuan duten ekarpena frogatu du.",
+      "weight_as_stored": 0.03
+    },
+    {
+      "row": 101,
+      "criterion": "b) Datuak garbitu eta eraldatu ditu, aurrez zehaztutako helburuetan oinarrituta.",
+      "advanced_cell": "G101",
+      "advanced_descriptor": "Garbiketa- eta eraldaketa-fluxu sendoa garatzen du, balio baliogabeak bereiziz eta datuen koherentzia egiaztatuz, biltegiratzean eta scoring-APIarekin integratzean.",
+      "weight_as_stored": 0.035
+    },
+    {
+      "row": 104,
+      "criterion": "e) Datuetatik ateratako informazioa eta horrek garaipenean duen eragina ebaluatu eta interpretatu du(negozio desberdinetakoak).",
+      "advanced_cell": "G104",
+      "advanced_descriptor": "Alerten emaitzak kritikoki interpretatzen ditu, alerta okerren ondorioak eta geldialdien kostua aztertzen ditu, eta datuetan oinarritutako mantentze-jarduera arrazoituak proposatzen ditu.",
+      "weight_as_stored": 0.03
+    },
+    {
+      "row": 105,
+      "criterion": "f) Negozio-adimenaren (BI) eredu baten ezarpena simulatu du.",
+      "advanced_cell": "G105",
+      "advanced_descriptor": "Erabakiak denbora errealean hartzea ahalbidetzen duen dashboard ikusgarri eta zehatza sortu du.",
+      "weight_as_stored": 0.02
+    }
+  ]
+}

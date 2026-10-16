@@ -1,0 +1,408 @@
+{
+  "requested_on": "2026-10-16",
+  "start": "2026-10-16",
+  "delivery_target": "2026-11-06",
+  "technical_delivery_target": "2026-11-05",
+  "project": 2,
+  "assumptions": [
+    "Lunes a viernes, sin planificar fines de semana; festivos y disponibilidad por confirmar.",
+    "Dependencias con fin e inicio el mismo dia requieren aceptar el predecesor antes de empezar el sucesor.",
+    "Trabajo paralelo y parcial por persona; las estimaciones originales de esfuerzo se conservan, no son una validacion de capacidad.",
+    "No se reinicia el plazo docente original de 11 semanas; esta es la ventana operativa solicitada."
+  ],
+  "items": [
+    {
+      "issue": 1,
+      "title": "[CG01] Irismena, eginkizunak eta ANEXO1eko jarraipena adostu",
+      "start": "2026-10-16",
+      "target": "2026-10-16",
+      "dependencies": [],
+      "original_effort_person_days": 1.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW27P5g",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaM_o"
+    },
+    {
+      "issue": 2,
+      "title": "[CG02] Datu-iturrien inbentarioa egin eta helburu-etiketaren bideragarritasuna egiaztatu",
+      "start": "2026-10-16",
+      "target": "2026-10-19",
+      "dependencies": [
+        1
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28EBw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaN7s"
+    },
+    {
+      "issue": 3,
+      "title": "[CG03] Telemetriaren, mantentzearen, logen eta iragarpenen datu-kontratuak definitu",
+      "start": "2026-10-19",
+      "target": "2026-10-19",
+      "dependencies": [
+        1
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28MnQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOCU"
+    },
+    {
+      "issue": 4,
+      "title": "[CG04] Python ingurunea eta modulu erreproduzigarriak prestatu",
+      "start": "2026-10-19",
+      "target": "2026-10-19",
+      "dependencies": [
+        1
+      ],
+      "original_effort_person_days": 2.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28ThQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOIw"
+    },
+    {
+      "issue": 5,
+      "title": "[CG05] Laborategiko CSV sarrerak eta logak prestatu",
+      "start": "2026-10-20",
+      "target": "2026-10-20",
+      "dependencies": [
+        2,
+        3
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28aKw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOPU"
+    },
+    {
+      "issue": 6,
+      "title": "[CG06] Parquet historikoa, DuckDB kontsultak eta EDA notebooka prestatu",
+      "start": "2026-10-21",
+      "target": "2026-10-21",
+      "dependencies": [
+        4,
+        5
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28g8w",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOVY"
+    },
+    {
+      "issue": 7,
+      "title": "[CG07] Aldagaiak, etiketak eta datu-zatiketak informazio-ihesik gabe eraiki",
+      "start": "2026-10-22",
+      "target": "2026-10-22",
+      "dependencies": [
+        6
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28oTA",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOdQ"
+    },
+    {
+      "issue": 8,
+      "title": "[CG08] Random Forest eta ebaluazio-erreferentziak entrenatu",
+      "start": "2026-10-23",
+      "target": "2026-10-23",
+      "dependencies": [
+        7
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW28uCQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOjY"
+    },
+    {
+      "issue": 9,
+      "title": "[CG09] Isolation Forest entrenatu eta atalase osagarria hautatu",
+      "start": "2026-10-23",
+      "target": "2026-10-23",
+      "dependencies": [
+        7
+      ],
+      "original_effort_person_days": 2.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2817Q",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOqw"
+    },
+    {
+      "issue": 10,
+      "title": "[CG10] Metrikak, atalaseak eta abisu-politika balioztatu",
+      "start": "2026-10-26",
+      "target": "2026-10-26",
+      "dependencies": [
+        8,
+        9
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW289YA",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaOxE"
+    },
+    {
+      "issue": 11,
+      "title": "[CG11] 1. mugarria · Datu eta modelo erreproduzigarriak",
+      "start": "2026-10-26",
+      "target": "2026-10-26",
+      "dependencies": [
+        10
+      ],
+      "original_effort_person_days": 1.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29Ebw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaO2s"
+    },
+    {
+      "issue": 12,
+      "title": "[CG12] Tokiko Docker Compose eta biltegiratzea konfiguratu",
+      "start": "2026-10-20",
+      "target": "2026-10-20",
+      "dependencies": [
+        3
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29Kiw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaO9M"
+    },
+    {
+      "issue": 13,
+      "title": "[CG13] Kafka topicak eta kontsumitzaile-taldeak konfiguratu",
+      "start": "2026-10-21",
+      "target": "2026-10-21",
+      "dependencies": [
+        12
+      ],
+      "original_effort_person_days": 2.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29SLQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPD8"
+    },
+    {
+      "issue": 14,
+      "title": "[CG14] NiFi-ren balioztatze- eta baztertze-fluxua eraiki",
+      "start": "2026-10-22",
+      "target": "2026-10-23",
+      "dependencies": [
+        5,
+        13,
+        36
+      ],
+      "original_effort_person_days": 5.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29aAA",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPKs"
+    },
+    {
+      "issue": 15,
+      "title": "[CG15] archive kontsumitzailea Parquet idempotentearekin inplementatu",
+      "start": "2026-10-26",
+      "target": "2026-10-26",
+      "dependencies": [
+        6,
+        13
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29fpg",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPQc"
+    },
+    {
+      "issue": 16,
+      "title": "[CG16] Inferentzia-kontsumitzailea eta datu-kalitatearen egoerak inplementatu",
+      "start": "2026-10-27",
+      "target": "2026-10-27",
+      "dependencies": [
+        10,
+        13,
+        14,
+        35
+      ],
+      "original_effort_person_days": 5.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29lyw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPXE"
+    },
+    {
+      "issue": 17,
+      "title": "[CG17] Makina bakoitzeko abisuak multzokatzeko politika inplementatu",
+      "start": "2026-10-28",
+      "target": "2026-10-28",
+      "dependencies": [
+        16
+      ],
+      "original_effort_person_days": 2.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW29tAw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPeY"
+    },
+    {
+      "issue": 18,
+      "title": "[CG18] Elasticsearch mappingak eta dashboard-sink kontsumitzailea sortu",
+      "start": "2026-10-22",
+      "target": "2026-10-23",
+      "dependencies": [
+        3,
+        13
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW290Jw",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPmg"
+    },
+    {
+      "issue": 19,
+      "title": "[CG19] Kibana panela eta ikerketa-bistak eraiki",
+      "start": "2026-10-29",
+      "target": "2026-10-29",
+      "dependencies": [
+        17,
+        18
+      ],
+      "original_effort_person_days": 5.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2962g",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaPuk"
+    },
+    {
+      "issue": 20,
+      "title": "[CG20] Ohiko ibilbidea muturretik muturrera probatu",
+      "start": "2026-10-30",
+      "target": "2026-10-30",
+      "dependencies": [
+        14,
+        15,
+        16,
+        19,
+        35,
+        36
+      ],
+      "original_effort_person_days": 2.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-BHQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaP1k"
+    },
+    {
+      "issue": 21,
+      "title": "[CG21] Akatsak, bikoiztuak eta berreskuratzea probatu",
+      "start": "2026-11-02",
+      "target": "2026-11-02",
+      "dependencies": [
+        20
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-H9w",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaP8g"
+    },
+    {
+      "issue": 22,
+      "title": "[CG22] 2. mugarria · Integrazio berreskuragarria eta panel egiaztatua",
+      "start": "2026-11-02",
+      "target": "2026-11-02",
+      "dependencies": [
+        21
+      ],
+      "original_effort_person_days": 1.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-PVg",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQDk"
+    },
+    {
+      "issue": 23,
+      "title": "[CG23] Ahalmena neurtu eta atxikipena eta kostua berrikusi",
+      "start": "2026-11-03",
+      "target": "2026-11-03",
+      "dependencies": [
+        22
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-WkQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQLE"
+    },
+    {
+      "issue": 24,
+      "title": "[CG24] Segurtasuna, alborapenak eta giza eragina berrikusi",
+      "start": "2026-11-03",
+      "target": "2026-11-03",
+      "dependencies": [
+        22
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-duA",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQSI"
+    },
+    {
+      "issue": 25,
+      "title": "[CG25] Txostena, irizpide gorriak eta ANEXO4 osatu",
+      "start": "2026-11-04",
+      "target": "2026-11-04",
+      "dependencies": [
+        23,
+        24,
+        37
+      ],
+      "original_effort_person_days": 4.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-k5w",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQYQ"
+    },
+    {
+      "issue": 26,
+      "title": "[CG26] Demo erreproduzigarria eta taldearen defentsa prestatu",
+      "start": "2026-11-05",
+      "target": "2026-11-05",
+      "dependencies": [
+        25
+      ],
+      "original_effort_person_days": 3.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-r_g",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQeE"
+    },
+    {
+      "issue": 27,
+      "title": "[CG27] 3. mugarria · Defentsa eta azken dokumentazioa",
+      "start": "2026-11-06",
+      "target": "2026-11-06",
+      "dependencies": [
+        26
+      ],
+      "original_effort_person_days": 1.0,
+      "issue_id": "I_kwDOUYD5Ac8AAAABW2-zYQ",
+      "project_item_id": "PVTI_lADOE3gaF84Bm1BCzhAaQkM"
+    },
+    {
+      "issue": 35,
+      "cg": 28,
+      "title": "[CG28] FastAPI scoring zerbitzu sendoa",
+      "start": "2026-10-27",
+      "target": "2026-10-27",
+      "dependencies": [
+        3,
+        4,
+        8,
+        10
+      ],
+      "original_effort_person_days": 2,
+      "estimate_status": "Nueva estimacion bruta; revisar solapamiento con alcance antes implicito"
+    },
+    {
+      "issue": 36,
+      "cg": 29,
+      "title": "[CG29] Filebeat SMB fitxategietatik Kafka raw topicera",
+      "start": "2026-10-21",
+      "target": "2026-10-21",
+      "dependencies": [
+        5,
+        12,
+        13
+      ],
+      "original_effort_person_days": 1,
+      "estimate_status": "Nueva estimacion bruta; revisar solapamiento con alcance antes implicito"
+    },
+    {
+      "issue": 37,
+      "cg": 30,
+      "title": "[CG30] IA ML eta diseinu aukeren justifikazioa",
+      "start": "2026-10-19",
+      "target": "2026-10-26",
+      "dependencies": [
+        1
+      ],
+      "original_effort_person_days": 1.5,
+      "estimate_status": "Nueva estimacion bruta; revisar solapamiento con alcance antes implicito"
+    }
+  ],
+  "capacity_review": {
+    "weekdays_inclusive": 16,
+    "team_members": 4,
+    "theoretical_person_days": 64,
+    "original_estimated_person_days": 82,
+    "gap_person_days": 18,
+    "status": "30 issues; reestimar restante, disponibilidad y solapamientos. No es compromiso de capacidad.",
+    "excludes": "Festivos, clases, ausencias, revisiones y coordinacion reducen la capacidad real; no se ha cuantificado el trabajo reutilizable de PRs",
+    "new_explicit_estimates_person_days": 4.5,
+    "gross_estimates_person_days": 86.5,
+    "gross_gap_person_days": 22.5
+  }
+}

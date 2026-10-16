@@ -1,0 +1,491 @@
+[
+  {
+    "cg": 1,
+    "issue": 1,
+    "title": "[CG01] Irismena eta taldearen akordioa",
+    "criteria": [
+      5,
+      23,
+      24
+    ],
+    "dependencies_cg": [],
+    "guide": "docs/issues/CG01.md"
+  },
+  {
+    "cg": 2,
+    "issue": 2,
+    "title": "[CG02] Iturriak eta etiketaren bideragarritasuna",
+    "criteria": [
+      36,
+      66,
+      95
+    ],
+    "dependencies_cg": [
+      1
+    ],
+    "guide": "docs/issues/CG02.md"
+  },
+  {
+    "cg": 3,
+    "issue": 3,
+    "title": "[CG03] Datu kontratuak",
+    "criteria": [
+      66,
+      100,
+      101
+    ],
+    "dependencies_cg": [
+      1
+    ],
+    "guide": "docs/issues/CG03.md"
+  },
+  {
+    "cg": 4,
+    "issue": 4,
+    "title": "[CG04] Python ingurune eta modulu erreproduzigarriak",
+    "criteria": [
+      32,
+      52,
+      55
+    ],
+    "dependencies_cg": [
+      1
+    ],
+    "guide": "docs/issues/CG04.md"
+  },
+  {
+    "cg": 5,
+    "issue": 5,
+    "title": "[CG05] SMB sarrerak eta probetarako datuak",
+    "criteria": [
+      49,
+      77,
+      95
+    ],
+    "dependencies_cg": [
+      2,
+      3
+    ],
+    "guide": "docs/issues/CG05.md"
+  },
+  {
+    "cg": 6,
+    "issue": 6,
+    "title": "[CG06] Historikoa eta EDA",
+    "criteria": [
+      36,
+      62,
+      77
+    ],
+    "dependencies_cg": [
+      4,
+      5
+    ],
+    "guide": "docs/issues/CG06.md"
+  },
+  {
+    "cg": 7,
+    "issue": 7,
+    "title": "[CG07] Features eta ebaluazio zatiketak",
+    "criteria": [
+      38,
+      60,
+      62
+    ],
+    "dependencies_cg": [
+      6
+    ],
+    "guide": "docs/issues/CG07.md"
+  },
+  {
+    "cg": 8,
+    "issue": 8,
+    "title": "[CG08] RF eta erreferentzien esperimentua",
+    "criteria": [
+      10,
+      31,
+      32,
+      38,
+      39,
+      60,
+      62
+    ],
+    "dependencies_cg": [
+      7
+    ],
+    "guide": "docs/issues/CG08.md"
+  },
+  {
+    "cg": 9,
+    "issue": 9,
+    "title": "[CG09] Isolation Forest osagarria",
+    "criteria": [
+      10,
+      31,
+      32
+    ],
+    "dependencies_cg": [
+      7
+    ],
+    "guide": "docs/issues/CG09.md"
+  },
+  {
+    "cg": 10,
+    "issue": 10,
+    "title": "[CG10] Metrikak atalaseak eta kostuak",
+    "criteria": [
+      14,
+      39,
+      45,
+      60,
+      61,
+      62,
+      104
+    ],
+    "dependencies_cg": [
+      8,
+      9
+    ],
+    "guide": "docs/issues/CG10.md"
+  },
+  {
+    "cg": 11,
+    "issue": 11,
+    "title": "[CG11] Lehen mugarriaren berrikuspena",
+    "criteria": [
+      36,
+      38,
+      39,
+      45,
+      60,
+      62
+    ],
+    "dependencies_cg": [
+      10
+    ],
+    "guide": "docs/issues/CG11.md"
+  },
+  {
+    "cg": 12,
+    "issue": 12,
+    "title": "[CG12] Laborategiko zerbitzuak",
+    "criteria": [
+      19,
+      20,
+      80,
+      85
+    ],
+    "dependencies_cg": [
+      3
+    ],
+    "guide": "docs/issues/CG12.md"
+  },
+  {
+    "cg": 13,
+    "issue": 13,
+    "title": "[CG13] Kafka topic eta offset kontratua",
+    "criteria": [
+      46,
+      49,
+      90
+    ],
+    "dependencies_cg": [
+      12
+    ],
+    "guide": "docs/issues/CG13.md"
+  },
+  {
+    "cg": 14,
+    "issue": 14,
+    "title": "[CG14] NiFi balidazio eta API fluxua",
+    "criteria": [
+      41,
+      46,
+      90,
+      92,
+      95,
+      101
+    ],
+    "dependencies_cg": [
+      5,
+      13,
+      29
+    ],
+    "guide": "docs/issues/CG14.md"
+  },
+  {
+    "cg": 15,
+    "issue": 15,
+    "title": "[CG15] Artxibo idempotentea",
+    "criteria": [
+      77,
+      96
+    ],
+    "dependencies_cg": [
+      6,
+      13
+    ],
+    "guide": "docs/issues/CG15.md"
+  },
+  {
+    "cg": 16,
+    "issue": 16,
+    "title": "[CG16] Online inferentziaren integrazioa",
+    "criteria": [
+      41,
+      46,
+      55,
+      61,
+      92
+    ],
+    "dependencies_cg": [
+      10,
+      13,
+      14,
+      28
+    ],
+    "guide": "docs/issues/CG16.md"
+  },
+  {
+    "cg": 17,
+    "issue": 17,
+    "title": "[CG17] Alerten politika eta giza berrikuspena",
+    "criteria": [
+      5,
+      61,
+      104
+    ],
+    "dependencies_cg": [
+      16
+    ],
+    "guide": "docs/issues/CG17.md"
+  },
+  {
+    "cg": 18,
+    "issue": 18,
+    "title": "[CG18] Elasticsearch datu eredua",
+    "criteria": [
+      65,
+      66,
+      68,
+      77,
+      100
+    ],
+    "dependencies_cg": [
+      3,
+      13
+    ],
+    "guide": "docs/issues/CG18.md"
+  },
+  {
+    "cg": 19,
+    "issue": 19,
+    "title": "[CG19] Kibana panela eta erabakiak",
+    "criteria": [
+      65,
+      71,
+      72,
+      87,
+      104,
+      105
+    ],
+    "dependencies_cg": [
+      17,
+      18
+    ],
+    "guide": "docs/issues/CG19.md"
+  },
+  {
+    "cg": 20,
+    "issue": 20,
+    "title": "[CG20] End to end ohiko proba",
+    "criteria": [
+      46,
+      49,
+      65,
+      77,
+      92
+    ],
+    "dependencies_cg": [
+      14,
+      15,
+      16,
+      19,
+      28,
+      29
+    ],
+    "guide": "docs/issues/CG20.md"
+  },
+  {
+    "cg": 21,
+    "issue": 21,
+    "title": "[CG21] Erroreak etenaldiak eta replay",
+    "criteria": [
+      46,
+      80,
+      90,
+      95,
+      96
+    ],
+    "dependencies_cg": [
+      20
+    ],
+    "guide": "docs/issues/CG21.md"
+  },
+  {
+    "cg": 22,
+    "issue": 22,
+    "title": "[CG22] Bigarren mugarriaren berrikuspena",
+    "criteria": [
+      46,
+      77,
+      80,
+      90,
+      92,
+      96
+    ],
+    "dependencies_cg": [
+      21
+    ],
+    "guide": "docs/issues/CG22.md"
+  },
+  {
+    "cg": 23,
+    "issue": 23,
+    "title": "[CG23] Karga ahalmena eta kostu eszenatokiak",
+    "criteria": [
+      14,
+      45,
+      80,
+      85,
+      96,
+      104
+    ],
+    "dependencies_cg": [
+      22
+    ],
+    "guide": "docs/issues/CG23.md"
+  },
+  {
+    "cg": 24,
+    "issue": 24,
+    "title": "[CG24] Segurtasuna pribatutasuna eta erantzukizuna",
+    "criteria": [
+      16,
+      17,
+      19,
+      20
+    ],
+    "dependencies_cg": [
+      22
+    ],
+    "guide": "docs/issues/CG24.md"
+  },
+  {
+    "cg": 25,
+    "issue": 25,
+    "title": "[CG25] Memoria errubrika eta ANEXO4",
+    "criteria": [
+      5,
+      10,
+      16,
+      17,
+      19,
+      20,
+      23,
+      24,
+      31,
+      32,
+      52
+    ],
+    "dependencies_cg": [
+      23,
+      24,
+      30
+    ],
+    "guide": "docs/issues/CG25.md"
+  },
+  {
+    "cg": 26,
+    "issue": 26,
+    "title": "[CG26] Demo eta defentsa",
+    "criteria": [
+      5,
+      23,
+      24,
+      72,
+      104,
+      105
+    ],
+    "dependencies_cg": [
+      25
+    ],
+    "guide": "docs/issues/CG26.md"
+  },
+  {
+    "cg": 27,
+    "issue": 27,
+    "title": "[CG27] Azken mugarriaren berrikuspena",
+    "criteria": [
+      5,
+      105
+    ],
+    "dependencies_cg": [
+      26
+    ],
+    "guide": "docs/issues/CG27.md"
+  },
+  {
+    "cg": 28,
+    "issue": 35,
+    "title": "[CG28] FastAPI scoring zerbitzu sendoa",
+    "criteria": [
+      41,
+      52,
+      55,
+      61
+    ],
+    "dependencies_cg": [
+      3,
+      4,
+      8,
+      10
+    ],
+    "guide": "docs/issues/CG28.md"
+  },
+  {
+    "cg": 29,
+    "issue": 36,
+    "title": "[CG29] Filebeat SMB fitxategietatik Kafka raw topicera",
+    "criteria": [
+      49,
+      77,
+      90,
+      96
+    ],
+    "dependencies_cg": [
+      5,
+      12,
+      13
+    ],
+    "guide": "docs/issues/CG29.md"
+  },
+  {
+    "cg": 30,
+    "issue": 37,
+    "title": "[CG30] IA ML eta diseinu aukeren justifikazioa",
+    "criteria": [
+      5,
+      10,
+      23,
+      24,
+      31,
+      32,
+      52
+    ],
+    "dependencies_cg": [
+      1
+    ],
+    "guide": "docs/issues/CG30.md"
+  }
+]

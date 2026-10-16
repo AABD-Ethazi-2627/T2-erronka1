@@ -1,0 +1,103 @@
+# CG01 — Propuesta de alcance y acuerdo de equipo
+
+**Borrador para debatir, 16 de octubre de 2026. No es un acuerdo aprobado.**
+Issue: [CG01](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/1).
+
+## Propuesta para presentar al equipo
+
+Proponemos desarrollar CNC Guard como un laboratorio reproducible de detección de fallos y anomalías. Utilizaremos el training AI4I disponible para entrenar y evaluar, y los batches diarios del SMB como registros operativos de máquinas simuladas. Construiremos nuestra propia conservación de los datos, su procesamiento y un panel de consulta. El resultado inicial identificará el estado de fallo del registro actual. La predicción de una avería a 24 horas seguirá como hipótesis de ampliación, pendiente de datos longitudinales y eventos de avería adecuados.
+
+El objetivo es mejorar la detección equilibrando falsos negativos y falsas alarmas. F1 y F2, junto con precisión, recall y matriz de confusión, permitirán justificar la elección. Acercarse a 1 es una aspiración, no una garantía ni un criterio que permita alterar etiquetas o reutilizar el test para ajustar el modelo.
+
+## 1. Alcance propuesto
+
+- Entrenar únicamente con `data/ai4i2020_train.csv`; separar entrenamiento, validación y test antes de ajustar modelos. Ajustar preparación, parámetros y umbrales dentro del proceso de entrenamiento/validación, conservando el test para la evaluación final.
+- Recoger los CSV del SMB cuando el servidor esté disponible. Son registros operativos del laboratorio de origen simulado AI4I; no constituyen evidencia de funcionamiento en una fábrica.
+- Inventariar y validar esquema, unidades, fechas, etiquetas y duplicados; conservar los originales y documentar registros rechazados y sus motivos.
+- Mantener un histórico propio, con Bronze (original), Silver (validado) y Gold (resultados/agregaciones). NiFi ejecutará el flujo que implementemos: instalarlo no crea por sí solo estas capas ni una política de retención.
+- Utilizar Random Forest para clasificación supervisada e integrar Isolation Forest como señal complementaria de anomalía. Una anomalía no equivale automáticamente a una avería; su señal no descartará por sí sola una alerta supervisada.
+- Consultar histórico con Parquet/DuckDB y visualizar resultados operativos con Elasticsearch/Kibana.
+- Entregar código, configuraciones, flujo de datos, informe de evaluación, instrucciones de reproducción y evidencias de una demostración completa.
+
+No se conectará el prototipo a CNC físicos ni se automatizarán órdenes de parada. La demostración no acreditará anticipación de 24 horas ni eficacia industrial. Los tiempos reales de llegada del SMB se medirán; «tiempo real» no implica una latencia garantizada.
+
+## 2. Tecnologías del curso y trazabilidad
+
+Rutas relativas a la raíz del repositorio docente `bigdata`, situado fuera de este worktree. Páginas físicas del PDF, contadas desde 1. Esta tabla propone una selección; el curso no obliga a usar todas las tecnologías mencionadas en sus materiales.
+
+| Función propuesta | Tecnología | Material docente comprobado |
+|---|---|---|
+| Ingesta y validación | Apache NiFi | `06_NiFi/materialak/01_01_ApacheNifi.pdf`, pp. 1–8 y casos de procesamiento de registros |
+| Transporte de eventos | Apache Kafka y consumidores Python | `07_Kafka/materialak/01_03_ApacheKafka.pdf`, pp. 1–6 y apartados de productores/consumidores |
+| Servicio de inferencia | FastAPI, Pydantic, serialización del modelo | Rúbrica docente `Zereginak!G41,G55,G61`; no es una incorporación externa |
+| Preparación y modelos | Python, pandas, scikit-learn; Random Forest | `05_BigData_Ingeniaritza/materialak/01_02_datuen_ingeniaritza.pdf`, p. 29; `03_ML_5072/materialak/5072_00_Sarrera.pdf`, apartado de herramientas; `03_ML_5072/materialak/5072_2_06_Random_Forest.pdf`, pp. 1–6 |
+| Anomalías | Isolation Forest | `03_ML_5072/materialak/5072_00_Sarrera.pdf`, p. 15, tabla de algoritmos (numeración impresa 16/22) |
+| Histórico y consulta | Parquet y DuckDB | `05_BigData_Ingeniaritza/materialak/01_02_datuen_ingeniaritza.pdf`, pp. 29–31 y 33–35 |
+| Organización por capas | Bronze / Silver / Gold | `06_NiFi/materialak/Apache NiFi kasu praktikoak (5-6-7).pdf`, caso 7, p. 25 y siguientes |
+| Consulta operativa y panel | Elasticsearch y Kibana | `05_BigData_Ingeniaritza/materialak/02_elastic_stack.pdf`, pp. 5–10 y apartados de consultas y visualización |
+| Ejecución local de servicios | Docker Compose | `05_BigData_Ingeniaritza/materialak/02_elastic_stack.pdf`, práctica de p. 10 |
+
+Recorrido propuesto según la rúbrica: SMB → recogida de archivos/Filebeat → Kafka → NiFi (CSV→JSON, validación, InvokeHTTP) → FastAPI → NiFi → Elasticsearch → Kibana; histórico propio por capas en paralelo, con Parquet/DuckDB. La adaptación SMB frente al NFS citado por la rúbrica requiere confirmación del tutor. El acceso concreto al SMB, la distribución de responsabilidades de archivo y las confirmaciones de consumo se concretarán en sus issues; este esquema no presupone un conector ya probado.
+
+El patrón medallion se adapta del caso docente AEMET; no obliga a incorporar AEMET o MongoDB a CNC Guard. La retención de Kafka tampoco sustituye al histórico propio. No se añaden servicios o frameworks sin respaldo docente. FastAPI sí forma parte de esta propuesta: lo exige expresamente la rúbrica docente, `Zereginak!G61`, con Pydantic en `G55`. Streamlit queda fuera.
+
+**Corrección tras revisar la rúbrica original:** la exclusión anterior de FastAPI era incorrecta. La rúbrica específica del reto prevalece sobre la selección de nuestra presentación. Ver [objetivos, etapas y matriz para nivel avanzado](../rubrica/OBJETIVOS_Y_ETAPAS.md). Este documento sigue siendo una propuesta pendiente de consenso.
+
+## 3. Criterios de aceptación propuestos
+
+| Entrega | Evidencia para aceptarla |
+|---|---|
+| Fuentes y calidad | Inventario reproducible, procedencia, hashes, unidades, análisis de etiquetas/tiempo y límites de uso; revisión de CG02 |
+| Ingesta | Un batch válido recorre el flujo; otro inválido queda identificado y conservado para revisión; relectura sin duplicar resultados según la clave acordada |
+| Histórico | Original recuperable, dato validado y resultado trazables entre capas; consulta DuckDB sobre Parquet y prueba de relectura |
+| Modelo supervisado | Separación de datos documentada, referencia de comparación, precisión/recall/F1/F2 y matriz de confusión; ningún identificador ni indicador derivado del fallo se usa como predictor sin justificar su disponibilidad y ausencia de fuga |
+| Anomalías | Resultado de Isolation Forest distinguido del fallo supervisado y evaluación de su aportación y falsas alarmas |
+| Panel | Resultados, calidad y frescura del dato visibles; interrupción del SMB distinguida de ausencia de fallos |
+| Reproducción | Otro compañero ejecuta las instrucciones en el laboratorio y registra versión, comandos, resultado y limitaciones |
+
+Antes de ajustar umbrales, el equipo debe acordar si F1 será el criterio principal y F2 el complementario o si prioriza F2 con una precisión mínima. El valor mínimo aceptable de precisión/recall y la política de falsas alarmas quedan **pendientes de acuerdo**, sin inventar costes industriales. Se publicarán también los recuentos de positivos y negativos. Los 40 registros de los snapshots de CG02 son negativos: por sí solos no permiten estimar recall ni F1/F2 para fallos.
+
+Retención propuesta para discutir: 90 días de histórico y 30 días de índice operativo, sujeta a espacio disponible y mediciones de volumen. Son decisiones de diseño pendientes, no requisitos del curso ni servicios actualmente activos.
+
+## 4. Objetivos y organización — ANEXO1
+
+Fuente: `01_Erronka1_CNC_Guard/materialak/ANEXO1-Eus.md` (plantilla original también en DOCX).
+
+Objetivos colectivos propuestos: aprender a trabajar en equipo, ayudarnos a comprender cada parte y entregar un laboratorio reproducible dentro del plazo. Revisar el trabajo de otro compañero antes de dar una tarea por aceptada y registrar acuerdos y desacuerdos.
+
+El reparto técnico de los issues abiertos ya permite identificar las cuatro áreas: infra (`petiteiker`), diseño (`Angiecrizu`), dev (`Niistal`) y generalista ML/Project lead (`tears-mysthrala`). Ver [ANEXO1 cumplimentado y seguimiento](ANEXO1_reparto_y_seguimiento.md) y [versión principal en Markdown en euskera](ANEXO1_CNC_Guard.md).
+
+| Cargo de ANEXO1 | Propuesta derivada del reparto |
+|---|---|
+| Coordinación | tears-mysthrala |
+| Vocal / portavocía | petiteiker |
+| Secretaría | Angiecrizu |
+| Auxiliar único | Niistal |
+
+La correspondencia con los cargos de tutoría incorpora la corrección expresa del usuario: petiteiker vocal y Niistal único auxiliar. Los compromisos describen el trabajo asignado y quedan pendientes de ratificación y firma. El usuario ha confirmado las cuatro cuentas y su reparto técnico el 16/10/2026; se mantienen esas cuentas como identificación en el borrador. Tutor/a y grupo oficial siguen pendientes. La versión Markdown conserva el contenido de la plantilla y deja las firmas pendientes; no acredita entrega a Moodle/Classroom.
+
+## 5. Calendario operativo solicitado
+
+Inicio: **16 de octubre de 2026**. Entrega objetivo: **6 de noviembre de 2026**. El [plan fechado del Gantt](../planificacion/README.md) sustituye al calendario relativo anterior para organizar el trabajo actual y mantiene las puertas E1–E8 de la rúbrica.
+
+Las 11 semanas proceden del enunciado docente y no se reinician hoy. La nueva ventana contiene 16 días de lunes a viernes. Las estimaciones originales suman 82 persona-días frente a un máximo teórico de 64: la fecha objetivo exige reestimar esfuerzo restante, disponibilidad y apoyo entre roles. No se ha validado su factibilidad ni se rebajan criterios para encajar el plazo.
+
+Hitos objetivo: datos/modelos el 26 de octubre; integración y panel el 2 de noviembre; demo preparada el 5; cierre y defensa el 6. Ver fechas por issue, dependencias y riesgos en el plan.
+
+## 6. Acta mínima para convertir el borrador en acuerdo
+
+- Fecha de reunión y participantes: **pendientes**.
+- Objetivo y límites aceptados, cambios solicitados: **pendientes**.
+- Arquitectura y tecnologías elegidas, con justificación: **pendientes**.
+- Métrica principal y mínimos de aceptación: **pendientes**.
+- Roles de ANEXO1, responsables técnicos y compromisos personales: **pendientes**.
+- Inicio, entrega y revisión del calendario: **pendientes**.
+- Política de retención y revisión de capacidad: **pendientes**.
+- Persona que redacta el acta, revisión del equipo y enlace al ANEXO1: **pendientes**.
+
+CG01 podrá marcarse resuelta cuando estos acuerdos estén registrados y revisados, el alcance quede limitado al laboratorio y el calendario operativo y la disponibilidad estén confirmados. Preparar un documento o abrir un PR no equivale a que el equipo lo haya aprobado.
+
+## Referencias de estado
+
+- [PR #33 / CG02](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/33): inventario y límites de la etiqueta, todavía sujeto a revisión. No es necesario mezclar su implementación con este borrador.
+- Material docente: rutas de la tabla anterior, verificadas localmente el 16 de octubre de 2026. La presentación previa es contexto de planificación, no prueba de consenso del equipo.

@@ -1,5 +1,9 @@
 # CNC Guard — Hasteko Argibideak
 
+## Dokumentazioa eta errubrika
+
+[Dokumentazioaren aurkibidea](docs/README.md) · [Errubrika eta ebidentzien jarraipena](docs/rubrica/README.md).
+
 ## 1. NFS karpeta muntatu (behin bakarrik)
 
 ```bash
