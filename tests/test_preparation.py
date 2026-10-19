@@ -10,17 +10,17 @@ class PreparationTests(unittest.TestCase):
     def test_physics_and_label_exclusion(self):
         frame = pd.DataFrame(
             [
-                dict(
-                    air_temp_K=300,
-                    process_temp_K=310,
-                    rpm=60,
-                    torque_Nm=10,
-                    tool_wear_min=5,
-                    machine_type="M",
-                    machine_failure=1,
-                    failure_TWF=1,
-                    machine_id="CNC-001",
-                )
+                {
+                    "air_temp_K": 300,
+                    "process_temp_K": 310,
+                    "rpm": 60,
+                    "torque_Nm": 10,
+                    "tool_wear_min": 5,
+                    "machine_type": "M",
+                    "machine_failure": 1,
+                    "failure_TWF": 1,
+                    "machine_id": "CNC-001",
+                }
             ]
         )
         result = features(frame)
