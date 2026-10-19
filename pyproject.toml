@@ -16,3 +16,8 @@ dependencies = [
   "httpx==0.27.0",
   "imbalanced-learn==0.12.4",
 ]
+
+[dependency-groups]
+research = [
+    "catboost==1.2.10",
+]

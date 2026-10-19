@@ -90,3 +90,6 @@ Una rama feat por issue, con dependencias apiladas y commits trazables en el ín
 Revisión humana y defensa pendientes antes de cerrar issues o atribuir nota.
 [Sincronización Project #2 → #1](docs/PROJECTS_SYNC.md) necesita su secret con alcance
 Project y activación administrativa; cambios locales no la activan por sí solos.
+
+[Exploración de alternativas RF/GradientBoosting/CatBoost y anomalías](docs/evidence/CG08_ALTERNATIVAS.md):
+comparación OOF y nested, costes y latencia; grupo opcional research.
