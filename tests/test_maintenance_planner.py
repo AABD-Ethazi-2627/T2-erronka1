@@ -41,7 +41,11 @@ class MaintenancePlannerTests(unittest.TestCase):
             build_plan([event("a"), event("a", score=0.1)], NOW)
 
     def test_no_overlap_and_missed_deadline_visible(self):
-        p = build_plan([event("a", "A"), event("b", "B"), event("c", "C")], NOW)
+        p = build_plan(
+            [event("a", "A"), event("b", "B"), event("c", "C")],
+            NOW,
+            critical_minutes=30,
+        )
         tasks = p["tasks"]
         for a, b in itertools.pairwise(tasks):
             self.assertLessEqual(a["proposed_end"], b["proposed_start"])
@@ -72,10 +76,12 @@ class MaintenancePlannerTests(unittest.TestCase):
 
     def test_weekend_deadline_and_dst(self):
         friday = datetime.fromisoformat("2026-10-23T14:45:00+00:00")
-        task = build_plan([event(score=0.15)], friday)["tasks"][0]
+        task = build_plan([event(score=0.15)], friday, warning_business_minutes=480)[
+            "tasks"
+        ][0]
         self.assertEqual(task["review_due_at"], "2026-10-26T15:45:00+00:00")
         self.assertEqual(task["proposed_start"], "2026-10-26T08:00:00+00:00")
-        critical = build_plan([event()], friday)["tasks"][0]
+        critical = build_plan([event()], friday, critical_minutes=30)["tasks"][0]
         self.assertTrue(critical["review_deadline_missed"])
 
     def test_anomaly_stale_future_and_capacity(self):
@@ -115,3 +121,51 @@ class MaintenancePlannerTests(unittest.TestCase):
         self.assertIsNone(task["independent_failure_confirmations"])
         with self.assertRaises(ValueError):
             review_task(task, "approve", "", "reason", NOW)
+
+    def test_model_score_orders_reviews_without_invented_failure_deadline(self):
+        tasks = build_plan([event("a", "A", 0.71), event("b", "B", 0.95)], NOW)["tasks"]
+        self.assertEqual([t["machine_id"] for t in tasks], ["B", "A"])
+        self.assertTrue(all(t["review_due_at"] is None for t in tasks))
+        self.assertTrue(all(t["review_deadline_missed"] is None for t in tasks))
+        self.assertEqual(tasks[0]["ranking_basis"], "MODEL_CURRENT_STATE_SCORE")
+        self.assertEqual(
+            tasks[0]["schedule_basis"], "RESOURCE_AVAILABILITY_NOT_FAILURE_ETA"
+        )
+
+    def test_cli_reports_absent_deadlines_without_failure(self):
+        import contextlib
+        import io
+        import json
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+
+        from scripts.plan_maintenance import main
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "predictions.json"
+            source.write_text(json.dumps([event()]))
+            output = Path(directory) / "calendar"
+            stdout = io.StringIO()
+            with (
+                patch(
+                    "sys.argv",
+                    [
+                        "planner",
+                        "--predictions",
+                        str(source),
+                        "--as-of",
+                        NOW.isoformat(),
+                        "--output",
+                        str(output),
+                    ],
+                ),
+                contextlib.redirect_stdout(stdout),
+            ):
+                main()
+            self.assertEqual(json.loads(stdout.getvalue())["missed_deadlines"], 0)
+            self.assertIsNone(
+                json.loads((output / "plan.json").read_text())["tasks"][0][
+                    "review_due_at"
+                ]
+            )

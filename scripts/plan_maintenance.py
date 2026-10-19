@@ -69,7 +69,7 @@ def main():
                 "tasks": len(plan["tasks"]),
                 "output": str(args.output),
                 "missed_deadlines": sum(
-                    t["review_deadline_missed"] for t in plan["tasks"]
+                    t["review_deadline_missed"] is True for t in plan["tasks"]
                 ),
             }
         )

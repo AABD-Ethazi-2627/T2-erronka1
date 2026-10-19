@@ -82,7 +82,7 @@ def main():
                     for p in ["P1", "P2", "P3"]
                 },
                 "missed_deadlines": sum(
-                    t["review_deadline_missed"] for t in plan["tasks"]
+                    t["review_deadline_missed"] is True for t in plan["tasks"]
                 ),
             }
         )

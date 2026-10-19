@@ -45,9 +45,9 @@ def build_plan(
     timezone_name="Europe/Madrid",
     capacity=1,
     slot_minutes=30,
-    critical_minutes=30,
-    warning_business_minutes=480,
-    anomaly_business_minutes=960,
+    critical_minutes=None,
+    warning_business_minutes=None,
+    anomaly_business_minutes=None,
     stale_minutes=15,
 ):
     now = instant(as_of)
@@ -55,13 +55,17 @@ def build_plan(
     for number in (
         capacity,
         slot_minutes,
-        critical_minutes,
-        warning_business_minutes,
-        anomaly_business_minutes,
         stale_minutes,
     ):
         if type(number) is not int or number <= 0:
             raise ValueError("Policy values must be positive integers")
+    for deadline in (
+        critical_minutes,
+        warning_business_minutes,
+        anomaly_business_minutes,
+    ):
+        if deadline is not None and (type(deadline) is not int or deadline <= 0):
+            raise ValueError("Optional policy deadlines must be positive integers")
     if slot_minutes > 480:
         raise ValueError("Review slot must fit a business day")
     unique, groups = {}, {}
@@ -98,17 +102,18 @@ def build_plan(
         if score < 0.15 and not anomaly:
             continue
         priority = "P1" if score >= 0.7 else "P2" if score >= 0.15 else "P3"
-        due = (
-            now + timedelta(minutes=critical_minutes)
-            if priority == "P1"
-            else business_add(
-                now,
-                warning_business_minutes
-                if priority == "P2"
-                else anomaly_business_minutes,
-                zone,
+        duration = {
+            "P1": critical_minutes,
+            "P2": warning_business_minutes,
+            "P3": anomaly_business_minutes,
+        }[priority]
+        due = None
+        if duration is not None:
+            due = (
+                now + timedelta(minutes=duration)
+                if priority == "P1"
+                else business_add(now, duration, zone)
             )
-        )
         warnings = [
             "UNVERIFIED_ASSET_IDENTITY",
             "NO_FAILURE_ETA",
@@ -134,7 +139,10 @@ def build_plan(
             "eta_minutes": None,
             "temporal_criticality": "UNKNOWN",
             "requires_human_review": True,
-            "review_due_at": due.astimezone(UTC).isoformat(),
+            "review_due_at": due.astimezone(UTC).isoformat() if due else None,
+            "deadline_basis": "EXPLICIT_OPERATOR_POLICY" if due else "NOT_ESTIMABLE",
+            "ranking_basis": "MODEL_CURRENT_STATE_SCORE",
+            "schedule_basis": "RESOURCE_AVAILABILITY_NOT_FAILURE_ETA",
             "evidence_event_ids": sorted(e["event_id"] for e, _ in records),
             "independent_failure_confirmations": None,
             "warnings": warnings,
@@ -151,7 +159,11 @@ def build_plan(
         if any(len(states) > 1 for states in by_time.values()):
             task["warnings"].append("CONFLICTING_SAME_TIME_PREDICTIONS")
         tasks.append(task)
-    tasks.sort(key=lambda t: (t["priority"], t["review_due_at"], t["machine_id"]))
+    # Anomaly scores are not failure probabilities: anomaly-only tasks remain a
+    # separate queue after risk alerts. Within risk alerts use model score, not ID.
+    tasks.sort(
+        key=lambda t: (t["priority"] == "P3", -t["failure_score"], t["machine_id"])
+    )
     resources = [business_start(now, zone)] * capacity
     for task in tasks:
         resource = min(range(capacity), key=lambda i: (resources[i], i))
@@ -168,7 +180,11 @@ def build_plan(
             resource=f"reviewer-{resource + 1}",
             proposed_start=start.astimezone(UTC).isoformat(),
             proposed_end=end.astimezone(UTC).isoformat(),
-            review_deadline_missed=instant(end) > instant(task["review_due_at"]),
+            review_deadline_missed=(
+                instant(end) > instant(task["review_due_at"])
+                if task["review_due_at"]
+                else None
+            ),
         )
     return {
         "schema_version": 1,
@@ -176,7 +192,7 @@ def build_plan(
         "as_of": now.isoformat(),
         "timezone": timezone_name,
         "tasks": tasks,
-        "notice": "Review deadlines are configurable policy, not predicted failure times. Human review pending.",
+        "notice": "Model scores rank current-state reviews; calendar slots follow resource availability. No learned maintenance time. Human review pending.",
     }
 
 

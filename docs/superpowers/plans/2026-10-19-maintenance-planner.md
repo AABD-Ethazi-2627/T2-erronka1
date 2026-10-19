@@ -30,3 +30,11 @@ deduplicación, independencia H/M/L, fin de semana/DST, capacidad, escalada y re
 Demostración con últimas lecturas de snapshot SMB actual y HTTP API real validado;
 replay enas_of explícito, sin afirmar mantenimiento observado o ahorro real.
 Trazar rúbrica G5/G14/G41/G61/G65/G72/G104/G105 como parcial, revisión humana pendiente.
+
+## Rectificación solicitada por el usuario
+
+El usuario quiere recomendaciones aprendidas, no plazos elegidos por el agente.
+Se retiran los SLA por defecto y se ordena por score del modelo; fechas de recurso
+no se presentan como mantenimiento predicho. El objetivo de aprender cuándo y qué
+mantener queda pendiente: no existen etiquetas de mantenimiento/tiempo restante
+real. No usar fechas generadas para ocultar esta ausencia.
