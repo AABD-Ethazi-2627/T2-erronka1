@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:cnc-guard:contracts:0.1.0:prediction",
-  "title": "CNC Guard prediction — proposed 0.1.0",
+  "title": "CNC Guard prediction \u2014 proposed 0.1.0",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -78,6 +78,40 @@
     },
     "anomaly_threshold": {
       "type": "number"
+    },
+    "machine_type": {
+      "enum": [
+        "H",
+        "M",
+        "L"
+      ]
+    },
+    "air_temp_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "process_temp_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "rpm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "torque_Nm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tool_wear_min": {
+      "type": "number",
+      "minimum": 0
+    },
+    "alert_level": {
+      "enum": [
+        "OK",
+        "AVISO",
+        "CRITICA"
+      ]
     }
   }
 }
