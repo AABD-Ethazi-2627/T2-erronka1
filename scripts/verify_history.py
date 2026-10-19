@@ -11,6 +11,13 @@ def verify(root):
     root = Path(root).resolve()
     try:
         manifest = json.loads((root / "manifest.json").read_text())
+        actual = {
+            str(p.relative_to(root))
+            for p in root.rglob("*")
+            if p.is_file() and p.suffix in {".csv", ".parquet"}
+        }
+        if actual != set(manifest["files"]):
+            return False
         for name, digest in manifest["files"].items():
             path = (root / name).resolve()
             if (

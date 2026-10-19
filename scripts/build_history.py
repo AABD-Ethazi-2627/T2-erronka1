@@ -9,10 +9,20 @@ import duckdb
 import pandas as pd
 
 from scripts.audit_cg02 import audit_csv
+from scripts.verify_history import verify
 
 
 def retain(sources, output):
     output = Path(output)
+    if (output / "manifest.json").exists():
+        if not verify(output):
+            raise ValueError(
+                "Prior history is inconsistent; preserve evidence, do not rebaseline"
+            )
+    elif output.exists() and any(output.rglob("*")):
+        raise ValueError(
+            "Nonempty history without manifest requires explicit reconciliation"
+        )
     prepared = {}
     # Validate the complete batch before any write. IDs are file hash + row ordinal,
     # not machine/time, which is demonstrably non-unique in the classroom stream.
