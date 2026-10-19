@@ -31,6 +31,7 @@ def inspect_checkout(root):
     if compose.exists():
         result = subprocess.run(
             ["docker", "compose", "-f", str(compose), "config", "--services"],
+            check=False,
             capture_output=True,
             text=True,
             timeout=20,
