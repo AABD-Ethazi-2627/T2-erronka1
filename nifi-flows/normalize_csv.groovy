@@ -37,7 +37,7 @@ try {
     def key = flow.getAttribute('kafka.key')
     if (!key) throw new IllegalArgumentException('Missing stable source record key')
     event.event_id = MessageDigest.getInstance('SHA-256').digest(key.getBytes(StandardCharsets.UTF_8)).encodeHex().toString()
-    event.source = [kind:'lab_fixture', uri:'kafka://kafka:9092/cnc-sensors-raw', record_ref:key, raw_record:raw]
+    event.source = [kind:'lab_fixture', uri:'kafka://kafka:9092/'+flow.getAttribute('kafka.topic'), record_ref:key, raw_record:raw]
     def content = JsonOutput.toJson(event).getBytes(StandardCharsets.UTF_8)
     flow = session.write(flow, { output -> output.write(content) } as OutputStreamCallback)
     flow = session.putAllAttributes(flow, ['mime.type':'application/json', 'cnc.event_id':event.event_id, 'filename':event.event_id+'.json'])

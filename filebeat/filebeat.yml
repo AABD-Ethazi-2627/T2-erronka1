@@ -1,12 +1,12 @@
 filebeat.inputs:
   - type: filestream
-    id: cnc-stream-v1
+    id: cnc-stream-v2
     paths: ['/mnt/cnc-stream/*.csv']
     exclude_lines: ['^timestamp,']
     clean_removed: false
     close.on_state_change.removed: false
     prospector.scanner.check_interval: 1s
-    prospector.scanner.fingerprint.offset: 200
+    prospector.scanner.fingerprint.offset: 164
     prospector.scanner.fingerprint.length: 64
     file_identity.fingerprint: ~
 processors:
@@ -17,7 +17,7 @@ processors:
       ignore_missing: false
 output.kafka:
   hosts: ['kafka:9092']
-  topic: cnc-sensors-raw
+  topic: cnc-sensors-lab-v2
   key: '%{[@metadata.cnc_line_sha256]}:%{[log.offset]}'
   codec.format:
     string: '%{[message]}'
