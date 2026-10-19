@@ -1,0 +1,100 @@
+{
+  "index_patterns": [
+    "cnc-telemetry-*",
+    "cnc-alerts-*"
+  ],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    },
+    "mappings": {
+      "dynamic": "strict",
+      "properties": {
+        "event_id": {
+          "type": "keyword"
+        },
+        "machine_id": {
+          "type": "keyword"
+        },
+        "machine_type": {
+          "type": "keyword"
+        },
+        "schema_version": {
+          "type": "keyword"
+        },
+        "quality_flag": {
+          "type": "keyword"
+        },
+        "policy": {
+          "type": "keyword"
+        },
+        "model_version": {
+          "type": "keyword"
+        },
+        "model_artifact_sha256": {
+          "type": "keyword"
+        },
+        "alert_level": {
+          "type": "keyword"
+        },
+        "air_temp_K": {
+          "type": "double"
+        },
+        "process_temp_K": {
+          "type": "double"
+        },
+        "rpm": {
+          "type": "double"
+        },
+        "torque_Nm": {
+          "type": "double"
+        },
+        "tool_wear_min": {
+          "type": "double"
+        },
+        "failure_score": {
+          "type": "double"
+        },
+        "anomaly_score": {
+          "type": "double"
+        },
+        "risk_threshold": {
+          "type": "double"
+        },
+        "anomaly_threshold": {
+          "type": "double"
+        },
+        "risk_alert": {
+          "type": "boolean"
+        },
+        "anomaly_alert": {
+          "type": "boolean"
+        },
+        "timestamp": {
+          "type": "date"
+        },
+        "scored_at": {
+          "type": "date"
+        },
+        "source": {
+          "properties": {
+            "kind": {
+              "type": "keyword"
+            },
+            "uri": {
+              "type": "keyword"
+            },
+            "record_ref": {
+              "type": "keyword"
+            },
+            "raw_record": {
+              "type": "text",
+              "index": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
