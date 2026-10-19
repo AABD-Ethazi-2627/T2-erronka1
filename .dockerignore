@@ -1,0 +1,12 @@
+.git
+.venv
+outputs
+historical
+.superpowers
+notebooks
+docs
+exports
+prototypes
+__pycache__
+**/__pycache__
+.env
