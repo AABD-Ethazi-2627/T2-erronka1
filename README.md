@@ -96,3 +96,6 @@ comparación OOF y nested, costes y latencia; grupo opcional research.
 
 [Dataset estacional sintético ampliado y curva de aprendizaje](docs/evidence/CG11_ESTACIONAL_V2.md):
 245.376 filas; modelo experimental separado, sin mejora de precisión garantizada.
+
+[¿Se puede estimar tiempo hasta fallo con el SMB disponible?](docs/evidence/CG02_ETA_SMB.md)
+Auditoría de procedencia/continuidad y propuesta de criticidad por5/30/120min.
