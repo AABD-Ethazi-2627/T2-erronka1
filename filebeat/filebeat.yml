@@ -1,34 +1,28 @@
-# ═══════════════════════════════════════════════════════════════════
-# CNC Guard — Filebeat Konfigurazioa
-# IKASLEEK OSATU BEHAR DUTE
-# ═══════════════════════════════════════════════════════════════════
-
-# 1. SARRERA: Zer fitxategi begiratu behar ditu Filebeat-ek?
 filebeat.inputs:
-  - type: # ← Zein input mota? (filestream gomendatzen da)
-    id: cnc-stream
-    paths:
-      - # ← Zein karpetako zein fitxategiak? (adib. /karpeta/*.csv)
-
-    # CSV fitxategiek goiburu-lerro bat dute (zutabe-izenak).
-    # Lerro hori ez bidali Kafka-ra — nola iragazi?
-    exclude_lines: # ← Bete: zer eredu dute goiburu-lerroek?
-
-    # NFS-ekin lan egiten ari garenez, fitxategi-jarraipena
-    # path bidez egin behar da (inodo-aldaketak ekiditeko)
-    file_identity:
-      path: ~
-
-# 2. IRTEERA: Nora bidali datuak?
-# Kafka topiko batera bidaltzen ditugu — NiFi-k handik kontsumituko ditu.
-# Lerro gordina bidali, ez Beats event JSON osoa (codec.format erabili).
-output.# ← Zein output mota erabili behar da Kafka-rentzat?
-  hosts:
-    - # ← Kafka broker-aren helbidea eta ataka (Docker sare barnean)
-  topic: # ← Kafka topiko-izena (adib. cnc-sensors-raw)
+  - type: filestream
+    id: cnc-stream-v1
+    paths: ['/mnt/cnc-stream/*.csv']
+    exclude_lines: ['^timestamp,']
+    clean_removed: false
+    close.on_state_change.removed: false
+    prospector.scanner.check_interval: 1s
+    prospector.scanner.fingerprint.offset: 200
+    prospector.scanner.fingerprint.length: 64
+    file_identity.fingerprint: ~
+processors:
+  - fingerprint:
+      fields: [message]
+      target_field: '@metadata.cnc_line_sha256'
+      method: sha256
+      ignore_missing: false
+output.kafka:
+  hosts: ['kafka:9092']
+  topic: cnc-sensors-raw
+  key: '%{[@metadata.cnc_line_sha256]}:%{[log.offset]}'
   codec.format:
-    string: # ← Nola formateatu mezua? Pista: '%{[message]}' (lerro gordina)
-
-# 3. ERREGISTROA
+    string: '%{[message]}'
+  required_acks: -1
+  partition.hash:
+    reachable_only: false
 logging.level: info
 logging.to_files: false
