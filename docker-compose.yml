@@ -34,6 +34,7 @@ services:
     volumes:
       - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - ${CNC_STREAM_DIR:-./outputs/stream}:/mnt/cnc-stream:ro
+      - ${CNC_SMB_CAPTURE_DIR:-./outputs/smb-stream}:/mnt/cnc-smb:ro
       - filebeat-data:/usr/share/filebeat/data
     depends_on: [kafka]
     mem_limit: 192m
@@ -68,10 +69,10 @@ services:
     image: docker.elastic.co/kibana/kibana:9.5.4
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-      NODE_OPTIONS: --max-old-space-size=512
+      NODE_OPTIONS: --max-old-space-size=1024
     ports: ['127.0.0.1:15601:5601']
     depends_on: [elasticsearch]
-    mem_limit: 800m
+    mem_limit: 1600m
     profiles: [dashboard]
   scoring-api:
     build:

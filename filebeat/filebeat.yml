@@ -9,6 +9,18 @@ filebeat.inputs:
     prospector.scanner.fingerprint.offset: 164
     prospector.scanner.fingerprint.length: 64
     file_identity.fingerprint: ~
+  - type: filestream
+    id: cnc-smb-v1
+    paths: ['/mnt/cnc-smb/*.csv']
+    fields:
+      cnc_source_kind: smb_csv
+    exclude_lines: ['^timestamp,']
+    clean_removed: false
+    close.on_state_change.removed: false
+    prospector.scanner.check_interval: 1s
+    prospector.scanner.fingerprint.offset: 164
+    prospector.scanner.fingerprint.length: 64
+    file_identity.fingerprint: ~
 processors:
   - fingerprint:
       fields: [message]
@@ -18,6 +30,10 @@ processors:
 output.kafka:
   hosts: ['kafka:9092']
   topic: cnc-sensors-lab-v2
+  topics:
+    - topic: cnc-sensors-smb-v1
+      when.equals:
+        fields.cnc_source_kind: smb_csv
   key: '%{[@metadata.cnc_line_sha256]}:%{[log.offset]}'
   codec.format:
     string: '%{[message]}'
