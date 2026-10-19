@@ -8,9 +8,9 @@ from scripts.experiment_rf import evaluate
 x = pd.read_csv("data/ai4i2020_train.csv")
 v = pd.read_csv("outputs/cg08/validation.csv")
 v["machine_type"] = x.loc[v.source_row_index, "machine_type"].to_numpy()
-t = json.load(open("outputs/cg08/report.json"))["validation_tuning_metrics"][
-    "threshold"
-]
+t = json.loads(Path("outputs/cg08/report.json").read_text())[
+    "validation_tuning_metrics"
+]["threshold"]
 r = {}
 for kind, g in v.groupby("machine_type"):
     r[kind] = {
