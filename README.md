@@ -93,3 +93,6 @@ Project y activación administrativa; cambios locales no la activan por sí solo
 
 [Exploración de alternativas RF/GradientBoosting/CatBoost y anomalías](docs/evidence/CG08_ALTERNATIVAS.md):
 comparación OOF y nested, costes y latencia; grupo opcional research.
+
+[Dataset estacional sintético ampliado y curva de aprendizaje](docs/evidence/CG11_ESTACIONAL_V2.md):
+245.376 filas; modelo experimental separado, sin mejora de precisión garantizada.
