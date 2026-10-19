@@ -1,0 +1,16 @@
+{
+  "rows": 40,
+  "unique_records": 40,
+  "files": {
+    "bronze/2669b1cb0e5a70d7e7b676cf8f9b81b59bb22ac34db747398450388dc7e10dc3.csv": "2669b1cb0e5a70d7e7b676cf8f9b81b59bb22ac34db747398450388dc7e10dc3",
+    "bronze/2ebc51fbf8bb0ef98c4adc4ce8cc91d7ea21b017c2c3a5329398bf61cedaa977.csv": "2ebc51fbf8bb0ef98c4adc4ce8cc91d7ea21b017c2c3a5329398bf61cedaa977",
+    "bronze/40b837386255ab311cb8aae5a54b0e1d357ea9a93db80fd661b7e52bd270e324.csv": "40b837386255ab311cb8aae5a54b0e1d357ea9a93db80fd661b7e52bd270e324",
+    "bronze/8fe356c6cc592e265599a9c9403b597d1b0e9a8dca4556ffb9a1a1960e0e01b2.csv": "8fe356c6cc592e265599a9c9403b597d1b0e9a8dca4556ffb9a1a1960e0e01b2",
+    "gold/machine_summary.parquet": "6aeb56835321bef7be0b32afe4a427e641c6e302cff4c402c397451c25773085",
+    "silver/date=2026-10-15/2669b1cb0e5a70d7e7b676cf8f9b81b59bb22ac34db747398450388dc7e10dc3.parquet": "9660294e56c20c2d6fc71bb94e02b80ee3dde4a299aa20666aad56e67538622e",
+    "silver/date=2026-10-15/8fe356c6cc592e265599a9c9403b597d1b0e9a8dca4556ffb9a1a1960e0e01b2.parquet": "ed7ff3cff366637aa9f19b6ffe65c238a700b74a8a3c94d844bde7cfaecdd1c0",
+    "silver/date=2026-10-16/2ebc51fbf8bb0ef98c4adc4ce8cc91d7ea21b017c2c3a5329398bf61cedaa977.parquet": "85315387af9ce6a70f441764a39e351b976a974fd2991b9fd688bed6e518474f",
+    "silver/date=2026-10-16/40b837386255ab311cb8aae5a54b0e1d357ea9a93db80fd661b7e52bd270e324.parquet": "d1994e8acc89419ee69f211f995d5ab835a576d85e29c23f9ce763140341110f"
+  },
+  "meaning": "Simulated batch observations, not physical machine history or future labels"
+}
