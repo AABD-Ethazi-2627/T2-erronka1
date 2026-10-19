@@ -1,0 +1,86 @@
+{
+  "status": "read_listing_and_samples_verified",
+  "verified_on": "2026-10-15",
+  "protocol": "SMB",
+  "host": "192.168.75.222",
+  "port": 445,
+  "share": "cnc-stream",
+  "unc_path": "\\\\192.168.75.222\\cnc-stream",
+  "uri": "smb://192.168.75.222/cnc-stream",
+  "requested_access": "read_only",
+  "authentication": "private_env_file_not_versioned",
+  "filename_pattern": "cnc_batch_YYYYMMDD_HHMMSS_SEQUENCE.csv (observed)",
+  "sample_encoding": "utf-8",
+  "source_namespace": "cnc-simulator-v1",
+  "samples": [
+    {
+      "file": "data/stream_samples/cnc_batch_20261015_080906_00001.csv",
+      "sha256": "2669b1cb0e5a70d7e7b676cf8f9b81b59bb22ac34db747398450388dc7e10dc3",
+      "rows": 10,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "first_timestamp": "2026-10-15T08:09:06Z",
+      "last_timestamp": "2026-10-15T08:09:06Z"
+    },
+    {
+      "file": "data/stream_samples/cnc_batch_20261015_084306_00069.csv",
+      "sha256": "79463c64fbffce735081ca8bd322f4d3c1981938da7a7cbf363b524074775b88",
+      "rows": 10,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "first_timestamp": "2026-10-15T08:43:06Z",
+      "last_timestamp": "2026-10-15T08:43:06Z"
+    },
+    {
+      "file": "data/stream_samples/cnc_batch_20261015_084606_00075.csv",
+      "sha256": "8fe356c6cc592e265599a9c9403b597d1b0e9a8dca4556ffb9a1a1960e0e01b2",
+      "rows": 10,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "first_timestamp": "2026-10-15T08:46:06Z",
+      "last_timestamp": "2026-10-15T08:46:06Z"
+    }
+  ]
+}

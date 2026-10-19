@@ -1,0 +1,14 @@
+{
+  "event_id": "a42782b481124f47cdc6e7b72cdf0d3ace44226df362b1246b97aa0dd90905d7",
+  "machine_id": "CNC-039",
+  "timestamp": "2026-10-15T10:00:00Z",
+  "schema_version": "0.1.0",
+  "quality_flag": "OK",
+  "source": {
+    "kind": "lab_fixture",
+    "uri": "fixture:maintenance",
+    "record_ref": "synthetic-example-1"
+  },
+  "action": "inspection",
+  "failure_observed": "unknown"
+}
