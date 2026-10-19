@@ -1,0 +1,20 @@
+{
+  "api_parses": true,
+  "api_has_unfilled_bodies": false,
+  "scoring_dockerfile": true,
+  "model_bundle_hashes_match": true,
+  "compose_services": [
+    "elasticsearch",
+    "filebeat",
+    "kafka",
+    "kafka-init",
+    "kibana",
+    "nifi",
+    "scoring-api"
+  ],
+  "missing_services": [],
+  "static_prerequisites_met": true,
+  "ready": false,
+  "live_verified": false,
+  "meaning": "Read-only static preflight only; ready requires explicit end-to-end event reconciliation and live evidence."
+}

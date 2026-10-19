@@ -1,0 +1,28 @@
+name: Validate CNC Guard
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Install locked environment
+        run: |
+          python3 -m pip install uv==0.13.1
+          uv sync --frozen --python 3.11
+      - name: Generate own model bundle for API acceptance tests
+        run: |
+          uv run --frozen python -m scripts.experiment_rf
+          uv run --frozen python -m scripts.experiment_anomaly
+          uv run --frozen python -m scripts.package_model
+      - name: Unit tests and immutable source audit
+        run: |
+          uv run --frozen python -m unittest discover -s tests -v
+          uv run --frozen python -m scripts.audit_cg02 --check
+          git diff --exit-code

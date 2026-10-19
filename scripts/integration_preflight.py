@@ -1,6 +1,7 @@
 """Read-only checkout preflight. Passing static checks never proves live integration."""
 
 import ast
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -23,14 +24,30 @@ def inspect_checkout(root):
         checks["api_parses"] = False
         checks["api_has_unfilled_bodies"] = True
     checks["scoring_dockerfile"] = (root / "scoring/Dockerfile").is_file()
-    checks["model_at_compose_default"] = (
-        root / "models/cnc_failure_model.pkl"
-    ).is_file()
+    manifest_path = root / "outputs/api/manifest.json"
+    try:
+        manifest = json.loads(manifest_path.read_text())
+        checks["model_bundle_hashes_match"] = all(
+            hashlib.sha256((manifest_path.parent / name).read_bytes()).hexdigest()
+            == manifest["files"][name]
+            for name in ["rf.pkl", "if.pkl"]
+        )
+    except (OSError, ValueError, KeyError):
+        checks["model_bundle_hashes_match"] = False
     compose = root / "docker-compose.yml"
     checks["compose_services"] = []
     if compose.exists():
         result = subprocess.run(
-            ["docker", "compose", "-f", str(compose), "config", "--services"],
+            [
+                "docker",
+                "compose",
+                "--profile",
+                "dashboard",
+                "-f",
+                str(compose),
+                "config",
+                "--services",
+            ],
             check=False,
             capture_output=True,
             text=True,
@@ -45,7 +62,7 @@ def inspect_checkout(root):
             checks["api_parses"],
             not checks["api_has_unfilled_bodies"],
             checks["scoring_dockerfile"],
-            checks["model_at_compose_default"],
+            checks["model_bundle_hashes_match"],
             not checks["missing_services"],
         ]
     )

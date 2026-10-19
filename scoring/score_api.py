@@ -103,7 +103,7 @@ def create_app(manifest_path=None):
                 raise ValueError("Invalid model probe")
             application.state.models = models
             application.state.manifest = manifest
-        except Exception:
+        except Exception:  # noqa: BLE001 -- fail closed for any model loading/probe error
             log.error("Model bundle unavailable or invalid; scoring remains unready")
         yield
         application.state.models = None
