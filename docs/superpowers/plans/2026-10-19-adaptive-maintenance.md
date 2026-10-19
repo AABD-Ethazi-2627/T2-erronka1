@@ -68,3 +68,17 @@ reset handling, false improvement on replay, selection bias, negative/zero targe
 Independent review found cwd-relative hashing and duplicate CSV-header ambiguity;
 both reproduced RED, fixed and covered GREEN. Current AI4I temporal objective refuses
 missing fields. Phases2–4 remain planned, not implemented. No runtime model changed.
+
+## Continuación autorizada: fases2–4
+
+Implementación de laboratorio en planning/online.py, selection.py, registry.py, cycle.py
+y mechanisms.py; CLI adaptive_cycle y worker watch_adaptive. Registro reanudable con
+aceptación ligada al campeón y rollback; propuestas por cruce y escenarios empíricos.
+Demo reproducible scripts/demo_adaptive_cycle.py. Consulta CG17_ADAPTIVE_RUNTIME.md.
+
+Ruling: escenarios de error no calibrados sustituyen provisionalmente una distribución
+conjunta probabilística; se etiquetan como tales. No fingir confianza estadística.
+Ruling: la operación continua está disponible como worker opt-in, sin instalar servicio
+para una fuente actual no válida. Búsqueda/activación siguen explícitas y separadas de API.
+Ruling: las partes dependientes de averías/censura/datos físicos quedan sin validar;
+completar código de laboratorio no completa esos criterios de aceptación industrial.

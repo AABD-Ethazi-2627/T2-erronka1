@@ -1,6 +1,7 @@
 # CG17 — inicio del aprendizaje adaptativo y cambio de dataset
 
-Estado: primera fase implementada; propuesta temporal/selección continua en desarrollo.
+Estado histórico de primera fase. Las fases posteriores se implementan como laboratorio
+en [CG17_ADAPTIVE_RUNTIME.md](CG17_ADAPTIVE_RUNTIME.md); validación física pendiente.
 [Plan por fases](../superpowers/plans/2026-10-19-adaptive-maintenance.md).
 No es Recursive Self-Improvement de código autónomo. Es la base de un ciclo medible
 para aprender de nuevas observaciones, comparar candidatos y después decidir si
@@ -52,7 +53,10 @@ warmup2 son configuración experimental fija, no hiperparámetros optimizados.
 El CSV AI4I actual, sin tiempo ni ciclo físico, se rechaza para esta evaluación. El
 SMB replay no se emplea para demostrar degradación. No se toca el antiguo test reservado.
 
-## Qué queda planificado
+## Qué quedaba planificado tras primera fase
+
+La implementación posterior y sus límites están en CG17_ADAPTIVE_RUNTIME.md.
+El texto siguiente conserva el alcance de la primera entrega:
 
 Registro de artefactos y estado de aprendizaje reanudable, selección champion/challenger,
 comparación temporal por bloques y activos, incertidumbre y drift, aceptación futura
