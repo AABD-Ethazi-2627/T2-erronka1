@@ -69,6 +69,8 @@ services:
     image: docker.elastic.co/kibana/kibana:9.5.4
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      TELEMETRY_OPTIN: 'false'
+      TELEMETRY_ALLOWCHANGINGOPTIN: 'false'
       NODE_OPTIONS: --max-old-space-size=1024
     ports: ['127.0.0.1:15601:5601']
     depends_on: [elasticsearch]
