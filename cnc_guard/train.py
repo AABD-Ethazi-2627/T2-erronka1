@@ -16,8 +16,17 @@ TEST_SIZE = 0.2
 def train_model(
     data_path: str | Path,
     model_path: str | Path = "models/cnc_failure_model.pkl",
+    *,
+    overwrite: bool = False,
 ) -> dict[str, float | int | str]:
-    """Entrena, evalúa y guarda el modelo de fallo CNC."""
+    """Entrena el modelo; no reemplaza artefactos existentes salvo petición explícita."""
+    destination = Path(model_path)
+    if destination.exists() and not overwrite:
+        raise FileExistsError(
+            f"El modelo ya existe: {destination}. "
+            "Usa overwrite=True para autorizar su sustitución."
+        )
+
     X, y = load_training_data(data_path)
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -56,7 +65,6 @@ def train_model(
     model.fit(X_train, y_train)
     accuracy = float(model.score(X_test, y_test))
 
-    destination = Path(model_path)
     destination.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(model, destination)
 

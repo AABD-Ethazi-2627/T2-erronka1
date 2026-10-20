@@ -4,3 +4,9 @@ __pycache__/
 venv/
 .env
 
+
+.venv/
+.ipynb_checkpoints/
+.env.*
+!.env.example
+models/*.pkl

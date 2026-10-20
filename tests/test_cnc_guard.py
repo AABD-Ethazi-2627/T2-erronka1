@@ -1,6 +1,7 @@
 ﻿from pathlib import Path
 
 import joblib
+import pytest
 
 from cnc_guard.data import load_dataset
 from cnc_guard.features import FEATURE_COLUMNS, load_training_data
@@ -35,3 +36,14 @@ def test_training_saves_loadable_model(tmp_path):
     model = joblib.load(model_path)
     X, _ = load_training_data(str(DATA_PATH))
     assert len(model.predict(X.iloc[[0]])) == 1
+
+
+def test_training_refuses_to_overwrite_existing_model(tmp_path):
+    model_path = tmp_path / "existing_model.pkl"
+    original_bytes = b"existing model must remain unchanged"
+    model_path.write_bytes(original_bytes)
+
+    with pytest.raises(FileExistsError, match="overwrite=True"):
+        train_model(DATA_PATH, model_path)
+
+    assert model_path.read_bytes() == original_bytes
