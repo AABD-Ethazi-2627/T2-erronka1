@@ -76,6 +76,8 @@ class CurrentStateScopeTests(unittest.TestCase):
             self.assertEqual(client.post("/predict", json=unsafe).status_code, 422)
 
     def test_inference_ignores_identity_and_observation_time(self):
+        if not Path("outputs/api/manifest.json").exists():
+            self.skipTest("Run the controlled training and package_model first")
         payload = json.loads(
             Path("contracts/examples/valid/telemetry.json").read_text()
         )
