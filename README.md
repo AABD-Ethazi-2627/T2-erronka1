@@ -102,3 +102,8 @@ comparación OOF y nested, costes y latencia; grupo opcional research.
 
 [¿Se puede estimar tiempo hasta fallo con el SMB disponible?](docs/evidence/CG02_ETA_SMB.md)
 Auditoría de procedencia/continuidad y propuesta de criticidad por5/30/120min.
+
+## Rutas y archivos del repositorio
+
+[Mapa de carpetas y política de archivos](docs/REPOSITORY_LAYOUT.md).
+Ejecutar `python3 scripts/check_repository_layout.py` desde la raíz.

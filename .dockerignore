@@ -10,3 +10,12 @@ prototypes
 __pycache__
 **/__pycache__
 .env
+**/.git
+**/.venv
+**/.ipynb_checkpoints
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+models

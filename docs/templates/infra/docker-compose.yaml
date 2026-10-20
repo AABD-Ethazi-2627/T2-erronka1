@@ -1,3 +1,4 @@
+# Historical classroom example; see docs/REPOSITORY_LAYOUT.md.
 # docker-compose.yml — IKASLE VM-ERAKO
 # Simuladorea ZERBITZARI NAGUSIAN dago; honetatik NFS bidez irakurtzen du Filebeat-ek.
 # Abiatzeko: docker compose up -d
@@ -85,7 +86,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./models:/models:ro
+      - ../../../models:/models:ro
     environment:
       MODEL_PATH: /models/cnc_failure_model.pkl
     restart: unless-stopped

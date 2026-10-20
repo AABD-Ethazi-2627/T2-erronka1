@@ -1,14 +1,39 @@
+# Python environments and generated caches (at any depth).
 __pycache__/
 *.py[cod]
-*.pyc
+.venv/
 venv/
-.env
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.ipynb_checkpoints/
+.coverage
+.coverage.*
+htmlcov/
+/build/
+/dist/
+*.egg-info/
 
-
-# Local connection credentials; publish only the empty template.
+# Private connection configuration. Keep empty/example templates reviewable.
 .env
 .env.*
 !.env.example
-.venv/
-historical/
-outputs/
+!.env.*.example
+
+# Reproducible local runtime data, captures and model bundles.
+# Sources in data/, compact evidence in docs/evidence/, fixtures and uv.lock
+# remain versioned; do not add global *.csv, *.json, *.png or *.pkl rules.
+/outputs/
+/historical/
+/models/*
+!/models/.gitkeep
+!/models/README.md
+
+# Editor/OS noise. Shared editor settings can be explicitly reviewed later.
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
