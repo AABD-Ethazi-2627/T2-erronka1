@@ -62,3 +62,15 @@ Revisor y conclusión:
 ```
 
 El registro no debe contener credenciales, datos personales innecesarios ni una nota autootorgada.
+
+## Evidencia CG04 — entorno y módulos reproducibles
+
+- **Issue:** [CG04 / #4](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/4)
+- **Artefactos:** `pyproject.toml`, `uv.lock`, `cnc_guard/data.py`, `cnc_guard/features.py`, `cnc_guard/train.py`, `tests/test_cnc_guard.py` y `notebooks/02_training_TEMPLATE.ipynb`.
+- **Entorno:** Python 3.12; dependencias fijadas y lock generado con `uv`.
+- **Comprobación del lock:** `uv lock --check` — correcto.
+- **Pruebas:** `uv run --locked python -m pytest -q` — 13 passed; 801 warnings de NumPy/joblib.
+- **Entrenamiento:** 6.400 filas de entrenamiento, 1.600 de prueba, `random_state=42`; accuracy observada: `0.97875`.
+- **Rutas personales:** búsqueda en los archivos fuente `.py` y `.ipynb` sin coincidencias.
+- **Límites:** dataset de laboratorio simulado; la accuracy no demuestra rendimiento industrial ni predicción a 24 horas. Las advertencias de dependencias siguen pendientes de revisar.
+- **Revisor y fecha:** pendiente de revisión por otro miembro.

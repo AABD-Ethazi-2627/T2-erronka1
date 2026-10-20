@@ -1,0 +1,37 @@
+﻿from pathlib import Path
+
+import joblib
+
+from cnc_guard.data import load_dataset
+from cnc_guard.features import FEATURE_COLUMNS, load_training_data
+from cnc_guard.train import train_model
+
+DATA_PATH = Path("data/ai4i2020_train.csv")
+
+
+def test_dataset_loads_with_expected_columns():
+    data = load_dataset(DATA_PATH)
+    assert len(data) == 8000
+    assert len(data.columns) == 13
+
+
+def test_features_exclude_failure_result_columns():
+    X, y = load_training_data(str(DATA_PATH))
+    assert list(X.columns) == FEATURE_COLUMNS
+    assert len(X) == len(y)
+    assert "machine_failure" not in X.columns
+    assert not any(column.startswith("failure_") for column in X.columns)
+
+
+def test_training_saves_loadable_model(tmp_path):
+    model_path = tmp_path / "test_model.pkl"
+    result = train_model(DATA_PATH, model_path)
+
+    assert result["train_rows"] == 6400
+    assert result["test_rows"] == 1600
+    assert 0.0 <= result["accuracy"] <= 1.0
+    assert model_path.is_file()
+
+    model = joblib.load(model_path)
+    X, _ = load_training_data(str(DATA_PATH))
+    assert len(model.predict(X.iloc[[0]])) == 1
