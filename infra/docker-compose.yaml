@@ -44,7 +44,7 @@ services:
     image: apache/nifi:1.25.0
     container_name: cnc-nifi
     ports:
-      - "127.0.0.1:8443:8443"
+      - "${CNC_LAN_BIND_IP:-127.0.0.1}:8443:8443"
     environment:
       SINGLE_USER_CREDENTIALS_USERNAME: admin
       SINGLE_USER_CREDENTIALS_PASSWORD: ${CNC_NIFI_PASSWORD:?Set CNC_NIFI_PASSWORD for this lab}

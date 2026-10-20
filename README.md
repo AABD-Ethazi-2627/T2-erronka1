@@ -29,8 +29,13 @@ docker compose ps     # 6 zerbitzu "running" ikusi behar dituzu
 
 `infra/docker-compose.yaml` es un ejemplo histórico: para evaluarlo, definir
 `CNC_NIFI_PASSWORD` y `CNC_STREAM_DIR` (directorio local ya montado). Sus
-puertos solo se publican en `127.0.0.1`; no configura acceso remoto ni guarda
-credenciales CIFS en Docker.
+puertos sin autenticación permanecen en `127.0.0.1`. Para que los cuatro
+estudiantes accedan a NiFi desde la red local, definir `CNC_LAN_BIND_IP` con la
+IP LAN del servidor: `https://<IP-LAN-DEL-SERVIDOR>:8443`. NiFi exige contraseña
+y HTTPS; el certificado debe ser confiable para esa IP o nombre, sin ignorar
+errores TLS. No guarda credenciales CIFS en Docker. Para los otros servicios,
+usar un túnel SSH individual al servidor (por ejemplo,
+`ssh -L 8000:127.0.0.1:8000 usuario@servidor` para la API).
 
 ## 3. Proiektuko fitxategiak
 
