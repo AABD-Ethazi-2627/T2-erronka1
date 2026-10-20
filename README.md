@@ -60,7 +60,7 @@ contener otra dirección de origen y se conservan con su procedencia original.
 |---|---|
 | API / health | http://127.0.0.1:18001/health |
 | API / OpenAPI | http://127.0.0.1:18001/docs |
-| NiFi TLS | https://localhost:18080/nifi; con `CNC_LAN_BIND_IP`, https://IP-LAN-DEL-SERVIDOR:18080/nifi |
+| NiFi TLS | https://localhost:18080/nifi |
 | Elasticsearch | http://127.0.0.1:19200 |
 | Kibana | http://127.0.0.1:15601 |
 | Kafka | kafka:9092, solo dentro de Docker |
@@ -68,20 +68,6 @@ contener otra dirección de origen y se conservan con su procedencia original.
 NiFi conserva TLS y credenciales autogeneradas: no hay contraseña de ejemplo en
 este README. Importar y revisar `nifi-flows/cnc_lab_completed.json` en NiFi2.0;
 configurar servicios de controlador y comprobar relaciones/colas antes de arrancar.
-Para que los cuatro estudiantes accedan a NiFi desde la LAN, definir
-`CNC_LAN_BIND_IP` con la IP LAN del servidor antes de iniciar Compose. Cada
-cliente debe confiar en un certificado NiFi válido para esa IP o nombre; no
-ignorar errores TLS. Kibana, la API y Elasticsearch siguen ligados a loopback
-porque este laboratorio no les configura autenticación. Cada estudiante puede
-abrir un túnel SSH individual, por ejemplo:
-
-```bash
-ssh -L 18080:127.0.0.1:18080 -L 15601:127.0.0.1:15601 -L 18001:127.0.0.1:18001 usuario@servidor
-```
-
-Después se abren `https://localhost:18080/nifi`, `http://localhost:15601` y
-`http://localhost:18001/docs` en su propio equipo. Kafka solo se usa dentro
-de Docker.
 El export final utiliza topics lab-v2/SMB-v1, cuarentena y retries acotados.
 `scripts/nifi_client.py` es cliente local para revisión; su token privado no se
 versiona y no forma parte del export. Requiere `CNC_NIFI_TOKEN_FILE` con ruta
