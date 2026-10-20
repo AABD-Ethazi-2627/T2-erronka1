@@ -47,3 +47,29 @@ def test_training_refuses_to_overwrite_existing_model(tmp_path):
         train_model(DATA_PATH, model_path)
 
     assert model_path.read_bytes() == original_bytes
+
+
+def test_package_imports_from_notebooks_directory():
+    import os
+    import subprocess
+    import sys
+
+    repo_root = Path(__file__).resolve().parents[1]
+    env = os.environ.copy()
+    env.pop("PYTHONPATH", None)
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "from cnc_guard.data import load_dataset; "
+            "from cnc_guard.features import load_training_data",
+        ],
+        cwd=repo_root / "notebooks",
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
