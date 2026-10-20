@@ -16,7 +16,7 @@ class CaptureTests(unittest.TestCase):
             self.assertEqual(target.read_bytes(), raw)
             self.assertFalse(publish_snapshot(raw, target))
             with self.assertRaises(ValueError):
-                publish_snapshot(raw.replace(b"300", b"301"), target)
+                publish_snapshot(raw + b"\n", target)
             self.assertEqual(target.read_bytes(), raw)
 
     def test_invalid_batch_never_becomes_visible_csv(self):

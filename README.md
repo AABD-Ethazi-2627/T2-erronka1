@@ -70,7 +70,10 @@ este README. Importar y revisar `nifi-flows/cnc_lab_completed.json` en NiFi2.0;
 configurar servicios de controlador y comprobar relaciones/colas antes de arrancar.
 El export final utiliza topics lab-v2/SMB-v1, cuarentena y retries acotados.
 `scripts/nifi_client.py` es cliente local para revisión; su token privado no se
-versiona y no forma parte del export. No ejecutar scripts temporales del equipo
+versiona y no forma parte del export. Requiere `CNC_NIFI_TOKEN_FILE` con ruta
+absoluta a un archivo del usuario en modo `0600` y `CNC_NIFI_CA_FILE` con el
+certificado de confianza de NiFi. Verifica TLS y el nombre `localhost`; no
+acepta certificados sin validar. No ejecutar scripts temporales del equipo
 como si fueran instalación portable.
 
 Aplicar `elasticsearch/index-template.json` como template antes de ingerir y crear
