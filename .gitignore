@@ -10,5 +10,6 @@ venv/
 .env.*
 !.env.example
 .venv/
+secrets/
 historical/
 outputs/

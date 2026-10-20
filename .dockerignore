@@ -10,3 +10,4 @@ prototypes
 __pycache__
 **/__pycache__
 .env
+secrets
