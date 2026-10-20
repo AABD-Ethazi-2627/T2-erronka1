@@ -22,10 +22,15 @@ docker compose ps     # 6 zerbitzu "running" ikusi behar dituzu
 | Zerbitzua | URLa | Erabiltzailea / Pasahitza |
 |---|---|---|
 | Kafka | kafka:9092 (Docker barnetik) | — |
-| NiFi | https://localhost:8443 | admin / adminpassword123 |
+| NiFi (laborategi osoaren adarretan) | https://localhost:8443 | Ingurunean konfiguratutako kredentzialak |
 | Kibana | http://localhost:5601 | — |
 | Elasticsearch | http://localhost:9200 | — |
 | Scoring API | http://localhost:8000/docs | — |
+
+`infra/docker-compose.yaml` es un ejemplo histórico: para evaluarlo, definir
+`CNC_NIFI_PASSWORD` y `CNC_STREAM_DIR` (directorio local ya montado). Sus
+puertos solo se publican en `127.0.0.1`; no configura acceso remoto ni guarda
+credenciales CIFS en Docker.
 
 ## 3. Proiektuko fitxategiak
 

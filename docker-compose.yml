@@ -20,7 +20,7 @@ services:
       context: ./scoring
     container_name: cnc-scoring
     ports:
-      - "8000:8000"   # FastAPI (ikasleek probatzeko: http://VM_IP:8000/docs)
+      - "127.0.0.1:8000:8000"   # FastAPI local: http://localhost:8000/docs
     volumes:
       - ./models:/models:ro  # Modeloa hemen egon behar da: ./models/cnc_failure_model.pkl
     environment:
