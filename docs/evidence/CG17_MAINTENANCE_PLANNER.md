@@ -1,5 +1,9 @@
 # CG17 — calendario asistido ante la incompatibilidad AI4I/rúbrica
 
+> Alcance retirado de la entrega por confirmación20Oct: usar solo AI4I reducido y
+> clasificación del estado actual. Documento histórico; no activar pronóstico temporal
+> ni sustituir el dataset. Véase [alcance vigente](CG17_CURRENT_STATE_SCOPE.md).
+
 Implementado en `feat/17-maintenance-planner`, sobre PR41. Estado: evidencia local,
 propuesta de laboratorio; revisión por otro miembro pendiente. No hay mantenimiento
 físico autorizado, ETA validada, aceptación docente adicional ni calificación garantizada.

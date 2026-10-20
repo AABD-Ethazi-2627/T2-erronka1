@@ -38,10 +38,6 @@
         "record_ref": {
           "type": "string",
           "minLength": 1
-        },
-        "raw_record": {
-          "type": "string",
-          "minLength": 1
         }
       }
     }

@@ -4,6 +4,14 @@ Clasificación del estado actual con AI4I2020, entrenada offline y servida por
 FastAPI. Inferencia por lotes SMB → Filebeat → Kafka → NiFi → API → Elasticsearch
 → Kibana. No acciona máquinas ni acredita predicciones a 24 horas.
 
+**Alcance confirmado20Oct:** entrenar exclusivamente con el CSV reducido docente.
+NiFi retira etiquetas y fila CSV cruda antes de `/predict`; la API solo utiliza
+cinco sensores y `machine_type`. El score representa clasificación contemporánea,
+no porcentaje de desgaste ni probabilidad calibrada de fallo futuro. Fecha/ID solo
+sirven para trazabilidad. ETA, RUL, estaciones y aprendizaje temporal quedan fuera
+de la entrega; los experimentos históricos se conservan separados y no se cargan
+en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOPE.md).
+
 [Índice final: ramas, métricas, comandos y límites](docs/evidence/INDEX_2026-10-19.md)
 · [Rúbrica y revisión pendiente](docs/rubrica/SEGUIMIENTO.md)
 · [Enunciado original](ENUNTZIATUA.md) · [Documentación](docs/README.md).
@@ -28,10 +36,11 @@ Los experimentos y empaquetado rechazan sobrescribir salidas; conservar anterior
 coherentes. No cargar pickles descargados de terceros. Los modelos generados quedan
 ignorados por Git; informes compactos y hashes están versionados en docs/evidence.
 
-Opcionales: `scripts.experiment_smotenc` compara sobremuestreo dentro de los folds;
-`scripts.seasonal_lab` genera un laboratorio temporal separado, sin entrenar
-forecast ni convertir fechas inventadas en historial observado. El test antiguo
-inspeccionado en PR29 se excluye: las métricas actuales son de desarrollo.
+Opcional de clasificación: `scripts.experiment_smotenc` compara sobremuestreo dentro
+de los folds. Los laboratorios temporales/estacionales y otros datasets son trabajo
+histórico fuera del alcance confirmado; no forman parte del entrenamiento, empaquetado
+ni despliegue de esta entrega. El test antiguo inspeccionado en PR29 se excluye:
+las métricas actuales son de desarrollo.
 
 ## Laboratorio local
 

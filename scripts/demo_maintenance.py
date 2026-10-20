@@ -45,7 +45,6 @@ def main():
                     "kind": "smb_csv",
                     "uri": "smb://192.168.75.150/cnc-stream",
                     "record_ref": f"{key[1]}:data-row-{key[2]}",
-                    "raw_record": ",".join(row.values()),
                 },
             }
             for field in [

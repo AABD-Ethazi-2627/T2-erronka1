@@ -29,6 +29,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import FunctionTransformer, OneHotEncoder, StandardScaler
 
 from scoring.preparation import DERIVED, SEED, SENSORS, features, split_development
+from scoring.scope import INPUT_FEATURES, load_training_source
 
 
 def pipeline(kind, physical=False, weight=None, trees=120, depth=12):
@@ -105,7 +106,7 @@ def run(output):
             "Use a new output directory; do not overwrite experiment evidence"
         )
     source = Path("data/ai4i2020_train.csv")
-    frame = pd.read_csv(source)
+    frame = load_training_source(source)
     train, validation, excluded = split_development(frame)
     # Guard exact feature duplicates across partitions/folds, irrespective of labels/IDs.
     columns = SENSORS + ["machine_type"]
@@ -131,7 +132,12 @@ def run(output):
     for kind, physical, weight, depth in specifications:
         model = pipeline(kind, physical, weight, depth=depth)
         scores = cross_val_predict(
-            model, train, train.machine_failure, cv=cv, method="predict_proba", n_jobs=2
+            model,
+            train[INPUT_FEATURES],
+            train.machine_failure,
+            cv=cv,
+            method="predict_proba",
+            n_jobs=2,
         )[:, 1]
         cutoff = 0.5 if kind == "dummy" else threshold(train.machine_failure, scores)
         result = {
@@ -149,14 +155,14 @@ def run(output):
     winner = max(
         eligible, key=lambda i: results[i]["oof_selection_metrics"]["average_precision"]
     )
-    model = candidates[winner].fit(train, train.machine_failure)
-    scores = model.predict_proba(validation)[:, 1]
+    model = candidates[winner].fit(train[INPUT_FEATURES], train.machine_failure)
+    scores = model.predict_proba(validation[INPUT_FEATURES])[:, 1]
     cutoff = threshold(validation.machine_failure, scores)
     output.mkdir(parents=True)
     path = output / "rf.pkl"
     joblib.dump(model, path)
     np.testing.assert_array_equal(
-        scores, joblib.load(path).predict_proba(validation)[:, 1]
+        scores, joblib.load(path).predict_proba(validation[INPUT_FEATURES])[:, 1]
     )
     pd.DataFrame(
         {

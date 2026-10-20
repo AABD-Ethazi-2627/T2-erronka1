@@ -18,6 +18,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from scoring.alert_policy import alert_level
+from scoring.scope import INPUT_FEATURES, SCOPE, validate_bundle_scope
 from scripts.validate_contracts import validators
 
 log = logging.getLogger(__name__)
@@ -28,7 +29,6 @@ class Source(BaseModel):
     kind: Literal["smb_csv", "lab_fixture", "statement_example"]
     uri: str = Field(min_length=1, max_length=1024)
     record_ref: str = Field(min_length=1, max_length=1024)
-    raw_record: str | None = Field(default=None, max_length=8192)
 
 
 class Telemetry(BaseModel):
@@ -66,6 +66,7 @@ def create_app(manifest_path=None):
         application.state.manifest = None
         try:
             manifest = json.loads(path.read_text())
+            validate_bundle_scope(manifest)
             if manifest["versions"]["sklearn"] != sklearn.__version__:
                 raise ValueError("Model/runtime sklearn mismatch")
             models = {}
@@ -132,7 +133,12 @@ def create_app(manifest_path=None):
     def health():
         if app.state.models is None:
             raise HTTPException(503, "Model not ready")
-        return {"status": "ready", "model_version": app.state.manifest["model_version"]}
+        return {
+            "status": "ready",
+            "model_version": app.state.manifest["model_version"],
+            "prediction_scope": SCOPE["prediction_scope"],
+            "temporal_prediction_enabled": False,
+        }
 
     @app.post("/predict")
     def predict(payload: Telemetry):
@@ -141,7 +147,7 @@ def create_app(manifest_path=None):
         event = payload.model_dump(exclude_none=True)
         try:
             schemas["telemetry"].validate(event)
-            frame = pd.DataFrame([event])
+            frame = pd.DataFrame([event])[INPUT_FEATURES]
             risk = float(app.state.models["rf.pkl"].predict_proba(frame)[0, 1])
             anomaly = float(-app.state.models["if.pkl"].score_samples(frame)[0])
             if not math.isfinite(anomaly):
@@ -149,6 +155,9 @@ def create_app(manifest_path=None):
             manifest = app.state.manifest
             result = {
                 **event,
+                "prediction_scope": SCOPE["prediction_scope"],
+                "temporal_prediction_enabled": False,
+                "score_semantics": SCOPE["score_semantics"],
                 "failure_score": risk,
                 "risk_alert": risk >= manifest["risk_threshold"],
                 "alert_level": alert_level(risk),

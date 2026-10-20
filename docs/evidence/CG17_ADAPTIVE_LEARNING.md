@@ -1,5 +1,9 @@
 # CG17 — inicio del aprendizaje adaptativo y cambio de dataset
 
+> Alcance retirado de la entrega por confirmación20Oct: usar solo AI4I reducido y
+> clasificación del estado actual. Documento histórico; no activar pronóstico temporal
+> ni sustituir el dataset. Véase [alcance vigente](CG17_CURRENT_STATE_SCOPE.md).
+
 Estado histórico de primera fase. Las fases posteriores se implementan como laboratorio
 en [CG17_ADAPTIVE_RUNTIME.md](CG17_ADAPTIVE_RUNTIME.md); validación física pendiente.
 [Plan por fases](../superpowers/plans/2026-10-19-adaptive-maintenance.md).

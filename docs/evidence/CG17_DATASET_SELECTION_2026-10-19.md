@@ -1,5 +1,9 @@
 # Selección de dataset para degradación y propuestas temporales
 
+> Alcance retirado de la entrega por confirmación20Oct: usar solo AI4I reducido y
+> clasificación del estado actual. Documento histórico; no activar pronóstico temporal
+> ni sustituir el dataset. Véase [alcance vigente](CG17_CURRENT_STATE_SCOPE.md).
+
 Fecha de investigación:19Oct2026. Decisión: **XJTU-SY para la ampliación temporal**,
 con AI4I separado para la entrega obligatoria. Recomendación por adecuación del
 objetivo, no resultado de entrenamiento ni garantía de precisión. No se cambia la

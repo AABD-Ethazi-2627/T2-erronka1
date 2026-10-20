@@ -6,6 +6,8 @@ import json
 import subprocess
 from pathlib import Path
 
+from scoring.scope import validate_bundle_scope
+
 
 def inspect_checkout(root):
     root = Path(root)
@@ -32,8 +34,13 @@ def inspect_checkout(root):
             == manifest["files"][name]
             for name in ["rf.pkl", "if.pkl"]
         )
-    except (OSError, ValueError, KeyError):
+    except (OSError, ValueError, KeyError, TypeError):
         checks["model_bundle_hashes_match"] = False
+    try:
+        validate_bundle_scope(json.loads(manifest_path.read_text()))
+        checks["model_scope_valid"] = True
+    except (OSError, ValueError, KeyError, TypeError):
+        checks["model_scope_valid"] = False
     compose = root / "docker-compose.yml"
     checks["compose_services"] = []
     if compose.exists():
@@ -63,6 +70,7 @@ def inspect_checkout(root):
             not checks["api_has_unfilled_bodies"],
             checks["scoring_dockerfile"],
             checks["model_bundle_hashes_match"],
+            checks["model_scope_valid"],
             not checks["missing_services"],
         ]
     )

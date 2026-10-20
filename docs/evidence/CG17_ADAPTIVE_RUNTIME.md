@@ -1,5 +1,9 @@
 # CG17 — ciclo adaptativo completo de laboratorio
 
+> Alcance retirado de la entrega por confirmación20Oct: usar solo AI4I reducido y
+> clasificación del estado actual. Documento histórico; no activar pronóstico temporal
+> ni sustituir el dataset. Véase [alcance vigente](CG17_CURRENT_STATE_SCOPE.md).
+
 Estado: mecanismos de fases2–4 implementados y ensayados en laboratorio sintético.
 Validación física y promoción operativa pendientes de un dataset adecuado. Complementa
 [la primera fase](CG17_ADAPTIVE_LEARNING.md); no implica RSI de código que se reescribe.

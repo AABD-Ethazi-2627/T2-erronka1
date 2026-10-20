@@ -1,5 +1,11 @@
 # CG03 — Datu-kontratuen proposamena 0.1.0
 
+> Alcance vigente20Oct2026: solo clasificación del estado actual con AI4I reducido.
+> NiFi elimina todas las etiquetas y `source.raw_record` antes de predict. La API
+> v4 exige el manifiesto de alcance y no ofrece fechas/ETA/RUL. Este documento
+> conserva propuestas históricas de identidad; la implementación actual se indica abajo.
+
+
 Egoera: berrikusteko proposamena; ez da HTTP API edo NiFi flow bat hedatu.
 Oinarriak: `ENUNTZIATUA.md`, tokiko AI4I entrenamendu-CSVa, SMBtik irakurritako
 hiru lote txiki eta `scoring/inference.py` inferentzia partekatua.
@@ -91,9 +97,14 @@ Lerro guztiz berdineko bi benetako gertaera bereizteko ez da nahikoa: simuladore
 jatorrizko event ID edo sekuentzia global fidagarria beharko litzateke.
 Ez da exactly-once portaera frogatu edo inplementatu.
 
-Raw CSVko azken sei etiketak jatorrizko laginean/`source.raw_record`-en gordetzen dira,
-baina ez inferentziaren aldagai gisa. Modeloak sentsoreak eta `machine_type` soilik
-hartzen ditu. Etiketak ebaluazio/testuingururako aparte prozesatu behar dira.
+Las seis etiquetas se conservan únicamente en la fuente/auditoría original para
+contraste separado; `source.raw_record` ya no está permitido en el contrato. NiFi
+no envía la fila cruda ni las etiquetas a predict. La API entrega al estimador
+solo los cinco sensores y `machine_type`. Fecha/ID no son predictores.
+
+En el flujo NiFi vigente, `event_id=sha256(UTF8(kafka.key))`; `record_ref` conserva
+esa clave de origen. La fórmula anterior es una propuesta histórica, no la
+definición que ejecuta el normalizador probado en esta entrega.
 
 Iragarpena deduplikatzeko giltza proposatua `(event_id, model_artifact_sha256, policy)`
 da: gertaera bera modelo edo politika desberdinekin puntuatu ahal izateko.
@@ -101,7 +112,9 @@ da: gertaera bera modelo edo politika desberdinekin puntuatu ahal izateko.
 ## RF / Isolation Forest eta aurreko txantiloia
 
 `failure_score` [0,1] arrisku-puntuazio kalibratu gabea da. Ez deitu automatikoki
-`failure_probability`-ri eta ez aldatu `.5/.8` alert-maila zaharrak isilean.
+`failure_probability`-ri. `alert_level` erabiltzen du: >=0.15 AVISO, >=0.70 CRITICA.
+`prediction_scope=AI4I_CURRENT_STATE_ONLY`, `temporal_prediction_enabled=false` eta
+`score_semantics=uncalibrated_current_state_score` erantzunean derrigorrezkoak dira.
 `risk_alert` hautatutako politikaren atalasearekin kalkulatzen da; `anomaly_alert`
 IFren atalase bereiziarekin. IFren puntuazioa ez da hutsegite-probabilitatea.
 Ez dago AND baldintzarik edo makina gelditzeko komando edo eremurik.
