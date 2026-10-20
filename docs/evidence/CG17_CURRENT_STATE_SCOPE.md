@@ -32,8 +32,10 @@ los experimentos históricos se conservan fuera del modelo/API desplegados.
 
 ## Aplicación local
 
-Paquete nuevo: `outputs/api-current-state-20261020/`. El enlace `outputs/api` apunta a
-ese paquete verificado; anterior conservado en `outputs/api-before-scope-20261020/`.
+Paquete versionado: `outputs/api-current-state-20261020/`. La carpeta canónica
+`outputs/api` contiene una copia idéntica verificada (sin enlaces simbólicos, para
+compatibilidad con el verificador de rutas); anterior conservado en
+`outputs/api-before-scope-20261020/`.
 La API Docker local se reconstruye con el nuevo código y se inicia en127.0.0.1:18001.
 No se reentrena online ni se modifica ningún equipo industrial.
 
