@@ -1,6 +1,14 @@
-# Idempotencia de CG14: diseño pendiente de contrato y destino
+# Idempotencia de CG14: contrato legacy y origen estable
 
-## Comportamiento actual observado
+## Comportamiento legacy observado
+
+Esta sección describe el parser y el laboratorio legacy. El contrato opt-in
+vigente de ocurrencia y entrega está en
+[CG14_PR42_INTEGRATION.md](../../docs/CG14_PR42_INTEGRATION.md).
+`bind_occurrence` existe como primitiva offline; su cableado en el grafo activo
+y la aceptación E2E durable siguen pendientes. El contrato de respuesta canónica
+del API se documenta por separado en
+[SCORING_REPLAY_CONTRACT.md](../../docs/SCORING_REPLAY_CONTRACT.md).
 
 El validador calcula `event_id` como SHA-256 de `schema_version`, `source.kind` y
 el registro CSV original. Por tanto, el mismo registro exacto desde el mismo tipo
@@ -13,15 +21,17 @@ Esto deja una ambigüedad contractual: dos lecturas físicas legítimas pueden t
 el mismo contenido (por ejemplo, dos muestras iguales consecutivas). Un hash de
 contenido las colapsaría si se adopta como identidad de negocio. CG03 debe
 confirmar un identificador de ocurrencia estable emitido por el productor, o una
-composición de campos que identifique inequívocamente la muestra. El offset Kafka
-puede ayudar a localizar un transporte, pero no debe convertirse en `event_id`:
-un replay o una republicación puede asignar otro offset al mismo evento.
+composición de campos que identifique inequívocamente la muestra. En el contrato
+legacy, el offset del transporte actual sólo localiza la entrega. En el contrato
+opt-in, namespace/generación/topic/partition/offset **originales** identifican una
+ocurrencia estable y sí intervienen en `event_id`. Deben conservarse al republicar:
+el nuevo offset pertenece a otra entrega (`delivery_id`) y no sustituye al origen.
 
 Un retry de un FlowFile puede volver a llamar al endpoint. Un replay de Kafka
 puede volver a producir la llamada. El estado de NiFi en memoria o el estado de
 cola no evita esos efectos y no constituye una garantía de idempotencia.
 
-## Diseño propuesto, no implementado
+## Diseño histórico y condiciones de integración
 
 1. CG03 debe decidir si `event_id` representa contenido idéntico o una lectura
    física única, y si cambios de normalización, schema o fuente cambian identidad.
@@ -40,9 +50,10 @@ cola no evita esos efectos y no constituye una garantía de idempotencia.
    lo que el consumidor/destino de alertas también necesita una clave única
    durable. No existe una transacción atómica general entre NiFi, HTTP y una base
    remota.
-5. NiFi conserva la misma clave al reintentar 5xx/timeouts. La identidad procede
-   del contrato de evento, nunca de `kafka.offset`; topic/partition/offset se
-   mantienen como localizador de transporte y dato de provenance.
+5. NiFi debe conservar la misma clave al reintentar 5xx/timeouts. La identidad
+   procede del contrato de evento: coordenadas originales preservadas en el
+   binding opt-in, no el `kafka.offset` asignado a una republicación. Las
+   coordenadas del transporte actual identifican la entrega y su provenance.
 6. La retención de claves debe cubrir el máximo de retry, retención/replay Kafka,
    reprocesados operativos y ventana de alertas acordada. Expirar claves antes de
    esa ventana vuelve a permitir efectos duplicados.

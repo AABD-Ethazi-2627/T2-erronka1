@@ -1024,6 +1024,7 @@ class Runner:
                             "kafka.topic",
                             "kafka.partition",
                             "kafka.offset",
+                            "kafka.key",
                             "cg14.valid",
                             "cg14.code",
                             "cg14.event.id",

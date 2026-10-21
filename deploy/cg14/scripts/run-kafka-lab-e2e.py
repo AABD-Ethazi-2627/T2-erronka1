@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Run one bounded, synthetic Kafka -> NiFi CG14 lab integration test.
+"""Collect bounded, synthetic Kafka -> NiFi CG14 legacy drain diagnostics.
+
+This runner never certifies functional acceptance. Use run-restore-e2e.py for
+scenario/HTTP/retry/DLQ reconciliation; missing provenance returns nonzero here.
 
 The script reads deploy/cg14/.env locally, creates a fresh 24-hour topic only
 on cnc-cg14-kafka-test, and records redacted evidence under data/evidence/.
@@ -649,6 +652,17 @@ def main() -> int:
             relationship = event.get("relationship") or "UNKNOWN"
             route_outcomes[relationship] = route_outcomes.get(relationship, 0) + 1
 
+    # These summaries do not reconcile HTTP, retry ordering or durable DLQ content.
+    # Even a complete drain observation therefore has no acceptance meaning.
+    expected_inputs = {f"{topic}/0/{i}" for i in range(len(records))}
+    if errors:
+        run_error = run_error or "legacy diagnostic provenance query failed"
+    elif set(input_records) != expected_inputs:
+        run_error = (
+            run_error
+            or "legacy diagnostic input provenance is incomplete or miscorrelated"
+        )
+
     def delta(component_name: str, field: str) -> int:
         cid = current_components[component_name]["id"]
         return final_metrics.get(cid, {}).get(field, 0) - before_metrics.get(
@@ -673,7 +687,9 @@ def main() -> int:
             "recovered_healthy": broker_recovered,
             "outage_seconds": outage_seconds if args.inject_kafka_outage else None,
         },
-        "run_status": "VERIFIED" if run_error is None else "PARTIAL",
+        "run_status": "DRAIN_OBSERVED" if run_error is None else "EVIDENCE_INCOMPLETE",
+        "acceptance": "NOT_EVALUATED",
+        "acceptance_runner": "run-restore-e2e.py",
         "run_error": run_error,
         "produced_messages": len(records),
         "message_classes": {
@@ -712,6 +728,7 @@ def main() -> int:
         "valid_event_id_multiplicity": sorted(id_counts.values()),
         "provenance_query_errors": errors,
         "limitations": [
+            "Legacy drain diagnostics only; functional acceptance requires run-restore-e2e.py and its complete reconciliation gate.",
             "This is an isolated synthetic broker, not the team CG13 broker or topic.",
             "Kafka offsets are committed after consumption; this does not prove exactly-once processing.",
             "The current flow has no persistent idempotent accepted sink; duplicate semantic events are not suppressed.",
@@ -726,6 +743,8 @@ def main() -> int:
             {
                 "evidence": str(evidence_dir / "e2e-summary.json"),
                 "run_status": output["run_status"],
+                "acceptance": output["acceptance"],
+                "acceptance_runner": output["acceptance_runner"],
                 "run_error": run_error,
                 "topic": topic,
                 "consumer_group": group,

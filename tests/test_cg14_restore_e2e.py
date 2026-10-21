@@ -498,7 +498,7 @@ def functional_evidence(lab):
         a.update(attrs)
         e["provenance"].append(
             {
-                "event_id": len(e["provenance"]),
+                "event_id": len(e["provenance"]) + 1,
                 "component_id": names[name],
                 "type": event_type,
                 "relationship": relation,
@@ -509,6 +509,13 @@ def functional_evidence(lab):
     for d, line in zip(expected, wire, strict=True):
         scenario = d["scenario"]
         raw = line.split("|", 1)[1].rstrip("\n")
+        # ConsumeKafka records RECEIVE before either downstream processor enriches it.
+        add(d, m.CONSUMER, "RECEIVE", **{"kafka.key": line.split("|", 1)[0]})
+        receive = e["provenance"][-1]["attributes"]
+        receive.pop("cg14.event.id")
+        receive.pop("cg14.mock.scenario")
+        add(d, m.METADATA, "ATTRIBUTES_MODIFIED")
+        e["provenance"][-1]["attributes"].pop("cg14.event.id")
         if scenario == "invalid":
             add(
                 d,
@@ -584,9 +591,63 @@ def test_functional_checks_accept_complete_evidence(functional_evidence, lab):
     assert m.functional_pass(functional_evidence, lab[1])
 
 
+@pytest.mark.parametrize(
+    "failure",
+    [
+        "missing-receive",
+        "missing-key",
+        "crossed-key",
+        "crossed-offset",
+        "crossed-partition",
+        "foreign-topic",
+        "foreign-component",
+        "late-receive",
+        "missing-later-scenario",
+        "missing-http-id",
+    ],
+)
+def test_functional_checks_correlate_receive_before_enrichment(
+    functional_evidence, lab, failure
+):
+    e = functional_evidence
+    receive = next(r for r in e["provenance"] if r["type"] == "RECEIVE")
+    attrs = receive["attributes"]
+    if failure == "missing-receive":
+        e["provenance"].remove(receive)
+    elif failure == "missing-key":
+        attrs.pop("kafka.key")
+    elif failure == "crossed-key":
+        attrs["kafka.key"] = "422"
+    elif failure == "crossed-offset":
+        attrs["kafka.offset"] = "1"
+    elif failure == "crossed-partition":
+        attrs["kafka.partition"] = "1"
+    elif failure == "foreign-topic":
+        attrs["kafka.topic"] = "other-topic"
+    elif failure == "foreign-component":
+        receive["component_id"] = "unowned"
+    elif failure == "late-receive":
+        receive["event_id"] = 100000
+    else:
+        name = m.METADATA if failure == "missing-later-scenario" else m.HTTP
+        cid = next(
+            p["instanceIdentifier"] for p in lab[1]["processors"] if p["name"] == name
+        )
+        row = next(r for r in e["provenance"] if r["component_id"] == cid)
+        row["attributes"].pop(
+            "cg14.mock.scenario"
+            if failure == "missing-later-scenario"
+            else "cg14.event.id"
+        )
+    assert not m.functional_pass(e, lab[1])
+
+
 @pytest.mark.parametrize("complete", [True, False])
+@pytest.mark.parametrize(
+    "receive_failure", [None, "missing-key", "crossed-key", "crossed-offset"]
+)
 def test_collector_reconciles_detailed_provenance_and_real_dlq_files(
-    functional_evidence, lab, tmp_path, monkeypatch, complete
+    functional_evidence, lab, tmp_path, monkeypatch, complete, receive_failure
 ):
     from cg14_validation.validator import parse_csv_event
 
@@ -626,6 +687,13 @@ def test_collector_reconciles_detailed_provenance_and_real_dlq_files(
     monkeypatch.setattr(m, "read_offsets", lambda group: functional_evidence["offsets"])
     original_get = rr.api.get
     rows = functional_evidence["provenance"]
+    receive = next(r for r in rows if r["type"] == "RECEIVE")["attributes"]
+    if receive_failure == "missing-key":
+        receive.pop("kafka.key")
+    elif receive_failure == "crossed-key":
+        receive["kafka.key"] = "422"
+    elif receive_failure == "crossed-offset":
+        receive["kafka.offset"] = "1"
     reads = []
 
     def get(path):
@@ -661,7 +729,15 @@ def test_collector_reconciles_detailed_provenance_and_real_dlq_files(
     e = rr.collect()
     assert e["provenance_complete"] is complete
     assert len(e["dlq"]) == 4 and len(e["provenance"]) == len(rows)
-    assert rr.s["functional"] == ("VERIFIED" if complete else "NOT_VERIFIED")
+    received = [r for r in e["provenance"] if r["type"] == "RECEIVE"]
+    assert len(received) == 5
+    assert [r["attributes"].get("kafka.key") for r in received] == [
+        r["attributes"].get("kafka.key") for r in rows if r["type"] == "RECEIVE"
+    ]
+    assert all("cg14.mock.scenario" not in r["attributes"] for r in received)
+    assert rr.s["functional"] == (
+        "VERIFIED" if complete and receive_failure is None else "NOT_VERIFIED"
+    )
     assert len(
         [path for path in reads if path.startswith("/provenance-events/")]
     ) == len(rows)

@@ -4,6 +4,7 @@ import hashlib
 import json
 
 SCENARIOS = ("2xx", "422", "5xx", "timeout", "invalid")
+CONSUMER = "ConsumeKafka — CG14 synthetic E2E"
 HTTP = "InvokeHTTP — local CG14 mock only"
 RETRY = "RouteOnAttribute — max two retries"
 COUNT = "UpdateAttribute — count mock retries"
@@ -123,9 +124,12 @@ def _reconciled(e, inv):
                     return False
                 rows.append(row)
                 seen.add(coordinate)
-                if a.get("cg14.mock.scenario") != (
-                    "2xx" if d["scenario"] == "invalid" else d["scenario"]
-                ):
+                scenario = "2xx" if d["scenario"] == "invalid" else d["scenario"]
+                # RECEIVE precedes UpdateAttribute: only Kafka coordinates/key exist.
+                if row["component_id"] == names[CONSUMER] and row["type"] == "RECEIVE":
+                    if a.get("kafka.key") != scenario:
+                        return False
+                elif a.get("cg14.mock.scenario") != scenario:
                     return False
                 if a.get("cg14.event.id") not in (None, "", d["event_id"]):
                     return False
@@ -142,6 +146,14 @@ def _reconciled(e, inv):
                 and r["type"] == event_type
                 and (relationship is None or r.get("relationship") == relationship)
             ]
+
+        received = at(CONSUMER, "RECEIVE")
+        if len(received) != 1 or any(
+            r["event_id"] <= received[0]["event_id"]
+            for r in rows
+            if r is not received[0]
+        ):
+            return False
 
         if d["scenario"] == "invalid":
             if d["event_id"] is not None or at(HTTP, "ROUTE"):
