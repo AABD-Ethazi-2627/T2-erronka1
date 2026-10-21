@@ -120,19 +120,19 @@ def build_report(source, validation_raw, report_raw):
         },
         "limitations": [
             "Validation was already observed and used to tune this fixed threshold; "
-            "not an independent final test.",
+            + "not an independent final test.",
             "No threshold or model is selected by this report; scores are "
-            "uncalibrated current-state scores.",
+            + "uncalibrated current-state scores.",
             "H/L/M are synthetic machine categories, not people or verified "
-            "physical machine regimes.",
+            + "physical machine regimes.",
             "Small positive counts make subgroup rates unstable; "
-            "no causal or fairness conclusion.",
+            + "no causal or fairness conclusion.",
             "Counts describe RF tuned alerts, not classroom severity bands "
-            "or Isolation Forest alerts.",
+            + "or Isolation Forest alerts.",
             "Hashes identify inputs; they do not authenticate an experiment "
-            "or prove score generation.",
+            + "or prove score generation.",
             "No ETA, RUL, 24h forecast, industrial validation "
-            "or automated machine control.",
+            + "or automated machine control.",
         ],
     }
 
