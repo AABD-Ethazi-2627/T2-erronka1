@@ -28,7 +28,8 @@ def test_recovery_uses_committed_offset_and_empty_queue_not_resettable_counters(
 
 def test_offset_parser_selects_expected_topic_partition():
     output = (
-        "GROUP TOPIC PARTITION CURRENT-OFFSET LOG-END-OFFSET LAG CONSUMER-ID HOST CLIENT-ID\n"
+        "GROUP TOPIC PARTITION CURRENT-OFFSET LOG-END-OFFSET LAG "
+        "CONSUMER-ID HOST CLIENT-ID\n"
         "g other-topic 0 4 4 0 consumer host client\n"
         "g cg14-outage-a 0 6 6 0 consumer host client\n"
     )

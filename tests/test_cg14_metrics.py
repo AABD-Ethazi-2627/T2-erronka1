@@ -10,7 +10,11 @@ from cg14_validation.validator import stable_event_id
 
 VALID = "2026-10-15T08:09:06Z,CNC-049,L,300.5,309.8,1345,62.7,153,0,0,0,0,0,0"
 ACTIVE_LABEL = "2026-10-15T08:09:06Z,CNC-049,L,300.5,309.8,1345,62.7,153,1,0,0,0,0,0"
-HEADER = "machine_id,machine_type,air_temp_K,process_temp_K,rpm,torque_Nm,tool_wear_min,machine_failure,failure_TWF,failure_HDF,failure_PWF,failure_OSF,failure_RNF"
+HEADER = (
+    "machine_id,machine_type,air_temp_K,process_temp_K,rpm,torque_Nm,"
+    "tool_wear_min,machine_failure,failure_TWF,failure_HDF,"
+    "failure_PWF,failure_OSF,failure_RNF"
+)
 
 
 def _observe(metrics, line):

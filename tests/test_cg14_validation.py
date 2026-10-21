@@ -216,7 +216,11 @@ def test_csv_label_out_of_range_is_rejected():
 
 
 def test_stream_header_with_timestamp_prefix_is_rejected_as_header():
-    header = "timestamp,machine_id,machine_type,air_temp_K,process_temp_K,rpm,torque_Nm,tool_wear_min,machine_failure,failure_TWF,failure_HDF,failure_PWF,failure_OSF,failure_RNF"
+    header = (
+        "timestamp,machine_id,machine_type,air_temp_K,process_temp_K,rpm,"
+        "torque_Nm,tool_wear_min,machine_failure,failure_TWF,failure_HDF,"
+        "failure_PWF,failure_OSF,failure_RNF"
+    )
 
     result = parse_csv_event(
         header, source_uri="fixture://cg14", record_ref="stream-header.csv:1"

@@ -327,7 +327,10 @@ def run_one(
         "result": "PARTIAL",
         "limitations": [
             "Isolated synthetic lab only; not the real CG13 broker or topic.",
-            "Kafka commits offsets after ConsumeKafka output; this is at-least-once behavior, not exactly-once.",
+            (
+                "Kafka commits offsets after ConsumeKafka output; this is "
+                "at-least-once behavior, not exactly-once."
+            ),
         ],
     }
     broker_stopped = False
@@ -412,7 +415,8 @@ def run_one(
                 time.sleep(2)
         if ready is None:
             raise TimeoutError(
-                "lab broker did not pass broker API, advertised endpoint, DNS/TCP readiness"
+                "lab broker did not pass broker API, advertised endpoint, DNS/"
+                "TCP readiness"
             )
         broker_stopped = False
         evidence["phases"]["outage"]["broker_readiness_after_restore"] = ready
