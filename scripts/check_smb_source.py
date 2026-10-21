@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BATCH = re.compile(r"^\s*(cnc_batch_[0-9]{8}_[0-9]{6}_[0-9]+\.csv)\s+N\s+[0-9]+\s+")
+BATCH = re.compile(r"^\s*(cnc_batch_[0-9]{8}_[0-9]{6}_[0-9]+\.csv)\s+N\s+([0-9]+)\s+")
 
 
 @dataclass(frozen=True)
@@ -75,10 +75,19 @@ def read_config(path):
     )
 
 
+def list_batch_sizes(listing):
+    batches = {}
+    for line in listing.splitlines():
+        if match := BATCH.match(line):
+            name, size = match.group(1), int(match.group(2))
+            if name in batches and batches[name] != size:
+                raise ValueError("SMB listing contains conflicting batch sizes")
+            batches[name] = size
+    return dict(sorted(batches.items()))
+
+
 def list_batch_names(listing):
-    return sorted(
-        {m.group(1) for line in listing.splitlines() if (m := BATCH.match(line))}
-    )
+    return list(list_batch_sizes(listing))
 
 
 def smb_command(config, command, cwd=None):
