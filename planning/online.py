@@ -216,7 +216,10 @@ def crossing_proposal(
         "failure_eta_minutes": None,
         "operationally_validated": False,
         "forecast_horizon_minutes": engine.horizon,
-        "projection_caveat": "Crossings beyond the measured forecast horizon are additional unvalidated extrapolation",
+        "projection_caveat": (
+            "Crossings beyond the measured forecast horizon are "
+            + "additional unvalidated extrapolation"
+        ),
         "uncertainty_kind": "EMPIRICAL_RATE_SCENARIOS_NOT_CALIBRATED_CONFIDENCE",
         "action": "REVIEW_PROJECTED_LIMITS",
         "requires_human_review": True,
@@ -298,7 +301,10 @@ def crossing_proposal(
             "from": state["at"],
             "before": (instant(state["at"]) + timedelta(minutes=earliest)).isoformat(),
             "basis": "EARLIEST_PROJECTED_SCENARIO_CROSSING",
-            "notice": "Model-derived review proposal, not an optimized maintenance time or validated failure deadline",
+            "notice": (
+                "Model-derived review proposal, not an optimized "
+                + "maintenance time or validated failure deadline"
+            ),
         }
         if earliest == 0:
             result["action"] = "REVIEW_OBSERVED_LIMIT_BREACH"

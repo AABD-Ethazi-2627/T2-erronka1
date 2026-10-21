@@ -347,10 +347,19 @@ def run(output):
         "limitations": [
             "Reused development validation; no new independent final test.",
             "OOF candidate/member/threshold search is optimistic, not nested CV.",
-            "Bootstrap percentiles describe fixed OOF scores, not unbiased algorithm uncertainty.",
-            "Small unequal search budgets, single seed/source; no universal best-model claim.",
+            (
+                "Bootstrap percentiles describe fixed OOF scores, not "
+                + "unbiased algorithm uncertainty."
+            ),
+            (
+                "Small unequal search budgets, single seed/source; no "
+                + "universal best-model claim."
+            ),
             "Anomaly diagnostics use failure proxy, not verified anomaly ground truth.",
-            "One-hot machine_type for all supervised models, including CatBoost; no native categorical claim.",
+            (
+                "One-hot machine_type for all supervised models, "
+                + "including CatBoost; no native categorical claim."
+            ),
             "No API model promotion; no 24h forecast or physical machine history.",
         ],
     }

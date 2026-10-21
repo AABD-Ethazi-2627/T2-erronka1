@@ -1,4 +1,6 @@
-"""Export traceable compact comparison and charts without fitting/selecting on validation."""
+"""Export traceable compact comparison and charts without fitting/selecting
+on validation.
+"""
 
 import hashlib
 import json
@@ -61,7 +63,10 @@ def performance_diagnostic(root, broad):
             ),
         }
     return {
-        "meaning": "Own verified models, warm sequential single-row in-process; no HTTP or load SLA",
+        "meaning": (
+            "Own verified models, warm sequential single-row "
+            + "in-process; no HTTP or load SLA"
+        ),
         "repetitions": 30,
         "models": result,
     }
@@ -230,7 +235,14 @@ def run():
         axes[1].text(
             0.02,
             index,
-            f"AP {m['average_precision']:.3f}; FN {m['confusion_matrix'][1][0]}, FP {m['confusion_matrix'][0][1]}",
+            (
+                "AP "
+                f"{m['average_precision']:.3f}"
+                "; FN "
+                f"{m['confusion_matrix'][1][0]}"
+                ", FP "
+                f"{m['confusion_matrix'][0][1]}"
+            ),
             va="center",
             fontsize=9,
             color="white",
