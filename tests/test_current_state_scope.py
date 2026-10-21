@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fastapi.testclient import TestClient
+from api_client import api_client
 
 from scoring.scope import (
     APPROVED_SOURCE_SHA256,
@@ -14,7 +14,7 @@ from scoring.scope import (
 from scoring.score_api import create_app
 
 
-class CurrentStateScopeTests(unittest.TestCase):
+class CurrentStateScopeTests(unittest.IsolatedAsyncioTestCase):
     def test_only_original_reduced_training_source_is_accepted(self):
         frame = load_training_source()
         self.assertEqual(len(frame), 8000)
@@ -44,52 +44,56 @@ class CurrentStateScopeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_bundle_scope({})
 
-    def test_raw_source_and_all_labels_are_rejected_before_model_readiness(self):
+    async def test_raw_source_and_all_labels_are_rejected_before_model_readiness(self):
         payload = json.loads(
             Path("contracts/examples/valid/telemetry.json").read_text()
         )
         payload["source"].pop("raw_record", None)
-        with (
-            tempfile.TemporaryDirectory() as directory,
-            TestClient(create_app(Path(directory) / "missing")) as client,
-        ):
-            for label in [
-                "machine_failure",
-                "failure_TWF",
-                "failure_HDF",
-                "failure_PWF",
-                "failure_OSF",
-                "failure_RNF",
-                "eta_minutes",
-                "rul_minutes",
-            ]:
+        with tempfile.TemporaryDirectory() as directory:
+            app = create_app(Path(directory) / "missing")
+            async with api_client(app) as client:
+                for label in [
+                    "machine_failure",
+                    "failure_TWF",
+                    "failure_HDF",
+                    "failure_PWF",
+                    "failure_OSF",
+                    "failure_RNF",
+                    "eta_minutes",
+                    "rul_minutes",
+                ]:
+                    self.assertEqual(
+                        (
+                            await client.post("/predict", json={**payload, label: 1})
+                        ).status_code,
+                        422,
+                    )
+                unsafe = {
+                    **payload,
+                    "source": {
+                        **payload["source"],
+                        "raw_record": "timestamp,machine,features,1,1,1",
+                    },
+                }
                 self.assertEqual(
-                    client.post("/predict", json={**payload, label: 1}).status_code, 422
+                    (await client.post("/predict", json=unsafe)).status_code, 422
                 )
-            unsafe = {
-                **payload,
-                "source": {
-                    **payload["source"],
-                    "raw_record": "timestamp,machine,features,1,1,1",
-                },
-            }
-            self.assertEqual(client.post("/predict", json=unsafe).status_code, 422)
 
-    def test_inference_ignores_identity_and_observation_time(self):
+    async def test_inference_ignores_identity_and_observation_time(self):
         if not Path("outputs/api/manifest.json").exists():
             self.skipTest("Run the controlled training and package_model first")
         payload = json.loads(
             Path("contracts/examples/valid/telemetry.json").read_text()
         )
-        with TestClient(create_app("outputs/api/manifest.json")) as client:
-            first = client.post("/predict", json=payload)
+        async with api_client(create_app("outputs/api/manifest.json")) as client:
+            first = await client.post("/predict", json=payload)
             self.assertEqual(first.status_code, 200)
             changed = {
                 **payload,
                 "machine_id": "CNC-099",
                 "timestamp": "2000-01-01T00:00:00Z",
             }
-            second = client.post("/predict", json=changed)
+            second = await client.post("/predict", json=changed)
             self.assertEqual(second.status_code, 200)
             self.assertEqual(
                 first.json()["failure_score"], second.json()["failure_score"]
@@ -102,7 +106,7 @@ class CurrentStateScopeTests(unittest.TestCase):
                 first.json()["score_semantics"], "uncalibrated_current_state_score"
             )
             self.assertEqual(
-                client.get("/health").json()["prediction_scope"],
+                (await client.get("/health")).json()["prediction_scope"],
                 "AI4I_CURRENT_STATE_ONLY",
             )
 
