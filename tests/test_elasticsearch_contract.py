@@ -9,7 +9,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 import sklearn
-from fastapi.testclient import TestClient
+from api_client import api_client
 
 from scoring.scope import INPUT_FEATURES, SCOPE
 from scoring.score_api import create_app
@@ -60,7 +60,7 @@ def fixture_bundle(root):
     return path
 
 
-class ElasticsearchContractTests(unittest.TestCase):
+class ElasticsearchContractTests(unittest.IsolatedAsyncioTestCase):
     def test_entire_prediction_contract_has_explicit_compatible_mappings(self):
         schema = json.loads((ROOT / "contracts/prediction.schema.json").read_text())
         common = json.loads((ROOT / "contracts/common.schema.json").read_text())
@@ -112,7 +112,7 @@ class ElasticsearchContractTests(unittest.TestCase):
 
         check(schema["properties"], mapping["properties"])
 
-    def test_real_api_response_and_exported_nifi_paths_preserve_contract(self):
+    async def test_real_api_response_and_exported_nifi_paths_preserve_contract(self):
         flow = json.loads((ROOT / "nifi-flows/cnc_lab_completed.json").read_text())[
             "flowContents"
         ]
@@ -180,8 +180,9 @@ class ElasticsearchContractTests(unittest.TestCase):
         ]["mappings"]["properties"]
         with tempfile.TemporaryDirectory() as directory:
             manifest = fixture_bundle(Path(directory))
-            with TestClient(create_app(manifest)) as client:
-                self.assertEqual(client.get("/health").status_code, 200)
+            app = create_app(manifest)
+            async with api_client(app) as client:
+                self.assertEqual((await client.get("/health")).status_code, 200)
                 for kind in ["lab_fixture", "smb_csv"]:
                     with self.subTest(source=kind):
                         payload = json.loads(
@@ -194,7 +195,7 @@ class ElasticsearchContractTests(unittest.TestCase):
                             "uri": "fixture://es-contract",
                             "record_ref": "synthetic-row-1",
                         }
-                        response = client.post("/predict", json=payload)
+                        response = await client.post("/predict", json=payload)
                         self.assertEqual(response.status_code, 200, response.text)
                         document = response.json()
                         checks["prediction"].validate(document)
@@ -225,3 +226,4 @@ class ElasticsearchContractTests(unittest.TestCase):
                                 "rul_minutes",
                             }
                         )
+            self.assertIsNone(app.state.models)

@@ -22,7 +22,8 @@ modelos sintéticos pequeños, cargados mediante el lifespan y hashes normales.
 No carga pickles publicados, entrena modelos de entrega ni evalúa el test final.
 
 La inspección de conexiones y expresiones NiFi es estática: no ejecuta sus
-procesadores. El payload HTTP sí procede de la API ejecutada en `TestClient`.
+procesadores. El payload HTTP sí procede de la API ejecutada en un transporte
+ASGI de HTTPX, con el lifespan real de la aplicación.
 El manifiesto de fixture declara el alcance que exige la API, pero su versión
 `synthetic-es-contract-test-only` identifica que no acredita procedencia ni calidad
 del modelo de entrega. No se usa fuera de la prueba.
@@ -141,3 +142,57 @@ Python3.12.15 y dependencias frozen:
 El campo `source.kind=smb_csv` se prueba como valor del contrato con URI de fixture;
 no se lee SMB. No se ejecutan NiFi/Kafka/Filebeat/Kibana, latencias del pipeline,
 modelos de entrega, infraestructura compartida ni migración de índices reales.
+
+## Corrección de los residuales de revisión
+
+Sobre el head revisado `0272276a77f6b42c6164e4772590854bbb48dace`:
+
+- Ruff Windows 0.17.1: imports ordenados y `check=False` explícito en la sonda
+  de disponibilidad. Un retorno no cero forma parte de la espera intencional;
+  las peticiones de verificación siguen usando `check=True`. Sin `noqa` nuevos.
+- El caso mínimo `with TestClient(FastAPI())` reproduce el defecto ajeno al
+  scoring: tres ciclos, `gc.collect(2)` y ResourceWarning como error producen
+  seis excepciones no propagables de streams AnyIO sin cerrar. No demuestra
+  una fuga en producción. El [código de Starlette 0.37.2](https://github.com/encode/starlette/blob/0.37.2/starlette/testclient.py)
+  deja abiertos ambos extremos de `stream_receive`; la
+  [corrección upstream #2693](https://github.com/Kludex/starlette/pull/2693)
+  se publicó en [Starlette 0.38.6](https://starlette.dev/release-notes/#0386-september-22-2024).
+- [FastAPI 0.111.0 exige Starlette >=0.37.2,<0.38.0](https://github.com/fastapi/fastapi/blob/0.111.0/pyproject.toml).
+  No se fuerza una versión incompatible ni se amplía la actualización de
+  dependencias. `pyproject.toml`, `uv.lock` y el código de producción permanecen
+  sin cambios en esta corrección.
+- Las pruebas usan ahora el [transporte ASGI público de HTTPX](https://www.python-httpx.org/advanced/transports/#asgi-transport),
+  también descrito en las [pruebas async de FastAPI](https://fastapi.tiangolo.com/advanced/async-tests/).
+  `tests/api_client.py` entra y sale del contexto lifespan de la aplicación:
+  HTTPX no lo ejecuta automáticamente. No se modifican las clases de Starlette
+  ni sus streams internos. Se conserva la carga y descarga real de las fixtures,
+  las comprobaciones de readiness y las validaciones de petición/respuesta.
+  Dos regresiones comprueban cierre del cliente y shutdown con respuesta normal
+  y con excepción de la aplicación, que sigue propagándose. El shutdown usa
+  `AsyncExitStack.aclose()` sin inyectar esa excepción en el lifespan, igual que
+  el ciclo independiente de TestClient. El caso de error se comprobó primero
+  en rojo con un lifespan que limpia después de `yield`, como el de scoring.
+
+`-W error::ResourceWarning` por sí solo no convierte las excepciones de `__del__`
+en fallos de proceso. `tests/verify_resource_cleanup.py` añade recolección de
+generación 2 después de cada test y al terminar cada suite; registra y muestra
+las excepciones de `sys.unraisablehook`, y falla si aparece cualquiera de ellas.
+No suprime warnings. Repite la suite dos veces y exige los mismos IDs y orden de
+descubrimiento. Para reproducir con el entorno frozen anterior:
+
+```sh
+outputs/venv/bin/python tests/verify_resource_cleanup.py
+```
+
+La evidencia de esta ejecución se registra por separado en
+[ES_V4_CONTRACT_HYGIENE_20261021.json](ES_V4_CONTRACT_HYGIENE_20261021.json);
+el JSON anterior conserva los resultados históricos del head original.
+
+La validación final repite 108 tests: 105 correctos y tres omitidos en cada
+pasada, sin ResourceWarning ni excepciones no propagables con GC forzado.
+El control negativo con dos streams deliberadamente abiertos termina con
+código 1 aunque su unittest termine correctamente. El ensayo de ES desechable
+repite las 44 operaciones y elimina su contenedor, sin warnings de recursos.
+Ruff Windows 0.17.1, formato, auditoría inmutable CG02 y layout pasan localmente.
+La revisión independiente del cambio, el CI del nuevo head y los tres tests
+que requieren modelos de entrega quedan separados de estos resultados locales.

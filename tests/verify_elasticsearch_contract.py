@@ -7,6 +7,7 @@ Never connects to a host ES endpoint or executes NiFi processors.
 """
 
 import argparse
+import asyncio
 import copy
 import json
 import subprocess
@@ -15,8 +16,7 @@ import time
 import uuid
 from pathlib import Path
 
-from fastapi.testclient import TestClient
-
+from api_client import api_client
 from test_elasticsearch_contract import ROOT, fixture_bundle
 
 from scoring.score_api import create_app
@@ -152,6 +152,7 @@ def run(output, baseline_ref=BASE):
                 capture_output=True,
                 text=True,
                 timeout=10,
+                check=False,
             )
             if ready.returncode == 0:
                 evidence["server"] = json.loads(ready.stdout)
@@ -164,23 +165,30 @@ def run(output, baseline_ref=BASE):
             manifest = fixture_bundle(Path(directory))
             documents = {}
             evidence["api_exchanges"] = []
-            with TestClient(create_app(manifest)) as client:
-                payload = json.loads(
-                    (ROOT / "contracts/examples/valid/telemetry.json").read_text()
-                )
-                for kind in ["lab_fixture", "smb_csv"]:
-                    payload["source"] = {
-                        "kind": kind,
-                        "uri": "fixture://es-contract",
-                        "record_ref": "synthetic-row-1",
-                    }
-                    response = client.post("/predict", json=payload)
-                    assert response.status_code == 200, response.text
-                    documents[kind] = response.json()
-                    assert documents[kind]["anomaly_alert"]
-                    evidence["api_exchanges"].append(
-                        {"request": copy.deepcopy(payload), "response": documents[kind]}
+
+            async def collect_predictions():
+                async with api_client(create_app(manifest)) as client:
+                    payload = json.loads(
+                        (ROOT / "contracts/examples/valid/telemetry.json").read_text()
                     )
+                    for kind in ["lab_fixture", "smb_csv"]:
+                        payload["source"] = {
+                            "kind": kind,
+                            "uri": "fixture://es-contract",
+                            "record_ref": "synthetic-row-1",
+                        }
+                        response = await client.post("/predict", json=payload)
+                        assert response.status_code == 200, response.text
+                        documents[kind] = response.json()
+                        assert documents[kind]["anomaly_alert"]
+                        evidence["api_exchanges"].append(
+                            {
+                                "request": copy.deepcopy(payload),
+                                "response": documents[kind],
+                            }
+                        )
+
+            asyncio.run(collect_predictions())
 
         # Install old template, create one existing index, and reproduce the failure.
         document = documents["lab_fixture"]
@@ -240,7 +248,8 @@ def run(output, baseline_ref=BASE):
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(evidence, indent=2) + "\n")
     print(
-        "PASS: old mapping rejected, additive migration and both strict index families verified; disposable container removed."
+        "PASS: old mapping rejected, additive migration and both strict index "
+        "families verified; disposable container removed."
     )
 
 
