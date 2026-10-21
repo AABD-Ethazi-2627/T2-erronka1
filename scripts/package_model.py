@@ -6,7 +6,22 @@ import json
 import shutil
 from pathlib import Path
 
+from scoring.preparation import split_development
 from scoring.scope import APPROVED_SOURCE_SHA256, SCOPE, load_training_source
+
+
+def validate_rf_partitions(report, frame):
+    """Reject an exercise/unknown split before copying or loading any artifact."""
+    if report.get("artifact_role") not in (None, "ACTIVE_CG08"):
+        raise ValueError("Development exercises cannot be promoted to the API bundle")
+    train, validation, excluded = split_development(frame)
+    expected = {
+        "train": train.index.tolist(),
+        "validation": validation.index.tolist(),
+        "excluded_previously_inspected_test": excluded.index.tolist(),
+    }
+    if report.get("splits") != expected:
+        raise ValueError("RF report must preserve the exact active 70/15/15 partitions")
 
 
 def package(
@@ -16,8 +31,9 @@ def package(
 ):
     if output.exists():
         raise FileExistsError("Refuse replacing a model bundle")
-    load_training_source()
+    frame = load_training_source()
     rf = json.loads((rf_dir / "report.json").read_text())
+    validate_rf_partitions(rf, frame)
     anomaly = json.loads((anomaly_dir / "report.json").read_text())
     if any(
         report.get("source_sha256") != APPROVED_SOURCE_SHA256
@@ -45,7 +61,10 @@ def package(
         "risk_threshold": rf["validation_tuning_metrics"]["threshold"],
         "anomaly_threshold": anomaly["threshold"],
         "policy": "f2",
-        "limitation": "Development classification only; not calibrated industrial or future risk.",
+        "limitation": (
+            "Development classification only; not calibrated "
+            + "industrial or future risk."
+        ),
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     return manifest

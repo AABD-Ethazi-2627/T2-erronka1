@@ -1,0 +1,220 @@
+{
+  "date": "2026-10-21",
+  "scope": "F1 API response / exported NiFi route / strict Elasticsearch mapping",
+  "base_pr": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/42",
+  "base_sha": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
+  "environment": {
+    "wsl_distribution": "FedoraLinux-43",
+    "python": "3.12.15",
+    "dependencies": "uv sync --frozen --python 3.12",
+    "sklearn": "1.5.0",
+    "ruff": "0.14.1"
+  },
+  "changed_artifact_sha256": {
+    "elasticsearch/index-template.json": "4c57685a6e65b08b0fe758d7eea6f79c475123e67cabafbeb048c7386056e0ff",
+    "tests/test_elasticsearch_contract.py": "fceb62af626aa39bceb73203135eaface0e08aa6793f2aaa230825293563b29c",
+    "tests/verify_elasticsearch_contract.py": "f8a610da38e78b07c4fa6e1ae0dad027dc601c7fb47fcdca515b96b92e64ba95"
+  },
+  "regression_before_fix": {
+    "log": "outputs/es-contract/baseline-red-corrected.log",
+    "tests": 2,
+    "failed_subtests": 5,
+    "errors": 0,
+    "missing_fields": [
+      "prediction_scope",
+      "temporal_prediction_enabled",
+      "score_semantics"
+    ]
+  },
+  "unit_suite": {
+    "discovered": 106,
+    "passed": 103,
+    "skipped": 3,
+    "skip_reason": "No delivery model bundle; not generated under this authorization",
+    "warning": "ResourceWarning: unclosed anyio memory streams observed; not suppressed, origin unresolved"
+  },
+  "existing_suite_comparison": {
+    "discovered": 104,
+    "passed": 101,
+    "skipped": 3,
+    "resource_warnings_observed": false
+  },
+  "checks": {
+    "ruff_check_new_python": "PASS",
+    "ruff_format_check_new_python": "PASS",
+    "immutable_cg02_audit": "PASS",
+    "repository_layout": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "live_es": {
+    "version": "9.5.4",
+    "image": "docker.elastic.co/elasticsearch/elasticsearch:9.5.4",
+    "image_id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+    "isolation": {
+      "network": "none",
+      "published_ports": [],
+      "persistent_mounts": []
+    },
+    "container_removed": true,
+    "passed": true,
+    "http_operations": 44,
+    "status_counts": {
+      "200": 25,
+      "400": 14,
+      "201": 5
+    },
+    "old_mapping_rejection": {
+      "method": "PUT",
+      "path": "/cnc-telemetry-contract-existing/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:438] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:438] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    "existing_index_after_template_only_status": 400,
+    "existing_index_additive_mapping_status": 200,
+    "existing_index_insert_after_migration_status": 201,
+    "new_indices": [
+      "cnc-telemetry-lab-v2",
+      "cnc-alerts-lab-v2",
+      "cnc-telemetry-smb-v1",
+      "cnc-alerts-smb-v1"
+    ],
+    "verified_assertions": [
+      "Full API response indexed without field stripping",
+      "Both source kinds scored separately through real API lifecycle and fixture hashes",
+      "Complete _source equality after insert and replay",
+      "Same event_id replay leaves one document per destination",
+      "Unknown root and nested source fields rejected under strict",
+      "Invalid temporal_prediction_enabled boolean rejected",
+      "Rejected writes preserve the previously accepted document"
+    ],
+    "api_exchanges": [
+      {
+        "request": {
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "machine_id": "CNC-049",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "schema_version": "0.1.0",
+          "quality_flag": "OK",
+          "source": {
+            "kind": "lab_fixture",
+            "uri": "fixture://es-contract",
+            "record_ref": "synthetic-row-1"
+          },
+          "machine_type": "L",
+          "air_temp_K": 300.5,
+          "process_temp_K": 309.8,
+          "rpm": 1345.0,
+          "torque_Nm": 62.7,
+          "tool_wear_min": 153.0
+        },
+        "response": {
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "machine_id": "CNC-049",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "schema_version": "0.1.0",
+          "quality_flag": "OK",
+          "source": {
+            "kind": "lab_fixture",
+            "uri": "fixture://es-contract",
+            "record_ref": "synthetic-row-1"
+          },
+          "machine_type": "L",
+          "air_temp_K": 300.5,
+          "process_temp_K": 309.8,
+          "rpm": 1345.0,
+          "torque_Nm": 62.7,
+          "tool_wear_min": 153.0,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "temporal_prediction_enabled": false,
+          "score_semantics": "uncalibrated_current_state_score",
+          "failure_score": 0.5714285714285715,
+          "risk_alert": true,
+          "alert_level": "AVISO",
+          "anomaly_score": 0.5393746949992847,
+          "anomaly_alert": true,
+          "policy": "f2",
+          "model_version": "synthetic-es-contract-test-only",
+          "scored_at": "2026-10-21T07:52:19.127541Z",
+          "model_artifact_sha256": "6029cd3fc76d3d4e46ac27c8f172097d8f44aa496fe129674971015b29512877",
+          "risk_threshold": 0.15,
+          "anomaly_threshold": 0.0
+        }
+      },
+      {
+        "request": {
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "machine_id": "CNC-049",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "schema_version": "0.1.0",
+          "quality_flag": "OK",
+          "source": {
+            "kind": "smb_csv",
+            "uri": "fixture://es-contract",
+            "record_ref": "synthetic-row-1"
+          },
+          "machine_type": "L",
+          "air_temp_K": 300.5,
+          "process_temp_K": 309.8,
+          "rpm": 1345.0,
+          "torque_Nm": 62.7,
+          "tool_wear_min": 153.0
+        },
+        "response": {
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "machine_id": "CNC-049",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "schema_version": "0.1.0",
+          "quality_flag": "OK",
+          "source": {
+            "kind": "smb_csv",
+            "uri": "fixture://es-contract",
+            "record_ref": "synthetic-row-1"
+          },
+          "machine_type": "L",
+          "air_temp_K": 300.5,
+          "process_temp_K": 309.8,
+          "rpm": 1345.0,
+          "torque_Nm": 62.7,
+          "tool_wear_min": 153.0,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "temporal_prediction_enabled": false,
+          "score_semantics": "uncalibrated_current_state_score",
+          "failure_score": 0.5714285714285715,
+          "risk_alert": true,
+          "alert_level": "AVISO",
+          "anomaly_score": 0.5393746949992847,
+          "anomaly_alert": true,
+          "policy": "f2",
+          "model_version": "synthetic-es-contract-test-only",
+          "scored_at": "2026-10-21T07:52:19.136128Z",
+          "model_artifact_sha256": "6029cd3fc76d3d4e46ac27c8f172097d8f44aa496fe129674971015b29512877",
+          "risk_threshold": 0.15,
+          "anomaly_threshold": 0.0
+        }
+      }
+    ],
+    "raw_log_local": "outputs/es-contract/live-final.json",
+    "raw_log_sha256": "25e7e41ffd7b00e8cc3deee8cfcde99b411c74aec952690e5739ec9d51bd171e"
+  },
+  "limits": [
+    "NiFi connections and expressions inspected statically; processors not executed",
+    "No distributed E2E, Kafka, Filebeat, Kibana, archive or latency acceptance",
+    "Synthetic test bundle only; no delivery model training or final test",
+    "No SMB or OT access",
+    "No shared services, mappings or migration changed",
+    "No workflow/trigger edits, manual CI, merge, issue closure or Copilot request",
+    "Independent parent review and human acceptance pending"
+  ]
+}

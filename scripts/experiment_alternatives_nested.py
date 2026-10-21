@@ -149,10 +149,22 @@ def nested_compare(train, pool, outer_splits=3, inner_splits=3):
         "outer_folds": records,
         "outer_metrics": results,
         "limitations": [
-            "Audit of declared candidate pool and selection strategy; no further tuning on outer-held rows.",
-            "No validation or excluded-test rows used; source remains synthetic development data.",
-            "Pooled AP mixes outer-fitted scores; calibration varies across folds/models.",
-            "No independent final evaluation or industrial/temporal prediction guarantee.",
+            (
+                "Audit of declared candidate pool and selection "
+                + "strategy; no further tuning on outer-held rows."
+            ),
+            (
+                "No validation or excluded-test rows used; source "
+                + "remains synthetic development data."
+            ),
+            (
+                "Pooled AP mixes outer-fitted scores; calibration "
+                + "varies across folds/models."
+            ),
+            (
+                "No independent final evaluation or "
+                + "industrial/temporal prediction guarantee."
+            ),
         ],
     }, predictions
 

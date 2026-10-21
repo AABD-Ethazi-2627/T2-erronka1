@@ -169,7 +169,8 @@ fitxategi gisa gordetzen da 3. fasean scoring-api-k erabiltzeko.
 **1. urratsa — Datu-karga eta azterketa**
 ```python
 import pandas as pd
-df = pd.read_csv('../data/ai4i2020_train.csv')
+
+df = pd.read_csv("../data/ai4i2020_train.csv")
 # Aztertu: df.info(), df.describe(), df['machine_failure'].value_counts()
 ```
 
@@ -183,8 +184,8 @@ Aukeratu ikuspegietan bat eta **justifikatu** zergatik:
 
 **3. urratsa — Feature engineering (aukerakoa, puntu gehigarria)**
 ```python
-df['temp_diff']  = df['process_temp_K'] - df['air_temp_K']
-df['power_est']  = df['rpm'] * df['torque_Nm']
+df["temp_diff"] = df["process_temp_K"] - df["air_temp_K"]
+df["power_est"] = df["rpm"] * df["torque_Nm"]
 ```
 
 **4. urratsa — Entrenamendua**
@@ -193,14 +194,16 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 
-X = df[['air_temp_K', 'process_temp_K', 'rpm', 'torque_Nm', 'tool_wear_min']]
-y = df['machine_failure']
+X = df[["air_temp_K", "process_temp_K", "rpm", "torque_Nm", "tool_wear_min"]]
+y = df["machine_failure"]
 
 X_train, X_val, y_train, y_val = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-model = RandomForestClassifier(n_estimators=100, class_weight='balanced', random_state=42)
+model = RandomForestClassifier(
+    n_estimators=100, class_weight="balanced", random_state=42
+)
 model.fit(X_train, y_train)
 
 print(classification_report(y_val, model.predict(X_val)))
@@ -209,7 +212,8 @@ print(classification_report(y_val, model.predict(X_val)))
 **5. urratsa — Eredua gorde**
 ```python
 import joblib
-joblib.dump(model, '../models/cnc_failure_model.pkl')
+
+joblib.dump(model, "../models/cnc_failure_model.pkl")
 print("Eredua gordeta!")
 ```
 

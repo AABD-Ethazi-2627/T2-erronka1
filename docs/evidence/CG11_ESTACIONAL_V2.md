@@ -1,5 +1,11 @@
 # CG11 — dataset estacional sintético ampliado
 
+La [confirmación de alcance del 20/10/2026](CG17_CURRENT_STATE_SCOPE.md) sustituyó
+este protocolo para la entrega activa. Se conservan resultados y comandos como
+investigación sintética fuera de la entrega; no ejecutar este forecast para
+reproducir el hito CG11. El [protocolo activo](CG11.md#protocolo-activo--21102026)
+usa AI4I reducido y clasificación contemporánea, sin ETA/RUL/forecast24h.
+
 Resultado: se generaron **245.376 filas horarias**, cuatro años de calendario
 inventado y20 identidades SIM distintas (16 principales y4 de stress). No se añadieron filas a AI4I ni se modificó
 su CSV, su test antiguo o su modelo de clasificación servido. El nuevo objetivo
