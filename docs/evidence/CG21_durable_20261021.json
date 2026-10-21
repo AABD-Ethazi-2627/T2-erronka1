@@ -1,0 +1,165 @@
+{
+  "scope": "local SQLite source and real CG15 durable archive; no NiFi/Kafka/ES acceptance",
+  "snapshots": {
+    "sent": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 0,
+      "duplicates": 0,
+      "offset_acknowledged": 0
+    },
+    "outage": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 0,
+      "duplicates": 0,
+      "offset_acknowledged": 0
+    },
+    "stored_before_ack": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 1,
+      "duplicates": 0,
+      "offset_acknowledged": 0
+    },
+    "restart": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 1,
+      "duplicates": 0,
+      "offset_acknowledged": 0
+    },
+    "backpressure_batch": {
+      "accepted": 1,
+      "rejected": 1,
+      "pending": 3,
+      "sent": 5,
+      "stored_unique": 1,
+      "duplicates": 0,
+      "offset_acknowledged": 2
+    },
+    "recovered": {
+      "accepted": 3,
+      "rejected": 2,
+      "pending": 0,
+      "sent": 5,
+      "stored_unique": 2,
+      "duplicates": 1,
+      "offset_acknowledged": 5
+    },
+    "replay_noop": {
+      "accepted": 3,
+      "rejected": 2,
+      "pending": 0,
+      "sent": 5,
+      "stored_unique": 2,
+      "duplicates": 1,
+      "offset_acknowledged": 5
+    }
+  },
+  "process_crashes": [
+    {
+      "checkpoint": "after_write",
+      "child_exitcode": 73,
+      "before_replay": {
+        "accepted": 0,
+        "rejected": 0,
+        "pending": 1,
+        "sent": 1,
+        "stored_unique": 0,
+        "duplicates": 0,
+        "offset_acknowledged": 0
+      },
+      "after_replay": {
+        "accepted": 1,
+        "rejected": 0,
+        "pending": 0,
+        "sent": 1,
+        "stored_unique": 1,
+        "duplicates": 0,
+        "offset_acknowledged": 1
+      },
+      "parquet_sha256_before_replay": {
+        "telemetry/date=2026-10-15/30cf054a379ccca4a842894798759b165a698cb747ab4189f14cd94dd43c054e.parquet": "e96d3e1f09285caf6101fa8a9b0484726c85e4f2b7f3eff47e1d454a6a45ebd1"
+      },
+      "parquet_bytes_preserved": true
+    },
+    {
+      "checkpoint": "before_commit",
+      "child_exitcode": 73,
+      "before_replay": {
+        "accepted": 0,
+        "rejected": 0,
+        "pending": 1,
+        "sent": 1,
+        "stored_unique": 0,
+        "duplicates": 0,
+        "offset_acknowledged": 0
+      },
+      "after_replay": {
+        "accepted": 1,
+        "rejected": 0,
+        "pending": 0,
+        "sent": 1,
+        "stored_unique": 1,
+        "duplicates": 0,
+        "offset_acknowledged": 1
+      },
+      "parquet_sha256_before_replay": {
+        "telemetry/date=2026-10-15/30cf054a379ccca4a842894798759b165a698cb747ab4189f14cd94dd43c054e.parquet": "e96d3e1f09285caf6101fa8a9b0484726c85e4f2b7f3eff47e1d454a6a45ebd1"
+      },
+      "parquet_bytes_preserved": true
+    },
+    {
+      "checkpoint": "after_commit",
+      "child_exitcode": 73,
+      "before_replay": {
+        "accepted": 0,
+        "rejected": 0,
+        "pending": 1,
+        "sent": 1,
+        "stored_unique": 1,
+        "duplicates": 0,
+        "offset_acknowledged": 0
+      },
+      "after_replay": {
+        "accepted": 1,
+        "rejected": 0,
+        "pending": 0,
+        "sent": 1,
+        "stored_unique": 1,
+        "duplicates": 0,
+        "offset_acknowledged": 1
+      },
+      "parquet_sha256_before_replay": {
+        "telemetry/date=2026-10-15/30cf054a379ccca4a842894798759b165a698cb747ab4189f14cd94dd43c054e.parquet": "e96d3e1f09285caf6101fa8a9b0484726c85e4f2b7f3eff47e1d454a6a45ebd1"
+      },
+      "parquet_bytes_preserved": true
+    }
+  ],
+  "execution": {
+    "base_commit": "f446ddaac911431b598e0ecfa961c3caff4164f2",
+    "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "python": "3.11.15",
+    "versions": {
+      "fastapi": "0.133.0",
+      "starlette": "1.7.0",
+      "pyarrow": "23.0.1"
+    },
+    "source_sha256": {
+      "scripts/failure_harness.py": "ec55d12e69ece90f248e49d0c5ecb2d2ee052ccf46a8d89abc3ece6e94078fa5",
+      "scripts/archive_consumer.py": "344eb99be727a4d2f37ceb60247f1a3c96c3cb51373df6116b32f9ee8fd17b4f",
+      "tests/test_failure_harness.py": "a08d7f700568d6a9d60d8cf12a29931ccce97e541617530444565f1286dc3b29"
+    },
+    "command": "python -B -m scripts.failure_harness --output NEW_EMPTY_DIRECTORY",
+    "independent_artifact_check": "SQLite integrity_check; journal status versus ledger; every committed object hash and original Bronze payload verified"
+  }
+}
