@@ -53,6 +53,39 @@ class TypeDiagnosticsTests(unittest.TestCase):
         self.assertEqual(result["false_positive_rate"], 0.5)
         self.assertEqual(result["false_negative_rate"], 0.5)
 
+    def test_csv_preserves_real_threshold_boundary_for_source_row_7763(self):
+        cutoff = 0.19082281465428477
+        self.experiment["validation_tuning_metrics"]["threshold"] = cutoff
+        self.assertEqual(self.validation.loc[7763, "machine_failure"], 1)
+        self.assertEqual(self.validation.loc[7763, "machine_type"], "L")
+        self.scores["rf_score"] = 0.0
+        for score, tp in (
+            (np.nextafter(cutoff, -np.inf), 0),
+            (cutoff, 1),
+            (np.nextafter(cutoff, np.inf), 1),
+        ):
+            with self.subTest(score=score):
+                self.scores.loc[self.scores.source_row_index == 7763, "rf_score"] = (
+                    score
+                )
+                validation_raw = self.scores.to_csv(index=False).encode()
+                self.assertIn(f"7763,1,{score!r}".encode(), validation_raw)
+                result = build_report(
+                    SOURCE, validation_raw, json.dumps(self.experiment).encode()
+                )
+                for group, positives in (
+                    (result["overall"], 41),
+                    (result["by_machine_type"]["L"], 31),
+                ):
+                    self.assertEqual(group["tp"], tp)
+                    self.assertEqual(group["fn"], positives - tp)
+                    self.assertEqual(group["alerts"], tp)
+                    self.assertEqual(group["fp"], 0)
+                    self.assertEqual(group["tn"], group["negatives"])
+                    self.assertEqual(
+                        group["false_negative_rate"], (positives - tp) / positives
+                    )
+
     def test_undefined_rates_are_null(self):
         for labels, scores in [([], []), ([0, 0], [0.1, 0.2])]:
             with self.subTest(labels=labels):

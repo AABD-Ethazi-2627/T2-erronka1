@@ -31,16 +31,16 @@
     "rows": 1200,
     "positives": 41,
     "negatives": 1159,
-    "alerts": 40,
-    "tp": 31,
-    "fn": 10,
+    "alerts": 41,
+    "tp": 32,
+    "fn": 9,
     "fp": 9,
     "tn": 1150,
-    "false_negative_rate": 0.24390243902439024,
+    "false_negative_rate": 0.21951219512195122,
     "false_positive_rate": 0.007765314926660914,
-    "recall": 0.7560975609756098,
-    "precision": 0.775,
-    "alert_rate": 0.03333333333333333
+    "recall": 0.7804878048780488,
+    "precision": 0.7804878048780488,
+    "alert_rate": 0.034166666666666665
   },
   "by_machine_type": {
     "H": {
@@ -62,16 +62,16 @@
       "rows": 705,
       "positives": 31,
       "negatives": 674,
-      "alerts": 28,
-      "tp": 24,
-      "fn": 7,
+      "alerts": 29,
+      "tp": 25,
+      "fn": 6,
       "fp": 4,
       "tn": 670,
-      "false_negative_rate": 0.22580645161290322,
+      "false_negative_rate": 0.1935483870967742,
       "false_positive_rate": 0.005934718100890208,
-      "recall": 0.7741935483870968,
-      "precision": 0.8571428571428571,
-      "alert_rate": 0.03971631205673759
+      "recall": 0.8064516129032258,
+      "precision": 0.8620689655172413,
+      "alert_rate": 0.04113475177304964
     },
     "M": {
       "rows": 367,

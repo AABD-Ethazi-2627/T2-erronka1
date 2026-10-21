@@ -68,7 +68,8 @@ def build_report(source, validation_raw, report_raw):
         or not 0 <= cutoff <= 1
     ):
         raise ValueError("RF threshold must be finite and within [0, 1]")
-    scores = pd.read_csv(BytesIO(validation_raw))
+    # Preserve equality with the JSON threshold across CSV serialization.
+    scores = pd.read_csv(BytesIO(validation_raw), float_precision="round_trip")
     if set(scores.columns) != {"source_row_index", "label", "rf_score"}:
         raise ValueError("Unexpected validation columns")
     indices = scores.source_row_index
