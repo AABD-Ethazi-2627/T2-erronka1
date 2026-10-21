@@ -195,6 +195,10 @@ class ElasticsearchContractTests(unittest.IsolatedAsyncioTestCase):
                             "uri": "fixture://es-contract",
                             "record_ref": "synthetic-row-1",
                         }
+                        # Each source variant is a distinct immutable event.
+                        payload["event_id"] = hashlib.sha256(
+                            f"es-contract:{kind}:synthetic-row-1".encode()
+                        ).hexdigest()
                         response = await client.post("/predict", json=payload)
                         self.assertEqual(response.status_code, 200, response.text)
                         document = response.json()

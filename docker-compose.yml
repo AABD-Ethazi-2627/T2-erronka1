@@ -82,8 +82,9 @@ services:
       dockerfile: scoring/Dockerfile
     environment:
       MODEL_MANIFEST: /models/manifest.json
+      SCORING_LEDGER: /state/responses.sqlite3
     ports: ['127.0.0.1:18001:8000']
-    volumes: ['./outputs/api:/models:ro']
+    volumes: ['./outputs/api:/models:ro', 'scoring-state:/state']
     mem_limit: 512m
 volumes:
   kafka-data:
@@ -93,3 +94,4 @@ volumes:
   nifi-content:
   nifi-flowfiles:
   es-data:
+  scoring-state:

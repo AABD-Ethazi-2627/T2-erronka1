@@ -96,7 +96,9 @@ class FrameworkUpgradeContractTests(unittest.IsolatedAsyncioTestCase):
                     ),
                     patch("scoring.score_api.log"),
                 ):
-                    failure = await client.post("/predict", json=payload)
+                    failure = await client.post(
+                        "/predict", json={**payload, "event_id": "f" * 64}
+                    )
                 self.assertEqual(failure.status_code, 500, failure.text)
                 self.assertEqual(failure.json(), {"detail": "Scoring failed"})
 
