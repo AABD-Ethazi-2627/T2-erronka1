@@ -21,14 +21,18 @@ class FrameworkUpgradeContractTests(unittest.IsolatedAsyncioTestCase):
             app = create_app(fixture_bundle(Path(directory)))
             payload = (ROOT / "contracts/examples/valid/telemetry.json").read_bytes()
 
+            requests = []
+            for size, expected in ((32768, 200), (32769, 413)):
+                body = payload + b" " * (size - len(payload))
+
+                async def fragments(body=body):
+                    for offset in range(0, len(body), 4096):
+                        yield body[offset : offset + 4096]
+
+                requests.append((size, expected, fragments))
+
             async with api_client(app) as client:
-                for size, expected in ((32768, 200), (32769, 413)):
-                    body = payload + b" " * (size - len(payload))
-
-                    async def fragments():
-                        for offset in range(0, len(body), 4096):
-                            yield body[offset : offset + 4096]
-
+                for size, expected, fragments in requests:
                     with self.subTest(size=size):
                         response = await client.post(
                             "/predict",
