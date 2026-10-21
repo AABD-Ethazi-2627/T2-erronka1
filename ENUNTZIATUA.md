@@ -73,7 +73,7 @@ Zerbitzu hauek abiarazten dira:
 | **Kibana** | Bistaratzea eta dashboardak | http://localhost:5601 |
 | **scoring-api** | ML inferentzia (3. fasean erabiliko duzu) | http://localhost:8000/docs |
 
-> **NiFi sarbidea:** erabiltzailea `admin`, pasahitza `adminpassword123`
+> **NiFi sarbidea:** erabili tokiko instalazioak sortutako kredentzialak; ez gorde edo partekatu Git bidez.
 
 Simuladorea irakasleak martxan jartzen du zerbitzari nagusian. Zure VM-ak NFS bidez
 jasotzen ditu CSV fitxategiak `/mnt/cnc-stream/` karpetan.
