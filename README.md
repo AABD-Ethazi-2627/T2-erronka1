@@ -85,10 +85,14 @@ certificado de confianza de NiFi. Verifica TLS y el nombre `localhost`; no
 acepta certificados sin validar. No ejecutar scripts temporales del equipo
 como si fueran instalación portable.
 
-Aplicar `elasticsearch/index-template.json` como template antes de ingerir y crear
-el dashboard con `uv run --frozen python -m scripts.create_lab_dashboard` o importar
-`kibana/acceptance-export.ndjson`. La vista filtra índices de aceptación, conserva
-el rango temporal del ensayo y no mezcla el montaje v1. Ver CG18/CG19 para pruebas.
+En un laboratorio autorizado, aplicar `elasticsearch/index-template.json` antes de
+ingerir. `uv run --frozen python -m scripts.create_lab_dashboard` genera ahora
+`kibana/cg19-review-source.ndjson` **sin conectarse a Kibana**; `--check` verifica
+su reproducción. El candidato v2 incluye temperaturas, heatmap/casos offline,
+últimos50 y KPI con denominadores. Importación y revisión humana siguen pendientes:
+ver [CG19 vigente](docs/evidence/CG19_2026-10-21.md). El export
+`kibana/acceptance-export.ndjson` conserva el ensayo histórico v1 y su rango absoluto;
+no demuestra las vistas nuevas. Ambos excluyen el índice de montaje v1.
 
 Elasticsearch sin autenticación está limitado a loopback/red Docker del lab;
 no exponer estos puertos en una red compartida. Mononodo no aporta HA.
