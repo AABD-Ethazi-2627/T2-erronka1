@@ -177,5 +177,6 @@ if __name__ == "__main__":
             )
         )
     except (OSError, ValueError, RuntimeError) as error:
-        # Errors we raise contain no credential values; OS errors only concern paths/executables.
+        # Errors we raise contain no credential values; OS errors only concern
+        # paths/executables.
         parser.exit(1, f"{error}\n")

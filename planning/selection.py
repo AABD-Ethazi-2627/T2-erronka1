@@ -227,7 +227,10 @@ def compare_candidates(
             "metrics": metrics,
             "paired_block_advantage": block_advantages,
             "empirical_block_bootstrap_interval": block_intervals,
-            "interval_caveat": "Not a calibrated confidence guarantee; temporal dependence may persist",
+            "interval_caveat": (
+                "Not a calibrated confidence guarantee; temporal "
+                + "dependence may persist"
+            ),
             "scope": "FROZEN_SETTINGS_PREQUENTIAL_OBSERVATION_EVALUATION",
         },
         "lab_decision": "REJECTED" if reasons else "ACCEPTED_SHADOW_ONLY",
@@ -236,5 +239,9 @@ def compare_candidates(
         "failure_eta_minutes": None,
         "state_before_acceptance": before,
         "state_after_acceptance": chosen.snapshot(),
-        "notice": "Temporal block checks are experimental gates, not confidence guarantees or maintenance outcome validation.",
+        "notice": (
+            "Temporal block checks are experimental gates, not "
+            + "confidence guarantees or maintenance outcome "
+            + "validation."
+        ),
     }

@@ -1,0 +1,58 @@
+test_existing_evidence_is_preserved_before_loading_models (test_cg26_rehearsal.RehearsalCliTests.test_existing_evidence_is_preserved_before_loading_models) ... ok
+test_gc_guard_detects_deliberate_own_leak (test_cg26_rehearsal.RehearsalCliTests.test_gc_guard_detects_deliberate_own_leak) ... ok
+test_missing_bundle_does_not_publish_success (test_cg26_rehearsal.RehearsalCliTests.test_missing_bundle_does_not_publish_success) ... ok
+test_body_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan) ... ok
+test_complete_rehearsal_with_small_synthetic_bundle (test_cg26_rehearsal.RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle) ... Executing <Task pending name='Task-7' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.307 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-7' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.101 seconds
+ok
+test_empty_manifest_rejects_before_loading_and_gc_is_clean (test_cg26_rehearsal.RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-12' coro=<RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:204> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.123 seconds
+ok
+test_request_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_request_error_propagates_and_closes_client_and_lifespan) ... ok
+test_startup_error_propagates (test_cg26_rehearsal.RehearsalTransportTests.test_startup_error_propagates) ... ok
+test_success_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_success_closes_client_and_lifespan) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 44.813s
+
+OK
+test_existing_evidence_is_preserved_before_loading_models (test_cg26_rehearsal.RehearsalCliTests.test_existing_evidence_is_preserved_before_loading_models) ... ok
+test_gc_guard_detects_deliberate_own_leak (test_cg26_rehearsal.RehearsalCliTests.test_gc_guard_detects_deliberate_own_leak) ... ok
+test_missing_bundle_does_not_publish_success (test_cg26_rehearsal.RehearsalCliTests.test_missing_bundle_does_not_publish_success) ... ok
+test_body_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan) ... ok
+test_complete_rehearsal_with_small_synthetic_bundle (test_cg26_rehearsal.RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle) ... Executing <Task pending name='Task-37' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.147 seconds
+Executing <Task pending name='Task-37' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.132 seconds
+Executing <Task pending name='Task-37' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> wait_for=<Future pending cb=[Task.task_wakeup()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:428> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.108 seconds
+Executing <Task pending name='Task-37' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.100 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-37' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.106 seconds
+ok
+test_empty_manifest_rejects_before_loading_and_gc_is_clean (test_cg26_rehearsal.RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-42' coro=<RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:204> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.122 seconds
+ok
+test_request_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_request_error_propagates_and_closes_client_and_lifespan) ... ok
+test_startup_error_propagates (test_cg26_rehearsal.RehearsalTransportTests.test_startup_error_propagates) ... ok
+test_success_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_success_closes_client_and_lifespan) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 46.955s
+
+OK
+{
+  "runs": [
+    {
+      "iteration": 1,
+      "run": 9,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "run": 9,
+      "skipped": 0,
+      "success": true
+    }
+  ],
+  "unraisables": []
+}

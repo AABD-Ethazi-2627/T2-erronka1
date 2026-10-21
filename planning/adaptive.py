@@ -150,7 +150,8 @@ def evaluate_stream(rows, manifest, *, alpha=0.25, warmup=2):
                         value - persistence
                     )
                     totals[name]["online_drift_absolute_error"] += abs(value - forecast)
-                # Only AFTER predicting and scoring may the new observation update state.
+                # Only AFTER predicting and scoring may the new observation update
+                # state.
                 observed_rate = (value - persistence) / dt
                 if not isfinite(observed_rate):
                     raise ValueError("Nonfinite observed rate")
@@ -201,5 +202,8 @@ def evaluate_stream(rows, manifest, *, alpha=0.25, warmup=2):
             "NO_VERIFIED_MAINTENANCE_OUTCOMES",
         ],
         "failure_eta_minutes": None,
-        "notice": "Online sensor drift experiment. No maintenance timing model or runtime promotion.",
+        "notice": (
+            "Online sensor drift experiment. No maintenance timing "
+            + "model or runtime promotion."
+        ),
     }

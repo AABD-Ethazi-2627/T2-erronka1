@@ -1,4 +1,4 @@
-"""Validation diagnostics and hypothetical cost sensitivity; never industrial savings."""
+"Validation diagnostics and hypothetical cost sensitivity; never industrial savings."
 
 import json
 from pathlib import Path
@@ -36,7 +36,8 @@ def run():
                         "hypothetical_error_cost_eur": cost(fp, fn, inspection, hours),
                     }
                 )
-    # Conditional uncertainty: resample fixed predictions, not a substitute for independent data.
+    # Conditional uncertainty: resample fixed predictions, not a substitute for
+    # independent data.
     rng = np.random.default_rng(42)
     positive = np.flatnonzero(y == 1)
     recalls = [
@@ -51,10 +52,23 @@ def run():
         "cost_scenarios": scenarios,
         "limitations": [
             "Validation used for tuning: optimistic results.",
-            "Bootstrap fixes selected model and threshold; excludes selection and domain uncertainty.",
-            "1200 EUR/hour is classroom downtime assumption, not cost per FN or proven savings.",
-            "Inspection costs and downtime durations are hypothetical sensitivity inputs.",
-            "Planned maintenance can prevent observed failure: action changes future labels; requires intervention logs.",
+            (
+                "Bootstrap fixes selected model and threshold; "
+                + "excludes selection and domain uncertainty."
+            ),
+            (
+                "1200 EUR/hour is classroom downtime assumption, not "
+                + "cost per FN or proven savings."
+            ),
+            (
+                "Inspection costs and downtime durations are "
+                + "hypothetical sensitivity inputs."
+            ),
+            (
+                "Planned maintenance can prevent observed failure: "
+                + "action changes future labels; requires intervention "
+                + "logs."
+            ),
         ],
     }
     (root / "CG10_results.json").write_text(json.dumps(result, indent=2) + "\n")

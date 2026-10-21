@@ -1,0 +1,159 @@
+test_actual_elapsed_time_and_long_gap_reset (test_adaptive.AdaptiveTests.test_actual_elapsed_time_and_long_gap_reset) ... ok
+test_cli_provenance_hashes_and_no_overwrite (test_adaptive.AdaptiveTests.test_cli_provenance_hashes_and_no_overwrite) ... ok
+test_cli_runs_outside_repo_and_rejects_ambiguous_csv_headers (test_adaptive.AdaptiveTests.test_cli_runs_outside_repo_and_rejects_ambiguous_csv_headers) ... ok
+test_duplicate_is_removed_without_extra_learning (test_adaptive.AdaptiveTests.test_duplicate_is_removed_without_extra_learning) ... ok
+test_future_change_cannot_change_earlier_predictions (test_adaptive.AdaptiveTests.test_future_change_cannot_change_earlier_predictions) ... ok
+test_incremental_drift_beats_persistence_on_known_fixture (test_adaptive.AdaptiveTests.test_incremental_drift_beats_persistence_on_known_fixture) ... ok
+test_lifecycles_do_not_share_state_and_input_order_is_irrelevant (test_adaptive.AdaptiveTests.test_lifecycles_do_not_share_state_and_input_order_is_irrelevant) ... ok
+test_missing_timestamp_and_same_time_conflict_fail_closed (test_adaptive.AdaptiveTests.test_missing_timestamp_and_same_time_conflict_fail_closed) ... ok
+test_multiple_assets_do_not_contaminate_each_other (test_adaptive.AdaptiveTests.test_multiple_assets_do_not_contaminate_each_other) ... ok
+test_provenance_units_and_observation_time_are_explicit (test_adaptive.AdaptiveTests.test_provenance_units_and_observation_time_are_explicit) ... ok
+test_bad_resume_and_out_of_order_are_rejected_without_mutation (test_adaptive_runtime.RuntimeTests.test_bad_resume_and_out_of_order_are_rejected_without_mutation) ... ok
+test_candidate_must_beat_current_champion_not_only_persistence (test_adaptive_runtime.RuntimeTests.test_candidate_must_beat_current_champion_not_only_persistence) ... ok
+test_checkpoint_batch_replay_and_conflict_are_fail_closed (test_adaptive_runtime.RuntimeTests.test_checkpoint_batch_replay_and_conflict_are_fail_closed) ... ok
+test_crossing_is_a_model_estimate_not_failure_eta (test_adaptive_runtime.RuntimeTests.test_crossing_is_a_model_estimate_not_failure_eta) ... ok
+test_fixed_horizon_not_scored_on_wrong_timestamp (test_adaptive_runtime.RuntimeTests.test_fixed_horizon_not_scored_on_wrong_timestamp) ... ok
+test_inbox_requires_ready_hash_and_keeps_checkpoint_on_error (test_adaptive_runtime.RuntimeTests.test_inbox_requires_ready_hash_and_keeps_checkpoint_on_error) ... ok
+test_lab_registry_compare_and_swap_rollback_and_rejection (test_adaptive_runtime.RuntimeTests.test_lab_registry_compare_and_swap_rollback_and_rejection) ... ok
+test_mechanism_adapter_preserves_type_and_does_not_invent_time (test_adaptive_runtime.RuntimeTests.test_mechanism_adapter_preserves_type_and_does_not_invent_time) ... ok
+test_rate_shift_diagnostic_uses_only_prior_errors (test_adaptive_runtime.RuntimeTests.test_rate_shift_diagnostic_uses_only_prior_errors) ... ok
+test_registry_recovers_from_interrupted_stage_publish (test_adaptive_runtime.RuntimeTests.test_registry_recovers_from_interrupted_stage_publish) ... ok
+test_registry_rejects_replacement_without_champion_evaluation (test_adaptive_runtime.RuntimeTests.test_registry_rejects_replacement_without_champion_evaluation) ... ok
+test_resume_is_identical_and_predicts_before_learning (test_adaptive_runtime.RuntimeTests.test_resume_is_identical_and_predicts_before_learning) ... ok
+test_review_window_is_derived_from_predicted_crossing (test_adaptive_runtime.RuntimeTests.test_review_window_is_derived_from_predicted_crossing) ... ok
+test_selection_uses_earlier_validation_and_keeps_future_separate (test_adaptive_runtime.RuntimeTests.test_selection_uses_earlier_validation_and_keeps_future_separate) ... ok
+test_stale_lifecycle_and_gap_never_reuse_rate (test_adaptive_runtime.RuntimeTests.test_stale_lifecycle_and_gap_never_reuse_rate) ... ok
+test_training_result_can_resume_selected_configuration (test_adaptive_runtime.RuntimeTests.test_training_result_can_resume_selected_configuration) ... ok
+test_worker_can_start_from_selected_model_state (test_adaptive_runtime.RuntimeTests.test_worker_can_start_from_selected_model_state) ... ok
+test_worker_recovers_after_interrupted_atomic_publish (test_adaptive_runtime.RuntimeTests.test_worker_recovers_after_interrupted_atomic_publish) ... ok
+test_blend_rejects_invalid_weights_and_preserves_rows (test_alternatives.AlternativesTests.test_blend_rejects_invalid_weights_and_preserves_rows) ... ok
+test_cost_cutoff_changes_with_false_negative_cost (test_alternatives.AlternativesTests.test_cost_cutoff_changes_with_false_negative_cost) ... ok
+test_nested_selection_has_disjoint_outer_evaluation_rows (test_alternatives.AlternativesTests.test_nested_selection_has_disjoint_outer_evaluation_rows) ... outer 0 selected rf_reference inner AP 0.309309
+outer 1 selected rf_reference inner AP 0.221354
+ok
+test_real_fold_fits_ignore_ids_and_all_label_columns (test_alternatives.AlternativesTests.test_real_fold_fits_ignore_ids_and_all_label_columns) ... ok
+test_only_normal_fit_and_no_rf_alarm_suppression (test_anomaly.AnomalyTests.test_only_normal_fit_and_no_rf_alarm_suppression) ... ok
+test_missing_and_corrupt_models_are_unhealthy (test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_real_pipeline_contract_and_invalid_input (test_api.ApiTests.test_real_pipeline_contract_and_invalid_input) ... ok
+test_tampered_model_and_oversized_body (test_api.ApiTests.test_tampered_model_and_oversized_body) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_frozen_evidence_keeps_training_and_operational_sources_separate (test_audit_cg02.AuditTests.test_frozen_evidence_keeps_training_and_operational_sources_separate) ... /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:321: ResourceWarning: Unclosed <MemoryObjectSendStream at 7a221b739610>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:190: ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7a221b739650>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:321: ResourceWarning: Unclosed <MemoryObjectSendStream at 7a221b75bd50>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:190: ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7a221b75bd90>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_impossible_or_non_utc_dates_are_not_accepted_as_coverage (test_audit_cg02.AuditTests.test_impossible_or_non_utc_dates_are_not_accepted_as_coverage) ... ok
+test_overlap_ignores_event_time_and_machine_assignment (test_audit_cg02.AuditTests.test_overlap_ignores_event_time_and_machine_assignment) ... ok
+test_quality_and_label_disagreements_are_measured_without_repairs (test_audit_cg02.AuditTests.test_quality_and_label_disagreements_are_measured_without_repairs) ... ok
+test_same_machine_and_time_can_have_conflicting_sensor_states (test_audit_cg02.AuditTests.test_same_machine_and_time_can_have_conflicting_sensor_states) ... ok
+test_unexpected_header_fails_explicitly (test_audit_cg02.AuditTests.test_unexpected_header_fails_explicitly) ... ok
+test_existing_evidence_is_preserved_before_loading_models (test_cg26_rehearsal.RehearsalCliTests.test_existing_evidence_is_preserved_before_loading_models) ... ok
+test_gc_guard_detects_deliberate_own_leak (test_cg26_rehearsal.RehearsalCliTests.test_gc_guard_detects_deliberate_own_leak) ... ok
+test_missing_bundle_does_not_publish_success (test_cg26_rehearsal.RehearsalCliTests.test_missing_bundle_does_not_publish_success) ... ok
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:321: ResourceWarning: Unclosed <MemoryObjectSendStream at 7a221c8e7c90>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:190: ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7a221fe95d50>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_body_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan) ... ok
+test_complete_rehearsal_with_small_synthetic_bundle (test_cg26_rehearsal.RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle) ... Executing <Task pending name='Task-17' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.170 seconds
+Executing <Task pending name='Task-17' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.117 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-17' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:259> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181, <1 more>, WorkerThread.stop()] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.108 seconds
+ok
+test_empty_manifest_rejects_before_loading_and_gc_is_clean (test_cg26_rehearsal.RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-22' coro=<RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean() running at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_cg26_rehearsal.py:204> cb=[_run_until_complete_cb() at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/python-fedora/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.123 seconds
+ok
+test_request_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_request_error_propagates_and_closes_client_and_lifespan) ... ok
+test_startup_error_propagates (test_cg26_rehearsal.RehearsalTransportTests.test_startup_error_propagates) ... ok
+test_success_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_success_closes_client_and_lifespan) ... ok
+test_supplied_examples_and_negative_cases (test_contract_validation.ContractValidationTests.test_supplied_examples_and_negative_cases) ... ok
+test_bundle_must_explicitly_disable_temporal_scope (test_current_state_scope.CurrentStateScopeTests.test_bundle_must_explicitly_disable_temporal_scope) ... ok
+test_deployable_nifi_snapshot_contains_the_verified_script (test_current_state_scope.CurrentStateScopeTests.test_deployable_nifi_snapshot_contains_the_verified_script) ... ok
+test_inference_ignores_identity_and_observation_time (test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time) ... ok
+test_only_original_reduced_training_source_is_accepted (test_current_state_scope.CurrentStateScopeTests.test_only_original_reduced_training_source_is_accepted) ... ok
+test_preflight_rejects_legacy_bundle_even_with_matching_hashes (test_current_state_scope.CurrentStateScopeTests.test_preflight_rejects_legacy_bundle_even_with_matching_hashes) ... ok
+test_raw_source_and_all_labels_are_rejected_before_model_readiness (test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_training_uses_the_same_bytes_that_were_verified (test_current_state_scope.CurrentStateScopeTests.test_training_uses_the_same_bytes_that_were_verified) ... ok
+test_confusion_and_f2 (test_experiment.ExperimentTests.test_confusion_and_f2) ... ok
+test_pipeline_ignores_outcomes_and_serializes (test_experiment.ExperimentTests.test_pipeline_ignores_outcomes_and_serializes) ... ok
+test_invalid_input_does_not_write_partial_history (test_history.HistoryTests.test_invalid_input_does_not_write_partial_history) ... ok
+test_preserves_bytes_and_collisions_and_is_idempotent (test_history.HistoryTests.test_preserves_bytes_and_collisions_and_is_idempotent) ... /mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:321: ResourceWarning: Unclosed <MemoryObjectSendStream at 7a221aa47810>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:190: ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7a221aa44790>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:321: ResourceWarning: Unclosed <MemoryObjectSendStream at 7a221aa47f50>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/anyio/streams/memory.py:190: ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7a221aa47610>
+  warnings.warn(
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_anomaly_stale_future_and_capacity (test_maintenance_planner.MaintenancePlannerTests.test_anomaly_stale_future_and_capacity) ... ok
+test_cli_reports_absent_deadlines_without_failure (test_maintenance_planner.MaintenancePlannerTests.test_cli_reports_absent_deadlines_without_failure) ... ok
+test_conflict_is_visible_and_not_independent_confirmation (test_maintenance_planner.MaintenancePlannerTests.test_conflict_is_visible_and_not_independent_confirmation) ... ok
+test_dedup_preserves_evidence_and_escalation (test_maintenance_planner.MaintenancePlannerTests.test_dedup_preserves_evidence_and_escalation) ... ok
+test_exports_are_draft_and_do_not_overwrite (test_maintenance_planner.MaintenancePlannerTests.test_exports_are_draft_and_do_not_overwrite) ... ok
+test_human_review_is_explicit_and_validated (test_maintenance_planner.MaintenancePlannerTests.test_human_review_is_explicit_and_validated) ... ok
+test_invalid_and_ok_inputs (test_maintenance_planner.MaintenancePlannerTests.test_invalid_and_ok_inputs) ... ok
+test_model_score_orders_reviews_without_invented_failure_deadline (test_maintenance_planner.MaintenancePlannerTests.test_model_score_orders_reviews_without_invented_failure_deadline) ... ok
+test_no_overlap_and_missed_deadline_visible (test_maintenance_planner.MaintenancePlannerTests.test_no_overlap_and_missed_deadline_visible) ... ok
+test_type_is_context_not_a_fixed_risk_or_eta (test_maintenance_planner.MaintenancePlannerTests.test_type_is_context_not_a_fixed_risk_or_eta) ... ok
+test_weekend_deadline_and_dst (test_maintenance_planner.MaintenancePlannerTests.test_weekend_deadline_and_dst) ... ok
+test_private_token_and_rejects_unsafe_files (test_nifi_client_security.NiFiClientSecurityTests.test_private_token_and_rejects_unsafe_files) ... ok
+test_request_requires_trusted_ca_before_network (test_nifi_client_security.NiFiClientSecurityTests.test_request_requires_trusted_ca_before_network) ... ok
+test_request_uses_verified_context_and_local_endpoint (test_nifi_client_security.NiFiClientSecurityTests.test_request_uses_verified_context_and_local_endpoint) ... ok
+test_classroom_boundaries (test_policy.PolicyTests.test_classroom_boundaries) ... ok
+test_cost_uses_explicit_scenario_not_invented_savings (test_policy.PolicyTests.test_cost_uses_explicit_scenario_not_invented_savings) ... ok
+test_missing_or_broken_api_never_counts_as_ready (test_preflight.PreflightTests.test_missing_or_broken_api_never_counts_as_ready) ... ok
+test_nonbinary_target_is_rejected (test_preparation.PreparationTests.test_nonbinary_target_is_rejected) ... ok
+test_original_holdout_is_excluded_and_repeatable (test_preparation.PreparationTests.test_original_holdout_is_excluded_and_repeatable) ... ok
+test_physics_and_label_exclusion (test_preparation.PreparationTests.test_physics_and_label_exclusion) ... ok
+test_clear_issue_date (test_project_sync.IssueFieldTests.test_clear_issue_date) ... ok
+test_issue_date_payload_uses_issue_field_id (test_project_sync.IssueFieldTests.test_issue_date_payload_uses_issue_field_id) ... ok
+test_archived_source_is_not_deleted (test_project_sync.SyncTests.test_archived_source_is_not_deleted) ... ok
+test_conflicting_team_fails (test_project_sync.SyncTests.test_conflicting_team_fails) ... ok
+test_draft_fails (test_project_sync.SyncTests.test_draft_fails) ... ok
+test_foreign_repo_fails_before_mutation (test_project_sync.SyncTests.test_foreign_repo_fails_before_mutation) ... ok
+test_new_issue_maps_status_and_dates (test_project_sync.SyncTests.test_new_issue_maps_status_and_dates) ... ok
+test_removed_date_is_cleared (test_project_sync.SyncTests.test_removed_date_is_cleared) ... ok
+test_second_run_is_noop (test_project_sync.SyncTests.test_second_run_is_noop) ... ok
+test_unknown_status_fails (test_project_sync.SyncTests.test_unknown_status_fails) ... ok
+test_detects_changed_raw_bytes (test_retention_recovery.RecoveryTests.test_detects_changed_raw_bytes) ... ok
+test_new_ingest_cannot_rebaseline_old_corruption (test_retention_recovery.RecoveryTests.test_new_ingest_cannot_rebaseline_old_corruption) ... ok
+test_causal_features_and_censoring (test_seasonal_lab.SeasonalLabTests.test_causal_features_and_censoring) ... ok
+test_repeatable (test_seasonal_lab.SeasonalLabTests.test_repeatable) ... ok
+test_dataset_packaging_rejects_changed_partition (test_seasonal_v2.SeasonalV2Tests.test_dataset_packaging_rejects_changed_partition) ... ok
+test_event_audit_counts_onsets_not_overlapping_positive_hours (test_seasonal_v2.SeasonalV2Tests.test_event_audit_counts_onsets_not_overlapping_positive_hours) ... ok
+test_label_excludes_current_and_censors_unobserved_future (test_seasonal_v2.SeasonalV2Tests.test_label_excludes_current_and_censors_unobserved_future) ... ok
+test_model_ignores_outcomes_and_identity (test_seasonal_v2.SeasonalV2Tests.test_model_ignores_outcomes_and_identity) ... ok
+test_reproducible_causal_history_and_no_label_predictors (test_seasonal_v2.SeasonalV2Tests.test_reproducible_causal_history_and_no_label_predictors) ... ok
+test_summer_warmer_and_separate_seed_machine_identity (test_seasonal_v2.SeasonalV2Tests.test_summer_warmer_and_separate_seed_machine_identity) ... ok
+test_invalid_batch_never_becomes_visible_csv (test_smb_capture.CaptureTests.test_invalid_batch_never_becomes_visible_csv) ... ok
+test_publish_complete_bytes_idempotently_and_reject_mutation (test_smb_capture.CaptureTests.test_publish_complete_bytes_idempotently_and_reject_mutation) ... ok
+test_config_reads_secret_without_exposing_it_in_repr (test_smb_source.SmbSourceTests.test_config_reads_secret_without_exposing_it_in_repr) ... ok
+test_missing_credentials_and_unsafe_share_are_rejected (test_smb_source.SmbSourceTests.test_missing_credentials_and_unsafe_share_are_rejected) ... ok
+test_only_safe_csv_batch_names_are_selected (test_smb_source.SmbSourceTests.test_only_safe_csv_batch_names_are_selected) ... ok
+test_remote_write_commands_are_rejected_before_connecting (test_smb_source.SmbSourceTests.test_remote_write_commands_are_rejected_before_connecting) ... ok
+test_categorical_and_label_safety_through_real_fit (test_smotenc.SmotencTests.test_categorical_and_label_safety_through_real_fit) ... ok
+test_conflicts_and_unknown_provenance_block_eta_labels (test_temporal_feasibility.TemporalFeasibilityTests.test_conflicts_and_unknown_provenance_block_eta_labels) ... ok
+test_consistent_sampling_does_not_prove_physical_onsets (test_temporal_feasibility.TemporalFeasibilityTests.test_consistent_sampling_does_not_prove_physical_onsets) ... ok
+test_timestamped_replay_blocks_eta_even_with_attested_provenance (test_temporal_feasibility.TemporalFeasibilityTests.test_timestamped_replay_blocks_eta_even_with_attested_provenance) ... ok
+
+----------------------------------------------------------------------
+Ran 113 tests in 46.745s
+
+OK

@@ -192,7 +192,11 @@ def build_plan(
         "as_of": now.isoformat(),
         "timezone": timezone_name,
         "tasks": tasks,
-        "notice": "Model scores rank current-state reviews; calendar slots follow resource availability. No learned maintenance time. Human review pending.",
+        "notice": (
+            "Model scores rank current-state reviews; calendar "
+            + "slots follow resource availability. No learned "
+            + "maintenance time. Human review pending."
+        ),
     }
 
 

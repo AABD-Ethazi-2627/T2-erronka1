@@ -35,7 +35,8 @@ def main():
     ]
     if not source or any(field not in source[0] for field in required):
         raise ValueError(
-            "Dataset lacks mapped asset, observation timestamp, lifecycle or sensors; no dates are invented"
+            "Dataset lacks mapped asset, observation timestamp, "
+            + "lifecycle or sensors; no dates are invented"
         )
     for row in source:
         for spec in manifest["sensors"].values():
@@ -47,7 +48,8 @@ def main():
         Path(adaptive.__file__).read_bytes()
     ).hexdigest()
     report["evaluation_scope"] = (
-        "Exploratory prequential sensor forecast, not independent maintenance validation"
+        "Exploratory prequential sensor forecast, not "
+        + "independent maintenance validation"
     )
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / "report.json").write_text(

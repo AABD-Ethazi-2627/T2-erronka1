@@ -1,4 +1,4 @@
-"""Generate and evaluate an invented seasonal forecasting laboratory, never AI4I test."""
+"Generate and evaluate an invented seasonal forecasting laboratory, never AI4I test."
 
 import argparse
 import hashlib
@@ -268,18 +268,54 @@ def run(output):
         "selection": frozen,
         "stress_selected_model_only": stress,
         "references": references,
-        "learning_curve_definition": "Nested 1/2/4/8 machine cohorts across identical two-year duration, not independent hourly rows",
+        "learning_curve_definition": (
+            "Nested 1/2/4/8 machine cohorts across identical "
+            + "two-year duration, not independent hourly rows"
+        ),
         "api_promoted": False,
         "limitations": [
-            "Entirely invented simulator; more generated rows do not establish better industrial precision.",
-            "Air/torque scale from AI4I train only; hazard/season/history are assumptions, not fitted industrial truth.",
-            "No synthetic data appended to original AI4I or used to inflate its classification metrics.",
-            "Independent seeds/machines and future calendar periods, but shared simulator rules are not independent real-world evidence.",
-            "24h overlapping labels and autocorrelated readings; report actual onsets, not independent-row sample claims.",
-            "Learning curve changes machine diversity as well as sample count; not pure sample-size causal experiment.",
-            "Thresholds and full-data candidate chosen on validation before evaluation; no further tuning from evaluation/stress.",
-            "All predefined curve points reported on same synthetic evaluation; do not repeatedly optimize against this set.",
-            "Immediate repair and tool replacement policy are invented; season risk depends on hypothetical operations.",
+            (
+                "Entirely invented simulator; more generated rows do "
+                + "not establish better industrial precision."
+            ),
+            (
+                "Air/torque scale from AI4I train only; "
+                + "hazard/season/history are assumptions, not fitted "
+                + "industrial truth."
+            ),
+            (
+                "No synthetic data appended to original AI4I or used "
+                + "to inflate its classification metrics."
+            ),
+            (
+                "Independent seeds/machines and future calendar "
+                + "periods, but shared simulator rules are not "
+                + "independent real-world evidence."
+            ),
+            (
+                "24h overlapping labels and autocorrelated readings; "
+                + "report actual onsets, not independent-row sample "
+                + "claims."
+            ),
+            (
+                "Learning curve changes machine diversity as well as "
+                + "sample count; not pure sample-size causal experiment."
+            ),
+            (
+                "Thresholds and full-data candidate chosen on "
+                + "validation before evaluation; no further tuning from "
+                + "evaluation/stress."
+            ),
+            (
+                "All predefined curve points reported on same "
+                + "synthetic evaluation; do not repeatedly optimize "
+                + "against this set."
+            ),
+            (
+                "Immediate repair and tool replacement policy are "
+                + "invented; season risk depends on hypothetical "
+                + "operations."
+            ),
         ],
     }
     (output / "report.json").write_text(

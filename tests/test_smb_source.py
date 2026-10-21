@@ -17,7 +17,8 @@ class SmbSourceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / ".env"
             path.write_text(
-                'SMB_HOST=192.168.75.222\nSMB_SHARE=cnc-stream\nSMB_USERNAME=lab\nSMB_PASSWORD="private value"\nSMB_TIMEOUT=8\n'
+                "SMB_HOST=192.168.75.222\nSMB_SHARE=cnc-stream\nSMB_USERN"
+                + 'AME=lab\nSMB_PASSWORD="private value"\nSMB_TIMEOUT=8\n'
             )
             path.chmod(0o600)
             config = read_config(path)

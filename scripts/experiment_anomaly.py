@@ -72,8 +72,14 @@ def run(output=Path("outputs/cg09")):
         ),
         "limitations": [
             "Normal failure label is a proxy, not verified anomaly-free truth.",
-            "Quantile is selected on validation; no independent anomaly labels or final test.",
-            "Anomaly score is not a calibrated failure probability; cannot suppress RF alarms.",
+            (
+                "Quantile is selected on validation; no independent "
+                + "anomaly labels or final test."
+            ),
+            (
+                "Anomaly score is not a calibrated failure "
+                + "probability; cannot suppress RF alarms."
+            ),
         ],
     }
     output.mkdir(parents=True)

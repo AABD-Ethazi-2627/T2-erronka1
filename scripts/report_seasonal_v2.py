@@ -36,7 +36,11 @@ def event_audit(frame, predictions, cutoff):
         "alert_hours": int(alerts.sum()),
         "forecast_hours": len(predictions),
         "alert_hour_fraction": float(alerts.mean()),
-        "meaning": "Onsets with full 24h forecast coverage only; overlapping positive hours are not independent failures",
+        "meaning": (
+            "Onsets with full 24h forecast coverage only; "
+            + "overlapping positive hours are not independent "
+            + "failures"
+        ),
     }
 
 

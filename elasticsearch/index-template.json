@@ -26,6 +26,15 @@
         "quality_flag": {
           "type": "keyword"
         },
+        "prediction_scope": {
+          "type": "keyword"
+        },
+        "temporal_prediction_enabled": {
+          "type": "boolean"
+        },
+        "score_semantics": {
+          "type": "keyword"
+        },
         "policy": {
           "type": "keyword"
         },

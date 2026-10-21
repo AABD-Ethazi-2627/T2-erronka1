@@ -1,0 +1,27 @@
+{
+  "scope": "Index membership only; no fit, predictions or test metrics",
+  "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "active": {
+    "fit": {
+      "rows": 5600,
+      "ordered_index_sha256": "cdc6374b1a6e9c614f0c9f76b493a09109f125ae57f5fef66e2db9e078744c51"
+    },
+    "development_validation": {
+      "rows": 1200,
+      "ordered_index_sha256": "a5e9678ec3f4705d85eab6910cf3510685672b01075589df542a9dcfc42a3c53"
+    },
+    "excluded_previously_inspected_test": {
+      "rows": 1200,
+      "ordered_index_sha256": "b2c31c3b3f893f6d94b8e4bd1779f816f21652220028bfbd4efb6b2cedb8e07b"
+    },
+    "pairwise_disjoint": true,
+    "complete_coverage": true,
+    "excluded_rows_in_fit": 0
+  },
+  "PR43_exercise_80_20": {
+    "fit_rows": 6400,
+    "development_validation_rows": 1600,
+    "previously_excluded_rows_in_fit": 394,
+    "promotion_compatible": false
+  }
+}
