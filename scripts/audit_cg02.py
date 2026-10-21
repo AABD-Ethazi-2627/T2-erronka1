@@ -122,7 +122,10 @@ def audit_csv(path, kind):
             groups[(machine, timestamp)].append(
                 tuple(row.get(c) for c in SENSORS + ["machine_type"])
             )
-        fmt = lambda t: t.isoformat().replace("+00:00", "Z")
+
+        def fmt(t):
+            return t.isoformat().replace("+00:00", "Z")
+
         report["time"] = {
             "min": fmt(min(valid)) if valid else None,
             "max": fmt(max(valid)) if valid else None,
@@ -156,7 +159,8 @@ def audit_csv(path, kind):
 
 
 def compare_signatures(training_rows, batch_rows):
-    # Contemporaneous sensor/label signatures; IDs and emission dates do not add novelty.
+    # Contemporaneous sensor/label signatures; IDs and emission dates
+    # do not add novelty.
     def signature(row):
         return (row["machine_type"],) + tuple(float(row[c]) for c in SENSORS + LABELS)
 
@@ -173,7 +177,10 @@ def compare_signatures(training_rows, batch_rows):
         "rows_matching_training_signature": sum(
             value in training for value in signatures
         ),
-        "interpretation": "Exact signature overlap only; zero overlap does not prove statistical independence.",
+        "interpretation": (
+            "Exact signature overlap only; zero overlap does not prove "
+            "statistical independence."
+        ),
     }
 
 
@@ -181,14 +188,14 @@ def build_inventory(root):
     root = Path(root)
     train_path = root / "data/ai4i2020_train.csv"
     training = {
-        "file": str(train_path.relative_to(root)),
+        "file": train_path.relative_to(root).as_posix(),
         **audit_csv(train_path, "training"),
     }
     samples = sorted((root / "docs/requisitos/evidencias/muestras").glob("*.csv"))
     if not samples:
         raise ValueError("No frozen SMB evidence found")
     batches = [
-        {"file": str(path.relative_to(root)), **audit_csv(path, "batch")}
+        {"file": path.relative_to(root).as_posix(), **audit_csv(path, "batch")}
         for path in samples
     ]
     with train_path.open() as handle:
@@ -219,18 +226,29 @@ def build_inventory(root):
         "signature_overlap": overlap,
         "roles": {
             "training": "Local AI4I train CSV only; timestamps absent.",
-            "operational_logs": "Frozen SMB batches; operational machine observations in this simulated lab.",
-            "retention": "SMB has no retention guarantee per user; own historical storage is CG06.",
+            "operational_logs": (
+                "Frozen SMB batches; operational machine observations "
+                "in this simulated lab."
+            ),
+            "retention": (
+                "SMB has no retention guarantee per user; "
+                "own historical storage is CG06."
+            ),
             "maintenance": "No independent maintenance ledger supplied for this audit.",
         },
         "decision": {
-            "state_classification": "supported_by_contemporaneous_machine_failure_labels",
+            "state_classification": (
+                "supported_by_contemporaneous_machine_failure_labels"
+            ),
             "forecast_24h": "not_validated",
             "reasons": [
                 "Training CSV has no timestamps.",
-                "Batch time is simulator emission time; no complete per-machine 24h follow-up.",
-                "Failure bits are contemporaneous outcomes, not independent dated maintenance/failure onsets.",
-                "Stream lineage/overlap with training and stable machine identity over time are not established.",
+                "Batch time is simulator emission time; "
+                "no complete per-machine 24h follow-up.",
+                "Failure bits are contemporaneous outcomes, "
+                "not independent dated maintenance/failure onsets.",
+                "Stream lineage/overlap with training and stable machine identity "
+                "over time are not established.",
             ],
         },
     }
@@ -254,5 +272,6 @@ if __name__ == "__main__":
                 "CG02 inventory differs or is missing; inspect inputs before --write"
             )
         print(
-            "CG02 inventory verified offline: source bytes, quality, labels and time coverage match"
+            "CG02 inventory verified offline: source bytes, quality, labels "
+            "and time coverage match"
         )
