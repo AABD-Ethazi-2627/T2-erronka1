@@ -101,3 +101,52 @@ Validación local final, Python 3.12.14, lock sin cambios:
 Pruebas deterministas de orden/fsync y terminación de proceso, no evidencia de
 corte eléctrico real, garantías del hardware ni filesystem remoto. Adaptadores
 NiFi/Kafka, CI remoto y nueva revisión siguen pendientes. Sin merge ni cierre.
+
+## PR46: integración con la base actual y compatibilidad Parquet (21/10/2026)
+
+Integración normal de `feat/17-maintenance-planner`, base verificada por
+`git ls-remote`: `5c14df391f0e93ad27092bc83070d145e4fb8f41`, árbol
+`e3bc75475954f766243290e751fd498b18dfb634`, sobre el head anterior de PR46
+`343d7f0e3d75c2df12c6f319f9f0c9cadcdd65fa`. El merge local reproduce un único
+conflicto en `docs/rubrica/SEGUIMIENTO.md`: se conservan las actualizaciones
+de CG19 y las referencias de CG15 en G77/G96. Las correcciones de Gold,
+sus pruebas, dependencias y workflows se conservan idénticos a la base.
+
+La conciliación del archive comparaba una nueva codificación Parquet con los
+bytes existentes. Dos regresiones nuevas fallaron antes del arreglo: duplicado
+con otra codificación válida y recuperación de un huérfano previo al commit.
+Ahora se compara esquema y valores, conservando los bytes existentes si son
+equivalentes. La comprobación inicial de hashes comprometidos sigue intacta:
+no se rebaselinea corrupción ni se emite ACK ante diferencias de esquema o datos.
+Se mantiene el orden fsync → commit → ACK y la API pública del consumidor.
+
+Validación ejecutada en **FedoraLinux-43 explícito**, sin servicios compartidos,
+modelos de entrega, conjunto final ni descargas de dependencias:
+
+- Python 3.11, `tests/run_strict_resources.py`: 184 pruebas por pasada, dos
+  pasadas; 0 fallos/errores/avisos/unraisables. Seis omisiones por prerrequisitos:
+  tres sin bundle API local y tres sin Elasticsearch de integración configurado.
+- Python 3.11 y 3.12, runner estricto sobre copias idénticas de los cinco módulos
+  archive/history/retention/contracts/columnar: 18 pruebas por pasada y versión,
+  dos pasadas, 0 omisiones/fallos/errores/avisos/unraisables. Incluye 11 pruebas
+  archive, conservación Gold, corrupción, crash y fallos de disco/ACK.
+- Fixtures sintéticas escritas con PyArrow 18.1.0 y leídas con 23.0.1, y sentido
+  inverso: replay comprometido, duplicado y recuperación previa al commit OK;
+  cuatro Parquet por sentido conservan exactamente sus bytes y hashes.
+- Ruff 0.17.1 global y selección `E,F,I,PLW1510`, formato global (195 archivos),
+  `git diff --check` desde ambos padres completos, validadores de contratos,
+  `audit_cg02 --check`, layout y `uv lock --offline --check`: OK.
+  Se corrigieron B023 en el test nuevo y E501 heredado del SQL, sin supresiones.
+- `uv audit --locked --python-version 3.11 --output-format json` con uv 0.13.1:
+  exit 0, 51 paquetes auditados, sin vulnerabilidades conocidas según esa consulta.
+  Conserva dos avisos de uv sobre comando/formato JSON experimentales; no son
+  avisos de las pruebas ni vulnerabilidades. El lock no cambia.
+
+Evidencia de ejecución, salidas completas, intento interrumpido por timeout,
+regresiones negativas y fixture hashes: `.git/pr46-evidence/` del clon aislado
+`D:/github/_local/t2-babysit-20261021/pr46-conflict`. La documentación de esta
+sección y la partición del literal SQL no cambian comportamiento tras las pruebas.
+Los límites Windows previamente reportados (12 errores POSIX y aviso loky WMIC)
+no se han revalidado ni resuelto aquí. Revisión independiente, CI del nuevo head,
+aceptación humana y transporte real siguen pendientes. Sin merge de PR46 ni
+cierre de issues; la integración de base en su rama no equivale a aceptación.

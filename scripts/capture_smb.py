@@ -75,7 +75,11 @@ def capture_once(config, output, max_files=2):
         "available_at_listing": len(names),
         "captured": reports,
         "remaining_at_listing": len([n for n in names if not (output / n).exists()]),
-        "limitation": "Immutable generated filenames assumed; recheck or reconcile before trusting producer changes. No remote retention guarantee.",
+        "limitation": (
+            "Immutable generated filenames assumed; recheck or "
+            + "reconcile before trusting producer changes. No remote "
+            + "retention guarantee."
+        ),
     }
 
 

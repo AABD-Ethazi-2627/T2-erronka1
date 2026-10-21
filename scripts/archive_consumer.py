@@ -79,7 +79,8 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
     try:
         con.execute("PRAGMA synchronous=FULL")
         con.execute(
-            "CREATE TABLE IF NOT EXISTS deliveries (id TEXT PRIMARY KEY, hash TEXT, outcome TEXT)"
+            "CREATE TABLE IF NOT EXISTS deliveries "
+            "(id TEXT PRIMARY KEY, hash TEXT, outcome TEXT)"
         )
         con.execute(
             "CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, hash TEXT)"
@@ -165,17 +166,26 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
                 target = (
                     root / kind / ("date=" + obj["timestamp"][:10]) / (key + ".parquet")
                 )
-                write(
-                    target,
-                    parquet(
-                        {
-                            "event_id": obj["event_id"],
-                            "machine_id": obj["machine_id"],
-                            "timestamp": obj["timestamp"],
-                            "payload_json": canonical.decode(),
-                        }
-                    ),
-                )
+                row = {
+                    "event_id": obj["event_id"],
+                    "machine_id": obj["machine_id"],
+                    "timestamp": obj["timestamp"],
+                    "payload_json": canonical.decode(),
+                }
+                if target.exists():
+                    # Writer upgrades may change encoding without changing data.
+                    # Committed hashes were verified above; reconcile orphans by
+                    # schema and values, then retain their original bytes/hash.
+                    archived = target.read_bytes()
+                    if not pq.read_table(pa.BufferReader(archived)).equals(
+                        pa.Table.from_pylist([row])
+                    ):
+                        raise ValueError(
+                            "Archive object differs: reconciliation required"
+                        )
+                else:
+                    archived = parquet(row)
+                write(target, archived)
                 outcome = "duplicate" if existing else "stored"
                 con.execute(
                     "INSERT OR IGNORE INTO events VALUES (?, ?)",

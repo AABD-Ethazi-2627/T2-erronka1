@@ -70,7 +70,8 @@ def create_app(manifest_path=None):
             if manifest["versions"]["sklearn"] != sklearn.__version__:
                 raise ValueError("Model/runtime sklearn mismatch")
             models = {}
-            # Validate every artifact before deserializing any; directory must be trusted.
+            # Validate every artifact before deserializing any; directory must be
+            # trusted.
             for filename in ["rf.pkl", "if.pkl"]:
                 artifact = path.parent / filename
                 if (

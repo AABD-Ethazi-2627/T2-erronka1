@@ -1,0 +1,19 @@
+{
+  "start_head": "4d33e5cae3eafdeda310a94876838ab21eccd43f",
+  "only_spec_changes": [
+    "temperature.background",
+    "temperature.scales.color.range"
+  ],
+  "query_and_all_other_objects_unchanged": true,
+  "offline_sha256": "0d2313d5bc0f1053b5ae3b8bd97f095d4004f862e043ff773c8046f118e27bde",
+  "overall": {
+    "rows": 1200,
+    "positives": 41,
+    "negatives": 1159,
+    "alerts": 41,
+    "tp": 32,
+    "fn": 9,
+    "fp": 9,
+    "tn": 1150
+  }
+}

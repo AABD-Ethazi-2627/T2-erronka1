@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import sqlite3
@@ -8,6 +9,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+import pyarrow as pa
 import pyarrow.parquet as pq
 
 from scripts.archive_consumer import consume, mkdir, sync_dir
@@ -21,6 +23,87 @@ def batch():
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_duplicate_preserves_verified_alternate_parquet_encoding(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            consume(root, batch(), lambda: None)
+            target = next((root / "telemetry").rglob("*.parquet"))
+            pq.write_table(pq.ParquetFile(target).read(), target, compression=None)
+            original = target.read_bytes()
+            # Model an intact archive committed by a different Parquet writer.
+            with sqlite3.connect(root / "ledger.sqlite") as db:
+                db.execute(
+                    "UPDATE objects SET hash=? WHERE path=?",
+                    (
+                        hashlib.sha256(original).hexdigest(),
+                        str(target.relative_to(root)),
+                    ),
+                )
+            ack = []
+            result = consume(
+                root,
+                [("new-delivery", "telemetry", batch()[0][2])],
+                lambda: ack.append(1),
+            )
+            self.assertEqual(result["duplicate"], 1)
+            self.assertEqual(ack, [1])
+            self.assertEqual(target.read_bytes(), original)
+
+    def test_orphan_alternate_encoding_reconciles_before_ack(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+
+            def interrupt(stage):
+                if stage == "before_commit":
+                    raise RuntimeError("interrupted before commit")
+
+            ack = []
+            with self.assertRaisesRegex(RuntimeError, "before commit"):
+                consume(root, batch()[:1], lambda: ack.append(1), interrupt)
+            self.assertEqual(ack, [])
+            target = next((root / "telemetry").rglob("*.parquet"))
+            pq.write_table(pq.ParquetFile(target).read(), target, compression=None)
+            original = target.read_bytes()
+            result = consume(root, batch()[:1], lambda: ack.append(1))
+            self.assertEqual(result["stored"], 1)
+            self.assertEqual(ack, [1])
+            self.assertEqual(target.read_bytes(), original)
+            with sqlite3.connect(root / "ledger.sqlite") as db:
+                self.assertEqual(
+                    db.execute(
+                        "SELECT hash FROM objects WHERE path=?",
+                        (str(target.relative_to(root)),),
+                    ).fetchone()[0],
+                    hashlib.sha256(original).hexdigest(),
+                )
+
+    def test_orphan_content_or_schema_conflict_never_ack(self):
+        for field in ("payload_json", "extra_column"):
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+
+                def interrupt(stage):
+                    if stage == "before_commit":
+                        raise RuntimeError("interrupted")
+
+                with self.assertRaisesRegex(RuntimeError, "interrupted"):
+                    consume(root, batch()[:1], lambda: None, interrupt)
+                target = next((root / "telemetry").rglob("*.parquet"))
+                table = pq.ParquetFile(target).read()
+                row = table.to_pylist()[0]
+                row[field] = "changed"
+                pq.write_table(pa.Table.from_pylist([row]), target)
+                original = target.read_bytes()
+                ack = []
+                with self.assertRaises(ValueError):
+                    consume(root, batch()[:1], lambda ack=ack: ack.append(1))
+                self.assertEqual(ack, [])
+                self.assertEqual(target.read_bytes(), original)
+                with sqlite3.connect(root / "ledger.sqlite") as db:
+                    self.assertEqual(
+                        db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 0
+                    )
+
     def test_restart_repairs_existing_directory_links_before_ack(self):
         for interrupted in ("ancestor", "root", "bronze"):
             with (

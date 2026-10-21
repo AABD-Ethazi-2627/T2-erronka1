@@ -108,7 +108,8 @@ def run(output):
     source = Path("data/ai4i2020_train.csv")
     frame = load_training_source(source)
     train, validation, excluded = split_development(frame)
-    # Guard exact feature duplicates across partitions/folds, irrespective of labels/IDs.
+    # Guard exact feature duplicates across partitions/folds, irrespective of
+    # labels/IDs.
     columns = SENSORS + ["machine_type"]
     signature = pd.util.hash_pandas_object(frame[columns], index=False)
     if signature.duplicated().any():
@@ -200,9 +201,18 @@ def run(output):
         "reload_max_probability_difference": 0.0,
         "limitations": [
             "OOF model selection and threshold tuning are optimistic; not nested CV.",
-            "Validation and excluded test were previously inspected in PR29; no new independent final test.",
-            "No timestamps or verified physical identity; no 24h or seasonal forecast claims.",
-            "Class weighting changes probability calibration; score is not validated industrial risk.",
+            (
+                "Validation and excluded test were previously "
+                + "inspected in PR29; no new independent final test."
+            ),
+            (
+                "No timestamps or verified physical identity; no 24h "
+                + "or seasonal forecast claims."
+            ),
+            (
+                "Class weighting changes probability calibration; "
+                + "score is not validated industrial risk."
+            ),
         ],
     }
     (output / "report.json").write_text(

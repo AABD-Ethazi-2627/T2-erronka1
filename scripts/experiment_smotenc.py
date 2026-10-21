@@ -79,9 +79,18 @@ def run():
         ],
         "limitations": [
             "Supplementary exploratory experiment; selection/tuning scores optimistic.",
-            "No new independent final test. Existing API model is not changed by this experiment.",
-            "SMOTENC samples original sensors and true categorical types; derived physics recomputed afterward.",
-            "Synthetic interpolated sensors need physical plausibility scrutiny; not new observed failures.",
+            (
+                "No new independent final test. Existing API model is "
+                + "not changed by this experiment."
+            ),
+            (
+                "SMOTENC samples original sensors and true categorical "
+                + "types; derived physics recomputed afterward."
+            ),
+            (
+                "Synthetic interpolated sensors need physical "
+                + "plausibility scrutiny; not new observed failures."
+            ),
         ],
     }
     Path("docs/evidence/CG08_smotenc.json").write_text(
