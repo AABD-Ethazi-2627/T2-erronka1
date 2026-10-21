@@ -112,7 +112,15 @@ La copia del host anterior ya no corresponde a esta definición: requiere
 revisión/migración autorizada y readback de configuración antes de ejecutarla.
 No se ha importado ni modificado ninguna copia runtime en este trabajo.
 
-## Plan de cableado durable pendiente (P57-INTEGRATION-1)
+## Cableado durable P57-INTEGRATION-1
+
+La capa posterior a PR62 implementa el recorrido operable en
+[`scripts.run_durable_pipeline`](../scripts/run_durable_pipeline.py): journal
+raw/identidad, proyección, API canónica con precondiciones, outbox JSON y archivo
+CG15, más ES opt-in. Véase [operación y recuperación](CG14_DURABLE_PIPELINE.md).
+El export staged NiFi es auxiliar y no posee offsets de origen. El plan que
+sigue documenta las dependencias originales; la implementación del worker
+no acredita el grafo NiFi activo, Kafka real ni aceptación E2E del laboratorio.
 
 1. Conservar captura SMB y registro Filebeat existentes de PR42. En el broker
    autorizado, retener bytes y coordenadas originales; generar y persistir

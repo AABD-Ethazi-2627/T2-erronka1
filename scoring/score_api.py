@@ -13,14 +13,14 @@ from typing import Literal
 import joblib
 import pandas as pd
 import sklearn
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from scoring.alert_policy import alert_level
-from scoring.response_ledger import InferenceConflict, response
+from scoring.response_ledger import InferenceConflict, canonical, response
 from scoring.scope import INPUT_FEATURES, SCOPE, validate_bundle_scope
-from scripts.validate_contracts import validators
+from scripts.validate_contracts import contract_hashes, validators
 
 log = logging.getLogger(__name__)
 
@@ -122,6 +122,9 @@ def create_app(manifest_path=None, *, ledger_path=None):
     )
     app.state.models = None
     schemas = validators(Path(__file__).resolve().parents[1] / "contracts")
+    schema_fingerprint = hashlib.sha256(
+        canonical(contract_hashes()).encode()
+    ).hexdigest()
 
     @app.middleware("http")
     async def bounded_body(request: Request, call_next):
@@ -152,9 +155,20 @@ def create_app(manifest_path=None, *, ledger_path=None):
         "/predict",
         responses={409: {"description": "Event or inference identity conflict"}},
     )
-    def predict(payload: Telemetry):
+    def predict(payload: Telemetry, request: Request, reply: Response):
         if app.state.models is None:
             raise HTTPException(503, "Model not ready")
+        for header, actual in (
+            (
+                "X-CNC-Manifest-SHA256",
+                hashlib.sha256(canonical(app.state.manifest).encode()).hexdigest(),
+            ),
+            ("X-CNC-Contracts-SHA256", schema_fingerprint),
+        ):
+            expected = request.headers.get(header)
+            if expected is not None and expected != actual:
+                raise HTTPException(409, "Worker model/contract precondition differs")
+            reply.headers[header] = actual
         event = payload.model_dump(exclude_none=True)
         try:
             schemas["telemetry"].validate(event)
