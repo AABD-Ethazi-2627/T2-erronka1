@@ -1,0 +1,11 @@
+{
+  "distribution": "FedoraLinux-43 (explicit WSL selection)",
+  "python": "3.11.15",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "scikit-learn": "1.5.0",
+  "joblib": "1.4.2",
+  "pydantic": "2.14.1",
+  "fastapi": "0.111.0",
+  "uv": "0.13.1 (tool-run wrapper)"
+}

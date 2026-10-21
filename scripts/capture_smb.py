@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 
 from scripts.audit_cg02 import audit_csv
-from scripts.check_smb_source import list_batch_names, read_config, smb_command
+from scripts.check_smb_source import list_batch_sizes, read_config, smb_command
 
 
 def publish_snapshot(raw, target):
@@ -21,6 +21,15 @@ def publish_snapshot(raw, target):
             )
         return False
     try:
+        # Filebeat filters a plain header and emits one physical line per record.
+        # Require the producer's LF-delimited, unquoted UTF-8 envelope unchanged.
+        if (
+            not raw.endswith(b"\n")
+            or raw.startswith(b"\xef\xbb\xbf")
+            or b'"' in raw
+            or b"\r" in raw
+        ):
+            raise ValueError("Invalid SMB batch framing")
         with tempfile.NamedTemporaryFile() as check:
             check.write(raw)
             check.flush()
@@ -55,13 +64,17 @@ def capture_once(config, output, max_files=2):
     if max_files < 1 or max_files > 20:
         raise ValueError("max_files must be between1 and20")
     output = Path(output)
-    names = list_batch_names(smb_command(config, "ls"))
+    sizes = list_batch_sizes(smb_command(config, "ls"))
+    names = list(sizes)
     pending = [n for n in names if not (output / n).exists()][:max_files]
     reports = []
     for name in pending:
         with tempfile.TemporaryDirectory() as tmp:
             smb_command(config, f"get {name} sample.csv", cwd=tmp)
             raw = (Path(tmp) / "sample.csv").read_bytes()
+        after = list_batch_sizes(smb_command(config, "ls"))
+        if sizes[name] != len(raw) or after.get(name) != sizes[name]:
+            raise ValueError("SMB batch changed or incomplete; retry after publication")
         publish_snapshot(raw, output / name)
         reports.append(
             {
@@ -75,7 +88,11 @@ def capture_once(config, output, max_files=2):
         "available_at_listing": len(names),
         "captured": reports,
         "remaining_at_listing": len([n for n in names if not (output / n).exists()]),
-        "limitation": "Immutable generated filenames assumed; recheck or reconcile before trusting producer changes. No remote retention guarantee.",
+        "limitation": (
+            "Immutable generated filenames assumed; recheck or "
+            + "reconcile before trusting producer changes. No remote "
+            + "retention guarantee."
+        ),
     }
 
 
@@ -89,9 +106,15 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.interval < 5:
         parser.error("interval must be at least5 seconds")
-    config = read_config(args.env_file)
-    while True:
-        print(json.dumps(capture_once(config, args.output, args.max_files)), flush=True)
-        if not args.watch:
-            break
-        time.sleep(args.interval)
+    try:
+        config = read_config(args.env_file)
+        while True:
+            print(
+                json.dumps(capture_once(config, args.output, args.max_files)),
+                flush=True,
+            )
+            if not args.watch:
+                break
+            time.sleep(args.interval)
+    except (OSError, ValueError, RuntimeError) as error:
+        parser.exit(1, f"{error}\n")

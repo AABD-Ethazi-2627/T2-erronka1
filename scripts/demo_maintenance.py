@@ -63,7 +63,9 @@ def main():
     as_of = max(instant(p["timestamp"]) for p in predictions)
     plan = build_plan(predictions, as_of)
     plan["selection"] = (
-        "Latest timestamp per unverified ID; filename/row tie-break. Not a conflict resolution or temporal history."
+        "Latest timestamp per unverified ID; filename/row "
+        + "tie-break. Not a conflict resolution or temporal "
+        + "history."
     )
     plan["snapshot"] = str(args.snapshot)
     export_plan(plan, args.output)

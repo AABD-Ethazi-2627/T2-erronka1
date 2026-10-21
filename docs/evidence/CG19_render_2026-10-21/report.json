@@ -1,0 +1,113 @@
+{
+  "vega": "5.33.0",
+  "reports": [
+    {
+      "count": 0,
+      "width": 600,
+      "height": 400,
+      "pages": 1,
+      "covered": 0,
+      "minPlotHeight": 279,
+      "warnings": []
+    },
+    {
+      "count": 1,
+      "width": 600,
+      "height": 400,
+      "pages": 1,
+      "covered": 1,
+      "minPlotHeight": 241,
+      "warnings": []
+    },
+    {
+      "count": 31,
+      "width": 600,
+      "height": 400,
+      "pages": 7,
+      "covered": 31,
+      "minPlotHeight": 191,
+      "warnings": []
+    },
+    {
+      "count": 100,
+      "width": 600,
+      "height": 400,
+      "pages": 20,
+      "covered": 100,
+      "minPlotHeight": 191,
+      "warnings": []
+    },
+    {
+      "count": 0,
+      "width": 1100,
+      "height": 480,
+      "pages": 1,
+      "covered": 0,
+      "minPlotHeight": 359,
+      "warnings": []
+    },
+    {
+      "count": 1,
+      "width": 1100,
+      "height": 480,
+      "pages": 1,
+      "covered": 1,
+      "minPlotHeight": 321,
+      "warnings": []
+    },
+    {
+      "count": 31,
+      "width": 1100,
+      "height": 480,
+      "pages": 7,
+      "covered": 31,
+      "minPlotHeight": 271,
+      "warnings": []
+    },
+    {
+      "count": 100,
+      "width": 1100,
+      "height": 480,
+      "pages": 20,
+      "covered": 100,
+      "minPlotHeight": 271,
+      "warnings": []
+    },
+    {
+      "count": 0,
+      "width": 1600,
+      "height": 600,
+      "pages": 1,
+      "covered": 0,
+      "minPlotHeight": 479,
+      "warnings": []
+    },
+    {
+      "count": 1,
+      "width": 1600,
+      "height": 600,
+      "pages": 1,
+      "covered": 1,
+      "minPlotHeight": 441,
+      "warnings": []
+    },
+    {
+      "count": 31,
+      "width": 1600,
+      "height": 600,
+      "pages": 7,
+      "covered": 31,
+      "minPlotHeight": 391,
+      "warnings": []
+    },
+    {
+      "count": 100,
+      "width": 1600,
+      "height": 600,
+      "pages": 20,
+      "covered": 100,
+      "minPlotHeight": 391,
+      "warnings": []
+    }
+  ]
+}

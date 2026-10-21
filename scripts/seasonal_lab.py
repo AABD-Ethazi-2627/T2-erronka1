@@ -23,7 +23,8 @@ def simulate(days=365, machines=4, seed=42):
             load = rng.uniform(0.7, 1.3)
             torque = 40 * load + wear * 0.03 + rng.normal(0, 1)
             wear += load
-            # Invented fault hazard: degradation and heat, not fitted industrial physics.
+            # Invented fault hazard: degradation and heat, not fitted industrial
+            # physics.
             fault = int(
                 rng.random()
                 < (0.0005 + max(0, wear - 160) * 0.00005 + max(0, air - 303) * 0.0002)
@@ -41,7 +42,8 @@ def simulate(days=365, machines=4, seed=42):
                 )
             )
             if fault:
-                wear = 0.0  # hypothetical immediate repair, not a recorded maintenance event
+                # Hypothetical immediate repair, not a recorded maintenance event.
+                wear = 0.0
         frame = pd.DataFrame(
             rows,
             columns=[
@@ -111,11 +113,24 @@ if __name__ == "__main__":
             for name, part in zip(["train", "validation", "test"], splits)
         },
         "limitations": [
-            "Invented independent simulation, not AI4I timestamps or new industrial truth.",
-            "Annual cycle occurs once; held-out calendar periods do not establish generalization across years.",
-            "Rolling mean excludes current/future readings; future onset used only as label.",
+            (
+                "Invented independent simulation, not AI4I timestamps "
+                + "or new industrial truth."
+            ),
+            (
+                "Annual cycle occurs once; held-out calendar periods "
+                + "do not establish generalization across years."
+            ),
+            (
+                "Rolling mean excludes current/future readings; future "
+                + "onset used only as label."
+            ),
             "24h purge and end censoring prevent horizon overlap between partitions.",
-            "No forecasting model trained or predictive accuracy claimed. AI4I remains exclusive classification training source.",
+            (
+                "No forecasting model trained or predictive accuracy "
+                + "claimed. AI4I remains exclusive classification "
+                + "training source."
+            ),
         ],
     }
     (output / "report.json").write_text(json.dumps(report, indent=2) + "\n")

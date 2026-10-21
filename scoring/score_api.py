@@ -18,6 +18,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from scoring.alert_policy import alert_level
+from scoring.response_ledger import InferenceConflict, response
 from scoring.scope import INPUT_FEATURES, SCOPE, validate_bundle_scope
 from scripts.validate_contracts import validators
 
@@ -55,10 +56,16 @@ class Telemetry(BaseModel):
         return value
 
 
-def create_app(manifest_path=None):
+def create_app(manifest_path=None, *, ledger_path=None):
     path = Path(
         manifest_path or os.getenv("MODEL_MANIFEST", "outputs/api/manifest.json")
     )
+    ledger = Path(
+        ledger_path
+        or os.getenv("SCORING_LEDGER", str(path.parent / "responses.sqlite3"))
+    )
+    if str(ledger) == ":memory:":
+        raise ValueError("Scoring requires a persistent response ledger")
 
     @asynccontextmanager
     async def lifespan(application):
@@ -70,7 +77,8 @@ def create_app(manifest_path=None):
             if manifest["versions"]["sklearn"] != sklearn.__version__:
                 raise ValueError("Model/runtime sklearn mismatch")
             models = {}
-            # Validate every artifact before deserializing any; directory must be trusted.
+            # Validate every artifact before deserializing any; directory must be
+            # trusted.
             for filename in ["rf.pkl", "if.pkl"]:
                 artifact = path.parent / filename
                 if (
@@ -140,41 +148,54 @@ def create_app(manifest_path=None):
             "temporal_prediction_enabled": False,
         }
 
-    @app.post("/predict")
+    @app.post(
+        "/predict",
+        responses={409: {"description": "Event or inference identity conflict"}},
+    )
     def predict(payload: Telemetry):
         if app.state.models is None:
             raise HTTPException(503, "Model not ready")
         event = payload.model_dump(exclude_none=True)
         try:
             schemas["telemetry"].validate(event)
-            frame = pd.DataFrame([event])[INPUT_FEATURES]
-            risk = float(app.state.models["rf.pkl"].predict_proba(frame)[0, 1])
-            anomaly = float(-app.state.models["if.pkl"].score_samples(frame)[0])
-            if not math.isfinite(anomaly):
-                raise ValueError("Invalid anomaly output")
-            manifest = app.state.manifest
-            result = {
-                **event,
-                "prediction_scope": SCOPE["prediction_scope"],
-                "temporal_prediction_enabled": False,
-                "score_semantics": SCOPE["score_semantics"],
-                "failure_score": risk,
-                "risk_alert": risk >= manifest["risk_threshold"],
-                "alert_level": alert_level(risk),
-                "anomaly_score": anomaly,
-                "anomaly_alert": anomaly >= manifest["anomaly_threshold"],
-                "policy": manifest["policy"],
-                "model_version": manifest["model_version"],
-                "scored_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
-                "model_artifact_sha256": manifest["files"]["rf.pkl"],
-                "risk_threshold": manifest["risk_threshold"],
-                "anomaly_threshold": manifest["anomaly_threshold"],
-            }
-            schemas["prediction"].validate(result)
-            return result
+            return response(
+                ledger,
+                event,
+                app.state.manifest,
+                lambda: infer(event),
+                schemas["prediction"].validate,
+            )
+        except InferenceConflict as exc:
+            raise HTTPException(409, str(exc)) from None
         except Exception:
             log.exception("Scoring failed; no fallback probability emitted")
             raise HTTPException(500, "Scoring failed") from None
+
+    def infer(event):
+        frame = pd.DataFrame([event])[INPUT_FEATURES]
+        risk = float(app.state.models["rf.pkl"].predict_proba(frame)[0, 1])
+        anomaly = float(-app.state.models["if.pkl"].score_samples(frame)[0])
+        if not math.isfinite(anomaly):
+            raise ValueError("Invalid anomaly output")
+        manifest = app.state.manifest
+        result = {
+            **event,
+            "prediction_scope": SCOPE["prediction_scope"],
+            "temporal_prediction_enabled": False,
+            "score_semantics": SCOPE["score_semantics"],
+            "failure_score": risk,
+            "risk_alert": risk >= manifest["risk_threshold"],
+            "alert_level": alert_level(risk),
+            "anomaly_score": anomaly,
+            "anomaly_alert": anomaly >= manifest["anomaly_threshold"],
+            "policy": manifest["policy"],
+            "model_version": manifest["model_version"],
+            "scored_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+            "model_artifact_sha256": manifest["files"]["rf.pkl"],
+            "risk_threshold": manifest["risk_threshold"],
+            "anomaly_threshold": manifest["anomaly_threshold"],
+        }
+        return result
 
     return app
 

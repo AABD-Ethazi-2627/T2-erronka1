@@ -77,7 +77,9 @@ def inspect_checkout(root):
     checks["ready"] = False
     checks["live_verified"] = False
     checks["meaning"] = (
-        "Read-only static preflight only; ready requires explicit end-to-end event reconciliation and live evidence."
+        "Read-only static preflight only; ready requires "
+        + "explicit end-to-end event reconciliation and live "
+        + "evidence."
     )
     return checks
 

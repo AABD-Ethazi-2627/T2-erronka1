@@ -12,7 +12,7 @@ sirven para trazabilidad. ETA, RUL, estaciones y aprendizaje temporal quedan fue
 de la entrega; los experimentos históricos se conservan separados y no se cargan
 en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOPE.md).
 
-[Índice final: ramas, métricas, comandos y límites](docs/evidence/INDEX_2026-10-19.md)
+[Índice de evidencias: alcance vigente y registros históricos](docs/evidence/INDEX_2026-10-19.md)
 · [Rúbrica y revisión pendiente](docs/rubrica/SEGUIMIENTO.md)
 · [Enunciado original](ENUNTZIATUA.md) · [Documentación](docs/README.md).
 
@@ -35,6 +35,10 @@ Los experimentos y empaquetado rechazan sobrescribir salidas; conservar anterior
 `outputs/api/` debe contener manifest.json, rf.pkl e if.pkl propios, con hashes
 coherentes. No cargar pickles descargados de terceros. Los modelos generados quedan
 ignorados por Git; informes compactos y hashes están versionados en docs/evidence.
+
+La API necesita un ledger local persistente y escribible para conservar respuestas
+canónicas en reintentos. Compose usa el volumen `scoring-state`; fuera de Compose,
+consultar [identidad, recuperación y conflictos 409](docs/SCORING_REPLAY_CONTRACT.md).
 
 Opcional de clasificación: `scripts.experiment_smotenc` compara sobremuestreo dentro
 de los folds. Los laboratorios temporales/estacionales y otros datasets son trabajo
@@ -85,10 +89,14 @@ certificado de confianza de NiFi. Verifica TLS y el nombre `localhost`; no
 acepta certificados sin validar. No ejecutar scripts temporales del equipo
 como si fueran instalación portable.
 
-Aplicar `elasticsearch/index-template.json` como template antes de ingerir y crear
-el dashboard con `uv run --frozen python -m scripts.create_lab_dashboard` o importar
-`kibana/acceptance-export.ndjson`. La vista filtra índices de aceptación, conserva
-el rango temporal del ensayo y no mezcla el montaje v1. Ver CG18/CG19 para pruebas.
+En un laboratorio autorizado, aplicar `elasticsearch/index-template.json` antes de
+ingerir. `uv run --frozen python -m scripts.create_lab_dashboard` genera ahora
+`kibana/cg19-review-source.ndjson` **sin conectarse a Kibana**; `--check` verifica
+su reproducción. El candidato v2 incluye temperaturas, heatmap/casos offline,
+últimos50 y KPI con denominadores. Importación y revisión humana siguen pendientes:
+ver [CG19 vigente](docs/evidence/CG19_2026-10-21.md). El export
+`kibana/acceptance-export.ndjson` conserva el ensayo histórico v1 y su rango absoluto;
+no demuestra las vistas nuevas. Ambos excluyen el índice de montaje v1.
 
 Elasticsearch sin autenticación está limitado a loopback/red Docker del lab;
 no exponer estos puertos en una red compartida. Mononodo no aporta HA.
@@ -107,10 +115,12 @@ Project y activación administrativa; cambios locales no la activan por sí solo
 comparación OOF y nested, costes y latencia; grupo opcional research.
 
 [Dataset estacional sintético ampliado y curva de aprendizaje](docs/evidence/CG11_ESTACIONAL_V2.md):
-245.376 filas; modelo experimental separado, sin mejora de precisión garantizada.
+investigación histórica fuera de la entrega, 245.376 filas y modelo sintético
+experimental separado. No se carga en la API ni acredita forecast real.
 
 [¿Se puede estimar tiempo hasta fallo con el SMB disponible?](docs/evidence/CG02_ETA_SMB.md)
-Auditoría de procedencia/continuidad y propuesta de criticidad por5/30/120min.
+Auditoría histórica de procedencia/continuidad; no acredita ETA y sus propuestas
+temporales quedan fuera del alcance vigente.
 
 ## Rutas y archivos del repositorio
 
