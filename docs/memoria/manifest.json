@@ -51,9 +51,9 @@
     "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
     "docs/rubrica/SEGUIMIENTO.md": "79eac6ea471b6d6b538b00d58b22c0bfb1cf3046fe45c6c140fc6598c2e64f07",
     "docs/rubrica/fuente.json": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2",
-    "pyproject.toml": "2661684b764a9b7e947956872702ee7e25a77d1789b8d16fbcf25d27567112e2",
+    "pyproject.toml": "74080e3b9c484deab4b3c5882b10f1dcbf899ee93764c8393c533944aec3afd7",
     "scripts/check_cg25_memory.py": "8b6a7d2d627502be154c0303f316e945eb6842c3ca545eb42532f0eb30aa02e7",
-    "uv.lock": "297e424f48775c2d5b6c6abb666b9fabd96470db6010500e177e10bb61311a17"
+    "uv.lock": "99f36073a6823acf20aa8e5f1ff2b811720c6731740bb2f17be9c1b49282a68d"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",

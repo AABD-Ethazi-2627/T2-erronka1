@@ -57,3 +57,20 @@ cp311 descargado ocupaba 4958027 bytes; las pasadas definitivas fueron offline.
 
 Este cambio queda pendiente de revisión independiente del padre y merge.
 No acredita cierre CG14, integración NiFi, aceptación ES, CI ni producción.
+
+
+## Avance documental de la base durante la validación
+
+PR42 incorporó PR48 y avanzó a `bb24d773dfb971d981edcf66459717c7fdb15a77`.
+Se conservó el commit probado `52ec6e028183bb569116561ff2bb29ddeb463c99`
+en `backup/kafka311-e5faf-20261021` y se reaplicó el fix sobre esa base.
+Todos los Python previamente probados, pyproject y lock son idénticos byte a
+byte. El único Python nuevo del avance es el comprobador documental CG25.
+Por ello no se repitieron las suites funcionales tras esta reaplicación.
+
+El comprobador CG25 rechazaba los hashes anteriores de pyproject y lock.
+Se actualizaron exclusivamente esas dos entradas de docs/memoria/manifest.json;
+el control negativo anterior falla y el comprobador completo posterior pasa.
+No se cambió su código ni se relajaron controles. Ruff global 0.17.1, formato,
+layout y diff completo contra ambas bases pasan después de la composición.
+Los detalles y hashes están en composition-results.json del taskroot.
