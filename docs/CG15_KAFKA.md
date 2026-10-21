@@ -14,11 +14,14 @@ uv sync --locked --extra kafka
 uv run --locked --extra kafka python -m scripts.archive_consumer --help
 ```
 
-El extra incorpora solamente `kafka-python==3.0.11`, cliente Python sin
+El extra incorpora solamente `kafka-python==3.0.11+cncguard.1`, cliente Python sin
 dependencias transitivas obligatorias. El entorno offline sin `--extra kafka`
 conserva sus dependencias. Se eligió frente a añadir un servicio o una biblioteca
 C al consumidor. Lock y pruebas fijan la versión; no usar el paquete `kafka`.
-[Paquete](https://pypi.org/project/kafka-python/3.0.11/) y
+La [procedencia y el parche local](../vendor/README.md) documentan el wheel
+instalado, basado en el
+[paquete upstream](https://pypi.org/project/kafka-python/3.0.11/).
+Consulta también la
 [API del cliente](https://kafka-python.readthedocs.io/en/3.0.11/apidoc/KafkaConsumer.html).
 
 `--api-version 3.7` es el valor por defecto, correspondiente a
