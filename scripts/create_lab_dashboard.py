@@ -9,6 +9,8 @@ INDEX = "cnc-telemetry-lab-v2,cnc-telemetry-smb-v1"
 DASHBOARD_ID = "cnc-cg19-review-v2"
 DATA_VIEW_ID = "cnc-cg19-review-data-v2"
 OUTPUT = ROOT / "kibana/cg19-review-source.ndjson"
+TEMPERATURE_GROUP_LIMIT = 100
+TEMPERATURE_PAGE_SIZE = 5
 
 
 def source(body, prop):
@@ -29,7 +31,7 @@ def vega(data, marks, **extra):
         "$schema": "https://vega.github.io/schema/vega/v5.json",
         "autosize": {"type": "fit", "contains": "padding"},
         "padding": 10,
-        "data": [data],
+        "data": data if isinstance(data, list) else [data],
         "marks": marks,
         **extra,
     }
@@ -144,7 +146,7 @@ def temperature_spec():
                 "groups": {
                     "multi_terms": {
                         "terms": [{"field": "machine_id"}, {"field": "source.kind"}],
-                        "size": 100,
+                        "size": TEMPERATURE_GROUP_LIMIT,
                     },
                     "aggs": {
                         "series": {
@@ -162,19 +164,67 @@ def temperature_spec():
                 }
             },
         },
-        "aggregations.groups.buckets",
+        "aggregations.groups",
     )
-    data["transform"] = [
-        {"type": "formula", "as": "group", "expr": "join(datum.key, ' / ')"},
-        {"type": "flatten", "fields": ["series.buckets"], "as": ["bucket"]},
-        {
-            "type": "fold",
-            "fields": ["bucket.air.value", "bucket.process.value"],
-            "as": ["sensor", "temperature"],
-        },
-    ]
+    # Keep the aggregation envelope: sum_other_doc_count must remain visible.
+    data["name"] = "response"
+    groups = {
+        "name": "groups",
+        "source": "response",
+        "transform": [
+            {"type": "flatten", "fields": ["buckets"], "as": ["identity"]},
+            {"type": "filter", "expr": "isValid(datum.identity)"},
+            {
+                "type": "formula",
+                "as": "group",
+                "expr": "join(datum.identity.key, ' / ')",
+            },
+            {"type": "collect", "sort": {"field": "group"}},
+            {"type": "window", "ops": ["row_number"], "as": ["rank"]},
+        ],
+    }
+    page = {
+        "name": "page_groups",
+        "source": "groups",
+        "transform": [
+            {
+                "type": "filter",
+                "expr": "datum.rank > (page-1)*pageSize && datum.rank <= page*pageSize",
+            }
+        ],
+    }
+    table = {
+        "name": "table",
+        "source": "page_groups",
+        "transform": [
+            {
+                "type": "flatten",
+                "fields": ["identity.series.buckets"],
+                "as": ["bucket"],
+            },
+            {
+                "type": "fold",
+                "fields": ["bucket.air.value", "bucket.process.value"],
+                "as": ["sensor", "temperature"],
+            },
+            {"type": "formula", "as": "time", "expr": "datum.bucket.key"},
+        ],
+    }
+    points = {
+        "name": "points",
+        "source": "table",
+        "transform": [
+            {
+                "type": "filter",
+                "expr": "isValid(datum.temperature) && isFinite(datum.temperature) && isValid(datum.time) && isFinite(datum.time) && datum.bucket.doc_count > 0",
+            }
+        ],
+    }
+    x_domain = "extent(pluck(data('points'), 'time'))"
+    y_domain = "extent(pluck(data('points'), 'temperature'))"
+    description = "datum.group + '; ' + (datum.sensor === 'bucket.air.value' ? 'aire' : 'proceso') + '; UTC ' + utcFormat(datum.time, '%Y-%m-%d %H:%M') + '; ' + format(datum.temperature, '.2f') + ' K; n hora ' + datum.bucket.doc_count"
     return vega(
-        data,
+        [data, groups, page, table, points],
         [
             {
                 "type": "group",
@@ -188,11 +238,12 @@ def temperature_spec():
                 "marks": [
                     {
                         "type": "line",
+                        "aria": False,
                         "from": {"data": "series"},
                         "sort": {"field": "datum.bucket.key"},
                         "encode": {
                             "update": {
-                                "x": {"scale": "x", "field": "bucket.key"},
+                                "x": {"scale": "x", "field": "time"},
                                 "y": {"scale": "y", "field": "temperature"},
                                 "defined": {
                                     "signal": "isValid(datum.temperature) && datum.bucket.doc_count > 0"
@@ -209,60 +260,135 @@ def temperature_spec():
                     },
                     {
                         "type": "symbol",
-                        "from": {"data": "series"},
+                        "from": {"data": "series_points"},
                         "encode": {
                             "update": {
-                                "x": {"scale": "x", "field": "bucket.key"},
+                                "x": {"scale": "x", "field": "time"},
                                 "y": {"scale": "y", "field": "temperature"},
                                 "opacity": {
                                     "signal": "isValid(datum.temperature) ? 1 : 0"
                                 },
                                 "size": {"value": 35},
+                                "shape": {"scale": "shape", "field": "group"},
                                 "fill": {"scale": "color", "field": "group"},
-                                "tooltip": {"signal": "datum"},
+                                "description": {"signal": description},
+                                "tooltip": {"signal": description},
                             }
                         },
                     },
                 ],
-            }
+                "data": [
+                    {
+                        "name": "series_points",
+                        "source": "series",
+                        "transform": points["transform"],
+                    }
+                ],
+            },
+            {
+                "type": "text",
+                "encode": {
+                    "update": {
+                        "x": {"signal": "width/2"},
+                        "y": {"signal": "height/2"},
+                        "align": {"value": "center"},
+                        "fontSize": {"value": 14},
+                        "text": {
+                            "signal": "length(data('points')) ? '' : (length(data('page_groups')) ? 'Sin temperaturas en esta página / ventana' : (length(data('groups')) ? 'Página vacía: seleccione una página con IDs' : 'Sin datos en el filtro / ventana'))"
+                        },
+                        "description": {
+                            "signal": "length(data('points')) ? '' : 'Sin datos de temperatura; compruebe página, filtro y ventana'"
+                        },
+                    }
+                },
+            },
+        ],
+        title={
+            "text": {
+                "signal": "'IDs: ' + length(data('page_groups')) + '/' + length(data('groups')) + ' recuperados · página ' + page + '/' + max(1, ceil(length(data('groups'))/pageSize))"
+            },
+            "subtitle": {
+                "signal": "['Hasta 100 ID/fuente; eventos fuera del top: ' + (length(data('response')) ? data('response')[0].sum_other_doc_count : 0), 'Selector 1–20: use páginas con IDs o filtre.', 'Aire punteado; proceso continuo. Forma/color por ID.']"
+            },
+            "anchor": "start",
+            "fontSize": 13,
+            "subtitleFontSize": 11,
+        },
+        signals=[
+            {"name": "pageSize", "value": TEMPERATURE_PAGE_SIZE},
+            {
+                "name": "page",
+                "value": 1,
+                "bind": {
+                    "input": "select",
+                    "name": "Página de IDs (5 por página): ",
+                    "options": list(
+                        range(1, TEMPERATURE_GROUP_LIMIT // TEMPERATURE_PAGE_SIZE + 1)
+                    ),
+                },
+            },
+            {
+                "name": "xDomain",
+                "update": f"!length(data('points')) ? [0, 3600000] : ({x_domain}[0] === {x_domain}[1] ? [{x_domain}[0]-1800000, {x_domain}[1]+1800000] : {x_domain})",
+            },
+            {
+                "name": "yDomain",
+                "update": f"!length(data('points')) ? [0, 1] : ({y_domain}[0] === {y_domain}[1] ? [{y_domain}[0]-1, {y_domain}[1]+1] : {y_domain})",
+            },
         ],
         scales=[
             {
                 "name": "x",
                 "type": "utc",
-                "domain": {"data": "table", "field": "bucket.key"},
+                "domain": {"signal": "xDomain"},
                 "range": "width",
             },
             {
                 "name": "y",
                 "type": "linear",
-                "domain": {"data": "table", "field": "temperature"},
+                "domain": {"signal": "yDomain"},
                 "range": "height",
                 "zero": False,
             },
             {
                 "name": "color",
                 "type": "ordinal",
-                "domain": {"data": "table", "field": "group"},
+                "domain": {"data": "page_groups", "field": "group"},
                 "range": {"scheme": "category10"},
+            },
+            {
+                "name": "shape",
+                "type": "ordinal",
+                "domain": {"data": "page_groups", "field": "group"},
+                "range": ["circle", "square", "triangle-up", "diamond", "cross"],
             },
         ],
         axes=[
             {
                 "orient": "bottom",
                 "scale": "x",
-                "title": "UTC · intervalos de 1 h; huecos sin datos",
+                "title": "UTC · media horaria; huecos sin datos",
+                "description": "UTC; media horaria. Sin graduaciones cuando no hay temperaturas válidas.",
+                "tickCount": {"signal": "max(2, floor(width/140))"},
+                "values": {"signal": "length(data('points')) ? null : []"},
             },
-            {"orient": "left", "scale": "y", "title": "Temperatura media (K)"},
+            {
+                "orient": "left",
+                "scale": "y",
+                "title": "Temperatura media (K)",
+                "description": "Temperatura media en kelvin. Sin graduaciones cuando no hay temperaturas válidas.",
+                "values": {"signal": "length(data('points')) ? null : []"},
+            },
         ],
         legends=[
             {
                 "fill": "color",
-                "title": "ID / fuente (hasta 100; filtrar máquina)",
+                "shape": "shape",
+                "title": "ID / fuente · página actual",
                 "titleLimit": 1000,
                 "labelLimit": 1000,
                 "orient": "bottom",
-                "columns": 2,
+                "columns": 1,
             }
         ],
     )
@@ -443,7 +569,9 @@ def build_objects(offline):
         "## Interpretación y decisión propuesta\n"
         'Telemetría: KQL `machine_id : "CNC-024"`, `alert_level : "AVISO"` y selector de fecha UTC. '
         "Los filtros afectan KPI, temperaturas y tabla. Separar `source.kind`. "
-        "Temperaturas: media por hora, no trayectoria física validada; muestra hasta 100 combinaciones ID/fuente. "
+        "Temperaturas: media por hora, no trayectoria física validada; consulta hasta 100 combinaciones ID/fuente, "
+        "páginas de cinco con selector de teclado. El título indica IDs recuperados, página y eventos fuera del top; "
+        "recorrer páginas o filtrar máquina/fuente. Color y forma distinguen IDs dentro de cada página, se reutilizan al cambiarla. "
         "Las líneas se cortan en horas vacías. Los IDs son simulados.\n\n"
         "### Evaluación OFFLINE FIJA (no responde a filtros)\n"
         f"Validación reutilizada para ajustar umbral; **no test independiente**. RF `score >= {offline['threshold']}`. "

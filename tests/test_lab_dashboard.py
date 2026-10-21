@@ -88,6 +88,15 @@ class DashboardTests(unittest.TestCase):
             json.loads(attrs["kibanaSavedObjectMeta"]["searchSourceJSON"])["size"], 50
         )
 
+    def test_temperature_query_keeps_100_groups_and_omission_metadata(self):
+        spec = temperature_spec()
+        response = spec["data"][0]
+        self.assertEqual(
+            response["url"]["body"]["aggs"]["groups"]["multi_terms"]["size"], 100
+        )
+        # Retain the envelope, including sum_other_doc_count, for coverage disclosure.
+        self.assertEqual(response["format"]["property"], "aggregations.groups")
+
     def test_bin_boundaries_counts_and_absence_differ_from_zero(self):
         report = fixture()
         bins = {(b["machine_type"], b["wear_bin"]): b for b in report["wear_bins"]}
