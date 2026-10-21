@@ -5,6 +5,7 @@ valid template shape, single source of truth for the validation script, no
 secrets, everything environment-driven, and the valid/rejected/retry wiring.
 """
 
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -68,7 +69,14 @@ def test_script_covers_every_stable_rejection_code():
 def test_no_secrets_or_hardcoded_credentials_in_flow():
     text = FLOW.read_text(encoding="utf-8")
 
-    assert "adminpassword123" not in text
+    # Preserve the exact forbidden-substring check without publishing the credential.
+    legacy_digest = "426848eb68bf6aa07212a4070863dbe30d92456cf011e238252ddfd86a247856"
+    legacy_length = 16
+    raw = text.encode("utf-8")
+    assert all(
+        hashlib.sha256(raw[offset:offset + legacy_length]).hexdigest() != legacy_digest
+        for offset in range(max(0, len(raw) - legacy_length + 1))
+    )
     assert not re.search(r"(?i)(sasl\.password|ssl\.key\.password)\s*[\"']?\s*:", text)
     for match in re.findall(r"#{([A-Za-z0-9_.]+)}", text):
         assert match.startswith("CG14_"), f"unexpected parameter: {match}"
