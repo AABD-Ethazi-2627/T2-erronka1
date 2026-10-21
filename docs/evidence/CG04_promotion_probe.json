@@ -1,0 +1,6 @@
+{
+  "baseline_accepted_80_20_report": true,
+  "inert_bytes_only": true,
+  "corrected_rejected_before_copy": true,
+  "reason": "RF report must preserve the exact active 70/15/15 partitions"
+}
