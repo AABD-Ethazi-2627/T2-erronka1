@@ -214,3 +214,15 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
         return counts
     finally:
         con.close()
+
+
+if __name__ == "__main__":
+    try:
+        from scripts.kafka_archive import main
+    except ModuleNotFoundError as exc:
+        if exc.name != "kafka":
+            raise
+        raise SystemExit(
+            "Kafka adapter requires: uv sync --locked --extra kafka"
+        ) from exc
+    raise SystemExit(main())
