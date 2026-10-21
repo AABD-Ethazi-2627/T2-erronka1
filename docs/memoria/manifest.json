@@ -1,0 +1,29 @@
+{
+  "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
+  "issue": 25,
+  "human_review": "pending",
+  "source_template": {
+    "course_path": "01_Erronka1_CNC_Guard/materialak/ANEXO4.docx",
+    "sha256": "c1732062eb8707f2e43ed80de2e00c88cb04730e79a0eea428af638673d9a0a8"
+  },
+  "files": {
+    "ENUNTZIATUA.md": "cd486693b2fba7af535b7a35e282b29bb7b984c66a959f35f7c27f3c804cac13",
+    "docs/evidence/CG05.md": "e08495e3daef1871150a804a5ec69e8130d2269137461ab11b1b2262bc1f89ac",
+    "docs/evidence/CG08.md": "1d5bba0747abfee3d40e1207a742330f49c42cdbddeb3beef01f6b70bca1c53a",
+    "docs/evidence/CG10.md": "a1358100a4b8b3713a240f6e85423a9a716df8b246f8f57b23e7fe5d9bd46111",
+    "docs/evidence/CG11.md": "57db8bb0177dbc27d5c0e1a0764ea7686e3296cbcbfe60ac809d886924e8683e",
+    "docs/evidence/CG12.md": "cb07211da879ce00ac6da8a243904fa88632e3e34da27154c6ea34e2e698666b",
+    "docs/evidence/CG14.md": "1f5b598b973340d03174a119b38f975614fdf72e8ad019a7defd09a721f3bb7b",
+    "docs/evidence/CG16.md": "051f865ce956981b50dc1db22a3084e20f3dcf2460fad8d6b73b5e901454edc4",
+    "docs/evidence/CG17_CURRENT_STATE_SCOPE.json": "dc5deb95723ea8b58baf989ecca152ff0236b3bc53729e023bd9999055e7a80e",
+    "docs/evidence/CG17_CURRENT_STATE_SCOPE.md": "b3ab1397cdd5ae3a50ee7834186eab504884c57c6ec76a711d0f4322220a4fc0",
+    "docs/evidence/CG18.md": "c1c1666397174f57554570ebbdc00980b3c3df14f9003b611e4ec246369ed3fe",
+    "docs/evidence/CG19.md": "4915830340a2c610708922cb6d21feb4e0a7d6e802b8feecc4d605508a02877a",
+    "docs/evidence/CG22.md": "85fadc5e7c529670a5a0400f00ab4619e8cd5789e34bb351e008222dff12259b",
+    "docs/evidence/CG24.md": "f0dd7f19bfa5648fc770a32dbb56d30630c7ba8a41896938d3eaffeb9b00be66",
+    "docs/evidence/CG28.md": "47a7c226219000ef539e4944b5ce4cf8e5ed3b779c5996cd0fdb2ee27e509fa4",
+    "docs/evidence/CG30.md": "919784fa4c3694ac1e6d29b7331558727ba209aba79be20772d336c5109ab2d7",
+    "docs/evidence/INDEX_2026-10-19.md": "fcc0ca678d2338fcda6b6bcf5a90effc7c0d1460028fda97ecf33c9934618c1c",
+    "docs/rubrica/fuente.json": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2"
+  }
+}

@@ -47,6 +47,12 @@ La evidencia de cada fila debe incluir **artefacto/versionado + comando o proced
 | Zereginak!G104 | Angiecrizu, Niistal, petiteiker, tears-mysthrala | [#10](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/10), [#17](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/17), [#19](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/19), [#23](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/23), [#26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26) | Parcial local; revisión pendiente | [Evidencia](../evidence/CG10.md) · [versión/comandos](../evidence/INDEX_2026-10-19.md). Costes por escenarios; no ahorro observado. Revisor humano: pendiente. |
 | Zereginak!G105 | Angiecrizu, Niistal, petiteiker, tears-mysthrala | [#19](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/19), [#26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26), [#27](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27) | Parcial local; revisión pendiente | [Evidencia](../evidence/CG19.md) · [versión/comandos](../evidence/INDEX_2026-10-19.md). Panel con datos de aceptación, sin validación de utilidad por operador. Revisor humano: pendiente. |
 
+## Aportación documental CG25 de 21/10/2026
+
+[Memoria y matriz de 40 criterios](../memoria/README.md) y [ANEXO4 propuesto](../memoria/ANEXO4_CNC_Guard.md). Base PR42 `28a7754`; prevalece el alcance contemporáneo, sin forecast/ETA/RUL. El índice anterior es evidencia parcial histórica. No cambia el estado de aceptación de ninguna fila, ni el reparto o los acuerdos de ANEXO1. Revisor humano, conclusión y fecha: pendientes.
+
+Verificación local CG25: `python3 scripts/check_cg25_memory.py` → 40 criterios, 54 enlaces, 18 hashes correctos; `git diff --check` sin errores. Comprueba integridad documental, no reproduce resultados técnicos ni acredita CI, merge o evaluación docente.
+
 ## Registro de cada revisión
 
 Copiar este bloque en el PR o en la evidencia de la etapa y enlazarlo desde la fila correspondiente:
