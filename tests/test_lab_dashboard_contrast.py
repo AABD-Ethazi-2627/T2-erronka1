@@ -151,7 +151,10 @@ if __name__ == "__main__":
         reports.append({"svg": file.name, "essential_paints": len(paints)})
     assert len(colors) == 5, f"Expected five effective SVG colors: {colors}"
     report = {
-        "method": "WCAG 2.2 sRGB luminance; effective SVG paint/opacity over explicit white",
+        "method": (
+            "WCAG 2.2 sRGB luminance; effective SVG paint/opacity "
+            + "over explicit white"
+        ),
         "reference": "https://www.w3.org/TR/WCAG22/#dfn-relative-luminance",
         "threshold": 3,
         "background": "#ffffff",

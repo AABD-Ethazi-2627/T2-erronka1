@@ -94,12 +94,21 @@ def summary_spec():
                 "'Observaciones en el filtro: ' + datum.doc_count", 10, data="table"
             ),
             text_mark(
-                "'Avisos de nivel: ' + datum.alerts.doc_count + ' / ' + datum.classified.doc_count + ' clasificados = ' + (datum.classified.doc_count ? format(datum.alerts.doc_count / datum.classified.doc_count, '.2%') : 'N/D')",
+                (
+                    "'Avisos de nivel: ' + datum.alerts.doc_count + ' / ' "
+                    + "+ datum.classified.doc_count + ' clasificados = ' + "
+                    + "(datum.classified.doc_count ? "
+                    + "format(datum.alerts.doc_count / "
+                    + "datum.classified.doc_count, '.2%') : 'N/D')"
+                ),
                 40,
                 data="table",
             ),
             text_mark(
-                "'Sin nivel reconocido: ' + (datum.doc_count - datum.classified.doc_count)",
+                (
+                    "'Sin nivel reconocido: ' + (datum.doc_count - "
+                    + "datum.classified.doc_count)"
+                ),
                 70,
                 data="table",
             ),
@@ -109,12 +118,22 @@ def summary_spec():
                 data="table",
             ),
             text_mark(
-                "'Edad del último evento filtrado: ' + (isValid(datum.latest.value) ? (clock < datum.latest.value ? 'fecha futura; revisar reloj' : format((clock-datum.latest.value)/60000, '.1f') + ' min') : 'N/D: sin eventos')",
+                (
+                    "'Edad del último evento filtrado: ' + "
+                    + "(isValid(datum.latest.value) ? (clock < "
+                    + "datum.latest.value ? 'fecha futura; revisar reloj' : "
+                    + "format((clock-datum.latest.value)/60000, '.1f') + ' "
+                    + "min') : 'N/D: sin eventos')"
+                ),
                 130,
                 data="table",
             ),
             text_mark(
-                "'Último UTC: ' + (isValid(datum.latest.value) ? utcFormat(datum.latest.value, '%Y-%m-%d %H:%M:%S') : 'N/D')",
+                (
+                    "'Último UTC: ' + (isValid(datum.latest.value) ? "
+                    + "utcFormat(datum.latest.value, '%Y-%m-%d %H:%M:%S') : "
+                    + "'N/D')"
+                ),
                 160,
                 data="table",
             ),
@@ -216,13 +235,23 @@ def temperature_spec():
         "transform": [
             {
                 "type": "filter",
-                "expr": "isValid(datum.temperature) && isFinite(datum.temperature) && isValid(datum.time) && isFinite(datum.time) && datum.bucket.doc_count > 0",
+                "expr": (
+                    "isValid(datum.temperature) && "
+                    + "isFinite(datum.temperature) && isValid(datum.time) && "
+                    + "isFinite(datum.time) && datum.bucket.doc_count > 0"
+                ),
             }
         ],
     }
     x_domain = "extent(pluck(data('points'), 'time'))"
     y_domain = "extent(pluck(data('points'), 'temperature'))"
-    description = "datum.group + '; ' + (datum.sensor === 'bucket.air.value' ? 'aire' : 'proceso') + '; UTC ' + utcFormat(datum.time, '%Y-%m-%d %H:%M') + '; ' + format(datum.temperature, '.2f') + ' K; n hora ' + datum.bucket.doc_count"
+    description = (
+        "datum.group + '; ' + (datum.sensor === "
+        + "'bucket.air.value' ? 'aire' : 'proceso') + '; UTC ' + "
+        + "utcFormat(datum.time, '%Y-%m-%d %H:%M') + '; ' + "
+        + "format(datum.temperature, '.2f') + ' K; n hora ' + "
+        + "datum.bucket.doc_count"
+    )
     return vega(
         [data, groups, page, table, points],
         [
@@ -246,14 +275,34 @@ def temperature_spec():
                                 "x": {"scale": "x", "field": "time"},
                                 "y": {"scale": "y", "field": "temperature"},
                                 "defined": {
-                                    "signal": "isValid(datum.temperature) && datum.bucket.doc_count > 0"
+                                    "signal": (
+                                        (
+                                            "isValid(datum.temperature) && "
+                                            + "datum.bucket.doc_count "
+                                        )
+                                        + "> 0"
+                                    )
                                 },
                                 "stroke": {"scale": "color", "field": "group"},
                                 "strokeDash": {
-                                    "signal": "datum.sensor === 'bucket.air.value' ? [2,3] : [8,0]"
+                                    "signal": (
+                                        "datum.sensor === 'bucket.air.value' "
+                                        + "? [2,3] : [8,0]"
+                                    )
                                 },
                                 "tooltip": {
-                                    "signal": "{'ID / fuente': datum.group, 'sensor': datum.sensor, 'UTC': utcFormat(datum.bucket.key, '%Y-%m-%d %H:%M'), 'media K': datum.temperature, 'n hora': datum.bucket.doc_count}"
+                                    "signal": (
+                                        (
+                                            "{'ID / fuente': datum.group, "
+                                            + "'sensor': datum.sensor, "
+                                        )
+                                        + (
+                                            "'UTC': utcFormat(datum.bucket.key, "
+                                            + "'%Y-%m-%d %H:%M'), "
+                                        )
+                                        + "'media K': datum.temperature, 'n hora': "
+                                        + "datum.bucket.doc_count}"
+                                    )
                                 },
                             }
                         },
@@ -294,10 +343,22 @@ def temperature_spec():
                         "align": {"value": "center"},
                         "fontSize": {"value": 14},
                         "text": {
-                            "signal": "length(data('points')) ? '' : (length(data('page_groups')) ? 'Sin temperaturas en esta página / ventana' : (length(data('groups')) ? 'Página vacía: seleccione una página con IDs' : 'Sin datos en el filtro / ventana'))"
+                            "signal": (
+                                "length(data('points')) ? '' : "
+                                + "(length(data('page_groups')) ? 'Sin temperaturas en "
+                                + "esta página / ventana' : (length(data('groups')) ? "
+                                + (
+                                    "'Página vacía: seleccione una página con "
+                                    + "IDs' : 'Sin "
+                                )
+                                + "datos en el filtro / ventana'))"
+                            )
                         },
                         "description": {
-                            "signal": "length(data('points')) ? '' : 'Sin datos de temperatura; compruebe página, filtro y ventana'"
+                            "signal": (
+                                "length(data('points')) ? '' : 'Sin datos de "
+                                + "temperatura; compruebe página, filtro y ventana'"
+                            )
                         },
                     }
                 },
@@ -306,10 +367,21 @@ def temperature_spec():
         background="#ffffff",
         title={
             "text": {
-                "signal": "'IDs: ' + length(data('page_groups')) + '/' + length(data('groups')) + ' recuperados · página ' + page + '/' + max(1, ceil(length(data('groups'))/pageSize))"
+                "signal": (
+                    "'IDs: ' + length(data('page_groups')) + '/' + "
+                    + "length(data('groups')) + ' recuperados · página ' + "
+                    + "page + '/' + max(1, ceil(length(data('groups'))/pageSi"
+                    + "ze))"
+                )
             },
             "subtitle": {
-                "signal": "['Hasta 100 ID/fuente; eventos fuera del top: ' + (length(data('response')) ? data('response')[0].sum_other_doc_count : 0), 'Selector 1–20: use páginas con IDs o filtre.', 'Aire punteado; proceso continuo. Forma/color por ID.']"
+                "signal": (
+                    "['Hasta 100 ID/fuente; eventos fuera del top: ' + "
+                    + "(length(data('response')) ? data('response')[0].sum_ot"
+                    + "her_doc_count : 0), 'Selector 1–20: use páginas con "
+                    + "IDs o filtre.', 'Aire punteado; proceso continuo. "
+                    + "Forma/color por ID.']"
+                )
             },
             "anchor": "start",
             "fontSize": 13,
@@ -330,11 +402,35 @@ def temperature_spec():
             },
             {
                 "name": "xDomain",
-                "update": f"!length(data('points')) ? [0, 3600000] : ({x_domain}[0] === {x_domain}[1] ? [{x_domain}[0]-1800000, {x_domain}[1]+1800000] : {x_domain})",
+                "update": (
+                    "!length(data('points')) ? [0, 3600000] : ("
+                    f"{x_domain}"
+                    "[0] === "
+                    f"{x_domain}"
+                    "[1] ? ["
+                    f"{x_domain}"
+                    "[0]-1800000, "
+                    f"{x_domain}"
+                    "[1]+1800000] : "
+                    f"{x_domain}"
+                    ")"
+                ),
             },
             {
                 "name": "yDomain",
-                "update": f"!length(data('points')) ? [0, 1] : ({y_domain}[0] === {y_domain}[1] ? [{y_domain}[0]-1, {y_domain}[1]+1] : {y_domain})",
+                "update": (
+                    "!length(data('points')) ? [0, 1] : ("
+                    f"{y_domain}"
+                    "[0] === "
+                    f"{y_domain}"
+                    "[1] ? ["
+                    f"{y_domain}"
+                    "[0]-1, "
+                    f"{y_domain}"
+                    "[1]+1] : "
+                    f"{y_domain}"
+                    ")"
+                ),
             },
         ],
         scales=[
@@ -371,7 +467,10 @@ def temperature_spec():
                 "orient": "bottom",
                 "scale": "x",
                 "title": "UTC · media horaria; huecos sin datos",
-                "description": "UTC; media horaria. Sin graduaciones cuando no hay temperaturas válidas.",
+                "description": (
+                    "UTC; media horaria. Sin graduaciones cuando no hay "
+                    + "temperaturas válidas."
+                ),
                 "tickCount": {"signal": "max(2, floor(width/140))"},
                 "values": {"signal": "length(data('points')) ? null : []"},
             },
@@ -379,7 +478,10 @@ def temperature_spec():
                 "orient": "left",
                 "scale": "y",
                 "title": "Temperatura media (K)",
-                "description": "Temperatura media en kelvin. Sin graduaciones cuando no hay temperaturas válidas.",
+                "description": (
+                    "Temperatura media en kelvin. Sin graduaciones cuando "
+                    + "no hay temperaturas válidas."
+                ),
                 "values": {"signal": "length(data('points')) ? null : []"},
             },
         ],
@@ -423,7 +525,10 @@ def heatmap_spec(offline):
                         "x": {"scale": "x", "field": "wear_bin", "band": 0.5},
                         "y": {"scale": "y", "field": "machine_type", "band": 0.5},
                         "text": {
-                            "signal": "datum.positives + '/' + datum.rows + ' (' + format(datum.failure_rate, '.1%') + ')'"
+                            "signal": (
+                                "datum.positives + '/' + datum.rows + ' (' + "
+                                + "format(datum.failure_rate, '.1%') + ')'"
+                            )
                         },
                         "align": {"value": "center"},
                         "baseline": {"value": "middle"},
@@ -476,7 +581,10 @@ def recent_search():
         "id": "cnc-cg19-recent-v2",
         "attributes": {
             "title": "Últimos 50 eventos · timestamp DESC, event_id ASC",
-            "description": "Eventos filtrados; ID completo y fuente. No se deducen FP/FN sin etiquetas.",
+            "description": (
+                "Eventos filtrados; ID completo y fuente. No se "
+                + "deducen FP/FN sin etiquetas."
+            ),
             "columns": [
                 "timestamp",
                 "event_id",
@@ -531,11 +639,17 @@ def build_objects(offline):
     specs = {
         "summary": ("Ventana filtrada · avisos, IDs y edad", summary_spec()),
         "temperature": (
-            "Temperaturas por ID / fuente · media horaria; aire punteado, proceso continuo",
+            (
+                "Temperaturas por ID / fuente · media horaria; aire "
+                + "punteado, proceso continuo"
+            ),
             temperature_spec(),
         ),
         "wear": (
-            "OFFLINE FIJO · desgaste vs frecuencia de fallo etiquetado · no responde a filtros",
+            (
+                "OFFLINE FIJO · desgaste vs frecuencia de fallo "
+                + "etiquetado · no responde a filtros"
+            ),
             heatmap_spec(offline),
         ),
     }
@@ -546,7 +660,9 @@ def build_objects(offline):
                 "id": "cnc-cg19-" + key + "-v2",
                 "attributes": {
                     "title": title,
-                    "description": "Simulación docente; sin ETA, RUL ni control físico.",
+                    "description": (
+                        "Simulación docente; sin ETA, RUL ni control físico."
+                    ),
                     "visState": json.dumps(
                         {
                             "title": title,
@@ -569,35 +685,82 @@ def build_objects(offline):
     overall = offline["overall"]
     cases = offline["cases"]
     decision = (
-        "## Interpretación y decisión propuesta\n"
-        'Telemetría: KQL `machine_id : "CNC-024"`, `alert_level : "AVISO"` y selector de fecha UTC. '
-        "Los filtros afectan KPI, temperaturas y tabla. Separar `source.kind`. "
-        "Temperaturas: media por hora, no trayectoria física validada; consulta hasta 100 combinaciones ID/fuente, "
-        "páginas de cinco con selector de teclado. El título indica IDs recuperados, página y eventos fuera del top; "
-        "recorrer páginas o filtrar máquina/fuente. Color y forma distinguen IDs dentro de cada página, se reutilizan al cambiarla. "
-        "Las líneas se cortan en horas vacías. Los IDs son simulados.\n\n"
-        "### Evaluación OFFLINE FIJA (no responde a filtros)\n"
-        f"Validación reutilizada para ajustar umbral; **no test independiente**. RF `score >= {offline['threshold']}`. "
-        f"TP {overall['tp']}; FN {overall['fn']}; FP {overall['fp']}; TN {overall['tn']}. "
-        f"FNR = FN/positivos = {overall['fn']}/{overall['positives']}; "
-        f"FPR = FP/negativos = {overall['fp']}/{overall['negatives']}. "
-        "Estas alertas RF no equivalen a los niveles docentes ni a IF. "
-        "Heatmap: cada celda muestra fallos etiquetados/filas de su tipo y banda de desgaste; celda ausente = sin muestra, no 0%. "
-        "No mide fallos por hora, causalidad ni disponibilidad.\n\n"
+        (
+            "## Interpretación y decisión propuesta\nTelemetría: KQL "
+            '`machine_id : "CNC-024"`, `alert_level : "AVISO"` y selector de '
+            "fecha UTC. Los filtros afectan KPI, temperaturas y tabla. Separar "
+            "`source.kind`. Temperaturas: media por hora, no trayectoria "
+            "física validada; consulta hasta 100 combinaciones ID/fuente, "
+            "páginas de cinco con selector de teclado. El título indica IDs "
+            "recuperados, página y eventos fuera del top; recorrer páginas o "
+            "filtrar máquina/fuente. Color y forma distinguen IDs dentro de "
+            "cada página, se reutilizan al cambiarla. Las líneas se cortan en "
+            "horas vacías. Los IDs son simulados.\n\n### Evaluación OFFLINE FIJA "
+            "(no responde a filtros)\nValidación reutilizada para ajustar "
+            "umbral; **no test independiente**. RF `score >= "
+            f"{offline['threshold']}"
+            "`. TP "
+            f"{overall['tp']}"
+            "; FN "
+            f"{overall['fn']}"
+            "; FP "
+            f"{overall['fp']}"
+            "; TN "
+            f"{overall['tn']}"
+            ". FNR = FN/positivos = "
+            f"{overall['fn']}"
+            "/"
+            f"{overall['positives']}"
+            "; FPR = FP/negativos = "
+            f"{overall['fp']}"
+            "/"
+            f"{overall['negatives']}"
+            ". Estas alertas RF no equivalen a los niveles docentes ni a IF. "
+            "Heatmap: cada celda muestra fallos etiquetados/filas de su tipo y "
+            "banda de desgaste; celda ausente = sin muestra, no 0%. No mide "
+            "fallos por hora, causalidad ni disponibilidad.\n\n"
+        )
         + "\n\n".join(
-            f"**{kind} offline**, fila de fuente {case['source_row_index']}, tipo {case['machine_type']}: "
-            f"label={case['label']}, RF={case['rf_score']}, desgaste={case['tool_wear_min']} min. "
+            (
+                "**"
+                f"{kind}"
+                " offline**, fila de fuente "
+                f"{case['source_row_index']}"
+                ", tipo "
+                f"{case['machine_type']}"
+                ": label="
+                f"{case['label']}"
+                ", RF="
+                f"{case['rf_score']}"
+                ", desgaste="
+                f"{case['tool_wear_min']}"
+                " min. "
+            )
             + (
-                "Una inspección podría ser innecesaria: contrastar sensores y procedencia antes de proponer una intervención."
+                (
+                    "Una inspección podría ser innecesaria: contrastar "
+                    + "sensores y procedencia antes de proponer una "
+                    + "intervención."
+                )
                 if kind == "FP"
-                else "Un fallo etiquetado queda sin alerta RF: la ausencia de aviso no acredita seguridad; requiere revisión contextual."
+                else (
+                    "Un fallo etiquetado queda sin alerta RF: la ausencia "
+                    + "de aviso no acredita seguridad; requiere revisión "
+                    + "contextual."
+                )
             )
             for kind, case in cases.items()
         )
-        + "\n\n**Propuesta humana:** revisar fila, temperatura, desgaste y procedencia; registrar decisión y responsable. "
-        "No se ha validado utilidad con un operador, ejecutado mantenimiento ni observado ahorro. "
-        "Online no hay ground truth: tasa real, FP y FN = N/D. "
-        "[Procedencia y reproducción](https://github.com/AABD-Ethazi-2627/T2-erronka1/blob/codex/cg19-required-views/docs/evidence/CG19_2026-10-21.md)."
+        + (
+            "\n\n**Propuesta humana:** revisar fila, temperatura, "
+            + "desgaste y procedencia; registrar decisión y "
+            + "responsable. No se ha validado utilidad con un "
+            + "operador, ejecutado mantenimiento ni observado "
+            + "ahorro. Online no hay ground truth: tasa real, FP y "
+            + "FN = N/D. [Procedencia y reproducción](https://github."
+            + "com/AABD-Ethazi-2627/T2-erronka1/blob/codex/cg19-requi"
+            + "red-views/docs/evidence/CG19_2026-10-21.md)."
+        )
     )
     objects.append(
         {
@@ -645,8 +808,16 @@ def build_objects(offline):
             "type": "dashboard",
             "id": DASHBOARD_ID,
             "attributes": {
-                "title": "CNC Guard · CG19 revisión v2 (online sin etiquetas + offline fijo)",
-                "description": "Candidato generado offline. Filtros máquina/fecha/alerta en telemetría; heatmap y casos offline fijos. Importación, consulta/render Kibana y revisión humana pendientes.",
+                "title": (
+                    "CNC Guard · CG19 revisión v2 (online sin etiquetas + "
+                    + "offline fijo)"
+                ),
+                "description": (
+                    "Candidato generado offline. Filtros "
+                    + "máquina/fecha/alerta en telemetría; heatmap y casos "
+                    + "offline fijos. Importación, consulta/render Kibana y "
+                    + "revisión humana pendientes."
+                ),
                 "panelsJSON": json.dumps(panels),
                 "optionsJSON": json.dumps(
                     {"useMargins": True, "hidePanelTitles": False}
