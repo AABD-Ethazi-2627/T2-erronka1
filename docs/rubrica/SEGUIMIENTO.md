@@ -60,7 +60,7 @@ panel vivo posterior a PR42. Las seis filas conservan estado parcial: reproducci
 por otro miembro, defensa, utilidad del dashboard y revisor/fecha pendientes.
 No sustituye la memoria CG25 de PR48 ni acredita entrega.
 
-## Aportación documental CG25 de 21/10/2026
+## Registro histórico CG25 de la base original (21/10/2026)
 
 [Memoria y matriz de 40 criterios](../memoria/README.md) y [ANEXO4 propuesto](../memoria/ANEXO4_CNC_Guard.md). Base PR42 `28a7754`; prevalece el alcance contemporáneo, sin forecast/ETA/RUL. El índice anterior es evidencia parcial histórica. No cambia el estado de aceptación de ninguna fila, ni el reparto o los acuerdos de ANEXO1. Revisor humano, conclusión y fecha: pendientes.
 
@@ -112,3 +112,17 @@ publicación atómica, recuperación y claves esperadas tras rename/replay.
 No ejecutan Filebeat, registry, Kafka ni SMB real. La evidencia histórica se
 conserva; las issues #5/#36 siguen parciales y abiertas. Revisión del padre,
 otro miembro y tutor sobre SMB/NFS: pendientes. No cambia la aceptación de G49.
+
+## CG25/CG27/CG30 — reconciliación documental de PR48 (2026-10-21)
+
+[Memoria y matriz de 40 descriptores](../memoria/README.md),
+[ANEXO4 propuesto](../memoria/ANEXO4_CNC_Guard.md) y
+[versiones/argumentación CG30](../evidence/CG30.md#versiones-y-decisiones-incorporadas)
+se fijan a PR42 `e5faf015cc16e2044d25ab59c1ec30c32222d889` por merge normal.
+El manifiesto conserva la base original y sus hashes como histórico etiquetado.
+Se incorporan los resultados existentes de CG15 durable/Kafka, CG21, CG23,
+scoring replay y SMB offline con sus límites. PR62 NiFi no integrada; PR59
+abierta standalone e incluida en PR62. No se repiten pruebas técnicas ni se
+declara CI de PR48, E2E, revisión humana, firma, Moodle o entrega final.
+Siguen pendientes los 218 avisos Kafka 3.11, Windows/WMIC, migraciones y
+validaciones reales. Las issues permanecen abiertas y no se autootorga nota.
