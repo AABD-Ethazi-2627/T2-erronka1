@@ -58,6 +58,11 @@ superponer su notebook o `train.py` sobre este camino activo.
 distintas de las canónicas **antes de leer/copiar artefactos**. Conserva la ruta
 CG08 → RF + CG09 → IF → bundle v4. La API sigue leyendo `manifest.json`, `rf.pkl`
 e `if.pkl`, validando alcance, versión sklearn y hashes antes de deserializar.
+La prueba API usa un manifiesto incompleto que solo contiene `artifact_role`:
+demuestra rechazo por falta de scope antes de deserializar, no un guard API de
+ese rol. El rechazo explícito del rol pertenece al empaquetador. La prueba usa
+HTTPX ASGI con lifespan explícito, sin depender del helper de PR51 ni cambiar
+la API de producción.
 Un modelo de CG04 aislado no satisface ese contrato. Los manifiestos e informes
 son declaraciones en un directorio de confianza, no firmas de procedencia;
 esta barrera evita promoción accidental, no falsificación deliberada.

@@ -61,7 +61,9 @@ def package(
         "risk_threshold": rf["validation_tuning_metrics"]["threshold"],
         "anomaly_threshold": anomaly["threshold"],
         "policy": "f2",
-        "limitation": "Development classification only; not calibrated industrial or future risk.",
+        "limitation": (
+            "Development classification only; not calibrated industrial or future risk."
+        ),
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     return manifest
