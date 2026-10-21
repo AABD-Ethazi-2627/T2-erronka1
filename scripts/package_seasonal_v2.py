@@ -1,4 +1,4 @@
-"""Package only the four verified synthetic partitions, never models or original AI4I."""
+"Package only the four verified synthetic partitions, never models or original AI4I."
 
 import argparse
 import hashlib
@@ -7,11 +7,15 @@ import zipfile
 from pathlib import Path
 
 NOTICE = (
-    "SYNTHETIC SEASONAL SCENARIO ONLY\nAll rows and dates are invented. Separate from original AI4I.\n"
-    "Independent seeds share simulator rules, not independent industrial truth.\n"
-    "Keep train/validation/evaluation/stress partitions separate. Do not random-split hourly rows.\n"
-    "Forecast quality is insufficient for operational maintenance decisions.\n"
-    "See docs/evidence/CG11_ESTACIONAL_V2.md and versioned report.\n"
+    "SYNTHETIC SEASONAL SCENARIO ONLY\nAll rows and dates "
+    + "are invented. Separate from original "
+    + "AI4I.\nIndependent seeds share simulator rules, not "
+    + "independent industrial truth.\nKeep "
+    + "train/validation/evaluation/stress partitions "
+    + "separate. Do not random-split hourly rows.\nForecast "
+    + "quality is insufficient for operational maintenance "
+    + "decisions.\nSee docs/evidence/CG11_ESTACIONAL_V2.md "
+    + "and versioned report.\n"
 )
 
 
@@ -30,7 +34,11 @@ def package(root):
         hashes[f"{name}.parquet"] = digest
     manifest = {
         "source_kind": "synthetic_seasonal_v2",
-        "warning": "Entirely invented scenario; not AI4I augmentation or observed industrial data. Not suitable as proof of industrial forecast precision.",
+        "warning": (
+            "Entirely invented scenario; not AI4I augmentation or "
+            + "observed industrial data. Not suitable as proof of "
+            + "industrial forecast precision."
+        ),
         "scenario": report["scenario"],
         "datasets": report["datasets"],
         "ai4i_source_sha256": report["ai4i_source_sha256"],

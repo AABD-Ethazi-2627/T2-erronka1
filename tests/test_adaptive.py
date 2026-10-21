@@ -171,7 +171,8 @@ class AdaptiveTests(unittest.TestCase):
             config.write_text(json.dumps(manifest()))
             source = root / "source.csv"
             source.write_text(
-                "machine,run,at,wear\nA,one,2026-10-19T10:00:00Z,10\nA,one,2026-10-19T10:01:00Z,12\n"
+                "machine,run,at,wear\nA,one,2026-10-19T10:00:00Z,10\nA,on"
+                + "e,2026-10-19T10:01:00Z,12\n"
             )
             argv = [
                 "evaluate",

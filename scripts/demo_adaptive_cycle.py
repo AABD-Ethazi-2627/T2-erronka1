@@ -136,7 +136,10 @@ def main():
         "wear": {
             "upper": 3500,
             "unit": "min",
-            "source": "Synthetic integration fixture threshold; not a physical specification",
+            "source": (
+                "Synthetic integration fixture threshold; not a "
+                + "physical specification"
+            ),
         }
     }
     (root / "limits.json").write_text(json.dumps(limits))

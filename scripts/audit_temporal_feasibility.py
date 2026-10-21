@@ -125,7 +125,10 @@ def audit(frame, reference=None, verified_identity=False, verified_onsets=False)
             "fraction_over_5minutes": float(gaps.gt(300).mean()) if len(gaps) else None,
         },
         "next_positive_diagnostic": {
-            "meaning": "Strictly later observed positive state, NOT failure onset or physical remaining lifetime",
+            "meaning": (
+                "Strictly later observed positive state, NOT failure "
+                + "onset or physical remaining lifetime"
+            ),
             "unambiguous_rows_with_later_positive": len(next_minutes),
             "censored_rows": censored,
             "median_minutes_to_later_positive": float(np.median(next_minutes))
@@ -136,7 +139,10 @@ def audit(frame, reference=None, verified_identity=False, verified_onsets=False)
         "eta_training_ready": not blockers,
         "eta_minutes": None,
         "temporal_criticality": "UNKNOWN",
-        "meaning": "This audit estimates feasibility, not a trained ETA or validated urgency policy",
+        "meaning": (
+            "This audit estimates feasibility, not a trained ETA "
+            + "or validated urgency policy"
+        ),
     }
     if reference is not None:
         common = ["machine_type"] + SENSORS
@@ -218,7 +224,10 @@ def run(root):
         train_sig = signatures(training, features)
         complement = set(official_sig) - set(train_sig)
         report["official_uci_reference"] = {
-            "url": "https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset",
+            "url": (
+                "https://archive.ics.uci.edu/dataset/601/ai4i+2020+pred"
+                + "ictive+maintenance+dataset"
+            ),
             "sha256": hashlib.sha256(official_path.read_bytes()).hexdigest(),
             "rows": len(official),
             "static_reference_complement_signatures": len(complement),
@@ -232,15 +241,34 @@ def run(root):
                 stream_sig
             )
             == complement,
-            "meaning": "Fingerprint provenance only, not temporal labels or model performance evaluation",
+            "meaning": (
+                "Fingerprint provenance only, not temporal labels or "
+                + "model performance evaluation"
+            ),
         }
     report["limitations"] = [
-        "SMB availability and batch timestamps do not prove physical origin or chronological failure onset.",
-        "AI4I matching is forensic data provenance, not evaluation of the old test or model training.",
-        "Simultaneous conflicting states prevent valid longitudinal labels; no type changes were observed in this snapshot.",
+        (
+            "SMB availability and batch timestamps do not prove "
+            + "physical origin or chronological failure onset."
+        ),
+        (
+            "AI4I matching is forensic data provenance, not "
+            + "evaluation of the old test or model training."
+        ),
+        (
+            "Simultaneous conflicting states prevent valid "
+            + "longitudinal labels; no type changes were observed in "
+            + "this snapshot."
+        ),
         "A later positive label under a reused ID is not time-to-failure ground truth.",
-        "Wear decreases may be maintenance or unrelated sample; no repair/cycle log provided.",
-        "ETA remains unavailable; current-state severity and API response latency are different quantities.",
+        (
+            "Wear decreases may be maintenance or unrelated "
+            + "sample; no repair/cycle log provided."
+        ),
+        (
+            "ETA remains unavailable; current-state severity and "
+            + "API response latency are different quantities."
+        ),
     ]
     (root / "audit.json").write_text(
         json.dumps(report, indent=2, allow_nan=False) + "\n"
