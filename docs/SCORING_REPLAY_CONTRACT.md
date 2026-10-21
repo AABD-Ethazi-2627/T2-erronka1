@@ -7,6 +7,15 @@ intento HTTP. No se introducen IDs de intento ni se cambia el archivo.
 
 ## Identidad y conflictos
 
+Antes de validar Telemetry, el API limita el cuerpo completo a 32.768 bytes
+(413 si los supera, también con transferencia fragmentada) y a 64 contenedores
+JSON anidados. Superar la profundidad o fallar sintaxis/modelo de entrada da
+422 con diagnóstico fijo acotado, sin `input` ni contexto de validación. Las
+comillas, escapes y bytes UTF-8 dentro de cadenas no cuentan como estructura.
+Estos rechazos no llaman a scoring ni abren el ledger. El manejador sólo trata
+`RequestValidationError`; MemoryError y errores internos no se convierten en
+422. Una petición Telemetry válida con bundle inválido/ausente conserva 503.
+
 - `event_id` queda vinculado a **todo** el telemetry validado, incluidos source,
   máquina y timestamp. El orden de las claves JSON y las representaciones
   numéricas normalizadas al mismo JSON por Pydantic no crean otra ocurrencia

@@ -6,6 +6,7 @@ Requires an existing ES image in the local Docker engine; never pulls images.
 
 import argparse
 import asyncio
+import copy
 import json
 import socket
 import subprocess
@@ -23,8 +24,9 @@ from test_cg14_durable_pipeline import NAMESPACE, RAW, message
 from test_scoring_replay import AnomalyDouble, RiskDouble, manifest
 
 from scoring.score_api import create_app
+from scripts.archive_consumer import consume as archive
 from scripts.archive_consumer import digest, event_key
-from scripts.durable_pipeline import Pipeline
+from scripts.durable_pipeline import Pipeline, PipelineBlocked, encoded
 
 IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:9.5.4"
 
@@ -302,6 +304,92 @@ async def verify(output):
                 assert receipts[0]["completed"] == 1 and receipts[1]["replay"] == 1
                 assert all(receipt["source_ack"] is False for receipt in receipts)
                 assert risk.calls == 2
+                failure_cases = []
+                for stream in ("telemetry", "prediction"):
+                    conflict_root = root / ("conflict-" + stream)
+                    payload = json.loads(
+                        next(
+                            (root / "worker/outbox" / stream).glob("*.json")
+                        ).read_bytes()
+                    )
+                    # Match the selected occurrence, regardless of directory order.
+                    offset = (
+                        0
+                        if payload["event_id"]
+                        == json.loads(
+                            (
+                                root
+                                / "worker/identity"
+                                / (digest(message(0)[0].encode()) + ".json")
+                            ).read_bytes()
+                        )["telemetry"]["event_id"]
+                        else 1
+                    )
+                    stale = copy.deepcopy(payload)
+                    stale["rpm"] = 1501
+                    assert (
+                        archive(
+                            conflict_root / "archive",
+                            [("prior", stream, encoded(stale))],
+                            lambda: None,
+                        )["stored"]
+                        == 1
+                    )
+                    blocked_acks = []
+                    operations = len(evidence["operations"])
+                    for _ in range(4):
+                        blocked = Pipeline(
+                            conflict_root,
+                            Transport(),
+                            namespace=NAMESPACE,
+                            manifest=config,
+                            scoring_url=address + "/predict",
+                            es_url="http://isolated-es",
+                            es_index=index,
+                        )
+                        try:
+                            await blocked.consume(
+                                [message(offset)],
+                                lambda blocked_acks=blocked_acks: blocked_acks.append(
+                                    True
+                                ),
+                            )
+                        except PipelineBlocked:
+                            pass
+                        else:
+                            raise AssertionError("Rejected receipt became successful")
+                    assert not blocked_acks and risk.calls == 2
+                    assert len(evidence["operations"]) == operations
+                    failure_cases.append(
+                        {"stream": stream, "attempts": 4, "acks": 0, "es_calls": 0}
+                    )
+                # A real ES content conflict must block even a completed job.
+                prediction = json.loads(outputs[0].read_bytes())
+                identity = event_key("prediction", prediction)
+                stale = copy.deepcopy(prediction)
+                stale["rpm"] = 1501
+                assert (
+                    await asyncio.to_thread(
+                        es, "PUT", f"/{index}/_doc/{identity}", encoded(stale)
+                    )
+                ).status_code == 200
+                before_failed_ack = len(acks)
+                try:
+                    await worker.consume(
+                        [message(0), message(1)], lambda: acks.append(False)
+                    )
+                except PipelineBlocked:
+                    pass
+                else:
+                    raise AssertionError("ES conflict became successful")
+                assert len(acks) == before_failed_ack and risk.calls == 2
+                failure_cases.append(
+                    {
+                        "stream": "es",
+                        "acks": 0,
+                        "conflict": "real _create 409 and GET mismatch",
+                    }
+                )
                 evidence.update(
                     status="PASSED",
                     first=first,
@@ -313,6 +401,7 @@ async def verify(output):
                     raw_sha256=digest(RAW),
                     scoring_transport="HTTP over 127.0.0.1 ephemeral port",
                     staged_process_receipts=receipts,
+                    required_destination_failures=failure_cases,
                 )
     except BaseException as exc:
         evidence.update(status="FAILED", error=type(exc).__name__ + ": " + str(exc))
@@ -338,7 +427,8 @@ async def verify(output):
             "http_server_stopped", True
         ):
             raise RuntimeError(
-                "Disposable verification resources did not stop cleanly; inspect evidence"
+                "Disposable verification resources did not stop cleanly; "
+                "inspect evidence"
             )
 
 

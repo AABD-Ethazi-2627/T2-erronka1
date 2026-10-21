@@ -5,6 +5,14 @@ Draft contra `main`. **Estado global PARTIAL; issue #14 debe seguir abierta.**
 
 ## Estado vigente para el revisor
 
+La composición PR65 incorpora PR42 `53f342d` (PR62 y PR64). El
+[worker durable opt-in](CG14_DURABLE_PIPELINE.md) y su
+[corrección de recibos/JSON profundo](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
+tienen evidencia HTTP/disco y ES aislado separada del runtime histórico de
+este handoff. Un recibo CG15 rechazado bloquea todos los replays, sin ACK.
+Esto no habilita NiFi del host, no acredita RESTORE E2E y no cierra la issue.
+El siguiente gate de PR65 es revisión padre del SHA publicado.
+
 - VERIFIED histórico de laboratorio: pipeline de validación/rechazo, Kafka E2E,
   recuperación Kafka 3/3, provenance, DLQ y export de NiFi 2.12.0.
 - RESTORE estructural VERIFIED: grupo existente

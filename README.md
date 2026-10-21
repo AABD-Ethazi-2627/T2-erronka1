@@ -130,3 +130,12 @@ Ejecutar `python3 scripts/check_repository_layout.py` desde la raíz.
 ## CG14: validación e integración pendiente
 
 La validación CG14 y el laboratorio RESTORE tienen un alcance separado de la guía activa anterior. Consultar [contrato](docs/CG14_VALIDATION_CONTRACT.md), [RESTORE](docs/CG14_RESTORE_E2E.md) y [plan de integración PR42](docs/CG14_PR42_INTEGRATION.md). El mock RESTORE no acredita scoring ni archivo durable integrados.
+
+El [worker durable opt-in](docs/CG14_DURABLE_PIPELINE.md) conecta raw, API
+canónica, archivo CG15 y ES opcional requerido. PR65 exige recibos `stored` o
+`duplicate` por cada stream, incluso en replay; un rechazo persistido bloquea
+el ACK. La API limita el cuerpo a 32.768 bytes y la profundidad JSON a 64,
+con errores 422 acotados sin devolver la entrada. Véanse la
+[corrección y sus límites](docs/evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
+y la [matriz CG14](docs/CG14_ACCEPTANCE_MATRIX.md). La revisión padre y los
+ensayos Apache Kafka/NiFi reales siguen pendientes.

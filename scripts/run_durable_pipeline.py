@@ -68,7 +68,8 @@ def main(argv=None):
     args = cli.parse_args(argv)
     if not args.manifest.is_file():
         cli.error(
-            "Pinned manifest must exist; no models are generated or loaded by this worker"
+            "Pinned manifest must exist; "
+            "no models are generated or loaded by this worker"
         )
     if not math.isfinite(args.timeout) or args.timeout <= 0:
         cli.error("timeout must be positive and finite")

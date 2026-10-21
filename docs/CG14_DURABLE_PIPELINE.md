@@ -14,8 +14,9 @@ entorno del lock con extra `kafka`, API de esta revisión y manifiesto exacto de
 bundle aprobado ya disponible. El worker lee el manifiesto; no carga modelos,
 no entrena y no consulta datasets. No usar el journal/archivo en SMB/NFS.
 La distro validada se llama `FedoraLinux-43` pero declara Fedora Linux 44 WSL.
-Dependencias fijadas: kafka-python 3.0.11, HTTPX 0.27.0, FastAPI 0.133.0,
-Starlette 1.7.0, PyArrow 23.0.1. No se modifica pyproject ni lock.
+Dependencias de la base integrada: kafka-python `3.0.11+cncguard.1`, HTTPX
+0.27.0, FastAPI 0.133.0, Starlette 1.7.0 y PyArrow 23.0.1. El wheel local
+de PR64 corrige los avisos de resources; no se cambia su pin ni su contenido.
 
 En un laboratorio propio autorizado, con broker y topic ya creados:
 
@@ -92,6 +93,10 @@ ruta de republicación con origen implícito.
 5. `outbox/telemetry` y `outbox/prediction` son JSON inmutables. CG15 persiste
    Bronze, Parquet y ledger; un rechazo CG15 bloquea el origen. Se reutiliza
    su misma clave de evento, sin inventar una segunda semántica de IDs.
+   Cada stream exige un recibo durable `stored` o `duplicate` y la huella de
+   sus bytes. Se consulta también después del archivo de jobs pendientes:
+   `replay=1, rejected=0` no acredita aceptación del recibo original. Un
+   recibo `rejected` sigue bloqueando en todos los reintentos, sin editarlo.
 6. ES opt-in usa `_create` con esa misma clave Prediction. Un 409 sólo se
    acepta tras GET y comparación exacta del `_source`; nunca sobrescribe.
 7. El job pasa a completado sólo después de todos los destinos requeridos.
@@ -113,6 +118,11 @@ CSV/UTF-8 inválidos y HTTP 422 son rechazos terminales: raw más cuarentena
 durable antes del ack, sin predicción ficticia. La cuarentena referencia el
 delivery mediante nombre/hash, motivo y hashes del cuerpo cuando corresponde.
 HTTP 409 y otros 4xx/3xx bloquean, conservan evidencia y no confirman offsets.
+La API admite como máximo 32.768 bytes, incluidos cuerpos fragmentados; un
+cuerpo mayor conserva 413. JSON con más de 64 contenedores anidados devuelve
+422 antes del parsing. Errores de sintaxis/validación también devuelven 422
+acotado, sin serializar `input` ni contexto recursivo. Los errores internos no
+se reclasifican como errores de validación.
 2xx requiere cuerpo Prediction válido y las dos precondiciones reconocidas;
 un 204 o JSON inválido no es éxito. Los 5xx y errores de transporte, incluidos
 timeouts, tienen intentos finitos y, al agotarse, dejan cuarentena de bloqueo
@@ -182,6 +192,9 @@ HTTP real por loopback y ES 9.5.4 real en contenedor propio `--network=none`,
 sin puertos ni volúmenes, con datos tmpfs y `--pull=never`. Usa curl por
 docker exec exclusivamente contra 127.0.0.1 dentro de ese contenedor.
 No prueba Apache Kafka, NiFi, Filebeat, SMB/OT ni un modelo de entrega.
+`test_durable_receipts_http.py` añade Uvicorn/HTTP real, conflictos CG15 en
+ambos streams, cuatro intentos con conexiones reabiertas, commit de origen
+incierto y validación JSON profunda/fragmentada en Python 3.11 y 3.12.
 
 ```bash
 PYTHONPATH=.:tests python tests/verify_durable_pipeline.py --output /new/path/result.json
@@ -192,6 +205,7 @@ fallos y limpieza; no reemplaza evidencia previa. Las pruebas de cortes por
 excepción verifican replay y commits visibles, no un ensayo de pérdida de
 alimentación del disco. Antes de aceptación faltan ensayo Kafka/NiFi real,
 import del export, caída/rebalance real, persistencia tras reinicio del host
-y revisión independiente sobre el SHA final. El residual heredado de 218
-Kafka DeprecationWarning en Python 3.11 sigue reservado al otro frente;
-no se filtra ni se presenta el gate estricto general como limpio.
+y revisión independiente sobre el SHA final. Los 218 avisos Kafka heredados
+se corrigieron en PR64, incorporada en esta base; véase su
+[evidencia](evidence/KAFKA311_WARNING_FIX_20261021.md). La validación del delta
+y sus límites se registran en [la ronda 2](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md).

@@ -4,6 +4,14 @@ Fecha de corte: 2026-10-21. Issue oficial: [#14](https://github.com/AABD-Ethazi-
 
 ## Corte vigente de publicación — 2026-10-21
 
+Actualización PR65 ronda 2: el [worker opt-in](CG14_DURABLE_PIPELINE.md) ya
+implementa raw→API canónica→CG15→ES configurado, con recibo durable aceptado
+por stream antes de completar/ACK. [La evidencia de corrección](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
+separa regresiones HTTP/disco, crashes de procesos y ES aislado de la
+aceptación del grafo NiFi/Apache Kafka real. El conteo 209 y las reservas de
+runtime siguientes pertenecen al corte anterior; no son el total de esta
+ronda ni prueba de ausencia del worker. La revisión padre sigue pendiente.
+
 La regresión actual es **209 tests superados**. La estructura RESTORE 23/27/1
 está verificada; su servicio fue importado DISABLED. El RESTORE E2E funcional y
 la habilitación del servicio restaurado siguen **NOT_TESTED**. El mock propio
@@ -13,7 +21,8 @@ histórica y pertenece al laboratorio, no a esta copia ni a CG13 real.
 
 La tabla inferior conserva el corte histórico y sus reservas de evidencia HTTP;
 no autoriza cerrar los criterios oficiales. La revisión de otro integrante,
-contratos CG03/CG13/CG28, idempotencia durable y SSH remoto siguen pendientes.
+contratos CG03/CG13/CG28, aceptación de idempotencia en runtime y SSH remoto
+siguen pendientes.
 La issue #14 continúa abierta; la referencia del PR es únicamente `Refs #14`.
 Evidencias de runtime ignoradas se citan como rutas locales, no como enlaces a
 archivos disponibles en GitHub. Ver el estado vigente en
@@ -45,7 +54,7 @@ Estados usados:
 | Rechazo y DLQ persistente | `PutFile` a ruta local con permisos restrictivos | Persistencia/reinicio de DLQ validada en evidencia previa | VERIFIED_LAB | Definir sobre/destino compartido/retención con CG03/13 |
 | Recuperación de Kafka tras caída | ConsumeKafka 2.12 lab y group/topic sintéticos aislados | Tres ensayos; cada uno 6/6 offsets, lag 0, seis RECEIVE/offsets/IDs únicos, sin nuevos DLQ; `iteration5-summary.json` | VERIFIED_LAB | CG13 real aún no confirmado; no supone exactly-once |
 | Conteos y provenance | Atributos `event_id`, topic/partition/offset, FlowFile UUID y eventos NiFi | E2E lab consultó provenance; recuperación capturó RECEIVE y correlación por ID/offset | VERIFIED_LAB | No hay archivo de provenance externo/retención acordada |
-| Idempotencia productiva y alertas sin duplicados | Diseño en [`IDEMPOTENCY.md`](../deploy/cg14/IDEMPOTENCY.md); no dedupe durable implementada | E2E previo: dos eventos con mismo ID alcanzaron el mock | PARTIAL | Contrato de identidad CG03, API/almacenamiento y destino de alertas CG28 |
+| Idempotencia productiva y alertas sin duplicados | Worker opt-in con ledger API/worker/CG15 y recibos aceptados por stream; diseño en [`IDEMPOTENCY.md`](../deploy/cg14/IDEMPOTENCY.md) | Regresiones de replay/conflicto y HTTP/ES aislados; E2E previo del mock es histórico | PARTIAL | Revisión padre, Kafka/NiFi reales y destino de alertas CG28 |
 | Contrato CG03 aprobado | Propuesta local `docs/CG14_VALIDATION_CONTRACT.md` | Aprobación del responsable no disponible | BLOCKED | Revisar schema, ID, unidades, timestamps, rechazo y retención |
 | Kafka real CG13 y consumo autorizado | Broker de laboratorio no productivo | Sin endpoint/topic/group reales confirmados; no se consumieron datos reales | BLOCKED | Responsable CG13 confirma listeners seguros, formato, particiones, group, offsets/retención |
 | API productiva CG28 | `scoring/score_api.py` contiene marcadores; mock no equivalente | Sin request/response productivos ejecutados | BLOCKED | Implementación/contrato API y destino de alertas |
@@ -62,7 +71,9 @@ según las evidencias citadas. No equivale a aceptación de issue #14 hasta comp
 las rutas HTTP pendientes de evidencia y recibir la revisión requerida.
 
 **Integración real CNC Guard: BLOCKED** por CG03/CG13/CG28, broker/tópicos no
-confirmados, API real no implementada en el checkout y sin idempotencia durable.
+confirmados para el grafo activo y falta de aceptación runtime. El checkout
+incluye API canónica y worker durable opt-in; su existencia y validación local
+no acreditan cableado del grafo NiFi activo ni aceptación de esos contratos.
 
 **Acceso administrativo SSH/LAN: NOT_TESTED/BLOCKED** por intervención
 administrativa y segundo equipo pendiente. Esto no invalida las pruebas

@@ -147,10 +147,13 @@ class Pipeline:
                 con.execute("PRAGMA synchronous=FULL")
                 con.executescript(
                     "CREATE TABLE IF NOT EXISTS config (value TEXT NOT NULL);"
-                    "CREATE TABLE IF NOT EXISTS objects (path TEXT PRIMARY KEY, hash TEXT NOT NULL);"
-                    "CREATE TABLE IF NOT EXISTS jobs (id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, "
+                    "CREATE TABLE IF NOT EXISTS objects "
+                    "(path TEXT PRIMARY KEY, hash TEXT NOT NULL);"
+                    "CREATE TABLE IF NOT EXISTS jobs "
+                    "(id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, "
                     "response BLOB, outcome TEXT);"
-                    "CREATE TABLE IF NOT EXISTS attempts (id INTEGER PRIMARY KEY, delivery TEXT, "
+                    "CREATE TABLE IF NOT EXISTS attempts "
+                    "(id INTEGER PRIMARY KEY, delivery TEXT, "
                     "target TEXT, result TEXT);"
                 )
                 config = canonical(self.config)
@@ -305,14 +308,7 @@ class Pipeline:
                 # Never let consume() create a replacement empty ledger after
                 # a committed destination was lost. Verify its receipt read-only
                 # before replay, then let CG15 validate hashes and all objects.
-                ledger = (self.root / "archive/ledger.sqlite").as_uri() + "?mode=ro"
-                with closing(sqlite3.connect(ledger, uri=True)) as receipts:
-                    receipt = receipts.execute(
-                        "SELECT outcome FROM deliveries WHERE id=?",
-                        (canonical([delivery, stream]),),
-                    ).fetchone()
-                if not receipt or receipt[0] not in ("stored", "duplicate"):
-                    raise PipelineBlocked("Committed archive receipt missing")
+                self.require_archive_receipt(delivery, stream, payload)
             # A rejection here is not a successful required archive destination.
             stats = archive(
                 self.root / "archive",
@@ -322,12 +318,29 @@ class Pipeline:
             if stats["rejected"]:
                 self.evidence(con, key, "ARCHIVE_REJECTED", {"stream": stream})
                 raise PipelineBlocked("CG15 rejected a required output")
+            # CG15 replay counts do not repeat the original outcome. Require
+            # its committed receipt for pending jobs as well as completed ones.
+            self.require_archive_receipt(delivery, stream, payload)
             self.checkpoint("after_" + stream + "_archive")
         if self.config["es_url"]:
             await self.index(con, key, prediction, response)
         self.checkpoint("before_done")
         self.finish(con, delivery, "completed")
         return "replay" if completed else "completed"
+
+    def require_archive_receipt(self, delivery, stream, payload):
+        ledger = (self.root / "archive/ledger.sqlite").as_uri() + "?mode=ro"
+        with closing(sqlite3.connect(ledger, uri=True)) as receipts:
+            receipt = receipts.execute(
+                "SELECT hash, outcome FROM deliveries WHERE id=?",
+                (canonical([delivery, stream]),),
+            ).fetchone()
+        if (
+            not receipt
+            or receipt[0] != digest(stream.encode() + b"\0" + payload)
+            or receipt[1] not in ("stored", "duplicate")
+        ):
+            raise PipelineBlocked("Committed archive receipt missing or not accepted")
 
     def validate_prediction(self, prediction, event):
         self.schemas["prediction"].validate(prediction)

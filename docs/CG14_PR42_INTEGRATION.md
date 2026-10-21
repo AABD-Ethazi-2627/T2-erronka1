@@ -187,9 +187,9 @@ La evidencia de esta implementación se resume en
 Las brechas runtime anteriores permanecen abiertas; ASGI/dobles, comparación
 de exports y mocks offline no sustituyen un ensayo integrado.
 
-Tras incorporar PR58 se reproduce además un hallazgo heredado en Python 3.11:
-el import de kafka-python 3.0.11 emite 218 DeprecationWarning de la API legacy
-importlib.resources. Sus unittest no fallan, pero el runner estricto general
-devuelve 1 por esos avisos. En 3.12 el probe no emite avisos. No se filtran ni se
-modifica Kafka fuera de alcance. El informe registra INHERITED-KAFKA311-WARN-1
-como OPEN: esta rama no acredita la matriz estricta general limpia de 3.11.
+La base PR42 `53f342d` incorpora PR62 y PR64. El wheel fijado
+`3.0.11+cncguard.1` corrige los 218 avisos heredados de resources en Python
+3.11 sin filtrarlos; véase [el registro](evidence/KAFKA311_WARNING_FIX_20261021.md).
+PR65 añade el worker opt-in y la [corrección de recibos/HTTP profundo](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md).
+Esta composición no acredita Kafka/NiFi reales, RESTORE VERIFIED ni aceptación
+del equipo; la revisión padre sobre el head publicado sigue pendiente.

@@ -107,10 +107,14 @@ def build():
         "flowContents": {
             "identifier": group,
             "name": "CG14 durable staged bridge (opt-in)",
-            "comments": "Disabled staged-input bridge. Worker disk journal/archive own durability. "
-            "No ConsumeKafka and no source offset acknowledgement. Retain originals and failures. "
-            "Configure all parameters and original coordinates before enabling in an isolated lab. "
-            "No ES configured in this export; use the primary Kafka worker for optional ES.",
+            "comments": "Disabled staged-input bridge. "
+            "Worker disk journal/archive own durability. "
+            "No ConsumeKafka and no source offset acknowledgement. "
+            "Retain originals and failures. "
+            "Configure all parameters and original coordinates "
+            "before enabling in an isolated lab. "
+            "No ES configured in this export; "
+            "use the primary Kafka worker for optional ES.",
             "position": {"x": 0.0, "y": 0.0},
             "processGroups": [],
             "remoteProcessGroups": [],
