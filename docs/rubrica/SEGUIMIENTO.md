@@ -4,6 +4,8 @@ Tabla iniciada el 16/10/2026 y actualizada el 19/10/2026. Los responsables de ev
 
 La evidencia de cada fila debe incluir **artefacto/versionado + comando o procedimiento + resultado real + límite + revisor/fecha**. La [matriz de objetivos](OBJETIVOS_Y_ETAPAS.md) define el contenido de aceptación para cada celda; la [fuente](fuente.json) conserva su texto exacto.
 
+Avance CG24 del 21/10/2026 para G17/G19/G20: [diagnóstico FP/FN por tipo, controles de procedencia y supervisión humana](../evidence/CG24_2026-10-21.md), con [conteos y denominadores reproducidos](../evidence/CG24_current_state_types.json). Estado parcial: validación reutilizada, sin conclusión de equidad laboral, conformidad legal o robustez industrial. G16 mantiene su revisión normativa pendiente. Revisor humano y fecha de aceptación: pendientes.
+
 | Celda docente | Coordinación propuesta de la evidencia | Issues relacionados | Estado | Evidencia y revisión |
 |---|---|---|---|---|
 | Zereginak!G5 | Angiecrizu, Niistal, petiteiker, tears-mysthrala | [#1](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/1), [#17](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/17), [#25](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/25), [#26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26), [#27](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27), [#37](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/37) | Parcial local; revisión pendiente | [Evidencia](../evidence/CG30.md) · [versión/comandos](../evidence/INDEX_2026-10-19.md). Explicación y aceptación del equipo pendientes. Revisor humano: pendiente. |
