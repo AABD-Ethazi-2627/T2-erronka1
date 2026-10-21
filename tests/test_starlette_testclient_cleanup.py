@@ -5,6 +5,7 @@ import sys
 import unittest
 import warnings
 
+import anyio
 from fastapi import FastAPI
 from starlette.testclient import TestClient
 
@@ -39,6 +40,27 @@ class TestClientCleanupTests(unittest.TestCase):
                 if issubclass(warning.category, ResourceWarning)
             ]
             self.assertEqual(resource_warnings, [])
+            self.assertEqual(unraisables, [])
+        finally:
+            sys.unraisablehook = previous_hook
+
+    def test_negative_control_detects_unclosed_memory_streams(self):
+        unraisables = []
+        previous_hook = sys.unraisablehook
+
+        try:
+            sys.unraisablehook = lambda info: unraisables.append(info.exc_value)
+            with warnings.catch_warnings(record=True) as observed:
+                warnings.simplefilter("always", ResourceWarning)
+                send, receive = anyio.create_memory_object_stream(1)
+                del send, receive
+                gc.collect(2)
+            resource_warnings = [
+                warning
+                for warning in observed
+                if issubclass(warning.category, ResourceWarning)
+            ]
+            self.assertEqual(len(resource_warnings), 2)
             self.assertEqual(unraisables, [])
         finally:
             sys.unraisablehook = previous_hook
