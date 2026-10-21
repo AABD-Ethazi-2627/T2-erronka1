@@ -21,6 +21,8 @@ jobs:
           uv run --frozen python -m scripts.experiment_rf
           uv run --frozen python -m scripts.experiment_anomaly
           uv run --frozen python -m scripts.package_model
+      - name: CG14 hermetic regression tests
+        run: uv run --frozen python -m pytest -q tests/test_cg14_*.py
       - name: Unit tests and immutable source audit
         run: |
           uv run --frozen python -m unittest discover -s tests -v

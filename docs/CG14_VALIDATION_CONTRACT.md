@@ -27,8 +27,8 @@ Los campos originales del dataset son:
 | --- | --- | --- |
 | `machine_id` | string | `CNC-000` a `CNC-999`; origen del registro |
 | `machine_type` | enum | `H`, `M` o `L` |
-| `air_temp_K` | number finito | Kelvin |
-| `process_temp_K` | number finito | Kelvin |
+| `air_temp_K` | number finito >0 | Kelvin |
+| `process_temp_K` | number finito >0 | Kelvin |
 | `rpm` | number finito no negativo | revoluciones por minuto |
 | `torque_Nm` | number finito no negativo | Nm |
 | `tool_wear_min` | number finito no negativo | minutos |
@@ -38,7 +38,8 @@ Los campos originales del dataset son:
 No se usan mínimos/máximos observados en entrenamiento como límites físicos.
 Los límites operativos de cada sensor quedan **PENDIENTES** de confirmación con
 mantenimiento/CG03; en esta fase solo se rechazan tipos inválidos, valores no
-finitos y magnitudes físicas negativas. Del mismo modo, `machine_id` acepta el
+finitos, temperaturas Kelvin <=0 y otras magnitudes físicas negativas. El código
+`NEGATIVE_PHYSICAL_VALUE` se conserva también para Kelvin cero. `machine_id` acepta el
 formato `CNC-000`–`CNC-999` y no se restringe al rango observado `CNC-001`–`CNC-050`
 verificado en el CSV (8.000 filas, 50 máquinas, tipos H/M/L); acotar el parque
 de máquinas queda **PENDIENTE** de CG03.
@@ -49,8 +50,11 @@ Requeridos en el evento normalizado:
 
 - `event_id`: SHA-256 hexadecimal en minúsculas. Si el productor no lo envía,
   el adaptador de referencia calcula `SHA256("cnc.telemetry.v0.1.0\n" +
-  source_kind + "\n" + raw_record)`. Es una identidad de replay, no un
-  timestamp ni un identificador inventado de máquina.
+  source_kind + "\n" + raw_record)`. Este ID de contenido heredado se conserva
+  para compatibilidad; no distingue dos ocurrencias iguales. Para mezclar las
+  rutas PR42/CG14 se requiere la migración explícita por coordenadas originales
+  y sidecar descrita en [integración](CG14_PR42_INTEGRATION.md). No se recalculan
+  IDs persistidos en el parser ni en el puente.
 - `timestamp`: UTC ISO-8601 con `Z`, por ejemplo
   `2026-10-15T08:09:06Z`. No se aceptan offsets locales ni fechas imposibles.
 - `schema_version`: `0.1.0` mientras CG03 no apruebe otra versión.

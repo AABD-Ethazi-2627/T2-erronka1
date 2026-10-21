@@ -56,7 +56,7 @@ def msgFor(code, field) {
         case 'INVALID_MACHINE_TYPE': return 'expected H, M or L'
         case 'INVALID_NUMERIC': return 'CSV contains a non-numeric value'
         case 'NON_FINITE_NUMERIC': return 'NaN and infinity are forbidden'
-        case 'NEGATIVE_PHYSICAL_VALUE': return 'physical measurements cannot be negative'
+        case 'NEGATIVE_PHYSICAL_VALUE': return 'Kelvin must be positive; other measurements cannot be negative'
         case 'INVALID_LABEL': return 'CSV label columns must be 0 or 1'
         default: return 'rejected by CG14 validation'
     }
@@ -167,7 +167,7 @@ try {
         return
     }
     def sensors = ['air_temp_K', 'process_temp_K', 'rpm', 'torque_Nm', 'tool_wear_min']
-    def nonNeg = ['rpm', 'torque_Nm', 'tool_wear_min'] as Set
+    def kelvin = ['air_temp_K', 'process_temp_K'] as Set
     def nums = [:]
     for (s in sensors) {
         double v
@@ -186,7 +186,7 @@ try {
             session.transfer(flowFile, REL_SUCCESS)
             return
         }
-        if (v < 0 && nonNeg.contains(s)) {
+        if (v < 0 || (kelvin.contains(s) && v == 0)) {
             def r = fail('NEGATIVE_PHYSICAL_VALUE', s, raw, attrs)
             flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)
             flowFile = session.putAllAttributes(flowFile, r[1])

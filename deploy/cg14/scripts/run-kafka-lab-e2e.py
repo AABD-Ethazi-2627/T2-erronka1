@@ -20,7 +20,6 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-
 DEPLOY = Path(__file__).resolve().parents[1]
 REPO = DEPLOY.parents[1]
 GROUP_ID = "583bcfb5-01a1-1000-de1a-41cdf8ea78fe"
@@ -61,7 +60,9 @@ def docker(*args: str, input_bytes: bytes | None = None) -> str:
 class NifiApi:
     def __init__(self, env: dict[str, str]) -> None:
         self.base = "https://localhost:18443/nifi-api"
-        self.ctx = ssl.create_default_context(cafile=str(DEPLOY / "secrets/nifi-local.crt"))
+        self.ctx = ssl.create_default_context(
+            cafile=str(DEPLOY / "secrets/nifi-local.crt")
+        )
         request = urllib.request.Request(
             self.base + "/access/token",
             data=urllib.parse.urlencode(
@@ -92,7 +93,10 @@ class NifiApi:
         return self.call(f"/flow/process-groups/{GROUP_ID}")["processGroupFlow"]["flow"]
 
     def components(self) -> dict[str, dict]:
-        return {p["component"]["name"]: p["component"] for p in self.group_flow()["processors"]}
+        return {
+            p["component"]["name"]: p["component"]
+            for p in self.group_flow()["processors"]
+        }
 
     def set_state(self, component_id: str, state: str) -> None:
         entity = self.call(f"/processors/{component_id}")
@@ -110,7 +114,13 @@ class NifiApi:
             snap = item["processorStatusSnapshot"]
             components[snap["id"]] = {
                 k: int(snap.get(k, 0) or 0)
-                for k in ("flowFilesIn", "flowFilesOut", "taskCount", "bytesIn", "bytesOut")
+                for k in (
+                    "flowFilesIn",
+                    "flowFilesOut",
+                    "taskCount",
+                    "bytesIn",
+                    "bytesOut",
+                )
             }
         return components, int(aggregate.get("flowFilesQueued", 0) or 0)
 
@@ -221,10 +231,22 @@ def main() -> int:
     evidence_dir.mkdir(parents=True, exist_ok=False)
 
     # Validate the exact owned services and stop state before creating resources.
-    if docker("inspect", "--format", "{{.State.Health.Status}}", "cnc-cg14-kafka-test").strip() != "healthy":
+    if (
+        docker(
+            "inspect", "--format", "{{.State.Health.Status}}", "cnc-cg14-kafka-test"
+        ).strip()
+        != "healthy"
+    ):
         raise RuntimeError("CG14 lab Kafka broker is not healthy")
-    if docker("inspect", "--format", "{{.State.Health.Status}}", "cnc-cg14-mock-predict").strip() != "healthy":
-        raise RuntimeError("CG14 HTTP mock is not healthy; start the integration-mocks profile first")
+    if (
+        docker(
+            "inspect", "--format", "{{.State.Health.Status}}", "cnc-cg14-mock-predict"
+        ).strip()
+        != "healthy"
+    ):
+        raise RuntimeError(
+            "CG14 HTTP mock is not healthy; start the integration-mocks profile first"
+        )
     components = api.components()
     expected = {
         "ConsumeKafka — CG14 synthetic E2E",
@@ -246,7 +268,9 @@ def main() -> int:
         raise RuntimeError("required CG14 lab processors missing")
     running = [p["name"] for p in components.values() if p["state"] == "RUNNING"]
     if running:
-        raise RuntimeError("group already has running processors; refusing to interfere")
+        raise RuntimeError(
+            "group already has running processors; refusing to interfere"
+        )
     consumer = components["ConsumeKafka — CG14 synthetic E2E"]
     if consumer.get("validationErrors", []):
         raise RuntimeError("ConsumeKafka is invalid; refusing to start")
@@ -289,7 +313,9 @@ def main() -> int:
     metadata = components["CG14 lab — Kafka source metadata"]
     metadata_entity = api.call(f"/processors/{metadata['id']}")
     metadata_component = metadata_entity["component"]
-    metadata_component["config"]["properties"]["cg14.source.uri"] = f"kafka://cg14-kafka-test/{topic}"
+    metadata_component["config"]["properties"]["cg14.source.uri"] = (
+        f"kafka://cg14-kafka-test/{topic}"
+    )
     api.call(
         f"/processors/{metadata['id']}",
         "PUT",
@@ -297,7 +323,12 @@ def main() -> int:
     )
 
     group_info_before = docker(
-        "exec", BROKER, "/opt/kafka/bin/kafka-consumer-groups.sh", "--bootstrap-server", BOOTSTRAP, "--list"
+        "exec",
+        BROKER,
+        "/opt/kafka/bin/kafka-consumer-groups.sh",
+        "--bootstrap-server",
+        BOOTSTRAP,
+        "--list",
     ).splitlines()
     if group in group_info_before:
         raise RuntimeError("fresh consumer group unexpectedly exists")
@@ -311,11 +342,17 @@ def main() -> int:
     consumer_ran_during_outage = False
     outage_seconds = 0.0
     run_error: str | None = None
-    start_time = datetime.now().astimezone()
+    _start_time = datetime.now().astimezone()
     fixture_dir = REPO / "tests" / "fixtures" / "cg14"
-    valid = (fixture_dir / "valid_event.csv").read_text(encoding="utf-8").splitlines()[0]
-    missing_fields = (fixture_dir / "missing_fields.csv").read_text(encoding="utf-8").splitlines()[0]
-    wrong_types = (fixture_dir / "wrong_types.csv").read_text(encoding="utf-8").splitlines()[0]
+    valid = (
+        (fixture_dir / "valid_event.csv").read_text(encoding="utf-8").splitlines()[0]
+    )
+    missing_fields = (
+        (fixture_dir / "missing_fields.csv").read_text(encoding="utf-8").splitlines()[0]
+    )
+    wrong_types = (
+        (fixture_dir / "wrong_types.csv").read_text(encoding="utf-8").splitlines()[0]
+    )
     header = (fixture_dir / "header.csv").read_text(encoding="utf-8").splitlines()[0]
     records = [
         ("semantic-duplicate", valid),
@@ -354,24 +391,33 @@ def main() -> int:
             api.set_state(consumer["id"], "RUNNING")
             started.append(consumer["id"])
             time.sleep(5)
-            consumer_ran_during_outage = api.components()[consumer["name"]]["state"] == "RUNNING"
+            consumer_ran_during_outage = (
+                api.components()[consumer["name"]]["state"] == "RUNNING"
+            )
             docker("start", BROKER)
             recovery_deadline = time.time() + 90
             while time.time() < recovery_deadline:
-                if docker("inspect", "--format", "{{.State.Health.Status}}", BROKER).strip() == "healthy":
+                if (
+                    docker(
+                        "inspect", "--format", "{{.State.Health.Status}}", BROKER
+                    ).strip()
+                    == "healthy"
+                ):
                     broker_stopped = False
                     broker_recovered = True
                     break
                 time.sleep(1)
             outage_seconds = round(time.monotonic() - outage_started, 2)
             if not broker_recovered:
-                raise TimeoutError("CG14 lab Kafka did not return healthy after restart")
+                raise TimeoutError(
+                    "CG14 lab Kafka did not return healthy after restart"
+                )
         else:
             consumer = components["ConsumeKafka — CG14 synthetic E2E"]
             api.set_state(consumer["id"], "RUNNING")
             started.append(consumer["id"])
         time.sleep(1)
-        producer = docker(
+        _producer = docker(
             "exec",
             "-i",
             BROKER,
@@ -402,8 +448,17 @@ def main() -> int:
                 group,
             )
             offset_row = parse_group_offset(offsets, topic)
-            consumed = final_metrics[components["ConsumeKafka — CG14 synthetic E2E"]["id"]]["flowFilesOut"] - before_metrics.get(components["ConsumeKafka — CG14 synthetic E2E"]["id"], {}).get("flowFilesOut", 0)
-            if consumed >= len(records) and queued == 0 and offset_row and offset_row["lag"] == 0:
+            consumed = final_metrics[
+                components["ConsumeKafka — CG14 synthetic E2E"]["id"]
+            ]["flowFilesOut"] - before_metrics.get(
+                components["ConsumeKafka — CG14 synthetic E2E"]["id"], {}
+            ).get("flowFilesOut", 0)
+            if (
+                consumed >= len(records)
+                and queued == 0
+                and offset_row
+                and offset_row["lag"] == 0
+            ):
                 break
             time.sleep(1)
         else:
@@ -415,20 +470,45 @@ def main() -> int:
         for component_id in reversed(started):
             try:
                 api.set_state(component_id, "STOPPED")
-            except Exception:
-                pass
+            except (
+                OSError,
+                ValueError,
+                KeyError,
+                TypeError,
+                RuntimeError,
+                subprocess.SubprocessError,
+            ):
+                print(
+                    "Cleanup incomplete; inspect owned resources before retrying.",
+                    file=sys.stderr,
+                )
         if broker_stopped:
             try:
                 docker("start", BROKER)
                 recovery_deadline = time.time() + 90
                 while time.time() < recovery_deadline:
-                    if docker("inspect", "--format", "{{.State.Health.Status}}", BROKER).strip() == "healthy":
+                    if (
+                        docker(
+                            "inspect", "--format", "{{.State.Health.Status}}", BROKER
+                        ).strip()
+                        == "healthy"
+                    ):
                         broker_stopped = False
                         broker_recovered = True
                         break
                     time.sleep(1)
-            except Exception:
-                pass
+            except (
+                OSError,
+                ValueError,
+                KeyError,
+                TypeError,
+                RuntimeError,
+                subprocess.SubprocessError,
+            ):
+                print(
+                    "Cleanup incomplete; inspect owned resources before retrying.",
+                    file=sys.stderr,
+                )
         stop_deadline = time.time() + 30
         while time.time() < stop_deadline:
             still_running = [
@@ -438,11 +518,13 @@ def main() -> int:
                 break
             time.sleep(1)
 
-    end_time = datetime.now().astimezone()
+    _end_time = datetime.now().astimezone()
     time.sleep(1)
     final_metrics, queued = api.metrics()
     final_flow = api.group_flow()
-    current_components = {p["component"]["name"]: p["component"] for p in final_flow["processors"]}
+    current_components = {
+        p["component"]["name"]: p["component"] for p in final_flow["processors"]
+    }
     after_dlq = {p.name for p in dlq_dir.iterdir() if p.is_file()} - before_dlq
     dlq_rows = []
     for name in sorted(after_dlq):
@@ -459,7 +541,13 @@ def main() -> int:
                 }
             )
         except (OSError, json.JSONDecodeError):
-            dlq_rows.append({"name": name, "mode": oct(path.stat().st_mode & 0o777), "parseable": False})
+            dlq_rows.append(
+                {
+                    "name": name,
+                    "mode": oct(path.stat().st_mode & 0o777),
+                    "parseable": False,
+                }
+            )
 
     # Provenance is filtered to the source and validator processors, then reduced to safe attributes.
     provenance = {}
@@ -474,32 +562,48 @@ def main() -> int:
     try:
         topic_events = provenance_query(api, topic)
         for name in provenance_names:
-            provenance[name] = [event for event in topic_events if event.get("componentName") == name]
-    except Exception as exc:
+            provenance[name] = [
+                event for event in topic_events if event.get("componentName") == name
+            ]
+    except (
+        OSError,
+        ValueError,
+        KeyError,
+        TypeError,
+        RuntimeError,
+        subprocess.SubprocessError,
+    ) as exc:
         errors["topic-scoped-query"] = type(exc).__name__
     all_events = [event for values in provenance.values() for event in values]
     by_uuid: dict[str, dict] = {}
     by_type: dict[str, int] = {}
     for event in all_events:
-        by_type[event.get("eventType", "UNKNOWN")] = by_type.get(event.get("eventType", "UNKNOWN"), 0) + 1
+        by_type[event.get("eventType", "UNKNOWN")] = (
+            by_type.get(event.get("eventType", "UNKNOWN"), 0) + 1
+        )
         fid = event.get("flowFileUuid")
         if fid:
             row = by_uuid.setdefault(fid, {"flowfile_uuid": fid, "attributes": {}})
             row["attributes"].update(event.get("attributes", {}))
             row.setdefault("events", []).append(
-                {k: event.get(k) for k in ("eventType", "eventTime", "componentName", "relationship")}
+                {
+                    k: event.get(k)
+                    for k in ("eventType", "eventTime", "componentName", "relationship")
+                }
             )
     consumer_name = "ConsumeKafka — CG14 synthetic E2E"
     input_records: dict[str, dict] = {}
     for row in by_uuid.values():
         if not any(
-            event.get("componentName") == consumer_name and event.get("eventType") == "RECEIVE"
+            event.get("componentName") == consumer_name
+            and event.get("eventType") == "RECEIVE"
             for event in row["events"]
         ):
             continue
         attrs = row["attributes"]
         record_key = "/".join(
-            str(attrs.get(key, "")) for key in ("kafka.topic", "kafka.partition", "kafka.offset")
+            str(attrs.get(key, ""))
+            for key in ("kafka.topic", "kafka.partition", "kafka.offset")
         )
         input_records[record_key] = {
             "flowfile_uuid": row["flowfile_uuid"],
@@ -512,7 +616,8 @@ def main() -> int:
             "code": attrs.get("cg14.code"),
         }
     valid_event_ids = [
-        row["event_id"] for row in input_records.values()
+        row["event_id"]
+        for row in input_records.values()
         if row["valid"] == "true" and row["event_id"]
     ]
     id_counts: dict[str, int] = {}
@@ -525,29 +630,41 @@ def main() -> int:
         code = row["code"] or ("VALID" if valid == "true" else "UNKNOWN")
         validation_outcomes[code] = validation_outcomes.get(code, 0) + 1
         status = next(
-            (candidate["attributes"].get("invokehttp.status.code") for candidate in by_uuid.values()
-             if candidate["attributes"].get("kafka.offset") == row["offset"]
-             and candidate["attributes"].get("invokehttp.status.code")),
+            (
+                candidate["attributes"].get("invokehttp.status.code")
+                for candidate in by_uuid.values()
+                if candidate["attributes"].get("kafka.offset") == row["offset"]
+                and candidate["attributes"].get("invokehttp.status.code")
+            ),
             None,
         )
         if status:
             http_status_counts[status] = http_status_counts.get(status, 0) + 1
     route_outcomes: dict[str, int] = {}
     for event in all_events:
-        if event.get("componentName") == "RouteOnAttribute — accepted or rejected" and event.get("eventType") == "ROUTE":
+        if (
+            event.get("componentName") == "RouteOnAttribute — accepted or rejected"
+            and event.get("eventType") == "ROUTE"
+        ):
             relationship = event.get("relationship") or "UNKNOWN"
             route_outcomes[relationship] = route_outcomes.get(relationship, 0) + 1
 
     def delta(component_name: str, field: str) -> int:
         cid = current_components[component_name]["id"]
-        return final_metrics.get(cid, {}).get(field, 0) - before_metrics.get(cid, {}).get(field, 0)
+        return final_metrics.get(cid, {}).get(field, 0) - before_metrics.get(
+            cid, {}
+        ).get(field, 0)
 
     output = {
         "run_id": run_id,
         "topic": topic,
         "consumer_group": group,
         "bootstrap_server": BOOTSTRAP,
-        "topic_config": {"partitions": 1, "replication_factor": 1, "retention_ms": 86400000},
+        "topic_config": {
+            "partitions": 1,
+            "replication_factor": 1,
+            "retention_ms": 86400000,
+        },
         "processing_strategy": "FLOW_FILE; each Kafka message is expected to become its own FlowFile",
         "commit_offsets": True,
         "broker_outage_test": {
@@ -559,10 +676,18 @@ def main() -> int:
         "run_status": "VERIFIED" if run_error is None else "PARTIAL",
         "run_error": run_error,
         "produced_messages": len(records),
-        "message_classes": {"valid": 2, "missing_fields": 1, "wrong_types": 1, "header": 1},
+        "message_classes": {
+            "valid": 2,
+            "missing_fields": 1,
+            "wrong_types": 1,
+            "header": 1,
+        },
         "offsets_after": offset_row,
         "deltas": {
-            name: {"flowFilesIn": delta(name, "flowFilesIn"), "flowFilesOut": delta(name, "flowFilesOut")}
+            name: {
+                "flowFilesIn": delta(name, "flowFilesIn"),
+                "flowFilesOut": delta(name, "flowFilesOut"),
+            }
             for name in (
                 "ConsumeKafka — CG14 synthetic E2E",
                 "CG14 lab — Kafka source metadata",
@@ -575,7 +700,9 @@ def main() -> int:
         },
         "dlq_files_created": dlq_rows,
         "queue_flowfiles_after": queued,
-        "processor_states_after": {name: c["state"] for name, c in current_components.items()},
+        "processor_states_after": {
+            name: c["state"] for name, c in current_components.items()
+        },
         "provenance_events_by_type": by_type,
         "provenance_flowfiles": list(by_uuid.values()),
         "provenance_input_records": list(input_records.values()),
@@ -591,7 +718,9 @@ def main() -> int:
             "The HTTP endpoint is a local mock and no production predictor or alert destination was exercised.",
         ],
     }
-    (evidence_dir / "e2e-summary.json").write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (evidence_dir / "e2e-summary.json").write_text(
+        json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
     print(
         json.dumps(
             {
@@ -601,9 +730,15 @@ def main() -> int:
                 "topic": topic,
                 "consumer_group": group,
                 "produced": len(records),
-                "consumed_flowfiles": output["deltas"]["ConsumeKafka — CG14 synthetic E2E"]["flowFilesOut"],
-                "validator_flowfiles": output["deltas"]["ExecuteGroovyScript — CG14 contract validator"]["flowFilesIn"],
-                "accepted_sink_flowfiles": output["deltas"]["Local accepted fixture sink — attributes only"]["flowFilesIn"],
+                "consumed_flowfiles": output["deltas"][
+                    "ConsumeKafka — CG14 synthetic E2E"
+                ]["flowFilesOut"],
+                "validator_flowfiles": output["deltas"][
+                    "ExecuteGroovyScript — CG14 contract validator"
+                ]["flowFilesIn"],
+                "accepted_sink_flowfiles": output["deltas"][
+                    "Local accepted fixture sink — attributes only"
+                ]["flowFilesIn"],
                 "dlq_created": len(dlq_rows),
                 "queued_after": queued,
                 "provenance_event_types": by_type,
@@ -612,7 +747,9 @@ def main() -> int:
                 "validation_outcomes": validation_outcomes,
                 "mock_http_status_flowfiles": http_status_counts,
                 "broker_outage_test": output["broker_outage_test"],
-                "duplicate_event_id_multiplicities": output["valid_event_id_multiplicity"],
+                "duplicate_event_id_multiplicities": output[
+                    "valid_event_id_multiplicity"
+                ],
                 "provenance_query_errors": errors,
             },
             ensure_ascii=False,

@@ -74,7 +74,8 @@ def test_no_secrets_or_hardcoded_credentials_in_flow():
     legacy_length = 16
     raw = text.encode("utf-8")
     assert all(
-        hashlib.sha256(raw[offset:offset + legacy_length]).hexdigest() != legacy_digest
+        hashlib.sha256(raw[offset : offset + legacy_length]).hexdigest()
+        != legacy_digest
         for offset in range(max(0, len(raw) - legacy_length + 1))
     )
     assert not re.search(r"(?i)(sasl\.password|ssl\.key\.password)\s*[\"']?\s*:", text)

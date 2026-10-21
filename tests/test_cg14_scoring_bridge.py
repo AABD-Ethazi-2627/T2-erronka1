@@ -19,7 +19,7 @@ from scripts.validate_contracts import validators
 def cg14_event():
     event = json.loads(Path("contracts/examples/valid/telemetry.json").read_text())
     event["source"].update(
-        kind="cg14-kafka-lab",
+        kind="cg14-lab-kafka",
         uri="fixture://cg14/offline",
         record_ref="offline:1",
         raw_record="2026-10-15T08:09:06Z,CNC-049,L,300.5,309.8,1345,62.7,153,1,1,0,0,0,0",
@@ -29,11 +29,28 @@ def cg14_event():
 
 def bridge(event):
     return to_telemetry(
-        event, expected_source_kind="cg14-kafka-lab", source_kind="lab_fixture"
+        event, expected_source_kind="cg14-lab-kafka", source_kind="lab_fixture"
     )
 
 
 class Cg14BridgeTests(unittest.TestCase):
+    def test_export_and_exact_restore_aliases(self):
+        for kind in ("cg14-lab-kafka", "restore-restoretest001"):
+            with self.subTest(kind=kind):
+                original = cg14_event()
+                original["source"]["kind"] = kind
+                projected = to_telemetry(
+                    original, expected_source_kind=kind, source_kind="lab_fixture"
+                )
+                self.assertEqual(projected["event_id"], original["event_id"])
+                self.assertEqual(original["source"]["kind"], kind)
+                with self.assertRaises(ValueError):
+                    to_telemetry(
+                        original,
+                        expected_source_kind=kind + "-wrong",
+                        source_kind="lab_fixture",
+                    )
+
     def test_explicit_mapping_retains_identity_and_original_audit_event(self):
         event = cg14_event()
         original = copy.deepcopy(event)
@@ -58,9 +75,9 @@ class Cg14BridgeTests(unittest.TestCase):
         for options in (
             {},
             {"source_kind": "lab_fixture"},
-            {"expected_source_kind": "cg14-kafka-lab"},
+            {"expected_source_kind": "cg14-lab-kafka"},
             {"expected_source_kind": "other", "source_kind": "lab_fixture"},
-            {"expected_source_kind": "cg14-kafka-lab", "source_kind": "unknown"},
+            {"expected_source_kind": "cg14-lab-kafka", "source_kind": "unknown"},
         ):
             with self.subTest(options=options), self.assertRaises(ValueError):
                 to_telemetry(event, **options)
@@ -99,7 +116,7 @@ class Cg14BridgeTests(unittest.TestCase):
                     [
                         str(path),
                         "--expected-source-kind",
-                        "cg14-kafka-lab",
+                        "cg14-lab-kafka",
                         "--source-kind",
                         "lab_fixture",
                     ]

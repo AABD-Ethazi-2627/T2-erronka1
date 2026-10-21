@@ -1,19 +1,21 @@
 """Safety regression for the offline/host-only restore client; no live NiFi."""
 
+import json
+import ssl
+import urllib.error
 from email.parser import BytesParser
 from email.policy import default
 from io import BytesIO
-import json
 from pathlib import Path
-import ssl
-import urllib.error
 
 import pytest
 
 import cg14_restore_upload as restore
 
-
-FLOW = Path(restore.__file__).parent / "nifi-flows/cg14_validation_flow_nifi_2.12.0_restore_safe_20261020.json"
+FLOW = (
+    Path(restore.__file__).parent
+    / "nifi-flows/cg14_validation_flow_nifi_2.12.0_restore_safe_20261020.json"
+)
 
 
 def test_preflight_approved_artifact_and_tamper_rejection(tmp_path):
@@ -30,8 +32,11 @@ def test_preflight_approved_artifact_and_tamper_rejection(tmp_path):
 def test_preflight_does_not_create_api_or_use_network(monkeypatch, capsys):
     def forbidden(*args, **kwargs):
         pytest.fail("Offline preflight attempted network/API construction")
+
     monkeypatch.setattr(restore, "Api", forbidden)
-    monkeypatch.setattr(restore.ssl, "create_default_context", lambda **kwargs: object())
+    monkeypatch.setattr(
+        restore.ssl, "create_default_context", lambda **kwargs: object()
+    )
     assert restore.main(["--flow", str(FLOW)]) == 0
     assert "Sin red ni importación" in capsys.readouterr().out
 
@@ -40,9 +45,12 @@ def test_multipart_preserves_exact_file_and_target():
     raw = FLOW.read_bytes()
     body, content_type = restore.multipart(raw)
     message = BytesParser(policy=default).parsebytes(
-        f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n".encode() + body)
-    parts = {part.get_param("name", header="content-disposition"): part
-             for part in message.iter_parts()}
+        f"Content-Type: {content_type}\r\nMIME-Version: 1.0\r\n\r\n".encode() + body
+    )
+    parts = {
+        part.get_param("name", header="content-disposition"): part
+        for part in message.iter_parts()
+    }
     assert parts["file"].get_payload(decode=True) == raw
     assert parts["groupName"].get_content().strip() == restore.TARGET
     assert parts["disconnectedNodeAcknowledged"].get_content().strip() == "false"
@@ -50,13 +58,18 @@ def test_multipart_preserves_exact_file_and_target():
 
 def test_redirect_never_forwards_authentication():
     with pytest.raises(restore.GuardError, match="Redirección"):
-        restore.NoRedirect().redirect_request(None, None, 302, "", {}, "https://example.com")
+        restore.NoRedirect().redirect_request(
+            None, None, 302, "", {}, "https://example.com"
+        )
 
 
 def test_existing_target_prevents_upload():
     class FakeApi:
         def flow(self, group):
-            return {"flow": {"processGroups": [{"component": {"name": restore.TARGET}}]}}
+            return {
+                "flow": {"processGroups": [{"component": {"name": restore.TARGET}}]}
+            }
+
     with pytest.raises(restore.GuardError, match="ya existe"):
         restore.ensure_absent(FakeApi(), "root")
 
@@ -83,13 +96,17 @@ def test_uncertain_upload_is_not_retried_and_keeps_evidence(tmp_path, monkeypatc
     monkeypatch.setattr(restore, "REPO", tmp_path)
     monkeypatch.setattr(restore, "Api", FakeApi)
     monkeypatch.setattr(restore, "original_fingerprint", lambda api: "same-original")
-    monkeypatch.setattr(restore.ssl, "create_default_context", lambda **kwargs: object())
+    monkeypatch.setattr(
+        restore.ssl, "create_default_context", lambda **kwargs: object()
+    )
     monkeypatch.setattr("builtins.input", lambda prompt: "IMPORTAR")
     with pytest.raises(urllib.error.URLError):
         restore.main(["--flow", str(FLOW), "--execute"])
     assert len(requests) == 1
     assert requests[0][0] == "/process-groups/root-id/process-groups/upload"
-    evidence = list(tmp_path.glob("deploy/cg14/data/evidence/restore-upload-*/result.json"))
+    evidence = list(
+        tmp_path.glob("deploy/cg14/data/evidence/restore-upload-*/result.json")
+    )
     assert len(evidence) == 1
     result = json.loads(evidence[0].read_text())
     assert result["upload"] == "SENDING_OUTCOME_NOT_YET_KNOWN"
@@ -98,7 +115,9 @@ def test_uncertain_upload_is_not_retried_and_keeps_evidence(tmp_path, monkeypatc
 
 
 @pytest.mark.parametrize("upload_status", [200, 201])
-def test_follow_up_http_error_preserves_successful_upload(tmp_path, monkeypatch, upload_status):
+def test_follow_up_http_error_preserves_successful_upload(
+    tmp_path, monkeypatch, upload_status
+):
     requests = []
 
     class FakeApi:
@@ -115,22 +134,29 @@ def test_follow_up_http_error_preserves_successful_upload(tmp_path, monkeypatch,
 
         def request(self, *args):
             requests.append(args)
-            return upload_status, json.dumps({"component": {
-                "id": "new-group", "name": restore.TARGET}}).encode()
+            return upload_status, json.dumps(
+                {"component": {"id": "new-group", "name": restore.TARGET}}
+            ).encode()
 
     def unavailable(*args):
-        raise urllib.error.HTTPError("https://localhost/flow", 503, "unavailable", {}, None)
+        raise urllib.error.HTTPError(
+            "https://localhost/flow", 503, "unavailable", {}, None
+        )
 
     monkeypatch.setattr(restore, "REPO", tmp_path)
     monkeypatch.setattr(restore, "Api", FakeApi)
     monkeypatch.setattr(restore, "original_fingerprint", lambda api: "same-original")
     monkeypatch.setattr(restore, "observe", unavailable)
-    monkeypatch.setattr(restore.ssl, "create_default_context", lambda **kwargs: object())
+    monkeypatch.setattr(
+        restore.ssl, "create_default_context", lambda **kwargs: object()
+    )
     monkeypatch.setattr("builtins.input", lambda prompt: "IMPORTAR")
     with pytest.raises(urllib.error.HTTPError):
         restore.main(["--flow", str(FLOW), "--execute"])
     assert len(requests) == 1
-    evidence = next(tmp_path.glob("deploy/cg14/data/evidence/restore-upload-*/result.json"))
+    evidence = next(
+        tmp_path.glob("deploy/cg14/data/evidence/restore-upload-*/result.json")
+    )
     result = json.loads(evidence.read_text())
     assert result["http_status"] == upload_status
     assert result["upload"] == "RESPONDED"
@@ -159,7 +185,11 @@ def test_successful_201_checks_created_group_once(tmp_path, monkeypatch, include
 
         def flow(self, group):
             reads.append(group)
-            groups = [{"component": {"name": restore.TARGET, "id": "created-id"}}] if writes else []
+            groups = (
+                [{"component": {"name": restore.TARGET, "id": "created-id"}}]
+                if writes
+                else []
+            )
             return {"id": "parent-id", "flow": {"processGroups": groups}}
 
         def request(self, *args):
@@ -177,19 +207,27 @@ def test_successful_201_checks_created_group_once(tmp_path, monkeypatch, include
     monkeypatch.setattr(restore, "Api", FakeApi)
     monkeypatch.setattr(restore, "observe", observed)
     monkeypatch.setattr(restore, "original_fingerprint", lambda api: "unchanged")
-    monkeypatch.setattr(restore.ssl, "create_default_context", lambda **kwargs: object())
+    monkeypatch.setattr(
+        restore.ssl, "create_default_context", lambda **kwargs: object()
+    )
     monkeypatch.setattr("builtins.input", lambda prompt: "IMPORTAR")
     assert restore.main(["--flow", str(FLOW), "--execute"]) == 0
     assert len(writes) == 1
     assert observed_ids == ["created-id"]
     assert reads.count("parent-id") == (2 if include_id else 3)
-    result = json.loads(next(tmp_path.glob("deploy/cg14/data/evidence/restore-upload-*/result.json")).read_text())
+    result = json.loads(
+        next(
+            tmp_path.glob("deploy/cg14/data/evidence/restore-upload-*/result.json")
+        ).read_text()
+    )
     assert result["upload_http_status"] == 201
     assert result["upload_succeeded"] is True
     assert result["postcheck_succeeded"] is True
     assert result["postcheck_error"] is None
     assert result["imported_group_id"] == "created-id"
-    assert result["imported_group_id_source"] == ("upload_response" if include_id else "parent_children_get")
+    assert result["imported_group_id_source"] == (
+        "upload_response" if include_id else "parent_children_get"
+    )
 
 
 @pytest.mark.parametrize("matches", [0, 2])
@@ -197,8 +235,14 @@ def test_missing_id_fallback_rejects_absence_and_duplicates(matches):
     class ReadOnlyApi:
         def flow(self, group):
             assert group == "parent"
-            return {"flow": {"processGroups": [
-                {"component": {"name": restore.TARGET, "id": str(i)}} for i in range(matches)]}}
+            return {
+                "flow": {
+                    "processGroups": [
+                        {"component": {"name": restore.TARGET, "id": str(i)}}
+                        for i in range(matches)
+                    ]
+                }
+            }
 
     with pytest.raises(restore.GuardError, match="único"):
         restore.resolve_created_group(ReadOnlyApi(), "parent", b'{"component":{}}')
@@ -206,8 +250,13 @@ def test_missing_id_fallback_rejects_absence_and_duplicates(matches):
 
 def test_created_group_cannot_be_original():
     with pytest.raises(restore.GuardError, match="original"):
-        restore.resolve_created_group(None, "parent", json.dumps({"component": {
-            "name": restore.TARGET, "id": restore.ORIGINAL}}).encode())
+        restore.resolve_created_group(
+            None,
+            "parent",
+            json.dumps(
+                {"component": {"name": restore.TARGET, "id": restore.ORIGINAL}}
+            ).encode(),
+        )
 
 
 class StubResponse:
@@ -261,7 +310,9 @@ def test_login_negotiates_plain_text_and_accepts_201(monkeypatch, capsys):
 
 
 def test_get_root_negotiates_json(capsys):
-    api = api_with_stub(lambda request: StubResponse(200, b'{"processGroupFlow":{"id":"root"}}'))
+    api = api_with_stub(
+        lambda request: StubResponse(200, b'{"processGroupFlow":{"id":"root"}}')
+    )
     api.token = "synthetic-bearer"
     assert api.flow("root")["id"] == "root"
     request = api.opener.requests[0]
@@ -282,26 +333,45 @@ def test_upload_request_negotiates_json_and_valid_multipart_boundary():
     assert request.get_method() == "POST"
     assert request.get_header("Accept") == "application/json"
     message = BytesParser(policy=default).parsebytes(
-        f"Content-Type: {request.get_header('Content-type')}\r\n\r\n".encode() + request.data)
+        f"Content-Type: {request.get_header('Content-type')}\r\n\r\n".encode()
+        + request.data
+    )
     assert message.get_content_type() == "multipart/form-data"
     assert message.get_boundary().startswith("cg14-")
-    parts = {p.get_param("name", header="content-disposition"): p for p in message.iter_parts()}
+    parts = {
+        p.get_param("name", header="content-disposition"): p
+        for p in message.iter_parts()
+    }
     assert parts["file"].get_payload(decode=True) == raw
     assert len(api.opener.requests) == 1
 
 
-@pytest.mark.parametrize("path,expected_method,content_type", [
-    ("/access/token", "POST", "application/x-www-form-urlencoded"),
-    ("/flow/process-groups/root", "GET", None),
-    ("/process-groups/root/process-groups/upload", "POST", "multipart/form-data; boundary=cg14-test"),
-])
-def test_406_diagnostic_identifies_phase_without_secrets(path, expected_method, content_type, capsys):
+@pytest.mark.parametrize(
+    "path,expected_method,content_type",
+    [
+        ("/access/token", "POST", "application/x-www-form-urlencoded"),
+        ("/flow/process-groups/root", "GET", None),
+        (
+            "/process-groups/root/process-groups/upload",
+            "POST",
+            "multipart/form-data; boundary=cg14-test",
+        ),
+    ],
+)
+def test_406_diagnostic_identifies_phase_without_secrets(
+    path, expected_method, content_type, capsys
+):
     secret = "synthetic-sensitive-marker"
 
     def reject(request):
         # Error reason, headers and response body are all deliberately sensitive.
-        raise urllib.error.HTTPError(request.full_url, 406, secret,
-                                     {"Set-Cookie": secret}, BytesIO(secret.encode()))
+        raise urllib.error.HTTPError(
+            request.full_url,
+            406,
+            secret,
+            {"Set-Cookie": secret},
+            BytesIO(secret.encode()),
+        )
 
     api = api_with_stub(reject)
     api.token = secret
@@ -322,7 +392,9 @@ def test_406_diagnostic_identifies_phase_without_secrets(path, expected_method, 
 
 def test_login_406_aborts_before_confirmation_or_upload(monkeypatch, capsys):
     def reject(request):
-        raise urllib.error.HTTPError(request.full_url, 406, "sensitive-reason", {}, None)
+        raise urllib.error.HTTPError(
+            request.full_url, 406, "sensitive-reason", {}, None
+        )
 
     api = api_with_stub(reject)
     prompts = []
@@ -333,6 +405,12 @@ def test_login_406_aborts_before_confirmation_or_upload(monkeypatch, capsys):
         return "synthetic-user"
 
     monkeypatch.setattr(restore, "Api", lambda context: api)
+    # The HTTP 406 test owns TLS setup; no local CA or credentials are required.
+    monkeypatch.setattr(
+        restore.ssl,
+        "create_default_context",
+        lambda **kw: ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT),
+    )
     monkeypatch.setattr("builtins.input", username_only)
     monkeypatch.setattr(restore.getpass, "getpass", lambda prompt: "synthetic-password")
     with pytest.raises(urllib.error.HTTPError):

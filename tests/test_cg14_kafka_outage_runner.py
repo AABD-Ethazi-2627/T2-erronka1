@@ -3,7 +3,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 SCRIPT = Path(__file__).parents[1] / "deploy/cg14/scripts/run-kafka-outage-recovery.py"
 SPEC = importlib.util.spec_from_file_location("cg14_outage_runner", SCRIPT)
 assert SPEC is not None and SPEC.loader is not None

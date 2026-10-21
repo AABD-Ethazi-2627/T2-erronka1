@@ -1,4 +1,3 @@
-
 """Reference validation utilities for the CG14 ingestion contract."""
 
 from .metrics import ValidationMetrics

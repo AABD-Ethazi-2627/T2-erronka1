@@ -12,13 +12,13 @@ from urllib.parse import urlparse
 class MockPredictHandler(BaseHTTPRequestHandler):
     server_version = "CG14-Integration-Mock/1.0"
 
-    def do_GET(self) -> None:  # noqa: N802 - stdlib handler API
+    def do_GET(self) -> None:
         if urlparse(self.path).path == "/healthz":
             self._reply(200, {"mock": True, "status": "ready"})
         else:
             self._reply(404, {"mock": True, "error": "not_found"})
 
-    def do_POST(self) -> None:  # noqa: N802 - stdlib handler API
+    def do_POST(self) -> None:
         scenario = urlparse(self.path).path.removeprefix("/predict/")
         if scenario == "timeout":
             time.sleep(float(os.environ.get("CG14_MOCK_TIMEOUT_SECONDS", "10")))

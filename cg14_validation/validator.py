@@ -92,7 +92,11 @@ class ValidationResult:
 
 
 def stable_event_id(raw_record: str, source_kind: str = "cnc-simulator-v1") -> str:
-    """Create the replay-stable identity proposed for events without an ID."""
+    """Legacy content ID; equal records may be distinct source occurrences.
+
+    Kept byte-compatible for persisted events. Explicit occurrence migration
+    belongs at the integration boundary, never silently in this parser.
+    """
     if not isinstance(raw_record, str) or not isinstance(source_kind, str):
         raise TypeError("raw_record and source_kind must be text")
 
@@ -265,12 +269,12 @@ def validate_event(
                     "NON_FINITE_NUMERIC", field, "NaN and infinity are forbidden"
                 )
             )
-        elif value < 0:
+        elif value < 0 or (field in TELEMETRY_FIELDS[2:4] and value == 0):
             issues.append(
                 ValidationIssue(
                     "NEGATIVE_PHYSICAL_VALUE",
                     field,
-                    "physical measurements cannot be negative",
+                    "Kelvin must be positive; other measurements cannot be negative",
                 )
             )
 
