@@ -69,9 +69,19 @@ El registro no debe contener credenciales, datos personales innecesarios ni una 
 - **Artefactos:** `pyproject.toml`, `uv.lock`, `cnc_guard/data.py`, `cnc_guard/features.py`, `cnc_guard/train.py`, `tests/test_cnc_guard.py` y `notebooks/02_training_TEMPLATE.ipynb`.
 - **Entorno:** Python 3.12; dependencias fijadas y lock generado con `uv`.
 - **Comprobación del lock:** `uv lock --check` — correcto.
-- **Pruebas:** `uv run --locked python -m pytest -q` — 15 passed, sin warnings (commit de validación posterior a c04e821).
+- **Pruebas:** `uv run --locked python -m pytest -q` — 27 passed, sin warnings; código `ca7162681482347640eab215accc82f8d6e275c2`.
 - **Entrenamiento:** 6.400 filas de entrenamiento, 1.600 de prueba, `random_state=42`; accuracy observada: `0.97875`.
 - **Rutas personales:** búsqueda en los archivos fuente `.py` y `.ipynb` sin coincidencias.
 - **Importación desde notebooks:** paquete instalable con Hatchling; prueba automatizada ejecutada desde `notebooks/`, sin `PYTHONPATH`, correcta. `uv sync --frozen --python 3.12` y `uv lock --check` correctos.
 - **Límites:** dataset de laboratorio simulado; la accuracy no demuestra rendimiento industrial ni predicción a 24 horas. NumPy fijado en 2.2.6; las advertencias anteriores no se reproducen en la suite actual.
 - **Revisor y fecha:** pendiente de revisión por otro miembro.
+
+### Revisión CG04 — 2026-10-21
+
+[Revisión automática vigente](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/43#issuecomment-6309526290), sobre b2940bf: solicitaba notebook reproducible,
+contrato sin target y trazabilidad. Correcciones y evidencia en
+[el informe CG04](../../reports/cg04_training_report.md): 27 tests, notebook ejecutado
+con kernel fijado y protección de sobrescritura comprobada. Python/G52 y
+modularidad/G55 justificados en [el procedimiento](../CG04_ENVIRONMENT.md).
+Pendiente: revisión humana de otro miembro y aceptación; la revisión automática
+no es una firma humana. CG28 integrará el sobre y HTTP. No cerrar #4 todavía.
