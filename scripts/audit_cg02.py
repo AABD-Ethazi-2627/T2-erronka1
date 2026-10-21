@@ -244,11 +244,11 @@ def build_inventory(root):
             "reasons": [
                 "Training CSV has no timestamps.",
                 "Batch time is simulator emission time; "
-                "no complete per-machine 24h follow-up.",
+                + "no complete per-machine 24h follow-up.",
                 "Failure bits are contemporaneous outcomes, "
-                "not independent dated maintenance/failure onsets.",
+                + "not independent dated maintenance/failure onsets.",
                 "Stream lineage/overlap with training and stable machine identity "
-                "over time are not established.",
+                + "over time are not established.",
             ],
         },
     }
