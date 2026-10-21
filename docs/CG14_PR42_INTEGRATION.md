@@ -3,7 +3,9 @@
 Esta rama complementaria parte de PR42 `9158193b32ad0ee37b1ce03967c6ece2b70392d2`
 y contiene merges de PR57 `aace73cade05932e85a7a268fc1db288d4b60b4e` y PR59
 `528bcadc1d845adc09475470419b8fecc2764fb6`. No modifica ni publica esas ramas.
-Conserva la guía activa del README de PR42 y el alcance histórico de CG14.
+Después se incorpora por merge PR42 `7983beef471dc2de2a9fd977f8596809dc7f665c`,
+que ya incluye PR58, CG21 y la corrección de JSON recursivo. Se conservan sus
+archivos sin reimplementarlos. Conserva la guía activa del README y el alcance CG14.
 **No acredita CG14 DONE, RESTORE VERIFIED ni integración E2E funcional.**
 
 ## Compatibilidad implementada
@@ -123,12 +125,13 @@ No se ha importado ni modificado ninguna copia runtime en este trabajo.
    Publicar telemetría sólo tras el commit durable. Conservar ID legacy,
    event_id común, delivery_id y hashes; no mezclar sobres raw y estrictos
    bajo la misma clave de archivo.
-4. Integrar el adaptador existente de [PR58](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/58),
+4. Cablear el adaptador existente de [PR58](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/58),
    head observado `847f77faa4062e9bed9f7bfef2d6a49f661a631d`:
    `scripts/kafka_archive.py`, CLI `scripts/archive_consumer.py`. Reutilizar
    su ack después del commit durable y namespace estable de entrega; no
-   sustituirlo por el offset confirmado del ConsumeKafka CG14. Esta rama no
-   duplica ni integra ese adaptador y no modifica su consumidor.
+   sustituirlo por el offset confirmado del ConsumeKafka CG14. El adaptador ya
+   está integrado en la base actual PR42, incorporada aquí por merge; no se
+   duplica ni se modifica su consumidor. Falta conectarlo al flujo CG14.
 5. Conectar la proyección a `scoring-api:8000/predict` y publicar respuestas
    contractuales al destino de predicciones. El mock `/predict/<scenario>`
    no valida Telemetry ni produce Prediction. Revisar su grafo separado.
@@ -149,9 +152,11 @@ Usar Linux/fcntl. En la máquina de validación la distro se llama
 Python existentes 3.11.15/3.12.15. Las regresiones offline no necesitan CA,
 credenciales, broker, Docker en ejecución ni modelos de entrega.
 
-`pytest==9.1.1` está fijado en dev y uv.lock. Delta del lock: pytest y sus
+`pytest==9.1.1` está fijado en dev y uv.lock. Delta propio del lock respecto a
+PR42 `7983bee`: pytest y sus
 dependencias nuevas colorama, iniconfig, pluggy y pygments; se conservan las
-versiones preexistentes. CI ejecuta explícitamente `pytest tests/test_cg14_*.py`
+versiones preexistentes, incluido kafka-python de PR58. CI conserva `--extra kafka`
+y ejecuta explícitamente `pytest tests/test_cg14_*.py`
 y conserva unittest/auditoría; triggers, permisos y entrenamiento ya existente
 del workflow permanecen iguales. No se lanzó CI manual. El doble TLS se limita
 al test HTTP406; producción sigue verificando TLS con su contexto real.
@@ -168,3 +173,10 @@ La evidencia de esta implementación se resume en
 [CG14_INTEGRATION_20261021](evidence/CG14_INTEGRATION_20261021.md).
 Las brechas runtime anteriores permanecen abiertas; ASGI/dobles, comparación
 de exports y mocks offline no sustituyen un ensayo integrado.
+
+Tras incorporar PR58 se reproduce además un hallazgo heredado en Python 3.11:
+el import de kafka-python 3.0.11 emite 218 DeprecationWarning de la API legacy
+importlib.resources. Sus unittest no fallan, pero el runner estricto general
+devuelve 1 por esos avisos. En 3.12 el probe no emite avisos. No se filtran ni se
+modifica Kafka fuera de alcance. El informe registra INHERITED-KAFKA311-WARN-1
+como OPEN: esta rama no acredita la matriz estricta general limpia de 3.11.

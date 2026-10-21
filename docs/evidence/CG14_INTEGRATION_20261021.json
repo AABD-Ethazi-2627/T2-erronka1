@@ -1,0 +1,177 @@
+{
+  "recorded_at": "2026-10-21T18:56:49.848207+00:00",
+  "code_head": "1d279e33d2ae34a3a66b9dae819638b9e72ad5cc",
+  "base": "7983beef471dc2de2a9fd977f8596809dc7f665c",
+  "general_validation_head": "7bcb53aeaf173d3276ad4b9e3f2a88cac19c9331",
+  "distro": "FedoraLinux-43",
+  "os": "Fedora Linux 44 (WSL)",
+  "python": [
+    "3.11.15",
+    "3.12.15"
+  ],
+  "suites": {
+    "311": {
+      "pytest": 244,
+      "pytest_subtests": 21,
+      "unittest_passes": [
+        [
+          1,
+          234,
+          6,
+          0,
+          0,
+          218,
+          0
+        ],
+        [
+          2,
+          234,
+          6,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "review_focused": 15
+    },
+    "312": {
+      "pytest": 244,
+      "pytest_subtests": 21,
+      "unittest_passes": [
+        [
+          1,
+          234,
+          6,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          234,
+          6,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "review_focused": 15
+    }
+  },
+  "checks": [
+    {
+      "name": "ruff",
+      "exit": 0
+    },
+    {
+      "name": "format",
+      "exit": 0
+    },
+    {
+      "name": "actionlint",
+      "exit": 0
+    },
+    {
+      "name": "lock",
+      "exit": 0
+    },
+    {
+      "name": "audit",
+      "exit": 0
+    },
+    {
+      "name": "diff",
+      "exit": 0
+    },
+    {
+      "name": "reserved",
+      "exit": 0
+    }
+  ],
+  "runtime_checks": [
+    {
+      "name": "pytest-311",
+      "exit": 0
+    },
+    {
+      "name": "unittest-strict-311",
+      "exit": 1
+    },
+    {
+      "name": "pytest-312",
+      "exit": 0
+    },
+    {
+      "name": "unittest-strict-312",
+      "exit": 0
+    },
+    {
+      "name": "cg02",
+      "exit": 0
+    },
+    {
+      "name": "layout",
+      "exit": 0
+    },
+    {
+      "name": "restore-plan",
+      "exit": 0
+    },
+    {
+      "name": "diff-check",
+      "exit": 0
+    }
+  ],
+  "ruff_version": "0.17.1",
+  "ruff_python_files": 127,
+  "lock_added": [
+    "colorama",
+    "iniconfig",
+    "pluggy",
+    "pygments",
+    "pytest"
+  ],
+  "lock_changed_existing": [
+    "cnc-guard-offline"
+  ],
+  "reserved_hashes": {
+    "scoring/score_api.py": "f4369c23a3b5a5ee2736b6416285e8e04ef9202f1c182bca72ab841005024e32",
+    "scripts/archive_consumer.py": "49d99595d7537d2fb1c2981251cc74a59636dc65440ee393db6ac2473f9dcae4",
+    "tests/test_archive_consumer.py": "28766b5d6b7e5cce832c1ea36444b212b025ea6dd938ea810ab71c19077bbfba",
+    "tests/test_archive_json_depth.py": "e20109a6e49f275648b4639e340d2f967ca33f086f467dd927ef2ddb24a2395f",
+    "scripts/kafka_archive.py": "febd7993bbebdc88ce85c208b7fbcd3cba212f15788954562980961ec460c72e",
+    "tests/test_kafka_archive.py": "424c2eb2ccbee3c8aafa7330bad463b21d78ee032bef9a5c64658151e8d57bbb"
+  },
+  "hashes": {
+    "nifi-flows/cg14_validate.groovy": "ad78a84e375b3e0d21f82ef07742212fdc6c585959efde3a219b42b54eacd0b3",
+    "nifi-flows/cg14_validation_flow_nifi_2.12.0_restore_safe_20261020.json": "60048fc426b25d57dd4bb6f9c8c5c99a48a80e906865d3d49a210e7659f43f52",
+    "deploy/cg14/scripts/mock_predict.py": "f45dfc70a95e86e71b5800213ce9eaccbec8e4db122f4e72b320de9268fd1bcc",
+    "data/ai4i2020_train.csv": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce"
+  },
+  "integration_e2e": "NOT_EXECUTED",
+  "restore_host": "NOT_EXECUTED",
+  "ci": "NOT_ASSERTED",
+  "open_findings": [
+    {
+      "id": "INHERITED-KAFKA311-WARN-1",
+      "severity": "IMPORTANT/P2 workflow",
+      "status": "OPEN",
+      "strict_gate": "FAILED",
+      "warning_count": 218,
+      "source": "kafka-python3.0.11 importlib.resources legacy API",
+      "scope": "inherited from PR58/new PR42 base; not changed in this patch"
+    }
+  ],
+  "unittest_columns": [
+    "pass",
+    "run",
+    "skipped",
+    "failures",
+    "errors",
+    "warnings",
+    "unraisables"
+  ]
+}
