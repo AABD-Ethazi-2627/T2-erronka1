@@ -224,8 +224,9 @@ def _reconciled(e, inv):
                 ) or at(DLQ, "SEND"):
                     return False
                 continue
-        sends = at(DLQ, "SEND")
-        if not sends or not any(r["event_id"] > terminal_after for r in sends):
+        # Filename and terminal ordering must be satisfied by the same SEND.
+        sends = [r for r in at(DLQ, "SEND") if r["event_id"] > terminal_after]
+        if not sends:
             return False
         files = [f for f in e["dlq"] if f["source"]["record_ref"] == d["record_ref"]]
         if len(files) != 1:

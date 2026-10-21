@@ -788,6 +788,10 @@ def test_functional_checks_require_every_gate(functional_evidence, lab, failure)
         e["original_unchanged"] = "NOT_TESTED"
     elif failure == "terminal-before-route":
         send = next(r for r in e["provenance"] if r["type"] == "SEND")
+        unrelated_send = copy.deepcopy(send)
+        unrelated_send["event_id"] = 100000
+        unrelated_send["attributes"]["filename"] = "other-file.json"
+        e["provenance"].append(unrelated_send)
         send["event_id"] = -1
     assert not m.functional_pass(e, lab[1])
 
