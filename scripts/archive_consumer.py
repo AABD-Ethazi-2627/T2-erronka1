@@ -130,13 +130,16 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
             try:
                 if kind not in ("telemetry", "prediction"):
                     raise ValueError("Unknown stream")
-                obj = json.loads(
-                    raw,
-                    parse_constant=lambda value: (_ for _ in ()).throw(
-                        ValueError("Nonfinite JSON")
-                    ),
-                )
-                schemas[kind].validate(obj)
+                try:
+                    obj = json.loads(
+                        raw,
+                        parse_constant=lambda value: (_ for _ in ()).throw(
+                            ValueError("Nonfinite JSON")
+                        ),
+                    )
+                    schemas[kind].validate(obj)
+                except RecursionError as exc:
+                    raise ValueError("JSON nesting exceeds processing limit") from exc
                 canonical = json.dumps(
                     obj, sort_keys=True, separators=(",", ":"), allow_nan=False
                 ).encode()
@@ -157,7 +160,13 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
                             "delivery_id": delivery,
                             "kind": kind,
                             "reason": type(exc).__name__,
-                            "detail": str(exc).splitlines()[0],
+                            # ValidationError.__str__ pretty-prints the instance,
+                            # which can recurse even when parsing succeeded.
+                            "detail": (
+                                exc.message
+                                if isinstance(exc, ValidationError)
+                                else str(exc)
+                            ).splitlines()[0],
                             "bronze_sha256": digest(raw),
                         }
                     ).encode(),
@@ -205,3 +214,15 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
         return counts
     finally:
         con.close()
+
+
+if __name__ == "__main__":
+    try:
+        from scripts.kafka_archive import main
+    except ModuleNotFoundError as exc:
+        if exc.name != "kafka":
+            raise
+        raise SystemExit(
+            "Kafka adapter requires: uv sync --locked --extra kafka"
+        ) from exc
+    raise SystemExit(main())

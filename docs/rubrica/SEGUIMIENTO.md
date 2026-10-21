@@ -76,6 +76,14 @@ Revisor y conclusión:
 
 El registro no debe contener credenciales, datos personales innecesarios ni una nota autootorgada.
 
+### CG21: harness local de fallos (2026-10-21)
+
+[Procedimiento, resultados y límites](../evidence/CG21.md),
+[recuentos fixture](../evidence/CG21_fixture.json). Conciliación por entregas,
+rechazos, replay tras escritura sin acuse y persistencia SQLite comprobados;
+API en proceso falla cerrada ante modelo ausente/corrupto. No equivale a aceptación
+NiFi/Kafka/ES ni completa G46/G80/G90/G95/G96. Revisión humana pendiente.
+
 ## CG23 — ampliación local parcial (2026-10-21)
 
 G14/G45/G80/G85/G96/G104: [protocolo y límites](../evidence/CG23.md),

@@ -24,11 +24,15 @@ Bronze guarda exactamente los bytes recibidos, incluso JSON inválido. Rechazos
 conservan referencia a Bronze, hash y motivo. Es un sink de mensajes normalizados;
 no sustituye la captura Bronze de CSV crudos de CG05/06 ni normaliza CSV.
 
-El adaptador Kafka futuro debe desactivar auto-commit, usar identidad global
-`cluster/topic/partition/offset`, entregar offsets contiguos por partición y
-hacer commit del siguiente offset únicamente en `ack`. NiFi debe usar una
-identidad persistente y transferir a success solamente tras retorno correcto.
-No se ha instalado ese adaptador, cambiado el flow ni contactado brokers.
+El adaptador Kafka se incorpora posteriormente en `scripts/kafka_archive.py`:
+ver [guía operativa](../CG15_KAFKA.md) y
+[evidencia del adaptador](CG15_KAFKA_20261021.md). Desactiva auto-commit, usa
+identidad global con namespace de clúster/generación, topic, partición y offset,
+y confirma el siguiente offset únicamente en `ack`. Procesa prefijos ordenados
+devueltos por poll: Kafka puede omitir offsets numéricos por compactación o
+transacciones. NiFi debe usar una identidad persistente y transferir a success
+solamente tras retorno correcto. No se ha cambiado el flow ni contactado brokers
+compartidos; el lab de transporte usa un mock propio de protocolo en loopback.
 Un error de ack requiere replay; no deshacer archivos ya comprometidos.
 
 Identidad de telemetría: `(kind,event_id)`. Predicción:
