@@ -303,6 +303,7 @@ def temperature_spec():
                 },
             },
         ],
+        background="#ffffff",
         title={
             "text": {
                 "signal": "'IDs: ' + length(data('page_groups')) + '/' + length(data('groups')) + ' recuperados · página ' + page + '/' + max(1, ceil(length(data('groups'))/pageSize))"
@@ -354,7 +355,9 @@ def temperature_spec():
                 "name": "color",
                 "type": "ordinal",
                 "domain": {"data": "page_groups", "field": "group"},
-                "range": {"scheme": "category10"},
+                # Five identities per page; each color exceeds 3:1 on white
+                # for essential lines/symbols (WCAG 2.2 SC 1.4.11).
+                "range": ["#1f77b4", "#b35400", "#2ca02c", "#d62728", "#9467bd"],
             },
             {
                 "name": "shape",
