@@ -60,29 +60,82 @@ class RehearsalCliTests(unittest.TestCase):
             self.assertIn("FileExistsError", process.stderr)
             self.assertEqual(output.read_bytes(), previous)
 
+    def test_gc_guard_detects_deliberate_own_leak(self):
+        probe = """
+import sys
+import unittest
+from pathlib import Path
+import anyio
+sys.path.insert(0, str(Path.cwd() / "tests"))
+from test_cg26_rehearsal import RehearsalTransportTests
+
+class LeakingProbe(RehearsalTransportTests):
+    async def leak(self):
+        send, receive = anyio.create_memory_object_stream()
+        cycle = [send, receive]
+        cycle.append(cycle)
+
+result = unittest.TextTestRunner().run(
+    unittest.TestSuite([LeakingProbe("leak")])
+)
+sys.exit(not result.wasSuccessful())
+"""
+        process = subprocess.run(
+            [sys.executable, "-c", probe],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        self.assertEqual(process.returncode, 1, process.stderr)
+        self.assertIn(
+            "ResourceWarning: Unclosed <MemoryObjectSendStream", process.stderr
+        )
+        self.assertIn(
+            "ResourceWarning: Unclosed <MemoryObjectReceiveStream", process.stderr
+        )
+        self.assertIn("FAILED", process.stderr)
+
 
 class RehearsalTransportTests(unittest.IsolatedAsyncioTestCase):
-    def setUp(self):
-        self.unraisables = []
-        self.original_hook = sys.unraisablehook
-        self.warning_context = warnings.catch_warnings()
-        self.warning_context.__enter__()
+    @classmethod
+    def setUpClass(cls):
+        # Drain earlier tests before attributing resources to this class. This
+        # leaves their warnings/hook untouched and visible to a global checker.
+        gc.collect(2)
+        gc.collect(2)
+        cls.unraisables = []
+        cls.original_hook = sys.unraisablehook
+        cls.warning_context = warnings.catch_warnings()
+        cls.warning_context.__enter__()
         warnings.simplefilter("error", ResourceWarning)
 
         def capture(info):
-            self.unraisables.append(f"{info.exc_type.__name__}: {info.exc_value}")
-            self.original_hook(info)
+            cls.unraisables.append(f"{info.exc_type.__name__}: {info.exc_value}")
+            cls.original_hook(info)
 
         sys.unraisablehook = capture
 
+    def setUp(self):
+        # Capture remains active between methods and event-loop shutdowns, so
+        # delayed resources from an earlier CG26 test cannot escape attribution.
+        gc.collect(2)
+
     def tearDown(self):
+        gc.collect(2)
+        gc.collect(2)
+        self.assertEqual(self.unraisables, [])
+
+    @classmethod
+    def tearDownClass(cls):
         try:
             gc.collect(2)
             gc.collect(2)
         finally:
-            sys.unraisablehook = self.original_hook
-            self.warning_context.__exit__(None, None, None)
-        self.assertEqual(self.unraisables, [])
+            sys.unraisablehook = cls.original_hook
+            cls.warning_context.__exit__(None, None, None)
+        if cls.unraisables:
+            raise AssertionError(f"CG26 unclosed resources: {cls.unraisables}")
 
     async def check_lifecycle(self, failure):
         events = []

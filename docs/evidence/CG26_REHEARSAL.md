@@ -155,3 +155,41 @@ PR52 corrige sus separadores por separado. El límite POSIX de la suite completa
 sigue vigente; esta rama mantiene su base PR42 y no integra PR52 ni PR51.
 Pendientes revisión independiente, checks remotos y aceptación humana; sin CI
 manual, Copilot, merge, cierre, SMB/OT ni servicios compartidos.
+
+## Atribución del fallo CI de 7ffe34a y guard corregido
+
+CI `39572592395/job119130196446` ejecutó 112 pruebas en Python 3.11.17 y falló
+en el tearDown del primer test ASGI nuevo. Se reproduce localmente en
+FedoraLinux-43 con **3.11.17 exacto**: 112 pruebas/1 fallo. En 3.12.15 el mismo
+head y lock da 112 OK. Ambos clones tienen una fixture propia de 24 filas y tres
+árboles, no modelos de entrega ni pickles compartidos entre versiones.
+
+La instrumentación registra asignación y recogida sin retener los streams.
+Con GC natural reproduce la atribución cruzada: los dos objetos que recoge el
+test body-error de CG26 se crearon en `test_api` missing/corrupt, dentro de
+`TestClient.__enter__`. Con GC tras cada test registra diez streams en las cinco
+rutas heredadas de test_api/test_current_state_scope y ninguno asignado por CG26.
+[Traza y resultados estructurados](CG26_GC_ATTRIBUTION.json).
+
+Se delimita el guard a la **clase completa**: GC antes de instalar su captura,
+sin tocar los warnings/hook previos, captura fatal continua entre métodos y
+cierres de event loop, GC tras cada método y al terminar la clase. Así las fugas
+propias diferidas siguen haciendo fallar el guard. No se cambia el transporte
+ya corregido, no se filtran/suprimen warnings ni se toca PR51.
+Un nuevo control negativo ejecuta una fuga cíclica deliberada de ambos streams
+en un subprocess y comprueba que el guard falla con ambos ResourceWarning.
+
+- Suite completa: **113 OK, cero skips**, en [3.11.17](CG26_GC_full_311.txt) y
+  [3.12.15](CG26_GC_full_312.txt), conservando visibles los avisos heredados.
+- CG26 estricto: **9 pruebas x2, cero skips/unraisables**, salida 0, en
+  [3.11.17](CG26_GC_strict_311.txt), [3.12.15](CG26_GC_strict_312.txt) y
+  [Windows 3.11.9](CG26_GC_strict_windows.txt), incluido el control negativo.
+- El comprobador global sigue devolviendo **1** en ambos Linux: detecta los
+  mismos diez streams heredados y cero de CG26. No se presenta como cierre de
+  recursos de toda la rama aislada: esas rutas corresponden a PR51, separada.
+- Ruff 0.17.1 con `--select E,F,I,PLW1510`, formato Windows/Fedora, enlaces
+  locales, blobs protegidos y diff pasan. No se pide rerun de CI sin cambios.
+
+La validación focal inicial de ocho pruebas era correcta pero insuficiente para
+la interacción de GC de la suite. Estos resultados la amplían; no convierten
+la CI ni la revisión independiente posterior en una aprobación ya obtenida.

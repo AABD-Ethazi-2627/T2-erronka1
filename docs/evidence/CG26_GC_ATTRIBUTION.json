@@ -1,0 +1,234 @@
+{
+  "head": "7ffe34a2853e82582061b6d3ba4208842d0a7c78",
+  "python": "3.11.17",
+  "distribution": "FedoraLinux-43",
+  "fixture": "24 synthetic rows, 3 trees per estimator; no delivery model",
+  "plain_suite": {
+    "python_3_11_17": "112 tests, 1 failure in CG26 tearDown",
+    "python_3_12_15": "112 tests, success"
+  },
+  "natural_gc": {
+    "events": [
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:body",
+        "collected_in": "test_audit_cg02.AuditTests.test_frozen_evidence_keeps_training_and_operational_sources_separate:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 36, in test_real_pipeline_contract_and_invalid_input\n    with TestClient(app) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:body",
+        "collected_in": "test_audit_cg02.AuditTests.test_frozen_evidence_keeps_training_and_operational_sources_separate:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 36, in test_real_pipeline_contract_and_invalid_input\n    with TestClient(app) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_api.ApiTests.test_tampered_model_and_oversized_body:body",
+        "collected_in": "test_audit_cg02.AuditTests.test_frozen_evidence_keeps_training_and_operational_sources_separate:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 62, in test_tampered_model_and_oversized_body\n    with TestClient(create_app(root / \"manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_api.ApiTests.test_tampered_model_and_oversized_body:body",
+        "collected_in": "test_audit_cg02.AuditTests.test_frozen_evidence_keeps_training_and_operational_sources_separate:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 62, in test_tampered_model_and_oversized_body\n    with TestClient(create_app(root / \"manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:body",
+        "collected_in": "test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 16, in test_missing_and_corrupt_models_are_unhealthy\n    with TestClient(create_app(manifest)) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:body",
+        "collected_in": "test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 16, in test_missing_and_corrupt_models_are_unhealthy\n    with TestClient(create_app(manifest)) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:body",
+        "collected_in": "test_history.HistoryTests.test_preserves_bytes_and_collisions_and_is_idempotent:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 84, in test_inference_ignores_identity_and_observation_time\n    with TestClient(create_app(\"outputs/api/manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:body",
+        "collected_in": "test_history.HistoryTests.test_preserves_bytes_and_collisions_and_is_idempotent:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 84, in test_inference_ignores_identity_and_observation_time\n    with TestClient(create_app(\"outputs/api/manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:body",
+        "collected_in": "test_history.HistoryTests.test_preserves_bytes_and_collisions_and_is_idempotent:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 52, in test_raw_source_and_all_labels_are_rejected_before_model_readiness\n    with (\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:body",
+        "collected_in": "test_history.HistoryTests.test_preserves_bytes_and_collisions_and_is_idempotent:body",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 52, in test_raw_source_and_all_labels_are_rejected_before_model_readiness\n    with (\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      }
+    ],
+    "run": 112,
+    "unittest_success": false
+  },
+  "forced_gc": {
+    "events": [
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:body",
+        "collected_in": "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 16, in test_missing_and_corrupt_models_are_unhealthy\n    with TestClient(create_app(manifest)) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:body",
+        "collected_in": "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 16, in test_missing_and_corrupt_models_are_unhealthy\n    with TestClient(create_app(manifest)) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:body",
+        "collected_in": "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 36, in test_real_pipeline_contract_and_invalid_input\n    with TestClient(app) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:body",
+        "collected_in": "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 36, in test_real_pipeline_contract_and_invalid_input\n    with TestClient(app) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_api.ApiTests.test_tampered_model_and_oversized_body:body",
+        "collected_in": "test_api.ApiTests.test_tampered_model_and_oversized_body:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 62, in test_tampered_model_and_oversized_body\n    with TestClient(create_app(root / \"manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_api.ApiTests.test_tampered_model_and_oversized_body:body",
+        "collected_in": "test_api.ApiTests.test_tampered_model_and_oversized_body:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_api.py\", line 62, in test_tampered_model_and_oversized_body\n    with TestClient(create_app(root / \"manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:body",
+        "collected_in": "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 84, in test_inference_ignores_identity_and_observation_time\n    with TestClient(create_app(\"outputs/api/manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:body",
+        "collected_in": "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 84, in test_inference_ignores_identity_and_observation_time\n    with TestClient(create_app(\"outputs/api/manifest.json\")) as client:\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectSendStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:body",
+        "collected_in": "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 52, in test_raw_source_and_all_labels_are_rejected_before_model_readiness\n    with (\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      },
+      {
+        "stream": "MemoryObjectReceiveStream",
+        "allocated_in": "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:body",
+        "collected_in": "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:post-gc",
+        "allocation_stack": [
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/tests/test_current_state_scope.py\", line 52, in test_raw_source_and_all_labels_are_rejected_before_model_readiness\n    with (\n",
+          "  File \"/mnt/d/github/_local/t2-babysit-20261021/composition-fixes/pr50-matrix-311/.venv/lib/python3.11/site-packages/starlette/testclient.py\", line 783, in __enter__\n    send2, receive2 = anyio.create_memory_object_stream(math.inf)\n"
+        ]
+      }
+    ],
+    "run": 112,
+    "unittest_success": true
+  },
+  "conclusion": "All 10 unclosed streams were allocated by the five inherited TestClient routes. In natural GC, the two streams allocated in the missing/corrupt API test are collected inside CG26's body-error test. None are allocated by CG26. This does not remediate the inherited routes owned by PR51.",
+  "after": {
+    "3.11.17": {
+      "full_suite": "113 tests, success, no skips; inherited warnings visible",
+      "strict_cg26": "9 tests x2, no skips or unraisables; exit 0",
+      "global_strict_exit": 1,
+      "unclosed_streams": 10,
+      "allocation_owners": {
+        "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:body": 2,
+        "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:body": 2,
+        "test_api.ApiTests.test_tampered_model_and_oversized_body:body": 2,
+        "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:body": 2,
+        "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:body": 2
+      },
+      "own_negative_control": "Deliberate two-stream cyclic leak fails subprocess guard"
+    },
+    "3.12.15": {
+      "full_suite": "113 tests, success, no skips; inherited warnings visible",
+      "strict_cg26": "9 tests x2, no skips or unraisables; exit 0",
+      "global_strict_exit": 1,
+      "unclosed_streams": 10,
+      "allocation_owners": {
+        "test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy:body": 2,
+        "test_api.ApiTests.test_real_pipeline_contract_and_invalid_input:body": 2,
+        "test_api.ApiTests.test_tampered_model_and_oversized_body:body": 2,
+        "test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time:body": 2,
+        "test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness:body": 2
+      },
+      "own_negative_control": "Deliberate two-stream cyclic leak fails subprocess guard"
+    }
+  },
+  "windows": "Python 3.11.9, strict CG26 9 tests x2, no skips/unraisables"
+}
