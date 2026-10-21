@@ -26,3 +26,7 @@ La [rúbrica del proyecto](rubrica/README.md) reúne los objetivos del nivel ava
 ## Automatización del Project
 
 [Configuración y límites de la sincronización](PROJECTS_SYNC.md).
+
+## Memoria y ANEXO4 CG25
+
+[Memoria con 40 criterios](memoria/README.md) · [ANEXO4 para revisión](memoria/ANEXO4_CNC_Guard.md). Borradores con resultados versionados y aceptación humana pendiente.

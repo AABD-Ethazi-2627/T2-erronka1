@@ -270,7 +270,8 @@ def multipart(raw):
     body.extend(
         (
             f'--{boundary}\r\nContent-Disposition: form-data; name="file"; '
-            'filename="cg14-restore-safe.json"\r\nContent-Type: application/json\r\n\r\n'
+            'filename="cg14-restore-safe.json"\r\nContent-Type: application/'
+            "json\r\n\r\n"
         ).encode()
     )
     body.extend(raw)
@@ -545,7 +546,8 @@ if __name__ == "__main__":
     except (ValueError, KeyError, OSError, EOFError, KeyboardInterrupt) as error:
         # Exception bodies can contain server data; print only the exception type.
         print(
-            f"Operación detenida ({type(error).__name__}); no repetir upload sin revisar evidencia.",
+            f"Operación detenida ({type(error).__name__}); "
+            "no repetir upload sin revisar evidencia.",
             file=sys.stderr,
         )
         sys.exit(2)

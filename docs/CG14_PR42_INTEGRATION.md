@@ -67,10 +67,15 @@ no una reinterpretación de eventos archivados. El sidecar no se envía a `/pred
 from scripts.cg14_occurrence import bind_occurrence
 
 bound = bind_occurrence(
-    original_event, namespace="lab-cluster-generation1", topic=original_topic,
-    partition=original_partition, offset=original_offset,
-    delivery_id=persisted_delivery_id, expected_event_id=original_event["event_id"],
-    expected_source_kind="cg14-lab-kafka", source_kind="lab_fixture",
+    original_event,
+    namespace="lab-cluster-generation1",
+    topic=original_topic,
+    partition=original_partition,
+    offset=original_offset,
+    delivery_id=persisted_delivery_id,
+    expected_event_id=original_event["event_id"],
+    expected_source_kind="cg14-lab-kafka",
+    source_kind="lab_fixture",
 )
 # Antes de publicar: commit durable de bytes originales + bound["identity"].
 # Después: publicar únicamente bound["telemetry"] al destino contractual.

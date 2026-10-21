@@ -212,7 +212,10 @@ def main() -> int:
     parser.add_argument(
         "--inject-kafka-outage",
         action="store_true",
-        help="run the phase-controlled outage/recovery regression (three isolated repetitions)",
+        help=(
+            "run the phase-controlled outage/recovery regression (three "
+            "isolated repetitions)"
+        ),
     )
     args = parser.parse_args()
     if args.inject_kafka_outage:
@@ -465,9 +468,13 @@ def main() -> int:
                 break
             time.sleep(1)
         else:
-            run_error = "expected Kafka records did not drain through the CG14 group before timeout"
+            run_error = (
+                "expected Kafka records did not drain through the CG14 group "
+                "before timeout"
+            )
 
-        # Keep the integration flow running long enough for provenance commits, then stop.
+        # Keep the integration flow running long enough for provenance commits, then
+        # stop.
         time.sleep(2)
     finally:
         for component_id in reversed(started):
@@ -552,7 +559,8 @@ def main() -> int:
                 }
             )
 
-    # Provenance is filtered to the source and validator processors, then reduced to safe attributes.
+    # Provenance is filtered to the source and validator processors, then reduced to
+    # safe attributes.
     provenance = {}
     errors = {}
     provenance_names = (
@@ -679,7 +687,8 @@ def main() -> int:
             "replication_factor": 1,
             "retention_ms": 86400000,
         },
-        "processing_strategy": "FLOW_FILE; each Kafka message is expected to become its own FlowFile",
+        "processing_strategy": "FLOW_FILE; each Kafka message is expected to become "
+        "its own FlowFile",
         "commit_offsets": True,
         "broker_outage_test": {
             "injected": args.inject_kafka_outage,
@@ -728,11 +737,23 @@ def main() -> int:
         "valid_event_id_multiplicity": sorted(id_counts.values()),
         "provenance_query_errors": errors,
         "limitations": [
-            "Legacy drain diagnostics only; functional acceptance requires run-restore-e2e.py and its complete reconciliation gate.",
+            (
+                "Legacy drain diagnostics only; functional acceptance requires "
+                "run-restore-e2e.py and its complete reconciliation gate."
+            ),
             "This is an isolated synthetic broker, not the team CG13 broker or topic.",
-            "Kafka offsets are committed after consumption; this does not prove exactly-once processing.",
-            "The current flow has no persistent idempotent accepted sink; duplicate semantic events are not suppressed.",
-            "The HTTP endpoint is a local mock and no production predictor or alert destination was exercised.",
+            (
+                "Kafka offsets are committed after consumption; this does not "
+                "prove exactly-once processing."
+            ),
+            (
+                "The current flow has no persistent idempotent accepted sink; "
+                "duplicate semantic events are not suppressed."
+            ),
+            (
+                "The HTTP endpoint is a local mock and no production predictor "
+                "or alert destination was exercised."
+            ),
         ],
     }
     (evidence_dir / "e2e-summary.json").write_text(

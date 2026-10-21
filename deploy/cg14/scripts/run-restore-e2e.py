@@ -24,12 +24,13 @@ from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-DEPLOY = Path(__file__).resolve().parents[1]
-REPO = DEPLOY.parents[1]
-sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 import cg14_restore_upload as auth
 from cg14_validation.reconciliation import content_hash, dlq_summary, reconciled
 from cg14_validation.validator import parse_csv_event
+
+DEPLOY = Path(__file__).resolve().parents[1]
+REPO = DEPLOY.parents[1]
 
 TARGET = "5d4f0539-01a1-1000-4a08-0a3f4c8946d8"
 SERVICE = "ce5c27e6-986a-3047-bead-420bdcc8ef65"
@@ -42,7 +43,10 @@ FLOW = REPO / "nifi-flows/cg14_validation_flow_nifi_2.12.0_restore_safe_20261020
 INVENTORY = DEPLOY / "restore-inventory.json"
 INVENTORY_SHA256 = "2231b311018f7dc50a9a130dc556a895f20b9959c9ebbf3e213280ca45de32da"
 MOCK_SHA256 = "f45dfc70a95e86e71b5800213ce9eaccbec8e4db122f4e72b320de9268fd1bcc"
-MOCK_IMAGE = "python:3.13-alpine@sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a"
+MOCK_IMAGE = (
+    "python:3.13-alpine@sha256:2d9aefe2fef018a7eb2c13064c89c71929800f"
+    "d2e5dccdbf52ea5da5bb8d929a"
+)
 CONSUMER = "ConsumeKafka — CG14 synthetic E2E"
 METADATA = "CG14 lab — Kafka source metadata"
 HTTP = "InvokeHTTP — local CG14 mock only"
@@ -433,7 +437,8 @@ def mock_ready(r):
                 r["mock"],
                 "python",
                 "-c",
-                "import json,urllib.request; r=urllib.request.urlopen('http://127.0.0.1:8080/healthz', timeout=2); "
+                "import json,urllib.request; r=urllib.request.urlopen('http://"
+                "127.0.0.1:8080/healthz', timeout=2); "
                 "ok=r.status==200 and json.load(r)=={'mock':True,'status':'ready'}; "
                 "raise SystemExit(0 if ok else 1)",
             )
@@ -569,7 +574,7 @@ class Runner:
         )
 
     def resume(self):
-        """Resume only the existing owned mock; reconcile uncertain start by reads only."""
+        "Resume only the existing owned mock; reconcile uncertain start by reads only."
         record = self.s.setdefault("mock_resume", {})
         starting = False
         checking_health = False
@@ -628,7 +633,8 @@ class Runner:
             )
             record["container_id"] = cid
             if not was_running:
-                # Intent fsynced before Docker; a crash cannot cause a blind second start.
+                # Intent fsynced before Docker; a crash cannot cause a blind second
+                # start.
                 record.update(
                     start_attempted=True,
                     stop_confirmed=False,
@@ -675,7 +681,8 @@ class Runner:
                 status="FAILED" if starting or checking_health else "BLOCKED",
                 error_kind=type(error).__name__,
             )
-            self.persist()  # Preserve pending and start_attempted on uncertain outcomes.
+            # Preserve pending and start_attempted on uncertain outcomes.
+            self.persist()
             raise
 
     def action(self, label, function):
@@ -796,7 +803,8 @@ class Runner:
             )
         mock_guard(inspect(self.r["mock"]), self.r)
         mock_ready(self.r)
-        # Create with NiFi's own UID through its existing bind mount. No container restart.
+        # Create with NiFi's own UID through its existing bind mount. No container
+        # restart.
         self.action(
             "mkdir-dlq",
             lambda: docker(
@@ -887,7 +895,8 @@ class Runner:
         raise GuardError("Estado no confirmado en 30s; usar --stop.")
 
     def stop(self):
-        # Identity checks remain mandatory; isolation/config drift must not prevent stopping owned IDs.
+        # Identity checks remain mandatory; isolation/config drift must not prevent
+        # stopping owned IDs.
         ps, _cs, _ = snapshot(self.api, self.inv)
         errors = []
         for cid in reversed(self.s.get("activated", [])):
@@ -938,7 +947,8 @@ class Runner:
                     self.s["mock_resume"]["stop_confirmed"] = True
                     if self.s.get("pending") == "resume-owned-mock":
                         self.s["pending"] = (
-                            None  # Explicit stop resolved start uncertainty by observation.
+                            # Explicit stop resolved start uncertainty by observation.
+                            None
                         )
         self.s["stopped"] = True
         self.persist()
@@ -1159,7 +1169,8 @@ class Runner:
                 raise GuardError("No se confirmó drenaje/offset 5 en 120s.")
         finally:
             self.stop()
-        # Query only this component, then filter by topic and target IDs before persisting.
+        # Query only this component, then filter by topic and target IDs before
+        # persisting.
         time.sleep(3)
         query = self.action(
             "provenance-query",
@@ -1317,7 +1328,8 @@ def main(argv=None):
                 configuration_guard(ps, cs, f, flow, inv, r, isolated=False)
                 compare_original(api, ps, r)
                 runtime_guard(r)
-                # Save only allowlisted configuration: exact pinned baseline, no secrets.
+                # Save only allowlisted configuration: exact pinned baseline, no
+                # secrets.
                 s = {
                     "resources": r,
                     "inventory_sha256": digest(inv),

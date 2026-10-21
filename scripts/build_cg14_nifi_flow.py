@@ -88,7 +88,8 @@ def main() -> None:
             STD_BUNDLE,
             {
                 "cg14.source.kind": "nifi-cg14",
-                "cg14.source.uri": "kafka://${kafka.topic}/${kafka.partition}/${kafka.offset}",
+                "cg14.source.uri": "kafka://${kafka.topic}/${kafka.partition}/"
+                "${kafka.offset}",
                 "cg14.record.ref": "${kafka.topic}/${kafka.partition}/${kafka.offset}",
                 "cg14.max.line.bytes": "#{CG14_MAX_LINE_BYTES}",
                 "cg14.max.field.chars": "#{CG14_MAX_FIELD_CHARS}",
@@ -173,7 +174,8 @@ def main() -> None:
             "org.apache.nifi.processors.standard.UpdateAttribute",
             STD_BUNDLE,
             {
-                "cg14.publish.attempts": "${cg14.publish.attempts:replaceNull('0'):toNumber():plus(1)}",
+                "cg14.publish.attempts": "${cg14.publish.attempts:replaceNull('0'):"
+                "toNumber():plus(1)}",
             },
             1420,
             300,
@@ -185,7 +187,8 @@ def main() -> None:
             STD_BUNDLE,
             {
                 "Routing Strategy": "Route to Property Name",
-                "retry": "${cg14.publish.attempts:toNumber():le(#{CG14_MAX_PUBLISH_ATTEMPTS})}",
+                "retry": "${cg14.publish.attempts:toNumber():"
+                "le(#{CG14_MAX_PUBLISH_ATTEMPTS})}",
             },
             1660,
             300,
@@ -304,7 +307,9 @@ def main() -> None:
         "flowContents": {
             "identifier": "cnc-guard-cg14",
             "name": "CNC Guard — CG14 validación y rechazo (propuesta v0.1.0)",
-            "comments": "Generado por scripts/build_cg14_nifi_flow.py desde nifi-flows/cg14_validate.groovy. NO desplegado ni probado en vivo: BLOCKED por CG03/CG13 e infra.",
+            "comments": "Generado por scripts/build_cg14_nifi_flow.py desde "
+            "nifi-flows/cg14_validate.groovy. NO desplegado ni probado en "
+            "vivo: BLOCKED por CG03/CG13 e infra.",
             "position": {"x": 0.0, "y": 0.0},
             "processGroups": [
                 {
