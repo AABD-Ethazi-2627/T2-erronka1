@@ -75,3 +75,15 @@ Revisor y conclusión:
 ```
 
 El registro no debe contener credenciales, datos personales innecesarios ni una nota autootorgada.
+
+## CG23 — ampliación local parcial (2026-10-21)
+
+G14/G45/G80/G85/G96/G104: [protocolo y límites](../evidence/CG23.md),
+[18 corridas, tres por combinación](../evidence/CG23_repeated_20261021.json),
+[antecedente de seis corridas](../evidence/CG23_local.json), `scripts/cg23_capacity.py` y
+`tests/test_cg23_capacity.py`. Diez tests con
+`python -m unittest discover -s tests -p test_cg23_capacity.py -v`.
+Medición sintética aislada, comparación 1/4 consumidores y sensibilidad dimensional;
+no capacidad real del pipeline, durabilidad distribuida ni ahorro demostrado.
+Revisor humano, fecha de revisión y conclusión: pendientes. No cambia la aceptación
+ni el estado de la issue #23; CG22 e integración bajo carga siguen pendientes.
