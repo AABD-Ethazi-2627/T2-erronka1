@@ -16,6 +16,31 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class FrameworkUpgradeContractTests(unittest.IsolatedAsyncioTestCase):
+    async def test_fragmented_json_at_body_size_boundary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            app = create_app(fixture_bundle(Path(directory)))
+            payload = (ROOT / "contracts/examples/valid/telemetry.json").read_bytes()
+
+            async with api_client(app) as client:
+                for size, expected in ((32768, 200), (32769, 413)):
+                    body = payload + b" " * (size - len(payload))
+
+                    async def fragments():
+                        for offset in range(0, len(body), 4096):
+                            yield body[offset : offset + 4096]
+
+                    with self.subTest(size=size):
+                        response = await client.post(
+                            "/predict",
+                            content=fragments(),
+                            headers={"Content-Type": "application/json"},
+                        )
+                        self.assertEqual(response.status_code, expected, response.text)
+                        if expected == 413:
+                            self.assertEqual(
+                                response.json(), {"detail": "Request too large"}
+                            )
+
     async def test_real_asgi_responses_and_schema_with_synthetic_models(self):
         with tempfile.TemporaryDirectory() as directory:
             app = create_app(fixture_bundle(Path(directory)))
