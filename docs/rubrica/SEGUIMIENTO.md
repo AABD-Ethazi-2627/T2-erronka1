@@ -49,6 +49,17 @@ Avance CG24 del 21/10/2026 para G17/G19/G20: [diagnóstico FP/FN por tipo, contr
 | Zereginak!G104 | Angiecrizu, Niistal, petiteiker, tears-mysthrala | [#10](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/10), [#17](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/17), [#19](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/19), [#23](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/23), [#26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26) | Parcial local; revisión pendiente | [Evidencia](../evidence/CG10.md) · [versión/comandos](../evidence/INDEX_2026-10-19.md). Costes por escenarios; no ahorro observado. Revisor humano: pendiente. |
 | Zereginak!G105 | Angiecrizu, Niistal, petiteiker, tears-mysthrala | [#19](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/19), [#26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26), [#27](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27) | Parcial local; revisión pendiente | [Evidencia](../evidence/CG19.md) · [versión/comandos](../evidence/INDEX_2026-10-19.md). Panel con datos de aceptación, sin validación de utilidad por operador. Revisor humano: pendiente. |
 
+## Preparación CG26 — 21/10/2026
+
+Para **G5/G23/G24/G72/G104/G105**, el [guion CG26](../demo/README.md) añade
+procedimiento desde clon limpio, ejemplos normal/con alerta/rechazado, fallo de
+disponibilidad y preguntas para justificar modelo, reglas, panel y costes.
+El [registro técnico](../evidence/CG26_REHEARSAL.md) enlaza versión, comandos,
+resultados locales y límites. Es ensayo de API en proceso, no streaming E2E ni
+panel vivo posterior a PR42. Las seis filas conservan estado parcial: reproducción
+por otro miembro, defensa, utilidad del dashboard y revisor/fecha pendientes.
+No sustituye la memoria CG25 de PR48 ni acredita entrega.
+
 ## Registro de cada revisión
 
 Copiar este bloque en el PR o en la evidencia de la etapa y enlazarlo desde la fila correspondiente:

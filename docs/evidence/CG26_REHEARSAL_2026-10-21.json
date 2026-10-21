@@ -1,0 +1,138 @@
+{
+  "status": "isolated_rehearsal_passed",
+  "executed_at_utc": "2026-10-21T07:32:17.806876+00:00",
+  "checkout_head": "ae14eec148a9ae47f4c317276cc443a81050dc7e",
+  "python": "3.11.15",
+  "scope": {
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "temporal_prediction_enabled": false,
+    "training_source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "input_features": [
+      "air_temp_K",
+      "process_temp_K",
+      "rpm",
+      "torque_Nm",
+      "tool_wear_min",
+      "machine_type"
+    ],
+    "score_semantics": "uncalibrated_current_state_score"
+  },
+  "source_rows": 8000,
+  "manifest_sha256": "a6cc7a29f0b061e114e046865cf7ac4a3969111a904a0281f1919aff35ea0945",
+  "execution_files_sha256": {
+    "scripts/rehearse_cg26.py": "102fbbdace9b45030edeefba6d07dfc31050c25ffe5fcaa6d6cd4cc0a97a7082",
+    "scoring/score_api.py": "f7ca3e3ba78423f73a1742b765179f650b142cbe7b383be5df0327f66fefd561",
+    "uv.lock": "c2c4bbc6f28bdc4e2cd8c0172ba8a746d18e237b1964a34b7fdec5880c779a3f"
+  },
+  "model_hashes": {
+    "rf.pkl": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+    "if.pkl": "a12304b474f290841a435ffb7d9caaa65c0843ce537267d28686a9d0f49aae79"
+  },
+  "health": {
+    "http_status": 200,
+    "body": {
+      "status": "ready",
+      "model_version": "ai4i-current-state-v4",
+      "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+      "temporal_prediction_enabled": false
+    }
+  },
+  "cases": {
+    "normal_fit_example": {
+      "http_status": 200,
+      "prediction": {
+        "event_id": "b25b4f8494db7b3ef60c8bda179a80fbc4121d78a2afb3283f195ac5df102acb",
+        "machine_id": "CNC-025",
+        "timestamp": "2026-10-21T00:00:00Z",
+        "schema_version": "0.1.0",
+        "quality_flag": "OK",
+        "source": {
+          "kind": "lab_fixture",
+          "uri": "data/ai4i2020_train.csv",
+          "record_ref": "zero-based-data-row:1386;fit;demo-only"
+        },
+        "machine_type": "M",
+        "air_temp_K": 301.5,
+        "process_temp_K": 310.4,
+        "rpm": 1350.0,
+        "torque_Nm": 54.9,
+        "tool_wear_min": 153.0,
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "temporal_prediction_enabled": false,
+        "score_semantics": "uncalibrated_current_state_score",
+        "failure_score": 0.004264675232657996,
+        "risk_alert": false,
+        "alert_level": "OK",
+        "anomaly_score": 0.5238387352961528,
+        "anomaly_alert": false,
+        "policy": "f2",
+        "model_version": "ai4i-current-state-v4",
+        "scored_at": "2026-10-21T07:32:17.745383Z",
+        "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+        "risk_threshold": 0.19082281465428477,
+        "anomaly_threshold": 0.6145036167334864
+      }
+    },
+    "failure_fit_example": {
+      "http_status": 200,
+      "prediction": {
+        "event_id": "3979eb79bf61149009d3ba190e12b4f40eca7122ebe7c4ee26751c82f51159fa",
+        "machine_id": "CNC-047",
+        "timestamp": "2026-10-21T00:00:00Z",
+        "schema_version": "0.1.0",
+        "quality_flag": "OK",
+        "source": {
+          "kind": "lab_fixture",
+          "uri": "data/ai4i2020_train.csv",
+          "record_ref": "zero-based-data-row:679;fit;demo-only"
+        },
+        "machine_type": "L",
+        "air_temp_K": 302.6,
+        "process_temp_K": 311.5,
+        "rpm": 1442.0,
+        "torque_Nm": 59.8,
+        "tool_wear_min": 169.0,
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "temporal_prediction_enabled": false,
+        "score_semantics": "uncalibrated_current_state_score",
+        "failure_score": 0.8024801587301588,
+        "risk_alert": true,
+        "alert_level": "CRITICA",
+        "anomaly_score": 0.561303837458433,
+        "anomaly_alert": false,
+        "policy": "f2",
+        "model_version": "ai4i-current-state-v4",
+        "scored_at": "2026-10-21T07:32:17.753646Z",
+        "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+        "risk_threshold": 0.19082281465428477,
+        "anomaly_threshold": 0.6145036167334864
+      }
+    }
+  },
+  "rejected_422": {
+    "machine_failure": 422,
+    "failure_TWF": 422,
+    "failure_HDF": 422,
+    "failure_PWF": 422,
+    "failure_OSF": 422,
+    "failure_RNF": 422,
+    "eta_minutes": 422,
+    "rul_minutes": 422,
+    "negative_rpm": 422,
+    "raw_record": 422
+  },
+  "trace_invariance": true,
+  "missing_bundle": {
+    "health": 503,
+    "predict": 503
+  },
+  "human_review": "pending",
+  "limits": [
+    "TestClient in process; no live HTTP server or streaming E2E.",
+    "Two FIT examples for demonstration, not independent evaluation.",
+    "Timestamp is fixture metadata, not observed machine history.",
+    "No SMB, OT, Docker, Kafka, NiFi, Elasticsearch or Kibana exercised.",
+    "No ETA/RUL/forecast24h, calibrated industrial risk or observed savings.",
+    "No team defence, reviewer acceptance or delivery evidence established."
+  ]
+}
