@@ -122,3 +122,36 @@ Siguiente paso humano: reproducir el guion en un clon propio, completar el
 registro del compañero y revisar la decisión del panel. El E2E posterior a PR42
 necesita un ensayo separado, autorizado y reconciliado; no extrapolar la
 evidencia histórica de PR38. No hay ETA, RUL ni forecast24h en esta entrega.
+
+## Corrección de recursos tras la composición (21 de octubre)
+
+La sonda con manifiesto `{}` rechaza correctamente con `Bundle not ready: 503`,
+pero el transporte TestClient anterior deja dos ResourceWarning/unraisables tras
+GC; salida 1. [Control negativo](CG26_resource_cleanup_before.txt).
+Se sustituye por HTTPX ASGI con lifespan explícito y cierre independiente de las
+excepciones de petición/cuerpo. El cliente se cierra antes del shutdown y los
+errores se propagan al llamador. El script conserva su entrada síncrona y no
+importa helpers de tests ni cambia scoring, dependencias, contratos o modelos.
+
+La sonda corregida devuelve el mismo rechazo y cero unraisables, salida 0.
+Se añaden regresiones de rechazo sin deserializar, éxito, cierre y propagación
+por fallo de petición, cuerpo y startup. El ensayo completo recorre inferencia,
+422, invariancia de trazas y bundle ausente con **24 filas sintéticas/3 árboles
+por estimador**, en temporales. No se carga ni entrena la entrega. Las pruebas
+nuevas hacen fatal ResourceWarning, capturan sys.unraisablehook y fuerzan GC 2.
+
+Comprobación externa adicional: dos pasadas del archivo de 8 pruebas, sin skips
+ni unraisables, salida 0 en [FedoraLinux-43/Python 3.11.15](CG26_resource_cleanup_after_fedora.txt)
+y [Windows/Python 3.11.9](CG26_resource_cleanup_after_windows.txt).
+Ruff 0.17.1 `check --select E,F,I,PLW1510` y `format --check` de script y tests
+pasan en ambos sistemas; contratos y `git diff --check` pasan. Un primer intento
+de la nueva fixture omitía policy: falló la prueba positiva con 500, se corrigió
+el manifiesto de prueba y se repitieron ambas pasadas en ambos sistemas.
+
+La evidencia JSON original y sus hashes se conservan como ejecución histórica
+del transporte anterior: no son una ejecución del script cambiado. No se repite
+entrenamiento de entrega. La advertencia CG02 del guion ahora se limita a PR42;
+PR52 corrige sus separadores por separado. El límite POSIX de la suite completa
+sigue vigente; esta rama mantiene su base PR42 y no integra PR52 ni PR51.
+Pendientes revisión independiente, checks remotos y aceptación humana; sin CI
+manual, Copilot, merge, cierre, SMB/OT ni servicios compartidos.

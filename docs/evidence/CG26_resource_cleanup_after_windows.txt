@@ -1,0 +1,49 @@
+test_existing_evidence_is_preserved_before_loading_models (test_cg26_rehearsal.RehearsalCliTests.test_existing_evidence_is_preserved_before_loading_models) ... ok
+test_missing_bundle_does_not_publish_success (test_cg26_rehearsal.RehearsalCliTests.test_missing_bundle_does_not_publish_success) ... ok
+test_body_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan) ... ok
+test_complete_rehearsal_with_small_synthetic_bundle (test_cg26_rehearsal.RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-7' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() done, defined at D:\github\_local\t2-babysit-20261021\cg26-demo-0915\tests\test_cg26_rehearsal.py:155> result=None created at C:\Users\unaiu\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py:100> took 1.265 seconds
+ok
+test_empty_manifest_rejects_before_loading_and_gc_is_clean (test_cg26_rehearsal.RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_request_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_request_error_propagates_and_closes_client_and_lifespan) ... ok
+test_startup_error_propagates (test_cg26_rehearsal.RehearsalTransportTests.test_startup_error_propagates) ... ok
+test_success_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_success_closes_client_and_lifespan) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 10.388s
+
+OK
+test_existing_evidence_is_preserved_before_loading_models (test_cg26_rehearsal.RehearsalCliTests.test_existing_evidence_is_preserved_before_loading_models) ... ok
+test_missing_bundle_does_not_publish_success (test_cg26_rehearsal.RehearsalCliTests.test_missing_bundle_does_not_publish_success) ... ok
+test_body_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_body_error_propagates_and_closes_client_and_lifespan) ... ok
+test_complete_rehearsal_with_small_synthetic_bundle (test_cg26_rehearsal.RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-37' coro=<RehearsalTransportTests.test_complete_rehearsal_with_small_synthetic_bundle() done, defined at D:\github\_local\t2-babysit-20261021\cg26-demo-0915\tests\test_cg26_rehearsal.py:155> result=None created at C:\Users\unaiu\AppData\Local\Programs\Python\Python311\Lib\asyncio\runners.py:100> took 1.265 seconds
+ok
+test_empty_manifest_rejects_before_loading_and_gc_is_clean (test_cg26_rehearsal.RehearsalTransportTests.test_empty_manifest_rejects_before_loading_and_gc_is_clean) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_request_error_propagates_and_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_request_error_propagates_and_closes_client_and_lifespan) ... ok
+test_startup_error_propagates (test_cg26_rehearsal.RehearsalTransportTests.test_startup_error_propagates) ... ok
+test_success_closes_client_and_lifespan (test_cg26_rehearsal.RehearsalTransportTests.test_success_closes_client_and_lifespan) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 10.886s
+
+OK
+{
+  "runs": [
+    {
+      "iteration": 1,
+      "run": 8,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "run": 8,
+      "skipped": 0,
+      "success": true
+    }
+  ],
+  "unraisables": []
+}

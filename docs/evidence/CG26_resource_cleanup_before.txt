@@ -1,0 +1,18 @@
+Model bundle unavailable or invalid; scoring remains unready
+Exception ignored in: <function MemoryObjectSendStream.__del__ at 0x7c2a51bc9300>
+Traceback (most recent call last):
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg26-demo-0915/outputs/venv-linux/lib/python3.11/site-packages/anyio/streams/memory.py", line 321, in __del__
+    warnings.warn(
+ResourceWarning: Unclosed <MemoryObjectSendStream at 7c2a52546cd0>
+Exception ignored in: <function MemoryObjectReceiveStream.__del__ at 0x7c2a51bc8ae0>
+Traceback (most recent call last):
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg26-demo-0915/outputs/venv-linux/lib/python3.11/site-packages/anyio/streams/memory.py", line 190, in __del__
+    warnings.warn(
+ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7c2a52544e90>
+{
+  "expected_rejection": "Bundle not ready: 503",
+  "unraisables": [
+    "ResourceWarning: Unclosed <MemoryObjectSendStream at 7c2a52546cd0>",
+    "ResourceWarning: Unclosed <MemoryObjectReceiveStream at 7c2a52544e90>"
+  ]
+}

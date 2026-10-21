@@ -23,13 +23,20 @@ La brecha cubierta es el recorrido reproducible normal → alerta → rechazo �
 modelo no disponible, con resultados y versión guardados, más preguntas de
 defensa. E2E streaming, panel vivo y explicación del equipo quedan pendientes.
 
+El ensayo usa HTTPX ASGI con el lifespan real explícito; las peticiones y el
+cliente se cierran antes del shutdown, también al rechazar un bundle o propagar
+un error. No importa helpers de tests ni abre un servidor. La regresión
+`test_cg26_rehearsal.py` fuerza GC y detecta ResourceWarning/unraisables; incluye
+un bundle de 24 filas sintéticas que no es un modelo de entrega.
+
 ## Procedimiento desde un clon limpio
 
 Entorno completo: Linux, Git, Python 3.11 y uv instalados, acceso a paquetes para
 `uv sync`. En Windows nativo el ensayo API funciona, pero la suite completa tiene
-errores en rutas previas que requieren semántica POSIX/temporales Unix. La auditoría
-CG02 compara rutas con `/` y tampoco coincide allí. No reescribir el inventario
-para disimular esa diferencia: ejecutar los comandos completos en Linux/WSL con
+errores en rutas previas que requieren semántica POSIX/temporales Unix. En la base
+PR42, CG02 también discrepaba por los separadores Windows; PR52 corrige esa
+discrepancia sin cambiar el inventario y se valida por separado. Esta rama no
+incorpora PR52: ejecutar los comandos completos en Linux/WSL con
 una distribución explícita y un entorno Python propio para Linux.
 Ejecutar desde la raíz de **un clon propio**; no reutilizar el checkout ni
 `outputs/` de otra persona. Anotar la versión con `git rev-parse HEAD`,
