@@ -18,7 +18,7 @@ docker compose ps     # 6 zerbitzu "running" ikusi behar dituzu
 | Zerbitzua | URLa | Erabiltzailea / Pasahitza |
 |---|---|---|
 | Kafka | kafka:9092 (Docker barnetik) | — |
-| NiFi | https://localhost:8443 | admin / adminpassword123 |
+| NiFi | https://localhost:8443 | Credenciales generadas localmente; ver `deploy/cg14/README.md` |
 | Kibana | http://localhost:5601 | — |
 | Elasticsearch | http://localhost:9200 | — |
 | Scoring API | http://localhost:8000/docs | — |
