@@ -1,9 +1,129 @@
 # Starlette TestClient y avisos de seguridad — 2026-10-21
 
-Base: PR #51, `9786d7d1e4e7bc657ad4888d5a433e46b46bbab7`. Este
-cambio actualiza solo las dependencias de la API y añade regresiones. Los
-ensayos son locales en FedoraLinux-43, Python 3.11.15; no acreditan CI ni
-la cadena distribuida.
+Base: PR #51, `9786d7d1e4e7bc657ad4888d5a433e46b46bbab7`. Continuación
+del PR #56 desde `1d794cdff20d37b0d6820c19b6b3aa68b6340b36`.
+Este registro distingue el candidato actual y la evidencia histórica R1.
+Las pruebas locales no acreditan CI, integración distribuida ni producción.
+
+## Candidato actual: import de AnyIO y PyArrow
+
+El lock cambia exclusivamente Starlette `1.3.1 → 1.7.0` y PyArrow
+`18.1.0 → 23.0.1`; no añade ni elimina paquetes. Se mantienen FastAPI
+`0.133.0`, AnyIO `4.15.1`, NumPy `1.26.4`, pandas `2.2.2`, DuckDB `1.2.2`,
+scikit-learn `1.5.0` y joblib `1.4.2`. El pin Starlette de
+`scoring/requirements.txt` coincide con `pyproject.toml` y `uv.lock`.
+
+- Las [notas de Starlette 1.7.0](https://starlette.dev/release-notes/#170-september-23-2026)
+  identifican el arreglo del import obsoleto de AnyIO. Es la primera
+  publicación que lo incluye; no se fija AnyIO antiguo ni se filtran avisos.
+  Los [metadatos de FastAPI 0.133.0](https://pypi.org/pypi/fastapi/0.133.0/json)
+  declaran `starlette>=0.40.0`, sin techo, y permiten este candidato.
+  [Starlette 1.7.0](https://pypi.org/pypi/starlette/1.7.0/json) exige
+  AnyIO `>=4,<5`, ya satisfecho por el lock.
+- [CVE-2026-25087 / GHSA-rgxp-2hwp-jwgg](https://github.com/advisories/GHSA-rgxp-2hwp-jwgg)
+  y `PYSEC-2026-113` son identificadores del mismo problema, no dos
+  vulnerabilidades. El rango es `>=15.0.0,<23.0.1`; `23.0.1` es la primera
+  versión corregida. Se conserva la severidad alta de GHSA; el
+  [aviso original de Apache](https://www.openwall.com/lists/oss-security/2026/02/17/4)
+  lo clasifica como moderado y excluye expresamente los bindings Python.
+  La ruta requiere un archivo IPC con buffers variádicos y la llamada C++
+  `RecordBatchFileReader::PreBufferMetadata`, desactivada por defecto.
+  El parche upstream es [Arrow #48925](https://github.com/apache/arrow/pull/48925).
+- La aplicación usa pandas Parquet y SQL `read_parquet` de DuckDB en
+  `scripts/build_history.py`, `verify_history.py` y los scripts estacionales;
+  no se encontraron callers IPC ni `PreBufferMetadata` en scoring/scripts/tests.
+  La actualización retira la versión señalada por el auditor; no se presenta
+  un PoC Python ni se afirma explotación de la API.
+- [Arrow 23](https://arrow.apache.org/docs/23.0/python/install.html) admite
+  Python 3.11/3.12, NumPy >=1.21.2 y pandas >=1.3.4. El
+  [metadato PyArrow 23.0.1](https://pypi.org/pypi/pyarrow/23.0.1/json)
+  requiere Python >=3.10 y publica wheels cp311/cp312 Windows x64 y
+  Linux x64. Se compararon contra PyPI los hashes SHA-256 de todos los
+  artefactos de FastAPI, Starlette y PyArrow referenciados por el lock;
+  coinciden y ninguno está retirado. No se confunden requisitos de build
+  con dependencias del wheel instalado.
+
+## Compatibilidad de archivos y corrección de history
+
+La primera lectura cruzada encontró una regresión real de idempotencia:
+`retain()` reescribía Gold en cada ingestión. Arrow 23 produce bytes Parquet
+distintos de Arrow 18 para el mismo resumen; cambiaban el archivo y su hash
+del manifiesto aun al reingerir exactamente el mismo lote.
+
+Ahora `retain()` conserva Gold si el resumen leído es igual al recalculado.
+La verificación del histórico sigue ocurriendo antes de cualquier escritura;
+una ingestión con filas nuevas sigue actualizando Gold y su manifiesto.
+No se rebaselina corrupción ni se regeneran archivos o modelos existentes.
+
+`tests/test_columnar_upgrade_contract.py` añade dos regresiones con fixtures
+pequeñas: roundtrip pandas/Arrow/DuckDB con esquema, UTC, nulos y Unicode;
+deduplicación por bytes y preservación de filas con igual máquina/hora;
+integridad e idempotencia del ZIP; y conservación de un Gold con codificación
+Parquet alternativa, seguida de una ingestión realmente nueva. Esta última
+regresión falla con el escritor anterior y pasa con la corrección.
+
+Se generaron aparte fixtures sintéticas reales con Arrow 18 y con Arrow 23.
+Se comprobaron ambas direcciones de lectura, esquemas y valores, reingestión
+idempotente, ZIP y carga ASGI de modelos sintéticos serializados con joblib.
+En cada verificación se conservan los hashes de los 15 archivos, incluidos
+Parquet, manifiestos, ZIP y pickles. Los bytes de dos generaciones distintas
+pueden diferir; no se exige que un escritor nuevo reproduzca los bytes antiguos.
+Los bundles de entrega no se cargaron ni modificaron: esa aceptación sigue
+pendiente y no se sustituye por las fixtures.
+
+## Matriz ejecutada del candidato
+
+Cada «proceso nuevo» invoca el runner desde cero; dentro ejecuta dos pasadas.
+La captura empieza antes de discovery/import y termina después de GC, con
+filtro `always` y hook de unraisables. No se utiliza la caché de la segunda
+pasada como prueba de un primer import limpio.
+
+| Entorno | Resultado |
+| --- | --- |
+| FedoraLinux-43, Python 3.11.15, suite completa | Dos procesos nuevos × dos pasadas: 119 pruebas, 3 omitidas, 0 fallos/errores/avisos/unraisables en cada pasada; salidas 0. |
+| FedoraLinux-43, Python 3.12.15, suite completa | Misma matriz y resultado: 119/3, cero diagnósticos capturados; salidas 0. |
+| Windows 11 x64, Python 3.11.9 y 3.12.10, contratos focalizados | Para cada Python, dos procesos nuevos × dos pasadas: 28 pruebas, 2 omitidas, 0 fallos/errores/unraisables. Cada primer import emite 1 UserWarning de Joblib/loky al no encontrar WMIC; salida estricta 1, conservada. No se declara Windows libre de avisos. |
+| Windows nativo, intento de suite completa | 12 errores de portabilidad en rutas ajenas: `fcntl`, `os.O_NOFOLLOW`, permisos POSIX y reapertura de NamedTemporaryFile. Con el lock anterior se reproducen los mismos 12 errores y el aviso loky, además de la deprecación de Starlette. No se portan esos subsistemas en este PR. |
+| Controles del runner, ambos Python/Fedora y Windows | Las 4 regresiones pasan. El negativo abandona dos pares AnyIO reales entre discovery y GC: captura 4 ResourceWarning y sale 1. También se comprueban deprecación y unraisable durante import. |
+
+Los contratos focalizados incluyen API, OpenAPI, lifespan, cierre de
+TestClient, cuerpos fragmentados 32768/32769 bytes, history, recuperación,
+Parquet/ZIP y empaquetado estacional sintético. Se conservan 200/422/413/500/503.
+El requisito de `Content-Type: application/json` ya introducido por el PR
+permanece explícito; el export NiFi lo declara, pero no se ejecutó NiFi.
+
+Los entornos candidatos son venvs separados para cada plataforma/Python.
+El `.venv` original del checkout conserva Arrow 18/Starlette 1.3.1 para la
+comparación; ejecutarlo directamente no valida las dependencias candidatas.
+
+## Checks y residuos actuales
+
+- `uv==0.13.1 lock --check`: pasa. Resolución de scoring para Python 3.11 y
+  3.12: pasa. `uv audit --locked`: 0 vulnerabilidades conocidas en los 51
+  paquetes auditados; `--only-group research`: 0 en 19 paquetes. El aviso
+  de que `uv audit` es experimental sigue visible y no es una advisory.
+- Auditoría inmutable CG02, layout y Ruff 0.14.14 de los seis archivos Python
+  afectados por este PR: pasan; formato de esos archivos: pasa.
+- `ruff check .` sigue fallando con cuatro E402 en
+  `notebooks/01_EDA_evidence.ipynb` y E731 en `scripts/audit_cg02.py`,
+  sin cambios respecto a la base. Sus correcciones pertenecen a la rama
+  de composición; este PR no las pisa ni se atribuye su resolución.
+- Se conserva el fallo estricto nativo de Windows por Joblib/loky y los
+  errores POSIX de la suite completa. No se sube joblib ni se cambia el
+  formato de los modelos para eliminar un aviso ajeno a estas dependencias.
+- La revisión independiente no encontró regresiones concretas del diff;
+  sus 9 pruebas se ejecutaron en el venv anterior y no validan el upgrade.
+  La matriz candidata anterior es evidencia separada de implementación.
+- Los tres skips completos requieren un bundle de entrega. No se ejecutaron
+  testfinal, SMB/OT, servicios compartidos, despliegue ni CI manual; tampoco
+  se cambiaron triggers ni se solicitaron revisiones Copilot. La revisión
+  independiente del padre y los checks remotos del nuevo SHA son fases distintas.
+
+## Registro histórico R1: no describe el candidato actual
+
+Las secciones siguientes conservan las mediciones de R1 sobre el lock
+anterior. Sus residuos de Starlette/PyArrow y su tabla de 117 pruebas fueron
+superados por el candidato y la matriz anteriores; no son el estado vigente.
 
 ## Rectificación de la revisión independiente R1
 
