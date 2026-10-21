@@ -113,10 +113,17 @@ class Pipeline:
             attempt = cursor.lastrowid
             con.commit()
             try:
-                result = await self.client.request(
-                    method, url, timeout=self.timeout, follow_redirects=False, **kwargs
-                )
-            except httpx.TransportError as exc:
+                # HTTPX timeouts are per operation/inactivity. Also cap total
+                # wall time so a slow-drip response cannot outlive the poll budget.
+                async with asyncio.timeout(self.timeout):
+                    result = await self.client.request(
+                        method,
+                        url,
+                        timeout=self.timeout,
+                        follow_redirects=False,
+                        **kwargs,
+                    )
+            except (httpx.TransportError, TimeoutError) as exc:
                 status = type(exc).__name__
                 result = None
             else:

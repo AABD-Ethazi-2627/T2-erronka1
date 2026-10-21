@@ -435,6 +435,27 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
                     self.assertEqual(
                         con.execute("SELECT count(*) FROM attempts").fetchone()[0], 2
                     )
+        with tempfile.TemporaryDirectory() as directory:
+            self.root = Path(directory)
+            self.acks = []
+
+            async def slow_drip(request):
+                await asyncio.sleep(10)
+                return httpx.Response(200, json={})
+
+            async with httpx.AsyncClient(
+                transport=httpx.MockTransport(slow_drip)
+            ) as client:
+                with self.assertRaises(PipelineBlocked):
+                    await self.worker(client, attempts=2, timeout=0.01).consume(
+                        [message()], self.ack
+                    )
+            with sqlite3.connect(self.root / "worker/pipeline.sqlite3") as con:
+                self.assertEqual(
+                    con.execute("SELECT result FROM attempts").fetchall(),
+                    [("TimeoutError",), ("TimeoutError",)],
+                )
+            self.assertFalse(self.acks)
 
     async def test_committed_corruption_and_archive_failure_prevent_ack(self):
         app = self.app()
