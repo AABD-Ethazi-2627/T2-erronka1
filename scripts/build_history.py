@@ -84,7 +84,11 @@ def retain(sources, output):
         ).fetchone()
     gold = output / "gold"
     gold.mkdir(exist_ok=True)
-    per_machine.to_parquet(gold / "machine_summary.parquet", index=False)
+    summary = gold / "machine_summary.parquet"
+    # A writer upgrade can change Parquet bytes without changing the summary.
+    # Preserve the verified artifact and its manifest hash on an identical ingest.
+    if not summary.exists() or not pd.read_parquet(summary).equals(per_machine):
+        per_machine.to_parquet(summary, index=False)
     files = sorted(
         p for p in output.rglob("*") if p.is_file() and p.suffix in {".csv", ".parquet"}
     )
