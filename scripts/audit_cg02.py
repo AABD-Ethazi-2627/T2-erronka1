@@ -181,14 +181,14 @@ def build_inventory(root):
     root = Path(root)
     train_path = root / "data/ai4i2020_train.csv"
     training = {
-        "file": str(train_path.relative_to(root)),
+        "file": train_path.relative_to(root).as_posix(),
         **audit_csv(train_path, "training"),
     }
     samples = sorted((root / "docs/requisitos/evidencias/muestras").glob("*.csv"))
     if not samples:
         raise ValueError("No frozen SMB evidence found")
     batches = [
-        {"file": str(path.relative_to(root)), **audit_csv(path, "batch")}
+        {"file": path.relative_to(root).as_posix(), **audit_csv(path, "batch")}
         for path in samples
     ]
     with train_path.open() as handle:
