@@ -36,6 +36,10 @@ Los experimentos y empaquetado rechazan sobrescribir salidas; conservar anterior
 coherentes. No cargar pickles descargados de terceros. Los modelos generados quedan
 ignorados por Git; informes compactos y hashes están versionados en docs/evidence.
 
+La API necesita un ledger local persistente y escribible para conservar respuestas
+canónicas en reintentos. Compose usa el volumen `scoring-state`; fuera de Compose,
+consultar [identidad, recuperación y conflictos 409](docs/SCORING_REPLAY_CONTRACT.md).
+
 Opcional de clasificación: `scripts.experiment_smotenc` compara sobremuestreo dentro
 de los folds. Los laboratorios temporales/estacionales y otros datasets son trabajo
 histórico fuera del alcance confirmado; no forman parte del entrenamiento, empaquetado

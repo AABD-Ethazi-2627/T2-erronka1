@@ -90,6 +90,7 @@ class CurrentStateScopeTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(first.status_code, 200)
             changed = {
                 **payload,
+                "event_id": "f" * 64,
                 "machine_id": "CNC-099",
                 "timestamp": "2000-01-01T00:00:00Z",
             }

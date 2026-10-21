@@ -123,6 +123,9 @@ async def _rehearsal(manifest_path):
             "/predict",
             json={
                 **payload,
+                "event_id": hashlib.sha256(
+                    b"cg26:trace-invariance-variant"
+                ).hexdigest(),
                 "machine_id": "CNC-099",
                 "timestamp": "2000-01-01T00:00:00Z",
             },
@@ -159,7 +162,12 @@ async def _rehearsal(manifest_path):
         "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
         "execution_files_sha256": {
             name: hashlib.sha256(Path(name).read_bytes()).hexdigest()
-            for name in ["scripts/rehearse_cg26.py", "scoring/score_api.py", "uv.lock"]
+            for name in [
+                "scripts/rehearse_cg26.py",
+                "scoring/score_api.py",
+                "scoring/response_ledger.py",
+                "uv.lock",
+            ]
         },
         "model_hashes": manifest["files"],
         "health": {"http_status": health.status_code, "body": health.json()},
