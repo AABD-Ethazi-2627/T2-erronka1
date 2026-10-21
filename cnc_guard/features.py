@@ -1,6 +1,7 @@
-﻿import pandas as pd
+import pandas as pd
 
 from cnc_guard.data import load_dataset
+from cnc_guard.schemas import SensorReading
 
 FEATURE_COLUMNS = [
     "machine_type",
@@ -23,11 +24,10 @@ def prepare_features(
     if missing:
         raise ValueError(f"Faltan columnas necesarias: {missing}")
 
-    X = data[FEATURE_COLUMNS].copy()
+    X = prepare_inference_features(data[FEATURE_COLUMNS])
     y = data[TARGET_COLUMN].copy()
-
-    if X.isnull().any().any() or y.isnull().any():
-        raise ValueError("Hay valores ausentes en las variables o el objetivo")
+    if y.isnull().any() or not y.isin([0, 1]).all():
+        raise ValueError("El objetivo debe ser binario (0 o 1), sin ausentes")
 
     return X, y
 
@@ -35,3 +35,16 @@ def prepare_features(
 def load_training_data(path: str) -> tuple[pd.DataFrame, pd.Series]:
     """Carga el dataset y devuelve las variables preparadas."""
     return prepare_features(load_dataset(path))
+
+
+def prepare_inference_features(data: pd.DataFrame) -> pd.DataFrame:
+    """Validate sensor-only rows; Pydantic ValidationError is a ValueError.
+
+    Training explicitly selects predictors first. Inference rejects any extra
+    fields, including targets, raw records, identities and temporal fields.
+    """
+    if data.empty:
+        raise ValueError("Se requiere al menos una lectura")
+    records = [SensorReading.model_validate(row).model_dump()
+               for row in data.to_dict(orient="records")]
+    return pd.DataFrame(records, columns=FEATURE_COLUMNS, index=data.index)

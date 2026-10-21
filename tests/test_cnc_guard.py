@@ -73,3 +73,47 @@ def test_package_imports_from_notebooks_directory():
     )
 
     assert result.returncode == 0, result.stderr
+
+
+def test_inference_matches_training_and_pipeline(tmp_path):
+    from cnc_guard.features import prepare_features, prepare_inference_features
+
+    data = load_dataset(DATA_PATH).iloc[:3]
+    training, _ = prepare_features(data)
+    inference = prepare_inference_features(data[FEATURE_COLUMNS])
+    import pandas as pd
+    import numpy as np
+
+    pd.testing.assert_frame_equal(training, inference)
+    path = tmp_path / "model.pkl"
+    train_model(DATA_PATH, path)
+    pipeline = joblib.load(path)
+    np.testing.assert_array_equal(
+        pipeline[:-1].transform(training), pipeline[:-1].transform(inference)
+    )
+    np.testing.assert_array_equal(pipeline.predict(training), pipeline.predict(inference))
+
+
+@pytest.mark.parametrize("field,value", [
+    ("rpm", -1), ("torque_Nm", float("inf")),
+    ("air_temp_K", 0), ("process_temp_K", float("nan")),
+    ("tool_wear_min", "12"), ("machine_type", "X"),
+    ("machine_failure", 1), ("failure_TWF", 0),
+    ("raw_record", "csv"), ("timestamp", "2026-10-21"),
+])
+def test_inference_rejects_invalid_readings(field, value):
+    from cnc_guard.features import prepare_inference_features
+
+    data = load_dataset(DATA_PATH).iloc[:1][FEATURE_COLUMNS].copy()
+    data[field] = value
+    with pytest.raises(ValueError):
+        prepare_inference_features(data)
+
+
+def test_inference_rejects_missing_and_empty():
+    from cnc_guard.features import prepare_inference_features
+
+    data = load_dataset(DATA_PATH).iloc[:1][FEATURE_COLUMNS]
+    for invalid in (data.drop(columns="rpm"), data.iloc[:0]):
+        with pytest.raises(ValueError):
+            prepare_inference_features(invalid)

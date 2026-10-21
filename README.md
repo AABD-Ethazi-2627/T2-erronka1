@@ -51,3 +51,7 @@ cnc-guard/
 ## Planning automatikoa
 
 [Project #2 → #1 sinkronizazioa, 8 orduro](docs/PROJECTS_SYNC.md).
+
+## CG04 — Python y notebook reproducibles
+
+[Instalación con uv, kernel del proyecto y contrato compartido CG03/CG28](docs/CG04_ENVIRONMENT.md).
