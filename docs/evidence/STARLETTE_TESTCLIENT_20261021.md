@@ -104,10 +104,10 @@ comparación; ejecutarlo directamente no valida las dependencias candidatas.
   de que `uv audit` es experimental sigue visible y no es una advisory.
 - Auditoría inmutable CG02, layout y Ruff 0.14.14 de los seis archivos Python
   afectados por este PR: pasan; formato de esos archivos: pasa.
-- `ruff check .` sigue fallando con cuatro E402 en
-  `notebooks/01_EDA_evidence.ipynb` y E731 en `scripts/audit_cg02.py`,
-  sin cambios respecto a la base. Sus correcciones pertenecen a la rama
-  de composición; este PR no las pisa ni se atribuye su resolución.
+- Tras el ajuste del notebook descrito abajo, `ruff check .` devuelve 1
+  únicamente por E731 en `scripts/audit_cg02.py:125`. Este archivo permanece
+  intacto: su corrección ya pertenece al PR #52, `b32f819`, pendiente de
+  composición. Los cuatro E402 heredados sí quedan corregidos en este PR.
 - Se conserva el fallo estricto nativo de Windows por Joblib/loky y los
   errores POSIX de la suite completa. No se sube joblib ni se cambia el
   formato de los modelos para eliminar un aviso ajeno a estas dependencias.
@@ -118,6 +118,49 @@ comparación; ejecutarlo directamente no valida las dependencias candidatas.
   testfinal, SMB/OT, servicios compartidos, despliegue ni CI manual; tampoco
   se cambiaron triggers ni se solicitaron revisiones Copilot. La revisión
   independiente del padre y los checks remotos del nuevo SHA son fases distintas.
+
+## Ajuste acotado de E402 del notebook
+
+Punto de partida verificado, local y remoto:
+`f70f3bd7f777f4c5475c3bdf7ac96ce74f130dd0`, sobre PR #51
+`9786d7d1e4e7bc657ad4888d5a433e46b46bbab7`. La matriz completa anterior
+corresponde a ese punto de partida; este ajuste solo repite las comprobaciones
+del notebook, no la suite, entrenamiento ni aceptación de modelos.
+
+La preparación de `ROOT` y `sys.path` se separa en una celda anterior a los
+imports. Conserva el orden de las sentencias y los imports estáticos; permite
+ejecutar desde la raíz o desde `notebooks/`. Ruff formatea el mismo notebook.
+No se añaden supresiones, imports dinámicos ni cambios de configuración.
+Las salidas guardadas mantienen su procedencia: no se regeneran.
+
+Comprobaciones ejecutadas:
+
+- `uvx --from ruff==0.14.14 ruff check notebooks/01_EDA_evidence.ipynb`:
+  salida 0. `uvx --from ruff==0.14.14 ruff format --check
+  notebooks/01_EDA_evidence.ipynb`: salida 0.
+- `uvx --from ruff==0.14.14 ruff check .`: salida 1, solo E731 indicado
+  arriba; antes del ajuste reproducía además los cuatro E402.
+- Comparación estructural contra `git show f70f3bd7f777f4c5475c3bdf7ac96ce74f130dd0:notebooks/01_EDA_evidence.ipynb`:
+  AST concatenado idéntico sin atributos de posición, compilación de todas
+  las celdas correcta, IDs y orden originales conservados, metadatos,
+  contadores, salidas y Markdown originales idénticos. La nueva celda de
+  preparación tiene contador nulo y ninguna salida.
+- Smoke en dos procesos nuevos, FedoraLinux-43/Python 3.11.15 del venv
+  candidato, con cwd raíz y `notebooks/`: solo preparación e imports reales
+  de pandas, DuckDB, pyplot y `scoring.preparation`. Se verifica el origen
+  local de `scoring.preparation`, `ROOT` correcto y ausencia de `frame`.
+  Un guard de perfil rechaza llamadas a `fit`, `fit_transform`, `partial_fit`
+  y `fit_resample`; ninguna ocurre. No se ejecutan las celdas de datos.
+- `git diff --check`: salida 0.
+
+El script reproducible y sus comandos están en la evidencia local del padre:
+`D:/github/_local/t2-babysit-20261021/review2-pr56/verify_notebook_e402.py`.
+Modos: `structural <raíz-absoluta>` y `smoke <raíz-absoluta>`; este último
+se invoca por separado con cada cwd. SHA-256 del notebook resultante:
+`a8b2c7028f860cd44e2425b61848fe686084e2033ad8261981f51203f84abcdc`.
+Revisión proporcional del padre y composición final pendientes. No se
+modifican API, dependencias, lock, Gold, triggers ni otros PRs. No se ejecutan
+testfinal, CI manual, solicitudes Copilot, merge ni cierre.
 
 ## Registro histórico R1: no describe el candidato actual
 
