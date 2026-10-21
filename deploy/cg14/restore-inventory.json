@@ -1,0 +1,380 @@
+{
+  "processors": [
+    {
+      "identifier": "33bed7aa-732f-3513-bb67-edf91e641c44",
+      "instanceIdentifier": "423aa1d6-8461-3925-05b8-a73f58eab252",
+      "name": "Local accepted fixture sink — attributes only",
+      "type": "org.apache.nifi.processors.standard.LogAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "4be791ff-a20a-327a-9660-ac6a680058b8",
+      "instanceIdentifier": "7a868e88-3f49-3063-ebf4-8aa3213d7e20",
+      "name": "Fixture — wrong_types",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "f54e9475-a8ff-3a20-b17d-a52d700fac03",
+      "instanceIdentifier": "37ad5ad8-af4d-3adf-7bc4-881727d0e9fa",
+      "name": "RouteOnAttribute — max two retries",
+      "type": "org.apache.nifi.processors.standard.RouteOnAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "b71a1b8e-c97c-35f0-84a9-fd1e11587e12",
+      "instanceIdentifier": "735c6463-f35e-3932-3e07-f4cb7ec43672",
+      "name": "HTTP mock fixture — timeout (manual only)",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "81135927-27c9-30b1-873c-fa3e98b1e1ec",
+      "instanceIdentifier": "e5556da2-cbca-34bb-4353-c14822155885",
+      "name": "DLQ — durable local file sink",
+      "type": "org.apache.nifi.processors.standard.PutFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "62bbcac8-3100-31d2-a832-fe9e451389c1",
+      "instanceIdentifier": "7671d0f9-b0ca-30b4-9618-5dbbdfdbaadd",
+      "name": "Test fixture — valid CSV (manual only)",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "f04fe91b-257e-3557-8712-3fb9730d7af3",
+      "instanceIdentifier": "1b13cd15-27fa-3db0-0b77-605719fbb4db",
+      "name": "Local HTTP original sink — attributes only",
+      "type": "org.apache.nifi.processors.standard.LogAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "0ad92414-9b8d-34c3-8b8a-e36ff3fb781d",
+      "instanceIdentifier": "b20abcbe-571d-3026-1158-cb653f9de51f",
+      "name": "InvokeHTTP — local CG14 mock only",
+      "type": "org.apache.nifi.processors.standard.InvokeHTTP",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "4278a790-52ac-3afa-adc8-e39cc0bfd074",
+      "instanceIdentifier": "af11950c-f804-3f48-1a6f-cd7308cc8503",
+      "name": "RouteOnAttribute — accepted or rejected",
+      "type": "org.apache.nifi.processors.standard.RouteOnAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "881a40e7-df29-34fa-8c92-aa68ccb0b291",
+      "instanceIdentifier": "951d20f3-1532-3430-cc00-dff6364280b3",
+      "name": "Unused Groovy API probe — no input",
+      "type": "org.apache.nifi.processors.groovyx.ExecuteGroovyScript",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-groovyx-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "a3f80cc8-1b25-3dfd-bef3-a783283d8b33",
+      "instanceIdentifier": "8c61d882-8cd3-37ab-987d-23c29ec88a20",
+      "name": "UpdateAttribute — count mock retries",
+      "type": "org.apache.nifi.processors.attributes.UpdateAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-update-attribute-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "9329d42c-00ae-30c9-b32c-f09749ca3cff",
+      "instanceIdentifier": "8c0166cc-a62e-375f-1ce5-a31a1c8df882",
+      "name": "Fixture — label_active_event",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "41218ebc-ea4a-3f5e-9e4b-7fb2a3463dbd",
+      "instanceIdentifier": "a230e955-44b6-3244-d2d1-f446a00df98f",
+      "name": "Fixture — valid_event",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "b8062ea9-e59d-3403-a272-daee3c33cb06",
+      "instanceIdentifier": "3084c3c2-5ec6-346b-6901-9d6a6211ea28",
+      "name": "Local engine-error sink — attributes only",
+      "type": "org.apache.nifi.processors.standard.LogAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "e604a690-8482-35b6-b43c-d00679478b29",
+      "instanceIdentifier": "03b0d5ca-8ae8-31c3-3289-e9664c23beef",
+      "name": "Local rejection audit sink — attributes only",
+      "type": "org.apache.nifi.processors.standard.LogAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "d5267f2e-fb4a-3280-9b23-089a55412c17",
+      "instanceIdentifier": "aef05e80-f1af-3275-1979-26a8bfc638bf",
+      "name": "HTTP mock fixture — 5xx (manual only)",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "3c8ba3e7-dfc4-3b1e-884d-f76dfa832942",
+      "instanceIdentifier": "92fe4a3d-6f50-38f8-dfaa-791e9120a3df",
+      "name": "DLQ — add failure reason to filename",
+      "type": "org.apache.nifi.processors.attributes.UpdateAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-update-attribute-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "fdc93d7f-7c94-3e9e-93a0-4f90f957b439",
+      "instanceIdentifier": "7f6f4a6f-afe9-3b5b-f581-c4e736125ec4",
+      "name": "ConsumeKafka — CG14 synthetic E2E",
+      "type": "org.apache.nifi.kafka.processors.ConsumeKafka",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "6b799ee2-1447-31fd-bcdb-e770695d61c7",
+      "instanceIdentifier": "dd29421c-4a93-3d14-9bdc-fc3a62ef9860",
+      "name": "Fixture — header",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "7fa8d8fe-c66b-3249-8a1d-3ac9f2e879d3",
+      "instanceIdentifier": "bed28db2-1ec0-3bed-15ac-572ef3aa99cf",
+      "name": "CG14 lab — Kafka source metadata",
+      "type": "org.apache.nifi.processors.attributes.UpdateAttribute",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-update-attribute-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "2ffd13b8-f29e-390f-b152-39d73a5a922a",
+      "instanceIdentifier": "71816c35-9212-3029-7471-0a20abd378bd",
+      "name": "Fixture — missing_fields",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "b686c3e9-d3b3-34d6-acdb-1d9938561141",
+      "instanceIdentifier": "79acafd0-0572-3fd7-df29-e28328f4925d",
+      "name": "HTTP mock fixture — 422 (manual only)",
+      "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      }
+    },
+    {
+      "identifier": "9e9f7266-3865-3043-907e-b2f80cd70299",
+      "instanceIdentifier": "df8f5a58-1cb3-3a20-6984-ae07dfe0e116",
+      "name": "ExecuteGroovyScript — CG14 contract validator",
+      "type": "org.apache.nifi.processors.groovyx.ExecuteGroovyScript",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-groovyx-nar",
+        "version": "2.12.0"
+      }
+    }
+  ],
+  "controllerServices": [
+    {
+      "identifier": "d667c591-8b5c-32ec-a722-ff7fae45ea0d",
+      "instanceIdentifier": "ce5c27e6-986a-3047-bead-420bdcc8ef65",
+      "name": "CG14 lab Kafka3 connection",
+      "type": "org.apache.nifi.kafka.service.Kafka3ConnectionService",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-3-service-nar",
+        "version": "2.12.0"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "identifier": "d26fd8ff-1daa-323d-b7db-271f015244c8",
+      "instanceIdentifier": "643ba9e5-d9bd-3ac6-bd58-206070399949"
+    },
+    {
+      "identifier": "aeaab877-c398-33dd-a494-d37ea6fba909",
+      "instanceIdentifier": "df06af1f-3cfb-377b-2edc-4e6803bca332"
+    },
+    {
+      "identifier": "7187319b-8808-3cbc-8830-7150e0ca2e14",
+      "instanceIdentifier": "4422f0a8-e2c9-325e-5073-5b18b6f59051"
+    },
+    {
+      "identifier": "1bf8a51f-8fd0-3286-826e-e63570f68033",
+      "instanceIdentifier": "f5778927-8152-3753-3e2a-1d96b392ffa2"
+    },
+    {
+      "identifier": "6f3d236e-c10f-314e-803f-1d470a4cbc31",
+      "instanceIdentifier": "f10ebbef-c7e9-3bfe-961e-bc9798b601ee"
+    },
+    {
+      "identifier": "47355e17-799b-3a83-8f3b-2b6e9137a4d0",
+      "instanceIdentifier": "251db62d-c22e-3bd7-7fd5-2bb5f890ac01"
+    },
+    {
+      "identifier": "3aa1d273-7e35-381c-83d2-59b8011f6446",
+      "instanceIdentifier": "91feaae9-3cee-3169-29aa-f9b0295610a5"
+    },
+    {
+      "identifier": "8d3e6941-3e06-373a-bbf1-d9897f6f2b83",
+      "instanceIdentifier": "14abad91-34ac-3664-4374-b2e6ad4b7da2"
+    },
+    {
+      "identifier": "b3dc9c64-b097-3731-bc05-4ba03061107c",
+      "instanceIdentifier": "db001f11-0916-3664-fd4d-40fdd7e945f2"
+    },
+    {
+      "identifier": "7708772a-14ee-3f36-8654-4f96b8b274a1",
+      "instanceIdentifier": "60e6c8cf-eefd-3745-3b6e-f9a45cba6f6c"
+    },
+    {
+      "identifier": "61512a6b-2f09-3f28-a9da-823f59694e5b",
+      "instanceIdentifier": "222c9fd6-cfb9-3ea2-c9ce-1480d2ddc421"
+    },
+    {
+      "identifier": "e2a00870-26d6-3298-b729-95a443a8faa9",
+      "instanceIdentifier": "5eed0443-cf78-3e8c-dade-519185d1b8c2"
+    },
+    {
+      "identifier": "4b8452cb-19d5-3915-b91d-668300c872c2",
+      "instanceIdentifier": "233f0919-4acb-3cdb-9676-2302b58e0055"
+    },
+    {
+      "identifier": "1f3334ca-de67-35d3-8cdb-1bbd8da8618b",
+      "instanceIdentifier": "f3d15237-85d0-3930-db90-1ae077cfaac7"
+    },
+    {
+      "identifier": "6551d1df-1622-3999-b6ac-99f62f2794de",
+      "instanceIdentifier": "8988a725-b4e4-30ea-b1d4-ee3e91be4b09"
+    },
+    {
+      "identifier": "82d0683f-e65b-376e-b491-3dfd31c013fe",
+      "instanceIdentifier": "bad188c0-5622-351b-ff1e-f504bed13461"
+    },
+    {
+      "identifier": "ecaf723e-c454-3936-8f65-21c24745dbd4",
+      "instanceIdentifier": "d03fcf44-8c73-30fc-061d-e273c2854d8f"
+    },
+    {
+      "identifier": "6917c2e4-a504-3625-a9b2-24e991e41e7a",
+      "instanceIdentifier": "c019c3e9-4e58-3032-7e48-9b39c8ca8acf"
+    },
+    {
+      "identifier": "ef3257b6-a8f1-37aa-972f-030b005eccfa",
+      "instanceIdentifier": "d4f8e9d4-eeb4-3412-f906-db97f2d97597"
+    },
+    {
+      "identifier": "f924388b-5792-3d6c-b0f1-6ef6e2e0c22e",
+      "instanceIdentifier": "dddf1624-12e8-3912-8083-f1ca37f5bd1b"
+    },
+    {
+      "identifier": "722e404d-f77b-3c21-8449-29eea62e8189",
+      "instanceIdentifier": "c4248711-6ebc-3496-e09f-518815b1d63e"
+    },
+    {
+      "identifier": "6669c2e3-6381-3e77-99f1-72b39ff4e014",
+      "instanceIdentifier": "225f8572-dfa8-38b3-5395-1030157bcfe3"
+    },
+    {
+      "identifier": "b0d91097-7067-3f3c-bda2-3be7dc4a6327",
+      "instanceIdentifier": "be63956e-150c-36db-e5b1-9c75f0152cfb"
+    },
+    {
+      "identifier": "f08001c1-d2d5-38ca-bc2b-c0e993a1b3f5",
+      "instanceIdentifier": "16cd14cd-2cfd-3cba-e3cb-7a58fe4a5156"
+    },
+    {
+      "identifier": "ef2a7dfe-6649-3ff1-8d89-72ee3922fe85",
+      "instanceIdentifier": "4df1565d-f23e-37d7-68ae-15e844410934"
+    },
+    {
+      "identifier": "18d1cb78-505f-3120-9123-b4fd7d23e321",
+      "instanceIdentifier": "d143cd73-4b71-3342-cb10-e3d689f2d698"
+    },
+    {
+      "identifier": "dbe91e1b-b09f-38ad-988f-260a9e0f63e1",
+      "instanceIdentifier": "49de0399-b9fb-3701-5ff7-d18446ef4cc9"
+    }
+  ]
+}

@@ -7,9 +7,9 @@
     "sha256": "c1732062eb8707f2e43ed80de2e00c88cb04730e79a0eea428af638673d9a0a8"
   },
   "files": {
-    "ENUNTZIATUA.md": "3e024253464705ee8185ec666a013446298fedb95758f06d3bee652d958de775",
+    "ENUNTZIATUA.md": "3ca6a3ae33c650a2aa1c2f60331995485f86e6b62b6a0277023003d459f9fd87",
     "docs/CG04_ENVIRONMENT.md": "b37e6cca6348a8d63a839c4217fa013a92671509cc740e3e9de9e5af60e914fc",
-    "docs/CG15_KAFKA.md": "01f37ae7b57028dd94195c37b199aaed7506a625431930a73377152b9c481614",
+    "docs/CG15_KAFKA.md": "681bb57bd4213bde40a561c21da50d63a15d0a09aefdc7cf5ff5ec63be9f9c22",
     "docs/SCORING_REPLAY_CONTRACT.md": "26fdc872983d5a5eb5def7e295a3c2ca6c76cf33dc30562319d54954a287b13a",
     "docs/SMB_FILEBEAT_LAB.md": "c444e959aff9e7bbcfd1c5bf81b667a094bc0ce50eee3e9b250f1d66a438d9c0",
     "docs/evidence/CG04_split_membership.json": "081f11bfe228d8a707a0817306e1e768f3991bf9b880fc1dc63c1b3980821873",
@@ -51,9 +51,9 @@
     "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
     "docs/rubrica/SEGUIMIENTO.md": "79eac6ea471b6d6b538b00d58b22c0bfb1cf3046fe45c6c140fc6598c2e64f07",
     "docs/rubrica/fuente.json": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2",
-    "pyproject.toml": "74080e3b9c484deab4b3c5882b10f1dcbf899ee93764c8393c533944aec3afd7",
+    "pyproject.toml": "092279f6234d63a9c5c75ab52ca2e9b7cd4cfc976a48eb4b0890213fa767a444",
     "scripts/check_cg25_memory.py": "8b6a7d2d627502be154c0303f316e945eb6842c3ca545eb42532f0eb30aa02e7",
-    "uv.lock": "99f36073a6823acf20aa8e5f1ff2b811720c6731740bb2f17be9c1b49282a68d"
+    "uv.lock": "3d2a282b8cfe718fa7f84d05a8a01da9f726881e50b77b9c4b361b93f5b79e83"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",

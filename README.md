@@ -126,3 +126,7 @@ temporales quedan fuera del alcance vigente.
 
 [Mapa de carpetas y política de archivos](docs/REPOSITORY_LAYOUT.md).
 Ejecutar `python3 scripts/check_repository_layout.py` desde la raíz.
+
+## CG14: validación e integración pendiente
+
+La validación CG14 y el laboratorio RESTORE tienen un alcance separado de la guía activa anterior. Consultar [contrato](docs/CG14_VALIDATION_CONTRACT.md), [RESTORE](docs/CG14_RESTORE_E2E.md) y [plan de integración PR42](docs/CG14_PR42_INTEGRATION.md). El mock RESTORE no acredita scoring ni archivo durable integrados.

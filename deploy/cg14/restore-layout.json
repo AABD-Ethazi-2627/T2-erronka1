@@ -1,0 +1,221 @@
+{
+  "kind": "visual_reference_not_import",
+  "group_id": "5d4f0539-01a1-1000-4a08-0a3f4c8946d8",
+  "observed_date": "2026-10-21",
+  "preserve_layout": true,
+  "apply_automatically": false,
+  "verification": {
+    "processors": 23,
+    "connections": 27,
+    "processor_overlaps": 0
+  },
+  "processors": [
+    {
+      "id": "8c0166cc-a62e-375f-1ce5-a31a1c8df882",
+      "name": "Fixture — label_active_event",
+      "position": {
+        "x": 72,
+        "y": -48
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "735c6463-f35e-3932-3e07-f4cb7ec43672",
+      "name": "HTTP mock fixture — timeout (manual only)",
+      "position": {
+        "x": 72,
+        "y": 1376
+      },
+      "color": "#7c3aed"
+    },
+    {
+      "id": "1b13cd15-27fa-3db0-0b77-605719fbb4db",
+      "name": "Local HTTP original sink — attributes only",
+      "position": {
+        "x": 2432,
+        "y": 0
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "bed28db2-1ec0-3bed-15ac-572ef3aa99cf",
+      "name": "CG14 lab — Kafka source metadata",
+      "position": {
+        "x": 896,
+        "y": 24
+      },
+      "color": "#0369a1"
+    },
+    {
+      "id": "79acafd0-0572-3fd7-df29-e28328f4925d",
+      "name": "HTTP mock fixture — 422 (manual only)",
+      "position": {
+        "x": 72,
+        "y": 904
+      },
+      "color": "#7c3aed"
+    },
+    {
+      "id": "423aa1d6-8461-3925-05b8-a73f58eab252",
+      "name": "Local accepted fixture sink — attributes only",
+      "position": {
+        "x": 2432,
+        "y": 504
+      },
+      "color": "#15803d"
+    },
+    {
+      "id": "7671d0f9-b0ca-30b4-9618-5dbbdfdbaadd",
+      "name": "Test fixture — valid CSV (manual only)",
+      "position": {
+        "x": 72,
+        "y": -280
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "8c61d882-8cd3-37ab-987d-23c29ec88a20",
+      "name": "UpdateAttribute — count mock retries",
+      "position": {
+        "x": 1936,
+        "y": 1024
+      },
+      "color": "#b45309"
+    },
+    {
+      "id": "92fe4a3d-6f50-38f8-dfaa-791e9120a3df",
+      "name": "DLQ — add failure reason to filename",
+      "position": {
+        "x": 1936,
+        "y": 1520
+      },
+      "color": "#be123c"
+    },
+    {
+      "id": "3084c3c2-5ec6-346b-6901-9d6a6211ea28",
+      "name": "Local engine-error sink — attributes only",
+      "position": {
+        "x": 896,
+        "y": 1520
+      },
+      "color": "#be123c"
+    },
+    {
+      "id": "e5556da2-cbca-34bb-4353-c14822155885",
+      "name": "DLQ — durable local file sink",
+      "position": {
+        "x": 2432,
+        "y": 1520
+      },
+      "color": "#be123c"
+    },
+    {
+      "id": "951d20f3-1532-3430-cc00-dff6364280b3",
+      "name": "Unused Groovy API probe — no input",
+      "position": {
+        "x": 2432,
+        "y": 2024
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "71816c35-9212-3029-7471-0a20abd378bd",
+      "name": "Fixture — missing_fields",
+      "position": {
+        "x": 72,
+        "y": 424
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "b20abcbe-571d-3026-1158-cb653f9de51f",
+      "name": "InvokeHTTP — local CG14 mock only",
+      "position": {
+        "x": 1936,
+        "y": 504
+      },
+      "color": "#7c3aed"
+    },
+    {
+      "id": "aef05e80-f1af-3275-1979-26a8bfc638bf",
+      "name": "HTTP mock fixture — 5xx (manual only)",
+      "position": {
+        "x": 72,
+        "y": 1136
+      },
+      "color": "#7c3aed"
+    },
+    {
+      "id": "a230e955-44b6-3244-d2d1-f446a00df98f",
+      "name": "Fixture — valid_event",
+      "position": {
+        "x": 72,
+        "y": -504
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "7f6f4a6f-afe9-3b5b-f581-c4e736125ec4",
+      "name": "ConsumeKafka — CG14 synthetic E2E",
+      "position": {
+        "x": 896,
+        "y": -488
+      },
+      "color": "#0369a1"
+    },
+    {
+      "id": "df8f5a58-1cb3-3a20-6984-ae07dfe0e116",
+      "name": "ExecuteGroovyScript — CG14 contract validator",
+      "position": {
+        "x": 896,
+        "y": 504
+      },
+      "color": "#0f766e"
+    },
+    {
+      "id": "af11950c-f804-3f48-1a6f-cd7308cc8503",
+      "name": "RouteOnAttribute — accepted or rejected",
+      "position": {
+        "x": 1424,
+        "y": 504
+      },
+      "color": "#b45309"
+    },
+    {
+      "id": "dd29421c-4a93-3d14-9bdc-fc3a62ef9860",
+      "name": "Fixture — header",
+      "position": {
+        "x": 72,
+        "y": 184
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "7a868e88-3f49-3063-ebf4-8aa3213d7e20",
+      "name": "Fixture — wrong_types",
+      "position": {
+        "x": 72,
+        "y": 664
+      },
+      "color": "#475569"
+    },
+    {
+      "id": "37ad5ad8-af4d-3adf-7bc4-881727d0e9fa",
+      "name": "RouteOnAttribute — max two retries",
+      "position": {
+        "x": 1424,
+        "y": 1024
+      },
+      "color": "#b45309"
+    },
+    {
+      "id": "03b0d5ca-8ae8-31c3-3289-e9664c23beef",
+      "name": "Local rejection audit sink — attributes only",
+      "position": {
+        "x": 1424,
+        "y": 1552
+      },
+      "color": "#be123c"
+    }
+  ]
+}
