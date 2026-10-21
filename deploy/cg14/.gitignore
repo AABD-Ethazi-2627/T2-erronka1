@@ -1,0 +1,11 @@
+.env
+*.env
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+secrets/
+data/
+backups/
+*.log

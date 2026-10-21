@@ -23,17 +23,17 @@ if (flowFile == null) { return }
 
 def fail(reason, field, raw, attrs) {
     def now = Instant.now().toString()
-    def envelope = '{"valid":false'
-        + ',"code":' + jsonStr(reason)
-        + ',"field":' + jsonStr(field)
-        + ',"message":' + jsonStr(msgFor(reason, field))
-        + ',"event_id":null'
-        + ',"source":{"kind":' + jsonStr(attrs['kind'])
-        + ',"uri":' + jsonStr(attrs['uri'])
-        + ',"record_ref":' + jsonStr(attrs['ref'])
-        + ',"raw_record":' + jsonStr(raw)
-        + '},"reject_time":' + jsonStr(now)
-        + ',"original":' + jsonStr(raw) + '}'
+    def envelope = new StringBuilder('{"valid":false')
+        .append(',"code":').append(jsonStr(reason))
+        .append(',"field":').append(jsonStr(field))
+        .append(',"message":').append(jsonStr(msgFor(reason, field)))
+        .append(',"event_id":null')
+        .append(',"source":{"kind":').append(jsonStr(attrs['kind']))
+        .append(',"uri":').append(jsonStr(attrs['uri']))
+        .append(',"record_ref":').append(jsonStr(attrs['ref']))
+        .append(',"raw_record":').append(jsonStr(raw))
+        .append('},"reject_time":').append(jsonStr(now))
+        .append(',"original":').append(jsonStr(raw)).append('}').toString()
     return [envelope, ['cg14.valid': 'false', 'cg14.code': reason,
         'cg14.field': field ?: '', 'cg14.event.id': '',
         'cg14.warning': '', 'machine.id': '', 'cg14.reject.time': now]]
@@ -91,7 +91,12 @@ try {
     def maxField = (flowFile.getAttribute('cg14.max.field.chars') ?: '512') as int
     def attrs = ['kind': kind, 'uri': uri, 'ref': ref]
 
-    def rawBytes = session.read(flowFile, { ins -> ins.bytes } as InputStreamCallback)
+    // ProcessSession.read(FlowFile, InputStreamCallback) returns void. Keep the
+    // bytes in an external buffer; treating the callback's return as data makes
+    // rawBytes null in NiFi and sends every input to the engine-error path.
+    def rawBuffer = new java.io.ByteArrayOutputStream()
+    session.read(flowFile, { ins -> ins.transferTo(rawBuffer) } as InputStreamCallback)
+    def rawBytes = rawBuffer.toByteArray()
     if (rawBytes.length > maxLine) {
         def r = fail('MESSAGE_TOO_LARGE', '', '', attrs)
         flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)
@@ -206,18 +211,18 @@ try {
 
     def digest = MessageDigest.getInstance('SHA-256')
     def eventId = digest.digest(('cnc.telemetry.v' + schema + '\n' + kind + '\n' + raw).getBytes(StandardCharsets.UTF_8)).encodeHex().toString()
-    def event = '{"event_id":' + jsonStr(eventId)
-        + ',"machine_id":' + jsonStr(row['machine_id'])
-        + ',"timestamp":' + jsonStr(row['timestamp'])
-        + ',"schema_version":' + jsonStr(schema)
-        + ',"quality_flag":"OK"'
-        + ',"source":{"kind":' + jsonStr(kind)
-        + ',"uri":' + jsonStr(uri)
-        + ',"record_ref":' + jsonStr(ref)
-        + ',"raw_record":' + jsonStr(raw) + '}'
-        + ',"machine_type":' + jsonStr(row['machine_type'])
-        + sensors.collect { ',"' + it + '":' + nums[it] }.join('')
-        + '}'
+    def eventBuilder = new StringBuilder('{"event_id":').append(jsonStr(eventId))
+        .append(',"machine_id":').append(jsonStr(row['machine_id']))
+        .append(',"timestamp":').append(jsonStr(row['timestamp']))
+        .append(',"schema_version":').append(jsonStr(schema))
+        .append(',"quality_flag":"OK"')
+        .append(',"source":{"kind":').append(jsonStr(kind))
+        .append(',"uri":').append(jsonStr(uri))
+        .append(',"record_ref":').append(jsonStr(ref))
+        .append(',"raw_record":').append(jsonStr(raw)).append('}')
+        .append(',"machine_type":').append(jsonStr(row['machine_type']))
+    sensors.each { s -> eventBuilder.append(',"').append(s).append('":').append(nums[s]) }
+    def event = eventBuilder.append('}').toString()
     flowFile = session.write(flowFile, { out -> out.write(event.getBytes('UTF-8')) } as OutputStreamCallback)
     flowFile = session.putAllAttributes(flowFile, ['cg14.valid': 'true', 'cg14.code': '',
         'cg14.field': '', 'cg14.event.id': eventId, 'cg14.warning': warning,
