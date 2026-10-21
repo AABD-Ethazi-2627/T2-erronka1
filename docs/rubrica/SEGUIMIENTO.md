@@ -95,3 +95,14 @@ Medición sintética aislada, comparación 1/4 consumidores y sensibilidad dimen
 no capacidad real del pipeline, durabilidad distribuida ni ahorro demostrado.
 Revisor humano, fecha de revisión y conclusión: pendientes. No cambia la aceptación
 ni el estado de la issue #23; CG22 e integración bajo carga siguen pendientes.
+
+## CG05/CG29 — publicación y contrato offline parcial (2026-10-21)
+
+G49/G77/G90/G95/G96: [protocolo y prerrequisitos](../SMB_FILEBEAT_LAB.md),
+[resultados offline](../evidence/CG05_CG29_OFFLINE_20261021.md),
+`scripts/capture_smb.py`, `scripts/smb_filebeat_fixture.py` y `tests/test_smb*.py`.
+Controles de descarga corta/cambiante, formato de líneas, fallos simulados,
+publicación atómica, recuperación y claves esperadas tras rename/replay.
+No ejecutan Filebeat, registry, Kafka ni SMB real. La evidencia histórica se
+conserva; las issues #5/#36 siguen parciales y abiertas. Revisión del padre,
+otro miembro y tutor sobre SMB/NFS: pendientes. No cambia la aceptación de G49.
