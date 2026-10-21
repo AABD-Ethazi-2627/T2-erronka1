@@ -18,6 +18,14 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def event_key(kind, obj):
+    """Shared archive/output identity; keep the historical encoding unchanged."""
+    identity = [kind, obj["event_id"]]
+    if kind == "prediction":
+        identity += [obj["model_artifact_sha256"], obj["policy"]]
+    return digest(json.dumps(identity).encode())
+
+
 def sync_dir(path):
     fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
     try:
@@ -143,10 +151,7 @@ def consume(root, messages, ack, checkpoint=lambda stage: None):
                 canonical = json.dumps(
                     obj, sort_keys=True, separators=(",", ":"), allow_nan=False
                 ).encode()
-                identity = [kind, obj["event_id"]]
-                if kind == "prediction":
-                    identity += [obj["model_artifact_sha256"], obj["policy"]]
-                key = digest(json.dumps(identity).encode())
+                key = event_key(kind, obj)
                 existing = con.execute(
                     "SELECT hash FROM events WHERE id=?", (key,)
                 ).fetchone()

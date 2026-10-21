@@ -13,16 +13,45 @@ from typing import Literal
 import joblib
 import pandas as pd
 import sklearn
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from scoring.alert_policy import alert_level
-from scoring.response_ledger import InferenceConflict, response
+from scoring.response_ledger import InferenceConflict, canonical, response
 from scoring.scope import INPUT_FEATURES, SCOPE, validate_bundle_scope
-from scripts.validate_contracts import validators
+from scripts.validate_contracts import contract_hashes, validators
 
 log = logging.getLogger(__name__)
+
+
+def json_too_deep(raw, limit=64):
+    """Count JSON containers without recursion, ignoring escaped string bytes.
+
+    Syntax remains the JSON parser's responsibility. Check only after the byte
+    limit so oversized requests retain 413, including fragmented bodies.
+    """
+    depth = 0
+    quoted = False
+    escaped = False
+    for value in raw:
+        if quoted:
+            if escaped:
+                escaped = False
+            elif value == 92:
+                escaped = True
+            elif value == 34:
+                quoted = False
+        elif value == 34:
+            quoted = True
+        elif value in (91, 123):
+            depth += 1
+            if depth > limit:
+                return True
+        elif value in (93, 125):
+            depth -= 1
+    return False
 
 
 class Source(BaseModel):
@@ -122,6 +151,24 @@ def create_app(manifest_path=None, *, ledger_path=None):
     )
     app.state.models = None
     schemas = validators(Path(__file__).resolve().parents[1] / "contracts")
+    schema_fingerprint = hashlib.sha256(
+        canonical(contract_hashes()).encode()
+    ).hexdigest()
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request: Request, exc: RequestValidationError):
+        # Never serialize the untrusted input or recursive validation context.
+        error = exc.errors()[0]
+        # Preserve the existing field-location contract without echoing extra
+        # keys, arbitrarily long paths, messages or values supplied by clients.
+        location = [
+            part if part == "body" or part in Telemetry.model_fields else "field"
+            for part in error["loc"][:2]
+        ]
+        return JSONResponse(
+            status_code=422,
+            content={"detail": [{"loc": location, "msg": "Invalid request"}]},
+        )
 
     @app.middleware("http")
     async def bounded_body(request: Request, call_next):
@@ -135,6 +182,10 @@ def create_app(manifest_path=None, *, ledger_path=None):
                 )
             chunks.append(chunk)
         request._body = b"".join(chunks)
+        if json_too_deep(request._body):
+            return JSONResponse(
+                status_code=422, content={"detail": "JSON nesting exceeds 64"}
+            )
         return await call_next(request)
 
     @app.get("/health")
@@ -152,9 +203,20 @@ def create_app(manifest_path=None, *, ledger_path=None):
         "/predict",
         responses={409: {"description": "Event or inference identity conflict"}},
     )
-    def predict(payload: Telemetry):
+    def predict(payload: Telemetry, request: Request, reply: Response):
         if app.state.models is None:
             raise HTTPException(503, "Model not ready")
+        for header, actual in (
+            (
+                "X-CNC-Manifest-SHA256",
+                hashlib.sha256(canonical(app.state.manifest).encode()).hexdigest(),
+            ),
+            ("X-CNC-Contracts-SHA256", schema_fingerprint),
+        ):
+            expected = request.headers.get(header)
+            if expected is not None and expected != actual:
+                raise HTTPException(409, "Worker model/contract precondition differs")
+            reply.headers[header] = actual
         event = payload.model_dump(exclude_none=True)
         try:
             schemas["telemetry"].validate(event)

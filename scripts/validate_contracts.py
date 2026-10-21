@@ -1,11 +1,21 @@
 """Offline Draft 2020-12 validators for the existing CG03 proposals."""
 
+import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
 from referencing import Registry, Resource
+
+
+def contract_hashes():
+    """Pin schema bytes for coordinated worker/API upgrades."""
+    root = Path(__file__).resolve().parents[1] / "contracts"
+    return {
+        p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+        for p in sorted(root.glob("*.schema.json"))
+    }
 
 
 def validators(root=Path("contracts")):

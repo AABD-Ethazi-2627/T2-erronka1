@@ -48,7 +48,9 @@ def delivery_id(namespace, topic, partition, offset):
     )
 
 
-def archive_poll(root, consumer, records, streams, namespace, listener, timeout_ms):
+def archive_poll(
+    root, consumer, records, streams, namespace, listener, timeout_ms, *, sink=None
+):
     """Persist the entire fetched prefix before committing explicit next offsets.
 
     Kafka can omit numeric offsets (compaction, transactions). The prefix is the
@@ -92,7 +94,7 @@ def archive_poll(root, consumer, records, streams, namespace, listener, timeout_
         # Never commit the client's position: it may include prefetched records.
         consumer.commit(offsets=offsets, timeout_ms=timeout_ms)
 
-    return consume(root, messages, ack)
+    return (sink or consume)(root, messages, ack)
 
 
 def run(
@@ -107,20 +109,33 @@ def run(
     commit_timeout_ms=30000,
     max_batches=None,
     report=print,
+    sink=None,
+    max_polls=None,
 ):
     """Own the consumer on one application thread; close without implicit commits."""
     listener = ArchiveRebalanceListener()
     completed = 0
+    polls = 0
     try:
         consumer.subscribe(topics=list(streams), listener=listener)
         while not stop.is_set():
+            if max_polls is not None and polls >= max_polls:
+                break
             listener.check()
             records = consumer.poll(timeout_ms=poll_timeout_ms, max_records=max_records)
+            polls += 1
             listener.check()
             if stop.is_set():
                 break  # A fetched, unprocessed poll is left for replay.
             result = archive_poll(
-                root, consumer, records, streams, namespace, listener, commit_timeout_ms
+                root,
+                consumer,
+                records,
+                streams,
+                namespace,
+                listener,
+                commit_timeout_ms,
+                sink=sink,
             )
             if result is not None:
                 completed += 1
