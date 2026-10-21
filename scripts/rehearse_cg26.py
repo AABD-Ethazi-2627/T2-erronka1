@@ -41,6 +41,14 @@ async def _rehearsal_client(app):
         await lifespan.aclose()
 
 
+async def _checkout_head():
+    return (
+        await asyncio.to_thread(
+            subprocess.check_output, ["git", "rev-parse", "HEAD"], text=True
+        )
+    ).strip()
+
+
 def rehearsal(manifest_path):
     return asyncio.run(_rehearsal(manifest_path))
 
@@ -144,9 +152,7 @@ async def _rehearsal(manifest_path):
     return {
         "status": "isolated_rehearsal_passed",
         "executed_at_utc": datetime.now(UTC).isoformat(),
-        "checkout_head": subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], text=True
-        ).strip(),
+        "checkout_head": await _checkout_head(),
         "python": platform.python_version(),
         "scope": SCOPE,
         "source_rows": 8000,

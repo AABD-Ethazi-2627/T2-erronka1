@@ -1,9 +1,11 @@
+import asyncio
 import gc
 import hashlib
 import json
 import subprocess
 import sys
 import tempfile
+import threading
 import unittest
 import warnings
 from contextlib import asynccontextmanager
@@ -19,7 +21,47 @@ from scoring.scope import INPUT_FEATURES, SCOPE
 from scoring.score_api import create_app
 from scripts.experiment_anomaly import fit_normal
 from scripts.experiment_rf import pipeline
-from scripts.rehearse_cg26 import _rehearsal, _rehearsal_client
+from scripts.rehearse_cg26 import _checkout_head, _rehearsal, _rehearsal_client
+
+
+class CheckoutQueryTests(unittest.IsolatedAsyncioTestCase):
+    async def test_git_query_keeps_loop_responsive_and_preserves_arguments(self):
+        loop_thread = threading.get_ident()
+        started = asyncio.Event()
+        released = threading.Event()
+        loop = asyncio.get_running_loop()
+
+        def query(*args, **kwargs):
+            self.assertNotEqual(threading.get_ident(), loop_thread)
+            loop.call_soon_threadsafe(started.set)
+            self.assertTrue(released.wait(5), "Event loop did not release Git query")
+            return "0123456789abcdef\n"
+
+        async def release_query():
+            await started.wait()
+            released.set()
+
+        with patch(
+            "scripts.rehearse_cg26.subprocess.check_output", side_effect=query
+        ) as git:
+            release = asyncio.create_task(release_query())
+            try:
+                self.assertEqual(await _checkout_head(), "0123456789abcdef")
+                await release
+            finally:
+                released.set()
+                release.cancel()
+                await asyncio.gather(release, return_exceptions=True)
+        git.assert_called_once_with(["git", "rev-parse", "HEAD"], text=True)
+
+    async def test_git_failure_is_propagated(self):
+        failure = subprocess.CalledProcessError(128, ["git", "rev-parse", "HEAD"])
+        with (
+            patch("scripts.rehearse_cg26.subprocess.check_output", side_effect=failure),
+            self.assertRaises(subprocess.CalledProcessError) as caught,
+        ):
+            await _checkout_head()
+        self.assertIs(caught.exception, failure)
 
 
 class RehearsalCliTests(unittest.TestCase):
