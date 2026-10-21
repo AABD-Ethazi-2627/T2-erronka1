@@ -27,10 +27,15 @@ def sync_dir(path):
 
 
 def mkdir(path):
-    if not path.exists():
-        mkdir(path.parent)
-        path.mkdir(exist_ok=True)
-        sync_dir(path.parent)
+    # Normalize lexical .. components and follow symlinks before walking parents.
+    # Existing directories can be leftovers from a process interrupted after
+    # mkdir but before fsync(parent); existence is not evidence of durability.
+    path = Path(path).resolve()
+    if path == path.parent:
+        return  # Filesystem root has no directory entry in a distinct parent.
+    mkdir(path.parent)
+    path.mkdir(exist_ok=True)
+    sync_dir(path.parent)
 
 
 def durable(path, raw):

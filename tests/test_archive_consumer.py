@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 import pyarrow.parquet as pq
 
-from scripts.archive_consumer import consume
+from scripts.archive_consumer import consume, mkdir, sync_dir
 
 
 def batch():
@@ -21,6 +21,77 @@ def batch():
 
 
 class ArchiveTests(unittest.TestCase):
+    def test_restart_repairs_existing_directory_links_before_ack(self):
+        for interrupted in ("ancestor", "root", "bronze"):
+            with (
+                self.subTest(interrupted=interrupted),
+                tempfile.TemporaryDirectory() as tmp,
+            ):
+                root = Path(tmp) / "ancestor" / "archive"
+                target = {
+                    "ancestor": root.parent,
+                    "root": root,
+                    "bronze": root / "bronze",
+                }[interrupted]
+
+                def interrupt_after_mkdir(
+                    path, *args, original_mkdir=Path.mkdir, target=target, **kwargs
+                ):
+                    original_mkdir(path, *args, **kwargs)
+                    if path == target:
+                        raise OSError("interrupted before parent fsync")
+
+                with (
+                    patch.object(Path, "mkdir", interrupt_after_mkdir),
+                    self.assertRaisesRegex(OSError, "before parent fsync"),
+                ):
+                    mkdir(target)
+                self.assertTrue(target.is_dir())
+                synced = []
+
+                def record_sync(path, synced=synced):
+                    sync_dir(path)
+                    synced.append(path)
+
+                def ack(target=target, root=root, synced=synced):
+                    self.assertIn(target.parent, synced)
+                    self.assertIn(root.parent.parent, synced)
+
+                with patch("scripts.archive_consumer.sync_dir", record_sync):
+                    consume(root, [("bad", "telemetry", b"{bad")], ack)
+
+    def test_recovery_parent_sync_failure_prevents_ack(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "archive"
+            root.mkdir()
+            ack = []
+
+            def fail_parent(path):
+                if path == root.parent:
+                    raise OSError("parent fsync failed")
+                sync_dir(path)
+
+            with (
+                patch("scripts.archive_consumer.sync_dir", fail_parent),
+                self.assertRaisesRegex(OSError, "parent fsync failed"),
+            ):
+                consume(root, [("bad", "telemetry", b"{bad")], lambda: ack.append(1))
+            self.assertEqual(ack, [])
+
+    def test_mkdir_path_boundaries(self):
+        with patch("scripts.archive_consumer.sync_dir") as sync:
+            mkdir(Path("/"))
+            sync.assert_not_called()
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            (base / "real").mkdir()
+            (base / "alias").symlink_to(base / "real", target_is_directory=True)
+            with patch("scripts.archive_consumer.sync_dir", wraps=sync_dir) as sync:
+                mkdir(base / "alias" / ".." / "real" / "child")
+            self.assertTrue((base / "real" / "child").is_dir())
+            self.assertIn(unittest.mock.call(base / "real"), sync.call_args_list)
+            self.assertIn(unittest.mock.call(base), sync.call_args_list)
+
     def test_replay_separation_and_reconciliation(self):
         with tempfile.TemporaryDirectory() as tmp:
             ack = []

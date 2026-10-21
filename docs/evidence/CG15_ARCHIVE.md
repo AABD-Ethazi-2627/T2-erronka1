@@ -72,3 +72,32 @@ sujeto a filesystem POSIX local, fsync fiable, SQLite intacto y IDs estables.
 No se ha probado SMB/NFS, pérdida de disco, clúster, carga sostenida ni integración
 NiFi/Kafka real. No hay despliegue, merge, cierre de issue ni aprobación humana.
 CG21 puede reutilizar este contrato/resultados; sus módulos de pruebas no cambian.
+
+## PR46: recuperación de enlaces de directorio (21/10/2026)
+
+Hallazgo P1 verificado sobre `179436348e96a35dfe9b5fe08376dd8f4fb84d19`:
+la existencia de un directorio tras interrupción no prueba que su entrada en
+el padre se sincronizara. La regresión inyecta una excepción inmediatamente
+después de mkdir, antes de fsync del padre, en ancestro, raíz y Bronze. Antes
+del arreglo: 7 tests ejecutados, 4 fallos (tres subcasos y fallo de fsync sin
+bloqueo de ACK). Después: 8 tests de archivo OK, incluyendo límites de ruta.
+
+`mkdir` recorre también directorios existentes y sincroniza cada padre antes
+del ACK. No se detiene en el primer ancestro existente: ese ancestro también
+puede proceder de una ejecución interrumpida. Resuelve rutas relativas,
+componentes `..` y symlinks, y termina en la raíz del filesystem. Esto añade
+fsync por profundidad en cada escritura; errores de permisos/fsync de cualquier
+ancestro abortan sin ACK. Se presupone jerarquía de rutas estable, sin cambios
+concurrentes de symlinks/montajes; no es una frontera de seguridad de rutas.
+
+Validación local final, Python 3.12.14, lock sin cambios:
+
+- `uv run --locked python -m unittest discover -s tests -p test_archive_consumer.py -v`: 8 OK.
+- Mismo comando con `test_history.py`: 2 OK; `test_contract_validation.py`: 1 OK;
+  `test_retention_recovery.py`: 2 OK. Total pertinente: 13 tests OK.
+- `ruff check scripts/archive_consumer.py tests/test_archive_consumer.py`: OK.
+- `ruff format --check scripts/archive_consumer.py tests/test_archive_consumer.py`: OK.
+
+Pruebas deterministas de orden/fsync y terminación de proceso, no evidencia de
+corte eléctrico real, garantías del hardware ni filesystem remoto. Adaptadores
+NiFi/Kafka, CI remoto y nueva revisión siguen pendientes. Sin merge ni cierre.
