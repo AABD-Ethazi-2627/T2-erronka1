@@ -66,7 +66,15 @@ T3 preview abrió la página, pero dos snapshots fallaron con
 Chrome mediante computer-use, en una pestaña propia posteriormente cerrada.
 Las capturas siguientes son de Kibana real, no del renderer offline:
 
-![KPI y temperaturas reales tras la corrección](ISOLATED_RUNTIME_20261022/ui-final-page20.png)
+![Captura histórica de Kibana: página 18, IDs 085–089](ISOLATED_RUNTIME_20261022/ui-final-page18-historical.png)
+
+Corrección de trazabilidad posterior a la revisión de `84dd6f2`: esta PNG se
+publicó originalmente como `ui-final-page20.png`, pero muestra página **18** e
+IDs085–089. Se conserva sin cambiar sus bytes, con el nombre histórico correcto;
+el JSON original `ui-final-page20.json` corresponde a otro estado (página20,
+IDs095–099) y conserva además el defecto ARIA anterior. No forman una pareja
+del mismo estado. La [corrección SVG y nueva captura real de página20](CG19_SVG_ARIA_20261022.md)
+documenta una ejecución posterior y no sustituye silenciosamente esta evidencia.
 
 ## Defectos corregidos y accesibilidad comprobada
 

@@ -1,0 +1,1178 @@
+{
+  "toolIcon": {
+    "_tag": "website",
+    "pageUrl": "http://127.0.0.1:19479/before.html?final=1"
+  },
+  "value": {
+    "covered": 100,
+    "failures": [
+      "page 2: title ARIA",
+      "page 3: title ARIA",
+      "page 4: title ARIA",
+      "page 5: title ARIA",
+      "page 6: title ARIA",
+      "page 7: title ARIA",
+      "page 8: title ARIA",
+      "page 9: title ARIA",
+      "page 10: title ARIA",
+      "page 11: title ARIA",
+      "page 12: title ARIA",
+      "page 13: title ARIA",
+      "page 14: title ARIA",
+      "page 15: title ARIA",
+      "page 16: title ARIA",
+      "page 17: title ARIA",
+      "page 18: title ARIA",
+      "page 19: title ARIA",
+      "page 20: title ARIA",
+      "100-page20: stale title ARIA",
+      "100-page20: stale guide ARIA",
+      "31: clamp to last page",
+      "31-page7-clamp: stale title ARIA",
+      "31-page7-clamp: stale guide ARIA",
+      "31-page1: stale title ARIA",
+      "31-page1: stale guide ARIA",
+      "1-page1: stale title ARIA",
+      "1-page1: stale guide ARIA",
+      "0-page1: stale title ARIA",
+      "0-page1: stale guide ARIA",
+      "100-reverse-page20: stale title ARIA",
+      "100-new-window-and-omissions: stale title ARIA",
+      "100-new-window-and-omissions: stale guide ARIA",
+      "size: clamp to last page",
+      "size10-page10: stale title ARIA",
+      "size10-page10: stale guide ARIA",
+      "null-temperatures: stale title ARIA",
+      "null-temperatures: stale guide ARIA",
+      "single-time-constant-values: stale title ARIA",
+      "single-time-constant-values: stale guide ARIA",
+      "final-page20: stale title ARIA"
+    ],
+    "pageCoverage": [
+      {
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "page": 1,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-005 / smb_csv",
+          "CNC-006 / lab_fixture",
+          "CNC-007 / smb_csv",
+          "CNC-008 / lab_fixture",
+          "CNC-009 / smb_csv"
+        ],
+        "page": 2,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-010 / lab_fixture",
+          "CNC-011 / smb_csv",
+          "CNC-012 / lab_fixture",
+          "CNC-013 / smb_csv",
+          "CNC-014 / lab_fixture"
+        ],
+        "page": 3,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-015 / smb_csv",
+          "CNC-016 / lab_fixture",
+          "CNC-017 / smb_csv",
+          "CNC-018 / lab_fixture",
+          "CNC-019 / smb_csv"
+        ],
+        "page": 4,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-020 / lab_fixture",
+          "CNC-021 / smb_csv",
+          "CNC-022 / lab_fixture",
+          "CNC-023 / smb_csv",
+          "CNC-024 / lab_fixture"
+        ],
+        "page": 5,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-025 / smb_csv",
+          "CNC-026 / lab_fixture",
+          "CNC-027 / smb_csv",
+          "CNC-028 / lab_fixture",
+          "CNC-029 / smb_csv"
+        ],
+        "page": 6,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-030 / lab_fixture",
+          "CNC-031 / smb_csv",
+          "CNC-032 / lab_fixture",
+          "CNC-033 / smb_csv",
+          "CNC-034 / lab_fixture"
+        ],
+        "page": 7,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-035 / smb_csv",
+          "CNC-036 / lab_fixture",
+          "CNC-037 / smb_csv",
+          "CNC-038 / lab_fixture",
+          "CNC-039 / smb_csv"
+        ],
+        "page": 8,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-040 / lab_fixture",
+          "CNC-041 / smb_csv",
+          "CNC-042 / lab_fixture",
+          "CNC-043 / smb_csv",
+          "CNC-044 / lab_fixture"
+        ],
+        "page": 9,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-045 / smb_csv",
+          "CNC-046 / lab_fixture",
+          "CNC-047 / smb_csv",
+          "CNC-048 / lab_fixture",
+          "CNC-049 / smb_csv"
+        ],
+        "page": 10,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-050 / lab_fixture",
+          "CNC-051 / smb_csv",
+          "CNC-052 / lab_fixture",
+          "CNC-053 / smb_csv",
+          "CNC-054 / lab_fixture"
+        ],
+        "page": 11,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-055 / smb_csv",
+          "CNC-056 / lab_fixture",
+          "CNC-057 / smb_csv",
+          "CNC-058 / lab_fixture",
+          "CNC-059 / smb_csv"
+        ],
+        "page": 12,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-060 / lab_fixture",
+          "CNC-061 / smb_csv",
+          "CNC-062 / lab_fixture",
+          "CNC-063 / smb_csv",
+          "CNC-064 / lab_fixture"
+        ],
+        "page": 13,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-065 / smb_csv",
+          "CNC-066 / lab_fixture",
+          "CNC-067 / smb_csv",
+          "CNC-068 / lab_fixture",
+          "CNC-069 / smb_csv"
+        ],
+        "page": 14,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-070 / lab_fixture",
+          "CNC-071 / smb_csv",
+          "CNC-072 / lab_fixture",
+          "CNC-073 / smb_csv",
+          "CNC-074 / lab_fixture"
+        ],
+        "page": 15,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-075 / smb_csv",
+          "CNC-076 / lab_fixture",
+          "CNC-077 / smb_csv",
+          "CNC-078 / lab_fixture",
+          "CNC-079 / smb_csv"
+        ],
+        "page": 16,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-080 / lab_fixture",
+          "CNC-081 / smb_csv",
+          "CNC-082 / lab_fixture",
+          "CNC-083 / smb_csv",
+          "CNC-084 / lab_fixture"
+        ],
+        "page": 17,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-085 / smb_csv",
+          "CNC-086 / lab_fixture",
+          "CNC-087 / smb_csv",
+          "CNC-088 / lab_fixture",
+          "CNC-089 / smb_csv"
+        ],
+        "page": 18,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-090 / lab_fixture",
+          "CNC-091 / smb_csv",
+          "CNC-092 / lab_fixture",
+          "CNC-093 / smb_csv",
+          "CNC-094 / lab_fixture"
+        ],
+        "page": 19,
+        "pointDescriptions": 40
+      },
+      {
+        "ids": [
+          "CNC-095 / smb_csv",
+          "CNC-096 / lab_fixture",
+          "CNC-097 / smb_csv",
+          "CNC-098 / lab_fixture",
+          "CNC-099 / smb_csv"
+        ],
+        "page": 20,
+        "pointDescriptions": 40
+      }
+    ],
+    "pages": 20,
+    "pass": false,
+    "sameSVG": true,
+    "samples": [
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "name": "100-page1",
+        "page": 1,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314.4
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 308 to 322",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-095 / smb_csv, CNC-096 / lab_fixture, CNC-097 / smb_csv, CNC-098 / lab_fixture, CNC-099 / smb_csv",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-095 / smb_csv",
+          "CNC-096 / lab_fixture",
+          "CNC-097 / smb_csv",
+          "CNC-098 / lab_fixture",
+          "CNC-099 / smb_csv"
+        ],
+        "name": "100-page20",
+        "page": 20,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          309.5,
+          323.9
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 308 to 322",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-095 / smb_csv, CNC-096 / lab_fixture, CNC-097 / smb_csv, CNC-098 / lab_fixture, CNC-099 / smb_csv",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [],
+        "name": "31-page7-clamp",
+        "page": 20,
+        "size": 5,
+        "total": 31,
+        "xDomain": [
+          0,
+          3600000
+        ],
+        "yDomain": [
+          0,
+          1
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "name": "31-page1",
+        "page": 1,
+        "size": 5,
+        "total": 31,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314.4
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture"
+        ],
+        "name": "1-page1",
+        "page": 1,
+        "size": 5,
+        "total": 1,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [],
+        "name": "0-page1",
+        "page": 1,
+        "size": 5,
+        "total": 0,
+        "xDomain": [
+          0,
+          3600000
+        ],
+        "yDomain": [
+          0,
+          1
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "name": "100-reverse-page1",
+        "page": 1,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314.4
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 310 to 324",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-095 / smb_csv, CNC-096 / lab_fixture, CNC-097 / smb_csv, CNC-098 / lab_fixture, CNC-099 / smb_csv",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-095 / smb_csv",
+          "CNC-096 / lab_fixture",
+          "CNC-097 / smb_csv",
+          "CNC-098 / lab_fixture",
+          "CNC-099 / smb_csv"
+        ],
+        "name": "100-reverse-page20",
+        "page": 20,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          309.5,
+          323.9
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Thursday, 22 October 2026, 12:00:00 AM UTC to Thursday, 22 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 410 to 424",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-095 / smb_csv, CNC-096 / lab_fixture, CNC-097 / smb_csv, CNC-098 / lab_fixture, CNC-099 / smb_csv",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-095 / smb_csv",
+          "CNC-096 / lab_fixture",
+          "CNC-097 / smb_csv",
+          "CNC-098 / lab_fixture",
+          "CNC-099 / smb_csv"
+        ],
+        "name": "100-new-window-and-omissions",
+        "page": 20,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792627200000,
+          1792641600000
+        ],
+        "yDomain": [
+          409.5,
+          423.9
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Thursday, 22 October 2026, 12:00:00 AM UTC to Thursday, 22 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 410 to 424",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-095 / smb_csv, CNC-096 / lab_fixture, CNC-097 / smb_csv, CNC-098 / lab_fixture, CNC-099 / smb_csv",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [],
+        "name": "size10-page10",
+        "page": 20,
+        "size": 10,
+        "total": 100,
+        "xDomain": [
+          0,
+          3600000
+        ],
+        "yDomain": [
+          0,
+          1
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Thursday, 22 October 2026, 12:00:00 AM UTC to Thursday, 22 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 400 to 414",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture"
+        ],
+        "name": "null-temperatures",
+        "page": 1,
+        "size": 5,
+        "total": 1,
+        "xDomain": [
+          0,
+          3600000
+        ],
+        "yDomain": [
+          0,
+          1
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Tuesday, 20 October 2026, 11:30:00 PM UTC to Wednesday, 21 October 2026, 12:30:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 299.0 to 301.0",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture"
+        ],
+        "name": "single-time-constant-values",
+        "page": 1,
+        "size": 5,
+        "total": 1,
+        "xDomain": [
+          1792539000000,
+          1792542600000
+        ],
+        "yDomain": [
+          299,
+          301
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "name": "resize-600",
+        "page": 1,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314.4
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "name": "resize-1100",
+        "page": 1,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314.4
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 314",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-000 / lab_fixture, CNC-001 / smb_csv, CNC-002 / lab_fixture, CNC-003 / smb_csv, CNC-004 / lab_fixture",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-000 / lab_fixture",
+          "CNC-001 / smb_csv",
+          "CNC-002 / lab_fixture",
+          "CNC-003 / smb_csv",
+          "CNC-004 / lab_fixture"
+        ],
+        "name": "resize-1600",
+        "page": 1,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          300,
+          314.4
+        ]
+      },
+      {
+        "guides": [
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 12:00:00 AM UTC to Wednesday, 21 October 2026, 4:00:00 AM UTC",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 310 to 324",
+            "role": "mark-group role-axis",
+            "roleDescription": "axis"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: CNC-095 / smb_csv, CNC-096 / lab_fixture, CNC-097 / smb_csv, CNC-098 / lab_fixture, CNC-099 / smb_csv",
+            "role": "mark-group role-legend",
+            "roleDescription": "legend"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text",
+            "roleDescription": "title"
+          },
+          {
+            "ariaRole": "graphics-symbol",
+            "hidden": null,
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 17 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle",
+            "roleDescription": "subtitle"
+          }
+        ],
+        "ids": [
+          "CNC-095 / smb_csv",
+          "CNC-096 / lab_fixture",
+          "CNC-097 / smb_csv",
+          "CNC-098 / lab_fixture",
+          "CNC-099 / smb_csv"
+        ],
+        "name": "final-page20",
+        "page": 20,
+        "size": 5,
+        "total": 100,
+        "xDomain": [
+          1792540800000,
+          1792555200000
+        ],
+        "yDomain": [
+          309.5,
+          323.9
+        ]
+      }
+    ],
+    "vega": "5.33.0"
+  }
+}

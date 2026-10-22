@@ -1,0 +1,38 @@
+{
+  "value": {
+    "guides": [
+      {
+        "description": "axis",
+        "hidden": null,
+        "name": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+        "role": "graphics-symbol"
+      },
+      {
+        "description": "axis",
+        "hidden": null,
+        "name": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 310 to 320",
+        "role": "graphics-symbol"
+      },
+      {
+        "description": "legend",
+        "hidden": null,
+        "name": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-095 / aria_fixture, ARIA-SYNTHETIC-096 / aria_fixture, ARIA-SYNTHETIC-097 / aria_fixture, ARIA-SYNTHETIC-098 / aria_fixture, ARIA-SYNTHETIC-099 / aria_fixture",
+        "role": "graphics-symbol"
+      },
+      {
+        "description": "title",
+        "hidden": null,
+        "name": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+        "role": "graphics-symbol"
+      },
+      {
+        "description": "subtitle",
+        "hidden": null,
+        "name": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+        "role": "graphics-symbol"
+      }
+    ],
+    "sameSVG": true,
+    "signal": 20
+  }
+}

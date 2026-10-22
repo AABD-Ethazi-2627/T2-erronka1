@@ -252,7 +252,8 @@ def temperature_spec():
             {
                 "type": "filter",
                 "expr": "datum.rank > (page-1)*pageSize && datum.rank <= page*pageSize",
-            }
+            },
+            {"type": "collect", "sort": {"field": "rank"}},
         ],
     }
     table = {
@@ -429,12 +430,25 @@ def temperature_spec():
             "anchor": "start",
             "fontSize": 13,
             "subtitleFontSize": 11,
+            # Vega's SVG spot updates refresh items but not guide containers.
+            # Reorder each singleton guide title on state changes to refresh its
+            # parent's generated ARIA caption too, without changing paint order.
+            "encode": {
+                "title": {"update": {"zindex": {"signal": "guideRevision"}}},
+                "subtitle": {"update": {"zindex": {"signal": "guideRevision"}}},
+            },
         },
         signals=[
             {"name": "pageSize", "value": TEMPERATURE_PAGE_SIZE},
             {
                 "name": "page",
                 "value": 1,
+                "on": [
+                    {
+                        "events": {"signal": "pageCount"},
+                        "update": "clamp(page, 1, pageCount)",
+                    }
+                ],
                 "bind": {
                     "input": "select",
                     "name": "Página de IDs (5 por página): ",
@@ -442,6 +456,10 @@ def temperature_spec():
                         range(1, TEMPERATURE_GROUP_LIMIT // TEMPERATURE_PAGE_SIZE + 1)
                     ),
                 },
+            },
+            {
+                "name": "pageCount",
+                "update": "max(1, ceil(length(data('groups'))/pageSize))",
             },
             {
                 "name": "xDomain",
@@ -458,6 +476,23 @@ def temperature_spec():
                     f"{x_domain}"
                     ")"
                 ),
+            },
+            {
+                "name": "guideState",
+                "update": (
+                    "[page, pageSize, width, height, data('response'), "
+                    "data('page_groups'), xDomain, yDomain]"
+                ),
+            },
+            {
+                "name": "guideRevision",
+                "value": 0,
+                "on": [
+                    {
+                        "events": {"signal": "guideState"},
+                        "update": "guideRevision + 1",
+                    }
+                ],
             },
             {
                 "name": "yDomain",
@@ -493,7 +528,7 @@ def temperature_spec():
             {
                 "name": "color",
                 "type": "ordinal",
-                "domain": {"data": "page_groups", "field": "group"},
+                "domain": {"data": "page_groups", "field": "group", "sort": True},
                 # Five identities per page; each color exceeds 3:1 on white
                 # for essential lines/symbols (WCAG 2.2 SC 1.4.11).
                 "range": ["#1f77b4", "#b35400", "#2ca02c", "#d62728", "#9467bd"],
@@ -501,7 +536,7 @@ def temperature_spec():
             {
                 "name": "shape",
                 "type": "ordinal",
-                "domain": {"data": "page_groups", "field": "group"},
+                "domain": {"data": "page_groups", "field": "group", "sort": True},
                 "range": ["circle", "square", "triangle-up", "diamond", "cross"],
             },
         ],
@@ -516,6 +551,9 @@ def temperature_spec():
                 ),
                 "tickCount": {"signal": "max(2, floor(width/140))"},
                 "values": {"signal": "length(data('points')) ? null : []"},
+                "encode": {
+                    "title": {"update": {"zindex": {"signal": "guideRevision"}}}
+                },
             },
             {
                 "orient": "left",
@@ -526,6 +564,9 @@ def temperature_spec():
                     + "no hay temperaturas válidas."
                 ),
                 "values": {"signal": "length(data('points')) ? null : []"},
+                "encode": {
+                    "title": {"update": {"zindex": {"signal": "guideRevision"}}}
+                },
             },
         ],
         legends=[
@@ -537,6 +578,9 @@ def temperature_spec():
                 "labelLimit": 1000,
                 "orient": "bottom",
                 "columns": 1,
+                "encode": {
+                    "title": {"update": {"zindex": {"signal": "guideRevision"}}}
+                },
             }
         ],
     )

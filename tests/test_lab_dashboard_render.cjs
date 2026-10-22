@@ -130,7 +130,7 @@ async function run() {
         if (count < 100) assert((await view.toSVG()).includes(count ? 'Página vacía:' : 'Sin datos en el filtro'));
         if (count === 100) {
           await view.change('response', vega.changeset().remove(() => true).insert([fixture(1)])).runAsync();
-          assert((await view.toSVG()).includes('Página vacía:'));
+          assert.equal(view.signal('page'), 1, 'Filter must clamp to the last available page');
           await view.signal('page', 1).runAsync();
           assert.equal(view.data('page_groups').length, 1);
           await view.change('response', vega.changeset().remove(() => true).insert([fixture(0)])).runAsync();
@@ -172,10 +172,13 @@ async function run() {
   delete browserSpec.data[0].url;
   delete browserSpec.data[0].format;
   const runtime = fs.readFileSync(path.join(path.dirname(require.resolve(process.env.CG19_VEGA_MODULE || 'vega')), 'vega.min.js'), 'utf8');
+  const domRegression = fs.readFileSync(path.join(__dirname, 'test_lab_dashboard_dom.js'), 'utf8');
   fs.writeFileSync(path.join(out, 'browser.html'), `<!doctype html><html lang="es"><meta charset="utf-8"><title>CG19 · regresión local</title>
 <style>body{font:14px Arial;margin:0}p{line-height:1.5}select{font:inherit}select:focus-visible{outline:3px solid #155db1;outline-offset:3px}#chart{max-width:1100px}svg{display:block;background:white}</style>
 <p>Fixture sintética de regresión: 100 ID/fuente. Vega ${vega.version}. Render local; importación y filtros Kibana pendientes.</p>
 <div id="chart"></div><script>${runtime}</script><script>
+${fixture.toString()}
+${domRegression}
 window.spec=${JSON.stringify(browserSpec)};
 window.view=new vega.View(vega.parse(spec),{renderer:'svg'}).initialize('#chart').width(Math.min(1100,innerWidth)).height(480);
 window.ready=view.runAsync().then(()=>console.log('CG19 ready',view.data('groups').length));
