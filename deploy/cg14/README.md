@@ -103,6 +103,11 @@ También exige metadata KRaft idéntica, capa sin cambios respecto de los puntos
 de montaje creados por Docker y fallo de
 arranque con el mismo bind en sólo lectura. Conserva binds y contenedores
 finales detenidos, comandos, códigos de salida e IDs. No elimina volúmenes.
+El guard de capa compara entradas completas de `docker diff` ordenadas,
+incluidos tipo, ruta exacta y multiplicidad; no depende del orden de Docker.
+La revisión de `49800d7` reprodujo un falso fallo por reordenación después de
+verificar persistencia correcta. Ese intento sigue siendo fallido y conserva
+sus logs; véase la [corrección focal](../../docs/evidence/KAFKA_DIFF_ORDER_FIX_20261022.md).
 Es una recreación tras parada controlada de un broker, sin prueba de pérdida de
 alimentación ni multinodo. El export NiFi staged sigue sin ser propietario
 de offsets ni de almacenamiento Kafka; no configura un broker por importarlo.

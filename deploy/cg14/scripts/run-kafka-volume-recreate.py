@@ -21,6 +21,15 @@ HERE = Path(__file__).resolve().parent
 LABEL = "t2.kafka.volume.run"
 
 
+def layer_entries(output: str) -> list[str]:
+    # Only LF delimits Docker entries; spaces and Unicode belong to the path.
+    entries = output.removesuffix("\n").split("\n") if output else []
+    if any(len(row) < 3 or row[0] not in "ACD" or row[1:3] != " /" for row in entries):
+        raise RuntimeError("Malformed docker diff entry")
+    # Sorting preserves multiplicity, change type and the exact path.
+    return sorted(entries)
+
+
 def storage_root(value: str) -> Path:
     path = Path(value).resolve()
     if not str(path).startswith("/mnt/d/") or path.is_symlink():
@@ -72,10 +81,18 @@ class Lab:
             )
         if check:
             result.check_returncode()
+        if args[0] == "diff":
+            return result.stdout
         return (result.stdout + (result.stderr if args[0] == "logs" else "")).strip()
 
     def inspect(self, identity):
         return json.loads(self.docker("inspect", identity))[0]
+
+    def check_layer(self, identity):
+        if layer_entries(self.docker("diff", identity)) != layer_entries(
+            self.layer_baselines[identity]
+        ):
+            raise RuntimeError("Unexpected write into the container layer")
 
     def owned(self, identity):
         obj = self.inspect(identity)
@@ -122,16 +139,22 @@ class Lab:
             "--mount",
             f"type=bind,src={self.root / 'secrets'},dst=/etc/kafka/secrets,readonly",
             "--mount",
-            f"type=bind,src={self.root / 'shared-config'},"
-            "dst=/mnt/shared/config,readonly",
+            (
+                f"type=bind,src={self.root / 'shared-config'},"
+                "dst=/mnt/shared/config,readonly"
+            ),
             "--mount",
             f"type=bind,src={runtime},dst=/lab/runtime",
             "--mount",
-            f"type=bind,src={self.root / 'server.properties'},"
-            "dst=/lab/server.properties,readonly",
+            (
+                f"type=bind,src={self.root / 'server.properties'},"
+                "dst=/lab/server.properties,readonly"
+            ),
             "--mount",
-            f"type=bind,src={HERE / 'kafka-volume-start.sh'},"
-            "dst=/lab/start.sh,readonly",
+            (
+                f"type=bind,src={HERE / 'kafka-volume-start.sh'},"
+                "dst=/lab/start.sh,readonly"
+            ),
             "--entrypoint",
             "/bin/bash",
             image,
@@ -163,7 +186,7 @@ class Lab:
             "A /lab/server.properties",
             "A /lab/start.sh",
         }
-        if set(baseline.splitlines()) - allowed:
+        if any(entry not in allowed for entry in layer_entries(baseline)):
             raise RuntimeError("Unexpected container layer change at startup")
         self.layer_baselines[identity] = baseline
         self.save("layer-baselines.json", self.layer_baselines)
@@ -171,6 +194,7 @@ class Lab:
 
     def ready(self, identity, endpoint):
         from kafka import KafkaAdminClient
+        from kafka.errors import KafkaError
 
         deadline = time.monotonic() + 90
         while time.monotonic() < deadline:
@@ -182,7 +206,7 @@ class Lab:
                     bootstrap_servers=endpoint,
                     request_timeout_ms=3000,
                 )
-            except Exception as exc:
+            except (KafkaError, OSError) as exc:
                 # Bounded readiness only; no produce/commit retries.
                 (self.root / "readiness-last-error.txt").write_text(repr(exc))
                 time.sleep(1)
@@ -346,8 +370,7 @@ class Lab:
             },
         )
         self.save("second-running.json", self.owned(second))
-        if self.docker("diff", second) != self.layer_baselines[second]:
-            raise RuntimeError("Unexpected write into the container layer")
+        self.check_layer(second)
         self.stop_cleanly(second, "second-stopped.json")
         # The same retained bind must fail closed when made read-only.
         probe = self.create(image["Id"], port, readonly=True)
