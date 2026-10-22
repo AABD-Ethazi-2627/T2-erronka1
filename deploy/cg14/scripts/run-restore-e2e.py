@@ -367,6 +367,28 @@ def compare_original(api, ps, r):
     )
 
 
+def kafka_storage_guard(broker, config):
+    for destination, relative in (
+        ("/var/lib/kafka", "data/kafka-test"),
+        ("/var/lib/kafka/data", "data/kafka-test/data"),
+    ):
+        mounts = [m for m in broker["Mounts"] if m["Destination"] == destination]
+        require(
+            len(mounts) == 1
+            and mounts[0]["Type"] == "bind"
+            and mounts[0]["RW"]
+            and Path(mounts[0]["Source"]).resolve() == (DEPLOY / relative).resolve(),
+            "Persistencia Kafka distinta.",
+        )
+    require(
+        "log.dirs=/var/lib/kafka/data" in config.splitlines()
+        and "metadata.log.dir=/var/lib/kafka/metadata" in config.splitlines()
+        and broker["HostConfig"]["ReadonlyRootfs"]
+        and broker["Config"]["Entrypoint"] == ["/bin/bash", "/lab/start.sh"],
+        "Configuración efectiva de almacenamiento Kafka distinta.",
+    )
+
+
 def runtime_guard(r, mock_required=False):
     nifi, broker = inspect("cnc-cg14-nifi"), inspect(BROKER)
     for obj in (nifi, broker):
@@ -394,14 +416,8 @@ def runtime_guard(r, mock_required=False):
         == {https_ports[0] + "/tcp": [{"HostIp": "127.0.0.1", "HostPort": "18443"}]},
         "Publicación NiFi distinta.",
     )
-    km = [m for m in broker["Mounts"] if m["Destination"] == "/tmp/kraft-combined-logs"]
-    require(
-        len(km) == 1
-        and km[0]["Type"] == "bind"
-        and km[0]["RW"]
-        and Path(km[0]["Source"]).resolve() == (DEPLOY / "data/kafka-test").resolve(),
-        "Persistencia Kafka distinta.",
-    )
+    config = docker("exec", BROKER, "cat", "/lab/server.properties")
+    kafka_storage_guard(broker, config)
     aliases = broker["NetworkSettings"]["Networks"][NETWORK].get("Aliases", [])
     require(
         "cg14-kafka-test" in aliases

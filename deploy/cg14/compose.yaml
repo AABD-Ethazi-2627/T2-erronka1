@@ -84,6 +84,8 @@ services:
     hostname: cg14-kafka-test
     profiles: [kafka-test]
     restart: "no"
+    read_only: true
+    entrypoint: ["/bin/bash", "/lab/start.sh"]
     mem_limit: 1g
     cpus: 1.0
     cap_drop:
@@ -105,9 +107,21 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "0"
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
-      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_METADATA_LOG_DIR: /var/lib/kafka/metadata
+      TMPDIR: /lab/runtime
+      TEMP: /lab/runtime
+      TMP: /lab/runtime
+      LOG_DIR: /lab/runtime/logs
+      KAFKA_OPTS: "-Djava.io.tmpdir=/lab/runtime -XX:-UsePerfData"
     volumes:
-      - ./data/kafka-test:/tmp/kraft-combined-logs
+      - ./data/kafka-test:/var/lib/kafka
+      - ./data/kafka-test/data:/var/lib/kafka/data
+      - ./data/kafka-secrets:/etc/kafka/secrets:ro
+      - ./data/kafka-shared-config:/mnt/shared/config:ro
+      - ./data/kafka-runtime:/lab/runtime
+      - ./scripts/kafka-volume.properties:/lab/server.properties:ro
+      - ./scripts/kafka-volume-start.sh:/lab/start.sh:ro
     networks:
       - cg14
     healthcheck:

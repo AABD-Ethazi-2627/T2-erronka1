@@ -21,7 +21,7 @@
           "x": 0.0,
           "y": 100.0
         },
-        "scheduledState": "STOPPED",
+        "scheduledState": "DISABLED",
         "concurrentlySchedulableTaskCount": 1
       }
     ],
@@ -34,7 +34,7 @@
           "x": 900.0,
           "y": 0.0
         },
-        "scheduledState": "STOPPED",
+        "scheduledState": "DISABLED",
         "concurrentlySchedulableTaskCount": 1
       },
       {
@@ -45,7 +45,7 @@
           "x": 900.0,
           "y": 150.0
         },
-        "scheduledState": "STOPPED",
+        "scheduledState": "DISABLED",
         "concurrentlySchedulableTaskCount": 1
       },
       {
@@ -56,7 +56,7 @@
           "x": 900.0,
           "y": 300.0
         },
-        "scheduledState": "STOPPED",
+        "scheduledState": "DISABLED",
         "concurrentlySchedulableTaskCount": 1
       },
       {
@@ -67,7 +67,7 @@
           "x": 900.0,
           "y": 450.0
         },
-        "scheduledState": "STOPPED",
+        "scheduledState": "DISABLED",
         "concurrentlySchedulableTaskCount": 1
       }
     ],
@@ -93,11 +93,16 @@
           "Argument Delimiter": ";",
           "Ignore STDIN": "false"
         },
+        "propertyDescriptors": {},
         "scheduledState": "DISABLED",
         "schedulingStrategy": "TIMER_DRIVEN",
         "schedulingPeriod": "1 sec",
         "concurrentlySchedulableTaskCount": 1,
-        "executionNode": "PRIMARY",
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
         "autoTerminatedRelationships": []
       },
       {
@@ -117,11 +122,16 @@
           "Routing Strategy": "Route to Property name",
           "completed": "${execution.status:equals('0')}"
         },
+        "propertyDescriptors": {},
         "scheduledState": "DISABLED",
         "schedulingStrategy": "TIMER_DRIVEN",
         "schedulingPeriod": "1 sec",
         "concurrentlySchedulableTaskCount": 1,
-        "executionNode": "PRIMARY",
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
         "autoTerminatedRelationships": []
       }
     ],
@@ -142,6 +152,12 @@
         "selectedRelationships": [
           ""
         ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
         "backPressureObjectThreshold": 100,
         "backPressureDataSizeThreshold": "10 MB",
         "flowFileExpiration": "0 sec"
@@ -162,6 +178,12 @@
         "selectedRelationships": [
           "original"
         ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
         "backPressureObjectThreshold": 100,
         "backPressureDataSizeThreshold": "10 MB",
         "flowFileExpiration": "0 sec"
@@ -182,6 +204,12 @@
         "selectedRelationships": [
           "completed"
         ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
         "backPressureObjectThreshold": 100,
         "backPressureDataSizeThreshold": "10 MB",
         "flowFileExpiration": "0 sec"
@@ -202,6 +230,12 @@
         "selectedRelationships": [
           "unmatched"
         ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
         "backPressureObjectThreshold": 100,
         "backPressureDataSizeThreshold": "10 MB",
         "flowFileExpiration": "0 sec"
@@ -222,6 +256,12 @@
         "selectedRelationships": [
           "output stream"
         ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
         "backPressureObjectThreshold": 100,
         "backPressureDataSizeThreshold": "10 MB",
         "flowFileExpiration": "0 sec"
@@ -242,6 +282,12 @@
         "selectedRelationships": [
           "nonzero status"
         ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
         "backPressureObjectThreshold": 100,
         "backPressureDataSizeThreshold": "10 MB",
         "flowFileExpiration": "0 sec"
