@@ -107,7 +107,7 @@
     "docs/workflows/scoring-response-import/procedure.md": "91466580fe7709d5a90320faca0251b7984eb3d2c558084511c718c1b5f90430",
     "docs/workflows/scoring-response-import/runs/20261022.md": "f1ffedc9a2102538dcec8f5eb52c9f2d119b571be4eb3f78144148f2be36247c",
     "scoring/response_ledger.py": "93355badf158753222b8c6fa6b1feb0327d03670fd93169e4b58c697344c43cd",
-    "scoring/score_api.py": "042bdcb323094c95289961f29bb13bd3030492cfb02316d9304150bb0af54dd1",
+    "scoring/score_api.py": "013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e",
     "scripts/import_scoring_responses.py": "8c5a844a5164fcc6301f0df4ff89bd7dc3d24c10f340669f2f60ec05cac99404",
     "tests/test_scoring_import.py": "d6cfa1498457bcdc85c0cbc770b5b0f78d64911fa68746bec103ff90338f7072",
     "docs/evidence/SCORING_RESPONSE_IMPORT_20261022.md": "f88ba766a3b258ade1328749137c08fefadb6d7aeeba64290b6bc251970f777e",

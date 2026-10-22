@@ -5,9 +5,11 @@ import json
 import logging
 import math
 import os
+import sys
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 from pathlib import Path
+from types import TracebackType
 from typing import Literal
 
 import joblib
@@ -141,8 +143,18 @@ def create_app(manifest_path=None, *, ledger_path=None):
                 raise ValueError("Invalid model probe")
             application.state.models = models
             application.state.manifest = manifest
-        except Exception:  # noqa: BLE001 -- fail closed for any model loading/probe error
-            log.error("Model bundle unavailable or invalid; scoring remains unready")
+        except Exception:
+            # Fail closed for arbitrary loader/probe errors. Keep only this
+            # trusted frame; external frames/messages may contain sensitive data.
+            origin = sys.exc_info()[2]
+            safe_trace = TracebackType(
+                None, origin.tb_frame, origin.tb_lasti, origin.tb_lineno
+            )
+            safe_error = RuntimeError("Model initialization failed; details redacted")
+            log.error(
+                "Model bundle unavailable or invalid; scoring remains unready",
+                exc_info=(RuntimeError, safe_error, safe_trace),
+            )
         yield
         application.state.models = None
 
