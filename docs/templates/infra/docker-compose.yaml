@@ -1,6 +1,6 @@
 # docker-compose.yml — IKASLE VM-ERAKO
 # Simuladorea ZERBITZARI NAGUSIAN dago; honetatik NFS bidez irakurtzen du Filebeat-ek.
-# Abiatzeko: docker compose up -d
+# Plantilla histórica; ver README.md. No sustituye el Compose principal.
 
 services:
 
@@ -49,6 +49,8 @@ services:
       SINGLE_USER_CREDENTIALS_USERNAME: admin
       SINGLE_USER_CREDENTIALS_PASSWORD: ${CNC_NIFI_PASSWORD:?Set CNC_NIFI_PASSWORD for this lab}
       NIFI_WEB_HTTPS_PORT: 8443
+      # Host HTTP externo permitido; no configura certificados TLS.
+      NIFI_WEB_PROXY_HOST: "${CNC_NIFI_PROXY_HOST:-localhost:8443,127.0.0.1:8443}"
     restart: unless-stopped
 
   # ── Elasticsearch — Biltegiratze eta bilaketa ────────────────────────────────
@@ -85,7 +87,7 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
-      - ./models:/models:ro
+      - ../../../models:/models:ro
     environment:
       MODEL_PATH: /models/cnc_failure_model.pkl
     restart: unless-stopped
