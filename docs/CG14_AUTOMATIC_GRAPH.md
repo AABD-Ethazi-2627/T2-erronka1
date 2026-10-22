@@ -84,6 +84,9 @@ No habilitar este export en un clúster NiFi multinodo ni compartir SQLite por S
    En el lab de esta entrega todo writable/temp/cache se ubica en binds D:.
    Persistir conf/state/FlowFile/content/provenance/work/logs de NiFi y datos y
    metadata KRaft; un bind a otra ruta no acredita `log.dirs`.
+   NiFi2.12 también requiere assets/connector_assets/nar_repository/status:
+   el lab los configura dentro del bind de trabajo. Filebeat debe ejecutar
+   con un UID que pueda persistir y ajustar permisos de su registry.
 6. Revisar VALID de los cinco processors. Habilitar primero PutFile,
    AttributesToJSON y ExecuteStreamCommand; activar GenerateFlowFile al final.
    Una tarea concurrente por processor, nodo único. El trigger periódico
@@ -135,6 +138,8 @@ del ciclo significa que no hay lag: puede haber consumido solo su presupuesto.
 comprueban exclusión, configuración inmutable, configuración ES obligatoria,
 errores, recibos rechazados y replay. [Evidencia de esta entrega](evidence/AUTOMATIC_GRAPH_20261022.md)
 distingue fuente/export estático, integración real y límites pendientes.
+El contrato de tipos/NAR/relaciones de los processors se capturó del catálogo
+real de NiFi2.12 y se conserva en la fixture versionada de regresión.
 
 Hay transacciones independientes en Filebeat, Kafka, API, worker, CG15, ES y
 NiFi. No se afirma exactly-once distribuido, pérdida cero, HA, capacidad
