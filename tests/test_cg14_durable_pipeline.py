@@ -634,6 +634,18 @@ class KafkaPipelineBoundaryTests(unittest.TestCase):
         self.assertTrue(
             all(p["scheduledState"] == "DISABLED" for p in flow["processors"])
         )
+        self.assertTrue(all(p["executionNode"] == "ALL" for p in flow["processors"]))
+        self.assertTrue(
+            all(
+                p["scheduledState"] == "DISABLED"
+                for p in flow["inputPorts"] + flow["outputPorts"]
+            )
+        )
+        self.assertTrue(all(p["bulletinLevel"] == "WARN" for p in flow["processors"]))
+        self.assertTrue(
+            all(isinstance(p["propertyDescriptors"], dict) for p in flow["processors"])
+        )
+        self.assertTrue(all(type(c["labelIndex"]) is int for c in flow["connections"]))
         self.assertFalse(any("Kafka" in p["type"] for p in flow["processors"]))
         self.assertTrue(
             all(not p["autoTerminatedRelationships"] for p in flow["processors"])

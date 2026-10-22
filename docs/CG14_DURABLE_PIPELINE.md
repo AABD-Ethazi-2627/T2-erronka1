@@ -14,9 +14,10 @@ entorno del lock con extra `kafka`, API de esta revisión y manifiesto exacto de
 bundle aprobado ya disponible. El worker lee el manifiesto; no carga modelos,
 no entrena y no consulta datasets. No usar el journal/archivo en SMB/NFS.
 La distro validada se llama `FedoraLinux-43` pero declara Fedora Linux 44 WSL.
-Dependencias de la base integrada: kafka-python `3.0.11+cncguard.1`, HTTPX
+Dependencias: kafka-python `3.0.11+cncguard.2`, HTTPX
 0.27.0, FastAPI 0.133.0, Starlette 1.7.0 y PyArrow 23.0.1. El wheel local
-de PR64 corrige los avisos de resources; no se cambia su pin ni su contenido.
+de PR64 corrige los avisos de resources; la revisión local `.2` añade una
+versión de software válida para el handshake de Apache Kafka 3.7.2.
 
 En un laboratorio propio autorizado, con broker y topic ya creados:
 
@@ -175,7 +176,13 @@ en un laboratorio revisado. No conectar un ConsumeKafka que ya confirme su
 origen y atribuirle las garantías del worker Kafka.
 Las propiedades y relaciones siguen la documentación de
 [ExecuteStreamCommand 2.12.0](https://nifi.apache.org/components/org.apache.nifi.processors.standard.ExecuteStreamCommand/).
-El export está inspeccionado offline; no se acredita import/ejecución NiFi.
+El export corregido se ha importado/exportado en NiFi 2.12.0 propio y su
+puente staged se ha ejecutado con HTTP canónico y CG15 reales; véase
+[el ensayo del 22 de octubre](evidence/REAL_KAFKA_NIFI_20261022.md).
+Sus puertos están DISABLED; el formato versionado usa ese enum, no STOPPED.
+Los processors con entrada usan ejecución ALL: NiFi rechaza PRIMARY con
+conexiones entrantes. En el laboratorio de un nodo se usa una tarea por
+processor y el lock del worker; esto no valida operación multinodo.
 
 Regenerar siempre a una ruta nueva; el comando rechaza sobrescritura:
 
@@ -203,9 +210,10 @@ PYTHONPATH=.:tests python tests/verify_durable_pipeline.py --output /new/path/re
 Ese verificador reserva un fichero nuevo antes de crear recursos y registra
 fallos y limpieza; no reemplaza evidencia previa. Las pruebas de cortes por
 excepción verifican replay y commits visibles, no un ensayo de pérdida de
-alimentación del disco. Antes de aceptación faltan ensayo Kafka/NiFi real,
-import del export, caída/rebalance real, persistencia tras reinicio del host
-y revisión independiente sobre el SHA final. Los 218 avisos Kafka heredados
+alimentación del disco. El ensayo adicional de Kafka 3.7.2/NiFi 2.12.0 propio
+está en la evidencia del 22 de octubre enlazada arriba. Siguen pendientes el
+rebalance durante escritura, pérdida de alimentación, persistencia tras
+reinicio del host y revisión independiente sobre el SHA final. Los 218 avisos Kafka heredados
 se corrigieron en PR64, incorporada en esta base; véase su
 [evidencia](evidence/KAFKA311_WARNING_FIX_20261021.md). La validación del delta
 y sus límites se registran en [la ronda 2](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md).

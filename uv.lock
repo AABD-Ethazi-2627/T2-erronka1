@@ -131,7 +131,7 @@ requires-dist = [
     { name = "imbalanced-learn", specifier = "==0.12.4" },
     { name = "joblib", specifier = "==1.4.2" },
     { name = "jsonschema", specifier = "==4.23.0" },
-    { name = "kafka-python", marker = "extra == 'kafka'", path = "vendor/kafka_python-3.0.11+cncguard.1-py3-none-any.whl" },
+    { name = "kafka-python", marker = "extra == 'kafka'", path = "vendor/kafka_python-3.0.11+cncguard.2-py3-none-any.whl" },
     { name = "matplotlib", specifier = "==3.10.1" },
     { name = "numpy", specifier = "==1.26.4" },
     { name = "pandas", specifier = "==2.2.2" },
@@ -426,10 +426,10 @@ wheels = [
 
 [[package]]
 name = "kafka-python"
-version = "3.0.11+cncguard.1"
-source = { path = "vendor/kafka_python-3.0.11+cncguard.1-py3-none-any.whl" }
+version = "3.0.11+cncguard.2"
+source = { path = "vendor/kafka_python-3.0.11+cncguard.2-py3-none-any.whl" }
 wheels = [
-    { filename = "kafka_python-3.0.11+cncguard.1-py3-none-any.whl", hash = "sha256:92126ea98835abfef978b6c77963faa8dac78f185ac0f5349e54acb19391485a" },
+    { filename = "kafka_python-3.0.11+cncguard.2-py3-none-any.whl", hash = "sha256:e1d068023ae9ec42d8675956cc4cb9768fafbc02d5a7101e96cfff7828dff069" },
 ]
 
 [package.metadata]

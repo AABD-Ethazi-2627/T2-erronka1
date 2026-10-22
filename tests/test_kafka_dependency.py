@@ -18,6 +18,13 @@ import importlib
 import importlib.resources
 import json
 import kafka
+import re
+from kafka.net.connection import KafkaConnection
+from kafka.net.manager import KafkaConnectionManager
+for config in (KafkaConnection.DEFAULT_CONFIG, KafkaConnectionManager.DEFAULT_CONFIG):
+    wire_version = config['client_software_version']
+    assert re.fullmatch(r'[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?', wire_version)
+    assert wire_version == kafka.__version__.replace('+', '-')
 loader = importlib.import_module('kafka.protocol.schemas.load_json')
 package = importlib.import_module('kafka.protocol.schemas.resources')
 resources = importlib.resources.files(package)

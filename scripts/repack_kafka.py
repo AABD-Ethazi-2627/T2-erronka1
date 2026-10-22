@@ -9,7 +9,7 @@ import zipfile
 from pathlib import Path
 
 UPSTREAM_SHA256 = "9d10cab4e11e02545d82c7e5af5702da5aa46dd4eccd11ad92a50bf6dbbecd14"
-VERSION = "3.0.11+cncguard.1"
+VERSION = "3.0.11+cncguard.2"
 WHEEL_NAME = f"kafka_python-{VERSION}-py3-none-any.whl"
 OLD_INFO = "kafka_python-3.0.11.dist-info/"
 NEW_INFO = f"kafka_python-{VERSION}.dist-info/"
@@ -42,6 +42,19 @@ def repack(upstream, output):
     members["kafka/version.py"] = replace_once(
         members["kafka/version.py"], b"'3.0.11'", f"'{VERSION}'".encode()
     )
+    # KIP-511 software versions allow letters, digits, dots and hyphens, not
+    # PEP 440's local-version '+'. Preserve distribution identity in metadata
+    # while sending a broker-valid version for every client, including Admin.
+    for connection in ("kafka/net/connection.py", "kafka/net/manager.py"):
+        members[connection] = replace_once(
+            members[connection],
+            b"'client_software_version': __version__,",
+            b"'client_software_version': __version__.replace('+', '-'),",
+        )
+        members[connection] = (
+            b"# Modified by CNC Guard: encode PEP 440 local versions for KIP-511.\n"
+            + members[connection]
+        )
     members[OLD_INFO + "METADATA"] = replace_once(
         members[OLD_INFO + "METADATA"],
         b"Version: 3.0.11\n",
