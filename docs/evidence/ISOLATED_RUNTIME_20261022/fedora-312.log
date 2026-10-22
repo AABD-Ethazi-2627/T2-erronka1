@@ -1,0 +1,25 @@
+test_bin_boundaries_counts_and_absence_differ_from_zero (test_lab_dashboard.DashboardTests.test_bin_boundaries_counts_and_absence_differ_from_zero) ... ok
+test_committed_objects_match_generator (test_lab_dashboard.DashboardTests.test_committed_objects_match_generator) ... ok
+test_csv_round_trip_and_evidence_guards_with_small_fixture (test_lab_dashboard.DashboardTests.test_csv_round_trip_and_evidence_guards_with_small_fixture) ... ok
+test_empty_offline_sample_has_no_fabricated_cases (test_lab_dashboard.DashboardTests.test_empty_offline_sample_has_no_fabricated_cases) ... ok
+test_equality_at_threshold_stays_tp_not_fn (test_lab_dashboard.DashboardTests.test_equality_at_threshold_stays_tp_not_fn) ... ok
+test_export_has_unique_ids_resolved_references_and_expected_views (test_lab_dashboard.DashboardTests.test_export_has_unique_ids_resolved_references_and_expected_views) ... ok
+test_generator_is_offline_deterministic_and_detects_drift (test_lab_dashboard.DashboardTests.test_generator_is_offline_deterministic_and_detects_drift) ... ok
+test_invalid_reference_rejected_before_source_or_csv_read (test_lab_dashboard.DashboardTests.test_invalid_reference_rejected_before_source_or_csv_read) ... ok
+test_no_overlaps_in_panel_layout (test_lab_dashboard.DashboardTests.test_no_overlaps_in_panel_layout) ... ok
+test_online_queries_keep_dashboard_context_and_contain_no_ground_truth (test_lab_dashboard.DashboardTests.test_online_queries_keep_dashboard_context_and_contain_no_ground_truth) ... ok
+test_recent_table_sort_identity_and_50_rows (test_lab_dashboard.DashboardTests.test_recent_table_sort_identity_and_50_rows) ... ok
+test_temperature_query_keeps_100_groups_and_omission_metadata (test_lab_dashboard.DashboardTests.test_temperature_query_keeps_100_groups_and_omission_metadata) ... ok
+test_temperatures_group_by_id_source_hour_and_preserve_gaps (test_lab_dashboard.DashboardTests.test_temperatures_group_by_id_source_hour_and_preserve_gaps) ... ok
+test_every_vega_view_paints_background_and_uses_accessible_svg (test_lab_dashboard_contrast.ContrastTests.test_every_vega_view_paints_background_and_uses_accessible_svg) ... ok
+test_exported_temperature_palette_on_explicit_white (test_lab_dashboard_contrast.ContrastTests.test_exported_temperature_palette_on_explicit_white) ... ok
+test_independent_wcag_reference_and_negative_control (test_lab_dashboard_contrast.ContrastTests.test_independent_wcag_reference_and_negative_control) ... ok
+test_svg_verifier_rejects_orange_and_inherited_transparency (test_lab_dashboard_contrast.ContrastTests.test_svg_verifier_rejects_orange_and_inherited_transparency) ... ok
+test_recent_query_returns_50_with_stable_ties_and_filter (test_lab_dashboard_es.DashboardESQueries.test_recent_query_returns_50_with_stable_ties_and_filter) ... skipped 'Disposable CG19 ES not configured'
+test_summary_denominators_filter_and_empty_window (test_lab_dashboard_es.DashboardESQueries.test_summary_denominators_filter_and_empty_window) ... skipped 'Disposable CG19 ES not configured'
+test_temperature_hour_gap_sensor_means_and_sources (test_lab_dashboard_es.DashboardESQueries.test_temperature_hour_gap_sensor_means_and_sources) ... skipped 'Disposable CG19 ES not configured'
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.063s
+
+OK (skipped=3)

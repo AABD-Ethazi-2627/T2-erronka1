@@ -29,6 +29,21 @@ def source(body, prop):
 def vega(data, marks, **extra):
     return {
         "$schema": "https://vega.github.io/schema/vega/v5.json",
+        # Kibana inherits the user's theme. Paint the chart and its labels as a
+        # pair, and use SVG so the mark descriptions reach the accessibility tree.
+        "background": "#ffffff",
+        "config": {
+            "kibana": {"renderer": "svg"},
+            "axis": {
+                "labelColor": "#333333",
+                "titleColor": "#333333",
+                "domainColor": "#666666",
+                "tickColor": "#666666",
+            },
+            "title": {"color": "#333333", "subtitleColor": "#333333"},
+            "legend": {"labelColor": "#333333", "titleColor": "#333333"},
+            "text": {"fill": "#333333"},
+        },
         "autosize": {"type": "fit", "contains": "padding"},
         "padding": 10,
         "data": data if isinstance(data, list) else [data],
@@ -55,6 +70,33 @@ def text_mark(expr, y, size=16, data=None):
     if data:
         mark["from"] = {"data": data}
     return mark
+
+
+def reflow_summary(spec):
+    """Wrap prose inside the panel; allow vertical scrolling at narrow widths."""
+    heights = []
+    for mark in spec["marks"]:
+        mark.setdefault("from", {"data": "table"})
+        update = mark["encode"]["update"]
+        expression = update["text"]["signal"]
+        size = update["fontSize"]["value"]
+        wrapped = (
+            f"split(trim(replace({expression}, "
+            "regexp('(.{1,' + max(8, floor((width-8)/"
+            f"{size * 0.65}"
+            ")) + '})(?: +|$)', 'g'), '$1\\n')), '\\n')"
+        )
+        update["text"] = {"signal": wrapped}
+        update["description"] = {"signal": expression}
+        update["lineHeight"] = {"value": size * 1.3}
+        update["y"] = {"signal": "10" + "".join(f" + ({h})" for h in heights)}
+        heights.append(f"length({wrapped}) * {size * 1.3} + 8")
+    total = "20 + " + " + ".join(f"({h})" for h in heights)
+    spec["signals"].append(
+        {"name": "height", "update": total.replace("datum.", "data('table')[0].")}
+    )
+    spec["autosize"]["type"] = "fit-x"
+    return spec
 
 
 def summary_spec():
@@ -87,7 +129,7 @@ def summary_spec():
         },
         "aggregations.summary.buckets",
     )
-    return vega(
+    spec = vega(
         data,
         [
             text_mark(
@@ -155,6 +197,7 @@ def summary_spec():
             }
         ],
     )
+    return reflow_summary(spec)
 
 
 def temperature_spec():
@@ -209,7 +252,8 @@ def temperature_spec():
             {
                 "type": "filter",
                 "expr": "datum.rank > (page-1)*pageSize && datum.rank <= page*pageSize",
-            }
+            },
+            {"type": "collect", "sort": {"field": "rank"}},
         ],
     }
     table = {
@@ -386,12 +430,25 @@ def temperature_spec():
             "anchor": "start",
             "fontSize": 13,
             "subtitleFontSize": 11,
+            # Vega's SVG spot updates refresh items but not guide containers.
+            # Reorder each singleton guide title on state changes to refresh its
+            # parent's generated ARIA caption too, without changing paint order.
+            "encode": {
+                "title": {"update": {"zindex": {"signal": "guideRevision"}}},
+                "subtitle": {"update": {"zindex": {"signal": "guideRevision"}}},
+            },
         },
         signals=[
             {"name": "pageSize", "value": TEMPERATURE_PAGE_SIZE},
             {
                 "name": "page",
                 "value": 1,
+                "on": [
+                    {
+                        "events": {"signal": "pageCount"},
+                        "update": "clamp(page, 1, pageCount)",
+                    }
+                ],
                 "bind": {
                     "input": "select",
                     "name": "Página de IDs (5 por página): ",
@@ -399,6 +456,10 @@ def temperature_spec():
                         range(1, TEMPERATURE_GROUP_LIMIT // TEMPERATURE_PAGE_SIZE + 1)
                     ),
                 },
+            },
+            {
+                "name": "pageCount",
+                "update": "max(1, ceil(length(data('groups'))/pageSize))",
             },
             {
                 "name": "xDomain",
@@ -415,6 +476,23 @@ def temperature_spec():
                     f"{x_domain}"
                     ")"
                 ),
+            },
+            {
+                "name": "guideState",
+                "update": (
+                    "[page, pageSize, width, height, data('response'), "
+                    "data('page_groups'), xDomain, yDomain]"
+                ),
+            },
+            {
+                "name": "guideRevision",
+                "value": 0,
+                "on": [
+                    {
+                        "events": {"signal": "guideState"},
+                        "update": "guideRevision + 1",
+                    }
+                ],
             },
             {
                 "name": "yDomain",
@@ -450,7 +528,7 @@ def temperature_spec():
             {
                 "name": "color",
                 "type": "ordinal",
-                "domain": {"data": "page_groups", "field": "group"},
+                "domain": {"data": "page_groups", "field": "group", "sort": True},
                 # Five identities per page; each color exceeds 3:1 on white
                 # for essential lines/symbols (WCAG 2.2 SC 1.4.11).
                 "range": ["#1f77b4", "#b35400", "#2ca02c", "#d62728", "#9467bd"],
@@ -458,7 +536,7 @@ def temperature_spec():
             {
                 "name": "shape",
                 "type": "ordinal",
-                "domain": {"data": "page_groups", "field": "group"},
+                "domain": {"data": "page_groups", "field": "group", "sort": True},
                 "range": ["circle", "square", "triangle-up", "diamond", "cross"],
             },
         ],
@@ -473,6 +551,9 @@ def temperature_spec():
                 ),
                 "tickCount": {"signal": "max(2, floor(width/140))"},
                 "values": {"signal": "length(data('points')) ? null : []"},
+                "encode": {
+                    "title": {"update": {"zindex": {"signal": "guideRevision"}}}
+                },
             },
             {
                 "orient": "left",
@@ -483,6 +564,9 @@ def temperature_spec():
                     + "no hay temperaturas válidas."
                 ),
                 "values": {"signal": "length(data('points')) ? null : []"},
+                "encode": {
+                    "title": {"update": {"zindex": {"signal": "guideRevision"}}}
+                },
             },
         ],
         legends=[
@@ -494,6 +578,9 @@ def temperature_spec():
                 "labelLimit": 1000,
                 "orient": "bottom",
                 "columns": 1,
+                "encode": {
+                    "title": {"update": {"zindex": {"signal": "guideRevision"}}}
+                },
             }
         ],
     )
@@ -513,6 +600,15 @@ def heatmap_spec(offline):
                         "y": {"scale": "y", "field": "machine_type"},
                         "height": {"scale": "y", "band": 0.95},
                         "fill": {"scale": "color", "field": "failure_rate"},
+                        "description": {
+                            "signal": (
+                                "'Offline fijo; tipo ' + datum.machine_type + "
+                                "'; desgaste ' + datum.wear_bin + ' min; ' + "
+                                "datum.positives + ' fallos etiquetados de ' + "
+                                "datum.rows + ' filas; ' + "
+                                "format(datum.failure_rate, '.1%')"
+                            )
+                        },
                         "tooltip": {"signal": "datum"},
                     }
                 },

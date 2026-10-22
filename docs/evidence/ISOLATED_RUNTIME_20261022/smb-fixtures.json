@@ -1,0 +1,18 @@
+{
+  "small.csv": {
+    "bytes": 260,
+    "sha256": "e53fe8e447d93e9c3bc2ff4750341306e98eebcf7996ae5b3bdfcba99d716922"
+  },
+  "tiny.csv": {
+    "bytes": 216,
+    "sha256": "40b485094ae392e8aca95e091fe4185764fbbe6fded136a2cef30cd47246ae5e"
+  },
+  "partial.csv": {
+    "bytes": 259,
+    "sha256": "86b173c92eaf45e779cd2e0b8939f9f3d88f9681efd52889e36f7ced57deef43"
+  },
+  "header.csv": {
+    "bytes": 164,
+    "sha256": "da046fb6510d3811c07b55178eebe5706929ef89d4d1d00544f677890b7910b2"
+  }
+}

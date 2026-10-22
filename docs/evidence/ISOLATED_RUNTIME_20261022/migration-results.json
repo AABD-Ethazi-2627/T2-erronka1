@@ -1,0 +1,105 @@
+{
+  "old_reject": {
+    "error": {
+      "root_cause": [
+        {
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:183] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+        }
+      ],
+      "type": "strict_dynamic_mapping_exception",
+      "reason": "[1:183] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+    },
+    "status": 400
+  },
+  "template_does_not_mutate_old_index": true,
+  "reindex": {
+    "took": 92,
+    "timed_out": false,
+    "total": 1,
+    "updated": 0,
+    "created": 1,
+    "deleted": 0,
+    "batches": 1,
+    "version_conflicts": 0,
+    "noops": 0,
+    "retries": {
+      "bulk": 0,
+      "search": 0
+    },
+    "throttled_millis": 0,
+    "requests_per_second": -1.0,
+    "throttled_until_millis": 0,
+    "failures": []
+  },
+  "replay": {
+    "_index": "cnc-telemetry-migration-v4",
+    "_id": "synthetic-migrate-001",
+    "_version": 3,
+    "result": "updated",
+    "forced_refresh": true,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "failed": 0
+    },
+    "_seq_no": 2,
+    "_primary_term": 1
+  },
+  "count_after_replay": {
+    "count": 1,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "skipped": 0,
+      "failed": 0
+    }
+  },
+  "strict_unknown_reject": {
+    "error": {
+      "root_cause": [
+        {
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:277] mapping set to strict, dynamic introduction of [unknown_field] within [_doc] is not allowed"
+        }
+      ],
+      "type": "strict_dynamic_mapping_exception",
+      "reason": "[1:277] mapping set to strict, dynamic introduction of [unknown_field] within [_doc] is not allowed"
+    },
+    "status": 400
+  },
+  "forward": {
+    "_index": "cnc-telemetry-migration-v4",
+    "_id": "synthetic-migrate-001",
+    "_version": 3,
+    "_seq_no": 2,
+    "_primary_term": 1,
+    "found": true,
+    "_source": {
+      "event_id": "synthetic-migrate-001",
+      "machine_id": "SYNTHETIC-LEGACY",
+      "timestamp": "2026-10-22T08:00:00Z",
+      "schema_version": "cnc.telemetry.v3",
+      "rpm": 1200.0,
+      "prediction_scope": "row",
+      "temporal_prediction_enabled": false,
+      "score_semantics": "synthetic"
+    }
+  },
+  "rollback": {
+    "_index": "cnc-telemetry-migration-old",
+    "_id": "synthetic-migrate-001",
+    "_version": 1,
+    "_seq_no": 0,
+    "_primary_term": 1,
+    "found": true,
+    "_source": {
+      "event_id": "synthetic-migrate-001",
+      "machine_id": "SYNTHETIC-LEGACY",
+      "timestamp": "2026-10-22T08:00:00Z",
+      "schema_version": "cnc.telemetry.v3",
+      "rpm": 1200.0
+    }
+  },
+  "limitation": "Synthetic documents, no scoring/model execution, rollback validated with writes quiesced; original source retained."
+}

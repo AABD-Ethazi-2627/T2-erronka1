@@ -1,0 +1,198 @@
+[
+  {
+    "name": "ruff-version",
+    "args": [
+      "ruff",
+      "--version"
+    ],
+    "exit": 0,
+    "utc": 1792656552.804612,
+    "elapsed": 0.019536972045898438
+  },
+  {
+    "name": "ruff-selected",
+    "args": [
+      "ruff",
+      "check",
+      "--select",
+      "E,F,I,PLW1510",
+      "scripts/create_lab_dashboard.py",
+      "tests/test_lab_dashboard_contrast.py"
+    ],
+    "exit": 0,
+    "utc": 1792656552.824149,
+    "elapsed": 0.02903914451599121
+  },
+  {
+    "name": "ruff-format",
+    "args": [
+      "ruff",
+      "format",
+      "--check",
+      "scripts/create_lab_dashboard.py",
+      "tests/test_lab_dashboard_contrast.py"
+    ],
+    "exit": 0,
+    "utc": 1792656552.8536892,
+    "elapsed": 0.026481151580810547
+  },
+  {
+    "name": "diff-check",
+    "args": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit": 0,
+    "utc": 1792656552.8801703,
+    "elapsed": 0.04190993309020996
+  },
+  {
+    "name": "generator-check",
+    "args": [
+      "py",
+      "-3.12",
+      "-m",
+      "scripts.create_lab_dashboard",
+      "--check"
+    ],
+    "exit": 0,
+    "utc": 1792656552.9220803,
+    "elapsed": 0.08486318588256836
+  },
+  {
+    "name": "windows-311",
+    "args": [
+      "D:\\github\\_local\\t2-babysit-20261021\\duckdb200-migration\\venv-win311\\Scripts\\python.exe",
+      "-W",
+      "error::ResourceWarning",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_lab_dashboard*.py",
+      "-v"
+    ],
+    "exit": 0,
+    "utc": 1792656553.0074437,
+    "elapsed": 3.1043007373809814
+  },
+  {
+    "name": "fedora-311",
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--user",
+      "root",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora311/bin/python -W error::ResourceWarning -m unittest discover -s tests -p 'test_lab_dashboard*.py' -v"
+    ],
+    "exit": 0,
+    "utc": 1792656556.1127498,
+    "elapsed": 15.915266990661621
+  },
+  {
+    "name": "windows-312",
+    "args": [
+      "D:\\github\\_local\\t2-babysit-20261021\\duckdb200-migration\\venv-win312\\Scripts\\python.exe",
+      "-W",
+      "error::ResourceWarning",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_lab_dashboard*.py",
+      "-v"
+    ],
+    "exit": 0,
+    "utc": 1792656572.0285175,
+    "elapsed": 1.6358675956726074
+  },
+  {
+    "name": "fedora-312",
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--user",
+      "root",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python -W error::ResourceWarning -m unittest discover -s tests -p 'test_lab_dashboard*.py' -v"
+    ],
+    "exit": 0,
+    "utc": 1792656573.6648855,
+    "elapsed": 15.937936782836914
+  },
+  {
+    "name": "audit-cg02",
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--user",
+      "root",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python -m scripts.audit_cg02 --check"
+    ],
+    "exit": 0,
+    "utc": 1792656589.6028223,
+    "elapsed": 0.32549238204956055
+  },
+  {
+    "name": "audit-cg25",
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--user",
+      "root",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python -m scripts.check_cg25_memory"
+    ],
+    "exit": 1,
+    "utc": 1792656589.9288163,
+    "elapsed": 0.7931151390075684
+  },
+  {
+    "name": "layout",
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--user",
+      "root",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python scripts/check_repository_layout.py"
+    ],
+    "exit": 2,
+    "utc": 1792656590.7219315,
+    "elapsed": 0.20980119705200195
+  },
+  {
+    "name": "lock-frozen",
+    "args": [
+      "uv",
+      "lock",
+      "--check",
+      "--offline"
+    ],
+    "exit": 0,
+    "utc": 1792656590.9317327,
+    "elapsed": 0.5333895683288574
+  }
+]
