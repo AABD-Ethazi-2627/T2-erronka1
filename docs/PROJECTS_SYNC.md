@@ -31,6 +31,10 @@ un error explícito; publicar el workflow no significa que ya esté activo.
 - `Taldea = B-taldea`.
 - `Status`: Egiteke → Todo; Lanean/Berrikusten/Blokeatuta → In Progress;
   Eginda → Done. El detalle completo sigue disponible en Project #2.
+  Se admiten `Todo` y `To do` como etiquetas equivalentes del destino. Si existen
+  ambas, se aborta antes de escribir por ambigüedad; no se renombran opciones.
+  Las pruebas locales cubren ambos nombres, sin afirmar qué nombre tiene hoy
+  el tablero compartido.
 - Hasiera-data → Start date; Amaiera-data → Target date. Si las fechas vascas
   están vacías, usa Start date/Target date del origen. Dos fechas distintas
   para el mismo concepto provocan error antes de escribir.
