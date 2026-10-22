@@ -15,6 +15,10 @@ de `scoring.preparation.features`; no duplica esas fórmulas. El notebook invoca
 el módulo desde la raíz mediante su propio intérprete: funciona también al
 abrirlo desde `notebooks/`, sin PYTHONPATH ni instalación global del proyecto.
 
+Entorno vigente: DuckDB 2.0.0, Python 3.11/3.12; instalación frozen en un
+venv nuevo. Ver [migración y rollback](DUCKDB_2_MIGRATION.md). Los registros
+fechados anteriores conservan las versiones con las que se ejecutaron.
+
 ## Preparación sin entrenamiento
 
 Desde la raíz en FedoraLinux-43, usando uv 0.13.1 y un entorno **propio del clon**:

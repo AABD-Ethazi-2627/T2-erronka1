@@ -15,6 +15,7 @@ import pyarrow.parquet as pq
 
 from scripts.audit_cg02 import TRAIN_COLUMNS
 from scripts.build_history import retain
+from scripts.duckdb_output import to_pandas_utc
 from scripts.package_seasonal_v2 import package
 from scripts.verify_history import verify
 
@@ -87,15 +88,25 @@ class ColumnarUpgradeContractTests(unittest.TestCase):
                 "SELECT count(*), count(DISTINCT record_id), count(rpm), "
                 "sum(machine_failure) FROM read_parquet(?)",
                 [str(path)],
-            ).fetchone()
+            ).fetchall()[0]
             self.assertEqual(counts, (4, 3, 3, 1))
-            restored = con.execute("SELECT * FROM read_parquet(?)", [str(path)]).df()
-        # DuckDB represents TIMESTAMPTZ in microseconds, pandas/Arrow in ns.
+            restored = to_pandas_utc(
+                con.sql("SELECT * FROM read_parquet(?)", params=[str(path)])
+            )
+        self.assertIsNotNone(restored.timestamp.dt.tz)
+        # Keep the strict aware/ns contract after the typed UTC export.
         restored["timestamp"] = restored.timestamp.astype("datetime64[ns, UTC]")
         pd.testing.assert_frame_equal(restored, columnar_frame())
 
         history = root / "history"
         self.assertTrue(verify(history))
+        # Gold's established numeric schema must survive the engine migration.
+        gold = pd.read_parquet(history / "gold/machine_summary.parquet")
+        self.assertEqual(
+            gold.dtypes.astype(str).tolist(),
+            ["object", "int64", "float64", "float64"],
+        )
+        self.assertEqual(gold.iloc[0].tolist(), ["CNC-001", 2, 1.0, 75.0])
         before = (history / "manifest.json").read_bytes()
         retain([root / "batch.csv"], history)
         self.assertEqual((history / "manifest.json").read_bytes(), before)
