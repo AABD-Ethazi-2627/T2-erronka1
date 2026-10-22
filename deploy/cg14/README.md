@@ -64,6 +64,49 @@ docker exec cnc-cg14-nifi bash -lc 'timeout 3 bash -c "</dev/tcp/cg14-kafka-test
 
 El smoke crea solo `cg14-test-raw` y publica/consume `tests/fixtures/cg14/valid_event.csv`; no consume mensajes reales ni ejercita el processor NiFi. Detén únicamente el broker opcional con `docker compose ... stop kafka-test`; conserva su volumen.
 
+### Almacenamiento explícito y recreación aislada (2026-10-22)
+
+El arranque nuevo usa `scripts/kafka-volume.properties` directamente: datos en
+`/var/lib/kafka/data` y metadata KRaft en `/var/lib/kafka/metadata`. El bind
+`data/kafka-test` contiene ambos; `data/kafka-test/data` se monta además en el
+destino exacto para impedir que un `VOLUME` de la imagen lo oculte. La capa del
+contenedor es de sólo lectura. Logs y temporales JVM van a `data/kafka-runtime`
+por `/lab/runtime`; las variables de temporales se fijan sólo para el proceso
+del contenedor. El script rechaza almacenamiento parcial, cluster ID distinto
+y errores de escritura antes de arrancar el broker. No reformatea datos existentes.
+
+Esto cambia el almacenamiento declarado del perfil opcional. No ejecutar
+`compose up`, `down -v` ni mover datos de una instancia anterior para aplicar
+este cambio durante una revisión. El Kafka histórico
+`t2-real-20261022-0937-kafka` conserva datos únicos en su capa escribible y debe
+permanecer intacto. Los ensayos históricos de restart no prueban recreación.
+
+El runner nuevo crea exclusivamente recursos con etiqueta aleatoria
+`t2.kafka.volume.run`, usa la imagen oficial **3.7.2 ya instalada** por ID y
+`--pull=never`, publica un puerto aleatorio en 127.0.0.1 y exige un directorio
+nuevo de evidencia bajo `/mnt/d/`. Ejemplo desde WSL, con un intérprete que
+tenga el extra Kafka del lock:
+
+```sh
+mkdir -p /mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/process-temp
+env TMPDIR=/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/process-temp \
+    TEMP=/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/process-temp \
+    TMP=/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/process-temp \
+    .venv/bin/python -B deploy/cg14/scripts/run-kafka-volume-recreate.py \
+    --evidence-dir /mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/fresh-run
+```
+
+Produce seis mensajes, consume tres mediante coordinación de grupo, confirma
+offset3, detiene y elimina sólo el ID recién creado, recrea otro contenedor con
+los mismos binds y prueba offset3, lectura desde3, commit6 y replay completo.
+También exige metadata KRaft idéntica, capa sin cambios respecto de los puntos
+de montaje creados por Docker y fallo de
+arranque con el mismo bind en sólo lectura. Conserva binds y contenedores
+finales detenidos, comandos, códigos de salida e IDs. No elimina volúmenes.
+Es una recreación tras parada controlada de un broker, sin prueba de pérdida de
+alimentación ni multinodo. El export NiFi staged sigue sin ser propietario
+de offsets ni de almacenamiento Kafka; no configura un broker por importarlo.
+
 El Process Group CG14 incluye `org.apache.nifi.kafka.processors.ConsumeKafka`, bundle `org.apache.nifi:nifi-kafka-nar:2.12.0`, y `Kafka3ConnectionService`. En NiFi 2.12 `FLOW_FILE` crea un FlowFile por mensaje Kafka; se comprobó con cinco mensajes sintéticos. `DEMARCATOR` puede combinar mensajes y no se usa para esta prueba. `RECORD` requiere Record Reader/Writer y no se usa porque el framing y los bytes raw deben conservar el contrato CSV. `Commit Offsets` está habilitado en el processor de laboratorio; una caída del broker mostró que todavía no hay evidencia de reanudación/commit en esa condición. Esto no prueba exactly-once. El consumer y todos los processors quedan detenidos al finalizar los tests.
 
 Para conservar trazabilidad por evento, la opción de ingestión a evaluar primero es `DEMARCATOR` sin combinar mensajes, de modo que cada mensaje Kafka se preserve como FlowFile; validar esa configuración frente a los mensajes CG13 antes de activar. Si se selecciona `RECORD`, dividir por registro y transferir los metadatos Kafka correspondientes antes de calcular `event_id`. Las opciones exactas dependen de si un mensaje Kafka contiene una fila CSV o un record set y de la semántica de `event_id` ratificada por CG03. El grupo actual no tiene consumidor ni publicador real y permanece detenido. El export de la instancia actual con DLQ está en [`nifi-flows/cg14_validation_flow_nifi_2.12.0_dlq.json`](../../nifi-flows/cg14_validation_flow_nifi_2.12.0_dlq.json); no se importó el JSON NiFi 1.x.

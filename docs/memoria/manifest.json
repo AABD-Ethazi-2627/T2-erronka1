@@ -62,7 +62,7 @@
     "scripts/duckdb_output.py": "7d0500c3353bc66b1cc8f5faa8151c77eef18796873056a5a1fa73ab0fd9bc8c",
     "tests/test_duckdb_output.py": "6c6fc9c501965339712355498be046b46832abd33e84279b263a0e603cab9017",
     "docs/DUCKDB_2_MIGRATION.md": "216a4bfb9c58742234622c19cf4458097dc13fe8db8e5daa00483e837bbeb759",
-    "deploy/cg14/scripts/run-restore-e2e.py": "678463f8e0d0113fafd97b53faeea94e0a60c82e08ad3b804a881233fde1298b",
+    "deploy/cg14/scripts/run-restore-e2e.py": "e815c273e5aa8a9d861a95ec02ff5a8560a5c49d09c119829d03de39294e2d74",
     "planning/registry.py": "7c13920ae73f76f3329eb612763a20f18544c9b04d28357bde31aa0f2f3b8879",
     "scoring/requirements.txt": "e935d21b6dc2e71c294cb4efe5117b8a77ccd5b1d197e9087df41900fce67635",
     "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
@@ -91,7 +91,7 @@
     "scripts/private_files.py": "47847e63d26be64434e3f5e4b01b2cf1b5802f48f3ac31bcf9b7ee231ed351a3",
     "tests/test_platform_io.py": "70b6b543debfedc134bc7b41b0295bf86c120e1481bf9166c026068b28502ddc",
     "tests/test_private_files.py": "4669640370d993f6e17ef788c5d30cd3fb7c820e7abfe84ec4efbe57d4d89af8",
-    "tests/test_cg14_restore_e2e.py": "5aa3680faf0d68afd8dc146bc4ed8071498a1a0372aee2fa3a26031ee2b61918",
+    "tests/test_cg14_restore_e2e.py": "9e50d75fb74ad502319b40035b367af86270f2d25048ae9e641025dfc1835d90",
     "tests/test_cg23_capacity.py": "73e67995b345aa91ef0052a4e3630c882ec0c2231c4d45e1e49955c6d402d3ad",
     "docs/evidence/WINDOWS_PORTABILITY_20261022.json": "38c2a26321c09546546b78f70f4b734666e4302dc3f416a15442d345953ee256",
     "docs/evidence/WINDOWS_PORTABILITY_20261022.md": "5c3b4eca54bee48b1cbc871eff98cf7151d84b588b20de7c8b6d9be8c13c247c"

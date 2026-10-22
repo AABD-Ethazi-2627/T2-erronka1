@@ -3,6 +3,10 @@
 Estado: validación local del alcance descrito abajo. Revisión independiente del
 padre, CI del SHA publicado, aceptación humana y merge pendientes.
 
+La corrección posterior de almacenamiento y el ensayo **nuevo** de recreación
+están en [KAFKA_VOLUME_RECREATE_20261022.md](KAFKA_VOLUME_RECREATE_20261022.md).
+Este informe conserva la evidencia histórica de restart del mismo contenedor.
+
 Base remota verificada antes y después del ensayo:
 `8caf98962175fabcf13fbc1584dc890cf4f0135f`, árbol
 `82a69eba2754045619a2c2d218473605183bb9c3`, PR42
