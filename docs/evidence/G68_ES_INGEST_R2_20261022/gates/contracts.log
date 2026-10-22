@@ -1,0 +1,13 @@
+
+STDERR:
+test_export_is_current_and_reproducible (test_es_ingest_pipeline.IngestExportTests.test_export_is_current_and_reproducible) ... ok
+test_final_pipeline_matches_export (test_es_ingest_pipeline.IngestExportTests.test_final_pipeline_matches_export) ... ok
+test_guard_rules_follow_contract_types_bounds_and_required_fields (test_es_ingest_pipeline.IngestExportTests.test_guard_rules_follow_contract_types_bounds_and_required_fields) ... ok
+test_v4_fixture_is_contract_valid_and_contains_no_labels (test_es_ingest_pipeline.IngestExportTests.test_v4_fixture_is_contract_valid_and_contains_no_labels) ... ok
+test_supplied_examples_and_negative_cases (test_contract_validation.ContractValidationTests.test_supplied_examples_and_negative_cases) ... ok
+test_entire_prediction_contract_has_explicit_compatible_mappings (test_elasticsearch_contract.ElasticsearchContractTests.test_entire_prediction_contract_has_explicit_compatible_mappings) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.049s
+
+OK

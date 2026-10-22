@@ -1,0 +1,8 @@
+{
+  "attempt": "gates-final",
+  "result": "12 passed; diff exit2",
+  "cause": "New evidence/manifest Windows CRLF bytes flagged as trailing whitespace",
+  "fix": "Normalize new evidence and manifest to LF; no checks/config relaxed",
+  "additional_harness_attempt": "CG25-only link helper rejects all external URLs by design; replaced with local-link checker supporting guides with official external links; no repository check modified",
+  "final": "See document-gates.json and gates/results.json"
+}

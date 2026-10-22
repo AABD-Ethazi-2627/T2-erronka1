@@ -95,8 +95,15 @@ certificado de confianza de NiFi. Verifica TLS y el nombre `localhost`; no
 acepta certificados sin validar. No ejecutar scripts temporales del equipo
 como si fueran instalación portable.
 
-En un laboratorio autorizado, aplicar `elasticsearch/index-template.json` antes de
-ingerir. `uv run --frozen python -m scripts.create_lab_dashboard` genera ahora
+En un laboratorio autorizado, instalar primero `elasticsearch/ingest-pipeline.json`
+con `PUT /_ingest/pipeline/cnc-prediction-v1` y comprobarlo con
+`GET /_ingest/pipeline/cnc-prediction-v1`. Después aplicar
+`elasticsearch/index-template.json` con `PUT /_index_template/cnc-lab-v1`, antes de
+crear índices e ingerir. Seguir el [procedimiento de instalación y comprobación](elasticsearch/README.md#instalación-y-rollback-en-un-laboratorio-propio):
+el template exige ese pipeline final; si falta, incluso los documentos válidos
+reciben HTTP400. El template no migra índices existentes.
+
+`uv run --frozen python -m scripts.create_lab_dashboard` genera ahora
 `kibana/cg19-review-source.ndjson` **sin conectarse a Kibana**; `--check` verifica
 su reproducción. El candidato v2 incluye temperaturas, heatmap/casos offline,
 últimos50 y KPI con denominadores. Importación y revisión humana siguen pendientes:

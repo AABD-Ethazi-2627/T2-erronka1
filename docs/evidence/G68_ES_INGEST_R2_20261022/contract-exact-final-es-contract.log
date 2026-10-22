@@ -1,0 +1,3 @@
+PASS: old mapping rejected, additive migration and both strict index families verified; disposable container removed.
+
+STDERR:
