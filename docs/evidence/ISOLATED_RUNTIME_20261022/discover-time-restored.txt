@@ -1,0 +1,1377 @@
+- banner:
+  - status "Page change announcements": Últimos 50 eventos · timestamp DESC, event_id ASC - Discover - Elastic
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - link "Elastic home":
+    - /url: /app/home
+    - progressbar "Loading content"
+  - searchbox "Find apps, content, and more."
+  - 'generic "Keyboard shortcut: Control + /"': ^/
+  - paragraph: Use the Up and Down arrow keys to move focus over options. Press Enter to select. Press Escape to collapse options.
+  - button "Help menu":
+  - button "Newsfeed menu - all items read":
+  - button "Submit feedback" [disabled]:
+    - img "Submit feedback"
+  - button "AI Agent":
+    - generic: AI Agent
+  - button "Account menu":
+    - img "Synthetic CG19 lab viewer":
+      - generic: SC
+  - button "Toggle primary navigation":
+  - button "Spaces navigation":
+    - img "Default":
+      - generic: D
+  - navigation "Breadcrumbs":
+    - list:
+      - link "Discover":
+        - /url: "#/"
+      - generic "Últimos 50 eventos · timestamp DESC, event_id ASC"
+  - button:
+  - button "Click to learn more about the “solution view”":
+    - generic: Check out context-aware Discover
+- heading "Discover - Últimos 50 eventos · timestamp DESC, event_id ASC" [level=1]
+- tablist:
+  - tab "Untitled" [selected]:
+    - generic: Untitled
+    - img "Unsaved changes"
+  - button "Actions":
+- button "New tab":
+- button "Tabs menu":
+- navigation "App menu":
+  - button "Share":
+    - generic: Share
+  - button "Query in ES|QL":
+    - generic: Query in ES|QL
+  - button "More":
+- tabpanel "Untitled Unsaved changes":
+  - generic: Data view
+  - button "CG19 · telemetría de laboratorio":
+    - generic: CG19 · telemetría de laboratorio
+  - button "Add filter":
+  - button "Query menu":
+  - combobox "Search and filter the discover page":
+    - search:
+      - textbox "Start typing to search and filter the discover page":
+        - /placeholder: Filter your data using KQL syntax
+        - text: "machine_id : *"
+      - button "Clear input"
+  - button "Oct 22, 09:00 → 11:00 2h":
+    - generic: Oct 22, 09:00 → 11:00
+    - generic "2h":
+      - generic: 2h
+  - group "Time window actions":
+    - generic: Time window actions
+    - button "Previous":
+      - generic: Previous
+    - button "Zoom out":
+      - generic: Zoom out
+    - button "Next" [active]:
+      - generic: Next
+  - button "Refresh query":
+    - generic: Refresh
+  - generic "Fields":
+    - searchbox "Search field names"
+    - button "Filter by type":
+      - generic: "0"
+    - generic: 8 selected fields. 18 available fields. 11 empty fields. 4 meta fields.
+    - button [expanded]:
+    - 'button "Selected fields: 8 items" [expanded]':
+      - strong: Selected fields
+    - generic: "8"
+    - 'group "Selected fields: 8 items"':
+      - link "Go to Available fields":
+        - /url: "#fieldListGroupedButton:r1s:AvailableFields"
+        - generic: Go to Available fields
+      - list:
+        - button "timestamp"
+        - 'button "Preview timestamp: date"':
+          - img "Date"
+          - generic: timestamp
+        - button "Remove field from table":
+        - button "event_id"
+        - 'button "Preview event_id: string"':
+          - img "Keyword"
+          - generic: event_id
+        - button "Remove field from table":
+        - button "machine_id"
+        - 'button "Preview machine_id: string"':
+          - img "Keyword"
+          - generic: machine_id
+        - button "Remove field from table":
+        - button "source.kind"
+        - 'button "Preview source.kind: string"':
+          - img "Keyword"
+          - generic: source.kind
+        - button "Remove field from table":
+        - button "alert_level"
+        - 'button "Preview alert_level: string"':
+          - img "Keyword"
+          - generic: alert_level
+        - button "Remove field from table":
+        - button "failure_score"
+        - 'button "Preview failure_score: number"':
+          - img "Number"
+          - generic: failure_score
+        - button "Remove field from table":
+        - button "risk_alert"
+        - 'button "Preview risk_alert: boolean"':
+          - img "Boolean"
+          - generic: risk_alert
+        - button "Remove field from table":
+        - button "anomaly_alert"
+        - 'button "Preview anomaly_alert: boolean"':
+          - img "Boolean"
+          - generic: anomaly_alert
+        - button "Remove field from table":
+    - button [expanded]:
+    - 'button "Available fields: 18 items" [expanded]':
+      - strong: Available fields
+      - img "Fields available for display in the table."
+    - generic: "18"
+    - 'group "Available fields: 18 items"':
+      - link "Go to Empty fields":
+        - /url: "#fieldListGroupedButton:r1s:EmptyFields"
+        - generic: Go to Empty fields
+      - list:
+        - button "air_temp_K"
+        - 'button "Preview air_temp_K: number"':
+          - img "Number"
+          - generic: air_temp_K
+        - button "Add field as column":
+        - button "alert_level"
+        - 'button "Preview alert_level: string"':
+          - img "Keyword"
+          - generic: alert_level
+        - button "Remove field from table":
+        - button "event_id"
+        - 'button "Preview event_id: string"':
+          - img "Keyword"
+          - generic: event_id
+        - button "Remove field from table":
+        - button "machine_id"
+        - 'button "Preview machine_id: string"':
+          - img "Keyword"
+          - generic: machine_id
+        - button "Remove field from table":
+        - button "machine_type"
+        - 'button "Preview machine_type: string"':
+          - img "Keyword"
+          - generic: machine_type
+        - button "Add field as column":
+        - button "prediction_scope"
+        - 'button "Preview prediction_scope: string"':
+          - img "Keyword"
+          - generic: prediction_scope
+        - button "Add field as column":
+        - button "process_temp_K"
+        - 'button "Preview process_temp_K: number"':
+          - img "Number"
+          - generic: process_temp_K
+        - button "Add field as column":
+        - button "quality_flag"
+        - 'button "Preview quality_flag: string"':
+          - img "Keyword"
+          - generic: quality_flag
+        - button "Add field as column":
+        - button "rpm"
+        - 'button "Preview rpm: number"':
+          - img "Number"
+          - generic: rpm
+        - button "Add field as column":
+        - button "schema_version"
+        - 'button "Preview schema_version: string"':
+          - img "Keyword"
+          - generic: schema_version
+        - button "Add field as column":
+        - button "score_semantics"
+        - 'button "Preview score_semantics: string"':
+          - img "Keyword"
+          - generic: score_semantics
+        - button "Add field as column":
+        - button "source.kind"
+        - 'button "Preview source.kind: string"':
+          - img "Keyword"
+          - generic: source.kind
+        - button "Remove field from table":
+        - button "source.record_ref"
+        - 'button "Preview source.record_ref: string"':
+          - img "Keyword"
+          - generic: source.record_ref
+        - button "Add field as column":
+        - button "source.uri"
+        - 'button "Preview source.uri: string"':
+          - img "Keyword"
+          - generic: source.uri
+        - button "Add field as column":
+        - button "temporal_prediction_enabled"
+        - 'button "Preview temporal_prediction_enabled: boolean"':
+          - img "Boolean"
+          - generic: temporal_prediction_enabled
+        - button "Add field as column":
+        - button "timestamp"
+        - 'button "Preview timestamp: date"':
+          - img "Date"
+          - generic: timestamp
+        - button "Remove field from table":
+        - button "tool_wear_min"
+        - 'button "Preview tool_wear_min: number"':
+          - img "Number"
+          - generic: tool_wear_min
+        - button "Add field as column":
+        - button "torque_Nm"
+        - 'button "Preview torque_Nm: number"':
+          - img "Number"
+          - generic: torque_Nm
+        - button "Add field as column":
+    - button:
+    - 'button "Empty fields: 11 items"':
+      - strong: Empty fields
+      - img "Fields that don't have any values based on your filters."
+    - generic: "11"
+    - 'group "Empty fields: 11 items"':
+      - link "Go to Meta fields":
+        - /url: "#fieldListGroupedButton:r1s:MetaFields"
+        - generic: Go to Meta fields
+      - list
+    - button:
+    - 'button "Meta fields: 4 items"':
+      - strong: Meta fields
+    - generic: "4"
+    - 'group "Meta fields: 4 items"':
+      - list
+  - button "Press the left or right arrow keys to adjust panels size"
+  - main:
+    - generic "Documents":
+      - heading "Documents" [level=2]
+      - group "Panels visibility":
+        - generic: Panels visibility
+        - button "Hide field list" [expanded]:
+          - generic: Hide field list
+        - button "Show visualization":
+          - generic: Show visualization
+        - button "Hide results table" [disabled] [expanded]:
+          - generic: Hide results table
+      - tablist:
+        - tab "Documents ( 100 )" [selected]:
+          - text: Documents (
+          - strong: "100"
+          - text: )
+        - tab "Field statistics":
+          - generic: Field statistics
+      - 'button "Columns - Active: 8"':
+        - generic: Columns
+        - 'marquee "- Active: 8"': "8"
+      - 'button "Sort fields - Active: 2"':
+        - generic: Sort fields
+        - 'marquee "- Active: 2"': "2"
+      - button "Find in table":
+      - button "Keyboard shortcuts":
+      - button "Display options":
+      - button "Enter fullscreen":
+      - grid "Documents Page 1 of 1.":
+        - generic: 𐘂𐘂
+        - row "Select column Select all visible rows Actions column Info timestamp event_id Press the Enter key to view this column's actions machine_id Press the Enter key to view this column's actions source.kind Press the Enter key to view this column's actions alert_level Press the Enter key to view this column's actions failure_score Press the Enter key to view this column's actions risk_alert Press the Enter key to view this column's actions anomaly_alert Press the Enter key to view this column's actions":
+          - columnheader "Select column Select all visible rows":
+            - generic: Select column
+            - checkbox "Select all visible rows"
+            - status
+            - generic: ↦
+          - columnheader "Actions column Info":
+            - generic: Actions column
+            - img "Info"
+            - status
+            - generic: ↦
+          - columnheader "timestamp":
+            - generic "timestamp":
+              - generic "timestamp - this field represents the time that events occurred.":
+                - text: timestamp
+                - img "Info"
+            - button "timestamp. Click to view column header actions.":
+            - status
+            - generic: ↦
+          - columnheader "event_id Press the Enter key to view this column's actions":
+            - generic "event_id":
+              - img "Keyword"
+              - text: event_id
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↦
+          - columnheader "machine_id Press the Enter key to view this column's actions":
+            - generic "machine_id":
+              - img "Keyword"
+              - text: machine_id
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↦
+          - columnheader "source.kind Press the Enter key to view this column's actions":
+            - generic "source.kind":
+              - img "Keyword"
+              - text: source.kind
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↦
+          - columnheader "alert_level Press the Enter key to view this column's actions":
+            - generic "alert_level":
+              - img "Keyword"
+              - text: alert_level
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↦
+          - columnheader "failure_score Press the Enter key to view this column's actions":
+            - generic "failure_score":
+              - img "Number"
+              - text: failure_score
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↦
+          - columnheader "risk_alert Press the Enter key to view this column's actions":
+            - generic "risk_alert":
+              - img "Boolean"
+              - text: risk_alert
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↦
+          - columnheader "anomaly_alert Press the Enter key to view this column's actions":
+            - generic "anomaly_alert":
+              - img "Boolean"
+              - text: anomaly_alert
+            - button "Press the Enter key to view this column's actions":
+            - generic: ↵
+        - row "Select document '1' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-000 SYNTHETIC-000 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '1'":
+            - checkbox "Select document '1'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-000":
+            - generic: synthetic-online-000
+            - generic: ↦
+          - gridcell "SYNTHETIC-000":
+            - generic: SYNTHETIC-000
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '2' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-001 SYNTHETIC-001 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '2'":
+            - checkbox "Select document '2'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-001":
+            - generic: synthetic-online-001
+            - generic: ↦
+          - gridcell "SYNTHETIC-001":
+            - generic: SYNTHETIC-001
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '3' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-002 SYNTHETIC-002 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '3'":
+            - checkbox "Select document '3'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-002":
+            - generic: synthetic-online-002
+            - generic: ↦
+          - gridcell "SYNTHETIC-002":
+            - generic: SYNTHETIC-002
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '4' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-003 SYNTHETIC-003 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '4'":
+            - checkbox "Select document '4'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-003":
+            - generic: synthetic-online-003
+            - generic: ↦
+          - gridcell "SYNTHETIC-003":
+            - generic: SYNTHETIC-003
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '5' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-004 SYNTHETIC-004 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '5'":
+            - checkbox "Select document '5'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-004":
+            - generic: synthetic-online-004
+            - generic: ↦
+          - gridcell "SYNTHETIC-004":
+            - generic: SYNTHETIC-004
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '6' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-005 SYNTHETIC-005 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '6'":
+            - checkbox "Select document '6'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-005":
+            - generic: synthetic-online-005
+            - generic: ↦
+          - gridcell "SYNTHETIC-005":
+            - generic: SYNTHETIC-005
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '7' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-006 SYNTHETIC-006 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '7'":
+            - checkbox "Select document '7'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-006":
+            - generic: synthetic-online-006
+            - generic: ↦
+          - gridcell "SYNTHETIC-006":
+            - generic: SYNTHETIC-006
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '8' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-007 SYNTHETIC-007 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '8'":
+            - checkbox "Select document '8'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-007":
+            - generic: synthetic-online-007
+            - generic: ↦
+          - gridcell "SYNTHETIC-007":
+            - generic: SYNTHETIC-007
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '9' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-008 SYNTHETIC-008 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '9'":
+            - checkbox "Select document '9'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-008":
+            - generic: synthetic-online-008
+            - generic: ↦
+          - gridcell "SYNTHETIC-008":
+            - generic: SYNTHETIC-008
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '10' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-009 SYNTHETIC-009 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '10'":
+            - checkbox "Select document '10'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-009":
+            - generic: synthetic-online-009
+            - generic: ↦
+          - gridcell "SYNTHETIC-009":
+            - generic: SYNTHETIC-009
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '11' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-010 SYNTHETIC-010 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '11'":
+            - checkbox "Select document '11'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-010":
+            - generic: synthetic-online-010
+            - generic: ↦
+          - gridcell "SYNTHETIC-010":
+            - generic: SYNTHETIC-010
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '12' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-011 SYNTHETIC-011 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '12'":
+            - checkbox "Select document '12'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-011":
+            - generic: synthetic-online-011
+            - generic: ↦
+          - gridcell "SYNTHETIC-011":
+            - generic: SYNTHETIC-011
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '13' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-012 SYNTHETIC-012 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '13'":
+            - checkbox "Select document '13'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-012":
+            - generic: synthetic-online-012
+            - generic: ↦
+          - gridcell "SYNTHETIC-012":
+            - generic: SYNTHETIC-012
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '14' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-013 SYNTHETIC-013 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '14'":
+            - checkbox "Select document '14'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-013":
+            - generic: synthetic-online-013
+            - generic: ↦
+          - gridcell "SYNTHETIC-013":
+            - generic: SYNTHETIC-013
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '15' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-014 SYNTHETIC-014 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '15'":
+            - checkbox "Select document '15'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-014":
+            - generic: synthetic-online-014
+            - generic: ↦
+          - gridcell "SYNTHETIC-014":
+            - generic: SYNTHETIC-014
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '16' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-015 SYNTHETIC-015 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '16'":
+            - checkbox "Select document '16'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-015":
+            - generic: synthetic-online-015
+            - generic: ↦
+          - gridcell "SYNTHETIC-015":
+            - generic: SYNTHETIC-015
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '17' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-016 SYNTHETIC-016 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '17'":
+            - checkbox "Select document '17'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-016":
+            - generic: synthetic-online-016
+            - generic: ↦
+          - gridcell "SYNTHETIC-016":
+            - generic: SYNTHETIC-016
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '18' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-017 SYNTHETIC-017 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '18'":
+            - checkbox "Select document '18'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-017":
+            - generic: synthetic-online-017
+            - generic: ↦
+          - gridcell "SYNTHETIC-017":
+            - generic: SYNTHETIC-017
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '19' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-018 SYNTHETIC-018 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '19'":
+            - checkbox "Select document '19'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-018":
+            - generic: synthetic-online-018
+            - generic: ↦
+          - gridcell "SYNTHETIC-018":
+            - generic: SYNTHETIC-018
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '20' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-019 SYNTHETIC-019 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '20'":
+            - checkbox "Select document '20'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-019":
+            - generic: synthetic-online-019
+            - generic: ↦
+          - gridcell "SYNTHETIC-019":
+            - generic: SYNTHETIC-019
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '21' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-020 SYNTHETIC-020 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '21'":
+            - checkbox "Select document '21'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-020":
+            - generic: synthetic-online-020
+            - generic: ↦
+          - gridcell "SYNTHETIC-020":
+            - generic: SYNTHETIC-020
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '22' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-021 SYNTHETIC-021 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '22'":
+            - checkbox "Select document '22'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-021":
+            - generic: synthetic-online-021
+            - generic: ↦
+          - gridcell "SYNTHETIC-021":
+            - generic: SYNTHETIC-021
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '23' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-022 SYNTHETIC-022 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '23'":
+            - checkbox "Select document '23'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-022":
+            - generic: synthetic-online-022
+            - generic: ↦
+          - gridcell "SYNTHETIC-022":
+            - generic: SYNTHETIC-022
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '24' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-023 SYNTHETIC-023 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '24'":
+            - checkbox "Select document '24'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-023":
+            - generic: synthetic-online-023
+            - generic: ↦
+          - gridcell "SYNTHETIC-023":
+            - generic: SYNTHETIC-023
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '25' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-024 SYNTHETIC-024 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '25'":
+            - checkbox "Select document '25'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-024":
+            - generic: synthetic-online-024
+            - generic: ↦
+          - gridcell "SYNTHETIC-024":
+            - generic: SYNTHETIC-024
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '26' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-025 SYNTHETIC-025 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '26'":
+            - checkbox "Select document '26'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-025":
+            - generic: synthetic-online-025
+            - generic: ↦
+          - gridcell "SYNTHETIC-025":
+            - generic: SYNTHETIC-025
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '27' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-026 SYNTHETIC-026 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '27'":
+            - checkbox "Select document '27'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-026":
+            - generic: synthetic-online-026
+            - generic: ↦
+          - gridcell "SYNTHETIC-026":
+            - generic: SYNTHETIC-026
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '28' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-027 SYNTHETIC-027 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '28'":
+            - checkbox "Select document '28'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-027":
+            - generic: synthetic-online-027
+            - generic: ↦
+          - gridcell "SYNTHETIC-027":
+            - generic: SYNTHETIC-027
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '29' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-028 SYNTHETIC-028 lab_fixture AVISO (null) (null) (null)":
+          - gridcell "Select document '29'":
+            - checkbox "Select document '29'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-028":
+            - generic: synthetic-online-028
+            - generic: ↦
+          - gridcell "SYNTHETIC-028":
+            - generic: SYNTHETIC-028
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "AVISO":
+            - generic: AVISO
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '30' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-029 SYNTHETIC-029 lab_fixture CRITICA (null) (null) (null)":
+          - gridcell "Select document '30'":
+            - checkbox "Select document '30'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-029":
+            - generic: synthetic-online-029
+            - generic: ↦
+          - gridcell "SYNTHETIC-029":
+            - generic: SYNTHETIC-029
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "CRITICA":
+            - generic: CRITICA
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - row "Select document '31' Toggle dialog with details Oct 22, 2026 @ 10:00:00.000 synthetic-online-030 SYNTHETIC-030 lab_fixture OK (null) (null) (null)":
+          - gridcell "Select document '31'":
+            - checkbox "Select document '31'"
+            - status
+            - generic: ↦
+          - gridcell "Toggle dialog with details":
+            - button "Toggle dialog with details":
+            - status
+            - generic: ↦
+          - gridcell "Oct 22, 2026 @ 10:00:00.000":
+            - generic: Oct 22, 2026 @ 10:00:00.000
+            - generic: ↦
+          - gridcell "synthetic-online-030":
+            - generic: synthetic-online-030
+            - generic: ↦
+          - gridcell "SYNTHETIC-030":
+            - generic: SYNTHETIC-030
+            - generic: ↦
+          - gridcell "lab_fixture":
+            - generic: lab_fixture
+            - generic: ↦
+          - gridcell "OK":
+            - generic: OK
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↦
+          - gridcell "(null)":
+            - generic: (null)
+            - generic: ↵
+        - generic: 𐘂𐘂
+      - 'button "Rows per page: 50"':
+        - generic: "Rows per page: 50"
+      - navigation "Pagination for preceding grid":
+        - status: Page 1 of 1
+        - button "Previous page" [disabled]:
+        - list:
+          - button "Page 1 of 1" [disabled]:
+            - generic: "1"
+        - button "Next page" [disabled]:
+      - paragraph:
+        - generic: Search results are limited to 50 documents.
+        - button "Load more":
+          - generic: Load more
+      - paragraph: Table generated by Discover session 'Últimos 50 eventos · timestamp DESC, event_id ASC' (Eventos filtrados; ID completo y fuente. No se deducen FP/FN sin etiquetas.)
+  - paragraph
+  - paragraph: Press space or enter to start dragging. When dragging, use the up/down arrow keys to reorder items in the group and left/right arrow keys to choose drop targets outside of the group. Press space or enter again to finish.
+  - paragraph: Press space or enter to start dragging. When dragging, use the left/right arrow keys to move between drop targets. Press space or enter again to finish.
+- log "Notification message list"
+- tooltip "Next 2 hours":
+  - generic: Next 2 hours

@@ -1,0 +1,40 @@
+test_active_report_accepted_exercise_and_missing_splits_rejected (test_cg04_reconciliation.ReconciliationTests.test_active_report_accepted_exercise_and_missing_splits_rejected) ... ok
+test_api_rejects_exercise_before_any_deserialization (test_cg04_reconciliation.ReconciliationTests.test_api_rejects_exercise_before_any_deserialization) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_fit_and_score_never_receive_excluded_indices (test_cg04_reconciliation.ReconciliationTests.test_fit_and_score_never_receive_excluded_indices) ... ok
+test_label_exclusion_and_sensor_contract (test_cg04_reconciliation.ReconciliationTests.test_label_exclusion_and_sensor_contract) ... ok
+test_notebook_invokes_module_from_repo_root_without_pythonpath (test_cg04_reconciliation.ReconciliationTests.test_notebook_invokes_module_from_repo_root_without_pythonpath) ... ok
+test_packager_preserves_active_path_with_inert_fixture (test_cg04_reconciliation.ReconciliationTests.test_packager_preserves_active_path_with_inert_fixture) ... ok
+test_packager_rejects_exercise_before_reading_artifacts (test_cg04_reconciliation.ReconciliationTests.test_packager_rejects_exercise_before_reading_artifacts) ... ok
+test_real_pipeline_on_small_synthetic_fixture_only (test_cg04_reconciliation.ReconciliationTests.test_real_pipeline_on_small_synthetic_fixture_only) ... ok
+test_real_source_membership_only_matches_active_and_reproduces_F3 (test_cg04_reconciliation.ReconciliationTests.test_real_source_membership_only_matches_active_and_reproduces_F3) ... ok
+test_unauthorized_source_is_rejected_before_fit (test_cg04_reconciliation.ReconciliationTests.test_unauthorized_source_is_rejected_before_fit) ... ok
+test_nonbinary_target_is_rejected (test_preparation.PreparationTests.test_nonbinary_target_is_rejected) ... ok
+test_original_holdout_is_excluded_and_repeatable (test_preparation.PreparationTests.test_original_holdout_is_excluded_and_repeatable) ... ok
+test_physics_and_label_exclusion (test_preparation.PreparationTests.test_physics_and_label_exclusion) ... ok
+test_bundle_must_explicitly_disable_temporal_scope (test_current_state_scope.CurrentStateScopeTests.test_bundle_must_explicitly_disable_temporal_scope) ... ok
+test_deployable_nifi_snapshot_contains_the_verified_script (test_current_state_scope.CurrentStateScopeTests.test_deployable_nifi_snapshot_contains_the_verified_script) ... ok
+test_inference_ignores_identity_and_observation_time (test_current_state_scope.CurrentStateScopeTests.test_inference_ignores_identity_and_observation_time) ... skipped 'Run the controlled training and package_model first'
+test_only_original_reduced_training_source_is_accepted (test_current_state_scope.CurrentStateScopeTests.test_only_original_reduced_training_source_is_accepted) ... ok
+test_preflight_rejects_legacy_bundle_even_with_matching_hashes (test_current_state_scope.CurrentStateScopeTests.test_preflight_rejects_legacy_bundle_even_with_matching_hashes) ... ok
+test_raw_source_and_all_labels_are_rejected_before_model_readiness (test_current_state_scope.CurrentStateScopeTests.test_raw_source_and_all_labels_are_rejected_before_model_readiness) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_training_uses_the_same_bytes_that_were_verified (test_current_state_scope.CurrentStateScopeTests.test_training_uses_the_same_bytes_that_were_verified) ... ok
+test_missing_and_corrupt_models_are_unhealthy (test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_real_pipeline_contract_and_invalid_input (test_api.ApiTests.test_real_pipeline_contract_and_invalid_input) ... skipped 'Run python -m scripts.package_model first'
+test_tampered_model_and_oversized_body (test_api.ApiTests.test_tampered_model_and_oversized_body) ... skipped 'Run package_model first'
+test_supplied_examples_and_negative_cases (test_contract_validation.ContractValidationTests.test_supplied_examples_and_negative_cases) ... ok
+test_frozen_evidence_keeps_training_and_operational_sources_separate (test_audit_cg02.AuditTests.test_frozen_evidence_keeps_training_and_operational_sources_separate) ... ok
+test_impossible_or_non_utc_dates_are_not_accepted_as_coverage (test_audit_cg02.AuditTests.test_impossible_or_non_utc_dates_are_not_accepted_as_coverage) ... ok
+test_overlap_ignores_event_time_and_machine_assignment (test_audit_cg02.AuditTests.test_overlap_ignores_event_time_and_machine_assignment) ... ok
+test_quality_and_label_disagreements_are_measured_without_repairs (test_audit_cg02.AuditTests.test_quality_and_label_disagreements_are_measured_without_repairs) ... ok
+test_same_machine_and_time_can_have_conflicting_sensor_states (test_audit_cg02.AuditTests.test_same_machine_and_time_can_have_conflicting_sensor_states) ... ok
+test_unexpected_header_fails_explicitly (test_audit_cg02.AuditTests.test_unexpected_header_fails_explicitly) ... ok
+test_classroom_boundaries (test_policy.PolicyTests.test_classroom_boundaries) ... ok
+test_cost_uses_explicit_scenario_not_invented_savings (test_policy.PolicyTests.test_cost_uses_explicit_scenario_not_invented_savings) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 6.468s
+
+OK (skipped=3)

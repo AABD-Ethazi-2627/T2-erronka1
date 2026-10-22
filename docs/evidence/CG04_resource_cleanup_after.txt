@@ -1,0 +1,50 @@
+test_active_report_accepted_exercise_and_missing_splits_rejected (test_cg04_reconciliation.ReconciliationTests.test_active_report_accepted_exercise_and_missing_splits_rejected) ... ok
+test_api_rejects_incomplete_scope_before_any_deserialization (test_cg04_reconciliation.ReconciliationTests.test_api_rejects_incomplete_scope_before_any_deserialization) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-6' coro=<ReconciliationTests.test_api_rejects_incomplete_scope_before_any_deserialization() running at /mnt/d/github/_local/t2-babysit-20261021/cg04-reconcile/tests/test_cg04_reconciliation.py:248> cb=[_run_until_complete_cb() at /home/Fedora/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/base_events.py:181] created at /home/Fedora/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/asyncio/runners.py:100> took 0.256 seconds
+ok
+test_fit_and_score_never_receive_excluded_indices (test_cg04_reconciliation.ReconciliationTests.test_fit_and_score_never_receive_excluded_indices) ... ok
+test_label_exclusion_and_sensor_contract (test_cg04_reconciliation.ReconciliationTests.test_label_exclusion_and_sensor_contract) ... ok
+test_notebook_invokes_module_from_repo_root_without_pythonpath (test_cg04_reconciliation.ReconciliationTests.test_notebook_invokes_module_from_repo_root_without_pythonpath) ... ok
+test_packager_preserves_active_path_with_inert_fixture (test_cg04_reconciliation.ReconciliationTests.test_packager_preserves_active_path_with_inert_fixture) ... ok
+test_packager_rejects_exercise_before_reading_artifacts (test_cg04_reconciliation.ReconciliationTests.test_packager_rejects_exercise_before_reading_artifacts) ... ok
+test_real_pipeline_on_small_synthetic_fixture_only (test_cg04_reconciliation.ReconciliationTests.test_real_pipeline_on_small_synthetic_fixture_only) ... ok
+test_real_source_membership_only_matches_active_and_reproduces_F3 (test_cg04_reconciliation.ReconciliationTests.test_real_source_membership_only_matches_active_and_reproduces_F3) ... ok
+test_unauthorized_source_is_rejected_before_fit (test_cg04_reconciliation.ReconciliationTests.test_unauthorized_source_is_rejected_before_fit) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 7.150s
+
+OK
+test_active_report_accepted_exercise_and_missing_splits_rejected (test_cg04_reconciliation.ReconciliationTests.test_active_report_accepted_exercise_and_missing_splits_rejected) ... ok
+test_api_rejects_incomplete_scope_before_any_deserialization (test_cg04_reconciliation.ReconciliationTests.test_api_rejects_incomplete_scope_before_any_deserialization) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_fit_and_score_never_receive_excluded_indices (test_cg04_reconciliation.ReconciliationTests.test_fit_and_score_never_receive_excluded_indices) ... ok
+test_label_exclusion_and_sensor_contract (test_cg04_reconciliation.ReconciliationTests.test_label_exclusion_and_sensor_contract) ... ok
+test_notebook_invokes_module_from_repo_root_without_pythonpath (test_cg04_reconciliation.ReconciliationTests.test_notebook_invokes_module_from_repo_root_without_pythonpath) ... ok
+test_packager_preserves_active_path_with_inert_fixture (test_cg04_reconciliation.ReconciliationTests.test_packager_preserves_active_path_with_inert_fixture) ... ok
+test_packager_rejects_exercise_before_reading_artifacts (test_cg04_reconciliation.ReconciliationTests.test_packager_rejects_exercise_before_reading_artifacts) ... ok
+test_real_pipeline_on_small_synthetic_fixture_only (test_cg04_reconciliation.ReconciliationTests.test_real_pipeline_on_small_synthetic_fixture_only) ... ok
+test_real_source_membership_only_matches_active_and_reproduces_F3 (test_cg04_reconciliation.ReconciliationTests.test_real_source_membership_only_matches_active_and_reproduces_F3) ... ok
+test_unauthorized_source_is_rejected_before_fit (test_cg04_reconciliation.ReconciliationTests.test_unauthorized_source_is_rejected_before_fit) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 6.603s
+
+OK
+{
+  "runs": [
+    {
+      "iteration": 1,
+      "run": 10,
+      "skipped": 0,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "run": 10,
+      "skipped": 0,
+      "success": true
+    }
+  ],
+  "unraisables": []
+}

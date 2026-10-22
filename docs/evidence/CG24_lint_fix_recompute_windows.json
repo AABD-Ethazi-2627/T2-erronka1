@@ -1,0 +1,15 @@
+{
+  "prior_raw_inputs_read_only": "D:\\github\\_local\\t2-babysit-20261021\\cg24-evidence-1045\\outputs\\cg24-rf",
+  "csv_sha256": "a63c3b54fb58fd39ddf34084b9a8898e5f6b400dc4c692fb7d1174d7f94bfd1b",
+  "report_sha256": "14ce085fb4af2507b9014466aa60c6c16ab422933a34a7b11da1f35690ad7902",
+  "output_sha256": "deb550b826ecdebde2628e7624dbb28ff44b5c17eec2769baecd552f8f5e62dd",
+  "byte_identical_to_published": true,
+  "independent_counts": {
+    "tp": 32,
+    "fn": 9,
+    "fp": 9,
+    "tn": 1150
+  },
+  "row_7763_equals_cutoff": true,
+  "scope": "No fit, no pickle load, no final-test evaluation"
+}

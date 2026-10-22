@@ -1,0 +1,37 @@
+{
+  "removed_containers": [
+    "c1eb82376add5df1b0c8b1b1f70dafe0e93ec640c33d5c3acb4c43e8298f42cc",
+    "a1b2d347a2587255f061c671842855b933df271d7a8e8d0b25a508ae3f68fc47",
+    "e09bf56acbb619570fc42d5c5fba514485ebf0745bc73f77c4234a90ad6814eb",
+    "e33a34a7cd99a0c18a6debae172d8d19cce2fa9a811ca8b763966faeb594e9cf"
+  ],
+  "own_network_removed": true,
+  "initial_resources_preserved": {
+    "containers": {
+      "before": 85,
+      "after": 88,
+      "missing_initial_ids": []
+    },
+    "networks": {
+      "before": 7,
+      "after": 9,
+      "missing_initial_ids": []
+    },
+    "volumes": {
+      "before": 55,
+      "after": 75,
+      "missing_initial_ids": []
+    }
+  },
+  "owned_after": {
+    "containers": [],
+    "networks": [],
+    "volumes": [
+      "t2-cg19-20261022-8caf989-6da1-es-data",
+      "t2-cg19-20261022-8caf989-6da1-kafka-data",
+      "t2-cg19-20261022-8caf989-6da1-kb-data",
+      "t2-cg19-20261022-8caf989-6da1-smb-data"
+    ]
+  },
+  "retained": "Four own labelled data volumes, downloaded images and binaries, private credentials and local evidence retained. No prune or foreign cleanup."
+}

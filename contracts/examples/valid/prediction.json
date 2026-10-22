@@ -1,0 +1,25 @@
+{
+  "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+  "machine_id": "CNC-049",
+  "timestamp": "2026-10-15T08:09:06Z",
+  "schema_version": "0.1.0",
+  "quality_flag": "OK",
+  "source": {
+    "kind": "smb_csv",
+    "uri": "smb://192.168.75.222/cnc-stream",
+    "record_ref": "cnc_batch_20261015_080906_00001.csv:data-row-1"
+  },
+  "failure_score": 0.0019646890446528196,
+  "risk_alert": false,
+  "anomaly_score": 0.4989086654875238,
+  "anomaly_alert": false,
+  "policy": "f1",
+  "model_version": "offline-ai4i-v2",
+  "scored_at": "2026-10-15T08:47:11Z",
+  "model_artifact_sha256": "0ef08777c0943c7b6ed9c9463933b01938a280ddc0072f65b3c9e9efebdfdfea",
+  "risk_threshold": 0.5506458333333333,
+  "anomaly_threshold": 0.6338224044766037,
+  "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+  "temporal_prediction_enabled": false,
+  "score_semantics": "uncalibrated_current_state_score"
+}

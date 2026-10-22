@@ -1,0 +1,1090 @@
+{
+  "schema_version": "1.0.0",
+  "source_catalog_sha256": "e7c7101bb3bc0ca8048fdad7dd23cbe04804faf6167ccf29007ae8db20fd07ef",
+  "training": {
+    "file": "data/ai4i2020_train.csv",
+    "bytes": 380026,
+    "sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "encoding": "utf-8",
+    "delimiter": ",",
+    "has_header": true,
+    "columns": [
+      "machine_id",
+      "machine_type",
+      "air_temp_K",
+      "process_temp_K",
+      "rpm",
+      "torque_Nm",
+      "tool_wear_min",
+      "machine_failure",
+      "failure_TWF",
+      "failure_HDF",
+      "failure_PWF",
+      "failure_OSF",
+      "failure_RNF"
+    ],
+    "rows": 8000,
+    "malformed_row_widths": 0,
+    "missing": {
+      "machine_id": 0,
+      "machine_type": 0,
+      "air_temp_K": 0,
+      "process_temp_K": 0,
+      "rpm": 0,
+      "torque_Nm": 0,
+      "tool_wear_min": 0,
+      "machine_failure": 0,
+      "failure_TWF": 0,
+      "failure_HDF": 0,
+      "failure_PWF": 0,
+      "failure_OSF": 0,
+      "failure_RNF": 0
+    },
+    "invalid_numeric": {
+      "air_temp_K": 0,
+      "process_temp_K": 0,
+      "rpm": 0,
+      "torque_Nm": 0,
+      "tool_wear_min": 0,
+      "machine_failure": 0,
+      "failure_TWF": 0,
+      "failure_HDF": 0,
+      "failure_PWF": 0,
+      "failure_OSF": 0,
+      "failure_RNF": 0
+    },
+    "invalid_numeric_domain": {
+      "air_temp_K": 0,
+      "process_temp_K": 0,
+      "rpm": 0,
+      "torque_Nm": 0,
+      "tool_wear_min": 0,
+      "machine_failure": 0,
+      "failure_TWF": 0,
+      "failure_HDF": 0,
+      "failure_PWF": 0,
+      "failure_OSF": 0,
+      "failure_RNF": 0
+    },
+    "numeric_ranges": {
+      "air_temp_K": {
+        "min": 295.3,
+        "max": 304.5
+      },
+      "process_temp_K": {
+        "min": 305.7,
+        "max": 313.8
+      },
+      "rpm": {
+        "min": 1168.0,
+        "max": 2886.0
+      },
+      "torque_Nm": {
+        "min": 3.8,
+        "max": 76.6
+      },
+      "tool_wear_min": {
+        "min": 0.0,
+        "max": 253.0
+      },
+      "machine_failure": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "failure_TWF": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "failure_HDF": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "failure_PWF": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "failure_OSF": {
+        "min": 0.0,
+        "max": 1.0
+      },
+      "failure_RNF": {
+        "min": 0.0,
+        "max": 1.0
+      }
+    },
+    "label_counts": {
+      "machine_failure": {
+        "0": 7729,
+        "1": 271
+      },
+      "failure_TWF": {
+        "0": 7964,
+        "1": 36
+      },
+      "failure_HDF": {
+        "0": 7914,
+        "1": 86
+      },
+      "failure_PWF": {
+        "0": 7918,
+        "1": 82
+      },
+      "failure_OSF": {
+        "0": 7918,
+        "1": 82
+      },
+      "failure_RNF": {
+        "0": 7985,
+        "1": 15
+      }
+    },
+    "machine_types": {
+      "H": 789,
+      "L": 4830,
+      "M": 2381
+    },
+    "machines": 50,
+    "duplicate_rows": 0,
+    "failure_without_subtype": 7,
+    "subtype_without_failure": 14,
+    "time": null
+  },
+  "batches": [
+    {
+      "file": "docs/requisitos/evidencias/muestras/cnc_batch_20261015_080906_00001.csv",
+      "bytes": 850,
+      "sha256": "2669b1cb0e5a70d7e7b676cf8f9b81b59bb22ac34db747398450388dc7e10dc3",
+      "encoding": "utf-8",
+      "delimiter": ",",
+      "has_header": true,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "rows": 10,
+      "malformed_row_widths": 0,
+      "missing": {
+        "timestamp": 0,
+        "machine_id": 0,
+        "machine_type": 0,
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric_domain": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "numeric_ranges": {
+        "air_temp_K": {
+          "min": 295.6,
+          "max": 303.7
+        },
+        "process_temp_K": {
+          "min": 306.3,
+          "max": 312.4
+        },
+        "rpm": {
+          "min": 1345.0,
+          "max": 2384.0
+        },
+        "torque_Nm": {
+          "min": 15.0,
+          "max": 62.7
+        },
+        "tool_wear_min": {
+          "min": 19.0,
+          "max": 209.0
+        },
+        "machine_failure": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_TWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_HDF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_PWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_OSF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_RNF": {
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "label_counts": {
+        "machine_failure": {
+          "0": 10
+        },
+        "failure_TWF": {
+          "0": 10
+        },
+        "failure_HDF": {
+          "0": 10
+        },
+        "failure_PWF": {
+          "0": 10
+        },
+        "failure_OSF": {
+          "0": 10
+        },
+        "failure_RNF": {
+          "0": 10
+        }
+      },
+      "machine_types": {
+        "H": 3,
+        "L": 6,
+        "M": 1
+      },
+      "machines": 8,
+      "duplicate_rows": 0,
+      "failure_without_subtype": 0,
+      "subtype_without_failure": 0,
+      "time": {
+        "min": "2026-10-15T08:09:06Z",
+        "max": "2026-10-15T08:09:06Z",
+        "invalid_or_non_utc_rows": 0,
+        "backward_rows_per_machine_in_file": 0,
+        "duplicate_machine_timestamp_rows": 2,
+        "conflicting_machine_timestamp_groups": 2,
+        "failure_timestamps": []
+      },
+      "per_machine": {
+        "CNC-001": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-005": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-010": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-025": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-039": {
+          "rows": 2,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-040": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-047": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        },
+        "CNC-049": {
+          "rows": 2,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:09:06Z"
+          ]
+        }
+      }
+    },
+    {
+      "file": "docs/requisitos/evidencias/muestras/cnc_batch_20261015_084606_00075.csv",
+      "bytes": 849,
+      "sha256": "8fe356c6cc592e265599a9c9403b597d1b0e9a8dca4556ffb9a1a1960e0e01b2",
+      "encoding": "utf-8",
+      "delimiter": ",",
+      "has_header": true,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "rows": 10,
+      "malformed_row_widths": 0,
+      "missing": {
+        "timestamp": 0,
+        "machine_id": 0,
+        "machine_type": 0,
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric_domain": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "numeric_ranges": {
+        "air_temp_K": {
+          "min": 297.6,
+          "max": 303.9
+        },
+        "process_temp_K": {
+          "min": 308.4,
+          "max": 313.0
+        },
+        "rpm": {
+          "min": 1309.0,
+          "max": 1617.0
+        },
+        "torque_Nm": {
+          "min": 31.9,
+          "max": 45.8
+        },
+        "tool_wear_min": {
+          "min": 11.0,
+          "max": 215.0
+        },
+        "machine_failure": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_TWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_HDF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_PWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_OSF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_RNF": {
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "label_counts": {
+        "machine_failure": {
+          "0": 10
+        },
+        "failure_TWF": {
+          "0": 10
+        },
+        "failure_HDF": {
+          "0": 10
+        },
+        "failure_PWF": {
+          "0": 10
+        },
+        "failure_OSF": {
+          "0": 10
+        },
+        "failure_RNF": {
+          "0": 10
+        }
+      },
+      "machine_types": {
+        "H": 1,
+        "L": 4,
+        "M": 5
+      },
+      "machines": 10,
+      "duplicate_rows": 0,
+      "failure_without_subtype": 0,
+      "subtype_without_failure": 0,
+      "time": {
+        "min": "2026-10-15T08:46:06Z",
+        "max": "2026-10-15T08:46:06Z",
+        "invalid_or_non_utc_rows": 0,
+        "backward_rows_per_machine_in_file": 0,
+        "duplicate_machine_timestamp_rows": 0,
+        "conflicting_machine_timestamp_groups": 0,
+        "failure_timestamps": []
+      },
+      "per_machine": {
+        "CNC-007": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-013": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-021": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-028": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-031": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-033": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-040": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-041": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-046": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        },
+        "CNC-048": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-15T08:46:06Z"
+          ]
+        }
+      }
+    },
+    {
+      "file": "docs/requisitos/evidencias/muestras/cnc_batch_20261016_060449_00001.csv",
+      "bytes": 850,
+      "sha256": "2ebc51fbf8bb0ef98c4adc4ce8cc91d7ea21b017c2c3a5329398bf61cedaa977",
+      "encoding": "utf-8",
+      "delimiter": ",",
+      "has_header": true,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "rows": 10,
+      "malformed_row_widths": 0,
+      "missing": {
+        "timestamp": 0,
+        "machine_id": 0,
+        "machine_type": 0,
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric_domain": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "numeric_ranges": {
+        "air_temp_K": {
+          "min": 295.6,
+          "max": 303.7
+        },
+        "process_temp_K": {
+          "min": 306.3,
+          "max": 312.4
+        },
+        "rpm": {
+          "min": 1345.0,
+          "max": 2384.0
+        },
+        "torque_Nm": {
+          "min": 15.0,
+          "max": 62.7
+        },
+        "tool_wear_min": {
+          "min": 19.0,
+          "max": 209.0
+        },
+        "machine_failure": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_TWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_HDF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_PWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_OSF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_RNF": {
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "label_counts": {
+        "machine_failure": {
+          "0": 10
+        },
+        "failure_TWF": {
+          "0": 10
+        },
+        "failure_HDF": {
+          "0": 10
+        },
+        "failure_PWF": {
+          "0": 10
+        },
+        "failure_OSF": {
+          "0": 10
+        },
+        "failure_RNF": {
+          "0": 10
+        }
+      },
+      "machine_types": {
+        "H": 3,
+        "L": 6,
+        "M": 1
+      },
+      "machines": 8,
+      "duplicate_rows": 0,
+      "failure_without_subtype": 0,
+      "subtype_without_failure": 0,
+      "time": {
+        "min": "2026-10-16T06:04:49Z",
+        "max": "2026-10-16T06:04:49Z",
+        "invalid_or_non_utc_rows": 0,
+        "backward_rows_per_machine_in_file": 0,
+        "duplicate_machine_timestamp_rows": 2,
+        "conflicting_machine_timestamp_groups": 2,
+        "failure_timestamps": []
+      },
+      "per_machine": {
+        "CNC-001": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-005": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-010": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-025": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-039": {
+          "rows": 2,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-040": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-047": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        },
+        "CNC-049": {
+          "rows": 2,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T06:04:49Z"
+          ]
+        }
+      }
+    },
+    {
+      "file": "docs/requisitos/evidencias/muestras/cnc_batch_20261016_070620_00124.csv",
+      "bytes": 848,
+      "sha256": "40b837386255ab311cb8aae5a54b0e1d357ea9a93db80fd661b7e52bd270e324",
+      "encoding": "utf-8",
+      "delimiter": ",",
+      "has_header": true,
+      "columns": [
+        "timestamp",
+        "machine_id",
+        "machine_type",
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_failure",
+        "failure_TWF",
+        "failure_HDF",
+        "failure_PWF",
+        "failure_OSF",
+        "failure_RNF"
+      ],
+      "rows": 10,
+      "malformed_row_widths": 0,
+      "missing": {
+        "timestamp": 0,
+        "machine_id": 0,
+        "machine_type": 0,
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "invalid_numeric_domain": {
+        "air_temp_K": 0,
+        "process_temp_K": 0,
+        "rpm": 0,
+        "torque_Nm": 0,
+        "tool_wear_min": 0,
+        "machine_failure": 0,
+        "failure_TWF": 0,
+        "failure_HDF": 0,
+        "failure_PWF": 0,
+        "failure_OSF": 0,
+        "failure_RNF": 0
+      },
+      "numeric_ranges": {
+        "air_temp_K": {
+          "min": 296.9,
+          "max": 303.9
+        },
+        "process_temp_K": {
+          "min": 308.1,
+          "max": 312.7
+        },
+        "rpm": {
+          "min": 1339.0,
+          "max": 1706.0
+        },
+        "torque_Nm": {
+          "min": 28.1,
+          "max": 62.3
+        },
+        "tool_wear_min": {
+          "min": 8.0,
+          "max": 219.0
+        },
+        "machine_failure": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_TWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_HDF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_PWF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_OSF": {
+          "min": 0.0,
+          "max": 0.0
+        },
+        "failure_RNF": {
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "label_counts": {
+        "machine_failure": {
+          "0": 10
+        },
+        "failure_TWF": {
+          "0": 10
+        },
+        "failure_HDF": {
+          "0": 10
+        },
+        "failure_PWF": {
+          "0": 10
+        },
+        "failure_OSF": {
+          "0": 10
+        },
+        "failure_RNF": {
+          "0": 10
+        }
+      },
+      "machine_types": {
+        "H": 1,
+        "L": 4,
+        "M": 5
+      },
+      "machines": 9,
+      "duplicate_rows": 0,
+      "failure_without_subtype": 0,
+      "subtype_without_failure": 0,
+      "time": {
+        "min": "2026-10-16T07:06:20Z",
+        "max": "2026-10-16T07:06:20Z",
+        "invalid_or_non_utc_rows": 0,
+        "backward_rows_per_machine_in_file": 0,
+        "duplicate_machine_timestamp_rows": 1,
+        "conflicting_machine_timestamp_groups": 1,
+        "failure_timestamps": []
+      },
+      "per_machine": {
+        "CNC-005": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-016": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-017": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-020": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-028": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-032": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-038": {
+          "rows": 2,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-043": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        },
+        "CNC-048": {
+          "rows": 1,
+          "positive_rows": 0,
+          "timestamps": [
+            "2026-10-16T07:06:20Z"
+          ]
+        }
+      }
+    }
+  ],
+  "batch_summary": {
+    "files": 4,
+    "rows": 40,
+    "days_observed": [
+      "2026-10-15",
+      "2026-10-16"
+    ],
+    "machine_ids_observed": [
+      "CNC-001",
+      "CNC-005",
+      "CNC-007",
+      "CNC-010",
+      "CNC-013",
+      "CNC-016",
+      "CNC-017",
+      "CNC-020",
+      "CNC-021",
+      "CNC-025",
+      "CNC-028",
+      "CNC-031",
+      "CNC-032",
+      "CNC-033",
+      "CNC-038",
+      "CNC-039",
+      "CNC-040",
+      "CNC-041",
+      "CNC-043",
+      "CNC-046",
+      "CNC-047",
+      "CNC-048",
+      "CNC-049"
+    ],
+    "min_timestamp": "2026-10-15T08:09:06Z",
+    "max_timestamp": "2026-10-16T07:06:20Z"
+  },
+  "signature_overlap": {
+    "comparison_columns": [
+      "machine_type",
+      "air_temp_K",
+      "process_temp_K",
+      "rpm",
+      "torque_Nm",
+      "tool_wear_min",
+      "machine_failure",
+      "failure_TWF",
+      "failure_HDF",
+      "failure_PWF",
+      "failure_OSF",
+      "failure_RNF"
+    ],
+    "excluded_columns": [
+      "machine_id",
+      "timestamp"
+    ],
+    "distinct_sensor_label_signatures": 30,
+    "repeated_rows_beyond_first_signature": 10,
+    "rows_matching_training_signature": 0,
+    "interpretation": "Exact signature overlap only; zero overlap does not prove statistical independence."
+  },
+  "roles": {
+    "training": "Local AI4I train CSV only; timestamps absent.",
+    "operational_logs": "Frozen SMB batches; operational machine observations in this simulated lab.",
+    "retention": "SMB has no retention guarantee per user; own historical storage is CG06.",
+    "maintenance": "No independent maintenance ledger supplied for this audit."
+  },
+  "decision": {
+    "state_classification": "supported_by_contemporaneous_machine_failure_labels",
+    "forecast_24h": "not_validated",
+    "reasons": [
+      "Training CSV has no timestamps.",
+      "Batch time is simulator emission time; no complete per-machine 24h follow-up.",
+      "Failure bits are contemporaneous outcomes, not independent dated maintenance/failure onsets.",
+      "Stream lineage/overlap with training and stable machine identity over time are not established."
+    ]
+  }
+}

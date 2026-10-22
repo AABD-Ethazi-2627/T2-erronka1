@@ -1,0 +1,68 @@
+{
+  "scope": "local SQLite fixture; no NiFi/Kafka/ES acceptance",
+  "snapshots": {
+    "sent": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 0,
+      "offset_acknowledged": 0,
+      "duplicates": 0
+    },
+    "outage": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 0,
+      "offset_acknowledged": 0,
+      "duplicates": 0
+    },
+    "stored_before_ack": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 1,
+      "offset_acknowledged": 0,
+      "duplicates": 0
+    },
+    "restart": {
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 5,
+      "sent": 5,
+      "stored_unique": 1,
+      "offset_acknowledged": 0,
+      "duplicates": 0
+    },
+    "backpressure_batch": {
+      "accepted": 1,
+      "rejected": 1,
+      "pending": 3,
+      "sent": 5,
+      "stored_unique": 1,
+      "offset_acknowledged": 2,
+      "duplicates": 0
+    },
+    "recovered": {
+      "accepted": 3,
+      "rejected": 2,
+      "pending": 0,
+      "sent": 5,
+      "stored_unique": 2,
+      "offset_acknowledged": 5,
+      "duplicates": 1
+    },
+    "replay_noop": {
+      "accepted": 3,
+      "rejected": 2,
+      "pending": 0,
+      "sent": 5,
+      "stored_unique": 2,
+      "offset_acknowledged": 5,
+      "duplicates": 1
+    }
+  }
+}

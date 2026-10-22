@@ -1,0 +1,3 @@
+PASS: real ES simulate, final guard, strict mapping and immutable replay; own container removed
+
+STDERR:

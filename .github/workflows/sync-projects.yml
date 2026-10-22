@@ -22,7 +22,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Validate synchronizer
-        run: python3 -m unittest discover -s tests
+        run: python3 -m unittest discover -s tests -p test_project_sync.py
       - name: Synchronize Projects
         env:
           GH_TOKEN: ${{ secrets.PROJECTS_SYNC_TOKEN }}

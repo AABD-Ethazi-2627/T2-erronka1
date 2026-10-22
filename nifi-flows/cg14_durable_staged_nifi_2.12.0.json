@@ -1,0 +1,297 @@
+{
+  "flowContents": {
+    "identifier": "9026e4b5-5842-528a-9f07-742f929baa30",
+    "name": "CG14 durable staged bridge (opt-in)",
+    "comments": "Disabled staged-input bridge. Worker disk journal/archive own durability. No ConsumeKafka and no source offset acknowledgement. Retain originals and failures. Configure all parameters and original coordinates before enabling in an isolated lab. No ES configured in this export; use the primary Kafka worker for optional ES.",
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "processGroups": [],
+    "remoteProcessGroups": [],
+    "controllerServices": [],
+    "funnels": [],
+    "labels": [],
+    "inputPorts": [
+      {
+        "identifier": "51a85da3-adc4-5e13-beb7-1f9dac44bd96",
+        "name": "staged-csv",
+        "type": "INPUT_PORT",
+        "position": {
+          "x": 0.0,
+          "y": 100.0
+        },
+        "scheduledState": "DISABLED",
+        "concurrentlySchedulableTaskCount": 1
+      }
+    ],
+    "outputPorts": [
+      {
+        "identifier": "027a4d3f-a9d3-59a8-8ede-e3c98b8878ea",
+        "name": "completed-original",
+        "type": "OUTPUT_PORT",
+        "position": {
+          "x": 900.0,
+          "y": 0.0
+        },
+        "scheduledState": "DISABLED",
+        "concurrentlySchedulableTaskCount": 1
+      },
+      {
+        "identifier": "aeaa7a4e-4c61-53ee-831c-78128b7c5b6d",
+        "name": "failed-original",
+        "type": "OUTPUT_PORT",
+        "position": {
+          "x": 900.0,
+          "y": 150.0
+        },
+        "scheduledState": "DISABLED",
+        "concurrentlySchedulableTaskCount": 1
+      },
+      {
+        "identifier": "ddbad047-ad22-525f-beeb-1b5971f93f86",
+        "name": "durable-receipt",
+        "type": "OUTPUT_PORT",
+        "position": {
+          "x": 900.0,
+          "y": 300.0
+        },
+        "scheduledState": "DISABLED",
+        "concurrentlySchedulableTaskCount": 1
+      },
+      {
+        "identifier": "c7f82ada-4b02-530e-81f8-2ca267c15a6c",
+        "name": "failed-receipt",
+        "type": "OUTPUT_PORT",
+        "position": {
+          "x": 900.0,
+          "y": 450.0
+        },
+        "scheduledState": "DISABLED",
+        "concurrentlySchedulableTaskCount": 1
+      }
+    ],
+    "processors": [
+      {
+        "identifier": "d3a74dc7-fe17-54dd-b9b6-3ddf76a2cdfb",
+        "name": "Durable staged CSV",
+        "type": "org.apache.nifi.processors.standard.ExecuteStreamCommand",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 250.0,
+          "y": 100.0
+        },
+        "properties": {
+          "Working Directory": "#{WORKER_CHECKOUT}",
+          "Command Path": "#{WORKER_PYTHON}",
+          "Command Arguments Strategy": "Command Arguments Property",
+          "Command Arguments": "-m;scripts.run_durable_pipeline;--root;#{DURABLE_ROOT};--manifest;#{PINNED_MANIFEST};--source-namespace;#{SOURCE_NAMESPACE};--source-kind;#{SOURCE_KIND};--scoring-url;#{SCORING_URL};stdin;--topic;${kafka.topic};--partition;${kafka.partition};--offset;${kafka.offset}",
+          "Argument Delimiter": ";",
+          "Ignore STDIN": "false"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "1 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": []
+      },
+      {
+        "identifier": "7d3ea91e-286a-54f6-ad79-48de6114689f",
+        "name": "Retain original by exit status",
+        "type": "org.apache.nifi.processors.standard.RouteOnAttribute",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 550.0,
+          "y": 100.0
+        },
+        "properties": {
+          "Routing Strategy": "Route to Property name",
+          "completed": "${execution.status:equals('0')}"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "1 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": []
+      }
+    ],
+    "connections": [
+      {
+        "identifier": "6dee4f7f-34de-5db5-badf-2c14b2e49927",
+        "name": "input",
+        "source": {
+          "id": "51a85da3-adc4-5e13-beb7-1f9dac44bd96",
+          "type": "INPUT_PORT",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "destination": {
+          "id": "d3a74dc7-fe17-54dd-b9b6-3ddf76a2cdfb",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "selectedRelationships": [
+          ""
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 100,
+        "backPressureDataSizeThreshold": "10 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "6d06a372-baff-575b-a442-3edc1a8b7c47",
+        "name": "original",
+        "source": {
+          "id": "d3a74dc7-fe17-54dd-b9b6-3ddf76a2cdfb",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "destination": {
+          "id": "7d3ea91e-286a-54f6-ad79-48de6114689f",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "selectedRelationships": [
+          "original"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 100,
+        "backPressureDataSizeThreshold": "10 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "80deb3ae-be88-5548-b80d-9655cc0db10b",
+        "name": "completed",
+        "source": {
+          "id": "7d3ea91e-286a-54f6-ad79-48de6114689f",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "destination": {
+          "id": "027a4d3f-a9d3-59a8-8ede-e3c98b8878ea",
+          "type": "OUTPUT_PORT",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "selectedRelationships": [
+          "completed"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 100,
+        "backPressureDataSizeThreshold": "10 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "413dbfb0-de97-5325-9219-caad8f93a7cf",
+        "name": "failed",
+        "source": {
+          "id": "7d3ea91e-286a-54f6-ad79-48de6114689f",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "destination": {
+          "id": "aeaa7a4e-4c61-53ee-831c-78128b7c5b6d",
+          "type": "OUTPUT_PORT",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "selectedRelationships": [
+          "unmatched"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 100,
+        "backPressureDataSizeThreshold": "10 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "6384fccd-6bc9-5252-9664-a2bbc3a0699c",
+        "name": "receipt",
+        "source": {
+          "id": "d3a74dc7-fe17-54dd-b9b6-3ddf76a2cdfb",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "destination": {
+          "id": "ddbad047-ad22-525f-beeb-1b5971f93f86",
+          "type": "OUTPUT_PORT",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "selectedRelationships": [
+          "output stream"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 100,
+        "backPressureDataSizeThreshold": "10 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "54b66558-98ac-5f19-8766-fd44259a91f5",
+        "name": "error",
+        "source": {
+          "id": "d3a74dc7-fe17-54dd-b9b6-3ddf76a2cdfb",
+          "type": "PROCESSOR",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "destination": {
+          "id": "c7f82ada-4b02-530e-81f8-2ca267c15a6c",
+          "type": "OUTPUT_PORT",
+          "groupId": "9026e4b5-5842-528a-9f07-742f929baa30"
+        },
+        "selectedRelationships": [
+          "nonzero status"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 100,
+        "backPressureDataSizeThreshold": "10 MB",
+        "flowFileExpiration": "0 sec"
+      }
+    ]
+  }
+}

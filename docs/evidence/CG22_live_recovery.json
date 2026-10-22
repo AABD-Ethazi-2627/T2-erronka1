@@ -1,0 +1,43 @@
+{
+  "lab_topic_messages": 24,
+  "lab_documents": 23,
+  "lab_invalid_records": 1,
+  "lab_alerts": 3,
+  "smb_documents": 20,
+  "consumer_pause": {
+    "topic_offset_after_production": 24,
+    "indexed_while_paused": 22,
+    "indexed_after_resume": 23
+  },
+  "api_outage": {
+    "retry_flowfile_in": 1,
+    "retry_flowfile_out": 1,
+    "event_recovered": true
+  },
+  "queues": {
+    "535058e8-01a1-1000-757f-7bcc9e474f0d": 0,
+    "534e83be-01a1-1000-a476-5b6e09cea827": 0,
+    "535059dc-01a1-1000-6ecb-315977309bb6": 0,
+    "53505916-01a1-1000-c9e7-5e9814dae359": 0,
+    "534e85d1-01a1-1000-0b3d-81d8f50e0725": 0,
+    "534e84f3-01a1-1000-9862-64fd2890e369": 0,
+    "534e86c9-01a1-1000-b2d2-6aa12c668724": 0,
+    "534e866e-01a1-1000-8018-3eeb9808f37b": 0,
+    "534e8746-01a1-1000-53cd-7639e784774c": 0,
+    "534e8529-01a1-1000-447d-9fa0fba24b33": 0,
+    "534e871e-01a1-1000-a6ba-b793eef7303b": 0,
+    "534e860e-01a1-1000-5bcf-26a82c5a7453": 0,
+    "534e8580-01a1-1000-bd96-c22727f29cc4": 0,
+    "53505a2a-01a1-1000-7540-c6e5cf455d1e": 0,
+    "534e869d-01a1-1000-4ab3-2cf9a5bf470d": 0,
+    "5350593c-01a1-1000-479d-346c94bbb10b": 0,
+    "53505962-01a1-1000-1a76-3ee01967ea87": 0,
+    "53518dd0-01a1-1000-552b-e2dd930bd055": 0,
+    "534e86f3-01a1-1000-c5c5-50db1a9273b8": 0,
+    "534e8637-01a1-1000-1a73-f1db9a929d6b": 0
+  },
+  "limits": [
+    "Local simulated source and fixture tests, not production loss guarantee.",
+    "Old setup output preserved separately; no destructive cleanup."
+  ]
+}

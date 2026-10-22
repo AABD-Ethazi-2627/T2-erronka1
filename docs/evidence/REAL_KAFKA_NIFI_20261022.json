@@ -1,0 +1,1694 @@
+{
+  "date": "2026-10-22",
+  "base_commit": "8caf98962175fabcf13fbc1584dc890cf4f0135f",
+  "base_tree": "82a69eba2754045619a2c2d218473605183bb9c3",
+  "environment": {
+    "distribution": "FedoraLinux-43",
+    "os": "Fedora 44",
+    "python": [
+      "3.11.15",
+      "3.12.15"
+    ],
+    "existing_wsl_registration_base": "C:\\Users\\unaiu\\AppData\\Local\\wsl\\{8a489b57-18f3-4603-b97a-9525d61c7794}"
+  },
+  "evidence_directory": "D:\\github\\_local\\t2-babysit-20261021\\real-kafka-nifi-evidence-20261022",
+  "independent_review": "PENDING_PARENT",
+  "human_acceptance": "NOT_ASSERTED",
+  "ci": "NOT_POLLED_BY_CHILD",
+  "not_validated": [
+    "host/power-loss recovery",
+    "rebalance during write",
+    "sustained capacity",
+    "multi-node durability",
+    "SMB/Filebeat/Kibana",
+    "delivery models",
+    "Windows global suite"
+  ],
+  "execution_note": "Harness scripts are their final state; logs retain failed attempts and instrumentation changes. Core Pipeline/API/archive sources unchanged from base.",
+  "kafka": {
+    "base": "8caf98962175fabcf13fbc1584dc890cf4f0135f",
+    "cases": [
+      {
+        "scenario": "valid-reject",
+        "first_exit": 0,
+        "first_offset": 4,
+        "replay_exit": 0,
+        "replay_offset": 4,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/395429addb5ee8babf424c49990760988958eebfafbd45c86e164be31e4a3c11.parquet": "f4e3fcb822fbe4350c74c9289bcae39d4d73f162271bbfcf8ee7e8ded1257f70",
+          "archive/telemetry/date=2026-10-21/5d66fbb8cc8aaa82832cbcb795bca5d2469181867c5f16dba30cc8ce7eb469f7.parquet": "e85adda58d2b09d4abb75d44a6223a3319564e42a1dda8198ec30bdeac36a154",
+          "archive/prediction/date=2026-10-21/f66213fa47a021be4d17594d74bf82340f7cdf12bf0a5ce8f283bfab4135c955.parquet": "c9d25864a9db99db5e0993a3c0387db7851e62c06363588248ed1bfd8973b2f6",
+          "archive/prediction/date=2026-10-21/ab2637abb425a3d991a9951cf511ec097bdf7738ef98d33332d6391739c170d1.parquet": "f40103a5eb23fe12bd02c6706cf7634b9d3ca36e2f66b3ef93608db565f77dca"
+        },
+        "prediction_ids": [
+          "88a7d2c6e8ee35ade0d408f2025ebe37b634a51045197bb9902ce7bb51069461",
+          "b9d15efda0b26d4cf78ad8f921d7d477a943c689a213aa078d8f7bd2f6eaf8a1"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            4
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-valid-reject\",0,0]",
+            "completed"
+          ],
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-valid-reject\",0,1]",
+            "completed"
+          ],
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-valid-reject\",0,2]",
+            "rejected"
+          ],
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-valid-reject\",0,3]",
+            "rejected"
+          ]
+        ],
+        "risk_calls_before": 0,
+        "risk_calls_after": 2
+      },
+      {
+        "scenario": "es-block",
+        "first_exit": 1,
+        "first_offset": null,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/0725021b8957e0b7f499669985eb3fb33296a3bf1b776c817a15fc35c1dbb045.parquet": "cb7f29d4dd7b5df7b9f15ba5f6a0871fbc8a3198ac27434f27658c307c837506",
+          "archive/prediction/date=2026-10-21/cc89374fa813b4e509361336213fdf2e9076ba37c5dc083d0793cfb60422126d.parquet": "6e679399d71bfb129bcea1e50a2310d74d114df4940a273acc365d69b5e6685d"
+        },
+        "prediction_ids": [
+          "4f503009385c805dc08cc3eaf32a7fac6b8e79b23035095141e3b4c8e7a1af50"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            2
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-es-block\",0,0]",
+            "completed"
+          ]
+        ],
+        "risk_calls_before": 2,
+        "risk_calls_after": 3
+      },
+      {
+        "scenario": "archive-block",
+        "first_exit": 1,
+        "first_offset": null,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/80f1527fb5a11b586f2fa65cd6f27774ea0c0bf23455d4eab8a2444123ad1483.parquet": "34845d094b0ab42c1549a8ae4c8174a042b505f34b2c7e4b767b6fcbc50acbef",
+          "archive/prediction/date=2026-10-21/ea0c34c716d83164c2e485e2ad38ca705a9625844946f978fc05ed2dfe8fe2ac.parquet": "8dbf4a4ddcc71b8eb1ac8e8c075da7e4bddefa29c8c79161dec06bc3236ba825"
+        },
+        "prediction_ids": [
+          "f4aa21d6397d8b989019c0f8020ac34ab696376b1d4a0de2ebe4c977f505fc9b"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            2
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-archive-block\",0,0]",
+            "completed"
+          ]
+        ],
+        "risk_calls_before": 3,
+        "risk_calls_after": 4
+      },
+      {
+        "scenario": "api-timeout",
+        "first_exit": 1,
+        "first_offset": null,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/f24c4c9841ba3810ddd55245bfb9052e3c91d5782660e3173176a217ec22b12f.parquet": "ae2c9e217359967e00cb84a406719bda114fff30f9b25cb2a9eead1714e20b99",
+          "archive/prediction/date=2026-10-21/a0b8110abe40d9b952651490e3a671d6ec69d8e0e6436bcdfc65f5e23b97c081.parquet": "b8a10af805ac8395011183d0a5e394b875f25b4d940249bcf4ec89fe7551e841"
+        },
+        "prediction_ids": [
+          "aaa36dc4f8a42829cf126615f66ce4dabb1f8672784995e5b0b2c09d059d2d2b"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            2
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-api-timeout\",0,0]",
+            "completed"
+          ]
+        ],
+        "risk_calls_before": 4,
+        "risk_calls_after": 5
+      },
+      {
+        "scenario": "missing-provenance",
+        "first_exit": 1,
+        "first_offset": null,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/9e8b7459d7e2a8805c7b52d184c909819ac79e40fb59c38e12e4482851a4b925.parquet": "1ec41832d3b7e2693192842c1908ce51753c8a34e5452ac52426d6160bea424b",
+          "archive/prediction/date=2026-10-21/f5137ce394921be4d648a9b6606d16402e5d9bab82e32a83480671d1f44c2f3a.parquet": "0314aecf699673868f64b7c57ede45b34f0333b2c4b8cba40c288b9a4f241c13"
+        },
+        "prediction_ids": [
+          "d324362a72aed4dc82bcc64dd88928220704ddbddb28f8df1271688ecb4d8d8a"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            2
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-missing-provenance\",0,0]",
+            "completed"
+          ]
+        ],
+        "risk_calls_before": 5,
+        "risk_calls_after": 6
+      },
+      {
+        "scenario": "api-422",
+        "first_exit": 0,
+        "first_offset": 1,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {},
+        "prediction_ids": [],
+        "receipt_counts": [],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-api-422-r2\",0,0]",
+            "rejected"
+          ]
+        ],
+        "risk_calls_before": 6,
+        "risk_calls_after": 6
+      },
+      {
+        "scenario": "crash-before-done",
+        "first_exit": 86,
+        "first_offset": null,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/f38f1c25cc3e5daf8118e4f9ce8f2f3c2b56067d428492bffad58d80ac610ef5.parquet": "bbd4982d47e53b2e74471dab99e0decbdbc902424d80f99a8cafb3577b8368e7",
+          "archive/prediction/date=2026-10-21/0567c7406c98de81c78d5150289824173e3b0aff811ff49a6e1babe7df03cb10.parquet": "2b16761a943a983f1c13a68525e7ee4b0ef795e74ab21af8558dc14b4ea2bfbb"
+        },
+        "prediction_ids": [
+          "55a743d9d580b50c621e254e2f658f66433209e39e5861b54dfccdec23d4bc02"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            2
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-crash-before-done-r3\",0,0]",
+            "completed"
+          ]
+        ],
+        "risk_calls_before": 7,
+        "risk_calls_after": 8
+      },
+      {
+        "scenario": "crash-before-ack",
+        "first_exit": 86,
+        "first_offset": null,
+        "replay_exit": 0,
+        "replay_offset": 1,
+        "parquet_hashes": {
+          "archive/telemetry/date=2026-10-21/83313d191f838d6ef7bc192e6604a7a9c0274b48ed6e0b610cf6e8784307c4bc.parquet": "1f0a7c6ae8e00954cff6bc8490f7e3ace1158e5c02243522e71adf839754a87e",
+          "archive/prediction/date=2026-10-21/00ee72967c2422a15d7dc5f6ef03c2f70253ce9e47725ca0260825eadb70b0bd.parquet": "ccf1fb7ff421b487ec85435beeeeab06ca4d601c06e449a16d630c7fd4d96379"
+        },
+        "prediction_ids": [
+          "ff34d5c0b49027d38bc5e33195e44eb8330266200c16b1eea4f6c023983d60a6"
+        ],
+        "receipt_counts": [
+          [
+            "stored",
+            2
+          ]
+        ],
+        "jobs": [
+          [
+            "[\"kafka\",\"t2-real-20261022-0937/topic-generation-1\",\"cg14-real-crash-before-ack-r3\",0,0]",
+            "completed"
+          ]
+        ],
+        "risk_calls_before": 8,
+        "risk_calls_after": 9
+      }
+    ],
+    "status": "PASSED",
+    "es_version": "9.5.4"
+  },
+  "nifi": {
+    "status": "PASSED",
+    "nifi": "2.12.0",
+    "group": "6299d17f-01a1-1000-de67-70da5a0ef05a",
+    "receipts": [
+      {
+        "transport": "staged-stdin",
+        "source_ack": false,
+        "completed": 0,
+        "rejected": 1,
+        "replay": 0
+      },
+      {
+        "transport": "staged-stdin",
+        "source_ack": false,
+        "completed": 1,
+        "rejected": 0,
+        "replay": 0
+      }
+    ],
+    "archive_receipts": [
+      [
+        "stored",
+        2
+      ]
+    ],
+    "offset_before_receipts": null,
+    "offset_after_receipts": 2,
+    "provenance_events": 2,
+    "offset_owner": "external-lab-driver-not-NiFi-ConsumeKafka"
+  },
+  "nifi_outage": {
+    "status": "PASSED",
+    "failed_original_retained": true,
+    "failed_receipt_retained": true,
+    "offset_during_outage": 2,
+    "offset_after_durable_recovery": 3,
+    "recovery_receipt": {
+      "transport": "staged-stdin",
+      "source_ack": false,
+      "completed": 1,
+      "rejected": 0,
+      "replay": 0
+    },
+    "replay_receipt": {
+      "transport": "staged-stdin",
+      "source_ack": false,
+      "completed": 0,
+      "rejected": 0,
+      "replay": 1
+    },
+    "api_process_restarted_with_same_ledger": true,
+    "models": "synthetic-fixtures-no-training"
+  },
+  "provenance": {
+    "status": "PASSED",
+    "events": {
+      "2-replay.csv": {
+        "event_id": 34,
+        "uuid": "92c7ef80-ae12-4c0e-9b7f-817a04f1d039",
+        "offset": "2",
+        "execution_status": "0",
+        "raw_sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "2-retry.csv": {
+        "event_id": 26,
+        "uuid": "aa8ada27-52ee-4b5e-a26f-213425f85c74",
+        "offset": "2",
+        "execution_status": "0",
+        "raw_sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "2.csv": {
+        "event_id": 18,
+        "uuid": "f4d8b80c-642b-45f8-b9ce-9a88a1cf088a",
+        "offset": "2",
+        "execution_status": "1",
+        "raw_sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "0.csv": {
+        "event_id": 10,
+        "uuid": "155bb500-3517-4710-8975-10ca78af5db4",
+        "offset": "0",
+        "execution_status": "0",
+        "raw_sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "1.csv": {
+        "event_id": 4,
+        "uuid": "4bb4d517-b498-45be-b711-59d2b1c2a274",
+        "offset": "1",
+        "execution_status": "0",
+        "raw_sha256": "e601edfaf4067744ae72fee16ade7435808e1462614d0ba7fd46a8a697634621"
+      }
+    },
+    "gate": "identity+coordinates+status+exact-input-output-content"
+  },
+  "final_source_import": {
+    "status": "PASSED",
+    "group": "62a8e736-01a1-1000-419f-ba2b32d37af8",
+    "processors": 2,
+    "connections": 6,
+    "ports": 5,
+    "all_disabled": true,
+    "all_execution_node_ALL": true,
+    "source": "nifi-flows/cg14_durable_staged_nifi_2.12.0.json"
+  },
+  "service_restart": {
+    "status": "PASSED",
+    "offsets_before": {
+      "cg14-real-valid-reject-group": {
+        "cg14-real-valid-reject/0": 4
+      },
+      "cg14-real-es-block-group": {
+        "cg14-real-es-block/0": 1
+      },
+      "cg14-real-archive-block-group": {
+        "cg14-real-archive-block/0": 1
+      },
+      "cg14-real-api-timeout-group": {
+        "cg14-real-api-timeout/0": 1
+      },
+      "cg14-real-missing-provenance-group": {
+        "cg14-real-missing-provenance/0": 1
+      },
+      "cg14-real-api-422-r2-group": {
+        "cg14-real-api-422-r2/0": 1
+      },
+      "cg14-real-crash-before-done-r3-group": {
+        "cg14-real-crash-before-done-r3/0": 1
+      },
+      "cg14-real-crash-before-ack-r3-group": {
+        "cg14-real-crash-before-ack-r3/0": 1
+      },
+      "cg14-real-nifi-staged-group": {
+        "cg14-real-nifi-staged/0": 3
+      }
+    },
+    "offsets_after": {
+      "cg14-real-valid-reject-group": {
+        "cg14-real-valid-reject/0": 4
+      },
+      "cg14-real-es-block-group": {
+        "cg14-real-es-block/0": 1
+      },
+      "cg14-real-archive-block-group": {
+        "cg14-real-archive-block/0": 1
+      },
+      "cg14-real-api-timeout-group": {
+        "cg14-real-api-timeout/0": 1
+      },
+      "cg14-real-missing-provenance-group": {
+        "cg14-real-missing-provenance/0": 1
+      },
+      "cg14-real-api-422-r2-group": {
+        "cg14-real-api-422-r2/0": 1
+      },
+      "cg14-real-crash-before-done-r3-group": {
+        "cg14-real-crash-before-done-r3/0": 1
+      },
+      "cg14-real-crash-before-ack-r3-group": {
+        "cg14-real-crash-before-ack-r3/0": 1
+      },
+      "cg14-real-nifi-staged-group": {
+        "cg14-real-nifi-staged/0": 3
+      }
+    },
+    "unchanged_parquet_objects": 318,
+    "scope": "Own Kafka and NiFi container restart; not host/power-loss recovery"
+  },
+  "capacity": {
+    "status": "PASSED_SHORT_RUNS_ONLY",
+    "scope": "12 events per short repetition; not sustained/production capacity",
+    "runs": [
+      {
+        "batch": 1,
+        "rate": 5,
+        "rep": 0,
+        "count": 12,
+        "seconds": 2.3930468559265137,
+        "completed_per_second": 5.014527805956383,
+        "p50_ms": 195.16241550445557,
+        "p95_ms": 284.8851680755615,
+        "max_lag_sample": 2,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212212,
+        "worker_resources": {
+          "wall": 6.528851509094238,
+          "cpu_user": 1.109029,
+          "cpu_system": 0.478243,
+          "maxrss_kib": 211456,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289001,
+        "latencies_ms": [
+          299.6094226837158,
+          284.8851680755615,
+          253.81231307983398,
+          221.79126739501953,
+          187.2713565826416,
+          197.0691680908203,
+          181.809663772583,
+          193.25566291809082,
+          187.89362907409668,
+          199.13196563720703,
+          173.96235466003418,
+          192.948579788208
+        ],
+        "lag_samples": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "batch": 1,
+        "rate": 5,
+        "rep": 1,
+        "count": 12,
+        "seconds": 2.5055198669433594,
+        "completed_per_second": 4.789425204055377,
+        "p50_ms": 317.655086517334,
+        "p95_ms": 325.9270191192627,
+        "max_lag_sample": 2,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212304,
+        "worker_resources": {
+          "wall": 6.62801718711853,
+          "cpu_user": 1.200039,
+          "cpu_system": 0.38764099999999996,
+          "maxrss_kib": 211432,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289024,
+        "latencies_ms": [
+          283.9970588684082,
+          297.81627655029297,
+          318.09163093566895,
+          321.7642307281494,
+          313.57765197753906,
+          309.83543395996094,
+          317.5663948059082,
+          317.74377822875977,
+          326.00998878479004,
+          321.76661491394043,
+          325.9270191192627,
+          305.4335117340088
+        ],
+        "lag_samples": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "batch": 1,
+        "rate": 5,
+        "rep": 2,
+        "count": 12,
+        "seconds": 2.384533166885376,
+        "completed_per_second": 5.032431574719563,
+        "p50_ms": 262.3840570449829,
+        "p95_ms": 306.7605495452881,
+        "max_lag_sample": 2,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212236,
+        "worker_resources": {
+          "wall": 6.506521463394165,
+          "cpu_user": 1.180585,
+          "cpu_system": 0.40866399999999997,
+          "maxrss_kib": 211884,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 288984,
+        "latencies_ms": [
+          345.7343578338623,
+          306.7605495452881,
+          280.4114818572998,
+          268.2943344116211,
+          264.64200019836426,
+          260.2534294128418,
+          264.514684677124,
+          228.16824913024902,
+          216.1247730255127,
+          189.97955322265625,
+          180.4971694946289,
+          184.44395065307617
+        ],
+        "lag_samples": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1
+        ]
+      },
+      {
+        "batch": 1,
+        "rate": 20,
+        "rep": 0,
+        "count": 12,
+        "seconds": 2.769317388534546,
+        "completed_per_second": 4.333197794403083,
+        "p50_ms": 1340.5598402023315,
+        "p95_ms": 2073.774814605713,
+        "max_lag_sample": 10,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212328,
+        "worker_resources": {
+          "wall": 6.848891258239746,
+          "cpu_user": 1.144293,
+          "cpu_system": 0.39819699999999997,
+          "maxrss_kib": 211752,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289466,
+        "latencies_ms": [
+          280.03501892089844,
+          427.92534828186035,
+          573.3201503753662,
+          787.3058319091797,
+          955.0127983093262,
+          1175.4868030548096,
+          1505.6328773498535,
+          1679.4581413269043,
+          1811.8529319763184,
+          1959.256887435913,
+          2073.774814605713,
+          2219.235897064209
+        ],
+        "lag_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          6,
+          7,
+          8,
+          9,
+          9,
+          10
+        ]
+      },
+      {
+        "batch": 1,
+        "rate": 20,
+        "rep": 1,
+        "count": 12,
+        "seconds": 2.3680288791656494,
+        "completed_per_second": 5.067505766326666,
+        "p50_ms": 1047.5053787231445,
+        "p95_ms": 1696.2645053863525,
+        "max_lag_sample": 10,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212220,
+        "worker_resources": {
+          "wall": 6.451780557632446,
+          "cpu_user": 1.16791,
+          "cpu_system": 0.383858,
+          "maxrss_kib": 212128,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289341,
+        "latencies_ms": [
+          330.2655220031738,
+          477.25534439086914,
+          619.1980838775635,
+          745.063304901123,
+          879.1296482086182,
+          994.8806762695312,
+          1100.1300811767578,
+          1233.2186698913574,
+          1387.4568939208984,
+          1521.296739578247,
+          1696.2645053863525,
+          1817.941427230835
+        ],
+        "lag_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          7,
+          8,
+          9,
+          10,
+          10
+        ]
+      },
+      {
+        "batch": 1,
+        "rate": 20,
+        "rep": 2,
+        "count": 12,
+        "seconds": 2.309736967086792,
+        "completed_per_second": 5.195396779372359,
+        "p50_ms": 1034.744381904602,
+        "p95_ms": 1633.5461139678955,
+        "max_lag_sample": 10,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212180,
+        "worker_resources": {
+          "wall": 6.43909215927124,
+          "cpu_user": 1.068943,
+          "cpu_system": 0.392993,
+          "maxrss_kib": 211768,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289349,
+        "latencies_ms": [
+          272.16458320617676,
+          431.826114654541,
+          565.6814575195312,
+          679.6514987945557,
+          806.3950538635254,
+          963.6831283569336,
+          1105.8056354522705,
+          1237.0245456695557,
+          1357.6128482818604,
+          1511.7127895355225,
+          1633.5461139678955,
+          1759.6335411071777
+        ],
+        "lag_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          6,
+          7,
+          8,
+          9,
+          9,
+          10
+        ]
+      },
+      {
+        "batch": 4,
+        "rate": 5,
+        "rep": 0,
+        "count": 12,
+        "seconds": 2.5220999717712402,
+        "completed_per_second": 4.7579398653149125,
+        "p50_ms": 357.5761318206787,
+        "p95_ms": 370.3930377960205,
+        "max_lag_sample": 2,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212364,
+        "worker_resources": {
+          "wall": 6.66070556640625,
+          "cpu_user": 1.093195,
+          "cpu_system": 0.383223,
+          "maxrss_kib": 211776,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 288938,
+        "latencies_ms": [
+          331.0198783874512,
+          370.18728256225586,
+          353.11007499694824,
+          366.2221431732178,
+          370.1519966125488,
+          370.3930377960205,
+          370.6176280975342,
+          362.0421886444092,
+          346.42839431762695,
+          351.1238098144531,
+          345.9506034851074,
+          322.0207691192627
+        ],
+        "lag_samples": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "batch": 4,
+        "rate": 5,
+        "rep": 1,
+        "count": 12,
+        "seconds": 2.4705498218536377,
+        "completed_per_second": 4.857218378618439,
+        "p50_ms": 274.24871921539307,
+        "p95_ms": 325.35767555236816,
+        "max_lag_sample": 2,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212520,
+        "worker_resources": {
+          "wall": 6.5730602741241455,
+          "cpu_user": 1.115401,
+          "cpu_system": 0.39038999999999996,
+          "maxrss_kib": 212056,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 288957,
+        "latencies_ms": [
+          332.14807510375977,
+          319.0135955810547,
+          325.35767555236816,
+          314.53514099121094,
+          290.0204658508301,
+          274.3351459503174,
+          257.71498680114746,
+          262.5002861022949,
+          270.09010314941406,
+          273.84161949157715,
+          274.16229248046875,
+          270.45130729675293
+        ],
+        "lag_samples": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "batch": 4,
+        "rate": 5,
+        "rep": 2,
+        "count": 12,
+        "seconds": 2.4274535179138184,
+        "completed_per_second": 4.943452021405929,
+        "p50_ms": 208.7613344192505,
+        "p95_ms": 284.44838523864746,
+        "max_lag_sample": 2,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212720,
+        "worker_resources": {
+          "wall": 6.5605528354644775,
+          "cpu_user": 1.2347920000000001,
+          "cpu_system": 0.333265,
+          "maxrss_kib": 212276,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 288951,
+        "latencies_ms": [
+          320.965051651001,
+          284.44838523864746,
+          265.83099365234375,
+          229.51698303222656,
+          205.99794387817383,
+          211.52472496032715,
+          178.572416305542,
+          189.2068386077881,
+          159.26885604858398,
+          174.40009117126465,
+          194.76890563964844,
+          227.3721694946289
+        ],
+        "lag_samples": [
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "batch": 4,
+        "rate": 20,
+        "rep": 0,
+        "count": 12,
+        "seconds": 2.205531120300293,
+        "completed_per_second": 5.440866324464352,
+        "p50_ms": 1121.427297592163,
+        "p95_ms": 1655.442714691162,
+        "max_lag_sample": 11,
+        "final_lag": 0,
+        "rss_sample_max_kib": 211988,
+        "worker_resources": {
+          "wall": 6.259594440460205,
+          "cpu_user": 1.182517,
+          "cpu_system": 0.36352999999999996,
+          "maxrss_kib": 211532,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289066,
+        "latencies_ms": [
+          279.10876274108887,
+          879.4703483581543,
+          829.4522762298584,
+          779.4647216796875,
+          729.4349670410156,
+          855.9567928314209,
+          1513.404130935669,
+          1463.348150253296,
+          1413.3961200714111,
+          1363.3842468261719,
+          1705.444574356079,
+          1655.442714691162
+        ],
+        "lag_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "batch": 4,
+        "rate": 20,
+        "rep": 1,
+        "count": 12,
+        "seconds": 2.274756908416748,
+        "completed_per_second": 5.275288957514195,
+        "p50_ms": 1105.0456762313843,
+        "p95_ms": 1724.677324295044,
+        "max_lag_sample": 11,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212132,
+        "worker_resources": {
+          "wall": 6.375906467437744,
+          "cpu_user": 1.127947,
+          "cpu_system": 0.349622,
+          "maxrss_kib": 211744,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289114,
+        "latencies_ms": [
+          326.2219429016113,
+          961.4012241363525,
+          911.3879203796387,
+          861.3941669464111,
+          811.3911151885986,
+          1130.0508975982666,
+          1080.040454864502,
+          1726.6521453857422,
+          1676.6700744628906,
+          1626.662015914917,
+          1576.667308807373,
+          1724.677324295044
+        ],
+        "lag_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "batch": 4,
+        "rate": 20,
+        "rep": 2,
+        "count": 12,
+        "seconds": 2.3226349353790283,
+        "completed_per_second": 5.166545898889501,
+        "p50_ms": 1180.214524269104,
+        "p95_ms": 1772.5512981414795,
+        "max_lag_sample": 11,
+        "final_lag": 0,
+        "rss_sample_max_kib": 212004,
+        "worker_resources": {
+          "wall": 6.444850444793701,
+          "cpu_user": 1.087526,
+          "cpu_system": 0.377388,
+          "maxrss_kib": 211504,
+          "inblock": 0,
+          "oublock": 0
+        },
+        "bytes_on_disk": 289055,
+        "latencies_ms": [
+          297.1534729003906,
+          912.1081829071045,
+          862.0953559875488,
+          812.1128082275391,
+          762.1045112609863,
+          900.688648223877,
+          1598.3161926269531,
+          1548.3129024505615,
+          1498.3181953430176,
+          1448.3208656311035,
+          1822.5433826446533,
+          1772.5512981414795
+        ],
+        "lag_samples": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      }
+    ]
+  },
+  "checks": [
+    {
+      "check": "ruff-tracked",
+      "args": [
+        "/home/Fedora/.local/bin/uvx",
+        "--from",
+        "ruff==0.17.1",
+        "ruff",
+        "check",
+        "--select",
+        "E,F,I,PLW1510",
+        "cg14_restore_upload.py",
+        "cg14_validation/__init__.py",
+        "cg14_validation/metrics.py",
+        "cg14_validation/reconciliation.py",
+        "cg14_validation/resilience.py",
+        "cg14_validation/validator.py",
+        "cnc_guard/__init__.py",
+        "cnc_guard/data.py",
+        "cnc_guard/features.py",
+        "cnc_guard/schemas.py",
+        "cnc_guard/train.py",
+        "deploy/cg14/scripts/mock_predict.py",
+        "deploy/cg14/scripts/run-kafka-lab-e2e.py",
+        "deploy/cg14/scripts/run-kafka-outage-recovery.py",
+        "deploy/cg14/scripts/run-restore-e2e.py",
+        "docs/templates/infra/scoring/score_api.py",
+        "planning/adaptive.py",
+        "planning/cycle.py",
+        "planning/maintenance.py",
+        "planning/mechanisms.py",
+        "planning/online.py",
+        "planning/registry.py",
+        "planning/selection.py",
+        "scoring/alert_policy.py",
+        "scoring/preparation.py",
+        "scoring/response_ledger.py",
+        "scoring/scope.py",
+        "scoring/score_api.py",
+        "scripts/adaptive_cycle.py",
+        "scripts/archive_consumer.py",
+        "scripts/audit_cg02.py",
+        "scripts/audit_temporal_feasibility.py",
+        "scripts/build_cg14_nifi_flow.py",
+        "scripts/build_cg19_evaluation.py",
+        "scripts/build_durable_pipeline_flow.py",
+        "scripts/build_history.py",
+        "scripts/capture_smb.py",
+        "scripts/capture_temporal_snapshot.py",
+        "scripts/cg04_preparation.py",
+        "scripts/cg14_occurrence.py",
+        "scripts/cg14_scoring_bridge.py",
+        "scripts/cg23_capacity.py",
+        "scripts/check_cg25_memory.py",
+        "scripts/check_repository_layout.py",
+        "scripts/check_smb_source.py",
+        "scripts/create_lab_dashboard.py",
+        "scripts/demo_adaptive.py",
+        "scripts/demo_adaptive_cycle.py",
+        "scripts/demo_maintenance.py",
+        "scripts/duckdb_output.py",
+        "scripts/durable_pipeline.py",
+        "scripts/evaluate_adaptive.py",
+        "scripts/experiment_alternatives.py",
+        "scripts/experiment_alternatives_nested.py",
+        "scripts/experiment_anomaly.py",
+        "scripts/experiment_rf.py",
+        "scripts/experiment_smotenc.py",
+        "scripts/failure_harness.py",
+        "scripts/integration_preflight.py",
+        "scripts/kafka_archive.py",
+        "scripts/nifi_client.py",
+        "scripts/package_model.py",
+        "scripts/package_seasonal_v2.py",
+        "scripts/plan_maintenance.py",
+        "scripts/rehearse_cg26.py",
+        "scripts/repack_kafka.py",
+        "scripts/report_alternatives.py",
+        "scripts/report_seasonal_v2.py",
+        "scripts/report_thresholds.py",
+        "scripts/report_type_diagnostics.py",
+        "scripts/run_durable_pipeline.py",
+        "scripts/seasonal_lab.py",
+        "scripts/seasonal_v2.py",
+        "scripts/smb_filebeat_fixture.py",
+        "scripts/sync_projects.py",
+        "scripts/train_seasonal_v2.py",
+        "scripts/validate_contracts.py",
+        "scripts/verify_history.py",
+        "scripts/watch_adaptive.py",
+        "tests/api_client.py",
+        "tests/kafka_wire_lab.py",
+        "tests/run_strict_resources.py",
+        "tests/test_adaptive.py",
+        "tests/test_adaptive_runtime.py",
+        "tests/test_alternatives.py",
+        "tests/test_anomaly.py",
+        "tests/test_api.py",
+        "tests/test_api_client.py",
+        "tests/test_archive_consumer.py",
+        "tests/test_archive_json_depth.py",
+        "tests/test_audit_cg02.py",
+        "tests/test_cg04_reconciliation.py",
+        "tests/test_cg14_durable_pipeline.py",
+        "tests/test_cg14_hardening.py",
+        "tests/test_cg14_kafka_outage_runner.py",
+        "tests/test_cg14_legacy_e2e.py",
+        "tests/test_cg14_metrics.py",
+        "tests/test_cg14_nifi_flow.py",
+        "tests/test_cg14_occurrence.py",
+        "tests/test_cg14_regression.py",
+        "tests/test_cg14_restore_e2e.py",
+        "tests/test_cg14_restore_upload.py",
+        "tests/test_cg14_scoring_bridge.py",
+        "tests/test_cg14_thermal_parity.py",
+        "tests/test_cg14_validation.py",
+        "tests/test_cg23_capacity.py",
+        "tests/test_cg26_rehearsal.py",
+        "tests/test_columnar_upgrade_contract.py",
+        "tests/test_contract_validation.py",
+        "tests/test_current_state_scope.py",
+        "tests/test_duckdb_output.py",
+        "tests/test_durable_receipts_http.py",
+        "tests/test_elasticsearch_contract.py",
+        "tests/test_experiment.py",
+        "tests/test_failure_harness.py",
+        "tests/test_framework_upgrade_contract.py",
+        "tests/test_history.py",
+        "tests/test_kafka_archive.py",
+        "tests/test_kafka_dependency.py",
+        "tests/test_lab_dashboard.py",
+        "tests/test_lab_dashboard_contrast.py",
+        "tests/test_lab_dashboard_es.py",
+        "tests/test_maintenance_planner.py",
+        "tests/test_nifi_client_security.py",
+        "tests/test_policy.py",
+        "tests/test_preflight.py",
+        "tests/test_preparation.py",
+        "tests/test_project_sync.py",
+        "tests/test_retention_recovery.py",
+        "tests/test_scoring_replay.py",
+        "tests/test_seasonal_lab.py",
+        "tests/test_seasonal_v2.py",
+        "tests/test_smb_capture.py",
+        "tests/test_smb_filebeat_contract.py",
+        "tests/test_smb_source.py",
+        "tests/test_smotenc.py",
+        "tests/test_starlette_testclient_cleanup.py",
+        "tests/test_strict_resources_runner.py",
+        "tests/test_temporal_feasibility.py",
+        "tests/test_type_diagnostics.py",
+        "tests/verify_durable_pipeline.py",
+        "tests/verify_elasticsearch_contract.py",
+        "tests/verify_resource_cleanup.py"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "format-final",
+      "args": [
+        "/home/Fedora/.local/bin/uvx",
+        "--from",
+        "ruff==0.17.1",
+        "ruff",
+        "format",
+        "--check",
+        "scripts/repack_kafka.py",
+        "scripts/build_durable_pipeline_flow.py",
+        "tests/test_kafka_dependency.py",
+        "tests/test_cg14_durable_pipeline.py"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "pytest-nifi-311",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv311/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "error",
+        "tests/test_cg14_nifi_flow.py",
+        "tests/test_cg14_durable_pipeline.py"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "pytest-nifi-312",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "error",
+        "tests/test_cg14_nifi_flow.py",
+        "tests/test_cg14_durable_pipeline.py"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "cg25-final",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-m",
+        "scripts.check_cg25_memory"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "cg02-final",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-m",
+        "scripts.audit_cg02",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "lock-final",
+      "args": [
+        "/home/Fedora/.local/bin/uv",
+        "lock",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "layout-final",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-m",
+        "scripts.check_repository_layout"
+      ],
+      "exit": 0
+    },
+    {
+      "check": "diff-final",
+      "args": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0
+    }
+  ],
+  "wheel": {
+    "status": "PASSED",
+    "changed_members": [
+      "kafka/net/connection.py",
+      "kafka/net/manager.py",
+      "kafka/protocol/schemas/load_json.py",
+      "kafka/version.py",
+      "kafka_python-3.0.11.dist-info/METADATA",
+      "kafka_python-3.0.11.dist-info/RECORD"
+    ],
+    "unchanged_protocol_json_count": 108,
+    "wheel_sha256": "e1d068023ae9ec42d8675956cc4cb9768fafbc02d5a7101e96cfff7828dff069"
+  },
+  "inventory": {
+    "status": "PASSED",
+    "preexisting_container_count": 85,
+    "preexisting_containers_still_present": 85,
+    "own_containers_stopped": [
+      "8f59ce840a222edb924f033b9503840b9f8cdf6e5f63648d3de6c7d6838578ef",
+      "28d70b96fca30458914c3f8cb26fe7bcc388778bcb78f7b5cb35d38a5463b464",
+      "4538bfaa922f300536dc6dcf49ecdb8ac6a503c92ce9d2d8b707ad50c5734b31"
+    ],
+    "own_volume_mounts": {
+      "nifi": [
+        {
+          "Type": "volume",
+          "Name": "24b67604ec61313c1bf616e1335a44d5a3998d1d8f83d33fbdfb40030c32c69a",
+          "Source": "/var/lib/docker/volumes/24b67604ec61313c1bf616e1335a44d5a3998d1d8f83d33fbdfb40030c32c69a/_data",
+          "Destination": "/opt/nifi/nifi-current/conf",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "c1ba5f462622be8ee36c607f94019b8a3c8019fea30f72fb90a3798620afd709",
+          "Source": "/var/lib/docker/volumes/c1ba5f462622be8ee36c607f94019b8a3c8019fea30f72fb90a3798620afd709/_data",
+          "Destination": "/opt/nifi/nifi-current/content_repository",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "df4e1a3ffe00ade75d71ee3c7f4bd901120a1e5533c80a14b26d49b4ff3c577e",
+          "Source": "/var/lib/docker/volumes/df4e1a3ffe00ade75d71ee3c7f4bd901120a1e5533c80a14b26d49b4ff3c577e/_data",
+          "Destination": "/opt/nifi/nifi-current/database_repository",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "c357cd0c7fa5d514cffd6de6b7c76ed8f2cd4ad70df1a4111acb71d953919d13",
+          "Source": "/var/lib/docker/volumes/c357cd0c7fa5d514cffd6de6b7c76ed8f2cd4ad70df1a4111acb71d953919d13/_data",
+          "Destination": "/opt/nifi/nifi-current/flowfile_repository",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "a7ac426bd0c56b7fb9a72beda8ba13f833ab4076a2eae9231636fd07cb64387a",
+          "Source": "/var/lib/docker/volumes/a7ac426bd0c56b7fb9a72beda8ba13f833ab4076a2eae9231636fd07cb64387a/_data",
+          "Destination": "/opt/nifi/nifi-current/logs",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "27857b39326f03225d752e0d703c623532679a57556780683d0823a884e36d9e",
+          "Source": "/var/lib/docker/volumes/27857b39326f03225d752e0d703c623532679a57556780683d0823a884e36d9e/_data",
+          "Destination": "/opt/nifi/nifi-current/nar_extensions",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "ec2cc74639e42f78aca4449882a3d0a5f3ff4195fd2cf482a84889f60edb6d9a",
+          "Source": "/var/lib/docker/volumes/ec2cc74639e42f78aca4449882a3d0a5f3ff4195fd2cf482a84889f60edb6d9a/_data",
+          "Destination": "/opt/nifi/nifi-current/provenance_repository",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "d854c6b564e02235518ff7aacfeaa62f4fec8e50b7791a637e5ff25e35bd7442",
+          "Source": "/var/lib/docker/volumes/d854c6b564e02235518ff7aacfeaa62f4fec8e50b7791a637e5ff25e35bd7442/_data",
+          "Destination": "/opt/nifi/nifi-current/python_extensions",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "t2-real-20261022-0937-nifi",
+          "Source": "/var/lib/docker/volumes/t2-real-20261022-0937-nifi/_data",
+          "Destination": "/opt/nifi/nifi-current/state",
+          "Driver": "local",
+          "Mode": "z",
+          "RW": true,
+          "Propagation": ""
+        }
+      ],
+      "kafka": [
+        {
+          "Type": "volume",
+          "Name": "t2-real-20261022-0937-kafka",
+          "Source": "/var/lib/docker/volumes/t2-real-20261022-0937-kafka/_data",
+          "Destination": "/tmp/kraft-combined-logs",
+          "Driver": "local",
+          "Mode": "z",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "7e9b7f8176024a5f009d25cb9e5cdf317874fab70be9fc382431a445df72e6f2",
+          "Source": "/var/lib/docker/volumes/7e9b7f8176024a5f009d25cb9e5cdf317874fab70be9fc382431a445df72e6f2/_data",
+          "Destination": "/etc/kafka/secrets",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "9bdcc4c496ffd93b78ea6261fa4754c530255f40ba70e4a43f23c016863a3e27",
+          "Source": "/var/lib/docker/volumes/9bdcc4c496ffd93b78ea6261fa4754c530255f40ba70e4a43f23c016863a3e27/_data",
+          "Destination": "/mnt/shared/config",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        },
+        {
+          "Type": "volume",
+          "Name": "29cc987f64178de23e50aa2375d4953eaea2ce2e5bb587f8d6044ed3795bd6db",
+          "Source": "/var/lib/docker/volumes/29cc987f64178de23e50aa2375d4953eaea2ce2e5bb587f8d6044ed3795bd6db/_data",
+          "Destination": "/var/lib/kafka/data",
+          "Driver": "local",
+          "Mode": "",
+          "RW": true,
+          "Propagation": ""
+        }
+      ],
+      "es": [
+        {
+          "Type": "volume",
+          "Name": "t2-real-20261022-0937-es",
+          "Source": "/var/lib/docker/volumes/t2-real-20261022-0937-es/_data",
+          "Destination": "/usr/share/elasticsearch/data",
+          "Driver": "local",
+          "Mode": "z",
+          "RW": true,
+          "Propagation": ""
+        }
+      ]
+    },
+    "cleanup": "Only owned containers stopped; no containers/volumes/images/networks removed; all evidence and data retained",
+    "commands": [
+      {
+        "args": [
+          "docker",
+          "inspect",
+          "8f59ce840a222edb924f033b9503840b9f8cdf6e5f63648d3de6c7d6838578ef"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "logs",
+          "8f59ce840a222edb924f033b9503840b9f8cdf6e5f63648d3de6c7d6838578ef"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "stop",
+          "--time",
+          "20",
+          "8f59ce840a222edb924f033b9503840b9f8cdf6e5f63648d3de6c7d6838578ef"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "inspect",
+          "28d70b96fca30458914c3f8cb26fe7bcc388778bcb78f7b5cb35d38a5463b464"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "logs",
+          "28d70b96fca30458914c3f8cb26fe7bcc388778bcb78f7b5cb35d38a5463b464"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "stop",
+          "--time",
+          "20",
+          "28d70b96fca30458914c3f8cb26fe7bcc388778bcb78f7b5cb35d38a5463b464"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "inspect",
+          "4538bfaa922f300536dc6dcf49ecdb8ac6a503c92ce9d2d8b707ad50c5734b31"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "logs",
+          "4538bfaa922f300536dc6dcf49ecdb8ac6a503c92ce9d2d8b707ad50c5734b31"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "stop",
+          "--time",
+          "20",
+          "4538bfaa922f300536dc6dcf49ecdb8ac6a503c92ce9d2d8b707ad50c5734b31"
+        ],
+        "exit": 0
+      },
+      {
+        "action": "no-signal-pid-reused",
+        "pid": 242998
+      },
+      {
+        "args": [
+          "docker",
+          "ps",
+          "-a",
+          "--no-trunc",
+          "--format",
+          "{{json .}}"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "volume",
+          "ls",
+          "--format",
+          "{{json .}}"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "network",
+          "ls",
+          "--format",
+          "{{json .}}"
+        ],
+        "exit": 0
+      },
+      {
+        "args": [
+          "docker",
+          "image",
+          "ls",
+          "--digests",
+          "--format",
+          "{{json .}}"
+        ],
+        "exit": 0
+      }
+    ]
+  },
+  "nifi_es_required": {
+    "status": "PASSED",
+    "route": "ApacheKafka3.7.2 -> external own staged driver -> NiFi2.12 -> canonical HTTP -> CG15+ES9.5.4 -> explicit Kafka commit",
+    "offset_owner": "external-own-lab-driver; not product ConsumeKafka",
+    "group": "62a8e736-01a1-1000-419f-ba2b32d37af8",
+    "es_required": true,
+    "offset_before_destinations": null,
+    "offset_after_all_destinations": 2,
+    "http_attempts": [
+      [
+        "http://172.24.0.1:19283/predict",
+        "200"
+      ],
+      [
+        "http://es:9200/cnc-telemetry-nifi-es/_create/27b0feda78c6d291a2ab6ab0b6c5d6d3e759788fcedddc798d892f39e5a6a4d9",
+        "403"
+      ],
+      [
+        "http://es:9200/cnc-telemetry-nifi-es/_create/27b0feda78c6d291a2ab6ab0b6c5d6d3e759788fcedddc798d892f39e5a6a4d9",
+        "201"
+      ]
+    ],
+    "archive_receipts": [
+      [
+        "stored",
+        2
+      ]
+    ],
+    "es_exact_documents": 1,
+    "risk_calls_before_and_after_es_recovery": 1,
+    "provenance_gate": {
+      "0-retry.csv": {
+        "id": 78,
+        "uuid": "53b436f9-3624-464f-8c40-205489f222e0",
+        "status": "0",
+        "offset": "0",
+        "sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "0.csv": {
+        "id": 70,
+        "uuid": "62b674e2-c342-4f37-bfc5-38b4882cd2ba",
+        "status": "1",
+        "offset": "0",
+        "sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "1.csv": {
+        "id": 64,
+        "uuid": "7eb6a654-f71b-4bda-a745-b780b85a62ad",
+        "status": "0",
+        "offset": "1",
+        "sha256": "e601edfaf4067744ae72fee16ade7435808e1462614d0ba7fd46a8a697634621"
+      }
+    },
+    "failed_original_preserved": true
+  },
+  "strict_unittest": {
+    "311": "python 3.11.15 (main, May 10 2026, 19:28:18) [Clang 22.1.3 ] run 54 failures 0 errors 0 skips 0 warnings 0 unraisables 0",
+    "312": "python 3.12.15 (main, Oct  1 2026, 20:59:04) [Clang 22.1.3 ] run 54 failures 0 errors 0 skips 0 warnings 0 unraisables 0"
+  },
+  "pytest": {
+    "311": "24 passed, 28 subtests passed in 10.51s",
+    "312": "24 passed, 28 subtests passed in 7.64s"
+  },
+  "audit": {
+    "audited_packages": 57,
+    "vulnerabilities": 0,
+    "adverse_statuses": 0,
+    "exit": 0,
+    "experimental_cli_warnings_retained": true
+  },
+  "actionlint": {
+    "exit": 0,
+    "log": "actionlint.log"
+  },
+  "images": {
+    "elasticsearch-9.5.4-image.json": {
+      "id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+      "repo_digests": [
+        "docker.elastic.co/elasticsearch/elasticsearch@sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026"
+      ],
+      "size": 2564192641
+    },
+    "kafka-3.7.2-image.json": {
+      "id": "sha256:8bd63e1bd445e5e19427a4bdbcc3d23bf6efd774b058a41b36ba87fda7623e34",
+      "repo_digests": [
+        "apache/kafka@sha256:8bd63e1bd445e5e19427a4bdbcc3d23bf6efd774b058a41b36ba87fda7623e34"
+      ],
+      "size": 624992819
+    },
+    "nifi-2.12.0-image.json": {
+      "id": "sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad",
+      "repo_digests": [
+        "apache/nifi@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad"
+      ],
+      "size": 2407879264
+    }
+  },
+  "previous_candidate": "a98afc421a3c329c9343ef4c2b1c919cb3fe418f",
+  "later_user_temporary_constraint": {
+    "remaining_process_tmp": "D:\\github\\_local\\t2-babysit-20261021\\real-kafka-nifi-evidence-20261022\\process-temp",
+    "remaining_system_tmp_need": "NONE",
+    "no_new_tests_or_services": true,
+    "existing_resources_not_moved_or_deleted": true,
+    "kafka_effective_log_dir": "/tmp/kafka-logs",
+    "kafka_effective_log_storage": "own stopped container writable layer",
+    "kafka_mounted_volume_target_not_effective_log_dir": "/tmp/kraft-combined-logs",
+    "restart_evidence_limit": "same-container restart only; not recreate or named-volume log persistence",
+    "inventory": "temporary-inventory.json",
+    "handoff": "TEMPORARY-SPACE-HANDOFF.md"
+  }
+}

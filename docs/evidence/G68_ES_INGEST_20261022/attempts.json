@@ -1,0 +1,49 @@
+[
+  {
+    "attempt": "lab-attempt1",
+    "passed": false,
+    "operations": 0,
+    "container_removed": true,
+    "detail": "Warm timeout 60s; exited own container inspected and removed by exact ID."
+  },
+  {
+    "attempt": "lab-attempt2",
+    "passed": false,
+    "operations": 0,
+    "container_removed": true,
+    "detail": "ES native ML boot failure on D: Java temp; ES ML disabled only in lab."
+  },
+  {
+    "attempt": "lab-attempt3",
+    "passed": false,
+    "operations": 5,
+    "container_removed": true,
+    "detail": "GET pipeline adds server-managed lifecycle dates; export comparison corrected."
+  },
+  {
+    "attempt": "lab-attempt4",
+    "passed": false,
+    "operations": 6,
+    "container_removed": true,
+    "detail": "ES 9.5.4 if_version conflict returns HTTP400, not assumed409; reason asserted."
+  },
+  {
+    "attempt": "lab-attempt5",
+    "passed": true,
+    "operations": 93,
+    "container_removed": true,
+    "detail": "See raw HTTP exchanges."
+  },
+  {
+    "attempt": "lab-attempt6",
+    "passed": true,
+    "operations": 93,
+    "container_removed": true,
+    "detail": "Final LF artifact bytes; 93 HTTP operations repeated after Windows newline fix."
+  },
+  {
+    "attempt": "gates-attempt1",
+    "passed": false,
+    "detail": "All scoped gates passed except WSL layout (Windows worktree .git path) and diff (CRLF manifest). Native Windows layout and LF fixed before final validation."
+  }
+]

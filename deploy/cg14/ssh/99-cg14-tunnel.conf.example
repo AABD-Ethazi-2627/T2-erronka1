@@ -1,0 +1,22 @@
+# Example drop-in for /etc/ssh/sshd_config.d/99-cg14-tunnel.conf
+# Replace every placeholder before installation. Do not copy as-is.
+# Keep this file outside the effective configuration until an administrator
+# has confirmed console access, existing SSH policy, and host keys.
+
+# Repeat this Match block for each individual account and its authorized /32
+# source address. Never share an account or private key.
+Match User nifi-peer1 Address 192.168.75.10/32
+    AuthenticationMethods publickey
+    PasswordAuthentication no
+    KbdInteractiveAuthentication no
+    AllowTcpForwarding local
+    AllowStreamLocalForwarding no
+    PermitOpen 127.0.0.1:18443
+    GatewayPorts no
+    AllowAgentForwarding no
+    X11Forwarding no
+    PermitTTY no
+    PermitTunnel no
+    MaxSessions 0
+
+# Match blocks are account- and source-specific. Add one for every peer.

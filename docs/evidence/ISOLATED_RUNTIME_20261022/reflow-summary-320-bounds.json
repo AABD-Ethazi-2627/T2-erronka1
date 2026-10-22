@@ -1,0 +1,62 @@
+{
+  "chart": {
+    "height": 466.890625,
+    "width": 278
+  },
+  "text": [
+    {
+      "label": "Observaciones en el filtro: 0",
+      "lines": 2,
+      "right": 159.5806484222412,
+      "x": 13.002508163452148
+    },
+    {
+      "label": "Avisos de nivel: 0 / 0 clasificados = N/D",
+      "lines": 2,
+      "right": 160.06503868103027,
+      "x": 13.002508163452148
+    },
+    {
+      "label": "Sin nivel reconocido: 0",
+      "lines": 0,
+      "right": 174.7824001312256,
+      "x": 14.002508163452148
+    },
+    {
+      "label": "IDs con eventos en la ventana (aprox.): 0",
+      "lines": 2,
+      "right": 167.1934108734131,
+      "x": 13.002508163452148
+    },
+    {
+      "label": "Edad del último evento filtrado: N/D: sin eventos",
+      "lines": 3,
+      "right": 176.47667503356934,
+      "x": 13.002508163452148
+    },
+    {
+      "label": "Último UTC: N/D",
+      "lines": 0,
+      "right": 133.28683280944824,
+      "x": 14.002508163452148
+    },
+    {
+      "label": "Tasa de fallo real: N/D · sin etiquetas online",
+      "lines": 2,
+      "right": 173.03534507751465,
+      "x": 14.002508163452148
+    },
+    {
+      "label": "Activos = IDs observados; no acredita máquinas encendidas.",
+      "lines": 2,
+      "right": 193.7368984222412,
+      "x": 13.002508163452148
+    },
+    {
+      "label": "Edad desde timestamp de evento; no latencia de ingestión.",
+      "lines": 3,
+      "right": 165.2982692718506,
+      "x": 14.002508163452148
+    }
+  ]
+}

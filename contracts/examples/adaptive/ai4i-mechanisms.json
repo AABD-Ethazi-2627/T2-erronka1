@@ -1,0 +1,13 @@
+{
+  "dataset_id": "replace-with-verified-source-and-version",
+  "provenance": "unknown",
+  "physical_identity_verified": false,
+  "timestamp_role": "observation",
+  "columns": {"asset": "asset_id", "timestamp": "event_time", "lifecycle": "component_cycle"},
+  "sensors": {
+    "power_W": {"column": "power_W", "unit": "W"},
+    "thermal_margin": {"column": "thermal_margin", "unit": "dimensionless"},
+    "overstrain_margin": {"column": "overstrain_margin", "unit": "min*Nm"}
+  },
+  "max_gap_minutes": 10
+}

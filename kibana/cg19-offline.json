@@ -1,0 +1,146 @@
+{
+  "threshold": 0.19082281465428477,
+  "overall": {
+    "rows": 1200,
+    "positives": 41,
+    "negatives": 1159,
+    "alerts": 41,
+    "tp": 32,
+    "fn": 9,
+    "fp": 9,
+    "tn": 1150
+  },
+  "wear_bins": [
+    {
+      "machine_type": "H",
+      "wear_bin": "0–49",
+      "rows": 25,
+      "positives": 0,
+      "failure_rate": 0.0
+    },
+    {
+      "machine_type": "H",
+      "wear_bin": "50–99",
+      "rows": 31,
+      "positives": 0,
+      "failure_rate": 0.0
+    },
+    {
+      "machine_type": "H",
+      "wear_bin": "100–149",
+      "rows": 27,
+      "positives": 0,
+      "failure_rate": 0.0
+    },
+    {
+      "machine_type": "H",
+      "wear_bin": "150–199",
+      "rows": 33,
+      "positives": 0,
+      "failure_rate": 0.0
+    },
+    {
+      "machine_type": "H",
+      "wear_bin": "200–249",
+      "rows": 12,
+      "positives": 2,
+      "failure_rate": 0.16666666666666666
+    },
+    {
+      "machine_type": "L",
+      "wear_bin": "0–49",
+      "rows": 165,
+      "positives": 5,
+      "failure_rate": 0.030303030303030304
+    },
+    {
+      "machine_type": "L",
+      "wear_bin": "50–99",
+      "rows": 150,
+      "positives": 5,
+      "failure_rate": 0.03333333333333333
+    },
+    {
+      "machine_type": "L",
+      "wear_bin": "100–149",
+      "rows": 157,
+      "positives": 3,
+      "failure_rate": 0.01910828025477707
+    },
+    {
+      "machine_type": "L",
+      "wear_bin": "150–199",
+      "rows": 167,
+      "positives": 4,
+      "failure_rate": 0.023952095808383235
+    },
+    {
+      "machine_type": "L",
+      "wear_bin": "200–249",
+      "rows": 66,
+      "positives": 14,
+      "failure_rate": 0.21212121212121213
+    },
+    {
+      "machine_type": "M",
+      "wear_bin": "0–49",
+      "rows": 90,
+      "positives": 1,
+      "failure_rate": 0.011111111111111112
+    },
+    {
+      "machine_type": "M",
+      "wear_bin": "50–99",
+      "rows": 99,
+      "positives": 2,
+      "failure_rate": 0.020202020202020204
+    },
+    {
+      "machine_type": "M",
+      "wear_bin": "100–149",
+      "rows": 78,
+      "positives": 1,
+      "failure_rate": 0.01282051282051282
+    },
+    {
+      "machine_type": "M",
+      "wear_bin": "150–199",
+      "rows": 74,
+      "positives": 0,
+      "failure_rate": 0.0
+    },
+    {
+      "machine_type": "M",
+      "wear_bin": "200–249",
+      "rows": 26,
+      "positives": 4,
+      "failure_rate": 0.15384615384615385
+    }
+  ],
+  "cases": {
+    "FP": {
+      "source_row_index": 1945,
+      "label": 0,
+      "rf_score": 0.42027777777777786,
+      "machine_type": "M",
+      "tool_wear_min": 226
+    },
+    "FN": {
+      "source_row_index": 217,
+      "label": 1,
+      "rf_score": 0.023254763963065174,
+      "machine_type": "L",
+      "tool_wear_min": 206
+    }
+  },
+  "provenance": {
+    "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "validation_csv_sha256": "a63c3b54fb58fd39ddf34084b9a8898e5f6b400dc4c692fb7d1174d7f94bfd1b",
+    "experiment_report_sha256": "14ce085fb4af2507b9014466aa60c6c16ab422933a34a7b11da1f35690ad7902",
+    "seed": 42,
+    "partition": "reused_validation_for_threshold_tuning",
+    "excluded_test_rows": 1200,
+    "reference_commit": "a4da1d5474d72e72047c0f334aadedde09114553",
+    "reference_sha256": "deb550b826ecdebde2628e7624dbb28ff44b5c17eec2769baecd552f8f5e62dd"
+  }
+}

@@ -1,0 +1,640 @@
+{
+  "encodingVersion": {
+    "majorVersion": 2,
+    "minorVersion": 0
+  },
+  "externalControllerServices": {},
+  "parameterContexts": {
+    "cg14-params-001": {
+      "name": "CG14-params",
+      "parameters": {
+        "CG14_BOOTSTRAP_SERVERS": {
+          "name": "CG14_BOOTSTRAP_SERVERS",
+          "value": "kafka:9092",
+          "description": "CG13: broker propuesto",
+          "sensitive": false
+        },
+        "CG14_RAW_TOPIC": {
+          "name": "CG14_RAW_TOPIC",
+          "value": "cnc-sensors-raw",
+          "description": "CG13: topic de entrada propuesto",
+          "sensitive": false
+        },
+        "CG14_VALIDATED_TOPIC": {
+          "name": "CG14_VALIDATED_TOPIC",
+          "value": "cnc.telemetry.validated",
+          "description": "CG13: propuesto",
+          "sensitive": false
+        },
+        "CG14_REJECTED_TOPIC": {
+          "name": "CG14_REJECTED_TOPIC",
+          "value": "cnc.rejected",
+          "description": "CG13: propuesto",
+          "sensitive": false
+        },
+        "CG14_CONSUMER_GROUP": {
+          "name": "CG14_CONSUMER_GROUP",
+          "value": "cnc-nifi-cg14",
+          "description": "grupo dedicado NiFi",
+          "sensitive": false
+        },
+        "CG14_SECURITY_PROTOCOL": {
+          "name": "CG14_SECURITY_PROTOCOL",
+          "value": "PLAINTEXT",
+          "description": "CG13: subir a SASL_SSL con TLS",
+          "sensitive": false
+        },
+        "CG14_SCHEMA_VERSION": {
+          "name": "CG14_SCHEMA_VERSION",
+          "value": "0.1.0",
+          "description": "propuesta CG14/CG03",
+          "sensitive": false
+        },
+        "CG14_MAX_LINE_BYTES": {
+          "name": "CG14_MAX_LINE_BYTES",
+          "value": "8192",
+          "description": "presupuesto por línea",
+          "sensitive": false
+        },
+        "CG14_MAX_FIELD_CHARS": {
+          "name": "CG14_MAX_FIELD_CHARS",
+          "value": "512",
+          "description": "presupuesto por campo",
+          "sensitive": false
+        },
+        "CG14_MAX_PUBLISH_ATTEMPTS": {
+          "name": "CG14_MAX_PUBLISH_ATTEMPTS",
+          "value": "3",
+          "description": "reintentos acotados",
+          "sensitive": false
+        }
+      }
+    }
+  },
+  "flowContents": {
+    "identifier": "cnc-guard-cg14",
+    "name": "CNC Guard — CG14 validación y rechazo (propuesta v0.1.0)",
+    "comments": "Generado por scripts/build_cg14_nifi_flow.py desde nifi-flows/cg14_validate.groovy. NO desplegado ni probado en vivo: BLOCKED por CG03/CG13 e infra.",
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "processGroups": [
+      {
+        "identifier": "cg14-group-001",
+        "name": "CG14 — validación y rechazo",
+        "position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "parameterContextName": "CG14-params",
+        "processGroups": [],
+        "remoteProcessGroups": [],
+        "processors": [
+          {
+            "identifier": "cg14-consume-kafka",
+            "name": "ConsumeKafka — raw (CG14)",
+            "position": {
+              "x": 100.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.kafka.pubsub.ConsumeKafka_2_6",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-kafka-2-6-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "bootstrap.servers": "#{CG14_BOOTSTRAP_SERVERS}",
+              "topic": "#{CG14_RAW_TOPIC}",
+              "topic_type": "names",
+              "group.id": "#{CG14_CONSUMER_GROUP}",
+              "auto.offset.reset": "earliest",
+              "security.protocol": "#{CG14_SECURITY_PROTOCOL}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-source-meta",
+            "name": "UpdateAttribute — procedencia",
+            "position": {
+              "x": 340.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.standard.UpdateAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "cg14.source.kind": "nifi-cg14",
+              "cg14.source.uri": "kafka://${kafka.topic}/${kafka.partition}/${kafka.offset}",
+              "cg14.record.ref": "${kafka.topic}/${kafka.partition}/${kafka.offset}",
+              "cg14.max.line.bytes": "#{CG14_MAX_LINE_BYTES}",
+              "cg14.max.field.chars": "#{CG14_MAX_FIELD_CHARS}",
+              "cg14.schema.version": "#{CG14_SCHEMA_VERSION}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-validate",
+            "name": "ExecuteScript — validación CG14 (Groovy)",
+            "position": {
+              "x": 580.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.script.ExecuteScript",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-scripting-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "Script Engine": "Groovy",
+              "Script Body": "// CG14 — validación de ingesta (propuesta v0.1.0, NiFi 1.25.0, motor Groovy).\n//\n// Única fuente de verdad del script: este fichero. El flow JSON lo incrusta\n// y tests/test_cg14_nifi_flow.py exige que ambos sean idénticos.\n// Reglas = docs/CG14_VALIDATION_CONTRACT.md + cg14_validation/validator.py.\n//\n// Entrada: contenido = 1 línea CSV (timestamp + 13 columnas).\n// Atributos de entrada: kafka.topic/partition/offset, cg14.source.kind,\n//   cg14.max.line.bytes, cg14.max.field.chars, cg14.schema.version.\n// Salida REL_SUCCESS con contenido JSON:\n//   válido   -> evento normalizado SIN etiquetas + cg14.valid=true\n//   rechazado-> sobre de error auditable + cg14.valid=false/cg14.code/cg14.field\n// Salida REL_FAILURE solo ante error del motor (no de validación).\n\nimport java.nio.charset.StandardCharsets\nimport java.security.MessageDigest\nimport java.time.Instant\nimport org.apache.nifi.processor.io.InputStreamCallback\nimport org.apache.nifi.processor.io.OutputStreamCallback\n\ndef flowFile = session.get()\nif (flowFile == null) { return }\n\ndef fail(reason, field, raw, attrs) {\n    def now = Instant.now().toString()\n    def envelope = new StringBuilder('{\"valid\":false')\n        .append(',\"code\":').append(jsonStr(reason))\n        .append(',\"field\":').append(jsonStr(field))\n        .append(',\"message\":').append(jsonStr(msgFor(reason, field)))\n        .append(',\"event_id\":null')\n        .append(',\"source\":{\"kind\":').append(jsonStr(attrs['kind']))\n        .append(',\"uri\":').append(jsonStr(attrs['uri']))\n        .append(',\"record_ref\":').append(jsonStr(attrs['ref']))\n        .append(',\"raw_record\":').append(jsonStr(raw))\n        .append('},\"reject_time\":').append(jsonStr(now))\n        .append(',\"original\":').append(jsonStr(raw)).append('}').toString()\n    return [envelope, ['cg14.valid': 'false', 'cg14.code': reason,\n        'cg14.field': field ?: '', 'cg14.event.id': '',\n        'cg14.warning': '', 'machine.id': '', 'cg14.reject.time': now]]\n}\n\ndef jsonStr(s) {\n    if (s == null) { return 'null' }\n    def t = s.replace('\\\\', '\\\\\\\\').replace('\"', '\\\\\"')\n        .replace('\\n', '\\\\n').replace('\\r', '\\\\r').replace('\\t', '\\\\t')\n    return '\"' + t + '\"'\n}\n\ndef msgFor(code, field) {\n    switch (code) {\n        case 'MESSAGE_TOO_LARGE': return 'line or field exceeds configured budget'\n        case 'MALFORMED_CSV': return 'expected timestamp plus 13 CSV fields'\n        case 'HEADER_ROW': return 'header row received as data'\n        case 'INVALID_TIMESTAMP': return 'expected UTC ISO-8601 ending in Z'\n        case 'INVALID_MACHINE_ID': return 'expected CNC-000 format'\n        case 'INVALID_MACHINE_TYPE': return 'expected H, M or L'\n        case 'INVALID_NUMERIC': return 'CSV contains a non-numeric value'\n        case 'NON_FINITE_NUMERIC': return 'NaN and infinity are forbidden'\n        case 'NEGATIVE_PHYSICAL_VALUE': return 'Kelvin must be positive; other measurements cannot be negative'\n        case 'INVALID_LABEL': return 'CSV label columns must be 0 or 1'\n        default: return 'rejected by CG14 validation'\n    }\n}\n\ndef splitCsv(line) {\n    def fields = []\n    def cur = new StringBuilder()\n    def inQuotes = false\n    for (int i = 0; i < line.length(); i++) {\n        def c = line.charAt(i)\n        if (inQuotes) {\n            if (c == '\"') {\n                if (i + 1 < line.length() && line.charAt(i + 1) == '\"') { cur.append('\"'); i++ }\n                else { inQuotes = false }\n            } else { cur.append(c) }\n        } else if (c == '\"') { inQuotes = true }\n        else if (c == ',') { fields.add(cur.toString()); cur = new StringBuilder() }\n        else { cur.append(c) }\n    }\n    if (inQuotes) { return null }\n    fields.add(cur.toString())\n    return fields\n}\n\ntry {\n    def kind = flowFile.getAttribute('cg14.source.kind') ?: 'nifi-cg14'\n    def uri = flowFile.getAttribute('cg14.source.uri') ?: 'kafka://unknown'\n    def ref = flowFile.getAttribute('cg14.record.ref') ?: 'nifi:unknown'\n    def schema = flowFile.getAttribute('cg14.schema.version') ?: '0.1.0'\n    def maxLine = (flowFile.getAttribute('cg14.max.line.bytes') ?: '8192') as long\n    def maxField = (flowFile.getAttribute('cg14.max.field.chars') ?: '512') as int\n    def attrs = ['kind': kind, 'uri': uri, 'ref': ref]\n\n    // ProcessSession.read(FlowFile, InputStreamCallback) returns void. Keep the\n    // bytes in an external buffer; treating the callback's return as data makes\n    // rawBytes null in NiFi and sends every input to the engine-error path.\n    def rawBuffer = new java.io.ByteArrayOutputStream()\n    session.read(flowFile, { ins -> ins.transferTo(rawBuffer) } as InputStreamCallback)\n    def rawBytes = rawBuffer.toByteArray()\n    if (rawBytes.length > maxLine) {\n        def r = fail('MESSAGE_TOO_LARGE', '', '', attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    def raw = new String(rawBytes, StandardCharsets.UTF_8).replaceAll(/[\\r\\n]+$/, '')\n    def values = splitCsv(raw)\n    if (values == null || values.size() != 14) {\n        def first = (values && values.size() > 0) ? values[0].toLowerCase() : ''\n        def code = (first == 'timestamp' || first == 'machine_id') ? 'HEADER_ROW' : 'MALFORMED_CSV'\n        def r = fail(code, '', raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    def names = ['timestamp', 'machine_id', 'machine_type', 'air_temp_K', 'process_temp_K',\n        'rpm', 'torque_Nm', 'tool_wear_min', 'machine_failure', 'failure_TWF',\n        'failure_HDF', 'failure_PWF', 'failure_OSF', 'failure_RNF']\n    def row = [:]\n    names.eachWithIndex { n, i -> row[n] = values[i] }\n    if (row['timestamp'].trim().toLowerCase() == 'timestamp'\n        || row['machine_id'].trim().toLowerCase() == 'machine_id'\n        || row['machine_type'].trim().toLowerCase() == 'machine_type') {\n        def r = fail('HEADER_ROW', '', raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    def over = names.find { row[it].length() > maxField }\n    if (over) {\n        def r = fail('MESSAGE_TOO_LARGE', over, raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    if (!(row['timestamp'] ==~ /^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$/)) {\n        def r = fail('INVALID_TIMESTAMP', 'timestamp', raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    try { Instant.parse(row['timestamp']) }\n    catch (Exception e) {\n        def r = fail('INVALID_TIMESTAMP', 'timestamp', raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    if (!(row['machine_id'] ==~ /^CNC-[0-9]{3}$/)) {\n        def r = fail('INVALID_MACHINE_ID', 'machine_id', raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    if (!(row['machine_type'] in ['H', 'M', 'L'])) {\n        def r = fail('INVALID_MACHINE_TYPE', 'machine_type', raw, attrs)\n        flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n        flowFile = session.putAllAttributes(flowFile, r[1])\n        session.transfer(flowFile, REL_SUCCESS)\n        return\n    }\n    def sensors = ['air_temp_K', 'process_temp_K', 'rpm', 'torque_Nm', 'tool_wear_min']\n    def kelvin = ['air_temp_K', 'process_temp_K'] as Set\n    def nums = [:]\n    for (s in sensors) {\n        double v\n        try { v = Double.parseDouble(row[s]) }\n        catch (NumberFormatException e) {\n            def r = fail('INVALID_NUMERIC', s, raw, attrs)\n            flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n            flowFile = session.putAllAttributes(flowFile, r[1])\n            session.transfer(flowFile, REL_SUCCESS)\n            return\n        }\n        if (Double.isNaN(v) || Double.isInfinite(v)) {\n            def r = fail('NON_FINITE_NUMERIC', s, raw, attrs)\n            flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n            flowFile = session.putAllAttributes(flowFile, r[1])\n            session.transfer(flowFile, REL_SUCCESS)\n            return\n        }\n        if (v < 0 || (kelvin.contains(s) && v == 0)) {\n            def r = fail('NEGATIVE_PHYSICAL_VALUE', s, raw, attrs)\n            flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n            flowFile = session.putAllAttributes(flowFile, r[1])\n            session.transfer(flowFile, REL_SUCCESS)\n            return\n        }\n        nums[s] = v\n    }\n    def labels = ['machine_failure', 'failure_TWF', 'failure_HDF', 'failure_PWF', 'failure_OSF', 'failure_RNF']\n    for (l in labels) {\n        // trim: paridad con int() de Python, que ignora espacios alrededor\n        if (!(row[l].trim() == '0' || row[l].trim() == '1')) {\n            def r = fail('INVALID_LABEL', l, raw, attrs)\n            flowFile = session.write(flowFile, { out -> out.write(r[0].getBytes('UTF-8')) } as OutputStreamCallback)\n            flowFile = session.putAllAttributes(flowFile, r[1])\n            session.transfer(flowFile, REL_SUCCESS)\n            return\n        }\n    }\n    def active = labels.find { row[it].trim() == '1' }\n    def warning = active ? 'TRAINING_LABEL_STRIPPED' : ''\n\n    def digest = MessageDigest.getInstance('SHA-256')\n    def eventId = digest.digest(('cnc.telemetry.v' + schema + '\\n' + kind + '\\n' + raw).getBytes(StandardCharsets.UTF_8)).encodeHex().toString()\n    def eventBuilder = new StringBuilder('{\"event_id\":').append(jsonStr(eventId))\n        .append(',\"machine_id\":').append(jsonStr(row['machine_id']))\n        .append(',\"timestamp\":').append(jsonStr(row['timestamp']))\n        .append(',\"schema_version\":').append(jsonStr(schema))\n        .append(',\"quality_flag\":\"OK\"')\n        .append(',\"source\":{\"kind\":').append(jsonStr(kind))\n        .append(',\"uri\":').append(jsonStr(uri))\n        .append(',\"record_ref\":').append(jsonStr(ref))\n        .append(',\"raw_record\":').append(jsonStr(raw)).append('}')\n        .append(',\"machine_type\":').append(jsonStr(row['machine_type']))\n    sensors.each { s -> eventBuilder.append(',\"').append(s).append('\":').append(nums[s]) }\n    def event = eventBuilder.append('}').toString()\n    flowFile = session.write(flowFile, { out -> out.write(event.getBytes('UTF-8')) } as OutputStreamCallback)\n    flowFile = session.putAllAttributes(flowFile, ['cg14.valid': 'true', 'cg14.code': '',\n        'cg14.field': '', 'cg14.event.id': eventId, 'cg14.warning': warning,\n        'machine.id': row['machine_id'], 'cg14.reject.time': ''])\n    session.transfer(flowFile, REL_SUCCESS)\n} catch (Exception e) {\n    flowFile = session.putAttribute(flowFile, 'cg14.engine.error', e.toString())\n    session.transfer(flowFile, REL_FAILURE)\n}\n"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-route",
+            "name": "RouteOnAttribute — válidos/rechazados",
+            "position": {
+              "x": 820.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.standard.RouteOnAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "Routing Strategy": "Route to Property Name",
+              "valid": "${cg14.valid:equals('true')}",
+              "rejected": "${cg14.valid:equals('false')}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-tag-valid",
+            "name": "UpdateAttribute — marca destino validated",
+            "position": {
+              "x": 940.0,
+              "y": 180.0
+            },
+            "type": "org.apache.nifi.processors.standard.UpdateAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "cg14.retry.topic": "#{CG14_VALIDATED_TOPIC}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-tag-rejected",
+            "name": "UpdateAttribute — marca destino rejected",
+            "position": {
+              "x": 940.0,
+              "y": 420.0
+            },
+            "type": "org.apache.nifi.processors.standard.UpdateAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "cg14.retry.topic": "#{CG14_REJECTED_TOPIC}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-publish-valid",
+            "name": "PublishKafka — cnc.telemetry.validated",
+            "position": {
+              "x": 1180.0,
+              "y": 180.0
+            },
+            "type": "org.apache.nifi.processors.kafka.pubsub.PublishKafka_2_6",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-kafka-2-6-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "bootstrap.servers": "#{CG14_BOOTSTRAP_SERVERS}",
+              "topic": "#{CG14_VALIDATED_TOPIC}",
+              "delivery.guarantee": "Guarantee Replicated Delivery",
+              "security.protocol": "#{CG14_SECURITY_PROTOCOL}"
+            },
+            "autoTerminatedRelationships": [
+              "success"
+            ],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-publish-rejected",
+            "name": "PublishKafka — cnc.rejected",
+            "position": {
+              "x": 1180.0,
+              "y": 420.0
+            },
+            "type": "org.apache.nifi.processors.kafka.pubsub.PublishKafka_2_6",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-kafka-2-6-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "bootstrap.servers": "#{CG14_BOOTSTRAP_SERVERS}",
+              "topic": "#{CG14_REJECTED_TOPIC}",
+              "delivery.guarantee": "Guarantee Replicated Delivery",
+              "security.protocol": "#{CG14_SECURITY_PROTOCOL}"
+            },
+            "autoTerminatedRelationships": [
+              "success"
+            ],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-retry-count",
+            "name": "UpdateAttribute — intentos de publicación",
+            "position": {
+              "x": 1420.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.standard.UpdateAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "cg14.publish.attempts": "${cg14.publish.attempts:replaceNull('0'):toNumber():plus(1)}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-retry-route",
+            "name": "RouteOnAttribute — reintento acotado",
+            "position": {
+              "x": 1660.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.standard.RouteOnAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "Routing Strategy": "Route to Property Name",
+              "retry": "${cg14.publish.attempts:toNumber():le(#{CG14_MAX_PUBLISH_ATTEMPTS})}"
+            },
+            "autoTerminatedRelationships": [],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-retry-target",
+            "name": "PublishKafka — reintento al destino original",
+            "position": {
+              "x": 1900.0,
+              "y": 300.0
+            },
+            "type": "org.apache.nifi.processors.kafka.pubsub.PublishKafka_2_6",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-kafka-2-6-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "bootstrap.servers": "#{CG14_BOOTSTRAP_SERVERS}",
+              "topic": "${cg14.retry.topic}",
+              "delivery.guarantee": "Guarantee Replicated Delivery",
+              "security.protocol": "#{CG14_SECURITY_PROTOCOL}"
+            },
+            "autoTerminatedRelationships": [
+              "success"
+            ],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-dead-letter",
+            "name": "LogAttribute — dead-letter auditable",
+            "position": {
+              "x": 1900.0,
+              "y": 520.0
+            },
+            "type": "org.apache.nifi.processors.standard.LogAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "Log Level": "warn",
+              "Attributes to Log Regex": "cg14.*|kafka.*",
+              "Log Payload": "false"
+            },
+            "autoTerminatedRelationships": [
+              "success"
+            ],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          },
+          {
+            "identifier": "cg14-engine-errors",
+            "name": "LogAttribute — errores del motor",
+            "position": {
+              "x": 820.0,
+              "y": 520.0
+            },
+            "type": "org.apache.nifi.processors.standard.LogAttribute",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "1.25.0"
+            },
+            "properties": {
+              "Log Level": "error",
+              "Attributes to Log Regex": "cg14.*|kafka.*",
+              "Log Payload": "false"
+            },
+            "autoTerminatedRelationships": [
+              "success"
+            ],
+            "schedulingStrategy": "TIMER_DRIVEN",
+            "schedulingPeriod": "0 sec",
+            "executionNode": "ALL"
+          }
+        ],
+        "connections": [
+          {
+            "identifier": "c1",
+            "name": "",
+            "source": {
+              "id": "cg14-consume-kafka",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-source-meta",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "success"
+            ]
+          },
+          {
+            "identifier": "c2",
+            "name": "",
+            "source": {
+              "id": "cg14-source-meta",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-validate",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "success"
+            ]
+          },
+          {
+            "identifier": "c3",
+            "name": "",
+            "source": {
+              "id": "cg14-validate",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-route",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "success"
+            ]
+          },
+          {
+            "identifier": "c4",
+            "name": "",
+            "source": {
+              "id": "cg14-validate",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-engine-errors",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "failure"
+            ]
+          },
+          {
+            "identifier": "c5",
+            "name": "",
+            "source": {
+              "id": "cg14-route",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-tag-valid",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "valid"
+            ]
+          },
+          {
+            "identifier": "c6",
+            "name": "",
+            "source": {
+              "id": "cg14-route",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-tag-rejected",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "rejected"
+            ]
+          },
+          {
+            "identifier": "c7",
+            "name": "",
+            "source": {
+              "id": "cg14-route",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-dead-letter",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "unmatched"
+            ]
+          },
+          {
+            "identifier": "c8",
+            "name": "",
+            "source": {
+              "id": "cg14-tag-valid",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-publish-valid",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "success"
+            ]
+          },
+          {
+            "identifier": "c9",
+            "name": "",
+            "source": {
+              "id": "cg14-tag-rejected",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-publish-rejected",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "success"
+            ]
+          },
+          {
+            "identifier": "c10",
+            "name": "",
+            "source": {
+              "id": "cg14-publish-valid",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-retry-count",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "failure"
+            ]
+          },
+          {
+            "identifier": "c11",
+            "name": "",
+            "source": {
+              "id": "cg14-publish-rejected",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-retry-count",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "failure"
+            ]
+          },
+          {
+            "identifier": "c12",
+            "name": "",
+            "source": {
+              "id": "cg14-retry-count",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-retry-route",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "success"
+            ]
+          },
+          {
+            "identifier": "c13",
+            "name": "",
+            "source": {
+              "id": "cg14-retry-route",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-retry-target",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "retry"
+            ]
+          },
+          {
+            "identifier": "c14",
+            "name": "",
+            "source": {
+              "id": "cg14-retry-route",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-dead-letter",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "unmatched"
+            ]
+          },
+          {
+            "identifier": "c15",
+            "name": "",
+            "source": {
+              "id": "cg14-retry-target",
+              "type": "PROCESSOR"
+            },
+            "destination": {
+              "id": "cg14-retry-count",
+              "type": "PROCESSOR"
+            },
+            "selectedRelationships": [
+              "failure"
+            ]
+          }
+        ],
+        "labels": []
+      }
+    ],
+    "remoteProcessGroups": [],
+    "processors": [],
+    "connections": [],
+    "labels": []
+  }
+}
