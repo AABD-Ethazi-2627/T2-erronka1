@@ -37,9 +37,10 @@ def run(output, baseline_ref=BASE):
         )
     )
     difference = copy.deepcopy(template)
+    del difference["template"]["settings"]["index.final_pipeline"]
     for field in FIELDS:
         del difference["template"]["mappings"]["properties"][field]
-    assert difference == baseline, "Expected only the three additive field mappings"
+    assert difference == baseline, "Expected three additive mappings and final pipeline"
 
     container = subprocess.check_output(
         [
@@ -200,6 +201,11 @@ def run(output, baseline_ref=BASE):
         assert "strict_dynamic_mapping_exception" in json.dumps(error)
 
         # Updating the template alone must not silently fix that existing index.
+        request(
+            "PUT",
+            "/_ingest/pipeline/cnc-prediction-v1",
+            json.loads((ROOT / "elasticsearch/ingest-pipeline.json").read_text()),
+        )
         request("PUT", "/_index_template/cnc-contract-test", template)
         request("PUT", document_path, document, expected=400)
         additive = {

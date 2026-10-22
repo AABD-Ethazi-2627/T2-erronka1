@@ -172,6 +172,12 @@ async def verify(output):
             if time.monotonic() > deadline:
                 raise TimeoutError("Isolated ES did not start in 180s")
             await asyncio.sleep(1)
+        pipeline = Path("elasticsearch/ingest-pipeline.json").read_bytes()
+        assert (
+            await asyncio.to_thread(
+                es, "PUT", "/_ingest/pipeline/cnc-prediction-v1", pipeline
+            )
+        ).status_code == 200
         template = json.loads(Path("elasticsearch/index-template.json").read_text())
         assert (
             await asyncio.to_thread(
