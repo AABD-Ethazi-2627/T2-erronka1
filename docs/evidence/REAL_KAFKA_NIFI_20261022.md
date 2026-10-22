@@ -54,6 +54,20 @@ worker en `/home/Fedora/t2-real-lab-20261022`, evidencia en D:. La distribución
 está registrada bajo `C:\Users\unaiu\AppData\Local\wsl\{8a489b57-18f3-4603-b97a-9525d61c7794}`;
 no se ha trasladado la distro ni se afirma que su VHDX esté en D:.
 
+El inventario posterior a la nueva restricción de temporales detectó que el
+`log.dir` efectivo de Kafka era `/tmp/kafka-logs` en su capa escribible: el
+volumen montado en `/tmp/kraft-combined-logs` no era ese destino. No se ha
+eliminado ni recreado el contenedor. Por tanto, la persistencia observada es
+tras **restart del mismo contenedor**, no tras recreación ni prueba de ese
+volumen. Los auxiliares de Java/NiFi/ES bajo `/tmp` se inventariaron también.
+La instrucción nueva se aplicó al trabajo restante: sin repetir pruebas ni
+arrancar servicios, TMPDIR/TEMP/TMP por proceso apuntan a `process-temp` en el
+taskroot de D:. No queda necesidad de `/tmp`; no se movieron ni borraron
+datos existentes. Paths exactos y atribuciones pendientes se conservan en
+`temporary-inventory.json` y `TEMPORARY-SPACE-HANDOFF.md` del directorio local
+de evidencia. Los nombres temporales eliminados por unittest no se habían
+registrado y no se reconstruyen por conjetura.
+
 La API es `scoring.score_api.create_app` servida por Uvicorn/HTTP real con
 ledger SQLite y modelos **sintéticos en memoria**. No se entrenó, cargó un
 modelo de entrega ni evaluó testfinal. Los fallos HTTP controlados se declaran

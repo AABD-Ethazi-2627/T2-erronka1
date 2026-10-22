@@ -769,6 +769,18 @@
     "probe-stop.json": {
       "sha256": "0739cdac9e6819eb342c6f687c67b6cb01d69704b1b640fde1e2cb50fd84b8f6",
       "size": 423
+    },
+    "inventory_temporaries.py": {
+      "sha256": "9f2ccd235f8a009f5973edb00e703e6f46c159546a8407dc8f7f57744110496d",
+      "size": 2364
+    },
+    "temporary-inventory.json": {
+      "sha256": "849fc9376a4683a893b18ff02fce2951fd3216dce1bc51d87f9d19a4ab0e6b5e",
+      "size": 61766
+    },
+    "TEMPORARY-SPACE-HANDOFF.md": {
+      "sha256": "6e34ebd0a280c6c407bda9b819e1d6334ca9affd273e3aa9fbb911bf03e22f21",
+      "size": 2697
     }
   },
   "candidate_sources": {
@@ -784,6 +796,6 @@
     "pyproject.toml": "59332d35f31eab4aaaffa472d8faca8c54a4e640520dc526cd3b44322b22438c",
     "uv.lock": "eac3f7c0c79e2accb3f86952c67f877c3cd5a6501779bd90adbd8f1ad7e73f6e"
   },
-  "summary_sha256": "93e341910b2bf2ca4a4822bc725460b26afcabceedfaa4ed327331ffdf3ab55c",
+  "summary_sha256": "98bd892848606fe246abeb35c239f2134f8496b4609f1190648e69cdd5834f8f",
   "freeze_note": "Owned diagnostic probe 216159 stopped with SIGTERM; kafka-client-debug.log was still open during the previous seal. All other sealed artifacts and candidate source hashes matched."
 }

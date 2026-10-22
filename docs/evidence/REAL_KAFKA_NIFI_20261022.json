@@ -1678,5 +1678,17 @@
       "size": 2407879264
     }
   },
-  "previous_candidate": "a98afc421a3c329c9343ef4c2b1c919cb3fe418f"
+  "previous_candidate": "a98afc421a3c329c9343ef4c2b1c919cb3fe418f",
+  "later_user_temporary_constraint": {
+    "remaining_process_tmp": "D:\\github\\_local\\t2-babysit-20261021\\real-kafka-nifi-evidence-20261022\\process-temp",
+    "remaining_system_tmp_need": "NONE",
+    "no_new_tests_or_services": true,
+    "existing_resources_not_moved_or_deleted": true,
+    "kafka_effective_log_dir": "/tmp/kafka-logs",
+    "kafka_effective_log_storage": "own stopped container writable layer",
+    "kafka_mounted_volume_target_not_effective_log_dir": "/tmp/kraft-combined-logs",
+    "restart_evidence_limit": "same-container restart only; not recreate or named-volume log persistence",
+    "inventory": "temporary-inventory.json",
+    "handoff": "TEMPORARY-SPACE-HANDOFF.md"
+  }
 }
