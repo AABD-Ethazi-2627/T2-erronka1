@@ -1,0 +1,47 @@
+{
+  "docker.elastic.co/elasticsearch/elasticsearch:9.5.4": {
+    "Id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+    "RepoDigests": [
+      "docker.elastic.co/elasticsearch/elasticsearch@sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026"
+    ],
+    "Size": 2564192641,
+    "Os": "linux",
+    "Architecture": "amd64"
+  },
+  "docker.elastic.co/kibana/kibana:9.5.4": {
+    "Id": "sha256:b1b4cea273350ffcb67292d7b90dd034598c1627bfa3cd0783315e9237dbe737",
+    "RepoDigests": [
+      "docker.elastic.co/kibana/kibana@sha256:b1b4cea273350ffcb67292d7b90dd034598c1627bfa3cd0783315e9237dbe737"
+    ],
+    "Size": 2728260879,
+    "Os": "linux",
+    "Architecture": "amd64"
+  },
+  "docker.elastic.co/beats/filebeat:9.5.4": {
+    "Id": "sha256:2dd1d5252f3d5d3f3104f8e908b88cb9dfb53faeab5beb8a01ce1593a8fc149d",
+    "RepoDigests": [
+      "docker.elastic.co/beats/filebeat@sha256:2dd1d5252f3d5d3f3104f8e908b88cb9dfb53faeab5beb8a01ce1593a8fc149d"
+    ],
+    "Size": 606001019,
+    "Os": "linux",
+    "Architecture": "amd64"
+  },
+  "apache/kafka:3.7.2": {
+    "Id": "sha256:8bd63e1bd445e5e19427a4bdbcc3d23bf6efd774b058a41b36ba87fda7623e34",
+    "RepoDigests": [
+      "apache/kafka@sha256:8bd63e1bd445e5e19427a4bdbcc3d23bf6efd774b058a41b36ba87fda7623e34"
+    ],
+    "Size": 624992819,
+    "Os": "linux",
+    "Architecture": "amd64"
+  },
+  "local/t2-cg19-samba:20261022-6da1": {
+    "Id": "sha256:6f72c970289784d167417aef90beba37c0dd97c5d9a3088054f4f23e7ce58457",
+    "RepoDigests": [
+      "local/t2-cg19-samba@sha256:6f72c970289784d167417aef90beba37c0dd97c5d9a3088054f4f23e7ce58457"
+    ],
+    "Size": 95285865,
+    "Os": "linux",
+    "Architecture": "amd64"
+  }
+}

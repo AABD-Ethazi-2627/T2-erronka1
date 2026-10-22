@@ -1,0 +1,91 @@
+{
+  "version": "Filebeat9.5.4 native Windows; Samba4.23.8 SMB3; Apache Kafka3.7.2 own broker",
+  "arguments": [
+    "D:\\github\\_local\\t2-babysit-20261021\\es-kibana-smb-live-20261022\\downloads\\filebeat-9.5.4-windows-x86_64\\filebeat.exe",
+    "-c",
+    "D:\\github\\_local\\t2-babysit-20261021\\es-kibana-smb-live-20261022\\filebeat-live.yml",
+    "-e",
+    "--path.data",
+    "D:\\github\\_local\\t2-babysit-20261021\\es-kibana-smb-live-20261022\\filebeat-kafka-registry",
+    "--path.logs",
+    "D:\\github\\_local\\t2-babysit-20261021\\es-kibana-smb-live-20261022\\filebeat-kafka-logs",
+    "-E",
+    "output.file.enabled=false",
+    "-E",
+    "output.kafka.enabled=true",
+    "-E",
+    "output.kafka.hosts=[127.0.0.1:19042]",
+    "-E",
+    "output.kafka.topic=cg19-smb-owned",
+    "-E",
+    "output.kafka.required_acks=-1",
+    "-E",
+    "output.kafka.key=%{[@metadata.cnc_line_sha256]}:%{[log.offset]}",
+    "-E",
+    "output.kafka.codec.format.string=%{[message]}"
+  ],
+  "stages": [
+    {
+      "stage": "initial",
+      "exit": 0,
+      "rows": [
+        [
+          "0444fc2b9c9d23dcc8f2449ab4520ba597659d95983e72185c4ed780b607a4f1:164",
+          "2026-10-22T08:00:00Z,SYNTHETIC-SMB-002,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0"
+        ],
+        [
+          "11fb58983b399995fc6c3fde6a3e50b47ba776f945486635a73c294977978652:164",
+          "2026-10-22T08:00:00Z,SYNTHETIC-SMB-001,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0"
+        ],
+        [
+          "93d47cc6a130f3a458f6c9d6ca9908eae2aa267b1c298d6d43de8e0d83480751:260",
+          "2026-10-22T08:00:00Z,SYNTHETIC-SMB-003,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0"
+        ],
+        [
+          "906ac2b88b955f5ac412da0b9f02aa0573c392a2422e6a733ed4107e48431455:164",
+          "2026-10-22T08:00:00Z,TINY01,L,1,1,1,1,1,0,0,0,0,0,0"
+        ]
+      ]
+    },
+    {
+      "stage": "after-outage-restart",
+      "exit": 0,
+      "rows": [
+        [
+          "0444fc2b9c9d23dcc8f2449ab4520ba597659d95983e72185c4ed780b607a4f1:164",
+          "2026-10-22T08:00:00Z,SYNTHETIC-SMB-002,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0"
+        ],
+        [
+          "11fb58983b399995fc6c3fde6a3e50b47ba776f945486635a73c294977978652:164",
+          "2026-10-22T08:00:00Z,SYNTHETIC-SMB-001,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0"
+        ],
+        [
+          "93d47cc6a130f3a458f6c9d6ca9908eae2aa267b1c298d6d43de8e0d83480751:260",
+          "2026-10-22T08:00:00Z,SYNTHETIC-SMB-003,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0"
+        ],
+        [
+          "906ac2b88b955f5ac412da0b9f02aa0573c392a2422e6a733ed4107e48431455:164",
+          "2026-10-22T08:00:00Z,TINY01,L,1,1,1,1,1,0,0,0,0,0,0"
+        ]
+      ]
+    }
+  ],
+  "expected": {
+    "0444fc2b9c9d23dcc8f2449ab4520ba597659d95983e72185c4ed780b607a4f1:164": "2026-10-22T08:00:00Z,SYNTHETIC-SMB-002,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0",
+    "11fb58983b399995fc6c3fde6a3e50b47ba776f945486635a73c294977978652:164": "2026-10-22T08:00:00Z,SYNTHETIC-SMB-001,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0",
+    "93d47cc6a130f3a458f6c9d6ca9908eae2aa267b1c298d6d43de8e0d83480751:260": "2026-10-22T08:00:00Z,SYNTHETIC-SMB-003,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0",
+    "906ac2b88b955f5ac412da0b9f02aa0573c392a2422e6a733ed4107e48431455:164": "2026-10-22T08:00:00Z,TINY01,L,1,1,1,1,1,0,0,0,0,0,0"
+  },
+  "actual": {
+    "0444fc2b9c9d23dcc8f2449ab4520ba597659d95983e72185c4ed780b607a4f1:164": "2026-10-22T08:00:00Z,SYNTHETIC-SMB-002,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0",
+    "11fb58983b399995fc6c3fde6a3e50b47ba776f945486635a73c294977978652:164": "2026-10-22T08:00:00Z,SYNTHETIC-SMB-001,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0",
+    "93d47cc6a130f3a458f6c9d6ca9908eae2aa267b1c298d6d43de8e0d83480751:260": "2026-10-22T08:00:00Z,SYNTHETIC-SMB-003,L,300.0000,310.0000,1200.0000,40.0000,1.0000,0,0,0,0,0,0",
+    "906ac2b88b955f5ac412da0b9f02aa0573c392a2422e6a733ed4107e48431455:164": "2026-10-22T08:00:00Z,TINY01,L,1,1,1,1,1,0,0,0,0,0,0"
+  },
+  "missing": [],
+  "unexpected": [],
+  "duplicates": {},
+  "equal": true,
+  "required_acks": -1,
+  "limitation": "Single own broker; not broker power-loss, sustained load, shared NiFi or distributed exactly-once."
+}

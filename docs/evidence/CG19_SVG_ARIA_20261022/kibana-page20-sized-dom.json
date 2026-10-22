@@ -1,0 +1,6 @@
+{
+  "result": {
+    "type": "string",
+    "value": "{\"signalPage\":20,\"selected\":\"20\",\"title\":\"IDs: 5/100 recuperados · página 20/20\",\"aria\":\"Title text 'IDs: 5/100 recuperados · página 20/20'\",\"ids\":[\"ARIA-SYNTHETIC-095 / aria_fixture\",\"ARIA-SYNTHETIC-096 / aria_fixture\",\"ARIA-SYNTHETIC-097 / aria_fixture\",\"ARIA-SYNTHETIC-098 / aria_fixture\",\"ARIA-SYNTHETIC-099 / aria_fixture\"],\"legend\":[\"ARIA-SYNTHETIC-095 / aria_fixture\",\"ARIA-SYNTHETIC-096 / aria_fixture\",\"ARIA-SYNTHETIC-097 / aria_fixture\",\"ARIA-SYNTHETIC-098 / aria_fixture\",\"ARIA-SYNTHETIC-099 / aria_fixture\"],\"sameSVG\":true,\"requestedPlotHeight\":480,\"svgBounds\":{\"x\":8,\"y\":152,\"width\":1848,\"height\":480,\"top\":152,\"right\":1856,\"bottom\":632,\"left\":8},\"utc\":\"2026-10-22T09:00:37.903Z\"}"
+  }
+}

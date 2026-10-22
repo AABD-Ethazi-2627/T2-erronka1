@@ -36,6 +36,40 @@ function checkNumbers(item) {
 async function run() {
   fs.mkdirSync(out, {recursive: true});
   const reports = [];
+  const summary = JSON.parse(JSON.parse(objects.find(o => o.id === 'cnc-cg19-summary-v2').attributes.visState).params.spec);
+  for (const width of [250, 600, 1100]) {
+    const spec = structuredClone(summary);
+    spec.data[0].values = [{doc_count: 100, alerts: {doc_count: 66}, classified: {doc_count: 100},
+      machines: {value: 100}, latest: {value: Date.UTC(2026, 9, 22, 8)}, oldest: {value: Date.UTC(2026, 9, 22, 8)}}];
+    delete spec.data[0].url;
+    delete spec.data[0].format;
+    const warnings = [];
+    const logger = vega.logger(vega.Warn);
+    logger.warn = (...args) => warnings.push(args.join(' '));
+    logger.error = (...args) => warnings.push(args.join(' '));
+    const view = new vega.View(vega.parse(spec), {renderer: 'none', logger}).width(width).height(280);
+    try {
+      await view.runAsync();
+      const group = view.scenegraph().root.items[0];
+      const svg = await view.toSVG();
+      fs.writeFileSync(path.join(out, `summary-${width}.svg`), svg);
+      const viewport = svg.match(/<svg[^>]* width="([\d.]+)" height="([\d.]+)"/);
+      const origin = view.origin().map((value, axis) => value + view.padding()[axis ? 'top' : 'left']);
+      assert(Number(viewport[1]) <= width + 0.1, 'Summary must not expand horizontally');
+      for (const mark of group.items) {
+        assert(mark.bounds.y2 + origin[1] <= Number(viewport[2]) + 0.1, `Summary prose clipped vertically at ${width}`);
+        // Node's font fallback estimates differ from browser glyph metrics.
+        // Check lossless wrapping here; measure actual text bounds in live Kibana.
+        for (const item of mark.items) {
+          assert.equal(item.text.join(' ').replace(/\s+/g, ' '), item.description.replace(/\s+/g, ' '));
+          if (width === 250) assert(item.text.every(line => line.length < 30));
+        }
+      }
+      assert(svg.includes('aria-label="Observaciones en el filtro: 100"'));
+      assert(svg.includes('aria-label="Edad desde timestamp de evento; no latencia de ingestión."'));
+      assert.deepEqual(warnings, []);
+    } finally { view.finalize(); }
+  }
   for (const [width, height] of [[600, 400], [1100, 480], [1600, 600]]) {
     for (const count of [0, 1, 31, 100]) {
       const spec = structuredClone(original);
@@ -96,7 +130,7 @@ async function run() {
         if (count < 100) assert((await view.toSVG()).includes(count ? 'Página vacía:' : 'Sin datos en el filtro'));
         if (count === 100) {
           await view.change('response', vega.changeset().remove(() => true).insert([fixture(1)])).runAsync();
-          assert((await view.toSVG()).includes('Página vacía:'));
+          assert.equal(view.signal('page'), 1, 'Filter must clamp to the last available page');
           await view.signal('page', 1).runAsync();
           assert.equal(view.data('page_groups').length, 1);
           await view.change('response', vega.changeset().remove(() => true).insert([fixture(0)])).runAsync();
@@ -138,10 +172,13 @@ async function run() {
   delete browserSpec.data[0].url;
   delete browserSpec.data[0].format;
   const runtime = fs.readFileSync(path.join(path.dirname(require.resolve(process.env.CG19_VEGA_MODULE || 'vega')), 'vega.min.js'), 'utf8');
+  const domRegression = fs.readFileSync(path.join(__dirname, 'test_lab_dashboard_dom.js'), 'utf8');
   fs.writeFileSync(path.join(out, 'browser.html'), `<!doctype html><html lang="es"><meta charset="utf-8"><title>CG19 · regresión local</title>
 <style>body{font:14px Arial;margin:0}p{line-height:1.5}select{font:inherit}select:focus-visible{outline:3px solid #155db1;outline-offset:3px}#chart{max-width:1100px}svg{display:block;background:white}</style>
 <p>Fixture sintética de regresión: 100 ID/fuente. Vega ${vega.version}. Render local; importación y filtros Kibana pendientes.</p>
 <div id="chart"></div><script>${runtime}</script><script>
+${fixture.toString()}
+${domRegression}
 window.spec=${JSON.stringify(browserSpec)};
 window.view=new vega.View(vega.parse(spec),{renderer:'svg'}).initialize('#chart').width(Math.min(1100,innerWidth)).height(480);
 window.ready=view.runAsync().then(()=>console.log('CG19 ready',view.data('groups').length));

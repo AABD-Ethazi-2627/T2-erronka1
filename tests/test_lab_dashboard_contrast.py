@@ -95,6 +95,29 @@ def inspect_svg(file):
 
 
 class ContrastTests(unittest.TestCase):
+    def test_every_vega_view_paints_background_and_uses_accessible_svg(self):
+        objects = [
+            json.loads(line) for line in SOURCE.read_text(encoding="utf-8").splitlines()
+        ]
+        specs = []
+        for obj in objects:
+            state = json.loads(obj.get("attributes", {}).get("visState", "{}"))
+            if state.get("type") == "vega":
+                specs.append(json.loads(state["params"]["spec"]))
+        self.assertEqual(len(specs), 3)
+        for spec in specs:
+            self.assertEqual(spec["background"], "#ffffff")
+            self.assertEqual(spec["config"]["kibana"]["renderer"], "svg")
+            for component, properties in {
+                "axis": ["labelColor", "titleColor"],
+                "title": ["color", "subtitleColor"],
+                "legend": ["labelColor", "titleColor"],
+            }.items():
+                for prop in properties:
+                    self.assertGreaterEqual(
+                        contrast(rgb(spec["config"][component][prop])), 4.5
+                    )
+
     def test_svg_verifier_rejects_orange_and_inherited_transparency(self):
         template = (
             '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400">'

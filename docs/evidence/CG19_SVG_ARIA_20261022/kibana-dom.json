@@ -1,0 +1,810 @@
+{
+  "value": {
+    "coverage": [
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-000 / aria_fixture",
+          "ARIA-SYNTHETIC-001 / aria_fixture",
+          "ARIA-SYNTHETIC-002 / aria_fixture",
+          "ARIA-SYNTHETIC-003 / aria_fixture",
+          "ARIA-SYNTHETIC-004 / aria_fixture"
+        ],
+        "page": 1,
+        "title": "IDs: 5/100 recuperados · página 1/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 2/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-005 / aria_fixture",
+          "ARIA-SYNTHETIC-006 / aria_fixture",
+          "ARIA-SYNTHETIC-007 / aria_fixture",
+          "ARIA-SYNTHETIC-008 / aria_fixture",
+          "ARIA-SYNTHETIC-009 / aria_fixture"
+        ],
+        "page": 2,
+        "title": "IDs: 5/100 recuperados · página 2/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 3/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-010 / aria_fixture",
+          "ARIA-SYNTHETIC-011 / aria_fixture",
+          "ARIA-SYNTHETIC-012 / aria_fixture",
+          "ARIA-SYNTHETIC-013 / aria_fixture",
+          "ARIA-SYNTHETIC-014 / aria_fixture"
+        ],
+        "page": 3,
+        "title": "IDs: 5/100 recuperados · página 3/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 4/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-015 / aria_fixture",
+          "ARIA-SYNTHETIC-016 / aria_fixture",
+          "ARIA-SYNTHETIC-017 / aria_fixture",
+          "ARIA-SYNTHETIC-018 / aria_fixture",
+          "ARIA-SYNTHETIC-019 / aria_fixture"
+        ],
+        "page": 4,
+        "title": "IDs: 5/100 recuperados · página 4/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 5/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-020 / aria_fixture",
+          "ARIA-SYNTHETIC-021 / aria_fixture",
+          "ARIA-SYNTHETIC-022 / aria_fixture",
+          "ARIA-SYNTHETIC-023 / aria_fixture",
+          "ARIA-SYNTHETIC-024 / aria_fixture"
+        ],
+        "page": 5,
+        "title": "IDs: 5/100 recuperados · página 5/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 6/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-025 / aria_fixture",
+          "ARIA-SYNTHETIC-026 / aria_fixture",
+          "ARIA-SYNTHETIC-027 / aria_fixture",
+          "ARIA-SYNTHETIC-028 / aria_fixture",
+          "ARIA-SYNTHETIC-029 / aria_fixture"
+        ],
+        "page": 6,
+        "title": "IDs: 5/100 recuperados · página 6/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 7/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-030 / aria_fixture",
+          "ARIA-SYNTHETIC-031 / aria_fixture",
+          "ARIA-SYNTHETIC-032 / aria_fixture",
+          "ARIA-SYNTHETIC-033 / aria_fixture",
+          "ARIA-SYNTHETIC-034 / aria_fixture"
+        ],
+        "page": 7,
+        "title": "IDs: 5/100 recuperados · página 7/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 8/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-035 / aria_fixture",
+          "ARIA-SYNTHETIC-036 / aria_fixture",
+          "ARIA-SYNTHETIC-037 / aria_fixture",
+          "ARIA-SYNTHETIC-038 / aria_fixture",
+          "ARIA-SYNTHETIC-039 / aria_fixture"
+        ],
+        "page": 8,
+        "title": "IDs: 5/100 recuperados · página 8/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 9/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-040 / aria_fixture",
+          "ARIA-SYNTHETIC-041 / aria_fixture",
+          "ARIA-SYNTHETIC-042 / aria_fixture",
+          "ARIA-SYNTHETIC-043 / aria_fixture",
+          "ARIA-SYNTHETIC-044 / aria_fixture"
+        ],
+        "page": 9,
+        "title": "IDs: 5/100 recuperados · página 9/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 10/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-045 / aria_fixture",
+          "ARIA-SYNTHETIC-046 / aria_fixture",
+          "ARIA-SYNTHETIC-047 / aria_fixture",
+          "ARIA-SYNTHETIC-048 / aria_fixture",
+          "ARIA-SYNTHETIC-049 / aria_fixture"
+        ],
+        "page": 10,
+        "title": "IDs: 5/100 recuperados · página 10/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 11/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-050 / aria_fixture",
+          "ARIA-SYNTHETIC-051 / aria_fixture",
+          "ARIA-SYNTHETIC-052 / aria_fixture",
+          "ARIA-SYNTHETIC-053 / aria_fixture",
+          "ARIA-SYNTHETIC-054 / aria_fixture"
+        ],
+        "page": 11,
+        "title": "IDs: 5/100 recuperados · página 11/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 12/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-055 / aria_fixture",
+          "ARIA-SYNTHETIC-056 / aria_fixture",
+          "ARIA-SYNTHETIC-057 / aria_fixture",
+          "ARIA-SYNTHETIC-058 / aria_fixture",
+          "ARIA-SYNTHETIC-059 / aria_fixture"
+        ],
+        "page": 12,
+        "title": "IDs: 5/100 recuperados · página 12/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 13/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-060 / aria_fixture",
+          "ARIA-SYNTHETIC-061 / aria_fixture",
+          "ARIA-SYNTHETIC-062 / aria_fixture",
+          "ARIA-SYNTHETIC-063 / aria_fixture",
+          "ARIA-SYNTHETIC-064 / aria_fixture"
+        ],
+        "page": 13,
+        "title": "IDs: 5/100 recuperados · página 13/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 14/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-065 / aria_fixture",
+          "ARIA-SYNTHETIC-066 / aria_fixture",
+          "ARIA-SYNTHETIC-067 / aria_fixture",
+          "ARIA-SYNTHETIC-068 / aria_fixture",
+          "ARIA-SYNTHETIC-069 / aria_fixture"
+        ],
+        "page": 14,
+        "title": "IDs: 5/100 recuperados · página 14/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 15/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-070 / aria_fixture",
+          "ARIA-SYNTHETIC-071 / aria_fixture",
+          "ARIA-SYNTHETIC-072 / aria_fixture",
+          "ARIA-SYNTHETIC-073 / aria_fixture",
+          "ARIA-SYNTHETIC-074 / aria_fixture"
+        ],
+        "page": 15,
+        "title": "IDs: 5/100 recuperados · página 15/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 16/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-075 / aria_fixture",
+          "ARIA-SYNTHETIC-076 / aria_fixture",
+          "ARIA-SYNTHETIC-077 / aria_fixture",
+          "ARIA-SYNTHETIC-078 / aria_fixture",
+          "ARIA-SYNTHETIC-079 / aria_fixture"
+        ],
+        "page": 16,
+        "title": "IDs: 5/100 recuperados · página 16/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 17/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-080 / aria_fixture",
+          "ARIA-SYNTHETIC-081 / aria_fixture",
+          "ARIA-SYNTHETIC-082 / aria_fixture",
+          "ARIA-SYNTHETIC-083 / aria_fixture",
+          "ARIA-SYNTHETIC-084 / aria_fixture"
+        ],
+        "page": 17,
+        "title": "IDs: 5/100 recuperados · página 17/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 18/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-085 / aria_fixture",
+          "ARIA-SYNTHETIC-086 / aria_fixture",
+          "ARIA-SYNTHETIC-087 / aria_fixture",
+          "ARIA-SYNTHETIC-088 / aria_fixture",
+          "ARIA-SYNTHETIC-089 / aria_fixture"
+        ],
+        "page": 18,
+        "title": "IDs: 5/100 recuperados · página 18/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 19/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-090 / aria_fixture",
+          "ARIA-SYNTHETIC-091 / aria_fixture",
+          "ARIA-SYNTHETIC-092 / aria_fixture",
+          "ARIA-SYNTHETIC-093 / aria_fixture",
+          "ARIA-SYNTHETIC-094 / aria_fixture"
+        ],
+        "page": 19,
+        "title": "IDs: 5/100 recuperados · página 19/20"
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+        "ids": [
+          "ARIA-SYNTHETIC-095 / aria_fixture",
+          "ARIA-SYNTHETIC-096 / aria_fixture",
+          "ARIA-SYNTHETIC-097 / aria_fixture",
+          "ARIA-SYNTHETIC-098 / aria_fixture",
+          "ARIA-SYNTHETIC-099 / aria_fixture"
+        ],
+        "page": 20,
+        "title": "IDs: 5/100 recuperados · página 20/20"
+      }
+    ],
+    "failures": [],
+    "pass": true,
+    "samples": [
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+        "domains": [
+          [
+            1792569600000,
+            1792580400000
+          ],
+          [
+            300,
+            310.4
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 310",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-000 / aria_fixture, ARIA-SYNTHETIC-001 / aria_fixture, ARIA-SYNTHETIC-002 / aria_fixture, ARIA-SYNTHETIC-003 / aria_fixture, ARIA-SYNTHETIC-004 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-000 / aria_fixture",
+          "ARIA-SYNTHETIC-001 / aria_fixture",
+          "ARIA-SYNTHETIC-002 / aria_fixture",
+          "ARIA-SYNTHETIC-003 / aria_fixture",
+          "ARIA-SYNTHETIC-004 / aria_fixture"
+        ],
+        "name": "100-page1",
+        "page": 1,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-000 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.00 K; n hora 1",
+          "ARIA-SYNTHETIC-000 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.00 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; aire; UTC 2026-10-21 09:00; 300.10 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; proceso; UTC 2026-10-21 09:00; 310.10 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; aire; UTC 2026-10-21 10:00; 300.20 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; proceso; UTC 2026-10-21 10:00; 310.20 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; aire; UTC 2026-10-21 11:00; 300.30 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; proceso; UTC 2026-10-21 11:00; 310.30 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.40 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.40 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 1/20",
+        "total": 100
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+        "domains": [
+          [
+            1792569600000,
+            1792580400000
+          ],
+          [
+            309.5,
+            319.9
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 310 to 320",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-095 / aria_fixture, ARIA-SYNTHETIC-096 / aria_fixture, ARIA-SYNTHETIC-097 / aria_fixture, ARIA-SYNTHETIC-098 / aria_fixture, ARIA-SYNTHETIC-099 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-095 / aria_fixture",
+          "ARIA-SYNTHETIC-096 / aria_fixture",
+          "ARIA-SYNTHETIC-097 / aria_fixture",
+          "ARIA-SYNTHETIC-098 / aria_fixture",
+          "ARIA-SYNTHETIC-099 / aria_fixture"
+        ],
+        "name": "100-page20",
+        "page": 20,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-095 / aria_fixture; aire; UTC 2026-10-21 11:00; 309.50 K; n hora 1",
+          "ARIA-SYNTHETIC-095 / aria_fixture; proceso; UTC 2026-10-21 11:00; 319.50 K; n hora 1",
+          "ARIA-SYNTHETIC-096 / aria_fixture; aire; UTC 2026-10-21 08:00; 309.60 K; n hora 1",
+          "ARIA-SYNTHETIC-096 / aria_fixture; proceso; UTC 2026-10-21 08:00; 319.60 K; n hora 1",
+          "ARIA-SYNTHETIC-097 / aria_fixture; aire; UTC 2026-10-21 09:00; 309.70 K; n hora 1",
+          "ARIA-SYNTHETIC-097 / aria_fixture; proceso; UTC 2026-10-21 09:00; 319.70 K; n hora 1",
+          "ARIA-SYNTHETIC-098 / aria_fixture; aire; UTC 2026-10-21 10:00; 309.80 K; n hora 1",
+          "ARIA-SYNTHETIC-098 / aria_fixture; proceso; UTC 2026-10-21 10:00; 319.80 K; n hora 1",
+          "ARIA-SYNTHETIC-099 / aria_fixture; aire; UTC 2026-10-21 11:00; 309.90 K; n hora 1",
+          "ARIA-SYNTHETIC-099 / aria_fixture; proceso; UTC 2026-10-21 11:00; 319.90 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 20/20",
+        "total": 100
+      },
+      {
+        "aria": "Title text 'IDs: 1/31 recuperados · página 7/7'",
+        "domains": [
+          [
+            1792575000000,
+            1792578600000
+          ],
+          [
+            303,
+            313
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 9:30:00 AM UTC to Wednesday, 21 October 2026, 10:30:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 303 to 313",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 1 value: ARIA-SYNTHETIC-030 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 1/31 recuperados · página 7/7'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-030 / aria_fixture"
+        ],
+        "name": "filter-response-31",
+        "page": 7,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-030 / aria_fixture; aire; UTC 2026-10-21 10:00; 303.00 K; n hora 1",
+          "ARIA-SYNTHETIC-030 / aria_fixture; proceso; UTC 2026-10-21 10:00; 313.00 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 1/31 recuperados · página 7/7",
+        "total": 31
+      },
+      {
+        "aria": "Title text 'IDs: 1/1 recuperados · página 1/1'",
+        "domains": [
+          [
+            1792567800000,
+            1792571400000
+          ],
+          [
+            300,
+            310
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 7:30:00 AM UTC to Wednesday, 21 October 2026, 8:30:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 310",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 1 value: ARIA-SYNTHETIC-000 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 1/1 recuperados · página 1/1'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-000 / aria_fixture"
+        ],
+        "name": "filter-response-1",
+        "page": 1,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-000 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.00 K; n hora 1",
+          "ARIA-SYNTHETIC-000 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.00 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 1/1 recuperados · página 1/1",
+        "total": 1
+      },
+      {
+        "aria": "Title text 'IDs: 0/0 recuperados · página 1/1'",
+        "domains": [
+          [
+            0,
+            3600000
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Thursday, 01 January 1970, 12:00:00 AM UTC to Thursday, 01 January 1970, 1:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 0.0 to 1.0",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 0 values: ",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 0/0 recuperados · página 1/1'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [],
+        "name": "filter-response-0",
+        "page": 1,
+        "pointLabels": [],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 0/0 recuperados · página 1/1",
+        "total": 0
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+        "domains": [
+          [
+            1792569600000,
+            1792580400000
+          ],
+          [
+            300,
+            310.4
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 310",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-000 / aria_fixture, ARIA-SYNTHETIC-001 / aria_fixture, ARIA-SYNTHETIC-002 / aria_fixture, ARIA-SYNTHETIC-003 / aria_fixture, ARIA-SYNTHETIC-004 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-000 / aria_fixture",
+          "ARIA-SYNTHETIC-001 / aria_fixture",
+          "ARIA-SYNTHETIC-002 / aria_fixture",
+          "ARIA-SYNTHETIC-003 / aria_fixture",
+          "ARIA-SYNTHETIC-004 / aria_fixture"
+        ],
+        "name": "filter-response-100",
+        "page": 1,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-000 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.00 K; n hora 1",
+          "ARIA-SYNTHETIC-000 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.00 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; aire; UTC 2026-10-21 09:00; 300.10 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; proceso; UTC 2026-10-21 09:00; 310.10 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; aire; UTC 2026-10-21 10:00; 300.20 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; proceso; UTC 2026-10-21 10:00; 310.20 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; aire; UTC 2026-10-21 11:00; 300.30 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; proceso; UTC 2026-10-21 11:00; 310.30 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.40 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.40 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 1/20",
+        "total": 100
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+        "domains": [
+          [
+            1792569600000,
+            1792580400000
+          ],
+          [
+            300,
+            310.4
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 310",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-000 / aria_fixture, ARIA-SYNTHETIC-001 / aria_fixture, ARIA-SYNTHETIC-002 / aria_fixture, ARIA-SYNTHETIC-003 / aria_fixture, ARIA-SYNTHETIC-004 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-000 / aria_fixture",
+          "ARIA-SYNTHETIC-001 / aria_fixture",
+          "ARIA-SYNTHETIC-002 / aria_fixture",
+          "ARIA-SYNTHETIC-003 / aria_fixture",
+          "ARIA-SYNTHETIC-004 / aria_fixture"
+        ],
+        "name": "reversed",
+        "page": 1,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-000 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.00 K; n hora 1",
+          "ARIA-SYNTHETIC-000 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.00 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; aire; UTC 2026-10-21 09:00; 300.10 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; proceso; UTC 2026-10-21 09:00; 310.10 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; aire; UTC 2026-10-21 10:00; 300.20 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; proceso; UTC 2026-10-21 10:00; 310.20 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; aire; UTC 2026-10-21 11:00; 300.30 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; proceso; UTC 2026-10-21 11:00; 310.30 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.40 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.40 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 1/20",
+        "total": 100
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+        "domains": [
+          [
+            1792656000000,
+            1792666800000
+          ],
+          [
+            409.5,
+            419.9
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Thursday, 22 October 2026, 8:00:00 AM UTC to Thursday, 22 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 410 to 420",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-095 / aria_fixture, ARIA-SYNTHETIC-096 / aria_fixture, ARIA-SYNTHETIC-097 / aria_fixture, ARIA-SYNTHETIC-098 / aria_fixture, ARIA-SYNTHETIC-099 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 42 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-095 / aria_fixture",
+          "ARIA-SYNTHETIC-096 / aria_fixture",
+          "ARIA-SYNTHETIC-097 / aria_fixture",
+          "ARIA-SYNTHETIC-098 / aria_fixture",
+          "ARIA-SYNTHETIC-099 / aria_fixture"
+        ],
+        "name": "changed-window-omissions",
+        "page": 20,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-095 / aria_fixture; aire; UTC 2026-10-22 11:00; 409.50 K; n hora 1",
+          "ARIA-SYNTHETIC-095 / aria_fixture; proceso; UTC 2026-10-22 11:00; 419.50 K; n hora 1",
+          "ARIA-SYNTHETIC-096 / aria_fixture; aire; UTC 2026-10-22 08:00; 409.60 K; n hora 1",
+          "ARIA-SYNTHETIC-096 / aria_fixture; proceso; UTC 2026-10-22 08:00; 419.60 K; n hora 1",
+          "ARIA-SYNTHETIC-097 / aria_fixture; aire; UTC 2026-10-22 09:00; 409.70 K; n hora 1",
+          "ARIA-SYNTHETIC-097 / aria_fixture; proceso; UTC 2026-10-22 09:00; 419.70 K; n hora 1",
+          "ARIA-SYNTHETIC-098 / aria_fixture; aire; UTC 2026-10-22 10:00; 409.80 K; n hora 1",
+          "ARIA-SYNTHETIC-098 / aria_fixture; proceso; UTC 2026-10-22 10:00; 419.80 K; n hora 1",
+          "ARIA-SYNTHETIC-099 / aria_fixture; aire; UTC 2026-10-22 11:00; 409.90 K; n hora 1",
+          "ARIA-SYNTHETIC-099 / aria_fixture; proceso; UTC 2026-10-22 11:00; 419.90 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 20/20",
+        "total": 100
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+        "domains": [
+          [
+            1792569600000,
+            1792580400000
+          ],
+          [
+            300,
+            310.4
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 310",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-000 / aria_fixture, ARIA-SYNTHETIC-001 / aria_fixture, ARIA-SYNTHETIC-002 / aria_fixture, ARIA-SYNTHETIC-003 / aria_fixture, ARIA-SYNTHETIC-004 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-000 / aria_fixture",
+          "ARIA-SYNTHETIC-001 / aria_fixture",
+          "ARIA-SYNTHETIC-002 / aria_fixture",
+          "ARIA-SYNTHETIC-003 / aria_fixture",
+          "ARIA-SYNTHETIC-004 / aria_fixture"
+        ],
+        "name": "restored-page1",
+        "page": 1,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-000 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.00 K; n hora 1",
+          "ARIA-SYNTHETIC-000 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.00 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; aire; UTC 2026-10-21 09:00; 300.10 K; n hora 1",
+          "ARIA-SYNTHETIC-001 / aria_fixture; proceso; UTC 2026-10-21 09:00; 310.10 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; aire; UTC 2026-10-21 10:00; 300.20 K; n hora 1",
+          "ARIA-SYNTHETIC-002 / aria_fixture; proceso; UTC 2026-10-21 10:00; 310.20 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; aire; UTC 2026-10-21 11:00; 300.30 K; n hora 1",
+          "ARIA-SYNTHETIC-003 / aria_fixture; proceso; UTC 2026-10-21 11:00; 310.30 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; aire; UTC 2026-10-21 08:00; 300.40 K; n hora 1",
+          "ARIA-SYNTHETIC-004 / aria_fixture; proceso; UTC 2026-10-21 08:00; 310.40 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 1/20",
+        "total": 100
+      },
+      {
+        "aria": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+        "domains": [
+          [
+            1792569600000,
+            1792580400000
+          ],
+          [
+            309.5,
+            319.9
+          ]
+        ],
+        "guides": [
+          {
+            "label": "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 310 to 320",
+            "role": "mark-group role-axis"
+          },
+          {
+            "label": "Symbol legend titled 'ID / fuente · página actual' for shape and fill color with 5 values: ARIA-SYNTHETIC-095 / aria_fixture, ARIA-SYNTHETIC-096 / aria_fixture, ARIA-SYNTHETIC-097 / aria_fixture, ARIA-SYNTHETIC-098 / aria_fixture, ARIA-SYNTHETIC-099 / aria_fixture",
+            "role": "mark-group role-legend"
+          },
+          {
+            "label": "Title text 'IDs: 5/100 recuperados · página 20/20'",
+            "role": "mark-text role-title-text"
+          },
+          {
+            "label": "Subtitle text 'Hasta 100 ID/fuente; eventos fuera del top: 0 Selector 1–20: use páginas con IDs o filtre. Aire punteado; proceso continuo. Forma/color por ID.'",
+            "role": "mark-text role-title-subtitle"
+          }
+        ],
+        "ids": [
+          "ARIA-SYNTHETIC-095 / aria_fixture",
+          "ARIA-SYNTHETIC-096 / aria_fixture",
+          "ARIA-SYNTHETIC-097 / aria_fixture",
+          "ARIA-SYNTHETIC-098 / aria_fixture",
+          "ARIA-SYNTHETIC-099 / aria_fixture"
+        ],
+        "name": "restored-page20",
+        "page": 20,
+        "pointLabels": [
+          "ARIA-SYNTHETIC-095 / aria_fixture; aire; UTC 2026-10-21 11:00; 309.50 K; n hora 1",
+          "ARIA-SYNTHETIC-095 / aria_fixture; proceso; UTC 2026-10-21 11:00; 319.50 K; n hora 1",
+          "ARIA-SYNTHETIC-096 / aria_fixture; aire; UTC 2026-10-21 08:00; 309.60 K; n hora 1",
+          "ARIA-SYNTHETIC-096 / aria_fixture; proceso; UTC 2026-10-21 08:00; 319.60 K; n hora 1",
+          "ARIA-SYNTHETIC-097 / aria_fixture; aire; UTC 2026-10-21 09:00; 309.70 K; n hora 1",
+          "ARIA-SYNTHETIC-097 / aria_fixture; proceso; UTC 2026-10-21 09:00; 319.70 K; n hora 1",
+          "ARIA-SYNTHETIC-098 / aria_fixture; aire; UTC 2026-10-21 10:00; 309.80 K; n hora 1",
+          "ARIA-SYNTHETIC-098 / aria_fixture; proceso; UTC 2026-10-21 10:00; 319.80 K; n hora 1",
+          "ARIA-SYNTHETIC-099 / aria_fixture; aire; UTC 2026-10-21 11:00; 309.90 K; n hora 1",
+          "ARIA-SYNTHETIC-099 / aria_fixture; proceso; UTC 2026-10-21 11:00; 319.90 K; n hora 1"
+        ],
+        "sameSVG": true,
+        "size": 5,
+        "title": "IDs: 5/100 recuperados · página 20/20",
+        "total": 100
+      }
+    ],
+    "scope": "Actual Kibana9.5.4 SVG View; response mutations use visual fixtures after real ES load"
+  }
+}
