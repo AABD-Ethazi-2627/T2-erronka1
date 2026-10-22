@@ -1,0 +1,4 @@
+warning: `uv audit` is experimental and may change without warning. Pass `--preview-features audit-command` to disable this warning.
+Using CPython 3.12.10 interpreter at: <python312>
+Resolved 58 packages in 1ms
+Found no known vulnerabilities and no adverse project statuses in 57 packages

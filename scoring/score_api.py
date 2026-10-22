@@ -220,13 +220,15 @@ def create_app(manifest_path=None, *, ledger_path=None):
         event = payload.model_dump(exclude_none=True)
         try:
             schemas["telemetry"].validate(event)
-            return response(
+            body = response(
                 ledger,
                 event,
                 app.state.manifest,
                 lambda: infer(event),
                 schemas["prediction"].validate,
+                serialize=lambda result: JSONResponse(result).body,
             )
+            return Response(body, media_type="application/json", headers=reply.headers)
         except InferenceConflict as exc:
             raise HTTPException(409, str(exc)) from None
         except Exception:
