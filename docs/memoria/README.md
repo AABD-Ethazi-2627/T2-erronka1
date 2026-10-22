@@ -40,7 +40,7 @@ El [índice de 19/10](../evidence/INDEX_2026-10-19.md) conserva ensayos pre-v4 c
 ## Límites y pendientes
 
 - **Kafka Python 3.11:** el registro histórico SMB tenía 218 avisos del primer import. PR64 los corrige con el wheel fijado `3.0.11+cncguard.1`, ya incorporado en `53f342d`; véase [evidencia](../evidence/KAFKA311_WARNING_FIX_20261021.md). Los logs históricos no cambian y sus fallos no se presentan como passes nuevos.
-- **Windows:** la [matriz de compatibilidad](../evidence/STARLETTE_TESTCLIENT_20261021.md) conserva 12 errores POSIX y UserWarning de joblib/loky por WMIC ausente. No se han resuelto ni revalidado mediante esta aportación documental.
+- **Windows:** la [matriz histórica](../evidence/STARLETTE_TESTCLIENT_20261021.md) conserva su resultado previo de 12 errores POSIX y aviso WMIC. La corrección posterior define el [contrato actual](../PLATFORM_SUPPORT.md), separando recuperación de proceso Windows de fsync POSIX. El informe histórico no se reescribe ni acredita por sí solo las pruebas del cambio actual.
 - **Runtime y migración:** faltan Apache Kafka real, Filebeat/registry/SMB propios, confirmación del productor, Kibana actual, E2E NiFi v4 y conciliación de colas/índices/identidades/respuestas previas. No se ha aplicado la migración ES, el pin RESTORE ni el ledger a servicios compartidos.
 - **Personas y entrega:** pendientes revisión del padre, contraste de otro miembro, explicación individual CG30, demo/defensa, acuerdos ANEXO1/ANEXO4, firmas y canal Moodle. La información del usuario sobre tutor no sustituye un acta o aceptación textual archivada. No se cierran issues.
 

@@ -6,6 +6,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 from unittest.mock import patch
 
@@ -31,7 +32,7 @@ class ArchiveTests(unittest.TestCase):
             pq.write_table(pq.ParquetFile(target).read(), target, compression=None)
             original = target.read_bytes()
             # Model an intact archive committed by a different Parquet writer.
-            with sqlite3.connect(root / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(root / "ledger.sqlite")) as db, db:
                 db.execute(
                     "UPDATE objects SET hash=? WHERE path=?",
                     (
@@ -68,7 +69,7 @@ class ArchiveTests(unittest.TestCase):
             self.assertEqual(result["stored"], 1)
             self.assertEqual(ack, [1])
             self.assertEqual(target.read_bytes(), original)
-            with sqlite3.connect(root / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(root / "ledger.sqlite")) as db, db:
                 self.assertEqual(
                     db.execute(
                         "SELECT hash FROM objects WHERE path=?",
@@ -99,7 +100,7 @@ class ArchiveTests(unittest.TestCase):
                     consume(root, batch()[:1], lambda ack=ack: ack.append(1))
                 self.assertEqual(ack, [])
                 self.assertEqual(target.read_bytes(), original)
-                with sqlite3.connect(root / "ledger.sqlite") as db:
+                with closing(sqlite3.connect(root / "ledger.sqlite")) as db, db:
                     self.assertEqual(
                         db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 0
                     )
@@ -218,7 +219,7 @@ consume(sys.argv[1], batch(), lambda: open(sys.argv[1]+'/ACK', 'w').close(),
                 self.assertFalse((Path(tmp) / "ACK").exists())
                 result = consume(tmp, batch(), lambda: None)
                 self.assertEqual(result["replay"], 3 if stage == "after_commit" else 0)
-                with sqlite3.connect(Path(tmp) / "ledger.sqlite") as db:
+                with closing(sqlite3.connect(Path(tmp) / "ledger.sqlite")) as db, db:
                     self.assertEqual(
                         db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 3
                     )

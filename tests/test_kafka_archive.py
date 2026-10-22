@@ -6,6 +6,7 @@ import sqlite3
 import tempfile
 import unittest
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from pathlib import Path
 from threading import Barrier, Event
 from types import SimpleNamespace
@@ -95,7 +96,7 @@ class KafkaArchiveTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
 
             def verify(offsets):
-                with sqlite3.connect(Path(root) / "ledger.sqlite") as db:
+                with closing(sqlite3.connect(Path(root) / "ledger.sqlite")) as db, db:
                     self.assertEqual(
                         db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 3
                     )
@@ -185,7 +186,7 @@ class KafkaArchiveTests(unittest.TestCase):
             self.assertEqual(client.commits, [])
             replay = Consumer([{TP: [record()]}])
             self.assertEqual(self.execute(root, replay), 1)
-            with sqlite3.connect(Path(root) / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(Path(root) / "ledger.sqlite")) as db, db:
                 self.assertEqual(
                     db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 1
                 )
@@ -258,7 +259,7 @@ class KafkaArchiveTests(unittest.TestCase):
             )
             self.assertEqual(first["stored"], 1)
             self.assertEqual(other["duplicate"], 1)
-            with sqlite3.connect(Path(root) / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(Path(root) / "ledger.sqlite")) as db, db:
                 self.assertEqual(
                     db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 2
                 )
@@ -291,7 +292,7 @@ class KafkaArchiveTests(unittest.TestCase):
                 futures = [pool.submit(worker) for _ in range(2)]
                 self.assertEqual([f.result(timeout=30) for f in futures], [1, 1])
             self.assertEqual(len(list(Path(root).rglob("*.parquet"))), 1)
-            with sqlite3.connect(Path(root) / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(Path(root) / "ledger.sqlite")) as db, db:
                 self.assertEqual(
                     db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 1
                 )
@@ -331,7 +332,7 @@ class KafkaArchiveTests(unittest.TestCase):
             self.assertEqual(
                 next((Path(root) / "bronze").glob("*.bin")).read_bytes(), winner
             )
-            with sqlite3.connect(Path(root) / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(Path(root) / "ledger.sqlite")) as db, db:
                 self.assertEqual(
                     db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 1
                 )

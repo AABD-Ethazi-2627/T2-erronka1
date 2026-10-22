@@ -9,7 +9,7 @@ import tempfile
 import threading
 import time
 import unittest
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from pathlib import Path
 from unittest.mock import patch
 
@@ -128,11 +128,14 @@ class DurableReceiptHTTPTests(unittest.TestCase):
                     await worker.consume(
                         [message()], lambda attempt=attempt: acks.append(attempt)
                     )
-                with sqlite3.connect(root / "worker/pipeline.sqlite3") as db:
+                with (
+                    closing(sqlite3.connect(root / "worker/pipeline.sqlite3")) as db,
+                    db,
+                ):
                     self.assertEqual(
                         db.execute("SELECT outcome FROM jobs").fetchall(), [(None,)]
                     )
-                with sqlite3.connect(target / "ledger.sqlite") as db:
+                with closing(sqlite3.connect(target / "ledger.sqlite")) as db, db:
                     self.assertEqual(
                         db.execute(
                             "SELECT outcome FROM deliveries WHERE id=?",
@@ -176,7 +179,7 @@ class DurableReceiptHTTPTests(unittest.TestCase):
             for stream in ("telemetry", "prediction"):
                 for outcome in ("rejected", "unknown", None):
                     with self.subTest(stream=stream, outcome=outcome):
-                        with sqlite3.connect(ledger) as db:
+                        with closing(sqlite3.connect(ledger)) as db, db:
                             db.execute(
                                 "UPDATE deliveries SET outcome=? WHERE id=?",
                                 (outcome, canonical([message()[0], stream])),
@@ -186,7 +189,7 @@ class DurableReceiptHTTPTests(unittest.TestCase):
                                 [message()], lambda: acks.append(False)
                             )
                         self.assertEqual(acks, [True])
-                with sqlite3.connect(ledger) as db:
+                with closing(sqlite3.connect(ledger)) as db, db:
                     db.execute(
                         "UPDATE deliveries SET outcome='stored' WHERE id=?",
                         (canonical([message()[0], stream]),),
@@ -307,7 +310,7 @@ class BoundedValidationHTTPTests(unittest.TestCase):
                 )
                 self.assertEqual(reply.status_code, status)
             self.assertEqual(risk.calls, 1)
-            with sqlite3.connect(root / "api.sqlite3") as db:
+            with closing(sqlite3.connect(root / "api.sqlite3")) as db, db:
                 self.assertEqual(
                     db.execute("SELECT count(*) FROM scoring_responses").fetchone()[0],
                     1,

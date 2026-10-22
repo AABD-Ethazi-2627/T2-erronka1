@@ -4,6 +4,7 @@ import json
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 from unittest.mock import patch
 
@@ -44,7 +45,7 @@ class JsonDepthTests(unittest.TestCase):
                     self.assertEqual(stages[-1], "after_commit")
                     self.assertEqual(synced[-1], root)
                     self.assertIn(root / "rejected", synced)
-                    with sqlite3.connect(root / "ledger.sqlite") as db:
+                    with closing(sqlite3.connect(root / "ledger.sqlite")) as db, db:
                         self.assertEqual(
                             dict(db.execute("SELECT id,outcome FROM deliveries")),
                             {"deep": "rejected", "valid": "stored"},
@@ -95,7 +96,7 @@ class JsonDepthTests(unittest.TestCase):
                     root, [("deep", "telemetry", deep_json())], lambda: acks.append(1)
                 )
             self.assertEqual(acks, [])
-            with sqlite3.connect(root / "ledger.sqlite") as db:
+            with closing(sqlite3.connect(root / "ledger.sqlite")) as db, db:
                 self.assertEqual(
                     db.execute("SELECT count(*) FROM deliveries").fetchone()[0], 0
                 )

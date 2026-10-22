@@ -3,6 +3,7 @@
 import copy
 import importlib.util
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -12,6 +13,19 @@ SPEC = importlib.util.spec_from_file_location(
 )
 m = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(m)
+
+
+def test_native_host_contract_before_state_creation(tmp_path, monkeypatch):
+    monkeypatch.setattr(m, "DEPLOY", tmp_path)
+    root = tmp_path / "data/evidence/restore-e2e"
+    if os.name == "nt":
+        with pytest.raises(m.GuardError, match="require POSIX"), m.lock():
+            pytest.fail("Windows must not acquire an operational RESTORE lock")
+        assert not root.exists()
+    else:
+        with m.lock() as actual:
+            assert actual == root
+            assert (root / "target.lock").is_file()
 
 
 @pytest.fixture
