@@ -22,6 +22,14 @@ Filebeat → Kafka → NiFi → FastAPI → NiFi → Elasticsearch → Kibana de
 
 ## Resultados incorporados
 
+Actualización específica CG24, 22/10/2026, sobre main `3b79c92`:
+[tabla normativa, fuentes verificadas y responsabilidades](../evidence/CG24.md#aplicabilidad-normativa--corte-del-22102026).
+Completa el análisis que faltaba para G16/G17; el criterio 2 de #24 queda pendiente
+de revisión PM e integración. Los criterios 1/3/4/5 ya tienen aceptación PM en
+el comentario 6342074330 de #24, enlazado en el informe. Las 40 filas de la matriz
+mantienen su corte histórico y la revisión/explicación educativa pendiente; no
+se confunde aceptación documental del issue con nota, defensa o certificación.
+
 Los resultados siguientes están registrados en las fuentes indicadas. «Integrado» describe un merge de código; no expresa aceptación humana o de todos los criterios asociados.
 
 | Frente | Evidencia y resultado registrado | Límite vigente |
