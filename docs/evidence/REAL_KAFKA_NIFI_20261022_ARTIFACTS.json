@@ -283,8 +283,8 @@
       "size": 3186
     },
     "kafka-client-debug.log": {
-      "sha256": "107882af26d8efbafa29d1825712fbf6fdf525a9505751b3cd6c6867ceafc42c",
-      "size": 238940
+      "sha256": "a8d55c0f83a61b307147945d77985e1c29e23d66e61cfbd0706f7159ba40a076",
+      "size": 245918
     },
     "kafka-container.log": {
       "sha256": "656576a3b1b6a65f94ccf27ed84610a5676d04f0d5b2c023dee43f1c45fbd662",
@@ -765,6 +765,10 @@
     "worker_child.py": {
       "sha256": "8a8026209da4436abf1349b46e8fc4d71748795aa97fd3aa75185257ec52485f",
       "size": 2546
+    },
+    "probe-stop.json": {
+      "sha256": "0739cdac9e6819eb342c6f687c67b6cb01d69704b1b640fde1e2cb50fd84b8f6",
+      "size": 423
     }
   },
   "candidate_sources": {
@@ -780,5 +784,6 @@
     "pyproject.toml": "59332d35f31eab4aaaffa472d8faca8c54a4e640520dc526cd3b44322b22438c",
     "uv.lock": "eac3f7c0c79e2accb3f86952c67f877c3cd5a6501779bd90adbd8f1ad7e73f6e"
   },
-  "summary_sha256": "93e341910b2bf2ca4a4822bc725460b26afcabceedfaa4ed327331ffdf3ab55c"
+  "summary_sha256": "93e341910b2bf2ca4a4822bc725460b26afcabceedfaa4ed327331ffdf3ab55c",
+  "freeze_note": "Owned diagnostic probe 216159 stopped with SIGTERM; kafka-client-debug.log was still open during the previous seal. All other sealed artifacts and candidate source hashes matched."
 }

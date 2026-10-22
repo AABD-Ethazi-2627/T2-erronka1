@@ -158,6 +158,11 @@ Los scripts del harness reflejan su estado final; los logs conservan los
 reintentos y los cambios de instrumentación. La lógica central del worker,
 archivo y API no cambia en esta PR.
 
+La verificación final del sellado detectó un log de diagnóstico aún abierto.
+Se comprobó el cmdline del probe propio, se detuvo con SIGTERM y se fijó su
+huella final. Los demás artefactos y hashes de fuentes coincidían. Ese probe
+no confirmaba offsets ni forma parte de los escenarios funcionales pasados.
+
 El resumen JSON y manifiesto adjuntos fijan los resultados y hashes de los
 artefactos locales. Se mantienen también los fallos iniciales de import,
 handshake, comandos de gate y las correcciones del harness. Los tres
