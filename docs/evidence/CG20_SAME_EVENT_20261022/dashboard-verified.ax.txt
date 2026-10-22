@@ -1,0 +1,107 @@
+Browser tab: 1868626041, Title: "CG20 · API → ES → Kibana · mismo evento - Elastic", URL: "http://127.0.0.1:48899/app/dashboards#/view/cg20-own-dashboard?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))".
+1 AXWebArea CG20 · API → ES → Kibana · mismo evento - Elastic, URL: 127.0.0.1:48899/app/dashboards#/view/cg20-own-dashboard?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))
+	2 container
+		3 container kibana-body
+			4 container globalHeaderBars
+				5 container
+					6 container Page change announcements
+						28 text CG20 · API → ES → Kibana · mismo evento - Dashboards - Elastic
+					7 button Skip to main content
+					8 link Description: Elastic home, Value: 127.0.0.1:48899/app/home
+					9 container
+						10 container
+							11 search text field (settable) Find apps, content, and more.
+						12 text ^/
+						13 text Use the Up and Down arrow keys to move focus over options. Press Enter to select. Press Escape to collapse options.
+					14 pop up button (collapsed) Description: Help menu, Secondary Actions: Expand
+					15 pop up button (collapsed) Description: Newsfeed menu - all items read, Secondary Actions: Expand
+					29 pop up button (disabled) Submit feedback
+						30 image Submit feedback
+					16 button AI Agent
+				17 container
+					18 checkbox (collapsed) Description: Toggle primary navigation, Value: 0, Secondary Actions: Expand
+					19 pop up button (collapsed) Description: Spaces navigation, Secondary Actions: Expand
+						31 image Default
+					32 container Breadcrumbs
+						33 content list
+							34 button Dashboards
+							35 container CG20 · API → ES → Kibana · mismo evento
+								36 text CG20 · API → ES → Kibana · mismo evento
+					37 container
+						38 button Add to Starred
+						39 image
+					40 container App menu
+						41 checkbox Share, Value: 0
+						42 checkbox Export, Value: 0
+						43 checkbox (collapsed) Description: More, Value: 0, Secondary Actions: Expand
+						44 checkbox Edit, Value: 0
+			23 container app-main-scroll
+				45 container
+					46 heading Dashboards - CG20 · API → ES → Kibana · mismo evento, Value: 1, ID: dashboardTitle
+						47 text Dashboards - CG20 · API → ES → Kibana · mismo evento
+					48 container
+						49 button (collapsed) Description: Add filter, Secondary Actions: Expand
+						50 button (collapsed) Description: Query menu, Secondary Actions: Expand
+						51 combo box (collapsed) Description: Search and filter the dashboards page, Secondary Actions: Expand
+							52 container
+								53 text entry area (settable) Description: Start typing to search and filter the dashboards page, Value: event_id: "279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b", ID: id4801d71-ce1f-11f1-aaed-b78b2c2276ab
+								54 button Clear input
+						55 button (disabled) Fast mode unavailable
+						56 container
+							57 button (collapsed) Description: Oct 21, 02:00 → Oct 23, 02:00, Secondary Actions: Expand
+								71 text 2d
+						72 container Time window actions
+							73 text Time window actions
+							74 button Previous
+							75 button Zoom out
+							76 button Next
+						77 container
+							78 button Refresh query
+							79 button (disabled) Send to background
+					80 container
+						81 text CG20 · respuesta canónica en ES · modelos stub
+						91 container Vega visualization
+							92 image
+								93 container event_id = 279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8bsource.kind = lab_fixturesource.uri = kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1source.record_ref = cnc-sensors-automatic-v1/0/0machine_id = CNC-001model_version = synthetic-replay-onlyfailure_score = 0.8risk_alert = trueanomaly_score = 0.5anomaly_alert = truealert_level = CRITICAtimestamp = 2026-10-21T08:00:00Zscored_at = 2026-10-22T13:47:41.231811Z_index = cnc-alerts-automatic-v4_id = a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c
+									94 container event_id = 279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b
+										95 text mark event_id = 279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b
+									96 container source.kind = lab_fixture
+										97 text mark source.kind = lab_fixture
+									98 container source.uri = kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1
+										99 text mark source.uri = kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1
+									100 container source.record_ref = cnc-sensors-automatic-v1/0/0
+										101 text mark source.record_ref = cnc-sensors-automatic-v1/0/0
+									102 container machine_id = CNC-001
+										103 text mark machine_id = CNC-001
+									104 container model_version = synthetic-replay-only
+										105 text mark model_version = synthetic-replay-only
+									106 container failure_score = 0.8
+										107 text mark failure_score = 0.8
+									108 container risk_alert = true
+										109 text mark risk_alert = true
+									110 container anomaly_score = 0.5
+										111 text mark anomaly_score = 0.5
+									112 container anomaly_alert = true
+										113 text mark anomaly_alert = true
+									114 container alert_level = CRITICA
+										115 text mark alert_level = CRITICA
+									116 container timestamp = 2026-10-21T08:00:00Z
+										117 text mark timestamp = 2026-10-21T08:00:00Z
+									118 container scored_at = 2026-10-22T13:47:41.231811Z
+										119 text mark scored_at = 2026-10-22T13:47:41.231811Z
+									120 container _index = cnc-alerts-automatic-v4
+										121 text mark _index = cnc-alerts-automatic-v4
+									122 container _id = a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c
+										123 text mark _id = a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c
+		25 container Notification message list
+			26 container 0
+				84 text A new notification appears
+				85 text Your data is not secure
+				27 button Dismiss toast
+				86 container
+					87 text Don’t lose one bit. Enable our free security features.
+					88 checkbox (settable, integer) Description: Don't show again, Value: 0, ID: persistDismissedAlertPreference
+					89 link Description: Enable security, Value: elastic.co/docs/deploy-manage/deploy/self-managed/installing-elasticsearch?blade=kibanasecuritymessage
+					90 button Dismiss
+
+The focused UI element is 53 text entry area (settable) Description: Start typing to search and filter the dashboards page, Value: event_id: "279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b", ID: id4801d71-ce1f-11f1-aaed-b78b2c2276ab

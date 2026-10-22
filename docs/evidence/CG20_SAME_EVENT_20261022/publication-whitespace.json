@@ -1,0 +1,20 @@
+[
+  {
+    "file": "discover-document.ax.txt",
+    "raw_sha256": "694888a5a02b7410536b68bf465f65bac0947a94794094174cf96bd10e3093b2",
+    "publication_sha256": "caa5a86ef631c552dc1632d4312947c98b7b66ab4b38e6d339b21ebdd6fc4815",
+    "change": "trailing display whitespace removed in publication copy only; raw retained locally"
+  },
+  {
+    "file": "discover-negative.ax.txt",
+    "raw_sha256": "e75ae3f1ef9b3473c45b9ff494fa548407ada079bd937eb91a36dd2bbd70cde1",
+    "publication_sha256": "46449d7fc3c18a19e92bb534498098909708c72544863602fefa96c978138a32",
+    "change": "trailing display whitespace removed in publication copy only; raw retained locally"
+  },
+  {
+    "file": "discover-same-event.ax.txt",
+    "raw_sha256": "704a65d500bce009f1992734ea7c8e6edb82a69cbe48b6c1f7a9a4075b9615ef",
+    "publication_sha256": "a1f0ae305d16afd3d594e49760e510823dbad079e586ff3d78dab2a601417594",
+    "change": "trailing display whitespace removed in publication copy only; raw retained locally"
+  }
+]

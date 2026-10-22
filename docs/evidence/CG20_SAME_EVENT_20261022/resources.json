@@ -1,0 +1,575 @@
+{
+  "label": {
+    "t2.cg20.run": "t2-cg20-b74cb05b34"
+  },
+  "containers": {
+    "kafka": {
+      "Id": "aa8e92517cafb60eeb7bb3be12c3a16e0e11050deb4f872faf385aa1c0ab2fe7",
+      "Name": "/t2-cg20-b74cb05b34-kafka",
+      "Image": "sha256:8bd63e1bd445e5e19427a4bdbcc3d23bf6efd774b058a41b36ba87fda7623e34",
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kafka-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/server.properties",
+          "Destination": "/lab/server.properties",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_worktrees/t2-cg20-api-kibana-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+          "Destination": "/lab/start.sh",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kafka/volume-0",
+          "Destination": "/etc/kafka/secrets",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kafka/volume-1",
+          "Destination": "/mnt/shared/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kafka-storage",
+          "Destination": "/var/lib/kafka",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kafka-storage/data",
+          "Destination": "/var/lib/kafka/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 143,
+        "Error": "",
+        "StartedAt": "2026-10-22T13:42:10.722313582Z",
+        "FinishedAt": "2026-10-22T13:57:24.226919472Z"
+      },
+      "labels": {
+        "maintainer": "Apache Kafka",
+        "org.label-schema.build-date": "2024-12-04",
+        "org.label-schema.description": "Apache Kafka",
+        "org.label-schema.name": "kafka",
+        "org.label-schema.vcs-url": "https://github.com/apache/kafka",
+        "t2.cg20.run": "t2-cg20-b74cb05b34"
+      },
+      "ports": {
+        "9092/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "36609"
+          }
+        ]
+      },
+      "read_only_rootfs": true,
+      "memory_limit": 1073741824
+    },
+    "es": {
+      "Id": "02f3effdc17fdbcb406d42267442f75bc6de4d534b4ed9c05e74c62f5576e877",
+      "Name": "/t2-cg20-b74cb05b34-es",
+      "Image": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/es-posix",
+          "Destination": "/tmp",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/es-posix",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/es-config",
+          "Destination": "/usr/share/elasticsearch/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/es-data",
+          "Destination": "/usr/share/elasticsearch/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/es-logs",
+          "Destination": "/usr/share/elasticsearch/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 143,
+        "Error": "",
+        "StartedAt": "2026-10-22T13:42:28.199254126Z",
+        "FinishedAt": "2026-10-22T13:57:22.632570703Z"
+      },
+      "labels": {
+        "architecture": "x86_64",
+        "build-date": "2026-09-09T07:31:28Z",
+        "com.redhat.component": "ubi9-minimal-container",
+        "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI",
+        "cpe": "cpe:/a:redhat:enterprise_linux:9::appstream",
+        "description": "You know, for search.",
+        "distribution-scope": "public",
+        "io.buildah.version": "1.44.0",
+        "io.k8s.description": "The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "io.k8s.display-name": "Red Hat Universal Base Image 9 Minimal",
+        "io.openshift.expose-services": "",
+        "io.openshift.tags": "minimal rhel9",
+        "maintainer": "infra@elastic.co",
+        "name": "Elasticsearch",
+        "org.label-schema.build-date": "2026-09-09T22:42:53.976833287Z",
+        "org.label-schema.license": "Elastic-License-2.0",
+        "org.label-schema.name": "Elasticsearch",
+        "org.label-schema.schema-version": "1.0",
+        "org.label-schema.url": "https://www.elastic.co/products/elasticsearch",
+        "org.label-schema.usage": "https://www.elastic.co/guide/en/elasticsearch/reference/index.html",
+        "org.label-schema.vcs-ref": "9170df19cae1adb107b7b489b4d82dec66d7a337",
+        "org.label-schema.vcs-url": "https://github.com/elastic/elasticsearch",
+        "org.label-schema.vendor": "Elastic",
+        "org.label-schema.version": "9.5.4",
+        "org.opencontainers.image.created": "2026-09-09T22:42:53.976833287Z",
+        "org.opencontainers.image.documentation": "https://www.elastic.co/guide/en/elasticsearch/reference/index.html",
+        "org.opencontainers.image.licenses": "Elastic-License-2.0",
+        "org.opencontainers.image.revision": "9170df19cae1adb107b7b489b4d82dec66d7a337",
+        "org.opencontainers.image.source": "https://github.com/elastic/elasticsearch",
+        "org.opencontainers.image.title": "Elasticsearch",
+        "org.opencontainers.image.url": "https://www.elastic.co/products/elasticsearch",
+        "org.opencontainers.image.vendor": "Elastic",
+        "org.opencontainers.image.version": "9.5.4",
+        "release": "1",
+        "summary": "Elasticsearch",
+        "t2.cg20.run": "t2-cg20-b74cb05b34",
+        "url": "https://catalog.redhat.com/en/search?searchType=containers",
+        "vcs-ref": "032ccfa67770989ab0253359280f8ba2cf77ce39",
+        "vcs-type": "git",
+        "vendor": "Elastic",
+        "version": "9.5.4"
+      },
+      "ports": {
+        "9200/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "47189"
+          }
+        ]
+      },
+      "read_only_rootfs": true,
+      "memory_limit": 1342177280
+    },
+    "nifi": {
+      "Id": "7abf9772d81e9a16f51974fb88b1dbfd8326fdc8a7fc1a129c54689358f68432",
+      "Name": "/t2-cg20-b74cb05b34-nifi",
+      "Image": "sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad",
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi-start.sh",
+          "Destination": "/lab/nifi-start.sh",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_worktrees/t2-cg20-api-kibana-20261022",
+          "Destination": "/opt/checkout",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/Fedora/t2-real-lab-20261022/venv",
+          "Destination": "/home/Fedora/t2-real-lab-20261022/venv",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-0",
+          "Destination": "/opt/nifi/nifi-current/conf",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-1",
+          "Destination": "/opt/nifi/nifi-current/content_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-2",
+          "Destination": "/opt/nifi/nifi-current/database_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-3",
+          "Destination": "/opt/nifi/nifi-current/flowfile_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-4",
+          "Destination": "/opt/nifi/nifi-current/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-5",
+          "Destination": "/opt/nifi/nifi-current/nar_extensions",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-6",
+          "Destination": "/opt/nifi/nifi-current/provenance_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-7",
+          "Destination": "/opt/nifi/nifi-current/python_extensions",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi-run",
+          "Destination": "/opt/nifi/nifi-current/run",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi/volume-8",
+          "Destination": "/opt/nifi/nifi-current/state",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/nifi-work",
+          "Destination": "/opt/nifi/nifi-current/work",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu",
+          "Destination": "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01",
+          "Destination": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 143,
+        "Error": "",
+        "StartedAt": "2026-10-22T13:43:06.599563605Z",
+        "FinishedAt": "2026-10-22T13:57:18.833156973Z"
+      },
+      "labels": {
+        "maintainer": "Apache NiFi <dev@nifi.apache.org>",
+        "site": "https://nifi.apache.org",
+        "t2.cg20.run": "t2-cg20-b74cb05b34"
+      },
+      "ports": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "49957"
+          }
+        ]
+      },
+      "read_only_rootfs": true,
+      "memory_limit": 2415919104
+    },
+    "filebeat": {
+      "Id": "7e515fc4fa72493ec3a7769d19d4c51ca1675faa3413634d0d906c0d79233e45",
+      "Name": "/t2-cg20-b74cb05b34-filebeat",
+      "Image": "sha256:2dd1d5252f3d5d3f3104f8e908b88cb9dfb53faeab5beb8a01ce1593a8fc149d",
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/filebeat.yml",
+          "Destination": "/lab/filebeat.yml",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/input",
+          "Destination": "/lab/input",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/registry",
+          "Destination": "/lab/registry",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/filebeat-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-22T13:46:11.094988172Z",
+        "FinishedAt": "2026-10-22T13:57:10.586465472Z"
+      },
+      "labels": {
+        "architecture": "x86_64",
+        "build-date": "2026-09-09T07:31:28Z",
+        "com.redhat.component": "ubi9-minimal-container",
+        "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI",
+        "cpe": "cpe:/a:redhat:enterprise_linux:9::appstream",
+        "description": "Filebeat sends log files to Logstash or directly to Elasticsearch.",
+        "distribution-scope": "public",
+        "io.buildah.version": "1.44.0",
+        "io.k8s.description": "Filebeat sends log files to Logstash or directly to Elasticsearch.",
+        "io.k8s.display-name": "Filebeat image",
+        "io.openshift.expose-services": "",
+        "io.openshift.tags": "minimal rhel9",
+        "license": "Elastic License",
+        "maintainer": "infra@elastic.co",
+        "name": "filebeat",
+        "org.label-schema.build-date": "2026-09-09T20:58:47Z",
+        "org.label-schema.license": "Elastic License",
+        "org.label-schema.name": "filebeat",
+        "org.label-schema.schema-version": "1.0",
+        "org.label-schema.url": "https://www.elastic.co/beats/filebeat",
+        "org.label-schema.vcs-ref": "ccdfcad1de773e22e494089f508162c52b027ee2",
+        "org.label-schema.vcs-url": "github.com/elastic/beats/v7",
+        "org.label-schema.vendor": "Elastic",
+        "org.label-schema.version": "9.5.4",
+        "org.opencontainers.image.authors": "infra@elastic.co",
+        "org.opencontainers.image.created": "2026-09-09T20:58:47Z",
+        "org.opencontainers.image.licenses": "Elastic License",
+        "org.opencontainers.image.revision": "032ccfa67770989ab0253359280f8ba2cf77ce39",
+        "org.opencontainers.image.title": "Filebeat",
+        "org.opencontainers.image.vendor": "Elastic",
+        "release": "1",
+        "summary": "filebeat",
+        "t2.cg20.run": "t2-cg20-b74cb05b34",
+        "url": "https://www.elastic.co/beats/filebeat",
+        "vcs-ref": "032ccfa67770989ab0253359280f8ba2cf77ce39",
+        "vcs-type": "git",
+        "vendor": "Elastic",
+        "version": "9.5.4"
+      },
+      "ports": {},
+      "read_only_rootfs": true,
+      "memory_limit": 268435456
+    },
+    "kibana": {
+      "Id": "58ca162d696d9097d17e7dc08d8054a067abdef9fdff3eb70bb24f1d3e9eabd1",
+      "Name": "/t2-cg20-b74cb05b34-kibana",
+      "Image": "sha256:b1b4cea273350ffcb67292d7b90dd034598c1627bfa3cd0783315e9237dbe737",
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kibana-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/kibana-data",
+          "Destination": "/usr/share/kibana/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ],
+      "State": {
+        "Status": "exited",
+        "Running": false,
+        "Paused": false,
+        "Restarting": false,
+        "OOMKilled": false,
+        "Dead": false,
+        "Pid": 0,
+        "ExitCode": 0,
+        "Error": "",
+        "StartedAt": "2026-10-22T13:47:58.39311721Z",
+        "FinishedAt": "2026-10-22T13:57:33.392071205Z"
+      },
+      "labels": {
+        "architecture": "x86_64",
+        "build-date": "2026-09-09T07:31:28Z",
+        "com.redhat.component": "ubi9-minimal-container",
+        "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI",
+        "cpe": "cpe:/a:redhat:enterprise_linux:9::appstream",
+        "description": "Your window into the Elastic Stack.",
+        "distribution-scope": "public",
+        "io.buildah.version": "1.44.0",
+        "io.k8s.description": "The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.",
+        "io.k8s.display-name": "Red Hat Universal Base Image 9 Minimal",
+        "io.openshift.expose-services": "",
+        "io.openshift.tags": "minimal rhel9",
+        "maintainer": "infra@elastic.co",
+        "name": "Kibana",
+        "org.label-schema.build-date": "2026-09-10T00:20:16.578Z",
+        "org.label-schema.license": "Elastic License",
+        "org.label-schema.name": "Kibana",
+        "org.label-schema.schema-version": "1.0",
+        "org.label-schema.url": "https://www.elastic.co/products/kibana",
+        "org.label-schema.usage": "https://www.elastic.co/guide/en/kibana/reference/index.html",
+        "org.label-schema.vcs-ref": "abf4eb613d64cdb3a6290671ce1cb67399677ab3",
+        "org.label-schema.vcs-url": "https://github.com/elastic/kibana",
+        "org.label-schema.vendor": "Elastic",
+        "org.label-schema.version": "9.5.4",
+        "org.opencontainers.image.created": "2026-09-10T00:20:16.578Z",
+        "org.opencontainers.image.documentation": "https://www.elastic.co/guide/en/kibana/reference/index.html",
+        "org.opencontainers.image.licenses": "Elastic License",
+        "org.opencontainers.image.revision": "abf4eb613d64cdb3a6290671ce1cb67399677ab3",
+        "org.opencontainers.image.source": "https://github.com/elastic/kibana",
+        "org.opencontainers.image.title": "Kibana",
+        "org.opencontainers.image.url": "https://www.elastic.co/products/kibana",
+        "org.opencontainers.image.vendor": "Elastic",
+        "org.opencontainers.image.version": "9.5.4",
+        "release": "1",
+        "summary": "Kibana",
+        "t2.cg20.run": "t2-cg20-b74cb05b34",
+        "url": "https://catalog.redhat.com/en/search?searchType=containers",
+        "vcs-ref": "032ccfa67770989ab0253359280f8ba2cf77ce39",
+        "vcs-type": "git",
+        "vendor": "Elastic",
+        "version": "9.5.4"
+      },
+      "ports": {
+        "5601/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "48899"
+          }
+        ]
+      },
+      "read_only_rootfs": true,
+      "memory_limit": 1610612736
+    }
+  },
+  "network": "c9b8dfe14964d4bc4fe2c83607154f38fa4b280ad7ca210743d958abc274ae5d",
+  "all_own_containers_stopped": true,
+  "new_volumes": [],
+  "before_raw_sha256": "f82b6febf0c217f7cbbe77799623507f995bf81814c78d3d0786ef7c79c12fee",
+  "after_raw_sha256": "b6dbe182ca8f24a0924a32c1f88f986d5a8a443111cd930ae60f9ef54277bbef",
+  "foreign_inventory_scope": "Config/HostConfig/image/mount/state and volumes/networks preserved; changing health log timestamps excluded. Full inventory local only."
+}

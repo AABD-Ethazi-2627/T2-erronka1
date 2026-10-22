@@ -1,0 +1,10 @@
+{
+  "stopped_ids": {
+    "kafka": "aa8e92517cafb60eeb7bb3be12c3a16e0e11050deb4f872faf385aa1c0ab2fe7",
+    "es": "02f3effdc17fdbcb406d42267442f75bc6de4d534b4ed9c05e74c62f5576e877",
+    "nifi": "7abf9772d81e9a16f51974fb88b1dbfd8326fdc8a7fc1a129c54689358f68432",
+    "filebeat": "7e515fc4fa72493ec3a7769d19d4c51ca1675faa3413634d0d906c0d79233e45",
+    "kibana": "58ca162d696d9097d17e7dc08d8054a067abdef9fdff3eb70bb24f1d3e9eabd1"
+  },
+  "data_retained": true
+}

@@ -130,3 +130,14 @@ validaciones reales. Las issues permanecen abiertas y no se autootorga nota.
 ## Corte actual 22/10/2026
 
 [30 CG y bloqueos por implementación/laboratorio/personas](ESTADO_20261022.md), [40 descriptores contra f770932](../memoria/README.md#matriz-de-los-40-descriptores) y [defensa/reproducción pendiente](../demo/ACTA_PENDIENTE_20261022.md). PR66/67/69 integradas en la base auditada; PR68 abierta al corte. Los registros anteriores son históricos y no reabren defectos ya corregidos. Ninguna fila acredita aceptación docente ni cierre de issue.
+
+## CG20: ensayo del mismo evento hasta Kibana, 22/10/2026
+
+[Evidencia nueva sobre main 3b79c927](../evidence/CG20_SAME_EVENT_20261022.md):
+Filebeat/Kafka/NiFi-worker/API HTTP/CG15/ES/Kibana propios, modelos stub sintéticos.
+Un mismo event_id y sus valores canónicos coinciden en API, ledger, ES, Discover
+y panel; filtros positivo/negativo comprobados y exports vigentes retenidos.
+Contabilidad 5 = 4 guardados + 1 rechazado + 0 pendientes, offset5.
+Issue #20 permanece abierto para revisión del padre. Sin aceptación académica,
+SLA/HA/exactly-once global ni inferencia de modelos reales. Las filas y cortes
+anteriores se conservan como registros históricos.
