@@ -71,11 +71,13 @@ def retain(sources, output):
                 group.reset_index(drop=True).to_parquet(target, index=False)
     # Recompute Gold from every retained Silver object, including previous runs.
     with duckdb.connect() as con:
-        per_machine = con.execute(
+        # No timestamps are projected here. Native pandas export preserves the
+        # established HUGEINT sum -> float64 Gold contract (Arrow uses Decimal).
+        per_machine = con.sql(
             """SELECT machine_id, count(*) n,
             sum(machine_failure) positives, avg(rpm) mean_rpm
             FROM read_parquet(?) GROUP BY machine_id ORDER BY machine_id""",
-            [str(output / "silver/**/*.parquet")],
+            params=[str(output / "silver/**/*.parquet")],
         ).df()
         totals = con.execute(
             """SELECT count(*), count(DISTINCT record_id)

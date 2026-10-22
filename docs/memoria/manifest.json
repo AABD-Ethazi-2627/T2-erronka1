@@ -8,7 +8,7 @@
   },
   "files": {
     "ENUNTZIATUA.md": "3ca6a3ae33c650a2aa1c2f60331995485f86e6b62b6a0277023003d459f9fd87",
-    "docs/CG04_ENVIRONMENT.md": "b37e6cca6348a8d63a839c4217fa013a92671509cc740e3e9de9e5af60e914fc",
+    "docs/CG04_ENVIRONMENT.md": "b6d2236e22d0184fc0871575495915324b82edb8038ca2c740371d9613098b3f",
     "docs/CG15_KAFKA.md": "681bb57bd4213bde40a561c21da50d63a15d0a09aefdc7cf5ff5ec63be9f9c22",
     "docs/SCORING_REPLAY_CONTRACT.md": "68af86a58b2c9cf16e045af9ea1a687a59466297a91c415e3fb7632e1cf77799",
     "docs/SMB_FILEBEAT_LAB.md": "c444e959aff9e7bbcfd1c5bf81b667a094bc0ce50eee3e9b250f1d66a438d9c0",
@@ -51,9 +51,17 @@
     "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
     "docs/rubrica/SEGUIMIENTO.md": "79eac6ea471b6d6b538b00d58b22c0bfb1cf3046fe45c6c140fc6598c2e64f07",
     "docs/rubrica/fuente.json": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2",
-    "pyproject.toml": "092279f6234d63a9c5c75ab52ca2e9b7cd4cfc976a48eb4b0890213fa767a444",
+    "pyproject.toml": "3a07ed845a747302827d736217520d69476fe5ddab560361fc11722fbad43929",
     "scripts/check_cg25_memory.py": "8b6a7d2d627502be154c0303f316e945eb6842c3ca545eb42532f0eb30aa02e7",
-    "uv.lock": "3d2a282b8cfe718fa7f84d05a8a01da9f726881e50b77b9c4b361b93f5b79e83"
+    "uv.lock": "8e14c1384cd909b5988a19ee2ac1f9acdb9c04a2e5bd269ca44b5dc03ee45bb5",
+    "README.md": "5714e1188c701524d9a472e9d3867376d9f8f5e227b676caa36a778fa4c0d43f",
+    "notebooks/01_EDA_evidence.ipynb": "a08bf85f0a4a4ac307a2496729ae46bda32160f94112e407bbca2744529f615b",
+    "notebooks/02_training_TEMPLATE.ipynb": "888daa4a547911e072c782fb561ae547a4835bc7790b11b0023b8ab1057ed890",
+    "scripts/build_history.py": "4c50f32c7ba3a942db358228b294ac2fdfafbf75ebfb4572d2b8b7303d8ed36d",
+    "tests/test_columnar_upgrade_contract.py": "b77a3d70a1a05918f74259e8dbf6e303060d112bd894e59c7c655431a3971371",
+    "scripts/duckdb_output.py": "7d0500c3353bc66b1cc8f5faa8151c77eef18796873056a5a1fa73ab0fd9bc8c",
+    "tests/test_duckdb_output.py": "6c6fc9c501965339712355498be046b46832abd33e84279b263a0e603cab9017",
+    "docs/DUCKDB_2_MIGRATION.md": "216a4bfb9c58742234622c19cf4458097dc13fe8db8e5daa00483e837bbeb759"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",

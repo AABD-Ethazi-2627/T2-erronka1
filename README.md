@@ -18,7 +18,8 @@ en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOP
 
 ## Entorno y experimentos
 
-Python 3.11 y uv; el lock conserva las versiones. Desde checkout limpio:
+Python 3.11/3.12, DuckDB **2.0.0** y uv; el lock conserva las versiones.
+[Migración, timestamps UTC y rollback](docs/DUCKDB_2_MIGRATION.md). Desde checkout limpio:
 
 ```bash
 uv sync --frozen --python 3.11
