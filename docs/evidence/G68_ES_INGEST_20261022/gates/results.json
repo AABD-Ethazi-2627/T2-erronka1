@@ -1,0 +1,195 @@
+[
+  {
+    "name": "python",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "--version"
+    ],
+    "started_at": "2026-10-22T10:22:42.194366+00:00",
+    "exit_code": 0,
+    "log": "python.log",
+    "sha256": "67dba0f634d4118e5ae81af78698c7ff363457b05bef30b39f09bb6108d36f1c"
+  },
+  {
+    "name": "export",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "scripts.build_es_ingest_pipeline",
+      "--check"
+    ],
+    "started_at": "2026-10-22T10:22:42.216392+00:00",
+    "exit_code": 0,
+    "log": "export.log",
+    "sha256": "666143fb466c2ef32d3fb82d8bfa9815dc621ca24a05fd58ab4b305bee7b2e1f"
+  },
+  {
+    "name": "contracts",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "-W",
+      "error::ResourceWarning",
+      "-m",
+      "unittest",
+      "-v",
+      "test_es_ingest_pipeline",
+      "test_contract_validation",
+      "test_elasticsearch_contract.ElasticsearchContractTests.test_entire_prediction_contract_has_explicit_compatible_mappings"
+    ],
+    "started_at": "2026-10-22T10:22:42.293582+00:00",
+    "exit_code": 0,
+    "log": "contracts.log",
+    "sha256": "bf6e973a8654c0ee2b8981637feee1f913a4a6b2765f2623cd63ce2bbe4011b8"
+  },
+  {
+    "name": "ruff-version",
+    "command": [
+      "ruff",
+      "--version"
+    ],
+    "started_at": "2026-10-22T10:22:45.242128+00:00",
+    "exit_code": 0,
+    "log": "ruff-version.log",
+    "sha256": "dcef6a033c8efc322c1b2ab073dc73ef739f1d1c34602df09c11cf7fa02c668d"
+  },
+  {
+    "name": "ruff-check",
+    "command": [
+      "ruff",
+      "check",
+      "--select",
+      "E,F,I,PLW1510",
+      "scripts/build_es_ingest_pipeline.py",
+      "tests/test_es_ingest_pipeline.py",
+      "tests/verify_es_ingest_pipeline.py",
+      "tests/verify_elasticsearch_contract.py",
+      "tests/verify_durable_pipeline.py"
+    ],
+    "started_at": "2026-10-22T10:22:45.257147+00:00",
+    "exit_code": 0,
+    "log": "ruff-check.log",
+    "sha256": "40d459ecb50c5b63073d7194070aaddae58fe5859b23fe2b1694964fc08285de"
+  },
+  {
+    "name": "ruff-format",
+    "command": [
+      "ruff",
+      "format",
+      "--check",
+      "scripts/build_es_ingest_pipeline.py",
+      "tests/test_es_ingest_pipeline.py",
+      "tests/verify_es_ingest_pipeline.py",
+      "tests/verify_elasticsearch_contract.py",
+      "tests/verify_durable_pipeline.py"
+    ],
+    "started_at": "2026-10-22T10:22:45.286363+00:00",
+    "exit_code": 0,
+    "log": "ruff-format.log",
+    "sha256": "da41405827c9418906b82c334f51980739509c67d2815c025c43ec1c439c263f"
+  },
+  {
+    "name": "CG02",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "scripts.audit_cg02",
+      "--check"
+    ],
+    "started_at": "2026-10-22T10:22:45.315934+00:00",
+    "exit_code": 0,
+    "log": "CG02.log",
+    "sha256": "2484ddece9fd2b396d3240694ea9046074ecc90f7cbfce2db80f8db46f5fc0f4"
+  },
+  {
+    "name": "CG25",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "scripts.check_cg25_memory"
+    ],
+    "started_at": "2026-10-22T10:22:45.464223+00:00",
+    "exit_code": 0,
+    "log": "CG25.log",
+    "sha256": "b6ce68db332f71153a21b12d88ebdfa732d06c2e3b22f508b2288f95164b2ab6"
+  },
+  {
+    "name": "layout",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "scripts/check_repository_layout.py"
+    ],
+    "started_at": "2026-10-22T10:22:46.207190+00:00",
+    "exit_code": 0,
+    "log": "layout.log",
+    "sha256": "4c59b1dec449a1d6573a8da04fa85865e2100a1d7a7f915eedb2d379f07fbdad"
+  },
+  {
+    "name": "uv-version",
+    "command": [
+      "uv",
+      "tool",
+      "run",
+      "--from",
+      "uv==0.13.1",
+      "uv",
+      "--version"
+    ],
+    "started_at": "2026-10-22T10:22:47.144847+00:00",
+    "exit_code": 0,
+    "log": "uv-version.log",
+    "sha256": "2456527a29572735abae3860524afb08a8e61f17fae8d21c9fa6a55c4cb75f16"
+  },
+  {
+    "name": "lock",
+    "command": [
+      "uv",
+      "tool",
+      "run",
+      "--from",
+      "uv==0.13.1",
+      "uv",
+      "lock",
+      "--check",
+      "--offline"
+    ],
+    "started_at": "2026-10-22T10:22:47.198007+00:00",
+    "exit_code": 0,
+    "log": "lock.log",
+    "sha256": "c217ad278e291a7a3c693d88928d59f083a2c2f311bb398ce3b0f887061fef0c"
+  },
+  {
+    "name": "audit",
+    "command": [
+      "uv",
+      "tool",
+      "run",
+      "--from",
+      "uv==0.13.1",
+      "uv",
+      "audit",
+      "--locked"
+    ],
+    "started_at": "2026-10-22T10:22:47.255589+00:00",
+    "exit_code": 0,
+    "log": "audit.log",
+    "sha256": "f7ed73de17b78dacdb4ff9e21db6228e454fe003a5675ec6d4f4e1203c2affb0"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "cc36beb49a17949c805f789b5aa3b4b568f5d4c6"
+    ],
+    "started_at": "2026-10-22T10:22:47.788939+00:00",
+    "exit_code": 0,
+    "log": "diff.log",
+    "sha256": "abc30023955fb1415cb6df613a2f287897377fa4b0a607d322483e2bd51a91d1"
+  }
+]

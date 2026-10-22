@@ -83,8 +83,13 @@ No borrar, truncar ni rotar este ledger de forma independiente del archivo y sus
 backups. No hay TTL: eliminar una respuesta permite rescoring y puede volver a
 provocar el conflicto original. Un despliegue sobre eventos archivados antes de
 este cambio necesita reconciliar/importar sus respuestas canónicas con control
-de identidad; el ledger nuevo no puede reconstruir sus timestamps. Esa migración
-no está implementada aquí. El almacenamiento local se considera confiable; no
+de identidad; el ledger nuevo no puede reconstruir sus timestamps. La
+[CLI de importación explícita](SCORING_RESPONSE_IMPORT.md) valida por defecto y
+exige petición/respuesta originales, manifiesto completo y evidencia de identidad.
+Su implementación no significa que se hayan migrado históricos reales ni que se
+hayan reconciliado IDs distintos de CG14/Filebeat. Las respuestas importadas se
+reproducen con sus bytes originales; no desplegar un API anterior sobre ese ledger
+si necesita conservarlos. El almacenamiento local se considera confiable; no
 se pretende autenticar una modificación maliciosa del SQLite.
 
 ## Compatibilidad y límite de aceptación

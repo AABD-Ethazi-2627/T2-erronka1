@@ -1,0 +1,145 @@
+test_corrupt_bytes_and_orphan_binding_never_rescore (test_scoring_import.ImportAPITests.test_corrupt_bytes_and_orphan_binding_never_rescore) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_original_wire_bytes_restart_conflicts_and_archive_ack (test_scoring_import.ImportAPITests.test_original_wire_bytes_restart_conflicts_and_archive_ack) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_batch_duplicate_and_backup_restoration (test_scoring_import.ImportTests.test_batch_duplicate_and_backup_restoration) ... ok
+test_conflicts_inside_batch_and_existing_ledger_leave_no_rows (test_scoring_import.ImportTests.test_conflicts_inside_batch_and_existing_ledger_leave_no_rows) ... ok
+test_default_validation_has_no_target_or_backup_writes (test_scoring_import.ImportTests.test_default_validation_has_no_target_or_backup_writes) ... ok
+test_duplicate_keys_nonfinite_deep_and_oversized_snapshots_are_rejected (test_scoring_import.ImportTests.test_duplicate_keys_nonfinite_deep_and_oversized_snapshots_are_rejected) ... ok
+test_existing_api_response_cannot_be_replaced_by_other_wire_bytes (test_scoring_import.ImportTests.test_existing_api_response_cannot_be_replaced_by_other_wire_bytes) ... ok
+test_killed_import_recovers_atomic_original_and_retry_is_idempotent (test_scoring_import.ImportTests.test_killed_import_recovers_atomic_original_and_retry_is_idempotent) ... ok
+test_ledger_corruption_sidecars_and_wrong_schema_are_rejected (test_scoring_import.ImportTests.test_ledger_corruption_sidecars_and_wrong_schema_are_rejected) ... ok
+test_malformed_missing_incompatible_and_retargeted_inputs_fail_closed (test_scoring_import.ImportTests.test_malformed_missing_incompatible_and_retargeted_inputs_fail_closed) ... ok
+test_mid_batch_error_and_commit_failure_roll_back_all_rows (test_scoring_import.ImportTests.test_mid_batch_error_and_commit_failure_roll_back_all_rows) ... ok
+test_requires_backup_and_preserves_original_database (test_scoring_import.ImportTests.test_requires_backup_and_preserves_original_database) ... ok
+test_target_configuration_and_existing_event_conflicts_are_atomic (test_scoring_import.ImportTests.test_target_configuration_and_existing_event_conflicts_are_atomic) ... ok
+test_wal_mode_is_rejected_without_creating_sidecars (test_scoring_import.ImportTests.test_wal_mode_is_rejected_without_creating_sidecars) ... ok
+test_concurrent_apps_share_one_committed_response (test_scoring_replay.ScoringReplayTests.test_concurrent_apps_share_one_committed_response) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_concurrent_payload_conflict_keeps_the_winner (test_scoring_replay.ScoringReplayTests.test_concurrent_payload_conflict_keeps_the_winner) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_configuration_reuse_conflicts_and_new_archive_identity_succeeds (test_scoring_replay.ScoringReplayTests.test_configuration_reuse_conflicts_and_new_archive_identity_succeeds) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_failed_commit_rolls_back_and_returns_no_success (test_scoring_replay.ScoringReplayTests.test_failed_commit_rolls_back_and_returns_no_success) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_inference_and_storage_failures_never_commit_success (test_scoring_replay.ScoringReplayTests.test_inference_and_storage_failures_never_commit_success) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_lost_http_response_restart_and_archive_replay (test_scoring_replay.ScoringReplayTests.test_lost_http_response_restart_and_archive_replay) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_memory_database_is_not_a_durable_configuration (test_scoring_replay.ScoringReplayTests.test_memory_database_is_not_a_durable_configuration) ... ok
+test_rehearsal_uses_new_identity_for_trace_variant (test_scoring_replay.ScoringReplayTests.test_rehearsal_uses_new_identity_for_trace_variant) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_same_id_different_valid_payload_conflicts_before_inference (test_scoring_replay.ScoringReplayTests.test_same_id_different_valid_payload_conflicts_before_inference) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_timeout_after_commit_recovers_without_rescoring (test_scoring_replay.ScoringReplayTests.test_timeout_after_commit_recovers_without_rescoring) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_unready_bundle_does_not_serve_previously_cached_success (test_scoring_replay.ScoringReplayTests.test_unready_bundle_does_not_serve_previously_cached_success) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_missing_and_corrupt_models_are_unhealthy (test_api.ApiTests.test_missing_and_corrupt_models_are_unhealthy) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_real_pipeline_contract_and_invalid_input (test_api.ApiTests.test_real_pipeline_contract_and_invalid_input) ... skipped 'Run python -m scripts.package_model first'
+test_tampered_model_and_oversized_body (test_api.ApiTests.test_tampered_model_and_oversized_body) ... skipped 'Run package_model first'
+test_deep_rejection_durable_before_ack_continues_and_replays (test_archive_json_depth.JsonDepthTests.test_deep_rejection_durable_before_ack_continues_and_replays) ... ok
+test_deep_rejection_interruption_replays_stable_files (test_archive_json_depth.JsonDepthTests.test_deep_rejection_interruption_replays_stable_files) ... ok
+test_large_shallow_invalid_input_retains_original_bytes (test_archive_json_depth.JsonDepthTests.test_large_shallow_invalid_input_retains_original_bytes) ... ok
+test_memory_and_unexpected_validation_errors_propagate (test_archive_json_depth.JsonDepthTests.test_memory_and_unexpected_validation_errors_propagate) ... ok
+test_recursion_from_schema_validation_is_rejected (test_archive_json_depth.JsonDepthTests.test_recursion_from_schema_validation_is_rejected) ... ok
+test_recursion_outside_input_validation_propagates (test_archive_json_depth.JsonDepthTests.test_recursion_outside_input_validation_propagates) ... ok
+test_rejection_write_failure_aborts_without_ack_then_recovers (test_archive_json_depth.JsonDepthTests.test_rejection_write_failure_aborts_without_ack_then_recovers) ... ok
+test_projected_request_scores_with_deterministic_model_doubles (test_cg14_scoring_bridge.Cg14BridgeApiTests.test_projected_request_scores_with_deterministic_model_doubles) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_real_asgi_validation_accepts_bridge_but_stays_unready_without_models (test_cg14_scoring_bridge.Cg14BridgeApiTests.test_real_asgi_validation_accepts_bridge_but_stays_unready_without_models) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_alias_is_exact_and_never_implicit (test_cg14_scoring_bridge.Cg14BridgeTests.test_alias_is_exact_and_never_implicit) ... ok
+test_canonical_event_needs_no_alias_and_replays_identically (test_cg14_scoring_bridge.Cg14BridgeTests.test_canonical_event_needs_no_alias_and_replays_identically) ... ok
+test_cli_outputs_only_request_and_fails_without_payload_leak (test_cg14_scoring_bridge.Cg14BridgeTests.test_cli_outputs_only_request_and_fails_without_payload_leak) ... ok
+test_explicit_mapping_retains_identity_and_original_audit_event (test_cg14_scoring_bridge.Cg14BridgeTests.test_explicit_mapping_retains_identity_and_original_audit_event) ... ok
+test_export_and_exact_restore_aliases (test_cg14_scoring_bridge.Cg14BridgeTests.test_export_and_exact_restore_aliases) ... ok
+test_forbidden_fields_and_invalid_measurements_are_not_repaired (test_cg14_scoring_bridge.Cg14BridgeTests.test_forbidden_fields_and_invalid_measurements_are_not_repaired) ... ok
+test_archive_rejection_is_blocking_and_disk_failures_never_ack (test_cg14_durable_pipeline.DurablePipelineTests.test_archive_rejection_is_blocking_and_disk_failures_never_ack) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-143' coro=<DurablePipelineTests.test_archive_rejection_is_blocking_and_disk_failures_never_ack() done, defined at <worktree>\tests\test_cg14_durable_pipeline.py:510> result=None created at <python311-stdlib>\asyncio\runners.py:100> took 0.125 seconds
+ok
+test_changed_local_manifest_contract_targets_and_raw_fail_closed (test_cg14_durable_pipeline.DurablePipelineTests.test_changed_local_manifest_contract_targets_and_raw_fail_closed) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-149' coro=<DurablePipelineTests.test_changed_local_manifest_contract_targets_and_raw_fail_closed() done, defined at <worktree>\tests\test_cg14_durable_pipeline.py:329> result=None created at <python311-stdlib>\asyncio\runners.py:100> took 0.156 seconds
+ok
+test_committed_corruption_and_archive_failure_prevent_ack (test_cg14_durable_pipeline.DurablePipelineTests.test_committed_corruption_and_archive_failure_prevent_ack) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-155' coro=<DurablePipelineTests.test_committed_corruption_and_archive_failure_prevent_ack() done, defined at <worktree>\tests\test_cg14_durable_pipeline.py:481> result=None created at <python311-stdlib>\asyncio\runners.py:100> took 0.188 seconds
+ok
+test_contract_precondition_and_old_api_without_echo_fail_closed (test_cg14_durable_pipeline.DurablePipelineTests.test_contract_precondition_and_old_api_without_echo_fail_closed) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_es_create_uncertain_success_replay_and_conflict_block_ack (test_cg14_durable_pipeline.DurablePipelineTests.test_es_create_uncertain_success_replay_and_conflict_block_ack) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-167' coro=<DurablePipelineTests.test_es_create_uncertain_success_replay_and_conflict_block_ack() done, defined at <worktree>\tests\test_cg14_durable_pipeline.py:260> result=None created at <python311-stdlib>\asyncio\runners.py:100> took 0.172 seconds
+ok
+test_http_status_classes_are_explicit_and_never_fabricate_predictions (test_cg14_durable_pipeline.DurablePipelineTests.test_http_status_classes_are_explicit_and_never_fabricate_predictions) ... Executing <Task pending name='Task-173' coro=<DurablePipelineTests.test_http_status_classes_are_explicit_and_never_fabricate_predictions() running at <worktree>\tests\test_cg14_durable_pipeline.py:383> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181] created at <python311-stdlib>\asyncio\runners.py:100> took 0.485 seconds
+ok
+test_invalid_csv_utf8_oversize_durable_quarantine_before_ack (test_cg14_durable_pipeline.DurablePipelineTests.test_invalid_csv_utf8_oversize_durable_quarantine_before_ack) ... ok
+test_model_change_after_uncertain_success_fails_before_rescoring (test_cg14_durable_pipeline.DurablePipelineTests.test_model_change_after_uncertain_success_fails_before_rescoring) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_raw_projection_canonical_outputs_archive_and_distinct_occurrences (test_cg14_durable_pipeline.DurablePipelineTests.test_raw_projection_canonical_outputs_archive_and_distinct_occurrences) ... Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-190' coro=<DurablePipelineTests.test_raw_projection_canonical_outputs_archive_and_distinct_occurrences() done, defined at <worktree>\tests\test_cg14_durable_pipeline.py:88> result=None created at <python311-stdlib>\asyncio\runners.py:100> took 0.203 seconds
+ok
+test_real_api_unready_503_has_bounded_attempts_no_ack (test_cg14_durable_pipeline.DurablePipelineTests.test_real_api_unready_503_has_bounded_attempts_no_ack) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_restart_every_boundary_preserves_prediction_bytes (test_cg14_durable_pipeline.DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:186> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.171 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:178> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.141 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:178> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.141 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:178> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.172 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:178> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.187 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:178> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.203 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task pending name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() running at <worktree>\tests\test_cg14_durable_pipeline.py:178> cb=[_run_until_complete_cb() at <python311-stdlib>\asyncio\base_events.py:181, <1 more>, WorkerThread.stop()] created at <python311-stdlib>\asyncio\runners.py:100> took 0.219 seconds
+Model bundle unavailable or invalid; scoring remains unready
+Executing <Task finished name='Task-204' coro=<DurablePipelineTests.test_restart_every_boundary_preserves_prediction_bytes() done, defined at <worktree>\tests\test_cg14_durable_pipeline.py:154> result=None created at <python311-stdlib>\asyncio\runners.py:100> took 0.172 seconds
+ok
+test_second_worker_cannot_cross_live_journal_lock (test_cg14_durable_pipeline.DurablePipelineTests.test_second_worker_cannot_cross_live_journal_lock) ... Model bundle unavailable or invalid; scoring remains unready
+ok
+test_transport_timeout_and_connect_failure_are_bounded (test_cg14_durable_pipeline.DurablePipelineTests.test_transport_timeout_and_connect_failure_are_bounded) ... ok
+test_uncertain_success_restarts_using_api_canonical_response (test_cg14_durable_pipeline.DurablePipelineTests.test_uncertain_success_restarts_using_api_canonical_response) ... Model bundle unavailable or invalid; scoring remains unready
+Model bundle unavailable or invalid; scoring remains unready
+ok
+test_commit_uncertain_rebalance_and_required_destinations (test_cg14_durable_pipeline.KafkaPipelineBoundaryTests.test_commit_uncertain_rebalance_and_required_destinations) ... ok
+test_empty_polls_are_bounded (test_cg14_durable_pipeline.KafkaPipelineBoundaryTests.test_empty_polls_are_bounded) ... ok
+test_export_disabled_staged_bridge_preserves_all_relationships_no_overwrite (test_cg14_durable_pipeline.KafkaPipelineBoundaryTests.test_export_disabled_staged_bridge_preserves_all_relationships_no_overwrite) ... ok
+test_deep_malformed_fragmented_and_model_unready (test_durable_receipts_http.BoundedValidationHTTPTests.test_deep_malformed_fragmented_and_model_unready) ... ok
+test_depth_limit_escapes_and_internal_errors_propagate (test_durable_receipts_http.BoundedValidationHTTPTests.test_depth_limit_escapes_and_internal_errors_propagate) ... ok
+test_valid_escaped_strings_and_exact_byte_limit (test_durable_receipts_http.BoundedValidationHTTPTests.test_valid_escaped_strings_and_exact_byte_limit) ... ok
+test_completed_receipts_and_failed_source_commit (test_durable_receipts_http.DurableReceiptHTTPTests.test_completed_receipts_and_failed_source_commit) ... ok
+test_rejected_receipt_never_completes_or_acks_on_repeated_restart (test_durable_receipts_http.DurableReceiptHTTPTests.test_rejected_receipt_never_completes_or_acks_on_repeated_restart) ... ok
+test_conflict_and_write_failure_never_ack (test_archive_consumer.ArchiveTests.test_conflict_and_write_failure_never_ack) ... ok
+test_duplicate_preserves_verified_alternate_parquet_encoding (test_archive_consumer.ArchiveTests.test_duplicate_preserves_verified_alternate_parquet_encoding) ... ok
+test_event_conflict_quarantined (test_archive_consumer.ArchiveTests.test_event_conflict_quarantined) ... ok
+test_io_failure_and_ack_failure_recovery (test_archive_consumer.ArchiveTests.test_io_failure_and_ack_failure_recovery) ... ok
+test_mkdir_path_boundaries (test_archive_consumer.ArchiveTests.test_mkdir_path_boundaries) ... ok
+test_orphan_alternate_encoding_reconciles_before_ack (test_archive_consumer.ArchiveTests.test_orphan_alternate_encoding_reconciles_before_ack) ... ok
+test_orphan_content_or_schema_conflict_never_ack (test_archive_consumer.ArchiveTests.test_orphan_content_or_schema_conflict_never_ack) ... ok
+test_process_crash_before_and_after_commit (test_archive_consumer.ArchiveTests.test_process_crash_before_and_after_commit) ... ok
+test_recovery_parent_sync_failure_prevents_ack (test_archive_consumer.ArchiveTests.test_recovery_parent_sync_failure_prevents_ack) ... ok
+test_replay_separation_and_reconciliation (test_archive_consumer.ArchiveTests.test_replay_separation_and_reconciliation) ... ok
+test_restart_repairs_existing_directory_links_before_ack (test_archive_consumer.ArchiveTests.test_restart_repairs_existing_directory_links_before_ack) ... ok
+test_supplied_examples_and_negative_cases (test_contract_validation.ContractValidationTests.test_supplied_examples_and_negative_cases) ... ok
+
+----------------------------------------------------------------------
+Ran 77 tests in 26.083s
+
+OK (skipped=2)
+{"errors": 0, "failures": 0, "patterns": ["test_scoring_import.py", "test_scoring_replay.py", "test_api.py", "test_archive_json_depth.py", "test_cg14_scoring_bridge.py", "test_cg14_durable_pipeline.py", "test_durable_receipts_http.py", "test_archive_consumer.py", "test_contract_validation.py"], "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]", "skipped": 2, "tests": 77, "unraisables": [], "warnings": []}
