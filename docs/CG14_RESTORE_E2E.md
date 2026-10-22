@@ -1,5 +1,21 @@
 # CG14 — restore E2E aislado, iteración 14
 
+## Corte vigente — 22 de octubre de 2026
+
+[Auditoría de ramas y host](evidence/CG14_BRANCH_AUDIT_20261022.md): login HTTPS
+confirmado, original intacto, RESTORE 23/27/1 DISABLED con colas vacías.
+El runner integrado bloquea por Script Body antiguo y persistencia Kafka legacy.
+**No hay RESTORE_FUNCTIONAL_VERIFIED.** Alinear esos dos componentes conservando
+los datos antes de ejecutar; no usar el runner histórico para omitir los gates.
+La copia segura versionada actual tiene SHA256
+`60048fc426b25d57dd4bb6f9c8c5c99a48a80e906865d3d49a210e7659f43f52`.
+Los hashes `98bc…`, mounts `/tmp/kraft-combined-logs` y resultados de iteraciones
+anteriores que aparecen abajo son históricos; no describen el Compose actual.
+El nuevo layout exige `/var/lib/kafka` y `/var/lib/kafka/data` con entrypoint
+explícito `/lab/start.sh`. No hacer otro upload ni recrear el broker existente.
+
+## Procedimiento e historial anterior
+
 Estado del gate (2026-10-21): **HOST_RUNNER_PREPARED / FUNCTIONAL_NOT_TESTED**.
 La estructura previamente verificada continúa siendo 23 processors, 27 conexiones,
 un Controller Service. Esta iteración prepara una operación; no acredita un E2E
@@ -97,8 +113,10 @@ permisos, cambiando red o reiniciando servicios.
 ## Operación desde la terminal real de Omarchy
 
 Estar en la raíz del checkout y en `feat/14-nifi-validation`. Mantener el mismo
-run ID en todos los pasos. Credenciales existentes solicitadas interactivamente
-en cada invocación, token sólo en memoria; no se lee `.env`. El transporte usa
+run ID en todos los pasos. Las credenciales `SINGLE_USER_CREDENTIALS_USERNAME` y
+`SINGLE_USER_CREDENTIALS_PASSWORD` se leen primero del entorno y después de
+`deploy/cg14/.env`, relativo al checkout; sólo se preguntan los valores ausentes
+o vacíos. El token permanece sólo en memoria. El transporte usa
 CA local, hostname verificado, sin proxy heredado ni redirects de autenticación.
 
 ```bash

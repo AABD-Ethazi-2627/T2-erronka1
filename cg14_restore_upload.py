@@ -10,6 +10,7 @@ import argparse
 import getpass
 import hashlib
 import json
+import os
 import ssl
 import sys
 import urllib.error
@@ -20,6 +21,11 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent
+ENV_FILE = REPO / "deploy/cg14/.env"
+CREDENTIAL_KEYS = (
+    "SINGLE_USER_CREDENTIALS_USERNAME",
+    "SINGLE_USER_CREDENTIALS_PASSWORD",
+)
 FLOW_SHA256 = "60048fc426b25d57dd4bb6f9c8c5c99a48a80e906865d3d49a210e7659f43f52"
 TARGET = "CNC-GUARD-CG14-RESTORE-TEST"
 ORIGINAL = "583bcfb5-01a1-1000-de1a-41cdf8ea78fe"
@@ -33,6 +39,33 @@ class GuardError(ValueError):
 def require(condition, message):
     if not condition:
         raise GuardError(message)
+
+
+def credentials():
+    """Read only local credential keys, without executing shell or expanding values."""
+    values = {key: os.environ.get(key, "") for key in CREDENTIAL_KEYS}
+    if all(values.values()):
+        return values
+    try:
+        lines = ENV_FILE.read_text(encoding="utf-8").splitlines()
+    except FileNotFoundError:
+        return values
+    except (OSError, UnicodeError):
+        raise GuardError("No se pudo leer el archivo local de credenciales.") from None
+    for line in lines:
+        if line.lstrip().startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        if key.startswith("export "):
+            key = key[7:].strip()
+        if key not in CREDENTIAL_KEYS or os.environ.get(key):
+            continue
+        # Quotes delimit literal values; passwords otherwise retain whitespace.
+        if len(value) >= 2 and value[0] in ("'", '"') and value[-1] == value[0]:
+            value = value[1:-1]
+        values[key] = value
+    return values
 
 
 def preflight(path):
@@ -141,15 +174,31 @@ class Api:
                 return response.status, response.read()
         except urllib.error.HTTPError as error:
             self.diagnose(request, error.code)
+            if path == "/access/token" and error.code == 400:
+                # Inspect a bounded response only to emit a fixed classification.
+                # Never echo server text: it may contain credentials or tokens.
+                try:
+                    body = error.read(16384)
+                except Exception:
+                    body = b""
+                category = (
+                    "TLS_SNI_REJECTED" if b"Invalid SNI" in body else "UNCLASSIFIED"
+                )
+                print("AUTH_HTTP400: " + category, file=sys.stderr)
             raise
 
     def login(self):
-        username = input("Usuario NiFi (no se guardará): ").strip()
+        values = credentials()
+        username = (
+            values.pop(CREDENTIAL_KEYS[0]) or input("Usuario NiFi (no se guardará): ")
+        ).strip()
         require(
             bool(username),
             "Usuario NiFi vacío tras normalizar; autenticación no enviada.",
         )
-        password = getpass.getpass("Contraseña NiFi (entrada oculta): ")
+        password = values.pop(CREDENTIAL_KEYS[1]) or getpass.getpass(
+            "Contraseña NiFi (entrada oculta): "
+        )
         try:
             status, raw = self.request(
                 "/access/token",
