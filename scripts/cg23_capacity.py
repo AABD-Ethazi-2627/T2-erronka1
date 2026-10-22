@@ -8,7 +8,6 @@ import math
 import os
 import platform
 import queue
-import resource
 import statistics
 import subprocess
 import sys
@@ -18,6 +17,12 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from pathlib import Path
+
+if __package__:
+    from scripts.platform_io import peak_rss_kib
+else:
+    # Preserve the original standalone entry point, including from another cwd.
+    from platform_io import peak_rss_kib
 
 LOGGER = logging.getLogger(__name__)
 
@@ -226,7 +231,7 @@ def run(rate, duration, workers, capacity=16, service_ms=10, fail_every=17):
             "sink_bytes": disk_bytes,
             "replay_elapsed_s": replay_elapsed,
             "cpu_process_s": time.process_time() - cpu_start,
-            "process_peak_rss_KiB": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+            "process_peak_rss_KiB": peak_rss_kib(),
             "workload_sha256": hashlib.sha256(
                 json.dumps(
                     {
@@ -301,7 +306,8 @@ def protocol(repetitions=3, rates=(25, 100, 250), duration=1):
                     [
                         sys.executable,
                         "-B",
-                        str(script),
+                        "-m",
+                        "scripts.cg23_capacity",
                         "--worker",
                         str(rate),
                         str(duration),
@@ -311,6 +317,7 @@ def protocol(repetitions=3, rates=(25, 100, 250), duration=1):
                     capture_output=True,
                     text=True,
                     timeout=30,
+                    cwd=Path(__file__).resolve().parents[1],
                 )
                 measured = json.loads(child.stdout)
                 if (
@@ -345,7 +352,10 @@ def protocol(repetitions=3, rates=(25, 100, 250), duration=1):
             "platform": platform.platform(),
             "python": platform.python_version(),
             "logical_cpus": os.cpu_count(),
-            "rss_scope": "fresh child interpreter per run; lifetime peak, Linux KiB",
+            "rss_scope": (
+                "fresh child interpreter per run; lifetime peak in KiB; "
+                "Windows PeakWorkingSetSize or POSIX ru_maxrss"
+            ),
             "temporary_filesystem": tempfile.gettempdir(),
         },
         "protocol": {

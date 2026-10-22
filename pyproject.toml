@@ -6,7 +6,7 @@ dependencies = [
   "pandas==2.2.2",
   "numpy==1.26.4",
   "scikit-learn==1.5.0",
-  "joblib==1.4.2",
+  "joblib==1.5.3",
   "pyarrow==23.0.1",
   "duckdb==2.0.0",
   "jsonschema==4.23.0",

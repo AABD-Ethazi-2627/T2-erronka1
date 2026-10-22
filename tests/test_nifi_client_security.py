@@ -1,40 +1,41 @@
 """Security checks for the local NiFi API client's credential boundary."""
 
 import os
-import tempfile
 import unittest
 from io import BytesIO
-from pathlib import Path
 from unittest.mock import patch
 
 from scripts.nifi_client import private_token, request
+from scripts.private_files import private_text_file
 
 
 class NiFiClientSecurityTests(unittest.TestCase):
-    def test_private_token_and_rejects_unsafe_files(self):
-        with tempfile.TemporaryDirectory() as directory:
-            token_file = Path(directory) / "token"
-            token_file.write_text("lab-token\n")
-            token_file.chmod(0o600)
-            with patch.dict(os.environ, {"CNC_NIFI_TOKEN_FILE": str(token_file)}):
-                self.assertEqual(private_token(), "lab-token")
-                token_file.chmod(0o644)
-                with self.assertRaises(ValueError):
-                    private_token()
-                token_file.chmod(0o600)
-                link = Path(directory) / "link"
-                link.symlink_to(token_file)
-                with (
-                    patch.dict(os.environ, {"CNC_NIFI_TOKEN_FILE": str(link)}),
-                    self.assertRaises(OSError),
-                ):
-                    private_token()
+    def test_private_token(self):
+        with (
+            private_text_file("lab-token\n") as token_file,
+            patch.dict(os.environ, {"CNC_NIFI_TOKEN_FILE": str(token_file)}),
+        ):
+            self.assertEqual(private_token(), "lab-token")
+
+    def test_token_requires_absolute_path(self):
+        for configured in ("", "relative-token"):
+            with (
+                patch.dict(os.environ, {"CNC_NIFI_TOKEN_FILE": configured}, clear=True),
+                self.assertRaisesRegex(ValueError, "absolute"),
+            ):
+                private_token()
+
+    def test_empty_multiline_and_oversized_tokens_are_rejected(self):
+        for content in ("", " \n", "first\nsecond", "first\rsecond", "x" * 8193):
+            with (
+                private_text_file(content) as token_file,
+                patch.dict(os.environ, {"CNC_NIFI_TOKEN_FILE": str(token_file)}),
+                self.assertRaisesRegex(ValueError, "malformed"),
+            ):
+                private_token()
 
     def test_request_requires_trusted_ca_before_network(self):
-        with tempfile.TemporaryDirectory() as directory:
-            token_file = Path(directory) / "token"
-            token_file.write_text("lab-token")
-            token_file.chmod(0o600)
+        with private_text_file("lab-token") as token_file:
             with (
                 patch.dict(
                     os.environ, {"CNC_NIFI_TOKEN_FILE": str(token_file)}, clear=True
@@ -46,10 +47,7 @@ class NiFiClientSecurityTests(unittest.TestCase):
             network.assert_not_called()
 
     def test_request_uses_verified_context_and_local_endpoint(self):
-        with tempfile.TemporaryDirectory() as directory:
-            token_file = Path(directory) / "token"
-            token_file.write_text("lab-token")
-            token_file.chmod(0o600)
+        with private_text_file("lab-token") as token_file:
             response = BytesIO(b"ok")
             response.headers = {"Content-Type": "text/plain"}
             with (

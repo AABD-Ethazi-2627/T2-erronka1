@@ -1,11 +1,11 @@
 """CG14 raw CSV -> canonical scoring -> immutable outputs and CG15 archive.
 
 Only the Kafka adapter owns source offsets. A disk journal owns replay between
-services; no distributed exactly-once transaction is implied. POSIX local disk.
+services; no distributed exactly-once transaction is implied. Local disk only;
+POSIX fsync or Windows process recovery (see docs/PLATFORM_SUPPORT.md).
 """
 
 import asyncio
-import fcntl
 import json
 import math
 import sqlite3
@@ -22,6 +22,8 @@ from scoring.scope import validate_bundle_scope
 from scripts.archive_consumer import consume as archive
 from scripts.archive_consumer import digest, durable, event_key, mkdir, sync_dir
 from scripts.cg14_occurrence import bind_occurrence
+from scripts.platform_io import exclusive_lock
+from scripts.platform_io import require_power_loss_durability as require_power_loss
 from scripts.validate_contracts import contract_hashes, validators
 
 VERSION = "cg14.durable.v1"
@@ -51,7 +53,10 @@ class Pipeline:
         attempts=3,
         timeout=10.0,
         checkpoint=lambda stage: None,
+        require_power_loss_durability=False,
     ):
+        if require_power_loss_durability:
+            require_power_loss()
         if not namespace.strip() or source_kind not in ("lab_fixture", "smb_csv"):
             raise ValueError("Explicit stable namespace and canonical source required")
         if not isinstance(legacy_source_kind, str) or not legacy_source_kind.strip():
@@ -140,42 +145,41 @@ class Pipeline:
     async def consume(self, messages, ack):
         """messages: existing PR58 (delivery_id, 'raw_csv', bytes) tuples."""
         mkdir(self.root)
-        with (self.root / "worker.lock").open("a+b") as lock:
-            # Nonblocking avoids a second worker waiting past its poll interval.
-            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            with closing(sqlite3.connect(self.root / "pipeline.sqlite3")) as con:
-                con.execute("PRAGMA synchronous=FULL")
-                con.executescript(
-                    "CREATE TABLE IF NOT EXISTS config (value TEXT NOT NULL);"
-                    "CREATE TABLE IF NOT EXISTS objects "
-                    "(path TEXT PRIMARY KEY, hash TEXT NOT NULL);"
-                    "CREATE TABLE IF NOT EXISTS jobs "
-                    "(id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, "
-                    "response BLOB, outcome TEXT);"
-                    "CREATE TABLE IF NOT EXISTS attempts "
-                    "(id INTEGER PRIMARY KEY, delivery TEXT, "
-                    "target TEXT, result TEXT);"
-                )
-                config = canonical(self.config)
-                previous = con.execute("SELECT value FROM config").fetchall()
-                if previous and previous != [(config,)]:
-                    raise PipelineBlocked(
-                        "Configuration changed; reconciliation required"
-                    )
-                if not previous:
-                    con.execute("INSERT INTO config VALUES (?)", (config,))
-                    con.commit()
-                sync_dir(self.root)
-                for name, expected in con.execute("SELECT path, hash FROM objects"):
-                    if digest((self.root / name).read_bytes()) != expected:
-                        raise PipelineBlocked("Committed journal object corruption")
-                counts = {"completed": 0, "rejected": 0, "replay": 0}
-                for delivery, kind, raw in messages:
-                    outcome = await self.process(con, delivery, kind, raw)
-                    counts[outcome] += 1
-                self.checkpoint("before_ack")
-                ack()  # all required destinations for the entire poll are durable
-                return counts
+        # Nonblocking avoids a second worker waiting past its poll interval.
+        with (
+            exclusive_lock(self.root / "worker.lock", blocking=False),
+            closing(sqlite3.connect(self.root / "pipeline.sqlite3")) as con,
+        ):
+            con.execute("PRAGMA synchronous=FULL")
+            con.executescript(
+                "CREATE TABLE IF NOT EXISTS config (value TEXT NOT NULL);"
+                "CREATE TABLE IF NOT EXISTS objects "
+                "(path TEXT PRIMARY KEY, hash TEXT NOT NULL);"
+                "CREATE TABLE IF NOT EXISTS jobs "
+                "(id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, "
+                "response BLOB, outcome TEXT);"
+                "CREATE TABLE IF NOT EXISTS attempts "
+                "(id INTEGER PRIMARY KEY, delivery TEXT, "
+                "target TEXT, result TEXT);"
+            )
+            config = canonical(self.config)
+            previous = con.execute("SELECT value FROM config").fetchall()
+            if previous and previous != [(config,)]:
+                raise PipelineBlocked("Configuration changed; reconciliation required")
+            if not previous:
+                con.execute("INSERT INTO config VALUES (?)", (config,))
+                con.commit()
+            sync_dir(self.root)
+            for name, expected in con.execute("SELECT path, hash FROM objects"):
+                if digest((self.root / name).read_bytes()) != expected:
+                    raise PipelineBlocked("Committed journal object corruption")
+            counts = {"completed": 0, "rejected": 0, "replay": 0}
+            for delivery, kind, raw in messages:
+                outcome = await self.process(con, delivery, kind, raw)
+                counts[outcome] += 1
+            self.checkpoint("before_ack")
+            ack()  # all required destinations for the entire poll are durable
+            return counts
 
     async def process(self, con, delivery, kind, raw):
         origin = json.loads(delivery)

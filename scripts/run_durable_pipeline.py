@@ -44,6 +44,11 @@ def parser():
     )
     cli.add_argument("--attempts", type=positive, default=3)
     cli.add_argument("--timeout", type=float, default=10)
+    cli.add_argument(
+        "--require-power-loss-durability",
+        action="store_true",
+        help="Require POSIX directory fsync; Windows supports process recovery only",
+    )
     mode = cli.add_subparsers(dest="mode", required=True)
     kafka = mode.add_parser("kafka", help="Own source offsets with the PR58 adapter")
     kafka.add_argument("--bootstrap-servers", required=True)
@@ -95,6 +100,7 @@ def main(argv=None):
                 es_index=args.es_index,
                 attempts=args.attempts,
                 timeout=args.timeout,
+                require_power_loss_durability=args.require_power_loss_durability,
             )
             if args.mode == "stdin":
                 raw = sys.stdin.buffer.read(1048577)

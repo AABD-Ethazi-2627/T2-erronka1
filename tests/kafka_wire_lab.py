@@ -16,6 +16,7 @@ import subprocess
 import sys
 import tempfile
 import time
+from contextlib import closing
 from pathlib import Path
 
 import confluent_kafka
@@ -63,7 +64,7 @@ def wait_until(predicate, timeout=20):
 def count_deliveries(root):
     if not (root / "ledger.sqlite").exists():
         return 0
-    with sqlite3.connect(root / "ledger.sqlite") as db:
+    with closing(sqlite3.connect(root / "ledger.sqlite")) as db, db:
         try:
             return db.execute("SELECT count(*) FROM deliveries").fetchone()[0]
         except sqlite3.OperationalError:
