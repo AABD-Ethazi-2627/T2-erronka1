@@ -1,5 +1,5 @@
 {
-  "base_commit": "e5faf015cc16e2044d25ab59c1ec30c32222d889",
+  "base_commit": "f770932d61ff55158bb18c9d89120617e8c5db65",
   "issue": 25,
   "human_review": "pending",
   "source_template": {
@@ -40,16 +40,16 @@
     "docs/evidence/CG24_2026-10-21.md": "695a1cdc879d5a82e274702f28fb7666cf5b268db181b5c2bd154b8614507444",
     "docs/evidence/CG26_REHEARSAL.md": "4e1610932b5d0055a03cfd2ad5d732bd4e43dd6c07c03ae57e3170e1fcd5fd7f",
     "docs/evidence/CG28.md": "47a7c226219000ef539e4944b5ce4cf8e5ed3b779c5996cd0fdb2ee27e509fa4",
-    "docs/evidence/CG30.md": "4e17fbb97ff718f1d5a3e22023c5dbccac0d57e9e29807024ee09c2ffa92f5ac",
+    "docs/evidence/CG30.md": "c4a478883098c589fd409bb91635ff8c9ac02a3a9763da044ff6a4c0cfbb7517",
     "docs/evidence/ES_V4_CONTRACT_MIGRATION.md": "bf376646d2a34035dd7dfd7acee2e34b1539e36ac88f480f0cb5caae4807d3b5",
-    "docs/evidence/INDEX_2026-10-19.md": "09aca76993ba209b81bf94c3c53816b162afc9a4e71a0d9556b0abafac3f9e70",
+    "docs/evidence/INDEX_2026-10-19.md": "cf7a916bca8637be9199c5001982239cc32d1cbce08551252e67d33507541125",
     "docs/evidence/PR61_ES_FIXTURE_IDENTITY.md": "f5441d58d4d48b0719f3a7104e5798dd0499ecf8826fc540e67dde5fae67a31f",
     "docs/evidence/STARLETTE_TESTCLIENT_20261021.md": "bb8fafb02bff36460933ab4fc1c76272cd627dea27b760a9f1e2d606aee5c1a0",
-    "docs/memoria/ANEXO4_CNC_Guard.md": "73e64e708cf7bd58663c021a591a8d8dc7fbb4481675e8ca646e2984dbca2942",
-    "docs/memoria/README.md": "f46db530cef760dde694a79afd9758a20ca1395afeb74dfed70f41adfbf403a6",
+    "docs/memoria/ANEXO4_CNC_Guard.md": "24e2feecda4a0ad93c09d4d807b25daf6a23deefc784446ba370a97663888cd1",
+    "docs/memoria/README.md": "3b06de5a9de38ff176d363fee5f0644537b21477894b6fd47a0698f6d2d87f4f",
     "docs/requisitos/ANEXO1_CNC_Guard.md": "1fe0c3a5ba9ef3e328c294320b162bb9b1d430fd3fe4e9e867d2c8195d8d0378",
     "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
-    "docs/rubrica/SEGUIMIENTO.md": "79eac6ea471b6d6b538b00d58b22c0bfb1cf3046fe45c6c140fc6598c2e64f07",
+    "docs/rubrica/SEGUIMIENTO.md": "d43e132dda855f03dfb7442e74ac5cc95dcacb1c23ffe5602fdcce328d441add",
     "docs/rubrica/fuente.json": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2",
     "pyproject.toml": "7e9d8e2dc80bbf4d406a33b0df03b01d5ed21a74ed4001afe026faf3d58be553",
     "scripts/check_cg25_memory.py": "8b6a7d2d627502be154c0303f316e945eb6842c3ca545eb42532f0eb30aa02e7",
@@ -96,7 +96,12 @@
     "docs/evidence/WINDOWS_PORTABILITY_20261022.json": "38c2a26321c09546546b78f70f4b734666e4302dc3f416a15442d345953ee256",
     "docs/evidence/WINDOWS_PORTABILITY_20261022.md": "5c3b4eca54bee48b1cbc871eff98cf7151d84b588b20de7c8b6d9be8c13c247c",
     "docs/evidence/CG19_SVG_ARIA_20261022.md": "c14ba808d62505c4412eccec670cf09668481ff9779904dd8236e9e8f8c73b44",
-    "docs/evidence/CG19_SVG_ARIA_20261022/sha256.json": "e82ad4f4ed1f2802ade2267abc3590f7abeb59d003f332ef843ac3ad12ca0d31"
+    "docs/evidence/CG19_SVG_ARIA_20261022/sha256.json": "e82ad4f4ed1f2802ade2267abc3590f7abeb59d003f332ef843ac3ad12ca0d31",
+    "docs/rubrica/ESTADO_20261022.md": "d7f5f7019aac53ff1ad26fe36eed473f5398bd3cb2a6b1e56b124c9bc38e5fda",
+    "docs/demo/README.md": "ff1d748fa0e5329d028f450b958042ea37e8ffdde47d4bff7addc702a4191a24",
+    "docs/demo/ACTA_PENDIENTE_20261022.md": "99f30b7e33343adaa28d9b9c7fc030eb51bf73392c7c7c6fcc7f2d2060a4a1a7",
+    "docs/evidence/ISOLATED_RUNTIME_20261022.md": "9e4042f8548776fe4052ac1ea1f4d33a7174555f8d02bad3210c86100029ea21",
+    "docs/evidence/ISOLATED_RUNTIME_20261022/sha256.json": "d3368d311ecc73fbef19307e846137605abfa01ecdfff3d0669c1c609785c773"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -122,7 +127,7 @@
     },
     "status": "Original PR48 source snapshot; historical, not current evidence"
   },
-  "base_tree": "040546fdb917fd65641812d80f643ef4b2ca1fe0",
+  "base_tree": "7f47d0763d7fb04ca25a999635a53b49b2a3e4d7",
   "active_scope": {
     "task": "contemporary_classification",
     "rows": 8000,
@@ -132,10 +137,14 @@
     "eta_rul": false,
     "final_test_evaluated_by_this_change": false
   },
-  "evidence_status": "Source records inspected; documentary checks only in PR48; human acceptance pending",
+  "evidence_status": "2026-10-22 documentary reconciliation; author suites reused; own checks separately recorded; human acceptance pending",
   "not_integrated": {
-    "PR62": "c8d7cb0e0ff3056f1da2a76c5c1d17cf8dd53a40",
-    "PR59": "528bcadc1d845adc09475470419b8fecc2764fb6",
-    "note": "Both open; PR59 included in PR62, not in reconciled PR42 base"
+    "PR68": "49800d7633257c45f962578383b211eae755c217",
+    "note": "OPEN at audit cut; P2 docker diff order fix under review elsewhere; not part of f770932"
+  },
+  "previous_reconciled_snapshot": {
+    "base_commit": "e5faf015cc16e2044d25ab59c1ec30c32222d889",
+    "base_tree": "040546fdb917fd65641812d80f643ef4b2ca1fe0",
+    "note": "Previous metadata retained; original historical_snapshot hashes unchanged. Exact previous manifest available with git show f770932:docs/memoria/manifest.json"
   }
 }
