@@ -73,7 +73,7 @@
     "scripts/durable_pipeline.py": "c2823a058760f49c86659cc376763b6be4d8f5991ae292f96375fa0b1d2d2225",
     "scripts/kafka_archive.py": "a3571f985b3655a9a169fa80bcea95e6d719673a41a21955a44663b4549635b4",
     "scripts/nifi_client.py": "34f136620637e1b76bc16c4c478ea8b1ec6a05d1e8ed277de041981d077844b7",
-    "scripts/run_durable_pipeline.py": "196ac77364271900f93fa96593c156d9d13c9d379e0029014202cc7a4403873f",
+    "scripts/run_durable_pipeline.py": "20ce36a6f4d49aa4cf032d31e4c4078dd2b3edc3ae9ac2c004769f3f6b99455a",
     "scripts/watch_adaptive.py": "2a35a26790a6d8a37c60e8ac2e5da80739fa8945be0c39f1aaedf208ebb7d886",
     "tests/kafka_wire_lab.py": "f20bcd5992fc06fb801ff1d4cb6884db1c513f0187ec581e33f3c112ea64b617",
     "tests/test_archive_consumer.py": "498d8d413ee2018d96484e5fb4632893964bdfea69649b0aef1daf1efb3525df",
