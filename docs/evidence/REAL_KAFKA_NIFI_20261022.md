@@ -84,8 +84,21 @@ retenidos, dos receipts `source_ack=false`, dos recibos CG15 almacenados y
 provenance real. Un driver externo de laboratorio conservó los bytes y
 coordenadas Kafka y confirmó offset 2 sólo después de verificar esos destinos.
 **Ese driver es cableado del laboratorio; no es un ConsumeKafka del producto.**
-El puente NiFi sigue sin ser dueño del offset y no configura ES. La ruta
-Kafka directa anterior sí exige ES antes del commit.
+El puente NiFi sigue sin ser dueño del offset y el export versionado no
+configura ES. La ruta Kafka directa anterior sí exige ES antes del commit.
+
+Un segundo ensayo cerró también la ruta **combinada con ES obligatorio**:
+Kafka real → driver staged propio → copia NiFi → API canónica → CG15+ES →
+commit explícito. Se configuraron los flags ES del CLI sólo en esa copia
+propia, con raíz, topic, índice y sinks nuevos. Con ES bloqueado hubo 403,
+original fallido retenido, dos recibos CG15 `stored` y offset sin confirmar.
+Al recuperar ES, el reintento reutilizó la respuesta guardada (una inferencia
+en total). Antes de confirmar 2 se verificaron journal, recibos, documento ES
+exacto y los tres eventos provenance, incluyendo coordenadas/status y bytes
+input/output. El CSV inválido quedó rechazado de forma durable. Se conservó
+el fallo inicial del harness que consultó por error el ledger del primer
+ensayo; un verificador separado leyó la raíz correcta y confirmó el offset
+sólo después de todos los destinos. No se cambió lógica del producto.
 
 Al detener realmente la API, NiFi retuvo el original y receipt fallidos y el
 offset quedó en 2. Tras reiniciar la API con el mismo ledger, el reintento de
@@ -138,7 +151,8 @@ Evidencia completa y scripts ejecutados:
 `D:/github/_local/t2-babysit-20261021/real-kafka-nifi-evidence-20261022/`.
 Puntos de entrada: `start_lab.py`, `run_kafka.py`, `worker_child.py`,
 `nifi_resume.py`, `nifi_outage.py`, `verify_services.py`, `capacity.py`,
-`checks.py`, `final_checks.py` y `stop_inventory.py`. No ejecutar otra vez un
+`checks.py`, `final_checks.py` y `stop_inventory.py`. El ensayo combinado usa
+`run_nifi_es.py`, `verify_nifi_es.py` y `stop_inventory_phase2.py`. No ejecutar otra vez un
 creador de recursos: el laboratorio y sus datos se conservan para revisión.
 Los scripts del harness reflejan su estado final; los logs conservan los
 reintentos y los cambios de instrumentación. La lógica central del worker,

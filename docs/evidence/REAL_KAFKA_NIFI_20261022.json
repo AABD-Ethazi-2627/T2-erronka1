@@ -1534,8 +1534,8 @@
         "exit": 0
       },
       {
-        "action": "fixture-api-already-absent",
-        "pid": 235127
+        "action": "no-signal-pid-reused",
+        "pid": 242998
       },
       {
         "args": [
@@ -1581,6 +1581,61 @@
       }
     ]
   },
+  "nifi_es_required": {
+    "status": "PASSED",
+    "route": "ApacheKafka3.7.2 -> external own staged driver -> NiFi2.12 -> canonical HTTP -> CG15+ES9.5.4 -> explicit Kafka commit",
+    "offset_owner": "external-own-lab-driver; not product ConsumeKafka",
+    "group": "62a8e736-01a1-1000-419f-ba2b32d37af8",
+    "es_required": true,
+    "offset_before_destinations": null,
+    "offset_after_all_destinations": 2,
+    "http_attempts": [
+      [
+        "http://172.24.0.1:19283/predict",
+        "200"
+      ],
+      [
+        "http://es:9200/cnc-telemetry-nifi-es/_create/27b0feda78c6d291a2ab6ab0b6c5d6d3e759788fcedddc798d892f39e5a6a4d9",
+        "403"
+      ],
+      [
+        "http://es:9200/cnc-telemetry-nifi-es/_create/27b0feda78c6d291a2ab6ab0b6c5d6d3e759788fcedddc798d892f39e5a6a4d9",
+        "201"
+      ]
+    ],
+    "archive_receipts": [
+      [
+        "stored",
+        2
+      ]
+    ],
+    "es_exact_documents": 1,
+    "risk_calls_before_and_after_es_recovery": 1,
+    "provenance_gate": {
+      "0-retry.csv": {
+        "id": 78,
+        "uuid": "53b436f9-3624-464f-8c40-205489f222e0",
+        "status": "0",
+        "offset": "0",
+        "sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "0.csv": {
+        "id": 70,
+        "uuid": "62b674e2-c342-4f37-bfc5-38b4882cd2ba",
+        "status": "1",
+        "offset": "0",
+        "sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f"
+      },
+      "1.csv": {
+        "id": 64,
+        "uuid": "7eb6a654-f71b-4bda-a745-b780b85a62ad",
+        "status": "0",
+        "offset": "1",
+        "sha256": "e601edfaf4067744ae72fee16ade7435808e1462614d0ba7fd46a8a697634621"
+      }
+    },
+    "failed_original_preserved": true
+  },
   "strict_unittest": {
     "311": "python 3.11.15 (main, May 10 2026, 19:28:18) [Clang 22.1.3 ] run 54 failures 0 errors 0 skips 0 warnings 0 unraisables 0",
     "312": "python 3.12.15 (main, Oct  1 2026, 20:59:04) [Clang 22.1.3 ] run 54 failures 0 errors 0 skips 0 warnings 0 unraisables 0"
@@ -1622,5 +1677,6 @@
       ],
       "size": 2407879264
     }
-  }
+  },
+  "previous_candidate": "a98afc421a3c329c9343ef4c2b1c919cb3fe418f"
 }
