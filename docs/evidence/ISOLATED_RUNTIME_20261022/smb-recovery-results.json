@@ -1,0 +1,22 @@
+{
+  "elapsed_seconds": 11.01600000000326,
+  "events": 4,
+  "unique_keys": 4,
+  "duplicates": {},
+  "missing": [],
+  "unexpected": [],
+  "keys": [
+    "11fb58983b399995fc6c3fde6a3e50b47ba776f945486635a73c294977978652:164",
+    "906ac2b88b955f5ac412da0b9f02aa0573c392a2422e6a733ed4107e48431455:164",
+    "0444fc2b9c9d23dcc8f2449ab4520ba597659d95983e72185c4ed780b607a4f1:164",
+    "93d47cc6a130f3a458f6c9d6ca9908eae2aa267b1c298d6d43de8e0d83480751:260"
+  ],
+  "source_file_hashes": {
+    "header.csv": "da046fb6510d3811c07b55178eebe5706929ef89d4d1d00544f677890b7910b2",
+    "partial.csv": "4860603ffcab91dbee4581bbeb967f9f8e4cafc8f9ede3ece84b896e675f460e",
+    "renamed.csv": "c8a4e2102f359e1fb4b477d729943f34cfa083e3799a06e1c95a0b355962d55f",
+    "tiny.csv": "40b485094ae392e8aca95e091fe4185764fbbe6fded136a2cef30cd47246ae5e"
+  },
+  "tiny_received": true,
+  "growing_default": "Version reference says true since9.5; registry fingerprint_len52 observed."
+}

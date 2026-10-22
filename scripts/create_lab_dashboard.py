@@ -29,6 +29,21 @@ def source(body, prop):
 def vega(data, marks, **extra):
     return {
         "$schema": "https://vega.github.io/schema/vega/v5.json",
+        # Kibana inherits the user's theme. Paint the chart and its labels as a
+        # pair, and use SVG so the mark descriptions reach the accessibility tree.
+        "background": "#ffffff",
+        "config": {
+            "kibana": {"renderer": "svg"},
+            "axis": {
+                "labelColor": "#333333",
+                "titleColor": "#333333",
+                "domainColor": "#666666",
+                "tickColor": "#666666",
+            },
+            "title": {"color": "#333333", "subtitleColor": "#333333"},
+            "legend": {"labelColor": "#333333", "titleColor": "#333333"},
+            "text": {"fill": "#333333"},
+        },
         "autosize": {"type": "fit", "contains": "padding"},
         "padding": 10,
         "data": data if isinstance(data, list) else [data],
@@ -55,6 +70,33 @@ def text_mark(expr, y, size=16, data=None):
     if data:
         mark["from"] = {"data": data}
     return mark
+
+
+def reflow_summary(spec):
+    """Wrap prose inside the panel; allow vertical scrolling at narrow widths."""
+    heights = []
+    for mark in spec["marks"]:
+        mark.setdefault("from", {"data": "table"})
+        update = mark["encode"]["update"]
+        expression = update["text"]["signal"]
+        size = update["fontSize"]["value"]
+        wrapped = (
+            f"split(trim(replace({expression}, "
+            "regexp('(.{1,' + max(8, floor((width-8)/"
+            f"{size * 0.65}"
+            ")) + '})(?: +|$)', 'g'), '$1\\n')), '\\n')"
+        )
+        update["text"] = {"signal": wrapped}
+        update["description"] = {"signal": expression}
+        update["lineHeight"] = {"value": size * 1.3}
+        update["y"] = {"signal": "10" + "".join(f" + ({h})" for h in heights)}
+        heights.append(f"length({wrapped}) * {size * 1.3} + 8")
+    total = "20 + " + " + ".join(f"({h})" for h in heights)
+    spec["signals"].append(
+        {"name": "height", "update": total.replace("datum.", "data('table')[0].")}
+    )
+    spec["autosize"]["type"] = "fit-x"
+    return spec
 
 
 def summary_spec():
@@ -87,7 +129,7 @@ def summary_spec():
         },
         "aggregations.summary.buckets",
     )
-    return vega(
+    spec = vega(
         data,
         [
             text_mark(
@@ -155,6 +197,7 @@ def summary_spec():
             }
         ],
     )
+    return reflow_summary(spec)
 
 
 def temperature_spec():
@@ -513,6 +556,15 @@ def heatmap_spec(offline):
                         "y": {"scale": "y", "field": "machine_type"},
                         "height": {"scale": "y", "band": 0.95},
                         "fill": {"scale": "color", "field": "failure_rate"},
+                        "description": {
+                            "signal": (
+                                "'Offline fijo; tipo ' + datum.machine_type + "
+                                "'; desgaste ' + datum.wear_bin + ' min; ' + "
+                                "datum.positives + ' fallos etiquetados de ' + "
+                                "datum.rows + ' filas; ' + "
+                                "format(datum.failure_rate, '.1%')"
+                            )
+                        },
                         "tooltip": {"signal": "datum"},
                     }
                 },

@@ -36,6 +36,40 @@ function checkNumbers(item) {
 async function run() {
   fs.mkdirSync(out, {recursive: true});
   const reports = [];
+  const summary = JSON.parse(JSON.parse(objects.find(o => o.id === 'cnc-cg19-summary-v2').attributes.visState).params.spec);
+  for (const width of [250, 600, 1100]) {
+    const spec = structuredClone(summary);
+    spec.data[0].values = [{doc_count: 100, alerts: {doc_count: 66}, classified: {doc_count: 100},
+      machines: {value: 100}, latest: {value: Date.UTC(2026, 9, 22, 8)}, oldest: {value: Date.UTC(2026, 9, 22, 8)}}];
+    delete spec.data[0].url;
+    delete spec.data[0].format;
+    const warnings = [];
+    const logger = vega.logger(vega.Warn);
+    logger.warn = (...args) => warnings.push(args.join(' '));
+    logger.error = (...args) => warnings.push(args.join(' '));
+    const view = new vega.View(vega.parse(spec), {renderer: 'none', logger}).width(width).height(280);
+    try {
+      await view.runAsync();
+      const group = view.scenegraph().root.items[0];
+      const svg = await view.toSVG();
+      fs.writeFileSync(path.join(out, `summary-${width}.svg`), svg);
+      const viewport = svg.match(/<svg[^>]* width="([\d.]+)" height="([\d.]+)"/);
+      const origin = view.origin().map((value, axis) => value + view.padding()[axis ? 'top' : 'left']);
+      assert(Number(viewport[1]) <= width + 0.1, 'Summary must not expand horizontally');
+      for (const mark of group.items) {
+        assert(mark.bounds.y2 + origin[1] <= Number(viewport[2]) + 0.1, `Summary prose clipped vertically at ${width}`);
+        // Node's font fallback estimates differ from browser glyph metrics.
+        // Check lossless wrapping here; measure actual text bounds in live Kibana.
+        for (const item of mark.items) {
+          assert.equal(item.text.join(' ').replace(/\s+/g, ' '), item.description.replace(/\s+/g, ' '));
+          if (width === 250) assert(item.text.every(line => line.length < 30));
+        }
+      }
+      assert(svg.includes('aria-label="Observaciones en el filtro: 100"'));
+      assert(svg.includes('aria-label="Edad desde timestamp de evento; no latencia de ingestión."'));
+      assert.deepEqual(warnings, []);
+    } finally { view.finalize(); }
+  }
   for (const [width, height] of [[600, 400], [1100, 480], [1600, 600]]) {
     for (const count of [0, 1, 31, 100]) {
       const spec = structuredClone(original);

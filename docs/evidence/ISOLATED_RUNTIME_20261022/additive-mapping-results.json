@@ -1,0 +1,29 @@
+{
+  "applied": {
+    "acknowledged": true
+  },
+  "old_document_unchanged": true,
+  "count_old_plus_replayed_v4": {
+    "count": 2,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "skipped": 0,
+      "failed": 0
+    }
+  },
+  "unknown_rejected": {
+    "error": {
+      "root_cause": [
+        {
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:275] mapping set to strict, dynamic introduction of [new_unknown] within [_doc] is not allowed"
+        }
+      ],
+      "type": "strict_dynamic_mapping_exception",
+      "reason": "[1:275] mapping set to strict, dynamic introduction of [new_unknown] within [_doc] is not allowed"
+    },
+    "status": 400
+  },
+  "rollback": "Mappings are additive, not removable. Reindex/alias rollback exercised before this optional in-place change; old source is retained in migration-results.json."
+}
