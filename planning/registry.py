@@ -1,6 +1,5 @@
 """Local lab-shadow registry only. No connector to the scoring API or equipment."""
 
-import fcntl
 import json
 import os
 import tempfile
@@ -9,6 +8,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from planning.online import digest
+from scripts.platform_io import exclusive_lock, replace_file, sync_directory
 
 
 class ShadowRegistry:
@@ -18,12 +18,8 @@ class ShadowRegistry:
 
     @contextmanager
     def locked(self):
-        with (self.root / "registry.lock").open("a") as handle:
-            fcntl.flock(handle, fcntl.LOCK_EX)
-            try:
-                yield
-            finally:
-                fcntl.flock(handle, fcntl.LOCK_UN)
+        with exclusive_lock(self.root / "registry.lock"):
+            yield
 
     def status(self):
         path = self.root / "pointer.json"
@@ -76,12 +72,8 @@ class ShadowRegistry:
                 json.dump(value, handle, sort_keys=True, allow_nan=False)
                 handle.flush()
                 os.fsync(handle.fileno())
-            os.replace(temporary, path)
-            directory_fd = os.open(path.parent, os.O_DIRECTORY)
-            try:
-                os.fsync(directory_fd)
-            finally:
-                os.close(directory_fd)
+            replace_file(temporary, path)
+            sync_directory(path.parent)
         finally:
             if temporary is not None:
                 temporary.unlink(missing_ok=True)

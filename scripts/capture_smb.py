@@ -30,10 +30,12 @@ def publish_snapshot(raw, target):
             or b"\r" in raw
         ):
             raise ValueError("Invalid SMB batch framing")
-        with tempfile.NamedTemporaryFile() as check:
-            check.write(raw)
-            check.flush()
-            report = audit_csv(check.name, "batch")
+        # Close before a second reader opens it (Windows denies reopening a
+        # delete-on-close NamedTemporaryFile with ordinary sharing flags).
+        with tempfile.TemporaryDirectory(prefix="cnc-smb-validate-") as directory:
+            check = Path(directory) / "batch.csv"
+            check.write_bytes(raw)
+            report = audit_csv(check, "batch")
         if (
             report["malformed_row_widths"]
             or any(report["missing"].values())
@@ -52,11 +54,15 @@ def publish_snapshot(raw, target):
         raise ValueError("Invalid SMB batch preserved outside inference") from None
     target.parent.mkdir(parents=True, exist_ok=True)
     # Link complete flushed bytes into the watched glob atomically and exclusively.
-    with tempfile.NamedTemporaryFile(dir=target.parent, prefix=".capture-") as stage:
-        stage.write(raw)
-        stage.flush()
-        os.fsync(stage.fileno())
-        os.link(stage.name, target)
+    descriptor, name = tempfile.mkstemp(dir=target.parent, prefix=".capture-")
+    try:
+        with os.fdopen(descriptor, "wb") as stage:
+            stage.write(raw)
+            stage.flush()
+            os.fsync(stage.fileno())
+        os.link(name, target)
+    finally:
+        os.unlink(name)
     return True
 
 

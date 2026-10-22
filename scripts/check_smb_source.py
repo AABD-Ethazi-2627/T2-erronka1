@@ -18,6 +18,8 @@ import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from scripts.private_files import open_private_text, private_text_file
+
 ROOT = Path(__file__).resolve().parents[1]
 BATCH = re.compile(r"^\s*(cnc_batch_[0-9]{8}_[0-9]{6}_[0-9]+\.csv)\s+N\s+([0-9]+)\s+")
 
@@ -32,11 +34,10 @@ class SmbConfig:
 
 
 def read_config(path):
-    path = Path(path)
-    if path.stat().st_mode & 0o077:
-        raise ValueError("Unsafe env permissions; run chmod 600 on the env file")
+    with open_private_text(path) as handle:
+        lines = handle.read().splitlines()
     values = {}
-    for number, line in enumerate(path.read_text().splitlines(), 1):
+    for number, line in enumerate(lines, 1):
         line = line.strip()
         if not line or line.startswith("#"):
             continue
@@ -96,21 +97,18 @@ def smb_command(config, command, cwd=None):
     ):
         raise ValueError("Only read-only ls/get commands are allowed")
     # Credentials never appear in process arguments, output or repository files.
-    with tempfile.NamedTemporaryFile(
-        mode="w", prefix="cnc-smb-", suffix=".auth"
+    with private_text_file(
+        f"username = {config.username}\npassword = {config.password}\n"
     ) as auth:
-        os.fchmod(auth.fileno(), 0o600)
-        auth.write(f"username = {config.username}\npassword = {config.password}\n")
-        auth.flush()
         try:
             result = subprocess.run(
                 [
                     "smbclient",
                     f"//{config.host}/{config.share}",
                     "-s",
-                    "/dev/null",
+                    os.devnull,
                     "-A",
-                    auth.name,
+                    str(auth),
                     "-t",
                     str(config.timeout),
                     "-c",

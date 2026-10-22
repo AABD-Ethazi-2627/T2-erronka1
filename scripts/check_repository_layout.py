@@ -1,6 +1,7 @@
 """Check tracked artifacts and root Compose paths without starting services."""
 
 import json
+import os
 import shlex
 import subprocess
 import sys
@@ -47,7 +48,7 @@ def check():
             [
                 "git",
                 "-c",
-                "core.excludesFile=/dev/null",
+                "core.excludesFile=" + os.devnull,
                 "check-ignore",
                 "--no-index",
                 "-q",
@@ -64,8 +65,6 @@ def check():
     compose = ROOT / "docker-compose.yml"
     if compose.exists():
         # Use the template defaults, independent of private caller overrides.
-        import os
-
         env = {
             k: v
             for k, v in os.environ.items()
@@ -77,7 +76,7 @@ def check():
                     "docker",
                     "compose",
                     "--env-file",
-                    "/dev/null",
+                    os.devnull,
                     "-f",
                     str(compose),
                     "config",

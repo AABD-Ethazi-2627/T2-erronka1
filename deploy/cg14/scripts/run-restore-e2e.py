@@ -9,7 +9,6 @@ its topic. A new execution requires stopped components and explicit new run ID.
 from __future__ import annotations
 
 import argparse
-import fcntl
 import hashlib
 import json
 import os
@@ -28,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 import cg14_restore_upload as auth
 from cg14_validation.reconciliation import content_hash, dlq_summary, reconciled
 from cg14_validation.validator import parse_csv_event
+from scripts.platform_io import replace_file, sync_directory
 
 DEPLOY = Path(__file__).resolve().parents[1]
 REPO = DEPLOY.parents[1]
@@ -503,16 +503,19 @@ def save(path, state):
         f.write("\n")
         f.flush()
         os.fsync(f.fileno())
-    os.replace(temp, path)
-    fd = os.open(path.parent, os.O_RDONLY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+    # Pure journal persistence is also used by hermetic Windows fixtures.
+    # Operational host access still requires POSIX at lock(), before I/O.
+    replace_file(temp, path)
+    sync_directory(path.parent)
 
 
 @contextmanager
 def lock():
+    require(
+        os.name == "posix", "RESTORE host operations require POSIX; --plan is offline."
+    )
+    import fcntl
+
     # One lock for the fixed target, regardless of run-id. Never unlink the inode.
     root = DEPLOY / "data/evidence/restore-e2e"
     root.mkdir(parents=True, exist_ok=True, mode=0o700)

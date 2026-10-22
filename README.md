@@ -19,6 +19,11 @@ en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOP
 ## Entorno y experimentos
 
 Python 3.11/3.12, DuckDB **2.0.0** y uv; el lock conserva las versiones.
+
+El [contrato de plataforma](docs/PLATFORM_SUPPORT.md) distingue fsync POSIX de
+recuperación Windows ante muerte del proceso. Windows no acredita persistencia
+de metadatos ante pérdida de energía; las herramientas permiten exigir y
+comprobar explícitamente el requisito de fsync de directorios.
 [Migración, timestamps UTC y rollback](docs/DUCKDB_2_MIGRATION.md). Desde checkout limpio:
 
 ```bash
