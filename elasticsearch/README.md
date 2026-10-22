@@ -64,6 +64,7 @@ con la raíz y `tests`, y ejecutar con una carpeta D: que todavía no exista:
 ```powershell
 $env:PYTHONPATH='.;tests'
 uv run --frozen python tests/verify_es_ingest_pipeline.py --work-dir D:/lab-propio/g68-corrida1 --docker-via-wsl FedoraLinux-43
+uv run --frozen python tests/verify_elasticsearch_contract.py --work-dir D:/lab-propio/contract-corrida1 --output D:/lab-propio/contract-corrida1.json --docker-via-wsl FedoraLinux-43
 ```
 
 El verificador crea y elimina solo su contenedor, no conecta a ES del host y deja
@@ -71,7 +72,14 @@ datos/evidencia bajo esa carpeta. Comprueba un control negativo sin guard,
 simulación válida repetida, rechazos, versión/CAS, preservación de `_source`,
 pipeline final obligatorio, `_create`/409, conteo único y mapping estricto aislado.
 La fixture construida usa metadatos v4 versionados; no ejecuta entrenamiento,
-inferencia ni test final. [Resultados y límites](../docs/evidence/G68_ES_INGEST_20261022.md).
+inferencia ni test final. El segundo verificador conserva el rechazo del mapping
+antiguo, su ampliación aditiva y las cuatro combinaciones de familia/origen.
+Comprueba por separado el error de script `CG18 unknown field` del guard final
+y `strict_dynamic_mapping_exception` en controles con `index.final_pipeline=_none`,
+además de ausencia de documentos rechazados y preservación del válido. Usa
+documentos construidos y validados por contrato; no arranca la API de scoring.
+[Resultados y límites](../docs/evidence/G68_ES_INGEST_20261022.md).
+[Correcciones y ejecución de revisión R2](../docs/evidence/G68_ES_INGEST_R2_20261022.md).
 
 Referencias oficiales consultadas para este diseño:
 [pipelines](https://www.elastic.co/docs/manage-data/ingest/transform-enrich/ingest-pipelines),

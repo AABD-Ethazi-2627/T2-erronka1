@@ -1,0 +1,2146 @@
+{
+  "baseline_ref": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
+  "image": "docker.elastic.co/elasticsearch/elasticsearch:9.5.4",
+  "operations": [
+    {
+      "method": "PUT",
+      "path": "/_index_template/cnc-contract-test",
+      "status": 200,
+      "response": {
+        "acknowledged": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-contract-existing",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-telemetry-contract-existing"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-contract-existing/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:744] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:744] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/_ingest/pipeline/cnc-prediction-v1",
+      "status": 200,
+      "response": {
+        "acknowledged": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/_index_template/cnc-contract-test",
+      "status": 200,
+      "response": {
+        "acknowledged": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-contract-existing/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:744] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:744] mapping set to strict, dynamic introduction of [prediction_scope] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-contract-existing/_mapping",
+      "status": 200,
+      "response": {
+        "acknowledged": true
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-contract-existing/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 201,
+      "response": {
+        "_index": "cnc-telemetry-contract-existing",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 1,
+        "result": "created",
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 0,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-contract-existing/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-contract-existing",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 1,
+        "_seq_no": 0,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "machine_id": "CNC-049",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "schema_version": "0.1.0",
+          "quality_flag": "OK",
+          "source": {
+            "kind": "lab_fixture",
+            "uri": "fixture://cg18/synthetic-v4-contract",
+            "record_ref": "constructed-contract-fixture-no-inference"
+          },
+          "failure_score": 0.0019646890446528196,
+          "risk_alert": false,
+          "anomaly_score": 0.4989086654875238,
+          "anomaly_alert": false,
+          "policy": "f2",
+          "model_version": "ai4i-current-state-v4",
+          "scored_at": "2026-10-15T08:47:11Z",
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "risk_threshold": 0.19082281465428477,
+          "anomaly_threshold": 0.6145036167334865,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "temporal_prediction_enabled": false,
+          "score_semantics": "uncalibrated_current_state_score"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-telemetry-lab-v2"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 201,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 1,
+        "result": "created",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 0,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "result": "updated",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 1,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_count",
+      "status": 200,
+      "response": {
+        "count": 1,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2-strict",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-telemetry-lab-v2-strict"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2-strict/_settings",
+      "status": 200,
+      "response": {
+        "cnc-telemetry-lab-v2-strict": {
+          "settings": {
+            "index": {
+              "routing": {
+                "allocation": {
+                  "include": {
+                    "_tier_preference": "data_content"
+                  }
+                }
+              },
+              "number_of_shards": "1",
+              "provided_name": "cnc-telemetry-lab-v2-strict",
+              "final_pipeline": "_none",
+              "creation_date": "1792665787520",
+              "number_of_replicas": "0",
+              "uuid": "BlszenQhSnaW4aXVtSduJQ",
+              "version": {
+                "created": "9111000"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:893] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:893] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:362] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:362] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2-strict/_count",
+      "status": 200,
+      "response": {
+        "count": 0,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 940,
+                "start": 905,
+                "end": 969
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 940,
+            "start": 905,
+            "end": 969
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 type: temporal_prediction_enabled"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-alerts-lab-v2"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 201,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 1,
+        "result": "created",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 0,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "result": "updated",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 1,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_count",
+      "status": 200,
+      "response": {
+        "count": 1,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2-strict",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-alerts-lab-v2-strict"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2-strict/_settings",
+      "status": 200,
+      "response": {
+        "cnc-alerts-lab-v2-strict": {
+          "settings": {
+            "index": {
+              "routing": {
+                "allocation": {
+                  "include": {
+                    "_tier_preference": "data_content"
+                  }
+                }
+              },
+              "number_of_shards": "1",
+              "provided_name": "cnc-alerts-lab-v2-strict",
+              "final_pipeline": "_none",
+              "creation_date": "1792665791877",
+              "number_of_replicas": "0",
+              "uuid": "pWCdOd-gRiaW_fcYhjAgcQ",
+              "version": {
+                "created": "9111000"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:893] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:893] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-lab-v2-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:362] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:362] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-lab-v2-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2-strict/_count",
+      "status": 200,
+      "response": {
+        "count": 0,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 940,
+                "start": 905,
+                "end": 969
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 940,
+            "start": 905,
+            "end": 969
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 type: temporal_prediction_enabled"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-lab-v2/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-lab-v2",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "lab_fixture",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-telemetry-smb-v1"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 201,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 1,
+        "result": "created",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 0,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "result": "updated",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 1,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_count",
+      "status": 200,
+      "response": {
+        "count": 1,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1-strict",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-telemetry-smb-v1-strict"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1-strict/_settings",
+      "status": 200,
+      "response": {
+        "cnc-telemetry-smb-v1-strict": {
+          "settings": {
+            "index": {
+              "routing": {
+                "allocation": {
+                  "include": {
+                    "_tier_preference": "data_content"
+                  }
+                }
+              },
+              "number_of_shards": "1",
+              "provided_name": "cnc-telemetry-smb-v1-strict",
+              "final_pipeline": "_none",
+              "creation_date": "1792665796305",
+              "number_of_replicas": "0",
+              "uuid": "41ESvET0QpCAUoFlGXiRoQ",
+              "version": {
+                "created": "9111000"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:889] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:889] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:358] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:358] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1-strict/_count",
+      "status": 200,
+      "response": {
+        "count": 0,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 940,
+                "start": 905,
+                "end": 969
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 940,
+            "start": 905,
+            "end": 969
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 type: temporal_prediction_enabled"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-telemetry-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-alerts-smb-v1"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 201,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 1,
+        "result": "created",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 0,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d?refresh=true",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "result": "updated",
+        "forced_refresh": true,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "failed": 0
+        },
+        "_seq_no": 1,
+        "_primary_term": 1
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_count",
+      "status": 200,
+      "response": {
+        "count": 1,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1/_doc/guard-rejected?pipeline=_none",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 580,
+                "start": 545,
+                "end": 626
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 580,
+            "start": 545,
+            "end": 626
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 unknown field: unexpected_contract_field"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_doc/guard-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "guard-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1-strict",
+      "status": 200,
+      "response": {
+        "acknowledged": true,
+        "shards_acknowledged": true,
+        "index": "cnc-alerts-smb-v1-strict"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1-strict/_settings",
+      "status": 200,
+      "response": {
+        "cnc-alerts-smb-v1-strict": {
+          "settings": {
+            "index": {
+              "routing": {
+                "allocation": {
+                  "include": {
+                    "_tier_preference": "data_content"
+                  }
+                }
+              },
+              "number_of_shards": "1",
+              "provided_name": "cnc-alerts-smb-v1-strict",
+              "final_pipeline": "_none",
+              "creation_date": "1792665800949",
+              "number_of_replicas": "0",
+              "uuid": "LNErs88xQIuLDOwLM-abJg",
+              "version": {
+                "created": "9111000"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:889] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:889] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [_doc] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-smb-v1-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1-strict/_doc/mapping-rejected",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "strict_dynamic_mapping_exception",
+              "reason": "[1:358] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+            }
+          ],
+          "type": "strict_dynamic_mapping_exception",
+          "reason": "[1:358] mapping set to strict, dynamic introduction of [unexpected_contract_field] within [source] is not allowed"
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1-strict/_doc/mapping-rejected",
+      "status": 404,
+      "response": {
+        "_index": "cnc-alerts-smb-v1-strict",
+        "_id": "mapping-rejected",
+        "found": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1-strict/_count",
+      "status": 200,
+      "response": {
+        "count": 0,
+        "_shards": {
+          "total": 1,
+          "successful": 1,
+          "skipped": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 400,
+      "response": {
+        "error": {
+          "root_cause": [
+            {
+              "type": "script_exception",
+              "reason": "runtime error",
+              "script_stack": [
+                "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+                "                                   ^---- HERE"
+              ],
+              "script": "for (def section : params.sections) { ...",
+              "lang": "painless",
+              "position": {
+                "offset": 940,
+                "start": 905,
+                "end": 969
+              }
+            }
+          ],
+          "type": "script_exception",
+          "reason": "runtime error",
+          "script_stack": [
+            "throw new IllegalArgumentException('CG18 type: ' + name); }\n    ",
+            "                                   ^---- HERE"
+          ],
+          "script": "for (def section : params.sections) { ...",
+          "lang": "painless",
+          "position": {
+            "offset": 940,
+            "start": 905,
+            "end": 969
+          },
+          "caused_by": {
+            "type": "illegal_argument_exception",
+            "reason": "CG18 type: temporal_prediction_enabled"
+          }
+        },
+        "status": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-alerts-smb-v1/_doc/0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+      "status": 200,
+      "response": {
+        "_index": "cnc-alerts-smb-v1",
+        "_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "_version": 2,
+        "_seq_no": 1,
+        "_primary_term": 1,
+        "found": true,
+        "_source": {
+          "risk_alert": false,
+          "model_version": "ai4i-current-state-v4",
+          "anomaly_threshold": 0.6145036167334865,
+          "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+          "score_semantics": "uncalibrated_current_state_score",
+          "machine_id": "CNC-049",
+          "source": {
+            "kind": "smb_csv",
+            "record_ref": "constructed-contract-fixture-no-inference",
+            "uri": "fixture://cg18/synthetic-v4-contract"
+          },
+          "temporal_prediction_enabled": false,
+          "scored_at": "2026-10-15T08:47:11Z",
+          "anomaly_alert": false,
+          "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+          "schema_version": "0.1.0",
+          "anomaly_score": 0.4989086654875238,
+          "failure_score": 0.0019646890446528196,
+          "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+          "risk_threshold": 0.19082281465428477,
+          "quality_flag": "OK",
+          "timestamp": "2026-10-15T08:09:06Z",
+          "policy": "f2"
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "isolation": {
+    "network": "none",
+    "published_ports": [],
+    "persistent_mounts": [
+      {
+        "Type": "bind",
+        "Source": "/mnt/d/github/_local/t2-babysit-20261021/es-ingest-fix-r2/contract-exact-final-lab/data",
+        "Destination": "/usr/share/elasticsearch/data",
+        "Mode": "",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/mnt/d/github/_local/t2-babysit-20261021/es-ingest-fix-r2/contract-exact-final-lab/java-temp",
+        "Destination": "/usr/share/elasticsearch/java-temp",
+        "Mode": "",
+        "RW": true,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "bind",
+        "Source": "/mnt/d/github/_local/t2-babysit-20261021/es-ingest-fix-r2/contract-exact-final-lab/logs",
+        "Destination": "/usr/share/elasticsearch/logs",
+        "Mode": "",
+        "RW": true,
+        "Propagation": "rprivate"
+      }
+    ],
+    "container_id": "52ef4d667404f3215c0b791c191f2d947ae0c5d562b7bc7e8e5576f2ed380b2b"
+  },
+  "image_id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+  "server": {
+    "name": "52ef4d667404",
+    "cluster_name": "docker-cluster",
+    "cluster_uuid": "IF4-szt8Qo-CWSBDjS0Rfg",
+    "version": {
+      "number": "9.5.4",
+      "build_flavor": "default",
+      "build_type": "docker",
+      "build_hash": "9170df19cae1adb107b7b489b4d82dec66d7a337",
+      "build_date": "2026-09-09T22:42:53.976833287Z",
+      "build_snapshot": false,
+      "lucene_version": "10.5.1",
+      "minimum_wire_compatibility_version": "8.19.0",
+      "minimum_index_compatibility_version": "8.0.0"
+    },
+    "tagline": "You Know, for Search"
+  },
+  "fixtures": {
+    "kind": "constructed contract documents, NOT API inference",
+    "documents": {
+      "lab_fixture": {
+        "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "machine_id": "CNC-049",
+        "timestamp": "2026-10-15T08:09:06Z",
+        "schema_version": "0.1.0",
+        "quality_flag": "OK",
+        "source": {
+          "kind": "lab_fixture",
+          "uri": "fixture://cg18/synthetic-v4-contract",
+          "record_ref": "constructed-contract-fixture-no-inference"
+        },
+        "failure_score": 0.0019646890446528196,
+        "risk_alert": false,
+        "anomaly_score": 0.4989086654875238,
+        "anomaly_alert": false,
+        "policy": "f2",
+        "model_version": "ai4i-current-state-v4",
+        "scored_at": "2026-10-15T08:47:11Z",
+        "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+        "risk_threshold": 0.19082281465428477,
+        "anomaly_threshold": 0.6145036167334865,
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "temporal_prediction_enabled": false,
+        "score_semantics": "uncalibrated_current_state_score"
+      },
+      "smb_csv": {
+        "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+        "machine_id": "CNC-049",
+        "timestamp": "2026-10-15T08:09:06Z",
+        "schema_version": "0.1.0",
+        "quality_flag": "OK",
+        "source": {
+          "kind": "smb_csv",
+          "uri": "fixture://cg18/synthetic-v4-contract",
+          "record_ref": "constructed-contract-fixture-no-inference"
+        },
+        "failure_score": 0.0019646890446528196,
+        "risk_alert": false,
+        "anomaly_score": 0.4989086654875238,
+        "anomaly_alert": false,
+        "policy": "f2",
+        "model_version": "ai4i-current-state-v4",
+        "scored_at": "2026-10-15T08:47:11Z",
+        "model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+        "risk_threshold": 0.19082281465428477,
+        "anomaly_threshold": 0.6145036167334865,
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "temporal_prediction_enabled": false,
+        "score_semantics": "uncalibrated_current_state_score"
+      }
+    }
+  },
+  "container_removed": true
+}
