@@ -2,6 +2,7 @@ import json
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 
 from scoring.score_api import create_app
@@ -103,7 +104,10 @@ class FailureHarnessTests(unittest.IsolatedAsyncioTestCase):
                 with self.assertRaisesRegex(ValueError, "Delivery identity reused"):
                     h.drain()
                 self.assertEqual(h.report()["pending"], 1)
-                with sqlite3.connect(h.archive / "ledger.sqlite") as ledger:
+                with (
+                    closing(sqlite3.connect(h.archive / "ledger.sqlite")) as ledger,
+                    ledger,
+                ):
                     self.assertEqual(
                         ledger.execute("SELECT count(*) FROM deliveries").fetchone()[0],
                         1,

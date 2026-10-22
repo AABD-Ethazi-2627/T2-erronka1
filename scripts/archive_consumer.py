@@ -11,6 +11,13 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from jsonschema import ValidationError
 
+from scripts.platform_io import (
+    replace_file,
+    sync_directory,
+)
+from scripts.platform_io import (
+    require_power_loss_durability as require_power_loss,
+)
 from scripts.validate_contracts import validators
 
 
@@ -27,11 +34,7 @@ def event_key(kind, obj):
 
 
 def sync_dir(path):
-    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+    sync_directory(path)
 
 
 def mkdir(path):
@@ -61,7 +64,7 @@ def durable(path, raw):
             handle.write(raw)
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(name, path)
+        replace_file(name, path)
         sync_dir(path.parent)
     finally:
         if os.path.exists(name):
@@ -74,12 +77,23 @@ def parquet(row):
     return sink.getvalue().to_pybytes()
 
 
-def consume(root, messages, ack, checkpoint=lambda stage: None):
-    """messages: (delivery_id, kind, bytes). ack called only after durable commit.
+def consume(
+    root,
+    messages,
+    ack,
+    checkpoint=lambda stage: None,
+    *,
+    require_power_loss_durability=False,
+):
+    """messages: (delivery_id, kind, bytes); ACK follows the platform storage barrier.
 
     delivery_id must be stable and globally namespaced (cluster/topic/partition/offset
     for Kafka, persistent FlowFile identity for NiFi). No broker is contacted here.
+    Windows provides process recovery only; set require_power_loss_durability=True
+    to fail closed before writes there. See docs/PLATFORM_SUPPORT.md.
     """
+    if require_power_loss_durability:
+        require_power_loss()
     root = Path(root).absolute()
     mkdir(root)
     schemas = validators()

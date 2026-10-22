@@ -14,6 +14,7 @@ import sys
 import tempfile
 import time
 import uuid
+from contextlib import closing
 from pathlib import Path
 from threading import Thread
 from urllib.parse import urlsplit
@@ -249,7 +250,10 @@ async def verify(output):
                 # Simulate crash after ES create but before the local done commit.
                 import sqlite3
 
-                with sqlite3.connect(root / "worker/pipeline.sqlite3") as con:
+                with (
+                    closing(sqlite3.connect(root / "worker/pipeline.sqlite3")) as con,
+                    con,
+                ):
                     con.execute(
                         "UPDATE jobs SET outcome=NULL WHERE outcome='completed'"
                     )

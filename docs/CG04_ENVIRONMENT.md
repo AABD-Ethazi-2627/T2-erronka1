@@ -78,12 +78,18 @@ cambio. No reconstruir ni atribuir membresías a un artefacto sin procedencia.
 ## Versiones y artefactos
 
 - Camino activo: lock Python `>=3.11,<3.13`, NumPy 1.26.4, pandas 2.2.2,
-  scikit-learn 1.5.0, joblib 1.4.2; Docker/API usa Python 3.11.
+  scikit-learn 1.5.0, joblib 1.5.3; Docker/API usa Python 3.11.
 - PR43: Python `>=3.12`, NumPy 2.2.6 y un lock propio. Compartir sklearn 1.5.0
   no prueba compatibilidad binaria ni equivalencia de preparación/particiones.
 - Esta integración mantiene `pyproject.toml`, `uv.lock`, requirements y API de
   PR42. No carga pickles entre esos entornos, no cambia bundles ni vuelve a
   entrenar la entrega. Las versiones verificadas están en el registro local.
+
+La corrección posterior de portabilidad actualiza únicamente joblib 1.4.2 a
+1.5.3 para la detección CIM de núcleos Windows, conservando las otras
+dependencias. No regenera el bundle ni cambia sklearn. Las versiones de los
+informes anteriores conservan su fecha y atribución; el
+[contrato de plataforma](PLATFORM_SUPPORT.md) delimita la persistencia Windows.
 
 Para cualquier futura promoción se necesita el entorno de entrenamiento y
 dependencias compatibles, la misma preparación y membresía, y revisión del

@@ -7,7 +7,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from contextlib import asynccontextmanager
+from contextlib import asynccontextmanager, closing
 from pathlib import Path
 from unittest.mock import patch
 
@@ -271,7 +271,7 @@ class ScoringReplayTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result["status"], "isolated_rehearsal_passed")
         self.assertTrue(result["trace_invariance"])
         self.assertIn("scoring/response_ledger.py", result["execution_files_sha256"])
-        with sqlite3.connect(self.ledger) as con:
+        with closing(sqlite3.connect(self.ledger)) as con, con:
             self.assertEqual(
                 con.execute("SELECT count(*) FROM scoring_events").fetchone()[0], 3
             )
@@ -288,7 +288,7 @@ class ScoringReplayTests(unittest.IsolatedAsyncioTestCase):
             ):
                 failure = await client.post("/predict", json=self.event)
             self.assertEqual(failure.status_code, 500)
-            with sqlite3.connect(self.ledger) as con:
+            with closing(sqlite3.connect(self.ledger)) as con, con:
                 # Failed inference rolls back schema creation as well.
                 self.assertEqual(
                     con.execute(
@@ -344,7 +344,7 @@ class ScoringReplayTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(
                 (await client.post("/predict", json=self.event)).status_code, 504
             )
-        with sqlite3.connect(self.ledger) as con:
+        with closing(sqlite3.connect(self.ledger)) as con, con:
             committed = json.loads(
                 con.execute("SELECT response FROM scoring_responses").fetchone()[0]
             )
@@ -379,7 +379,7 @@ class ScoringReplayTests(unittest.IsolatedAsyncioTestCase):
             ):
                 failed = await client.post("/predict", json=self.event)
             self.assertEqual(failed.status_code, 500)
-            with connect(self.ledger) as con:
+            with closing(connect(self.ledger)) as con, con:
                 self.assertEqual(
                     con.execute(
                         "SELECT count(*) FROM sqlite_master "

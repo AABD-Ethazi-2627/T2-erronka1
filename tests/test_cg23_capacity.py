@@ -1,5 +1,8 @@
 import json
+import os
 import statistics
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,6 +12,23 @@ from scripts.cg23_capacity import estimates, main, percentile, protocol, run, su
 
 
 class CapacityTests(unittest.TestCase):
+    def test_standalone_help_from_another_directory(self):
+        from scripts import cg23_capacity
+
+        with tempfile.TemporaryDirectory() as directory:
+            environment = {k: v for k, v in os.environ.items() if k != "PYTHONPATH"}
+            result = subprocess.run(
+                [sys.executable, "-B", str(Path(cg23_capacity.__file__)), "--help"],
+                cwd=directory,
+                env=environment,
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=15,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertIn("--repetitions", result.stdout)
+
     def test_units_and_replicas(self):
         result = estimates(
             machines=1, hz=1, event_bytes=1, days=1, replicas=1, overhead=1

@@ -1,7 +1,6 @@
 """Consume explicitly ready local lab batches; continuous polling is opt-in."""
 
 import argparse
-import fcntl
 import json
 import os
 import tempfile
@@ -12,6 +11,7 @@ from pathlib import Path
 from planning.cycle import update_batch
 from planning.online import OnlineForecaster, digest
 from scripts.adaptive_cycle import read_data
+from scripts.platform_io import exclusive_lock
 
 
 def atomic_json(path, value):
@@ -31,8 +31,7 @@ def run_once(inbox, manifest_path, work, *, seed=None):
     work.mkdir(parents=True, exist_ok=True)
     manifest = json.loads(Path(manifest_path).read_text())
     processed = 0
-    with (work / "worker.lock").open("a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with exclusive_lock(work / "worker.lock"):
         checkpoint_path = work / "checkpoint.json"
         checkpoint = (
             json.loads(checkpoint_path.read_text())

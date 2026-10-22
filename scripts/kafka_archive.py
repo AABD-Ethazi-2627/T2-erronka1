@@ -3,7 +3,6 @@
 import argparse
 import json
 import signal
-import sys
 from pathlib import Path
 from threading import Event
 
@@ -12,6 +11,7 @@ from kafka.consumer.subscription_state import ConsumerRebalanceListener
 from kafka.structs import OffsetAndMetadata
 
 from scripts.archive_consumer import consume
+from scripts.platform_io import require_power_loss_durability
 
 
 class AssignmentLost(RuntimeError):
@@ -194,7 +194,10 @@ def parser():
         "--root",
         type=Path,
         required=True,
-        help="Durable archive on a local POSIX filesystem",
+        help=(
+            "Local archive; POSIX fsync or Windows process recovery "
+            "(PLATFORM_SUPPORT.md)"
+        ),
     )
     result.add_argument(
         "--offset-reset",
@@ -206,6 +209,11 @@ def parser():
     result.add_argument("--poll-timeout-ms", type=positive, default=1000)
     result.add_argument("--max-poll-interval-ms", type=positive, default=300000)
     result.add_argument("--commit-timeout-ms", type=positive, default=30000)
+    result.add_argument(
+        "--require-power-loss-durability",
+        action="store_true",
+        help="Fail before connecting on Windows; requires POSIX directory fsync",
+    )
     result.add_argument(
         "--max-batches",
         type=positive,
@@ -235,8 +243,8 @@ def main(argv=None):
         cli.error("broker endpoints, group and namespace must not be blank")
     if args.poll_timeout_ms >= args.max_poll_interval_ms:
         cli.error("poll timeout must be shorter than max poll interval")
-    if sys.platform == "win32":
-        cli.error("the durable sink requires a local POSIX filesystem; use Fedora WSL")
+    if args.require_power_loss_durability:
+        require_power_loss_durability()
     stop = Event()
     handlers = {}
     try:

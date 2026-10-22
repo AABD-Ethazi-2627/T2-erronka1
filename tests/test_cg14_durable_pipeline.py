@@ -6,6 +6,7 @@ import json
 import sqlite3
 import tempfile
 import unittest
+from contextlib import closing
 from pathlib import Path
 from threading import Event
 from unittest.mock import patch
@@ -75,7 +76,10 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
         )
 
     def ack(self):
-        with sqlite3.connect(self.root / "worker/pipeline.sqlite3") as con:
+        with (
+            closing(sqlite3.connect(self.root / "worker/pipeline.sqlite3")) as con,
+            con,
+        ):
             self.assertFalse(
                 con.execute("SELECT id FROM jobs WHERE outcome IS NULL").fetchall()
             )
@@ -184,7 +188,10 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
                     prediction = next(
                         (self.root / "worker/outbox/prediction").glob("*.json")
                     ).read_bytes()
-                    with sqlite3.connect(self.root / "api.sqlite3") as con:
+                    with (
+                        closing(sqlite3.connect(self.root / "api.sqlite3")) as con,
+                        con,
+                    ):
                         canonical = (
                             con.execute("SELECT response FROM scoring_responses")
                             .fetchone()[0]
@@ -300,7 +307,10 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
             self.acks = []
             # Interrupted local transaction after external commit must compare
             # the stored _source, never replace a conflicting remote document.
-            with sqlite3.connect(self.root / "worker/pipeline.sqlite3") as con:
+            with (
+                closing(sqlite3.connect(self.root / "worker/pipeline.sqlite3")) as con,
+                con,
+            ):
                 con.execute("UPDATE jobs SET outcome=NULL")
             original = copy.deepcopy(documents)
             next(iter(documents.values()))["scored_at"] = "2000-01-01T00:00:00Z"
@@ -382,7 +392,10 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
         async with api_client(self.app()) as client:
             with self.assertRaises(PipelineBlocked):
                 await self.worker(client, attempts=2).consume([message()], self.ack)
-        with sqlite3.connect(self.root / "worker/pipeline.sqlite3") as con:
+        with (
+            closing(sqlite3.connect(self.root / "worker/pipeline.sqlite3")) as con,
+            con,
+        ):
             self.assertEqual(
                 con.execute("SELECT result FROM attempts").fetchall(),
                 [("503",), ("503",)],
@@ -431,7 +444,12 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
                             [message()], self.ack
                         )
                 self.assertFalse(self.acks)
-                with sqlite3.connect(self.root / "worker/pipeline.sqlite3") as con:
+                with (
+                    closing(
+                        sqlite3.connect(self.root / "worker/pipeline.sqlite3")
+                    ) as con,
+                    con,
+                ):
                     self.assertEqual(
                         con.execute("SELECT count(*) FROM attempts").fetchone()[0], 2
                     )
@@ -450,7 +468,10 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
                     await self.worker(client, attempts=2, timeout=0.01).consume(
                         [message()], self.ack
                     )
-            with sqlite3.connect(self.root / "worker/pipeline.sqlite3") as con:
+            with (
+                closing(sqlite3.connect(self.root / "worker/pipeline.sqlite3")) as con,
+                con,
+            ):
                 self.assertEqual(
                     con.execute("SELECT result FROM attempts").fetchall(),
                     [("TimeoutError",), ("TimeoutError",)],
@@ -475,7 +496,7 @@ class DurablePipelineTests(unittest.IsolatedAsyncioTestCase):
                 await self.worker(client).consume([message()], self.ack)
             self.assertFalse(ledger.exists())
             ledger.write_bytes(retained)
-            with sqlite3.connect(ledger) as con:
+            with closing(sqlite3.connect(ledger)) as con, con:
                 con.execute("DELETE FROM deliveries")
             with self.assertRaises(PipelineBlocked):
                 await self.worker(client).consume([message()], self.ack)
