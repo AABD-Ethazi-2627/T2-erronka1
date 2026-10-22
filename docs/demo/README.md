@@ -1,143 +1,55 @@
-# CG26: demo reproducible y preparación de defensa
+# CG26: demo de la API vigente y preparación de defensa
 
-Guion para que otra persona reproduzca **un ensayo de la API en proceso** desde
-un clon limpio y explique sus límites. No requiere sockets, Docker, SMB, OT ni
-servicios compartidos. Es preparación de #26, no una defensa realizada ni prueba
-de entrega. La revisión por otro miembro sigue pendiente.
+Base revisada `f770932d61ff55158bb18c9d89120617e8c5db65`. Este guion prepara una reproducción aislada de contratos actuales, sin infraestructura compartida ni modelos de entrega. El [ensayo del 21/10](../evidence/CG26_REHEARSAL.md) conserva su fecha/alcance; no es una defensa realizada. La [matriz actual](../rubrica/ESTADO_20261022.md) y el [acta pendiente](ACTA_PENDIENTE_20261022.md) separan ejecución técnica de aceptación humana.
 
-## Cobertura y base deliberada
+## Preparar un worktree propio en D:
 
-- [PR38](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/38) conserva evidencia
-  histórica del recorrido completo y del panel. No prueba el recorrido completo
-  después de la corrección de alcance de PR42.
-- [PR42](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/42), base
-  `28a77543bfd67a36b96ddc2f4acc103b13f62c2e`, fija AI4I reducido (8.000 filas),
-  cinco sensores y `machine_type`, clasificación del estado actual. Sus modelos
-  se regeneran aquí sin cambiar entrenamiento, contratos o API.
-- [PR48](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/48) aporta memoria,
-  ANEXO4 y comprobación documental. Este guion no los reescribe ni los incorpora
-  como si estuvieran integrados. PR40/41 son investigación histórica, fuera de la
-  entrega activa. PR45/46/47 siguen sus propias revisiones.
+Requisitos: checkout existente de confianza con el SHA disponible, Git, Python3.11/3.12 y uv. En Windows usar PowerShell sin perfil. Sustituir las rutas por un checkout/evidencia propios; no clonar ni reutilizar outputs/venv/ledger ajenos. Cada persona anota commit, versiones y códigos de salida. Si ya existe el destino, elegir uno nuevo; no borrar resultados previos.
 
-La brecha cubierta es el recorrido reproducible normal → alerta → rechazo →
-modelo no disponible, con resultados y versión guardados, más preguntas de
-defensa. E2E streaming, panel vivo y explicación del equipo quedan pendientes.
-
-El ensayo usa HTTPX ASGI con el lifespan real explícito; las peticiones y el
-cliente se cierran antes del shutdown, también al rechazar un bundle o propagar
-un error. No importa helpers de tests ni abre un servidor. La regresión
-`test_cg26_rehearsal.py` fuerza GC y detecta ResourceWarning/unraisables; incluye
-un bundle de 24 filas sintéticas que no es un modelo de entrega.
-
-## Procedimiento desde un clon limpio
-
-Entorno completo: Linux, Git, Python 3.11 y uv instalados, acceso a paquetes para
-`uv sync`. En Windows nativo el ensayo API funciona, pero la suite completa tiene
-errores en rutas previas que requieren semántica POSIX/temporales Unix. En la base
-PR42, CG02 también discrepaba por los separadores Windows; PR52 corrige esa
-discrepancia sin cambiar el inventario y se valida por separado. Esta rama no
-incorpora PR52: ejecutar los comandos completos en Linux/WSL con
-una distribución explícita y un entorno Python propio para Linux.
-Ejecutar desde la raíz de **un clon propio**; no reutilizar el checkout ni
-`outputs/` de otra persona. Anotar la versión con `git rev-parse HEAD`,
-`uv --version` y, tras `uv sync`, `uv run --frozen python --version`.
-
-```text
-git clone --branch feat/26-isolated-demo --single-branch https://github.com/AABD-Ethazi-2627/T2-erronka1.git cnc-guard-cg26
-cd cnc-guard-cg26
-uv sync --frozen --python 3.11
-uv run --frozen python -m scripts.audit_cg02 --check
-uv run --frozen python -m scripts.experiment_rf
-uv run --frozen python -m scripts.experiment_anomaly
-uv run --frozen python -m scripts.package_model
-uv run --frozen python -m scripts.rehearse_cg26 --output outputs/cg26/ensayo-01.json
-uv run --frozen python -m unittest discover -s tests -v
+```powershell
+$repo = 'D:/github/T2-erronka1' # sustituir por el checkout existente propio
+$work = 'D:/github/_worktrees/t2-demo-companero-01'
+$evidence = 'D:/github/_local/t2-demo-companero-01'
+New-Item -ItemType Directory -Force "$evidence/process-temp" | Out-Null
+$env:TMP = "$evidence/process-temp"
+$env:TEMP = $env:TMP
+$env:TMPDIR = $env:TMP
+$env:UV_CACHE_DIR = "$evidence/uv-cache"
+$env:UV_PROJECT_ENVIRONMENT = "$evidence/venv"
+$env:PYTHONDONTWRITEBYTECODE = '1'
+git -C $repo worktree add --detach $work f770932d61ff55158bb18c9d89120617e8c5db65
+# Comprobar exit 0 antes de continuar.
+Set-Location $work
+git rev-parse HEAD
+uv --version
+uv sync --frozen --python 3.11 --extra kafka
+# Comprobar exit 0 antes de continuar. No entrenar ni empaquetar modelos.
+uv run --frozen --extra kafka python -B -m scripts.audit_cg02 --check
+uv run --frozen --extra kafka python -B -m scripts.check_cg25_memory
+uv run --frozen --extra kafka python -B -W error::ResourceWarning -m unittest discover -s tests -p test_scoring_replay.py -v
+uv run --frozen --extra kafka python -B -W error::ResourceWarning -m unittest discover -s tests -p test_cg26_rehearsal.py -v
 git diff --check
 ```
 
-Estos comandos no arrancan servicios. RF/IF entrenan offline en directorios nuevos;
-no cargar pickles descargados ni copiar bundles ajenos. El lock fija paquetes,
-pero no garantiza hashes idénticos del pickle entre plataformas/Python: cada
-ejecución registra sus propios hashes. No es necesario `build_history`, un
-experimento estacional ni `demo_maintenance` para esta demo.
+Detenerse ante un código distinto de 0 y guardar comando/salida. Los logs negativos de bundle ausente son esperados cuando el test exige 503; un traceback de unittest no lo es. En WSL seleccionar explícitamente distribución, intérprete/venv Linux propio y temporales en `/mnt/d/.../process-temp`, sin `/tmp`. El informe [Windows PR67](../evidence/WINDOWS_PORTABILITY_20261022.md) registra cuatro entornos del autor; no presentar esas suites como ejecución propia.
 
-El script termina con código 0 y `CG26 isolated rehearsal PASS` **solo si se
-cumplen todas sus comprobaciones**. Un error termina con código distinto de 0;
-no se publica un nuevo resultado de éxito. Conservar logs y fallo; no editar el
-JSON para obtener PASS. El registro `Model bundle unavailable or invalid` durante
-el caso sin modelo es esperado; exige 503, no indica que el bundle principal falló.
+## Qué demuestra cada caso
 
-El empaquetado, los entrenamientos y el ensayo rechazan sobrescrituras. Para
-repetir solamente el ensayo, elegir otro archivo, por ejemplo `ensayo-02.json`.
-Para repetir entrenamiento, usar otro clon o los argumentos de salida de esos
-scripts, sin borrar resultados previos. La API solo deserializa modelos de origen
-propio y confiable: un hash no convierte un pickle ajeno en seguro.
+Los tests de replay usan dobles deterministas etiquetados `synthetic-replay-only`, SQLite/archivos reales y fixtures temporales propias. Los tests CG26 incluyen pequeños fits de 24 filas sintéticas; no entrenan modelos de entrega ni consumen el test final. Revisar también `contracts/examples/valid/telemetry.json`, `scoring/score_api.py`, `scoring/response_ledger.py` y el [contrato](../SCORING_REPLAY_CONTRACT.md).
 
-## Casos que se muestran
+1. **200/replay:** `test_lost_http_response_restart_and_archive_replay` repite la petición válida sin cambiar event_id; exige respuesta idéntica byte a byte, mismo scored_at y sin segunda inferencia, incluso tras reinicio. Archivo concilia1stored+1duplicate y recibo anterior alACK.
+2. **409:** `test_same_id_different_valid_payload_conflicts_before_inference` conserva event_id y cambia payload válido; rechaza antes de inferir. No resolverlo inventando un ID nuevo. `test_configuration_reuse_conflicts_and_new_archive_identity_succeeds` comprueba cambio de configuración/identidad de policy.
+3. **422:** campos/valores inválidos se rechazan. `test_rehearsal_uses_new_identity_for_trace_variant` y los tests CG26 cubren etiquetas, ETA/RUL, rpm negativo y source.raw_record. Esos campos no son inputs vigentes de `/predict`.
+4. **503:** `test_unready_bundle_does_not_serve_previously_cached_success` exige fallo cerrado aun con respuesta antigua en ledger; no score alternativo. Health/predict sin bundle no acreditan disponibilidad.
+5. **Trazabilidad:** cambiar ID/fecha para una ocurrencia distinta permite comprobar invariancia del score. Reutilizar el mismo ID con fecha distinta es409; no usar el ejemplo antiguo que esperaba200 para esa mutación.
 
-1. `/health` responde 200 con `AI4I_CURRENT_STATE_ONLY`.
-2. Fila 1386 (índice de datos desde cero) del fit: ejemplo normal; se exige
-   `OK` y `risk_alert=false`. Los sensores y tipo son las únicas seis entradas
-   del estimador; identidad/fecha/procedencia son trazabilidad.
-3. Fila 679 del fit: ejemplo de fallo docente; se exige `risk_alert=true`.
-   No es una avería física observada ni una predicción de cuándo ocurrirá.
-4. Diez peticiones inválidas: las seis etiquetas, ETA, RUL, rpm negativo y
-   `source.raw_record` deben responder 422. Las etiquetas sirven para entrenar o
-   describir los ejemplos, nunca viajan a `/predict`.
-5. Cambiar solo ID/fecha deja iguales scores y alertas. La fecha de fixture es
-   metadato inventado explícito, no una serie temporal observada.
-6. Otra instancia de la misma API sin manifiesto responde 503 en health/predict;
-   no emite un score de respaldo ni toca el bundle válido.
+El CLI `scripts.rehearse_cg26 --manifest ... --output ...` sigue disponible para un bundle propio ya validado y compatible. Requiere modelo RF/IF local de confianza y crea/persiste un ledger; no ejecutarlo sobre modelos de entrega ni reentrenar como parte de este guion. Su variante de trazabilidad ya usa un ID nuevo. Usar salida nueva sin sobrescritura.
 
-Se usan dos ejemplos **del fit conocido**, sin buscar nuevos casos en validación
-o test y sin ajustar umbrales. Sirven para explicar comportamientos, no para
-estimar rendimiento. El JSON guarda respuestas, rechazos, hashes, versión Python,
-HEAD de ejecución y límites. La repetición puede cambiar fecha y `scored_at`.
+## Panel y explicación de 10 minutos
 
-## Guion de defensa y decisión propuesta
+- Minutos0–2: fuente 8000 / split 5600/1200/1200; TP32/FN9/FP9/TN1150 es validación reutilizada, no test final independiente. Solo cinco sensores+machine_type al estimador, metadatos para trazabilidad.
+- Minutos2–5: mostrar los resultados guardados de 200/replay,409,422,503 y explicar ledger/ACK, error transitorio frente a conflicto terminal y recuperación de proceso Windows sin powercut.
+- Minutos5–8: abrir [Kibana real del autor](../evidence/ISOLATED_RUNTIME_20261022.md) y [página20/DOM](../evidence/CG19_SVG_ARIA_20261022.md). Distinguir fixtures online de offline fijo; filtros 0/1/31/100, total frente a muestra, Kelvin/UTC y páginas. Son evidencias del autor, no panel levantado por el compañero. Para reproducción viva preparar lab propio con el padre, sin tocar servicios compartidos.
+- Minutos8–10: proponer inspección humana de una alerta y comparar FP/FN. Coste 1200 €/h es supuesto docente, no ahorro observado. Explicar IA estrecha, reglas 0,15/0,70 frente a risk_threshold y rareza IF. No ETA/RUL/forecast24h ni acción sobre CNC.
 
-Otra persona debe abrir los artefactos, explicar entrada → transformación →
-salida → error y contestar con sus palabras. No rellenar la revisión por ella.
-
-- **G5:** enseñar `scoring/score_api.py` y los informes offline. ¿Qué cambia al
-  inferir y qué exigiría un bucle cerrado? Aquí se informa a una persona, sin
-  aprendizaje online ni órdenes a una CNC. Ver [CG30](../evidence/CG30.md).
-- **G23:** ¿Por qué es IA estrecha? Aprende una tarea de clasificación sintética;
-  no tiene comprensión general ni autonomía de mantenimiento.
-- **G24:** distinguir el score aprendido de RF de las reglas fijas
-  `OK/AVISO/CRITICA` (0,15/0,70). `risk_alert` usa otro umbral ajustado en
-  desarrollo; IF señala rareza, no probabilidad de fallo. Ver
-  `scoring/alert_policy.py`, manifiesto y [alcance](../evidence/CG17_CURRENT_STATE_SCOPE.md).
-- **G72/G105:** abrir el [export del panel](../../kibana/acceptance-export.ndjson)
-  y [CG19](../evidence/CG19.md). Propuesta: filtrar rango y fuente, localizar el
-  evento con alerta, contrastar sensores y pedir inspección humana contextual.
-  El scatter por evento evita fingir continuidad entre IDs simulados. Los KPI
-  históricos 43/4 pertenecen al ensayo anterior; no esperar esos contadores en
-  este ensayo en memoria. No hay panel vivo nuevo ni prueba de utilidad por operador.
-- **G104:** ¿Cuánto cuesta un falso positivo y un falso negativo? Mostrar
-  `scoring/alert_policy.py:cost` y [CG10](../evidence/CG10.md). Por ejemplo,
-  2 inspecciones a 50 € y 1 omisión con 2 h hipotéticas a 1.200 €/h suman
-  2.500 €. Es un escenario docente, sin ahorro observado. Preguntar cómo cambian
-  la decisión el desbalance, la calibración pendiente y los errores por régimen.
-
-Para enseñar el panel vivo y streaming hace falta otro ensayo autorizado, aislado
-y con reconciliación posterior a PR42. No usar el procedimiento de laboratorio
-del README como autorización para acceder a infraestructura compartida.
-
-## Registro humano pendiente
-
-Copiar y completar solo tras el ensayo real de cada compañero:
-
-```text
-Persona que reproduce / fecha:
-Commit y hashes del JSON:
-Comandos ejecutados y códigos de salida / archivo de resultados:
-Explicación propia de datos, modelo, integración y panel:
-Decisión propuesta y justificación / límites:
-Preguntas no resueltas:
-Revisor distinto / fecha / conclusión:
-```
-
-No hay nombres, firmas, asistencia ni aceptación preasignados. La matriz mantiene
-sus seis criterios en estado parcial. El [registro técnico](../evidence/CG26_REHEARSAL.md)
-separa ejecución local, CI y publicación; no cerrar #26 por disponer de este guion.
+Preguntas: ¿qué confirma un 200 y qué falta hasta elACK? ¿Por qué no reintentar 409 como 503? ¿Por qué cuatro mensajes SMB y 35 estadosDOM no prueban SLA o lectura audible? ¿Qué cambia entre mononodo y clúster? ¿Qué dato haría falta para probar beneficio de mantenimiento? Registrar la respuesta del compañero, sin escribirla en su nombre.

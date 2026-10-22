@@ -19,8 +19,10 @@ CNC Guard — Mantentze Prediktiboa, según [enunciado](../../ENUNTZIATUA.md).
 
 ANEXO1eko konpromisoen berrespena, benetako akordioak, sinadurak eta entrega pendiente daude.
 
-## Estado documental al 21/10/2026
+## Estado documental al 22/10/2026
 
-Base integrada PR42 `e5faf015cc16e2044d25ab59c1ec30c32222d889`; propuesta pendiente de acuerdo. Los resultados de CG15 durable/adaptador Kafka, CG21, microbenchmark CG23, scoring replay y SMB offline se reúnen en la memoria con sus límites. TP32/FN9/FP9/TN1150 corresponde a validación reutilizada, sin evaluación final independiente nueva.
+Base auditada PR42 `f770932d61ff55158bb18c9d89120617e8c5db65`. La [matriz actual](../rubrica/ESTADO_20261022.md) incorpora PR66 DuckDB2, PR67 Windows y PR69 Kibana/ES/SMB reales. PR68 sigue abierta, fuera de esta base y con revisión del fix P2 pendiente al corte. Los cuatro mensajes SMB no prueban carga sostenida ni SLA; la regresión DOM/ARIA no acredita zoom nativo ni NVDA audible.
 
-Pendientes: Apache Kafka y SMB/Filebeat reales, Kibana actual, NiFi E2E v4, migraciones y revisión humana. La base PR42 `53f342d` ya incorpora PR62 y PR64; esta última corrige los 218 avisos Kafka de Python 3.11. PR65 añade el worker opt-in y [su corrección de recibos/HTTP](../evidence/DURABLE_PIPELINE_FIX_R2_20261021.md), pendiente de revisión padre. Los límites Windows/WMIC permanecen. No se acredita aceptación humana, firma, Moodle ni entrega final; no se cierran issues.
+TP32/FN9/FP9/TN1150 es validación reutilizada. Split activo 5600/1200/1200, sin test final independiente nuevo. No se ejecutan entrenamientos ni se cambian modelos de entrega en esta actualización.
+
+Acuerdo, reproducción por compañero, explicación individual, firmas, Moodle y entrega final: pendientes. No se cierran issues ni se asigna calificación.

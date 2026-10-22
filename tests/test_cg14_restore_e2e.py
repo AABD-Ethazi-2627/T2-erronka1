@@ -15,6 +15,40 @@ m = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(m)
 
 
+def test_storage_guard_rejects_image_volume_shadow_and_default_config(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setattr(m, "DEPLOY", tmp_path)
+    broker = {
+        "Mounts": [
+            {
+                "Destination": destination,
+                "Type": "bind",
+                "RW": True,
+                "Source": str(tmp_path / relative),
+            }
+            for destination, relative in (
+                ("/var/lib/kafka", "data/kafka-test"),
+                ("/var/lib/kafka/data", "data/kafka-test/data"),
+            )
+        ],
+        "HostConfig": {"ReadonlyRootfs": True},
+        "Config": {"Entrypoint": ["/bin/bash", "/lab/start.sh"]},
+    }
+    config = "log.dirs=/var/lib/kafka/data\nmetadata.log.dir=/var/lib/kafka/metadata\n"
+    m.kafka_storage_guard(broker, config)
+    shadowed = copy.deepcopy(broker)
+    shadowed["Mounts"][1]["Type"] = "volume"
+    with pytest.raises(m.GuardError, match="Persistencia"):
+        m.kafka_storage_guard(shadowed, config)
+    with pytest.raises(m.GuardError, match="Configuración"):
+        m.kafka_storage_guard(broker, "log.dirs=/tmp/kafka-logs\n")
+    wrong_entrypoint = copy.deepcopy(broker)
+    wrong_entrypoint["Config"]["Entrypoint"] = ["/etc/kafka/docker/run"]
+    with pytest.raises(m.GuardError, match="Configuración"):
+        m.kafka_storage_guard(wrong_entrypoint, config)
+
+
 def test_native_host_contract_before_state_creation(tmp_path, monkeypatch):
     monkeypatch.setattr(m, "DEPLOY", tmp_path)
     root = tmp_path / "data/evidence/restore-e2e"

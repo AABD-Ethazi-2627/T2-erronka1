@@ -32,12 +32,20 @@ locales. Permite `.env.example` y `.env.*.example`. No excluye CSV/JSON/imágene
 por extensión: ocultaría fuentes, fixtures o evidencia. `uv.lock` se versiona.
 No se borran capturas, exports, prototipos ni archivos ajenos durante esta reparación.
 Los checkpoints ya versionados se retiran del índice conservando la copia local.
-Las credenciales de ejemplos históricos no son secretos válidos para despliegue.
+La plantilla histórica exige `CNC_NIFI_PASSWORD` y `CNC_STREAM_DIR`, sin valores
+predeterminados ni credenciales CIFS. El directorio de entrada debe existir y
+estar montado localmente; Filebeat lo recibe de solo lectura. Para NiFi se debe
+proporcionar una contraseña privada de al menos 12 caracteres fuera de Git.
+Todos sus puertos se publican en `127.0.0.1`, con TLS/autenticación en NiFi y
+allowlist Host `localhost:8443,127.0.0.1:8443`. No incorpora un override LAN;
+el Host permitido no sustituye la validación del certificado TLS del servidor.
+Esta protección no convierte la plantilla antigua en la instalación vigente.
 
 ## Verificación sin iniciar servicios
 
 ```bash
 python3 scripts/check_repository_layout.py
+python3 scripts/check_lab_compose.py
 ```
 
 Requiere Git y Docker Compose v2; no necesita daemon. Revisa el índice, las reglas
@@ -45,3 +53,7 @@ de exclusión, el contexto/Dockerfile/COPY y los bind mounts estáticos del Comp
 principal. Las rutas generadas `outputs/` y `models/` se permiten sin crearlas.
 No acredita que la API docente esté completa ni que exista una integración viva.
 La CI ejecuta esta comprobación en PR y bajo petición manual.
+El segundo comando valida por separado la plantilla histórica con valores
+ficticios y un directorio de fixtures del checkout. Comprueba puertos privados,
+TLS/autenticación, rutas, entrada de solo lectura y rechazo de variables ausentes
+o vacías mediante `docker compose config`. No monta SMB ni inicia contenedores.

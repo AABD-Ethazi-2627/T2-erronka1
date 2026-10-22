@@ -1,6 +1,6 @@
-# Kafka: parche de compatibilidad con Python 3.11
+# Kafka: recursos de Python y compatibilidad de protocolo
 
-`kafka_python-3.0.11+cncguard.1-py3-none-any.whl` es una distribución local
+`kafka_python-3.0.11+cncguard.2-py3-none-any.whl` es una distribución local
 del wheel oficial `kafka-python==3.0.11`, bajo Apache-2.0. Conserva su licencia
 en `*.dist-info/licenses/LICENSE`. No es una versión publicada por upstream.
 
@@ -11,7 +11,7 @@ seguía usando `importlib.resources.read_text`. En Python 3.11, el primer import
 emite 218 DeprecationWarning; una segunda importación en el mismo proceso no
 permite comprobar la reparación.
 
-El único cambio funcional sustituye esa llamada por
+El parche sustituye esa llamada por
 `importlib.resources.files(package).joinpath(msg_type + '.json').read_text(encoding='utf-8')`,
 como recomienda la [documentación de Python 3.11](https://docs.python.org/3.11/library/importlib.resources.html#importlib.resources.read_text).
 No cambia los 108 JSON de protocolo, su parser ni el comportamiento ante recursos
@@ -19,6 +19,14 @@ ausentes. Se marca el archivo modificado, se distingue la versión local en
 `kafka/version.py` y METADATA, se renombra dist-info y se regenera RECORD.
 El wheel declara Python >=3.9 porque `files()` se incorporó en esa versión;
 el proyecto conserva su soporte >=3.11,<3.13 y valida ambas versiones.
+
+La revisión local `.2` también transforma `+` en `-` en el valor predeterminado
+`client_software_version` de conexión y gestor. La identidad del paquete sigue
+siendo PEP 440 (`3.0.11+cncguard.2`); el protocolo envía
+`3.0.11-cncguard.2`. Apache Kafka 3.7.2 rechaza el signo `+` en
+[ApiVersionsRequest v3](https://github.com/apache/kafka/blob/3.7.2/clients/src/main/java/org/apache/kafka/common/requests/ApiVersionsRequest.java#L53).
+El ensayo con broker real reprodujo `INVALID_REQUEST` (42) con `.1` y comprobó
+bootstrap, producción, consumo y commits con `.2`. No cambia schemas ni parser.
 
 ## Instalación y reproducción
 
@@ -34,8 +42,8 @@ Para reconstruir, descargar únicamente el wheel oficial enlazado en
 
 ```sh
 python3 scripts/repack_kafka.py /ruta/kafka_python-3.0.11-py3-none-any.whl \
-  --output /tmp/kafka_python-3.0.11+cncguard.1-py3-none-any.whl
-sha256sum /tmp/kafka_python-3.0.11+cncguard.1-py3-none-any.whl vendor/*.whl
+  --output /tmp/kafka_python-3.0.11+cncguard.2-py3-none-any.whl
+sha256sum /tmp/kafka_python-3.0.11+cncguard.2-py3-none-any.whl vendor/*.whl
 ```
 
 El script sólo usa la biblioteca estándar y rechaza un wheel de origen con hash
