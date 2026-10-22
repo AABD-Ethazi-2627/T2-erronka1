@@ -1,0 +1,18 @@
+{
+  "schema": {
+    "version": "preview"
+  },
+  "summary": {
+    "audited_packages": 57,
+    "vulnerabilities": 0,
+    "adverse_statuses": 0
+  },
+  "vulnerabilities": [],
+  "adverse_statuses": []
+}
+
+STDERR:
+warning: `uv audit` is experimental and may change without warning. Pass `--preview-features audit-command` to disable this warning.
+warning: The `--output-format json` option is experimental and the schema may change without warning. Pass `--preview-features json-output` to disable this warning.
+Using CPython 3.12.15
+Resolved 58 packages in 6ms

@@ -4,6 +4,10 @@ Borrador reconciliado el 22/10/2026 para revisión del equipo y docente. Cubre d
 
 ## Fuentes y atribución por sección
 
+- [Conciliación CG10 del 22/10](../evidence/CG10_PRECISION_20261022.md): corrige
+  la precisión de lectura CSV de los umbrales y costes; reemplaza el JSON anterior
+  para los resultados activos. Las revisiones Git fijadas en la matriz conservan
+  su valor histórico; no acreditan la revisión ni el merge de este arreglo.
 - [Enunciado](../../ENUNTZIATUA.md): fases de pipeline, entrenamiento e inferencia; «Entregablea Orokorra» y «Demo Aurkezpena» describen artefactos y defensa de 10 minutos. Los pesos de fase y de módulo son ejes distintos.
 - [Fuente docente exacta](../rubrica/fuente.json), Zereginak, columna G: 40 descriptores, celdas y hash del Excel local; [interpretación](../rubrica/OBJETIVOS_Y_ETAPAS.md). No se ha cotejado la versión online ni se asigna una nota.
 - ANEXO4.docx docente local: «Erronkaren izena», «BEHIN BETIKO PROPOSAMENA» y «Taldeak aurrera eramatea erabaki duen proposamena» dan la estructura del [borrador adaptado](ANEXO4_CNC_Guard.md). Ruta y hash del original en el [manifiesto](manifest.json); el original no se redistribuye ni se vuelve a inspeccionar aquí.
