@@ -1,34 +1,49 @@
-"""Opt-in real ES regression in a disposable container with no network or volumes.
+"""Opt-in real ES regression with constructed fixtures, no training/inference.
 
 Run from the repository root:
-PYTHONPATH=.:tests python tests/verify_elasticsearch_contract.py
+PYTHONPATH=.:tests python tests/verify_elasticsearch_contract.py --work-dir D:/lab/es1
 Requires the project's ES image already present in the local Docker engine.
 Never connects to a host ES endpoint or executes NiFi processors.
 """
 
 import argparse
-import asyncio
 import copy
 import json
+import os
 import subprocess
-import tempfile
 import time
 import uuid
 from pathlib import Path
 
-from api_client import api_client
-from test_elasticsearch_contract import ROOT, fixture_bundle
+from test_es_ingest_pipeline import synthetic_prediction
 
-from scoring.score_api import create_app
+from scripts.build_es_ingest_pipeline import ROOT
+from scripts.validate_contracts import validators
 
 IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:9.5.4"
 BASE = "28a77543bfd67a36b96ddc2f4acc103b13f62c2e"
 FIELDS = ["prediction_scope", "temporal_prediction_enabled", "score_semantics"]
 
 
-def run(output, baseline_ref=BASE):
+def run(output, work, baseline_ref=BASE, distro=None):
     if output.exists():
         raise FileExistsError("Refuse replacing verification evidence")
+    work = work.resolve()
+    if not (work.drive.lower() == "d:" or str(work).startswith("/mnt/d/")):
+        raise ValueError("Lab data/evidence must be on D:")
+    work.mkdir(parents=True, exist_ok=False)
+    mounts = []
+    for name in ("data", "java-temp", "logs"):
+        path = work / name
+        path.mkdir()
+        source = f"/mnt/d/{path.as_posix()[3:]}" if distro else str(path)
+        mounts += [
+            "--mount",
+            f"type=bind,src={source},dst=/usr/share/elasticsearch/{name}",
+        ]
+    docker = (
+        ["wsl", "-d", distro, "--exec", "/usr/sbin/docker"] if distro else ["docker"]
+    )
     template = json.loads((ROOT / "elasticsearch/index-template.json").read_text())
     baseline = json.loads(
         subprocess.check_output(
@@ -37,13 +52,14 @@ def run(output, baseline_ref=BASE):
         )
     )
     difference = copy.deepcopy(template)
+    del difference["template"]["settings"]["index.final_pipeline"]
     for field in FIELDS:
         del difference["template"]["mappings"]["properties"][field]
-    assert difference == baseline, "Expected only the three additive field mappings"
+    assert difference == baseline, "Expected three additive mappings and final pipeline"
 
     container = subprocess.check_output(
-        [
-            "docker",
+        docker
+        + [
             "run",
             "--detach",
             "--pull=never",
@@ -54,18 +70,24 @@ def run(output, baseline_ref=BASE):
             "--network=none",
             "--cap-drop=ALL",
             "--security-opt=no-new-privileges",
+            "--log-driver=none",
             "--memory=1280m",
             "--memory-swap=1280m",
             "--cpus=2",
             "--pids-limit=512",
-            "--tmpfs",
-            "/usr/share/elasticsearch/data:rw,uid=1000,gid=0,size=512m",
+            *mounts,
+            "-e",
+            "ES_LOG_STYLE=file",
+            "-e",
+            "ES_TMPDIR=/usr/share/elasticsearch/java-temp",
             "-e",
             "discovery.type=single-node",
             "-e",
             "network.host=127.0.0.1",
             "-e",
             "xpack.security.enabled=false",
+            "-e",
+            "xpack.ml.enabled=false",
             "-e",
             "ingest.geoip.downloader.enabled=false",
             "-e",
@@ -83,8 +105,8 @@ def run(output, baseline_ref=BASE):
 
     def request(method, path, body=None, expected=200):
         result = subprocess.run(
-            [
-                "docker",
+            docker
+            + [
                 "exec",
                 "-i",
                 container,
@@ -124,22 +146,27 @@ def run(output, baseline_ref=BASE):
 
     try:
         inspection = json.loads(
-            subprocess.check_output(["docker", "inspect", container])
+            subprocess.check_output(docker + ["inspect", container])
         )[0]
         assert inspection["HostConfig"]["NetworkMode"] == "none"
         assert not inspection["HostConfig"].get("PortBindings")
-        assert all(m["Type"] == "tmpfs" for m in inspection["Mounts"])
+        assert len(inspection["Mounts"]) == 3
+        assert all(
+            m["Type"] == "bind" and m["Source"].startswith("/mnt/d/")
+            for m in inspection["Mounts"]
+        )
         evidence["isolation"] = {
             "network": "none",
             "published_ports": [],
-            "persistent_mounts": [],
+            "persistent_mounts": inspection["Mounts"],
+            "container_id": container,
         }
         evidence["image_id"] = inspection["Image"]
         deadline = time.monotonic() + 180
         while True:
             ready = subprocess.run(
-                [
-                    "docker",
+                docker
+                + [
                     "exec",
                     container,
                     "curl",
@@ -156,39 +183,22 @@ def run(output, baseline_ref=BASE):
             )
             if ready.returncode == 0:
                 evidence["server"] = json.loads(ready.stdout)
+                assert evidence["server"]["version"]["number"] == "9.5.4"
                 break
             if time.monotonic() >= deadline:
                 raise TimeoutError("Disposable ES did not start within 180 seconds")
             time.sleep(1)
 
-        with tempfile.TemporaryDirectory() as directory:
-            manifest = fixture_bundle(Path(directory))
-            documents = {}
-            evidence["api_exchanges"] = []
-
-            async def collect_predictions():
-                async with api_client(create_app(manifest)) as client:
-                    payload = json.loads(
-                        (ROOT / "contracts/examples/valid/telemetry.json").read_text()
-                    )
-                    for kind in ["lab_fixture", "smb_csv"]:
-                        payload["source"] = {
-                            "kind": kind,
-                            "uri": "fixture://es-contract",
-                            "record_ref": "synthetic-row-1",
-                        }
-                        response = await client.post("/predict", json=payload)
-                        assert response.status_code == 200, response.text
-                        documents[kind] = response.json()
-                        assert documents[kind]["anomaly_alert"]
-                        evidence["api_exchanges"].append(
-                            {
-                                "request": copy.deepcopy(payload),
-                                "response": documents[kind],
-                            }
-                        )
-
-            asyncio.run(collect_predictions())
+        documents = {}
+        for kind in ("lab_fixture", "smb_csv"):
+            document = synthetic_prediction()
+            document["source"]["kind"] = kind
+            validators(ROOT / "contracts")["prediction"].validate(document)
+            documents[kind] = document
+        evidence["fixtures"] = {
+            "kind": "constructed contract documents, NOT API inference",
+            "documents": documents,
+        }
 
         # Install old template, create one existing index, and reproduce the failure.
         document = documents["lab_fixture"]
@@ -200,6 +210,11 @@ def run(output, baseline_ref=BASE):
         assert "strict_dynamic_mapping_exception" in json.dumps(error)
 
         # Updating the template alone must not silently fix that existing index.
+        request(
+            "PUT",
+            "/_ingest/pipeline/cnc-prediction-v1",
+            json.loads((ROOT / "elasticsearch/ingest-pipeline.json").read_text()),
+        )
         request("PUT", "/_index_template/cnc-contract-test", template)
         request("PUT", document_path, document, expected=400)
         additive = {
@@ -226,12 +241,37 @@ def run(output, baseline_ref=BASE):
                 assert request("GET", path)["_source"] == document
                 assert request("GET", f"/{index}/_count")["count"] == 1
                 unknown = {**document, "unexpected_contract_field": True}
-                error = request("PUT", path, unknown, expected=400)
-                assert "strict_dynamic_mapping_exception" in json.dumps(error)
                 nested = copy.deepcopy(document)
                 nested["source"]["unexpected_contract_field"] = True
-                error = request("PUT", path, nested, expected=400)
-                assert "strict_dynamic_mapping_exception" in json.dumps(error)
+                # The final guard runs before mapping, including pipeline=_none.
+                for value in (unknown, nested):
+                    rejected = f"/{index}/_doc/guard-rejected"
+                    error = request("PUT", rejected + "?pipeline=_none", value, 400)
+                    assert error["error"]["type"] == "script_exception", error
+                    reason = error["error"]["caused_by"]
+                    assert reason["type"] == "illegal_argument_exception", error
+                    assert reason["reason"] == (
+                        "CG18 unknown field: unexpected_contract_field"
+                    ), error
+                    assert request("GET", rejected, expected=404)["found"] is False
+                    assert request("GET", path)["_source"] == document
+                # Isolate strict mapping rather than attributing a guard error to it.
+                strict = index + "-strict"
+                request(
+                    "PUT", "/" + strict, {"settings": {"index.final_pipeline": "_none"}}
+                )
+                settings = request("GET", f"/{strict}/_settings")[strict]["settings"]
+                assert settings["index"]["final_pipeline"] == "_none"
+                control_path = f"/{strict}/_doc/mapping-rejected"
+                for scope, value in (("_doc", unknown), ("source", nested)):
+                    error = request("PUT", control_path, value, expected=400)
+                    assert "strict_dynamic_mapping_exception" in json.dumps(error)
+                    assert error["error"]["type"] == "strict_dynamic_mapping_exception"
+                    assert "[unexpected_contract_field]" in error["error"]["reason"]
+                    assert f"within [{scope}]" in error["error"]["reason"]
+                    assert "CG18 unknown field" not in json.dumps(error), error
+                    assert request("GET", control_path, expected=404)["found"] is False
+                assert request("GET", f"/{strict}/_count")["count"] == 0
                 invalid_type = {
                     **document,
                     "temporal_prediction_enabled": "invalid-boolean",
@@ -242,7 +282,7 @@ def run(output, baseline_ref=BASE):
     finally:
         # Only remove the exact container ID created above, including on failure.
         subprocess.run(
-            ["docker", "rm", "--force", container], check=True, capture_output=True
+            docker + ["rm", "--force", container], check=True, capture_output=True
         )
         evidence["container_removed"] = True
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -259,5 +299,8 @@ if __name__ == "__main__":
         "--output", type=Path, default=ROOT / "outputs/es-contract/live.json"
     )
     parser.add_argument("--baseline-ref", default=BASE)
+    parser.add_argument("--work-dir", required=True, type=Path)
+    parser.add_argument("--docker-via-wsl")
     args = parser.parse_args()
-    run(args.output, args.baseline_ref)
+    os.environ.setdefault("PYTHONDONTWRITEBYTECODE", "1")
+    run(args.output, args.work_dir, args.baseline_ref, args.docker_via_wsl)
