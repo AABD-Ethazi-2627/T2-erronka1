@@ -1,6 +1,6 @@
 # Dependency Refresh Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Fix the approved dependency findings and deliver one PR with a complete, evidence-backed lock review.
 
@@ -31,11 +31,11 @@
 
 **Interfaces:** Produces the `runtime` dependency group and deterministic `python -m scripts.export_runtime --check` command, consumed by the image and CI.
 
-- [ ] Compare candidate release metadata/notes and run numerical/API candidate checks in separate environments.
-- [ ] Add meaningful export-drift, complete-transitive and hash requirements tests; run them before implementing the export command.
-- [ ] Select compatible direct updates, regenerate the lock and hashed runtime export.
-- [ ] Run framework, columnar, model serialization and export checks. Expected: passing contracts or a documented reason to retain the scientific baseline.
-- [ ] Commit the selected Python/runtime changes and record evidence.
+- [x] Compare candidate release metadata/notes and run numerical/API candidate checks in separate environments.
+- [x] Add meaningful export-drift, complete-transitive and hash requirements tests; run them before implementing the export command.
+- [x] Select compatible direct updates, regenerate the lock and hashed runtime export.
+- [x] Run framework, columnar, model serialization and export checks. Expected: passing contracts or a documented reason to retain the scientific baseline.
+- [x] Commit the selected Python/runtime changes and record evidence.
 
 ### Task 2: Update the active infrastructure and retire unsafe entry points
 
@@ -43,11 +43,11 @@
 
 **Interfaces:** Consumes Task 1's hashed runtime export; produces pinned official images and an explicitly disabled historical template.
 
-- [ ] Resolve published digests for Elastic 9.5.5, Kafka 4.3.1, NiFi 2.12.0 and Python 3.11.16 slim; record references.
-- [ ] Update images, active flow bundles and runtime build, preserving historical exports/evidence.
-- [ ] Make historical Compose require an explicit archival-use override; verify the default cannot start it.
-- [ ] Validate Compose paths and isolated image/flow/contract smokes. Expected: compatible new configuration, no use of existing state.
-- [ ] Commit infrastructure and documentation changes.
+- [x] Resolve published digests for Elastic 9.5.5, Kafka 4.3.1, NiFi 2.12.0 and Python 3.11.16 slim; record references.
+- [x] Update images, active flow bundles and runtime build, preserving historical exports/evidence.
+- [x] Make historical Compose require an explicit archival-use override; verify the default cannot start it.
+- [x] Validate Compose paths and isolated image/flow/contract smokes. Expected: compatible new configuration, no use of existing state.
+- [x] Commit infrastructure and documentation changes.
 
 ### Task 3: Prevent stale dependencies and publish the complete assessment
 

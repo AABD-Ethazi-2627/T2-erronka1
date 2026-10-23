@@ -18,9 +18,10 @@ from pathlib import Path
 from test_es_ingest_pipeline import synthetic_prediction
 
 from scripts.build_es_ingest_pipeline import ROOT
+from scripts.image_inventory import image
 from scripts.validate_contracts import validators
 
-IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:9.5.4"
+IMAGE = image("elasticsearch")
 BASE = "28a77543bfd67a36b96ddc2f4acc103b13f62c2e"
 FIELDS = ["prediction_scope", "temporal_prediction_enabled", "score_semantics"]
 
@@ -183,7 +184,7 @@ def run(output, work, baseline_ref=BASE, distro=None):
             )
             if ready.returncode == 0:
                 evidence["server"] = json.loads(ready.stdout)
-                assert evidence["server"]["version"]["number"] == "9.5.4"
+                assert evidence["server"]["version"]["number"] == "9.5.5"
                 break
             if time.monotonic() >= deadline:
                 raise TimeoutError("Disposable ES did not start within 180 seconds")
