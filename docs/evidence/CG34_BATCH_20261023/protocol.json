@@ -1,0 +1,1147 @@
+{
+  "archive_sha256": "457751fac45828b69d6345bb245d62beb8c9c46131e687843801aa7ddd7ad3e0",
+  "study_manifest_sha256": "d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b",
+  "code_sha256": "96a1ea460f46739586f861ba0fdd6f06613ec6f2328b110aee7ceb8ebefd5d40",
+  "adapter_sha256": "78293fa87b0484803d8171206ab951201c1e569ec8f261765e67f101133b74d8",
+  "input_sha256": "f40c4f21017a54ea51f308c7b3ff0317f818138de869a4b2b2eb6ad0350dff0e",
+  "targets_sha256": "266b5f51ed2cdcc412a7336509c87517aaa5857ad9d0ab51887d406ece1eb5a4",
+  "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "old_summary_sha256": "e874fc3fa7e1560d63ba830f2467d8fc4ee1257488f453e489bc6cdff2fb629e",
+  "business_summary_sha256": "d820c7c296297d4723e22bb1d03e369ae06399aef50a8c80aed94606a831f9f4",
+  "files": 507,
+  "events": 5070,
+  "unique_vectors": 2000,
+  "cohorts": {
+    "unmatched": 5070
+  },
+  "eligible_events": 5070,
+  "eligible_unique_vectors": 2000,
+  "input_columns": [
+    "air_temp_K",
+    "process_temp_K",
+    "rpm",
+    "torque_Nm",
+    "tool_wear_min",
+    "machine_type"
+  ],
+  "excluded_columns": [
+    "timestamp",
+    "machine_id",
+    "machine_failure",
+    "failure_TWF",
+    "failure_HDF",
+    "failure_PWF",
+    "failure_OSF",
+    "failure_RNF",
+    "_source_file",
+    "_file_row"
+  ],
+  "sensor_ranges": {
+    "air_temp_K": {
+      "train_min": 295.3,
+      "train_max": 304.5,
+      "batch_outside_train_range": 0
+    },
+    "process_temp_K": {
+      "train_min": 305.7,
+      "train_max": 313.8,
+      "batch_outside_train_range": 0
+    },
+    "rpm": {
+      "train_min": 1168.0,
+      "train_max": 2861.0,
+      "batch_outside_train_range": 0
+    },
+    "torque_Nm": {
+      "train_min": 4.6,
+      "train_max": 76.2,
+      "batch_outside_train_range": 0
+    },
+    "tool_wear_min": {
+      "train_min": 0.0,
+      "train_max": 253.0,
+      "batch_outside_train_range": 0
+    }
+  },
+  "fixed_model": {
+    "name": "rf_final_5600",
+    "path": "D:\\cnc-guard-research\\study-20261023-v2\\analysis-v2\\packages\\rf_reference.joblib",
+    "sha256": "34a14ab97a0e1facc4f4eff10b7ed9227516cc853d7400abd351ccef17cffe72",
+    "fit_n": 5600
+  },
+  "outer_artifacts": [
+    {
+      "model": "ada_depth1",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\1f32638d2063b657c328700c9e5f11f8e45fc43419c924887bcb5f42c3c048d5\\model.joblib",
+      "sha256": "fc3ae73eb2983b9fdd2b09892fa697ce1e4d19ed6790eb2fefa16e78ac1f36d9",
+      "fit_n": 3733
+    },
+    {
+      "model": "ada_depth1",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\620c33cc67e8d746e579fdee6ceebf00f5e6a039eed0b9d0da62ca5f76b79e57\\model.joblib",
+      "sha256": "05a2551821917621cb2a1080ca338d0ef0e1303f7de640070a352d1f6753793a",
+      "fit_n": 3733
+    },
+    {
+      "model": "ada_depth1",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\f661b56e3c8bebf1e4863630820fb9d492784194e33e8aa37d92f88e04b21dfd\\model.joblib",
+      "sha256": "28f603244e6fdb89cece8a7baab55582a547ff4cf489d03b7432a5046001d7af",
+      "fit_n": 3734
+    },
+    {
+      "model": "ada_depth2",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\e4208456c7e4ec5b8e73f0da2bc3b477c2ccfbdd7ddf9b845647a01b2fa92c00\\model.joblib",
+      "sha256": "94d77c9c99f4df1012c8c8964b5b45be608468b354bdcbf6813cdbf5b79c70ff",
+      "fit_n": 3733
+    },
+    {
+      "model": "ada_depth2",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\75f00a4f5defda9a67ef8731ca940d77c86502a5fef987f0a1a2eb25d37871c5\\model.joblib",
+      "sha256": "81be14e50595c10bcba2c75ce7d8f840c02735d268d7e34ecc4fe2c817c6d4af",
+      "fit_n": 3733
+    },
+    {
+      "model": "ada_depth2",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\fd7fbb0d82841c756f97a5724697153afb2b36223a0b87a72248279ea854bebb\\model.joblib",
+      "sha256": "e101299a75f82536637c43b5b3f468c810ee6a92d0dca4abeb89b3faf3f4e3a2",
+      "fit_n": 3734
+    },
+    {
+      "model": "ae2",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\43452f7419fe4598215c4e56f92c86bd6df60324a04fc07818ca2890d0b33597\\model.joblib",
+      "sha256": "63e7e253b45851b9854c7fa31177fc582e815999e2e33c5c1544b732e4768336",
+      "fit_n": 3733
+    },
+    {
+      "model": "ae2",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\456c3cf637016c92e7c4fc4a771fb1a240d341d4efd55496d47c906a57b331ed\\model.joblib",
+      "sha256": "aef21d8179103b5e3034684f6b980231dd445545356baed06878ea0c6f255106",
+      "fit_n": 3733
+    },
+    {
+      "model": "ae2",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\31374c047738f1ea75a00d1fdcbc4f54e276a42e2a2b6df3ac7a2c103c494119\\model.joblib",
+      "sha256": "223f190832dd074490ae0686b7c218a253d6f3362631db9bafbd7bde9c5d3042",
+      "fit_n": 3734
+    },
+    {
+      "model": "ae3",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\a254791b201dbf9c3adb8939683506e068ce44c936cd01d905d9dcad2fcb69a9\\model.joblib",
+      "sha256": "a1f3b364a47eb603616b3da9d5f941d0b6cec9b54cc808bd44548aa1136d2856",
+      "fit_n": 3733
+    },
+    {
+      "model": "ae3",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\126bcf33d38661a42ce495c1ff8ac4a18dca640e9b7b02a455847f1233e82cea\\model.joblib",
+      "sha256": "50f90523cf62b7d89d134e652b3af3c04b733854154cd1bbd487583149a96544",
+      "fit_n": 3733
+    },
+    {
+      "model": "ae3",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\a0ab1bf63352ed34985140bcb2236b31e5480b1efdc7b6f25c9755f9bd6a6355\\model.joblib",
+      "sha256": "8e3686e9d409730fb128081a3dd23269bf7395152dbc5bf349c429ae702e7444",
+      "fit_n": 3734
+    },
+    {
+      "model": "always0",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\70d34f3861739329e0af29b11753a3d2fb3b5b26825bb910865df2abd8eff99e\\model.joblib",
+      "sha256": "5da14c0f01d204c88c9480cfe20b41fd01574fc0230ca0b292f60ee2d1b17965",
+      "fit_n": 3733
+    },
+    {
+      "model": "always0",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\9a3ff253271b302d75e3507e5cf192d961304bf7fa5d23db4111134cd875cc84\\model.joblib",
+      "sha256": "09445fd0524e4ced143b4d900dd936f6fe8313d4bef725805d3d85472dee3443",
+      "fit_n": 3733
+    },
+    {
+      "model": "always0",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\1d69aac7c7a11a263a2d013d60950e8752466be700db709978416578dfd7244a\\model.joblib",
+      "sha256": "034621cab8d645ce42819db2e1fe027343e477db1bc85d74b57fa1c4391079a1",
+      "fit_n": 3734
+    },
+    {
+      "model": "always1",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\9390f4562a019282b0bc1705e6126fc76cbc65faea27da39fe1e5fd4583537d0\\model.joblib",
+      "sha256": "12e17235ea1f563f96d6b7649a9e691226d1e920be8a20f3b6c311deab10f739",
+      "fit_n": 3733
+    },
+    {
+      "model": "always1",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\b7393075742d69aef70c2f07c2fc25912f20b76de2f53cfc287be3e31ac16b64\\model.joblib",
+      "sha256": "2c759a23c9bfd9875fb5c38d205a5d38815066ae2ca1ff5cf2dc89165e781c0d",
+      "fit_n": 3733
+    },
+    {
+      "model": "always1",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\c4b7382ac4d8bf0f007ed4430a98c01dd63578f4ea92dd5a6617ea34d47a5c87\\model.joblib",
+      "sha256": "50556669c63f3906d3564cfe9873e8eef72b2028008fee13828f90a604491b21",
+      "fit_n": 3734
+    },
+    {
+      "model": "cart_depth3",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\6b1a89d557a41b788a81b0cef3bfda199a338c24cb80291f9273a702c4e40509\\model.joblib",
+      "sha256": "eec4d3b7cc7dc93326a10abb24b724102747a5828ecbf1540e119eac1455c03e",
+      "fit_n": 3733
+    },
+    {
+      "model": "cart_depth3",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\406d97d10428757aaaec7fdb6fc3712d134ca9dfe1a820b4c142f862b32fb631\\model.joblib",
+      "sha256": "4890e15f25f262dcbdf0998e8643d7e6a4a05e2099166620b44c87ff6329064e",
+      "fit_n": 3733
+    },
+    {
+      "model": "cart_depth3",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\e546e112004bcda8f22ca187af2a59b92676b993d36c45f82171965ebc732dfb\\model.joblib",
+      "sha256": "0e519eeaf600cfc5998156cd8ae2524673cf32fac42d9ac1199bce50d990b3de",
+      "fit_n": 3734
+    },
+    {
+      "model": "cart_depth5",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\eb0d5a6576dbcd12a9accd749da65ac69d034a7617f4eb54771d219d717d4677\\model.joblib",
+      "sha256": "eeac6d6e7e7a56506dd1f763628963000e1800dbd12cdfef8ae364d273c284a1",
+      "fit_n": 3733
+    },
+    {
+      "model": "cart_depth5",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\0c8b50c5dedb5aff6104794be1585c372df9fac5220056b87ee2bcac499751e2\\model.joblib",
+      "sha256": "21b6a8bf9440f67274fa2da60f7b192644fa816d8e8c2299a107314ed949d214",
+      "fit_n": 3733
+    },
+    {
+      "model": "cart_depth5",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\e887f1b4dc27b0a042b99c4042e15943a52e3c608ac59c08c3cec0e76dddccbb\\model.joblib",
+      "sha256": "8a6d0623ae1b1e6e19e5ad56d03ffdbbe8807f99131679bbc9ebd07fbd438835",
+      "fit_n": 3734
+    },
+    {
+      "model": "cart_depth8",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5065a6a1cd545266edcc93145e6c593d9520b52bdab237b1a99a327d7604a1e6\\model.joblib",
+      "sha256": "00f0001ab61e4636fc5936160b454be6623f057f8aea26b6a1bdf1d4b7b5b9c1",
+      "fit_n": 3733
+    },
+    {
+      "model": "cart_depth8",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\80b1fe80417689f07780230f7616de9068cd06e5396a25d9c39776dfddcc7705\\model.joblib",
+      "sha256": "29920b8460371e0fa577c60c5d78c26bae95596c7cd57b2c3c9bd933be07974c",
+      "fit_n": 3733
+    },
+    {
+      "model": "cart_depth8",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\104037f031c308980152e85a262899f753a6a0a13f801235d29da8e92211565c\\model.joblib",
+      "sha256": "d25c4ff5fff62c8118f32753e44410ceaeac57507079c393db8ed6238ff31ff8",
+      "fit_n": 3734
+    },
+    {
+      "model": "cat_d4_False",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\0ae485b82151920454e65ce87fe8684cc030288948086bea5ce50c5fbc031d4e\\model.joblib",
+      "sha256": "5c25211e288b5c2fc2cc62efb6067da66399bf309f364a05a7e20d882c5cff01",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d4_False",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\595a4f047b255a2e0da23e7a79990e8501c65f60aac94a7546eac04c6eb262ac\\model.joblib",
+      "sha256": "8d46dba6cf87b732bc5b003dc44eb06b42549924e7da03210398a7af98fd51c8",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d4_False",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3048678cce0e8d93e7ee9333aca2d68ee94573d38621e80464976c460633e951\\model.joblib",
+      "sha256": "c1750914821a4de3934c163a335598f784da1a9e44e44c0b12e80400aa704b6f",
+      "fit_n": 3734
+    },
+    {
+      "model": "cat_d4_True",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\9ea4705efb9303a524d6a731268a337f616c8a23f2811135036cb4431cb742a7\\model.joblib",
+      "sha256": "ba7fa3d2c72d7ac23b1d70c472cfb561346ddce2c88c10e54b8f883129ee7dd7",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d4_True",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\c41c100d662cec3a0c35a91562fab3ca0f5b05af57e136be2d5d569254046bf4\\model.joblib",
+      "sha256": "c1b956eea9e5faefcfb9c246d034a26a3190a29f545272a80118b4bc694049f9",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d4_True",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5586ff80a134f62bc009d18346a23de230299ea43a614326c3fc4797ff2b8414\\model.joblib",
+      "sha256": "6f8f5e83a40d9f0a855686e3315fef22afbec6b4b3d811e73a531ce851f8605e",
+      "fit_n": 3734
+    },
+    {
+      "model": "cat_d6_False",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\04b76cd59057a11209fa9cd4d2105cd7213413302e8cee5854b8d5d1ce09887b\\model.joblib",
+      "sha256": "786d64d33ae556a495245876bc0cef848ee1cd011e5a262c2aeec6a1df0c5258",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d6_False",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\23d648b618aef1089c797611d8166ca0082b231434a92288958df054bdd1e724\\model.joblib",
+      "sha256": "7cb8641310284a556f9d024911dfe33e5198d36ba66f8c04ca21b953f7058a8c",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d6_False",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\23e91c5b7616c6754d12a5475d507a47b3e82140cfc2db0730ca0605be0d88ac\\model.joblib",
+      "sha256": "1b12ef57f7034913ecdad2573623c1de8995583393519894771d87f973ba7d38",
+      "fit_n": 3734
+    },
+    {
+      "model": "cat_d6_True",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\6ee8868fd8206751339123963edae9a41c1fb833bc3730e406a155b103445f29\\model.joblib",
+      "sha256": "b1b92ddd8f3ca5a5d7dec4b467eb5d25f7aa3864e6d67081a0f22b5185cc7727",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d6_True",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\f5ef866f5f5835207fafb187f0ae8d83497bcf58b1de54586b6b83c7d1ec9837\\model.joblib",
+      "sha256": "773c7da4c82fed449cbbdcc336d4d5f26e059427927310384748cdb8245e75d4",
+      "fit_n": 3733
+    },
+    {
+      "model": "cat_d6_True",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\c9ab786f66959e925639cc247fcb00e2ff85cdf8cfd48ef7dd5d3b68e623583f\\model.joblib",
+      "sha256": "029b70e887f02f815f3fd08642a96656bbabc01d88f3df412552afe9d6ecf9f7",
+      "fit_n": 3734
+    },
+    {
+      "model": "ebm_0",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\943e8534afee4f3e1660db28c4607389a1e352ff987d6b026c54d9f5dc81d296\\model.joblib",
+      "sha256": "0e544c1fdfe134673dd3a826c381b61b343d9c17c3d681798dbb76544ca884fe",
+      "fit_n": 3733
+    },
+    {
+      "model": "ebm_0",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\c7028bf6e93b64abdf6b4b257affc063fe4d814d04e2ad4c0a45d0c73ad548bf\\model.joblib",
+      "sha256": "edf8a236a657e760de3d769daebf3bf476e3b40f6d4612c57032bee05fca8ca3",
+      "fit_n": 3733
+    },
+    {
+      "model": "ebm_0",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\59db64b37919ae08c77a5e809a1df3c6919fc084fb1eda9d59a55802d4b33a81\\model.joblib",
+      "sha256": "d8a9748d2b68745123b76daabbd2e87a42a5e7050f04a1a215d09333421c45cd",
+      "fit_n": 3734
+    },
+    {
+      "model": "ebm_3",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\9ec8c41727793db90274d391e5b9dc7dd848f078c5f9f01b443bf72bf4b921b3\\model.joblib",
+      "sha256": "37595e4e30837842cf994c54864410920b05bb6607b1b83e5b04e54b21e9e3f6",
+      "fit_n": 3733
+    },
+    {
+      "model": "ebm_3",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\4ed79a479c695a22837c3702428cd7794e1b1c8a9e646fde06092491b91343e3\\model.joblib",
+      "sha256": "c86548490a9613eff4493277379cb4711514b2dca0ccdbe18cd48773d0223bd5",
+      "fit_n": 3733
+    },
+    {
+      "model": "ebm_3",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\af104897553a3bc1e5e4dd2cbf3be867ef23170398c952dc3a4b5d37d8bd9b37\\model.joblib",
+      "sha256": "86a84759f70d9925555160133ef23a9954c4bd8c9e743719fa49404582d89748",
+      "fit_n": 3734
+    },
+    {
+      "model": "gam_3",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\42f53ffac7fd593e9c3e37a1004f5b91c6ba620630be8f65776284b58aafe05b\\model.joblib",
+      "sha256": "736d4c619061f8bb78447f77bc1b84a8502904b39ed689f5142945dd5b9dc60b",
+      "fit_n": 3733
+    },
+    {
+      "model": "gam_3",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\acc4c4f69952ce9abcebb2d3b391f7e17c02bcc5655bdd847d30d082cf02e156\\model.joblib",
+      "sha256": "c5b522e91f9a9936681914271ca375db2f7de827892d2b3d2dc4dc39c0ed668a",
+      "fit_n": 3733
+    },
+    {
+      "model": "gam_3",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\2e10aa7d66a5eb1ab360d21bdf1840e4cdd0c89afb4e9085d7507b2e476b4622\\model.joblib",
+      "sha256": "fb287d77807d2e1d5e3104a87ff384c60260fe4e9bee01ddefa3214a733db5e3",
+      "fit_n": 3734
+    },
+    {
+      "model": "gam_5",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\9275f7bede932936e3fadb951b97558487039ff00305597f2027b02b4a7c2747\\model.joblib",
+      "sha256": "72aedbe2932b25066c6e68016a2bd2379b60fa9383ecba018903cce1ddf0d5c5",
+      "fit_n": 3733
+    },
+    {
+      "model": "gam_5",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\18b68cb0e2bb3ef09531a55228df8684c6ad24cbad3d0060caa0f68e9fb375cd\\model.joblib",
+      "sha256": "39464b7793a0e75abab9eba74f082ba966e914860aba65f268ee16ea5350674a",
+      "fit_n": 3733
+    },
+    {
+      "model": "gam_5",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\0d1828b18d8a89c52a82f6444f117aae02889deb95d28a885fcdf88b05b8eccf\\model.joblib",
+      "sha256": "929e4c6b29a206348071e9748d1e23f1c15bef6003e53af42aff77e2209b4268",
+      "fit_n": 3734
+    },
+    {
+      "model": "gb_depth3",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\524c261e9841b2f51b33be3a648657db76a8433ba6ca3ce24221d1b8b4420715\\model.joblib",
+      "sha256": "4f9a0876858922c3d5333cb520e150d929bae00a991c979599ef226e869ecab2",
+      "fit_n": 3733
+    },
+    {
+      "model": "gb_depth3",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\bf12670507ce73a94e53445be432c7c60989a72c9b9a54917d3668d85a84e96d\\model.joblib",
+      "sha256": "0afd4397b1682c2f82109dfe8f582705ed9e26d14d26b253e5ff04940bc73489",
+      "fit_n": 3733
+    },
+    {
+      "model": "gb_depth3",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\ffcf5aeb014b586090e409217bb7706869804834601837ebb591e291e177a40c\\model.joblib",
+      "sha256": "6a08239fae406a7b7bfd680c551da8ce6f173bcd51e9fb0059cae7ac4cc7d937",
+      "fit_n": 3734
+    },
+    {
+      "model": "gb_no_derived",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\47a3bf29995abaf909294551cd87ef952169d944eb45d24a7f2c0684942019d7\\model.joblib",
+      "sha256": "f1671ec2aea6532f1d74c1b879750db28e834f8762b0c1aa2a964d9d7b5df0c7",
+      "fit_n": 3733
+    },
+    {
+      "model": "gb_no_derived",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\39b32e4935b26969aa513c645d88fb5b4066dd06577b8ae55abfa41c133dd149\\model.joblib",
+      "sha256": "73e8262607696f24b787b8705fb1a44c68c2e7682c74d608de2b9dd0e0d68603",
+      "fit_n": 3733
+    },
+    {
+      "model": "gb_no_derived",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5e4117dde4e37f9be172dc80850dca3997a4174ab5f03e3a4b8f906f9fea3c76\\model.joblib",
+      "sha256": "4d5cdffe2803fdfe06f2dd12e649014fe9d7f486c6eb0e83b6211a269608e6be",
+      "fit_n": 3734
+    },
+    {
+      "model": "hist_reference",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\09976e58fd7c25564a15a3bbda4f2b260721304aa4c6d7c08aef685f980edf90\\model.joblib",
+      "sha256": "dc27af907137baca4dc36d8d3c803cb003ca6f27998abe2031f7ebd708080561",
+      "fit_n": 3733
+    },
+    {
+      "model": "hist_reference",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\2c99540e8c03a24e92bd9139184999090ec80d92ce8df87e3b5eaa6b5ee3339f\\model.joblib",
+      "sha256": "389d74c7aad31353f42bb16f5c007832338505d335af3c4736e908338249f3c4",
+      "fit_n": 3733
+    },
+    {
+      "model": "hist_reference",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\74d7671cd7b6569ffd9d5aa47e9c736de4773f544c879b37f7f10acfeb930b63\\model.joblib",
+      "sha256": "53caf3d8b4160c45870678c214bb2ee9c7461b05a4b47d333bd93334285626ce",
+      "fit_n": 3734
+    },
+    {
+      "model": "if_adapted",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\468099efb9b7c9eea06565c275b511a9f8d47390e5c437b7094e03fb6b057428\\model.joblib",
+      "sha256": "cdd21f51674b077bfa76023f6bf2827877a6df3c1f8ffa2c78cf461b48ab5265",
+      "fit_n": 3733
+    },
+    {
+      "model": "if_adapted",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\bcf5b0ef9feabb2d8de2df965c83d649f2ea8d8fd34a4b60d20d5388746f3067\\model.joblib",
+      "sha256": "994279a9942be8f3fb17538c128a7a89f69d4431bc0c06f8a4454f4b4f1f1eda",
+      "fit_n": 3733
+    },
+    {
+      "model": "if_adapted",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\03d094ca8733911d6942a45be1e6d34f17ae69fb3e51d87d3f7c6f0c91322cce\\model.joblib",
+      "sha256": "f1a991c98e28c9799c5f1df94f53514909fee9ffc2d08b208fb8b779e02e5359",
+      "fit_n": 3734
+    },
+    {
+      "model": "knn15",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\f494ba916a48885609c107348e09799152aa8b1b272b3da4f383454cbc2fbc5c\\model.joblib",
+      "sha256": "ed24d37c7b29b89ad3f227e84d4ea5cbf6fabff6715c9749104bac04d6ae5d67",
+      "fit_n": 3733
+    },
+    {
+      "model": "knn15",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\ecda26cf0c6861604f7b7c6cd4b39cdd1d35204b3d0c21a6bdfb880b49a4be49\\model.joblib",
+      "sha256": "7871c56e1de12e3cf9b14432d95d0d4882165c72925f7ca700e86a82bb2a5d7a",
+      "fit_n": 3733
+    },
+    {
+      "model": "knn15",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\a8bcd46fcbe8977774aefbd11d623f6894ae83e159c045cc2d6420eb19c64261\\model.joblib",
+      "sha256": "0ec57bc4a94bfd716bc5a07fa5fc39d150dd2293c83d45339524e69b22c1c391",
+      "fit_n": 3734
+    },
+    {
+      "model": "knn35",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\fa19e7b690941a44df01004b0a448f985c5201cdbb11551e4d0719b310e0e6ff\\model.joblib",
+      "sha256": "0f507529b23f304335bd09a9bf09fe9febf197d2c450fc924a11891eaaf7ab65",
+      "fit_n": 3733
+    },
+    {
+      "model": "knn35",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\d01454868e1f997f83fd226fc1558f0ca79f6439e58a3f93cadddb6984a5d94c\\model.joblib",
+      "sha256": "dc204354838816a81bc70b5aa31dc8a84e8191170b2970d82b7f1e2067980105",
+      "fit_n": 3733
+    },
+    {
+      "model": "knn35",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\703b61cd896da5ef8b3f74bc7d790c4eeea94785514f1fe38b691616b0b4bc5a\\model.joblib",
+      "sha256": "acb7e010603250d6a3c41c58f8cb216f4d9698a1cab9e2adc1d59441fc97f295",
+      "fit_n": 3734
+    },
+    {
+      "model": "knn5",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\740f5751c2884905b90c6adae96f8ebbbc6e97134b8d38c4b41bba5b27809ee7\\model.joblib",
+      "sha256": "235f56308c0488460664fc139cfa51e211036a8284bc59141b129f6901aa4c8f",
+      "fit_n": 3733
+    },
+    {
+      "model": "knn5",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5ac181cef2eb49cd62a8a233aaa6cc8a2d94142c590ef10aeb70d6bba2cc835f\\model.joblib",
+      "sha256": "7abe4eaeeb7c2a43337ffd968af3a96a586433d90e3a160844463e4a0e4898f5",
+      "fit_n": 3733
+    },
+    {
+      "model": "knn5",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\c52dd3c6c63dcc438bef7d8690cc122ace5573770fa2046009400869aed4f802\\model.joblib",
+      "sha256": "c0a177b99c914ad22d9b78fba605b306d4857f98f866e2fd303e384cc18d4a54",
+      "fit_n": 3734
+    },
+    {
+      "model": "lda",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\335070396382b9451416ba8e479b64682e7d593049cc407bc2c3ed77fcad7cb9\\model.joblib",
+      "sha256": "97a8c27d859001e0c2861fecf39a7bb63dea73f2cf2daa0f78ef1b055f7df8f7",
+      "fit_n": 3733
+    },
+    {
+      "model": "lda",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\092a08ec06418aa7e2bce01cf785ea523bfc1dff7fe9943545311e704d41c74a\\model.joblib",
+      "sha256": "871dcf1408772936844d3d86ce3d83301c2e876896a600705908e59bb235d5e1",
+      "fit_n": 3733
+    },
+    {
+      "model": "lda",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\a07b143cba4fc1bf891576611f4f63f0b356d6564ef317278ac11a61c8976817\\model.joblib",
+      "sha256": "c5a3c4f58d68ff03618c97a60e38e208a3fc10e5902991a3ee21ff2be188960d",
+      "fit_n": 3734
+    },
+    {
+      "model": "lgb_15_False",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\31699b205d6d95d256ced127dd9a25e80c6fcae182ad1a65c62e3ae39e8d2bdb\\model.joblib",
+      "sha256": "e34ed432ea61c508447f842810240af7985f50486026dcd87b78316f4ceb8624",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_15_False",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\4ee945e273920a7cd95aa4e3e9bca7b5fddc8afbf923d65f731fbf8ed439bc59\\model.joblib",
+      "sha256": "fa13d074ee6ba4db33e92332a63631a8469597c9b75db9bdcb4e3c30e58dd2b5",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_15_False",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\6cb775aa85ae9e18964620f11bf96fab7e62c23479ff16cca8a90efa2d96410a\\model.joblib",
+      "sha256": "5fa9475db29036f8a99f4766c0fd3b0eada3ce76fabd9e5130d5da8383ac0f29",
+      "fit_n": 3734
+    },
+    {
+      "model": "lgb_15_True",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\1828f24bfaf582d3024cec29fb0a5fa87a5196473f6812c30ca156f46c85f8ae\\model.joblib",
+      "sha256": "0352c7ff2b6da62475cc1bdec14900885991f43aa63dd334cc896180edfefb2f",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_15_True",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\b5bdbecc4537e366612ef94335e3209a8e55a770faaafe6f86b098f11633ae65\\model.joblib",
+      "sha256": "16187ff61c1abe00cd7430d7f593a2c25c41904c4ea7e0f92889f4e84a34a086",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_15_True",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\cf0e833466ec19811716d97ccc1e9f72507b48dfe3b9102eff5906c365a0b5ab\\model.joblib",
+      "sha256": "368b19f2ee19e739588d5dc61929b171f4f3b5c1b8eb5e0e3734245eceef9c70",
+      "fit_n": 3734
+    },
+    {
+      "model": "lgb_7_False",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5148511b92968ac98e4c77c048e09471344d44285eb01d1fcbe0709618df4b32\\model.joblib",
+      "sha256": "1a43b2057f12cbe8e993fe4f17803f76b37131c676b1e4f4bc69b8a962548ce1",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_7_False",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\cbe2a88251e2f68ea58e234430bc761d5c8b88884427600520f7e4c64ef59b84\\model.joblib",
+      "sha256": "ce140ee1a4acfda21d657c7801ee0364184398a4593435f5d823a7e26d606b11",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_7_False",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\de76d61ce7546d7322074e452191c47d508ffdbe977cc91df56f868ef3f12b81\\model.joblib",
+      "sha256": "7f2324b374d992e4f3c866a517831e471900d76050b0ef65285713c9872943a8",
+      "fit_n": 3734
+    },
+    {
+      "model": "lgb_7_True",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3ab4e721c2d18946b4c9c0f7d3f5f80ac798dd37d1b67c7dedff34ee35c4d42e\\model.joblib",
+      "sha256": "30b00b4f6866a3e763d8e952c5be1ba05c8917ffa2a61482d0599857f12edbd9",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_7_True",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\00599143525d29d0060a2dba07f1d91032a0afe178b431d44cd3d628397759a3\\model.joblib",
+      "sha256": "98ec9d0b5a020c32ebe55ac8ca79000e45c2d65482cf569397211e2b4f79c7ba",
+      "fit_n": 3733
+    },
+    {
+      "model": "lgb_7_True",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\431ec1e6771274809e725013bd26301dc6315e0c588b47c0e5dfa0dbb08d1c87\\model.joblib",
+      "sha256": "0f0bf19c04e0f7f6d40c01fa0df555888bd3d494368a47bc0bc872bc48fb7dcb",
+      "fit_n": 3734
+    },
+    {
+      "model": "lof20_adapted",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\d6d7b7f7201d9e9e94128df547fb55ca081d63395cc10f7700bb88bb8d3c14be\\model.joblib",
+      "sha256": "654fa692b91b9c529586ae9db1bedbf1e7ae432eee8f630a7c47c704d64805f0",
+      "fit_n": 3733
+    },
+    {
+      "model": "lof20_adapted",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\42350b868fb6967f37719838455ade77315a5cffa6dbd979a48ab2ba93a19f3d\\model.joblib",
+      "sha256": "78da99fd4fcb526d92b2a852c5f26e77e141cfd3f98edee89c9489b1e3ed1420",
+      "fit_n": 3733
+    },
+    {
+      "model": "lof20_adapted",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\584e143c1f157e76784b89ceef85f61d906e4825986d974c3a0ebc2e5effa5ec\\model.joblib",
+      "sha256": "c4c64c6894351443e1f1c332dbd3c56d9264518868ed7c78a14b328d42bbc440",
+      "fit_n": 3734
+    },
+    {
+      "model": "lof50_adapted",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\a1c838c5ae910ad1d75921eb87fd160345b9376fe7494040b76bade872d543e7\\model.joblib",
+      "sha256": "21152b19e0ab36acd4af676139ffd2a20946f23d06d8af738ec77a0864b389d6",
+      "fit_n": 3733
+    },
+    {
+      "model": "lof50_adapted",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\02b1960a3dc7591e7b579f4252bb8449cb4389d687b51a900aacc8249fa94185\\model.joblib",
+      "sha256": "11cc1e606457bd42e44d3f97ca5cf1c4cfadd4ea6f105685052e88156f6d38da",
+      "fit_n": 3733
+    },
+    {
+      "model": "lof50_adapted",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\793958a0b40c5b1e779e61cbbaf6245eaac016d313aaa86aad36f7f3cd119e01\\model.joblib",
+      "sha256": "d6839cf3942a05caadd4113c4b4680e320e23959e72c19b7392d1d205f790371",
+      "fit_n": 3734
+    },
+    {
+      "model": "logistic_reference",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\7324015ed50fd280e8ac496d1dc657b2b5f08d6ad4a45ae855d314a43618433c\\model.joblib",
+      "sha256": "7a0c6f6d7dc1839f5d8ae93dce9d89ae436da1b92faf837599adc461c3ef3930",
+      "fit_n": 3733
+    },
+    {
+      "model": "logistic_reference",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3112086c76248dfa8e0393def918cf2fca66cf276c4341023de02c6920db109e\\model.joblib",
+      "sha256": "fd447877fcad88c19e4c22afbba7539b9acd0b98bcbd47d3db438b44ca867050",
+      "fit_n": 3733
+    },
+    {
+      "model": "logistic_reference",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\8cd7859e65a8b27175b24c5532b8bd34307972cb8fc2879cb904c340571ab20e\\model.joblib",
+      "sha256": "56071a60ccae28c310cb1b0f24132b90ea6198d74c036e5743b057d966e370f0",
+      "fit_n": 3734
+    },
+    {
+      "model": "mlp_16",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\1029ea59975f5c2253634e48a80a18f6ba8a078166743fe5bf46e99f046e9f41\\model.joblib",
+      "sha256": "aa412a86d2ddfac949137026f06940fe5fa4e0f63aa4fb3a346062c32fb513d4",
+      "fit_n": 3733
+    },
+    {
+      "model": "mlp_16",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\80880256f82454598ba7e39bb087d91d2505090ce502764659222f2580d86b3f\\model.joblib",
+      "sha256": "f9e4b7c7d6cda51adf20eb382d46ed7b318c33c408c872c98dc1f2f54ee7457c",
+      "fit_n": 3733
+    },
+    {
+      "model": "mlp_16",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\648b88648a246a18dff10eaac0b5265645a1252c10cb1b17a766ba22dd8fe93b\\model.joblib",
+      "sha256": "9e3740b42e1720c3d23ec1e6aaff1e0d21c036afda302c4e85a1571136d2230e",
+      "fit_n": 3734
+    },
+    {
+      "model": "mlp_32",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\fa463921e88679f0e0caf5feb841df2c6ad58dddf05a0ef0483fda65335e2229\\model.joblib",
+      "sha256": "cc4dd231e10c172c6e67a4d63c0c1dd97bb3a578f8d246e0d316dce0c9baeda5",
+      "fit_n": 3733
+    },
+    {
+      "model": "mlp_32",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\136a1193db12178e5822d86daaf05bb0edb175086a51b73ad3805d00f151c809\\model.joblib",
+      "sha256": "232201e0b06bb70063c3172eca8dc7826ad307c01cd0bd8a66874b6abb804e98",
+      "fit_n": 3733
+    },
+    {
+      "model": "mlp_32",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\e391c638137238b76bb6485179b9368b67df7c5e14502043f8208455a4337466\\model.joblib",
+      "sha256": "5dd9c6c88c96d20b0466fbdff8a0244418a6ceebdc0ec9835c3332cf3e3a0e89",
+      "fit_n": 3734
+    },
+    {
+      "model": "mlp_32_16",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\91530302eaef4e1e1251a4c20492bce00bd88781374c8a38fd0475d56dd85365\\model.joblib",
+      "sha256": "dfa4f08b7fdd46a92076210c4b76e7bdb7397da4dd7c78d7ac5c3aa258db6e62",
+      "fit_n": 3733
+    },
+    {
+      "model": "mlp_32_16",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3277cd5c7d68918e522a22ffdaac8ff658c5b8730c11fc2100486430bc673e29\\model.joblib",
+      "sha256": "3689698b9be46d63b2a302a2de60de66e933af53f9a015f582b024dbb8b17ecf",
+      "fit_n": 3733
+    },
+    {
+      "model": "mlp_32_16",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\f741990c0bb7a6454f8486f97d0e75903c74aa186b9ea39c9b3986f0fe390121\\model.joblib",
+      "sha256": "024115283bac83fd393f567f8af8c0a5eb6181355a1afcda3d54016288cdb41f",
+      "fit_n": 3734
+    },
+    {
+      "model": "nb_1e-07",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\07c9455f02eca5376da36c4e45039eebea3476c0b59cbe0e47117b12a9b0f2c8\\model.joblib",
+      "sha256": "24344687a75ae682965b0e9fbc0b9f6c77dc908331832137d484752d9ce541b4",
+      "fit_n": 3733
+    },
+    {
+      "model": "nb_1e-07",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\8f883ae9e3912cd9553e8e331fcad3ebe556f2ed406f3bba7b55963ceeec3c4d\\model.joblib",
+      "sha256": "ad77a761eaba2a562b5f6c0aa6b2c8f69034a85eebb8c26b78be7a19da17c2b4",
+      "fit_n": 3733
+    },
+    {
+      "model": "nb_1e-07",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\715d4dfe2ed34ecc24ff05aac5fb7c69423bf8cdec035cecb1101b05d175cbef\\model.joblib",
+      "sha256": "a62579f8f968dc10f22025ae17bb876fefc467063661b86b64677a58fdc3a188",
+      "fit_n": 3734
+    },
+    {
+      "model": "nb_1e-09",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\8086d86c4d358c00aff4feb6883039b29bbeb8d4f8c5b49a5e34cfc626f18236\\model.joblib",
+      "sha256": "609d6a6c721f8d9a52a27563b9d54c3b9c4951f2694132f64684a7016952f66b",
+      "fit_n": 3733
+    },
+    {
+      "model": "nb_1e-09",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3521ddcbfe6cfd0787e67628a8ae2f4b1c45bcea2c8a461d744c1328dbfa7eed\\model.joblib",
+      "sha256": "00946b8ff9f68ccf4a6e4e75e3016454b787a3f4520d679bef39865d6052c77f",
+      "fit_n": 3733
+    },
+    {
+      "model": "nb_1e-09",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\39a99da2ff868cd53b5101adbb8b1bee1f0d735300370ff8a9cee2ac430c1c41\\model.joblib",
+      "sha256": "eda004713d05c5b947c81df081d9974f08164b532372e2c9c0273b3fd856f9ed",
+      "fit_n": 3734
+    },
+    {
+      "model": "ocsvm_001",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5156d5b86f72095b69ba3ef620ec45cd6867cc095d6a7df90568f1e7828432bd\\model.joblib",
+      "sha256": "5d9d7ddc03efad7e08d36fc55f5eec8e43e60bbd8959fd92d9930b8adee1c849",
+      "fit_n": 3733
+    },
+    {
+      "model": "ocsvm_001",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\2905ed42fefa433713d9b7db097db13ab9ce7b34faddcfd27cd4c7d6545f1e8d\\model.joblib",
+      "sha256": "f40aa07defc701e5501ff5b141a95c4a3ffd15f3cf4f7613257bb74bb1fd61cb",
+      "fit_n": 3733
+    },
+    {
+      "model": "ocsvm_001",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\85d73bbecb46e095f497b27c54eb485c68882efb7649e610b6404e3612daec2e\\model.joblib",
+      "sha256": "e8f0e5f6931e9fc8d0dac50961b23040eb3709d7788145bc5837330bf4f9334d",
+      "fit_n": 3734
+    },
+    {
+      "model": "ocsvm_005",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\bf5bfec571105e06e01600523b33a3be20b8449ffbdee8d0e9ba45bd77fe1a00\\model.joblib",
+      "sha256": "261ced490fe006ad8a8927347c671c72226f7d7e8f969332d1afbf7f642c6838",
+      "fit_n": 3733
+    },
+    {
+      "model": "ocsvm_005",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\631e89772a1b3f8388e45fc6edc486b6852258352e44abe76cc5eee2e0d94cd4\\model.joblib",
+      "sha256": "2107c4701b9aa33a51fbe88f972dab261fc246cc18aa27763170383513cdb00a",
+      "fit_n": 3733
+    },
+    {
+      "model": "ocsvm_005",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\333cf2b2c21b19ff2f238ca818db2a2b9ae43418bc5a0e3370140e8f261a4712\\model.joblib",
+      "sha256": "e59472017c6470f8487a7a058481f03c0f74e6a0927d08660883c285b174fb02",
+      "fit_n": 3734
+    },
+    {
+      "model": "pca2",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\297346b34d4d60dbc982e3957e7774da91078b28dca9024c203a24f18d014c5e\\model.joblib",
+      "sha256": "acfa24e27d41f75cef1dcaca5719b50b3cd2eb77b017568fbf028e81aa3a7ea9",
+      "fit_n": 3733
+    },
+    {
+      "model": "pca2",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3c235095730b4ccd4c480f5cb49a9f8275d6f0177aa235ceac0a27a856bb0c74\\model.joblib",
+      "sha256": "440ffaecf563eba47c5ed0b1da289e93b7ebd150d0552edb5806d0ee92883dbc",
+      "fit_n": 3733
+    },
+    {
+      "model": "pca2",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\3b74797694a60cad23d2d62bbe5d2b59cc9f9d9bda49ca398fd3aacdf9b7156e\\model.joblib",
+      "sha256": "0ffe86dc7ff052233540897283dd0a46066873257ca534ec8bc38d1597272a41",
+      "fit_n": 3734
+    },
+    {
+      "model": "pca4",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\19c5da850aa7632bb147664b62392ed4f501add76ed42d85adf34c11a0bc9768\\model.joblib",
+      "sha256": "9d7b4fb79fff9e08aa409d0d8bbfe1259a49287028d0d5df2ee34059391a4af4",
+      "fit_n": 3733
+    },
+    {
+      "model": "pca4",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\e20603aab721bdfbd905685116f5276add0a27359c4777b67af54ed9f8448943\\model.joblib",
+      "sha256": "bd60ae773cb5cbbbb83e675f31c73dc4d491788309185cf05565698e57485e12",
+      "fit_n": 3733
+    },
+    {
+      "model": "pca4",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\92f9cb53d2469572606cfb3b293a47a4803250f42190276d502ce9def2f7abda\\model.joblib",
+      "sha256": "eebf9107462ee32ee2a9813686c3b1bdfdc5f1606e24b5463271eb373b27faad",
+      "fit_n": 3734
+    },
+    {
+      "model": "qda_0.1",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\1ab14b823a6da281127403f3ac10339d9bee1beceb27143f20c6e4e7f3831f38\\model.joblib",
+      "sha256": "023e5bfc46dec000104e6d1798487119ce5a734bf5c02e3f4ec9905744e5796c",
+      "fit_n": 3733
+    },
+    {
+      "model": "qda_0.1",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\460c0561149d8b0ebd91ecc8c425d898226e24654bcb0414de8a970992702085\\model.joblib",
+      "sha256": "3ae3db7cad7fb60c444b71a0855f1a6c725ec37c6cd81504d4c1222a0b5318dd",
+      "fit_n": 3733
+    },
+    {
+      "model": "qda_0.1",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\e4d19db53255951072f5e35c77d2ef472abb0f55431e2c97370a886a952a53d6\\model.joblib",
+      "sha256": "9b2d8dc977852c498038e7a3bdaac808cdfdf1b6a056417d2ace41043766b11f",
+      "fit_n": 3734
+    },
+    {
+      "model": "qda_0.5",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\dc3b369e1931728a3c85c94bde529021148c25fb73b24e1c2da0dfad1db85794\\model.joblib",
+      "sha256": "eaa24a720e85a29e0412f2c1e06a772e4063ee346fdbdd62bf61aea46bda2b78",
+      "fit_n": 3733
+    },
+    {
+      "model": "qda_0.5",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\76bb128fe43d0daec8fe5558ddb972eac95f0c65549233a1f06101e1a9ed0ccd\\model.joblib",
+      "sha256": "5baf65f074102e5df523675fac7f901dc8bb4042cdeeac6ba40498ddefb1eb73",
+      "fit_n": 3733
+    },
+    {
+      "model": "qda_0.5",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\9f999920f9c98de47f9917adfc73931325ae474de12dfa604717e1c110de4e46\\model.joblib",
+      "sha256": "cf5dd5835ea24626e44c8c3581b057febfaa7a39383c7a0670e730adf5a59b64",
+      "fit_n": 3734
+    },
+    {
+      "model": "rf_no_derived",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\defd294f695e42fe201738cf2a3cc8d1f4d4975ed9bbab56711f36d30fe8820c\\model.joblib",
+      "sha256": "34c815c714290ad36fe6b3dc754bd9836cc9c9fbcd31bc646d76b9805804ca80",
+      "fit_n": 3733
+    },
+    {
+      "model": "rf_no_derived",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\6bbae6118e096cb487c00ed58941af3cb377d9cc922524966eca99bcc307cf3f\\model.joblib",
+      "sha256": "339cb6305cb4301c91508e4fc51de0f7c67278c7ea193baf40380ea02e84bb64",
+      "fit_n": 3733
+    },
+    {
+      "model": "rf_no_derived",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\09db3fd98092831fbb69b2583f5bce719e5d478a17ec0ea6c1deb1ea591a5715\\model.joblib",
+      "sha256": "d1af97aa262ada958bdae714986d44cee8cf5c84d56617942fed70c159880370",
+      "fit_n": 3734
+    },
+    {
+      "model": "rf_reference",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\7b8dfe6997337fd2f07f83d6ac878a8b61e954dafdb4b93ebaea5c771e4d98a5\\model.joblib",
+      "sha256": "b2d29acca695d5b441f5504e5cda18aef326e3046be5ae1c133748c0b1016dba",
+      "fit_n": 3733
+    },
+    {
+      "model": "rf_reference",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\fc9c62fafa07ebf16782930feb4a7b18933d511fc9823c8264d9087850a039c7\\model.joblib",
+      "sha256": "bca3496ecfb6e8c24b8848746ecfab9def4a9fdffdec8b59ba858ad2437416d1",
+      "fit_n": 3733
+    },
+    {
+      "model": "rf_reference",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\40ea984ddb12138ee0928b8452206788885e62b52f52d65557640763de8d59bf\\model.joblib",
+      "sha256": "288671c78fef2c77f628ad835fb7b02c3be5911b05286a9256ec5e7b75d8318b",
+      "fit_n": 3734
+    },
+    {
+      "model": "robust_covariance",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\fcce202683350da7d4cb12370696368624b8129faa69dfbd8e7d253f148a61f8\\model.joblib",
+      "sha256": "1cd8b001cafcbfbc4ad12fd883ad7ac2a8f759b5216ec015ac58b5a43f1c0cc8",
+      "fit_n": 3733
+    },
+    {
+      "model": "robust_covariance",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5a4939bfb7e185774b1f99774dab4b503f57d2ff33134e1313ccbbfa94bbc105\\model.joblib",
+      "sha256": "a75c67eea05cd716c9cf71a76917c46fc4be5095fd2e2d25e89c1230c28728e6",
+      "fit_n": 3733
+    },
+    {
+      "model": "robust_covariance",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\57cadbe661b465e0dda79129de01c3276e05e6f914710692f6faa34042f34b00\\model.joblib",
+      "sha256": "01d6fd7a19bb52df4fdf5bff7411b1c8d5232e7e596bd8b402a164c5eaea84d7",
+      "fit_n": 3734
+    },
+    {
+      "model": "xgb_d3_False",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\f2bf786cd60bc0768c1af4b39656649d49c7aba1e5f877e11baf17b78a8b45b6\\model.joblib",
+      "sha256": "3c4274e98d4ee6d5cd18c9f1e837c2cb83ae6509b1110f9f0845e53088d5b568",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d3_False",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\2c150014d1d70e2424da0247b0fd554fe376cb0b8789941c020cd8376631736c\\model.joblib",
+      "sha256": "82277debcca4f3b0cfd3bcfbe7e5d8e10ae6a5d0bd61c7b966cbef959e59c195",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d3_False",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\ee754fec38cf75b6ec42069da1fba9a17c2903a6ca5c3224dad5aded65a66bfb\\model.joblib",
+      "sha256": "b8b4e2202650580dab70491ee5b9f87ad62f078e72273729820f032ed4b35802",
+      "fit_n": 3734
+    },
+    {
+      "model": "xgb_d3_True",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\5958e69558622ba896112dc589fac263c8e7867e66b03ca1453910014ce6b734\\model.joblib",
+      "sha256": "e58ab7adfb7581ff53ea595076d0fb0aee82a26dfd3d1b461f7d7c519287d942",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d3_True",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\dbfd1cfd693228938c165f24cdb0e420866bda0c75429056103bab856ea4b54a\\model.joblib",
+      "sha256": "443c82127820e17f3b293d8875ac4eee35d7528786d734e039833fd46a90379b",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d3_True",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\4cb9c086dbdb17a67cdbb48b11c6cf5cdb182703e1b222f236b655b71e4362b0\\model.joblib",
+      "sha256": "460dae786bab387ced0aab53939dfe3d7590bea2fc0cb331f972c8a4a3a384ba",
+      "fit_n": 3734
+    },
+    {
+      "model": "xgb_d6_False",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\c34b2bc7ddb533386c699b2d704d013a9bc8b3881ca0e943f77f8e0260a54e33\\model.joblib",
+      "sha256": "b8998a31556c29fddd4283613f0f88761b0d10109861b7bd6a9e7a325f0679bc",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d6_False",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\bdea2e87b78d80bd8d4b783f1f1e83295538409b3235d11d49ffebb3f0b31286\\model.joblib",
+      "sha256": "e1f4e76ddfb5b366d6e30520c566486c570c452ea05d77a3549a34378d2fc3fd",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d6_False",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\cfc0cfffceb066f5838f2259cf312ce0b12ac67c52dbdc4a21e6a72689c487cd\\model.joblib",
+      "sha256": "c427737c2916cf2dde53c5683a135fbce97aa8327896f4f6abac9d8b03750139",
+      "fit_n": 3734
+    },
+    {
+      "model": "xgb_d6_True",
+      "outer": 0,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\d0e829873d202f7a07c73504e8c2f68215332e1a3661cbb4ba86e55fa5e517bc\\model.joblib",
+      "sha256": "176817b1824bfcc2a54627ced28180530ca7d5f09bde2b1790aa478c6ba2c5f1",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d6_True",
+      "outer": 1,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\4230ac5217925e3b97187c9c9eefb13c562fc430679d671d372aa21d3554c538\\model.joblib",
+      "sha256": "c49b902bf0774aa2ca02c703bf680f2bb98f14d0eee3d7a97fe73fbe4dac2033",
+      "fit_n": 3733
+    },
+    {
+      "model": "xgb_d6_True",
+      "outer": 2,
+      "path": "D:\\cnc-guard-research\\study-20261023-v2\\units\\b9091f8b65cf6f8251cd735bd638e3510bfcd6d9af25c9a62c218060d0e4ce05\\model.joblib",
+      "sha256": "9e219432292a47d68d6b11f108bef9f6015cfc69d04a4904b947397fd2ebb9dd",
+      "fit_n": 3734
+    }
+  ],
+  "policies": {
+    "fixed": [
+      0.15,
+      0.7
+    ],
+    "research_initial": 0.1599255350951087,
+    "research_business": 0.11899870801033592,
+    "outer_A": "existing inner-learned business threshold per artifact",
+    "anomaly": "existing normal inner quantile 0.99 per artifact"
+  },
+  "cost_eur": {
+    "tp": 300,
+    "fn": 5000,
+    "fp": 200,
+    "tn": 0
+  },
+  "reporting": "event-weighted and one occurrence per unique six-input vector",
+  "model_comparison": "Each of 3 saved outer models is evaluated separately; report range/mean. Not a new ensemble; RF trained on 5600 is reported separately.",
+  "selection": "No fits, calibration, threshold tuning or model selection",
+  "limits": {
+    "timeout_seconds": 300,
+    "rss_bytes": 2147483648
+  }
+}
