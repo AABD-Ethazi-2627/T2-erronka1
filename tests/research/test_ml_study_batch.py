@@ -67,7 +67,7 @@ class BatchTests(unittest.TestCase):
 
     def test_nonfinite_and_unknown_type_are_rejected(self):
         for column, value in [("rpm", np.inf), ("machine_type", "UNKNOWN")]:
-            frame = fixture()
+            frame = fixture().astype({"rpm": float})
             frame.loc[0, column] = value
             with self.assertRaises(ValueError):
                 sanitize(frame)
