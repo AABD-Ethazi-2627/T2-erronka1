@@ -24,6 +24,13 @@ lint/formato, estructura, CG25, catálogo y lock comprobados localmente.
 El runner actual incorpora correcciones de serialización/estilo posteriores;
 no permite reanudar el sello histórico con bytes diferentes. No repetir unidades.
 
-Publicación de rama/PR y comentarios de issues pendiente en este punto de cierre.
-No hacer merge, desplegar ni modificar Project/fechas. Registrar URL del PR en T3.
-Separar CI y revisión humana de estas comprobaciones locales.
+Rama publicada y [PR #90](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/90)
+abierto, revisable y enlazado a este hilo T3. Commit de implementación/evidencia:
+`ddb0386ab907256712c2dbc32429c164697073e1`.
+Las tres CI pasan en ese commit: ML research smoke, Repository layout y Validate
+CNC Guard. El último commit documental tiene su estado propio en el PR.
+#83 actualizado con ejecución, GPU y matriz docente; comentarios #84–#89 y
+#80–#82 publicados y verificados. Referencias en `CG34_20261023/feedback.json`.
+No se cerraron issues ni se cambiaron responsables/fechas del Project.
+No hacer merge o desplegar. Revisión humana, integración, HTTP/E2E y aceptación
+permanecen pendientes; no se necesitan más fits para reproducir la recomendación.

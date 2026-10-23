@@ -310,8 +310,12 @@ bytes originales se conservan. No se reentrenó para corregir esa representació
   --offline` y paridad 50/50 del catálogo actual con el sellado. Los cambios de
   estilo y serialización del runner posterior no alteran fuentes ejecutadas.
 
-La implementación, pruebas locales y evidencia están ejecutadas. La publicación,
-CI, integración y aceptación se registran por separado en el PR. No se atribuyen
+La implementación, pruebas locales y evidencia están ejecutadas y publicadas en
+el [PR #90](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/90), enlazado al hilo.
+Las tres CI pasan en el commit de implementación `ddb0386`; el último head se
+informa en el PR. [Snapshot CI](CG34_20261023/ci-implementation.json) y
+[feedback verificado de issues](CG34_20261023/feedback.json). Integración y
+aceptación permanecen pendientes. No se atribuyen
 firmas, participación individual, ensayo, defensa, entrega o resultados industriales.
 El servicio, SMB/OT, históricos y recursos compartidos no se han operado.
 
