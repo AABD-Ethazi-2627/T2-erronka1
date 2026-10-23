@@ -1,0 +1,38 @@
+[
+  {
+    "repository": "actions/checkout",
+    "version": "v7.0.1",
+    "sha": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "source": "https://raw.githubusercontent.com/actions/checkout/3d3c42e5aac5ba805825da76410c181273ba90b1/action.yml",
+    "runtime": [
+      "using: node24"
+    ]
+  },
+  {
+    "repository": "astral-sh/setup-uv",
+    "version": "v10.3.2",
+    "sha": "07a047e608db84b3d8c06cd9a7c7dcc9c355c18e",
+    "source": "https://raw.githubusercontent.com/astral-sh/setup-uv/07a047e608db84b3d8c06cd9a7c7dcc9c355c18e/action.yml",
+    "runtime": [
+      "using: \"node24\""
+    ]
+  },
+  {
+    "repository": "actions/upload-artifact",
+    "version": "v7.0.2",
+    "sha": "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    "source": "https://raw.githubusercontent.com/actions/upload-artifact/cf430e030ddbb5b0abf93d22962f4752f3646cd9/action.yml",
+    "runtime": [
+      "using: 'node24'"
+    ]
+  },
+  {
+    "repository": "aquasecurity/trivy-action",
+    "version": "v0.36.0",
+    "sha": "ed142fd0673e97e23eac54620cfb913e5ce36c25",
+    "source": "https://raw.githubusercontent.com/aquasecurity/trivy-action/ed142fd0673e97e23eac54620cfb913e5ce36c25/action.yaml",
+    "runtime": [
+      "using: 'composite'"
+    ]
+  }
+]

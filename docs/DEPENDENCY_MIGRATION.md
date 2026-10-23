@@ -86,3 +86,21 @@ consumo, ACK, persistencia ni el grafo completo con datos reales.
 Sus seis servicios requieren el perfil `historical-archive-only`; un arranque sin
 perfil no selecciona ninguno. `scripts.check_lab_compose` solo hace validación
 estática con valores ficticios. No incorporar ese perfil a los comandos activos.
+
+## Auditoría continua
+
+`python -m scripts.audit_dependencies --latest --output reporte-nuevo.json`
+consulta todas las entradas del lock y uv; no sobrescribe reportes existentes.
+Requiere acceso a PyPI. Un error de consulta o una fuente no cubierta falla.
+
+El workflow `Dependency audit` se ejecuta en PR, semanalmente y bajo petición.
+Conserva el JSON completo de cada imagen, incluidos avisos sin parche. El gate de
+la API bloquea HIGH/CRITICAL corregibles; los scans de imágenes oficiales externas
+son informativos sobre vulnerabilidades y fallan si el scanner no puede completar
+el análisis. CI verde no significa que esas imágenes estén libres de CVE.
+No hay despliegue, publicación de imágenes ni auto-merge.
+
+Dependabot propone cambios semanales. Revisar sus releases y scans, sincronizar
+`deploy/images.json` y regenerar el export runtime antes de aceptar. Los paquetes
+Debian y la fecha del snapshot requieren actualización deliberada con un build y
+scan nuevos; sus pins no se actualizan automáticamente con Dependabot.

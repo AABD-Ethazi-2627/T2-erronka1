@@ -55,12 +55,12 @@
 
 **Interfaces:** Consumes the selected lock and runtime export; produces fail-closed audit JSON and recurring validation without deployment.
 
-- [ ] Test active/withdrawn advisories, lookup failures, every source type and complete package coverage before implementing the auditor.
-- [ ] Implement bounded official PyPI queries, local-wheel provenance checks and CI tool inspection; fail on active advisories or incomplete results.
-- [ ] Update pinned CI tooling/actions and add PR/weekly audits, image scans and update proposals.
-- [ ] Write decisions for every original lock entry and each newly introduced package, with sources and measured limits.
-- [ ] Run auditor and workflow/export checks. Expected: no unresolved active advisories and complete coverage, or explicit external-image exceptions supported by provider applicability evidence.
-- [ ] Commit prevention and assessment.
+- [x] Test active/withdrawn advisories, lookup failures, every source type and complete package coverage before implementing the auditor.
+- [x] Implement bounded official PyPI queries, local-wheel provenance checks and CI tool inspection; fail on active advisories or incomplete results.
+- [x] Update pinned CI tooling/actions and add PR/weekly audits, image scans and update proposals.
+- [x] Write decisions for every original lock entry and each newly introduced package, with sources and measured limits.
+- [x] Run auditor and workflow/export checks. Expected: no unresolved active advisories and complete coverage, or explicit external-image exceptions supported by provider applicability evidence.
+- [x] Commit prevention and assessment.
 
 ### Task 4: Validate, review and publish one PR
 

@@ -1,0 +1,543 @@
+{
+  "original_entries": 58,
+  "decisions": [
+    {
+      "name": "annotated-doc",
+      "original": "0.0.5",
+      "latest": "0.0.5",
+      "selected": "0.0.5",
+      "decision": "Conservar actual: documentaci\u00f3n de par\u00e1metros FastAPI. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "annotated-types",
+      "original": "0.8.0",
+      "latest": "0.8.0",
+      "selected": "0.8.0",
+      "decision": "Conservar actual: restricciones de tipos Pydantic. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "anyio",
+      "original": "4.15.1",
+      "latest": "4.15.1",
+      "selected": "4.15.1",
+      "decision": "Conservar actual: concurrencia ASGI/HTTP. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "attrs",
+      "original": "26.1.0",
+      "latest": "26.1.0",
+      "selected": "26.1.0",
+      "decision": "Conservar actual: modelos de referencias JSON Schema. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "catboost",
+      "original": "1.2.10",
+      "latest": "1.2.10",
+      "selected": "1.2.10",
+      "decision": "Conservar actual: alternativa de investigaci\u00f3n, fuera del runtime. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": null,
+      "latest_requires_python": null
+    },
+    {
+      "name": "certifi",
+      "original": "2026.10.19",
+      "latest": "2026.10.19",
+      "selected": "2026.10.19",
+      "decision": "Conservar actual: ra\u00edces CA para clientes HTTP. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.7",
+      "latest_requires_python": ">=3.7"
+    },
+    {
+      "name": "click",
+      "original": "8.5.0",
+      "latest": "8.5.0",
+      "selected": "8.5.0",
+      "decision": "Conservar actual: CLI de Uvicorn. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "cnc-guard-offline",
+      "original": "0.1.0",
+      "latest": "interna",
+      "selected": "0.1.0",
+      "decision": "Retener versi\u00f3n interna 0.1.0: proyecto virtual, no paquete descargado ni candidato PyPI. Se prueba el c\u00f3digo de esta rama.",
+      "selected_requires_python": ">=3.11,<3.13",
+      "latest_requires_python": ">=3.11,<3.13"
+    },
+    {
+      "name": "colorama",
+      "original": "0.4.6",
+      "latest": "0.4.6",
+      "selected": "0.4.6",
+      "decision": "Conservar actual: color de consola en Windows; se audita aunque Linux no lo instale. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7",
+      "latest_requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+    },
+    {
+      "name": "contourpy",
+      "original": "1.3.3",
+      "latest": "1.4.0",
+      "selected": "1.3.3",
+      "decision": "Retener: 1.4 exige Python >=3.12. 1.3.3 mantiene la misma resoluci\u00f3n en 3.11/3.12; Matplotlib 3.11 funciona con ella.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.12"
+    },
+    {
+      "name": "cycler",
+      "original": "0.12.1",
+      "latest": "0.12.1",
+      "selected": "0.12.1",
+      "decision": "Conservar actual: ciclos de estilo de figuras. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.8",
+      "latest_requires_python": ">=3.8"
+    },
+    {
+      "name": "duckdb",
+      "original": "2.0.0",
+      "latest": "2.0.0",
+      "selected": "2.0.0",
+      "decision": "Conservar actual: consulta y verificaci\u00f3n del archivo columnar. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.11.0",
+      "latest_requires_python": ">=3.11.0"
+    },
+    {
+      "name": "fastapi",
+      "original": "0.133.0",
+      "latest": "0.161.1",
+      "selected": "0.161.1",
+      "decision": "Actualizar: correcciones de validaci\u00f3n/aliases y sem\u00e1ntica documentada de JSON null/omitido. Los contratos reales pasan; no se atribuye una mejora de ML ni una CVE inexistente.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "fonttools",
+      "original": "4.67.0",
+      "latest": "4.67.0",
+      "selected": "4.67.0",
+      "decision": "Conservar actual: fuentes de Matplotlib. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "graphviz",
+      "original": "0.21",
+      "latest": "0.21",
+      "selected": "0.21",
+      "decision": "Conservar actual: visualizaci\u00f3n del extra CatBoost. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "h11",
+      "original": "0.16.0",
+      "latest": "0.16.0",
+      "selected": "0.16.0",
+      "decision": "Conservar actual: protocolo HTTP/1.1. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.8",
+      "latest_requires_python": ">=3.8"
+    },
+    {
+      "name": "httpcore",
+      "original": "1.0.9",
+      "latest": "1.0.9",
+      "selected": "1.0.9",
+      "decision": "Conservar actual: transporte de HTTPX. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.8",
+      "latest_requires_python": ">=3.8"
+    },
+    {
+      "name": "httpcore2",
+      "original": "2.12.0",
+      "latest": "2.16.0",
+      "selected": "2.16.0",
+      "decision": "Actualizar con httpx2; resoluci\u00f3n compatible del transporte de pruebas, fuera del runtime.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "httpx",
+      "original": "0.27.0",
+      "latest": "0.28.1",
+      "selected": "0.28.1",
+      "decision": "Actualizar: mantenimiento del transporte y API de cliente. La eliminaci\u00f3n de app/proxies en 0.28 requiere revisar llamadas; el repositorio usa el transporte expl\u00edcito y sus contratos pasan.",
+      "selected_requires_python": ">=3.8",
+      "latest_requires_python": ">=3.8"
+    },
+    {
+      "name": "httpx2",
+      "original": "2.12.0",
+      "latest": "2.16.0",
+      "selected": "2.16.0",
+      "decision": "Actualizar el cliente de desarrollo a su release actual; mantener httpcore2 sincronizado. No entra en serving.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "httpx2-jsfetch",
+      "original": "1.0",
+      "latest": "1.0",
+      "selected": "1.0",
+      "decision": "Conservar actual: adaptador de plataforma del cliente de desarrollo; tambi\u00e9n cubierto. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.12",
+      "latest_requires_python": ">=3.12"
+    },
+    {
+      "name": "idna",
+      "original": "3.20",
+      "latest": "3.20",
+      "selected": "3.20",
+      "decision": "Conservar actual: normalizaci\u00f3n de dominios HTTP. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "imbalanced-learn",
+      "original": "0.12.4",
+      "latest": "0.14.2",
+      "selected": "0.12.4",
+      "decision": "Retener: 0.14.2 adapta compatibilidad a scikit-learn 1.9; la base 0.12.4 es la pareja probada con 1.5. No se prob\u00f3 una mejora de SMOTENC atribuible al cambio.",
+      "selected_requires_python": null,
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "iniconfig",
+      "original": "2.3.1",
+      "latest": "2.3.1",
+      "selected": "2.3.1",
+      "decision": "Conservar actual: configuraci\u00f3n de pytest. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "joblib",
+      "original": "1.5.3",
+      "latest": "1.6.0",
+      "selected": "1.5.3",
+      "decision": "Retener: 1.6 corrige cach\u00e9 de funciones en notebooks e incorpora cloudpickle; ese uso no existe en serving. No justifica cambiar la pareja de persistencia probada.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "jsonschema",
+      "original": "4.23.0",
+      "latest": "4.26.0",
+      "selected": "4.26.0",
+      "decision": "Actualizar: mantenimiento de validadores/referencias; contratos JSON y rechazos de etiquetas inv\u00e1lidas verificados.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "original": "2025.9.1",
+      "latest": "2025.9.1",
+      "selected": "2025.9.1",
+      "decision": "Conservar actual: metaschemas oficiales JSON Schema. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "kafka-python",
+      "original": "3.0.11+cncguard.2",
+      "latest": "3.0.11",
+      "selected": "3.0.11+cncguard.2",
+      "decision": "Retener wheel local .2: upstream 3.0.11 sigue actual. Sus parches de importlib.resources y client_software_version son necesarios para el protocolo. Hash/procedencia y regresiones espec\u00edficos; el feed solo cubre upstream.",
+      "selected_requires_python": ">=3.8",
+      "latest_requires_python": ">=3.8"
+    },
+    {
+      "name": "kiwisolver",
+      "original": "1.5.1",
+      "latest": "1.5.1",
+      "selected": "1.5.1",
+      "decision": "Conservar actual: restricciones de layout de figuras. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "matplotlib",
+      "original": "3.10.1",
+      "latest": "3.11.2",
+      "selected": "3.11.2",
+      "decision": "Actualizar: mantenimiento de renderizado, fuentes/PDF y eliminaci\u00f3n de los warnings anteriores de pyparsing. Las figuras futuras pueden cambiar; no reescribir evidencias hist\u00f3ricas.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "narwhals",
+      "original": "2.27.1",
+      "latest": "2.27.1",
+      "selected": "2.27.1",
+      "decision": "Conservar actual: compatibilidad de dataframes de Plotly. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "numpy",
+      "original": "1.26.4",
+      "latest": "2.5.4",
+      "selected": "1.26.4",
+      "decision": "Retener: 2.5.4 exige Python 3.12. Se prob\u00f3 2.4.6 en 3.11; mismos scores OOF, cambios ABI y dos asserts de repr incompatibles. No se demostr\u00f3 beneficio considerable en este flujo.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.12"
+    },
+    {
+      "name": "packaging",
+      "original": "26.3",
+      "latest": "26.3",
+      "selected": "26.3",
+      "decision": "Conservar actual: comparaci\u00f3n de versiones y tags. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "pandas",
+      "original": "2.2.2",
+      "latest": "3.1.0",
+      "selected": "2.2.2",
+      "decision": "Retener: 3.1 aporta cambios de strings y mejoras de lectura, pero aqu\u00ed cambia el esquema persistido Arrow a large_string. Misma predicci\u00f3n RF; migraci\u00f3n de datos separada.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "pillow",
+      "original": "13.0.0",
+      "latest": "13.0.0",
+      "selected": "13.0.0",
+      "decision": "Conservar actual: im\u00e1genes de Matplotlib. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "plotly",
+      "original": "7.1.0",
+      "latest": "7.1.0",
+      "selected": "7.1.0",
+      "decision": "Conservar actual: figuras del extra CatBoost. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.8",
+      "latest_requires_python": ">=3.8"
+    },
+    {
+      "name": "pluggy",
+      "original": "1.7.0",
+      "latest": "1.7.0",
+      "selected": "1.7.0",
+      "decision": "Conservar actual: plugins de pytest. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "pyarrow",
+      "original": "23.0.1",
+      "latest": "26.0.0",
+      "selected": "23.0.1",
+      "decision": "Retener: 26 trae mantenimiento/funcionalidad columnar, pero su import exige NumPy >=2 incluso cuando los metadatos no lo anticipan. Import aislado con 1.26 falla; necesita migraci\u00f3n conjunta.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "pydantic",
+      "original": "2.14.1",
+      "latest": "2.14.1",
+      "selected": "2.14.1",
+      "decision": "Conservar actual: validaci\u00f3n del contrato API. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "pydantic-core",
+      "original": "2.50.1",
+      "latest": "2.50.1",
+      "selected": "2.50.1",
+      "decision": "Conservar actual: motor binario de Pydantic; mantener pareja compatible. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "pygments",
+      "original": "2.21.0",
+      "latest": "2.21.0",
+      "selected": "2.21.0",
+      "decision": "Conservar actual: presentaci\u00f3n de errores de pytest. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "pyparsing",
+      "original": "3.3.3",
+      "latest": "3.3.3",
+      "selected": "3.3.3",
+      "decision": "Conservar actual: an\u00e1lisis de expresiones de Matplotlib. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "pytest",
+      "original": "9.1.1",
+      "latest": "9.1.1",
+      "selected": "9.1.1",
+      "decision": "Conservar actual: ejecutor de pruebas. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "python-dateutil",
+      "original": "2.9.0.post0",
+      "latest": "3.0.0",
+      "selected": "2.9.0.post0",
+      "decision": "Retener: 3 cambia tzfile/DST y a\u00f1ade tzdata. El contrato usa UTC can\u00f3nico y no se demostr\u00f3 beneficio para esta carga; mantener con pandas 2.",
+      "selected_requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7",
+      "latest_requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+    },
+    {
+      "name": "pytz",
+      "original": "2026.5",
+      "latest": "2026.5",
+      "selected": "2026.5",
+      "decision": "Conservar actual: zonas horarias de pandas 2. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": null,
+      "latest_requires_python": null
+    },
+    {
+      "name": "referencing",
+      "original": "0.37.0",
+      "latest": "0.37.0",
+      "selected": "0.37.0",
+      "decision": "Conservar actual: resoluci\u00f3n de referencias JSON Schema. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "rpds-py",
+      "original": "2026.9.1",
+      "latest": "2026.9.1",
+      "selected": "2026.9.1",
+      "decision": "Conservar actual: estructuras persistentes de referencing. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "scikit-learn",
+      "original": "1.5.0",
+      "latest": "1.9.1",
+      "selected": "1.5.0",
+      "decision": "Retener: 1.9.1 aporta funciones/optimizaciones generales, pero el RF prefijado produce scores id\u00e9nticos. Persistencia entre versiones no est\u00e1 soportada; requiere nuevo bundle y validaci\u00f3n separada.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "scipy",
+      "original": "1.17.1",
+      "latest": "1.18.1",
+      "selected": "1.17.1",
+      "decision": "Retener: 1.18.1 exige Python >=3.12. La base 1.17.1 mantiene ambas versiones de Python; no se observ\u00f3 necesidad de cambiar los kernels num\u00e9ricos.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.12"
+    },
+    {
+      "name": "six",
+      "original": "1.17.0",
+      "latest": "1.17.0",
+      "selected": "1.17.0",
+      "decision": "Conservar actual: compatibilidad de dateutil 2. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7",
+      "latest_requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+    },
+    {
+      "name": "sniffio",
+      "original": "1.3.1",
+      "latest": "1.3.1",
+      "selected": "retirado",
+      "decision": "Retirar: dej\u00f3 de pertenecer a la clausura resuelta de AnyIO/HTTPX seleccionada. No conservar una dependencia hu\u00e9rfana; su versi\u00f3n original tambi\u00e9n se consult\u00f3.",
+      "selected_requires_python": null,
+      "latest_requires_python": ">=3.7"
+    },
+    {
+      "name": "starlette",
+      "original": "1.7.0",
+      "latest": "1.9.0",
+      "selected": "1.9.0",
+      "decision": "Actualizar con FastAPI: correcciones de URL/cabeceras y soporte del cliente de pruebas por streaming. Contratos ASGI y cierre de recursos verificados.",
+      "selected_requires_python": ">=3.11",
+      "latest_requires_python": ">=3.11"
+    },
+    {
+      "name": "threadpoolctl",
+      "original": "3.7.0",
+      "latest": "3.7.0",
+      "selected": "3.7.0",
+      "decision": "Conservar actual: control de hilos BLAS/OpenMP. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "truststore",
+      "original": "0.10.5",
+      "latest": "0.10.5",
+      "selected": "0.10.5",
+      "decision": "Conservar actual: ra\u00edces nativas del cliente de desarrollo. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "typing-extensions",
+      "original": "4.16.0",
+      "latest": "4.16.0",
+      "selected": "4.16.0",
+      "decision": "Conservar actual: tipos de Python compatibles con Pydantic. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.9",
+      "latest_requires_python": ">=3.9"
+    },
+    {
+      "name": "typing-inspection",
+      "original": "0.4.4",
+      "latest": "0.4.4",
+      "selected": "0.4.4",
+      "decision": "Conservar actual: introspecci\u00f3n de tipos de Pydantic. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    },
+    {
+      "name": "tzdata",
+      "original": "2026.5",
+      "latest": "2026.5",
+      "selected": "2026.5",
+      "decision": "Conservar actual: base de zonas horarias en plataformas que la requieren. Sin release nueva ni aviso activo en el feed; compatible en la resoluci\u00f3n congelada y en las suites 3.11/3.12.",
+      "selected_requires_python": ">=2",
+      "latest_requires_python": ">=2"
+    },
+    {
+      "name": "uvicorn",
+      "original": "0.30.1",
+      "latest": "0.54.0",
+      "selected": "0.54.0",
+      "decision": "Actualizar: mantenimiento acumulado de protocolo y ejecuci\u00f3n ASGI. El arranque de la imagen y predict/replay se verifican; no se afirma m\u00e1s capacidad.",
+      "selected_requires_python": ">=3.10",
+      "latest_requires_python": ">=3.10"
+    }
+  ],
+  "added": [
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/opentelemetry-api/1.45.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.45.1",
+      "latest": {
+        "version": "1.45.1",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    }
+  ]
+}
