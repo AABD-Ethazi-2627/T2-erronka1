@@ -11,6 +11,7 @@ import pandas as pd
 from scoring.preparation import SENSORS
 from scripts.ml_study import (
     choose_threshold,
+    execute,
     folds,
     metrics,
     seal,
@@ -21,6 +22,27 @@ from scripts.ml_study_models import CORE, StudyCalibrated, StudyModel, catalog
 
 
 class StudyProtocolTests(unittest.TestCase):
+    def test_driver_accepts_native_paths_and_preserves_budget_stop(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = {
+                "budgets": {
+                    "cpu_hours": {
+                        "screening": 3,
+                        "nested": 8,
+                        "secondary": 2,
+                        "benchmark": 1,
+                    },
+                    "gpu_seconds": 7200,
+                    "evidence_bytes": 1024**3,
+                    "host_available_bytes": 1,
+                    "disk_free_bytes": 10**30,
+                }
+            }
+            # Real disk/RAM probes; no worker can start with impossible free disk.
+            result = execute(root, manifest, {"model": "synthetic"}, "screening", 60)
+            self.assertEqual(result, (None, "not_executed_host_resource"))
+
     def test_seal_binds_folds_environment_and_rejects_corruption(self):
         frame = pd.DataFrame({"machine_failure": np.resize([1, 0, 0, 0], 120)})
         with tempfile.TemporaryDirectory() as temporary:

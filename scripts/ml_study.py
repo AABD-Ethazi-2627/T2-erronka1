@@ -468,7 +468,7 @@ def execute(output, manifest, task, stage, timeout):
         return None, "not_executed_evidence_limit"
     if (
         psutil.virtual_memory().available < budget["host_available_bytes"]
-        or psutil.disk_usage(output).free < budget["disk_free_bytes"]
+        or psutil.disk_usage(str(output)).free < budget["disk_free_bytes"]
     ):
         return None, "not_executed_host_resource"
     unit.mkdir(parents=True, exist_ok=False)
