@@ -1,16 +1,66 @@
-"""Synthetic protocol regressions; never train or score the AI4I source."""
+"""Research-only synthetic regressions; never train or score the AI4I source."""
 
+import tempfile
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
 
 from scoring.preparation import SENSORS
-from scripts.ml_study import choose_threshold, folds, metrics
-from scripts.ml_study_models import CORE, StudyModel, catalog
+from scripts.ml_study import (
+    choose_threshold,
+    folds,
+    metrics,
+    seal,
+    verify,
+    write_json,
+)
+from scripts.ml_study_models import CORE, StudyCalibrated, StudyModel, catalog
 
 
 class StudyProtocolTests(unittest.TestCase):
+    def test_seal_binds_folds_environment_and_rejects_corruption(self):
+        frame = pd.DataFrame({"machine_failure": np.resize([1, 0, 0, 0], 120)})
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            smoke = root / "smoke.json"
+            write_json(smoke, [{"status": "complete"}] * 50)
+            output = root / "sealed"
+            with patch("scripts.ml_study.source_train", return_value=(frame, {})):
+                seal(output, smoke)
+            manifest = verify(output)
+            self.assertEqual(len(manifest["outer"]), 3)
+            self.assertEqual(len(manifest["outer"][0]["inner"]), 3)
+            self.assertEqual(
+                manifest["pilot"]["fit_rows"],
+                manifest["outer"][0]["inner"][0]["fit"],
+            )
+            with self.assertRaises(FileExistsError):
+                with patch("scripts.ml_study.source_train", return_value=(frame, {})):
+                    seal(output, smoke)
+            (output / "manifest.json").write_text("{}")
+            with self.assertRaisesRegex(ValueError, "seal changed"):
+                verify(output)
+
+    def test_calibrator_reserves_only_its_own_training_rows(self):
+        rng = np.random.default_rng(14)
+        frame = pd.DataFrame(rng.normal(size=(120, 5)), columns=SENSORS)
+        frame["machine_type"] = np.resize(["L", "M", "H"], 120)
+        y = np.resize([1, 0, 0, 0], 120)
+        spec = next(s for s in catalog() if s["name"] == "cart_depth5")
+        for method in ("raw75", "sigmoid", "isotonic"):
+            model = StudyCalibrated(spec, method).fit(frame, y)
+            self.assertEqual(
+                model.fit_positive_support_ + model.calibration_positive_support_,
+                int(y.sum()),
+            )
+            self.assertLessEqual(
+                abs(model.calibration_positive_support_ - int(y.sum()) * 0.25), 0.5
+            )
+            self.assertTrue(np.isfinite(model.score(frame.iloc[:3])).all())
+
     def test_catalog_and_core_are_fixed(self):
         specs = catalog()
         self.assertEqual(len(specs), 50)

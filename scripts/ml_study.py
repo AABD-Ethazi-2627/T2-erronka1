@@ -209,7 +209,7 @@ def seal(output, smoke_path):
     if len(smoke_report) != 50 or any(r["status"] != "complete" for r in smoke_report):
         raise ValueError("All synthetic adapters must complete before seal")
     train, membership = source_train()
-    outer = folds(train, 43)
+    outer = [dict(**f, inner=folds(train.loc[f["fit"]], 42)) for f in folds(train, 43)]
     manifest = dict(
         schema=1,
         created_at=datetime.now(timezone.utc).isoformat(),
@@ -228,7 +228,7 @@ def seal(output, smoke_path):
         catalog=catalog(),
         core=CORE,
         screening=folds(train, 42),
-        outer=[dict(**f, inner=folds(train.loc[f["fit"]], 42)) for f in outer],
+        outer=outer,
         rule=dict(
             fp_euros=100,
             fn_hours=1,
