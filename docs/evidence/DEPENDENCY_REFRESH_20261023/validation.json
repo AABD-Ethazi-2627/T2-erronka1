@@ -1,0 +1,140 @@
+{
+  "scope": "local verification of one maintenance PR; no deployment or human acceptance",
+  "python": {
+    "3.11": {
+      "version": "Python 3.11.17",
+      "pytest": {
+        "passed": 640,
+        "skipped": 3,
+        "subtests_passed": 303
+      },
+      "log_sha256": "3a24685b3c14b42880f054924fb954ff69604866656deed2fa9cc53e01cde4b3"
+    },
+    "3.12": {
+      "version": "Python 3.12.14",
+      "pytest": {
+        "passed": 640,
+        "skipped": 3,
+        "subtests_passed": 303
+      },
+      "log_sha256": "d2790317fbdd76bf6e3509df8098da61030f0b163ac1ed6388b0e856d689d84f"
+    }
+  },
+  "checks": [
+    {
+      "name": "lock",
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "runtime-export",
+      "command": [
+        "python",
+        "-m",
+        "scripts.export_runtime",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "image-inventory",
+      "command": [
+        "python",
+        "-m",
+        "scripts.image_inventory",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "NiFi-flow",
+      "command": [
+        "python",
+        "-m",
+        "scripts.build_refreshed_lab_flow",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "layout",
+      "command": [
+        "python",
+        "scripts/check_repository_layout.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "historical-compose",
+      "command": [
+        "python",
+        "scripts/check_lab_compose.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "workflow-lint",
+      "command": [
+        "actionlint"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "ruff_changed_python_files": 14,
+  "api_image_smoke": "api31117-smoke.json",
+  "container_evidence": [
+    "nifi-compatibility.json",
+    "filebeat-kafka-compatibility.json",
+    "durable-es955.json"
+  ],
+  "skips": "Three CG19 Elasticsearch dashboard integration tests require an explicitly configured disposable instance; the full suites skipped them. Own model and Kafka-extra tests ran.",
+  "additional_integration": {
+    "CG19_dashboard_queries": {
+      "passed": 3,
+      "es_version": "9.5.5",
+      "result": "dashboard-es-compatibility.json",
+      "scope": "same three skipped cases, exercised separately on a fresh instance; not Kibana rendering"
+    }
+  },
+  "development_parent_commit": "619ab67704bfdc7b4d534840440e6ed20414bb1a",
+  "review_fixes_included": true,
+  "tested_source_sha256": {
+    ".github/workflows/dependencies.yml": "a5e5a563ec1d2403419ce1edf31610aa9fee1d205d753b8741839c94bbf60283",
+    ".github/workflows/ml-study.yml": "f272d38419ca883946b4ddcc799779b187c1bbe02e0e22470f52f24c347316f1",
+    ".github/workflows/repository-layout.yml": "4d7f3d555d53c5f27a2ee4c80b97e518cf96a6c5e41c11313638126caeac7062",
+    ".github/workflows/sync-projects.yml": "1a10fa2725ea6da42d9c0f8259e41b5cd075e400f0e33fecc233e79b8a20701f",
+    ".github/workflows/validate.yml": "12d779d5f1672805c7f06a87f1ebe26982f7af50addd42830de04978159121cc",
+    "deploy/images.json": "c951b477777f62f1c54cbc5a27c7ddc72a2fd75f81617a9717f836135e6ceee6",
+    "docs/evidence/DEPENDENCY_REFRESH_20261023/scientific_probe.py": "416a982b72cc41619644a682a636f354542b25682c8ab8c0c96fd5ae13fa108c",
+    "pyproject.toml": "1d962ee822718efd61ee0373e4faaf54bd8b4ddaa92e48fd2c588cb932d0593c",
+    "scoring/Dockerfile": "4b6dd69a3d7ad7ba965f2eb255311d177bb05af6ac8bc6f2dac006ce0f1845e4",
+    "scoring/requirements.txt": "0e95d2a105d536b5cfb781ff7fb87e860678c3c0941c3306526015fd1e72da9a",
+    "scripts/audit_dependencies.py": "0dc176a4c4234c0656cb599d777c2dabc2bcdf4720557558c75366b15cf91d65",
+    "scripts/build_refreshed_lab_flow.py": "236b1fb80137454656859e495cf9127cbcf07e64ac0ddd788a1304256aa30d5e",
+    "scripts/check_lab_compose.py": "226f37c64d92106a6368bed3064f0a07bc96ed6b92c1f3e5d9286c52eed546ef",
+    "scripts/check_repository_layout.py": "2bef665dc0a2192f19b4a8e7504f9d15b7ade12328f62e608e5a2057f8685475",
+    "scripts/export_runtime.py": "d959bc431284d9d06db485c8caf5cf56b15aac83fc0c4058d2d08d9cc342728b",
+    "scripts/image_inventory.py": "97eb54ce62f7136b219f97bba77f199ed9fa34b67502bc4390a1b362cb487e2b",
+    "tests/test_dependency_audit.py": "e4bbbcd6d81b22722a9ee8658a023a6eac8f26f0810ceec901cf86c2f65cc0cb",
+    "tests/test_dependency_infra.py": "1e2c1d81718a54c369280ae5e75b5773cbc1a79ff55d18090a2eb0f030d75850",
+    "tests/test_dependency_runtime.py": "94354de29c88ff03f498cd189a8361ac8655eb6428d6d68afcc2f5e03a3ff2a0",
+    "tests/test_smb_filebeat_contract.py": "779dcbadf25a6415c5caa1fc125df6671ec996777bbb6c5a86b22cb6e028e032",
+    "tests/verify_durable_pipeline.py": "461a8d8e598221aefe253e3f44ab6cfccca64f52f5d1270949e209d8ded62493",
+    "tests/verify_elasticsearch_contract.py": "6612bc54269fc9603f812f3a3aaf45ebdb2e6ef927a8cd14e1c1256a5d8c71c3",
+    "tests/verify_es_ingest_pipeline.py": "1dfa57149ff57b05b5c162588b401481ca17816d2fe0dc3091228ea045ba74a5",
+    "uv.lock": "c3de3344bf59afdbd1242a89794aaa219f795538a5656a3832a8375ee9404a20",
+    "scripts/ml_study_requirements.txt": "f1e17bc90aa67473f0fc7186e42b2b1092f4f19d8cb6ffd14a7f1bec4f24b1c2"
+  },
+  "image_gate_regression": "image-gate-regression.json",
+  "external_scans": "external-image-scans.json",
+  "main_integrated": "5005ccde81f16cd2deac6ee3b30085d773e0fc88",
+  "research_integration": "research-integration.json",
+  "final_api_scan": "python31117-image-scans.json",
+  "compose_version": "5.6.1",
+  "observed_ci_regression": "ci-environment-regression.json",
+  "final_image_gate_exit_code": 0
+}

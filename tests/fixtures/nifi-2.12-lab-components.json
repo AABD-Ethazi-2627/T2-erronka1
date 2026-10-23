@@ -1,0 +1,613 @@
+{
+  "nifi_version": "2.12.0",
+  "image": "apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad",
+  "source": "GET /nifi-api/processors/{id} and /controller-services/{id} in isolated official-image lab, 2026-10-23; no flow execution",
+  "components": {
+    "org.apache.nifi.processors.standard.RetryFlowFile": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Retry Attribute",
+        "Maximum Retries",
+        "Penalize Retries",
+        "Fail on Nonnumerical Overwrite",
+        "Reuse Mode"
+      ],
+      "property_renames": {
+        "penalize-retries": "Penalize Retries",
+        "maximum-retries": "Maximum Retries",
+        "Fail on Non-numerical Overwrite": "Fail on Nonnumerical Overwrite",
+        "reuse-mode": "Reuse Mode",
+        "retry-attribute": "Retry Attribute"
+      },
+      "relationships": [
+        "failure",
+        "retries_exceeded",
+        "retry"
+      ]
+    },
+    "org.apache.nifi.processors.standard.EvaluateJsonPath": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Destination",
+        "Return Type",
+        "Path Not Found Behavior",
+        "Null Value Representation",
+        "Max String Length",
+        "cnc.alert_level",
+        "cnc.anomaly_alert",
+        "cnc.event_id",
+        "cnc.source_kind"
+      ],
+      "property_renames": {
+        "Destination": "Destination",
+        "cnc.alert_level": "cnc.alert_level",
+        "Max String Length": "Max String Length",
+        "Return Type": "Return Type",
+        "cnc.event_id": "cnc.event_id",
+        "Null Value Representation": "Null Value Representation",
+        "cnc.anomaly_alert": "cnc.anomaly_alert",
+        "cnc.source_kind": "cnc.source_kind",
+        "Path Not Found Behavior": "Path Not Found Behavior"
+      },
+      "relationships": [
+        "failure",
+        "matched",
+        "unmatched"
+      ]
+    },
+    "org.apache.nifi.processors.standard.ConvertRecord": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Record Reader",
+        "Record Writer",
+        "Include Zero Record FlowFiles"
+      ],
+      "property_renames": {
+        "Include Zero Record FlowFiles": "Include Zero Record FlowFiles",
+        "Record Writer": "Record Writer",
+        "Record Reader": "Record Reader"
+      },
+      "relationships": [
+        "failure",
+        "success"
+      ]
+    },
+    "org.apache.nifi.processors.elasticsearch.PutElasticsearchJson": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-elasticsearch-restapi-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Index Operation",
+        "Index",
+        "Type",
+        "Script",
+        "Scripted Upsert",
+        "Dynamic Templates",
+        "Input Content Format",
+        "Max FlowFiles Per Batch",
+        "Max Batch Size",
+        "Suppress Nulls",
+        "Identifier Attribute",
+        "Field Path Mode",
+        "Identifier Field",
+        "Retain Identifier Field",
+        "Index Field",
+        "Retain Index Field",
+        "Timestamp Field",
+        "Retain Timestamp Field",
+        "Character Set",
+        "Max JSON Field String Length",
+        "Client Service",
+        "Log Error Responses",
+        "Output Error Responses",
+        "Output Bulk Request",
+        "Treat Not Found as Success"
+      ],
+      "property_renames": {
+        "put-es-json-dynamic_templates": "Dynamic Templates",
+        "Max JSON Field String Length": "Max JSON Field String Length",
+        "put-es-record-batch-size": "Max FlowFiles Per Batch",
+        "put-es-record-index-op": "Index Operation",
+        "put-es-output-error-responses": "Output Error Responses",
+        "el-rest-fetch-index": "Index",
+        "put-es-json-scripted-upsert": "Scripted Upsert",
+        "put-es-json-charset": "Character Set",
+        "el-rest-client-service": "Client Service",
+        "put-es-record-log-error-responses": "Log Error Responses",
+        "put-es-json-id-attr": "Identifier Attribute",
+        "el-rest-type": "Type",
+        "put-es-not_found-is-error": "Treat Not Found as Success",
+        "put-es-json-script": "Script"
+      },
+      "relationships": [
+        "errors",
+        "failure",
+        "original",
+        "retry",
+        "successful"
+      ]
+    },
+    "org.apache.nifi.processors.standard.InvokeHTTP": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "HTTP Method",
+        "HTTP URL",
+        "HTTP/2 Disabled",
+        "SSL Context Service",
+        "Connection Timeout",
+        "Socket Read Timeout",
+        "Socket Write Timeout",
+        "Socket Idle Timeout",
+        "Socket Idle Connections",
+        "Proxy Configuration Service",
+        "Request OAuth2 Access Token Provider",
+        "OAuth2 Access Token Refresh Strategy",
+        "Request Username",
+        "Request Password",
+        "Request Digest Authentication Enabled",
+        "Request Failure Penalization Enabled",
+        "Request Body Enabled",
+        "Request Multipart Form-Data Name",
+        "Request Multipart Form-Data Filename Enabled",
+        "Request Chunked Transfer-Encoding Enabled",
+        "Request Content-Encoding",
+        "Request Content-Type",
+        "Request Date Header Enabled",
+        "Request Header Attributes Pattern",
+        "Request User-Agent",
+        "Response Body Attribute Name",
+        "Response Body Attribute Size",
+        "Response Body Ignored",
+        "Response Cache Enabled",
+        "Response Cache Size",
+        "Response Cookie Strategy",
+        "Response Generation Required",
+        "Response FlowFile Naming Strategy",
+        "Response Header Request Attributes Enabled",
+        "Response Header Request Attributes Prefix",
+        "Response Redirects Enabled"
+      ],
+      "property_renames": {
+        "Request Content-Encoding": "Request Content-Encoding",
+        "proxy-configuration-service": "Proxy Configuration Service",
+        "Request Multipart Form-Data Filename Enabled": "Request Multipart Form-Data Filename Enabled",
+        "Request Chunked Transfer-Encoding Enabled": "Request Chunked Transfer-Encoding Enabled",
+        "HTTP/2 Disabled": "HTTP/2 Disabled",
+        "Connection Timeout": "Connection Timeout",
+        "Response Cookie Strategy": "Response Cookie Strategy",
+        "Socket Read Timeout": "Socket Read Timeout",
+        "Socket Idle Connections": "Socket Idle Connections",
+        "Request Body Enabled": "Request Body Enabled",
+        "HTTP URL": "HTTP URL",
+        "Request OAuth2 Access Token Provider": "Request OAuth2 Access Token Provider",
+        "Socket Idle Timeout": "Socket Idle Timeout",
+        "Response Redirects Enabled": "Response Redirects Enabled",
+        "Socket Write Timeout": "Socket Write Timeout",
+        "Request Header Attributes Pattern": "Request Header Attributes Pattern",
+        "Response FlowFile Naming Strategy": "Response FlowFile Naming Strategy",
+        "Response Cache Enabled": "Response Cache Enabled",
+        "Request Date Header Enabled": "Request Date Header Enabled",
+        "Request Failure Penalization Enabled": "Request Failure Penalization Enabled",
+        "Response Body Attribute Size": "Response Body Attribute Size",
+        "SSL Context Service": "SSL Context Service",
+        "Response Generation Required": "Response Generation Required",
+        "Request User-Agent": "Request User-Agent",
+        "Response Header Request Attributes Enabled": "Response Header Request Attributes Enabled",
+        "HTTP Method": "HTTP Method",
+        "Request Username": "Request Username",
+        "Request Content-Type": "Request Content-Type",
+        "Response Body Attribute Name": "Response Body Attribute Name",
+        "Request Digest Authentication Enabled": "Request Digest Authentication Enabled",
+        "Request Multipart Form-Data Name": "Request Multipart Form-Data Name",
+        "Response Cache Size": "Response Cache Size",
+        "Response Body Ignored": "Response Body Ignored"
+      },
+      "relationships": [
+        "Failure",
+        "No Retry",
+        "Original",
+        "Response",
+        "Retry"
+      ]
+    },
+    "org.apache.nifi.processors.groovyx.ExecuteGroovyScript": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-groovyx-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Script File",
+        "Script Body",
+        "Failure Strategy",
+        "Additional Classpath"
+      ],
+      "property_renames": {
+        "groovyx-script-body": "Script Body",
+        "groovyx-failure-strategy": "Failure Strategy",
+        "groovyx-additional-classpath": "Additional Classpath",
+        "groovyx-script-file": "Script File"
+      },
+      "relationships": [
+        "failure",
+        "success"
+      ]
+    },
+    "org.apache.nifi.kafka.processors.ConsumeKafka": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Kafka Connection Service",
+        "Group ID",
+        "Topic Format",
+        "Topics",
+        "auto.offset.reset",
+        "Commit Offsets",
+        "Max Uncommitted Size",
+        "Max Uncommitted Time",
+        "Header Name Pattern",
+        "Header Format",
+        "Header Encoding",
+        "Processing Strategy",
+        "Header Name Prefix",
+        "Record Reader",
+        "Record Writer",
+        "Output Strategy",
+        "Schema Conflict Resolution",
+        "Key Attribute Encoding",
+        "Key Format",
+        "Key Record Reader",
+        "Message Demarcator",
+        "Separate By Key"
+      ],
+      "property_renames": {
+        "Topics": "Topics",
+        "Commit Offsets": "Commit Offsets",
+        "Header Name Pattern": "Header Name Pattern",
+        "Key Format": "Key Format",
+        "Key Record Reader": "Key Record Reader",
+        "Message Demarcator": "Message Demarcator",
+        "Record Reader": "Record Reader",
+        "Key Attribute Encoding": "Key Attribute Encoding",
+        "Topic Format": "Topic Format",
+        "Header Encoding": "Header Encoding",
+        "Max Uncommitted Time": "Max Uncommitted Time",
+        "Kafka Connection Service": "Kafka Connection Service",
+        "Separate By Key": "Separate By Key",
+        "Processing Strategy": "Processing Strategy",
+        "Record Writer": "Record Writer",
+        "Group ID": "Group ID",
+        "auto.offset.reset": "auto.offset.reset",
+        "Output Strategy": "Output Strategy"
+      },
+      "relationships": [
+        "success"
+      ]
+    },
+    "org.apache.nifi.processors.standard.PutFile": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Directory",
+        "Conflict Resolution Strategy",
+        "Create Missing Directories",
+        "Maximum File Count",
+        "Last Modified Time",
+        "Permissions",
+        "Owner",
+        "Group",
+        "Resource Transfer Source",
+        "File Resource Service"
+      ],
+      "property_renames": {
+        "Group": "Group",
+        "Owner": "Owner",
+        "Create Missing Directories": "Create Missing Directories",
+        "Permissions": "Permissions",
+        "Maximum File Count": "Maximum File Count",
+        "Last Modified Time": "Last Modified Time",
+        "Directory": "Directory",
+        "Conflict Resolution Strategy": "Conflict Resolution Strategy"
+      },
+      "relationships": [
+        "failure",
+        "success"
+      ]
+    },
+    "org.apache.nifi.processors.standard.RouteOnAttribute": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Routing Strategy",
+        "alert"
+      ],
+      "property_renames": {
+        "Routing Strategy": "Routing Strategy",
+        "alert": "alert"
+      },
+      "relationships": [
+        "alert",
+        "unmatched"
+      ]
+    },
+    "org.apache.nifi.processors.standard.ExtractText": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Character Set",
+        "Maximum Buffer Size",
+        "Maximum Capture Group Length",
+        "Enable Canonical Equivalence",
+        "Enable Case-insensitive Matching",
+        "Permit Whitespace and Comments in Pattern",
+        "Enable DOTALL Mode",
+        "Enable Literal Parsing of the Pattern",
+        "Enable Multiline Mode",
+        "Enable Unicode-aware Case Folding",
+        "Enable Unicode Predefined Character Classes",
+        "Enable Unix Lines Mode",
+        "Include Capture Group 0",
+        "Enable Repeating Capture Group",
+        "Enable Named Groups",
+        "cnc.raw"
+      ],
+      "property_renames": {
+        "Enable Unicode Predefined Character Classes": "Enable Unicode Predefined Character Classes",
+        "Permit Whitespace and Comments in Pattern": "Permit Whitespace and Comments in Pattern",
+        "Enable Unicode-aware Case Folding": "Enable Unicode-aware Case Folding",
+        "Enable named group support": "Enable Named Groups",
+        "Enable DOTALL Mode": "Enable DOTALL Mode",
+        "Enable Unix Lines Mode": "Enable Unix Lines Mode",
+        "Maximum Buffer Size": "Maximum Buffer Size",
+        "Enable Canonical Equivalence": "Enable Canonical Equivalence",
+        "Enable Case-insensitive Matching": "Enable Case-insensitive Matching",
+        "Enable Multiline Mode": "Enable Multiline Mode",
+        "Enable repeating capture group": "Enable Repeating Capture Group",
+        "cnc.raw": "cnc.raw",
+        "Maximum Capture Group Length": "Maximum Capture Group Length",
+        "Enable Literal Parsing of the Pattern": "Enable Literal Parsing of the Pattern",
+        "Character Set": "Character Set",
+        "Include Capture Group 0": "Include Capture Group 0"
+      },
+      "relationships": [
+        "matched",
+        "unmatched"
+      ]
+    },
+    "org.apache.nifi.elasticsearch.ElasticSearchClientServiceImpl": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-elasticsearch-client-service-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "HTTP Hosts",
+        "Path Prefix",
+        "Authorization Scheme",
+        "Username",
+        "Password",
+        "API Key ID",
+        "API Key",
+        "JWT Shared Secret",
+        "OAuth2 Access Token Provider",
+        "Run As User",
+        "SSL Context Service",
+        "Proxy Configuration Service",
+        "Connect Timeout",
+        "Read Timeout",
+        "Character Set",
+        "Suppress Null and Empty Values",
+        "Enable Compression",
+        "Send Meta Header",
+        "Strict Deprecation",
+        "Node Selector",
+        "Sniff Cluster Nodes",
+        "Sniffer Interval",
+        "Sniffer Request Timeout",
+        "Sniff on Failure",
+        "Sniffer Failure Delay"
+      ],
+      "property_renames": {
+        "el-cs-suppress-nulls": "Suppress Null and Empty Values",
+        "el-cs-strict-deprecation": "Strict Deprecation",
+        "el-cs-http-hosts": "HTTP Hosts",
+        "el-cs-path-prefix": "Path Prefix",
+        "proxy-configuration-service": "Proxy Configuration Service",
+        "el-cs-charset": "Character Set",
+        "api-key-id": "API Key ID",
+        "el-cs-send-meta-header": "Send Meta Header",
+        "el-cs-username": "Username",
+        "el-cs-enable-compression": "Enable Compression",
+        "el-cs-sniff-cluster-nodes": "Sniff Cluster Nodes",
+        "el-cs-sniffer-interval": "Sniffer Interval",
+        "el-cs-sniffer-failure-delay": "Sniffer Failure Delay",
+        "el-cs-node-selector": "Node Selector",
+        "authorization-scheme": "Authorization Scheme",
+        "el-cs-sniff-failure": "Sniff on Failure",
+        "el-cs-sniffer-request-timeout": "Sniffer Request Timeout",
+        "el-cs-connect-timeout": "Connect Timeout",
+        "el-cs-socket-timeout": "Read Timeout",
+        "el-cs-ssl-context-service": "SSL Context Service"
+      },
+      "relationships": []
+    },
+    "org.apache.nifi.json.JsonRecordSetWriter": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-record-serialization-services-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Schema Write Strategy",
+        "Schema Cache",
+        "Schema Reference Writer",
+        "Schema Access Strategy",
+        "Schema Registry",
+        "Schema Name",
+        "Schema Version",
+        "Schema Branch",
+        "Schema Text",
+        "Schema Reference Reader",
+        "Date Format",
+        "Time Format",
+        "Timestamp Format",
+        "Pretty Print JSON",
+        "Suppress Null Values",
+        "Allow Scientific Notation",
+        "Output Grouping",
+        "Compression Format",
+        "Compression Level",
+        "Serialized JSON Input Handling",
+        "Timestamp Representation"
+      ],
+      "property_renames": {
+        "schema-reference-reader": "Schema Reference Reader",
+        "schema-branch": "Schema Branch",
+        "Allow Scientific Notation": "Allow Scientific Notation",
+        "compression-level": "Compression Level",
+        "schema-cache": "Schema Cache",
+        "Timestamp Format": "Timestamp Format",
+        "Date Format": "Date Format",
+        "Pretty Print JSON": "Pretty Print JSON",
+        "compression-format": "Compression Format",
+        "Schema Write Strategy": "Schema Write Strategy",
+        "suppress-nulls": "Suppress Null Values",
+        "output-grouping": "Output Grouping",
+        "schema-name": "Schema Name",
+        "schema-registry": "Schema Registry",
+        "Time Format": "Time Format",
+        "schema-access-strategy": "Schema Access Strategy",
+        "schema-version": "Schema Version",
+        "schema-text": "Schema Text",
+        "Schema Reference Writer": "Schema Reference Writer"
+      },
+      "relationships": []
+    },
+    "org.apache.nifi.csv.CSVReader": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-record-serialization-services-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "Schema Access Strategy",
+        "Schema Registry",
+        "Schema Name",
+        "Schema Version",
+        "Schema Branch",
+        "Schema Text",
+        "Schema Reference Reader",
+        "CSV Parser",
+        "Date Format",
+        "Time Format",
+        "Timestamp Format",
+        "CSV Format",
+        "Value Separator",
+        "Record Separator",
+        "Treat First Line as Header",
+        "Ignore CSV Header Column Names",
+        "Quote Character",
+        "Escape Character",
+        "Comment Marker",
+        "Null String",
+        "Trim Fields",
+        "Character Set",
+        "Allow Duplicate Header Names",
+        "Trim Double Quote"
+      ],
+      "property_renames": {
+        "schema-reference-reader": "Schema Reference Reader",
+        "ignore-csv-header": "Ignore CSV Header Column Names",
+        "schema-branch": "Schema Branch",
+        "Trim double quote": "Trim Double Quote",
+        "CSV Format": "CSV Format",
+        "Quote Character": "Quote Character",
+        "csvutils-allow-duplicate-header-names": "Allow Duplicate Header Names",
+        "Value Separator": "Value Separator",
+        "Record Separator": "Record Separator",
+        "Timestamp Format": "Timestamp Format",
+        "Escape Character": "Escape Character",
+        "Date Format": "Date Format",
+        "Null String": "Null String",
+        "Skip Header Line": "Treat First Line as Header",
+        "Trim Fields": "Trim Fields",
+        "schema-name": "Schema Name",
+        "schema-registry": "Schema Registry",
+        "csv-reader-csv-parser": "CSV Parser",
+        "Time Format": "Time Format",
+        "Comment Marker": "Comment Marker",
+        "schema-access-strategy": "Schema Access Strategy",
+        "schema-version": "Schema Version",
+        "csvutils-character-set": "Character Set",
+        "schema-text": "Schema Text"
+      },
+      "relationships": []
+    },
+    "org.apache.nifi.kafka.service.Kafka3ConnectionService": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-3-service-nar",
+        "version": "2.12.0"
+      },
+      "property_names": [
+        "bootstrap.servers",
+        "security.protocol",
+        "sasl.mechanism",
+        "sasl.username",
+        "sasl.password",
+        "oauth2-access-token-provider-service",
+        "kerberos-user-service",
+        "sasl.kerberos.service.name",
+        "SSL Context Service",
+        "isolation.level",
+        "max.poll.records",
+        "default.api.timeout.ms",
+        "max.block.ms",
+        "ack.wait.time"
+      ],
+      "property_renames": {
+        "security.protocol": "security.protocol",
+        "SSL Context Service": "SSL Context Service",
+        "ack.wait.time": "ack.wait.time",
+        "sasl.username": "sasl.username",
+        "max.poll.records": "max.poll.records",
+        "sasl.mechanism": "sasl.mechanism",
+        "isolation.level": "isolation.level",
+        "max.block.ms": "max.block.ms",
+        "bootstrap.servers": "bootstrap.servers",
+        "default.api.timeout.ms": "default.api.timeout.ms"
+      },
+      "relationships": []
+    }
+  }
+}

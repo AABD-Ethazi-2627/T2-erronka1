@@ -1,0 +1,12 @@
+{
+  "image": "cnc-guard-deps-api:20261023-r4-py31117",
+  "passed": true,
+  "scope": "real API image with existing own freshly generated AI4I bundle, read-only root and fresh ledger; no deployment",
+  "health_status": 200,
+  "predict_status": 200,
+  "replay_identical": true,
+  "invalid_status": 422,
+  "python": "Python 3.11.17",
+  "locked_runtime_packages": 29,
+  "image_id": "sha256:1cc014be759031442763b90412592ae103622aa0709ceeaf028a3c09d64eb5db"
+}
