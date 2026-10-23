@@ -22,6 +22,7 @@ def measured(root, module, arguments):
         "scripts.export_ml_study_package",
         "scripts.verify_ml_study_scores",
         "scripts.business_ml_study",
+        "scripts.evaluate_ml_study_batch",
     }
     if module not in allowed:
         raise ValueError("Only read/packaging study modules are admitted")

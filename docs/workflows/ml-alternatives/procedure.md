@@ -51,3 +51,11 @@ Si hay interrupción, un directorio de unidad sin `accounting.json` exige inspec
 manual. Los resultados completados se verifican por hash, nunca se sobrescriben.
 Un cambio de código sellado exige otra versión/raíz: no retocar un experimento ya
 observado para presentarlo como preregistrado. No puntuar validación ni test excluido.
+
+Para un lote nuevo autorizado, `scripts.evaluate_ml_study_batch` verifica ZIP,
+esquema y coincidencias exactas con la fuente anterior, conserva solo las seis
+entradas por lista permitida y separa etiquetas. Excluye coincidencias previas
+del análisis externo. Sellar antes de puntuar; no reajustar umbrales o modelos.
+Informar registros únicos y emisiones por separado, sin triplicar muestras al
+comparar tres refits. Mantener filas/etiquetas/predicciones del adjunto locales;
+publicar solo agregados dentro de la autorización existente.

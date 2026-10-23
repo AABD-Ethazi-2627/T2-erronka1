@@ -34,3 +34,11 @@ CNC Guard. El último commit documental tiene su estado propio en el PR.
 No se cerraron issues ni se cambiaron responsables/fechas del Project.
 No hacer merge o desplegar. Revisión humana, integración, HTTP/E2E y aceptación
 permanecen pendientes; no se necesitan más fits para reproducir la recomendación.
+
+Última instrucción: probar ZIP adjunto sin columnas de error en X. Ejecutado en
+`D:/cnc-guard-research/batch-eval-20261023-v1`: 507 CSV, 5.070 eventos/2.000 únicos,
+sin coincidencias exactas con las 8.000 anteriores. RF final: TP58/FN10/FP20 en
+únicos al corte0,15; recall85,29%, precision74,36%. Inferencia de151artefactos
+terminada sin avisos, sin ajustes. 22pruebas y auditor aritmético pasan.
+Datos/etiquetas/predicciones locales; solo código/agregados para PR90.
+Ver `runs/20261023-batch.md`; no repetir `run` sobre esa salida exclusiva.
