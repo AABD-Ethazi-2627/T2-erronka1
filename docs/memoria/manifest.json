@@ -16,8 +16,8 @@
     "docs/evidence/CG05.md": "c38a7e2570b270046eb20e4e2f6c4a82d0548575784b2e60c822b6b36513d049",
     "docs/evidence/CG05_CG29_OFFLINE_20261021.md": "0d4c5fd09c80e28b7b4dba3f4e3c49da3d4bd3c2d8916b82bc35d6ba7a7f97f7",
     "docs/evidence/CG08.md": "1d5bba0747abfee3d40e1207a742330f49c42cdbddeb3beef01f6b70bca1c53a",
-    "docs/evidence/CG10.md": "a1358100a4b8b3713a240f6e85423a9a716df8b246f8f57b23e7fe5d9bd46111",
-    "docs/evidence/CG11.md": "71a644d31b10f15cc65770a0d1208b2d1c010c4a42606a45f48185cb592e9767",
+    "docs/evidence/CG10.md": "262bc511fda4e50d4dae23a735f2f39b80ebdf318646728cd5f4829719d9bb61",
+    "docs/evidence/CG11.md": "8703cc99096ab2680f4a3b173a34b4e56ecf9758706ddaafd16c4c0db5999183",
     "docs/evidence/CG12.md": "cb07211da879ce00ac6da8a243904fa88632e3e34da27154c6ea34e2e698666b",
     "docs/evidence/CG14.md": "1f5b598b973340d03174a119b38f975614fdf72e8ad019a7defd09a721f3bb7b",
     "docs/evidence/CG15_ARCHIVE.md": "1103bbb89fa6b6cb4f00f4fc37c3aab5967d2d84170cfe88f800fdc8f34e2e30",
@@ -46,7 +46,7 @@
     "docs/evidence/PR61_ES_FIXTURE_IDENTITY.md": "f5441d58d4d48b0719f3a7104e5798dd0499ecf8826fc540e67dde5fae67a31f",
     "docs/evidence/STARLETTE_TESTCLIENT_20261021.md": "bb8fafb02bff36460933ab4fc1c76272cd627dea27b760a9f1e2d606aee5c1a0",
     "docs/memoria/ANEXO4_CNC_Guard.md": "24e2feecda4a0ad93c09d4d807b25daf6a23deefc784446ba370a97663888cd1",
-    "docs/memoria/README.md": "27820b9f5dfac35ff610728c958cc29c29f2f27708f465b8074a011a09b99224",
+    "docs/memoria/README.md": "67ed3b2e1e4b59f08037ef08fb636082ca4579c5fb4b05787379ca81a70de14b",
     "docs/requisitos/ANEXO1_CNC_Guard.md": "1fe0c3a5ba9ef3e328c294320b162bb9b1d430fd3fe4e9e867d2c8195d8d0378",
     "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
     "docs/rubrica/SEGUIMIENTO.md": "2a9d97d8356dcb74ceb51491590f1cbf633c81ac2d2679130bde32e963c8e148",
@@ -192,7 +192,12 @@
     "docs/evidence/G68_ES_INGEST_R2_20261022/original-sources/run_checks.py.txt": "f6705c30820e506894867c627f4cc264f46f990ad26e38081ae00b3a8d5c72f0",
     "docs/evidence/G68_ES_INGEST_R2_20261022/SOURCE_HISTORY.md": "f651066155c4c1f277a738ad11061bdd3a253180ed633e23c584b9353242b543",
     "docs/evidence/G68_ES_INGEST_R2_20261022/source-versions.json": "a80b54f1d9e016f65f7f25e4771a50cbb5a211da7ec52faa11222a9b51c338c4",
-    "docs/issues/CG24.md": "16bc8a0999b18b2f4efddb33728aabd116a30f7a544957c61697025a65109330"
+    "docs/issues/CG24.md": "16bc8a0999b18b2f4efddb33728aabd116a30f7a544957c61697025a65109330",
+    "docs/evidence/CG10_results.json": "40be1d3f3e8b1bc9f9cdacb2e1a8750aac1db30a5e8861a048070e977bd9ab59",
+    "docs/evidence/CG10_diagnostics.png": "d4e4eb378d70b84e88f8205d2fe73ee3dd5a7e373d96eb3d52581bc2dd259654",
+    "docs/evidence/CG10_PRECISION_20261022.md": "68db07ba221fc300f67c18e62a2d8ce59f0c4b971cf0b700b4b4192dce76430a",
+    "docs/evidence/CG10_PRECISION_20261022/independent-audit.json": "5380a8e227b8a06be9a472323550b7f82d49919723133100b4bc710bb65929c5",
+    "docs/evidence/CG10_PRECISION_20261022/parser-comparison.json": "c9e0f20e64db756d0796acf7f68e0be0e2e12cae515efcac47c8b641affd5f0b"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",

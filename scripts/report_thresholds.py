@@ -17,7 +17,8 @@ from scripts.experiment_rf import evaluate
 
 def run():
     root = Path("docs/evidence")
-    data = pd.read_csv("outputs/cg08/validation.csv")
+    # Preserve equality at a saved threshold (notably source row 7763).
+    data = pd.read_csv("outputs/cg08/validation.csv", float_precision="round_trip")
     report = json.loads(Path("outputs/cg08/report.json").read_text())
     y, p = data.label.to_numpy(), data.rf_score.to_numpy()
     tuned = report["validation_tuning_metrics"]["threshold"]
@@ -94,7 +95,7 @@ def run():
         xlim=(0, 1),
         ylim=(0, 1),
     )
-    matrix = report["validation_tuning_metrics"]["confusion_matrix"]
+    matrix = policies[str(tuned)]["confusion_matrix"]
     axes[2].imshow(matrix, cmap="Blues")
     for row in range(2):
         for col in range(2):
