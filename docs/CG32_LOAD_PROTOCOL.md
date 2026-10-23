@@ -1,0 +1,107 @@
+# CG32 — carga breve del grafo integrado con el bundle propio
+
+Issue #81. Amplía la evidencia de #23 (microbenchmark cola/JSONL) y #20 (mismo
+evento con RiskDouble/AnomalyDouble) sin reabrirlas. No es HA, SLA ni capacidad
+sostenida; el rendimiento ML sigue siendo desarrollo sintético.
+
+## Grafo medido
+
+`CSV append → Filebeat 9.5.4 → Kafka 4.3.1 (KRaft, 1 partición) → NiFi 2.12
+(GenerateFlowFile + ExecuteStreamCommand) → scripts.run_automatic_graph →
+API real (scoring/score_api.py + bundle) → ledger/CG15 → ES 9.5.4 (_create, guard
+cnc-prediction-v1) → Kibana Discover`.
+
+Producto sin cambios: worker, API, export NiFi (`build_automatic_graph_flow`),
+Filebeat (`filebeat/filebeat.yml`, solo rutas/host/topic), pipeline y template ES.
+Herramientas nuevas del ensayo:
+
+| Archivo | Papel |
+| --- | --- |
+| [deploy/cg32/compose.yaml](../deploy/cg32/compose.yaml) | Proyecto Compose propio, puertos aleatorios en loopback, `cap_drop: ALL`, sin restart |
+| [deploy/cg32/api_server.py](../deploy/cg32/api_server.py) | `create_app(manifest)` intacto + envoltorio ASGI que registra el tiempo servidor por petición (sin cuerpos ni cabeceras) |
+| [scripts/cg32_lab.py](../scripts/cg32_lab.py) | init/up/run/model/discover/stop del laboratorio |
+| [scripts/cg32_load.py](../scripts/cg32_load.py) | Fixture, oferta temporizada, reconciliación y estadísticas (sin servicios) |
+| [tests/test_cg32_load.py](../tests/test_cg32_load.py) | Regresiones de fixture, oferta, reconciliación y percentiles |
+
+## Aislamiento y presupuesto (paso 1 y 6)
+
+- Proyecto `cg32-<uuid>`; contenedores, red y volúmenes NiFi propios; Kafka/ES en
+  binds del directorio del lab. No usa SMB, el broker histórico, servicios
+  compartidos ni los contenedores `iabd-*`/`cnc-cg14-*` existentes.
+- Secretos NiFi generados en `<lab>/.env` (0600), nunca impresos ni versionados.
+- El bundle se monta **solo lectura** en la API; NiFi recibe una copia byte a byte
+  del `manifest.json` (el worker no carga pickles). `verify_bundle` exige que los
+  hashes de `rf.pkl`/`if.pkl` y del manifiesto coincidan con el recibo sellado
+  `CG26_REHEARSAL_2026-10-21.json` antes de cada run. Un bundle internamente
+  coherente con el mismo `model_version` no sustituye esa identidad.
+- Presupuesto acordado antes de arrancar (`BUDGET` en `cg32_lab.py`): RAM libre
+  ≥6 GiB y disco libre ≥20 GiB al iniciar; lab ≤4 GiB; drenaje ≤900 s; lag ≤20.000.
+  Límites de contenedor: Kafka 768 MiB, ES 1,2 GiB, NiFi 2 GiB, API 768 MiB,
+  Filebeat 256 MiB, Kibana 1,6 GiB (solo para Discover). El primer límite superado
+  detiene la oferta/drenaje y queda en `stopped_by_budget`; el informe se produce igual.
+- Sin retención automática, sin borrar datos, sin `down -v`, sin cambios de firewall.
+  El firewall del host bloquea contenedor→host: por eso la API corre como servicio
+  del proyecto (debian-slim + intérprete/venv del checkout montados solo lectura).
+
+## Cada run
+
+Topic, grupo, raíz del worker, ledger API, índice ES y grupo NiFi **nuevos**;
+`offset_reset=earliest` explícito en el primer arranque del grupo. Solo un grafo
+NiFi activo (los grupos anteriores se detienen antes de subir el nuevo).
+
+Fixture: primeras N filas nominales (todas las etiquetas 0) de
+`data/ai4i2020_train.csv`, cinco sensores + `machine_type`, timestamp
+`2026-10-23T00:00:00Z + i s`. Mismo hash entre repeticiones de una tasa; IDs nuevos
+por ocurrencia porque el `event_id` deriva de topic/partition/offset. No usa el test.
+
+### Puntos de medida (mismo reloj CLOCK_MONOTONIC del host)
+
+| Medida | Inicio | Fin |
+| --- | --- | --- |
+| Modelo en proceso (`model`) | `predict_proba`(RF)+`score_samples`(IF), una fila, `perf_counter`; 20 de calentamiento excluidas | — |
+| HTTP | servidor: entrada al ASGI | último mensaje de respuesta (`api-timing.jsonl`) |
+| E2E | tras `write`+`fsync` de la línea CSV | primer `_search` ES (cada 100 ms) que devuelve el documento; incluye refresh |
+
+Percentiles nearest-rank **por run**; entre repeticiones solo media/mediana/min/max/
+desviación de los p50/p95 de cada run (`cg32_load summarize`), nunca mezclados.
+Lag Kafka: `end - committed` del grupo cada 2 s mediante OffsetFetch sin unirse al
+grupo. CPU: integración de `docker stats` cada 2 s (aproximación); RSS: máximo
+observado por contenedor. El worker corre dentro de NiFi y se contabiliza en `nifi`.
+Bytes: CSV, valores Kafka, raíz del worker (`du`) y store primario ES.
+
+### Contabilidad e IDs
+
+`reconcile` compara conjuntos, no solo totales: líneas ofrecidas (hash) ↔ registros
+Kafka (offset+hash) ↔ jobs del worker (`record_ref`) ↔ documentos ES. Publica
+`observed = saved + rejected + pending`, líneas repetidas por Filebeat,
+`http_repeated_posts`, ciclos NiFi por código de salida y `valid_lost`.
+
+## Secuencia
+
+```bash
+uv sync --frozen --python 3.12 --extra kafka
+LAB=/ruta/nueva/cg32-AAAAMMDD
+M=/ruta/bundle-propio/manifest.json        # manifest.json + rf.pkl + if.pkl
+uv run --frozen python -m scripts.cg32_lab --lab $LAB init
+uv run --frozen python -m scripts.cg32_lab --lab $LAB up
+uv run --frozen python -m scripts.cg32_lab --lab $LAB model --manifest $M --output $LAB/model.json
+# Piloto
+uv run --frozen python -m scripts.cg32_lab --lab $LAB run --manifest $M --label pilot --rate 1 --duration 10
+# Medida: tres repeticiones; 50/s solo si piloto y presupuesto lo permiten
+for i in 1 2 3; do uv run --frozen python -m scripts.cg32_lab --lab $LAB run --manifest $M --label base-$i --rate 10 --duration 60; done
+# Recuperación (separada de las nominales)
+uv run --frozen python -m scripts.cg32_lab --lab $LAB run --manifest $M --label pause --rate 1 --duration 20 --pause-at 5 --pause-for 20
+uv run --frozen python -m scripts.cg32_lab --lab $LAB run --manifest $M --label kill --rate 1 --duration 20 --kill-at 6
+uv run --frozen python -m scripts.cg32_load summarize $LAB/runs/base-*/run.json --output $LAB/summary-10.json
+uv run --frozen python -m scripts.cg32_lab --lab $LAB discover --index <índice> --event-id <id> --output $LAB/discover
+uv run --frozen python -m scripts.cg32_lab --lab $LAB stop
+```
+
+Configuración aceptada de partida (CG20): trigger 2 s, `max_records=1`,
+`max_polls=3`, `attempts=1`, `timeout=0.5`, broker con
+`group.initial.rebalance.delay.ms=0` (igual que CG14). Una optimización cambia
+**una sola** variable (`--max-records`) y repite misma fixture y tasas; no se
+añaden hilos ni consumidores al grupo (propietario único del offset).
+
+Python 3.12 del checkout con `scikit-learn==1.5.0`; la API rechaza un bundle
+de otra versión sklearn (`Model/runtime sklearn mismatch`).
