@@ -1,0 +1,44 @@
+filebeat.inputs:
+  - type: filestream
+    id: cnc-stream-v2
+    paths: ['/lab/input/*.csv']
+    exclude_lines: ['^timestamp,']
+    clean_removed: false
+    close.on_state_change.removed: false
+    prospector.scanner.check_interval: 1s
+    prospector.scanner.fingerprint.offset: 164
+    prospector.scanner.fingerprint.length: 64
+    file_identity.fingerprint: ~
+  - type: filestream
+    id: cnc-smb-v1
+    paths: ['/lab/unused/*.csv']
+    fields:
+      cnc_source_kind: smb_csv
+    exclude_lines: ['^timestamp,']
+    clean_removed: false
+    close.on_state_change.removed: false
+    prospector.scanner.check_interval: 1s
+    prospector.scanner.fingerprint.offset: 164
+    prospector.scanner.fingerprint.length: 64
+    file_identity.fingerprint: ~
+processors:
+  - fingerprint:
+      fields: [message]
+      target_field: '@metadata.cnc_line_sha256'
+      method: sha256
+      ignore_missing: false
+output.kafka:
+  hosts: ['kafka:19092']
+  topic: cnc-sensors-automatic-v1
+  topics:
+    - topic: cnc-sensors-smb-v1
+      when.equals:
+        fields.cnc_source_kind: smb_csv
+  key: '%{[@metadata.cnc_line_sha256]}:%{[log.offset]}'
+  codec.format:
+    string: '%{[message]}'
+  required_acks: -1
+  partition.hash:
+    reachable_only: false
+logging.level: info
+logging.to_files: false

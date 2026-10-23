@@ -1,0 +1,574 @@
+Browser tab: 1868626041, Title: "Discover: CG20 · mismo evento canónico · stubs sintéticos - Elastic", URL: "http://127.0.0.1:48899/app/discover#/view/cg20-own-discover?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))&_tab=(tabId:'377942d4-1458-465b-b5da-74d532aee7c6')&_a=(columns:!(event_id,source.kind,source.uri,source.record_ref,model_version,failure_score,anomaly_score,alert_level,timestamp,scored_at,_index),dataSource:(dataViewId:cg20-own-events,type:dataView),filters:!(),grid:(),hideChart:!t,hideTable:!f,interval:auto,query:(language:kuery,query:'event_id:%20%22279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b%22'),rowsPerPage:10,sampleSize:10,sort:!(!(timestamp,desc)))".
+1 AXWebArea Discover: CG20 · mismo evento canónico · stubs sintéticos - Elastic, URL: 127.0.0.1:48899/app/discover#/view/cg20-own-discover?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))&_tab=(tabId:'377942d4-1458-465b-b5da-74d532aee7c6')&_a=(columns:!(event_id,source.kind,source.uri,source.record_ref,model_version,failure_score,anomaly_score,alert_level,timestamp,scored_at,_index),dataSource:(dataViewId:cg20-own-events,type:dataView),filters:!(),grid:(),hideChart:!t,hideTable:!f,interval:auto,query:(language:kuery,query:'event_id:%20%22279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b%22'),rowsPerPage:10,sampleSize:10,sort:!(!(timestamp,desc)))
+	2 container
+		3 container kibana-body
+			4 container globalHeaderBars
+				5 container
+					6 container Page change announcements
+						27 text CG20 · mismo evento canónico · stubs sintéticos - Discover - Elastic
+					7 button Skip to main content
+					8 link Description: Elastic home, Value: 127.0.0.1:48899/app/home
+					9 container
+						10 container
+							11 search text field (settable) Find apps, content, and more.
+						12 text ^/
+						13 text Use the Up and Down arrow keys to move focus over options. Press Enter to select. Press Escape to collapse options.
+					14 pop up button (collapsed) Description: Help menu, Secondary Actions: Expand
+					15 pop up button (collapsed) Description: Newsfeed menu - all items read, Secondary Actions: Expand
+					28 pop up button (disabled) Submit feedback
+						29 image Submit feedback
+					16 button AI Agent
+				17 container
+					18 checkbox (collapsed) Description: Toggle primary navigation, Value: 0, Secondary Actions: Expand
+					30 pop up button (collapsed) Description: Spaces navigation, Secondary Actions: Expand
+						31 image Default
+					32 container Breadcrumbs
+						33 content list
+							34 link Description: Discover, Value: 127.0.0.1:48899/app/discover#/
+							35 text CG20 · mismo evento canónico · stubs sintéticos
+					36 button (collapsed) Description: Click to learn more about the “solution view”, Secondary Actions: Expand
+			23 container app-main-scroll
+				37 container
+					38 heading Discover - CG20 · mismo evento canónico · stubs sintéticos, Value: 1
+						39 text Discover - CG20 · mismo evento canónico · stubs sintéticos
+					40 tab group
+						41 container
+							42 button (collapsed) Description: Actions, Secondary Actions: Expand
+							43 image
+							44 image
+						45 tab (selected, settable, boolean) Untitled, ID: tab-377942d4-1458-465b-b5da-74d532aee7c6, Value: 1
+Untitled
+					46 button New tab
+					47 button (collapsed) Description: Tabs menu, Secondary Actions: Expand
+					48 container App menu
+						49 checkbox Share, Value: 0
+						50 checkbox Query in ES|QL, Value: 0
+						51 checkbox (collapsed) Description: More, Value: 0, Secondary Actions: Expand
+						52 container
+							53 checkbox (collapsed) Save, Value: 0, Secondary Actions: Expand
+							54 checkbox Description: Save options, Value: 0
+					55 container Description: Untitled, ID: if92a4101-ce1f-11f1-ae66-e3606b1fd0cd
+						56 container
+							57 text Data view
+							58 container
+								59 button (collapsed) CG20 mismo evento (stubs sintéticos), Secondary Actions: Expand
+							60 button (collapsed) Description: Add filter, Secondary Actions: Expand
+							61 button (collapsed) Description: Query menu, Secondary Actions: Expand
+							62 combo box (collapsed) Description: Search and filter the discover page, Secondary Actions: Expand
+								63 container
+									64 text entry area (settable) Description: Start typing to search and filter the discover page, Value: event_id: "279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b", ID: if95e9770-ce1f-11f1-ae66-e3606b1fd0cd
+									65 button Clear input
+							66 container
+								67 button (collapsed) Oct 21, 02:00 → Oct 23, 02:00 2d, Secondary Actions: Expand
+									68 text Oct
+									69 text 21
+									70 text ,
+									71 text 02
+									72 text :
+									73 text 00
+									74 text →
+									75 text Oct
+									76 text 23
+									77 text ,
+									78 text 02
+									79 text :
+									80 text 00
+									81 text 2d
+							82 container Time window actions
+								83 text Time window actions
+								84 button Previous
+								85 button Zoom out
+								86 button Next
+							87 container
+								88 button Refresh query
+								89 button (disabled) Send to background
+						90 container
+							91 container Description: Fields, ID: discover-sidebar
+								92 container
+									93 container
+										94 search text field (settable) Search field names
+									95 button (collapsed) Description: Filter by type, Secondary Actions: Expand
+									96 container
+										97 text 11 selected fields. 28 available fields. 1 empty field. 4 meta fields.
+										98 button (expanded) Description: Selected fields: 11 items, ID: fieldListGroupedButton:r1r:SelectedFields, Secondary Actions: Collapse
+											99 text Selected fields
+										100 text 11
+										101 container Description: Selected fields: 11 items, ID: fieldListGroupedSelectedFields
+											102 link Description: Go to Available fields, Value: 127.0.0.1:48899/app/discover#fieldListGroupedButton:r1r:AvailableFields
+											103 content list
+												104 container
+													105 button (collapsed) Description: event_id, Secondary Actions: Expand
+													106 button Preview event_id: string
+														107 container
+															108 image Keyword
+														109 text event_id
+													110 button Remove field from table
+												111 container
+													112 button (collapsed) Description: source.kind, Secondary Actions: Expand
+													113 button Preview source.kind: string
+														114 container
+															115 image Keyword
+														116 text source.kind
+													117 button Remove field from table
+												118 container
+													119 button (collapsed) Description: source.uri, Secondary Actions: Expand
+													120 button Preview source.uri: string
+														121 container
+															122 image Keyword
+														123 text source.uri
+													124 button Remove field from table
+												125 container
+													126 button (collapsed) Description: source.record_ref, Secondary Actions: Expand
+													127 button Preview source.record_ref: string
+														128 container
+															129 image Keyword
+														130 text source.record_ref
+													131 button Remove field from table
+												132 container
+													133 button (collapsed) Description: model_version, Secondary Actions: Expand
+													134 button Preview model_version: string
+														135 container
+															136 image Keyword
+														137 text model_version
+													138 button Remove field from table
+												139 container
+													140 button (collapsed) Description: failure_score, Secondary Actions: Expand
+													141 button Preview failure_score: number
+														142 container
+															143 image Number
+														144 text failure_score
+													145 button Remove field from table
+												146 container
+													147 button (collapsed) Description: anomaly_score, Secondary Actions: Expand
+													148 button Preview anomaly_score: number
+														149 container
+															150 image Number
+														151 text anomaly_score
+													152 button Remove field from table
+												153 container
+													154 button (collapsed) Description: alert_level, Secondary Actions: Expand
+													155 button Preview alert_level: string
+														156 container
+															157 image Keyword
+														158 text alert_level
+													159 button Remove field from table
+												160 container
+													161 button (collapsed) Description: timestamp, Secondary Actions: Expand
+													162 button Preview timestamp: date
+														163 container
+															164 image Date
+														165 text timestamp
+													166 button Remove field from table
+												167 container
+													168 button (collapsed) Description: scored_at, Secondary Actions: Expand
+													169 button Preview scored_at: date
+														170 container
+															171 image Date
+														172 text scored_at
+													173 button Remove field from table
+												174 container
+													175 button (collapsed) Description: _index, Secondary Actions: Expand
+													176 button Preview _index: string
+														177 container
+															178 image Keyword
+														179 text _index
+													180 button Remove field from table
+										181 button (expanded) Description: Available fields: 28 items, ID: fieldListGroupedButton:r1r:AvailableFields, Secondary Actions: Collapse
+											182 container
+												183 text Available fields
+												184 image Fields available for display in the table.
+										185 text 28
+										186 container Description: Available fields: 28 items, ID: fieldListGroupedAvailableFields
+											187 link Description: Go to Empty fields, Value: 127.0.0.1:48899/app/discover#fieldListGroupedButton:r1r:EmptyFields
+											188 content list
+												189 container
+													190 button (collapsed) Description: air_temp_K, Secondary Actions: Expand
+													191 button Preview air_temp_K: number
+														192 container
+															193 image Number
+														194 text air_temp_K
+													195 button Add field as column
+												196 container
+													197 button (collapsed) Description: alert_level, Secondary Actions: Expand
+													198 button Preview alert_level: string
+														199 container
+															200 image Keyword
+														201 text alert_level
+													202 button Remove field from table
+												203 container
+													204 button (collapsed) Description: anomaly_alert, Secondary Actions: Expand
+													205 button Preview anomaly_alert: boolean
+														206 container
+															207 image Boolean
+														208 text anomaly_alert
+													209 button Add field as column
+												210 container
+													211 button (collapsed) Description: anomaly_score, Secondary Actions: Expand
+													212 button Preview anomaly_score: number
+														213 container
+															214 image Number
+														215 text anomaly_score
+													216 button Remove field from table
+												217 container
+													218 button (collapsed) Description: anomaly_threshold, Secondary Actions: Expand
+													219 button Preview anomaly_threshold: number
+														220 container
+															221 image Number
+														222 text anomaly_threshold
+													223 button Add field as column
+												224 container
+													225 button (collapsed) Description: event_id, Secondary Actions: Expand
+													226 button Preview event_id: string
+														227 container
+															228 image Keyword
+														229 text event_id
+													230 button Remove field from table
+												231 container
+													232 button (collapsed) Description: failure_score, Secondary Actions: Expand
+													233 button Preview failure_score: number
+														234 container
+															235 image Number
+														236 text failure_score
+													237 button Remove field from table
+												238 container
+													239 button (collapsed) Description: machine_id, Secondary Actions: Expand
+													240 button Preview machine_id: string
+														241 container
+															242 image Keyword
+														243 text machine_id
+													244 button Add field as column
+												245 container
+													246 button (collapsed) Description: machine_type, Secondary Actions: Expand
+													247 button Preview machine_type: string
+														248 container
+															249 image Keyword
+														250 text machine_type
+													251 button Add field as column
+												252 container
+													253 button (collapsed) Description: model_artifact_sha256, Secondary Actions: Expand
+													254 button Preview model_artifact_sha256: string
+														255 container
+															256 image Keyword
+														257 text model_artifact_sha256
+													258 button Add field as column
+												259 container
+													260 button (collapsed) Description: model_version, Secondary Actions: Expand
+													261 button Preview model_version: string
+														262 container
+															263 image Keyword
+														264 text model_version
+													265 button Remove field from table
+												266 container
+													267 button (collapsed) Description: policy, Secondary Actions: Expand
+													268 button Preview policy: string
+														269 container
+															270 image Keyword
+														271 text policy
+													272 button Add field as column
+												273 container
+													274 button (collapsed) Description: prediction_scope, Secondary Actions: Expand
+													275 button Preview prediction_scope: string
+														276 container
+															277 image Keyword
+														278 text prediction_scope
+													279 button Add field as column
+												280 container
+													281 button (collapsed) Description: process_temp_K, Secondary Actions: Expand
+													282 button Preview process_temp_K: number
+														283 container
+															284 image Number
+														285 text process_temp_K
+													286 button Add field as column
+												287 container
+													288 button (collapsed) Description: quality_flag, Secondary Actions: Expand
+													289 button Preview quality_flag: string
+														290 container
+															291 image Keyword
+														292 text quality_flag
+													293 button Add field as column
+												294 container
+													295 button (collapsed) Description: risk_alert, Secondary Actions: Expand
+													296 button Preview risk_alert: boolean
+														297 container
+															298 image Boolean
+														299 text risk_alert
+													300 button Add field as column
+												301 container
+													302 button (collapsed) Description: risk_threshold, Secondary Actions: Expand
+													303 button Preview risk_threshold: number
+														304 container
+															305 image Number
+														306 text risk_threshold
+													307 button Add field as column
+												308 container
+													309 button (collapsed) Description: rpm, Secondary Actions: Expand
+													310 button Preview rpm: number
+														311 container
+															312 image Number
+														313 text rpm
+													314 button Add field as column
+												315 container
+													316 button (collapsed) Description: schema_version, Secondary Actions: Expand
+													317 button Preview schema_version: string
+														318 container
+															319 image Keyword
+														320 text schema_version
+													321 button Add field as column
+												322 container
+													323 button (collapsed) Description: score_semantics, Secondary Actions: Expand
+													324 button Preview score_semantics: string
+														325 container
+															326 image Keyword
+														327 text score_semantics
+													328 button Add field as column
+												329 container
+													330 button (collapsed) Description: scored_at, Secondary Actions: Expand
+													331 button Preview scored_at: date
+														332 container
+															333 image Date
+														334 text scored_at
+													335 button Remove field from table
+												336 container
+													337 button (collapsed) Description: source.kind, Secondary Actions: Expand
+													338 button Preview source.kind: string
+														339 container
+															340 image Keyword
+														341 text source.kind
+													342 button Remove field from table
+												343 container
+													344 button (collapsed) Description: source.record_ref, Secondary Actions: Expand
+													345 button Preview source.record_ref: string
+														346 container
+															347 image Keyword
+														348 text source.record_ref
+													349 button Remove field from table
+												350 container
+													351 button (collapsed) Description: source.uri, Secondary Actions: Expand
+													352 button Preview source.uri: string
+														353 container
+															354 image Keyword
+														355 text source.uri
+													356 button Remove field from table
+												357 container
+													358 button (collapsed) Description: temporal_prediction_enabled, Secondary Actions: Expand
+													359 button Preview temporal_prediction_enabled: boolean
+														360 container
+															361 image Boolean
+														362 text temporal_prediction_enabled
+													363 button Add field as column
+												364 container
+													365 button (collapsed) Description: timestamp, Secondary Actions: Expand
+													366 button Preview timestamp: date
+														367 container
+															368 image Date
+														369 text timestamp
+													370 button Remove field from table
+												371 container
+													372 button (collapsed) Description: tool_wear_min, Secondary Actions: Expand
+													373 button Preview tool_wear_min: number
+														374 container
+															375 image Number
+														376 text tool_wear_min
+													377 button Add field as column
+												378 container
+													379 button (collapsed) Description: torque_Nm, Secondary Actions: Expand
+													380 button Preview torque_Nm: number
+														381 container
+															382 image Number
+														383 text torque_Nm
+													384 button Add field as column
+										385 button (collapsed) Description: Empty fields: 1 item, ID: fieldListGroupedButton:r1r:EmptyFields, Secondary Actions: Expand
+											386 container
+												387 text Empty fields
+												388 image Fields that don't have any values based on your filters.
+										389 text 1
+										390 button (collapsed) Description: Meta fields: 4 items, ID: fieldListGroupedButton:r1r:MetaFields, Secondary Actions: Expand
+											391 text Meta fields
+										392 text 4
+								393 button Add a field
+							394 button Description: Press the left or right arrow keys to adjust panels size, ID: resizable-button:rp:
+							395 container
+								396 container Documents
+									397 heading Documents, Value: 2, ID: documentsAriaLabel
+										398 text Documents
+									399 container unifiedDataTable:r25:
+										400 container Panels visibility
+											401 text Panels visibility
+											402 button (expanded) Description: Hide field list, Secondary Actions: Collapse
+											403 button (collapsed) Description: Show visualization, Secondary Actions: Expand
+											404 button (disabled, expanded) Description: Hide results table, Secondary Actions: Collapse
+										405 tab group
+											406 tab (selected, settable, boolean) Documents ( 1 ), Value: 1
+Documents
+(
+1
+)
+											407 tab (selectable, settable, boolean) Field statistics, Value: 0
+										408 button (collapsed) Columns - Active: 11, Secondary Actions: Expand
+											409 text Columns
+											410 container - Active: 11
+												411 text 11
+										412 button (collapsed) Sort fields - Active: 1, Secondary Actions: Expand
+											413 text Sort fields
+											414 container - Active: 1
+												415 text 1
+										416 container
+											417 button Find in table
+											418 button (collapsed) Description: Keyboard shortcuts, Secondary Actions: Expand
+											419 button (collapsed) Description: Display options, Secondary Actions: Expand
+											420 checkbox Description: Enter fullscreen, Value: 0
+											421 button Save table to dashboard
+										422 table Documents, ID: :r27:
+											423 container
+												424 row Select column Select all visible rows Actions column Info event_id Press the Enter key to view this column's actions source.kind Press the Enter key to view this column's actions source.uri Press the Enter key to view this column's actions source.record_ref Press the Enter key to view this column's actions model_version Press the Enter key to view this column's actions failure_score Press the Enter key to view this column's actions anomaly_score Press the Enter key to view this column's actions alert_level Press the Enter key to view this column's actions timestamp scored_at Press the Enter key to view this column's actions
+													425 cell
+														426 text Select column
+														427 checkbox (settable, integer) Description: Select all visible rows, Value: 0, ID: select-all-docs-on-page-toggle
+													428 cell
+														429 container
+															430 text Actions column
+															431 image Info
+													432 container
+														433 cell
+															434 container Description: event_id, ID: dataGridHeaderCellContent-event_id
+																435 container
+																	436 image Keyword
+																	437 text event_id
+															438 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													439 container
+														440 cell
+															441 container Description: source.kind, ID: dataGridHeaderCellContent-source.kind
+																442 container
+																	443 image Keyword
+																	444 text source.kind
+															445 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													446 container
+														447 cell
+															448 container Description: source.uri, ID: dataGridHeaderCellContent-source.uri
+																449 container
+																	450 image Keyword
+																	451 text source.uri
+															452 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													453 container
+														454 cell
+															455 container Description: source.record_ref, ID: dataGridHeaderCellContent-source.record_ref
+																456 container
+																	457 image Keyword
+																	458 text source.record_ref
+															459 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													460 container
+														461 cell
+															462 container Description: model_version, ID: dataGridHeaderCellContent-model_version
+																463 container
+																	464 image Keyword
+																	465 text model_version
+															466 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													467 container
+														468 cell
+															469 container Description: failure_score, ID: dataGridHeaderCellContent-failure_score
+																470 container
+																	471 image Number
+																	472 text failure_score
+															473 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													474 container
+														475 cell
+															476 container Description: anomaly_score, ID: dataGridHeaderCellContent-anomaly_score
+																477 container
+																	478 image Number
+																	479 text anomaly_score
+															480 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													481 container
+														482 cell
+															483 container Description: alert_level, ID: dataGridHeaderCellContent-alert_level
+																484 container
+																	485 image Keyword
+																	486 text alert_level
+															487 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													488 container
+														489 cell timestamp
+															490 container Description: timestamp, ID: dataGridHeaderCellContent-timestamp
+																491 container timestamp - this field represents the time that events occurred.
+																	492 container
+																		493 text timestamp
+																		494 image Info
+															495 button (collapsed) Description: timestamp. Click to view column header actions., Secondary Actions: Expand
+													496 container
+														497 cell
+															498 container Description: scored_at, ID: dataGridHeaderCellContent-scored_at
+																499 container
+																	500 image Date
+																	501 text scored_at
+															502 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+													503 container
+														504 cell
+															505 container Description: _index, ID: dataGridHeaderCellContent-_index
+																506 container
+																	507 image Keyword
+																	508 text _index
+															509 button (collapsed) Description: Press the Enter key to view this column's actions, Secondary Actions: Expand
+												510 row Select document '1' Toggle dialog with details - actions, column 2, row 1 279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b lab_fixture kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1 cnc-sensors-automatic-v1/0/0 synthetic-replay-only 0.8 0.5 CRITICA Oct 21, 2026 @ 10:00:00.000 Oct 22, 2026 @ 15:47:41.231
+													511 cell
+														512 container
+															513 checkbox (settable, integer) Description: Select document '1', Value: 0, ID: cnc-alerts-automatic-v4::a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c::
+													514 cell
+														515 container
+															516 checkbox Description: Toggle dialog with details, Value: 1
+														543 text - actions, column 2, row 1
+													517 cell
+														518 text 279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b
+													519 cell
+														520 text lab_fixture
+													521 cell
+														522 text kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1
+													523 cell
+														524 text cnc-sensors-automatic-v1/0/0
+													525 cell
+														526 text synthetic-replay-only
+													527 cell
+														528 text 0.8
+													529 cell
+														530 text 0.5
+													531 cell
+														532 text CRITICA
+													533 cell
+														534 text Oct 21, 2026 @ 10:00:00.000
+													559 cell
+														560 text Oct 22, 2026 @ 15:47:41.231
+									539 text Table generated by Discover session 'CG20 · mismo evento canónico · stubs sintéticos'
+						540 container
+							541 text Press space or enter to start dragging. When dragging, use the up/down arrow keys to reorder items in the group and left/right arrow keys to choose drop targets outside of the group. Press space or enter again to finish.
+							542 text Press space or enter to start dragging. When dragging, use the left/right arrow keys to move between drop targets. Press space or enter again to finish.
+		26 container Notification message list
+		544 container Document, ID: flyout-:r6n:-1
+			545 heading Document, Value: 3, ID: :r6q:
+				546 text Document
+			547 button Close this dialog
+			548 button Press the left or right arrow keys to adjust panels size
+			549 text You are in a non-modal dialog. To close the dialog, press Escape.
+			550 container
+				551 text Actions :
+			552 link Description: View single document, Value: 127.0.0.1:48899/app/r?l=DISCOVER_SINGLE_DOC_LOCATOR&v=9.5.4&lz=N4IglgdgJgpgHiAXCAxgcwEwAYC0B7AdwhxgDcYIAXAZxABoQAnQgSWniVQhRwEMAbGIxp8ArpTwBbXpTA9SAFnpNWUTrwDsAMw0AOKFiwBWLTC1QMu3QGYoANh12MvXtYBGZtwE4UXr06wbQywUazDeI3sNBRCvGBhdOxgARl5klGVGMyEsxk4Ael4AByL8qDBqFDxyRgBifNIwGAJ89Gx8IhxyyuqhAH4AfTQAXgAKWUkYRFGtZklEAHJsDDscZNwMZIAVQ0RdwwA6YIAtBboJReXV9ZwMax2sPcfDk4WASjeAMgHeMar%2BUSSCDURAAQlGZAolAGYCgdGoeFEjBQMAOAGtIHCEUiUQckWB4YjkaislVGFABlktHRJHhYPwBjVqGA8BA6FpeGAAVkBj0snReBApAIAJ68skwAWCYQDQTkfjnMCTaiUXiSIrwiUUmR0GHsOBvOhQGS8ADKRJR02NqoAak0CCwoIg2rhCMRIVRqOcRUUptbeHbmoaAI6iIQi6b8QVoUS8NBTNFhxgiuih8OLD3Q2GIACk2DzGAwGj8Cg0vCwyQ0MEiGiwvCgbl4zhs1ZgbmsyR8IWiXiMKywbd4KA0GCMXlgnaMCjcbhsChQdlnbgL7y%2BA1VbjGG8di2sGmLCgwUAUawURl0OAUdiMbhwbkivBw0SgRmszniGgX7xAAF8gA%3D%3D
+			553 link Description: View surrounding documents, Value: 127.0.0.1:48899/app/r?l=DISCOVER_CONTEXT_APP_LOCATOR&v=9.5.4&lz=N4IglgdgJgpgHiAXCAxgcwEwAYC0B7AdwhxgDcYIAXAZxABoQAnQgSSiRAEMB2AM24AcULFgCsvGLygYBAgMxQAbP0UZOnOQCNJmgJwpdu1VnkisKOZc6il3ACzndMGAMUwAjJ3cp6qPABsAVwBbCFpEAG0QMgpKAH0wdgZqPEDGFBgAOgBrSCSQFLSMzLSwX0L0rMYYFDxGKDjq3l9gvFh%2FOPJGajA8CF9eTjAg6rjqWurfTgg8YM5%2FAE8xiZgp%2FxhGePXyf19KMGCYakpOYIAHcpWGzkpfBOh4EABdBl5hyg3wiJemSQ3qxgcAD0nDOZyBUDA4zwXQAxEDSGAYAQgehsPgiDhIdCugB%2BOJoAC8AAp9odEMTeMxgogAOTYDCKHDuXAYdwAFREiC5IkyZgAWrS6JQ8HSGUyWTgMHJOVhuXLeQLaQBKZUAMjinBJtSCoWoiAAhMSYlQElA6BVirloBbUpUSowwLailUanUGk06K12p1Pr0IHRBsM0jBlnUYHRprN5ktodVI%2BtNnFtjB%2FMKDkcTucLVdNZQ6PdYHBlXQoDdOABlO0ZCllk4ANSRBDYiDRuEIxBNNGFCzOMEQdc4jeRJYAjoENgsKf5pmhApw0P3shPGAs6OPJ3Su2bEABSbD7jAYbiGOzcThYdzcGA2bhYThQTScNTyG8wTRydz6cz2XSiRlYO%2BnAoNwGCiLosBfqIdiaJo8h2CgihwZoh4quqcQnJoJKYS2tJyNwJ52BgUB2MydiiAIOB2IooiaDgmg2JwOD2FAohyGozjcIhKogAAvkAA%3D%3D%3D
+			554 container
+				555 tab group
+					556 tab (selectable, settable, boolean) Table, Value: 0, ID: kbn_doc_viewer_tab_doc_view_table
+					557 tab (selected, settable, boolean) JSON, Value: 1, ID: kbn_doc_viewer_tab_doc_view_source
+				558 container Description: JSON, ID: i0f6d9071-ce20-11f1-ae66-e3606b1fd0cd
+					561 container
+						562 button Copy to clipboard
+						567 text Copied
+					563 container
+						564 button Description: Read only JSON view of an elasticsearch document, activate edit mode, ID: codeEditor_125ee401-ce20-11f1-ae66-e3606b1fd0cd
+						565 container
+							566 editor (settable) Description: Editor content;Press Alt+F1 for Accessibility Options., Value: {
+  "_index": "cnc-alerts-automatic-v4",
+  "_id": "a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c",
+  "_version": 1,
+  "_source": {
+    "anomaly_threshold": 0.4,
+    "model_version": "synthetic-replay-only",
+    "model_artifact_sha256":
+		568 container Copied, ID: :rc2:
+			569 text Copied
+
+The focused UI element is 562 button Copy to clipboard
