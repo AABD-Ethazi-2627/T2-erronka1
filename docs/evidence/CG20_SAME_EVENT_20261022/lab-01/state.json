@@ -1,0 +1,29 @@
+{
+  "tag": "t2-cg20-b74cb05b34",
+  "ids": {
+    "kafka": "aa8e92517cafb60eeb7bb3be12c3a16e0e11050deb4f872faf385aa1c0ab2fe7",
+    "es": "02f3effdc17fdbcb406d42267442f75bc6de4d534b4ed9c05e74c62f5576e877",
+    "nifi": "7abf9772d81e9a16f51974fb88b1dbfd8326fdc8a7fc1a129c54689358f68432",
+    "filebeat": "7e515fc4fa72493ec3a7769d19d4c51ca1675faa3413634d0d906c0d79233e45",
+    "kibana": "58ca162d696d9097d17e7dc08d8054a067abdef9fdff3eb70bb24f1d3e9eabd1"
+  },
+  "kafka_port": 36609,
+  "nifi_port": 49957,
+  "es_port": 47189,
+  "api_port": 56843,
+  "network": "c9b8dfe14964d4bc4fe2c83607154f38fa4b280ad7ca210743d958abc274ae5d",
+  "gateway": "172.27.0.1",
+  "topic": "cnc-sensors-automatic-v1",
+  "group": "cg14-auto-t2-cg20-b74cb05b34",
+  "index": "cnc-alerts-automatic-v4",
+  "api_pid": 354254,
+  "group_id": "63dc9e7e-01a1-1000-a036-eac540599223",
+  "processors": {
+    "Single Kafka owner": "fe730614-2963-311a-5521-60d6429d8681",
+    "Retain cycle output": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+    "Retain cycle diagnostics": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+    "Schedule bounded source cycle": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+    "Capture cycle exit diagnostics": "4e7233ae-f584-3ee3-6a02-eb843e93b521"
+  },
+  "kibana_port": 48899
+}

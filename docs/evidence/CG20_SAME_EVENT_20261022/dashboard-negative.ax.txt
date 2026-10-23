@@ -1,0 +1,67 @@
+Browser tab: 1868626041, Title: "CG20 · API → ES → Kibana · mismo evento - Elastic", URL: "http://127.0.0.1:48899/app/dashboards#/view/cg20-own-dashboard?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))".
+1 AXWebArea CG20 · API → ES → Kibana · mismo evento - Elastic, URL: 127.0.0.1:48899/app/dashboards#/view/cg20-own-dashboard?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))
+	2 container
+		3 container kibana-body
+			4 container globalHeaderBars
+				5 container
+					6 container Page change announcements
+						28 text CG20 · API → ES → Kibana · mismo evento - Dashboards - Elastic
+					7 button Skip to main content
+					8 link Description: Elastic home, Value: 127.0.0.1:48899/app/home
+					9 container
+						10 container
+							11 search text field (settable) Find apps, content, and more.
+						12 text ^/
+						13 text Use the Up and Down arrow keys to move focus over options. Press Enter to select. Press Escape to collapse options.
+					14 pop up button (collapsed) Description: Help menu, Secondary Actions: Expand
+					15 pop up button (collapsed) Description: Newsfeed menu - all items read, Secondary Actions: Expand
+					29 pop up button (disabled) Submit feedback
+						30 image Submit feedback
+					16 button AI Agent
+				17 container
+					18 checkbox (collapsed) Description: Toggle primary navigation, Value: 0, Secondary Actions: Expand
+					31 pop up button (collapsed) Description: Spaces navigation, Secondary Actions: Expand
+						32 image Default
+					33 container Breadcrumbs
+						34 content list
+							35 button Dashboards
+							36 container CG20 · API → ES → Kibana · mismo evento
+								37 text CG20 · API → ES → Kibana · mismo evento
+					38 container
+						39 button Add to Starred
+						40 image
+					41 container App menu
+						42 checkbox Share, Value: 0
+						43 checkbox Export, Value: 0
+						44 checkbox (collapsed) Description: More, Value: 0, Secondary Actions: Expand
+						45 checkbox Edit, Value: 0
+			23 container app-main-scroll
+				46 container
+					47 heading Dashboards - CG20 · API → ES → Kibana · mismo evento, Value: 1, ID: dashboardTitle
+						48 text Dashboards - CG20 · API → ES → Kibana · mismo evento
+					49 container
+						50 button (collapsed) Description: Add filter, Secondary Actions: Expand
+						51 button (collapsed) Description: Query menu, Secondary Actions: Expand
+						52 combo box (collapsed) Description: Search and filter the dashboards page, Secondary Actions: Expand
+							53 container
+								54 text entry area (settable) Description: Start typing to search and filter the dashboards page, Value: event_id: "0000000000000000000000000000000000000000000000000000000000000000", ID: iab686691-ce1f-11f1-b1c7-2f134d1f819e
+								55 button Clear input
+						56 button (disabled) Fast mode unavailable
+						57 container
+							58 button (collapsed) Description: Oct 21, 02:00 → Oct 23, 02:00, Secondary Actions: Expand
+								72 text 2d
+						73 container Time window actions
+							74 text Time window actions
+							75 button Previous
+							76 button Zoom out
+							77 button Next
+						78 container
+							79 button Refresh query
+							80 button (disabled) Send to background
+					81 container
+						82 text CG20 · respuesta canónica en ES · modelos stub
+						83 container Vega visualization
+							84 image
+		25 container Notification message list
+
+The focused UI element is 54 text entry area (settable) Description: Start typing to search and filter the dashboards page, Value: event_id: "0000000000000000000000000000000000000000000000000000000000000000", ID: iab686691-ce1f-11f1-b1c7-2f134d1f819e

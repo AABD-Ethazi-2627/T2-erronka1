@@ -179,7 +179,7 @@ class Api:
                 # Never echo server text: it may contain credentials or tokens.
                 try:
                     body = error.read(16384)
-                except Exception:
+                except (OSError, ValueError):
                     body = b""
                 category = (
                     "TLS_SNI_REJECTED" if b"Invalid SNI" in body else "UNCLASSIFIED"

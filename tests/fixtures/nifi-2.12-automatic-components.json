@@ -1,0 +1,50 @@
+{
+  "nifi_version": "2.12.0",
+  "source": "GET /nifi-api/flow/processor-types and GET /processors/{id}, own lab 2026-10-22",
+  "components": {
+    "org.apache.nifi.processors.standard.PutFile": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "relationships": [
+        "failure",
+        "success"
+      ]
+    },
+    "org.apache.nifi.processors.standard.AttributesToJSON": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "relationships": [
+        "failure",
+        "success"
+      ]
+    },
+    "org.apache.nifi.processors.standard.ExecuteStreamCommand": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "relationships": [
+        "nonzero status",
+        "original",
+        "output stream"
+      ]
+    },
+    "org.apache.nifi.processors.standard.GenerateFlowFile": {
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "relationships": [
+        "success"
+      ]
+    }
+  }
+}

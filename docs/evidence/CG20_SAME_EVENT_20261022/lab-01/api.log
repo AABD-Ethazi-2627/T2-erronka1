@@ -1,0 +1,69 @@
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/Fedora/t2-real-lab-20261022/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/t2-real-lab-20261022/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 70, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/fixture_api.py", line 36, in fixture
+    log.write(json.dumps({'path': scope['path'], 'risk_calls': risk.calls, 'mode': mode, 'response_messages': [{**m, **({'body': m['body'].decode()} if isinstance(m.get('body'), bytes) else {})} for m in messages]}) + '\n')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bytes is not JSON serializable
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/Fedora/t2-real-lab-20261022/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/t2-real-lab-20261022/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 70, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/fixture_api.py", line 36, in fixture
+    log.write(json.dumps({'path': scope['path'], 'risk_calls': risk.calls, 'mode': mode, 'response_messages': [{**m, **({'body': m['body'].decode()} if isinstance(m.get('body'), bytes) else {})} for m in messages]}) + '\n')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bytes is not JSON serializable
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/Fedora/t2-real-lab-20261022/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 396, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/t2-real-lab-20261022/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 70, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/fixture_api.py", line 36, in fixture
+    log.write(json.dumps({'path': scope['path'], 'risk_calls': risk.calls, 'mode': mode, 'response_messages': [{**m, **({'body': m['body'].decode()} if isinstance(m.get('body'), bytes) else {})} for m in messages]}) + '\n')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bytes is not JSON serializable

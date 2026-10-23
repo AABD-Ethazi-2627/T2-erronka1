@@ -1,0 +1,19 @@
+{
+  "root": "/lab/graph/worker",
+  "manifest": "/lab/graph/pinned-manifest.json",
+  "source_namespace": "REPLACE-cluster-uuid/raw-topic-generation-1",
+  "source_kind": "smb_csv",
+  "legacy_source_kind": "cg14-lab-kafka",
+  "scoring_url": "http://scoring:8000/predict",
+  "es_url": "http://es:9200",
+  "es_index": "cnc-alerts-automatic-v4",
+  "bootstrap_servers": "kafka:19092",
+  "group_id": "cg14-automatic-single-owner",
+  "topic": "cnc-sensors-smb-v1",
+  "offset_reset": "none",
+  "max_records": 1,
+  "max_polls": 10,
+  "max_poll_interval_ms": 300000,
+  "attempts": 3,
+  "timeout": 10
+}

@@ -1,0 +1,95 @@
+{
+  "base": "1e161dd1588e34402066e4090f628681f1393860",
+  "protected_files": [
+    {
+      "file": "scoring/score_api.py",
+      "sha256": "013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e",
+      "identical_to_main": true
+    },
+    {
+      "file": "scoring/response_ledger.py",
+      "sha256": "93355badf158753222b8c6fa6b1feb0327d03670fd93169e4b58c697344c43cd",
+      "identical_to_main": true
+    },
+    {
+      "file": "scripts/import_scoring_responses.py",
+      "sha256": "8c5a844a5164fcc6301f0df4ff89bd7dc3d24c10f340669f2f60ec05cac99404",
+      "identical_to_main": true
+    },
+    {
+      "file": "scripts/build_es_ingest_pipeline.py",
+      "sha256": "15bd402dae34c0c3a1a5a756e8cc3bd03d2518c396174b8f190211f771cec7cd",
+      "identical_to_main": true
+    },
+    {
+      "file": "elasticsearch/ingest-pipeline.json",
+      "sha256": "b32d6b10aaf127efc469e207896caac59cea6866fdc75c7ef1aaa27bb41163a2",
+      "identical_to_main": true
+    },
+    {
+      "file": "elasticsearch/index-template.json",
+      "sha256": "32fb64161f82898c568ab8d4a0215c1a9cc0e792ec824fc5e1b1df8f03ffdcb7",
+      "identical_to_main": true
+    },
+    {
+      "file": "tests/test_scoring_import.py",
+      "sha256": "d6cfa1498457bcdc85c0cbc770b5b0f78d64911fa68746bec103ff90338f7072",
+      "identical_to_main": true
+    },
+    {
+      "file": "tests/test_es_ingest_pipeline.py",
+      "sha256": "51c06485c7414fec59432adb9fa960957e89b1851d7b5576a9754a52ca86f0e3",
+      "identical_to_main": true
+    },
+    {
+      "file": "tests/verify_es_ingest_pipeline.py",
+      "sha256": "e984e038a114f2533070374c24802ae7829b9d345679292452bca86005f43b54",
+      "identical_to_main": true
+    },
+    {
+      "file": "tests/verify_elasticsearch_contract.py",
+      "sha256": "ae6fb7203223e418ecbecb62b09b230a9ba8e6998c14d747e3e6cdae6b4b699d",
+      "identical_to_main": true
+    },
+    {
+      "file": "tests/verify_durable_pipeline.py",
+      "sha256": "f41d2464b1124148959d5c2475f9a83432bc00f74ed6976620f82aa3dfe5fc80",
+      "identical_to_main": true
+    },
+    {
+      "file": "nifi-flows/cg14_durable_staged_nifi_2.12.0.json",
+      "sha256": "796406758739dfc26da9cb363fdcaba6e9f66d54aab437a311ceedc505c618fc",
+      "identical_to_main": true
+    },
+    {
+      "file": "scripts/durable_pipeline.py",
+      "sha256": "c2823a058760f49c86659cc376763b6be4d8f5991ae292f96375fa0b1d2d2225",
+      "identical_to_main": true
+    },
+    {
+      "file": "scripts/kafka_archive.py",
+      "sha256": "a3571f985b3655a9a169fa80bcea95e6d719673a41a21955a44663b4549635b4",
+      "identical_to_main": true
+    },
+    {
+      "file": "docs/rubrica/ESTADO_20261022.md",
+      "sha256": "aee9061a41f2137876dc73ea4b6c95696c2b218f581042f702a59a31e39b1c46",
+      "identical_to_main": true
+    },
+    {
+      "file": "docs/SCORING_REPLAY_CONTRACT.md",
+      "sha256": "d23d33f488a468f7c0de5f22598c85d472e72f3ffdf788da404ee0bc315f9f76",
+      "identical_to_main": true
+    },
+    {
+      "file": "docs/SCORING_RESPONSE_IMPORT.md",
+      "sha256": "f003bd31ccf9fcd71c874169d7bf5efe7a9ec23cb21b384f59fc3dde13e95e60",
+      "identical_to_main": true
+    }
+  ],
+  "manifest_only_hash_changed": "scripts/run_durable_pipeline.py",
+  "old_hash": "196ac77364271900f93fa96593c156d9d13c9d379e0029014202cc7a4403873f",
+  "new_hash": "20ce36a6f4d49aa4cf032d31e4c4078dd2b3edc3ae9ac2c004769f3f6b99455a",
+  "historical_hashes_preserved": true,
+  "git_worktree_launcher_bytes_identical": true
+}

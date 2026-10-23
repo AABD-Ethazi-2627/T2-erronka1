@@ -1,0 +1,46 @@
+[
+  {
+    "check": "ruff-version",
+    "exit": 0
+  },
+  {
+    "check": "ruff-default",
+    "exit": 0
+  },
+  {
+    "check": "ruff-required",
+    "exit": 0
+  },
+  {
+    "check": "format",
+    "exit": 0
+  },
+  {
+    "check": "CG02",
+    "exit": 0
+  },
+  {
+    "check": "CG25",
+    "exit": 0
+  },
+  {
+    "check": "layout",
+    "exit": 0
+  },
+  {
+    "check": "lock",
+    "exit": 0
+  },
+  {
+    "check": "audit",
+    "exit": 0
+  },
+  {
+    "check": "actionlint",
+    "exit": 0
+  },
+  {
+    "check": "diff",
+    "exit": 0
+  }
+]

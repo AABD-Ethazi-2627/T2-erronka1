@@ -1,0 +1,393 @@
+{
+  "flowContents": {
+    "identifier": "e116686b-6484-5847-9c6a-c90a386be7e9",
+    "name": "CG14 automatic durable graph (single node)",
+    "comments": "NiFi schedules the built-in Kafka worker. Only that worker commits explicit offsets after CG15/required ES. No ConsumeKafka, archive consumer or second owner on the raw group. Single node; preserve root, API ledger and Kafka generation. FlowFile outputs are diagnostics, never authorization to ACK Kafka.",
+    "position": {
+      "x": 0.0,
+      "y": 0.0
+    },
+    "processGroups": [],
+    "remoteProcessGroups": [],
+    "controllerServices": [],
+    "funnels": [],
+    "labels": [],
+    "inputPorts": [],
+    "outputPorts": [],
+    "processors": [
+      {
+        "identifier": "7a292b6c-016e-59e3-9830-55bdd172ecf4",
+        "name": "Schedule bounded source cycle",
+        "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "properties": {
+          "File Size": "0B",
+          "Batch Size": "1",
+          "Data Format": "Text",
+          "Unique FlowFiles": "false"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "2 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": []
+      },
+      {
+        "identifier": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+        "name": "Single Kafka owner",
+        "type": "org.apache.nifi.processors.standard.ExecuteStreamCommand",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 350.0,
+          "y": 0.0
+        },
+        "properties": {
+          "Working Directory": "/opt/checkout",
+          "Command Path": "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+          "Command Arguments Strategy": "Command Arguments Property",
+          "Command Arguments": "-B;-m;scripts.run_automatic_graph;--config;/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/graph.json",
+          "Argument Delimiter": ";",
+          "Ignore STDIN": "true",
+          "TMPDIR": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/process-temp",
+          "TMP": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/process-temp",
+          "TEMP": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/process-temp",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONUNBUFFERED": "1"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "5 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": []
+      },
+      {
+        "identifier": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+        "name": "Capture cycle exit diagnostics",
+        "type": "org.apache.nifi.processors.standard.AttributesToJSON",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 700.0,
+          "y": 200.0
+        },
+        "properties": {
+          "Attributes List": "uuid,filename,execution.status,execution.error,execution.command,execution.command.args",
+          "Destination": "flowfile-content",
+          "Include Core Attributes": "true"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "5 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": []
+      },
+      {
+        "identifier": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+        "name": "Retain cycle output",
+        "type": "org.apache.nifi.processors.standard.PutFile",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 1050.0,
+          "y": 0.0
+        },
+        "properties": {
+          "Directory": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/cycle-reports/output",
+          "Conflict Resolution Strategy": "fail",
+          "Create Missing Directories": "true"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "5 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": [
+          "success"
+        ]
+      },
+      {
+        "identifier": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+        "name": "Retain cycle diagnostics",
+        "type": "org.apache.nifi.processors.standard.PutFile",
+        "bundle": {
+          "group": "org.apache.nifi",
+          "artifact": "nifi-standard-nar",
+          "version": "2.12.0"
+        },
+        "position": {
+          "x": 1050.0,
+          "y": 200.0
+        },
+        "properties": {
+          "Directory": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/cycle-reports/diagnostics",
+          "Conflict Resolution Strategy": "fail",
+          "Create Missing Directories": "true"
+        },
+        "propertyDescriptors": {},
+        "scheduledState": "DISABLED",
+        "schedulingStrategy": "TIMER_DRIVEN",
+        "schedulingPeriod": "5 sec",
+        "concurrentlySchedulableTaskCount": 1,
+        "executionNode": "ALL",
+        "bulletinLevel": "WARN",
+        "penaltyDuration": "30 sec",
+        "yieldDuration": "1 sec",
+        "runDurationMillis": 0,
+        "autoTerminatedRelationships": [
+          "success"
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "identifier": "369dc522-ffc6-5616-925c-4553d6121d84",
+        "name": "tick",
+        "source": {
+          "id": "7a292b6c-016e-59e3-9830-55bdd172ecf4",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "success"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "0b6f509b-cd85-5304-8da1-2a720d26c6ea",
+        "name": "exit",
+        "source": {
+          "id": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "original"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "31ba159d-8487-5ce7-8769-7012da809c60",
+        "name": "output",
+        "source": {
+          "id": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "output stream"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "a2ce10f0-82c3-54f8-a64e-90a64f1e7f0a",
+        "name": "error",
+        "source": {
+          "id": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "nonzero status"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "f0404670-a8f8-5217-80a7-bd3a5eb8f011",
+        "name": "diagnostics",
+        "source": {
+          "id": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "success"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "c74d3312-1d9a-5dda-bffe-51b9ed95c256",
+        "name": "retry-diagnostics",
+        "source": {
+          "id": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "failure"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "746bfcda-bdbd-5100-ba92-a646f4d7948f",
+        "name": "retry-Retain cycle output",
+        "source": {
+          "id": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "failure"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      },
+      {
+        "identifier": "ffdf036e-3c8b-5832-9980-169fbe4ebaf3",
+        "name": "retry-Retain cycle diagnostics",
+        "source": {
+          "id": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "destination": {
+          "id": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+          "type": "PROCESSOR",
+          "groupId": "e116686b-6484-5847-9c6a-c90a386be7e9"
+        },
+        "selectedRelationships": [
+          "failure"
+        ],
+        "labelIndex": 0,
+        "zIndex": 0,
+        "bends": [],
+        "prioritizers": [],
+        "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+        "loadBalanceCompression": "DO_NOT_COMPRESS",
+        "backPressureObjectThreshold": 1,
+        "backPressureDataSizeThreshold": "1 MB",
+        "flowFileExpiration": "0 sec"
+      }
+    ]
+  }
+}

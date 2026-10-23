@@ -4,6 +4,10 @@ Borrador reconciliado el 22/10/2026 para revisión del equipo y docente. Cubre d
 
 ## Fuentes y atribución por sección
 
+- [Conciliación CG10 del 22/10](../evidence/CG10_PRECISION_20261022.md): corrige
+  la precisión de lectura CSV de los umbrales y costes; reemplaza el JSON anterior
+  para los resultados activos. Las revisiones Git fijadas en la matriz conservan
+  su valor histórico; no acreditan la revisión ni el merge de este arreglo.
 - [Enunciado](../../ENUNTZIATUA.md): fases de pipeline, entrenamiento e inferencia; «Entregablea Orokorra» y «Demo Aurkezpena» describen artefactos y defensa de 10 minutos. Los pesos de fase y de módulo son ejes distintos.
 - [Fuente docente exacta](../rubrica/fuente.json), Zereginak, columna G: 40 descriptores, celdas y hash del Excel local; [interpretación](../rubrica/OBJETIVOS_Y_ETAPAS.md). No se ha cotejado la versión online ni se asigna una nota.
 - ANEXO4.docx docente local: «Erronkaren izena», «BEHIN BETIKO PROPOSAMENA» y «Taldeak aurrera eramatea erabaki duen proposamena» dan la estructura del [borrador adaptado](ANEXO4_CNC_Guard.md). Ruta y hash del original en el [manifiesto](manifest.json); el original no se redistribuye ni se vuelve a inspeccionar aquí.
@@ -21,6 +25,14 @@ RF clasifica **estado contemporáneo**, IF expresa rareza separada. Cinco sensor
 Filebeat → Kafka → NiFi → FastAPI → NiFi → Elasticsearch → Kibana describe el recorrido de laboratorio. El archivo CG15 y su adaptador Kafka ya están implementados e integrados; no acredita archivado continuo de ese recorrido ni su E2E v4. Una persona decide el mantenimiento; no se controla una CNC física. La discrepancia NFS del enunciado frente a SMB requiere aclaración docente.
 
 ## Resultados incorporados
+
+Actualización específica CG24, 22/10/2026, sobre main `3b79c92`:
+[tabla normativa, fuentes verificadas y responsabilidades](../evidence/CG24.md#aplicabilidad-normativa--corte-del-22102026).
+Completa el análisis que faltaba para G16/G17; el criterio 2 de #24 queda pendiente
+de revisión PM e integración. Los criterios 1/3/4/5 ya tienen aceptación PM en
+el comentario 6342074330 de #24, enlazado en el informe. Las 40 filas de la matriz
+mantienen su corte histórico y la revisión/explicación educativa pendiente; no
+se confunde aceptación documental del issue con nota, defensa o certificación.
 
 Los resultados siguientes están registrados en las fuentes indicadas. «Integrado» describe un merge de código; no expresa aceptación humana o de todos los criterios asociados.
 

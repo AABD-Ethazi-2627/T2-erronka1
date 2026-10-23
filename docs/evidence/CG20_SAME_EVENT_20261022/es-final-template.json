@@ -1,0 +1,122 @@
+{
+  "index_templates": [
+    {
+      "name": "cnc-lab-v1",
+      "index_template": {
+        "index_patterns": [
+          "cnc-telemetry-*",
+          "cnc-alerts-*"
+        ],
+        "template": {
+          "settings": {
+            "index": {
+              "number_of_shards": "1",
+              "number_of_replicas": "0",
+              "final_pipeline": "cnc-prediction-v1"
+            }
+          },
+          "mappings": {
+            "dynamic": "strict",
+            "properties": {
+              "model_version": {
+                "type": "keyword"
+              },
+              "anomaly_threshold": {
+                "type": "double"
+              },
+              "model_artifact_sha256": {
+                "type": "keyword"
+              },
+              "temporal_prediction_enabled": {
+                "type": "boolean"
+              },
+              "source": {
+                "properties": {
+                  "kind": {
+                    "type": "keyword"
+                  },
+                  "record_ref": {
+                    "type": "keyword"
+                  },
+                  "raw_record": {
+                    "index": false,
+                    "type": "text"
+                  },
+                  "uri": {
+                    "type": "keyword"
+                  }
+                }
+              },
+              "schema_version": {
+                "type": "keyword"
+              },
+              "anomaly_score": {
+                "type": "double"
+              },
+              "failure_score": {
+                "type": "double"
+              },
+              "quality_flag": {
+                "type": "keyword"
+              },
+              "alert_level": {
+                "type": "keyword"
+              },
+              "policy": {
+                "type": "keyword"
+              },
+              "timestamp": {
+                "type": "date"
+              },
+              "machine_type": {
+                "type": "keyword"
+              },
+              "risk_alert": {
+                "type": "boolean"
+              },
+              "score_semantics": {
+                "type": "keyword"
+              },
+              "air_temp_K": {
+                "type": "double"
+              },
+              "machine_id": {
+                "type": "keyword"
+              },
+              "torque_Nm": {
+                "type": "double"
+              },
+              "process_temp_K": {
+                "type": "double"
+              },
+              "scored_at": {
+                "type": "date"
+              },
+              "rpm": {
+                "type": "double"
+              },
+              "anomaly_alert": {
+                "type": "boolean"
+              },
+              "prediction_scope": {
+                "type": "keyword"
+              },
+              "event_id": {
+                "type": "keyword"
+              },
+              "tool_wear_min": {
+                "type": "double"
+              },
+              "risk_threshold": {
+                "type": "double"
+              }
+            }
+          }
+        },
+        "composed_of": [],
+        "created_date_millis": 1792676568986,
+        "modified_date_millis": 1792676568986
+      }
+    }
+  ]
+}

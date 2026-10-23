@@ -6,12 +6,15 @@ import json
 import math
 import signal
 import sys
+from contextlib import ExitStack
 from pathlib import Path
 from threading import Event
 
 import httpx
 
+from scripts.archive_consumer import mkdir
 from scripts.durable_pipeline import Pipeline
+from scripts.platform_io import exclusive_lock
 
 
 def positive(value):
@@ -85,7 +88,7 @@ def main(argv=None):
 
     stop = Event()
     handlers = {}
-    with asyncio.Runner() as runner:
+    with asyncio.Runner() as runner, ExitStack() as ownership:
         client = httpx.AsyncClient(trust_env=False)
         try:
             pipeline = Pipeline(
@@ -143,6 +146,13 @@ def main(argv=None):
                 )
             from kafka import KafkaConsumer
 
+            # Hold across subscribe/poll/commit/close, not only persistence.
+            # A second direct CLI or NiFi cycle on this root must fail before
+            # joining the group and provoking a rebalance of the active owner.
+            mkdir(args.root)
+            ownership.enter_context(
+                exclusive_lock(args.root / "kafka-owner.lock", blocking=False)
+            )
             for signum in (signal.SIGINT, signal.SIGTERM):
                 handlers[signum] = signal.signal(signum, lambda *_: stop.set())
             consumer = KafkaConsumer(
