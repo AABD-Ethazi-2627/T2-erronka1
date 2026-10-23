@@ -23,7 +23,7 @@ Si se modifica una dependencia, actualizar primero el lock con `uv lock` y despu
 CI rechaza el export desfasado. El Dockerfile instala únicamente esa clausura con
 uv 0.13.5, hashes obligatorios y wheels; la imagen Python y el binario uv tienen
 digests verificados. El binario uv también queda sujeto a la auditoría de tooling.
-La base Debian 13 utiliza un snapshot firmado y seis paquetes de seguridad con
+Python se fija en la revisión de seguridad 3.11.17. La base Debian 13 utiliza un snapshot firmado y seis paquetes de seguridad con
 versión exacta en `scoring/debian-security.txt`. `Check-Valid-Until: no` permite
 reproducir ese snapshot histórico; la comprobación de firmas sigue activa.
 Se retiran pip/setuptools/wheel del runtime, incluidos los bundles de ensurepip.
@@ -111,3 +111,6 @@ separados. La colección pytest de aplicación no importa `tests/research`; ese
 directorio se verifica con el Python preparado desde su propio requirements,
 como hace `ml-study.yml`. La auditoría conserva ambas versiones cuando un mismo
 paquete aparece con pins distintos en los dos entornos.
+
+Los jobs de configuración usan Docker Compose 5.6.1 fijado mediante un action por
+SHA; no dependen de la versión preinstalada en la imagen del runner.
