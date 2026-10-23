@@ -1,0 +1,26 @@
+{
+  "method": "CRLF to LF for readable public copies only; JSON values unchanged; exact originals remain in indexed ZIP archives",
+  "files": {
+    "business-seal.json": {
+      "original_sha256": "0fcefd3f3cdee0874dcc4f98a15f481f6d4c3a3ac20e54bfe597e75e2d5bcbec",
+      "published_sha256": "c477caa068d5e0e13a5393606a3462f4548305d79898364ed95d2f8bc5dd21af"
+    },
+    "hardware.json": {
+      "original_sha256": "fbb8cf38ecda8b492d816f502c32d42e16f53b748b6fe3a04421b6f5e88a5de7",
+      "published_sha256": "642d8af16cbf78d90f5936ca8af138e357f9e7226f9bf99fb543548098b7565f"
+    },
+    "independent-arithmetic-audit.json": {
+      "original_sha256": "525ae5ce04d83d9145dbe15b47fd374ef3f732a6129f67d52a078105ac963bb6",
+      "published_sha256": "3157b5f994292fbe8a193162cd6700fc18de2b9d5e55163b40d1258fb52647a5"
+    },
+    "native-builds.json": {
+      "original_sha256": "d508b584386118215715e4a3db2307dd08980c835e53306022fb8fdd6cc23ea5",
+      "published_sha256": "0813b73dd25eaf84bf4cd92cb7c9a28a7c35979c296022d66152d35c74a57d7a"
+    },
+    "package-admission.json": {
+      "original_sha256": "ba000335f3b3270f203b3420efbd9bfd33764d2387490455b09853e2cb5f32da",
+      "published_sha256": "ce7e663f959be5550f6a2f1598e4816ca10f3b3b15d36c744e6a4787f1ed574d"
+    }
+  },
+  "svg": "Public SVG trims trailing whitespace; original Matplotlib bytes preserved in supplemental ZIP"
+}

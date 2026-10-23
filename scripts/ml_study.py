@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import importlib.metadata
 import json
+import logging
 import os
 import platform
 import subprocess
@@ -11,7 +12,7 @@ import sys
 import time
 import traceback
 import warnings
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import joblib
@@ -38,6 +39,7 @@ CODE = [
     "scoring/scope.py",
 ]
 GIB = 1024**3
+LOGGER = logging.getLogger(__name__)
 
 
 def digest(path):
@@ -113,21 +115,21 @@ def metrics(y, score, cutoff):
     tp, fn = int(np.sum(pred & (y == 1))), int(np.sum(~pred & (y == 1)))
     fp, tn = int(np.sum(pred & (y == 0))), int(np.sum(~pred & (y == 0)))
     precision, recall = tp / max(tp + fp, 1), tp / max(tp + fn, 1)
-    return dict(
-        n=len(y),
-        positives=int(y.sum()),
-        tp=tp,
-        fn=fn,
-        fp=fp,
-        tn=tn,
-        recall=recall,
-        precision=precision,
-        f1=2 * tp / max(2 * tp + fp + fn, 1),
-        f2=5 * tp / max(5 * tp + fp + 4 * fn, 1),
-        average_precision=float(average_precision_score(y, score)),
-        roc_auc=float(roc_auc_score(y, score)),
-        cost_per_1000=(100 * fp + 1200 * fn) * 1000 / len(y),
-    )
+    return {
+        "n": len(y),
+        "positives": int(y.sum()),
+        "tp": tp,
+        "fn": fn,
+        "fp": fp,
+        "tn": tn,
+        "recall": recall,
+        "precision": precision,
+        "f1": 2 * tp / max(2 * tp + fp + fn, 1),
+        "f2": 5 * tp / max(5 * tp + fp + 4 * fn, 1),
+        "average_precision": float(average_precision_score(y, score)),
+        "roc_auc": float(roc_auc_score(y, score)),
+        "cost_per_1000": (100 * fp + 1200 * fn) * 1000 / len(y),
+    }
 
 
 def choose_threshold(y, score, fp_cost=100, fn_cost=1200):
@@ -182,21 +184,22 @@ def smoke(output):
                 )
                 path.unlink()  # Only our own synthetic scratch artifact.
                 report.append(
-                    dict(
-                        name=spec["name"],
-                        status="complete",
-                        warnings=[str(w.message) for w in caught],
-                        wall_seconds=time.perf_counter() - start,
-                    )
+                    {
+                        "name": spec["name"],
+                        "status": "complete",
+                        "warnings": [str(w.message) for w in caught],
+                        "wall_seconds": time.perf_counter() - start,
+                    }
                 )
             except Exception:
+                LOGGER.exception("Synthetic candidate failed: %s", spec["name"])
                 report.append(
-                    dict(
-                        name=spec["name"],
-                        status="error",
-                        error=traceback.format_exc(),
-                        wall_seconds=time.perf_counter() - start,
-                    )
+                    {
+                        "name": spec["name"],
+                        "status": "error",
+                        "error": traceback.format_exc(),
+                        "wall_seconds": time.perf_counter() - start,
+                    }
                 )
     write_json(output / "smoke.json", report)
     print(json.dumps(report), flush=True)
@@ -210,97 +213,97 @@ def seal(output, smoke_path):
         raise ValueError("All synthetic adapters must complete before seal")
     train, membership = source_train()
     outer = [dict(**f, inner=folds(train.loc[f["fit"]], 42)) for f in folds(train, 43)]
-    manifest = dict(
-        schema=1,
-        created_at=datetime.now(timezone.utc).isoformat(),
-        base_commit=subprocess.check_output(
+    manifest = {
+        "schema": 1,
+        "created_at": datetime.now(UTC).isoformat(),
+        "base_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
         ).strip(),
-        source_sha256=APPROVED_SOURCE_SHA256,
-        membership=membership,
-        code={p: digest(ROOT / p) for p in CODE},
-        environment={
+        "source_sha256": APPROVED_SOURCE_SHA256,
+        "membership": membership,
+        "code": {p: digest(ROOT / p) for p in CODE},
+        "environment": {
             d.metadata["Name"]: d.version for d in importlib.metadata.distributions()
         },
-        python=platform.python_version(),
-        platform=platform.platform(),
-        smoke_sha256=digest(smoke_path),
-        catalog=catalog(),
-        core=CORE,
-        screening=folds(train, 42),
-        outer=outer,
-        rule=dict(
-            fp_euros=100,
-            fn_hours=1,
-            euros_per_hour=1200,
-            recall_floor=0.76,
-            tie_break=["fewer_fn", "lower_inner_latency", "catalog_order"],
-        ),
-        budgets=dict(
-            cpu_hours=dict(screening=3, nested=8, secondary=2, benchmark=1),
-            gpu_seconds=7200,
-            pilot_seconds=600,
-            rss_bytes=2 * GIB,
-            host_available_bytes=4 * GIB,
-            disk_free_bytes=10 * GIB,
-            evidence_bytes=2 * GIB,
-            gpu_memory_bytes=4 * GIB,
-            gpu_free_bytes=6 * GIB,
-            screening_fit_seconds=60,
-            nested_fit_seconds=120,
-        ),
-        primary_backend="cpu",
-        reload_atol=1e-12,
-        constant_classifier_threshold=0.5,
-        pilot=dict(
-            models=["cat_d4_False", "xgb_d3_True"],
-            devices=["cpu", "cuda"],
-            repeats=2,
-            fit_rows=outer[0]["inner"][0]["fit"],
-            held_rows=outer[0]["inner"][0]["held"],
-            use_for_selection=False,
-            rule=(
+        "python": platform.python_version(),
+        "platform": platform.platform(),
+        "smoke_sha256": digest(smoke_path),
+        "catalog": catalog(),
+        "core": CORE,
+        "screening": folds(train, 42),
+        "outer": outer,
+        "rule": {
+            "fp_euros": 100,
+            "fn_hours": 1,
+            "euros_per_hour": 1200,
+            "recall_floor": 0.76,
+            "tie_break": ["fewer_fn", "lower_inner_latency", "catalog_order"],
+        },
+        "budgets": {
+            "cpu_hours": {"screening": 3, "nested": 8, "secondary": 2, "benchmark": 1},
+            "gpu_seconds": 7200,
+            "pilot_seconds": 600,
+            "rss_bytes": 2 * GIB,
+            "host_available_bytes": 4 * GIB,
+            "disk_free_bytes": 10 * GIB,
+            "evidence_bytes": 2 * GIB,
+            "gpu_memory_bytes": 4 * GIB,
+            "gpu_free_bytes": 6 * GIB,
+            "screening_fit_seconds": 60,
+            "nested_fit_seconds": 120,
+        },
+        "primary_backend": "cpu",
+        "reload_atol": 1e-12,
+        "constant_classifier_threshold": 0.5,
+        "pilot": {
+            "models": ["cat_d4_False", "xgb_d3_True"],
+            "devices": ["cpu", "cuda"],
+            "repeats": 2,
+            "fit_rows": outer[0]["inner"][0]["fit"],
+            "held_rows": outer[0]["inner"][0]["held"],
+            "use_for_selection": False,
+            "rule": (
                 "Only accelerate a separately documented round if total time "
                 "improves >=25%; primary pool remains CPU. CPU/GPU are different "
                 "implementations, not score-equivalent."
             ),
-        ),
-        optional=dict(
-            calibration=dict(
-                scope="top2 inner-ranked per outer plus RF without duplication",
-                methods=["raw75", "sigmoid", "isotonic"],
-                fit_fraction=0.75,
-                calibration_fraction=0.25,
-                seed=43,
-                budget_cpu_hours=2,
-            ),
-            stacking=(
+        },
+        "optional": {
+            "calibration": {
+                "scope": "top2 inner-ranked per outer plus RF without duplication",
+                "methods": ["raw75", "sigmoid", "isotonic"],
+                "fit_fraction": 0.75,
+                "calibration_fraction": 0.25,
+                "seed": 43,
+                "budget_cpu_hours": 2,
+            },
+            "stacking": (
                 "not executed in this round: additional nesting outside "
                 "initial implementation"
             ),
-            abstention="not executed: no preregistered human capacity/decision policy",
-        ),
-        limitations=[
+            "abstention": "not executed: human capacity/decision policy unspecified",
+        },
+        "limitations": [
             "Development data already explored; no independent final test",
             "No validation scoring; excluded test untouched for evaluation",
             "Reading full CSV for integrity and original membership only",
             "Anomaly labels unavailable: failure=0 is normality proxy",
             "No served model or API changes",
         ],
-    )
+    }
     output.mkdir(parents=True, exist_ok=False)
     write_json(output / "manifest.json", manifest)
     write_json(
-        output / "seal.json", dict(manifest_sha256=digest(output / "manifest.json"))
+        output / "seal.json", {"manifest_sha256": digest(output / "manifest.json")}
     )
     print(
         json.dumps(
-            dict(
-                output=str(output),
-                manifest_sha256=digest(output / "manifest.json"),
-                train_rows=len(train),
-                train_positives=int(train.machine_failure.sum()),
-            )
+            {
+                "output": str(output),
+                "manifest_sha256": digest(output / "manifest.json"),
+                "train_rows": len(train),
+                "train_positives": int(train.machine_failure.sum()),
+            }
         )
     )
 
@@ -345,6 +348,10 @@ def worker(output, task_path):
         a = time.perf_counter()
         scores = model.score(held[INPUT_FEATURES])
         prediction_seconds = time.perf_counter() - a
+        native_score_dtype = str(np.asarray(scores).dtype)
+        # Preserve exact float32 values in a CSV independently readable as
+        # float64; shortest float32 text can cross a decimal alert boundary.
+        scores = np.asarray(scores, dtype=np.float64)
         if not np.isfinite(scores).all():
             raise ValueError("Nonfinite predictions")
         if not spec["anomaly"] and (np.min(scores) < 0 or np.max(scores) > 1):
@@ -367,45 +374,48 @@ def worker(output, task_path):
                 model.score(held[INPUT_FEATURES].iloc[:1])
                 latency.append(1000 * (time.perf_counter() - a))
     predictions = pd.DataFrame(
-        dict(
-            source_row_index=held.index,
-            label=held.machine_failure.to_numpy(),
-            score=scores,
-        )
+        {
+            "source_row_index": held.index,
+            "label": held.machine_failure.to_numpy(),
+            "score": scores,
+        }
     )
     predictions.to_csv(unit / "scores.csv", index=False)
     write_json(
         unit / "result.json",
-        dict(
-            status="complete",
-            model=task["model"],
-            device=task.get("device", "cpu"),
-            task_sha256=digest(task_path),
-            fit_rows_sha256=canonical(task["fit"]),
-            held_rows_sha256=canonical(task["held"]),
-            preparation_included_in_fit=True,
-            preparation_seconds=model.preparation_seconds_,
-            fit_positive_support=getattr(model, "fit_positive_support_", None),
-            calibration_positive_support=getattr(
+        {
+            "status": "complete",
+            "model": task["model"],
+            "device": task.get("device", "cpu"),
+            "task_sha256": digest(task_path),
+            "fit_rows_sha256": canonical(task["fit"]),
+            "held_rows_sha256": canonical(task["held"]),
+            "preparation_included_in_fit": True,
+            "preparation_seconds": model.preparation_seconds_,
+            "fit_positive_support": getattr(model, "fit_positive_support_", None),
+            "calibration_positive_support": getattr(
                 model, "calibration_positive_support_", None
             ),
-            fit_seconds=fit_seconds - model.preparation_seconds_,
-            prediction_seconds=prediction_seconds,
-            cpu_seconds=time.process_time() - begin_cpu,
-            wall_seconds=time.perf_counter() - begin,
-            warnings=[
-                dict(category=w.category.__name__, message=str(w.message))
+            "fit_seconds": fit_seconds - model.preparation_seconds_,
+            "prediction_seconds": prediction_seconds,
+            "native_score_dtype": native_score_dtype,
+            "cpu_seconds": time.process_time() - begin_cpu,
+            "wall_seconds": time.perf_counter() - begin,
+            "warnings": [
+                {"category": w.category.__name__, "message": str(w.message)}
                 for w in caught
             ],
-            scores_sha256=digest(unit / "scores.csv"),
-            reload_max_difference=reload_difference,
-            model_sha256=digest(artifact) if artifact else None,
-            model_bytes=artifact.stat().st_size if artifact else None,
-            warm_process_batch1_p50_ms=float(np.median(latency)) if latency else None,
-            warm_process_batch1_p95_ms=float(np.quantile(latency, 0.95))
+            "scores_sha256": digest(unit / "scores.csv"),
+            "reload_max_difference": reload_difference,
+            "model_sha256": digest(artifact) if artifact else None,
+            "model_bytes": artifact.stat().st_size if artifact else None,
+            "warm_process_batch1_p50_ms": float(np.median(latency))
             if latency
             else None,
-        ),
+            "warm_process_batch1_p95_ms": float(np.quantile(latency, 0.95))
+            if latency
+            else None,
+        },
     )
 
 
@@ -496,14 +506,14 @@ def execute(output, manifest, task, stage, timeout):
         if free < budget["gpu_free_bytes"]:
             write_json(
                 unit / "accounting.json",
-                dict(
-                    stage=stage,
-                    status="not_executed_vram",
-                    cpu_seconds=0,
-                    gpu_seconds=0,
-                    wall_seconds=0,
-                    peak_rss_bytes=0,
-                ),
+                {
+                    "stage": stage,
+                    "status": "not_executed_vram",
+                    "cpu_seconds": 0,
+                    "gpu_seconds": 0,
+                    "wall_seconds": 0,
+                    "peak_rss_bytes": 0,
+                },
             )
             return unit, "not_executed_vram"
     status = "complete"
@@ -572,26 +582,26 @@ def execute(output, manifest, task, stage, timeout):
         cpu_peak = max(cpu_peak, read_json(unit / "result.json")["cpu_seconds"])
     write_json(
         unit / "accounting.json",
-        dict(
-            stage=stage,
-            status=status,
-            exit_code=code,
-            cpu_seconds=cpu_peak + max_threads * 0.2,
-            cpu_sample_seconds=cpu_peak,
-            cpu_method=(
+        {
+            "stage": stage,
+            "status": status,
+            "exit_code": code,
+            "cpu_seconds": cpu_peak + max_threads * 0.2,
+            "cpu_sample_seconds": cpu_peak,
+            "cpu_method": (
                 "process-tree CPU samples plus 0.2s per peak thread for unsampled tail"
             ),
-            gpu_seconds=elapsed if gpu else 0,
-            wall_seconds=elapsed,
-            peak_rss_bytes=rss_peak,
-            gpu_total_peak_bytes=gpu_peak,
-            gpu_baseline_bytes=gpu_used_start,
-            gpu_memory_method=(
+            "gpu_seconds": elapsed if gpu else 0,
+            "wall_seconds": elapsed,
+            "peak_rss_bytes": rss_peak,
+            "gpu_total_peak_bytes": gpu_peak,
+            "gpu_baseline_bytes": gpu_used_start,
+            "gpu_memory_method": (
                 "device total sampled; delta may include desktop workloads"
             )
             if gpu
             else None,
-        ),
+        },
     )
     print(
         f"{stage} {task['model']} {task.get('fold', '')} "
@@ -663,7 +673,9 @@ def inner_ranking(output, names, outer=None):
         latency = sum(
             read_json(p / "result.json")["prediction_seconds"] for _, p in found
         ) / len(scores)
-        ranking.append(dict(name=name, threshold=cutoff, metrics=m, latency=latency))
+        ranking.append(
+            {"name": name, "threshold": cutoff, "metrics": m, "latency": latency}
+        )
     eligible = [r for r in ranking if r["metrics"]["recall"] >= 0.76]
     return sorted(
         eligible,

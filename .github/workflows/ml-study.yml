@@ -2,8 +2,7 @@ name: ML research smoke
 on:
   pull_request:
     paths:
-      - 'scripts/ml_study*'
-      - 'scripts/report_ml_study.py'
+      - 'scripts/*ml_study*'
       - 'tests/research/**'
       - '.github/workflows/ml-study.yml'
   workflow_dispatch:
@@ -24,7 +23,7 @@ jobs:
           persist-credentials: false
       - name: Install separate research environment
         run: |
-          python3 -m pip install uv==0.13.1
+          python3 -m pip install uv==0.11.19
           uv venv --python 3.12 /tmp/cncguard-research
           uv pip sync --python /tmp/cncguard-research/bin/python scripts/ml_study_requirements.txt
       - name: Test protocol and every adapter with synthetic fixtures only

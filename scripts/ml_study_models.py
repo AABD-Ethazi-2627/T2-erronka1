@@ -53,7 +53,9 @@ def catalog():
     specs = []
 
     def add(name, family, **params):
-        specs.append(dict(name=name, family=family, params=params, anomaly=False))
+        specs.append(
+            {"name": name, "family": family, "params": params, "anomaly": False}
+        )
 
     add("rf_reference", "rf")
     add("gb_depth3", "gb")
@@ -101,7 +103,9 @@ def catalog():
         ("ae2", "ae", {"bottleneck": 2}),
         ("ae3", "ae", {"bottleneck": 3}),
     ]:
-        specs.append(dict(name=name, family=family, params=params, anomaly=True))
+        specs.append(
+            {"name": name, "family": family, "params": params, "anomaly": True}
+        )
     assert len(specs) == 50
     return specs
 

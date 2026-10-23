@@ -1,0 +1,75 @@
+{
+  "calibration_selector": {
+    "A": {
+      "n": 5600,
+      "positives": 190,
+      "tp": 166,
+      "fn": 24,
+      "fp": 29,
+      "tn": 5381,
+      "recall": 0.8736842105263158,
+      "precision": 0.8512820512820513,
+      "f1": 0.8623376623376623,
+      "f2": 0.8691099476439791,
+      "average_precision": 0.8918463178906386,
+      "roc_auc": 0.969743165677595,
+      "cost_per_1000": 5660.714285714285
+    },
+    "B": {
+      "n": 5600,
+      "positives": 190,
+      "tp": 163,
+      "fn": 27,
+      "fp": 32,
+      "tn": 5378,
+      "recall": 0.8578947368421053,
+      "precision": 0.8358974358974359,
+      "f1": 0.8467532467532467,
+      "f2": 0.8534031413612565,
+      "average_precision": 0.8918463178906386,
+      "roc_auc": 0.969743165677595,
+      "cost_per_1000": 6357.142857142857
+    },
+    "critica": {
+      "n": 5600,
+      "positives": 190,
+      "tp": 141,
+      "fn": 49,
+      "fp": 3,
+      "tn": 5407,
+      "recall": 0.7421052631578947,
+      "precision": 0.9791666666666666,
+      "f1": 0.844311377245509,
+      "f2": 0.7798672566371682,
+      "average_precision": 0.8918463178906386,
+      "roc_auc": 0.969743165677595,
+      "cost_per_1000": 10553.57142857143
+    },
+    "bootstrap_A": {
+      "method": "paired stratified bootstrap, 2000 resamples seed42 of FIXED OOF predictions",
+      "conditional_only": true,
+      "cost_delta_per_1000_95": [
+        -428.57142857142856,
+        -125.0
+      ],
+      "recall_delta_95": [
+        0.0,
+        0.0
+      ]
+    },
+    "bootstrap_B": {
+      "method": "paired stratified bootstrap, 2000 resamples seed42 of FIXED OOF predictions",
+      "conditional_only": true,
+      "cost_delta_per_1000_95": [
+        -535.7142857142857,
+        1696.8749999999975
+      ],
+      "recall_delta_95": [
+        -0.05263157894736842,
+        0.0
+      ]
+    }
+  },
+  "analysis_v2_comparison": "Primary selectors, fixed choice, 40 model results and calibration choices exactly equal to v1; calibrated ties now explicitly use inner latency then preregistered order.",
+  "scope": "Additional read-only arithmetic on stored outer predictions; no fit or retuning"
+}

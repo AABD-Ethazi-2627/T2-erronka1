@@ -1,6 +1,8 @@
 """Read-only analysis of sealed study evidence; never fits an estimator."""
 
 import argparse
+import importlib.metadata
+import platform
 from pathlib import Path
 
 import numpy as np
@@ -8,17 +10,40 @@ import pandas as pd
 from sklearn.metrics import brier_score_loss, log_loss, precision_recall_curve
 
 from scripts.ml_study import (
+    ROOT,
     accounting,
     choose_threshold,
     completed_units,
     digest,
-    inner_ranking,
     metrics,
     primary_names,
     read_json,
-    verify,
     write_json,
 )
+from scripts.ml_study import (
+    inner_ranking as recorded_inner_ranking,
+)
+
+
+def verify_evidence(output):
+    """Validate executed source bytes, including an archived immutable run."""
+    manifest = read_json(output / "manifest.json")
+    if (
+        digest(output / "manifest.json")
+        != read_json(output / "seal.json")["manifest_sha256"]
+    ):
+        raise ValueError("Manifest seal changed")
+    source_root = output / "sealed-code" if (output / "sealed-code").is_dir() else ROOT
+    for path, expected in manifest["code"].items():
+        if digest(source_root / path) != expected:
+            raise ValueError("Executed source provenance mismatch: " + path)
+    actual = {d.metadata["Name"]: d.version for d in importlib.metadata.distributions()}
+    if (
+        actual != manifest["environment"]
+        or platform.python_version() != manifest["python"]
+    ):
+        raise ValueError("Analysis runtime differs from sealed research environment")
+    return manifest
 
 
 def load_rows(records):
@@ -30,6 +55,16 @@ def load_rows(records):
         if digest(path / "task.json") != result["task_sha256"]:
             raise ValueError("Task artifact corruption")
         frame = pd.read_csv(path / "scores.csv", float_precision="round_trip")
+        if task["model"].startswith("xgb_"):
+            # pandas wrote native float32 with its shortest round-trip text.
+            # Decode that native dtype before promoting for metric arithmetic.
+            decoded = frame.score.to_numpy().astype(np.float32).astype(np.float64)
+            if not np.array_equal(
+                np.argsort(frame.score.to_numpy(), kind="stable"),
+                np.argsort(decoded, kind="stable"),
+            ):
+                raise ValueError("Native float32 decoding changed ranking")
+            frame["score"] = decoded
         if frame.source_row_index.tolist() != task["held"]:
             raise ValueError("Held membership/order mismatch")
         frames.append(frame)
@@ -37,6 +72,55 @@ def load_rows(records):
     if combined.source_row_index.duplicated().any():
         raise ValueError("OOF rows must occur exactly once")
     return combined
+
+
+def inner_ranking(output, names, outer=None):
+    """Same sealed selector, decoding original score dtype without retuning."""
+    ranking = []
+    records = completed_units(output)
+    for name in names:
+        found = [
+            (t, p)
+            for t, p in records
+            if t["model"] == name
+            and t["phase"] == ("screening" if outer is None else "inner")
+            and (outer is None or t["fold"][0] == outer)
+        ]
+        if len(found) != 3:
+            raise ValueError("Incomplete inner coverage")
+        rows = load_rows(found)
+        cut = cutoff(name, rows)
+        m = metrics(rows.label, rows.score, cut)
+        latency = sum(
+            read_json(p / "result.json")["prediction_seconds"] for _, p in found
+        ) / len(rows)
+        ranking.append(
+            {"name": name, "threshold": cut, "metrics": m, "latency": latency}
+        )
+    result = sorted(
+        [r for r in ranking if r["metrics"]["recall"] >= 0.76],
+        key=lambda r: (
+            r["metrics"]["cost_per_1000"],
+            r["metrics"]["fn"],
+            r["latency"],
+            names.index(r["name"]),
+        ),
+    )
+    recorded = recorded_inner_ranking(output, names, outer)
+    if [r["name"] for r in result] != [r["name"] for r in recorded]:
+        raise ValueError("Native dtype changed selector: investigate before reporting")
+    for restored, original in zip(result, recorded, strict=True):
+        expected = (
+            float(np.float32(original["threshold"]))
+            if restored["name"].startswith("xgb_")
+            else original["threshold"]
+        )
+        if restored["threshold"] != expected or any(
+            restored["metrics"][k] != original["metrics"][k]
+            for k in ("tp", "fn", "fp", "tn")
+        ):
+            raise ValueError("Decoding changed selection operating point")
+    return result
 
 
 def cutoff(name, rows, fp=100, fn=1200):
@@ -50,23 +134,25 @@ def cutoff(name, rows, fp=100, fn=1200):
 def reliability(rows):
     y, p = rows.label.to_numpy(), rows.score.to_numpy()
     bins = np.minimum((p * 5).astype(int), 4)
-    return dict(
-        brier=float(brier_score_loss(y, p)),
-        log_loss=float(log_loss(y, p, labels=[0, 1])),
-        bins=[
-            dict(
-                lower=k / 5,
-                upper=(k + 1) / 5,
-                n=int(np.sum(bins == k)),
-                positives=int(y[bins == k].sum()),
-                mean_score=float(np.mean(p[bins == k])) if np.any(bins == k) else None,
-                failure_rate=float(np.mean(y[bins == k]))
+    return {
+        "brier": float(brier_score_loss(y, p)),
+        "log_loss": float(log_loss(y, p, labels=[0, 1])),
+        "bins": [
+            {
+                "lower": k / 5,
+                "upper": (k + 1) / 5,
+                "n": int(np.sum(bins == k)),
+                "positives": int(y[bins == k].sum()),
+                "mean_score": float(np.mean(p[bins == k]))
                 if np.any(bins == k)
                 else None,
-            )
+                "failure_rate": float(np.mean(y[bins == k]))
+                if np.any(bins == k)
+                else None,
+            }
             for k in range(5)
         ],
-    )
+    }
 
 
 def paired_bootstrap(reference, challenger, prediction_column):
@@ -91,19 +177,19 @@ def paired_bootstrap(reference, challenger, prediction_column):
         recall_delta.append(
             float(np.sum(bi & (yi == 1)) - np.sum(ai & (yi == 1))) / len(positives)
         )
-    return dict(
-        method=(
+    return {
+        "method": (
             "paired stratified bootstrap, 2000 resamples seed42 "
             "of FIXED OOF predictions"
         ),
-        conditional_only=True,
-        cost_delta_per_1000_95=np.quantile(cost_delta, [0.025, 0.975]).tolist(),
-        recall_delta_95=np.quantile(recall_delta, [0.025, 0.975]).tolist(),
-    )
+        "conditional_only": True,
+        "cost_delta_per_1000_95": np.quantile(cost_delta, [0.025, 0.975]).tolist(),
+        "recall_delta_95": np.quantile(recall_delta, [0.025, 0.975]).tolist(),
+    }
 
 
 def report(output, destination):
-    manifest = verify(output)
+    manifest = verify_evidence(output)
     records = completed_units(output)
     coverage = []
     for spec in manifest["catalog"]:
@@ -113,12 +199,12 @@ def report(output, destination):
             if task["model"] == spec["name"]:
                 a = read_json(path)
                 rows.append(
-                    dict(
-                        phase=task["phase"],
-                        fold=task["fold"],
-                        status=a["status"],
-                        unit=path.parent.name,
-                    )
+                    {
+                        "phase": task["phase"],
+                        "fold": task["fold"],
+                        "status": a["status"],
+                        "unit": path.parent.name,
+                    }
                 )
         coverage.append(
             dict(
@@ -136,18 +222,23 @@ def report(output, destination):
                 ),
             )
         )
-    analysis = dict(
-        manifest_sha256=digest(output / "manifest.json"),
-        accounting=accounting(output),
-        coverage=coverage,
-        screening={},
-        models={},
-        anomalies={},
-        selectors={},
-        calibration={},
-        pilot={},
-        packages=[],
-    )
+    analysis = {
+        "manifest_sha256": digest(output / "manifest.json"),
+        "accounting": accounting(output),
+        "coverage": coverage,
+        "screening": {},
+        "models": {},
+        "anomalies": {},
+        "selectors": {},
+        "calibration": {},
+        "pilot": {},
+        "packages": [],
+        "csv_score_decoding": (
+            "round_trip float64; XGBoost outputs decoded through native float32 "
+            "then promoted to float64. Selector identity/error counts verified "
+            "unchanged; package threshold receives same native-dtype decoding."
+        ),
+    }
     for spec in manifest["catalog"]:
         name = spec["name"]
         screen = [
@@ -158,9 +249,10 @@ def report(output, destination):
         if len(screen) == 3 and not spec["anomaly"]:
             rows = load_rows(screen)
             cut = cutoff(name, rows)
-            analysis["screening"][name] = dict(
-                threshold=cut, exploratory_metrics=metrics(rows.label, rows.score, cut)
-            )
+            analysis["screening"][name] = {
+                "threshold": cut,
+                "exploratory_metrics": metrics(rows.label, rows.score, cut),
+            }
         if spec["anomaly"]:
             continue
         outer_records = [
@@ -168,21 +260,31 @@ def report(output, destination):
         ]
         if len(outer_records) != 3:
             continue
+        if any(
+            sum(
+                t["model"] == name and t["phase"] == "inner" and t["fold"][0] == outer
+                for t, _ in records
+            )
+            != 3
+            for outer in range(3)
+        ):
+            # Coverage keeps the failure; never infer a complete procedure
+            # from successful refits with an incomplete inner cohort.
+            continue
         outer_frames, fold_results = [], []
         sensitivities = {
             f"fp{fp}_fn{fn}": [] for fp in (25, 100, 300) for fn in (600, 1200, 4800)
         }
         for task, path in sorted(outer_records, key=lambda r: r[0]["fold"]):
             outer = task["fold"]
-            inner = load_rows(
-                [
-                    (t, p)
-                    for t, p in records
-                    if t["model"] == name
-                    and t["phase"] == "inner"
-                    and t["fold"][0] == outer
-                ]
-            )
+            inner_records = [
+                (t, p)
+                for t, p in records
+                if t["model"] == name
+                and t["phase"] == "inner"
+                and t["fold"][0] == outer
+            ]
+            inner = load_rows(inner_records)
             rows = load_rows([(task, path)])
             cut = cutoff(name, inner)
             rows["outer"] = outer
@@ -192,44 +294,44 @@ def report(output, destination):
             outer_frames.append(rows)
             result = read_json(path / "result.json")
             fold_results.append(
-                dict(
-                    outer=outer,
-                    threshold=cut,
-                    inner_metrics=metrics(inner.label, inner.score, cut),
-                    optimized=metrics(rows.label, rows.score, cut),
-                    aviso=metrics(rows.label, rows.score, 0.15),
-                    critica=metrics(rows.label, rows.score, 0.70),
-                    resources=result,
-                    accounting=read_json(path / "accounting.json"),
-                )
+                {
+                    "outer": outer,
+                    "threshold": cut,
+                    "inner_metrics": metrics(inner.label, inner.score, cut),
+                    "optimized": metrics(rows.label, rows.score, cut),
+                    "aviso": metrics(rows.label, rows.score, 0.15),
+                    "critica": metrics(rows.label, rows.score, 0.70),
+                    "resources": result,
+                    "accounting": read_json(path / "accounting.json"),
+                }
             )
             for fp in (25, 100, 300):
                 for fn in (600, 1200, 4800):
                     c = cutoff(name, inner, fp, fn)
                     m = metrics(rows.label, rows.score, c)
                     sensitivities[f"fp{fp}_fn{fn}"].append(
-                        dict(
-                            outer=outer,
-                            threshold=c,
-                            fp=m["fp"],
-                            fn=m["fn"],
-                            cost_euros=fp * m["fp"] + fn * m["fn"],
-                        )
+                        {
+                            "outer": outer,
+                            "threshold": c,
+                            "fp": m["fp"],
+                            "fn": m["fn"],
+                            "cost_euros": fp * m["fp"] + fn * m["fn"],
+                        }
                     )
         all_rows = pd.concat(outer_frames, ignore_index=True)
         if len(all_rows) != 5600 or all_rows.source_row_index.duplicated().any():
             raise ValueError("Incomplete outer cohort")
-        analysis["models"][name] = dict(
-            optimized=metrics(all_rows.label, all_rows.score, all_rows.threshold),
-            aviso=metrics(all_rows.label, all_rows.score, 0.15),
-            critica=metrics(all_rows.label, all_rows.score, 0.70),
-            mean_fold_ap=float(
+        analysis["models"][name] = {
+            "optimized": metrics(all_rows.label, all_rows.score, all_rows.threshold),
+            "aviso": metrics(all_rows.label, all_rows.score, 0.15),
+            "critica": metrics(all_rows.label, all_rows.score, 0.70),
+            "mean_fold_ap": float(
                 np.mean([r["optimized"]["average_precision"] for r in fold_results])
             ),
-            folds=fold_results,
-            sensitivity=sensitivities,
-            reliability=reliability(all_rows),
-        )
+            "folds": fold_results,
+            "sensitivity": sensitivities,
+            "reliability": reliability(all_rows),
+        }
         analysis["models"][name]["_rows"] = all_rows
     names = primary_names(output, manifest)
     analysis["primary_pool"] = names
@@ -243,24 +345,24 @@ def report(output, destination):
             rows = analysis["models"][chosen["name"]]["_rows"]
             selected_rows.append(rows.loc[rows.outer == outer].copy())
             decisions.append(
-                dict(
-                    outer=outer,
-                    selected=chosen["name"],
-                    inner_threshold=chosen["threshold"],
-                    inner_metrics=chosen["metrics"],
-                )
+                {
+                    "outer": outer,
+                    "selected": chosen["name"],
+                    "inner_threshold": chosen["threshold"],
+                    "inner_metrics": chosen["metrics"],
+                }
             )
         rows = pd.concat(selected_rows, ignore_index=True)
-        analysis["selectors"][label] = dict(
-            decisions=decisions,
-            optimized=metrics(rows.label, rows.score, rows.threshold),
-            aviso=metrics(rows.label, rows.score, 0.15),
-            critica=metrics(rows.label, rows.score, 0.70),
-            meaning=(
+        analysis["selectors"][label] = {
+            "decisions": decisions,
+            "optimized": metrics(rows.label, rows.score, rows.threshold),
+            "aviso": metrics(rows.label, rows.score, 0.15),
+            "critica": metrics(rows.label, rows.score, 0.70),
+            "meaning": (
                 "Evaluates selector procedure, NOT the subsequently "
                 "packaged fixed model"
             ),
-        )
+        }
     # Historical AP+F2 selection rule, reconstructed within each outer-train.
     history_rows, history_decisions = [], []
     for outer in range(3):
@@ -290,12 +392,12 @@ def report(output, destination):
         rows = rows.loc[rows.outer == outer].copy()
         rows["threshold"] = cut
         history_rows.append(rows)
-        history_decisions.append(dict(outer=outer, name=name, threshold=cut))
+        history_decisions.append({"outer": outer, "name": name, "threshold": cut})
     rows = pd.concat(history_rows)
-    analysis["selectors"]["historical_ap_f2"] = dict(
-        decisions=history_decisions,
-        optimized=metrics(rows.label, rows.score, rows.threshold),
-    )
+    analysis["selectors"]["historical_ap_f2"] = {
+        "decisions": history_decisions,
+        "optimized": metrics(rows.label, rows.score, rows.threshold),
+    }
     reference = analysis["models"]["rf_reference"]["_rows"]
     for name, result in analysis["models"].items():
         if name != "rf_reference":
@@ -337,39 +439,39 @@ def report(output, destination):
             rows["flag"] = rows.score >= cut
             frames.append(rows)
             fold_stats.append(
-                dict(
-                    outer=outer,
-                    threshold=cut,
-                    normal_inner_rows=len(normal),
-                    normal_inner_flags=int(np.sum(normal.score >= cut)),
-                )
+                {
+                    "outer": outer,
+                    "threshold": cut,
+                    "normal_inner_rows": len(normal),
+                    "normal_inner_flags": int(np.sum(normal.score >= cut)),
+                }
             )
         if len(frames) == 3:
             rows = pd.concat(frames)
-            analysis["anomalies"][name] = dict(
-                n=len(rows),
-                positive_proxy=int(rows.label.sum()),
-                total_flags=int(rows.flag.sum()),
-                failure_labels_flagged=int(np.sum(rows.flag & (rows.label == 1))),
-                normal_proxy_flags=int(np.sum(rows.flag & (rows.label == 0))),
-                rf_fn_recovered=int(
+            analysis["anomalies"][name] = {
+                "n": len(rows),
+                "positive_proxy": int(rows.label.sum()),
+                "total_flags": int(rows.flag.sum()),
+                "failure_labels_flagged": int(np.sum(rows.flag & (rows.label == 1))),
+                "normal_proxy_flags": int(np.sum(rows.flag & (rows.label == 0))),
+                "rf_fn_recovered": int(
                     np.sum(rows.flag & ~rows.aviso_prediction & (rows.label == 1))
                 ),
-                false_alarms_added=int(
+                "false_alarms_added": int(
                     np.sum(rows.flag & ~rows.aviso_prediction & (rows.label == 0))
                 ),
-                rf_fn_denominator=int(
+                "rf_fn_denominator": int(
                     np.sum(~rows.aviso_prediction & (rows.label == 1))
                 ),
-                rf_normal_no_alert_denominator=int(
+                "rf_normal_no_alert_denominator": int(
                     np.sum(~rows.aviso_prediction & (rows.label == 0))
                 ),
-                folds=fold_stats,
-                meaning=(
+                "folds": fold_stats,
+                "meaning": (
                     "Failure-label diagnostic only; no anomaly ground truth; "
                     "never suppress RF"
                 ),
-            )
+            }
     for name in manifest["pilot"]["models"]:
         rows = []
         score_records = {}
@@ -380,58 +482,70 @@ def report(output, destination):
                 scores = load_rows([(task, path)])
                 score_records[(task["device"], task["fold"])] = scores
                 rows.append(
-                    dict(
-                        device=task["device"],
-                        repeat=task["fold"],
-                        resources=result,
-                        accounting=account,
-                        metrics=metrics(scores.label, scores.score, 0.15),
-                    )
+                    {
+                        "device": task["device"],
+                        "repeat": task["fold"],
+                        "resources": result,
+                        "accounting": account,
+                        "metrics": metrics(scores.label, scores.score, 0.15),
+                    }
                 )
         comparisons = []
         for repeat in range(manifest["pilot"]["repeats"]):
             if ("cpu", repeat) in score_records and ("cuda", repeat) in score_records:
                 a, b = score_records[("cpu", repeat)], score_records[("cuda", repeat)]
                 comparisons.append(
-                    dict(
-                        repeat=repeat,
-                        max_score_difference=float(np.max(np.abs(a.score - b.score))),
-                        mean_score_difference=float(np.mean(np.abs(a.score - b.score))),
-                        aviso_disagreements=int(
+                    {
+                        "repeat": repeat,
+                        "max_score_difference": float(
+                            np.max(np.abs(a.score - b.score))
+                        ),
+                        "mean_score_difference": float(
+                            np.mean(np.abs(a.score - b.score))
+                        ),
+                        "aviso_disagreements": int(
                             np.sum((a.score >= 0.15) != (b.score >= 0.15))
                         ),
-                    )
+                    }
                 )
-        analysis["pilot"][name] = dict(runs=rows, comparisons=comparisons)
+        analysis["pilot"][name] = {"runs": rows, "comparisons": comparisons}
     for outer in range(3):
         variants = []
         for task, path in records:
             if task["phase"] != "calibration_outer" or task["fold"] != outer:
                 continue
             name, method = task["model"], task["calibration"]
-            inner = load_rows(
-                [
-                    (t, p)
-                    for t, p in records
-                    if t["phase"] == "calibration_inner"
-                    and t["model"] == name
-                    and t["calibration"] == method
-                    and t["fold"][0] == outer
-                ]
-            )
+            inner_records = [
+                (t, p)
+                for t, p in records
+                if t["phase"] == "calibration_inner"
+                and t["model"] == name
+                and t["calibration"] == method
+                and t["fold"][0] == outer
+            ]
+            if len(inner_records) != 3:
+                raise ValueError("Incomplete calibration inner cohort")
+            inner = load_rows(inner_records)
             rows = load_rows([(task, path)])
             cut = cutoff(name, inner)
             variants.append(
-                dict(
-                    name=name,
-                    method=method,
-                    threshold=cut,
-                    inner=metrics(inner.label, inner.score, cut),
-                    outer=metrics(rows.label, rows.score, cut),
-                    aviso=metrics(rows.label, rows.score, 0.15),
-                    reliability=reliability(rows),
-                    support=read_json(path / "result.json"),
-                )
+                {
+                    "name": name,
+                    "method": method,
+                    "threshold": cut,
+                    "inner": metrics(inner.label, inner.score, cut),
+                    "outer": metrics(rows.label, rows.score, cut),
+                    "aviso": metrics(rows.label, rows.score, 0.15),
+                    "reliability": reliability(rows),
+                    "support": read_json(path / "result.json"),
+                    "inner_latency": (
+                        sum(
+                            read_json(p / "result.json")["prediction_seconds"]
+                            for _, p in inner_records
+                        )
+                        / len(inner)
+                    ),
+                }
             )
         if variants:
             eligible = [r for r in variants if r["inner"]["recall"] >= 0.76]
@@ -440,33 +554,34 @@ def report(output, destination):
                 key=lambda r: (
                     r["inner"]["cost_per_1000"],
                     r["inner"]["fn"],
-                    r["name"],
-                    r["method"],
+                    r["inner_latency"],
+                    names.index(r["name"]),
+                    manifest["optional"]["calibration"]["methods"].index(r["method"]),
                 ),
             )
-            analysis["calibration"][str(outer)] = dict(
-                variants=variants,
-                selected=dict(
-                    name=chosen["name"],
-                    method=chosen["method"],
-                    threshold=chosen["threshold"],
-                    outer=chosen["outer"],
-                ),
-            )
+            analysis["calibration"][str(outer)] = {
+                "variants": variants,
+                "selected": {
+                    "name": chosen["name"],
+                    "method": chosen["method"],
+                    "threshold": chosen["threshold"],
+                    "outer": chosen["outer"],
+                },
+            }
     for task, path in records:
         if task["phase"] == "package":
             analysis["packages"].append(
-                dict(
-                    model=task["model"],
-                    threshold=task["threshold"],
-                    fit_rows=len(task["fit"]),
-                    probe=(
+                {
+                    "model": task["model"],
+                    "threshold": task["threshold"],
+                    "fit_rows": len(task["fit"]),
+                    "probe": (
                         "32 TRAINING rows, reload/latency ONLY; "
                         "no generalization metrics"
                     ),
-                    resources=read_json(path / "result.json"),
-                    unit=path.name,
-                )
+                    "resources": read_json(path / "result.json"),
+                    "unit": path.name,
+                }
             )
     analysis["fixed_choice_from_5600_inner"] = inner_ranking(output, names)[0]
     destination.mkdir(parents=True, exist_ok=False)

@@ -1,29 +1,29 @@
-# Estado de la exploración ML, 23/10/2026
+# Continuidad CNC Guard: estudio ejecutado
 
-Objetivo: ejecutar #83–#89 y recomendar con evidencia; sin cambiar el modelo servido.
-Worktree T3: `C:/Users/unaiu/.t3/worktrees/B-taldea/t3-e86974d3`.
-Rama: `kali/ml-alternatives-kalista-study`; base remota verificada:
-`41cb66f0f3a967bcc4e72c6e251586898edceee9`.
+Estado al 23/10/2026: no hay experimento activo. Trabajo en worktree T3
+`kali/ml-alternatives-kalista-study`, base remota verificada
+`41cb66f0f3a967bcc4e72c6e251586898edceee9`. No usar el checkout Linux antiguo.
 
-Leídas políticas globales Windows, política MKDL, instrucciones heredadas y cuerpos
-y comentarios actuales de #83–#89 (sin comentarios al iniciar). No hay AGENTS.md
-versionado. Worktree limpio al comenzar. El remoto B-taldea redirige al mismo main
-que T2-erronka1. No se usan checkouts anteriores ni sus outputs.
+Raíz local: `D:/cnc-guard-research/study-20261023-v2`.
+Entorno: `D:/cnc-guard-research/venv-20261023/Scripts/python.exe`.
+Fuentes de fit selladas en `e644737` y conservadas en `sealed-code/`.
+Manifiesto: `d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b`.
 
-Hardware observado: Ryzen 5 7600X, 6C/12T; RAM 31,1 GiB, ~7,8 GiB disponibles;
-RTX 5070 Ti 16 GiB, driver 630.20, ~2,4 GiB ocupados. CUDA visible desde Windows
-y FedoraLinux-43 WSL2. WSL tiene límite existente ~7,8 GiB; no se modifica.
-Sin procesos de experimentos ML detectados en Windows/WSL ni otro hilo activo
-del proyecto. Hay servicios personales y aplicaciones de escritorio: preservarlos.
+Completados: piloto8, screening150, nested600, calibración72, refit1: 831 unidades.
+Sin puntuar validación reutilizada ni test excluido. Sin cambio del modelo servido.
+Consumo acumulado 1,427684 CPU-h y 0,038558 GPU-h. No hay necesidad de más fits.
 
-Límites fijados antes de scores: un experimento y un hilo por biblioteca; RSS del
-árbol de procesos <=2 GiB, memoria disponible del host >=4 GiB, evidencia <=2 GiB,
-disco libre >=10 GiB; VRAM del experimento <=4 GiB y libre >=6 GiB. CPU acumulada
-14 h (screening 3, nested 8, secundarios 2, benchmark 1). GPU acumulada 2 h,
-piloto <=10 min; contabilización conservadora por duración de proceso GPU.
-El piloto puede desaconsejar GPU; no cambia silenciosamente el backend del pool.
+Análisis inicial en `analysis-v2`; matriz docente recibida después en
+`analysis-business-v1`. No reemplazar uno con otro. Ambos eligen RF como
+especificación fija; la matriz docente cambia el selector pool40 a AdaBoost/RF/RF.
+Recomendación final: conservar RF y 0,15/0,70. Ver informe CG34 y registro de ejecución.
 
-Próximo paso: resolver entorno research aislado en D:, implementar protocolo,
-smoke sintético, sellar folds/configuración antes de scores y ejecutar piloto.
-No hay entrenamiento nuevo ejecutado todavía. Validación reutilizada y test
-excluido no se puntúan en este estudio. Históricos no son ejecuciones actuales.
+Archivos originales de evidencia y añadido docente tienen hashes/CRC completos.
+173 artefactos CPU recargados con diferencia cero. Pruebas16 y smoke50 pasan;
+lint/formato, estructura, CG25, catálogo y lock comprobados localmente.
+El runner actual incorpora correcciones de serialización/estilo posteriores;
+no permite reanudar el sello histórico con bytes diferentes. No repetir unidades.
+
+Publicación de rama/PR y comentarios de issues pendiente en este punto de cierre.
+No hacer merge, desplegar ni modificar Project/fechas. Registrar URL del PR en T3.
+Separar CI y revisión humana de estas comprobaciones locales.

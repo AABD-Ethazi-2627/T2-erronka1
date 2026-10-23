@@ -59,9 +59,11 @@ class StudyProtocolTests(unittest.TestCase):
                 manifest["pilot"]["fit_rows"],
                 manifest["outer"][0]["inner"][0]["fit"],
             )
-            with self.assertRaises(FileExistsError):
-                with patch("scripts.ml_study.source_train", return_value=(frame, {})):
-                    seal(output, smoke)
+            with (
+                self.assertRaises(FileExistsError),
+                patch("scripts.ml_study.source_train", return_value=(frame, {})),
+            ):
+                seal(output, smoke)
             (output / "manifest.json").write_text("{}")
             with self.assertRaisesRegex(ValueError, "seal changed"):
                 verify(output)
