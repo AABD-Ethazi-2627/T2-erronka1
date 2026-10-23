@@ -3,6 +3,11 @@
 Fuente: https://github.com/orgs/AABD-Ethazi-2627/projects/2
 Destino: https://github.com/orgs/AABD-Ethazi-2627/projects/1
 
+El repositorio canónico es `AABD-Ethazi-2627/T2-erronka1`; `B-taldea` sigue
+siendo el nombre del equipo y el valor de `Taldea`. El filtro de contenido usa
+el nombre canónico exacto devuelto por GitHub, sin ampliar el acceso a otros
+repositorios. La URL antigua redirige al repositorio actual.
+
 El workflow `sync-projects.yml` se ejecuta a las 00:17, 08:17 y 16:17 UTC
 (GitHub puede retrasarlo), y manualmente desde Actions. Debe estar en `main`.
 No se ejecuta en pushes ni PRs y nunca escribe en Project #2.

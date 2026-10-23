@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-23T16:38:39.3776583Z",
+  "status": "original_bundle_located_and_copy_verified",
+  "project_base": "5005ccde81f16cd2deac6ee3b30085d773e0fc88",
+  "cg32_candidate": "c49813df9eb0ee9a4735c1af4372ddc85c01d9e3",
+  "identity_reference": "docs/evidence/CG26_REHEARSAL_2026-10-21.json",
+  "source": "D:\\github\\_local\\t2-babysit-20261021\\cg26-demo-0915\\outputs\\cg26-linux-complete\\api",
+  "verified_copy": "D:\\github\\_local\\t2-review-20261023\\delivery-bundle",
+  "sha256": {
+    "manifest.json": "a6cc7a29f0b061e114e046865cf7ac4a3969111a904a0281f1919aff35ea0945",
+    "rf.pkl": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+    "if.pkl": "a12304b474f290841a435ffb7d9caaa65c0843ce537267d28686a9d0f49aae79"
+  },
+  "model_version": "ai4i-current-state-v4",
+  "recorded_runtime": {
+    "python": "3.11.15",
+    "sklearn": "1.5.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "joblib": "1.4.2"
+  },
+  "risk_threshold": 0.19082281465428477,
+  "anomaly_threshold": 0.6145036167334864,
+  "limits": [
+    "Verificacion de identidad y copia; no acredita rendimiento ni E2E.",
+    "No se ha reentrenado ni modificado el bundle.",
+    "risk_alert usa el umbral F2 del manifiesto; alert_level conserva 0.15 y 0.70."
+  ]
+}

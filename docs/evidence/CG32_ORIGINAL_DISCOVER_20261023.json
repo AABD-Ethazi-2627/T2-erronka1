@@ -1,0 +1,23 @@
+{
+  "lab_project": "cg32-1ba594f6",
+  "manifest_sha256": "a6cc7a29f0b061e114e046865cf7ac4a3969111a904a0281f1919aff35ea0945",
+  "event_id": "83536630e8030ebd00b0380c2ae1b5a895741af29c99c513d464b3a014ba9b66",
+  "source_record_ref": "cg32-original-pilot-retry-r1-a1d2e9/0/0",
+  "index": "cnc-alerts-cg32-original-pilot-retry-r1-a1d2e9",
+  "data_view_id": "d02faa4f-74b1-43ac-a4db-9f886090a931",
+  "url": "http://127.0.0.1:32771/app/discover#/?_g=(time:(from:'2026-10-22T00:00:00Z',to:'2026-10-24T00:00:00Z'))&_a=(dataSource:(dataViewId:'d02faa4f-74b1-43ac-a4db-9f886090a931',type:dataView),query:(language:kuery,query:'event_id:\"83536630e8030ebd00b0380c2ae1b5a895741af29c99c513d464b3a014ba9b66\"'))",
+  "es_exact_event_hits": 1,
+  "ui_verification": "observed_in_chrome_ax_and_screenshot",
+  "observed_documents": 1,
+  "observed_event_id": "83536630e8030ebd00b0380c2ae1b5a895741af29c99c513d464b3a014ba9b66",
+  "observed_model_artifact_sha256": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+  "observed_source_record_ref": "cg32-original-pilot-retry-r1-a1d2e9/0/0",
+  "ui_checked_at_utc": "2026-10-23T16:59:39.133409+00:00",
+  "browser": "Chrome extension through cua_repl, after two T3 snapshot timeouts",
+  "preview_error": "Preview automation snapshot timed out after 15000ms.",
+  "screenshot_evidence": "Image inspected in conversation tool history; no standalone PNG exported",
+  "limits": [
+    "Private pilot Discover view; no global accessibility or operational acceptance.",
+    "No standalone screenshot file is claimed."
+  ]
+}

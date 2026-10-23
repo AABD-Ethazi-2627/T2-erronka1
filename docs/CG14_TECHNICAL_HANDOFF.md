@@ -1,5 +1,9 @@
 # CG14 — technical handoff
 
+> Estado vigente al 23/10/2026: [aceptación PM y trabajo separado](CG14_STATUS_20261023.md).
+> El corte histórico siguiente conserva las observaciones de su autor; las
+> instrucciones sobre mantener #14 abierta no describen el estado actual.
+
 Corte de publicación: 2026-10-21. Rama `feat/14-nifi-validation`; revisión en
 Draft contra `main`. **Estado global PARTIAL; issue #14 debe seguir abierta.**
 

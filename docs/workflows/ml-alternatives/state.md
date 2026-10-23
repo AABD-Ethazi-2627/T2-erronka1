@@ -1,8 +1,14 @@
 # Continuidad CNC Guard: estudio ejecutado
 
-Estado al 23/10/2026: no hay experimento activo. Trabajo en worktree T3
-`kali/ml-alternatives-kalista-study`, base remota verificada
-`41cb66f0f3a967bcc4e72c6e251586898edceee9`. No usar el checkout Linux antiguo.
+Estado al 23/10/2026: estudio sellado completado; revisión documental sin nuevos
+fits ni inferencias. Checkout de revisión `D:/github/AABD-Ethazi-2627/B-taldea`,
+rama `review/pending-20261023`, base de revisión
+`5005ccde81f16cd2deac6ee3b30085d773e0fc88`. En el cierre el checkout compartido
+avanzó a `c122a675a245c8a70ac4b5c43cd6ec6acf77478a`; la evidencia histórica
+examinada conserva sus hashes. Los cambios de otros agentes quedan fuera de
+esta revisión documental.
+La ejecución histórica usó el worktree T3 `kali/ml-alternatives-kalista-study`,
+base `41cb66f0f3a967bcc4e72c6e251586898edceee9`. No usar el checkout Linux antiguo.
 
 Raíz local: `D:/cnc-guard-research/study-20261023-v2`.
 Entorno: `D:/cnc-guard-research/venv-20261023/Scripts/python.exe`.
@@ -11,7 +17,9 @@ Manifiesto: `d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b`.
 
 Completados: piloto8, screening150, nested600, calibración72, refit1: 831 unidades.
 Sin puntuar validación reutilizada ni test excluido. Sin cambio del modelo servido.
-Consumo acumulado 1,427684 CPU-h y 0,038558 GPU-h. No hay necesidad de más fits.
+Consumo al cierre del estudio/análisis: 1,427684 CPU-h y 0,038558 GPU-h.
+Con el lote adicional ya ejecutado: 1,464869 CPU-h y 0,038558 GPU-h.
+No hay necesidad de más fits.
 
 Análisis inicial en `analysis-v2`; matriz docente recibida después en
 `analysis-business-v1`. No reemplazar uno con otro. Ambos eligen RF como
@@ -19,26 +27,59 @@ especificación fija; la matriz docente cambia el selector pool40 a AdaBoost/RF/
 Recomendación final: conservar RF y 0,15/0,70. Ver informe CG34 y registro de ejecución.
 
 Archivos originales de evidencia y añadido docente tienen hashes/CRC completos.
-173 artefactos CPU recargados con diferencia cero. Pruebas16 y smoke50 pasan;
-lint/formato, estructura, CG25, catálogo y lock comprobados localmente.
+173 artefactos CPU recargados con diferencia cero. Verificaciones históricas:
+16 pruebas y smoke50 pasaron; lint/formato, estructura, CG25, catálogo y lock
+comprobados localmente.
 El runner actual incorpora correcciones de serialización/estilo posteriores;
 no permite reanudar el sello histórico con bytes diferentes. No repetir unidades.
 
 Rama publicada y [PR #90](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/90)
-abierto, revisable y enlazado a este hilo T3. Commit de implementación/evidencia:
+fusionada el 23/10/2026 a las 11:45:09 UTC: merge
+`5005ccde81f16cd2deac6ee3b30085d773e0fc88`, head
+`3a5c3cf4d318ba254b8d461b9a03a8242bb32bd3`.
+Estado/head/merge verificados en GitHub durante esta revisión.
+Commit histórico de implementación/evidencia:
 `ddb0386ab907256712c2dbc32429c164697073e1`.
-Las tres CI pasan en ese commit: ML research smoke, Repository layout y Validate
-CNC Guard. El último commit documental tiene su estado propio en el PR.
-#83 actualizado con ejecución, GPU y matriz docente; comentarios #84–#89 y
+Las tres CI pasaron en ese commit: ML research smoke, Repository layout y Validate
+CNC Guard; no se consultaron de nuevo en esta ronda.
+Seguimiento histórico: #83 actualizado con ejecución, GPU y matriz docente; comentarios #84–#89 y
 #80–#82 publicados y verificados. Referencias en `CG34_20261023/feedback.json`.
 No se cerraron issues ni se cambiaron responsables/fechas del Project.
-No hacer merge o desplegar. Revisión humana, integración, HTTP/E2E y aceptación
-permanecen pendientes; no se necesitan más fits para reproducir la recomendación.
+La integración Git de #90 está resuelta. No hacer nuevas operaciones remotas o
+desplegar desde esta revisión. Revisión humana, disposición PM, aceptación y una
+eventual promoción del paquete research siguen separadas. HTTP/E2E se gestiona
+en #81 con su evidencia propia; las mediciones privadas concurrentes del padre
+quedan fuera de este flujo. No se necesitan más fits para revisar la recomendación.
 
-Última instrucción: probar ZIP adjunto sin columnas de error en X. Ejecutado en
+Última ejecución ML histórica: probar ZIP adjunto sin columnas de error en X.
+Ejecutado en
 `D:/cnc-guard-research/batch-eval-20261023-v1`: 507 CSV, 5.070 eventos/2.000 únicos,
 sin coincidencias exactas con las 8.000 anteriores. RF final: TP58/FN10/FP20 en
 únicos al corte0,15; recall85,29%, precision74,36%. Inferencia de151artefactos
 terminada sin avisos, sin ajustes. 22pruebas y auditor aritmético pasan.
 Datos/etiquetas/predicciones locales; solo código/agregados para PR90.
 Ver `runs/20261023-batch.md`; no repetir `run` sobre esa salida exclusiva.
+
+## Revisión de interpretación del 23/10/2026
+
+[Informe revisable por issue](../../evidence/ML_DECISION_REVIEW_20261023.md):
+#85 referencias/ablaciones/CART; #87 EBM/GAM y casos; #88 MLP/rareza/AE2/avisos;
+#89 nested/calibración/contrato; #83 disposición consolidada. Propuesta:
+conservar RF servido y 0,15/0,70, sin atribuir aceptación PM/docente. Las cinco
+issues siguen abiertas en la captura de esta revisión; no se publicaron cambios.
+
+Evidencia de esta ronda: lectura GitHub, JSON y ZIP; 1.801 comprobaciones de
+matrices, 40 agregaciones por fold, 12 reconstrucciones EBM/GAM y diez condiciones
+CART. Sellos/CRC y 831 resultados completos verificados, conservando 27 avisos
+(24 QDA, dos CUDA, uno AE2 sin convergencia). Ningún estimador cargado o ejecutado.
+Logs, snapshots y auditor:
+`D:/github/_local/t2-review-20261023/ml-decision/validation.json` y
+`validate_decision.py`. Las pruebas/recargas/CI anteriores no se repitieron.
+
+Pendiente verdadero: revisión de responsables sobre reglas, explicaciones y
+recursos; disposición humana de #85/#87/#88 y después #89/#83; incorporación y
+explicación propia en #80/#37/#26. No hay firma, cierre o participación individual
+acreditados por este informe. Mantener no ejecutados/condicionados según manifiesto
+y no promover un corte research, calibrador o unión RF+rareza.
+Siguiente acción: revisar el informe con las fuentes enlazadas y registrar la
+decisión humana cuando exista, sin repetir entrenamiento ni tocar el lab del padre.

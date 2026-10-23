@@ -1,5 +1,9 @@
 # CG14 — matriz de aceptación y evidencia
 
+> Estado vigente al 23/10/2026: [aceptación PM y trabajo separado](CG14_STATUS_20261023.md).
+> El corte histórico siguiente se conserva; sus reservas sobre #14 abierta y
+> aceptación PM pendiente han sido superadas por la decisión enlazada.
+
 Fecha de corte: 2026-10-21. Issue oficial: [#14](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/14). Los seis criterios oficiales exactos fueron recibidos del responsable; la matriz siguiente los transcribe y los vincula a evidencia existente. No se volvió a consultar GitHub.
 
 ## Corte vigente de publicación — 2026-10-21

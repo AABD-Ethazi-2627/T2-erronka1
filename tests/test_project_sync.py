@@ -33,7 +33,7 @@ def project(items=()):
     }
 
 
-def item(repo="AABD-Ethazi-2627/B-taldea", values=None):
+def item(repo="AABD-Ethazi-2627/T2-erronka1", values=None):
     return {
         "id": "i",
         "isArchived": False,
@@ -47,6 +47,12 @@ def item(repo="AABD-Ethazi-2627/B-taldea", values=None):
 
 
 class SyncTests(unittest.TestCase):
+    def test_canonical_repository_keeps_team_identity(self):
+        changes = plan(project([item()]), project())
+        self.assertEqual(
+            changes[0]["values"]["Taldea"], {"singleSelectOptionId": "B"}
+        )
+
     def test_new_issue_maps_status_and_dates(self):
         changes = plan(
             project(
@@ -99,8 +105,16 @@ class SyncTests(unittest.TestCase):
             plan(project([item(values={"Status": "Egiteke"})]), target)
 
     def test_foreign_repo_fails_before_mutation(self):
-        with self.assertRaises(ValueError):
-            plan(project([item(repo="other/repo")]), project())
+        for repository in (
+            "other/repo",
+            "other/T2-erronka1",
+            "AABD-Ethazi-2627/A-taldea",
+            "AABD-Ethazi-2627/T2-erronka1-copy",
+            "AABD-Ethazi-2627/B-taldea",
+        ):
+            with self.subTest(repository=repository):
+                with self.assertRaisesRegex(ValueError, "outside B-taldea"):
+                    plan(project([item(repo=repository)]), project())
 
     def test_unknown_status_fails(self):
         with self.assertRaises(ValueError):

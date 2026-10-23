@@ -1,0 +1,27 @@
+{
+  "manifest_sha256": "a6cc7a29f0b061e114e046865cf7ac4a3969111a904a0281f1919aff35ea0945",
+  "max": 67.72128699958557,
+  "measure": "predict_proba(RF)+score_samples(IF), 1 row DataFrame, perf_counter",
+  "model_version": "ai4i-current-state-v4",
+  "n": 600,
+  "p50": 7.467448005627375,
+  "p95": 11.07344300544355,
+  "warmup_excluded": 20,
+  "measure_unit": "milliseconds",
+  "runtime": {
+    "python": "3.11.15",
+    "sklearn": "1.5.0",
+    "joblib": "1.5.3",
+    "system": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.43"
+  },
+  "model_latency_function_sha256": "eec4084b4fdb507121d19fe624a8475aa2e20d9f51cb582579e69ef1f0d54015",
+  "model_latency_function_unchanged_from": "c49813df9eb0ee9a4735c1af4372ddc85c01d9e3",
+  "raw_timings": "D:/github/_local/t2-review-20261023/model.json",
+  "raw_timings_sha256": "080f0227c9140ed8d8ccff31fc61e57278a59a324b4a089067d37d0a641edd5a",
+  "limits": [
+    "RF+IF en proceso; no es latencia HTTP ni E2E.",
+    "600 observaciones nominales; 20 llamadas previas de calentamiento.",
+    "No hay reentreno, nueva evaluacion ML ni cambio de umbrales.",
+    "Medido antes del commit de identidad; funcion de medida sin cambios frente a PR91."
+  ]
+}

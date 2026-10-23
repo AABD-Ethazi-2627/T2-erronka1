@@ -6,7 +6,7 @@ import os
 import subprocess
 
 ORG = "AABD-Ethazi-2627"
-REPO = f"{ORG}/B-taldea"
+REPO = f"{ORG}/T2-erronka1"
 STATUS = {
     "Egiteke": "Todo",
     "Lanean": "In Progress",
