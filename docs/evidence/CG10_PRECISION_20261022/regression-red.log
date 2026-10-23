@@ -1,0 +1,62 @@
+test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) ...
+  test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) (cutoff=0.19082281465428474) ... FAIL
+  test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) (cutoff=0.19082281465428477) ... FAIL
+  test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) (cutoff=0.1908228146542848) ... FAIL
+
+======================================================================
+FAIL: test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) (cutoff=0.19082281465428474)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/d/github/_worktrees/t2-cg10-precision-20261022/tests/test_report_thresholds.py", line 59, in test_csv_threshold_equality_and_adjacent_floats
+    self.assertEqual(policy["confusion_matrix"], expected)
+AssertionError: Lists differ: [[1, 1], [2, 1]] != [[1, 1], [0, 3]]
+
+First differing element 1:
+[2, 1]
+[0, 3]
+
+- [[1, 1], [2, 1]]
+?           ^  ^
+
++ [[1, 1], [0, 3]]
+?           ^  ^
+
+
+======================================================================
+FAIL: test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) (cutoff=0.19082281465428477)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/d/github/_worktrees/t2-cg10-precision-20261022/tests/test_report_thresholds.py", line 59, in test_csv_threshold_equality_and_adjacent_floats
+    self.assertEqual(policy["confusion_matrix"], expected)
+AssertionError: Lists differ: [[1, 1], [2, 1]] != [[1, 1], [1, 2]]
+
+First differing element 1:
+[2, 1]
+[1, 2]
+
+- [[1, 1], [2, 1]]
+?            ---
+
++ [[1, 1], [1, 2]]
+?           +++
+
+
+======================================================================
+FAIL: test_csv_threshold_equality_and_adjacent_floats (test_report_thresholds.ThresholdReportTests.test_csv_threshold_equality_and_adjacent_floats) (cutoff=0.1908228146542848)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/d/github/_worktrees/t2-cg10-precision-20261022/tests/test_report_thresholds.py", line 60, in test_csv_threshold_equality_and_adjacent_floats
+    self.assertEqual(imshow.call_args.args[0], expected)
+AssertionError: Lists differ: [[999, 0], [0, 999]] != [[1, 1], [2, 1]]
+
+First differing element 0:
+[999, 0]
+[1, 1]
+
+- [[999, 0], [0, 999]]
++ [[1, 1], [2, 1]]
+
+----------------------------------------------------------------------
+Ran 1 test in 2.723s
+
+FAILED (failures=3)

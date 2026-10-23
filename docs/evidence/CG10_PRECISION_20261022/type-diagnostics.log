@@ -1,0 +1,19 @@
+
+STDERR:
+test_csv_preserves_real_threshold_boundary_for_source_row_7763 (test_type_diagnostics.TypeDiagnosticsTests.test_csv_preserves_real_threshold_boundary_for_source_row_7763) ... ok
+test_hand_computed_counts_and_threshold_equality (test_type_diagnostics.TypeDiagnosticsTests.test_hand_computed_counts_and_threshold_equality) ... ok
+test_reject_changed_split_including_excluded_test (test_type_diagnostics.TypeDiagnosticsTests.test_reject_changed_split_including_excluded_test) ... ok
+test_reject_duplicates_missing_rows_and_excluded_test_row (test_type_diagnostics.TypeDiagnosticsTests.test_reject_duplicates_missing_rows_and_excluded_test_row) ... ok
+test_reject_fractional_index (test_type_diagnostics.TypeDiagnosticsTests.test_reject_fractional_index) ... ok
+test_reject_invalid_cutoffs_and_extra_column (test_type_diagnostics.TypeDiagnosticsTests.test_reject_invalid_cutoffs_and_extra_column) ... ok
+test_reject_modified_source_bytes (test_type_diagnostics.TypeDiagnosticsTests.test_reject_modified_source_bytes) ... ok
+test_reject_wrong_labels_and_bad_scores (test_type_diagnostics.TypeDiagnosticsTests.test_reject_wrong_labels_and_bad_scores) ... ok
+test_reject_wrong_source_task_or_seed (test_type_diagnostics.TypeDiagnosticsTests.test_reject_wrong_source_task_or_seed) ... ok
+test_subgroups_reconcile_to_overall_and_order_is_irrelevant (test_type_diagnostics.TypeDiagnosticsTests.test_subgroups_reconcile_to_overall_and_order_is_irrelevant) ... ok
+test_undefined_rates_are_null (test_type_diagnostics.TypeDiagnosticsTests.test_undefined_rates_are_null) ... ok
+test_writer_preserves_prior_evidence (test_type_diagnostics.TypeDiagnosticsTests.test_writer_preserves_prior_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.608s
+
+OK
