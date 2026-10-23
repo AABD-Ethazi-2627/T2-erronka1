@@ -40,6 +40,7 @@ from scripts.build_automatic_graph_flow import build as build_flow
 REPO = Path(__file__).resolve().parents[1]
 COMPOSE = REPO / "deploy/cg32/compose.yaml"
 API_SERVER = REPO / "deploy/cg32/api_server.py"
+DELIVERY_RECORD = REPO / "docs/evidence/CG26_REHEARSAL_2026-10-21.json"
 TRIGGER = "Schedule bounded source cycle"
 # Budget agreed before starting (issue #81 step 6). Exceeding any stops the run.
 BUDGET = {
@@ -729,13 +730,20 @@ def preflight():
 
 def verify_bundle(path):
     path = Path(path).resolve()
-    manifest = json.loads(path.read_bytes())
-    for name, expected in manifest["files"].items():
+    identity = json.loads(DELIVERY_RECORD.read_bytes())
+    manifest_bytes = path.read_bytes()
+    manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
+    if manifest_sha256 != identity["manifest_sha256"]:
+        raise SystemExit("Bundle manifest differs from the sealed CG26 delivery")
+    manifest = json.loads(manifest_bytes)
+    if manifest.get("files") != identity["model_hashes"]:
+        raise SystemExit("Bundle file identities differ from the sealed CG26 delivery")
+    for name, expected in identity["model_hashes"].items():
         if sha_file(path.parent / name) != expected:
             raise SystemExit(f"Bundle artifact hash mismatch: {name}")
     return {
         "path": path,
-        "sha256": sha_file(path),
+        "sha256": manifest_sha256,
         "model_version": manifest.get("model_version"),
     }
 
