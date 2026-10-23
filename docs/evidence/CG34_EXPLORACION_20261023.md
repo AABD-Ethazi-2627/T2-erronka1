@@ -286,7 +286,11 @@ bytes originales se conservan. No se reentrenó para corregir esa representació
   cálculo principal, ejecutado por el mismo agente; no revisión humana independiente.
 - [Paquete fijo](CG34_20261023/packages.json): RF de investigación, seis entradas,
   `predict_proba`, score no calibrado y conversión con diferencia cero. SHA-256:
-  `6b33609caa275925ee0d23dcdacdb132308d924957d572af6cd3e0d5ebdd4444`.
+  `34a14ab97a0e1facc4f4eff10b7ed9227516cc853d7400abd351ccef17cffe72`,
+  ruta `analysis-v2/packages/rf_reference.joblib` dentro del ZIP. La exportación
+  anterior V1 también se conserva, con hash `6b33609c…`; no es el archivo al que
+  apunta el manifiesto público actual. El snapshot de informe dentro del ZIP
+  pertenece a aquel corte anterior; este informe corrige la referencia.
   Entrenado sobre 5.600 filas; los 32 probes de recarga son train, no evaluación final.
 - El [archivo de evidencia original](CG34_20261023/raw-evidence.zip) conserva scores por fila/fold, modelos propios, tareas,
   logs, contabilidad, fuente aprobada y código sellado. Su índice y SHA se publican
