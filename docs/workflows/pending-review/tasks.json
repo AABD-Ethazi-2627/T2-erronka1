@@ -1,0 +1,174 @@
+{
+  "tasks": [
+    {
+      "clientRequestId": "pending-20261023-tests-r1",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-tests-r1",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-docs-r1",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-docs-r1",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-integration-r1",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-integration-r1",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-composition-r2",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-composition-r2",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-ml-decision-r2",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-ml-decision-r2",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-closeout-review-r2",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-closeout-review-r2",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-hash-review-r3",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-hash-review-r3",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-academic-input-r4",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-academic-input-r4",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-oral-preparation-r4",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-oral-preparation-r4",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "clientRequestId": "pending-20261023-economic-notebook-r4",
+      "taskId": "node:delegated-task:command%3Amcp%3A93caf9eb-6413-46c8-b061-fd3f0ee505f9%3Adelegate-task%3Apending-20261023-economic-notebook-r4",
+      "status": "completed",
+      "providerInstanceId": "codex",
+      "model": "gpt-6.1-sol",
+      "options": [
+        {
+          "id": "reasoningEffort",
+          "value": "xhigh"
+        },
+        {
+          "id": "serviceTier",
+          "value": "priority"
+        }
+      ]
+    }
+  ]
+}

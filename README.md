@@ -14,6 +14,7 @@ en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOP
 
 [Índice de evidencias: alcance vigente y registros históricos](docs/evidence/INDEX_2026-10-19.md)
 · [Rúbrica actual y pendientes del 23/10](docs/rubrica/ESTADO_20261023.md)
+· [Revisión, correcciones y bloqueos del 23/10](docs/evidence/PENDING_REVIEW_20261023.md)
 · [Enunciado original](ENUNTZIATUA.md) · [Documentación](docs/README.md).
 
 ## Entorno y experimentos

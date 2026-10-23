@@ -1,0 +1,13 @@
+{
+  "reason": "Precommit diff check rejected CRLF; stored notebook normalized to UTF-8/LF",
+  "before_sha256": "9ab495b1552513d3df18537920dd355914eb829e9357f2e75bfca2f6e544aabc",
+  "after_sha256": "ff221989bfc0cd1fe2173aa08960836487282210f4cfded1356451ae3023277c",
+  "before_bytes": 267940,
+  "after_bytes": 267101,
+  "crlf_sequences_replaced": 839,
+  "notebook_json_equal": true,
+  "code_metadata_and_outputs_unchanged": true,
+  "nbformat_validation": "nbformat: valid",
+  "previous_executed_copy": "D:\\github\\_local\\t2-review-20261023\\economic-notebook\\notebook-crlf-before.ipynb",
+  "limits": "Serialization only; no cells, figures, calculations or parameters changed; original execution evidence preserved"
+}
