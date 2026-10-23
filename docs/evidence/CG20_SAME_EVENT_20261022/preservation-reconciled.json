@@ -1,0 +1,25 @@
+{
+  "containers": {
+    "before": 111,
+    "preserved": 111,
+    "mismatches": []
+  },
+  "volumes": {
+    "before": 78,
+    "preserved": 78,
+    "mismatches": []
+  },
+  "networks": {
+    "before": 11,
+    "preserved": 11,
+    "mismatches": []
+  },
+  "images_unchanged": true,
+  "old_kafka_layer_unchanged": true,
+  "docker_diff_order_only": {
+    "before_lines": 531,
+    "after_lines": 531,
+    "same_sorted_entries": true,
+    "scope": "Docker diff metadata/path entries; not a new content hash of foreign files"
+  }
+}

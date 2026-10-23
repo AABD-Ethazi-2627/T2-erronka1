@@ -1,0 +1,2 @@
+SOURCE     TARGET                                                                            FSTYPE OPTIONS
+/dev/loop1 /mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/es-posix ext4   rw,relatime

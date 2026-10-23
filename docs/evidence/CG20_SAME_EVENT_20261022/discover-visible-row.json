@@ -1,0 +1,6 @@
+{
+  "rows": [
+    "↦\n↦\n\n✄𐘗\n- actions, column 2, row 1\n✄𐘗\n\n279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b\n↦\nlab_fixture\n↦\nkafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1\n↦\ncnc-sensors-automatic-v1/0/0\n↦\nsynthetic-replay-only\n↦\n0.8\n↦\n0.5\n↦\nCRITICA\n↦\nOct 21, 2026 @ 10:00:00.000\n↦\nOct 22, 2026 @ 15:47:41.231\n↦\ncnc-alerts-automatic-v4\n↵"
+  ],
+  "url": "http://127.0.0.1:48899/app/discover#/view/cg20-own-discover?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:'2026-10-21T00:00:00.000Z',to:'2026-10-23T00:00:00.000Z'))&_tab=(tabId:'377942d4-1458-465b-b5da-74d532aee7c6')&_a=(columns:!(event_id,source.kind,source.uri,source.record_ref,model_version,failure_score,anomaly_score,alert_level,timestamp,scored_at,_index),dataSource:(dataViewId:cg20-own-events,type:dataView),filters:!(),grid:(),hideChart:!t,hideTable:!f,interval:auto,query:(language:kuery,query:'event_id:%20%22279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b%22'),rowsPerPage:10,sampleSize:10,sort:!(!(timestamp,desc)))"
+}

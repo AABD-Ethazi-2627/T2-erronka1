@@ -1,0 +1,19 @@
+{
+  "root": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/worker",
+  "manifest": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/pinned-manifest.json",
+  "source_namespace": "t2-cg20-b74cb05b34/generation-1",
+  "source_kind": "lab_fixture",
+  "legacy_source_kind": "cg14-lab-kafka",
+  "scoring_url": "http://172.27.0.1:56843/predict",
+  "es_url": "http://es:9200",
+  "es_index": "cnc-alerts-automatic-v4",
+  "bootstrap_servers": "kafka:19092",
+  "group_id": "cg14-auto-t2-cg20-b74cb05b34",
+  "topic": "cnc-sensors-automatic-v1",
+  "offset_reset": "earliest",
+  "max_records": 1,
+  "max_polls": 3,
+  "max_poll_interval_ms": 300000,
+  "attempts": 1,
+  "timeout": 0.5
+}
