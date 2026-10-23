@@ -7,24 +7,34 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.13.5'
+          python-version: ${{ matrix.python }}
+          enable-cache: false
+      - uses: docker/setup-compose-action@54042514f505b273907334ae2b9cdbb9a0213c1a # v2.4.0
+        with:
+          version: v5.6.1
       - name: Install locked environment
-        run: |
-          python3 -m pip install uv==0.13.1
-          uv sync --frozen --python 3.11 --extra kafka
+        run: uv sync --frozen --all-groups --extra kafka
       - name: Generate own model bundle for API acceptance tests
         run: |
-          uv run --frozen --extra kafka python -m scripts.experiment_rf
-          uv run --frozen --extra kafka python -m scripts.experiment_anomaly
-          uv run --frozen --extra kafka python -m scripts.package_model
-      - name: CG14 hermetic regression tests
-        run: uv run --frozen --extra kafka python -m pytest -q tests/test_cg14_*.py
+          uv run --frozen --all-groups --extra kafka python -m scripts.experiment_rf
+          uv run --frozen --all-groups --extra kafka python -m scripts.experiment_anomaly
+          uv run --frozen --all-groups --extra kafka python -m scripts.package_model
+      - name: Full regression suite
+        run: uv run --frozen --all-groups --extra kafka python -m pytest -q
       - name: Unit tests and immutable source audit
         run: |
-          uv run --frozen --extra kafka python -m unittest discover -s tests -v
-          uv run --frozen --extra kafka python -m scripts.audit_cg02 --check
+          uv run --frozen --all-groups --extra kafka python -m unittest discover -s tests -v
+          uv run --frozen --all-groups --extra kafka python -m scripts.audit_cg02 --check
           git diff --exit-code

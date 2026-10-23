@@ -7,6 +7,7 @@ services:
 
   # ── Kafka — Mezularitza bufferra (KRaft mode, zookeeper gabe) ────────────────
   kafka:
+    profiles: [historical-archive-only]
     image: apache/kafka:3.7.0
     container_name: cnc-kafka
     ports:
@@ -28,6 +29,7 @@ services:
 
   # ── Filebeat — CSV fitxategien irakurlea ─────────────────────────────────────
   filebeat:
+    profiles: [historical-archive-only]
     image: docker.elastic.co/beats/filebeat:8.11.0
     container_name: cnc-filebeat
     user: root
@@ -42,6 +44,7 @@ services:
 
   # ── Apache NiFi — Transformazioa eta bideratzea ──────────────────────────────
   nifi:
+    profiles: [historical-archive-only]
     image: apache/nifi:1.25.0
     container_name: cnc-nifi
     ports:
@@ -55,6 +58,7 @@ services:
 
   # ── Elasticsearch — Biltegiratze eta bilaketa ────────────────────────────────
   elasticsearch:
+    profiles: [historical-archive-only]
     image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
     container_name: cnc-elasticsearch
     ports:
@@ -69,6 +73,7 @@ services:
 
   # ── Kibana — Bistaratzea ─────────────────────────────────────────────────────
   kibana:
+    profiles: [historical-archive-only]
     image: docker.elastic.co/kibana/kibana:8.11.0
     container_name: cnc-kibana
     ports:
@@ -81,6 +86,7 @@ services:
 
   # ── Scoring API — ML inferentzia (3. fasea) ──────────────────────────────────
   scoring-api:
+    profiles: [historical-archive-only]
     build:
       context: ./scoring
     container_name: cnc-scoring
