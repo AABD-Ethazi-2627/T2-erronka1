@@ -68,7 +68,7 @@
 
 **Interfaces:** Consumes Tasks 1-3; produces one branch/PR with verified head SHA and precise validation limits.
 
-- [ ] Run frozen 3.11/3.12 suites, lint, immutable data audit, runtime export checks and applicable container smokes.
-- [ ] Obtain a fresh whole-branch review; fix important findings with focused regressions.
+- [x] Run frozen 3.11/3.12 suites, lint, immutable data audit, runtime export checks and applicable container smokes.
+- [x] Obtain a fresh whole-branch review; fix important findings with focused regressions.
 - [ ] Review the final diff, push this feature branch, create one PR against main and register it with T3.
 - [ ] Report the PR, chosen versions, retained scientific packages and pending CI/operational checks.

@@ -12,8 +12,10 @@ import time
 import tomllib
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
+from email.parser import BytesParser
 from pathlib import Path
 from urllib.request import Request, urlopen
+from zipfile import BadZipFile, ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -111,6 +113,23 @@ def audit(rows, root=ROOT, fetch=fetch_json, *, latest=False):
             result["audited_version"] = version
             result["requires_python"] = data["info"].get("requires_python")
             if status == "local-upstream-only":
+                result["upstream_requires_python"] = result["requires_python"]
+                wheel = root / row["source"]["path"]
+                with ZipFile(wheel) as archive:
+                    metadata = [
+                        name
+                        for name in archive.namelist()
+                        if name.endswith(".dist-info/METADATA")
+                    ]
+                    if len(metadata) != 1:
+                        raise ValueError("Ambiguous local wheel metadata")
+                    headers = BytesParser().parsebytes(archive.read(metadata[0]))
+                if (
+                    headers["Name"] != row["name"]
+                    or headers["Version"] != row["version"]
+                ):
+                    raise ValueError("Local wheel metadata does not match lock")
+                result["requires_python"] = headers["Requires-Python"]
                 result["limit"] = (
                     "Feed covers upstream; local changes require review and wheel regressions"
                 )
@@ -122,7 +141,7 @@ def audit(rows, root=ROOT, fetch=fetch_json, *, latest=False):
                     "requires_python": current["info"].get("requires_python"),
                     "active_advisory_groups": groups,
                 }
-        except (OSError, ValueError, KeyError, TypeError) as error:
+        except (OSError, ValueError, KeyError, TypeError, BadZipFile) as error:
             # Do not echo arbitrary network error strings or source URLs.
             result.update(status="error", error=type(error).__name__)
         return result

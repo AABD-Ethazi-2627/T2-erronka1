@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-23T11:38:41.165320+00:00",
+  "checked_at": "2026-10-23T11:48:44.358446+00:00",
   "passed": true,
   "coverage": "Every lock row, including optional groups, platform markers and local sources; uv additionally",
   "limit": "Advisory absence is not proof of safety or local patch correctness",
@@ -408,7 +408,8 @@
       "advisories": [],
       "active_advisory_groups": [],
       "audited_version": "3.0.11",
-      "requires_python": ">=3.8",
+      "requires_python": ">=3.9",
+      "upstream_requires_python": ">=3.8",
       "limit": "Feed covers upstream; local changes require review and wheel regressions",
       "latest": {
         "version": "3.0.11",

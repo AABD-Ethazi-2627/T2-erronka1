@@ -5,6 +5,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from zipfile import ZipFile
 
 from scripts.audit_dependencies import audit, uv_tool_version
 
@@ -92,7 +93,11 @@ class DependencyAuditTests(unittest.TestCase):
             root = Path(temporary)
             (root / "vendor").mkdir()
             wheel = root / "vendor/demo.whl"
-            wheel.write_bytes(b"test-wheel")
+            with ZipFile(wheel, "w") as archive:
+                archive.writestr(
+                    "kafka_python-1.0+cncguard.2.dist-info/METADATA",
+                    "Name: kafka-python\nVersion: 1.0+cncguard.2\nRequires-Python: >=3.9\n",
+                )
             digest = hashlib.sha256(wheel.read_bytes()).hexdigest()
             provenance = {
                 "upstream": {"version": "1.0"},
@@ -110,6 +115,10 @@ class DependencyAuditTests(unittest.TestCase):
             result = audit([row], root, metadata)
             self.assertTrue(result["passed"])
             self.assertEqual(result["packages"][0]["status"], "local-upstream-only")
+            self.assertEqual(result["packages"][0]["requires_python"], ">=3.9")
+            self.assertEqual(
+                result["packages"][0]["upstream_requires_python"], ">=3.11"
+            )
             wheel.write_bytes(b"tampered")
             self.assertFalse(audit([row], root, metadata)["passed"])
             row["source"]["path"] = "../outside.whl"

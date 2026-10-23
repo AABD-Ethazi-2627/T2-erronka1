@@ -4,7 +4,7 @@ Alcance: solo `AABD-Ethazi-2627/T2-erronka1`, base `41cb66f0`. Se revisaron las 
 
 ## Decisión y evidencia
 
-Actualizar API/HTTP/JSON Schema/figuras y mantener la base numérica probada. La ausencia de avisos no sustituye los contratos ni demuestra ausencia de vulnerabilidades. La consulta seleccionada cubre 58 filas del lock y uv adicional: **59 resultados, 0 errores, 0 grupos de avisos activos**. La wheel conserva una limitación explícita: la consulta se hace a su versión upstream y sus cambios locales requieren revisión/tests. [Resultado reproducible](DEPENDENCY_REFRESH_20261023/selected-lock-audit.json).
+Actualizar API/HTTP/JSON Schema/figuras y mantener la base numérica probada. La ausencia de avisos no sustituye los contratos ni demuestra ausencia de vulnerabilidades. La consulta seleccionada cubre 58 filas del lock y uv adicional: **59 resultados, 0 errores, 0 grupos de avisos activos**. El requisito Python del artefacto local (>=3.9) se lee de su METADATA y se separa del upstream (>=3.8). La wheel conserva una limitación explícita: la consulta se hace a su versión upstream y sus cambios locales requieren revisión/tests. [Resultado reproducible](DEPENDENCY_REFRESH_20261023/selected-lock-audit.json).
 
 La prueba RF prefijada usó exclusivamente las 5600 filas train y los mismos tres folds, sin ajustar hiperparámetros ni consultar validación/test. La candidata NumPy 2.4.6 + pandas 3.1 + scikit-learn 1.9.1 dio **scores OOF idénticos byte a byte** (AP 0.9020038074). No demuestra que otras funciones/modelos nuevos carezcan de valor. Cambió el esquema Parquet; dos subtests fallaron por el repr de escalares NumPy, no por corrupción numérica demostrada. PyArrow 26 aislado requiere NumPy 2. Los tiempos de una sola ejecución no son un benchmark fiable y no fundamentan capacidad HTTP. [Método, hashes y resultados](DEPENDENCY_REFRESH_20261023/scientific-comparison.json).
 
@@ -43,7 +43,7 @@ Para las filas sin release nueva: no existe un candidato más reciente que compa
 | [joblib](https://pypi.org/project/joblib/) | 1.5.3 | 1.6.0 | 1.5.3 | >=3.10 / >=3.9 | Retener: 1.6 corrige caché de funciones en notebooks e incorpora cloudpickle; ese uso no existe en serving. No justifica cambiar la pareja de persistencia probada. |
 | [jsonschema](https://pypi.org/project/jsonschema/) | 4.23.0 | 4.26.0 | 4.26.0 | >=3.10 / >=3.10 | Actualizar: mantenimiento de validadores/referencias; contratos JSON y rechazos de etiquetas inválidas verificados. |
 | [jsonschema-specifications](https://pypi.org/project/jsonschema-specifications/) | 2025.9.1 | 2025.9.1 | 2025.9.1 | >=3.9 / >=3.9 | Conservar actual: metaschemas oficiales JSON Schema. Sin release nueva ni aviso activo en el feed; compatible en la resolución congelada y en las suites 3.11/3.12. |
-| [kafka-python](https://pypi.org/project/kafka-python/) | 3.0.11+cncguard.2 | 3.0.11 | 3.0.11+cncguard.2 | >=3.8 / >=3.8 | Retener wheel local .2: upstream 3.0.11 sigue actual. Sus parches de importlib.resources y client_software_version son necesarios para el protocolo. Hash/procedencia y regresiones específicos; el feed solo cubre upstream. |
+| [kafka-python](https://pypi.org/project/kafka-python/) | 3.0.11+cncguard.2 | 3.0.11 | 3.0.11+cncguard.2 | >=3.8 / >=3.9 | Retener wheel local .2: upstream 3.0.11 sigue actual. Sus parches de importlib.resources y client_software_version son necesarios para el protocolo. Hash/procedencia y regresiones específicos; el feed solo cubre upstream. |
 | [kiwisolver](https://pypi.org/project/kiwisolver/) | 1.5.1 | 1.5.1 | 1.5.1 | >=3.10 / >=3.10 | Conservar actual: restricciones de layout de figuras. Sin release nueva ni aviso activo en el feed; compatible en la resolución congelada y en las suites 3.11/3.12. |
 | [matplotlib](https://pypi.org/project/matplotlib/) | 3.10.1 | 3.11.2 | 3.11.2 | >=3.11 / >=3.11 | Actualizar: mantenimiento de renderizado, fuentes/PDF y eliminación de los warnings anteriores de pyparsing. Las figuras futuras pueden cambiar; no reescribir evidencias históricas. |
 | [narwhals](https://pypi.org/project/narwhals/) | 2.27.1 | 2.27.1 | 2.27.1 | >=3.10 / >=3.10 | Conservar actual: compatibilidad de dataframes de Plotly. Sin release nueva ni aviso activo en el feed; compatible en la resolución congelada y en las suites 3.11/3.12. |
@@ -109,3 +109,28 @@ El auditor consulta metadatos públicos oficiales con timeout, tamaño y concurr
 ## Fuentes de los candidatos evaluados
 
 [FastAPI](https://fastapi.tiangolo.com/release-notes/), [Starlette](https://starlette.dev/release-notes/), [Uvicorn](https://github.com/Kludex/uvicorn/blob/main/docs/release-notes.md), [HTTPX](https://github.com/encode/httpx/blob/master/CHANGELOG.md), [JSON Schema](https://github.com/python-jsonschema/jsonschema/blob/main/CHANGELOG.rst), [Matplotlib](https://matplotlib.org/stable/release/prev_whats_new/whats_new_3.11.0.html), [pandas](https://pandas.pydata.org/pandas-docs/stable/whatsnew/v3.1.0.html), [scikit-learn](https://scikit-learn.org/stable/whats_new/v1.9.html), [persistencia sklearn](https://scikit-learn.org/stable/model_persistence.html), [imbalanced-learn](https://imbalanced-learn.org/stable/whats_new.html), [Joblib](https://joblib.readthedocs.io/en/latest/CHANGES.html), [Arrow 26](https://arrow.apache.org/release/26.0.0.html), [dateutil](https://raw.githubusercontent.com/dateutil/dateutil/master/NEWS). Las fichas PyPI de cada fila documentan la release/Requires-Python consultada.
+
+## Scan de las ocho imágenes declaradas
+
+Los ocho scans terminaron con exit 0 del scanner; el modo informe no usa un umbral de vulnerabilidades. **Todos los avisos siguientes siguen abiertos**, aunque existan parches para bibliotecas dentro de la imagen. No se aprobó su explotabilidad ni su riesgo. Son hallazgos por paquete/ocurrencia, no CVE únicos. [Detalle HIGH/CRITICAL, cuentas completas y hashes de los JSON originales](DEPENDENCY_REFRESH_20261023/external-image-scans.json).
+
+| Imagen declarada | HIGH | CRITICAL | HIGH/CRITICAL con versión de biblioteca corregida |
+|---|---:|---:|---:|
+| kafka | 27 | 0 | 27 |
+| nifi | 142 | 6 | 56 |
+| elasticsearch | 28 | 1 | 19 |
+| kibana | 53 | 5 | 37 |
+| filebeat | 30 | 1 | 15 |
+| python | 50 | 0 | 6 |
+| mock-python | 4 | 0 | 4 |
+| uv | 0 | 0 | 0 |
+
+Las bases Python y uv son etapas de build: su filesystem completo no es el runtime final de la API. La API final tiene su scan separado y los parches Debian descritos arriba. El mock de CG14 conserva tooling de la imagen oficial; sus avisos también permanecen visibles. No sustituir JAR/NAR/bibliotecas embebidas sin build y pruebas de compatibilidad del proveedor. Kafka 4.3.1 y NiFi 2.12 siguen siendo las releases oficiales publicadas consultadas; esto no afirma que sus imágenes carezcan de CVE. Una migración operativa requiere resolver o aceptar expresamente estos riesgos fuera del PR de mantenimiento.
+
+## Cierre de verificación local y revisión
+
+Tras corregir los dos hallazgos de la revisión independiente: **639 passed, 3 skipped y 303 subtests passed en cada Python 3.11.16 y 3.12.14**. Los tres skips son las consultas CG19 que requieren un Elasticsearch desechable explícito; se ejecutaron después por separado contra 9.5.5 y pasaron las tres. No se verificó el render de Kibana. [Resumen y hashes de fuentes/logs](DEPENDENCY_REFRESH_20261023/validation.json), [CG19 real](DEPENDENCY_REFRESH_20261023/dashboard-es-compatibility.json).
+
+La revisión detectó que el gate usaba una caché distinta del action. Se reprodujo el error, se fijó explícitamente la ruta y se probaron ambos comandos consecutivos con una base recién descargada: la imagen final pasa y una imagen anterior con parches pendientes se rechaza sin error de scanner. [Regresión real del gate](DEPENDENCY_REFRESH_20261023/image-gate-regression.json). También se corrigió la distinción Requires-Python de la rueda/upstream con una regresión RED→GREEN.
+
+La revisión fresca cubrió `41cb66f..0e2a0fd`; el autor comprobó las correcciones y la evidencia añadida después con las suites y los JSON originales. La CI remota se observa en el PR; estas pruebas locales no son una ejecución de GitHub Actions.

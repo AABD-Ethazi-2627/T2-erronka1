@@ -250,7 +250,7 @@
       "latest": "3.0.11",
       "selected": "3.0.11+cncguard.2",
       "decision": "Retener wheel local .2: upstream 3.0.11 sigue actual. Sus parches de importlib.resources y client_software_version son necesarios para el protocolo. Hash/procedencia y regresiones espec\u00edficos; el feed solo cubre upstream.",
-      "selected_requires_python": ">=3.8",
+      "selected_requires_python": ">=3.9",
       "latest_requires_python": ">=3.8"
     },
     {

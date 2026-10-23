@@ -85,7 +85,8 @@ jobs:
       - name: Reject fixable HIGH or CRITICAL findings in the built runtime
         if: matrix.image == 'api'
         run: >-
-          trivy image --skip-db-update --skip-java-db-update --scanners vuln
+          trivy image --cache-dir "$GITHUB_WORKSPACE/.cache/trivy"
+          --skip-db-update --skip-java-db-update --scanners vuln
           --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 cnc-guard-audit:ci
       # Official vendor images are reported without suppressing findings.
       # A newer library inside an image does not establish an available vendor
