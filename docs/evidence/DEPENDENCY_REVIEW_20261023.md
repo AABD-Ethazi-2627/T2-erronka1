@@ -4,7 +4,7 @@ Alcance: solo `AABD-Ethazi-2627/T2-erronka1`, base `41cb66f0`. Se revisaron las 
 
 ## Decisión y evidencia
 
-Actualizar API/HTTP/JSON Schema/figuras y mantener la base numérica probada. La ausencia de avisos no sustituye los contratos ni demuestra ausencia de vulnerabilidades. La consulta seleccionada cubre 58 filas del lock y uv adicional: **59 resultados, 0 errores, 0 grupos de avisos activos**. El requisito Python del artefacto local (>=3.9) se lee de su METADATA y se separa del upstream (>=3.8). La wheel conserva una limitación explícita: la consulta se hace a su versión upstream y sus cambios locales requieren revisión/tests. [Resultado reproducible](DEPENDENCY_REFRESH_20261023/selected-lock-audit.json).
+Actualizar API/HTTP/JSON Schema/figuras y mantener la base numérica probada. La ausencia de avisos no sustituye los contratos ni demuestra ausencia de vulnerabilidades. La consulta seleccionada cubre 58 filas del lock y uv adicional: **59 resultados para uv.lock + uv, 0 errores y 0 grupos de avisos activos**. Tras integrar main se añaden 31 pins del entorno separado del estudio: **90 resultados en total**, también sin errores/avisos activos. El requisito Python del artefacto local (>=3.9) se lee de su METADATA y se separa del upstream (>=3.8). La wheel conserva una limitación explícita: la consulta se hace a su versión upstream y sus cambios locales requieren revisión/tests. [Resultado reproducible](DEPENDENCY_REFRESH_20261023/selected-lock-audit.json).
 
 La prueba RF prefijada usó exclusivamente las 5600 filas train y los mismos tres folds, sin ajustar hiperparámetros ni consultar validación/test. La candidata NumPy 2.4.6 + pandas 3.1 + scikit-learn 1.9.1 dio **scores OOF idénticos byte a byte** (AP 0.9020038074). No demuestra que otras funciones/modelos nuevos carezcan de valor. Cambió el esquema Parquet; dos subtests fallaron por el repr de escalares NumPy, no por corrupción numérica demostrada. PyArrow 26 aislado requiere NumPy 2. Los tiempos de una sola ejecución no son un benchmark fiable y no fundamentan capacidad HTTP. [Método, hashes y resultados](DEPENDENCY_REFRESH_20261023/scientific-comparison.json).
 
@@ -134,3 +134,51 @@ Tras corregir los dos hallazgos de la revisión independiente: **639 passed, 3 s
 La revisión detectó que el gate usaba una caché distinta del action. Se reprodujo el error, se fijó explícitamente la ruta y se probaron ambos comandos consecutivos con una base recién descargada: la imagen final pasa y una imagen anterior con parches pendientes se rechaza sin error de scanner. [Regresión real del gate](DEPENDENCY_REFRESH_20261023/image-gate-regression.json). También se corrigió la distinción Requires-Python de la rueda/upstream con una regresión RED→GREEN.
 
 La revisión fresca cubrió `41cb66f..0e2a0fd`; el autor comprobó las correcciones y la evidencia añadida después con las suites y los JSON originales. La CI remota se observa en el PR; estas pruebas locales no son una ejecución de GitHub Actions.
+
+## Integración de main y entorno de investigación separado
+
+Antes de publicar entró el PR #90 (`5005ccd`), con el estudio de Kalista y un lock compilado independiente de **31 paquetes**. Se integró sin cambiar sus pins, modelos ni evidencias. Su workflow usaba uv 0.11.19: se actualiza también a 0.13.5 y Actions fijados actuales. El auditor periódico cubre ahora ambos manifiestos e identifica cada resultado por su origen.
+
+La colección de pytest por defecto se limita a tests de aplicación: el estudio importa psutil y sus boosters desde su propio entorno. Se reprodujeron cinco errores de colección al mezclar entornos y se corrigió su separación. La investigación conserva su CI sintética explícita: **22 tests y 50/50 adaptadores smoke completos**, con datos sintéticos de 120 filas. No se repitió la selección AI4I ni se promovió un modelo.
+
+Las versiones congeladas son la elección para **reproducir el estudio archivado**, no una afirmación de mejor calidad frente a releases posteriores. No hay avisos activos de PyPI para esos pins en esta consulta. Para promover candidatos nuevos se necesitan métricas comparables del procedimiento completo y un paquete nuevo; el benchmark RF del informe principal no evalúa todos estos boosters.
+
+| Pin de investigación | Versión del estudio | Última consultada | Python de última | Decisión y riesgo |
+|---|---|---|---|---|
+| [catboost](https://pypi.org/project/catboost/) | 1.2.10 | 1.2.10 | no declarado | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [colorama](https://pypi.org/project/colorama/) | 0.4.6 | 0.4.6 | !=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [contourpy](https://pypi.org/project/contourpy/) | 1.3.3 | 1.4.0 | >=3.12 | La última requiere Python >=3.12; conservar receta exacta del estudio, sin cambiar su entorno de figuras. |
+| [cycler](https://pypi.org/project/cycler/) | 0.12.1 | 0.12.1 | >=3.8 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [fonttools](https://pypi.org/project/fonttools/) | 4.67.0 | 4.67.0 | >=3.11 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [graphviz](https://pypi.org/project/graphviz/) | 0.21 | 0.21 | >=3.9 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [iniconfig](https://pypi.org/project/iniconfig/) | 2.3.1 | 2.3.1 | >=3.10 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [interpret-core](https://pypi.org/project/interpret-core/) | 0.6.10 | 0.7.8 | no declarado | La rama nueva puede cambiar los EBM e interacciones; no se ha demostrado una mejora en estos folds. Requiere un estudio nuevo para sustituir los paquetes sellados. |
+| [joblib](https://pypi.org/project/joblib/) | 1.5.3 | 1.6.0 | >=3.10 | La nueva mejora otros usos de caché; preservar serialización y versiones de los paquetes archivados. |
+| [kiwisolver](https://pypi.org/project/kiwisolver/) | 1.5.1 | 1.5.1 | >=3.10 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [lightgbm](https://pypi.org/project/lightgbm/) | 4.6.0 | 4.7.0 | >=3.10 | Release nueva del booster; los scores/costes archivados pertenecen a 4.6. No se atribuye mejora de calidad sin volver a evaluar el procedimiento. |
+| [matplotlib](https://pypi.org/project/matplotlib/) | 3.11.2 | 3.11.2 | >=3.11 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [narwhals](https://pypi.org/project/narwhals/) | 2.27.1 | 2.27.1 | >=3.10 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [numpy](https://pypi.org/project/numpy/) | 1.26.4 | 2.5.4 | >=3.12 | La última requiere Python >=3.12 y NumPy 2 cambia ABI/repr; una migración necesita nuevas evidencias del estudio. |
+| [packaging](https://pypi.org/project/packaging/) | 26.3 | 26.3 | >=3.9 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [pandas](https://pypi.org/project/pandas/) | 2.2.2 | 3.1.0 | >=3.11 | La nueva cambia inferencia de strings/esquema; conservar artefactos y cálculos archivados. |
+| [pillow](https://pypi.org/project/pillow/) | 13.0.0 | 13.0.0 | >=3.11 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [plotly](https://pypi.org/project/plotly/) | 7.1.0 | 7.1.0 | >=3.8 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [pluggy](https://pypi.org/project/pluggy/) | 1.7.0 | 1.7.0 | >=3.10 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [psutil](https://pypi.org/project/psutil/) | 7.1.0 | 7.2.2 | >=3.6 | Mantenimiento de métricas/plataformas; no hay mejora de precisión ML demostrada. Mantener el medidor de recursos con el que se selló la investigación. |
+| [pygments](https://pypi.org/project/pygments/) | 2.21.0 | 2.21.0 | >=3.9 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [pyparsing](https://pypi.org/project/pyparsing/) | 3.3.3 | 3.3.3 | >=3.9 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [pytest](https://pypi.org/project/pytest/) | 9.1.1 | 9.1.1 | >=3.10 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [python-dateutil](https://pypi.org/project/python-dateutil/) | 3.0.0 | 3.0.0 | !=3.0.*,!=3.1.*,!=3.2.*,>=2.7 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [pytz](https://pypi.org/project/pytz/) | 2026.5 | 2026.5 | no declarado | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [scikit-learn](https://pypi.org/project/scikit-learn/) | 1.5.0 | 1.9.1 | >=3.11 | No cargar modelos persistidos con otra versión; mantener la receta sellada. |
+| [scipy](https://pypi.org/project/scipy/) | 1.13.1 | 1.18.1 | >=3.12 | Conservar 1.13.1 para reproducir la investigación; la última exige >=3.12 y cambiar kernels requiere volver a medir sus modelos. |
+| [six](https://pypi.org/project/six/) | 1.17.0 | 1.17.0 | !=3.0.*,!=3.1.*,!=3.2.*,>=2.7 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [threadpoolctl](https://pypi.org/project/threadpoolctl/) | 3.6.0 | 3.7.0 | >=3.9 | 3.7 es la selección actual de la aplicación; el estudio conserva 3.6 para su presupuesto/receta, sin beneficio de calidad medido. |
+| [tzdata](https://pypi.org/project/tzdata/) | 2026.5 | 2026.5 | >=2 | Conservar versión actual publicada; compatible en el entorno separado y en sus regresiones sintéticas. |
+| [xgboost](https://pypi.org/project/xgboost/) | 3.1.3 | 3.4.1 | >=3.12 | Release nueva del booster con cambios de implementación; los scores/costes y calibradores archivados pertenecen a 3.1.3. Cambiarla requiere nueva evaluación y paquete. |
+
+Los requisitos de investigación siguen siendo el compilado del protocolo recibido; no se mezclan con el export hashed de serving. Su renovación o incorporación de hashes debe conservar las versiones/procedencia de los paquetes sellados y generar evidencia nueva, no reescribir la archivada. Referencias de candidatos: [XGBoost](https://xgboost.readthedocs.io/en/stable/changes/), [LightGBM](https://github.com/microsoft/LightGBM/releases), [InterpretML](https://github.com/interpretml/interpret/releases), [psutil](https://github.com/giampaolo/psutil/blob/master/HISTORY.rst).
+
+Entre las mejoras verificadas en las notas oficiales, XGBoost 3.4 amplía vector-leaf/multi-output y cambia objetivos de regresión cuantílica/MAE; esas capacidades no acreditan por sí solas mejora en este clasificador binario. LightGBM 4.7 añade soporte CUDA 13/ROCm y mejoras de interoperabilidad Arrow, además de correcciones: son candidatos útiles para una nueva evaluación de hardware/compatibilidad, pero no justifican atribuirles los scores del estudio sellado de 4.6. [XGBoost 3.4/3.4.1](https://xgboost.readthedocs.io/en/stable/changes/v3.4.0.html), [LightGBM 4.7](https://github.com/lightgbm-org/LightGBM/releases/tag/v4.7.0).
+
+Tras integrar `5005ccd`, la última ejecución local de aplicación da **640 passed, 3 skipped y 303 subtests passed por Python**. Se añade un test del parser de pins de investigación; sus 22 tests y 50 smoke tests sintéticos corren en el entorno separado. [Integración](DEPENDENCY_REFRESH_20261023/research-integration.json). InterpretML 0.7.8 mejora el tratamiento de datos según la disponibilidad de pandas y el soporte de notebooks; no demuestra por sí misma mejora de los EBM archivados. [Release](https://github.com/interpretml/interpret/releases/tag/v0.7.8).

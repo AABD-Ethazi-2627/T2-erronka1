@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from zipfile import ZipFile
 
-from scripts.audit_dependencies import audit, uv_tool_version
+from scripts.audit_dependencies import audit, requirements_rows, uv_tool_version
 
 
 def package(name="demo", version="1.0", source=None):
@@ -26,6 +26,19 @@ def metadata(url):
 
 
 class DependencyAuditTests(unittest.TestCase):
+    def test_separate_research_pins_are_covered_and_unknown_syntax_fails(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "research.txt"
+            path.write_text(
+                "# generated pins\nnumpy==1.26.4\n    # via pandas\npsutil==7.1.0\n"
+            )
+            rows = requirements_rows(path)
+            self.assertEqual([row["name"] for row in rows], ["numpy", "psutil"])
+            self.assertTrue(audit(rows, Path("."), metadata)["passed"])
+            path.write_text("numpy>=1.26\n")
+            with self.assertRaisesRegex(ValueError, "pin"):
+                requirements_rows(path)
+
     def test_all_rows_including_marker_only_and_project_are_accounted_for(self):
         rows = [package(), package("colorama"), package("app", source={"virtual": "."})]
         report = audit(rows, Path("."), metadata)

@@ -90,7 +90,8 @@ estática con valores ficticios. No incorporar ese perfil a los comandos activos
 ## Auditoría continua
 
 `python -m scripts.audit_dependencies --latest --output reporte-nuevo.json`
-consulta todas las entradas del lock y uv; no sobrescribe reportes existentes.
+consulta todas las entradas de uv.lock, los pins de
+`scripts/ml_study_requirements.txt` y uv; no sobrescribe reportes existentes.
 Requiere acceso a PyPI. Un error de consulta o una fuente no cubierta falla.
 
 El workflow `Dependency audit` se ejecuta en PR, semanalmente y bajo petición.
@@ -104,3 +105,9 @@ Dependabot propone cambios semanales. Revisar sus releases y scans, sincronizar
 `deploy/images.json` y regenerar el export runtime antes de aceptar. Los paquetes
 Debian y la fecha del snapshot requieren actualización deliberada con un build y
 scan nuevos; sus pins no se actualizan automáticamente con Dependabot.
+
+La investigación de PR #90 conserva su entorno compilado y su CI sintética
+separados. La colección pytest de aplicación no importa `tests/research`; ese
+directorio se verifica con el Python preparado desde su propio requirements,
+como hace `ml-study.yml`. La auditoría conserva ambas versiones cuando un mismo
+paquete aparece con pins distintos en los dos entornos.

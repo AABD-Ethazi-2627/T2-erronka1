@@ -97,6 +97,8 @@ def upstream_version(row, root):
 def audit(rows, root=ROOT, fetch=fetch_json, *, latest=False):
     def inspect(row):
         result = {"name": row["name"], "version": row["version"]}
+        if "manifest" in row:
+            result["manifest"] = row["manifest"]
         try:
             version, status = upstream_version(row, root)
             result["status"] = status
@@ -156,7 +158,7 @@ def audit(rows, root=ROOT, fetch=fetch_json, *, latest=False):
             for row in packages
         )
         and bool(packages),
-        "coverage": "Every lock row, including optional groups, platform markers and local sources; uv additionally",
+        "coverage": "Every uv.lock row, including optional groups, platform markers and local sources; separate research pins and uv additionally",
         "limit": "Advisory absence is not proof of safety or local patch correctness",
         "packages": packages,
     }
@@ -186,6 +188,27 @@ def uv_tool_version(root=ROOT):
     return match[1]
 
 
+def requirements_rows(path):
+    rows = []
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        match = re.fullmatch(r"([A-Za-z0-9_.-]+)==([A-Za-z0-9_.+!-]+)", line)
+        if match is None:
+            raise ValueError("Research requirements need exact public package pins")
+        rows.append(
+            {
+                "name": match[1],
+                "version": match[2],
+                "source": {"registry": "https://pypi.org/simple"},
+            }
+        )
+    if not rows:
+        raise ValueError("Research requirements contain no pins")
+    return rows
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -198,12 +221,21 @@ def main(argv=None):
     )
     args = parser.parse_args(argv)
     rows = tomllib.loads((ROOT / "uv.lock").read_text())["package"]
+    for row in rows:
+        row["manifest"] = "uv.lock"
+    research = ROOT / "scripts/ml_study_requirements.txt"
+    if research.exists():
+        additional = requirements_rows(research)
+        for row in additional:
+            row["manifest"] = "scripts/ml_study_requirements.txt"
+        rows.extend(additional)
     version = uv_tool_version()
     rows.append(
         {
             "name": "uv",
             "version": version,
             "source": {"registry": "https://pypi.org/simple"},
+            "manifest": "CI/Docker uv tool",
         }
     )
     report = audit(rows, latest=args.latest)

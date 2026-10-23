@@ -1,13 +1,14 @@
 {
   "schema": 1,
-  "checked_at": "2026-10-23T11:48:44.358446+00:00",
+  "checked_at": "2026-10-23T11:56:08.447438+00:00",
   "passed": true,
-  "coverage": "Every lock row, including optional groups, platform markers and local sources; uv additionally",
+  "coverage": "Every uv.lock row, including optional groups, platform markers and local sources; separate research pins and uv additionally",
   "limit": "Advisory absence is not proof of safety or local patch correctness",
   "packages": [
     {
       "name": "annotated-doc",
       "version": "0.0.5",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/annotated-doc/0.0.5/json",
       "advisories": [],
@@ -23,6 +24,7 @@
     {
       "name": "annotated-types",
       "version": "0.8.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/annotated-types/0.8.0/json",
       "advisories": [],
@@ -38,6 +40,7 @@
     {
       "name": "anyio",
       "version": "4.15.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/anyio/4.15.1/json",
       "advisories": [],
@@ -53,6 +56,7 @@
     {
       "name": "attrs",
       "version": "26.1.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/attrs/26.1.0/json",
       "advisories": [],
@@ -68,6 +72,7 @@
     {
       "name": "catboost",
       "version": "1.2.10",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/catboost/1.2.10/json",
       "advisories": [],
@@ -83,6 +88,7 @@
     {
       "name": "certifi",
       "version": "2026.10.19",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/certifi/2026.10.19/json",
       "advisories": [],
@@ -98,6 +104,7 @@
     {
       "name": "click",
       "version": "8.5.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/click/8.5.0/json",
       "advisories": [],
@@ -113,11 +120,13 @@
     {
       "name": "cnc-guard-offline",
       "version": "0.1.0",
+      "manifest": "uv.lock",
       "status": "project"
     },
     {
       "name": "colorama",
       "version": "0.4.6",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/colorama/0.4.6/json",
       "advisories": [],
@@ -133,6 +142,7 @@
     {
       "name": "contourpy",
       "version": "1.3.3",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/contourpy/1.3.3/json",
       "advisories": [],
@@ -148,6 +158,7 @@
     {
       "name": "cycler",
       "version": "0.12.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/cycler/0.12.1/json",
       "advisories": [],
@@ -163,6 +174,7 @@
     {
       "name": "duckdb",
       "version": "2.0.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/duckdb/2.0.0/json",
       "advisories": [],
@@ -178,6 +190,7 @@
     {
       "name": "fastapi",
       "version": "0.161.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/fastapi/0.161.1/json",
       "advisories": [],
@@ -193,6 +206,7 @@
     {
       "name": "fonttools",
       "version": "4.67.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/fonttools/4.67.0/json",
       "advisories": [],
@@ -208,6 +222,7 @@
     {
       "name": "graphviz",
       "version": "0.21",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/graphviz/0.21/json",
       "advisories": [],
@@ -223,6 +238,7 @@
     {
       "name": "h11",
       "version": "0.16.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/h11/0.16.0/json",
       "advisories": [],
@@ -238,6 +254,7 @@
     {
       "name": "httpcore",
       "version": "1.0.9",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/httpcore/1.0.9/json",
       "advisories": [],
@@ -253,6 +270,7 @@
     {
       "name": "httpcore2",
       "version": "2.16.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/httpcore2/2.16.0/json",
       "advisories": [],
@@ -268,6 +286,7 @@
     {
       "name": "httpx",
       "version": "0.28.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/httpx/0.28.1/json",
       "advisories": [],
@@ -283,6 +302,7 @@
     {
       "name": "httpx2",
       "version": "2.16.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/httpx2/2.16.0/json",
       "advisories": [],
@@ -298,6 +318,7 @@
     {
       "name": "httpx2-jsfetch",
       "version": "1.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/httpx2-jsfetch/1.0/json",
       "advisories": [],
@@ -313,6 +334,7 @@
     {
       "name": "idna",
       "version": "3.20",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/idna/3.20/json",
       "advisories": [],
@@ -328,6 +350,7 @@
     {
       "name": "imbalanced-learn",
       "version": "0.12.4",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/imbalanced-learn/0.12.4/json",
       "advisories": [],
@@ -343,6 +366,7 @@
     {
       "name": "iniconfig",
       "version": "2.3.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/iniconfig/2.3.1/json",
       "advisories": [],
@@ -358,6 +382,7 @@
     {
       "name": "joblib",
       "version": "1.5.3",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/joblib/1.5.3/json",
       "advisories": [],
@@ -373,6 +398,7 @@
     {
       "name": "jsonschema",
       "version": "4.26.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/jsonschema/4.26.0/json",
       "advisories": [],
@@ -388,6 +414,7 @@
     {
       "name": "jsonschema-specifications",
       "version": "2025.9.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
       "advisories": [],
@@ -403,6 +430,7 @@
     {
       "name": "kafka-python",
       "version": "3.0.11+cncguard.2",
+      "manifest": "uv.lock",
       "status": "local-upstream-only",
       "advisory_url": "https://pypi.org/pypi/kafka-python/3.0.11/json",
       "advisories": [],
@@ -420,6 +448,7 @@
     {
       "name": "kiwisolver",
       "version": "1.5.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/kiwisolver/1.5.1/json",
       "advisories": [],
@@ -435,6 +464,7 @@
     {
       "name": "matplotlib",
       "version": "3.11.2",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/matplotlib/3.11.2/json",
       "advisories": [],
@@ -450,6 +480,7 @@
     {
       "name": "narwhals",
       "version": "2.27.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/narwhals/2.27.1/json",
       "advisories": [],
@@ -465,6 +496,7 @@
     {
       "name": "numpy",
       "version": "1.26.4",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/numpy/1.26.4/json",
       "advisories": [],
@@ -480,6 +512,7 @@
     {
       "name": "opentelemetry-api",
       "version": "1.45.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/opentelemetry-api/1.45.1/json",
       "advisories": [],
@@ -495,6 +528,7 @@
     {
       "name": "packaging",
       "version": "26.3",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/packaging/26.3/json",
       "advisories": [],
@@ -510,6 +544,7 @@
     {
       "name": "pandas",
       "version": "2.2.2",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pandas/2.2.2/json",
       "advisories": [],
@@ -525,6 +560,7 @@
     {
       "name": "pillow",
       "version": "13.0.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pillow/13.0.0/json",
       "advisories": [],
@@ -540,6 +576,7 @@
     {
       "name": "plotly",
       "version": "7.1.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/plotly/7.1.0/json",
       "advisories": [],
@@ -555,6 +592,7 @@
     {
       "name": "pluggy",
       "version": "1.7.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pluggy/1.7.0/json",
       "advisories": [],
@@ -570,6 +608,7 @@
     {
       "name": "pyarrow",
       "version": "23.0.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pyarrow/23.0.1/json",
       "advisories": [],
@@ -585,6 +624,7 @@
     {
       "name": "pydantic",
       "version": "2.14.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pydantic/2.14.1/json",
       "advisories": [],
@@ -600,6 +640,7 @@
     {
       "name": "pydantic-core",
       "version": "2.50.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pydantic-core/2.50.1/json",
       "advisories": [],
@@ -615,6 +656,7 @@
     {
       "name": "pygments",
       "version": "2.21.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pygments/2.21.0/json",
       "advisories": [],
@@ -630,6 +672,7 @@
     {
       "name": "pyparsing",
       "version": "3.3.3",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pyparsing/3.3.3/json",
       "advisories": [],
@@ -645,6 +688,7 @@
     {
       "name": "pytest",
       "version": "9.1.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pytest/9.1.1/json",
       "advisories": [],
@@ -660,6 +704,7 @@
     {
       "name": "python-dateutil",
       "version": "2.9.0.post0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/python-dateutil/2.9.0.post0/json",
       "advisories": [],
@@ -675,6 +720,7 @@
     {
       "name": "pytz",
       "version": "2026.5",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/pytz/2026.5/json",
       "advisories": [],
@@ -690,6 +736,7 @@
     {
       "name": "referencing",
       "version": "0.37.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/referencing/0.37.0/json",
       "advisories": [],
@@ -705,6 +752,7 @@
     {
       "name": "rpds-py",
       "version": "2026.9.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/rpds-py/2026.9.1/json",
       "advisories": [],
@@ -720,6 +768,7 @@
     {
       "name": "scikit-learn",
       "version": "1.5.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/scikit-learn/1.5.0/json",
       "advisories": [],
@@ -735,6 +784,7 @@
     {
       "name": "scipy",
       "version": "1.17.1",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/scipy/1.17.1/json",
       "advisories": [],
@@ -750,6 +800,7 @@
     {
       "name": "six",
       "version": "1.17.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/six/1.17.0/json",
       "advisories": [],
@@ -765,6 +816,7 @@
     {
       "name": "starlette",
       "version": "1.9.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/starlette/1.9.0/json",
       "advisories": [],
@@ -780,6 +832,7 @@
     {
       "name": "threadpoolctl",
       "version": "3.7.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/threadpoolctl/3.7.0/json",
       "advisories": [],
@@ -795,6 +848,7 @@
     {
       "name": "truststore",
       "version": "0.10.5",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/truststore/0.10.5/json",
       "advisories": [],
@@ -810,6 +864,7 @@
     {
       "name": "typing-extensions",
       "version": "4.16.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/typing-extensions/4.16.0/json",
       "advisories": [],
@@ -825,6 +880,7 @@
     {
       "name": "typing-inspection",
       "version": "0.4.4",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/typing-inspection/0.4.4/json",
       "advisories": [],
@@ -840,6 +896,7 @@
     {
       "name": "tzdata",
       "version": "2026.5",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/tzdata/2026.5/json",
       "advisories": [],
@@ -855,6 +912,7 @@
     {
       "name": "uvicorn",
       "version": "0.54.0",
+      "manifest": "uv.lock",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/uvicorn/0.54.0/json",
       "advisories": [],
@@ -868,8 +926,505 @@
       }
     },
     {
+      "name": "catboost",
+      "version": "1.2.10",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/catboost/1.2.10/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.2.10",
+      "requires_python": null,
+      "latest": {
+        "version": "1.2.10",
+        "requires_python": null,
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/colorama/0.4.6/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "0.4.6",
+      "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7",
+      "latest": {
+        "version": "0.4.6",
+        "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "contourpy",
+      "version": "1.3.3",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/contourpy/1.3.3/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.3.3",
+      "requires_python": ">=3.11",
+      "latest": {
+        "version": "1.4.0",
+        "requires_python": ">=3.12",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "cycler",
+      "version": "0.12.1",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/cycler/0.12.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "0.12.1",
+      "requires_python": ">=3.8",
+      "latest": {
+        "version": "0.12.1",
+        "requires_python": ">=3.8",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "fonttools",
+      "version": "4.67.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/fonttools/4.67.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "4.67.0",
+      "requires_python": ">=3.11",
+      "latest": {
+        "version": "4.67.0",
+        "requires_python": ">=3.11",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "graphviz",
+      "version": "0.21",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/graphviz/0.21/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "0.21",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "0.21",
+        "requires_python": ">=3.9",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "iniconfig",
+      "version": "2.3.1",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/iniconfig/2.3.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "2.3.1",
+      "requires_python": ">=3.10",
+      "latest": {
+        "version": "2.3.1",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "interpret-core",
+      "version": "0.6.10",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/interpret-core/0.6.10/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "0.6.10",
+      "requires_python": null,
+      "latest": {
+        "version": "0.7.8",
+        "requires_python": null,
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "joblib",
+      "version": "1.5.3",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/joblib/1.5.3/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.5.3",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "1.6.0",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "kiwisolver",
+      "version": "1.5.1",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/kiwisolver/1.5.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.5.1",
+      "requires_python": ">=3.10",
+      "latest": {
+        "version": "1.5.1",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "lightgbm",
+      "version": "4.6.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/lightgbm/4.6.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "4.6.0",
+      "requires_python": ">=3.7",
+      "latest": {
+        "version": "4.7.0",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "matplotlib",
+      "version": "3.11.2",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/matplotlib/3.11.2/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "3.11.2",
+      "requires_python": ">=3.11",
+      "latest": {
+        "version": "3.11.2",
+        "requires_python": ">=3.11",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "narwhals",
+      "version": "2.27.1",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/narwhals/2.27.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "2.27.1",
+      "requires_python": ">=3.10",
+      "latest": {
+        "version": "2.27.1",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/numpy/1.26.4/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.26.4",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "2.5.4",
+        "requires_python": ">=3.12",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/packaging/26.3/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "26.3",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "26.3",
+        "requires_python": ">=3.9",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pandas",
+      "version": "2.2.2",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pandas/2.2.2/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "2.2.2",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "3.1.0",
+        "requires_python": ">=3.11",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pillow/13.0.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "13.0.0",
+      "requires_python": ">=3.11",
+      "latest": {
+        "version": "13.0.0",
+        "requires_python": ">=3.11",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "plotly",
+      "version": "7.1.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/plotly/7.1.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "7.1.0",
+      "requires_python": ">=3.8",
+      "latest": {
+        "version": "7.1.0",
+        "requires_python": ">=3.8",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pluggy",
+      "version": "1.7.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pluggy/1.7.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.7.0",
+      "requires_python": ">=3.10",
+      "latest": {
+        "version": "1.7.0",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "psutil",
+      "version": "7.1.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/psutil/7.1.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "7.1.0",
+      "requires_python": ">=3.6",
+      "latest": {
+        "version": "7.2.2",
+        "requires_python": ">=3.6",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pygments",
+      "version": "2.21.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pygments/2.21.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "2.21.0",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "2.21.0",
+        "requires_python": ">=3.9",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.3",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pyparsing/3.3.3/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "3.3.3",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "3.3.3",
+        "requires_python": ">=3.9",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pytest",
+      "version": "9.1.1",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pytest/9.1.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "9.1.1",
+      "requires_python": ">=3.10",
+      "latest": {
+        "version": "9.1.1",
+        "requires_python": ">=3.10",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/python-dateutil/3.0.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "3.0.0",
+      "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7",
+      "latest": {
+        "version": "3.0.0",
+        "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "pytz",
+      "version": "2026.5",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/pytz/2026.5/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "2026.5",
+      "requires_python": null,
+      "latest": {
+        "version": "2026.5",
+        "requires_python": null,
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "scikit-learn",
+      "version": "1.5.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/scikit-learn/1.5.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.5.0",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "1.9.1",
+        "requires_python": ">=3.11",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "scipy",
+      "version": "1.13.1",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/scipy/1.13.1/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.13.1",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "1.18.1",
+        "requires_python": ">=3.12",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/six/1.17.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "1.17.0",
+      "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7",
+      "latest": {
+        "version": "1.17.0",
+        "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "threadpoolctl",
+      "version": "3.6.0",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/threadpoolctl/3.6.0/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "3.6.0",
+      "requires_python": ">=3.9",
+      "latest": {
+        "version": "3.7.0",
+        "requires_python": ">=3.9",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.5",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/tzdata/2026.5/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "2026.5",
+      "requires_python": ">=2",
+      "latest": {
+        "version": "2026.5",
+        "requires_python": ">=2",
+        "active_advisory_groups": []
+      }
+    },
+    {
+      "name": "xgboost",
+      "version": "3.1.3",
+      "manifest": "scripts/ml_study_requirements.txt",
+      "status": "registry",
+      "advisory_url": "https://pypi.org/pypi/xgboost/3.1.3/json",
+      "advisories": [],
+      "active_advisory_groups": [],
+      "audited_version": "3.1.3",
+      "requires_python": ">=3.10",
+      "latest": {
+        "version": "3.4.1",
+        "requires_python": ">=3.12",
+        "active_advisory_groups": []
+      }
+    },
+    {
       "name": "uv",
       "version": "0.13.5",
+      "manifest": "CI/Docker uv tool",
       "status": "registry",
       "advisory_url": "https://pypi.org/pypi/uv/0.13.5/json",
       "advisories": [],

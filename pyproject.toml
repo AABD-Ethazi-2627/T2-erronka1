@@ -38,3 +38,9 @@ runtime = [
     "fastapi", "starlette", "uvicorn", "joblib", "scikit-learn", "pandas",
     "numpy", "jsonschema",
 ]
+
+# The sealed ML study has its own compiled requirements and synthetic CI job.
+# Default application tests must not import that separate numerical environment.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["research"]
