@@ -605,6 +605,77 @@ def task_for(spec, fit, held, phase, fold, **kw):
     return dict(model=spec["name"], fit=fit, held=held, phase=phase, fold=fold, **kw)
 
 
+def completed_units(output):
+    records = []
+    for path in (output / "units").glob("*/accounting.json"):
+        account = read_json(path)
+        if account["status"] == "complete":
+            records.append((read_json(path.parent / "task.json"), path.parent))
+    return records
+
+
+def primary_names(output, manifest):
+    units = completed_units(output)
+    complete = []
+    for spec in manifest["catalog"]:
+        if spec["anomaly"]:
+            continue
+        records = [t for t, _ in units if t["model"] == spec["name"]]
+        if (
+            sum(t["phase"] == "inner" for t in records) == 9
+            and sum(t["phase"] == "outer" for t in records) == 3
+        ):
+            complete.append(spec["name"])
+    if len(complete) == 40:
+        return complete
+    if set(manifest["core"]) <= set(complete):
+        return manifest["core"]
+    raise RuntimeError("Primary core incomplete: secondary selection is blocked")
+
+
+def inner_ranking(output, names, outer=None):
+    ranking = []
+    units = completed_units(output)
+    for name in names:
+        found = [
+            (t, p)
+            for t, p in units
+            if t["model"] == name
+            and t["phase"] == ("screening" if outer is None else "inner")
+            and (outer is None or t["fold"][0] == outer)
+        ]
+        if len(found) != 3:
+            raise RuntimeError(f"Incomplete inner coverage: {name}")
+        scores = pd.concat(
+            [
+                pd.read_csv(p / "scores.csv", float_precision="round_trip")
+                for _, p in found
+            ]
+        )
+        if scores.source_row_index.duplicated().any():
+            raise ValueError("Duplicate OOF row")
+        cutoff = (
+            0.5
+            if name in {"always0", "always1"}
+            else choose_threshold(scores.label, scores.score)
+        )
+        m = metrics(scores.label, scores.score, cutoff)
+        latency = sum(
+            read_json(p / "result.json")["prediction_seconds"] for _, p in found
+        ) / len(scores)
+        ranking.append(dict(name=name, threshold=cutoff, metrics=m, latency=latency))
+    eligible = [r for r in ranking if r["metrics"]["recall"] >= 0.76]
+    return sorted(
+        eligible,
+        key=lambda r: (
+            r["metrics"]["cost_per_1000"],
+            r["metrics"]["fn"],
+            r["latency"],
+            names.index(r["name"]),
+        ),
+    )
+
+
 def run(output, phase):
     manifest = verify(output)
     (output / "units").mkdir(exist_ok=True)
@@ -623,62 +694,6 @@ def run(output, phase):
                             time.perf_counter() - start
                         )
 
-
-def completed_units(output):
-    records = []
-    for path in (output / "units").glob("*/accounting.json"):
-        account = read_json(path)
-        if account["status"] == "complete":
-            records.append((read_json(path.parent / "task.json"), path.parent))
-    return records
-
-
-def primary_names(output, manifest):
-    units = completed_units(output)
-    complete = []
-    for spec in manifest["catalog"]:
-        if spec["anomaly"]:
-            continue
-        records = [t for t, _ in units if t["model"] == spec["name"]]
-        if sum(t["phase"] == "inner" for t in records) == 9 and sum(
-            t["phase"] == "outer" for t in records
-        ) == 3:
-            complete.append(spec["name"])
-    if len(complete) == 40:
-        return complete
-    if set(manifest["core"]) <= set(complete):
-        return manifest["core"]
-    raise RuntimeError("Primary core incomplete: secondary selection is blocked")
-
-
-def inner_ranking(output, names, outer=None):
-    ranking = []
-    units = completed_units(output)
-    for name in names:
-        found = [
-            (t, p) for t, p in units
-            if t["model"] == name
-            and t["phase"] == ("screening" if outer is None else "inner")
-            and (outer is None or t["fold"][0] == outer)
-        ]
-        if len(found) != 3:
-            raise RuntimeError(f"Incomplete inner coverage: {name}")
-        scores = pd.concat([
-            pd.read_csv(p / "scores.csv", float_precision="round_trip")
-            for _, p in found
-        ])
-        if scores.source_row_index.duplicated().any():
-            raise ValueError("Duplicate OOF row")
-        cutoff = 0.5 if name in {"always0", "always1"} else choose_threshold(
-            scores.label, scores.score
-        )
-        m = metrics(scores.label, scores.score, cutoff)
-        latency = sum(read_json(p / "result.json")["prediction_seconds"] for _, p in found) / len(scores)
-        ranking.append(dict(name=name, threshold=cutoff, metrics=m, latency=latency))
-    eligible = [r for r in ranking if r["metrics"]["recall"] >= .76]
-    return sorted(eligible, key=lambda r: (
-        r["metrics"]["cost_per_1000"], r["metrics"]["fn"], r["latency"], names.index(r["name"])
-    ))
                         if remaining <= 5:
                             return
                         execute(
@@ -739,32 +754,64 @@ def inner_ranking(output, names, outer=None):
             names = primary_names(output, manifest)
             for outer, f in enumerate(manifest["outer"]):
                 ranking = inner_ranking(output, names, outer)
-                finalists = list(dict.fromkeys(
-                    [r["name"] for r in ranking[:2]] + ["rf_reference"]
-                ))
+                finalists = list(
+                    dict.fromkeys([r["name"] for r in ranking[:2]] + ["rf_reference"])
+                )
                 for name in finalists:
                     spec = next(s for s in manifest["catalog"] if s["name"] == name)
                     for method in manifest["optional"]["calibration"]["methods"]:
                         for inner, g in enumerate(f["inner"]):
-                            execute(output, manifest, task_for(
-                                spec, g["fit"], g["held"], "calibration_inner",
-                                [outer, inner], calibration=method
-                            ), "secondary", 120)
-                        execute(output, manifest, task_for(
-                            spec, f["fit"], f["held"], "calibration_outer", outer,
-                            calibration=method, artifact=True
-                        ), "secondary", 120)
+                            execute(
+                                output,
+                                manifest,
+                                task_for(
+                                    spec,
+                                    g["fit"],
+                                    g["held"],
+                                    "calibration_inner",
+                                    [outer, inner],
+                                    calibration=method,
+                                ),
+                                "secondary",
+                                120,
+                            )
+                        execute(
+                            output,
+                            manifest,
+                            task_for(
+                                spec,
+                                f["fit"],
+                                f["held"],
+                                "calibration_outer",
+                                outer,
+                                calibration=method,
+                                artifact=True,
+                            ),
+                            "secondary",
+                            120,
+                        )
         elif phase == "package":
             names = primary_names(output, manifest)
             selected = inner_ranking(output, names)[0]
             for name in dict.fromkeys(["rf_reference", selected["name"]]):
                 spec = next(s for s in manifest["catalog"] if s["name"] == name)
-                execute(output, manifest, task_for(
-                    spec, manifest["membership"]["train"],
-                    manifest["membership"]["train"][:32], "package", 0,
-                    artifact=True,
-                    threshold=next(r["threshold"] for r in inner_ranking(output, [name]))
-                ), "benchmark", 120)
+                execute(
+                    output,
+                    manifest,
+                    task_for(
+                        spec,
+                        manifest["membership"]["train"],
+                        manifest["membership"]["train"][:32],
+                        "package",
+                        0,
+                        artifact=True,
+                        threshold=next(
+                            r["threshold"] for r in inner_ranking(output, [name])
+                        ),
+                    ),
+                    "benchmark",
+                    120,
+                )
         else:
             raise ValueError(phase)
 
