@@ -4,7 +4,17 @@ Tabla iniciada el 16/10/2026; corte documental actual 22/10/2026, base f770932. 
 
 La evidencia de cada fila debe incluir **artefacto/versionado + comando o procedimiento + resultado real + límite + revisor/fecha**. La [matriz de objetivos](OBJETIVOS_Y_ETAPAS.md) define el contenido de aceptación para cada celda; la [fuente](fuente.json) conserva su texto exacto.
 
-Avance CG24 del 21/10/2026 para G17/G19/G20: [diagnóstico FP/FN por tipo, controles de procedencia y supervisión humana](../evidence/CG24_2026-10-21.md), con [conteos y denominadores reproducidos](../evidence/CG24_current_state_types.json). Estado parcial: validación reutilizada, sin conclusión de equidad laboral, conformidad legal o robustez industrial. G16 mantiene su revisión normativa pendiente. Revisor humano y fecha de aceptación: pendientes.
+Actualización CG24 del 22/10/2026 para G16/G17/G19/G20:
+[aplicabilidad normativa, responsabilidades y fuentes oficiales verificadas](../evidence/CG24.md#aplicabilidad-normativa--corte-del-22102026).
+El PM aceptó criterios 1/3/4/5 el 22/10 en
+[su revisión registrada](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/24#issuecomment-6342074330).
+El criterio 2 está implementado documentalmente y pendiente de revisión PM e
+integración en main; #24 sigue abierto. Se conserva el
+[diagnóstico del 21/10](../evidence/CG24_2026-10-21.md) y sus
+[conteos](../evidence/CG24_current_state_types.json): validación reutilizada, sin
+conclusión de equidad laboral, certificación, seguridad industrial ni nota docente.
+Las filas históricas siguientes conservan sus cortes; para la decisión normativa
+actual de G16/G17 prevalece esta actualización, sin dar por aceptados otros criterios.
 
 | Celda docente | Coordinación propuesta de la evidencia | Issues relacionados | Estado | Evidencia y revisión |
 |---|---|---|---|---|
