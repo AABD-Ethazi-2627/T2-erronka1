@@ -710,7 +710,8 @@ class Lab:
         )
 
     def stop(self):
-        self.compose("stop")
+        # Profiled services (api, filebeat, kibana) are only stopped when named.
+        self.compose("--profile", "run", "--profile", "dashboard", "stop")
 
 
 # ------------------------------------------------------------------ helpers
