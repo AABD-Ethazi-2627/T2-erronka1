@@ -1,0 +1,11 @@
+{
+  "status": "pass",
+  "artifacts": [
+    {
+      "path": "analysis-v2/packages/rf_reference.joblib",
+      "sha256": "34a14ab97a0e1facc4f4eff10b7ed9227516cc853d7400abd351ccef17cffe72",
+      "expected": "34a14ab97a0e1facc4f4eff10b7ed9227516cc853d7400abd351ccef17cffe72"
+    }
+  ],
+  "scope": "Verify public package manifest against exact archived V2 artifact; previous V1 retained separately"
+}

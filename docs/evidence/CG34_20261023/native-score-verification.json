@@ -1,0 +1,1736 @@
+{
+  "status": "pass",
+  "verified": [
+    {
+      "model": "lgb_7_True",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "00599143525d29d0060a2dba07f1d91032a0afe178b431d44cd3d628397759a3"
+    },
+    {
+      "model": "lof50_adapted",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "02b1960a3dc7591e7b579f4252bb8449cb4389d687b51a900aacc8249fa94185"
+    },
+    {
+      "model": "if_adapted",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "03d094ca8733911d6942a45be1e6d34f17ae69fb3e51d87d3f7c6f0c91322cce"
+    },
+    {
+      "model": "cat_d6_False",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "04b76cd59057a11209fa9cd4d2105cd7213413302e8cee5854b8d5d1ce09887b"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "package",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 32,
+      "max_difference": 0.0,
+      "unit": "06be3b66f42f6e8096806d3d638c4c881e6e6c3b0e7047d03bac2f3924b9bf51"
+    },
+    {
+      "model": "nb_1e-07",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "07c9455f02eca5376da36c4e45039eebea3476c0b59cbe0e47117b12a9b0f2c8"
+    },
+    {
+      "model": "lda",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "092a08ec06418aa7e2bce01cf785ea523bfc1dff7fe9943545311e704d41c74a"
+    },
+    {
+      "model": "hist_reference",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "09976e58fd7c25564a15a3bbda4f2b260721304aa4c6d7c08aef685f980edf90"
+    },
+    {
+      "model": "rf_no_derived",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "09db3fd98092831fbb69b2583f5bce719e5d478a17ec0ea6c1deb1ea591a5715"
+    },
+    {
+      "model": "cat_d4_False",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "0ae485b82151920454e65ce87fe8684cc030288948086bea5ce50c5fbc031d4e"
+    },
+    {
+      "model": "cart_depth5",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "0c8b50c5dedb5aff6104794be1585c372df9fac5220056b87ee2bcac499751e2"
+    },
+    {
+      "model": "gam_5",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "0d1828b18d8a89c52a82f6444f117aae02889deb95d28a885fcdf88b05b8eccf"
+    },
+    {
+      "model": "mlp_16",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "1029ea59975f5c2253634e48a80a18f6ba8a078166743fe5bf46e99f046e9f41"
+    },
+    {
+      "model": "cart_depth8",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "104037f031c308980152e85a262899f753a6a0a13f801235d29da8e92211565c"
+    },
+    {
+      "model": "ae3",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "126bcf33d38661a42ce495c1ff8ac4a18dca640e9b7b02a455847f1233e82cea"
+    },
+    {
+      "model": "mlp_32",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "136a1193db12178e5822d86daaf05bb0edb175086a51b73ad3805d00f151c809"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 1,
+      "calibration": "raw75",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "1408a94c303fd466a9964675fc81c90904846fc105fd17eedbc45958499bdd99"
+    },
+    {
+      "model": "lgb_15_True",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "1828f24bfaf582d3024cec29fb0a5fa87a5196473f6812c30ca156f46c85f8ae"
+    },
+    {
+      "model": "gam_5",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "18b68cb0e2bb3ef09531a55228df8684c6ad24cbad3d0060caa0f68e9fb375cd"
+    },
+    {
+      "model": "pca4",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "19c5da850aa7632bb147664b62392ed4f501add76ed42d85adf34c11a0bc9768"
+    },
+    {
+      "model": "qda_0.1",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "1ab14b823a6da281127403f3ac10339d9bee1beceb27143f20c6e4e7f3831f38"
+    },
+    {
+      "model": "always0",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "1d69aac7c7a11a263a2d013d60950e8752466be700db709978416578dfd7244a"
+    },
+    {
+      "model": "ada_depth1",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "1f32638d2063b657c328700c9e5f11f8e45fc43419c924887bcb5f42c3c048d5"
+    },
+    {
+      "model": "cat_d6_False",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "23d648b618aef1089c797611d8166ca0082b231434a92288958df054bdd1e724"
+    },
+    {
+      "model": "cat_d6_False",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "23e91c5b7616c6754d12a5475d507a47b3e82140cfc2db0730ca0605be0d88ac"
+    },
+    {
+      "model": "ocsvm_001",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "2905ed42fefa433713d9b7db097db13ab9ce7b34faddcfd27cd4c7d6545f1e8d"
+    },
+    {
+      "model": "pca2",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "297346b34d4d60dbc982e3957e7774da91078b28dca9024c203a24f18d014c5e"
+    },
+    {
+      "model": "xgb_d3_False",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "2c150014d1d70e2424da0247b0fd554fe376cb0b8789941c020cd8376631736c"
+    },
+    {
+      "model": "hist_reference",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "2c99540e8c03a24e92bd9139184999090ec80d92ce8df87e3b5eaa6b5ee3339f"
+    },
+    {
+      "model": "gam_3",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "2e10aa7d66a5eb1ab360d21bdf1840e4cdd0c89afb4e9085d7507b2e476b4622"
+    },
+    {
+      "model": "cat_d4_False",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "3048678cce0e8d93e7ee9333aca2d68ee94573d38621e80464976c460633e951"
+    },
+    {
+      "model": "logistic_reference",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "3112086c76248dfa8e0393def918cf2fca66cf276c4341023de02c6920db109e"
+    },
+    {
+      "model": "ae2",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "31374c047738f1ea75a00d1fdcbc4f54e276a42e2a2b6df3ac7a2c103c494119"
+    },
+    {
+      "model": "lgb_15_False",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "31699b205d6d95d256ced127dd9a25e80c6fcae182ad1a65c62e3ae39e8d2bdb"
+    },
+    {
+      "model": "mlp_32_16",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "3277cd5c7d68918e522a22ffdaac8ff658c5b8730c11fc2100486430bc673e29"
+    },
+    {
+      "model": "ocsvm_005",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "333cf2b2c21b19ff2f238ca818db2a2b9ae43418bc5a0e3370140e8f261a4712"
+    },
+    {
+      "model": "lda",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "335070396382b9451416ba8e479b64682e7d593049cc407bc2c3ed77fcad7cb9"
+    },
+    {
+      "model": "nb_1e-09",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "3521ddcbfe6cfd0787e67628a8ae2f4b1c45bcea2c8a461d744c1328dbfa7eed"
+    },
+    {
+      "model": "ada_depth1",
+      "phase": "calibration_outer",
+      "fold": 0,
+      "calibration": "isotonic",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "37d90c61b7e283eeb5eff2c5a0a7618c8d8cab63a0ee8a7a7887ae3ab951ac1f"
+    },
+    {
+      "model": "cat_d4_False",
+      "phase": "pilot",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1245,
+      "max_difference": 0.0,
+      "unit": "390a0596e5b3a743e8fccab95c084366e2c037af5f9d18af215e9814144efadc"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 1,
+      "calibration": "isotonic",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "397a9bb953d32cf4d0a9042d274c2a573bfca0b9a4e6116dbc768b55d9f81ea1"
+    },
+    {
+      "model": "nb_1e-09",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "39a99da2ff868cd53b5101adbb8b1bee1f0d735300370ff8a9cee2ac430c1c41"
+    },
+    {
+      "model": "gb_no_derived",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "39b32e4935b26969aa513c645d88fb5b4066dd06577b8ae55abfa41c133dd149"
+    },
+    {
+      "model": "lgb_7_True",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "3ab4e721c2d18946b4c9c0f7d3f5f80ac798dd37d1b67c7dedff34ee35c4d42e"
+    },
+    {
+      "model": "pca2",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "3b74797694a60cad23d2d62bbe5d2b59cc9f9d9bda49ca398fd3aacdf9b7156e"
+    },
+    {
+      "model": "pca2",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "3c235095730b4ccd4c480f5cb49a9f8275d6f0177aa235ceac0a27a856bb0c74"
+    },
+    {
+      "model": "cart_depth3",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "406d97d10428757aaaec7fdb6fc3712d134ca9dfe1a820b4c142f862b32fb631"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "40ea984ddb12138ee0928b8452206788885e62b52f52d65557640763de8d59bf"
+    },
+    {
+      "model": "xgb_d6_True",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "4230ac5217925e3b97187c9c9eefb13c562fc430679d671d372aa21d3554c538"
+    },
+    {
+      "model": "lof20_adapted",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "42350b868fb6967f37719838455ade77315a5cffa6dbd979a48ab2ba93a19f3d"
+    },
+    {
+      "model": "gam_3",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "42f53ffac7fd593e9c3e37a1004f5b91c6ba620630be8f65776284b58aafe05b"
+    },
+    {
+      "model": "lgb_7_True",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "431ec1e6771274809e725013bd26301dc6315e0c588b47c0e5dfa0dbb08d1c87"
+    },
+    {
+      "model": "ae2",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "43452f7419fe4598215c4e56f92c86bd6df60324a04fc07818ca2890d0b33597"
+    },
+    {
+      "model": "ae2",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "456c3cf637016c92e7c4fc4a771fb1a240d341d4efd55496d47c906a57b331ed"
+    },
+    {
+      "model": "qda_0.1",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "460c0561149d8b0ebd91ecc8c425d898226e24654bcb0414de8a970992702085"
+    },
+    {
+      "model": "if_adapted",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "468099efb9b7c9eea06565c275b511a9f8d47390e5c437b7094e03fb6b057428"
+    },
+    {
+      "model": "gb_no_derived",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "47a3bf29995abaf909294551cd87ef952169d944eb45d24a7f2c0684942019d7"
+    },
+    {
+      "model": "xgb_d3_True",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "4cb9c086dbdb17a67cdbb48b11c6cf5cdb182703e1b222f236b655b71e4362b0"
+    },
+    {
+      "model": "ebm_3",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "4ed79a479c695a22837c3702428cd7794e1b1c8a9e646fde06092491b91343e3"
+    },
+    {
+      "model": "lgb_15_False",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "4ee945e273920a7cd95aa4e3e9bca7b5fddc8afbf923d65f731fbf8ed439bc59"
+    },
+    {
+      "model": "cart_depth8",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "5065a6a1cd545266edcc93145e6c593d9520b52bdab237b1a99a327d7604a1e6"
+    },
+    {
+      "model": "lgb_7_False",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "5148511b92968ac98e4c77c048e09471344d44285eb01d1fcbe0709618df4b32"
+    },
+    {
+      "model": "ocsvm_001",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "5156d5b86f72095b69ba3ef620ec45cd6867cc095d6a7df90568f1e7828432bd"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 2,
+      "calibration": "sigmoid",
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "51ef3f9ab3259e56eb49402edd34cd2efeec30dbbca08db2aecac510e9d2a855"
+    },
+    {
+      "model": "gb_depth3",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "524c261e9841b2f51b33be3a648657db76a8433ba6ca3ce24221d1b8b4420715"
+    },
+    {
+      "model": "gb_depth3",
+      "phase": "calibration_outer",
+      "fold": 1,
+      "calibration": "sigmoid",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "54319ec1957eafb7edafbea2d426b075b819a8e1b56e640f1e22bc8960b7557b"
+    },
+    {
+      "model": "cat_d4_True",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "5586ff80a134f62bc009d18346a23de230299ea43a614326c3fc4797ff2b8414"
+    },
+    {
+      "model": "gb_depth3",
+      "phase": "calibration_outer",
+      "fold": 1,
+      "calibration": "isotonic",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "567b0f2da15fa28568b1fd02c55169f9e429f49c80cdc5cf41f240a245173bc3"
+    },
+    {
+      "model": "robust_covariance",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "57cadbe661b465e0dda79129de01c3276e05e6f914710692f6faa34042f34b00"
+    },
+    {
+      "model": "lof20_adapted",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "584e143c1f157e76784b89ceef85f61d906e4825986d974c3a0ebc2e5effa5ec"
+    },
+    {
+      "model": "xgb_d3_True",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "5958e69558622ba896112dc589fac263c8e7867e66b03ca1453910014ce6b734"
+    },
+    {
+      "model": "cat_d4_False",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "595a4f047b255a2e0da23e7a79990e8501c65f60aac94a7546eac04c6eb262ac"
+    },
+    {
+      "model": "ebm_0",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "59db64b37919ae08c77a5e809a1df3c6919fc084fb1eda9d59a55802d4b33a81"
+    },
+    {
+      "model": "robust_covariance",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "5a4939bfb7e185774b1f99774dab4b503f57d2ff33134e1313ccbbfa94bbc105"
+    },
+    {
+      "model": "knn5",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "5ac181cef2eb49cd62a8a233aaa6cc8a2d94142c590ef10aeb70d6bba2cc835f"
+    },
+    {
+      "model": "gb_no_derived",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "5e4117dde4e37f9be172dc80850dca3997a4174ab5f03e3a4b8f906f9fea3c76"
+    },
+    {
+      "model": "ada_depth1",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "620c33cc67e8d746e579fdee6ceebf00f5e6a039eed0b9d0da62ca5f76b79e57"
+    },
+    {
+      "model": "ocsvm_005",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "631e89772a1b3f8388e45fc6edc486b6852258352e44abe76cc5eee2e0d94cd4"
+    },
+    {
+      "model": "mlp_16",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "648b88648a246a18dff10eaac0b5265645a1252c10cb1b17a766ba22dd8fe93b"
+    },
+    {
+      "model": "cart_depth3",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "6b1a89d557a41b788a81b0cef3bfda199a338c24cb80291f9273a702c4e40509"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 2,
+      "calibration": "isotonic",
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "6b23b48eb5e8e4963e41f31c46272f91716227a41ec29b8608a77ee7be52fc5c"
+    },
+    {
+      "model": "rf_no_derived",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "6bbae6118e096cb487c00ed58941af3cb377d9cc922524966eca99bcc307cf3f"
+    },
+    {
+      "model": "lgb_15_False",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "6cb775aa85ae9e18964620f11bf96fab7e62c23479ff16cca8a90efa2d96410a"
+    },
+    {
+      "model": "cat_d6_True",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "6ee8868fd8206751339123963edae9a41c1fb833bc3730e406a155b103445f29"
+    },
+    {
+      "model": "knn35",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "703b61cd896da5ef8b3f74bc7d790c4eeea94785514f1fe38b691616b0b4bc5a"
+    },
+    {
+      "model": "xgb_d3_True",
+      "phase": "pilot",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1245,
+      "max_difference": 0.0,
+      "unit": "70afc4b4fa5d49b46e6a355f1fc3805b0b205bb6669dd6ba3634d5cd12f678d7"
+    },
+    {
+      "model": "always0",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "70d34f3861739329e0af29b11753a3d2fb3b5b26825bb910865df2abd8eff99e"
+    },
+    {
+      "model": "nb_1e-07",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "715d4dfe2ed34ecc24ff05aac5fb7c69423bf8cdec035cecb1101b05d175cbef"
+    },
+    {
+      "model": "logistic_reference",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "7324015ed50fd280e8ac496d1dc657b2b5f08d6ad4a45ae855d314a43618433c"
+    },
+    {
+      "model": "knn5",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "740f5751c2884905b90c6adae96f8ebbbc6e97134b8d38c4b41bba5b27809ee7"
+    },
+    {
+      "model": "hist_reference",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "74d7671cd7b6569ffd9d5aa47e9c736de4773f544c879b37f7f10acfeb930b63"
+    },
+    {
+      "model": "ada_depth2",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "75f00a4f5defda9a67ef8731ca940d77c86502a5fef987f0a1a2eb25d37871c5"
+    },
+    {
+      "model": "qda_0.5",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "76bb128fe43d0daec8fe5558ddb972eac95f0c65549233a1f06101e1a9ed0ccd"
+    },
+    {
+      "model": "lof50_adapted",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "793958a0b40c5b1e779e61cbbaf6245eaac016d313aaa86aad36f7f3cd119e01"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "7b8dfe6997337fd2f07f83d6ac878a8b61e954dafdb4b93ebaea5c771e4d98a5"
+    },
+    {
+      "model": "nb_1e-09",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "8086d86c4d358c00aff4feb6883039b29bbeb8d4f8c5b49a5e34cfc626f18236"
+    },
+    {
+      "model": "mlp_16",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "80880256f82454598ba7e39bb087d91d2505090ce502764659222f2580d86b3f"
+    },
+    {
+      "model": "cart_depth8",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "80b1fe80417689f07780230f7616de9068cd06e5396a25d9c39776dfddcc7705"
+    },
+    {
+      "model": "ocsvm_001",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "85d73bbecb46e095f497b27c54eb485c68882efb7649e610b6404e3612daec2e"
+    },
+    {
+      "model": "cat_d4_False",
+      "phase": "pilot",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1245,
+      "max_difference": 0.0,
+      "unit": "86c19271d53dc2cdd2e1b0c62209d96d45d29082f6e67bedf5cf7fca7df81c73"
+    },
+    {
+      "model": "logistic_reference",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "8cd7859e65a8b27175b24c5532b8bd34307972cb8fc2879cb904c340571ab20e"
+    },
+    {
+      "model": "nb_1e-07",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "8f883ae9e3912cd9553e8e331fcad3ebe556f2ed406f3bba7b55963ceeec3c4d"
+    },
+    {
+      "model": "mlp_32_16",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "91530302eaef4e1e1251a4c20492bce00bd88781374c8a38fd0475d56dd85365"
+    },
+    {
+      "model": "gam_5",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "9275f7bede932936e3fadb951b97558487039ff00305597f2027b02b4a7c2747"
+    },
+    {
+      "model": "cart_depth5",
+      "phase": "calibration_outer",
+      "fold": 2,
+      "calibration": "raw75",
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "92dbd76aac2f05bcae1f559035fb2ae0689f9cdd9fff7e5c98ecd9570587eec0"
+    },
+    {
+      "model": "pca4",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "92f9cb53d2469572606cfb3b293a47a4803250f42190276d502ce9def2f7abda"
+    },
+    {
+      "model": "always1",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "9390f4562a019282b0bc1705e6126fc76cbc65faea27da39fe1e5fd4583537d0"
+    },
+    {
+      "model": "ebm_0",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "943e8534afee4f3e1660db28c4607389a1e352ff987d6b026c54d9f5dc81d296"
+    },
+    {
+      "model": "ada_depth1",
+      "phase": "calibration_outer",
+      "fold": 0,
+      "calibration": "sigmoid",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "94feb4a05b53bfd9962f5491ba3cee473de9832e9b557ce5a761090cbb8840d3"
+    },
+    {
+      "model": "always0",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "9a3ff253271b302d75e3507e5cf192d961304bf7fa5d23db4111134cd875cc84"
+    },
+    {
+      "model": "cat_d4_True",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "9ea4705efb9303a524d6a731268a337f616c8a23f2811135036cb4431cb742a7"
+    },
+    {
+      "model": "ebm_3",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "9ec8c41727793db90274d391e5b9dc7dd848f078c5f9f01b443bf72bf4b921b3"
+    },
+    {
+      "model": "qda_0.5",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "9f999920f9c98de47f9917adfc73931325ae474de12dfa604717e1c110de4e46"
+    },
+    {
+      "model": "lda",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "a07b143cba4fc1bf891576611f4f63f0b356d6564ef317278ac11a61c8976817"
+    },
+    {
+      "model": "ae3",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "a0ab1bf63352ed34985140bcb2236b31e5480b1efdc7b6f25c9755f9bd6a6355"
+    },
+    {
+      "model": "lof50_adapted",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "a1c838c5ae910ad1d75921eb87fd160345b9376fe7494040b76bade872d543e7"
+    },
+    {
+      "model": "ae3",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "a254791b201dbf9c3adb8939683506e068ce44c936cd01d905d9dcad2fcb69a9"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 0,
+      "calibration": "isotonic",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "a749e171de892e9046d1b8d6f0ab832a2e2498f4ed8b3385f774b60701899667"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 0,
+      "calibration": "sigmoid",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "a898a9339e3e80bee52c71b1696bdeb00b5260276b0530474c0a9b1b9c09bf4c"
+    },
+    {
+      "model": "knn15",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "a8bcd46fcbe8977774aefbd11d623f6894ae83e159c045cc2d6420eb19c64261"
+    },
+    {
+      "model": "cart_depth5",
+      "phase": "calibration_outer",
+      "fold": 2,
+      "calibration": "sigmoid",
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "a9226ddeba16b4efa02b2b44765c87fc0f0babd401e28e59782d2b8315b87851"
+    },
+    {
+      "model": "gam_3",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "acc4c4f69952ce9abcebb2d3b391f7e17c02bcc5655bdd847d30d082cf02e156"
+    },
+    {
+      "model": "ebm_3",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "af104897553a3bc1e5e4dd2cbf3be867ef23170398c952dc3a4b5d37d8bd9b37"
+    },
+    {
+      "model": "lgb_15_True",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "b5bdbecc4537e366612ef94335e3209a8e55a770faaafe6f86b098f11633ae65"
+    },
+    {
+      "model": "always1",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "b7393075742d69aef70c2f07c2fc25912f20b76de2f53cfc287be3e31ac16b64"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 0,
+      "calibration": "raw75",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "b7688e7e7ca4b466d91c38fe560ea64a1bb8cdb8077e3dd82e24a69469ff0416"
+    },
+    {
+      "model": "xgb_d6_True",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "b9091f8b65cf6f8251cd735bd638e3510bfcd6d9af25c9a62c218060d0e4ce05"
+    },
+    {
+      "model": "if_adapted",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "bcf5b0ef9feabb2d8de2df965c83d649f2ea8d8fd34a4b60d20d5388746f3067"
+    },
+    {
+      "model": "xgb_d6_False",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "bdea2e87b78d80bd8d4b783f1f1e83295538409b3235d11d49ffebb3f0b31286"
+    },
+    {
+      "model": "gb_depth3",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "bf12670507ce73a94e53445be432c7c60989a72c9b9a54917d3668d85a84e96d"
+    },
+    {
+      "model": "ocsvm_005",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "bf5bfec571105e06e01600523b33a3be20b8449ffbdee8d0e9ba45bd77fe1a00"
+    },
+    {
+      "model": "xgb_d6_False",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "c34b2bc7ddb533386c699b2d704d013a9bc8b3881ca0e943f77f8e0260a54e33"
+    },
+    {
+      "model": "cat_d4_True",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "c41c100d662cec3a0c35a91562fab3ca0f5b05af57e136be2d5d569254046bf4"
+    },
+    {
+      "model": "always1",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "c4b7382ac4d8bf0f007ed4430a98c01dd63578f4ea92dd5a6617ea34d47a5c87"
+    },
+    {
+      "model": "knn5",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "c52dd3c6c63dcc438bef7d8690cc122ace5573770fa2046009400869aed4f802"
+    },
+    {
+      "model": "ebm_0",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "c7028bf6e93b64abdf6b4b257affc063fe4d814d04e2ad4c0a45d0c73ad548bf"
+    },
+    {
+      "model": "cat_d6_True",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "c9ab786f66959e925639cc247fcb00e2ff85cdf8cfd48ef7dd5d3b68e623583f"
+    },
+    {
+      "model": "lgb_7_False",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "cbe2a88251e2f68ea58e234430bc761d5c8b88884427600520f7e4c64ef59b84"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 2,
+      "calibration": "raw75",
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "ccf2a63b0d70c17246833f24b501c2308825862bfc8c133ebefdb6c96a03e3b6"
+    },
+    {
+      "model": "lgb_15_True",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "cf0e833466ec19811716d97ccc1e9f72507b48dfe3b9102eff5906c365a0b5ab"
+    },
+    {
+      "model": "xgb_d6_False",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "cfc0cfffceb066f5838f2259cf312ce0b12ac67c52dbdc4a21e6a72689c487cd"
+    },
+    {
+      "model": "knn35",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "d01454868e1f997f83fd226fc1558f0ca79f6439e58a3f93cadddb6984a5d94c"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "calibration_outer",
+      "fold": 1,
+      "calibration": "sigmoid",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "d098f974401255565369f4ce5d3c49eda68b48733bbccdec0e0fdc924accdb3d"
+    },
+    {
+      "model": "xgb_d3_True",
+      "phase": "pilot",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1245,
+      "max_difference": 0.0,
+      "unit": "d0d0093bedc67678577a709bb261792fa5732a7447c220205b797ac627562dc4"
+    },
+    {
+      "model": "xgb_d6_True",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "d0e829873d202f7a07c73504e8c2f68215332e1a3661cbb4ba86e55fa5e517bc"
+    },
+    {
+      "model": "lof20_adapted",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "d6d7b7f7201d9e9e94128df547fb55ca081d63395cc10f7700bb88bb8d3c14be"
+    },
+    {
+      "model": "ada_depth1",
+      "phase": "calibration_outer",
+      "fold": 0,
+      "calibration": "raw75",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "d96e1d3be5ed8150c01479cef4617371f683c6df29fc3f5f5b1a6dc8a97fc18c"
+    },
+    {
+      "model": "xgb_d3_True",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "dbfd1cfd693228938c165f24cdb0e420866bda0c75429056103bab856ea4b54a"
+    },
+    {
+      "model": "qda_0.5",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "dc3b369e1931728a3c85c94bde529021148c25fb73b24e1c2da0dfad1db85794"
+    },
+    {
+      "model": "lgb_7_False",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "de76d61ce7546d7322074e452191c47d508ffdbe977cc91df56f868ef3f12b81"
+    },
+    {
+      "model": "rf_no_derived",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "defd294f695e42fe201738cf2a3cc8d1f4d4975ed9bbab56711f36d30fe8820c"
+    },
+    {
+      "model": "pca4",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "e20603aab721bdfbd905685116f5276add0a27359c4777b67af54ed9f8448943"
+    },
+    {
+      "model": "gb_depth3",
+      "phase": "calibration_outer",
+      "fold": 1,
+      "calibration": "raw75",
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "e382c0b5ef06634e2c054d8d30cdf745b2cd5bd56b1ac0a701e9615622904cca"
+    },
+    {
+      "model": "mlp_32",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "e391c638137238b76bb6485179b9368b67df7c5e14502043f8208455a4337466"
+    },
+    {
+      "model": "ada_depth2",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "e4208456c7e4ec5b8e73f0da2bc3b477c2ccfbdd7ddf9b845647a01b2fa92c00"
+    },
+    {
+      "model": "qda_0.1",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "e4d19db53255951072f5e35c77d2ef472abb0f55431e2c97370a886a952a53d6"
+    },
+    {
+      "model": "cart_depth3",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "e546e112004bcda8f22ca187af2a59b92676b993d36c45f82171965ebc732dfb"
+    },
+    {
+      "model": "cart_depth5",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "e887f1b4dc27b0a042b99c4042e15943a52e3c608ac59c08c3cec0e76dddccbb"
+    },
+    {
+      "model": "cart_depth5",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "eb0d5a6576dbcd12a9accd749da65ac69d034a7617f4eb54771d219d717d4677"
+    },
+    {
+      "model": "knn15",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "ecda26cf0c6861604f7b7c6cd4b39cdd1d35204b3d0c21a6bdfb880b49a4be49"
+    },
+    {
+      "model": "xgb_d3_False",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "ee754fec38cf75b6ec42069da1fba9a17c2903a6ca5c3224dad5aded65a66bfb"
+    },
+    {
+      "model": "cart_depth5",
+      "phase": "calibration_outer",
+      "fold": 2,
+      "calibration": "isotonic",
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "ef3318b748d75deef9ce5acfe81625377c348d53443c27a9a515faa47a3ccebd"
+    },
+    {
+      "model": "xgb_d3_False",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float32",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "f2bf786cd60bc0768c1af4b39656649d49c7aba1e5f877e11baf17b78a8b45b6"
+    },
+    {
+      "model": "knn15",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "f494ba916a48885609c107348e09799152aa8b1b272b3da4f383454cbc2fbc5c"
+    },
+    {
+      "model": "cat_d6_True",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "f5ef866f5f5835207fafb187f0ae8d83497bcf58b1de54586b6b83c7d1ec9837"
+    },
+    {
+      "model": "ada_depth1",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "f661b56e3c8bebf1e4863630820fb9d492784194e33e8aa37d92f88e04b21dfd"
+    },
+    {
+      "model": "mlp_32_16",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "f741990c0bb7a6454f8486f97d0e75903c74aa186b9ea39c9b3986f0fe390121"
+    },
+    {
+      "model": "knn35",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "fa19e7b690941a44df01004b0a448f985c5201cdbb11551e4d0719b310e0e6ff"
+    },
+    {
+      "model": "mlp_32",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "fa463921e88679f0e0caf5feb841df2c6ad58dddf05a0ef0483fda65335e2229"
+    },
+    {
+      "model": "rf_reference",
+      "phase": "outer",
+      "fold": 1,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "fc9c62fafa07ebf16782930feb4a7b18933d511fc9823c8264d9087850a039c7"
+    },
+    {
+      "model": "robust_covariance",
+      "phase": "outer",
+      "fold": 0,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1867,
+      "max_difference": 0.0,
+      "unit": "fcce202683350da7d4cb12370696368624b8129faa69dfbd8e7d253f148a61f8"
+    },
+    {
+      "model": "ada_depth2",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "fd7fbb0d82841c756f97a5724697153afb2b36223a0b87a72248279ea854bebb"
+    },
+    {
+      "model": "gb_depth3",
+      "phase": "outer",
+      "fold": 2,
+      "calibration": null,
+      "native_dtype": "float64",
+      "score_rows": 1866,
+      "max_difference": 0.0,
+      "unit": "ffcf5aeb014b586090e409217bb7706869804834601837ebb591e291e177a40c"
+    }
+  ],
+  "scope": "CPU prediction reload only; no fit, selection, validation or test scoring"
+}
