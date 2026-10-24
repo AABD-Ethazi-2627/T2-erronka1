@@ -1,0 +1,96 @@
+name: Dependency audit
+on:
+  pull_request:
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.13.5'
+          python-version: '3.11'
+          enable-cache: false
+      - uses: docker/setup-compose-action@54042514f505b273907334ae2b9cdbb9a0213c1a # v2.4.0
+        with:
+          version: v5.6.1
+      - name: Validate lock, runtime hashes and infrastructure inventory
+        run: |
+          uv lock --check
+          python3 -m scripts.export_runtime --check
+          python3 -m scripts.image_inventory --check
+          python3 -m scripts.build_refreshed_lab_flow --check
+          python3 scripts/check_lab_compose.py
+      - name: Audit every lock entry and uv (lookup failures fail closed)
+        run: python3 -m scripts.audit_dependencies --latest --output dependency-audit.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: dependency-audit
+          path: dependency-audit.json
+          if-no-files-found: error
+          retention-days: 30
+  images:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select immutable reference
+        id: image
+        env:
+          IMAGE_KEY: ${{ matrix.image }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          key = os.environ['IMAGE_KEY']
+          ref = 'cnc-guard-audit:ci' if key == 'api' else json.loads(Path('deploy/images.json').read_text())[key]
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              print('ref=' + ref, file=output)
+          PY
+      - name: Build actual API image
+        if: matrix.image == 'api'
+        run: docker build --file scoring/Dockerfile --tag cnc-guard-audit:ci .
+      - name: Preserve complete image scan, including unfixed findings
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          version: 'v0.76.1'
+          image-ref: ${{ steps.image.outputs.ref }}
+          scanners: vuln
+          format: json
+          output: image-scan.json
+          exit-code: '0'
+          ignore-unfixed: false
+          severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+          cache: false
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: image-${{ matrix.image }}
+          path: image-scan.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Reject fixable HIGH or CRITICAL findings in the built runtime
+        if: matrix.image == 'api'
+        run: >-
+          trivy image --cache-dir "$GITHUB_WORKSPACE/.cache/trivy"
+          --skip-db-update --skip-java-db-update --scanners vuln
+          --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 cnc-guard-audit:ci
+      # Official vendor images are reported without suppressing findings.
+      # A newer library inside an image does not establish an available vendor
+      # image upgrade. Review the full artifacts; see DEPENDENCY_MIGRATION.md.

@@ -97,7 +97,9 @@ def check():
                 if not context.is_dir() or not dockerfile.is_file():
                     errors.append(f"{service}: missing build context or Dockerfile")
                 else:
-                    for line in dockerfile.read_text().splitlines():
+                    # Docker joins backslash-continued instructions before
+                    # parsing; shlex cannot parse a dangling escape per line.
+                    for line in dockerfile.read_text().replace("\\\n", "").splitlines():
                         parts = shlex.split(line, comments=True)
                         if not parts or parts[0].upper() not in {"COPY", "ADD"}:
                             continue

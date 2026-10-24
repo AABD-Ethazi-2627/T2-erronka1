@@ -18,18 +18,23 @@ ENV.update(
 )
 
 
-def render(overrides=None, missing=None):
+def render(overrides=None, missing=None, archive=True):
     env = ENV | (overrides or {})
     if missing:
         env.pop(missing, None)
+    command = [
+        "docker",
+        "compose",
+        "--env-file",
+        os.devnull,
+        "-f",
+        str(COMPOSE),
+    ]
+    if archive:
+        command += ["--profile", "historical-archive-only"]
     return subprocess.run(
-        [
-            "docker",
-            "compose",
-            "--env-file",
-            os.devnull,
-            "-f",
-            str(COMPOSE),
+        command
+        + [
             "config",
             "--format",
             "json",
@@ -89,6 +94,11 @@ def check(overrides=None):
 
 
 if __name__ == "__main__":
+    default = render(archive=False)
+    assert default.returncode == 0, default.stderr
+    assert not json.loads(default.stdout)["services"], (
+        "Historical services must be opt-in"
+    )
     check()
     check({"CNC_LAN_BIND_IP": "0.0.0.0", "CNC_NIFI_PROXY_HOST": "untrusted:8443"})
     for key in ("CNC_NIFI_PASSWORD", "CNC_STREAM_DIR"):
