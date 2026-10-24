@@ -1,0 +1,14 @@
+{
+  "base_commit": "e64473703fa1d69c48f7e2781f4ae650abfcbd71",
+  "files": {
+    "scripts/ml_study.py": "0c3f3a7c08daf687163bc8fabcb52b5a1f9b846cd4601633c364fd5acef750ea",
+    "scripts/ml_study_models.py": "81875467f093dceb6953fa3bdbac1dd078ae0b6618e8c22ecab5763695c27c77",
+    "scripts/ml_study_requirements.txt": "f1e17bc90aa67473f0fc7186e42b2b1092f4f19d8cb6ffd14a7f1bec4f24b1c2",
+    "scoring/preparation.py": "2578e9497dc16d8501d88c4fe472b0f4146dc4661548a5abfa0019251ee80c1d",
+    "scoring/scope.py": "f8f9443f96465fe96d922a380af6940928a863d21a2f7a26e8db19ca35e4d7e7",
+    "scripts/platform_io.py": "80f813d1a299975e5a041300534abff93e886efb344fe68da9e4eda0ebbff8bb",
+    "data/ai4i2020_train.csv": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "docs/evidence/CG04_split_membership.json": "081f11bfe228d8a707a0817306e1e768f3991bf9b880fc1dc63c1b3980821873"
+  },
+  "scope": "provenance snapshot, no new checkout or training"
+}

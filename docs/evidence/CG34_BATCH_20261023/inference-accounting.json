@@ -1,0 +1,11 @@
+{
+  "stage": "benchmark",
+  "status": "complete_analysis",
+  "exit_code": 0,
+  "cpu_seconds": 13.865625,
+  "gpu_seconds": 0,
+  "wall_seconds": 11.543695000000298,
+  "peak_rss_bytes": 310669312,
+  "exact_process_tree_cpu_seconds": 9.765625,
+  "method": "retained Windows handles plus sampling/own-process margin"
+}
