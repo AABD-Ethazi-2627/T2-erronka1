@@ -45,7 +45,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv]
+        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, haproxy, debian]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -66,7 +66,7 @@ jobs:
       - name: Build actual API image
         if: matrix.image == 'api'
         run: docker build --file scoring/Dockerfile --tag cnc-guard-audit:ci .
-      - name: Preserve complete image scan, including unfixed findings
+      - name: Reject every image vulnerability and preserve the complete scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           version: 'v0.76.1'
@@ -74,7 +74,7 @@ jobs:
           scanners: vuln
           format: json
           output: image-scan.json
-          exit-code: '0'
+          exit-code: '1'
           ignore-unfixed: false
           severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
           cache: false
@@ -85,12 +85,3 @@ jobs:
           path: image-scan.json
           if-no-files-found: error
           retention-days: 30
-      - name: Reject fixable HIGH or CRITICAL findings in the built runtime
-        if: matrix.image == 'api'
-        run: >-
-          trivy image --cache-dir "$GITHUB_WORKSPACE/.cache/trivy"
-          --skip-db-update --skip-java-db-update --scanners vuln
-          --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 cnc-guard-audit:ci
-      # Official vendor images are reported without suppressing findings.
-      # A newer library inside an image does not establish an available vendor
-      # image upgrade. Review the full artifacts; see DEPENDENCY_MIGRATION.md.

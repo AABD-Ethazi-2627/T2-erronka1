@@ -14,19 +14,46 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from email.parser import BytesParser
 from pathlib import Path
-from urllib.request import Request, urlopen
+from urllib.parse import urlsplit
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 from zipfile import BadZipFile, ZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def validate_metadata_url(url):
+    parsed = urlsplit(url)
+    if (
+        parsed.scheme != "https"
+        or parsed.hostname != "pypi.org"
+        or parsed.username is not None
+        or parsed.password is not None
+        or parsed.port not in (None, 443)
+        or not parsed.path.startswith("/pypi/")
+        or parsed.query
+        or parsed.fragment
+    ):
+        raise ValueError("Metadata URL is outside the approved PyPI HTTPS origin")
+
+
+class PyPIRedirectHandler(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        validate_metadata_url(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+PYPI_OPENER = build_opener(PyPIRedirectHandler())
+
+
 def fetch_json(url):
+    validate_metadata_url(url)
     for attempt in range(3):
         try:
             request = Request(
                 url, headers={"User-Agent": "cnc-guard-dependency-audit/1"}
             )
-            with urlopen(request, timeout=15) as response:
+            with PYPI_OPENER.open(request, timeout=15) as response:
+                validate_metadata_url(response.geturl())
                 payload = response.read(32 * 1024 * 1024 + 1)
             if len(payload) > 32 * 1024 * 1024:
                 raise ValueError("Metadata exceeds the size limit")
