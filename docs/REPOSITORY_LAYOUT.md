@@ -23,6 +23,8 @@ el laboratorio completo.
 - `docs/templates/infra/`: variante histórica de infraestructura, antes `infra/`.
   Conserva su API y Filebeat propios, diferentes del código activo; no es una
   segunda instalación vigente. No ejecutar su Compose como sustituto del principal.
+  Todos sus servicios pertenecen al perfil `historical-archive-only`: el arranque
+  predeterminado no selecciona servicios. El verificador solo renderiza ese perfil.
   Sus rutas relativas se resuelven desde esa carpeta; modelos en `../../../models`.
 
 ## Exclusiones
@@ -54,6 +56,7 @@ principal. Las rutas generadas `outputs/` y `models/` se permiten sin crearlas.
 No acredita que la API docente esté completa ni que exista una integración viva.
 La CI ejecuta esta comprobación en PR y bajo petición manual.
 El segundo comando valida por separado la plantilla histórica con valores
-ficticios y un directorio de fixtures del checkout. Comprueba puertos privados,
+ficticios, el perfil explícito `historical-archive-only` y un directorio de fixtures
+del checkout. Comprueba que no hay servicios predeterminados, puertos privados,
 TLS/autenticación, rutas, entrada de solo lectura y rechazo de variables ausentes
 o vacías mediante `docker compose config`. No monta SMB ni inicia contenedores.
