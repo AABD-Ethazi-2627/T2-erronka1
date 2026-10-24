@@ -41,7 +41,7 @@ services:
 
   filebeat:
     <<: *hardening
-    image: docker.elastic.co/beats/filebeat:9.5.4
+    image: docker.elastic.co/beats/filebeat:9.5.5@sha256:4b2042fcbeb781800bc7271d400f764bb7d670310dfd4fe03ade53d6c7ab78aa
     user: '1000:1000'
     command: [filebeat, -e, --strict.perms=false, -c, '/lab/runs/${CG32_RUN:-none}/filebeat.yml', --path.data, '/lab/runs/${CG32_RUN:-none}/filebeat-data']
     volumes:
@@ -53,7 +53,7 @@ services:
 
   elasticsearch:
     <<: *hardening
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5@sha256:13b4a40bb095774f5fda635e45fd5677cc6a26565e42b24997b0c72b88e75984
     user: '1000:0'
     environment:
       discovery.type: single-node
@@ -69,7 +69,7 @@ services:
 
   kibana:
     <<: *hardening
-    image: docker.elastic.co/kibana/kibana:9.5.4
+    image: docker.elastic.co/kibana/kibana:9.5.5@sha256:13b72ce7222c36e4213229004ae62a87aeb32fd372ebfa6fb38f7a3285fdbb78
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       TELEMETRY_OPTIN: 'false'
@@ -85,7 +85,7 @@ services:
     <<: *hardening
     # Real API app + pinned bundle (read-only) + server-side timing log per run.
     # glibc base so the host uv interpreter/venv can be mounted read-only.
-    image: debian:bookworm-slim
+    image: debian:bookworm-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
     user: '1000:1000'
     working_dir: ${CG32_REPO}
     environment:
@@ -111,7 +111,7 @@ services:
 
   nifi:
     <<: *hardening
-    image: apache/nifi:2.12.0
+    image: apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad
     init: true
     user: '1000:1000'
     environment:

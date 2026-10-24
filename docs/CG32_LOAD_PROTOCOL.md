@@ -65,6 +65,11 @@ desviación de los p50/p95 de cada run (`cg32_load summarize`), nunca mezclados.
 Lag Kafka: `end - committed` del grupo cada 2 s mediante OffsetFetch sin unirse al
 grupo. CPU: integración de `docker stats` cada 2 s (aproximación); RSS: máximo
 observado por contenedor. El worker corre dentro de NiFi y se contabiliza en `nifi`.
+
+El cliente exporta el certificado público desde el contenedor NiFi perteneciente
+al proyecto Compose, guarda su SHA-256 en el estado privado del laboratorio y
+verifica cadena y nombre `localhost` en todas las llamadas. Un certificado
+ausente, sustituido o emitido para otro nombre aborta antes de enviar credenciales.
 Bytes: CSV, valores Kafka, raíz del worker (`du`) y store primario ES.
 
 ### Contabilidad e IDs

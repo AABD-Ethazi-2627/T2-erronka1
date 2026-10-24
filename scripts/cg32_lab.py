@@ -19,10 +19,12 @@ import itertools
 import json
 import os
 import platform
+import re
 import secrets
 import shutil
 import socket
 import sqlite3
+import ssl
 import subprocess
 import sys
 import threading
@@ -88,6 +90,7 @@ def du(path):
 class Lab:
     def __init__(self, root):
         self.root = Path(root).resolve()
+        self._nifi_ssl_context = None
         self.state_path = self.root / "state.json"
         self.state = (
             json.loads(self.state_path.read_text()) if self.state_path.exists() else {}
@@ -162,6 +165,8 @@ class Lab:
         self.save()
         wait(lambda: es_ok(self.state["es_url"]), "elasticsearch", 240)
         install_es_guard(self.state["es_url"])
+        wait(self.install_nifi_ca, "nifi certificate", 120)
+        wait(self.nifi_tls_ready, "nifi TLS", 120)
         wait(lambda: self.nifi_token(), "nifi", 400)
         self.state["versions"] = self.versions()
         self.save()
@@ -191,16 +196,111 @@ class Lab:
         }
 
     # ------------------------------------------------------------------- NiFi
+    @property
+    def nifi_url(self):
+        return f"https://localhost:{self.state['nifi_port']}"
+
+    def nifi_ssl_context(self):
+        if self._nifi_ssl_context is None:
+            ca_path = self.root / "nifi-ca.pem"
+            expected = self.state.get("nifi_ca_sha256")
+            if not ca_path.is_file() or sha_file(ca_path) != expected:
+                raise RuntimeError("NiFi certificate is absent or has changed")
+            self._nifi_ssl_context = ssl.create_default_context(cafile=ca_path)
+        return self._nifi_ssl_context
+
+    def nifi_container_id(self):
+        identifier = self.compose("ps", "-q", "nifi", check=False).stdout.strip()
+        if not re.fullmatch(r"[0-9a-f]{12,64}", identifier):
+            return None
+        labels = sh(
+            "docker",
+            "inspect",
+            "--format",
+            '{{index .Config.Labels "com.docker.compose.project"}}|'
+            '{{index .Config.Labels "com.docker.compose.service"}}',
+            identifier,
+            check=False,
+        )
+        if (
+            labels.returncode
+            or labels.stdout.strip() != f"{self.state['project']}|nifi"
+        ):
+            raise RuntimeError("Refusing certificate from an unexpected container")
+        return identifier
+
+    def install_nifi_ca(self):
+        ca_path = self.root / "nifi-ca.pem"
+        expected = self.state.get("nifi_ca_sha256")
+        if ca_path.is_file():
+            if not expected or sha_file(ca_path) != expected:
+                raise RuntimeError("NiFi certificate is absent or has changed")
+            self._nifi_ssl_context = ssl.create_default_context(cafile=ca_path)
+            return True
+
+        identifier = self.nifi_container_id()
+        if not identifier:
+            return False
+        export = sh(
+            "docker",
+            "exec",
+            identifier,
+            "sh",
+            "-c",
+            "set -eu; p=/opt/nifi/nifi-current/conf/nifi.properties; "
+            "k=$(sed -n 's/^nifi.security.keystore=//p' \"$p\"); "
+            "w=$(sed -n 's/^nifi.security.keystorePasswd=//p' \"$p\"); "
+            '[ -n "$k" ] && [ -n "$w" ]; '
+            'case "$k" in /*) ;; *) k=/opt/nifi/nifi-current/${k#./};; esac; '
+            'keytool -list -rfc -keystore "$k" -storepass "$w"',
+            check=False,
+        )
+        if export.returncode:
+            return False
+        certificates = re.findall(
+            r"-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----",
+            export.stdout,
+            flags=re.DOTALL,
+        )
+        if not certificates:
+            return False
+        pem = ("\n".join(certificates) + "\n").encode()
+        fd = os.open(ca_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(pem)
+        self.state["nifi_ca_sha256"] = sha_file(ca_path)
+        self.save()
+        self._nifi_ssl_context = ssl.create_default_context(cafile=ca_path)
+        return True
+
+    def nifi_tls_ready(self):
+        try:
+            raw = socket.create_connection(
+                ("127.0.0.1", self.state["nifi_port"]), timeout=5
+            )
+        except OSError:
+            return False
+        try:
+            with (
+                raw,
+                self.nifi_ssl_context().wrap_socket(raw, server_hostname="localhost"),
+            ):
+                return True
+        except ssl.SSLCertVerificationError:
+            raise
+        except OSError:
+            return False
+
     def nifi_token(self):
         env = self.env()
         try:
             response = httpx.post(
-                f"https://127.0.0.1:{self.state['nifi_port']}/nifi-api/access/token",
+                self.nifi_url + "/nifi-api/access/token",
                 data={
                     "username": env["SINGLE_USER_CREDENTIALS_USERNAME"],
                     "password": env["SINGLE_USER_CREDENTIALS_PASSWORD"],
                 },
-                verify=False,  # loopback-only port of this project's own NiFi
+                verify=self.nifi_ssl_context(),
                 timeout=10,
             )
         except httpx.HTTPError:
@@ -211,9 +311,9 @@ class Lab:
         token = self.nifi_token()
         response = httpx.request(
             method,
-            f"https://127.0.0.1:{self.state['nifi_port']}/nifi-api{path}",
+            self.nifi_url + f"/nifi-api{path}",
             headers={"Authorization": "Bearer " + token},
-            verify=False,
+            verify=self.nifi_ssl_context(),
             timeout=60,
             **kwargs,
         )
@@ -256,8 +356,7 @@ class Lab:
         root = self.nifi("GET", "/flow/process-groups/root")["processGroupFlow"]["id"]
         token = self.nifi_token()
         response = httpx.post(
-            f"https://127.0.0.1:{self.state['nifi_port']}/nifi-api"
-            f"/process-groups/{root}/process-groups/upload",
+            self.nifi_url + f"/nifi-api/process-groups/{root}/process-groups/upload",
             headers={"Authorization": "Bearer " + token},
             data={
                 "groupName": "CG32 " + run_dir.name,
@@ -266,7 +365,7 @@ class Lab:
                 "clientId": self.state["project"],
             },
             files={"file": ("flow.json", json.dumps(definition), "application/json")},
-            verify=False,
+            verify=self.nifi_ssl_context(),
             timeout=60,
         )
         response.raise_for_status()
