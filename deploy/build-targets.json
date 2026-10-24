@@ -1,0 +1,5 @@
+{
+  "api": "scoring/Dockerfile",
+  "kafka": "deploy/images/kafka.Dockerfile",
+  "mock-python": "deploy/images/mock-python.Dockerfile"
+}

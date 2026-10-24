@@ -50,7 +50,9 @@ services:
         max-file: "3"
 
   mock-predict:
-    image: python:3.13.17-alpine3.23@sha256:85c3e958f9448b4c75069957f1f6a3be5325e8ea7ad1f205142fc9d023d0531b
+    build:
+      context: ../..
+      dockerfile: deploy/images/mock-python.Dockerfile
     container_name: cnc-cg14-mock-predict
     profiles: [integration-mocks]
     restart: "no"
@@ -79,7 +81,9 @@ services:
         max-file: "3"
 
   kafka-test:
-    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
+    build:
+      context: ../..
+      dockerfile: deploy/images/kafka.Dockerfile
     container_name: cnc-cg14-kafka-test
     hostname: cg14-kafka-test
     profiles: [kafka-test]

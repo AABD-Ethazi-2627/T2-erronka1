@@ -21,6 +21,19 @@ def read_images(root=ROOT):
     return images
 
 
+def read_build_targets(root=ROOT):
+    targets = json.loads((root / "deploy/build-targets.json").read_text())
+    if not targets or any(
+        not isinstance(key, str)
+        or not isinstance(value, str)
+        or Path(value).is_absolute()
+        or not (root / value).is_file()
+        for key, value in targets.items()
+    ):
+        raise ValueError("Every build target needs a repository-relative Dockerfile")
+    return targets
+
+
 def image(name):
     return read_images()[name]
 
@@ -53,6 +66,7 @@ def compose(root, path, profiles=()):
 
 def check(root=ROOT):
     images = read_images(root)
+    build_targets = read_build_targets(root)
     errors = []
     specifications = [
         (
@@ -88,15 +102,25 @@ def check(root=ROOT):
     for path, profiles, expected in specifications:
         actual = compose(root, path, profiles)
         for service, key in expected.items():
-            if actual.get(service, {}).get("image") != images[key]:
+            config = actual.get(service, {})
+            if key in build_targets:
+                if config.get("build", {}).get("dockerfile") != build_targets[key]:
+                    errors.append(f"{path}: {service} differs from deploy/build-targets.json")
+            elif config.get("image") != images[key]:
                 errors.append(f"{path}: {service} differs from deploy/images.json")
         for service, config in actual.items():
             if "image" in config and config["image"] not in images.values():
                 errors.append(f"{path}: {service} has an unreviewed image")
-    dockerfile = (root / "scoring/Dockerfile").read_text()
+            if "build" in config and config["build"].get("dockerfile") not in build_targets.values():
+                errors.append(f"{path}: {service} has an unreviewed build")
+    dockerfile = (root / build_targets["api"]).read_text()
     for key in ("python", "uv"):
         if "FROM " + images[key] not in dockerfile:
             errors.append(f"scoring/Dockerfile: {key} differs from deploy/images.json")
+    for key in ("kafka", "mock-python"):
+        dockerfile = (root / build_targets[key]).read_text()
+        if "FROM " + images[key] not in dockerfile:
+            errors.append(f"{build_targets[key]}: {key} differs from deploy/images.json")
     return errors
 
 

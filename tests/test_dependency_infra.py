@@ -24,6 +24,9 @@ class InfrastructureRefreshTests(unittest.TestCase):
             root = Path(temporary)
             for name in (
                 "deploy/images.json",
+                "deploy/build-targets.json",
+                "deploy/images/kafka.Dockerfile",
+                "deploy/images/mock-python.Dockerfile",
                 "docker-compose.yml",
                 "deploy/cg14/compose.yaml",
                 "scoring/Dockerfile",

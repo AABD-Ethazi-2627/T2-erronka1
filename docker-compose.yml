@@ -2,7 +2,9 @@
 name: cnc-guard-lab-v2
 services:
   kafka-init:
-    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
+    build:
+      context: .
+      dockerfile: deploy/images/kafka.Dockerfile
     user: root
     entrypoint: [/bin/bash, -c, 'chown 1000:1000 /data']
     volumes: [kafka-data:/data]
@@ -11,7 +13,9 @@ services:
     depends_on:
       kafka-init:
         condition: service_completed_successfully
-    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
+    build:
+      context: .
+      dockerfile: deploy/images/kafka.Dockerfile
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
