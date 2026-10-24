@@ -11,7 +11,7 @@ services:
     environment:
       NIFI_WEB_PROXY_HOST: '${CNC_LAN_HOST:?Set the server LAN hostname or IP}:18080,localhost:18080,127.0.0.1:18080'
   lan-gateway:
-    image: haproxy:3.2-alpine
+    image: haproxy:3.2-alpine@sha256:5893840576071e6217cd52ebdcc14f454c6f7a631056fa6f4e0f40d3cac4215b
     user: '${CNC_LAN_CERT_UID:?Set id -u}:${CNC_LAN_CERT_GID:?Set id -g}'
     environment:
       CNC_NIFI_CERT_NAME: ${CNC_NIFI_CERT_NAME:?Set the verified NiFi certificate hostname}
