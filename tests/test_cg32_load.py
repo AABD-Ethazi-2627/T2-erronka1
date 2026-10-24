@@ -1,3 +1,4 @@
+import argparse
 import json
 import tempfile
 import unittest
@@ -11,6 +12,12 @@ SOURCE = Path(__file__).resolve().parents[1] / "data/ai4i2020_train.csv"
 
 
 class FixtureTest(unittest.TestCase):
+    def test_run_label_rejects_path_and_topic_escapes(self):
+        self.assertEqual(lab.validate_run_label("steady-01"), "steady-01")
+        for label in ("../../escape", "UPPER", "bad space", "-edge", "edge-"):
+            with self.subTest(label=label), self.assertRaises(argparse.ArgumentTypeError):
+                lab.validate_run_label(label)
+
     def test_fixture_is_nominal_unique_and_stable(self):
         first = load.fixture_lines(SOURCE, 50)
         self.assertEqual(first, load.fixture_lines(SOURCE, 50))

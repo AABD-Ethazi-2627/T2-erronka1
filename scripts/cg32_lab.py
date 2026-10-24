@@ -389,10 +389,14 @@ class Lab:
 
     # -------------------------------------------------------------------- run
     def run(self, args):
+        label = validate_run_label(args.label)
         manifest = verify_bundle(args.manifest)
         expected = load.validate_plan(args.rate, args.duration)
-        name = f"{args.label}-r{args.rate}-{uuid.uuid4().hex[:6]}"
-        run_dir = self.root / "runs" / name
+        name = f"{label}-r{args.rate}-{uuid.uuid4().hex[:6]}"
+        runs_root = (self.root / "runs").resolve()
+        run_dir = (runs_root / name).resolve()
+        if run_dir.parent != runs_root:
+            raise ValueError("Run directory escapes the lab root")
         for sub in ("input", "process-temp", "cycle-reports", "worker"):
             (run_dir / sub).mkdir(parents=True)
         lines = load.fixture_lines(REPO / "data/ai4i2020_train.csv", expected)
@@ -439,7 +443,7 @@ class Lab:
         nifi_group, processors = self.upload_graph(run_dir, args.period)
         record = {
             "name": name,
-            "label": args.label,
+            "label": label,
             "rate": args.rate,
             "duration_s": args.duration,
             "expected": expected,
@@ -493,7 +497,13 @@ class Lab:
             (run_dir / "api.log").write_text(logs.stdout + logs.stderr)
             self.compose("stop", "api", run=name, bundle=bundle, check=False)
             record["finished_utc"] = load.utc(now())
-            record.update(self.collect(run_dir, graph, record))
+            if sys.exc_info()[0] is None:
+                record.update(self.collect(run_dir, graph, record))
+            else:
+                record["collection"] = {
+                    "status": "skipped",
+                    "reason": "run_failed_before_measurement_completed",
+                }
             load.write_new(run_dir / "run.json", record)
         print(json.dumps(record["metrics"], indent=1))
         return record
@@ -1079,6 +1089,14 @@ def model_latency(manifest_path, count, output):
     print(json.dumps({k: v for k, v in result.items() if k != "values_ms"}))
 
 
+def validate_run_label(value):
+    if not re.fullmatch(r"[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?", value):
+        raise argparse.ArgumentTypeError(
+            "label must be 1-32 lowercase ASCII letters, digits or internal hyphens"
+        )
+    return value
+
+
 def main(argv=None):
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--lab", type=Path, required=True)
@@ -1088,7 +1106,7 @@ def main(argv=None):
     sub.add_parser("stop")
     run = sub.add_parser("run")
     run.add_argument("--manifest", type=Path, required=True)
-    run.add_argument("--label", required=True)
+    run.add_argument("--label", required=True, type=validate_run_label)
     run.add_argument("--rate", type=int, required=True)
     run.add_argument("--duration", type=int, required=True)
     run.add_argument("--period", default="2 sec", help="NiFi trigger period")
