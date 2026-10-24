@@ -18,7 +18,7 @@ def project(items=()):
                         "Berrikusten",
                         "Blokeatuta",
                         "Eginda",
-                        "To do",
+                        "Todo",
                         "In Progress",
                         "Done",
                     ]
@@ -128,7 +128,7 @@ class SyncTests(unittest.TestCase):
                 [
                     item(
                         values={
-                            "Status": "To do",
+                            "Status": "Todo",
                             "Taldea": "B-taldea",
                             "Start date": "2026-10-14",
                         }

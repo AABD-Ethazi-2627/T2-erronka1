@@ -29,7 +29,7 @@ un error explícito; publicar el workflow no significa que ya esté activo.
 - Responsables, título, cuerpo y comentarios son comunes porque se comparte
   la misma issue. No se modifican desde este script.
 - `Taldea = B-taldea`.
-- `Status`: Egiteke → To do; Lanean/Berrikusten/Blokeatuta → In Progress;
+- `Status`: Egiteke → Todo; Lanean/Berrikusten/Blokeatuta → In Progress;
   Eginda → Done. El detalle completo sigue disponible en Project #2.
   Se admiten `Todo` y `To do` como etiquetas equivalentes del destino. Si existen
   ambas, se aborta antes de escribir por ambigüedad; no se renombran opciones.

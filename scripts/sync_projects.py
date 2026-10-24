@@ -8,7 +8,7 @@ import subprocess
 ORG = "AABD-Ethazi-2627"
 REPO = f"{ORG}/T2-erronka1"
 STATUS = {
-    "Egiteke": "To do",
+    "Egiteke": "Todo",
     "Lanean": "In Progress",
     "Berrikusten": "In Progress",
     "Blokeatuta": "In Progress",
