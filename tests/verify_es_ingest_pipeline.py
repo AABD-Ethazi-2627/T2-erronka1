@@ -19,9 +19,10 @@ from test_es_ingest_pipeline import synthetic_prediction
 
 from scripts.archive_consumer import event_key
 from scripts.build_es_ingest_pipeline import EXPORT, PIPELINE_ID, ROOT
+from scripts.image_inventory import image
 from scripts.validate_contracts import validators
 
-IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:9.5.4"
+IMAGE = image("elasticsearch")
 
 
 def verify(work, distro=None):
@@ -213,7 +214,7 @@ def verify(work, distro=None):
             )
             if ready.returncode == 0:
                 evidence["server"] = json.loads(ready.stdout)
-                assert evidence["server"]["version"]["number"] == "9.5.4"
+                assert evidence["server"]["version"]["number"] == "9.5.5"
                 break
             state = json.loads(command(["inspect", container]))[0]["State"]
             if not state["Running"]:

@@ -54,10 +54,16 @@ las métricas actuales son de desarrollo.
 
 ## Laboratorio local
 
-Docker Compose y memoria suficiente para seis servicios (NiFi/Kibana son Java).
-La imagen NiFi de este equipo es `iabd-nifi:2.0.0-local`; para otra máquina se debe
-proporcionar esa imagen docente o validar `NIFI_IMAGE` compatible. No se afirma
-portabilidad ya comprobada en una máquina limpia.
+Docker Compose y memoria suficiente para seis servicios (NiFi/Elasticsearch usan
+Java y Kibana usa Node). El laboratorio usa imágenes oficiales fijadas por digest:
+NiFi **2.12.0**, Kafka **4.3.1** y Elastic **9.5.5**. Las referencias y su
+verificador están en [deploy/images.json](deploy/images.json). La API instala
+el grupo `runtime` de `uv.lock` con todas sus transitivas y hashes.
+
+El proyecto Compose nuevo se llama **cnc-guard-lab-v2**: utiliza volúmenes nuevos
+y conserva los del laboratorio anterior. Antes de ejecutarlo, leer la
+[migración y restauración](docs/DEPENDENCY_MIGRATION.md); actualizar este código
+no migra datos ni sustituye una instalación ya arrancada.
 
 ```bash
 mkdir -p outputs/smb-stream outputs/stream
@@ -84,9 +90,19 @@ contener otra dirección de origen y se conservan con su procedencia original.
 | Kibana | http://127.0.0.1:15601 |
 | Kafka | kafka:9092, solo dentro de Docker |
 
+Para que los cuatro estudiantes accedan directamente desde la LAN a NiFi,
+Kafka, Elasticsearch, Kibana y la API, usar el Compose adicional y los
+certificados de cliente descritos en [Acceso LAN](docs/LAN_ACCESS.md). El
+Compose base conserva los puertos locales hasta configurar la IP del servidor
+y la confianza TLS de NiFi.
+
 NiFi conserva TLS y credenciales autogeneradas: no hay contraseña de ejemplo en
-este README. Importar y revisar `nifi-flows/cnc_lab_completed.json` en NiFi2.0;
-configurar servicios de controlador y comprobar relaciones/colas antes de arrancar.
+este README. Importar y revisar
+`nifi-flows/cnc_lab_completed_nifi_2.12.0.json` en NiFi 2.12. El export mantiene
+todos los componentes deshabilitados; configurar servicios de controlador y
+comprobar relaciones/colas antes de habilitar el flujo. Las propiedades se han
+migrado a los nombres de NiFi 2.12, conservando scripts y referencias de servicio.
+`cnc_lab_completed.json` conserva el export anterior de NiFi 2.0 como procedencia.
 El export final utiliza topics lab-v2/SMB-v1, cuarentena y retries acotados.
 `scripts/nifi_client.py` es cliente local para revisión; su token privado no se
 versiona y no forma parte del export. Requiere `CNC_NIFI_TOKEN_FILE` con ruta
