@@ -16,6 +16,12 @@ conclusión de equidad laboral, certificación, seguridad industrial ni nota doc
 Las filas históricas siguientes conservan sus cortes; para la decisión normativa
 actual de G16/G17 prevalece esta actualización, sin dar por aceptados otros criterios.
 
+Avance CG14 del 22/10/2026 para G41/G46/G90/G92/G95/G101:
+[auditoría de seis ramas, pruebas y consulta real del host](../evidence/CG14_BRANCH_AUDIT_20261022.md).
+Worker durable y ensayo PR68 integrados; RESTORE funcional pendiente por deriva
+del Groovy y almacenamiento Kafka legacy. No cambia la aceptación de las filas.
+Revisión por otro integrante, conclusión y fecha: pendientes.
+
 | Celda docente | Coordinación propuesta de la evidencia | Issues relacionados | Estado | Evidencia y revisión |
 |---|---|---|---|---|
 | Zereginak!G5 | Angiecrizu, Niistal, petiteiker, tears-mysthrala | [#1](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/1), [#17](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/17), [#25](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/25), [#26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26), [#27](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27), [#37](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/37) | Parcial local; revisión pendiente | [Evidencia](../evidence/CG30.md) · [versión/comandos](../evidence/INDEX_2026-10-19.md). Explicación y aceptación del equipo pendientes. Revisor humano: pendiente. |

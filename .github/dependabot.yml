@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    groups:
+      scientific-stack:
+        patterns:
+          - numpy
+          - pandas
+          - scipy
+          - scikit-learn
+          - imbalanced-learn
+          - joblib
+          - pyarrow
+  - package-ecosystem: docker-compose
+    directories:
+      - /
+      - /deploy/cg14
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 2
+  - package-ecosystem: docker
+    directory: /scoring
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 2
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 2
