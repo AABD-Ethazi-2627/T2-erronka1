@@ -36,7 +36,7 @@ class RuntimeExportTests(unittest.TestCase):
             path.write_text("fastapi==0.0.1\n")
             self.assertFalse(check(ROOT, path))
             self.assertEqual(path.read_text(), "fastapi==0.0.1\n")
-            path.write_text(render(ROOT))
+            path.write_bytes(render(ROOT).encode("utf-8"))
             self.assertTrue(check(ROOT, path))
 
     def test_failed_export_is_not_treated_as_an_empty_valid_lock(self):
