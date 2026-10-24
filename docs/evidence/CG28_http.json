@@ -1,0 +1,43 @@
+{
+  "transport": "real loopback HTTP, sequential, 30 requests",
+  "model_version": "ai4i-development-v3",
+  "event_id_preserved": true,
+  "response": {
+    "event_id": "0bf1d771a68d442e20367630b20914396013eb5eba1f73caeaf9de6fe0f4178d",
+    "machine_id": "CNC-049",
+    "timestamp": "2026-10-15T08:09:06Z",
+    "schema_version": "0.1.0",
+    "quality_flag": "OK",
+    "source": {
+      "kind": "smb_csv",
+      "uri": "smb://192.168.75.222/cnc-stream",
+      "record_ref": "cnc_batch_20261015_080906_00001.csv:data-row-1",
+      "raw_record": "2026-10-15T08:09:06Z,CNC-049,L,300.5,309.8,1345,62.7,153,0,0,0,0,0,0"
+    },
+    "machine_type": "L",
+    "air_temp_K": 300.5,
+    "process_temp_K": 309.8,
+    "rpm": 1345.0,
+    "torque_Nm": 62.7,
+    "tool_wear_min": 153.0,
+    "failure_score": 0.039654372016458495,
+    "risk_alert": false,
+    "alert_level": "OK",
+    "anomaly_score": 0.5562422465593426,
+    "anomaly_alert": false,
+    "policy": "f2",
+    "model_version": "ai4i-development-v3",
+    "scored_at": "2026-10-19T08:27:02.533225Z",
+    "model_artifact_sha256": "b6ab270818b95f0bd1e52e6d4be7bc7b6ef87ec1f6e4ae2497eeca6b0a0c76a1",
+    "risk_threshold": 0.19082281465428477,
+    "anomaly_threshold": 0.6145036167334865
+  },
+  "latency_ms": {
+    "p50": 22.38275900026565,
+    "p95": 34.545905999948445,
+    "max": 48.18085900024016
+  },
+  "limitations": [
+    "Warm local sequential calls, not concurrency or industrial realtime guarantee."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PROPOSAL_NOT_RUNTIME_CONTRACT",
+  "source": "SMB audit snapshot 2026-10-19; static AI4I replay",
+  "observed_state_classification": "Retained separately; no inference performed in this audit",
+  "time_to_failure": {
+    "status": "UNAVAILABLE",
+    "eta_minutes": null,
+    "interval_minutes": null,
+    "probability_within_minutes": {"5": null, "30": null, "120": null},
+    "time_basis": "NOT_VERIFIED",
+    "reason_codes": ["STATIC_STATE_REPLAY", "SIMULTANEOUS_CONFLICTING_STATES", "NO_FAILURE_ONSET_LOG", "NO_COMPONENT_LIFECYCLE"]
+  },
+  "temporal_criticality": "UNKNOWN",
+  "proposed_horizons_minutes": [5, 30, 120],
+  "decision_thresholds": "Unspecified; must be selected and evaluated using prospective outcomes, false-alarm budget and intervention costs",
+  "constraint": "Cumulative probabilities must satisfy p_5 <= p_30 <= p_120; no score-to-minutes conversion",
+  "deployment": "Not implemented in API; existing score-based classroom alert policy is unchanged"
+}

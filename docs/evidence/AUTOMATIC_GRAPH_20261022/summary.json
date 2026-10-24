@@ -1,0 +1,813 @@
+{
+  "sent": 41,
+  "accounting": {
+    "observed": 41,
+    "saved": 36,
+    "rejected": 5,
+    "pending": 0
+  },
+  "committed_offset": 41,
+  "es_documents": 36,
+  "archive_receipts": 72,
+  "parquet_objects": 72,
+  "canonical_responses": 36,
+  "offset_owner": "NiFi-scheduled product Kafka adapter; harness admin reads only",
+  "checks": {
+    "api-restart-pass": {
+      "passed": true,
+      "prior_pid": 326333,
+      "new_pid": 338307,
+      "calls_before": 32,
+      "calls_after_canonical_replay": 0,
+      "response_sha256": "d42d1dc93a98e85a7466d9c7814f00fb869705f55f04651fddd75f630cfca5d8",
+      "same_response_bytes": true,
+      "synthetic_models_only": true
+    },
+    "es-failure-pass": {
+      "passed": true,
+      "blocked_offset": 29,
+      "recovered_offset": 33
+    },
+    "es-setup-pass": {
+      "passed": true,
+      "before": 25,
+      "after": 29,
+      "no_consumption_with_missing_guard": true
+    },
+    "lost-response-pass": {
+      "passed": true,
+      "no_repeat_inference": true,
+      "before": 21,
+      "after": 25
+    },
+    "normal-pass": {
+      "passed": true,
+      "source_owner": "NiFi scheduled product Kafka adapter; no lab commit"
+    },
+    "post-main-merge-pass": {
+      "passed": true,
+      "base": "1e161dd1588e34402066e4090f628681f1393860",
+      "before": 37,
+      "after": 41,
+      "previous_parquet_hashes_preserved": true,
+      "outcomes": [
+        [
+          "completed",
+          36
+        ],
+        [
+          "rejected",
+          5
+        ]
+      ],
+      "sent": 4,
+      "new_api_inferences": 4,
+      "external_driver_commits": 0
+    },
+    "restart-pass": {
+      "passed": true,
+      "metadata": {
+        "kafka-storage/data/meta.properties": "230a23546875204f63742032322031313a30353a313420474d5420323032360a636c75737465722e69643d434731346175746f6d6174696352657461696e656430310a6469726563746f72792e69643d46723758446644375170504132324e6732596d3844510a6e6f64652e69643d310a76657273696f6e3d310a",
+        "kafka-storage/metadata/meta.properties": "230a23546875204f63742032322031313a30353a313420474d5420323032360a636c75737465722e69643d434731346175746f6d6174696352657461696e656430310a6469726563746f72792e69643d69614178387832636955484d65626e396854507646770a6e6f64652e69643d310a76657273696f6e3d310a"
+      },
+      "before": 33,
+      "after": 37
+    },
+    "status-409-pass": {
+      "passed": true,
+      "before": 5,
+      "blocked_offset": 5,
+      "recovered_offset": 9
+    },
+    "status-413-pass": {
+      "passed": true,
+      "before": 9,
+      "blocked_offset": 9,
+      "recovered_offset": 13
+    },
+    "status-422-pass": {
+      "passed": true,
+      "before": 13,
+      "blocked_offset": 17,
+      "recovered_offset": 17
+    },
+    "status-503-pass": {
+      "passed": true,
+      "before": 17,
+      "blocked_offset": 17,
+      "recovered_offset": 21
+    }
+  },
+  "http_attempt_results": [
+    [
+      "200",
+      36
+    ],
+    [
+      "201",
+      36
+    ],
+    [
+      "403",
+      1
+    ],
+    [
+      "409",
+      1
+    ],
+    [
+      "413",
+      1
+    ],
+    [
+      "422",
+      4
+    ],
+    [
+      "503",
+      1
+    ],
+    [
+      "TimeoutError",
+      1
+    ]
+  ],
+  "preservation": {
+    "containers": {
+      "before": 102,
+      "preserved": 102,
+      "after": 111
+    },
+    "images": {
+      "before": 60,
+      "preserved": 60,
+      "after": 60
+    },
+    "volumes": {
+      "before": 78,
+      "preserved": 78,
+      "after": 78
+    },
+    "networks": {
+      "before": 9,
+      "preserved": 9,
+      "after": 11
+    },
+    "old_kafka": {
+      "id": "28d70b96fca30458914c3f8cb26fe7bcc388778bcb78f7b5cb35d38a5463b464",
+      "inspect_identical": true,
+      "layer_entries_identical": true,
+      "stopped": true
+    }
+  },
+  "resources": [
+    {
+      "name": "kafka",
+      "id": "f3f073680db5d40158189914d03e98215b3ec6aadc7ff0fc55b85656545d96cd",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:8bd63e1bd445e5e19427a4bdbcc3d23bf6efd774b058a41b36ba87fda7623e34",
+      "state": "exited",
+      "exit_code": 143,
+      "rootfs_read_only": true,
+      "ports": {
+        "9092/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "34859"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/kafka-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/server.properties",
+          "Destination": "/lab/server.properties",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_worktrees/t2-automatic-graph-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+          "Destination": "/lab/start.sh",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/kafka/volume-0",
+          "Destination": "/etc/kafka/secrets",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/kafka/volume-1",
+          "Destination": "/mnt/shared/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/kafka-storage",
+          "Destination": "/var/lib/kafka",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/kafka-storage/data",
+          "Destination": "/var/lib/kafka/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "es",
+      "id": "6812fc9cd213adca5e45fc20c0b428c54ace7003f7059833c715d1e5a1c51ae4",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+      "state": "exited",
+      "exit_code": 143,
+      "rootfs_read_only": true,
+      "ports": {
+        "9200/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "53681"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-posix",
+          "Destination": "/tmp",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-posix",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-config",
+          "Destination": "/usr/share/elasticsearch/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-data",
+          "Destination": "/usr/share/elasticsearch/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-logs",
+          "Destination": "/usr/share/elasticsearch/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "es-attempt1",
+      "id": "a43f186d272fcc2e5e2a234c6777eacc0d8ca6aa4335f1257ce279d0b47a7c95",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+      "state": "exited",
+      "exit_code": 74,
+      "rootfs_read_only": true,
+      "ports": {
+        "9200/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "53681"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-config",
+          "Destination": "/usr/share/elasticsearch/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-data",
+          "Destination": "/usr/share/elasticsearch/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-logs",
+          "Destination": "/usr/share/elasticsearch/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "es-attempt2",
+      "id": "6c0242692cd912071f57b4e8c2741512b680be301e65bc5e8f44b5f583c17f66",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+      "state": "exited",
+      "exit_code": 74,
+      "rootfs_read_only": true,
+      "ports": {
+        "9200/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "53681"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-config",
+          "Destination": "/usr/share/elasticsearch/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-data",
+          "Destination": "/usr/share/elasticsearch/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-logs",
+          "Destination": "/usr/share/elasticsearch/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "es-attempt3",
+      "id": "44611d91e9d0689ad6448024f5f612acdfa6e3db20dcaa4cd408b59b60fde5aa",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+      "state": "exited",
+      "exit_code": 1,
+      "rootfs_read_only": true,
+      "ports": {
+        "9200/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "53681"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-config",
+          "Destination": "/usr/share/elasticsearch/config",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-data",
+          "Destination": "/usr/share/elasticsearch/data",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-logs",
+          "Destination": "/usr/share/elasticsearch/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "nifi",
+      "id": "62dfdf24e6b470c140b23fdcfbeaca0e85ecbbd84c6c150b5f07a12581660909",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad",
+      "state": "exited",
+      "exit_code": 143,
+      "rootfs_read_only": true,
+      "ports": {
+        "8080/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "54161"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi-start.sh",
+          "Destination": "/lab/nifi-start.sh",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_worktrees/t2-automatic-graph-20261022",
+          "Destination": "/opt/checkout",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/Fedora/t2-real-lab-20261022/venv",
+          "Destination": "/home/Fedora/t2-real-lab-20261022/venv",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-0",
+          "Destination": "/opt/nifi/nifi-current/conf",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-1",
+          "Destination": "/opt/nifi/nifi-current/content_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-2",
+          "Destination": "/opt/nifi/nifi-current/database_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-3",
+          "Destination": "/opt/nifi/nifi-current/flowfile_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-4",
+          "Destination": "/opt/nifi/nifi-current/logs",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-5",
+          "Destination": "/opt/nifi/nifi-current/nar_extensions",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-6",
+          "Destination": "/opt/nifi/nifi-current/provenance_repository",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-7",
+          "Destination": "/opt/nifi/nifi-current/python_extensions",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi-run",
+          "Destination": "/opt/nifi/nifi-current/run",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi/volume-8",
+          "Destination": "/opt/nifi/nifi-current/state",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/nifi-work",
+          "Destination": "/opt/nifi/nifi-current/work",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu",
+          "Destination": "/home/Fedora/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01",
+          "Destination": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "filebeat",
+      "id": "da44f6b8b865640818d8f1eb288c0e3943c72374d3f5a4875275a5a5863fede9",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:2dd1d5252f3d5d3f3104f8e908b88cb9dfb53faeab5beb8a01ce1593a8fc149d",
+      "state": "exited",
+      "exit_code": 0,
+      "rootfs_read_only": true,
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/filebeat.yml",
+          "Destination": "/lab/filebeat.yml",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/input",
+          "Destination": "/lab/input",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/registry",
+          "Destination": "/lab/registry",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/filebeat-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "filebeat-attempt1",
+      "id": "d1c1aea5e20d9c5157bafd9f719c13fa5812bc25a983fc95cf1fd7b83acd9d6d",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:2dd1d5252f3d5d3f3104f8e908b88cb9dfb53faeab5beb8a01ce1593a8fc149d",
+      "state": "exited",
+      "exit_code": 1,
+      "rootfs_read_only": true,
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/filebeat.yml",
+          "Destination": "/lab/filebeat.yml",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/input",
+          "Destination": "/lab/input",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/registry",
+          "Destination": "/lab/registry",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/filebeat-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    },
+    {
+      "name": "filebeat-attempt2",
+      "id": "aed9fa65cace67c6523c938a814401f600717bc7c4d8eb5b169b0bdbbaf8fadf",
+      "label": "t2-auto-0a3ce18890",
+      "image": "sha256:2dd1d5252f3d5d3f3104f8e908b88cb9dfb53faeab5beb8a01ce1593a8fc149d",
+      "state": "exited",
+      "exit_code": 1,
+      "rootfs_read_only": true,
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/filebeat.yml",
+          "Destination": "/lab/filebeat.yml",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/input",
+          "Destination": "/lab/input",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/registry",
+          "Destination": "/lab/registry",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/filebeat-runtime",
+          "Destination": "/lab/runtime",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        }
+      ]
+    }
+  ],
+  "es_tmp_exception": {
+    "origin": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/lab-01/es-posix",
+    "backing_file": "/mnt/d/github/_local/t2-babysit-20261021/automatic-graph-20261022/es-posix-runtime.ext4",
+    "container": "6812fc9cd213adca5e45fc20c0b428c54ace7003f7059833c715d1e5a1c51ae4",
+    "label": "t2-auto-0a3ce18890",
+    "destinations": [
+      "/tmp",
+      "/lab/runtime"
+    ],
+    "rootfs_read_only": true,
+    "authorized_by_user": true
+  },
+  "limits": [
+    "synthetic local files, not shared SMB/OT",
+    "no sustained capacity, HA, power cut or host loss",
+    "NiFi schedules product worker; no native ConsumeKafka",
+    "independent parent review and CI pending"
+  ],
+  "local_gates": [
+    {
+      "check": "ruff-version",
+      "exit": 0
+    },
+    {
+      "check": "ruff-default",
+      "exit": 0
+    },
+    {
+      "check": "ruff-required",
+      "exit": 0
+    },
+    {
+      "check": "format",
+      "exit": 0
+    },
+    {
+      "check": "CG02",
+      "exit": 0
+    },
+    {
+      "check": "CG25",
+      "exit": 0
+    },
+    {
+      "check": "layout",
+      "exit": 0
+    },
+    {
+      "check": "lock",
+      "exit": 0
+    },
+    {
+      "check": "audit",
+      "exit": 0
+    },
+    {
+      "check": "actionlint",
+      "exit": 0
+    },
+    {
+      "check": "diff",
+      "exit": 0
+    }
+  ],
+  "validation": {
+    "post_main": {
+      "fedora312": "71 passed, 130 subtests passed; -W error",
+      "windows312": "71 passed, 130 subtests passed; -W error"
+    },
+    "prior_base_four_environments": "46 passed, 108 subtests passed each",
+    "independent_review": "pending",
+    "ci": "not consulted",
+    "deployment": "own stopped lab only"
+  }
+}

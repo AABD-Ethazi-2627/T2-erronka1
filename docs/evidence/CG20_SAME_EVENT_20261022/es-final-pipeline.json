@@ -1,0 +1,197 @@
+{
+  "cnc-prediction-v1": {
+    "description": "CG18 prediction shape/current-state guard; preserves canonical _source. API owns full JSON Schema validation; strict mapping owns storage types.",
+    "version": 1,
+    "_meta": {
+      "pipeline_id": "cnc-prediction-v1",
+      "contract_sha256": {
+        "common.schema.json": "149f53de0e5c210a26d2aa75a23c8eeac3cf94fc0f024fbe7a2258b1ffc3d9e2",
+        "prediction.schema.json": "bcf7fc02aa50e50538bf97f16226435a37eb213be067949c6c0a57351fbecb32"
+      },
+      "mutates_source": false
+    },
+    "processors": [
+      {
+        "script": {
+          "tag": "prediction-contract-guard-v1",
+          "lang": "painless",
+          "source": "for (def section : params.sections) {\n  def obj = section.path == '' ? ctx : ctx[section.path];\n  if (!(obj instanceof Map)) {\n    throw new IllegalArgumentException('CG18 object required: ' + section.path);\n  }\n  for (def name : section.required) {\n    if (!obj.containsKey(name) || obj[name] == null) {\n      throw new IllegalArgumentException('CG18 required: ' + name);\n    }\n  }\n  for (def name : obj.keySet()) {\n    if (!section.rules.containsKey(name)) {\n      if (section.path == '' && params.metadata.contains(name)) { continue; }\n      throw new IllegalArgumentException('CG18 unknown field: ' + name);\n    }\n    def rule = section.rules[name];\n    def value = obj[name];\n    boolean valid = rule.type == 'object' ? value instanceof Map :\n      rule.type == 'string' ? value instanceof String :\n      rule.type == 'boolean' ? value instanceof Boolean : value instanceof Number;\n    if (!valid) { throw new IllegalArgumentException('CG18 type: ' + name); }\n    if (rule.containsKey('const') && !rule['const'].equals(value)) {\n      throw new IllegalArgumentException('CG18 const: ' + name);\n    }\n    if (rule.containsKey('enum') && !rule['enum'].contains(value)) {\n      throw new IllegalArgumentException('CG18 enum: ' + name);\n    }\n    if (rule.containsKey('minLength') && value.length() < rule.minLength) {\n      throw new IllegalArgumentException('CG18 empty string: ' + name);\n    }\n    if (rule.type == 'number') {\n      double n = value.doubleValue();\n      if (!Double.isFinite(n) ||\n          (rule.containsKey('minimum') && n < rule.minimum) ||\n          (rule.containsKey('maximum') && n > rule.maximum) ||\n          (rule.containsKey('exclusiveMinimum') && n <= rule.exclusiveMinimum)) {\n        throw new IllegalArgumentException('CG18 range: ' + name);\n      }\n    }\n  }\n}\n",
+          "params": {
+            "metadata": [
+              "_index",
+              "_id",
+              "_routing",
+              "_version",
+              "_version_type",
+              "_dynamic_templates",
+              "_ingest"
+            ],
+            "sections": [
+              {
+                "path": "",
+                "required": [
+                  "event_id",
+                  "machine_id",
+                  "timestamp",
+                  "schema_version",
+                  "quality_flag",
+                  "source",
+                  "scored_at",
+                  "failure_score",
+                  "risk_alert",
+                  "anomaly_score",
+                  "anomaly_alert",
+                  "policy",
+                  "model_version",
+                  "model_artifact_sha256",
+                  "risk_threshold",
+                  "anomaly_threshold",
+                  "prediction_scope",
+                  "temporal_prediction_enabled",
+                  "score_semantics"
+                ],
+                "rules": {
+                  "event_id": {
+                    "type": "string"
+                  },
+                  "machine_id": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "string"
+                  },
+                  "schema_version": {
+                    "const": "0.1.0",
+                    "type": "string"
+                  },
+                  "quality_flag": {
+                    "const": "OK",
+                    "type": "string"
+                  },
+                  "source": {
+                    "type": "object"
+                  },
+                  "scored_at": {
+                    "type": "string"
+                  },
+                  "failure_score": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "risk_alert": {
+                    "type": "boolean"
+                  },
+                  "anomaly_score": {
+                    "type": "number"
+                  },
+                  "anomaly_alert": {
+                    "type": "boolean"
+                  },
+                  "policy": {
+                    "enum": [
+                      "f1",
+                      "f2"
+                    ],
+                    "type": "string"
+                  },
+                  "model_version": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "model_artifact_sha256": {
+                    "type": "string"
+                  },
+                  "risk_threshold": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "anomaly_threshold": {
+                    "type": "number"
+                  },
+                  "machine_type": {
+                    "enum": [
+                      "H",
+                      "M",
+                      "L"
+                    ],
+                    "type": "string"
+                  },
+                  "air_temp_K": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "process_temp_K": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "rpm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "torque_Nm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "tool_wear_min": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "alert_level": {
+                    "enum": [
+                      "OK",
+                      "AVISO",
+                      "CRITICA"
+                    ],
+                    "type": "string"
+                  },
+                  "prediction_scope": {
+                    "const": "AI4I_CURRENT_STATE_ONLY",
+                    "type": "string"
+                  },
+                  "temporal_prediction_enabled": {
+                    "const": false,
+                    "type": "boolean"
+                  },
+                  "score_semantics": {
+                    "const": "uncalibrated_current_state_score",
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "path": "source",
+                "required": [
+                  "kind",
+                  "uri",
+                  "record_ref"
+                ],
+                "rules": {
+                  "kind": {
+                    "enum": [
+                      "smb_csv",
+                      "lab_fixture",
+                      "statement_example"
+                    ],
+                    "type": "string"
+                  },
+                  "uri": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "record_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "created_date_millis": 1792676568761,
+    "modified_date_millis": 1792676568761
+  }
+}

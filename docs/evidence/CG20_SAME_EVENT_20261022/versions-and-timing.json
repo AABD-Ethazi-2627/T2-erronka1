@@ -1,0 +1,49 @@
+{
+  "captured_utc": "2026-10-22T13:56:02.364866+00:00",
+  "python": "3.12.15",
+  "libraries": {
+    "httpx": "0.27.0",
+    "uvicorn": "0.30.1",
+    "fastapi": "0.133.0",
+    "pyarrow": "23.0.1",
+    "kafka-python": "3.0.11+cncguard.2"
+  },
+  "es": {
+    "name": "02f3effdc17f",
+    "cluster_name": "docker-cluster",
+    "cluster_uuid": "FrCQrgYbTdWsl5QoxHbxGg",
+    "version": {
+      "number": "9.5.4",
+      "build_flavor": "default",
+      "build_type": "docker",
+      "build_hash": "9170df19cae1adb107b7b489b4d82dec66d7a337",
+      "build_date": "2026-09-09T22:42:53.976833287Z",
+      "build_snapshot": false,
+      "lucene_version": "10.5.1",
+      "minimum_wire_compatibility_version": "8.19.0",
+      "minimum_index_compatibility_version": "8.0.0"
+    },
+    "tagline": "You Know, for Search"
+  },
+  "nifi": {
+    "about": {
+      "title": "NiFi",
+      "version": "2.12.0",
+      "uri": "http://127.0.0.1:49957/nifi-api/",
+      "contentViewerUrl": "http://127.0.0.1:49957/nifi/#/content-viewer",
+      "timezone": "UTC",
+      "buildTag": "rel/nifi-2.12.0"
+    }
+  },
+  "source_artifacts_mtime_utc": {
+    "input/normal.csv": "2026-10-22T13:47:30.118009+00:00",
+    "worker/raw/0352b9da8ba63d02f332d224b932c75f6212eadf5b4578498f5ce79456781421.bin": "2026-10-22T13:47:41.095413+00:00",
+    "worker/identity/0352b9da8ba63d02f332d224b932c75f6212eadf5b4578498f5ce79456781421.json": "2026-10-22T13:47:41.152288+00:00",
+    "worker/archive/prediction/date=2026-10-21/a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c.parquet": "2026-10-22T13:49:18.694463+00:00",
+    "worker/archive/telemetry/date=2026-10-21/cd03b6d678dda734609bcd71c52ac98c98bbc2468e125b237438d0b0bd9e9ff6.parquet": "2026-10-22T13:49:18.567818+00:00"
+  },
+  "timing_scope": "filesystem mtime observations, not independent per-stage latency instrumentation or SLA; scored_at is canonical inference time, timestamp is fixture event time",
+  "api_metrics_after_recovery": {
+    "risk_calls": 3
+  }
+}

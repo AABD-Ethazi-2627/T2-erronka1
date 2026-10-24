@@ -1,0 +1,111 @@
+{
+  "base_commit": "3b79c927c909bb0c87fe3f344c2b4bd152f31c61",
+  "input_sha256": {
+    "validation.csv": "a63c3b54fb58fd39ddf34084b9a8898e5f6b400dc4c692fb7d1174d7f94bfd1b",
+    "report.json": "14ce085fb4af2507b9014466aa60c6c16ab422933a34a7b11da1f35690ad7902"
+  },
+  "rows": 1200,
+  "positives": 41,
+  "negatives": 1159,
+  "partition": "reused_validation_for_threshold_tuning",
+  "final_test_evaluated": false,
+  "boundary_row": {
+    "source_row_index": "7763",
+    "label": "1",
+    "rf_score": "0.19082281465428477"
+  },
+  "float_score_hex": "0x1.86ce1ca22aa51p-3",
+  "threshold_hex": "0x1.86ce1ca22aa51p-3",
+  "independent_csv_float_counts": {
+    "0.15": {
+      "tp": 32,
+      "fn": 9,
+      "fp": 12,
+      "tn": 1147
+    },
+    "0.7": {
+      "tp": 27,
+      "fn": 14,
+      "fp": 0,
+      "tn": 1159
+    },
+    "0.19082281465428477": {
+      "tp": 32,
+      "fn": 9,
+      "fp": 9,
+      "tn": 1150
+    }
+  },
+  "all_27_cost_scenarios_checked": true,
+  "unchanged_scenario_inputs": true,
+  "tuned_cost_changes": [
+    {
+      "inspection_eur": 25,
+      "downtime_hours": 0.5,
+      "before_eur": 6225.0,
+      "after_eur": 5625.0
+    },
+    {
+      "inspection_eur": 25,
+      "downtime_hours": 1,
+      "before_eur": 12225,
+      "after_eur": 11025
+    },
+    {
+      "inspection_eur": 25,
+      "downtime_hours": 4,
+      "before_eur": 48225,
+      "after_eur": 43425
+    },
+    {
+      "inspection_eur": 100,
+      "downtime_hours": 0.5,
+      "before_eur": 6900.0,
+      "after_eur": 6300.0
+    },
+    {
+      "inspection_eur": 100,
+      "downtime_hours": 1,
+      "before_eur": 12900,
+      "after_eur": 11700
+    },
+    {
+      "inspection_eur": 100,
+      "downtime_hours": 4,
+      "before_eur": 48900,
+      "after_eur": 44100
+    },
+    {
+      "inspection_eur": 300,
+      "downtime_hours": 0.5,
+      "before_eur": 8700.0,
+      "after_eur": 8100.0
+    },
+    {
+      "inspection_eur": 300,
+      "downtime_hours": 1,
+      "before_eur": 14700,
+      "after_eur": 13500
+    },
+    {
+      "inspection_eur": 300,
+      "downtime_hours": 4,
+      "before_eur": 50700,
+      "after_eur": 45900
+    }
+  ],
+  "bootstrap_before": [
+    0.6097560975609756,
+    0.8780487804878049
+  ],
+  "bootstrap_after": [
+    0.6341463414634146,
+    0.9024390243902439
+  ],
+  "deterministic_two_runs_sha256": {
+    "CG10_results.json": "40be1d3f3e8b1bc9f9cdacb2e1a8750aac1db30a5e8861a048070e977bd9ab59",
+    "CG10_diagnostics.png": "d4e4eb378d70b84e88f8205d2fe73ee3dd5a7e373d96eb3d52581bc2dd259654"
+  },
+  "cg08_all_tuned_metrics_equal": true,
+  "cg24_counts_equal": true
+}

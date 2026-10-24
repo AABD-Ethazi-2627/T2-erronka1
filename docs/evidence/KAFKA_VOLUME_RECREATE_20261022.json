@@ -1,0 +1,1176 @@
+{
+  "status": "LOCAL_VALIDATION_PASSED; independent parent review and exact-SHA CI separate",
+  "base_sha": "85cd1d0c8da1b57dd8b1083ee2ff43e4e4e18eab",
+  "base_merge_sha": "babbc028878c920c554aab916e3d3df138f10d76",
+  "worktree": "D:/github/_worktrees/t2-kafka-volume-20261022",
+  "branch": "fix/pr68-kafka-volume-20261022",
+  "evidence_root": "D:/github/_local/t2-babysit-20261021/kafka-volume-fix",
+  "broker_recreate": {
+    "result": "PASSED",
+    "run": "t2-volume-2ae1c6a12277",
+    "first_id": "3ae7f07746981d252936afd2519090f7e894168afc122dc70246e186279ce0cf",
+    "recreated_id": "7e06a058f92b5ee295f6dbf58285ac9517762c138f9845c553d030814246d929",
+    "readonly_probe_id": "56b755af846a59614d519f077d86df7a167dddfb033b97dc36a371bdea80fd32",
+    "retained_bind": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/storage",
+    "produced_offsets": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "before_rows": [
+      [
+        0,
+        "0",
+        "t2-volume-2ae1c6a12277-event-0"
+      ],
+      [
+        1,
+        "1",
+        "t2-volume-2ae1c6a12277-event-1"
+      ],
+      [
+        2,
+        "2",
+        "t2-volume-2ae1c6a12277-event-2"
+      ]
+    ],
+    "resumed_rows": [
+      [
+        3,
+        "3",
+        "t2-volume-2ae1c6a12277-event-3"
+      ],
+      [
+        4,
+        "4",
+        "t2-volume-2ae1c6a12277-event-4"
+      ],
+      [
+        5,
+        "5",
+        "t2-volume-2ae1c6a12277-event-5"
+      ]
+    ],
+    "replay_rows": [
+      [
+        0,
+        "0",
+        "t2-volume-2ae1c6a12277-event-0"
+      ],
+      [
+        1,
+        "1",
+        "t2-volume-2ae1c6a12277-event-1"
+      ],
+      [
+        2,
+        "2",
+        "t2-volume-2ae1c6a12277-event-2"
+      ],
+      [
+        3,
+        "3",
+        "t2-volume-2ae1c6a12277-event-3"
+      ],
+      [
+        4,
+        "4",
+        "t2-volume-2ae1c6a12277-event-4"
+      ],
+      [
+        5,
+        "5",
+        "t2-volume-2ae1c6a12277-event-5"
+      ]
+    ],
+    "group_offset_before": 3,
+    "group_offset_after": 6,
+    "same_kraft_metadata": true,
+    "readonly_exit": "1",
+    "prior_container_count": 95,
+    "preserved_prior_containers": 95,
+    "limits": [
+      "single broker; clean stop/recreate, not power loss",
+      "no NiFi/ES rerun; transport evidence is historical"
+    ]
+  },
+  "preservation": {
+    "original_container_count": 88,
+    "current_container_count": 97,
+    "original_ids_preserved": 88,
+    "old_id": "28d70b96fca30458914c3f8cb26fe7bcc388778bcb78f7b5cb35d38a5463b464",
+    "old_state_identical": true,
+    "old_mounts_identical": true,
+    "old_config_identical": true,
+    "old_volume_names": [
+      "t2-real-20261022-0937-kafka",
+      "7e9b7f8176024a5f009d25cb9e5cdf317874fab70be9fc382431a445df72e6f2",
+      "9bdcc4c496ffd93b78ea6261fa4754c530255f40ba70e4a43f23c016863a3e27",
+      "29cc987f64178de23e50aa2375d4953eaea2ce2e5bb587f8d6044ed3795bd6db"
+    ],
+    "old_full_inspect_identical": true,
+    "owned_containers_retained_stopped": [
+      {
+        "id": "56b755af846a59614d519f077d86df7a167dddfb033b97dc36a371bdea80fd32",
+        "name": "/t2-volume-2ae1c6a12277-kafka-readonly",
+        "label": "t2-volume-2ae1c6a12277",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/readonly-runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/secrets",
+            "Destination": "/etc/kafka/secrets",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/shared-config",
+            "Destination": "/mnt/shared/config",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/storage/data",
+            "Destination": "/var/lib/kafka/data",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          }
+        ]
+      },
+      {
+        "id": "7e06a058f92b5ee295f6dbf58285ac9517762c138f9845c553d030814246d929",
+        "name": "/t2-volume-2ae1c6a12277-kafka",
+        "label": "t2-volume-2ae1c6a12277",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/secrets",
+            "Destination": "/etc/kafka/secrets",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/shared-config",
+            "Destination": "/mnt/shared/config",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/storage/data",
+            "Destination": "/var/lib/kafka/data",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ]
+      },
+      {
+        "id": "bacda3918118acf530fc81175cb4e97571c4bf868527c5d182dcc86fd8b4261a",
+        "name": "/t2-volume-d4e0f972b55a-kafka",
+        "label": "t2-volume-d4e0f972b55a",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/secrets",
+            "Destination": "/etc/kafka/secrets",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/shared-config",
+            "Destination": "/mnt/shared/config",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/storage/data",
+            "Destination": "/var/lib/kafka/data",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ]
+      },
+      {
+        "id": "9a0e592e27a6c2e3c4d25dbcbb0df18dc61abdb5cd66eaae2f5aafa77c984364",
+        "name": "/t2-volume-524b9cf4e0fb-kafka",
+        "label": "t2-volume-524b9cf4e0fb",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/secrets",
+            "Destination": "/etc/kafka/secrets",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/shared-config",
+            "Destination": "/mnt/shared/config",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/storage/data",
+            "Destination": "/var/lib/kafka/data",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ]
+      },
+      {
+        "id": "3fc99ab0ad1aae14694147b759aaf339467ddf4756cc18a5e77c259b5d038006",
+        "name": "/t2-volume-072b0bc6560b-kafka",
+        "label": "t2-volume-072b0bc6560b",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/secrets",
+            "Destination": "/etc/kafka/secrets",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/shared-config",
+            "Destination": "/mnt/shared/config",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/storage/data",
+            "Destination": "/var/lib/kafka/data",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ]
+      },
+      {
+        "id": "65b89aca89eb64f8982b0f9158e9cda23df87e350f521f82e1b81c7bbe576aa8",
+        "name": "/t2-volume-07db3d1fc6c5-kafka",
+        "label": "t2-volume-07db3d1fc6c5",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/secrets",
+            "Destination": "/etc/kafka/secrets",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/shared-config",
+            "Destination": "/mnt/shared/config",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/storage/data",
+            "Destination": "/var/lib/kafka/data",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          }
+        ]
+      },
+      {
+        "id": "2416f0afa92da40c8cee39e93bcbc8c762229bd68c62594fb91bbb684b7e152f",
+        "name": "/t2-volume-d49744ece0c1-kafka",
+        "label": "t2-volume-d49744ece0c1",
+        "mounts": [
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-01/runtime",
+            "Destination": "/lab/runtime",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-01/server.properties",
+            "Destination": "/lab/server.properties",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_worktrees/t2-kafka-volume-20261022/deploy/cg14/scripts/kafka-volume-start.sh",
+            "Destination": "/lab/start.sh",
+            "Mode": "",
+            "RW": false,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "volume",
+            "Name": "74f9b7f781e383842ef3ed22b6fca8e0a22dfd255b28879ccd7fe7dcb40b9954",
+            "Source": "/var/lib/docker/volumes/74f9b7f781e383842ef3ed22b6fca8e0a22dfd255b28879ccd7fe7dcb40b9954/_data",
+            "Destination": "/etc/kafka/secrets",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "volume",
+            "Name": "f918c8f24cf7e4c697533ece868a642e86b6d65d3bbe1bfa02ee2cfcfbe5aefb",
+            "Source": "/var/lib/docker/volumes/f918c8f24cf7e4c697533ece868a642e86b6d65d3bbe1bfa02ee2cfcfbe5aefb/_data",
+            "Destination": "/mnt/shared/config",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+          },
+          {
+            "Type": "bind",
+            "Source": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-01/storage",
+            "Destination": "/var/lib/kafka",
+            "Mode": "",
+            "RW": true,
+            "Propagation": "rprivate"
+          },
+          {
+            "Type": "volume",
+            "Name": "a94efd5d13da6aff927ec4467a8965ac80954f9be72d409dce6f2e20f4b2cf69",
+            "Source": "/var/lib/docker/volumes/a94efd5d13da6aff927ec4467a8965ac80954f9be72d409dce6f2e20f4b2cf69/_data",
+            "Destination": "/var/lib/kafka/data",
+            "Driver": "local",
+            "Mode": "",
+            "RW": true,
+            "Propagation": ""
+          }
+        ]
+      }
+    ],
+    "new_bind_roots_retained": [
+      "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-01/storage",
+      "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-02/storage",
+      "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-03/storage",
+      "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-04/storage",
+      "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-05/storage",
+      "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06/storage"
+    ],
+    "cleanup": "Only exact first IDs created by successful recreate phases removed. No volumes/networks/images removed. Failed attempts retained."
+  },
+  "validation": [
+    {
+      "name": "recreate-06",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-B",
+        "deploy/cg14/scripts/run-kafka-volume-recreate.py",
+        "--evidence-dir",
+        "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/recreate-06"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "pytest-posix-311",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv311/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--capture=sys",
+        "-W",
+        "error",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_cg14_nifi_flow.py",
+        "tests/test_cg14_durable_pipeline.py",
+        "tests/test_cg14_kafka_outage_runner.py",
+        "tests/test_cg14_restore_e2e.py",
+        "tests/test_kafka_volume_runner.py",
+        "tests/test_platform_io.py",
+        "tests/test_private_files.py",
+        "tests/test_kafka_archive.py",
+        "tests/test_kafka_dependency.py",
+        "tests/test_durable_receipts_http.py",
+        "tests/test_archive_consumer.py",
+        "tests/test_archive_json_depth.py",
+        "tests/test_scoring_replay.py",
+        "tests/test_nifi_client_security.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "pytest-posix-312",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "--capture=sys",
+        "-W",
+        "error",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_cg14_nifi_flow.py",
+        "tests/test_cg14_durable_pipeline.py",
+        "tests/test_cg14_kafka_outage_runner.py",
+        "tests/test_cg14_restore_e2e.py",
+        "tests/test_kafka_volume_runner.py",
+        "tests/test_platform_io.py",
+        "tests/test_private_files.py",
+        "tests/test_kafka_archive.py",
+        "tests/test_kafka_dependency.py",
+        "tests/test_durable_receipts_http.py",
+        "tests/test_archive_consumer.py",
+        "tests/test_archive_json_depth.py",
+        "tests/test_scoring_replay.py",
+        "tests/test_nifi_client_security.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "ruff-final",
+      "args": [
+        "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/ruff",
+        "check",
+        "--select",
+        "E,F,I,PLW1510",
+        "cg14_restore_upload.py",
+        "cg14_validation/__init__.py",
+        "cg14_validation/metrics.py",
+        "cg14_validation/reconciliation.py",
+        "cg14_validation/resilience.py",
+        "cg14_validation/validator.py",
+        "cnc_guard/__init__.py",
+        "cnc_guard/data.py",
+        "cnc_guard/features.py",
+        "cnc_guard/schemas.py",
+        "cnc_guard/train.py",
+        "deploy/cg14/scripts/mock_predict.py",
+        "deploy/cg14/scripts/run-kafka-lab-e2e.py",
+        "deploy/cg14/scripts/run-kafka-outage-recovery.py",
+        "deploy/cg14/scripts/run-kafka-volume-recreate.py",
+        "deploy/cg14/scripts/run-restore-e2e.py",
+        "docs/templates/infra/scoring/score_api.py",
+        "planning/adaptive.py",
+        "planning/cycle.py",
+        "planning/maintenance.py",
+        "planning/mechanisms.py",
+        "planning/online.py",
+        "planning/registry.py",
+        "planning/selection.py",
+        "scoring/alert_policy.py",
+        "scoring/preparation.py",
+        "scoring/response_ledger.py",
+        "scoring/scope.py",
+        "scoring/score_api.py",
+        "scripts/adaptive_cycle.py",
+        "scripts/archive_consumer.py",
+        "scripts/audit_cg02.py",
+        "scripts/audit_temporal_feasibility.py",
+        "scripts/build_cg14_nifi_flow.py",
+        "scripts/build_cg19_evaluation.py",
+        "scripts/build_durable_pipeline_flow.py",
+        "scripts/build_history.py",
+        "scripts/capture_smb.py",
+        "scripts/capture_temporal_snapshot.py",
+        "scripts/cg04_preparation.py",
+        "scripts/cg14_occurrence.py",
+        "scripts/cg14_scoring_bridge.py",
+        "scripts/cg23_capacity.py",
+        "scripts/check_cg25_memory.py",
+        "scripts/check_repository_layout.py",
+        "scripts/check_smb_source.py",
+        "scripts/create_lab_dashboard.py",
+        "scripts/demo_adaptive.py",
+        "scripts/demo_adaptive_cycle.py",
+        "scripts/demo_maintenance.py",
+        "scripts/duckdb_output.py",
+        "scripts/durable_pipeline.py",
+        "scripts/evaluate_adaptive.py",
+        "scripts/experiment_alternatives.py",
+        "scripts/experiment_alternatives_nested.py",
+        "scripts/experiment_anomaly.py",
+        "scripts/experiment_rf.py",
+        "scripts/experiment_smotenc.py",
+        "scripts/failure_harness.py",
+        "scripts/integration_preflight.py",
+        "scripts/kafka_archive.py",
+        "scripts/nifi_client.py",
+        "scripts/package_model.py",
+        "scripts/package_seasonal_v2.py",
+        "scripts/plan_maintenance.py",
+        "scripts/platform_io.py",
+        "scripts/private_files.py",
+        "scripts/rehearse_cg26.py",
+        "scripts/repack_kafka.py",
+        "scripts/report_alternatives.py",
+        "scripts/report_seasonal_v2.py",
+        "scripts/report_thresholds.py",
+        "scripts/report_type_diagnostics.py",
+        "scripts/run_durable_pipeline.py",
+        "scripts/seasonal_lab.py",
+        "scripts/seasonal_v2.py",
+        "scripts/smb_filebeat_fixture.py",
+        "scripts/sync_projects.py",
+        "scripts/train_seasonal_v2.py",
+        "scripts/validate_contracts.py",
+        "scripts/verify_history.py",
+        "scripts/watch_adaptive.py",
+        "tests/api_client.py",
+        "tests/kafka_wire_lab.py",
+        "tests/run_strict_resources.py",
+        "tests/test_adaptive.py",
+        "tests/test_adaptive_runtime.py",
+        "tests/test_alternatives.py",
+        "tests/test_anomaly.py",
+        "tests/test_api.py",
+        "tests/test_api_client.py",
+        "tests/test_archive_consumer.py",
+        "tests/test_archive_json_depth.py",
+        "tests/test_audit_cg02.py",
+        "tests/test_cg04_reconciliation.py",
+        "tests/test_cg14_durable_pipeline.py",
+        "tests/test_cg14_hardening.py",
+        "tests/test_cg14_kafka_outage_runner.py",
+        "tests/test_cg14_legacy_e2e.py",
+        "tests/test_cg14_metrics.py",
+        "tests/test_cg14_nifi_flow.py",
+        "tests/test_cg14_occurrence.py",
+        "tests/test_cg14_regression.py",
+        "tests/test_cg14_restore_e2e.py",
+        "tests/test_cg14_restore_upload.py",
+        "tests/test_cg14_scoring_bridge.py",
+        "tests/test_cg14_thermal_parity.py",
+        "tests/test_cg14_validation.py",
+        "tests/test_cg23_capacity.py",
+        "tests/test_cg26_rehearsal.py",
+        "tests/test_columnar_upgrade_contract.py",
+        "tests/test_contract_validation.py",
+        "tests/test_current_state_scope.py",
+        "tests/test_duckdb_output.py",
+        "tests/test_durable_receipts_http.py",
+        "tests/test_elasticsearch_contract.py",
+        "tests/test_experiment.py",
+        "tests/test_failure_harness.py",
+        "tests/test_framework_upgrade_contract.py",
+        "tests/test_history.py",
+        "tests/test_kafka_archive.py",
+        "tests/test_kafka_dependency.py",
+        "tests/test_kafka_volume_runner.py",
+        "tests/test_lab_dashboard.py",
+        "tests/test_lab_dashboard_contrast.py",
+        "tests/test_lab_dashboard_es.py",
+        "tests/test_maintenance_planner.py",
+        "tests/test_nifi_client_security.py",
+        "tests/test_platform_io.py",
+        "tests/test_policy.py",
+        "tests/test_preflight.py",
+        "tests/test_preparation.py",
+        "tests/test_private_files.py",
+        "tests/test_project_sync.py",
+        "tests/test_retention_recovery.py",
+        "tests/test_scoring_replay.py",
+        "tests/test_seasonal_lab.py",
+        "tests/test_seasonal_v2.py",
+        "tests/test_smb_capture.py",
+        "tests/test_smb_filebeat_contract.py",
+        "tests/test_smb_source.py",
+        "tests/test_smotenc.py",
+        "tests/test_starlette_testclient_cleanup.py",
+        "tests/test_strict_resources_runner.py",
+        "tests/test_temporal_feasibility.py",
+        "tests/test_type_diagnostics.py",
+        "tests/verify_durable_pipeline.py",
+        "tests/verify_elasticsearch_contract.py",
+        "tests/verify_resource_cleanup.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "format-final",
+      "args": [
+        "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/ruff",
+        "format",
+        "--check",
+        "deploy/cg14/scripts/run-kafka-volume-recreate.py",
+        "deploy/cg14/scripts/run-restore-e2e.py",
+        "tests/test_kafka_volume_runner.py",
+        "tests/test_cg14_restore_e2e.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "cg02",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-B",
+        "-m",
+        "scripts.audit_cg02",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "cg25-final",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-B",
+        "-m",
+        "scripts.check_cg25_memory"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "layout-final",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-B",
+        "-m",
+        "scripts.check_repository_layout"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "lock",
+      "args": [
+        "/home/Fedora/.local/bin/uv",
+        "lock",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "audit",
+      "args": [
+        "/home/Fedora/.local/bin/uv",
+        "audit",
+        "--locked",
+        "--output-format",
+        "json"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "actionlint",
+      "args": [
+        "/mnt/c/Users/unaiu/scoop/shims/actionlint.exe",
+        ".github/workflows/validate.yml"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "shell-syntax",
+      "args": [
+        "bash",
+        "-n",
+        "deploy/cg14/scripts/kafka-volume-start.sh"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "source-equivalence",
+      "args": [
+        "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+        "-B",
+        "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/check_runner_equivalence.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "compose-cg14",
+      "args": [
+        "docker",
+        "compose",
+        "--env-file",
+        "/dev/null",
+        "-f",
+        "deploy/cg14/compose.yaml",
+        "--profile",
+        "kafka-test",
+        "config",
+        "--no-env-resolution",
+        "--format",
+        "json"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "diff-final-range",
+      "args": [
+        "git",
+        "diff",
+        "--check",
+        "85cd1d0c8da1b57dd8b1083ee2ff43e4e4e18eab"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "windows-helpers-identical",
+      "args": [
+        "git",
+        "diff",
+        "--exit-code",
+        "85cd1d0c8da1b57dd8b1083ee2ff43e4e4e18eab",
+        "--",
+        "scripts/platform_io.py",
+        "scripts/private_files.py",
+        "scripts/durable_pipeline.py",
+        "scripts/archive_consumer.py",
+        "scripts/nifi_client.py",
+        "scripts/kafka_archive.py",
+        "scripts/run_durable_pipeline.py",
+        "planning/registry.py"
+      ],
+      "exit": 0
+    },
+    {
+      "name": "loop-released",
+      "args": [
+        "losetup",
+        "-j",
+        "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/posix-temp.ext4"
+      ],
+      "exit": 0
+    }
+  ],
+  "windows_native_checks": [
+    {
+      "version": "311",
+      "args": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "error",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_platform_io.py",
+        "tests/test_private_files.py",
+        "tests/test_cg14_restore_e2e.py"
+      ],
+      "exit": 0
+    },
+    {
+      "version": "312",
+      "args": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win312\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-W",
+        "error",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_platform_io.py",
+        "tests/test_private_files.py",
+        "tests/test_cg14_restore_e2e.py"
+      ],
+      "exit": 0
+    }
+  ],
+  "audit_summary": {
+    "audited_packages": 57,
+    "vulnerabilities": 0,
+    "adverse_statuses": 0
+  },
+  "posix_temp_mount": {
+    "private_processes": [
+      {
+        "pid": 262294,
+        "namespace": "mnt:[4026533088]",
+        "mounts": [
+          "1527 1517 7:0 / /mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/process-temp-posix rw,relatime - ext4 /dev/loop0 rw"
+        ]
+      }
+    ],
+    "host_namespace": "mnt:[4026532199]",
+    "host_temp_path_filesystem": "9p rw,noatime,aname=drvfs;path=D:\\;uid=1000;gid=1000;symlinkroot=/mnt/,cache=0x5,access=client,msize=65536,trans=fd,rfd=6,wfd=6\n"
+  },
+  "posix_temp_image": {
+    "path": "/mnt/d/github/_local/t2-babysit-20261021/kafka-volume-fix/posix-temp.ext4",
+    "logical_bytes": 536870912,
+    "loop_released_after_tests": true,
+    "system_packages_installed": false
+  },
+  "source_hashes": {
+    "deploy/cg14/README.md": "5b9467f2f37a5c7000481c43d852b9e632f5a2ac44a1ab69b9e7cb0c1baac045",
+    "deploy/cg14/compose.yaml": "349bed83d7e139df954f362387aa199776a4818f90cb593919223cc4115ec8e5",
+    "deploy/cg14/scripts/kafka-volume.properties": "7e35c8894734c972bdbf04ea1e224b3c566348799ce3bc11439cb621b58b7b06",
+    "deploy/cg14/scripts/kafka-volume-start.sh": "6d1533b42e3cb401fb023c6539ee250538468bcec2a0d220a2d7db35aaf323f8",
+    "deploy/cg14/scripts/run-kafka-volume-recreate.py": "1ac4af67caf75725a837a3bc8eec58d82dcc3e0eaf20621014962234a9818331",
+    "deploy/cg14/scripts/run-restore-e2e.py": "e815c273e5aa8a9d861a95ec02ff5a8560a5c49d09c119829d03de39294e2d74",
+    "tests/test_cg14_restore_e2e.py": "9e50d75fb74ad502319b40035b367af86270f2d25048ae9e641025dfc1835d90",
+    "tests/test_kafka_volume_runner.py": "6a67dec5802ae0cf30fe897caa76574603b2f907c68619617f4da7be7fd71380",
+    "docs/memoria/manifest.json": "6fe32453c69b486eeeafde5aae31eef6ee41129a6e53b8d03b400e342ca0ff85",
+    "docs/evidence/KAFKA_VOLUME_RECREATE_20261022.md": "9be67f83a96f6821066a3232ad267eb4a07f2509576a2b07f8da40f09ae67d85",
+    "docs/evidence/REAL_KAFKA_NIFI_20261022.md": "9809457bd260d975f2b4c7db8c490232b8bde0362bd55454f8db71a7f7bcbc41"
+  },
+  "artifact_hashes": {
+    "actionlint.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "audit.log": "aa03d611d09a396f92d8f6dbbe52a3c1cd7ccd8463613f8af2b8b493f967c3aa",
+    "base-manifest.json": "a1849199719e539cacd182cf6fdc275a134c52dd23ed9caffad522e522a8617e",
+    "capture_posix_mount.py": "a9821e6e1bc950d2098d5cc3630c9e1784f1f5163ddf125fa98698bc885c027a",
+    "cg02.log": "30bd3518460446f5a51866451b7d9be598e209813b74abb09e52db3f5cc22754",
+    "cg25-final.log": "e871bb19921c87da0afef59798f51f134a9294975f85aa07f455695a1322dbd7",
+    "cg25.log": "e871bb19921c87da0afef59798f51f134a9294975f85aa07f455695a1322dbd7",
+    "check-summary.json": "9c402842ae0de7f82e3ad571e95ca8f1ab5de76d80961b55fecedcb85354fb67",
+    "check_runner_equivalence.py": "4e43ca6723bacb45597e40b9392527708e5bd92521e3564edddeeab09a40e680",
+    "checks.jsonl": "3ca6018ca93138ceaa931982503338ba41e621069db747a9d51d29a366c4dab6",
+    "compose-cg14.log": "808b3a37bdc54eb5db74acb71f020c7e02010277e2c0effc87131f357d915117",
+    "compose-without-profile.log": "2b17d049a0cf25387fe956dc0e5193e1f50e6d893b76a5ab10962eb5aa96a227",
+    "diff-final-range.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "diff-range.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "ext4-format-command.json": "623b3dedf6289650cd393537a271a997f1fd70970073ceca4bff3493780f8b81",
+    "ext4-format.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "ext4-tool-command-all-repos-failed.json": "7fd80344922a540b62d2fad6bc4c012670ca2cd36d85cb0d32e829c6299424df",
+    "ext4-tool-command.json": "2fdca698a8392ab350d95145f27167f7ff9de1028dfef322ae4d2ae23a442117",
+    "ext4-tool-download-all-repos-failed.log": "32e1f3e64e3e675be1243ce2c85da70df77c7c7d4a8c8f9586458ba5da9d435a",
+    "ext4-tool-download.log": "457366a4227041ed558461ce83af98119798131135f706c6b074f0baaf70c0fb",
+    "ext4-tool-packages.json": "5bbc066d20f6c8d032911013425df6cdac125cce2ed41533ebee15eadcaf8243",
+    "final-gates-summary.json": "796c4c14e96a550c0a864f3ea98bceabdd5dec430e60f965354d02a6da03fcd0",
+    "fix-hash-updates.json": "30ac61da280643565b1e7de9f7f8687ac8fef05a71ca4d245c1d56cb07756027",
+    "format-apply.log": "2c3ec66fe8a8c36a7f12eca8791b6c1f5e3f4ae4b52552fad936b3711ca9b4a0",
+    "format-check.log": "4b88bf553e4caeade91c8e18c71b7347fbf5c564171579ba458ef332bd5eb4ea",
+    "format-final.log": "4b88bf553e4caeade91c8e18c71b7347fbf5c564171579ba458ef332bd5eb4ea",
+    "inventory-commands.jsonl": "057af5ce9dfa5d400d5d3bfd14c755a602b88e978f7feb65dccf101bfca0a482",
+    "inventory.py": "badf6678e7a4be8e1eb370876f02d0251cdd7c94dbceb6399b8972d49fa148e7",
+    "layout-final.log": "cbc0444418ce1c42ada3057767a47fa7d774d5443bafd1a3ed3292efe345d9f6",
+    "layout.log": "cbc0444418ce1c42ada3057767a47fa7d774d5443bafd1a3ed3292efe345d9f6",
+    "lock.log": "8719fcaf26ba2abdb85bba2c5d142fd6e01aad219413f4294b3bd80071e34592",
+    "loop-released.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "merge-hash-resolution.json": "a7b2ded03f03a07e70b854b52dc215c2f1b3a0ca6b0570cb5924994d8260cbed",
+    "metadata-probe.json": "90d1794933ceeb97841301eb52710cc88d1dd41b793ebd68dfe9cff995275494",
+    "native-311.log": "b489e7ff5e2670cf91639451f4662ed149e0eda8be1181ec1bd21538f487c202",
+    "native-312.log": "de180de0cb379f117ecdc919979b2dc9d8cd03de58b9964e627f3681fd021393",
+    "native-checks.json": "5e6941cdad3fea350daeb7755a04e462cca437f43ee719610161f1592891f3cf",
+    "native_checks.py": "9552230ff0067d44f7297d7b0fadbaa2c6f6bc9e37a1f1e2a41ba2c611103e5d",
+    "old-kafka-after.json": "6988e4f7872edf40e5d044b852b99c49a228dbaccfcbc26c101093d85a960747",
+    "old-kafka-before.json": "321ed10f8f6b17818555285b224f41c78d4a65e4a8595ff7a104492fcad629a8",
+    "old-layer-diff-after.txt": "79f6b943ceece922ac5dc2a4400604778d0cd3aa82814d13af6754fffa047642",
+    "old-volumes-after.json": "fc4465b0edcc36f4cc28988821ae2e8034344754d300951d9b06bab4ade7e569",
+    "owned-final.json": "f7bd1f7410dc917ba6d19a8c72da922939154e44abfad07ca02974e1d2680ac3",
+    "posix-mount-proof.json": "f7d19197af4068e66f22c025e8516a560e24df1fab4ba610b7a84daf655052a5",
+    "posix-mount.sh": "eafcba8fa6cf855f99bd93981f0565f1ca17de835b595b68e3affa7274d8649b",
+    "prepare.py": "2effa30a250d9fd9f04df309a59a8303008448b64476ef47453dd0295b27bad5",
+    "prepare_ext4.py": "f34ac6db531481324251273910d61133de73d967f89bbbae9d456755c856c2b6",
+    "preservation.json": "b78c7e25fdd65f96bb24bab01ab48df2a2b3684b205f1997f7f21679d9aafca1",
+    "private-mount.sh": "f730483e0d25cb8d3b614a1be294eea5f6f7d6cd9e3a03ca5950094041ded71d",
+    "pytest-focused-311.log": "8b126425f802ff0c00894c9df9a8a8705d7c63fead324e0a9ea766bd28a3da9e",
+    "pytest-focused-312.log": "4f373dc25f424114e27c65e64d5f6d3d3227bf2b689bb9a471b7e499c0680a55",
+    "pytest-metadata-311.log": "7af3034eae3931305e46a5bbb69eaa6376fdb8d875871e8533532223a7240a12",
+    "pytest-metadata-312.log": "2b1ae0ce6ceced35c3b37aea4119d8ab414d88f97e15c6f7f8cd8e2467c15426",
+    "pytest-posix-311.log": "80ffd1a184ebf9b3bf322a14e0257cebd133984f46f54a83e108651cec241366",
+    "pytest-posix-312.log": "2ad26874853afa5561260f80258ca5a8c75315d234c8af7d2117cdf2e7232946",
+    "pytest-sys-311.log": "18b5f1a79a3412bc1dfa4aed447d9b85700c94b6054d69c841eaf96291d6c086",
+    "pytest-sys-312.log": "b441f1b9ddde23a8307da2d2fbb1b2bec143a2ac317735280ad4b6422da5069b",
+    "recreate-01/commands.jsonl": "29a6071a95d10987f42d9bf81dd8d5d77c8cc5fb0971ebd58b02fbb944718d01",
+    "recreate-01/container-ids-before.json": "8bdbf6dfb46aec48790ff5c7ea1699616b927af4f027e0e7b4458a29cef249b8",
+    "recreate-01/image.json": "93ae04837eb3ebe29201ba48a7b51ea91a933e663ef2678cfdc8492a8b111e2c",
+    "recreate-01/owned.json": "7c00b7c10e3107006dd8fd9b857ed2b729943e0a6dfee5e8c6c0075355ec05c8",
+    "recreate-01/readiness-last-error.txt": "71eba5a0fef27d308952447f41a86884f45425f3706b53a461ecf0c1b8b905e1",
+    "recreate-01/server.properties": "31e5601e8e1f4420acd5fb1fffb4187b756056e26fc27c0d00148f4f77dc8ab1",
+    "recreate-02/commands.jsonl": "faeb9111cd79dbfdb3b1a1be1b8b8c0361c5bdc6ccbb9d6ecbfdacb1010b4f6a",
+    "recreate-02/container-ids-before.json": "e947cbe881bad98e8ff34ba71378c5e902f03455733bceb1d0dd613e81acfc3e",
+    "recreate-02/image.json": "93ae04837eb3ebe29201ba48a7b51ea91a933e663ef2678cfdc8492a8b111e2c",
+    "recreate-02/owned.json": "8b4fa6a753aec3abe89c0c43e72bf12d1b74f2247589387fb78625192ad5abc7",
+    "recreate-02/server.properties": "6e321e053afab4cb11294a653f2a7e86562561b422e0b0a307444f00d5a4d406",
+    "recreate-02.log": "80da7182aeb29f1347901d468cfb8335740cb77d6c00122b58dd5397a8252412",
+    "recreate-03/commands.jsonl": "79c448883f56cae5ea11ca8fa70ae8e2ebd52f5f5c7d3e625c335419ee652af4",
+    "recreate-03/container-ids-before.json": "c2841cc0509e13a249fd89f4d98b58c19f340f55341080c2571413a26a8cc86b",
+    "recreate-03/created-1.json": "9aff77bf3f38cd411f2a40145dd66ab682aa16225ac43f25a11ff32aad75e4e3",
+    "recreate-03/first-stopped.json": "bdb3a637add9d8766eba6e8db050f2f7c5acd29ce0694e8a5d610d517bf518cd",
+    "recreate-03/image.json": "93ae04837eb3ebe29201ba48a7b51ea91a933e663ef2678cfdc8492a8b111e2c",
+    "recreate-03/owned.json": "2233093e31015449e22e59f49eeec0a5be62a93253755bebac3b0d38d53721dc",
+    "recreate-03/server.properties": "92b66d3345d45975e139115b3491b031b6e265f2ff6f30d71858686ba89b96e5",
+    "recreate-03.log": "ad2b45a54196c8024c11c990460da2ec6145c73f88671d734e7606ce92a70c12",
+    "recreate-04/commands.jsonl": "0eebe22750c70cd7eb93f9b1a3db56e9002a7288b4b6ce0a4c89980df317ecc1",
+    "recreate-04/container-ids-before.json": "09b57e18c71cc80636622804da4fbf20881b1775b38f233309b5c64ad920287c",
+    "recreate-04/created-1.json": "de1c8db62b4ed05cd08b517dbcc6d36d9577e90423f61d5bd535851f518f6e48",
+    "recreate-04/created-2.json": "815752e1917ff4cd2ffa4722c3ffafa3b95eac98194ac536daa53d4b31277d2c",
+    "recreate-04/first-stopped.json": "81d9031ee7547b2a84e476deb54d0c6cca61e9056dd607a8cf7e0c5218085a17",
+    "recreate-04/image.json": "93ae04837eb3ebe29201ba48a7b51ea91a933e663ef2678cfdc8492a8b111e2c",
+    "recreate-04/owned.json": "7ae98a6bf7d315434cf22de9063bc85558d9aa371589d889042e723b65bd26bd",
+    "recreate-04/second-running.json": "0b57be3889400cf6bb2e46f4ab7f6eb6c1972cd5e8c3c50e8a3d94d7d3ed04f3",
+    "recreate-04/server.properties": "39867266c8dbd09764d5ca48efb2bfa1e7a2d04f3bb6dc04763f381a258687bd",
+    "recreate-04/storage-after.json": "ffaa65c44dd976f9cb7f22d37cf0479c5ff3181e772f0c48a763bfb897526756",
+    "recreate-04/storage-before.json": "ffaa65c44dd976f9cb7f22d37cf0479c5ff3181e772f0c48a763bfb897526756",
+    "recreate-04.log": "e61c45e9554b42c61180980ab280b76a23a9c5e0ac1fd5171212e50cc6c7a1d3",
+    "recreate-05/commands.jsonl": "ad1ee716a1e7677b041bdc63a6a538268d23f8df9b5c86b918cd6e0c6d9c55b4",
+    "recreate-05/container-ids-before.json": "8deb5b415237fd57f20ea868309e165a5e1fcad1f75fb7e908b487daabfa7e61",
+    "recreate-05/created-1.json": "a88a30d5e946f541ca334c271c01304ac9f9be67d1e257f7b09cd7f7cade6e22",
+    "recreate-05/created-2.json": "1316247d21994e2ce8677d4ffb70f60410a1fe470663f5b58663ee4ef913bf45",
+    "recreate-05/first-stopped.json": "12686655a74da9cfb733d9d4dc8fd42fabe9ea91ffd3774d744304ba130a4238",
+    "recreate-05/image.json": "93ae04837eb3ebe29201ba48a7b51ea91a933e663ef2678cfdc8492a8b111e2c",
+    "recreate-05/owned.json": "af0ee424d3db090133ac004b5d6c2ad9a00298a9ffbf2d9b40cc01837efe6063",
+    "recreate-05/second-running.json": "bc20c57123641a87a72e9a49e13751e0655c159fa304e3610d39d42aba1c0b71",
+    "recreate-05/server.properties": "ba66778379c871d6e31f269672c32fd5f3aecb3bb4dfebaaac173d4209fa66d4",
+    "recreate-05/storage-after.json": "ddac4c63c975798b524c4908c4fc8411306b4dfa6ae3d32767fd87a9935cccf2",
+    "recreate-05/storage-before.json": "ddac4c63c975798b524c4908c4fc8411306b4dfa6ae3d32767fd87a9935cccf2",
+    "recreate-05.log": "246e36163b1a3dd3e7ccf4b899d1282a62db948df90f526cfffd5f9ef6e6bf65",
+    "recreate-06/commands.jsonl": "45ee3cbcb70b60fc91752ec7aba2a74d78c0343183e351662df4be4d2b453aa9",
+    "recreate-06/container-ids-after.json": "e671beb421dc22b3cd8387efe490b85fd3e2d016a54eb33da9a78a5b9d1f8964",
+    "recreate-06/container-ids-before.json": "05753e22a680cc8df6b88c491618038109a9539d1adcfad26c949b70aaa2104a",
+    "recreate-06/created-1.json": "d72a213b0787b0a7752b3a8fe77d6c7fff01859402cc8953944564a5bd949fae",
+    "recreate-06/created-2.json": "b2be85625c23aba320d6385b95d11de4dc76d1454e1405e6447e95099ecc47e2",
+    "recreate-06/first-stopped.json": "a7ca4db323337f868d5b67fedf887ea0032a48cedb7b9927cb2c41f6d1438233",
+    "recreate-06/image.json": "93ae04837eb3ebe29201ba48a7b51ea91a933e663ef2678cfdc8492a8b111e2c",
+    "recreate-06/layer-baselines.json": "8f675f130cbc33c9ee4755aaed1b525a9a1d9141994901189ec23d31b8930c9d",
+    "recreate-06/owned.json": "c4cc6a1185b375cb3c6091c95b9f7c021e0e05fecc1d3f42e3845a2b38a87d08",
+    "recreate-06/persistence-results.json": "638ed57988b79d70c3c797608b05c0b36a22662d83c6bfc0337aa4a696411d45",
+    "recreate-06/readonly-result.json": "a9f46e18b18a5e48d898b544fca04064cd0e40855eb1ebda6149b8a6fef75fe2",
+    "recreate-06/readonly-stopped.json": "7ccf8e6cf9b7e4a640fb45edcc7d810743cf348f5bc74dfa4450fc5cd5b8d0f0",
+    "recreate-06/readonly.json": "f9b7eea00411bc4c58b51650c34421bc9a2b7bf44c73b9e0ed0a12645ba78b0b",
+    "recreate-06/results.json": "9a895c03e633411a9a0df921970870ec4e72777aca5404660c58f0cb1e569c01",
+    "recreate-06/second-running.json": "a82445257f40bfb8742e0e812dcf930465b7fbc26b36e7b3b498ebe1fd257295",
+    "recreate-06/second-stopped.json": "35833f479ecfa65c54fe935e5e5638edfb3b61a3456a0aa17ab6a2e7d9e61f4b",
+    "recreate-06/server.properties": "4d8f2f5f394ec3d5bc79293de3e6f924dbcd7dda63ac93ec557d99299589671e",
+    "recreate-06/storage-after.json": "3331ab78a66124bba02eb6c6c1fe0bbcf2c0365c8fc40749bfe6bafae4d8695b",
+    "recreate-06/storage-before.json": "3331ab78a66124bba02eb6c6c1fe0bbcf2c0365c8fc40749bfe6bafae4d8695b",
+    "recreate-06.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "ruff-final.log": "08c8d9e6e870cfbd908a47a20ab036a78f282c8b459086f3c01cc8559f610430",
+    "ruff-tracked.log": "9b5f83bf38acc92528d5a1f3abe443dce74db1814ae160ca1f205ee8f89dc35f",
+    "run.py": "9ca8b1a8d4b70ef49a097d8d972a0fd0fc0b08ea32910e6c32c4dc82441fd3a1",
+    "runner-at-recreate-02.py": "f379076836c96e99711ad3dfd4ddee9f1cb7a4c6fdedebc4e7840a94cb9cc416",
+    "runner-at-recreate-03.py": "150e5d8af9da0f09a467edb8bb46fb3fa792a6d0012318f1208dd9a1ae76dc7f",
+    "runner-at-recreate-04.py": "f7cd0c1d03e884cc26f8cbf13205a28b933bd7263ade30963d5b6259c9dfe954",
+    "runner-at-recreate-05.py": "aed321234b41fec666779ca4871f987db6d9b3d9c398e61d0eb0631baa462b4c",
+    "runner-at-recreate-06.py": "9e19eeb158e8f43c4c24e29c5f611ed75447bacbfe2e4b20df06c5aaa6047483",
+    "runner-source-equivalence.json": "cabc749591055ccefc850f94207e6c2ef89537248e0e317aa64e3ba6c8588660",
+    "seal.py": "f50e4b7fc9c2c2120599647f883ffe937d593615d1e6ef933349bd262b94861e",
+    "shell-syntax.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e",
+    "source-equivalence.log": "0a281838cca19045e6126019012892b4a5a8c7a6fdd34ad9a18123795133c69d",
+    "startup-at-recreate-02.sh": "6d1533b42e3cb401fb023c6539ee250538468bcec2a0d220a2d7db35aaf323f8",
+    "startup-at-recreate-03.sh": "6d1533b42e3cb401fb023c6539ee250538468bcec2a0d220a2d7db35aaf323f8",
+    "startup-at-recreate-04.sh": "6d1533b42e3cb401fb023c6539ee250538468bcec2a0d220a2d7db35aaf323f8",
+    "startup-at-recreate-05.sh": "6d1533b42e3cb401fb023c6539ee250538468bcec2a0d220a2d7db35aaf323f8",
+    "startup-at-recreate-06.sh": "6d1533b42e3cb401fb023c6539ee250538468bcec2a0d220a2d7db35aaf323f8",
+    "windows-helpers-identical.log": "a3680b6601c39b586ea892ad2bbaa58a7f72b62a64f73917b09aa8c5f188110e"
+  },
+  "self_review": "Reviewed base/candidate scope, ownership before stop/remove, no force, explicit mounts, IO failure and preserved Windows helpers. Independent parent review pending.",
+  "limits": [
+    "Kafka3.7 real recreate after controlled shutdown; Kafka4.3 Compose config-only",
+    "no host/power/disk-loss or multi-node acceptance",
+    "NiFi/API/CG15/ES transport and capacity evidence historical, not rerun",
+    "no shared infrastructure, SMB/OT, delivery models, train/testfinal",
+    "CI snapshot and delivery SHA/tree added separately after the normal push"
+  ]
+}

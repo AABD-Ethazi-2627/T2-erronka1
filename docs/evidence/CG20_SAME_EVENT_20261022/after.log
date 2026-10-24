@@ -1,0 +1,7 @@
+
+STDERR
+Traceback (most recent call last):
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/inventory.py", line 51, in <module>
+    assert comparison['images_unchanged'] and comparison['old_kafka_layer_unchanged']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

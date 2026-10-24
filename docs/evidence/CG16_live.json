@@ -1,0 +1,90 @@
+{
+  "meaning": "Live local snapshot pipeline; not live SMB or independent model evaluation",
+  "processors": {
+    "InvokeHTTP": {
+      "in": 31,
+      "out": 31,
+      "status": "VALID"
+    },
+    "ConvertRecord": {
+      "in": 32,
+      "out": 32,
+      "status": "VALID"
+    },
+    "PutFile": {
+      "in": 21,
+      "out": 0,
+      "status": "VALID"
+    },
+    "RouteOnAttribute": {
+      "in": 31,
+      "out": 21,
+      "status": "VALID"
+    },
+    "Put alerts": {
+      "in": 1,
+      "out": 0,
+      "status": "VALID"
+    },
+    "RetryFlowFile": {
+      "in": 0,
+      "out": 0,
+      "status": "VALID"
+    },
+    "Quarantine envelope": {
+      "in": 1,
+      "out": 1,
+      "status": "VALID"
+    },
+    "EvaluateJsonPath": {
+      "in": 31,
+      "out": 62,
+      "status": "VALID"
+    },
+    "PutElasticsearchJson": {
+      "in": 31,
+      "out": 0,
+      "status": "VALID"
+    },
+    "ExtractText": {
+      "in": 32,
+      "out": 32,
+      "status": "VALID"
+    },
+    "ExecuteGroovyScript": {
+      "in": 31,
+      "out": 31,
+      "status": "VALID"
+    },
+    "ConsumeKafka": {
+      "in": 0,
+      "out": 32,
+      "status": "VALID"
+    }
+  },
+  "queues": {
+    "535058e8-01a1-1000-757f-7bcc9e474f0d": 0,
+    "534e83be-01a1-1000-a476-5b6e09cea827": 0,
+    "535059dc-01a1-1000-6ecb-315977309bb6": 0,
+    "53505916-01a1-1000-c9e7-5e9814dae359": 0,
+    "534e85d1-01a1-1000-0b3d-81d8f50e0725": 0,
+    "534e84f3-01a1-1000-9862-64fd2890e369": 0,
+    "534e86c9-01a1-1000-b2d2-6aa12c668724": 0,
+    "534e866e-01a1-1000-8018-3eeb9808f37b": 0,
+    "534e8746-01a1-1000-53cd-7639e784774c": 0,
+    "534e8529-01a1-1000-447d-9fa0fba24b33": 0,
+    "534e871e-01a1-1000-a6ba-b793eef7303b": 0,
+    "534e860e-01a1-1000-5bcf-26a82c5a7453": 0,
+    "534e8580-01a1-1000-bd96-c22727f29cc4": 0,
+    "53505a2a-01a1-1000-7540-c6e5cf455d1e": 0,
+    "534e869d-01a1-1000-4ab3-2cf9a5bf470d": 0,
+    "5350593c-01a1-1000-479d-346c94bbb10b": 0,
+    "53505962-01a1-1000-1a76-3ee01967ea87": 0,
+    "53518dd0-01a1-1000-552b-e2dd930bd055": 0,
+    "534e86f3-01a1-1000-c5c5-50db1a9273b8": 0,
+    "534e8637-01a1-1000-1a73-f1db9a929d6b": 0
+  },
+  "known_setup_artifacts": "20 successful normal results were also archived during temporary routing setup; preserved in state/quarantine, not counted as rejected. Final errors use state/rejected.",
+  "cnc-telemetry-lab-v1": 31,
+  "cnc-alerts-lab-v1": 1
+}

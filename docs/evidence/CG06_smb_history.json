@@ -1,0 +1,12 @@
+{
+  "rows": 20,
+  "unique_records": 20,
+  "files": {
+    "bronze/797ff28873790b49c2314beacb82c22ce4fc6f304d8b3848d284816c4ae960d0.csv": "797ff28873790b49c2314beacb82c22ce4fc6f304d8b3848d284816c4ae960d0",
+    "bronze/d5c2b86789e058c480b309cfec2c323eefd7d9c1da5e18943e178bce6688ee76.csv": "d5c2b86789e058c480b309cfec2c323eefd7d9c1da5e18943e178bce6688ee76",
+    "gold/machine_summary.parquet": "27299806c989baa15d7ded825ab145b5525dcf553d37af4a75197acc130df61a",
+    "silver/date=2026-10-19/797ff28873790b49c2314beacb82c22ce4fc6f304d8b3848d284816c4ae960d0.parquet": "26ad3abc841503a022dbf454ae81e226b7fbf10f497d82cca4e88c1cfd3d25bc",
+    "silver/date=2026-10-19/d5c2b86789e058c480b309cfec2c323eefd7d9c1da5e18943e178bce6688ee76.parquet": "d88332aa030dc70b4d79433e4dad8420c18b5d2542072c36f4a0fa0daade1c48"
+  },
+  "meaning": "Simulated batch observations, not physical machine history or future labels"
+}

@@ -1,0 +1,8 @@
+
+STDERR
+Traceback (most recent call last):
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/kibana_lab.py", line 7, in <module>
+    import lab
+  File "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab.py", line 498, in <module>
+    raise ValueError(STAGE)
+ValueError: kb-start

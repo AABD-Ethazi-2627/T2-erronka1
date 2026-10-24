@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-19",
+  "status": "local branches; no main merge; branch heads may include dependency and follow-up commits",
+  "branches": [
+    {
+      "issue": 2,
+      "branch": "feat/2-ai4i-source-audit",
+      "head_before_delivery_index": "2b5079ee1f071735142e1ea1a15206afe805fe4c"
+    },
+    {
+      "issue": 3,
+      "branch": "feat/3-contract-validation",
+      "head_before_delivery_index": "7fa8c3852df8c4fa56ceda4a7750a0764581b5c2"
+    },
+    {
+      "issue": 5,
+      "branch": "feat/5-readonly-smb-capture",
+      "head_before_delivery_index": "ec4aec36a41edc210eec07f99d6ef36745593ff2"
+    },
+    {
+      "issue": 6,
+      "branch": "feat/6-parquet-history",
+      "head_before_delivery_index": "c6f72ff6d5e133e81500be42116b47ec2c207538"
+    },
+    {
+      "issue": 7,
+      "branch": "feat/7-leakage-safe-features",
+      "head_before_delivery_index": "2adcca1992cce7b9d6ab22d98f850824f4053c17"
+    },
+    {
+      "issue": 8,
+      "branch": "feat/8-rf-controlled-evaluation",
+      "head_before_delivery_index": "922783b18af8a37293b42ad6dbccd3bbf0d7069e"
+    },
+    {
+      "issue": 9,
+      "branch": "feat/9-independent-anomaly",
+      "head_before_delivery_index": "ed473890741d381ce7f3023a2320bea3f097552c"
+    },
+    {
+      "issue": 10,
+      "branch": "feat/10-threshold-cost-evidence",
+      "head_before_delivery_index": "f464462178c9ee74e40950731a41bdb337fc2cb4"
+    },
+    {
+      "issue": 11,
+      "branch": "feat/11-reproducible-acceptance",
+      "head_before_delivery_index": "f91c87eeb2d89ab2412036aae1f6ca8e01e25d81"
+    },
+    {
+      "issue": 12,
+      "branch": "feat/12-isolated-lab-compose",
+      "head_before_delivery_index": "fcb1ae22b242540ac0334a771bee1278ee3eb68f"
+    },
+    {
+      "issue": 13,
+      "branch": "feat/13-versioned-kafka-recovery",
+      "head_before_delivery_index": "ffd03120599004290f828a56135a4f3102010586"
+    },
+    {
+      "issue": 14,
+      "branch": "feat/14-nifi-validation-flow",
+      "head_before_delivery_index": "55c61959584a84d4ff7392b1e93e85003ad6f819"
+    },
+    {
+      "issue": 16,
+      "branch": "feat/16-nifi-api-elasticsearch",
+      "head_before_delivery_index": "6e12563245ece5ab4bcd6cce11ba149d52021dc7"
+    },
+    {
+      "issue": 18,
+      "branch": "feat/18-elasticsearch-mapping",
+      "head_before_delivery_index": "6ce581dec8ff8af4214e894182b9f1f19e5e31ac"
+    },
+    {
+      "issue": 19,
+      "branch": "feat/19-kibana-acceptance-dashboard",
+      "head_before_delivery_index": "4db462ed34837035fb858651dec31d7e1e009ab8"
+    },
+    {
+      "issue": 20,
+      "branch": "feat/20-integration-preflight",
+      "head_before_delivery_index": "38a0bbed48237d04a0f7528c6e172b00524505ad"
+    },
+    {
+      "issue": 22,
+      "branch": "feat/22-recovery-acceptance",
+      "head_before_delivery_index": "2702d91ea72d6fc07a5cc822b2072ac78a079ae5"
+    },
+    {
+      "issue": 24,
+      "branch": "feat/24-security-human-impact",
+      "head_before_delivery_index": "fed595633a580c78daa7f419b9222f66e0230793"
+    },
+    {
+      "issue": 27,
+      "branch": "feat/27-delivery-evidence-index",
+      "head_before_delivery_index": "922783b18af8a37293b42ad6dbccd3bbf0d7069e"
+    },
+    {
+      "issue": 35,
+      "branch": "feat/35-robust-scoring-api",
+      "head_before_delivery_index": "0ea2c9dedfacf604d01e1dda0f4c2534af5cc04d"
+    },
+    {
+      "issue": 36,
+      "branch": "feat/36-filebeat-kafka-ingestion",
+      "head_before_delivery_index": "bc2fe99c55a5f8dfc66d4f7cba98af7bb658f944"
+    },
+    {
+      "issue": 37,
+      "branch": "feat/37-ml-design-justification",
+      "head_before_delivery_index": "4e21045693979d55b3ee3805fd3714322dd96497"
+    }
+  ]
+}

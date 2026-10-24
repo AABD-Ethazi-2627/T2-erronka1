@@ -1,0 +1,2361 @@
+{
+  "revision": {
+    "clientId": "t2-cg20-b74cb05b34",
+    "version": 2
+  },
+  "permissions": {
+    "canRead": true,
+    "canWrite": true
+  },
+  "processGroupFlow": {
+    "id": "63dc9e7e-01a1-1000-a036-eac540599223",
+    "uri": "http://127.0.0.1:49957/nifi-api/flow/process-groups/63dc9e7e-01a1-1000-a036-eac540599223",
+    "parentGroupId": "63dc56a8-01a1-1000-dc96-0dbea9e62ac8",
+    "breadcrumb": {
+      "id": "63dc9e7e-01a1-1000-a036-eac540599223",
+      "permissions": {
+        "canRead": true,
+        "canWrite": true
+      },
+      "breadcrumb": {
+        "id": "63dc9e7e-01a1-1000-a036-eac540599223",
+        "name": "Own automatic product graph"
+      },
+      "parentBreadcrumb": {
+        "id": "63dc56a8-01a1-1000-dc96-0dbea9e62ac8",
+        "permissions": {
+          "canRead": true,
+          "canWrite": true
+        },
+        "breadcrumb": {
+          "id": "63dc56a8-01a1-1000-dc96-0dbea9e62ac8",
+          "name": "NiFi Flow"
+        }
+      }
+    },
+    "flow": {
+      "processGroups": [],
+      "remoteProcessGroups": [],
+      "processors": [
+        {
+          "revision": {
+            "version": 3
+          },
+          "id": "fe730614-2963-311a-5521-60d6429d8681",
+          "uri": "http://127.0.0.1:49957/nifi-api/processors/fe730614-2963-311a-5521-60d6429d8681",
+          "position": {
+            "x": 350.0,
+            "y": 0.0
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "fe730614-2963-311a-5521-60d6429d8681",
+            "versionedComponentId": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "position": {
+              "x": 350.0,
+              "y": 0.0
+            },
+            "name": "Single Kafka owner",
+            "type": "org.apache.nifi.processors.standard.ExecuteStreamCommand",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "2.12.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "nonzero status",
+                "description": "The destination path for the FlowFile created from the command's output, if the returned status code is non-zero. All FlowFiles routed to this relationship will be penalized.",
+                "autoTerminate": false,
+                "retry": false
+              },
+              {
+                "name": "original",
+                "description": "The original FlowFile will be routed. It will have new attributes detailing the result of the script execution.",
+                "autoTerminate": false,
+                "retry": false
+              },
+              {
+                "name": "output stream",
+                "description": "The destination path for the FlowFile created from the command's output, if the returned status code is zero.",
+                "autoTerminate": false,
+                "retry": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsBatching": true,
+            "supportsSensitiveDynamicProperties": true,
+            "supportsBacklogReporting": false,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "executionNodeRestricted": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_REQUIRED",
+            "physicalState": "STOPPED",
+            "config": {
+              "properties": {
+                "Working Directory": "/opt/checkout",
+                "Command Path": "/home/Fedora/t2-real-lab-20261022/venv/bin/python",
+                "Command Arguments Strategy": "Command Arguments Property",
+                "Command Arguments": "-B;-m;scripts.run_automatic_graph;--config;/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/graph.json",
+                "Argument Delimiter": ";",
+                "Ignore STDIN": "true",
+                "Output Destination Attribute": null,
+                "Max Attribute Length": "256",
+                "Output MIME Type": null,
+                "PYTHONDONTWRITEBYTECODE": "1",
+                "PYTHONUNBUFFERED": "1",
+                "TEMP": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/process-temp",
+                "TMP": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/process-temp",
+                "TMPDIR": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/process-temp"
+              },
+              "descriptors": {
+                "Working Directory": {
+                  "name": "Working Directory",
+                  "displayName": "Working Directory",
+                  "description": "The directory to use as the current working directory when executing the command",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Command Path": {
+                  "name": "Command Path",
+                  "displayName": "Command Path",
+                  "description": "Specifies the command to be executed; if just the name of an executable is provided, it must be in the user's environment PATH.",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Command Arguments Strategy": {
+                  "name": "Command Arguments Strategy",
+                  "displayName": "Command Arguments Strategy",
+                  "description": "Strategy for configuring arguments to be supplied to the command.",
+                  "defaultValue": "Command Arguments Property",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "Command Arguments Property",
+                        "value": "Command Arguments Property",
+                        "description": "Arguments to be supplied to the executable are taken from the Command Arguments property"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "Dynamic Property Arguments",
+                        "value": "Dynamic Property Arguments",
+                        "description": "Arguments to be supplied to the executable are taken from dynamic properties with pattern of 'command.argument.<commandIndex>'"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Command Arguments": {
+                  "name": "Command Arguments",
+                  "displayName": "Command Arguments",
+                  "description": "The arguments to supply to the executable delimited by the ';' character.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": [
+                    {
+                      "propertyName": "Command Arguments Strategy",
+                      "dependentValues": [
+                        "Command Arguments Property"
+                      ]
+                    }
+                  ]
+                },
+                "Argument Delimiter": {
+                  "name": "Argument Delimiter",
+                  "displayName": "Argument Delimiter",
+                  "description": "Delimiter to use to separate arguments for a command [default: ;]. Must be a single character",
+                  "defaultValue": ";",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": [
+                    {
+                      "propertyName": "Command Arguments Strategy",
+                      "dependentValues": [
+                        "Command Arguments Property"
+                      ]
+                    }
+                  ]
+                },
+                "Ignore STDIN": {
+                  "name": "Ignore STDIN",
+                  "displayName": "Ignore STDIN",
+                  "description": "If true, the contents of the incoming FlowFile will not be passed to the executing command",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Output Destination Attribute": {
+                  "name": "Output Destination Attribute",
+                  "displayName": "Output Destination Attribute",
+                  "description": "If set, the output of the stream command will be put into an attribute of the original FlowFile instead of a separate FlowFile. There will no longer be a relationship for 'output stream' or 'nonzero status'. The value of this property will be the key for the output attribute.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Max Attribute Length": {
+                  "name": "Max Attribute Length",
+                  "displayName": "Max Attribute Length",
+                  "description": "If routing the output of the stream command to an attribute, the number of characters put to the attribute value will be at most this amount. This is important because attributes are held in memory and large attributes will quickly cause out of memory issues. If the output goes longer than this value, it will truncated to fit. Consider making this smaller if able.",
+                  "defaultValue": "256",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Output MIME Type": {
+                  "name": "Output MIME Type",
+                  "displayName": "Output MIME Type",
+                  "description": "Specifies the value to set for the \"mime.type\" attribute. This property is ignored if 'Output Destination Attribute' is set.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "PYTHONDONTWRITEBYTECODE": {
+                  "name": "PYTHONDONTWRITEBYTECODE",
+                  "displayName": "PYTHONDONTWRITEBYTECODE",
+                  "description": "Sets the environment variable 'PYTHONDONTWRITEBYTECODE' for the process' environment",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": true,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "PYTHONUNBUFFERED": {
+                  "name": "PYTHONUNBUFFERED",
+                  "displayName": "PYTHONUNBUFFERED",
+                  "description": "Sets the environment variable 'PYTHONUNBUFFERED' for the process' environment",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": true,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "TEMP": {
+                  "name": "TEMP",
+                  "displayName": "TEMP",
+                  "description": "Sets the environment variable 'TEMP' for the process' environment",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": true,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "TMP": {
+                  "name": "TMP",
+                  "displayName": "TMP",
+                  "description": "Sets the environment variable 'TMP' for the process' environment",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": true,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "TMPDIR": {
+                  "name": "TMPDIR",
+                  "displayName": "TMPDIR",
+                  "description": "Sets the environment variable 'TMPDIR' for the process' environment",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": true,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                }
+              },
+              "schedulingPeriod": "5 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "autoTerminatedRelationships": [],
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              },
+              "retryCount": 10,
+              "retriedRelationships": [],
+              "backoffMechanism": "PENALIZE_FLOWFILE",
+              "maxBackoffPeriod": "10 mins"
+            },
+            "validationStatus": "VALID",
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_REQUIRED",
+          "physicalState": "STOPPED",
+          "status": {
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "id": "fe730614-2963-311a-5521-60d6429d8681",
+            "name": "Single Kafka owner",
+            "runStatus": "Stopped",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "aggregateSnapshot": {
+              "id": "fe730614-2963-311a-5521-60d6429d8681",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Single Kafka owner",
+              "type": "ExecuteStreamCommand",
+              "runStatus": "Stopped",
+              "executionNode": "ALL",
+              "bytesRead": 0,
+              "bytesWritten": 5536,
+              "read": "0 bytes",
+              "written": "5.41 KB",
+              "flowFilesIn": 32,
+              "bytesIn": 0,
+              "input": "32 (0 bytes)",
+              "flowFilesOut": 64,
+              "bytesOut": 5536,
+              "output": "64 (5.41 KB)",
+              "taskCount": 32,
+              "tasksDurationNanos": 144900582666,
+              "tasks": "32",
+              "tasksDuration": "00:02:24.900",
+              "activeThreadCount": 0,
+              "terminatedThreadCount": 0,
+              "processingPerformanceStatus": {
+                "identifier": "fe730614-2963-311a-5521-60d6429d8681",
+                "cpuDuration": 1245132643,
+                "contentReadDuration": 0,
+                "contentWriteDuration": 0,
+                "sessionCommitDuration": 0,
+                "garbageCollectionDuration": 5
+              }
+            }
+          },
+          "operatePermissions": {
+            "canRead": true,
+            "canWrite": true
+          }
+        },
+        {
+          "revision": {
+            "version": 3
+          },
+          "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+          "uri": "http://127.0.0.1:49957/nifi-api/processors/deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+          "position": {
+            "x": 1050.0,
+            "y": 0.0
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+            "versionedComponentId": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "position": {
+              "x": 1050.0,
+              "y": 0.0
+            },
+            "name": "Retain cycle output",
+            "type": "org.apache.nifi.processors.standard.PutFile",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "2.12.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "failure",
+                "description": "Files that could not be written to the output directory for some reason are transferred to this relationship",
+                "autoTerminate": false,
+                "retry": false
+              },
+              {
+                "name": "success",
+                "description": "Files that have been successfully written to the output directory are transferred to this relationship",
+                "autoTerminate": true,
+                "retry": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsBatching": true,
+            "supportsSensitiveDynamicProperties": false,
+            "supportsBacklogReporting": false,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "executionNodeRestricted": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_REQUIRED",
+            "physicalState": "STOPPED",
+            "config": {
+              "properties": {
+                "Directory": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/cycle-reports/output",
+                "Conflict Resolution Strategy": "fail",
+                "Create Missing Directories": "true",
+                "Maximum File Count": null,
+                "Last Modified Time": null,
+                "Permissions": null,
+                "Owner": null,
+                "Group": null,
+                "Resource Transfer Source": "FLOWFILE_CONTENT",
+                "File Resource Service": null
+              },
+              "descriptors": {
+                "Directory": {
+                  "name": "Directory",
+                  "displayName": "Directory",
+                  "description": "The directory to which files should be written. You may use expression language such as /aa/bb/${path}",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Conflict Resolution Strategy": {
+                  "name": "Conflict Resolution Strategy",
+                  "displayName": "Conflict Resolution Strategy",
+                  "description": "Indicates what should happen when a file with the same name already exists in the output directory",
+                  "defaultValue": "fail",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "replace",
+                        "value": "replace"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "ignore",
+                        "value": "ignore"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "fail",
+                        "value": "fail"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Create Missing Directories": {
+                  "name": "Create Missing Directories",
+                  "displayName": "Create Missing Directories",
+                  "description": "If true, then missing destination directories will be created. If false, FlowFiles are penalized and sent to failure.",
+                  "defaultValue": "true",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Maximum File Count": {
+                  "name": "Maximum File Count",
+                  "displayName": "Maximum File Count",
+                  "description": "Specifies the maximum number of files that can exist in the output directory",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Last Modified Time": {
+                  "name": "Last Modified Time",
+                  "displayName": "Last Modified Time",
+                  "description": "Sets the lastModifiedTime on the output file to the value of this attribute.  Format must be yyyy-MM-dd'T'HH:mm:ssZ.  You may also use expression language such as ${file.lastModifiedTime}.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Permissions": {
+                  "name": "Permissions",
+                  "displayName": "Permissions",
+                  "description": "Sets the permissions on the output file to the value of this attribute.  Format must be either UNIX rwxrwxrwx with a - in place of denied permissions (e.g. rw-r--r--) or an octal number (e.g. 644).  You may also use expression language such as ${file.permissions}.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Owner": {
+                  "name": "Owner",
+                  "displayName": "Owner",
+                  "description": "Sets the owner on the output file to the value of this attribute.  You may also use expression language such as ${file.owner}. Note on many operating systems Nifi must be running as a super-user to have the permissions to set the file owner.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Group": {
+                  "name": "Group",
+                  "displayName": "Group",
+                  "description": "Sets the group on the output file to the value of this attribute.  You may also use expression language such as ${file.group}.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Resource Transfer Source": {
+                  "name": "Resource Transfer Source",
+                  "displayName": "Resource Transfer Source",
+                  "description": "The source of the content to be transferred",
+                  "defaultValue": "FLOWFILE_CONTENT",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "FlowFile Content",
+                        "value": "FLOWFILE_CONTENT",
+                        "description": "The content of the incoming FlowFile provides the source for transfer"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "File Resource Service",
+                        "value": "FILE_RESOURCE_SERVICE",
+                        "description": "The File Resource Service provides the source for transfer"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "File Resource Service": {
+                  "name": "File Resource Service",
+                  "displayName": "File Resource Service",
+                  "description": "File Resource Service providing access to the local resource to be transferred",
+                  "allowableValues": [],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "identifiesControllerService": "org.apache.nifi.fileresource.service.api.FileResourceService",
+                  "identifiesControllerServiceBundle": {
+                    "group": "org.apache.nifi",
+                    "artifact": "nifi-standard-services-api-nar",
+                    "version": "2.12.0"
+                  },
+                  "dependencies": [
+                    {
+                      "propertyName": "Resource Transfer Source",
+                      "dependentValues": [
+                        "FILE_RESOURCE_SERVICE"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "schedulingPeriod": "5 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "autoTerminatedRelationships": [
+                "success"
+              ],
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              },
+              "retryCount": 10,
+              "retriedRelationships": [],
+              "backoffMechanism": "PENALIZE_FLOWFILE",
+              "maxBackoffPeriod": "10 mins"
+            },
+            "validationStatus": "VALID",
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_REQUIRED",
+          "physicalState": "STOPPED",
+          "status": {
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+            "name": "Retain cycle output",
+            "runStatus": "Stopped",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "aggregateSnapshot": {
+              "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle output",
+              "type": "PutFile",
+              "runStatus": "Stopped",
+              "executionNode": "ALL",
+              "bytesRead": 5536,
+              "bytesWritten": 0,
+              "read": "5.41 KB",
+              "written": "0 bytes",
+              "flowFilesIn": 32,
+              "bytesIn": 5536,
+              "input": "32 (5.41 KB)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "taskCount": 32,
+              "tasksDurationNanos": 532463249,
+              "tasks": "32",
+              "tasksDuration": "00:00:00.532",
+              "activeThreadCount": 0,
+              "terminatedThreadCount": 0,
+              "processingPerformanceStatus": {
+                "identifier": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+                "cpuDuration": 126335575,
+                "contentReadDuration": 0,
+                "contentWriteDuration": 0,
+                "sessionCommitDuration": 0,
+                "garbageCollectionDuration": 0
+              }
+            }
+          },
+          "operatePermissions": {
+            "canRead": true,
+            "canWrite": true
+          }
+        },
+        {
+          "revision": {
+            "version": 3
+          },
+          "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+          "uri": "http://127.0.0.1:49957/nifi-api/processors/ac125404-f6a8-3d06-3492-6a2267dd0d04",
+          "position": {
+            "x": 1050.0,
+            "y": 200.0
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+            "versionedComponentId": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "position": {
+              "x": 1050.0,
+              "y": 200.0
+            },
+            "name": "Retain cycle diagnostics",
+            "type": "org.apache.nifi.processors.standard.PutFile",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "2.12.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "failure",
+                "description": "Files that could not be written to the output directory for some reason are transferred to this relationship",
+                "autoTerminate": false,
+                "retry": false
+              },
+              {
+                "name": "success",
+                "description": "Files that have been successfully written to the output directory are transferred to this relationship",
+                "autoTerminate": true,
+                "retry": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsBatching": true,
+            "supportsSensitiveDynamicProperties": false,
+            "supportsBacklogReporting": false,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "executionNodeRestricted": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_REQUIRED",
+            "physicalState": "STOPPED",
+            "config": {
+              "properties": {
+                "Directory": "/mnt/d/github/_local/t2-babysit-20261021/cg20-api-kibana-20261022/lab-01/cycle-reports/diagnostics",
+                "Conflict Resolution Strategy": "fail",
+                "Create Missing Directories": "true",
+                "Maximum File Count": null,
+                "Last Modified Time": null,
+                "Permissions": null,
+                "Owner": null,
+                "Group": null,
+                "Resource Transfer Source": "FLOWFILE_CONTENT",
+                "File Resource Service": null
+              },
+              "descriptors": {
+                "Directory": {
+                  "name": "Directory",
+                  "displayName": "Directory",
+                  "description": "The directory to which files should be written. You may use expression language such as /aa/bb/${path}",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Conflict Resolution Strategy": {
+                  "name": "Conflict Resolution Strategy",
+                  "displayName": "Conflict Resolution Strategy",
+                  "description": "Indicates what should happen when a file with the same name already exists in the output directory",
+                  "defaultValue": "fail",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "replace",
+                        "value": "replace"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "ignore",
+                        "value": "ignore"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "fail",
+                        "value": "fail"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Create Missing Directories": {
+                  "name": "Create Missing Directories",
+                  "displayName": "Create Missing Directories",
+                  "description": "If true, then missing destination directories will be created. If false, FlowFiles are penalized and sent to failure.",
+                  "defaultValue": "true",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Maximum File Count": {
+                  "name": "Maximum File Count",
+                  "displayName": "Maximum File Count",
+                  "description": "Specifies the maximum number of files that can exist in the output directory",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Last Modified Time": {
+                  "name": "Last Modified Time",
+                  "displayName": "Last Modified Time",
+                  "description": "Sets the lastModifiedTime on the output file to the value of this attribute.  Format must be yyyy-MM-dd'T'HH:mm:ssZ.  You may also use expression language such as ${file.lastModifiedTime}.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Permissions": {
+                  "name": "Permissions",
+                  "displayName": "Permissions",
+                  "description": "Sets the permissions on the output file to the value of this attribute.  Format must be either UNIX rwxrwxrwx with a - in place of denied permissions (e.g. rw-r--r--) or an octal number (e.g. 644).  You may also use expression language such as ${file.permissions}.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Owner": {
+                  "name": "Owner",
+                  "displayName": "Owner",
+                  "description": "Sets the owner on the output file to the value of this attribute.  You may also use expression language such as ${file.owner}. Note on many operating systems Nifi must be running as a super-user to have the permissions to set the file owner.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Group": {
+                  "name": "Group",
+                  "displayName": "Group",
+                  "description": "Sets the group on the output file to the value of this attribute.  You may also use expression language such as ${file.group}.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables and FlowFile Attributes",
+                  "dependencies": []
+                },
+                "Resource Transfer Source": {
+                  "name": "Resource Transfer Source",
+                  "displayName": "Resource Transfer Source",
+                  "description": "The source of the content to be transferred",
+                  "defaultValue": "FLOWFILE_CONTENT",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "FlowFile Content",
+                        "value": "FLOWFILE_CONTENT",
+                        "description": "The content of the incoming FlowFile provides the source for transfer"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "File Resource Service",
+                        "value": "FILE_RESOURCE_SERVICE",
+                        "description": "The File Resource Service provides the source for transfer"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "File Resource Service": {
+                  "name": "File Resource Service",
+                  "displayName": "File Resource Service",
+                  "description": "File Resource Service providing access to the local resource to be transferred",
+                  "allowableValues": [],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "identifiesControllerService": "org.apache.nifi.fileresource.service.api.FileResourceService",
+                  "identifiesControllerServiceBundle": {
+                    "group": "org.apache.nifi",
+                    "artifact": "nifi-standard-services-api-nar",
+                    "version": "2.12.0"
+                  },
+                  "dependencies": [
+                    {
+                      "propertyName": "Resource Transfer Source",
+                      "dependentValues": [
+                        "FILE_RESOURCE_SERVICE"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "schedulingPeriod": "5 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "autoTerminatedRelationships": [
+                "success"
+              ],
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              },
+              "retryCount": 10,
+              "retriedRelationships": [],
+              "backoffMechanism": "PENALIZE_FLOWFILE",
+              "maxBackoffPeriod": "10 mins"
+            },
+            "validationStatus": "VALID",
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_REQUIRED",
+          "physicalState": "STOPPED",
+          "status": {
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+            "name": "Retain cycle diagnostics",
+            "runStatus": "Stopped",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "aggregateSnapshot": {
+              "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle diagnostics",
+              "type": "PutFile",
+              "runStatus": "Stopped",
+              "executionNode": "ALL",
+              "bytesRead": 11744,
+              "bytesWritten": 0,
+              "read": "11.47 KB",
+              "written": "0 bytes",
+              "flowFilesIn": 32,
+              "bytesIn": 11744,
+              "input": "32 (11.47 KB)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "taskCount": 32,
+              "tasksDurationNanos": 349587362,
+              "tasks": "32",
+              "tasksDuration": "00:00:00.349",
+              "activeThreadCount": 0,
+              "terminatedThreadCount": 0,
+              "processingPerformanceStatus": {
+                "identifier": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+                "cpuDuration": 54260528,
+                "contentReadDuration": 0,
+                "contentWriteDuration": 0,
+                "sessionCommitDuration": 0,
+                "garbageCollectionDuration": 0
+              }
+            }
+          },
+          "operatePermissions": {
+            "canRead": true,
+            "canWrite": true
+          }
+        },
+        {
+          "revision": {
+            "version": 4
+          },
+          "id": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+          "uri": "http://127.0.0.1:49957/nifi-api/processors/f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+          "position": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+            "versionedComponentId": "7a292b6c-016e-59e3-9830-55bdd172ecf4",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "position": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "name": "Schedule bounded source cycle",
+            "type": "org.apache.nifi.processors.standard.GenerateFlowFile",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "2.12.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "success",
+                "description": "",
+                "autoTerminate": false,
+                "retry": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsBatching": true,
+            "supportsSensitiveDynamicProperties": false,
+            "supportsBacklogReporting": false,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "executionNodeRestricted": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_FORBIDDEN",
+            "physicalState": "STOPPED",
+            "config": {
+              "properties": {
+                "File Size": "0B",
+                "Batch Size": "1",
+                "Data Format": "Text",
+                "Unique FlowFiles": "false",
+                "Custom Text": null,
+                "Character Set": "UTF-8",
+                "Mime Type": null
+              },
+              "descriptors": {
+                "File Size": {
+                  "name": "File Size",
+                  "displayName": "File Size",
+                  "description": "The size of the file that will be used",
+                  "defaultValue": "0B",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables defined at JVM level and system properties",
+                  "dependencies": []
+                },
+                "Batch Size": {
+                  "name": "Batch Size",
+                  "displayName": "Batch Size",
+                  "description": "The number of FlowFiles to be transferred in each invocation",
+                  "defaultValue": "1",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Data Format": {
+                  "name": "Data Format",
+                  "displayName": "Data Format",
+                  "description": "Specifies whether the data should be Text or Binary",
+                  "defaultValue": "Text",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "Binary",
+                        "value": "Binary"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "Text",
+                        "value": "Text"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Unique FlowFiles": {
+                  "name": "Unique FlowFiles",
+                  "displayName": "Unique FlowFiles",
+                  "description": "If true, each FlowFile that is generated will be unique. If false, all generated FlowFiles will have the same content. When Unique FlowFiles is false, the first FlowFile in a batch is written and additional FlowFiles clone that content.",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Custom Text": {
+                  "name": "Custom Text",
+                  "displayName": "Custom Text",
+                  "description": "If Data Format is text and if Unique FlowFiles is false, then this custom text will be used as content of the generated FlowFiles and the File Size will be ignored. Finally, if Expression Language is used, evaluation will be performed only once per batch of generated FlowFiles",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables defined at JVM level and system properties",
+                  "dependencies": []
+                },
+                "Character Set": {
+                  "name": "Character Set",
+                  "displayName": "Character Set",
+                  "description": "Specifies the character set to use when writing the bytes of Custom Text to a FlowFile.",
+                  "defaultValue": "UTF-8",
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Mime Type": {
+                  "name": "Mime Type",
+                  "displayName": "Mime Type",
+                  "description": "Specifies the value to set for the \"mime.type\" attribute.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                }
+              },
+              "schedulingPeriod": "2 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "autoTerminatedRelationships": [],
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              },
+              "retryCount": 10,
+              "retriedRelationships": [],
+              "backoffMechanism": "PENALIZE_FLOWFILE",
+              "maxBackoffPeriod": "10 mins"
+            },
+            "validationStatus": "VALID",
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_FORBIDDEN",
+          "physicalState": "STOPPED",
+          "status": {
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "id": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+            "name": "Schedule bounded source cycle",
+            "runStatus": "Stopped",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "aggregateSnapshot": {
+              "id": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Schedule bounded source cycle",
+              "type": "GenerateFlowFile",
+              "runStatus": "Stopped",
+              "executionNode": "ALL",
+              "bytesRead": 0,
+              "bytesWritten": 0,
+              "read": "0 bytes",
+              "written": "0 bytes",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 31,
+              "bytesOut": 0,
+              "output": "31 (0 bytes)",
+              "taskCount": 31,
+              "tasksDurationNanos": 40016744,
+              "tasks": "31",
+              "tasksDuration": "00:00:00.040",
+              "activeThreadCount": 0,
+              "terminatedThreadCount": 0,
+              "processingPerformanceStatus": {
+                "identifier": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+                "cpuDuration": 14000660,
+                "contentReadDuration": 0,
+                "contentWriteDuration": 0,
+                "sessionCommitDuration": 0,
+                "garbageCollectionDuration": 0
+              }
+            }
+          },
+          "operatePermissions": {
+            "canRead": true,
+            "canWrite": true
+          }
+        },
+        {
+          "revision": {
+            "version": 3
+          },
+          "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+          "uri": "http://127.0.0.1:49957/nifi-api/processors/4e7233ae-f584-3ee3-6a02-eb843e93b521",
+          "position": {
+            "x": 700.0,
+            "y": 200.0
+          },
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "bulletins": [],
+          "component": {
+            "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+            "versionedComponentId": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "position": {
+              "x": 700.0,
+              "y": 200.0
+            },
+            "name": "Capture cycle exit diagnostics",
+            "type": "org.apache.nifi.processors.standard.AttributesToJSON",
+            "bundle": {
+              "group": "org.apache.nifi",
+              "artifact": "nifi-standard-nar",
+              "version": "2.12.0"
+            },
+            "state": "STOPPED",
+            "style": {},
+            "relationships": [
+              {
+                "name": "failure",
+                "description": "Failed to convert attributes to JSON",
+                "autoTerminate": false,
+                "retry": false
+              },
+              {
+                "name": "success",
+                "description": "Successfully converted attributes to JSON",
+                "autoTerminate": false,
+                "retry": false
+              }
+            ],
+            "supportsParallelProcessing": true,
+            "supportsBatching": true,
+            "supportsSensitiveDynamicProperties": false,
+            "supportsBacklogReporting": false,
+            "persistsState": false,
+            "restricted": false,
+            "deprecated": false,
+            "executionNodeRestricted": false,
+            "multipleVersionsAvailable": false,
+            "inputRequirement": "INPUT_REQUIRED",
+            "physicalState": "STOPPED",
+            "config": {
+              "properties": {
+                "Attributes List": "uuid,filename,execution.status,execution.error,execution.command,execution.command.args",
+                "Attributes Regular Expression": null,
+                "Destination": "flowfile-content",
+                "Include Core Attributes": "true",
+                "Null Value": "false",
+                "JSON Handling Strategy": "ESCAPED",
+                "Pretty Print": "false"
+              },
+              "descriptors": {
+                "Attributes List": {
+                  "name": "Attributes List",
+                  "displayName": "Attributes List",
+                  "description": "Comma separated list of attributes to be included in the resulting JSON. If this value is left empty then all existing Attributes will be included. This list of attributes is case sensitive. If an attribute specified in the list is not found it will be be emitted to the resulting JSON with an empty string or NULL value.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Attributes Regular Expression": {
+                  "name": "Attributes Regular Expression",
+                  "displayName": "Attributes Regular Expression",
+                  "description": "Regular expression that will be evaluated against the flow file attributes to select the matching attributes. This property can be used in combination with the attributes list property.",
+                  "required": false,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": true,
+                  "expressionLanguageScope": "Environment variables defined at JVM level and system properties",
+                  "dependencies": []
+                },
+                "Destination": {
+                  "name": "Destination",
+                  "displayName": "Destination",
+                  "description": "Control if JSON value is written as a new FlowFile attribute 'JSONAttributes' or written in the FlowFile content. Writing to FlowFile content will overwrite any existing FlowFile content.",
+                  "defaultValue": "flowfile-attribute",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "flowfile-attribute",
+                        "value": "flowfile-attribute"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "flowfile-content",
+                        "value": "flowfile-content"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Include Core Attributes": {
+                  "name": "Include Core Attributes",
+                  "displayName": "Include Core Attributes",
+                  "description": "Determines if the FlowFile org.apache.nifi.flowfile.attributes.CoreAttributes which are contained in every FlowFile should be included in the final JSON value generated.",
+                  "defaultValue": "true",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Null Value": {
+                  "name": "Null Value",
+                  "displayName": "Null Value",
+                  "description": "If true a non existing selected attribute will be NULL in the resulting JSON. If false an empty string will be placed in the JSON",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "JSON Handling Strategy": {
+                  "name": "JSON Handling Strategy",
+                  "displayName": "JSON Handling Strategy",
+                  "description": "Strategy to use for handling attributes which contain nested JSON.",
+                  "defaultValue": "ESCAPED",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "Escaped",
+                        "value": "ESCAPED",
+                        "description": "Escapes JSON attribute values to strings"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "Nested",
+                        "value": "NESTED",
+                        "description": "Handles JSON attribute values as nested structured objects or arrays"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": []
+                },
+                "Pretty Print": {
+                  "name": "Pretty Print",
+                  "displayName": "Pretty Print",
+                  "description": "Apply pretty print formatting to the output.",
+                  "defaultValue": "false",
+                  "allowableValues": [
+                    {
+                      "allowableValue": {
+                        "displayName": "true",
+                        "value": "true"
+                      },
+                      "canRead": true
+                    },
+                    {
+                      "allowableValue": {
+                        "displayName": "false",
+                        "value": "false"
+                      },
+                      "canRead": true
+                    }
+                  ],
+                  "required": true,
+                  "sensitive": false,
+                  "dynamic": false,
+                  "supportsEl": false,
+                  "expressionLanguageScope": "Not Supported",
+                  "dependencies": [
+                    {
+                      "propertyName": "Destination",
+                      "dependentValues": [
+                        "flowfile-content"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "schedulingPeriod": "5 sec",
+              "schedulingStrategy": "TIMER_DRIVEN",
+              "executionNode": "ALL",
+              "penaltyDuration": "30 sec",
+              "yieldDuration": "1 sec",
+              "bulletinLevel": "WARN",
+              "runDurationMillis": 0,
+              "concurrentlySchedulableTaskCount": 1,
+              "autoTerminatedRelationships": [],
+              "lossTolerant": false,
+              "defaultConcurrentTasks": {
+                "TIMER_DRIVEN": "1",
+                "CRON_DRIVEN": "1"
+              },
+              "defaultSchedulingPeriod": {
+                "TIMER_DRIVEN": "0 sec",
+                "CRON_DRIVEN": "* * * * * ?"
+              },
+              "retryCount": 10,
+              "retriedRelationships": [],
+              "backoffMechanism": "PENALIZE_FLOWFILE",
+              "maxBackoffPeriod": "10 mins"
+            },
+            "validationStatus": "VALID",
+            "extensionMissing": false
+          },
+          "inputRequirement": "INPUT_REQUIRED",
+          "physicalState": "STOPPED",
+          "status": {
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+            "name": "Capture cycle exit diagnostics",
+            "runStatus": "Stopped",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "aggregateSnapshot": {
+              "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Capture cycle exit diagnostics",
+              "type": "AttributesToJSON",
+              "runStatus": "Stopped",
+              "executionNode": "ALL",
+              "bytesRead": 0,
+              "bytesWritten": 11744,
+              "read": "0 bytes",
+              "written": "11.47 KB",
+              "flowFilesIn": 32,
+              "bytesIn": 0,
+              "input": "32 (0 bytes)",
+              "flowFilesOut": 32,
+              "bytesOut": 11744,
+              "output": "32 (11.47 KB)",
+              "taskCount": 32,
+              "tasksDurationNanos": 57582185,
+              "tasks": "32",
+              "tasksDuration": "00:00:00.057",
+              "activeThreadCount": 0,
+              "terminatedThreadCount": 0,
+              "processingPerformanceStatus": {
+                "identifier": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+                "cpuDuration": 20376461,
+                "contentReadDuration": 0,
+                "contentWriteDuration": 0,
+                "sessionCommitDuration": 0,
+                "garbageCollectionDuration": 0
+              }
+            }
+          },
+          "operatePermissions": {
+            "canRead": true,
+            "canWrite": true
+          }
+        }
+      ],
+      "inputPorts": [],
+      "outputPorts": [],
+      "connections": [
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "a8af455c-16d4-39a3-f690-d34ec1f757d2",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/a8af455c-16d4-39a3-f690-d34ec1f757d2",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "a8af455c-16d4-39a3-f690-d34ec1f757d2",
+            "versionedComponentId": "a2ce10f0-82c3-54f8-a64e-90a64f1e7f0a",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "fe730614-2963-311a-5521-60d6429d8681",
+              "versionedComponentId": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Single Kafka owner",
+              "running": false
+            },
+            "destination": {
+              "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+              "versionedComponentId": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle output",
+              "running": false
+            },
+            "name": "error",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "nonzero status"
+            ],
+            "availableRelationships": [
+              "nonzero status",
+              "original",
+              "output stream"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "a8af455c-16d4-39a3-f690-d34ec1f757d2",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "error",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "fe730614-2963-311a-5521-60d6429d8681",
+            "sourceName": "Single Kafka owner",
+            "destinationId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+            "destinationName": "Retain cycle output",
+            "aggregateSnapshot": {
+              "id": "a8af455c-16d4-39a3-f690-d34ec1f757d2",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "error",
+              "sourceName": "Single Kafka owner",
+              "destinationName": "Retain cycle output",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "fe730614-2963-311a-5521-60d6429d8681",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "e05c0f64-a232-3bed-92f3-400eac011e42",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/e05c0f64-a232-3bed-92f3-400eac011e42",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "e05c0f64-a232-3bed-92f3-400eac011e42",
+            "versionedComponentId": "c74d3312-1d9a-5dda-bffe-51b9ed95c256",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+              "versionedComponentId": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Capture cycle exit diagnostics",
+              "running": false
+            },
+            "destination": {
+              "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+              "versionedComponentId": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Capture cycle exit diagnostics",
+              "running": false
+            },
+            "name": "retry-diagnostics",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "failure"
+            ],
+            "availableRelationships": [
+              "failure",
+              "success"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "e05c0f64-a232-3bed-92f3-400eac011e42",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "retry-diagnostics",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+            "sourceName": "Capture cycle exit diagnostics",
+            "destinationId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+            "destinationName": "Capture cycle exit diagnostics",
+            "aggregateSnapshot": {
+              "id": "e05c0f64-a232-3bed-92f3-400eac011e42",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "retry-diagnostics",
+              "sourceName": "Capture cycle exit diagnostics",
+              "destinationName": "Capture cycle exit diagnostics",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "6936ea1e-bd08-3845-06e4-0d7425a67b6b",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/6936ea1e-bd08-3845-06e4-0d7425a67b6b",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "6936ea1e-bd08-3845-06e4-0d7425a67b6b",
+            "versionedComponentId": "f0404670-a8f8-5217-80a7-bd3a5eb8f011",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+              "versionedComponentId": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Capture cycle exit diagnostics",
+              "running": false
+            },
+            "destination": {
+              "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+              "versionedComponentId": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle diagnostics",
+              "running": false
+            },
+            "name": "diagnostics",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "success"
+            ],
+            "availableRelationships": [
+              "failure",
+              "success"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "6936ea1e-bd08-3845-06e4-0d7425a67b6b",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "diagnostics",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+            "sourceName": "Capture cycle exit diagnostics",
+            "destinationId": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+            "destinationName": "Retain cycle diagnostics",
+            "aggregateSnapshot": {
+              "id": "6936ea1e-bd08-3845-06e4-0d7425a67b6b",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "diagnostics",
+              "sourceName": "Capture cycle exit diagnostics",
+              "destinationName": "Retain cycle diagnostics",
+              "flowFilesIn": 32,
+              "bytesIn": 11744,
+              "input": "32 (11.47 KB)",
+              "flowFilesOut": 32,
+              "bytesOut": 11744,
+              "output": "32 (11.47 KB)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "29aa27ca-7634-3f21-eabf-509fc64dcc29",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/29aa27ca-7634-3f21-eabf-509fc64dcc29",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "29aa27ca-7634-3f21-eabf-509fc64dcc29",
+            "versionedComponentId": "31ba159d-8487-5ce7-8769-7012da809c60",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "fe730614-2963-311a-5521-60d6429d8681",
+              "versionedComponentId": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Single Kafka owner",
+              "running": false
+            },
+            "destination": {
+              "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+              "versionedComponentId": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle output",
+              "running": false
+            },
+            "name": "output",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "output stream"
+            ],
+            "availableRelationships": [
+              "nonzero status",
+              "original",
+              "output stream"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "29aa27ca-7634-3f21-eabf-509fc64dcc29",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "output",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "fe730614-2963-311a-5521-60d6429d8681",
+            "sourceName": "Single Kafka owner",
+            "destinationId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+            "destinationName": "Retain cycle output",
+            "aggregateSnapshot": {
+              "id": "29aa27ca-7634-3f21-eabf-509fc64dcc29",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "output",
+              "sourceName": "Single Kafka owner",
+              "destinationName": "Retain cycle output",
+              "flowFilesIn": 32,
+              "bytesIn": 5536,
+              "input": "32 (5.41 KB)",
+              "flowFilesOut": 32,
+              "bytesOut": 5536,
+              "output": "32 (5.41 KB)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "fe730614-2963-311a-5521-60d6429d8681",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "a815b688-cae6-3b4c-8dfc-101e3d12b4c5",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/a815b688-cae6-3b4c-8dfc-101e3d12b4c5",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "a815b688-cae6-3b4c-8dfc-101e3d12b4c5",
+            "versionedComponentId": "0b6f509b-cd85-5304-8da1-2a720d26c6ea",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "fe730614-2963-311a-5521-60d6429d8681",
+              "versionedComponentId": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Single Kafka owner",
+              "running": false
+            },
+            "destination": {
+              "id": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+              "versionedComponentId": "dc60c07a-480f-5bfc-a32e-b6a85db4cf4f",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Capture cycle exit diagnostics",
+              "running": false
+            },
+            "name": "exit",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "original"
+            ],
+            "availableRelationships": [
+              "nonzero status",
+              "original",
+              "output stream"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "a815b688-cae6-3b4c-8dfc-101e3d12b4c5",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "exit",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "fe730614-2963-311a-5521-60d6429d8681",
+            "sourceName": "Single Kafka owner",
+            "destinationId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+            "destinationName": "Capture cycle exit diagnostics",
+            "aggregateSnapshot": {
+              "id": "a815b688-cae6-3b4c-8dfc-101e3d12b4c5",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "exit",
+              "sourceName": "Single Kafka owner",
+              "destinationName": "Capture cycle exit diagnostics",
+              "flowFilesIn": 32,
+              "bytesIn": 0,
+              "input": "32 (0 bytes)",
+              "flowFilesOut": 32,
+              "bytesOut": 0,
+              "output": "32 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "fe730614-2963-311a-5521-60d6429d8681",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "4e7233ae-f584-3ee3-6a02-eb843e93b521",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "4de44d4e-6b69-37a3-059e-ef4b28a0320f",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/4de44d4e-6b69-37a3-059e-ef4b28a0320f",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "4de44d4e-6b69-37a3-059e-ef4b28a0320f",
+            "versionedComponentId": "369dc522-ffc6-5616-925c-4553d6121d84",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+              "versionedComponentId": "7a292b6c-016e-59e3-9830-55bdd172ecf4",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Schedule bounded source cycle",
+              "running": false
+            },
+            "destination": {
+              "id": "fe730614-2963-311a-5521-60d6429d8681",
+              "versionedComponentId": "e698ce72-1c1a-5bb8-a16f-14111cc7d36c",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Single Kafka owner",
+              "running": false
+            },
+            "name": "tick",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "success"
+            ],
+            "availableRelationships": [
+              "success"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "4de44d4e-6b69-37a3-059e-ef4b28a0320f",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "tick",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+            "sourceName": "Schedule bounded source cycle",
+            "destinationId": "fe730614-2963-311a-5521-60d6429d8681",
+            "destinationName": "Single Kafka owner",
+            "aggregateSnapshot": {
+              "id": "4de44d4e-6b69-37a3-059e-ef4b28a0320f",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "tick",
+              "sourceName": "Schedule bounded source cycle",
+              "destinationName": "Single Kafka owner",
+              "flowFilesIn": 31,
+              "bytesIn": 0,
+              "input": "31 (0 bytes)",
+              "flowFilesOut": 32,
+              "bytesOut": 0,
+              "output": "32 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "f247c6be-c95a-3219-d1eb-e02e5fc3dda5",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "fe730614-2963-311a-5521-60d6429d8681",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "7554a043-cc5c-3b95-5cc9-14058dbcc694",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/7554a043-cc5c-3b95-5cc9-14058dbcc694",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "7554a043-cc5c-3b95-5cc9-14058dbcc694",
+            "versionedComponentId": "746bfcda-bdbd-5100-ba92-a646f4d7948f",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+              "versionedComponentId": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle output",
+              "running": false
+            },
+            "destination": {
+              "id": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+              "versionedComponentId": "440db1a1-c64b-5f15-a932-65e0ab5bbaf5",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle output",
+              "running": false
+            },
+            "name": "retry-Retain cycle output",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "failure"
+            ],
+            "availableRelationships": [
+              "failure",
+              "success"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "7554a043-cc5c-3b95-5cc9-14058dbcc694",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "retry-Retain cycle output",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+            "sourceName": "Retain cycle output",
+            "destinationId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+            "destinationName": "Retain cycle output",
+            "aggregateSnapshot": {
+              "id": "7554a043-cc5c-3b95-5cc9-14058dbcc694",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "retry-Retain cycle output",
+              "sourceName": "Retain cycle output",
+              "destinationName": "Retain cycle output",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "deb2ec6a-5d71-317f-77ad-d3fa0ea15195",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        },
+        {
+          "revision": {
+            "version": 0
+          },
+          "id": "c5b7f60f-6401-3a30-1288-8d4e65564312",
+          "uri": "http://127.0.0.1:49957/nifi-api/connections/c5b7f60f-6401-3a30-1288-8d4e65564312",
+          "permissions": {
+            "canRead": true,
+            "canWrite": true
+          },
+          "component": {
+            "id": "c5b7f60f-6401-3a30-1288-8d4e65564312",
+            "versionedComponentId": "ffdf036e-3c8b-5832-9980-169fbe4ebaf3",
+            "parentGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "source": {
+              "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+              "versionedComponentId": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle diagnostics",
+              "running": false
+            },
+            "destination": {
+              "id": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+              "versionedComponentId": "9bfa9ac6-32e4-5bf8-9e2b-3a38bfd45526",
+              "type": "PROCESSOR",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "Retain cycle diagnostics",
+              "running": false
+            },
+            "name": "retry-Retain cycle diagnostics",
+            "labelIndex": 0,
+            "zIndex": 0,
+            "selectedRelationships": [
+              "failure"
+            ],
+            "availableRelationships": [
+              "failure",
+              "success"
+            ],
+            "backPressureObjectThreshold": 1,
+            "backPressureDataSizeThreshold": "1 MB",
+            "flowFileExpiration": "0 sec",
+            "prioritizers": [],
+            "bends": [],
+            "loadBalanceStrategy": "DO_NOT_LOAD_BALANCE",
+            "loadBalanceCompression": "DO_NOT_COMPRESS",
+            "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+          },
+          "status": {
+            "id": "c5b7f60f-6401-3a30-1288-8d4e65564312",
+            "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+            "name": "retry-Retain cycle diagnostics",
+            "statsLastRefreshed": "13:57:10 UTC",
+            "sourceId": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+            "sourceName": "Retain cycle diagnostics",
+            "destinationId": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+            "destinationName": "Retain cycle diagnostics",
+            "aggregateSnapshot": {
+              "id": "c5b7f60f-6401-3a30-1288-8d4e65564312",
+              "groupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+              "name": "retry-Retain cycle diagnostics",
+              "sourceName": "Retain cycle diagnostics",
+              "destinationName": "Retain cycle diagnostics",
+              "flowFilesIn": 0,
+              "bytesIn": 0,
+              "input": "0 (0 bytes)",
+              "flowFilesOut": 0,
+              "bytesOut": 0,
+              "output": "0 (0 bytes)",
+              "flowFilesQueued": 0,
+              "bytesQueued": 0,
+              "queued": "0 (0 bytes)",
+              "queuedSize": "0 bytes",
+              "queuedCount": "0",
+              "percentUseCount": 0,
+              "percentUseBytes": 0,
+              "flowFileAvailability": "ACTIVE_QUEUE_EMPTY",
+              "loadBalanceStatus": "LOAD_BALANCE_NOT_CONFIGURED"
+            }
+          },
+          "bends": [],
+          "labelIndex": 0,
+          "zIndex": 0,
+          "sourceId": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+          "sourceGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "sourceType": "PROCESSOR",
+          "destinationId": "ac125404-f6a8-3d06-3492-6a2267dd0d04",
+          "destinationGroupId": "63dc9e7e-01a1-1000-a036-eac540599223",
+          "destinationType": "PROCESSOR"
+        }
+      ],
+      "labels": [],
+      "funnels": []
+    },
+    "lastRefreshed": "13:57:10 UTC"
+  }
+}

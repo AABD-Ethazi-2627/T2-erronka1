@@ -1,0 +1,8 @@
+{
+  "old": "ui-final-page20.png",
+  "new": "ui-final-page18-historical.png",
+  "sha256": "4c4edda1373e4296e425075e80c707f8d24e816fa49a9693bb6b1241dd8d8075",
+  "bytes": 136333,
+  "bytes_preserved": true,
+  "reason": "Original PNG visibly shows page18 and IDs085-089; original adjacent JSON shows page20 and IDs095-099, so they are different states."
+}

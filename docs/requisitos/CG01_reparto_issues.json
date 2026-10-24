@@ -1,0 +1,455 @@
+{
+  "observed_on": "2026-10-16",
+  "repository": "AABD-Ethazi-2627/T2-erronka1",
+  "scope": "open issues only; assignment is not evidence of completion",
+  "template_sha256": "da867dc9f902b8eefb187279e802d15ebe018eb364b391e81f3003c130153c87",
+  "issues": [
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        },
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        },
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        },
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 1,
+      "title": "[CG01] Irismena, eginkizunak eta ANEXO1eko jarraipena adostu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/1"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 2,
+      "title": "[CG02] Datu-iturrien inbentarioa egin eta helburu-etiketaren bideragarritasuna egiaztatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/2"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 3,
+      "title": "[CG03] Telemetriaren, mantentzearen, logen eta iragarpenen datu-kontratuak definitu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/3"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 4,
+      "title": "[CG04] Python ingurunea eta modulu erreproduzigarriak prestatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/4"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 5,
+      "title": "[CG05] Laborategiko CSV sarrerak eta logak prestatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/5"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 6,
+      "title": "[CG06] Parquet historikoa, DuckDB kontsultak eta EDA notebooka prestatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/6"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 7,
+      "title": "[CG07] Aldagaiak, etiketak eta datu-zatiketak informazio-ihesik gabe eraiki",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/7"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 8,
+      "title": "[CG08] Random Forest eta ebaluazio-erreferentziak entrenatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/8"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 9,
+      "title": "[CG09] Isolation Forest entrenatu eta atalase osagarria hautatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/9"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        }
+      ],
+      "number": 10,
+      "title": "[CG10] Metrikak, atalaseak eta abisu-politika balioztatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/10"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        },
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        },
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        },
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 11,
+      "title": "[CG11] 1. mugarria · Datu eta modelo erreproduzigarriak",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/11"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 12,
+      "title": "[CG12] Tokiko Docker Compose eta biltegiratzea konfiguratu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/12"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 13,
+      "title": "[CG13] Kafka topicak eta kontsumitzaile-taldeak konfiguratu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/13"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        }
+      ],
+      "number": 14,
+      "title": "[CG14] NiFi-ren balioztatze- eta baztertze-fluxua eraiki",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/14"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        }
+      ],
+      "number": 15,
+      "title": "[CG15] archive kontsumitzailea Parquet idempotentearekin inplementatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/15"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        }
+      ],
+      "number": 16,
+      "title": "[CG16] Inferentzia-kontsumitzailea eta datu-kalitatearen egoerak inplementatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/16"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        }
+      ],
+      "number": 17,
+      "title": "[CG17] Makina bakoitzeko abisuak multzokatzeko politika inplementatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/17"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        }
+      ],
+      "number": 18,
+      "title": "[CG18] Elasticsearch mappingak eta dashboard-sink kontsumitzailea sortu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/18"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        }
+      ],
+      "number": 19,
+      "title": "[CG19] Kibana panela eta ikerketa-bistak eraiki",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/19"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        },
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        },
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        },
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 20,
+      "title": "[CG20] Ohiko ibilbidea muturretik muturrera probatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/20"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 21,
+      "title": "[CG21] Akatsak, bikoiztuak eta berreskuratzea probatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/21"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        },
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        },
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        },
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 22,
+      "title": "[CG22] 2. mugarria · Integrazio berreskuragarria eta panel egiaztatua",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/22"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 23,
+      "title": "[CG23] Ahalmena neurtu eta atxikipena eta kostua berrikusi",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/23"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        },
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        }
+      ],
+      "number": 24,
+      "title": "[CG24] Segurtasuna, alborapenak eta giza eragina berrikusi",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/24"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        }
+      ],
+      "number": 25,
+      "title": "[CG25] Txostena, irizpide gorriak eta ANEXO4 osatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/25"
+    },
+    {
+      "assignees": [
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        }
+      ],
+      "number": 26,
+      "title": "[CG26] Demo erreproduzigarria eta taldearen defentsa prestatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26"
+    },
+    {
+      "assignees": [
+        {
+          "id": "MDQ6VXNlcjYyMDQzNDc=",
+          "login": "tears-mysthrala",
+          "name": "Tears Mysthrala",
+          "databaseId": 6204347
+        },
+        {
+          "id": "U_kgDOBtLr1g",
+          "login": "Niistal",
+          "name": "Iker Nistal Fernandez",
+          "databaseId": 114486230
+        },
+        {
+          "id": "U_kgDOCv8gUQ",
+          "login": "Angiecrizu",
+          "name": "",
+          "databaseId": 184492113
+        },
+        {
+          "id": "U_kgDODcvZPQ",
+          "login": "petiteiker",
+          "name": "",
+          "databaseId": 231463229
+        }
+      ],
+      "number": 27,
+      "title": "[CG27] 3. mugarria · Defentsa eta azken dokumentazioa",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27"
+    }
+  ]
+}

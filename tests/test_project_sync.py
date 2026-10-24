@@ -69,6 +69,35 @@ class SyncTests(unittest.TestCase):
         target = project([item(values={"Status": "Done", "Taldea": "B-taldea"})])
         self.assertEqual(plan(source, target), [])
 
+    def test_renamed_todo_in_central_is_noop(self):
+        target = project([item(values={"Status": "To do", "Taldea": "B-taldea"})])
+        for value in target["fields"]["Status"]["options"]:
+            if value["name"] == "Todo":
+                value["name"] = "To do"
+        self.assertEqual(
+            plan(project([item(values={"Status": "Egiteke"})]), target), []
+        )
+
+    def test_renamed_todo_is_selected_for_new_item(self):
+        target = project()
+        for value in target["fields"]["Status"]["options"]:
+            if value["name"] == "Todo":
+                value["name"] = "To do"
+                value["id"] = "renamed-todo-id"
+        changes = plan(project([item(values={"Status": "Egiteke"})]), target)
+        self.assertEqual(
+            changes[0]["values"]["Status"],
+            {"singleSelectOptionId": "renamed-todo-id"},
+        )
+
+    def test_two_todo_aliases_are_ambiguous(self):
+        target = project()
+        target["fields"]["Status"]["options"].append(
+            {"id": "new-todo", "name": "To do"}
+        )
+        with self.assertRaisesRegex(ValueError, "ambiguous"):
+            plan(project([item(values={"Status": "Egiteke"})]), target)
+
     def test_foreign_repo_fails_before_mutation(self):
         with self.assertRaises(ValueError):
             plan(project([item(repo="other/repo")]), project())

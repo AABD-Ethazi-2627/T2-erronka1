@@ -1,0 +1,205 @@
+{
+  "total": 100,
+  "pages": [
+    {
+      "page": 1,
+      "ids": [
+        "SYNTHETIC-000 / lab_fixture",
+        "SYNTHETIC-001 / lab_fixture",
+        "SYNTHETIC-002 / lab_fixture",
+        "SYNTHETIC-003 / lab_fixture",
+        "SYNTHETIC-004 / lab_fixture"
+      ]
+    },
+    {
+      "page": 2,
+      "ids": [
+        "SYNTHETIC-005 / lab_fixture",
+        "SYNTHETIC-006 / lab_fixture",
+        "SYNTHETIC-007 / lab_fixture",
+        "SYNTHETIC-008 / lab_fixture",
+        "SYNTHETIC-009 / lab_fixture"
+      ]
+    },
+    {
+      "page": 3,
+      "ids": [
+        "SYNTHETIC-010 / lab_fixture",
+        "SYNTHETIC-011 / lab_fixture",
+        "SYNTHETIC-012 / lab_fixture",
+        "SYNTHETIC-013 / lab_fixture",
+        "SYNTHETIC-014 / lab_fixture"
+      ]
+    },
+    {
+      "page": 4,
+      "ids": [
+        "SYNTHETIC-015 / lab_fixture",
+        "SYNTHETIC-016 / lab_fixture",
+        "SYNTHETIC-017 / lab_fixture",
+        "SYNTHETIC-018 / lab_fixture",
+        "SYNTHETIC-019 / lab_fixture"
+      ]
+    },
+    {
+      "page": 5,
+      "ids": [
+        "SYNTHETIC-020 / lab_fixture",
+        "SYNTHETIC-021 / lab_fixture",
+        "SYNTHETIC-022 / lab_fixture",
+        "SYNTHETIC-023 / lab_fixture",
+        "SYNTHETIC-024 / lab_fixture"
+      ]
+    },
+    {
+      "page": 6,
+      "ids": [
+        "SYNTHETIC-025 / lab_fixture",
+        "SYNTHETIC-026 / lab_fixture",
+        "SYNTHETIC-027 / lab_fixture",
+        "SYNTHETIC-028 / lab_fixture",
+        "SYNTHETIC-029 / lab_fixture"
+      ]
+    },
+    {
+      "page": 7,
+      "ids": [
+        "SYNTHETIC-030 / lab_fixture",
+        "SYNTHETIC-031 / lab_fixture",
+        "SYNTHETIC-032 / lab_fixture",
+        "SYNTHETIC-033 / lab_fixture",
+        "SYNTHETIC-034 / lab_fixture"
+      ]
+    },
+    {
+      "page": 8,
+      "ids": [
+        "SYNTHETIC-035 / lab_fixture",
+        "SYNTHETIC-036 / lab_fixture",
+        "SYNTHETIC-037 / lab_fixture",
+        "SYNTHETIC-038 / lab_fixture",
+        "SYNTHETIC-039 / lab_fixture"
+      ]
+    },
+    {
+      "page": 9,
+      "ids": [
+        "SYNTHETIC-040 / lab_fixture",
+        "SYNTHETIC-041 / lab_fixture",
+        "SYNTHETIC-042 / lab_fixture",
+        "SYNTHETIC-043 / lab_fixture",
+        "SYNTHETIC-044 / lab_fixture"
+      ]
+    },
+    {
+      "page": 10,
+      "ids": [
+        "SYNTHETIC-045 / lab_fixture",
+        "SYNTHETIC-046 / lab_fixture",
+        "SYNTHETIC-047 / lab_fixture",
+        "SYNTHETIC-048 / lab_fixture",
+        "SYNTHETIC-049 / lab_fixture"
+      ]
+    },
+    {
+      "page": 11,
+      "ids": [
+        "SYNTHETIC-050 / lab_fixture",
+        "SYNTHETIC-051 / lab_fixture",
+        "SYNTHETIC-052 / lab_fixture",
+        "SYNTHETIC-053 / lab_fixture",
+        "SYNTHETIC-054 / lab_fixture"
+      ]
+    },
+    {
+      "page": 12,
+      "ids": [
+        "SYNTHETIC-055 / lab_fixture",
+        "SYNTHETIC-056 / lab_fixture",
+        "SYNTHETIC-057 / lab_fixture",
+        "SYNTHETIC-058 / lab_fixture",
+        "SYNTHETIC-059 / lab_fixture"
+      ]
+    },
+    {
+      "page": 13,
+      "ids": [
+        "SYNTHETIC-060 / lab_fixture",
+        "SYNTHETIC-061 / lab_fixture",
+        "SYNTHETIC-062 / lab_fixture",
+        "SYNTHETIC-063 / lab_fixture",
+        "SYNTHETIC-064 / lab_fixture"
+      ]
+    },
+    {
+      "page": 14,
+      "ids": [
+        "SYNTHETIC-065 / lab_fixture",
+        "SYNTHETIC-066 / lab_fixture",
+        "SYNTHETIC-067 / lab_fixture",
+        "SYNTHETIC-068 / lab_fixture",
+        "SYNTHETIC-069 / lab_fixture"
+      ]
+    },
+    {
+      "page": 15,
+      "ids": [
+        "SYNTHETIC-070 / lab_fixture",
+        "SYNTHETIC-071 / lab_fixture",
+        "SYNTHETIC-072 / lab_fixture",
+        "SYNTHETIC-073 / lab_fixture",
+        "SYNTHETIC-074 / lab_fixture"
+      ]
+    },
+    {
+      "page": 16,
+      "ids": [
+        "SYNTHETIC-075 / lab_fixture",
+        "SYNTHETIC-076 / lab_fixture",
+        "SYNTHETIC-077 / lab_fixture",
+        "SYNTHETIC-078 / lab_fixture",
+        "SYNTHETIC-079 / lab_fixture"
+      ]
+    },
+    {
+      "page": 17,
+      "ids": [
+        "SYNTHETIC-080 / lab_fixture",
+        "SYNTHETIC-081 / lab_fixture",
+        "SYNTHETIC-082 / lab_fixture",
+        "SYNTHETIC-083 / lab_fixture",
+        "SYNTHETIC-084 / lab_fixture"
+      ]
+    },
+    {
+      "page": 18,
+      "ids": [
+        "SYNTHETIC-085 / lab_fixture",
+        "SYNTHETIC-086 / lab_fixture",
+        "SYNTHETIC-087 / lab_fixture",
+        "SYNTHETIC-088 / lab_fixture",
+        "SYNTHETIC-089 / lab_fixture"
+      ]
+    },
+    {
+      "page": 19,
+      "ids": [
+        "SYNTHETIC-090 / lab_fixture",
+        "SYNTHETIC-091 / lab_fixture",
+        "SYNTHETIC-092 / lab_fixture",
+        "SYNTHETIC-093 / lab_fixture",
+        "SYNTHETIC-094 / lab_fixture"
+      ]
+    },
+    {
+      "page": 20,
+      "ids": [
+        "SYNTHETIC-095 / lab_fixture",
+        "SYNTHETIC-096 / lab_fixture",
+        "SYNTHETIC-097 / lab_fixture",
+        "SYNTHETIC-098 / lab_fixture",
+        "SYNTHETIC-099 / lab_fixture"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "captured_at": "2026-10-23T08:30:01.3771154Z",
+  "note": "Snapshot during the single active local pilot; desktop workloads preserved",
+  "cpu": {
+    "Name": "AMD Ryzen 5 7600X 6-Core Processor             ",
+    "NumberOfCores": 6,
+    "NumberOfLogicalProcessors": 12
+  },
+  "ram_kib": {
+    "TotalVisibleMemorySize": 32625020,
+    "FreePhysicalMemory": 7679384
+  },
+  "graphics": [
+    {
+      "Name": "AMD Radeon(TM) Graphics",
+      "DriverVersion": "32.0.21045.16010"
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 5070 Ti",
+      "DriverVersion": "32.0.16.3020"
+    }
+  ],
+  "disks_bytes": [
+    {
+      "Name": "C",
+      "Used": 852467138560,
+      "Free": 146594050048
+    },
+    {
+      "Name": "D",
+      "Used": 386564603904,
+      "Free": 125544181760
+    },
+    {
+      "Name": "G",
+      "Used": 859796844544,
+      "Free": 139264344064
+    },
+    {
+      "Name": "J",
+      "Used": 279944859648,
+      "Free": 232163926016
+    },
+    {
+      "Name": "Temp",
+      "Used": 852467138560,
+      "Free": 146594050048
+    }
+  ],
+  "nvidia_smi": "NVIDIA GeForce RTX 5070 Ti, 16303 MiB, 5479 MiB, 10517 MiB, 630.20",
+  "wsl_observation": "FedoraLinux-43 WSL2: same RTX5070Ti visible; existing ~7943MiB RAM limit; no configuration change",
+  "limits": {
+    "disk_free_gib": 10,
+    "gpu_free_gib": 6,
+    "experiment_rss_gib": 2,
+    "experiment_vram_gib": 4,
+    "host_available_gib": 4,
+    "evidence_gib": 2
+  }
+}

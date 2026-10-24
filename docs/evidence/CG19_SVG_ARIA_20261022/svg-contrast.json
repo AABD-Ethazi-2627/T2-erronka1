@@ -1,0 +1,364 @@
+{
+  "method": "WCAG 2.2 sRGB luminance; effective SVG paint/opacity over explicit white",
+  "reference": "https://www.w3.org/TR/WCAG22/#dfn-relative-luminance",
+  "threshold": 3,
+  "background": "#ffffff",
+  "colors": {
+    "#1f77b4": 4.82088230356505,
+    "#b35400": 5.018076239850577,
+    "#2ca02c": 3.4025803501541017,
+    "#d62728": 5.023831909882041,
+    "#9467bd": 4.256092143119029
+  },
+  "minimum_ratio": 3.4025803501541017,
+  "files": [
+    {
+      "svg": "temperature-0-1100x480-page-1.svg",
+      "essential_paints": 0
+    },
+    {
+      "svg": "temperature-0-1600x600-page-1.svg",
+      "essential_paints": 0
+    },
+    {
+      "svg": "temperature-0-600x400-page-1.svg",
+      "essential_paints": 0
+    },
+    {
+      "svg": "temperature-1-1100x480-page-1.svg",
+      "essential_paints": 11
+    },
+    {
+      "svg": "temperature-1-1600x600-page-1.svg",
+      "essential_paints": 11
+    },
+    {
+      "svg": "temperature-1-600x400-page-1.svg",
+      "essential_paints": 11
+    },
+    {
+      "svg": "temperature-100-1100x480-page-1.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-10.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-11.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-12.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-13.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-14.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-15.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-16.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-17.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-18.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-19.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-2.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-20.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-3.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-4.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-5.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-6.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-7.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-8.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1100x480-page-9.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-1.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-10.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-11.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-12.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-13.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-14.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-15.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-16.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-17.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-18.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-19.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-2.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-20.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-3.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-4.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-5.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-6.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-7.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-8.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-1600x600-page-9.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-1.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-10.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-11.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-12.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-13.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-14.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-15.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-16.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-17.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-18.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-19.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-2.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-20.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-3.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-4.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-5.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-6.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-7.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-8.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-100-600x400-page-9.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-1.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-2.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-3.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-4.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-5.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-6.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1100x480-page-7.svg",
+      "essential_paints": 11
+    },
+    {
+      "svg": "temperature-31-1600x600-page-1.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1600x600-page-2.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1600x600-page-3.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1600x600-page-4.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1600x600-page-5.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1600x600-page-6.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-1600x600-page-7.svg",
+      "essential_paints": 11
+    },
+    {
+      "svg": "temperature-31-600x400-page-1.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-600x400-page-2.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-600x400-page-3.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-600x400-page-4.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-600x400-page-5.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-600x400-page-6.svg",
+      "essential_paints": 55
+    },
+    {
+      "svg": "temperature-31-600x400-page-7.svg",
+      "essential_paints": 11
+    }
+  ]
+}

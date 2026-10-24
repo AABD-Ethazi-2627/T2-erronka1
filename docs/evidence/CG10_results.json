@@ -1,0 +1,236 @@
+{
+  "policies": {
+    "0.15": {
+      "threshold": 0.15,
+      "precision": 0.7272727272727273,
+      "recall": 0.7804878048780488,
+      "f1": 0.7529411764705882,
+      "f2": 0.7692307692307693,
+      "roc_auc": 0.9637197752477956,
+      "average_precision": 0.817191481534734,
+      "confusion_matrix": [
+        [
+          1147,
+          12
+        ],
+        [
+          9,
+          32
+        ]
+      ]
+    },
+    "0.7": {
+      "threshold": 0.7,
+      "precision": 1.0,
+      "recall": 0.6585365853658537,
+      "f1": 0.7941176470588235,
+      "f2": 0.7068062827225131,
+      "roc_auc": 0.9637197752477956,
+      "average_precision": 0.817191481534734,
+      "confusion_matrix": [
+        [
+          1159,
+          0
+        ],
+        [
+          14,
+          27
+        ]
+      ]
+    },
+    "0.19082281465428477": {
+      "threshold": 0.19082281465428477,
+      "precision": 0.7804878048780488,
+      "recall": 0.7804878048780488,
+      "f1": 0.7804878048780488,
+      "f2": 0.7804878048780488,
+      "roc_auc": 0.9637197752477956,
+      "average_precision": 0.817191481534734,
+      "confusion_matrix": [
+        [
+          1150,
+          9
+        ],
+        [
+          9,
+          32
+        ]
+      ]
+    }
+  },
+  "recall_conditional_bootstrap_95": [
+    0.6341463414634146,
+    0.9024390243902439
+  ],
+  "cost_scenarios": [
+    {
+      "threshold": "0.15",
+      "inspection_eur": 25,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 5700.0
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 25,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 8400.0
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 25,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 5625.0
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 25,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 11100
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 25,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 16800
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 25,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 11025
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 25,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 43500
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 25,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 67200
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 25,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 43425
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 100,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 6600.0
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 100,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 8400.0
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 100,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 6300.0
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 100,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 12000
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 100,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 16800
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 100,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 11700
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 100,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 44400
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 100,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 67200
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 100,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 44100
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 300,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 9000.0
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 300,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 8400.0
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 300,
+      "downtime_hours": 0.5,
+      "hypothetical_error_cost_eur": 8100.0
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 300,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 14400
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 300,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 16800
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 300,
+      "downtime_hours": 1,
+      "hypothetical_error_cost_eur": 13500
+    },
+    {
+      "threshold": "0.15",
+      "inspection_eur": 300,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 46800
+    },
+    {
+      "threshold": "0.7",
+      "inspection_eur": 300,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 67200
+    },
+    {
+      "threshold": "0.19082281465428477",
+      "inspection_eur": 300,
+      "downtime_hours": 4,
+      "hypothetical_error_cost_eur": 45900
+    }
+  ],
+  "limitations": [
+    "Validation used for tuning: optimistic results.",
+    "Bootstrap fixes selected model and threshold; excludes selection and domain uncertainty.",
+    "1200 EUR/hour is classroom downtime assumption, not cost per FN or proven savings.",
+    "Inspection costs and downtime durations are hypothetical sensitivity inputs.",
+    "Planned maintenance can prevent observed failure: action changes future labels; requires intervention logs."
+  ]
+}

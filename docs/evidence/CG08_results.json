@@ -1,0 +1,293 @@
+{
+  "task": "contemporaneous_state_classification",
+  "seed": 42,
+  "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "versions": {
+    "python": "3.11.16",
+    "sklearn": "1.5.0",
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "joblib": "1.4.2"
+  },
+  "search": [
+    {
+      "kind": "dummy",
+      "physical": false,
+      "class_weight": null,
+      "max_depth": 12,
+      "oof_selection_metrics": {
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "f2": 0.0,
+        "roc_auc": 0.5,
+        "average_precision": 0.033928571428571426,
+        "confusion_matrix": [
+          [
+            5410,
+            0
+          ],
+          [
+            190,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "logistic",
+      "physical": false,
+      "class_weight": "balanced",
+      "max_depth": 12,
+      "oof_selection_metrics": {
+        "threshold": 0.830505540772177,
+        "precision": 0.35973597359735976,
+        "recall": 0.5736842105263158,
+        "f1": 0.4421906693711968,
+        "f2": 0.5126999059266227,
+        "roc_auc": 0.9043827220546745,
+        "average_precision": 0.4504861647378615,
+        "confusion_matrix": [
+          [
+            5216,
+            194
+          ],
+          [
+            81,
+            109
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": false,
+      "class_weight": null,
+      "max_depth": 8,
+      "oof_selection_metrics": {
+        "threshold": 0.23761687036375864,
+        "precision": 0.6371681415929203,
+        "recall": 0.7578947368421053,
+        "f1": 0.6923076923076923,
+        "f2": 0.7302231237322515,
+        "roc_auc": 0.9627347018192431,
+        "average_precision": 0.7385062171842722,
+        "confusion_matrix": [
+          [
+            5328,
+            82
+          ],
+          [
+            46,
+            144
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": false,
+      "class_weight": null,
+      "max_depth": 12,
+      "oof_selection_metrics": {
+        "threshold": 0.21193121693121694,
+        "precision": 0.5855513307984791,
+        "recall": 0.8105263157894737,
+        "f1": 0.6799116997792495,
+        "f2": 0.7526881720430108,
+        "roc_auc": 0.9636141648020236,
+        "average_precision": 0.7682397293087254,
+        "confusion_matrix": [
+          [
+            5301,
+            109
+          ],
+          [
+            36,
+            154
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": false,
+      "class_weight": "balanced",
+      "max_depth": 8,
+      "oof_selection_metrics": {
+        "threshold": 0.34660504088424954,
+        "precision": 0.47575757575757577,
+        "recall": 0.8263157894736842,
+        "f1": 0.6038461538461538,
+        "f2": 0.7201834862385321,
+        "roc_auc": 0.9560891137270162,
+        "average_precision": 0.6169523513795379,
+        "confusion_matrix": [
+          [
+            5237,
+            173
+          ],
+          [
+            33,
+            157
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": false,
+      "class_weight": "balanced",
+      "max_depth": 12,
+      "oof_selection_metrics": {
+        "threshold": 0.27043690959291483,
+        "precision": 0.5416666666666666,
+        "recall": 0.8210526315789474,
+        "f1": 0.6527196652719666,
+        "f2": 0.7442748091603053,
+        "roc_auc": 0.9498443428349062,
+        "average_precision": 0.6955817730170772,
+        "confusion_matrix": [
+          [
+            5278,
+            132
+          ],
+          [
+            34,
+            156
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": true,
+      "class_weight": null,
+      "max_depth": 8,
+      "oof_selection_metrics": {
+        "threshold": 0.26294175165267997,
+        "precision": 0.8645833333333334,
+        "recall": 0.8736842105263158,
+        "f1": 0.8691099476439791,
+        "f2": 0.8718487394957983,
+        "roc_auc": 0.9736822648117521,
+        "average_precision": 0.9053327434675674,
+        "confusion_matrix": [
+          [
+            5384,
+            26
+          ],
+          [
+            24,
+            166
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": true,
+      "class_weight": null,
+      "max_depth": 12,
+      "oof_selection_metrics": {
+        "threshold": 0.3025667388167388,
+        "precision": 0.8691099476439791,
+        "recall": 0.8736842105263158,
+        "f1": 0.8713910761154856,
+        "f2": 0.8727655099894848,
+        "roc_auc": 0.9672468138924021,
+        "average_precision": 0.9089647747455067,
+        "confusion_matrix": [
+          [
+            5385,
+            25
+          ],
+          [
+            24,
+            166
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": true,
+      "class_weight": "balanced",
+      "max_depth": 8,
+      "oof_selection_metrics": {
+        "threshold": 0.47201406776384813,
+        "precision": 0.8663101604278075,
+        "recall": 0.8526315789473684,
+        "f1": 0.8594164456233422,
+        "f2": 0.8553326293558606,
+        "roc_auc": 0.975750559392937,
+        "average_precision": 0.8921269149837947,
+        "confusion_matrix": [
+          [
+            5385,
+            25
+          ],
+          [
+            28,
+            162
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "rf",
+      "physical": true,
+      "class_weight": "balanced",
+      "max_depth": 12,
+      "oof_selection_metrics": {
+        "threshold": 0.32008214970762033,
+        "precision": 0.7887323943661971,
+        "recall": 0.8842105263157894,
+        "f1": 0.8337468982630273,
+        "f2": 0.8633093525179856,
+        "roc_auc": 0.9704397314913902,
+        "average_precision": 0.8944218397311386,
+        "confusion_matrix": [
+          [
+            5365,
+            45
+          ],
+          [
+            22,
+            168
+          ]
+        ]
+      }
+    }
+  ],
+  "winner": 7,
+  "validation_tuning_metrics": {
+    "threshold": 0.19082281465428477,
+    "precision": 0.7804878048780488,
+    "recall": 0.7804878048780488,
+    "f1": 0.7804878048780488,
+    "f2": 0.7804878048780488,
+    "roc_auc": 0.9637197752477956,
+    "average_precision": 0.817191481534734,
+    "confusion_matrix": [
+      [
+        1150,
+        9
+      ],
+      [
+        9,
+        32
+      ]
+    ]
+  },
+  "model_sha256": "b6ab270818b95f0bd1e52e6d4be7bc7b6ef87ec1f6e4ae2497eeca6b0a0c76a1",
+  "reload_max_probability_difference": 0.0,
+  "limitations": [
+    "OOF model selection and threshold tuning are optimistic; not nested CV.",
+    "Validation and excluded test were previously inspected in PR29; no new independent final test.",
+    "No timestamps or verified physical identity; no 24h or seasonal forecast claims.",
+    "Class weighting changes probability calibration; score is not validated industrial risk."
+  ],
+  "membership_manifest": "outputs/cg08/report.json (regenerate with command); exact PR29 excluded-test membership verified"
+}

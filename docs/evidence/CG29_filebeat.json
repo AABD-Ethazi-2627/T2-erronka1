@@ -1,0 +1,12 @@
+{
+  "filebeat_version": "9.5.4",
+  "source_batch_rows": 10,
+  "initial_kafka_offset": 10,
+  "adversarial_restart_rename_before_fix": 20,
+  "registry_observation": "ttl0 and cleared cursor for same fingerprint after missing source path",
+  "fix": ["clean_removed=false", "close.on_state_change.removed=false", "content hash plus byte offset Kafka key"],
+  "after_fix_before_rename": 20,
+  "after_fix_after_rename": 20,
+  "after_fix_after_restart": 20,
+  "limitations": ["Historical duplicate messages preserved, not erased", "Local snapshot; real SMB outage untested", "Console consumer timed out under host load and read zero; raw payload verification deferred to NiFi"]
+}

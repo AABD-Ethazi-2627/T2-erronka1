@@ -1,0 +1,26 @@
+{
+  "initialOpen": {
+    "error": "Preview automation open failed: Invalid preview URL (parse: https:; input length 11).",
+    "resolution": "Opened actual HTTP fixture URL"
+  },
+  "kibanaNavigationBeforeReady": "chrome-error://chromewebdata/",
+  "snapshots": [
+    {
+      "error": {
+        "_tag": "PreviewAutomationTimeoutError",
+        "operation": "snapshot",
+        "failureCount": 1,
+        "message": "Preview automation snapshot timed out after 15000ms."
+      }
+    },
+    {
+      "error": {
+        "_tag": "PreviewAutomationTimeoutError",
+        "operation": "snapshot",
+        "failureCount": 1,
+        "message": "Preview automation snapshot timed out after 15000ms."
+      }
+    }
+  ],
+  "fallback": "Chrome own tab via cua_repl after two snapshot timeouts; T3 evaluate remained usable; CUA read-only DOM does not expose __data__, used documented CDP read to verify signalPage."
+}

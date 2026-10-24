@@ -1,0 +1,35 @@
+{
+  "seed": 42,
+  "rows": 35040,
+  "machines": 4,
+  "days": 365,
+  "censored_last_24h_rows": 96,
+  "sha256": "b135d2b8119bc8992e37d36052b5c53c8280fd350799f6b76519129adeee94e6",
+  "splits": {
+    "train": {
+      "rows": 20928,
+      "start": "2025-01-01 00:00:00+00:00",
+      "end": "2025-08-06 23:00:00+00:00",
+      "positives": 1500
+    },
+    "validation": {
+      "rows": 6912,
+      "start": "2025-08-08 00:00:00+00:00",
+      "end": "2025-10-18 23:00:00+00:00",
+      "positives": 539
+    },
+    "test": {
+      "rows": 6912,
+      "start": "2025-10-20 00:00:00+00:00",
+      "end": "2025-12-30 23:00:00+00:00",
+      "positives": 504
+    }
+  },
+  "limitations": [
+    "Invented independent simulation, not AI4I timestamps or new industrial truth.",
+    "Annual cycle occurs once; held-out calendar periods do not establish generalization across years.",
+    "Rolling mean excludes current/future readings; future onset used only as label.",
+    "24h purge and end censoring prevent horizon overlap between partitions.",
+    "No forecasting model trained or predictive accuracy claimed. AI4I remains exclusive classification training source."
+  ]
+}

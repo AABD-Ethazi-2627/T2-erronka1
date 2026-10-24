@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cnc-guard:contracts:0.1.0:prediction",
+  "title": "CNC Guard prediction \u2014 proposed 0.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "machine_id",
+    "timestamp",
+    "schema_version",
+    "quality_flag",
+    "source",
+    "scored_at",
+    "failure_score",
+    "risk_alert",
+    "anomaly_score",
+    "anomaly_alert",
+    "policy",
+    "model_version",
+    "model_artifact_sha256",
+    "risk_threshold",
+    "anomaly_threshold",
+    "prediction_scope",
+    "temporal_prediction_enabled",
+    "score_semantics"
+  ],
+  "properties": {
+    "event_id": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/event_id"
+    },
+    "machine_id": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/machine_id"
+    },
+    "timestamp": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/timestamp"
+    },
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "quality_flag": {
+      "const": "OK"
+    },
+    "source": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/source"
+    },
+    "scored_at": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/timestamp"
+    },
+    "failure_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "risk_alert": {
+      "type": "boolean"
+    },
+    "anomaly_score": {
+      "type": "number"
+    },
+    "anomaly_alert": {
+      "type": "boolean"
+    },
+    "policy": {
+      "enum": [
+        "f1",
+        "f2"
+      ]
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model_artifact_sha256": {
+      "$ref": "urn:cnc-guard:contracts:0.1.0:common#/$defs/event_id"
+    },
+    "risk_threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "anomaly_threshold": {
+      "type": "number"
+    },
+    "machine_type": {
+      "enum": [
+        "H",
+        "M",
+        "L"
+      ]
+    },
+    "air_temp_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "process_temp_K": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "rpm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "torque_Nm": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tool_wear_min": {
+      "type": "number",
+      "minimum": 0
+    },
+    "alert_level": {
+      "enum": [
+        "OK",
+        "AVISO",
+        "CRITICA"
+      ]
+    },
+    "prediction_scope": {
+      "const": "AI4I_CURRENT_STATE_ONLY"
+    },
+    "temporal_prediction_enabled": {
+      "const": false
+    },
+    "score_semantics": {
+      "const": "uncalibrated_current_state_score"
+    }
+  }
+}

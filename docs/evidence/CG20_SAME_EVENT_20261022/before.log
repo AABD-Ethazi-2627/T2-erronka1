@@ -1,0 +1,3 @@
+before {'containers': 111, 'volumes': 78, 'networks': 11, 'images': 60}
+
+STDERR

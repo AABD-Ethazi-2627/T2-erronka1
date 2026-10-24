@@ -1,0 +1,26 @@
+[
+  {
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python -m scripts.check_cg25_memory"
+    ],
+    "exit": 0
+  },
+  {
+    "args": [
+      "wsl",
+      "-d",
+      "FedoraLinux-43",
+      "--exec",
+      "/bin/sh",
+      "-c",
+      "cd /mnt/d/github/_local/t2-babysit-20261021/pr46-review/repo && PATH=/usr/sbin:/usr/bin:/bin /mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python scripts/check_repository_layout.py"
+    ],
+    "exit": 0
+  }
+]

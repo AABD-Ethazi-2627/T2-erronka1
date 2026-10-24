@@ -1,0 +1,16 @@
+{
+  "threshold": 0.19082281465428477,
+  "rows_compared": 1200,
+  "changed_decisions": [
+    {
+      "source_row_index": 7763,
+      "label": 1,
+      "csv_token": "0.19082281465428477",
+      "stdlib_float": 0.19082281465428477,
+      "pandas_default": 0.1908228146542847,
+      "pandas_round_trip": 0.19082281465428477,
+      "default_hex": "0x1.86ce1ca22aa4ep-3",
+      "round_trip_hex": "0x1.86ce1ca22aa51p-3"
+    }
+  ]
+}

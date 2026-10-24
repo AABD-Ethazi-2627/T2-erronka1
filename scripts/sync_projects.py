@@ -38,25 +38,31 @@ def graphql(query, **variables):
 
 
 def read_project(number):
-    query = """query($org:String!, $number:Int!, $cursor:String) {
-      organization(login:$org) { projectV2(number:$number) { id
-        fields(first:100) { pageInfo { hasNextPage } nodes {
-          ... on ProjectV2Field { id name dataType isIssueField issueField { ... on IssueFieldDate { id name } } }
-          ... on ProjectV2SingleSelectField { id name options { id name } }
-        } }
-        items(first:100, after:$cursor) { pageInfo { hasNextPage endCursor } nodes {
-          id isArchived content { __typename
-            ... on Issue { id repository { nameWithOwner } }
-            ... on PullRequest { id repository { nameWithOwner } }
-          }
-          fieldValues(first:100) { pageInfo { hasNextPage } nodes {
-            ... on ProjectV2ItemFieldSingleSelectValue { name field { ... on ProjectV2FieldCommon { name } } }
-            ... on ProjectV2ItemFieldDateValue { date field { ... on ProjectV2FieldCommon { name } } }
-            ... on ProjectV2ItemIssueFieldValue { field { ... on ProjectV2FieldCommon { name } } issueFieldValue { ... on IssueFieldDateValue { value } } }
-          } }
-        } }
-      } }
-    }"""
+    query = (
+        "query($org:String!, $number:Int!, $cursor:String) {\n  "
+        + "    organization(login:$org) { "
+        + "projectV2(number:$number) { id\n        "
+        + "fields(first:100) { pageInfo { hasNextPage } nodes {\n "
+        + "         ... on ProjectV2Field { id name dataType "
+        + "isIssueField issueField { ... on IssueFieldDate { id "
+        + "name } } }\n          ... on ProjectV2SingleSelectField"
+        + " { id name options { id name } }\n        } }\n        "
+        + "items(first:100, after:$cursor) { pageInfo { "
+        + "hasNextPage endCursor } nodes {\n          id "
+        + "isArchived content { __typename\n            ... on "
+        + "Issue { id repository { nameWithOwner } }\n            "
+        + "... on PullRequest { id repository { nameWithOwner } "
+        + "}\n          }\n          fieldValues(first:100) { "
+        + "pageInfo { hasNextPage } nodes {\n            ... on "
+        + "ProjectV2ItemFieldSingleSelectValue { name field { "
+        + "... on ProjectV2FieldCommon { name } } }\n            "
+        + "... on ProjectV2ItemFieldDateValue { date field { ... "
+        + "on ProjectV2FieldCommon { name } } }\n            ... "
+        + "on ProjectV2ItemIssueFieldValue { field { ... on "
+        + "ProjectV2FieldCommon { name } } issueFieldValue { ... "
+        + "on IssueFieldDateValue { value } } }\n          } }\n   "
+        + "     } }\n      } }\n    }"
+    )
     items, cursor = [], None
     while True:
         project = graphql(query, org=ORG, number=number, cursor=cursor)["organization"][
@@ -90,6 +96,16 @@ def option(field, name):
     matches = [o["id"] for o in field["options"] if o["name"] == name]
     if len(matches) != 1:
         raise ValueError(f"Unknown or ambiguous option: {name}")
+    return matches[0]
+
+
+def central_status(field, name):
+    if name is None:
+        return None
+    aliases = ("Todo", "To do") if name == "Todo" else (name,)
+    matches = [value["name"] for value in field["options"] if value["name"] in aliases]
+    if len(matches) != 1:
+        raise ValueError(f"Unknown or ambiguous central status: {name}")
     return matches[0]
 
 
@@ -140,7 +156,7 @@ def plan(source, target):
         if name is not None and name not in STATUS:
             raise ValueError(f"Unknown source status: {name}")
         desired = {
-            "Status": STATUS.get(name),
+            "Status": central_status(target["fields"]["Status"], STATUS.get(name)),
             "Taldea": "B-taldea",
             "Start date": source_date(values, "Hasiera-data", "Start date"),
             "Target date": source_date(values, "Amaiera-data", "Target date"),
@@ -179,9 +195,11 @@ def apply(target, changes):
         item_id = change["item_id"]
         if item_id is None:
             item_id = graphql(
-                """mutation($project:ID!, $content:ID!) {
-              addProjectV2ItemById(input:{projectId:$project, contentId:$content}) { item { id } }
-            }""",
+                (
+                    "mutation($project:ID!, $content:ID!) {\n              "
+                    + "addProjectV2ItemById(input:{projectId:$project, "
+                    + "contentId:$content}) { item { id } }\n            }"
+                ),
                 project=target["id"],
                 content=change["content_id"],
             )["addProjectV2ItemById"]["item"]["id"]
@@ -193,24 +211,34 @@ def apply(target, changes):
             }
             if target["fields"][name].get("isIssueField"):
                 graphql(
-                    """mutation($issue:ID!, $field:IssueFieldCreateOrUpdateInput!) {
-                  updateIssueFieldValue(input:{issueId:$issue,issueField:$field}) { clientMutationId }
-                }""",
+                    (
+                        "mutation($issue:ID!, $field:IssueFieldCreateOrUpdateIn"
+                        + "put!) {\n                  updateIssueFieldValue(input:"
+                        + "{issueId:$issue,issueField:$field}) { "
+                        + "clientMutationId }\n                }"
+                    ),
                     issue=change["content_id"],
                     field=issue_field_input(target["fields"][name], value),
                 )
             elif value is None:
                 graphql(
-                    """mutation($project:ID!, $item:ID!, $field:ID!) {
-                  clearProjectV2ItemFieldValue(input:{projectId:$project,itemId:$item,fieldId:$field}) { projectV2Item { id } }
-                }""",
+                    (
+                        "mutation($project:ID!, $item:ID!, $field:ID!) {\n      "
+                        + "            clearProjectV2ItemFieldValue(input:{projec"
+                        + "tId:$project,itemId:$item,fieldId:$field}) { "
+                        + "projectV2Item { id } }\n                }"
+                    ),
                     **variables,
                 )
             else:
                 graphql(
-                    """mutation($project:ID!, $item:ID!, $field:ID!, $value:ProjectV2FieldValue!) {
-                  updateProjectV2ItemFieldValue(input:{projectId:$project,itemId:$item,fieldId:$field,value:$value}) { projectV2Item { id } }
-                }""",
+                    (
+                        "mutation($project:ID!, $item:ID!, $field:ID!, "
+                        + "$value:ProjectV2FieldValue!) {\n                  "
+                        + "updateProjectV2ItemFieldValue(input:{projectId:$projec"
+                        + "t,itemId:$item,fieldId:$field,value:$value}) { "
+                        + "projectV2Item { id } }\n                }"
+                    ),
                     **variables,
                     value=value,
                 )
