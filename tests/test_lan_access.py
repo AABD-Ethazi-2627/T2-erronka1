@@ -33,7 +33,7 @@ class LanAccessTests(unittest.TestCase):
                 "docker",
                 "compose",
                 "--env-file",
-                "/dev/null",
+                os.devnull,
                 "-f",
                 "docker-compose.yml",
                 "-f",
