@@ -7,7 +7,13 @@ import unittest
 from pathlib import Path
 from zipfile import ZipFile
 
-from scripts.audit_dependencies import audit, requirements_rows, uv_tool_version
+from scripts.audit_dependencies import (
+    PyPIRedirectHandler,
+    audit,
+    requirements_rows,
+    uv_tool_version,
+    validate_metadata_url,
+)
 
 
 def package(name="demo", version="1.0", source=None):
@@ -26,6 +32,32 @@ def metadata(url):
 
 
 class DependencyAuditTests(unittest.TestCase):
+    def test_metadata_fetch_origin_is_restricted_to_pypi_https(self):
+        validate_metadata_url("https://pypi.org/pypi/demo/1.0/json")
+        validate_metadata_url("https://pypi.org:443/pypi/demo/json")
+        for url in (
+            "http://pypi.org/pypi/demo/json",
+            "https://evil.invalid/pypi/demo/json",
+            "https://pypi.org.evil.invalid/pypi/demo/json",
+            "https://user@pypi.org/pypi/demo/json",
+            "https://pypi.org/simple/demo",
+            "https://pypi.org/pypi/demo/json?redirect=https://evil.invalid",
+        ):
+            with self.subTest(url=url), self.assertRaises(ValueError):
+                validate_metadata_url(url)
+
+    def test_redirect_is_rejected_before_requesting_an_unapproved_origin(self):
+        handler = PyPIRedirectHandler()
+        with self.assertRaises(ValueError):
+            handler.redirect_request(
+                object(),
+                None,
+                302,
+                "Found",
+                {},
+                "https://evil.invalid/metadata.json",
+            )
+
     def test_separate_research_pins_are_covered_and_unknown_syntax_fails(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / "research.txt"
