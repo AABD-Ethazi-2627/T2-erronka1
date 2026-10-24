@@ -1,0 +1,10 @@
+{
+  "file": "raw-evidence.zip",
+  "sha256": "640d75114324df4d8bafa20461cccf20da3850552c3bd6fa48080b9584e97896",
+  "bytes": 50443554,
+  "files": 5350,
+  "uncompressed_bytes": 163236931,
+  "study_manifest_sha256": "d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b",
+  "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "scope": "isolated AI4I development evidence; own pickles, verify provenance/hashes before loading"
+}

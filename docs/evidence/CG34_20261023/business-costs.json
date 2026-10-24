@@ -1,0 +1,15 @@
+{
+  "source": "Forum text supplied by the user in this thread, attributed to Aitor Aretxaga Agirre, 2026-10-22 18:52; not independently verified industrial accounts",
+  "analysis_status": "Additional cost scenario introduced after original experiment results; original primary analysis remains immutable",
+  "cost_eur": {"fn": 5000, "fp": 200, "tp": 300, "tn": 0},
+  "minimum_inner_recall": 0.76,
+  "threshold_ties": ["cost", "fewer FN", "higher threshold"],
+  "model_ties": ["cost", "fewer FN", "inner latency", "catalog order"],
+  "pools": ["core10", "pool40"],
+  "selection_rows": "Existing screening OOF for fixed package specification; existing inner OOF within each outer-train for nested selector",
+  "evaluation_rows": "Existing 5600 outer scores only; no validation/test reuse and no refit",
+  "fixed_policies": [0.15, 0.70],
+  "calibration": "Secondary restricted comparison of already trained variants; finalist set was selected under original costs, so this is not a complete new calibration search",
+  "anomalies": "Only update hypothetical economic diagnostic; no outer-based detector selection",
+  "operational_change": false
+}
