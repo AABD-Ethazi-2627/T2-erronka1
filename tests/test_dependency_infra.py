@@ -43,6 +43,15 @@ class InfrastructureRefreshTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "digest"):
                 read_images(root)
 
+    def test_new_lan_and_cg32_images_are_in_the_scan_matrix(self):
+        images = read_images()
+        self.assertIn("haproxy", images)
+        self.assertIn("debian", images)
+        workflow = (ROOT / ".github/workflows/dependencies.yml").read_text()
+        self.assertIn("haproxy, debian", workflow)
+        self.assertIn("exit-code: '1'", workflow)
+        self.assertIn("ignore-unfixed: false", workflow)
+
     def test_retarget_preserves_routing_and_properties_but_disables_execution(self):
         old = json.loads((ROOT / "nifi-flows/cnc_lab_completed.json").read_text())
         refreshed = build()
