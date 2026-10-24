@@ -1,5 +1,11 @@
 {
   "api": "scoring/Dockerfile",
+  "elasticsearch": "deploy/images/elasticsearch.Dockerfile",
+  "filebeat": "deploy/images/filebeat.Dockerfile",
   "kafka": "deploy/images/kafka.Dockerfile",
-  "mock-python": "deploy/images/mock-python.Dockerfile"
+  "kibana": "deploy/images/kibana.Dockerfile",
+  "mock-python": "deploy/images/mock-python.Dockerfile",
+  "nifi": "deploy/images/nifi.Dockerfile",
+  "python": "deploy/images/python.Dockerfile",
+  "wolfi": "deploy/images/wolfi-base.Dockerfile"
 }

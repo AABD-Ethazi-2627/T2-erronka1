@@ -89,7 +89,7 @@ def check(root=ROOT):
     ]
     optional_image_files = {
         "docker-compose.lan.yml": {"haproxy": "haproxy"},
-        "deploy/cg32/compose.yaml": {"api": "debian"},
+        "deploy/cg32/compose.yaml": {"api": "wolfi"},
     }
     for path, expected in optional_image_files.items():
         file = root / path
@@ -117,10 +117,17 @@ def check(root=ROOT):
     for key in ("python", "uv"):
         if "FROM " + images[key] not in dockerfile:
             errors.append(f"scoring/Dockerfile: {key} differs from deploy/images.json")
-    for key in ("kafka", "mock-python"):
+    for key in ("elasticsearch", "filebeat", "kafka", "kibana", "mock-python", "nifi", "python", "wolfi"):
         dockerfile = (root / build_targets[key]).read_text()
         if "FROM " + images[key] not in dockerfile:
             errors.append(f"{build_targets[key]}: {key} differs from deploy/images.json")
+    filebeat = (root / build_targets["filebeat"]).read_text()
+    if "FROM " + images["go"] not in filebeat:
+        errors.append("deploy/images/filebeat.Dockerfile: go differs from deploy/images.json")
+    nifi = (root / build_targets["nifi"]).read_text()
+    for key in ("uv", "wolfi"):
+        if "FROM " + images[key] not in nifi:
+            errors.append(f"deploy/images/nifi.Dockerfile: {key} differs from deploy/images.json")
     return errors
 
 

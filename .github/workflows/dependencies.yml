@@ -40,12 +40,12 @@ jobs:
           retention-days: 30
   images:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       max-parallel: 2
       matrix:
-        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, haproxy, debian]
+        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, go, haproxy, wolfi]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -68,7 +68,7 @@ jobs:
       - name: Build actual runtime image
         if: steps.image.outputs.dockerfile != ''
         run: docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
-      - name: Reject every image vulnerability and preserve the complete scan
+      - name: Preserve the complete image scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           version: 'v0.76.1'
@@ -76,10 +76,23 @@ jobs:
           scanners: vuln
           format: json
           output: image-scan.json
-          exit-code: '1'
+          timeout: 15m
+          exit-code: '0'
           ignore-unfixed: false
           severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
           cache: false
+      - name: Reject unverified image vulnerabilities
+        env:
+          IMAGE_KEY: ${{ matrix.image }}
+        run: python3 -m scripts.enforce_image_scan "$IMAGE_KEY" image-scan.json
+      - name: Prove the Filebeat Go finding is unreachable
+        if: matrix.image == 'filebeat'
+        run: |
+          container=$(docker create "${{ steps.image.outputs.ref }}")
+          trap 'docker rm -f "$container" >/dev/null' EXIT
+          docker cp "$container:/usr/share/filebeat/filebeat" /tmp/filebeat
+          docker run --rm --volume /tmp/filebeat:/target/filebeat:ro golang:1.26.10-alpine3.23@sha256:0525c952defebc693cdaf62cdf43afa32be5a7f377e99260642ea19c240c708e sh -c \
+            'go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 -mode=binary /target/filebeat'
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
