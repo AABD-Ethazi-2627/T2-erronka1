@@ -2,7 +2,7 @@
 name: cnc-guard-lab-v2
 services:
   kafka-init:
-    image: apache/kafka:4.3.1@sha256:77e3df9054047a88b520d0cc46e16696d3b22022e1d580aeccd2632df6532837
+    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
     user: root
     entrypoint: [/bin/bash, -c, 'chown 1000:1000 /data']
     volumes: [kafka-data:/data]
@@ -11,7 +11,7 @@ services:
     depends_on:
       kafka-init:
         condition: service_completed_successfully
-    image: apache/kafka:4.3.1@sha256:77e3df9054047a88b520d0cc46e16696d3b22022e1d580aeccd2632df6532837
+    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -28,7 +28,7 @@ services:
     volumes: [kafka-data:/tmp/kraft-combined-logs]
     mem_limit: 640m
   filebeat:
-    image: docker.elastic.co/beats/filebeat:9.5.5@sha256:4b2042fcbeb781800bc7271d400f764bb7d670310dfd4fe03ade53d6c7ab78aa
+    image: docker.elastic.co/beats/filebeat-wolfi:9.5.5@sha256:b644d58f79f2a53b46ce558efa706a51ba211e0d0f89352bfe33b3973958e3eb
     user: root
     command: [filebeat, -e, --strict.perms=false]
     volumes:
@@ -54,7 +54,7 @@ services:
       - nifi-flowfiles:/opt/nifi/nifi-current/flowfile_repository
     mem_limit: 1200m
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5@sha256:13b4a40bb095774f5fda635e45fd5677cc6a26565e42b24997b0c72b88e75984
+    image: docker.elastic.co/elasticsearch/elasticsearch-wolfi:9.5.5@sha256:c2cce72acf8dc0510c04fd5926123f630859019082edf9827daef82b6a46c9c1
     environment:
       discovery.type: single-node
       xpack.security.enabled: 'false'
@@ -66,7 +66,7 @@ services:
     volumes: [es-data:/usr/share/elasticsearch/data]
     mem_limit: 800m
   kibana:
-    image: docker.elastic.co/kibana/kibana:9.5.5@sha256:13b72ce7222c36e4213229004ae62a87aeb32fd372ebfa6fb38f7a3285fdbb78
+    image: docker.elastic.co/kibana/kibana-wolfi:9.5.5@sha256:46b0a3adf85186f9153fbd322e55ea8f70bc4039dcd55d58826fc1caa372dee5
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       TELEMETRY_OPTIN: 'false'
