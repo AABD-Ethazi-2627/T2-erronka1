@@ -1,0 +1,35 @@
+{
+  "scanner": "Trivy 0.76.1",
+  "database_updated_at": "2026-10-23T07:12:39Z",
+  "image": "cnc-guard-deps-api:20261023-r3",
+  "counts": [
+    {
+      "type": "debian",
+      "severity": "LOW",
+      "fix_available": false,
+      "findings": 61
+    },
+    {
+      "type": "debian",
+      "severity": "HIGH",
+      "fix_available": false,
+      "findings": 44
+    },
+    {
+      "type": "debian",
+      "severity": "MEDIUM",
+      "fix_available": false,
+      "findings": 58
+    },
+    {
+      "type": "debian",
+      "severity": "UNKNOWN",
+      "fix_available": false,
+      "findings": 1
+    }
+  ],
+  "published_fixes_remaining": [],
+  "gate": "fail for HIGH/CRITICAL with a published fix; retain complete unfiltered scan as CI artifact",
+  "scope": "actual built API image including Debian, Python and embedded Rust; not just uv.lock",
+  "limits": "Unfixed vendor advisories remain visible. This scan does not establish exploitability."
+}

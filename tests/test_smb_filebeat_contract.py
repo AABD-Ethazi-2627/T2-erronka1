@@ -73,7 +73,7 @@ class FilebeatSeamTests(unittest.TestCase):
     def test_active_config_retains_version_identity_and_raw_key_contract(self):
         config = Path("filebeat/filebeat.yml").read_text()
         compose = Path("docker-compose.yml").read_text()
-        self.assertIn("docker.elastic.co/beats/filebeat:9.5.4", compose)
+        self.assertIn("docker.elastic.co/beats/filebeat:9.5.5@sha256:", compose)
         self.assertIn("filebeat-data:/usr/share/filebeat/data", compose)
         self.assertIn("/mnt/cnc-smb:ro", compose)
         self.assertEqual(config.count("prospector.scanner.fingerprint.offset: 164"), 2)

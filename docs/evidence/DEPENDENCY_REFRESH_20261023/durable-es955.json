@@ -1,0 +1,176 @@
+{
+  "status": "PASSED",
+  "image": "docker.elastic.co/elasticsearch/elasticsearch:9.5.5@sha256:13b4a40bb095774f5fda635e45fd5677cc6a26565e42b24997b0c72b88e75984",
+  "transport": "real-loopback-http+docker-exec-es",
+  "kafka": "NOT_EXECUTED",
+  "nifi": "NOT_EXECUTED",
+  "models": "in-memory-synthetic-doubles-no-training",
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/_ingest/pipeline/cnc-prediction-v1",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/_index_template/cnc-durable",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_create/ee77d6727a212ecffba9c8757b978d6f610420713bc28120edcec083495724af",
+      "status": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_create/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 201
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_create/ee77d6727a212ecffba9c8757b978d6f610420713bc28120edcec083495724af",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-durable-test/_doc/ee77d6727a212ecffba9c8757b978d6f610420713bc28120edcec083495724af",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_create/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-durable-test/_doc/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-durable-test/_doc/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-durable-test/_doc/ee77d6727a212ecffba9c8757b978d6f610420713bc28120edcec083495724af",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_doc/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_create/ee77d6727a212ecffba9c8757b978d6f610420713bc28120edcec083495724af",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-durable-test/_doc/ee77d6727a212ecffba9c8757b978d6f610420713bc28120edcec083495724af",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/cnc-telemetry-durable-test/_create/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/cnc-telemetry-durable-test/_doc/622d8ac87055fe47a81c55aa064c42f49166524248ba2b6edd0fd7cd380bf989",
+      "status": 200
+    }
+  ],
+  "python": "3.11.16 (main, Sep  1 2026, 14:18:37) [Clang 22.1.3 ]",
+  "execution_files_sha256": {
+    "tests/verify_durable_pipeline.py": "461a8d8e598221aefe253e3f44ab6cfccca64f52f5d1270949e209d8ded62493",
+    "scripts/durable_pipeline.py": "c2823a058760f49c86659cc376763b6be4d8f5991ae292f96375fa0b1d2d2225",
+    "scripts/run_durable_pipeline.py": "20ce36a6f4d49aa4cf032d31e4c4078dd2b3edc3ae9ac2c004769f3f6b99455a",
+    "scripts/kafka_archive.py": "a3571f985b3655a9a169fa80bcea95e6d719673a41a21955a44663b4549635b4",
+    "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
+    "scripts/cg14_occurrence.py": "3f02f7e685fe84b2382ddbe5a420997725631300a7af0ae59597712d51ea1e1e",
+    "scripts/cg14_scoring_bridge.py": "9c39db3db003b7c4ecb315f97e14e1003c2af7f665f3d46d539d5db55bdac53c",
+    "cg14_validation/validator.py": "a67e23c7f18ee6fb231a659cf881a6e063f08a125ef53453a9a508c755e64b53",
+    "scripts/validate_contracts.py": "ff51046e546034136db07708148f9399ee3c502d766d8b5083ea59f499b9a5f7",
+    "scoring/score_api.py": "013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e",
+    "scoring/response_ledger.py": "93355badf158753222b8c6fa6b1feb0327d03670fd93169e4b58c697344c43cd"
+  },
+  "image_id": "sha256:13b4a40bb095774f5fda635e45fd5677cc6a26565e42b24997b0c72b88e75984",
+  "container": "2f5cc37df19831304886eb0a72ba0145a63c22070e67df143f1e271a5ddc2355",
+  "isolation": {
+    "network": "none",
+    "published_ports": [],
+    "mounts": [],
+    "tmpfs": {
+      "/usr/share/elasticsearch/data": "rw,uid=1000,gid=0,size=512m"
+    }
+  },
+  "es_version": "9.5.5",
+  "first": {
+    "completed": 2,
+    "rejected": 1,
+    "replay": 0
+  },
+  "replay": {
+    "completed": 2,
+    "rejected": 0,
+    "replay": 1
+  },
+  "source_ack_calls": 2,
+  "synthetic_inference_calls": 2,
+  "archive_objects": 4,
+  "prediction_hashes": [
+    "f1fbf91a37bc5cc7e8ffea738091ea883386cbbfc7192834928b1aa33e9b9ae8",
+    "4c0e9570f4204689b09d5561a5cccda15e4c54686a1733f60e5866c8583ee75e"
+  ],
+  "raw_sha256": "76f1eddd2a7f396a5a959dc95fd705e53232284f02617d431e51dae4b9fe5a9f",
+  "scoring_transport": "HTTP over 127.0.0.1 ephemeral port",
+  "staged_process_receipts": [
+    {
+      "transport": "staged-stdin",
+      "source_ack": false,
+      "completed": 1,
+      "rejected": 0,
+      "replay": 0
+    },
+    {
+      "transport": "staged-stdin",
+      "source_ack": false,
+      "completed": 0,
+      "rejected": 0,
+      "replay": 1
+    }
+  ],
+  "required_destination_failures": [
+    {
+      "stream": "telemetry",
+      "attempts": 4,
+      "acks": 0,
+      "es_calls": 0
+    },
+    {
+      "stream": "prediction",
+      "attempts": 4,
+      "acks": 0,
+      "es_calls": 0
+    },
+    {
+      "stream": "es",
+      "acks": 0,
+      "conflict": "real _create 409 and GET mismatch"
+    }
+  ],
+  "http_server_stopped": true,
+  "container_removed": true
+}

@@ -18,12 +18,16 @@ jobs:
       MKL_NUM_THREADS: '1'
       NUMEXPR_NUM_THREADS: '1'
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.13.5'
+          python-version: '3.12'
+          enable-cache: false
       - name: Install separate research environment
         run: |
-          python3 -m pip install uv==0.11.19
           uv venv --python 3.12 /tmp/cncguard-research
           uv pip sync --python /tmp/cncguard-research/bin/python scripts/ml_study_requirements.txt
       - name: Test protocol and every adapter with synthetic fixtures only
