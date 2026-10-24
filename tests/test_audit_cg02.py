@@ -2,9 +2,11 @@
 
 import csv
 import hashlib
+import json
 import tempfile
 import unittest
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
+from unittest.mock import patch
 
 from scripts.audit_cg02 import (
     TRAIN_COLUMNS,
@@ -189,6 +191,23 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(len(r["batches"]), 4)
         self.assertEqual(sum(x["rows"] for x in r["batches"]), 40)
         self.assertEqual(r["decision"]["forecast_24h"], "not_validated")
+
+    def test_frozen_inventory_matches_saved_measurements(self):
+        expected = json.loads((ROOT / "docs/cg02/inventory.json").read_text())
+        self.assertEqual(build_inventory(ROOT), expected)
+
+    def test_inventory_paths_are_portable_for_both_path_flavours(self):
+        expected = json.loads((ROOT / "docs/cg02/inventory.json").read_text())
+        relative_to = type(ROOT).relative_to
+        for flavour in (PurePosixPath, PureWindowsPath):
+            with self.subTest(flavour=flavour.__name__):
+                # Keep real file I/O; exercise Windows separators even on Linux.
+                def relative_path(path, *other, flavour=flavour):
+                    return flavour(relative_to(path, *other))
+
+                with patch.object(type(ROOT), "relative_to", relative_path):
+                    actual = build_inventory(ROOT)
+                self.assertEqual(actual, expected)
 
 
 if __name__ == "__main__":

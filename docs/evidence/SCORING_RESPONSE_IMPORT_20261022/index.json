@@ -1,0 +1,103 @@
+{
+  "base": "cc36beb49a17949c805f789b5aa3b4b568f5d4c6",
+  "evidence": "own execution; synthetic only; paths redacted",
+  "files": [
+    {
+      "file": "focused-win311.log",
+      "raw_sha256": "9f54124cb7ef2603715ce0743d9dd7f7f061110598fe1990740f8ce77cd5b400",
+      "published_sha256": "5491587e905d6f2d288b27f60dc26040698e2669d98ec8529831c1e492a4a397",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "focused-fedora312.log",
+      "raw_sha256": "1cab52b5264e65cb3dbf4a58f01a90fb9952e3a4787df80a3da89f6c2ddba010",
+      "published_sha256": "c69015f8631bd0d5a6cbe0e06e4469cb65f9e5b1955ac87ede9e3f4a2fa7b4d6",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-audit.log",
+      "raw_sha256": "433fbb234a1feb5c7ae905fa91eb69b709ba358c94b81d96c41c8b79026246b9",
+      "published_sha256": "c28848369876c343032ca8f578493fde74413b149955ac104e169c8635c8d229",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-cg02.log",
+      "raw_sha256": "ce96c060b21a60b9a05b0d4bf6e34d082aaf7808a91db8dac03f9e2f59fb147b",
+      "published_sha256": "530eeefb4e67136b8b117fe135ae61b1925c15a18bec0a4a577987abd68a8815",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-cg25.log",
+      "raw_sha256": "213e31c3c2a7e3fec6e90333b526d2711735fb4236d2adbde955059abfecce28",
+      "published_sha256": "9ba5632347be61b9cfbe2a9ab936cd74413b2cb382ce332b717fdec548ee9620",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-diff.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-format.log",
+      "raw_sha256": "0bdbf07c33b440d59174a075da3c2aca213dea7338cf92c61d3acd5a9ca88186",
+      "published_sha256": "0bdbf07c33b440d59174a075da3c2aca213dea7338cf92c61d3acd5a9ca88186",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-layout.log",
+      "raw_sha256": "aae7bd1e782044ebcb12e8cecf0d2263d46d50c6dfe6a6de9564afcf558c6275",
+      "published_sha256": "660ea11889b3646995752354b0effe44227983c34bc8f8109cd6c25bda30a2a3",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-lock.log",
+      "raw_sha256": "acff54eb892841acebf79cf73607c7b8ac71dbeefd659f653dfad00d2f5f69c3",
+      "published_sha256": "62090de1c2320020be70acb5c04eaef9c0dffd605eb43d6ee851629867988567",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-ruff-default.log",
+      "raw_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "published_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-ruff-version.log",
+      "raw_sha256": "027fa459f46a02ce06da5b43de9da2bdcccf90a32acecdce930b4c1739fc4814",
+      "published_sha256": "027fa459f46a02ce06da5b43de9da2bdcccf90a32acecdce930b4c1739fc4814",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gate-ruff.log",
+      "raw_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "published_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    },
+    {
+      "file": "gates.json",
+      "raw_sha256": "8411c58fcb31d9e999dc059b1c5e4fdcbd112bfbbf595975960ab1c6f18a8e1d",
+      "published_sha256": "987a8a088d4c843bedbc12c2dab12eae80aaf361f68bce9a82bbe1d5b78da98e",
+      "local_paths_replaced": true,
+      "newlines_normalized": true
+    }
+  ],
+  "sources": {
+    "scoring/response_ledger.py": "93355badf158753222b8c6fa6b1feb0327d03670fd93169e4b58c697344c43cd",
+    "scoring/score_api.py": "042bdcb323094c95289961f29bb13bd3030492cfb02316d9304150bb0af54dd1",
+    "scripts/import_scoring_responses.py": "8c5a844a5164fcc6301f0df4ff89bd7dc3d24c10f340669f2f60ec05cac99404",
+    "tests/test_scoring_import.py": "d6cfa1498457bcdc85c0cbc770b5b0f78d64911fa68746bec103ff90338f7072"
+  }
+}

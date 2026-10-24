@@ -1,0 +1,26 @@
+[
+  {
+    "file": "commands.jsonl",
+    "before_sha256": "f8b627956291550bfc59b8ee43b49b79d54e22aa02c1e0eee91ba1002a5bc42c",
+    "published_sha256": "58b0a6238be5d3e389b4e8439a6b5f1f19846f12e6eb5f44647021076c9f5461",
+    "change": "CRLF to LF in new publication copy; local original retained"
+  },
+  {
+    "file": "posix-mount.log",
+    "before_sha256": "20c75ef08386d52b5777fc197c2ff1f143cc7fc863ea9be07c643e9312da02c0",
+    "published_sha256": "0ef942b7244f3ca4186c99dd65f5779fd22ae1f87ede9ed64357c1efa24127c7",
+    "change": "CRLF to LF in new publication copy; local original retained"
+  },
+  {
+    "file": "preservation-reconciled.json",
+    "before_sha256": "d85001db89682cbb605e31115d5e1ae8a762b737a70faa98229e8876a0dc9df1",
+    "published_sha256": "48ed6f4acf80cd13d36810258fe221d21950e02808a4de0a4d76ca4e3161843f",
+    "change": "CRLF to LF in new publication copy; local original retained"
+  },
+  {
+    "file": "resources.json",
+    "before_sha256": "01a4f61ddf80b19dc8fe6662ee498ab7d4e0e7e5bc47c200660564a6f4dde959",
+    "published_sha256": "65c434f786d288b7412a136517e1008bcf4dd01d7f1cbdbe9da8f37a0c5a7b59",
+    "change": "CRLF to LF in new publication copy; local original retained"
+  }
+]

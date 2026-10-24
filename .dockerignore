@@ -11,3 +11,12 @@ __pycache__
 **/__pycache__
 .env
 secrets
+**/.git
+**/.venv
+**/.ipynb_checkpoints
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
+models

@@ -18,8 +18,10 @@ import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from scripts.private_files import open_private_text, private_text_file
+
 ROOT = Path(__file__).resolve().parents[1]
-BATCH = re.compile(r"^\s*(cnc_batch_[0-9]{8}_[0-9]{6}_[0-9]+\.csv)\s+N\s+[0-9]+\s+")
+BATCH = re.compile(r"^\s*(cnc_batch_[0-9]{8}_[0-9]{6}_[0-9]+\.csv)\s+N\s+([0-9]+)\s+")
 
 
 @dataclass(frozen=True)
@@ -32,11 +34,10 @@ class SmbConfig:
 
 
 def read_config(path):
-    path = Path(path)
-    if path.stat().st_mode & 0o077:
-        raise ValueError("Unsafe env permissions; run chmod 600 on the env file")
+    with open_private_text(path) as handle:
+        lines = handle.read().splitlines()
     values = {}
-    for number, line in enumerate(path.read_text().splitlines(), 1):
+    for number, line in enumerate(lines, 1):
         line = line.strip()
         if not line or line.startswith("#"):
             continue
@@ -75,10 +76,19 @@ def read_config(path):
     )
 
 
+def list_batch_sizes(listing):
+    batches = {}
+    for line in listing.splitlines():
+        if match := BATCH.match(line):
+            name, size = match.group(1), int(match.group(2))
+            if name in batches and batches[name] != size:
+                raise ValueError("SMB listing contains conflicting batch sizes")
+            batches[name] = size
+    return dict(sorted(batches.items()))
+
+
 def list_batch_names(listing):
-    return sorted(
-        {m.group(1) for line in listing.splitlines() if (m := BATCH.match(line))}
-    )
+    return list(list_batch_sizes(listing))
 
 
 def smb_command(config, command, cwd=None):
@@ -87,21 +97,18 @@ def smb_command(config, command, cwd=None):
     ):
         raise ValueError("Only read-only ls/get commands are allowed")
     # Credentials never appear in process arguments, output or repository files.
-    with tempfile.NamedTemporaryFile(
-        mode="w", prefix="cnc-smb-", suffix=".auth"
+    with private_text_file(
+        f"username = {config.username}\npassword = {config.password}\n"
     ) as auth:
-        os.fchmod(auth.fileno(), 0o600)
-        auth.write(f"username = {config.username}\npassword = {config.password}\n")
-        auth.flush()
         try:
             result = subprocess.run(
                 [
                     "smbclient",
                     f"//{config.host}/{config.share}",
                     "-s",
-                    "/dev/null",
+                    os.devnull,
                     "-A",
-                    auth.name,
+                    str(auth),
                     "-t",
                     str(config.timeout),
                     "-c",
@@ -177,5 +184,6 @@ if __name__ == "__main__":
             )
         )
     except (OSError, ValueError, RuntimeError) as error:
-        # Errors we raise contain no credential values; OS errors only concern paths/executables.
+        # Errors we raise contain no credential values; OS errors only concern
+        # paths/executables.
         parser.exit(1, f"{error}\n")

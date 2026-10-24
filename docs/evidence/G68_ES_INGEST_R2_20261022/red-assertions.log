@@ -1,0 +1,32 @@
+test_old_verifier_unknown_root_mapping_assertion (__main__.BeforeFix.test_old_verifier_unknown_root_mapping_assertion) ... FAIL
+test_old_verifier_unknown_source_mapping_assertion (__main__.BeforeFix.test_old_verifier_unknown_source_mapping_assertion) ... FAIL
+test_template_only_accepts_valid_prediction (__main__.BeforeFix.test_template_only_accepts_valid_prediction) ... FAIL
+
+======================================================================
+FAIL: test_old_verifier_unknown_root_mapping_assertion (__main__.BeforeFix.test_old_verifier_unknown_root_mapping_assertion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\github\_local\t2-babysit-20261021\es-ingest-fix-r2\red_assertions.py", line 14, in test_old_verifier_unknown_root_mapping_assertion
+    self.assertIn('strict_dynamic_mapping_exception', json.dumps(errors[0]))
+AssertionError: 'strict_dynamic_mapping_exception' not found in '{"error": {"root_cause": [{"type": "script_exception", "reason": "runtime error", "script_stack": ["throw new IllegalArgumentException(\'CG18 unknown field: \' + name);\\n    }\\n    def ", "                                   ^---- HERE"], "script": "for (def section : params.sections) { ...", "lang": "painless", "position": {"offset": 580, "start": 545, "end": 626}}], "type": "script_exception", "reason": "runtime error", "script_stack": ["throw new IllegalArgumentException(\'CG18 unknown field: \' + name);\\n    }\\n    def ", "                                   ^---- HERE"], "script": "for (def section : params.sections) { ...", "lang": "painless", "position": {"offset": 580, "start": 545, "end": 626}, "caused_by": {"type": "illegal_argument_exception", "reason": "CG18 unknown field: unexpected_contract_field"}}, "status": 400}'
+
+======================================================================
+FAIL: test_old_verifier_unknown_source_mapping_assertion (__main__.BeforeFix.test_old_verifier_unknown_source_mapping_assertion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\github\_local\t2-babysit-20261021\es-ingest-fix-r2\red_assertions.py", line 17, in test_old_verifier_unknown_source_mapping_assertion
+    self.assertIn('strict_dynamic_mapping_exception', json.dumps(errors[1]))
+AssertionError: 'strict_dynamic_mapping_exception' not found in '{"error": {"root_cause": [{"type": "script_exception", "reason": "runtime error", "script_stack": ["throw new IllegalArgumentException(\'CG18 unknown field: \' + name);\\n    }\\n    def ", "                                   ^---- HERE"], "script": "for (def section : params.sections) { ...", "lang": "painless", "position": {"offset": 580, "start": 545, "end": 626}}], "type": "script_exception", "reason": "runtime error", "script_stack": ["throw new IllegalArgumentException(\'CG18 unknown field: \' + name);\\n    }\\n    def ", "                                   ^---- HERE"], "script": "for (def section : params.sections) { ...", "lang": "painless", "position": {"offset": 580, "start": 545, "end": 626}, "caused_by": {"type": "illegal_argument_exception", "reason": "CG18 unknown field: unexpected_contract_field"}}, "status": 400}'
+
+======================================================================
+FAIL: test_template_only_accepts_valid_prediction (__main__.BeforeFix.test_template_only_accepts_valid_prediction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\github\_local\t2-babysit-20261021\es-ingest-fix-r2\red_assertions.py", line 11, in test_template_only_accepts_valid_prediction
+    self.assertEqual(raw['F1']['actual_status'], 201)
+AssertionError: 400 != 201
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=3)

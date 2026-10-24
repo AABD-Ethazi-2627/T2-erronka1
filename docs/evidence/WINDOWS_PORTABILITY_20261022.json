@@ -1,0 +1,746 @@
+{
+  "base": "8caf98962175fabcf13fbc1584dc890cf4f0135f",
+  "base_tree": "82a69eba2754045619a2c2d218473605183bb9c3",
+  "branch": "fix/windows-portability-20261022",
+  "logs": {
+    "baseline-win311": {
+      "log_file": "published-logs\\baseline-win311-618d42a58efdb1f0.json",
+      "log_sha256": "618d42a58efdb1f0ab80cf0f3dc739473adf328a456012ef11016ddc8dc85641",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\duckdb200-migration\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 1,
+      "seconds": 53.59400000004098,
+      "strict_summary": [
+        "pass=1 run=256 skipped=3 failures=4 errors=84 warnings=1 unraisables=0",
+        "pass=2 run=256 skipped=3 failures=4 errors=84 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "baseline-win312": {
+      "log_file": "published-logs\\baseline-win312-54318c2a25cd6518.json",
+      "log_sha256": "54318c2a25cd651889ac3a3776c7aef5dc7bf41847faae5670db79130c247b1b",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\duckdb200-migration\\venv-win312\\Scripts\\python.exe",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 1,
+      "seconds": 58.65700000000652,
+      "strict_summary": [
+        "pass=1 run=256 skipped=3 failures=4 errors=84 warnings=1 unraisables=0",
+        "pass=2 run=256 skipped=3 failures=4 errors=84 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "baseline-reconciled-fedora311": {
+      "log_file": "published-logs\\baseline-reconciled-fedora311-6dee84c67df3205d.json",
+      "log_sha256": "6dee84c67df3205d05dfe2d2de960f43c0ee20f315cda250381377382f6878e2",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora311/bin/python",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\baseline-source",
+      "exit_code": 0,
+      "seconds": 238.125,
+      "strict_summary": [
+        "pass=1 run=284 skipped=3 failures=0 errors=0 warnings=0 unraisables=0",
+        "pass=2 run=284 skipped=3 failures=0 errors=0 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "baseline-reconciled-fedora312": {
+      "log_file": "published-logs\\baseline-reconciled-fedora312-84718470e31c872f.json",
+      "log_sha256": "84718470e31c872f0f593fc135077eb06f89ec62af58c59ffd2a0525f21dea1f",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/duckdb200-migration/venv-fedora312/bin/python",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\baseline-source",
+      "exit_code": 0,
+      "seconds": 243.70300000003772,
+      "strict_summary": [
+        "pass=1 run=284 skipped=3 failures=0 errors=0 warnings=0 unraisables=0",
+        "pass=2 run=284 skipped=3 failures=0 errors=0 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "strict-final-r2-win311": {
+      "log_file": "published-logs\\strict-final-r2-win311-d86d9f8758135ef7.json",
+      "log_sha256": "d86d9f8758135ef77bfcf4d106a281d672f848983defd76fa503b941b7bee4d7",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 90.75,
+      "strict_summary": [
+        "pass=1 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0",
+        "pass=2 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "strict-final-r2-win312": {
+      "log_file": "published-logs\\strict-final-r2-win312-d5628983c38d8c75.json",
+      "log_sha256": "d5628983c38d8c750f756423a8688cae0950265755c1021a7b97f480bcfe2c82",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win312\\Scripts\\python.exe",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 98.06199999997625,
+      "strict_summary": [
+        "pass=1 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0",
+        "pass=2 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "strict-final-fedora311": {
+      "log_file": "published-logs\\strict-final-fedora311-7b808a4103b61a1a.json",
+      "log_sha256": "7b808a4103b61a1af1c1d0d7eb417439c85f93ff6df5497145f6b74783072c05",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora311/bin/python",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 214.64000000001397,
+      "strict_summary": [
+        "pass=1 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0",
+        "pass=2 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "strict-final-fedora312": {
+      "log_file": "published-logs\\strict-final-fedora312-b25e8de6000234cc.json",
+      "log_sha256": "b25e8de6000234cca818d872ef9ba006a312d2d92dd13f2358083af0a08271ca",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora312/bin/python",
+        "-B",
+        "tests/run_strict_resources.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 219.76600000000326,
+      "strict_summary": [
+        "pass=1 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0",
+        "pass=2 run=303 skipped=3 failures=0 errors=0 warnings=0 unraisables=0"
+      ],
+      "pytest_summary": []
+    },
+    "pytest-r2-win311": {
+      "log_file": "published-logs\\pytest-r2-win311-eb6e925ff91d2061.json",
+      "log_sha256": "eb6e925ff91d2061b1ef4472adbae3a8338c86b42e59a85adc4364f529b293b6",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 48.06299999996554,
+      "strict_summary": [],
+      "pytest_summary": [
+        "558 passed, 3 skipped, 250 subtests passed in 47.18s"
+      ]
+    },
+    "pytest-r2-win312": {
+      "log_file": "published-logs\\pytest-r2-win312-946620f984f6755d.json",
+      "log_sha256": "946620f984f6755d23af58f1043a94e6b1a1c3f1a06bc8d11c20392a434ab2cf",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win312\\Scripts\\python.exe",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 50.85899999999674,
+      "strict_summary": [],
+      "pytest_summary": [
+        "558 passed, 3 skipped, 250 subtests passed in 49.85s"
+      ]
+    },
+    "pytest-r2-fedora311": {
+      "log_file": "published-logs\\pytest-r2-fedora311-b113ecccbeb8688c.json",
+      "log_sha256": "b113ecccbeb8688c1ce93665daa17083f7b2e0d1b4c3ca04797ce89750d99fdb",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora311/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 134.98399999999674,
+      "strict_summary": [],
+      "pytest_summary": [
+        "558 passed, 3 skipped, 250 subtests passed in 131.19s (0:02:11)"
+      ]
+    },
+    "pytest-r2-fedora312": {
+      "log_file": "published-logs\\pytest-r2-fedora312-3c6980883a60175f.json",
+      "log_sha256": "3c6980883a60175fec5650bf2eb1f245a577e98e2a620ef6dc4d7784afb7424b",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora312/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 134.39100000000326,
+      "strict_summary": [],
+      "pytest_summary": [
+        "558 passed, 3 skipped, 250 subtests passed in 130.30s (0:02:10)"
+      ]
+    },
+    "ruff-version": {
+      "log_file": "published-logs\\ruff-version-86bba60f8c8e05df.json",
+      "log_sha256": "86bba60f8c8e05df70cc1504c37470c6c615111245f9648c8ade22d1c6b96ebf",
+      "command": [
+        "ruff",
+        "--version"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.031000000017229468,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "ruff-default": {
+      "log_file": "published-logs\\ruff-default-fe841c2b46606e79.json",
+      "log_sha256": "fe841c2b46606e7956d955ae476dde026b2ec0bf36cbb798de6b2ff1c16eb76f",
+      "command": [
+        "ruff",
+        "check",
+        "."
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.030999999959021807,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "ruff-selected": {
+      "log_file": "published-logs\\ruff-selected-5741b0bde1690f4e.json",
+      "log_sha256": "5741b0bde1690f4eeb854eafca6a6bd78ce9771dfd986687cf4e55f88e961777",
+      "command": [
+        "ruff",
+        "check",
+        "--select",
+        "E,F,I,PLW1510",
+        "."
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.01600000000325963,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "ruff-format": {
+      "log_file": "published-logs\\ruff-format-4c2328f7ac6b1dd5.json",
+      "log_sha256": "4c2328f7ac6b1dd54b07a6fe19a25644258abaddc12cd7674228d1162677fe8c",
+      "command": [
+        "ruff",
+        "format",
+        "--check",
+        "."
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.0470000000204891,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "lock-check": {
+      "log_file": "published-logs\\lock-check-93356c0ac4f93e5b.json",
+      "log_sha256": "93356c0ac4f93e5b70f0d0e44be0b9251f8d86ceece0b886fdb2ead348185fc2",
+      "command": [
+        "<user-home>\\.local\\bin\\uv.exe",
+        "tool",
+        "run",
+        "--from",
+        "uv==0.13.1",
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.18699999997625127,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "dependency-audit": {
+      "log_file": "published-logs\\dependency-audit-e7b038392545fa6d.json",
+      "log_sha256": "e7b038392545fa6dac4c428d0f650580b8fb9bacba4fcb2ed97bdf2625c81970",
+      "command": [
+        "<user-home>\\.local\\bin\\uv.exe",
+        "tool",
+        "run",
+        "--from",
+        "uv==0.13.1",
+        "uv",
+        "audit",
+        "--locked"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.6880000000237487,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "CG02": {
+      "log_file": "published-logs\\CG02-040f683eab3e9f70.json",
+      "log_sha256": "040f683eab3e9f705feb2c620c835baae02fabe1b67c67559e9f1502ce626c07",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "scripts.audit_cg02",
+        "--check"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.15600000001722947,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "CG25": {
+      "log_file": "published-logs\\CG25-715d08a9665a2e45.json",
+      "log_sha256": "715d08a9665a2e459b842272f1e6c91ba347b5c018ec45b9b0c41e3f33fb295a",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "scripts/check_cg25_memory.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.8279999999795109,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "layout": {
+      "log_file": "published-logs\\layout-3c6feca879769317.json",
+      "log_sha256": "3c6feca87976931722e0b51352ed9c2b069b72dcf08b7cc8c3fa555d16beacbb",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "scripts/check_repository_layout.py"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 1.0459999999729916,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "actionlint": {
+      "log_file": "published-logs\\actionlint-003c10fc661e4ae1.json",
+      "log_sha256": "003c10fc661e4ae13e15ad2de1b0011935225ea20b37ce8be71712641fd5229f",
+      "command": [
+        "actionlint"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.10999999998603016,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "diff-check": {
+      "log_file": "published-logs\\diff-check-e7df16bbad7ee779.json",
+      "log_sha256": "e7df16bbad7ee779f88722b4736bbe89aa83a26112e0f0c292f4a2156d813a06",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "8caf98962175fabcf13fbc1584dc890cf4f0135f"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.0470000000204891,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "provenance-win311": {
+      "log_file": "published-logs\\provenance-win311-c7f88dac2f79793c.json",
+      "log_sha256": "c7f88dac2f79793c47743fe44ba422687efeadb8cade09a8ec453adab688c129",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "-W",
+        "error",
+        "-c",
+        "import json,joblib,sys; import joblib.externals.loky.backend.context as c; from pathlib import Path; import hashlib; print(json.dumps(dict(executable=sys.executable,version=joblib.__version__,physical_cores=joblib.cpu_count(only_physical_cores=True),context_file=c.__file__,context_sha256=hashlib.sha256(Path(c.__file__).read_bytes()).hexdigest())))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 1.75,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "provenance-win312": {
+      "log_file": "published-logs\\provenance-win312-0cf93f99aca8c801.json",
+      "log_sha256": "0cf93f99aca8c801d6a4238244d588b7193378a5d05e125b1b18c05ea0f6bb4e",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win312\\Scripts\\python.exe",
+        "-B",
+        "-W",
+        "error",
+        "-c",
+        "import json,joblib,sys; import joblib.externals.loky.backend.context as c; from pathlib import Path; import hashlib; print(json.dumps(dict(executable=sys.executable,version=joblib.__version__,physical_cores=joblib.cpu_count(only_physical_cores=True),context_file=c.__file__,context_sha256=hashlib.sha256(Path(c.__file__).read_bytes()).hexdigest())))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 1.7190000000409782,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "provenance-fedora311": {
+      "log_file": "published-logs\\provenance-fedora311-c9a9228c9b417e7a.json",
+      "log_sha256": "c9a9228c9b417e7ab13e81075d79e630ae9bd69ef8726215882e333b1077c1fb",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora311/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-c",
+        "import json,joblib,sys; import joblib.externals.loky.backend.context as c; from pathlib import Path; import hashlib; print(json.dumps(dict(executable=sys.executable,version=joblib.__version__,physical_cores=joblib.cpu_count(only_physical_cores=True),context_file=c.__file__,context_sha256=hashlib.sha256(Path(c.__file__).read_bytes()).hexdigest())))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 12.936999999976251,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "provenance-fedora312": {
+      "log_file": "published-logs\\provenance-fedora312-b5c17c3527218a02.json",
+      "log_sha256": "b5c17c3527218a02c986e06bd7cfde02eaebc461929c2eb5570491072adbabcb",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora312/bin/python",
+        "-B",
+        "-W",
+        "error",
+        "-c",
+        "import json,joblib,sys; import joblib.externals.loky.backend.context as c; from pathlib import Path; import hashlib; print(json.dumps(dict(executable=sys.executable,version=joblib.__version__,physical_cores=joblib.cpu_count(only_physical_cores=True),context_file=c.__file__,context_sha256=hashlib.sha256(Path(c.__file__).read_bytes()).hexdigest())))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 1.0780000000377186,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "inventory-final-win311": {
+      "log_file": "published-logs\\inventory-final-win311-8d150fb48e4eba15.json",
+      "log_sha256": "8d150fb48e4eba1522fb8ef3d7a3529b49865b48d54314323bf4b85a3e5edf29",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win311\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import importlib.metadata as m,json,os,platform,sys; print(json.dumps(dict(executable=sys.executable,python=sys.version,os=platform.platform(),tmp=os.getenv(\"TMPDIR\"),packages={d.metadata[\"Name\"]:d.version for d in m.distributions()})))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.18699999997625127,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "inventory-final-win312": {
+      "log_file": "published-logs\\inventory-final-win312-6ed74fa41fe8348e.json",
+      "log_sha256": "6ed74fa41fe8348eef56d0b0a58f399c3f65db859c131d7f0a300037b039d088",
+      "command": [
+        "D:\\github\\_local\\t2-babysit-20261021\\windows-portability\\venv-win312\\Scripts\\python.exe",
+        "-B",
+        "-c",
+        "import importlib.metadata as m,json,os,platform,sys; print(json.dumps(dict(executable=sys.executable,python=sys.version,os=platform.platform(),tmp=os.getenv(\"TMPDIR\"),packages={d.metadata[\"Name\"]:d.version for d in m.distributions()})))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.23499999998603016,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "inventory-final-fedora311": {
+      "log_file": "published-logs\\inventory-final-fedora311-23e9a52e6000d95e.json",
+      "log_sha256": "23e9a52e6000d95ed3f90c072a41de520a887f828a792b33026bf381c23e49ee",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora311/bin/python",
+        "-B",
+        "-c",
+        "import importlib.metadata as m,json,os,platform,sys; print(json.dumps(dict(executable=sys.executable,python=sys.version,os=platform.platform(),tmp=os.getenv(\"TMPDIR\"),packages={d.metadata[\"Name\"]:d.version for d in m.distributions()})))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.75,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "inventory-final-fedora312": {
+      "log_file": "published-logs\\inventory-final-fedora312-57fc579e3247cc09.json",
+      "log_sha256": "57fc579e3247cc096a2f087b2966cd56507d769b0bf043e97c5e413e1275ed98",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "UV_PYTHON_DOWNLOADS=never",
+        "MPLBACKEND=Agg",
+        "TMPDIR=/tmp",
+        "/mnt/d/github/_local/t2-babysit-20261021/windows-portability/venv-fedora312/bin/python",
+        "-B",
+        "-c",
+        "import importlib.metadata as m,json,os,platform,sys; print(json.dumps(dict(executable=sys.executable,python=sys.version,os=platform.platform(),tmp=os.getenv(\"TMPDIR\"),packages={d.metadata[\"Name\"]:d.version for d in m.distributions()})))"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.4529999999795109,
+      "strict_summary": [],
+      "pytest_summary": []
+    },
+    "fedora-os-final": {
+      "log_file": "published-logs\\fedora-os-final-c11797a301e41303.json",
+      "log_sha256": "c11797a301e41303c870a06cfba2d52cd1ad837aa258d4957a8a89927b1265a8",
+      "command": [
+        "wsl",
+        "-d",
+        "FedoraLinux-43",
+        "--exec",
+        "cat",
+        "/etc/os-release"
+      ],
+      "cwd": "D:\\github\\_local\\t2-babysit-20261021\\final-composition",
+      "exit_code": 0,
+      "seconds": 0.10899999999674037,
+      "strict_summary": [],
+      "pytest_summary": []
+    }
+  },
+  "source_sha256": {
+    "README.md": "a2313962c6b06f291e08d676617a5f3a2f12d3721a49cc9400924493b770c371",
+    "deploy/cg14/scripts/run-restore-e2e.py": "678463f8e0d0113fafd97b53faeea94e0a60c82e08ad3b804a881233fde1298b",
+    "docs/CG04_ENVIRONMENT.md": "a6c3f5115d29b4ed39697f672296ae09dd52744a6fa470281f63f2f54c615c4e",
+    "docs/PLATFORM_SUPPORT.md": "b90810cf3943b929e6efe023740c67543cfc022d6d69ce441b8fa5657790410f",
+    "docs/evidence/WINDOWS_PORTABILITY_20261022.md": "5c3b4eca54bee48b1cbc871eff98cf7151d84b588b20de7c8b6d9be8c13c247c",
+    "docs/memoria/README.md": "a9ab9b9b6d5cfeacd5d3c4aa4adbafbaa68c27561ef47a4a2f70e66bbedd0451",
+    "planning/registry.py": "7c13920ae73f76f3329eb612763a20f18544c9b04d28357bde31aa0f2f3b8879",
+    "pyproject.toml": "7e9d8e2dc80bbf4d406a33b0df03b01d5ed21a74ed4001afe026faf3d58be553",
+    "scoring/requirements.txt": "e935d21b6dc2e71c294cb4efe5117b8a77ccd5b1d197e9087df41900fce67635",
+    "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
+    "scripts/capture_smb.py": "b620d24c1cd7dc524c5e0975eb9731e093aa8610b232f3c586f142f00734858b",
+    "scripts/cg23_capacity.py": "44294462f42a7b6b54ebd2d163e1dc46967305c7660bc36301a7cd0c2528e7bd",
+    "scripts/check_repository_layout.py": "605a0d42a03013c08635ee4f40bd81532b5fe7e209cf10dc931f42bb45686ffd",
+    "scripts/check_smb_source.py": "7c93640cc7774013f88063a480b008a10b35f47dfc554eec8f7399a81244fa50",
+    "scripts/durable_pipeline.py": "c2823a058760f49c86659cc376763b6be4d8f5991ae292f96375fa0b1d2d2225",
+    "scripts/kafka_archive.py": "a3571f985b3655a9a169fa80bcea95e6d719673a41a21955a44663b4549635b4",
+    "scripts/nifi_client.py": "34f136620637e1b76bc16c4c478ea8b1ec6a05d1e8ed277de041981d077844b7",
+    "scripts/platform_io.py": "80f813d1a299975e5a041300534abff93e886efb344fe68da9e4eda0ebbff8bb",
+    "scripts/private_files.py": "47847e63d26be64434e3f5e4b01b2cf1b5802f48f3ac31bcf9b7ee231ed351a3",
+    "scripts/run_durable_pipeline.py": "196ac77364271900f93fa96593c156d9d13c9d379e0029014202cc7a4403873f",
+    "scripts/watch_adaptive.py": "2a35a26790a6d8a37c60e8ac2e5da80739fa8945be0c39f1aaedf208ebb7d886",
+    "tests/kafka_wire_lab.py": "f20bcd5992fc06fb801ff1d4cb6884db1c513f0187ec581e33f3c112ea64b617",
+    "tests/test_archive_consumer.py": "498d8d413ee2018d96484e5fb4632893964bdfea69649b0aef1daf1efb3525df",
+    "tests/test_archive_json_depth.py": "7435a6745c9dcef261de43d17350cef15d267cce5892230cd79ab3c7964ef5ad",
+    "tests/test_cg14_durable_pipeline.py": "427a8c1cef4842d8d5d86194c26a3e0b8dcca6aa9341eb76a01ed783af726c02",
+    "tests/test_cg14_restore_e2e.py": "5aa3680faf0d68afd8dc146bc4ed8071498a1a0372aee2fa3a26031ee2b61918",
+    "tests/test_cg23_capacity.py": "73e67995b345aa91ef0052a4e3630c882ec0c2231c4d45e1e49955c6d402d3ad",
+    "tests/test_durable_receipts_http.py": "67c9d030af9fcbb9dfc05181af7df59285c542ce99a8c09cf95a666fca75e3e7",
+    "tests/test_failure_harness.py": "15134666f49ba4954545c2f07b8906503efb11e7797c94c94c08ae88f4bb5f6c",
+    "tests/test_kafka_archive.py": "b0be631ddebc61db4fcb97274e2b4184aaf88c0d13b014b57d19191104ed8017",
+    "tests/test_nifi_client_security.py": "20ed939cf4d4cdf857c8149a45805ab66d7291a440794d3ea6c92eac62eeb6c3",
+    "tests/test_platform_io.py": "70b6b543debfedc134bc7b41b0295bf86c120e1481bf9166c026068b28502ddc",
+    "tests/test_private_files.py": "4669640370d993f6e17ef788c5d30cd3fb7c820e7abfe84ec4efbe57d4d89af8",
+    "tests/test_scoring_replay.py": "bb0c3a2daf88f64bca34579d0c3b5cd7dc8904b2943bfa4aa417a0725dc3b01f",
+    "tests/test_smb_source.py": "a5a8e8d4b3a1863f8ab5a809efa8b4cd6c7c2b7954029e71b743b3e07f3cec47",
+    "tests/verify_durable_pipeline.py": "a25a12d2a7795745edcb559f2dc1c8920559826e84dab984e988e6f3b6af1a22",
+    "uv.lock": "284128cd033823293ae04dc6e25083e05a0fb7fb069a2773c034923623425fac"
+  },
+  "r2_report_sha256": "94d8369750496db6db9793672de8630323983963a31a22fc5edee4d2996234ab",
+  "r2_reviewed_sources_unchanged": true,
+  "joblib": {
+    "package": {
+      "name": "joblib",
+      "version": "1.5.3",
+      "source": {
+        "registry": "https://pypi.org/simple"
+      },
+      "sdist": {
+        "url": "https://files.pythonhosted.org/packages/41/f2/d34e8b3a08a9cc79a50b2208a93dce981fe615b64d5a4d4abee421d898df/joblib-1.5.3.tar.gz",
+        "hash": "sha256:8561a3269e6801106863fd0d6d84bb737be9e7631e33aaed3fb9ce5953688da3",
+        "size": 331603,
+        "upload-time": "2025-12-15T08:41:46.427Z"
+      },
+      "wheels": [
+        {
+          "url": "https://files.pythonhosted.org/packages/7b/91/984aca2ec129e2757d1e4e3c81c3fcda9d0f85b74670a094cc443d9ee949/joblib-1.5.3-py3-none-any.whl",
+          "hash": "sha256:5fc3c5039fc5ca8c0276333a188bbd59d6b7ab37fe6632daa76bc7f9ec18e713",
+          "size": 309071,
+          "upload-time": "2025-12-15T08:41:44.973Z"
+        }
+      ]
+    },
+    "source": "https://pypi.org/pypi/joblib/1.5.3/json",
+    "verified": true
+  },
+  "resources": {
+    "venvs": {
+      "venv-win311": {
+        "files": 10212,
+        "logical_bytes": 438540397,
+        "symlinks": []
+      },
+      "venv-win312": {
+        "files": 10092,
+        "logical_bytes": 444860590,
+        "symlinks": []
+      },
+      "venv-fedora311": {
+        "files": 9973,
+        "logical_bytes": 580868251,
+        "symlinks": [
+          "lib64"
+        ]
+      },
+      "venv-fedora312": {
+        "files": 9847,
+        "logical_bytes": 579160869,
+        "symlinks": [
+          "lib64"
+        ]
+      }
+    },
+    "created_containers": [],
+    "created_networks": [],
+    "created_persistent_volumes": [],
+    "download_source": "https://pypi.org/project/joblib/1.5.3/",
+    "policy": "No shared resources mutated or cleaned; transient test subprocesses and loopback sockets only."
+  },
+  "protected_unchanged": true,
+  "limits": [
+    "Three pre-existing Elasticsearch service skips",
+    "Windows process recovery, no power-loss claim",
+    "No shared infrastructure or real transport validation",
+    "No final model training or final-test evaluation",
+    "No merge or human acceptance",
+    "Commands replace user home with <user-home>; raw logs retained locally",
+    "R2 and closure source seals; original runners did not seal source at subprocess start"
+  ]
+}

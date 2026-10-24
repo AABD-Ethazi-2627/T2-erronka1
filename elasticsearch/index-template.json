@@ -6,7 +6,8 @@
   "template": {
     "settings": {
       "number_of_shards": 1,
-      "number_of_replicas": 0
+      "number_of_replicas": 0,
+      "index.final_pipeline": "cnc-prediction-v1"
     },
     "mappings": {
       "dynamic": "strict",
@@ -24,6 +25,15 @@
           "type": "keyword"
         },
         "quality_flag": {
+          "type": "keyword"
+        },
+        "prediction_scope": {
+          "type": "keyword"
+        },
+        "temporal_prediction_enabled": {
+          "type": "boolean"
+        },
+        "score_semantics": {
           "type": "keyword"
         },
         "policy": {

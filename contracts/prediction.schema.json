@@ -20,7 +20,10 @@
     "model_version",
     "model_artifact_sha256",
     "risk_threshold",
-    "anomaly_threshold"
+    "anomaly_threshold",
+    "prediction_scope",
+    "temporal_prediction_enabled",
+    "score_semantics"
   ],
   "properties": {
     "event_id": {
@@ -112,6 +115,15 @@
         "AVISO",
         "CRITICA"
       ]
+    },
+    "prediction_scope": {
+      "const": "AI4I_CURRENT_STATE_ONLY"
+    },
+    "temporal_prediction_enabled": {
+      "const": false
+    },
+    "score_semantics": {
+      "const": "uncalibrated_current_state_score"
     }
   }
 }

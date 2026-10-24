@@ -1,0 +1,94 @@
+{
+  "packages": [
+    {
+      "model": "rf_reference",
+      "status": "exported_research_only",
+      "file": "rf_reference.joblib",
+      "artifact_sha256": "34a14ab97a0e1facc4f4eff10b7ed9227516cc853d7400abd351ccef17cffe72",
+      "bytes": 1129416,
+      "config": {
+        "name": "rf_reference",
+        "family": "rf",
+        "params": {},
+        "anomaly": false
+      },
+      "scope": {
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "temporal_prediction_enabled": false,
+        "training_source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+        "input_features": [
+          "air_temp_K",
+          "process_temp_K",
+          "rpm",
+          "torque_Nm",
+          "tool_wear_min",
+          "machine_type"
+        ],
+        "score_semantics": "uncalibrated_current_state_score"
+      },
+      "versions": {
+        "catboost": "1.2.10",
+        "colorama": "0.4.6",
+        "contourpy": "1.3.3",
+        "cycler": "0.12.1",
+        "fonttools": "4.67.0",
+        "graphviz": "0.21",
+        "iniconfig": "2.3.1",
+        "interpret-core": "0.6.10",
+        "joblib": "1.5.3",
+        "kiwisolver": "1.5.1",
+        "lightgbm": "4.6.0",
+        "matplotlib": "3.11.2",
+        "narwhals": "2.27.1",
+        "numpy": "1.26.4",
+        "packaging": "26.3",
+        "pandas": "2.2.2",
+        "pillow": "13.0.0",
+        "plotly": "7.1.0",
+        "pluggy": "1.7.0",
+        "psutil": "7.1.0",
+        "Pygments": "2.21.0",
+        "pyparsing": "3.3.3",
+        "pytest": "9.1.1",
+        "python-dateutil": "3.0.0",
+        "pytz": "2026.5",
+        "scikit-learn": "1.5.0",
+        "scipy": "1.13.1",
+        "six": "1.17.0",
+        "threadpoolctl": "3.6.0",
+        "tzdata": "2026.5",
+        "xgboost": "3.1.3"
+      },
+      "threshold_from_5600_train_oof": 0.1599255350951087,
+      "threshold_encoded_in_raw_csv": 0.1599255350951087,
+      "alert_contract": {
+        "OK": "score<0.15",
+        "AVISO": "0.15<=score<0.70",
+        "CRITICA": "score>=0.70"
+      },
+      "fit_source_rows_sha256": "cdc6374b1a6e9c614f0c9f76b493a09109f125ae57f5fef66e2db9e078744c51",
+      "input_features": [
+        "air_temp_K",
+        "process_temp_K",
+        "rpm",
+        "torque_Nm",
+        "tool_wear_min",
+        "machine_type"
+      ],
+      "method": "predict_proba",
+      "reload_and_conversion_max_score_difference": 0.0,
+      "verification": "32 training probes only; no new performance evaluation",
+      "additional_runtime_dependency": null,
+      "existing_api_libraries_sufficient": true,
+      "extra_research_module": null,
+      "api_runtime_executed": false,
+      "operational_bundle_ready": false,
+      "remaining": [
+        "Review candidate and unchanged/changed score semantics",
+        "Combine with authorised IF and exact package_model provenance/manifest",
+        "Decision PM and separate integration/deployment task"
+      ]
+    }
+  ],
+  "manifest_sha256": "d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b"
+}

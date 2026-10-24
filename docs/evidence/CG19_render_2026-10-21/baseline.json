@@ -1,0 +1,33 @@
+[
+  {
+    "head": "5a4e54c8d6dd76c31e45a9e9647123ef8b864218",
+    "count": 0,
+    "warnings": [
+      "Infinite extent for field \"bucket.key\": [Infinity, -Infinity]",
+      "Infinite extent for field \"temperature\": [Infinity, -Infinity]"
+    ],
+    "nonFiniteSVG": true,
+    "legendLabels": 0,
+    "colors": 0
+  },
+  {
+    "head": "5a4e54c8d6dd76c31e45a9e9647123ef8b864218",
+    "count": 31,
+    "warnings": [
+      "Symbol legend count exceeds limit, filtering items."
+    ],
+    "nonFiniteSVG": false,
+    "legendLabels": 30,
+    "colors": 10
+  },
+  {
+    "head": "5a4e54c8d6dd76c31e45a9e9647123ef8b864218",
+    "count": 100,
+    "warnings": [
+      "Symbol legend count exceeds limit, filtering items."
+    ],
+    "nonFiniteSVG": false,
+    "legendLabels": 30,
+    "colors": 10
+  }
+]

@@ -1,0 +1,170 @@
+- banner:
+  - status "Page change announcements": Últimos 50 eventos · timestamp DESC, event_id ASC - Discover - Elastic
+  - button "Skip to main content":
+    - generic: Skip to main content
+  - link "Elastic home":
+    - /url: /app/home
+    - img "Elastic Logo"
+  - searchbox "Find apps, content, and more."
+  - 'generic "Keyboard shortcut: Control + /"': ^/
+  - paragraph: Use the Up and Down arrow keys to move focus over options. Press Enter to select. Press Escape to collapse options.
+  - button "Help menu":
+  - button "Newsfeed menu - all items read":
+  - button "Submit feedback" [disabled]:
+    - img "Submit feedback"
+  - button "AI Agent":
+    - generic: AI Agent
+  - button "Account menu":
+    - img "Synthetic CG19 lab viewer":
+      - generic: SC
+  - button "Toggle primary navigation":
+  - button "Spaces navigation":
+    - img "Default":
+      - generic: D
+  - navigation "Breadcrumbs":
+    - list:
+      - link "Discover":
+        - /url: "#/"
+      - generic "Últimos 50 eventos · timestamp DESC, event_id ASC"
+  - button:
+  - button "Click to learn more about the “solution view”":
+    - generic: Check out context-aware Discover
+- heading "Discover - Últimos 50 eventos · timestamp DESC, event_id ASC" [level=1]
+- tablist:
+  - tab "Untitled" [selected]:
+    - generic: Untitled
+    - img "Unsaved changes"
+  - button "Actions":
+- button "New tab":
+- button "Tabs menu":
+- navigation "App menu":
+  - button "Share":
+    - generic: Share
+  - button "Query in ES|QL":
+    - generic: Query in ES|QL
+  - button "More":
+- tabpanel "Untitled Unsaved changes":
+  - generic: Data view
+  - button "CG19 · telemetría de laboratorio":
+    - generic: CG19 · telemetría de laboratorio
+  - button "Add filter":
+  - button "Query menu":
+  - combobox "Search and filter the discover page":
+    - search:
+      - textbox "Start typing to search and filter the discover page":
+        - /placeholder: Filter your data using KQL syntax
+        - text: "machine_id : *"
+      - button "Clear input"
+  - button "Oct 22, 07:00 → 09:00 2h":
+    - generic: Oct 22, 07:00 → 09:00
+    - generic "2h":
+      - generic: 2h
+  - group "Time window actions":
+    - generic: Time window actions
+    - button "Previous" [active]:
+      - generic: Previous
+    - button "Zoom out":
+      - generic: Zoom out
+    - button "Next":
+      - generic: Next
+  - button "Refresh query":
+    - generic: Refresh
+  - generic "Fields":
+    - searchbox "Search field names"
+    - button "Filter by type":
+      - generic: "0"
+    - generic: 8 selected fields. 0 available fields. 29 empty fields. 4 meta fields.
+    - button [expanded]:
+    - 'button "Selected fields: 8 items" [expanded]':
+      - strong: Selected fields
+    - generic: "8"
+    - 'group "Selected fields: 8 items"':
+      - link "Go to Available fields":
+        - /url: "#fieldListGroupedButton:r1s:AvailableFields"
+        - generic: Go to Available fields
+      - list:
+        - button "timestamp"
+        - 'button "Preview timestamp: date"':
+          - img "Date"
+          - generic: timestamp
+        - button "Remove field from table":
+        - button "event_id"
+        - 'button "Preview event_id: string"':
+          - img "Keyword"
+          - generic: event_id
+        - button "Remove field from table":
+        - button "machine_id"
+        - 'button "Preview machine_id: string"':
+          - img "Keyword"
+          - generic: machine_id
+        - button "Remove field from table":
+        - button "source.kind"
+        - 'button "Preview source.kind: string"':
+          - img "Keyword"
+          - generic: source.kind
+        - button "Remove field from table":
+        - button "alert_level"
+        - 'button "Preview alert_level: string"':
+          - img "Keyword"
+          - generic: alert_level
+        - button "Remove field from table":
+        - button "failure_score"
+        - 'button "Preview failure_score: number"':
+          - img "Number"
+          - generic: failure_score
+        - button "Remove field from table":
+        - button "risk_alert"
+        - 'button "Preview risk_alert: boolean"':
+          - img "Boolean"
+          - generic: risk_alert
+        - button "Remove field from table":
+        - button "anomaly_alert"
+        - 'button "Preview anomaly_alert: boolean"':
+          - img "Boolean"
+          - generic: anomaly_alert
+        - button "Remove field from table":
+    - button [expanded]:
+    - 'button "Available fields: 0 items" [expanded]':
+      - strong: Available fields
+      - img "Fields available for display in the table."
+    - generic: "0"
+    - 'group "Available fields: 0 items"':
+      - paragraph: No available fields containing data.
+      - strong: "Try:"
+      - list:
+        - listitem: Extending the time range
+    - button:
+    - 'button "Empty fields: 29 items"':
+      - strong: Empty fields
+      - img "Fields that don't have any values based on your filters."
+    - generic: "29"
+    - 'group "Empty fields: 29 items"':
+      - link "Go to Meta fields":
+        - /url: "#fieldListGroupedButton:r1s:MetaFields"
+        - generic: Go to Meta fields
+      - list
+    - button:
+    - 'button "Meta fields: 4 items"':
+      - strong: Meta fields
+    - generic: "4"
+    - 'group "Meta fields: 4 items"':
+      - list
+  - button "Press the left or right arrow keys to adjust panels size"
+  - group "Panels visibility":
+    - generic: Panels visibility
+    - button "Hide field list" [expanded]:
+      - generic: Hide field list
+  - heading "No results match your search criteria" [level=2]
+  - text: "Here are some things to try:"
+  - list:
+    - generic: Expand the time range
+    - generic: Try a different query
+    - button "KQL examples":
+  - button "Search entire time range":
+    - generic: Search entire time range
+  - paragraph
+  - paragraph: Press space or enter to start dragging. When dragging, use the up/down arrow keys to reorder items in the group and left/right arrow keys to choose drop targets outside of the group. Press space or enter again to finish.
+  - paragraph: Press space or enter to start dragging. When dragging, use the left/right arrow keys to move between drop targets. Press space or enter again to finish.
+- log "Notification message list"
+- tooltip "Previous 2 hours":
+  - generic: Previous 2 hours

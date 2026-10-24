@@ -1,0 +1,20 @@
+[
+  {
+    "aria": "Title text 'IDs: 0/0 recuperados · página 1/1'",
+    "axes": [
+      "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Thursday, 01 January 1970, 12:00:00 AM UTC to Thursday, 01 January 1970, 1:00:00 AM UTC",
+      "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 0.0 to 1.0"
+    ],
+    "name": "previous-time-window",
+    "title": "IDs: 0/0 recuperados · página 1/1"
+  },
+  {
+    "aria": "Title text 'IDs: 5/100 recuperados · página 1/20'",
+    "axes": [
+      "X-axis titled 'UTC · media horaria; huecos sin datos' for a utc scale with values from Wednesday, 21 October 2026, 8:00:00 AM UTC to Wednesday, 21 October 2026, 11:00:00 AM UTC",
+      "Y-axis titled 'Temperatura media (K)' for a linear scale with values from 300 to 310"
+    ],
+    "name": "restored-time-window",
+    "title": "IDs: 5/100 recuperados · página 1/20"
+  }
+]

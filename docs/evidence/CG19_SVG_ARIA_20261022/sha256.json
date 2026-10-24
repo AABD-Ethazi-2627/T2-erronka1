@@ -1,0 +1,18 @@
+{
+  "browser-failures.json": "af45c1da6a18cc65431555b2b6cbf6dd6dbe90124b5b4420a19f09c292ee569c",
+  "dom-after-final.json": "290ba04267b1be8bac574ce3fb8b10ab923f5461b03dcca56be9c8a36bcf3b90",
+  "dom-after-semantics.json": "f57964188ee75289682ce0a668f23e763a00867b9ba9259c43001ba97ea015c9",
+  "dom-before-final.json": "f857332473d50d6f4ba260e4a5d6e98d7388a33dd7c0ea748dcd83e6937ce563",
+  "dom-before-semantics.json": "afc10f7f57462994a1e45c3c1742074f69c189420b6754903d69885d2eff414b",
+  "historical-image-rename.json": "5c539eab05091ff49919c427e83c0664bcf00cfe8f3046ceff42742823c0e4f7",
+  "kibana-actual-roles.json": "4a5ea31cd8f26d5e4de17375123d954d72a2ab43e434b690d1a6ab6534263798",
+  "kibana-dom.json": "6722c010c421db935e01a6b5aa89c3c8187bd18e6e6064bffb5c1cd1bf6fe123",
+  "kibana-page20-dom.json": "2a53c1172a3b3e8beb7504482ed7666d9a8080f1df17266bca2e6f79613657f5",
+  "kibana-page20-sized-dom.json": "06c53286ea7c5a600bdef2e4f48606ba2837217c2d1cb1fbd1ad787740f68893",
+  "kibana-page20-sized-painted.png": "c7b096e517b9a36672ea00e8a0f9026ee123ecda15d13d0e43949946f681d0d2",
+  "kibana-page20.png": "4a40d3eef614196002892a2c338798a57214cdddf869ebc7bf52aa941a56af6f",
+  "kibana-real-kql-filters.json": "be66da8305cdd29ddd38d9c260638f5a1bc94eb57c3146a6b50994f7b9598e23",
+  "kibana-real-time-windows.json": "ac76e64dd35f08734a25fcac984e5bb9e63b1b473addb2c0998700e2d081eb27",
+  "renderer-report.json": "dba4870a3b96f0bf49e7d04632e6672bd94e43d69dff4d05aa83c0ff81d85320",
+  "svg-contrast.json": "d1c7a308963bcbf01303a2f712fb0e40e974a0b8e6cc88916cb00dd89e7aba2e"
+}

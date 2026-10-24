@@ -1,5 +1,6 @@
 """Independent anomaly channel: not a failure probability."""
 
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -11,6 +12,7 @@ from sklearn.ensemble import IsolationForest
 from sklearn.pipeline import Pipeline
 
 from scoring.preparation import SEED, split_development
+from scoring.scope import APPROVED_SOURCE_SHA256, INPUT_FEATURES, load_training_source
 from scripts.experiment_rf import evaluate, pipeline
 
 
@@ -33,7 +35,7 @@ def fit_normal(train, trees=200):
             ),
         ]
     )
-    model.fit(normal)
+    model.fit(normal[INPUT_FEATURES])
     return model, len(normal)
 
 
@@ -48,13 +50,14 @@ def signals(risk, anomaly, anomaly_threshold, risk_threshold=0.15):
 def run(output=Path("outputs/cg09")):
     if output.exists():
         raise FileExistsError("Use a fresh output directory")
-    train, validation, _ = split_development(pd.read_csv("data/ai4i2020_train.csv"))
+    train, validation, _ = split_development(load_training_source())
     model, count = fit_normal(train)
-    scores = -model.score_samples(validation)
+    scores = -model.score_samples(validation[INPUT_FEATURES])
     normal = validation.machine_failure.eq(0).to_numpy()
     cutoff = float(np.quantile(scores[normal], 0.99, method="higher"))
     flags = scores >= cutoff
     report = {
+        "source_sha256": APPROVED_SOURCE_SHA256,
         "normal_fit_rows": count,
         "normal_validation_rows": int(normal.sum()),
         "seed": SEED,
@@ -69,14 +72,21 @@ def run(output=Path("outputs/cg09")):
         ),
         "limitations": [
             "Normal failure label is a proxy, not verified anomaly-free truth.",
-            "Quantile is selected on validation; no independent anomaly labels or final test.",
-            "Anomaly score is not a calibrated failure probability; cannot suppress RF alarms.",
+            (
+                "Quantile is selected on validation; no independent "
+                + "anomaly labels or final test."
+            ),
+            (
+                "Anomaly score is not a calibrated failure "
+                + "probability; cannot suppress RF alarms."
+            ),
         ],
     }
     output.mkdir(parents=True)
     joblib.dump(model, output / "if.pkl")
     np.testing.assert_array_equal(
-        scores, -joblib.load(output / "if.pkl").score_samples(validation)
+        scores,
+        -joblib.load(output / "if.pkl").score_samples(validation[INPUT_FEATURES]),
     )
     report["model_sha256"] = hashlib.sha256(
         (output / "if.pkl").read_bytes()
@@ -89,4 +99,7 @@ def run(output=Path("outputs/cg09")):
 
 
 if __name__ == "__main__":
-    print(json.dumps(run(), indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=Path("outputs/cg09"))
+    args = parser.parse_args()
+    print(json.dumps(run(args.output), indent=2))

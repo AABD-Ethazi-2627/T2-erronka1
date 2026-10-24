@@ -1,0 +1,38 @@
+{
+  "objects": [
+    [
+      "dashboard",
+      "cnc-cg19-review-v2"
+    ],
+    [
+      "index-pattern",
+      "cnc-cg19-review-data-v2"
+    ],
+    [
+      "search",
+      "cnc-cg19-recent-v2"
+    ],
+    [
+      "visualization",
+      "cnc-cg19-decision-v2"
+    ],
+    [
+      "visualization",
+      "cnc-cg19-summary-v2"
+    ],
+    [
+      "visualization",
+      "cnc-cg19-temperature-v2"
+    ],
+    [
+      "visualization",
+      "cnc-cg19-wear-v2"
+    ]
+  ],
+  "visualization_specs_match_source": true,
+  "source_sha256": "e779473e43de7d733e7775d53b3933e86ad98a9599301a1e4088c6a51dab5e6c",
+  "export_sha256": "dff5f458f4ce2e60756159617005e6cd54511d35612a3c1bc74482a611a0ccef",
+  "es_uuid": "3Cv7WnfKQkGd3Xai0WpknQ",
+  "es_version": "9.5.4",
+  "kibana_version": "9.5.4"
+}

@@ -4,13 +4,27 @@ Clasificación del estado actual con AI4I2020, entrenada offline y servida por
 FastAPI. Inferencia por lotes SMB → Filebeat → Kafka → NiFi → API → Elasticsearch
 → Kibana. No acciona máquinas ni acredita predicciones a 24 horas.
 
-[Índice final: ramas, métricas, comandos y límites](docs/evidence/INDEX_2026-10-19.md)
+**Alcance confirmado20Oct:** entrenar exclusivamente con el CSV reducido docente.
+NiFi retira etiquetas y fila CSV cruda antes de `/predict`; la API solo utiliza
+cinco sensores y `machine_type`. El score representa clasificación contemporánea,
+no porcentaje de desgaste ni probabilidad calibrada de fallo futuro. Fecha/ID solo
+sirven para trazabilidad. ETA, RUL, estaciones y aprendizaje temporal quedan fuera
+de la entrega; los experimentos históricos se conservan separados y no se cargan
+en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOPE.md).
+
+[Índice de evidencias: alcance vigente y registros históricos](docs/evidence/INDEX_2026-10-19.md)
 · [Rúbrica y revisión pendiente](docs/rubrica/SEGUIMIENTO.md)
 · [Enunciado original](ENUNTZIATUA.md) · [Documentación](docs/README.md).
 
 ## Entorno y experimentos
 
-Python 3.11 y uv; el lock conserva las versiones. Desde checkout limpio:
+Python 3.11/3.12, DuckDB **2.0.0** y uv; el lock conserva las versiones.
+
+El [contrato de plataforma](docs/PLATFORM_SUPPORT.md) distingue fsync POSIX de
+recuperación Windows ante muerte del proceso. Windows no acredita persistencia
+de metadatos ante pérdida de energía; las herramientas permiten exigir y
+comprobar explícitamente el requisito de fsync de directorios.
+[Migración, timestamps UTC y rollback](docs/DUCKDB_2_MIGRATION.md). Desde checkout limpio:
 
 ```bash
 uv sync --frozen --python 3.11
@@ -28,10 +42,15 @@ Los experimentos y empaquetado rechazan sobrescribir salidas; conservar anterior
 coherentes. No cargar pickles descargados de terceros. Los modelos generados quedan
 ignorados por Git; informes compactos y hashes están versionados en docs/evidence.
 
-Opcionales: `scripts.experiment_smotenc` compara sobremuestreo dentro de los folds;
-`scripts.seasonal_lab` genera un laboratorio temporal separado, sin entrenar
-forecast ni convertir fechas inventadas en historial observado. El test antiguo
-inspeccionado en PR29 se excluye: las métricas actuales son de desarrollo.
+La API necesita un ledger local persistente y escribible para conservar respuestas
+canónicas en reintentos. Compose usa el volumen `scoring-state`; fuera de Compose,
+consultar [identidad, recuperación y conflictos 409](docs/SCORING_REPLAY_CONTRACT.md).
+
+Opcional de clasificación: `scripts.experiment_smotenc` compara sobremuestreo dentro
+de los folds. Los laboratorios temporales/estacionales y otros datasets son trabajo
+histórico fuera del alcance confirmado; no forman parte del entrenamiento, empaquetado
+ni despliegue de esta entrega. El test antiguo inspeccionado en PR29 se excluye:
+las métricas actuales son de desarrollo.
 
 ## Laboratorio local
 
@@ -76,13 +95,27 @@ este README. Importar y revisar `nifi-flows/cnc_lab_completed.json` en NiFi2.0;
 configurar servicios de controlador y comprobar relaciones/colas antes de arrancar.
 El export final utiliza topics lab-v2/SMB-v1, cuarentena y retries acotados.
 `scripts/nifi_client.py` es cliente local para revisión; su token privado no se
-versiona y no forma parte del export. No ejecutar scripts temporales del equipo
+versiona y no forma parte del export. Requiere `CNC_NIFI_TOKEN_FILE` con ruta
+absoluta a un archivo del usuario en modo `0600` y `CNC_NIFI_CA_FILE` con el
+certificado de confianza de NiFi. Verifica TLS y el nombre `localhost`; no
+acepta certificados sin validar. No ejecutar scripts temporales del equipo
 como si fueran instalación portable.
 
-Aplicar `elasticsearch/index-template.json` como template antes de ingerir y crear
-el dashboard con `uv run --frozen python -m scripts.create_lab_dashboard` o importar
-`kibana/acceptance-export.ndjson`. La vista filtra índices de aceptación, conserva
-el rango temporal del ensayo y no mezcla el montaje v1. Ver CG18/CG19 para pruebas.
+En un laboratorio autorizado, instalar primero `elasticsearch/ingest-pipeline.json`
+con `PUT /_ingest/pipeline/cnc-prediction-v1` y comprobarlo con
+`GET /_ingest/pipeline/cnc-prediction-v1`. Después aplicar
+`elasticsearch/index-template.json` con `PUT /_index_template/cnc-lab-v1`, antes de
+crear índices e ingerir. Seguir el [procedimiento de instalación y comprobación](elasticsearch/README.md#instalación-y-rollback-en-un-laboratorio-propio):
+el template exige ese pipeline final; si falta, incluso los documentos válidos
+reciben HTTP400. El template no migra índices existentes.
+
+`uv run --frozen python -m scripts.create_lab_dashboard` genera ahora
+`kibana/cg19-review-source.ndjson` **sin conectarse a Kibana**; `--check` verifica
+su reproducción. El candidato v2 incluye temperaturas, heatmap/casos offline,
+últimos50 y KPI con denominadores. Importación y revisión humana siguen pendientes:
+ver [CG19 vigente](docs/evidence/CG19_2026-10-21.md). El export
+`kibana/acceptance-export.ndjson` conserva el ensayo histórico v1 y su rango absoluto;
+no demuestra las vistas nuevas. Ambos excluyen el índice de montaje v1.
 
 Elasticsearch sin autenticación está limitado a loopback/red Docker del lab;
 no exponer estos puertos en una red compartida. Mononodo no aporta HA.
@@ -96,3 +129,32 @@ Una rama feat por issue, con dependencias apiladas y commits trazables en el ín
 Revisión humana y defensa pendientes antes de cerrar issues o atribuir nota.
 [Sincronización Project #2 → #1](docs/PROJECTS_SYNC.md) necesita su secret con alcance
 Project y activación administrativa; cambios locales no la activan por sí solos.
+
+[Exploración de alternativas RF/GradientBoosting/CatBoost y anomalías](docs/evidence/CG08_ALTERNATIVAS.md):
+comparación OOF y nested, costes y latencia; grupo opcional research.
+
+[Dataset estacional sintético ampliado y curva de aprendizaje](docs/evidence/CG11_ESTACIONAL_V2.md):
+investigación histórica fuera de la entrega, 245.376 filas y modelo sintético
+experimental separado. No se carga en la API ni acredita forecast real.
+
+[¿Se puede estimar tiempo hasta fallo con el SMB disponible?](docs/evidence/CG02_ETA_SMB.md)
+Auditoría histórica de procedencia/continuidad; no acredita ETA y sus propuestas
+temporales quedan fuera del alcance vigente.
+
+## Rutas y archivos del repositorio
+
+[Mapa de carpetas y política de archivos](docs/REPOSITORY_LAYOUT.md).
+Ejecutar `python3 scripts/check_repository_layout.py` desde la raíz.
+
+## CG14: validación e integración pendiente
+
+La validación CG14 y el laboratorio RESTORE tienen un alcance separado de la guía activa anterior. Consultar [contrato](docs/CG14_VALIDATION_CONTRACT.md), [RESTORE](docs/CG14_RESTORE_E2E.md) y [plan de integración PR42](docs/CG14_PR42_INTEGRATION.md). El mock RESTORE no acredita scoring ni archivo durable integrados.
+
+El [worker durable opt-in](docs/CG14_DURABLE_PIPELINE.md) conecta raw, API
+canónica, archivo CG15 y ES opcional requerido. PR65 exige recibos `stored` o
+`duplicate` por cada stream, incluso en replay; un rechazo persistido bloquea
+el ACK. La API limita el cuerpo a 32.768 bytes y la profundidad JSON a 64,
+con errores 422 acotados sin devolver la entrada. Véanse la
+[corrección y sus límites](docs/evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
+y la [matriz CG14](docs/CG14_ACCEPTANCE_MATRIX.md). La revisión padre y los
+ensayos Apache Kafka/NiFi reales siguen pendientes.

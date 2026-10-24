@@ -1,0 +1,103 @@
+[
+  {
+    "name": "es-contract",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "tests/verify_elasticsearch_contract.py",
+      "--work-dir",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\live1-contract",
+      "--output",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\live1\\contract.json",
+      "--docker-via-wsl",
+      "FedoraLinux-43"
+    ],
+    "started_at": "2026-10-22T10:39:07.084939+00:00",
+    "exit_code": 0,
+    "log": "live1-es-contract.log",
+    "sha256": "1b7b9f3e16dcf2ec7944ab5853d7b0c995a3a0f3bfc584029c50035200b59a80",
+    "local_original_log_sha256": "49e9b7b5621ee59922bcd304715f312a80bc20c5bba2499306b3abfe47a04ad2"
+  },
+  {
+    "name": "es-ingest",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "tests/verify_es_ingest_pipeline.py",
+      "--work-dir",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\live1-ingest",
+      "--docker-via-wsl",
+      "FedoraLinux-43"
+    ],
+    "started_at": "2026-10-22T10:39:39.738212+00:00",
+    "exit_code": 0,
+    "log": "live1-es-ingest.log",
+    "sha256": "eb3b4c57c365d0e732668fd933d5bac97f095df0dd4eb415bebdab57d738172c",
+    "local_original_log_sha256": "8ec1ca0f90613a2fe7412474274aabf2a207c9f6c22656588b814014962d8929"
+  },
+  {
+    "name": "build-setup",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\build_setup.py"
+    ],
+    "started_at": "2026-10-22T10:40:44.340044+00:00",
+    "exit_code": 0,
+    "log": "setup-and-contract-final-build-setup.log",
+    "sha256": "abc30023955fb1415cb6df613a2f287897377fa4b0a607d322483e2bd51a91d1",
+    "local_original_log_sha256": "536250a09a5fe5f5faf325ee309c2f9200017a2f382d5ebb4f655b2f7e55c253"
+  },
+  {
+    "name": "documented-setup",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\documented_setup.py"
+    ],
+    "started_at": "2026-10-22T10:40:44.396666+00:00",
+    "exit_code": 0,
+    "log": "setup-and-contract-final-documented-setup.log",
+    "sha256": "abc30023955fb1415cb6df613a2f287897377fa4b0a607d322483e2bd51a91d1",
+    "local_original_log_sha256": "536250a09a5fe5f5faf325ee309c2f9200017a2f382d5ebb4f655b2f7e55c253"
+  },
+  {
+    "name": "es-contract",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "tests/verify_elasticsearch_contract.py",
+      "--work-dir",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\contract-final-lab",
+      "--output",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\setup-and-contract-final\\contract.json",
+      "--docker-via-wsl",
+      "FedoraLinux-43"
+    ],
+    "started_at": "2026-10-22T10:41:11.872076+00:00",
+    "exit_code": 0,
+    "log": "setup-and-contract-final-es-contract.log",
+    "sha256": "1b7b9f3e16dcf2ec7944ab5853d7b0c995a3a0f3bfc584029c50035200b59a80",
+    "local_original_log_sha256": "49e9b7b5621ee59922bcd304715f312a80bc20c5bba2499306b3abfe47a04ad2"
+  },
+  {
+    "name": "es-contract",
+    "command": [
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-20261022\\venv\\Scripts\\python.exe",
+      "-B",
+      "tests/verify_elasticsearch_contract.py",
+      "--work-dir",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\contract-exact-final-lab",
+      "--output",
+      "D:\\github\\_local\\t2-babysit-20261021\\es-ingest-fix-r2\\contract-exact-final\\contract.json",
+      "--docker-via-wsl",
+      "FedoraLinux-43"
+    ],
+    "started_at": "2026-10-22T10:42:48.181005+00:00",
+    "exit_code": 0,
+    "log": "contract-exact-final-es-contract.log",
+    "sha256": "1b7b9f3e16dcf2ec7944ab5853d7b0c995a3a0f3bfc584029c50035200b59a80",
+    "contract_verifier_sha256_at_start": "ae6fb7203223e418ecbecb62b09b230a9ba8e6998c14d747e3e6cdae6b4b699d",
+    "local_original_log_sha256": "49e9b7b5621ee59922bcd304715f312a80bc20c5bba2499306b3abfe47a04ad2"
+  }
+]

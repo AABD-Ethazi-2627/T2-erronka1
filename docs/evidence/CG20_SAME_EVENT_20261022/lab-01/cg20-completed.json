@@ -1,0 +1,230 @@
+{
+  "offset": 5,
+  "accounting": {
+    "observed": 5,
+    "saved": 4,
+    "rejected": 1,
+    "pending": 0
+  },
+  "archive": [
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,0]\",\"prediction\"]",
+      "9d7a559e1d5e76132975ce69becb5de580b0477b856eaacd91adfb3d4bc57391",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,0]\",\"telemetry\"]",
+      "d5b5da61d88d8db07e6c7678b6b244354d58dfe6699c166601fe5f0a9573d742",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,1]\",\"prediction\"]",
+      "db515c22d06d7374364328a4fa0649fd05ed53462516ca829180087195e19139",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,1]\",\"telemetry\"]",
+      "081d0bad4b91bfdc54eda4e34a8096af48b4e83ab479f1c988acadbedec7d034",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,2]\",\"prediction\"]",
+      "ac4bbfd14320abeaf932cfe8cc1d213198b1a23cf7ed9a6f839b035043997896",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,2]\",\"telemetry\"]",
+      "233430d7a87535d32e46968bd080b73c181e1909e0df718ebffc8aaf5d5f053b",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,3]\",\"prediction\"]",
+      "29c4d9b9c56d86ed496007e46e4a7b75c4e6d19e279d77d36b54949ba61b7804",
+      "stored"
+    ],
+    [
+      "[\"[\\\"kafka\\\",\\\"t2-cg20-b74cb05b34/generation-1\\\",\\\"cnc-sensors-automatic-v1\\\",0,3]\",\"telemetry\"]",
+      "8f702cfd84cd074628aba05f85f8ca06f542597d1a7399bc84b9e5f140046e75",
+      "stored"
+    ]
+  ],
+  "parquet_hashes": {
+    "worker/archive/prediction/date=2026-10-21/1dfd6687720c84a21b18438a2a895651ad2d63c193d70c1623de2bf9f4ed0f4f.parquet": "4626ae3fd231c5816951b195cb36616a5911a07feba576c9f92889a92ffc2d74",
+    "worker/archive/prediction/date=2026-10-21/3df2dbe273924a3f59c9f42b9b0328d9cdae63f88f75d599edbc1bd52f52569c.parquet": "85877e4a1e8d3fd1d01a1020e8821ee9836ef881ecde969da33d804c9b1488b7",
+    "worker/archive/prediction/date=2026-10-21/a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c.parquet": "2a7d00309ad0d7a6344955e5b2cd43733c0975a54593e6f60445c3b4c7f60cde",
+    "worker/archive/prediction/date=2026-10-21/d7d837de2f18f490ee7f7745a328bb09c8479c97e04065e4ced0997733534254.parquet": "6a139d1a973d63ae8807a2d9f2a682344a75e2f5485fcd1e5784eba55d7fba0c",
+    "worker/archive/telemetry/date=2026-10-21/5b5bf7d69c4d930f7e9c14b0654f62f0d587b59bab6979fca53d133f0244705b.parquet": "bb3cb584f65d32cbe9b6222cc71e9529402ca27955584f92f1af956c9eafa526",
+    "worker/archive/telemetry/date=2026-10-21/8366de5ddb9b5abeaa9e5880e7700baceff9168a992498c018f03ca5a2fbbd52.parquet": "d637de72b9ab43f6526b10178d4fe282a5a6c93e0dbc941ee1a978405441af78",
+    "worker/archive/telemetry/date=2026-10-21/cd03b6d678dda734609bcd71c52ac98c98bbc2468e125b237438d0b0bd9e9ff6.parquet": "1f6171e190abb7e629ef9d135ccb7fdee5295617281367feeff2e423d3b47fbf",
+    "worker/archive/telemetry/date=2026-10-21/df91da5d33354808ceed290e76da6242c26929c6c5b95e40ef4159b591851c58.parquet": "3a04a334c0a1ece447f28125f6d659c351266e9b857a2604cfa61d2eac994998"
+  },
+  "es": {
+    "took": 1,
+    "timed_out": false,
+    "_shards": {
+      "total": 1,
+      "successful": 1,
+      "skipped": 0,
+      "failed": 0
+    },
+    "hits": {
+      "total": {
+        "value": 4,
+        "relation": "eq"
+      },
+      "max_score": 1.0,
+      "hits": [
+        {
+          "_index": "cnc-alerts-automatic-v4",
+          "_id": "a7f78d005fefd2883d6f762aa3befb9c9962083000c333a5d6740c9ee86e1a1c",
+          "_score": 1.0,
+          "_source": {
+            "anomaly_threshold": 0.4,
+            "model_version": "synthetic-replay-only",
+            "model_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "source": {
+              "kind": "lab_fixture",
+              "record_ref": "cnc-sensors-automatic-v1/0/0",
+              "uri": "kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1"
+            },
+            "temporal_prediction_enabled": false,
+            "schema_version": "0.1.0",
+            "anomaly_score": 0.5,
+            "failure_score": 0.8,
+            "quality_flag": "OK",
+            "alert_level": "CRITICA",
+            "policy": "f2",
+            "timestamp": "2026-10-21T08:00:00Z",
+            "machine_type": "H",
+            "risk_alert": true,
+            "score_semantics": "uncalibrated_current_state_score",
+            "air_temp_K": 300.0,
+            "machine_id": "CNC-001",
+            "torque_Nm": 40.0,
+            "process_temp_K": 310.0,
+            "scored_at": "2026-10-22T13:47:41.231811Z",
+            "anomaly_alert": true,
+            "rpm": 1500.0,
+            "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+            "event_id": "279947a017e5d70adba2a83e5eb319c0c7495260ebac7259de1954bb834c6b8b",
+            "risk_threshold": 0.5,
+            "tool_wear_min": 10.0
+          }
+        },
+        {
+          "_index": "cnc-alerts-automatic-v4",
+          "_id": "d7d837de2f18f490ee7f7745a328bb09c8479c97e04065e4ced0997733534254",
+          "_score": 1.0,
+          "_source": {
+            "anomaly_threshold": 0.4,
+            "model_version": "synthetic-replay-only",
+            "model_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "source": {
+              "kind": "lab_fixture",
+              "record_ref": "cnc-sensors-automatic-v1/0/1",
+              "uri": "kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1"
+            },
+            "temporal_prediction_enabled": false,
+            "schema_version": "0.1.0",
+            "anomaly_score": 0.5,
+            "failure_score": 0.8,
+            "quality_flag": "OK",
+            "alert_level": "CRITICA",
+            "policy": "f2",
+            "timestamp": "2026-10-21T08:00:00Z",
+            "machine_type": "H",
+            "risk_alert": true,
+            "score_semantics": "uncalibrated_current_state_score",
+            "air_temp_K": 300.0,
+            "machine_id": "CNC-001",
+            "torque_Nm": 40.0,
+            "process_temp_K": 310.0,
+            "scored_at": "2026-10-22T13:49:18.990247Z",
+            "anomaly_alert": true,
+            "rpm": 1500.0,
+            "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+            "event_id": "e2612b61a35abda295ca8f616423d25075487e707332e276a6e4ebffbbd02b32",
+            "risk_threshold": 0.5,
+            "tool_wear_min": 10.0
+          }
+        },
+        {
+          "_index": "cnc-alerts-automatic-v4",
+          "_id": "3df2dbe273924a3f59c9f42b9b0328d9cdae63f88f75d599edbc1bd52f52569c",
+          "_score": 1.0,
+          "_source": {
+            "anomaly_threshold": 0.4,
+            "model_version": "synthetic-replay-only",
+            "model_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "source": {
+              "kind": "lab_fixture",
+              "record_ref": "cnc-sensors-automatic-v1/0/2",
+              "uri": "kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1"
+            },
+            "temporal_prediction_enabled": false,
+            "schema_version": "0.1.0",
+            "anomaly_score": 0.5,
+            "failure_score": 0.8,
+            "quality_flag": "OK",
+            "alert_level": "CRITICA",
+            "policy": "f2",
+            "timestamp": "2026-10-21T08:00:00Z",
+            "machine_type": "H",
+            "risk_alert": true,
+            "score_semantics": "uncalibrated_current_state_score",
+            "air_temp_K": 300.0,
+            "machine_id": "CNC-001",
+            "torque_Nm": 40.0,
+            "process_temp_K": 310.0,
+            "scored_at": "2026-10-22T13:49:19.508214Z",
+            "anomaly_alert": true,
+            "rpm": 1500.0,
+            "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+            "event_id": "a4b0bfc0fc1fd80ff2dfa5125c5d5ecdb98532227ec594bccfdb63d5be2efa30",
+            "risk_threshold": 0.5,
+            "tool_wear_min": 10.0
+          }
+        },
+        {
+          "_index": "cnc-alerts-automatic-v4",
+          "_id": "1dfd6687720c84a21b18438a2a895651ad2d63c193d70c1623de2bf9f4ed0f4f",
+          "_score": 1.0,
+          "_source": {
+            "anomaly_threshold": 0.4,
+            "model_version": "synthetic-replay-only",
+            "model_artifact_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "source": {
+              "kind": "lab_fixture",
+              "record_ref": "cnc-sensors-automatic-v1/0/3",
+              "uri": "kafka://t2-cg20-b74cb05b34/generation-1/cnc-sensors-automatic-v1"
+            },
+            "temporal_prediction_enabled": false,
+            "schema_version": "0.1.0",
+            "anomaly_score": 0.5,
+            "failure_score": 0.8,
+            "quality_flag": "OK",
+            "alert_level": "CRITICA",
+            "policy": "f2",
+            "timestamp": "2026-10-21T08:00:00Z",
+            "machine_type": "H",
+            "risk_alert": true,
+            "score_semantics": "uncalibrated_current_state_score",
+            "air_temp_K": 300.0,
+            "machine_id": "CNC-001",
+            "torque_Nm": 40.0,
+            "process_temp_K": 310.0,
+            "scored_at": "2026-10-22T13:49:26.704253Z",
+            "anomaly_alert": true,
+            "rpm": 1500.0,
+            "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+            "event_id": "775c7dbdc7f57fcad0475cbe62746856c04dbf03c4339b5b3e261e5ff2cdf8f6",
+            "risk_threshold": 0.5,
+            "tool_wear_min": 10.0
+          }
+        }
+      ]
+    }
+  },
+  "canonical_response_count": 4,
+  "worker_response_count": 4
+}

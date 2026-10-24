@@ -1,0 +1,9 @@
+{
+  "dataset_id": "adaptive-synthetic-fixture-v1",
+  "provenance": "synthetic",
+  "physical_identity_verified": false,
+  "timestamp_role": "observation",
+  "columns": {"asset": "asset_id", "timestamp": "event_time", "lifecycle": "component_cycle"},
+  "sensors": {"wear": {"column": "wear_minutes", "unit": "min"}},
+  "max_gap_minutes": 10
+}

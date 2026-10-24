@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 
 from scripts.audit_cg02 import audit_csv
-from scripts.check_smb_source import list_batch_names, read_config, smb_command
+from scripts.check_smb_source import list_batch_sizes, read_config, smb_command
 
 
 def publish_snapshot(raw, target):
@@ -21,10 +21,21 @@ def publish_snapshot(raw, target):
             )
         return False
     try:
-        with tempfile.NamedTemporaryFile() as check:
-            check.write(raw)
-            check.flush()
-            report = audit_csv(check.name, "batch")
+        # Filebeat filters a plain header and emits one physical line per record.
+        # Require the producer's LF-delimited, unquoted UTF-8 envelope unchanged.
+        if (
+            not raw.endswith(b"\n")
+            or raw.startswith(b"\xef\xbb\xbf")
+            or b'"' in raw
+            or b"\r" in raw
+        ):
+            raise ValueError("Invalid SMB batch framing")
+        # Close before a second reader opens it (Windows denies reopening a
+        # delete-on-close NamedTemporaryFile with ordinary sharing flags).
+        with tempfile.TemporaryDirectory(prefix="cnc-smb-validate-") as directory:
+            check = Path(directory) / "batch.csv"
+            check.write_bytes(raw)
+            report = audit_csv(check, "batch")
         if (
             report["malformed_row_widths"]
             or any(report["missing"].values())
@@ -43,11 +54,15 @@ def publish_snapshot(raw, target):
         raise ValueError("Invalid SMB batch preserved outside inference") from None
     target.parent.mkdir(parents=True, exist_ok=True)
     # Link complete flushed bytes into the watched glob atomically and exclusively.
-    with tempfile.NamedTemporaryFile(dir=target.parent, prefix=".capture-") as stage:
-        stage.write(raw)
-        stage.flush()
-        os.fsync(stage.fileno())
-        os.link(stage.name, target)
+    descriptor, name = tempfile.mkstemp(dir=target.parent, prefix=".capture-")
+    try:
+        with os.fdopen(descriptor, "wb") as stage:
+            stage.write(raw)
+            stage.flush()
+            os.fsync(stage.fileno())
+        os.link(name, target)
+    finally:
+        os.unlink(name)
     return True
 
 
@@ -55,13 +70,17 @@ def capture_once(config, output, max_files=2):
     if max_files < 1 or max_files > 20:
         raise ValueError("max_files must be between1 and20")
     output = Path(output)
-    names = list_batch_names(smb_command(config, "ls"))
+    sizes = list_batch_sizes(smb_command(config, "ls"))
+    names = list(sizes)
     pending = [n for n in names if not (output / n).exists()][:max_files]
     reports = []
     for name in pending:
         with tempfile.TemporaryDirectory() as tmp:
             smb_command(config, f"get {name} sample.csv", cwd=tmp)
             raw = (Path(tmp) / "sample.csv").read_bytes()
+        after = list_batch_sizes(smb_command(config, "ls"))
+        if sizes[name] != len(raw) or after.get(name) != sizes[name]:
+            raise ValueError("SMB batch changed or incomplete; retry after publication")
         publish_snapshot(raw, output / name)
         reports.append(
             {
@@ -75,7 +94,11 @@ def capture_once(config, output, max_files=2):
         "available_at_listing": len(names),
         "captured": reports,
         "remaining_at_listing": len([n for n in names if not (output / n).exists()]),
-        "limitation": "Immutable generated filenames assumed; recheck or reconcile before trusting producer changes. No remote retention guarantee.",
+        "limitation": (
+            "Immutable generated filenames assumed; recheck or "
+            + "reconcile before trusting producer changes. No remote "
+            + "retention guarantee."
+        ),
     }
 
 
@@ -89,9 +112,15 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.interval < 5:
         parser.error("interval must be at least5 seconds")
-    config = read_config(args.env_file)
-    while True:
-        print(json.dumps(capture_once(config, args.output, args.max_files)), flush=True)
-        if not args.watch:
-            break
-        time.sleep(args.interval)
+    try:
+        config = read_config(args.env_file)
+        while True:
+            print(
+                json.dumps(capture_once(config, args.output, args.max_files)),
+                flush=True,
+            )
+            if not args.watch:
+                break
+            time.sleep(args.interval)
+    except (OSError, ValueError, RuntimeError) as error:
+        parser.exit(1, f"{error}\n")

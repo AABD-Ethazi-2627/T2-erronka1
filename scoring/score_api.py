@@ -5,22 +5,55 @@ import json
 import logging
 import math
 import os
+import sys
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 from pathlib import Path
+from types import TracebackType
 from typing import Literal
 
 import joblib
 import pandas as pd
 import sklearn
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from scoring.alert_policy import alert_level
-from scripts.validate_contracts import validators
+from scoring.response_ledger import InferenceConflict, canonical, response
+from scoring.scope import INPUT_FEATURES, SCOPE, validate_bundle_scope
+from scripts.validate_contracts import contract_hashes, validators
 
 log = logging.getLogger(__name__)
+
+
+def json_too_deep(raw, limit=64):
+    """Count JSON containers without recursion, ignoring escaped string bytes.
+
+    Syntax remains the JSON parser's responsibility. Check only after the byte
+    limit so oversized requests retain 413, including fragmented bodies.
+    """
+    depth = 0
+    quoted = False
+    escaped = False
+    for value in raw:
+        if quoted:
+            if escaped:
+                escaped = False
+            elif value == 92:
+                escaped = True
+            elif value == 34:
+                quoted = False
+        elif value == 34:
+            quoted = True
+        elif value in (91, 123):
+            depth += 1
+            if depth > limit:
+                return True
+        elif value in (93, 125):
+            depth -= 1
+    return False
 
 
 class Source(BaseModel):
@@ -28,7 +61,6 @@ class Source(BaseModel):
     kind: Literal["smb_csv", "lab_fixture", "statement_example"]
     uri: str = Field(min_length=1, max_length=1024)
     record_ref: str = Field(min_length=1, max_length=1024)
-    raw_record: str | None = Field(default=None, max_length=8192)
 
 
 class Telemetry(BaseModel):
@@ -55,10 +87,16 @@ class Telemetry(BaseModel):
         return value
 
 
-def create_app(manifest_path=None):
+def create_app(manifest_path=None, *, ledger_path=None):
     path = Path(
         manifest_path or os.getenv("MODEL_MANIFEST", "outputs/api/manifest.json")
     )
+    ledger = Path(
+        ledger_path
+        or os.getenv("SCORING_LEDGER", str(path.parent / "responses.sqlite3"))
+    )
+    if str(ledger) == ":memory:":
+        raise ValueError("Scoring requires a persistent response ledger")
 
     @asynccontextmanager
     async def lifespan(application):
@@ -66,10 +104,12 @@ def create_app(manifest_path=None):
         application.state.manifest = None
         try:
             manifest = json.loads(path.read_text())
+            validate_bundle_scope(manifest)
             if manifest["versions"]["sklearn"] != sklearn.__version__:
                 raise ValueError("Model/runtime sklearn mismatch")
             models = {}
-            # Validate every artifact before deserializing any; directory must be trusted.
+            # Validate every artifact before deserializing any; directory must be
+            # trusted.
             for filename in ["rf.pkl", "if.pkl"]:
                 artifact = path.parent / filename
                 if (
@@ -103,8 +143,18 @@ def create_app(manifest_path=None):
                 raise ValueError("Invalid model probe")
             application.state.models = models
             application.state.manifest = manifest
-        except Exception:  # noqa: BLE001 -- fail closed for any model loading/probe error
-            log.error("Model bundle unavailable or invalid; scoring remains unready")
+        except Exception:
+            # Fail closed for arbitrary loader/probe errors. Keep only this
+            # trusted frame; external frames/messages may contain sensitive data.
+            origin = sys.exc_info()[2]
+            safe_trace = TracebackType(
+                None, origin.tb_frame, origin.tb_lasti, origin.tb_lineno
+            )
+            safe_error = RuntimeError("Model initialization failed; details redacted")
+            log.error(
+                "Model bundle unavailable or invalid; scoring remains unready",
+                exc_info=(RuntimeError, safe_error, safe_trace),
+            )
         yield
         application.state.models = None
 
@@ -113,6 +163,24 @@ def create_app(manifest_path=None):
     )
     app.state.models = None
     schemas = validators(Path(__file__).resolve().parents[1] / "contracts")
+    schema_fingerprint = hashlib.sha256(
+        canonical(contract_hashes()).encode()
+    ).hexdigest()
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request: Request, exc: RequestValidationError):
+        # Never serialize the untrusted input or recursive validation context.
+        error = exc.errors()[0]
+        # Preserve the existing field-location contract without echoing extra
+        # keys, arbitrarily long paths, messages or values supplied by clients.
+        location = [
+            part if part == "body" or part in Telemetry.model_fields else "field"
+            for part in error["loc"][:2]
+        ]
+        return JSONResponse(
+            status_code=422,
+            content={"detail": [{"loc": location, "msg": "Invalid request"}]},
+        )
 
     @app.middleware("http")
     async def bounded_body(request: Request, call_next):
@@ -126,46 +194,84 @@ def create_app(manifest_path=None):
                 )
             chunks.append(chunk)
         request._body = b"".join(chunks)
+        if json_too_deep(request._body):
+            return JSONResponse(
+                status_code=422, content={"detail": "JSON nesting exceeds 64"}
+            )
         return await call_next(request)
 
     @app.get("/health")
     def health():
         if app.state.models is None:
             raise HTTPException(503, "Model not ready")
-        return {"status": "ready", "model_version": app.state.manifest["model_version"]}
+        return {
+            "status": "ready",
+            "model_version": app.state.manifest["model_version"],
+            "prediction_scope": SCOPE["prediction_scope"],
+            "temporal_prediction_enabled": False,
+        }
 
-    @app.post("/predict")
-    def predict(payload: Telemetry):
+    @app.post(
+        "/predict",
+        responses={409: {"description": "Event or inference identity conflict"}},
+    )
+    def predict(payload: Telemetry, request: Request, reply: Response):
         if app.state.models is None:
             raise HTTPException(503, "Model not ready")
+        for header, actual in (
+            (
+                "X-CNC-Manifest-SHA256",
+                hashlib.sha256(canonical(app.state.manifest).encode()).hexdigest(),
+            ),
+            ("X-CNC-Contracts-SHA256", schema_fingerprint),
+        ):
+            expected = request.headers.get(header)
+            if expected is not None and expected != actual:
+                raise HTTPException(409, "Worker model/contract precondition differs")
+            reply.headers[header] = actual
         event = payload.model_dump(exclude_none=True)
         try:
             schemas["telemetry"].validate(event)
-            frame = pd.DataFrame([event])
-            risk = float(app.state.models["rf.pkl"].predict_proba(frame)[0, 1])
-            anomaly = float(-app.state.models["if.pkl"].score_samples(frame)[0])
-            if not math.isfinite(anomaly):
-                raise ValueError("Invalid anomaly output")
-            manifest = app.state.manifest
-            result = {
-                **event,
-                "failure_score": risk,
-                "risk_alert": risk >= manifest["risk_threshold"],
-                "alert_level": alert_level(risk),
-                "anomaly_score": anomaly,
-                "anomaly_alert": anomaly >= manifest["anomaly_threshold"],
-                "policy": manifest["policy"],
-                "model_version": manifest["model_version"],
-                "scored_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
-                "model_artifact_sha256": manifest["files"]["rf.pkl"],
-                "risk_threshold": manifest["risk_threshold"],
-                "anomaly_threshold": manifest["anomaly_threshold"],
-            }
-            schemas["prediction"].validate(result)
-            return result
+            body = response(
+                ledger,
+                event,
+                app.state.manifest,
+                lambda: infer(event),
+                schemas["prediction"].validate,
+                serialize=lambda result: JSONResponse(result).body,
+            )
+            return Response(body, media_type="application/json", headers=reply.headers)
+        except InferenceConflict as exc:
+            raise HTTPException(409, str(exc)) from None
         except Exception:
             log.exception("Scoring failed; no fallback probability emitted")
             raise HTTPException(500, "Scoring failed") from None
+
+    def infer(event):
+        frame = pd.DataFrame([event])[INPUT_FEATURES]
+        risk = float(app.state.models["rf.pkl"].predict_proba(frame)[0, 1])
+        anomaly = float(-app.state.models["if.pkl"].score_samples(frame)[0])
+        if not math.isfinite(anomaly):
+            raise ValueError("Invalid anomaly output")
+        manifest = app.state.manifest
+        result = {
+            **event,
+            "prediction_scope": SCOPE["prediction_scope"],
+            "temporal_prediction_enabled": False,
+            "score_semantics": SCOPE["score_semantics"],
+            "failure_score": risk,
+            "risk_alert": risk >= manifest["risk_threshold"],
+            "alert_level": alert_level(risk),
+            "anomaly_score": anomaly,
+            "anomaly_alert": anomaly >= manifest["anomaly_threshold"],
+            "policy": manifest["policy"],
+            "model_version": manifest["model_version"],
+            "scored_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+            "model_artifact_sha256": manifest["files"]["rf.pkl"],
+            "risk_threshold": manifest["risk_threshold"],
+            "anomaly_threshold": manifest["anomaly_threshold"],
+        }
+        return result
 
     return app
 

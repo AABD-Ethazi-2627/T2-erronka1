@@ -1,0 +1,5 @@
+{
+  "power_W": {"lower": 3500, "upper": 9000, "unit": "W", "source": "AI4I synthetic generator PWF; not validated physical limits"},
+  "thermal_margin": {"lower": 0, "unit": "dimensionless", "source": "AI4I HDF boundary max(normalized temp difference margin, normalized rpm margin)"},
+  "overstrain_margin": {"lower": 0, "unit": "min*Nm", "source": "AI4I OSF boundary conditioned on product type L/M/H"}
+}

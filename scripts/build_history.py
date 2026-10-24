@@ -71,11 +71,13 @@ def retain(sources, output):
                 group.reset_index(drop=True).to_parquet(target, index=False)
     # Recompute Gold from every retained Silver object, including previous runs.
     with duckdb.connect() as con:
-        per_machine = con.execute(
+        # No timestamps are projected here. Native pandas export preserves the
+        # established HUGEINT sum -> float64 Gold contract (Arrow uses Decimal).
+        per_machine = con.sql(
             """SELECT machine_id, count(*) n,
             sum(machine_failure) positives, avg(rpm) mean_rpm
             FROM read_parquet(?) GROUP BY machine_id ORDER BY machine_id""",
-            [str(output / "silver/**/*.parquet")],
+            params=[str(output / "silver/**/*.parquet")],
         ).df()
         totals = con.execute(
             """SELECT count(*), count(DISTINCT record_id)
@@ -84,7 +86,11 @@ def retain(sources, output):
         ).fetchone()
     gold = output / "gold"
     gold.mkdir(exist_ok=True)
-    per_machine.to_parquet(gold / "machine_summary.parquet", index=False)
+    summary = gold / "machine_summary.parquet"
+    # A writer upgrade can change Parquet bytes without changing the summary.
+    # Preserve the verified artifact and its manifest hash on an identical ingest.
+    if not summary.exists() or not pd.read_parquet(summary).equals(per_machine):
+        per_machine.to_parquet(summary, index=False)
     files = sorted(
         p for p in output.rglob("*") if p.is_file() and p.suffix in {".csv", ".parquet"}
     )
@@ -95,7 +101,10 @@ def retain(sources, output):
             str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in files
         },
-        "meaning": "Simulated batch observations, not physical machine history or future labels",
+        "meaning": (
+            "Simulated batch observations, not physical machine "
+            + "history or future labels"
+        ),
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     return manifest

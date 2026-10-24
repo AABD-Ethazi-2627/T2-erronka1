@@ -1,0 +1,101 @@
+{
+  "cnc-alerts-automatic-v4": {
+    "mappings": {
+      "dynamic": "strict",
+      "properties": {
+        "air_temp_K": {
+          "type": "double"
+        },
+        "alert_level": {
+          "type": "keyword"
+        },
+        "anomaly_alert": {
+          "type": "boolean"
+        },
+        "anomaly_score": {
+          "type": "double"
+        },
+        "anomaly_threshold": {
+          "type": "double"
+        },
+        "event_id": {
+          "type": "keyword"
+        },
+        "failure_score": {
+          "type": "double"
+        },
+        "machine_id": {
+          "type": "keyword"
+        },
+        "machine_type": {
+          "type": "keyword"
+        },
+        "model_artifact_sha256": {
+          "type": "keyword"
+        },
+        "model_version": {
+          "type": "keyword"
+        },
+        "policy": {
+          "type": "keyword"
+        },
+        "prediction_scope": {
+          "type": "keyword"
+        },
+        "process_temp_K": {
+          "type": "double"
+        },
+        "quality_flag": {
+          "type": "keyword"
+        },
+        "risk_alert": {
+          "type": "boolean"
+        },
+        "risk_threshold": {
+          "type": "double"
+        },
+        "rpm": {
+          "type": "double"
+        },
+        "schema_version": {
+          "type": "keyword"
+        },
+        "score_semantics": {
+          "type": "keyword"
+        },
+        "scored_at": {
+          "type": "date"
+        },
+        "source": {
+          "properties": {
+            "kind": {
+              "type": "keyword"
+            },
+            "raw_record": {
+              "type": "text",
+              "index": false
+            },
+            "record_ref": {
+              "type": "keyword"
+            },
+            "uri": {
+              "type": "keyword"
+            }
+          }
+        },
+        "temporal_prediction_enabled": {
+          "type": "boolean"
+        },
+        "timestamp": {
+          "type": "date"
+        },
+        "tool_wear_min": {
+          "type": "double"
+        },
+        "torque_Nm": {
+          "type": "double"
+        }
+      }
+    }
+  }
+}

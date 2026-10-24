@@ -1,0 +1,108 @@
+[
+  {
+    "name": "ruff-version",
+    "command": [
+      "ruff",
+      "--version"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "ruff",
+    "command": [
+      "ruff",
+      "check",
+      "--select",
+      "E,F,I,PLW1510",
+      "."
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "ruff-default",
+    "command": [
+      "ruff",
+      "check",
+      "."
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "format",
+    "command": [
+      "ruff",
+      "format",
+      "--check",
+      "."
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "cg02",
+    "command": [
+      "<python311>",
+      "-B",
+      "-m",
+      "scripts.audit_cg02",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "cg25",
+    "command": [
+      "<python311>",
+      "-B",
+      "-m",
+      "scripts.check_cg25_memory"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "layout",
+    "command": [
+      "<python311>",
+      "-B",
+      "scripts/check_repository_layout.py"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "lock",
+    "command": [
+      "uv",
+      "tool",
+      "run",
+      "--from",
+      "uv==0.13.1",
+      "uv",
+      "lock",
+      "--check"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "audit",
+    "command": [
+      "uv",
+      "tool",
+      "run",
+      "--from",
+      "uv==0.13.1",
+      "uv",
+      "audit",
+      "--locked"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check",
+      "cc36beb49a17949c805f789b5aa3b4b568f5d4c6"
+    ],
+    "exit_code": 0
+  }
+]

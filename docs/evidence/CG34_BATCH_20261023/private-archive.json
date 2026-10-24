@@ -1,0 +1,8 @@
+{
+  "archive_file": "cnc_batch_evaluado_20261023.zip",
+  "sha256": "38ce1f2ba7554836f5feb233c0e7533effb1a601e8bf2faa37624591a16f533e",
+  "bytes": 3292980,
+  "files": 172,
+  "verified": "CRC and every indexed entry hash",
+  "publication": "private local archive only; original input, clean rows, labels and per-row predictions not uploaded to GitHub"
+}

@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-21",
+  "reviewed_head": "0272276a77f6b42c6164e4772590854bbb48dace",
+  "pull_request": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/51",
+  "base_sha": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
+  "scope": "Independent-review residuals: Ruff I001/PLW1510 and test-client resource cleanup",
+  "environment": {
+    "distribution": "FedoraLinux-43",
+    "python": "3.12.15",
+    "fastapi": "0.111.0",
+    "starlette": "0.37.2",
+    "anyio": "4.15.1",
+    "httpx": "0.27.0",
+    "ruff_windows": "0.17.1",
+    "dependencies": "Existing frozen outputs/venv; no dependency changes"
+  },
+  "upstream_baseline": {
+    "case": "Three TestClient(FastAPI()) contexts, GET / -> 404, del client, gc.collect(2)",
+    "command": "outputs/venv/bin/python outputs/es-contract/probe_testclient_cleanup.py",
+    "resource_warning_policy": "error",
+    "unraisables": 6,
+    "exit_code": 1,
+    "expected_failure": true,
+    "log": "outputs/es-contract/upstream-baseline.log",
+    "production_leak": "Not established; reproduces without scoring application"
+  },
+  "verification_guard_negative_control": {
+    "case": "One passing unittest drops both unclosed ends of an AnyIO memory stream",
+    "command": "outputs/venv/bin/python outputs/es-contract/verify_guard_negative.py",
+    "unraisables": 2,
+    "exit_code": 1,
+    "expected_failure": true,
+    "log": "outputs/es-contract/resource-guard-negative.log"
+  },
+  "full_suite": {
+    "command": "outputs/venv/bin/python tests/verify_resource_cleanup.py",
+    "resource_warning_policy": "error",
+    "gc": "generation 2 after every test and after each suite",
+    "discovery": "Same test IDs and order required in both iterations",
+    "runs": [
+      {
+        "iteration": 1,
+        "discovered": 108,
+        "run": 108,
+        "skipped": 3,
+        "success": true
+      },
+      {
+        "iteration": 2,
+        "discovered": 108,
+        "run": 108,
+        "skipped": 3,
+        "success": true
+      }
+    ],
+    "unraisables": [],
+    "exit_code": 0,
+    "log": "outputs/es-contract/resource-cleanup-suite-final-v2.log",
+    "skip_reason": "Three existing tests require absent delivery model bundle; no bundle generated"
+  },
+  "interrupted_attempt": {
+    "command": "outputs/venv/bin/python -X tracemalloc=5 tests/verify_resource_cleanup.py",
+    "status": "Executor timed out after 60 seconds; no pass claimed",
+    "recovery": "WSL process absence verified before rerun without tracemalloc",
+    "log": "outputs/es-contract/resource-cleanup-suite.log"
+  },
+  "live_es": {
+    "command": "outputs/venv/bin/python outputs/es-contract/verify_live_cleanup.py",
+    "version": "9.5.4",
+    "image_id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+    "http_operations": 44,
+    "passed": true,
+    "container_removed": true,
+    "isolation": {
+      "network": "none",
+      "published_ports": [],
+      "persistent_mounts": []
+    },
+    "resource_warning_policy": "error with unraisablehook capture and final gc.collect(2)",
+    "unraisables": 0,
+    "exit_code": 0,
+    "log": "outputs/es-contract/live-hygiene-v2.log",
+    "detailed_evidence": "outputs/es-contract/live-hygiene-v2.json"
+  },
+  "local_checks": {
+    "ruff": "PASS: ruff check --select E,F,I,PLW1510 on seven changed/new Python files",
+    "ruff_format": "PASS: ruff format --check on the same seven files",
+    "immutable_cg02": "PASS: outputs/venv/bin/python -m scripts.audit_cg02 --check",
+    "repository_layout": "PASS: outputs/venv/bin/python scripts/check_repository_layout.py",
+    "whitespace": "PASS: git diff --check",
+    "protected_paths": "PASS: git diff --quiet -- pyproject.toml uv.lock scoring models data"
+  },
+  "lifespan_error_regression": {
+    "red": "Direct lifespan context loses cleanup after yield when request raises; 1 of 2 lifecycle tests fails",
+    "red_log": "outputs/es-contract/lifespan-error-red.log",
+    "fix": "AsyncExitStack.aclose() preserves normal independent shutdown and propagates request exception",
+    "green": "Both lifecycle tests included in final repeated full suite"
+  },
+  "artifacts_sha256": {
+    "tests/api_client.py": "facdf5c437d9f36ce8e24d9d8d8d1eee6c3b3364e7a916b18c3c59f58b8a03f5",
+    "tests/test_api.py": "e4317c82dcf62b215e1b9480867340b7ebd562f552615581a04be31f98f1281c",
+    "tests/test_api_client.py": "37aa04a6746848e80d412df00473fe5335badfcffb9db14ee0deb4809ea99966",
+    "tests/test_current_state_scope.py": "01d47aa6a565d257b69ef8304334dc0d86d8b99d062ae4b433c7051caff3eeaf",
+    "tests/test_elasticsearch_contract.py": "848cf1cd8e154eab4dc955007e6138e9eaead7ff8897bf2a5cc315932b791307",
+    "tests/verify_elasticsearch_contract.py": "db13cd26d31d7056050422beafc713a844a14a1f1cba565230313744efb5142a",
+    "tests/verify_resource_cleanup.py": "e8d11beb7d8d926a4d6e8d5a285aefe564bd453f1bf60edd5be773dce4f5e18c",
+    "elasticsearch/index-template.json": "4c57685a6e65b08b0fe758d7eea6f79c475123e67cabafbeb048c7386056e0ff",
+    "pyproject.toml": "eefd0626fcb791bf15cfe0d6cb6691f98b31a5f738d2997df9819cca7613568b",
+    "uv.lock": "c2c4bbc6f28bdc4e2cd8c0172ba8a746d18e237b1964a34b7fdec5880c779a3f"
+  },
+  "limits": [
+    "Independent review of this correction remains with parent",
+    "New-head CI status must be read separately; local checks are not CI",
+    "Three delivery-model tests remain skipped; no delivery models or final test data used",
+    "No shared services, infrastructure migration, NiFi E2E, deployment or human acceptance",
+    "Starlette TestClient remains defective at locked version; tests no longer use it"
+  ]
+}

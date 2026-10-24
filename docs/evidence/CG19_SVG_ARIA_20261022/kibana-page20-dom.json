@@ -1,0 +1,6 @@
+{
+  "result": {
+    "type": "string",
+    "value": "{\"signalPage\":20,\"selected\":\"20\",\"title\":\"IDs: 5/100 recuperados · página 20/20\",\"aria\":\"Title text 'IDs: 5/100 recuperados · página 20/20'\",\"legend\":[\"ARIA-SYNTHETIC-095 / aria_fixture\",\"ARIA-SYNTHETIC-096 / aria_fixture\",\"ARIA-SYNTHETIC-097 / aria_fixture\",\"ARIA-SYNTHETIC-098 / aria_fixture\",\"ARIA-SYNTHETIC-099 / aria_fixture\"],\"points\":[\"ARIA-SYNTHETIC-095 / aria_fixture; aire; UTC 2026-10-21 11:00; 309.50 K; n hora 1\",\"ARIA-SYNTHETIC-095 / aria_fixture; proceso; UTC 2026-10-21 11:00; 319.50 K; n hora 1\",\"ARIA-SYNTHETIC-096 / aria_fixture; aire; UTC 2026-10-21 08:00; 309.60 K; n hora 1\",\"ARIA-SYNTHETIC-096 / aria_fixture; proceso; UTC 2026-10-21 08:00; 319.60 K; n hora 1\",\"ARIA-SYNTHETIC-097 / aria_fixture; aire; UTC 2026-10-21 09:00; 309.70 K; n hora 1\",\"ARIA-SYNTHETIC-097 / aria_fixture; proceso; UTC 2026-10-21 09:00; 319.70 K; n hora 1\",\"ARIA-SYNTHETIC-098 / aria_fixture; aire; UTC 2026-10-21 10:00; 309.80 K; n hora 1\",\"ARIA-SYNTHETIC-098 / aria_fixture; proceso; UTC 2026-10-21 10:00; 319.80 K; n hora 1\",\"ARIA-SYNTHETIC-099 / aria_fixture; aire; UTC 2026-10-21 11:00; 309.90 K; n hora 1\",\"ARIA-SYNTHETIC-099 / aria_fixture; proceso; UTC 2026-10-21 11:00; 319.90 K; n hora 1\"],\"utc\":\"2026-10-22T08:59:49.152Z\"}"
+  }
+}

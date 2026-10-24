@@ -1,0 +1,76 @@
+{
+  "rows": 5090,
+  "ordered_rows_repeat_every_2000_excluding_timestamp": true,
+  "machines": 50,
+  "distinct_timestamps": 509,
+  "start": "2026-10-19 06:07:53+00:00",
+  "end": "2026-10-19 10:21:55+00:00",
+  "positive_state_rows": 176,
+  "positive_unique_sensor_type_states": 68,
+  "duplicate_machine_timestamp_groups": 485,
+  "conflicting_machine_timestamp_groups": 485,
+  "rows_in_conflicting_groups": 1028,
+  "conflicting_failure_label_groups": 27,
+  "machines_with_multiple_types": 0,
+  "unambiguous_unique_rows": 4062,
+  "type_changes_in_unambiguous_series": 0,
+  "wear_decreases_between_unambiguous_readings": 1992,
+  "observed_zero_to_one_transitions_not_verified_onsets": 145,
+  "sensor_type_signatures": 2000,
+  "signatures_repeated_at_multiple_times": 2000,
+  "batch_gap_seconds": {
+    "median": 30.0
+  },
+  "per_machine_gap_seconds": {
+    "median": 120.0,
+    "p95": 600.0,
+    "fraction_over_5minutes": 0.17248255234297108
+  },
+  "next_positive_diagnostic": {
+    "meaning": "Strictly later observed positive state, NOT failure onset or physical remaining lifetime",
+    "unambiguous_rows_with_later_positive": 2768,
+    "censored_rows": 1294,
+    "median_minutes_to_later_positive": 30.5
+  },
+  "blockers": [
+    "Conflicting states for same machine and timestamp",
+    "No verified physical machine identity",
+    "No verified failure onset and maintenance/cycle log",
+    "Exactly repeated 2000-row sequence with new timestamps"
+  ],
+  "eta_training_ready": false,
+  "eta_minutes": null,
+  "temporal_criticality": "UNKNOWN",
+  "meaning": "This audit estimates feasibility, not a trained ETA or validated urgency policy",
+  "exact_ai4i_sensor_type_match_rows": 0,
+  "exact_ai4i_sensor_type_match_fraction": 0.0,
+  "exact_ai4i_sensor_type_and_labels_match_rows": 0,
+  "exact_ai4i_sensor_type_and_labels_match_fraction": 0.0,
+  "source": {
+    "host": "192.168.75.150",
+    "share": "cnc-stream",
+    "read_only": true,
+    "frozen_listing_count": 509,
+    "capture_started_at": "2026-10-19T10:23:11.933488+00:00",
+    "capture_completed_at": "2026-10-19T10:24:05.149285+00:00",
+    "capture_manifest_sha256": "3fc2d03a15371574a7451a89a011fe04d0a31ad6ba860f40d9a7f9862a7d5de3"
+  },
+  "official_uci_reference": {
+    "url": "https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset",
+    "sha256": "dc6630cd9b1f0f853922fad78a1b6436570d3f1ec863f1dd5c4340ac56bc8a8e",
+    "rows": 10000,
+    "static_reference_complement_signatures": 2000,
+    "stream_sensor_type_match_rows": 5090,
+    "stream_sensor_type_and_labels_match_rows": 5090,
+    "stream_unique_states_equal_complement_of_8000_training_rows": true,
+    "meaning": "Fingerprint provenance only, not temporal labels or model performance evaluation"
+  },
+  "limitations": [
+    "SMB availability and batch timestamps do not prove physical origin or chronological failure onset.",
+    "AI4I matching is forensic data provenance, not evaluation of the old test or model training.",
+    "Simultaneous conflicting states prevent valid longitudinal labels; no type changes were observed in this snapshot.",
+    "A later positive label under a reused ID is not time-to-failure ground truth.",
+    "Wear decreases may be maintenance or unrelated sample; no repair/cycle log provided.",
+    "ETA remains unavailable; current-state severity and API response latency are different quantities."
+  ]
+}

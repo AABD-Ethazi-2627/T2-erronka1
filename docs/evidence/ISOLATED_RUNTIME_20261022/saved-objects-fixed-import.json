@@ -1,0 +1,77 @@
+{
+  "successCount": 7,
+  "success": true,
+  "warnings": [],
+  "successResults": [
+    {
+      "type": "index-pattern",
+      "id": "cnc-cg19-review-data-v2",
+      "meta": {
+        "title": "CG19 · telemetría de laboratorio",
+        "icon": "indexPatternApp"
+      },
+      "managed": false,
+      "overwrite": true
+    },
+    {
+      "type": "visualization",
+      "id": "cnc-cg19-summary-v2",
+      "meta": {
+        "title": "Ventana filtrada · avisos, IDs y edad",
+        "icon": "visualizeApp"
+      },
+      "managed": false,
+      "overwrite": true
+    },
+    {
+      "type": "visualization",
+      "id": "cnc-cg19-temperature-v2",
+      "meta": {
+        "title": "Temperaturas por ID / fuente · media horaria; aire punteado, proceso continuo",
+        "icon": "visualizeApp"
+      },
+      "managed": false,
+      "overwrite": true
+    },
+    {
+      "type": "visualization",
+      "id": "cnc-cg19-wear-v2",
+      "meta": {
+        "title": "OFFLINE FIJO · desgaste vs frecuencia de fallo etiquetado · no responde a filtros",
+        "icon": "visualizeApp"
+      },
+      "managed": false,
+      "overwrite": true
+    },
+    {
+      "type": "search",
+      "id": "cnc-cg19-recent-v2",
+      "meta": {
+        "title": "Últimos 50 eventos · timestamp DESC, event_id ASC",
+        "icon": "discoverApp"
+      },
+      "managed": false,
+      "overwrite": true
+    },
+    {
+      "type": "visualization",
+      "id": "cnc-cg19-decision-v2",
+      "meta": {
+        "title": "Decisión humana propuesta · límites y FP/FN offline",
+        "icon": "visualizeApp"
+      },
+      "managed": false,
+      "overwrite": true
+    },
+    {
+      "type": "dashboard",
+      "id": "cnc-cg19-review-v2",
+      "meta": {
+        "title": "CNC Guard · CG19 revisión v2 (online sin etiquetas + offline fijo)",
+        "icon": "dashboardApp"
+      },
+      "managed": false,
+      "overwrite": true
+    }
+  ]
+}
