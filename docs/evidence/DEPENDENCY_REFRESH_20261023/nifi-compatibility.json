@@ -1,0 +1,184 @@
+{
+  "nifi_version": "2.12.0",
+  "passed": true,
+  "flow_executed": false,
+  "processors": [
+    {
+      "name": "Quarantine envelope",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-groovyx-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "PutElasticsearchJson",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-elasticsearch-restapi-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": [
+        "'Client Service' validated against 'c5b1dce3-3e74-3ac9-954b-0ac0ebab1a22' is invalid because Controller Service with ID c5b1dce3-3e74-3ac9-954b-0ac0ebab1a22 is disabled"
+      ]
+    },
+    {
+      "name": "EvaluateJsonPath",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "PutFile",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "RetryFlowFile",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "RouteOnAttribute",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "ExtractText",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "InvokeHTTP",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "ExecuteGroovyScript",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-groovyx-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "Put alerts",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-elasticsearch-restapi-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": [
+        "'Client Service' validated against 'c5b1dce3-3e74-3ac9-954b-0ac0ebab1a22' is invalid because Controller Service with ID c5b1dce3-3e74-3ac9-954b-0ac0ebab1a22 is disabled"
+      ]
+    },
+    {
+      "name": "ConvertRecord",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-standard-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": [
+        "'Record Writer' validated against 'fc3bc510-efe6-3710-de0b-106bdb8a7a7b' is invalid because Controller Service with ID fc3bc510-efe6-3710-de0b-106bdb8a7a7b is disabled",
+        "'Record Reader' validated against 'e641f806-26ad-305a-4a70-a2732ee4a3f8' is invalid because Controller Service with ID e641f806-26ad-305a-4a70-a2732ee4a3f8 is disabled"
+      ]
+    },
+    {
+      "name": "ConsumeKafka",
+      "state": "STOPPED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": [
+        "'Kafka Connection Service' validated against '6d1fa794-089e-390b-4d0c-95ddf99c790f' is invalid because Controller Service with ID 6d1fa794-089e-390b-4d0c-95ddf99c790f is disabled"
+      ]
+    }
+  ],
+  "controller_services": [
+    {
+      "name": "JsonRecordSetWriter",
+      "state": "DISABLED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-record-serialization-services-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "Elasticsearch local lab",
+      "state": "DISABLED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-elasticsearch-client-service-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "Kafka3ConnectionService",
+      "state": "DISABLED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-kafka-3-service-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    },
+    {
+      "name": "CSVReader",
+      "state": "DISABLED",
+      "bundle": {
+        "group": "org.apache.nifi",
+        "artifact": "nifi-record-serialization-services-nar",
+        "version": "2.12.0"
+      },
+      "validation_errors": []
+    }
+  ],
+  "connections_preserved": 20,
+  "export_sha256": "4729b85c4d14caee5f634f41d73e9603c9ea9cd430bda060b83740fa33971f6f",
+  "limitations": [
+    "Controller services intentionally disabled; processors enabled only to STOPPED for validation",
+    "No Kafka/ES request, source consumption or inference executed by this flow"
+  ]
+}

@@ -28,8 +28,9 @@ from scoring.score_api import create_app
 from scripts.archive_consumer import consume as archive
 from scripts.archive_consumer import digest, event_key
 from scripts.durable_pipeline import Pipeline, PipelineBlocked, encoded
+from scripts.image_inventory import image
 
-IMAGE = "docker.elastic.co/elasticsearch/elasticsearch:9.5.4"
+IMAGE = image("elasticsearch")
 
 
 async def verify(output):

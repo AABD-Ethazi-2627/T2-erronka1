@@ -1,0 +1,160 @@
+{
+  "scope": "fixed training-only dependency compatibility probe; not a model search or independent test",
+  "baseline": {
+    "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "train_rows": 5600,
+    "train_index_sha256": "06aab239eeb855cd055256e4f6275be3c48be07a9dfc7da04807a65fcd1bc0e7",
+    "folds": 3,
+    "policy": "fixed RF physical 120 trees depth12 min_leaf2, seed42; no tuning, train only",
+    "versions": {
+      "numpy": "1.26.4",
+      "pandas": "2.2.2",
+      "scikit-learn": "1.5.0",
+      "scipy": "1.17.1",
+      "joblib": "1.5.3",
+      "pyarrow": "23.0.1",
+      "matplotlib": "3.10.1",
+      "imbalanced-learn": "0.12.4"
+    },
+    "oof_seconds": 1.8042958629994246,
+    "in_process_single_row_p95_ms": 7.8903806002927,
+    "at_015": {
+      "threshold": 0.15,
+      "precision": 0.7433628318584071,
+      "recall": 0.8842105263157894,
+      "f1": 0.8076923076923077,
+      "f2": 0.8519269776876268,
+      "roc_auc": 0.974827317832474,
+      "average_precision": 0.9020038073550081,
+      "confusion_matrix": [
+        [
+          5352,
+          58
+        ],
+        [
+          22,
+          168
+        ]
+      ]
+    },
+    "at_070": {
+      "threshold": 0.7,
+      "precision": 0.9859154929577465,
+      "recall": 0.7368421052631579,
+      "f1": 0.8433734939759037,
+      "f2": 0.7760532150776053,
+      "roc_auc": 0.974827317832474,
+      "average_precision": 0.9020038073550081,
+      "confusion_matrix": [
+        [
+          5408,
+          2
+        ],
+        [
+          50,
+          140
+        ]
+      ]
+    },
+    "score_sha256": "8a515aae92549b9d014d7630fcb3fde88269f18436e09629f006c336f50d3bed",
+    "limitations": [
+      "development compatibility probe, not independent model selection or HTTP capacity",
+      "same folds and fixed cutoffs; reused validation and old test not evaluated"
+    ]
+  },
+  "candidate": {
+    "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "train_rows": 5600,
+    "train_index_sha256": "06aab239eeb855cd055256e4f6275be3c48be07a9dfc7da04807a65fcd1bc0e7",
+    "folds": 3,
+    "policy": "fixed RF physical 120 trees depth12 min_leaf2, seed42; no tuning, train only",
+    "versions": {
+      "numpy": "2.4.6",
+      "pandas": "3.1.0",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.17.1",
+      "joblib": "1.6.0",
+      "pyarrow": "26.0.0",
+      "matplotlib": "3.11.2",
+      "imbalanced-learn": "0.14.2"
+    },
+    "oof_seconds": 1.7729662450001342,
+    "in_process_single_row_p95_ms": 17.420405750453934,
+    "at_015": {
+      "threshold": 0.15,
+      "precision": 0.7433628318584071,
+      "recall": 0.8842105263157894,
+      "f1": 0.8076923076923077,
+      "f2": 0.8519269776876268,
+      "roc_auc": 0.974827317832474,
+      "average_precision": 0.9020038073550081,
+      "confusion_matrix": [
+        [
+          5352,
+          58
+        ],
+        [
+          22,
+          168
+        ]
+      ]
+    },
+    "at_070": {
+      "threshold": 0.7,
+      "precision": 0.9859154929577465,
+      "recall": 0.7368421052631579,
+      "f1": 0.8433734939759037,
+      "f2": 0.7760532150776053,
+      "roc_auc": 0.974827317832474,
+      "average_precision": 0.9020038073550081,
+      "confusion_matrix": [
+        [
+          5408,
+          2
+        ],
+        [
+          50,
+          140
+        ]
+      ]
+    },
+    "score_sha256": "8a515aae92549b9d014d7630fcb3fde88269f18436e09629f006c336f50d3bed",
+    "limitations": [
+      "development compatibility probe, not independent model selection or HTTP capacity",
+      "same folds and fixed cutoffs; reused validation and old test not evaluated"
+    ]
+  },
+  "same_train_indices": true,
+  "identical_oof_score_bytes": true,
+  "baseline_suite": {
+    "passed": 622,
+    "skipped": 6,
+    "warnings": 14
+  },
+  "candidate_suite": {
+    "passed": 621,
+    "failed_including_subtests": 3,
+    "skipped": 6,
+    "warnings": 3069
+  },
+  "candidate_failures": [
+    {
+      "test": "ColumnarUpgradeContractTests.test_roundtrip_schema_dedupe_history_and_archive",
+      "reason": "pandas 3.1 string inference changes persisted Arrow string fields to large_string"
+    },
+    {
+      "test": "TypeDiagnosticsTests.test_csv_preserves_real_threshold_boundary_for_source_row_7763 (two subtests)",
+      "reason": "NumPy 2 scalar repr includes np.float64(...); the legacy assertion compares repr against CSV. This is a test-portability failure, not demonstrated score corruption."
+    }
+  ],
+  "arrow26_alone": {
+    "status": "incompatible",
+    "reason": "ImportError: pyarrow requires NumPy 2.0 or newer, found 1.26.4; PyPI metadata alone did not expose this runtime requirement"
+  },
+  "decision": "retain numerical/ML baseline; newer stack gives identical fixed-RF OOF predictions and needs a separate schema/ABI/model-bundle migration",
+  "limits": [
+    "Single-run timings are diagnostic only, not a reliable latency comparison",
+    "Full suite includes historical/synthetic scenarios; no temporal model was promoted",
+    "Only training indices enter the RF comparison; validation and old test never enter fit/predict in this probe"
+  ]
+}
