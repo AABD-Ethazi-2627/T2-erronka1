@@ -1,0 +1,12 @@
+{
+  "scope": "real API image, own freshly generated AI4I bundle, read-only root and fresh tmpfs ledger; no full pipeline",
+  "image": "cnc-guard-deps-api:20261023-r3",
+  "passed": true,
+  "health_status": 200,
+  "predict_status": 200,
+  "replay_identical": true,
+  "invalid_status": 422,
+  "user": "65532:65532",
+  "read_only_root": true,
+  "image_id": "sha256:4584fffc600ef40d0929f8a8f6fbca618308cb363d043689ab015fb1ff103732"
+}

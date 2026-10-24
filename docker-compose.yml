@@ -1,8 +1,8 @@
 # Isolated local laboratory. No container_name, external mounts or production action.
-name: cnc-guard-lab
+name: cnc-guard-lab-v2
 services:
   kafka-init:
-    image: apache/kafka:3.7.0
+    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
     user: root
     entrypoint: [/bin/bash, -c, 'chown 1000:1000 /data']
     volumes: [kafka-data:/data]
@@ -11,7 +11,7 @@ services:
     depends_on:
       kafka-init:
         condition: service_completed_successfully
-    image: apache/kafka:3.7.0
+    image: apache/kafka:4.3.2@sha256:852a0d49fc4e656b022e7f23785411802c9a088c78a7c5e39f33969de9c227a7
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -28,7 +28,7 @@ services:
     volumes: [kafka-data:/tmp/kraft-combined-logs]
     mem_limit: 640m
   filebeat:
-    image: docker.elastic.co/beats/filebeat:9.5.4
+    image: docker.elastic.co/beats/filebeat-wolfi:9.5.5@sha256:b644d58f79f2a53b46ce558efa706a51ba211e0d0f89352bfe33b3973958e3eb
     user: root
     command: [filebeat, -e, --strict.perms=false]
     volumes:
@@ -39,7 +39,7 @@ services:
     depends_on: [kafka]
     mem_limit: 192m
   nifi:
-    image: ${NIFI_IMAGE:-iabd-nifi:2.0.0-local}
+    image: apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad
     environment:
       NIFI_WEB_HTTPS_PORT: '8443'
       NIFI_WEB_HTTPS_HOST: '0.0.0.0'
@@ -54,7 +54,7 @@ services:
       - nifi-flowfiles:/opt/nifi/nifi-current/flowfile_repository
     mem_limit: 1200m
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.4
+    image: docker.elastic.co/elasticsearch/elasticsearch-wolfi:9.5.5@sha256:c2cce72acf8dc0510c04fd5926123f630859019082edf9827daef82b6a46c9c1
     environment:
       discovery.type: single-node
       xpack.security.enabled: 'false'
@@ -66,7 +66,7 @@ services:
     volumes: [es-data:/usr/share/elasticsearch/data]
     mem_limit: 800m
   kibana:
-    image: docker.elastic.co/kibana/kibana:9.5.4
+    image: docker.elastic.co/kibana/kibana-wolfi:9.5.5@sha256:46b0a3adf85186f9153fbd322e55ea8f70bc4039dcd55d58826fc1caa372dee5
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       TELEMETRY_OPTIN: 'false'
@@ -86,6 +86,10 @@ services:
     ports: ['127.0.0.1:18001:8000']
     volumes: ['./outputs/api:/models:ro', 'scoring-state:/state']
     mem_limit: 512m
+    read_only: true
+    tmpfs: ['/tmp:rw,size=64m']
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
 volumes:
   kafka-data:
   filebeat-data:

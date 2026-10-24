@@ -1,0 +1,17 @@
+{
+  "initial_failure": {
+    "head": "8ea929c8a0f063ba8e6169213b09a975f948307c",
+    "job": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/39949963960/job/120401751471",
+    "runner_compose": "2.38.2",
+    "effect": "Static CG14 rendering failed before lock audit; local Compose5.6.1 passed"
+  },
+  "fix": "Pin Compose5.6.1 with setup-compose-action v2.4.0 SHA in lock and application test jobs",
+  "verified_remote_head": "619ab67704bfdc7b4d534840440e6ed20414bb1a",
+  "observed_remote_checks": {
+    "lock": "SUCCESS",
+    "synthetic-research": "SUCCESS",
+    "test (3.11)": "SUCCESS",
+    "test (3.12)": "SUCCESS"
+  },
+  "limits": "This is observed CI on 619ab67; the subsequent Python3.11.17 image change has separate local evidence and a new CI run."
+}

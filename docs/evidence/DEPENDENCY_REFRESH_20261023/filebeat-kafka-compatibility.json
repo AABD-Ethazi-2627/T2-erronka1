@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "scope": "isolated real Filebeat/Kafka raw-key compatibility; no NiFi/API/ES, no training",
+  "kafka_image": "apache/kafka:4.3.1@sha256:77e3df9054047a88b520d0cc46e16696d3b22022e1d580aeccd2632df6532837",
+  "filebeat_image": "docker.elastic.co/beats/filebeat:9.5.5@sha256:4b2042fcbeb781800bc7271d400f764bb7d670310dfd4fe03ade53d6c7ab78aa",
+  "source_sha256": "2669b1cb0e5a70d7e7b676cf8f9b81b59bb22ac34db747398450388dc7e10dc3",
+  "smb_records": 1,
+  "topic_routing_verified": true,
+  "records": 10,
+  "expected_records": 10,
+  "keys_and_messages_match": true,
+  "canonical_records_sha256": "a1249e52c6bce89ff2b1db83a216f7f223fa050aac4de833d24e98481f09666a"
+}
