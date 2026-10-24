@@ -95,10 +95,10 @@ consulta todas las entradas de uv.lock, los pins de
 Requiere acceso a PyPI. Un error de consulta o una fuente no cubierta falla.
 
 El workflow `Dependency audit` se ejecuta en PR, semanalmente y bajo petición.
-Conserva el JSON completo de cada imagen, incluidos avisos sin parche. El gate de
-la API bloquea HIGH/CRITICAL corregibles; los scans de imágenes oficiales externas
-son informativos sobre vulnerabilidades y fallan si el scanner no puede completar
-el análisis. CI verde no significa que esas imágenes estén libres de CVE.
+Conserva el JSON completo de cada imagen, incluidos avisos sin parche. Cada scan
+falla ante cualquier vulnerabilidad de cualquier severidad, también si todavía no
+hay parche, y si el scanner no puede completar el análisis. Un proveedor sin una
+imagen limpia mantiene el cambio bloqueado; no se rebaja el gate para aceptarlo.
 No hay despliegue, publicación de imágenes ni auto-merge.
 
 Dependabot propone cambios semanales. Revisar sus releases y scans, sincronizar

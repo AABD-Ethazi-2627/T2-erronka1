@@ -73,6 +73,18 @@ def check(root=ROOT):
             {"nifi": "nifi", "kafka-test": "kafka", "mock-predict": "mock-python"},
         ),
     ]
+    optional_image_files = {
+        "docker-compose.lan.yml": {"haproxy": "haproxy"},
+        "deploy/cg32/compose.yaml": {"api": "debian"},
+    }
+    for path, expected in optional_image_files.items():
+        file = root / path
+        if not file.is_file():
+            continue
+        text = file.read_text()
+        for service, key in expected.items():
+            if "image: " + images[key] not in text:
+                errors.append(f"{path}: {service} differs from deploy/images.json")
     for path, profiles, expected in specifications:
         actual = compose(root, path, profiles)
         for service, key in expected.items():
