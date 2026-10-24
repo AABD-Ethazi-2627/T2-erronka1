@@ -2,7 +2,7 @@ name: cnc-guard-cg14
 
 services:
   nifi:
-    image: apache/nifi:${NIFI_VERSION:-2.12.0}
+    image: apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad
     container_name: cnc-cg14-nifi
     restart: unless-stopped
     init: true
@@ -50,7 +50,7 @@ services:
         max-file: "3"
 
   mock-predict:
-    image: python:3.13-alpine@sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a
+    image: python:3.13.17-alpine3.23@sha256:df8241c52fff8aefebb789ce9e140fb20e9f1f1ff9e5bca28b2064831eb6ff04
     container_name: cnc-cg14-mock-predict
     profiles: [integration-mocks]
     restart: "no"

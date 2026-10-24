@@ -1,0 +1,16 @@
+{
+  "scope": "real Trivy CLI commands corresponding to consecutive CI steps; isolated fresh cache, no GitHub runner execution claimed",
+  "before_fix": {
+    "exit_code": 1,
+    "reason": "Second step skipped download in an empty default cache although the first-step cache contained a valid DB"
+  },
+  "after_fix": {
+    "first_scan_exit_code": 0,
+    "fresh_official_db_download": true,
+    "second_gate_exit_code": 0,
+    "vulnerable_earlier_image_gate_exit_code": 1,
+    "vulnerable_image_failed_for_findings_not_cache_error": true
+  },
+  "workflow_command": "trivy image --cache-dir \"$GITHUB_WORKSPACE/.cache/trivy\" --skip-db-update --skip-java-db-update --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 cnc-guard-audit:ci",
+  "first_scan_sha256": "e1e0b660614d9e3f03db6a4033e4f9ec8990af21b683851d786084fdb52c6a8f"
+}
