@@ -24,6 +24,15 @@ class InfrastructureRefreshTests(unittest.TestCase):
             root = Path(temporary)
             for name in (
                 "deploy/images.json",
+                "deploy/build-targets.json",
+                "deploy/images/elasticsearch.Dockerfile",
+                "deploy/images/filebeat.Dockerfile",
+                "deploy/images/kafka.Dockerfile",
+                "deploy/images/kibana.Dockerfile",
+                "deploy/images/mock-python.Dockerfile",
+                "deploy/images/nifi.Dockerfile",
+                "deploy/images/python.Dockerfile",
+                "deploy/images/wolfi-base.Dockerfile",
                 "docker-compose.yml",
                 "deploy/cg14/compose.yaml",
                 "scoring/Dockerfile",
@@ -31,9 +40,9 @@ class InfrastructureRefreshTests(unittest.TestCase):
                 destination = root / name
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(ROOT / name, destination)
-            compose = root / "docker-compose.yml"
-            compose.write_text(
-                compose.read_text().replace(read_images()["nifi"], "apache/nifi:2.0.0")
+            nifi = root / "deploy/images/nifi.Dockerfile"
+            nifi.write_text(
+                nifi.read_text().replace(read_images()["nifi"], "apache/nifi:2.0.0")
             )
             self.assertTrue(any("nifi" in error for error in check(root)))
             inventory = root / "deploy/images.json"
@@ -46,10 +55,11 @@ class InfrastructureRefreshTests(unittest.TestCase):
     def test_new_lan_and_cg32_images_are_in_the_scan_matrix(self):
         images = read_images()
         self.assertIn("haproxy", images)
-        self.assertIn("debian", images)
+        self.assertIn("wolfi", images)
         workflow = (ROOT / ".github/workflows/dependencies.yml").read_text()
-        self.assertIn("haproxy, debian", workflow)
-        self.assertIn("exit-code: '1'", workflow)
+        self.assertIn("uv, go, haproxy, wolfi", workflow)
+        self.assertIn("exit-code: '0'", workflow)
+        self.assertIn("scripts.enforce_image_scan", workflow)
         self.assertIn("ignore-unfixed: false", workflow)
 
     def test_retarget_preserves_routing_and_properties_but_disables_execution(self):
