@@ -14,7 +14,9 @@ x-hardening: &hardening
 services:
   kafka:
     <<: *hardening
-    image: apache/kafka:4.3.1@sha256:77e3df9054047a88b520d0cc46e16696d3b22022e1d580aeccd2632df6532837
+    build:
+      context: ../..
+      dockerfile: deploy/images/kafka.Dockerfile
     user: '1000:1000'
     environment:
       KAFKA_NODE_ID: 1
@@ -41,7 +43,9 @@ services:
 
   filebeat:
     <<: *hardening
-    image: docker.elastic.co/beats/filebeat:9.5.5@sha256:4b2042fcbeb781800bc7271d400f764bb7d670310dfd4fe03ade53d6c7ab78aa
+    build:
+      context: ../..
+      dockerfile: deploy/images/filebeat.Dockerfile
     user: '1000:1000'
     command: [filebeat, -e, --strict.perms=false, -c, '/lab/runs/${CG32_RUN:-none}/filebeat.yml', --path.data, '/lab/runs/${CG32_RUN:-none}/filebeat-data']
     volumes:
@@ -53,7 +57,9 @@ services:
 
   elasticsearch:
     <<: *hardening
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.5.5@sha256:13b4a40bb095774f5fda635e45fd5677cc6a26565e42b24997b0c72b88e75984
+    build:
+      context: ../..
+      dockerfile: deploy/images/elasticsearch.Dockerfile
     user: '1000:0'
     environment:
       discovery.type: single-node
@@ -69,7 +75,9 @@ services:
 
   kibana:
     <<: *hardening
-    image: docker.elastic.co/kibana/kibana:9.5.5@sha256:13b72ce7222c36e4213229004ae62a87aeb32fd372ebfa6fb38f7a3285fdbb78
+    build:
+      context: ../..
+      dockerfile: deploy/images/kibana.Dockerfile
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       TELEMETRY_OPTIN: 'false'
@@ -84,15 +92,16 @@ services:
   api:
     <<: *hardening
     # Real API app + pinned bundle (read-only) + server-side timing log per run.
-    # glibc base so the host uv interpreter/venv can be mounted read-only.
-    image: debian:bookworm-slim@sha256:7ff6ba31527b9e336162fa061746c366c4b2032f4d2cff2078bea43f78efe3f8
+    build:
+      context: ../..
+      dockerfile: scoring/Dockerfile
     user: '1000:1000'
     working_dir: ${CG32_REPO}
     environment:
       PYTHONPATH: ${CG32_REPO}
       PYTHONDONTWRITEBYTECODE: '1'
     command:
-      - ${CG32_REPO}/.venv/bin/python
+      - /usr/bin/python3.11
       - ${CG32_REPO}/deploy/cg32/api_server.py
       - /bundle/manifest.json
       - '${CG32_LAB}/runs/${CG32_RUN:-none}/api-ledger.sqlite3'
@@ -102,7 +111,6 @@ services:
     ports: ['127.0.0.1::8000']
     volumes:
       - '${CG32_REPO}:${CG32_REPO}:ro'
-      - '${CG32_UV_PYTHON}:${CG32_UV_PYTHON}:ro'
       - '${CG32_BUNDLE:-/nonexistent}:/bundle:ro'
       - '${CG32_LAB}/runs:${CG32_LAB}/runs'
     mem_limit: 768m
@@ -111,7 +119,9 @@ services:
 
   nifi:
     <<: *hardening
-    image: apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad
+    build:
+      context: ../..
+      dockerfile: deploy/images/nifi.Dockerfile
     init: true
     user: '1000:1000'
     environment:

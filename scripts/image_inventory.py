@@ -49,6 +49,14 @@ def compose(root, path, profiles=()):
         NIFI_SENSITIVE_PROPS_KEY="validation-only-key-never-a-real-secret",
         SINGLE_USER_CREDENTIALS_USERNAME="validation-only",
         SINGLE_USER_CREDENTIALS_PASSWORD="validation-only-password",
+        CG32_PROJECT="validation-cg32",
+        CG32_KAFKA_PORT="19092",
+        CG32_NIFI_PORT="18443",
+        CG32_LAB="/validation/lab",
+        CG32_REPO="/validation/repo",
+        CG32_UV_PYTHON="/validation/python",
+        CG32_BUNDLE="/validation/bundle",
+        CG32_RUN="validation-run",
     )
     args = ["docker", "compose", "--env-file", os.devnull, "-f", str(root / path)]
     for profile in profiles:
@@ -87,9 +95,23 @@ def check(root=ROOT):
             {"nifi": "nifi", "kafka-test": "kafka", "mock-predict": "mock-python"},
         ),
     ]
+    if (root / "deploy/cg32/compose.yaml").is_file():
+        specifications.append(
+            (
+                "deploy/cg32/compose.yaml",
+                ("run", "dashboard"),
+                {
+                    "kafka": "kafka",
+                    "filebeat": "filebeat",
+                    "elasticsearch": "elasticsearch",
+                    "kibana": "kibana",
+                    "api": "api",
+                    "nifi": "nifi",
+                },
+            )
+        )
     optional_image_files = {
         "docker-compose.lan.yml": {"haproxy": "haproxy"},
-        "deploy/cg32/compose.yaml": {"api": "wolfi"},
     }
     for path, expected in optional_image_files.items():
         file = root / path

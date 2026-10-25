@@ -125,13 +125,29 @@ class StatsTest(unittest.TestCase):
 
 
 class NifiTlsTest(unittest.TestCase):
-    def test_all_lab_images_are_digest_pinned(self):
-        compose = (
-            Path(lab.__file__).parents[1] / "deploy/cg32/compose.yaml"
-        ).read_text()
-        images = [line.strip() for line in compose.splitlines() if "image:" in line]
-        self.assertEqual(len(images), 6)
-        self.assertTrue(all("@sha256:" in line for line in images))
+    def test_all_lab_images_use_reviewed_build_targets(self):
+        root = Path(lab.__file__).parents[1]
+        compose = (root / "deploy/cg32/compose.yaml").read_text()
+        dockerfiles = {
+            line.split(":", 1)[1].strip()
+            for line in compose.splitlines()
+            if "dockerfile:" in line
+        }
+        targets = json.loads((root / "deploy/build-targets.json").read_text())
+        self.assertEqual(
+            dockerfiles,
+            {
+                targets[key]
+                for key in (
+                    "api",
+                    "elasticsearch",
+                    "filebeat",
+                    "kafka",
+                    "kibana",
+                    "nifi",
+                )
+            },
+        )
 
     def test_missing_or_changed_certificate_fails_closed(self):
         with tempfile.TemporaryDirectory() as tmp:
