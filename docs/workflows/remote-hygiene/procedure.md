@@ -13,4 +13,3 @@
 
 Condición de parada: cualquier cambio de SHA, PR nuevo, fallo de validación o
 hallazgo de seguridad pendiente impide publicar, borrar o declarar aceptación.
-
