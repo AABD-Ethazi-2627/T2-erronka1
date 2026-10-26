@@ -85,7 +85,7 @@
     "tests/test_nifi_client_security.py": "20ed939cf4d4cdf857c8149a45805ab66d7291a440794d3ea6c92eac62eeb6c3",
     "tests/test_scoring_replay.py": "bb0c3a2daf88f64bca34579d0c3b5cd7dc8904b2943bfa4aa417a0725dc3b01f",
     "tests/test_smb_source.py": "a5a8e8d4b3a1863f8ab5a809efa8b4cd6c7c2b7954029e71b743b3e07f3cec47",
-    "tests/verify_durable_pipeline.py": "461a8d8e598221aefe253e3f44ab6cfccca64f52f5d1270949e209d8ded62493",
+    "tests/verify_durable_pipeline.py": "228c0b22ddb335b5e9a581a2f9f947f979b2cb1cd4fe3a23a694cfa34c16510b",
     "docs/PLATFORM_SUPPORT.md": "b90810cf3943b929e6efe023740c67543cfc022d6d69ce441b8fa5657790410f",
     "scripts/platform_io.py": "80f813d1a299975e5a041300534abff93e886efb344fe68da9e4eda0ebbff8bb",
     "scripts/private_files.py": "47847e63d26be64434e3f5e4b01b2cf1b5802f48f3ac31bcf9b7ee231ed351a3",
@@ -129,10 +129,10 @@
     "elasticsearch/README.md": "62bd2c6194d1f3f58aba47f46b250792f9b8dccf3400f48139ae0279669ea8ff",
     "docs/evidence/G68_ES_INGEST_20261022.md": "6370d1fafdac52f2299accc36925d5f44fea3aa01938d494b7b15c22509ecef6",
     "tests/test_es_ingest_pipeline.py": "51c06485c7414fec59432adb9fa960957e89b1851d7b5576a9754a52ca86f0e3",
-    "tests/verify_es_ingest_pipeline.py": "1dfa57149ff57b05b5c162588b401481ca17816d2fe0dc3091228ea045ba74a5",
+    "tests/verify_es_ingest_pipeline.py": "a87782304c279229f4910da40fd6f82792776e700fd1083e5dbdc9964b35e122",
     "elasticsearch/index-template.json": "32fb64161f82898c568ab8d4a0215c1a9cc0e792ec824fc5e1b1df8f03ffdcb7",
     "scripts/build_es_ingest_pipeline.py": "15bd402dae34c0c3a1a5a756e8cc3bd03d2518c396174b8f190211f771cec7cd",
-    "tests/verify_elasticsearch_contract.py": "6612bc54269fc9603f812f3a3aaf45ebdb2e6ef927a8cd14e1c1256a5d8c71c3",
+    "tests/verify_elasticsearch_contract.py": "9a17dc31777936c3389767cbb51209653704d104751ec1d3344861a72d3fba71",
     "docs/evidence/G68_ES_INGEST_20261022/attempts.json": "4c07dffa935c8c1d4b1f485842e113cfa36f2c5085aa88242114c2d469108f06",
     "elasticsearch/ingest-pipeline.json": "b32d6b10aaf127efc469e207896caac59cea6866fdc75c7ef1aaa27bb41163a2",
     "docs/evidence/G68_ES_INGEST_20261022/gates/audit.log": "f7ed73de17b78dacdb4ff9e21db6228e454fe003a5675ec6d4f4e1203c2affb0",
@@ -197,7 +197,9 @@
     "docs/evidence/CG10_diagnostics.png": "d4e4eb378d70b84e88f8205d2fe73ee3dd5a7e373d96eb3d52581bc2dd259654",
     "docs/evidence/CG10_PRECISION_20261022.md": "68db07ba221fc300f67c18e62a2d8ce59f0c4b971cf0b700b4b4192dce76430a",
     "docs/evidence/CG10_PRECISION_20261022/independent-audit.json": "5380a8e227b8a06be9a472323550b7f82d49919723133100b4bc710bb65929c5",
-    "docs/evidence/CG10_PRECISION_20261022/parser-comparison.json": "c9e0f20e64db756d0796acf7f68e0be0e2e12cae515efcac47c8b641affd5f0b"
+    "docs/evidence/CG10_PRECISION_20261022/parser-comparison.json": "c9e0f20e64db756d0796acf7f68e0be0e2e12cae515efcac47c8b641affd5f0b",
+    "tests/es_runtime.py": "55c768a65b0402970b3a791101c07189f735a46d7ef6feb57746c9c4564563fd",
+    "tests/test_es_runtime.py": "2df6b346f8510644530a0a8bdfeba4e0529fa85d8810be67c302102e7d75b6b3"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",

@@ -11,10 +11,19 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 import time
 import uuid
 from pathlib import Path
 
+from es_runtime import (
+    DockerRuntime,
+    add_runtime_arguments,
+    cluster_uuid,
+    mount_source,
+    run_identity,
+    write_evidence,
+)
 from test_es_ingest_pipeline import synthetic_prediction
 
 from scripts.archive_consumer import event_key
@@ -25,16 +34,15 @@ from scripts.validate_contracts import validators
 IMAGE = image("elasticsearch")
 
 
-def verify(work, distro=None):
+def verify(work, distro=None, image_ref=IMAGE, docker_host=None, engine_work_dir=None):
+    runtime = DockerRuntime(image_ref, distro=distro, host=docker_host)
     work = work.resolve()
     if not (work.drive.lower() == "d:" or str(work).startswith("/mnt/d/")):
         raise ValueError("Lab data/evidence must be on D:")
     work.mkdir(parents=True, exist_ok=False)
     for name in ("data", "java-temp", "logs"):
         (work / name).mkdir()
-    docker = (
-        ["wsl", "-d", distro, "--exec", "/usr/sbin/docker"] if distro else ["docker"]
-    )
+    docker = runtime.prefix
 
     def command(args, **kwargs):
         return subprocess.run(
@@ -47,10 +55,7 @@ def verify(work, distro=None):
         ).stdout.strip()
 
     def mount(name):
-        path = work / name
-        if distro:
-            return f"/mnt/d/{path.as_posix()[3:]}"
-        return str(path)
+        return mount_source(work, name, distro=distro, engine_work_dir=engine_work_dir)
 
     pipeline = json.loads(EXPORT.read_text(encoding="utf-8"))
     template_path = ROOT / "elasticsearch/index-template.json"
@@ -59,7 +64,9 @@ def verify(work, distro=None):
     identity = event_key("prediction", doc)
     evidence = {
         "passed": False,
-        "image": IMAGE,
+        "image": image_ref,
+        "docker_command": docker,
+        "engine_work_dir": engine_work_dir,
         "fixture": {
             "kind": "constructed v4 contract fixture, NOT API inference",
             "document": doc,
@@ -72,6 +79,8 @@ def verify(work, distro=None):
         "containers_before": command(["ps", "-aq"]).splitlines(),
     }
     container = None
+    run_id = uuid.uuid4().hex
+    evidence["verification_id"] = run_id
 
     def request(method, path, body=None, expected=200):
         raw = command(
@@ -136,7 +145,8 @@ def verify(work, distro=None):
         return installed
 
     try:
-        evidence["image_id"] = json.loads(command(["image", "inspect", IMAGE]))[0]["Id"]
+        image_id = runtime.resolve_image()
+        evidence["image_id"] = image_id
         container = command(
             [
                 "run",
@@ -147,6 +157,7 @@ def verify(work, distro=None):
                 "--label",
                 "t2.purpose=g68-es-ingest-20261022",
                 "--network=none",
+                *run_identity(run_id),
                 "--cap-drop=ALL",
                 "--security-opt=no-new-privileges",
                 "--log-driver=none",
@@ -176,10 +187,10 @@ def verify(work, distro=None):
                 "ingest.geoip.downloader.enabled=false",
                 "-e",
                 "ES_JAVA_OPTS=-Xms384m -Xmx384m",
-                IMAGE,
+                image_id,
             ]
         )
-        inspection = json.loads(command(["inspect", container]))[0]
+        inspection = runtime.verify_owned(container, run_id, image_id)
         assert inspection["HostConfig"]["NetworkMode"] == "none"
         assert not inspection["HostConfig"].get("PortBindings")
         assert len(inspection["Mounts"]) == 3
@@ -215,6 +226,7 @@ def verify(work, distro=None):
             if ready.returncode == 0:
                 evidence["server"] = json.loads(ready.stdout)
                 assert evidence["server"]["version"]["number"] == "9.5.5"
+                evidence["cluster_uuid"] = cluster_uuid(evidence["server"])
                 break
             state = json.loads(command(["inspect", container]))[0]["State"]
             if not state["Running"]:
@@ -346,13 +358,24 @@ def verify(work, distro=None):
             assert request("GET", f"/{legacy}/_count")["count"] == 1
         evidence["passed"] = True
     finally:
-        if container:
-            command(["rm", "--force", container])
-            evidence["container_removed"] = True
-        evidence["containers_after"] = command(["ps", "-aq"]).splitlines()
-        (work / "result.json").write_text(
-            json.dumps(evidence, indent=2) + "\n", encoding="utf-8", newline="\n"
-        )
+        primary_error = sys.exc_info()[1]
+        try:
+            if container:
+                runtime.cleanup(container, run_id, image_id, evidence, primary_error)
+            try:
+                evidence["containers_after"] = command(["ps", "-aq"]).splitlines()
+            except (OSError, subprocess.SubprocessError) as exc:
+                evidence["passed"] = False
+                evidence["containers_after_error_type"] = type(exc).__name__
+                if primary_error is None:
+                    raise
+                primary_error.add_note(
+                    "ES post-cleanup inventory failed: " + type(exc).__name__
+                )
+        finally:
+            write_evidence(
+                work / "result.json", evidence, primary_error or sys.exc_info()[1]
+            )
     print(
         "PASS: real ES simulate, final guard, strict mapping and immutable replay; "
         "own container removed"
@@ -362,7 +385,13 @@ def verify(work, distro=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--work-dir", required=True, type=Path)
-    parser.add_argument("--docker-via-wsl")
+    add_runtime_arguments(parser, IMAGE, bind_mounts=True)
     args = parser.parse_args()
     os.environ.setdefault("PYTHONDONTWRITEBYTECODE", "1")
-    verify(args.work_dir, args.docker_via_wsl)
+    verify(
+        args.work_dir,
+        args.docker_via_wsl,
+        args.image,
+        args.docker_host,
+        args.engine_work_dir,
+    )

@@ -11,10 +11,19 @@ import copy
 import json
 import os
 import subprocess
+import sys
 import time
 import uuid
 from pathlib import Path
 
+from es_runtime import (
+    DockerRuntime,
+    add_runtime_arguments,
+    cluster_uuid,
+    mount_source,
+    run_identity,
+    write_evidence,
+)
 from test_es_ingest_pipeline import synthetic_prediction
 
 from scripts.build_es_ingest_pipeline import ROOT
@@ -26,7 +35,16 @@ BASE = "28a77543bfd67a36b96ddc2f4acc103b13f62c2e"
 FIELDS = ["prediction_scope", "temporal_prediction_enabled", "score_semantics"]
 
 
-def run(output, work, baseline_ref=BASE, distro=None):
+def run(
+    output,
+    work,
+    baseline_ref=BASE,
+    distro=None,
+    image_ref=IMAGE,
+    docker_host=None,
+    engine_work_dir=None,
+):
+    runtime = DockerRuntime(image_ref, distro=distro, host=docker_host)
     if output.exists():
         raise FileExistsError("Refuse replacing verification evidence")
     work = work.resolve()
@@ -37,14 +55,14 @@ def run(output, work, baseline_ref=BASE, distro=None):
     for name in ("data", "java-temp", "logs"):
         path = work / name
         path.mkdir()
-        source = f"/mnt/d/{path.as_posix()[3:]}" if distro else str(path)
+        source = mount_source(
+            work, name, distro=distro, engine_work_dir=engine_work_dir
+        )
         mounts += [
             "--mount",
             f"type=bind,src={source},dst=/usr/share/elasticsearch/{name}",
         ]
-    docker = (
-        ["wsl", "-d", distro, "--exec", "/usr/sbin/docker"] if distro else ["docker"]
-    )
+    docker = runtime.prefix
     template = json.loads((ROOT / "elasticsearch/index-template.json").read_text())
     baseline = json.loads(
         subprocess.check_output(
@@ -58,6 +76,8 @@ def run(output, work, baseline_ref=BASE, distro=None):
         del difference["template"]["mappings"]["properties"][field]
     assert difference == baseline, "Expected three additive mappings and final pipeline"
 
+    image_id = runtime.resolve_image()
+    run_id = uuid.uuid4().hex
     container = subprocess.check_output(
         docker
         + [
@@ -69,6 +89,7 @@ def run(output, work, baseline_ref=BASE, distro=None):
             "--label",
             "t2.purpose=es-contract-regression",
             "--network=none",
+            *run_identity(run_id),
             "--cap-drop=ALL",
             "--security-opt=no-new-privileges",
             "--log-driver=none",
@@ -93,13 +114,17 @@ def run(output, work, baseline_ref=BASE, distro=None):
             "ingest.geoip.downloader.enabled=false",
             "-e",
             "ES_JAVA_OPTS=-Xms384m -Xmx384m",
-            IMAGE,
+            image_id,
         ],
         text=True,
     ).strip()
     evidence = {
         "baseline_ref": baseline_ref,
-        "image": IMAGE,
+        "image": image_ref,
+        "image_id": image_id,
+        "docker_command": docker,
+        "verification_id": run_id,
+        "engine_work_dir": engine_work_dir,
         "operations": [],
         "passed": False,
     }
@@ -146,9 +171,7 @@ def run(output, work, baseline_ref=BASE, distro=None):
         return result_body
 
     try:
-        inspection = json.loads(
-            subprocess.check_output(docker + ["inspect", container])
-        )[0]
+        inspection = runtime.verify_owned(container, run_id, image_id)
         assert inspection["HostConfig"]["NetworkMode"] == "none"
         assert not inspection["HostConfig"].get("PortBindings")
         assert len(inspection["Mounts"]) == 3
@@ -185,6 +208,7 @@ def run(output, work, baseline_ref=BASE, distro=None):
             if ready.returncode == 0:
                 evidence["server"] = json.loads(ready.stdout)
                 assert evidence["server"]["version"]["number"] == "9.5.5"
+                evidence["cluster_uuid"] = cluster_uuid(evidence["server"])
                 break
             if time.monotonic() >= deadline:
                 raise TimeoutError("Disposable ES did not start within 180 seconds")
@@ -281,13 +305,11 @@ def run(output, work, baseline_ref=BASE, distro=None):
                 assert request("GET", path)["_source"] == document
         evidence["passed"] = True
     finally:
-        # Only remove the exact container ID created above, including on failure.
-        subprocess.run(
-            docker + ["rm", "--force", container], check=True, capture_output=True
-        )
-        evidence["container_removed"] = True
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(json.dumps(evidence, indent=2) + "\n")
+        primary_error = sys.exc_info()[1]
+        try:
+            runtime.cleanup(container, run_id, image_id, evidence, primary_error)
+        finally:
+            write_evidence(output, evidence, primary_error or sys.exc_info()[1])
     print(
         "PASS: old mapping rejected, additive migration and both strict index "
         "families verified; disposable container removed."
@@ -301,7 +323,15 @@ if __name__ == "__main__":
     )
     parser.add_argument("--baseline-ref", default=BASE)
     parser.add_argument("--work-dir", required=True, type=Path)
-    parser.add_argument("--docker-via-wsl")
+    add_runtime_arguments(parser, IMAGE, bind_mounts=True)
     args = parser.parse_args()
     os.environ.setdefault("PYTHONDONTWRITEBYTECODE", "1")
-    run(args.output, args.work_dir, args.baseline_ref, args.docker_via_wsl)
+    run(
+        args.output,
+        args.work_dir,
+        args.baseline_ref,
+        args.docker_via_wsl,
+        args.image,
+        args.docker_host,
+        args.engine_work_dir,
+    )
