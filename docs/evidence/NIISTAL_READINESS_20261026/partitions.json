@@ -1,0 +1,87 @@
+{
+  "status": "pass",
+  "membership_sizes": {
+    "train": 5600,
+    "validation": 1200,
+    "excluded": 1200
+  },
+  "screening": [
+    {
+      "fit": 3733,
+      "held": 1867
+    },
+    {
+      "fit": 3733,
+      "held": 1867
+    },
+    {
+      "fit": 3734,
+      "held": 1866
+    }
+  ],
+  "outer": [
+    {
+      "fit": 3733,
+      "held": 1867
+    },
+    {
+      "fit": 3733,
+      "held": 1867
+    },
+    {
+      "fit": 3734,
+      "held": 1866
+    }
+  ],
+  "inner": [
+    [
+      {
+        "fit": 2488,
+        "held": 1245
+      },
+      {
+        "fit": 2489,
+        "held": 1244
+      },
+      {
+        "fit": 2489,
+        "held": 1244
+      }
+    ],
+    [
+      {
+        "fit": 2488,
+        "held": 1245
+      },
+      {
+        "fit": 2489,
+        "held": 1244
+      },
+      {
+        "fit": 2489,
+        "held": 1244
+      }
+    ],
+    [
+      {
+        "fit": 2489,
+        "held": 1245
+      },
+      {
+        "fit": 2489,
+        "held": 1245
+      },
+      {
+        "fit": 2490,
+        "held": 1244
+      }
+    ]
+  ],
+  "limits": [
+    "Published manifest identities only; not execution or score verification",
+    "No dataset, excluded test, model or pickle loaded",
+    "No calibration-fit membership or native reload independently verified",
+    "SELF_REVIEW / NOT_INDEPENDENT; no human acceptance or promotion"
+  ],
+  "manifest_sha256": "d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b"
+}

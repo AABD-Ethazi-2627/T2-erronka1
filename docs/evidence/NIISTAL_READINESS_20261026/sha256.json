@@ -1,0 +1,11 @@
+{
+  "base_commit": "5005ccde81f16cd2deac6ee3b30085d773e0fc88",
+  "review": "SELF_REVIEW / NOT_INDEPENDENT",
+  "files": {
+    "docs/evidence/NIISTAL_READINESS_20261026/locked-tests.log": "ef2458ea1409c4bd7b24e660bf3d173fcc9f9ce6dbda69cdc4019ed31ba0094e",
+    "docs/evidence/NIISTAL_READINESS_20261026/partitions.json": "56f771f8c29d3c051c63012e28680191242b3f22685529d422b2de2c3f955d7a",
+    "docs/evidence/NIISTAL_READINESS_20261026/project-before.json": "0f0191a46a1bae1983b647b0660b2993acd93866b96a9996b39439f4bdaf21f1",
+    "scripts/audit_cg40_partitions.py": "cb6663214182762278dd4a63ccd52dfd3f866b2576c5ed61c53e1fb765542cec",
+    "tests/research/test_cg40_partitions.py": "a5596bbf1357a0c435d911c6a8b0d18590ae82cba130ea0268ef7727f8f1e745"
+  }
+}
