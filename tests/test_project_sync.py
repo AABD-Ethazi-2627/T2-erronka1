@@ -113,7 +113,7 @@ class SyncTests(unittest.TestCase):
             "AABD-Ethazi-2627/B-taldea",
         ):
             with self.subTest(repository=repository):
-                with self.assertRaisesRegex(ValueError, "outside B-taldea"):
+                with self.assertRaisesRegex(ValueError, "outside T2-erronka1"):
                     plan(project([item(repo=repository)]), project())
 
     def test_unknown_status_fails(self):
