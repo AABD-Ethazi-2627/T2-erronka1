@@ -1,0 +1,139 @@
+{
+  "observed_at": "2026-10-22T10:09:41.506859+00:00",
+  "issue": 14,
+  "integration_base": "3c957235e81e449bace661f8723f91edb02eb3b7",
+  "scope": "read-only local runtime and branch ancestry; no E2E or acceptance",
+  "branches": [
+    {
+      "ref": "origin/feat/14-nifi-validation",
+      "sha": "aace73cade05932e85a7a268fc1db288d4b60b4e",
+      "ancestor_of_integration": true,
+      "unique_commits": 0
+    },
+    {
+      "ref": "origin/feat/14-nifi-validation-flow",
+      "sha": "55c61959584a84d4ff7392b1e93e85003ad6f819",
+      "ancestor_of_integration": true,
+      "unique_commits": 0
+    },
+    {
+      "ref": "origin/feat/durable-pipeline-wiring",
+      "sha": "a64f4254bc2051974457e7c91a790abb4111ecca",
+      "ancestor_of_integration": true,
+      "unique_commits": 0
+    },
+    {
+      "ref": "origin/feat/real-kafka-nifi-lab-20261022",
+      "sha": "e2546e503ffc32c33b69a79fe60d86ec1ba144a5",
+      "ancestor_of_integration": true,
+      "unique_commits": 0
+    },
+    {
+      "ref": "origin/fix/cg14-pr42-integration",
+      "sha": "605e4b1d010f972de294a3f8430687b46407af0a",
+      "ancestor_of_integration": true,
+      "unique_commits": 0
+    },
+    {
+      "ref": "origin/fix/cg14-scoring-compat-offline",
+      "sha": "528bcadc1d845adc09475470419b8fecc2764fb6",
+      "ancestor_of_integration": true,
+      "unique_commits": 0
+    }
+  ],
+  "runtime": {
+    "auth_http": "201",
+    "original": {
+      "group_id": "583bcfb5-01a1-1000-de1a-41cdf8ea78fe",
+      "processors": 23,
+      "connections": 27,
+      "processor_states": {
+        "DISABLED": 1,
+        "STOPPED": 22
+      },
+      "controller_services": [
+        {
+          "id": "58b81dc3-01a1-1000-14a6-f2e538efe3db",
+          "state": "ENABLED"
+        }
+      ],
+      "queued": 0
+    },
+    "restore": {
+      "group_id": "5d4f0539-01a1-1000-4a08-0a3f4c8946d8",
+      "processors": 23,
+      "connections": 27,
+      "processor_states": {
+        "DISABLED": 23
+      },
+      "controller_services": [
+        {
+          "id": "ce5c27e6-986a-3047-bead-420bdcc8ef65",
+          "state": "DISABLED"
+        }
+      ],
+      "queued": 0
+    },
+    "configuration": {
+      "status": "BLOCKED",
+      "reason": "Propiedad inesperada: ExecuteGroovyScript \u2014 CG14 contract validator/Script Body"
+    },
+    "runtime_storage": {
+      "status": "BLOCKED",
+      "reason": "Docker fall\u00f3; inspeccionar desde host (salida omitida).",
+      "observed_mount_destinations": [
+        "/tmp/kraft-combined-logs",
+        "/etc/kafka/secrets",
+        "/mnt/shared/config",
+        "/var/lib/kafka/data"
+      ],
+      "required_mount_destinations": [
+        "/var/lib/kafka",
+        "/var/lib/kafka/data"
+      ],
+      "observed_entrypoint": [
+        "/__cacert_entrypoint.sh"
+      ],
+      "required_entrypoint": [
+        "/bin/bash",
+        "/lab/start.sh"
+      ],
+      "observed_readonly_rootfs": false,
+      "diagnosis": "Legacy Kafka container has no /lab/server.properties or explicit persistent metadata/data layout required by PR68."
+    },
+    "original_fingerprint_before": "f43e1da502068e94779afec516fea47809c7fbeea0f5016b074c147324319ebc",
+    "original_fingerprint_after": "f43e1da502068e94779afec516fea47809c7fbeea0f5016b074c147324319ebc",
+    "original_unchanged": true,
+    "mutations": false,
+    "functional_restore": "NOT_TESTED"
+  },
+  "probe_notes": [
+    "The first configuration probe referenced a nonexistent helper (AttributeError); corrected to snapshot and rerun. This was an audit script error, not a product failure."
+  ],
+  "all_remote_branches_scanned": 61,
+  "additional_branches_with_unique_cg14_path_commits": [],
+  "validation": {
+    "python": "3.12.14",
+    "environment": "uv sync --frozen --extra kafka",
+    "pytest": {
+      "passed": 296,
+      "subtests_passed": 91,
+      "warnings_as_errors": true
+    },
+    "unittest": {
+      "run": 304,
+      "skipped": 6,
+      "status": "OK"
+    },
+    "ruff": "0.17.1 E,F,I,PLW1510 and format passed",
+    "layout": "passed",
+    "cg25": {
+      "status": "passed",
+      "criteria": 40,
+      "local_links": 81,
+      "current_hashes": 90,
+      "historical_hashes": 18
+    },
+    "functional_restore": "NOT_TESTED"
+  }
+}

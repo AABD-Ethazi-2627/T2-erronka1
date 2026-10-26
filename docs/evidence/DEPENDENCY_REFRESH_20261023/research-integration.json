@@ -1,0 +1,10 @@
+{
+  "main_integrated": "5005ccde81f16cd2deac6ee3b30085d773e0fc88",
+  "research_pins": 31,
+  "research_versions_changed": false,
+  "data": "synthetic 120 rows only",
+  "unit_tests_passed": 22,
+  "smoke_models": 50,
+  "smoke_complete": 50,
+  "application_default_collection": "isolated from tests/research; research CI remains explicit"
+}

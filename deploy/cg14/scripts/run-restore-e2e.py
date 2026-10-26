@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Host-only, fail-closed RESTORE E2E. --plan is entirely offline.
 
-No import, deletion, container restart, .env access or automatic producer retry.
+No import, deletion, container restart or automatic producer retry.
+Authentication reads environment/local .env credentials through the shared client.
 An interrupted producer is terminal for --test: use --verify/--stop and retain
 its topic. A new execution requires stopped components and explicit new run ID.
 """

@@ -2,7 +2,9 @@ name: cnc-guard-cg14
 
 services:
   nifi:
-    image: apache/nifi:${NIFI_VERSION:-2.12.0}
+    build:
+      context: ../..
+      dockerfile: deploy/images/nifi.Dockerfile
     container_name: cnc-cg14-nifi
     restart: unless-stopped
     init: true
@@ -50,7 +52,9 @@ services:
         max-file: "3"
 
   mock-predict:
-    image: python:3.13-alpine@sha256:2d9aefe2fef018a7eb2c13064c89c71929800fd2e5dccdbf52ea5da5bb8d929a
+    build:
+      context: ../..
+      dockerfile: deploy/images/mock-python.Dockerfile
     container_name: cnc-cg14-mock-predict
     profiles: [integration-mocks]
     restart: "no"
@@ -79,7 +83,9 @@ services:
         max-file: "3"
 
   kafka-test:
-    image: apache/kafka:4.3.1@sha256:77e3df9054047a88b520d0cc46e16696d3b22022e1d580aeccd2632df6532837
+    build:
+      context: ../..
+      dockerfile: deploy/images/kafka.Dockerfile
     container_name: cnc-cg14-kafka-test
     hostname: cg14-kafka-test
     profiles: [kafka-test]

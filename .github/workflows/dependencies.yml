@@ -1,0 +1,102 @@
+name: Dependency audit
+on:
+  pull_request:
+  schedule:
+    - cron: '23 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.13.5'
+          python-version: '3.11'
+          enable-cache: false
+      - uses: docker/setup-compose-action@54042514f505b273907334ae2b9cdbb9a0213c1a # v2.4.0
+        with:
+          version: v5.6.1
+      - name: Validate lock, runtime hashes and infrastructure inventory
+        run: |
+          uv lock --check
+          python3 -m scripts.export_runtime --check
+          python3 -m scripts.image_inventory --check
+          python3 -m scripts.build_refreshed_lab_flow --check
+          python3 scripts/check_lab_compose.py
+      - name: Audit every lock entry and uv (lookup failures fail closed)
+        run: python3 -m scripts.audit_dependencies --latest --output dependency-audit.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: dependency-audit
+          path: dependency-audit.json
+          if-no-files-found: error
+          retention-days: 30
+  images:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, go, haproxy, wolfi]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select immutable reference
+        id: image
+        env:
+          IMAGE_KEY: ${{ matrix.image }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          key = os.environ['IMAGE_KEY']
+          targets = json.loads(Path('deploy/build-targets.json').read_text())
+          ref = f'cnc-guard-audit:{key}' if key in targets else json.loads(Path('deploy/images.json').read_text())[key]
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              print('ref=' + ref, file=output)
+              print('dockerfile=' + targets.get(key, ''), file=output)
+          PY
+      - name: Build actual runtime image
+        if: steps.image.outputs.dockerfile != ''
+        run: docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
+      - name: Preserve the complete image scan
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          version: 'v0.76.1'
+          image-ref: ${{ steps.image.outputs.ref }}
+          scanners: vuln
+          format: json
+          output: image-scan.json
+          timeout: 15m
+          exit-code: '0'
+          ignore-unfixed: false
+          severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
+          cache: false
+      - name: Reject unverified image vulnerabilities
+        env:
+          IMAGE_KEY: ${{ matrix.image }}
+        run: python3 -m scripts.enforce_image_scan "$IMAGE_KEY" image-scan.json
+      - name: Prove the Filebeat Go finding is unreachable
+        if: matrix.image == 'filebeat'
+        run: |
+          container=$(docker create "${{ steps.image.outputs.ref }}")
+          trap 'docker rm -f "$container" >/dev/null' EXIT
+          docker cp "$container:/usr/share/filebeat/filebeat" /tmp/filebeat
+          docker run --rm --volume /tmp/filebeat:/target/filebeat:ro golang:1.26.10-alpine3.23@sha256:0525c952defebc693cdaf62cdf43afa32be5a7f377e99260642ea19c240c708e sh -c \
+            'go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 -mode=binary /target/filebeat'
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: image-${{ matrix.image }}
+          path: image-scan.json
+          if-no-files-found: error
+          retention-days: 30

@@ -1,44 +1,39 @@
 # CG14 — technical handoff
 
-Corte de publicación: 2026-10-21. Rama `feat/14-nifi-validation`; revisión en
-Draft contra `main`. **Estado global PARTIAL; issue #14 debe seguir abierta.**
+Corte vigente: **2026-10-22**. Base integrada `3c957235e81e449bace661f8723f91edb02eb3b7`.
+Estado global **PARTIAL**; issue #14 abierta.
 
 ## Estado vigente para el revisor
 
-La composición PR65 incorpora PR42 `53f342d` (PR62 y PR64). El
-[worker durable opt-in](CG14_DURABLE_PIPELINE.md) y su
-[corrección de recibos/JSON profundo](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
-tienen evidencia HTTP/disco y ES aislado separada del runtime histórico de
-este handoff. Un recibo CG15 rechazado bloquea todos los replays, sin ACK.
-Esto no habilita NiFi del host, no acredita RESTORE E2E y no cierra la issue.
-El siguiente gate de PR65 es revisión padre del SHA publicado.
+Las seis ramas CG14 están integradas en `feat/17-maintenance-planner`.
+PR57 sigue abierta hacia main, pero su head ya es ancestro de esta integración;
+no hay que fusionarla otra vez para rescatar código. El worker durable de PR65
+y el ensayo real de PR68 se conservan.
 
-- VERIFIED histórico de laboratorio: pipeline de validación/rechazo, Kafka E2E,
-  recuperación Kafka 3/3, provenance, DLQ y export de NiFi 2.12.0.
-- RESTORE estructural VERIFIED: grupo existente
-  `5d4f0539-01a1-1000-4a08-0a3f4c8946d8`, 23 processors, 27 conexiones y servicio
-  `ce5c27e6-986a-3047-bead-420bdcc8ef65` importado DISABLED. No repetir upload.
-- RESTORE funcional NOT_TESTED: no existe ejecución completa acreditada de
-  fixtures en la copia ni habilitación ENABLED/VALID del servicio restaurado.
-- Bloqueo comunicado por el operador: el mock independiente no estaba disponible
-  durante el intento de test. El runner incluye `--resume`, pero eso no acredita
-  que el bloqueo esté resuelto ni que el E2E haya pasado.
-- Regresión de esta publicación: **209 passed** con
-  `PYTHONPATH=. ./.venv/bin/pytest -q`; Compose config, sintaxis Python/shell,
-  JSON y `git diff --check` correctos. Sin ejecutar E2E ni tocar Docker/NiFi.
-- CG03/CG13/CG28 reales, idempotencia durable, SSH remoto y revisión de otro
-  integrante siguen PARTIAL/NOT_TESTED o bloqueados por sus dependencias.
+[Auditoría del 22 de octubre](evidence/CG14_BRANCH_AUDIT_20261022.md) detalla
+versiones, ramas, pruebas y los pasos pendientes. La consulta HTTPS real obtuvo
+token HTTP 201; original y RESTORE tienen 23 processors, 27 conexiones y colas 0.
+RESTORE permanece DISABLED. La huella del original antes/después coincide.
 
-Procedimiento vigente para la copia existente:
-[CG14_RESTORE_E2E.md](CG14_RESTORE_E2E.md).
-[CG14_RESTORE_VALIDATION.md](CG14_RESTORE_VALIDATION.md) conserva la cronología;
-no reutilizar los comandos históricos de importación o los runners del grupo
-original para recuperar RESTORE-TEST.
+El cliente compartido admite credenciales del entorno o `.env` local, con
+pregunta interactiva sólo para valores ausentes, sin imprimirlos. El preflight
+sigue offline. El diagnóstico HTTP 400 sólo emite una categoría fija y acotada.
 
-Los JSON bajo `deploy/cg14/data/evidence/` son evidencias locales ignoradas y no
-se publican en este PR. Las cifras siguientes proceden del historial documentado,
-no de una nueva ejecución en esta publicación; el revisor debe contrastar esos
-artefactos sanitizados con el operador si necesita comprobar el runtime.
+RESTORE funcional permanece **NOT_TESTED**: el Script Body del validador vivo
+no coincide con la definición integrada y el broker local sigue con entrypoint
+y almacenamiento legacy. No ejecutar el runner antiguo para saltar estos gates,
+ni recrear el broker con Compose sobre sus datos sin inventario/backup y
+reconciliación de offsets. Ver la secuencia concreta en la auditoría.
+
+La API canónica y la idempotencia durable están implementadas. Las afirmaciones
+de ausencia en el historial inferior ya no describen esta base. La evidencia
+real de PR68 es laboratorio con modelos sintéticos, no integración industrial
+ni aceptación del equipo. Otro integrante debe registrar conclusión y fecha.
+
+Procedimiento RESTORE: [CG14_RESTORE_E2E.md](CG14_RESTORE_E2E.md).
+Cronología: [CG14_RESTORE_VALIDATION.md](CG14_RESTORE_VALIDATION.md).
+No repetir el upload existente. Los comandos de arranque históricos inferiores
+no autorizan recrear el broker legacy sobre el Compose actualizado.
 
 ## Historial técnico de laboratorio e iteraciones previas
 
