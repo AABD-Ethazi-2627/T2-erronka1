@@ -1,5 +1,21 @@
 # CG14 — runbook de restauración aislada de NiFi 2.12.0
 
+## Corte vigente — 22 de octubre de 2026
+
+[Auditoría de ramas y host](evidence/CG14_BRANCH_AUDIT_20261022.md): login HTTPS
+confirmado, original intacto, RESTORE 23/27/1 DISABLED con colas vacías.
+El runner integrado bloquea por Script Body antiguo y persistencia Kafka legacy.
+**No hay RESTORE_FUNCTIONAL_VERIFIED.** Alinear esos dos componentes conservando
+los datos antes de ejecutar; no usar el runner histórico para omitir los gates.
+La copia segura versionada actual tiene SHA256
+`60048fc426b25d57dd4bb6f9c8c5c99a48a80e906865d3d49a210e7659f43f52`.
+Los hashes `98bc…`, mounts `/tmp/kraft-combined-logs` y resultados de iteraciones
+anteriores que aparecen abajo son históricos; no describen el Compose actual.
+El nuevo layout exige `/var/lib/kafka` y `/var/lib/kafka/data` con entrypoint
+explícito `/lab/start.sh`. No hacer otro upload ni recrear el broker existente.
+
+## Procedimiento e historial anterior
+
 Estado actual: **PARTIAL — importación real confirmada (HTTP 201); pruebas
 funcionales pendientes**. Resultado del 2026-10-21 al final de este documento.
 La copia segura
@@ -154,9 +170,14 @@ valida ni invalida el archivo JSON. La carga local utiliza el endpoint REST
 independiente indicado arriba.
 
 El cliente [`cg14_restore_upload.py`](../cg14_restore_upload.py) ya existe en
-el checkout. Usa sólo Python estándar, solicita las credenciales de forma
-interactiva y valida TLS con el certificado público existente. No lee `.env`,
-no usa Docker, no habilita servicios ni arranca processors. Acepta únicamente
+el checkout. Usa sólo Python estándar y valida TLS con el certificado público
+existente. Lee `SINGLE_USER_CREDENTIALS_USERNAME` y
+`SINGLE_USER_CREDENTIALS_PASSWORD` primero del entorno y después de
+`deploy/cg14/.env` (ruta relativa al script, independiente del directorio actual).
+Sólo solicita manualmente los valores ausentes o vacíos. El archivo admite
+`CLAVE=valor`, comillas exteriores y prefijo `export `; los valores son literales,
+sin expansión de variables ni ejecución de shell. No imprime credenciales ni las
+lee durante el preflight. No usa Docker, no habilita servicios ni arranca processors. Acepta únicamente
 la copia con SHA256
 `98bcdaa8e64d197644b2e7a1c409394f50b4c8df2946780d442c109d2658839b`.
 

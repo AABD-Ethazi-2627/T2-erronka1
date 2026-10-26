@@ -95,8 +95,17 @@ def validate(
     analyzed = {(result["Class"], result["Type"]) for result in results}
     if image != "uv" and not any(kind == "os-pkgs" for kind, _ in analyzed):
         return ["image report contains no operating system package coverage"]
-    required = {"api": ("lang-pkgs", "python-pkg"), "uv": ("lang-pkgs", "rustbinary")}
-    if image in required and required[image] not in analyzed:
+    required = {
+        "api": {("lang-pkgs", "python-pkg"), ("lang-pkgs", "rustbinary")},
+        "uv": {("lang-pkgs", "rustbinary")},
+        "go": {("lang-pkgs", "gobinary")},
+        "filebeat": {("lang-pkgs", "gobinary")},
+        "kafka": {("lang-pkgs", "jar")},
+        "nifi": {("lang-pkgs", "jar"), ("lang-pkgs", "rustbinary")},
+        "elasticsearch": {("lang-pkgs", "jar")},
+        "kibana": {("lang-pkgs", "node-pkg")},
+    }
+    if not required.get(image, set()) <= analyzed:
         return ["image report is missing required runtime package coverage"]
     found = findings(report)
     permitted = VERIFIED_FINDINGS.get(image, set())

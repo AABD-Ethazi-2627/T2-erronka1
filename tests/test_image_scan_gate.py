@@ -27,8 +27,16 @@ def report(*findings, image="api"):
             {
                 "Target": "Python",
                 "Class": "lang-pkgs",
-                "Type": "python-pkg",
+                "Type": {"filebeat": "gobinary", "kibana": "node-pkg"}.get(
+                    image, "python-pkg"
+                ),
                 "Packages": [{"Name": "fixture-python-package", "Version": "1"}],
+            },
+            {
+                "Target": "uv",
+                "Class": "lang-pkgs",
+                "Type": "rustbinary",
+                "Packages": [{"Name": "fixture-rust-package", "Version": "1"}],
             },
         ],
     }
@@ -80,6 +88,32 @@ class ImageScanGateTests(unittest.TestCase):
     def test_every_unexpected_finding_fails(self):
         errors = validate("api", report(("CVE-X", "pkg", "1")))
         self.assertEqual(len(errors), 1)
+
+    def test_java_node_and_go_runtimes_cannot_pass_with_os_only(self):
+        for image in ("kafka", "nifi", "elasticsearch", "kibana", "go", "filebeat"):
+            data = report(image=image)
+            data["Results"] = data["Results"][:1]
+            with self.subTest(image=image):
+                self.assertIn(
+                    "image report is missing required runtime package coverage",
+                    validate(image, data, expected_artifact=data["ArtifactName"]),
+                )
+
+    def test_java_runtime_reports_pass_only_with_required_language_targets(self):
+        for image in ("kafka", "nifi", "elasticsearch"):
+            data = report(image=image)
+            data["Results"][1]["Type"] = "jar"
+            with self.subTest(image=image):
+                self.assertEqual(
+                    validate(image, data, expected_artifact=data["ArtifactName"]), []
+                )
+        api = report()
+        api["Results"] = api["Results"][:2]
+        self.assertTrue(validate("api", api))
+        nifi = report(image="nifi")
+        nifi["Results"][1]["Type"] = "jar"
+        nifi["Results"] = nifi["Results"][:2]
+        self.assertTrue(validate("nifi", nifi, expected_artifact=nifi["ArtifactName"]))
 
     def test_filebeat_requires_only_the_reachability_checked_module_finding(self):
         verified = ("GO-2026-5932", "golang.org/x/crypto", "v0.57.0")
