@@ -54,7 +54,7 @@
     "pyproject.toml": "1d962ee822718efd61ee0373e4faaf54bd8b4ddaa92e48fd2c588cb932d0593c",
     "scripts/check_cg25_memory.py": "8b6a7d2d627502be154c0303f316e945eb6842c3ca545eb42532f0eb30aa02e7",
     "uv.lock": "c3de3344bf59afdbd1242a89794aaa219f795538a5656a3832a8375ee9404a20",
-    "README.md": "6372266454afe7964d9ade15c24e5ebf85b1bafd1faba18dd76c4836ae0c2666",
+    "README.md": "1b88cdee43a0444d67d61b58340effee974071a34711064a5f2940e7b169281c",
     "notebooks/01_EDA_evidence.ipynb": "a08bf85f0a4a4ac307a2496729ae46bda32160f94112e407bbca2744529f615b",
     "notebooks/02_training_TEMPLATE.ipynb": "888daa4a547911e072c782fb561ae547a4835bc7790b11b0023b8ab1057ed890",
     "scripts/build_history.py": "4c50f32c7ba3a942db358228b294ac2fdfafbf75ebfb4572d2b8b7303d8ed36d",
