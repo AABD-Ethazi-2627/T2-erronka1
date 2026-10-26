@@ -1,5 +1,31 @@
 # Estado de revisión de pendientes
 
+## Estado vigente del padre — 26/10/2026
+
+Resolución técnica en curso; sin publicar esta composición ni aceptar el proyecto.
+Código `01a5f2b77ed890fac0d47e525ebced62733a1122`, árbol
+`8ba28e6c6727419589e9498f57b6b7d44bb0b03d`, en el worktree/rama indicados abajo.
+Gate con cobertura/identidad, cleanup que conserva fallos y spans de ciclo,
+sin cambios de ACK, batch o scheduling. Pytest 677 passed, 328 subtests y tres
+skips ES; unittest 385 pruebas y tres skips. Ambos con `-W error`, exit0;
+once checks adicionales exit0 individual. Los skips ES siguen sin PASS.
+
+Operaciones activas: runtime propio en D: (nueve builds/escaneos, pruebas de
+parches y tres casos ES), `clientRequestId=btaldea-runtime-validation-20261026-v1`,
+functions.exec cell26; revisión independiente solo lectura de `01a5f2b`,
+`clientRequestId=btaldea-final-code-review-20261026-v1`, cell43. Recibir sus
+resultados sin relanzar ni task_status; seguir su `next` si exige terminar turno.
+Los dos agentes nativos terminaron sus informes/patch. Sin watchers ni push/PR,
+merge remoto o Projects aplicado. Original y ramas autoras preservados.
+
+Siguiente: reconciliar runtime/revisión, corregir hallazgos, escanear commits
+nuevos y publicar solo lo apto, con dependencias claras de PR91/92/93.
+Mantener abiertos credencial Projects, decisiones docentes y actos humanos,
+además del objetivo E2E/campaña que la instrumentación no demuestra.
+[Resolución y evidencia vigente](runs/20261026-resolution.md).
+
+## Hito anterior del integrador — registro histórico
+
 26/10/2026: composición técnica local revisable; validación dinámica incompleta.
 
 - Worktree: `C:/Users/unaiu/.t3/worktrees/B-taldea/t3-6a929eaa`.

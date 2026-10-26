@@ -56,8 +56,26 @@ equivale a aceptación ni a CI. No se han fusionado PR ni desplegado servicios.
   `D:/cnc-guard-integration-20261026/checks.jsonl`. No interpretar el exit global
   del runner como aprobación: se inspeccionan sus filas y logs por comando.
 
-Los recuentos y el SHA final se añadirán tras terminar las validaciones y la
-revisión independiente. Los tres casos ES no son PASS por estar skipped.
+Suite completa terminada: **677 passed, 3 skipped, 328 subtests passed**;
+unittest **385 pruebas, 3 skips**. Ambas con `-W error`, exit individual 0.
+Los once checks restantes tienen exit individual 0. Los logs son
+`pytest.4.log`, `unittest.4.log` y los once `*.3.log` del recibo privado.
+Las fuentes de aplicación de este hito están en
+`01a5f2b77ed890fac0d47e525ebced62733a1122`, árbol
+`8ba28e6c6727419589e9498f57b6b7d44bb0b03d`. Las pruebas se ejecutaron sobre
+esas fuentes antes de confirmar el commit; no se cambiaron después durante
+la ejecución. Este añadido posterior solo precisa el recibo documental.
+Los tres casos ES no son PASS por estar skipped.
+
+Se detectó una caché Ruff nueva en el worktree C:. Se trasladó de forma
+reversible al directorio propio D:, verificando igualdad de seis archivos;
+recibo `ruff-cache-relocation.json`. Los próximos comandos Ruff usan
+`--no-cache` o `RUFF_CACHE_DIR` en D:. No se alteró configuración global.
+
+Revisión independiente final lanzada sobre `01a5f2b`:
+`clientRequestId=btaldea-final-code-review-20261026-v1`, functions.exec cell43,
+Codex/GPT-6.1-Sol, solo lectura. Pendiente de devolver resultado; no se presume
+aprobación. No hay publicación ni watchers.
 
 ## Operación dinámica separada
 
