@@ -1,5 +1,7 @@
 # CG26: demo de la API vigente y preparación de defensa
 
+Corte posterior: [preparación de Niistal y bloqueos al 26/10](ESTADO_NIISTAL_20261026.md). Conserva este guion y su base histórica.
+
 Base revisada `f770932d61ff55158bb18c9d89120617e8c5db65`. Este guion prepara una reproducción aislada de contratos actuales, sin infraestructura compartida ni modelos de entrega. El [ensayo del 21/10](../evidence/CG26_REHEARSAL.md) conserva su fecha/alcance; no es una defensa realizada. La [matriz actual](../rubrica/ESTADO_20261022.md) y el [acta pendiente](ACTA_PENDIENTE_20261022.md) separan ejecución técnica de aceptación humana.
 
 ## Preparar un worktree propio en D:
