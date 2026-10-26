@@ -1,4 +1,4 @@
-# Sincronización del planning B-taldea
+# Sincronización del planning T2-erronka1
 
 Fuente: https://github.com/orgs/AABD-Ethazi-2627/projects/2
 Destino: https://github.com/orgs/AABD-Ethazi-2627/projects/1
@@ -25,7 +25,7 @@ un error explícito; publicar el workflow no significa que ya esté activo.
 
 ## Qué se sincroniza
 
-- Las mismas issues/PRs de B-taldea, identificadas por ID, sin duplicarlas.
+- Las mismas issues/PRs de T2-erronka1, identificadas por ID, sin duplicarlas.
 - Responsables, título, cuerpo y comentarios son comunes porque se comparte
   la misma issue. No se modifican desde este script.
 - `Taldea = B-taldea`.
