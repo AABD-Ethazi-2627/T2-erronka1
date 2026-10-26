@@ -106,6 +106,11 @@ en el historial de herramientas; el recibo lo indica expresamente.
 
 ## Pendientes materiales
 
+> Registro del 23/10 sobre sus revisiones e imágenes originales. El
+> [estado de deudas del 26/10](DEBT_STATUS_20261026.md) distingue las correcciones
+> posteriores de la ejecución y aceptación aún pendientes. Los recuentos de
+> vulnerabilidades siguientes no se atribuyen a las nuevas imágenes sin escanearlas.
+
 - **CG32/#81:** corregir o acordar el rendimiento E2E observado; la campaña
   de tres repeticiones a 10/s, pausa/kill con el bundle original y 50/s condicionada
   no se ejecutaron.

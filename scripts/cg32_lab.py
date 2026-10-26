@@ -308,8 +308,14 @@ class Lab:
             return None
         return response.text if response.status_code == 201 else None
 
-    def nifi(self, method, path, **kwargs):
+    def require_nifi_token(self):
         token = self.nifi_token()
+        if not token:
+            raise RuntimeError("NiFi authentication unavailable")
+        return token
+
+    def nifi(self, method, path, **kwargs):
+        token = self.require_nifi_token()
         response = httpx.request(
             method,
             self.nifi_url + f"/nifi-api{path}",
@@ -355,7 +361,7 @@ class Lab:
                 processor["schedulingPeriod"] = period
         (run_dir / "nifi-flow.json").write_text(json.dumps(definition, indent=1))
         root = self.nifi("GET", "/flow/process-groups/root")["processGroupFlow"]["id"]
-        token = self.nifi_token()
+        token = self.require_nifi_token()
         response = httpx.post(
             self.nifi_url + f"/nifi-api/process-groups/{root}/process-groups/upload",
             headers={"Authorization": "Bearer " + token},
@@ -452,7 +458,18 @@ class Lab:
             "manifest_sha256": manifest["sha256"],
             "model_version": manifest["model_version"],
             "graph": graph,
-            "nifi": {"period": args.period, "group": nifi_group},
+            "nifi": {
+                "period": args.period,
+                "group": nifi_group,
+                # The trigger override does not change ExecuteStreamCommand's
+                # period; preserve the actual exported schedule for comparison.
+                "processor_periods": {
+                    processor["name"]: processor["schedulingPeriod"]
+                    for processor in json.loads(
+                        (run_dir / "nifi-flow.json").read_bytes()
+                    )["flowContents"]["processors"]
+                },
+            },
             "filebeat_sha256": load.sha256(beat.encode()),
             "pause": {
                 "at_s": args.pause_at,
@@ -488,26 +505,93 @@ class Lab:
             )
             record.update(self.measure(args, run_dir, lines, graph, processors))
         finally:
-            for identifier in processors.values():
-                try:
-                    self.processor_state(identifier, "STOPPED")
-                except httpx.HTTPError:
-                    record.setdefault("errors", []).append("nifi stop failed")
-            self.compose("stop", "filebeat", run=name, check=False)
-            logs = self.compose("logs", "--no-color", "api", run=name, check=False)
-            (run_dir / "api.log").write_text(logs.stdout + logs.stderr)
-            self.compose("stop", "api", run=name, bundle=bundle, check=False)
-            record["finished_utc"] = load.utc(now())
-            if sys.exc_info()[0] is None:
-                record.update(self.collect(run_dir, graph, record))
-            else:
-                record["collection"] = {
-                    "status": "skipped",
-                    "reason": "run_failed_before_measurement_completed",
-                }
-            load.write_new(run_dir / "run.json", record)
+            self.finalize_run(
+                run_dir, graph, record, processors, bundle, sys.exc_info()[1]
+            )
         print(json.dumps(record["metrics"], indent=1))
         return record
+
+    def finalize_run(self, run_dir, graph, record, processors, bundle, primary_error):
+        # Cleanup boundaries are independent: a failed NiFi stop must not leave
+        # the source/API running or hide the exception that ended measurement.
+        errors = record.setdefault("cleanup_errors", [])
+
+        def attempt(stage, action):
+            try:
+                result = action()
+                return_code = getattr(result, "returncode", 0)
+                if isinstance(return_code, int) and return_code != 0:
+                    raise RuntimeError("Cleanup command returned nonzero")
+                return result
+            except (
+                httpx.HTTPError,
+                OSError,
+                RuntimeError,
+                ValueError,
+                KeyError,
+                TypeError,
+                sqlite3.Error,
+                subprocess.SubprocessError,
+            ) as exc:
+                errors.append({"stage": stage, "error_type": type(exc).__name__})
+                return None
+
+        for identifier in processors.values():
+            attempt(
+                "nifi_stop",
+                lambda identifier=identifier: self.processor_state(
+                    identifier, "STOPPED"
+                ),
+            )
+        name = record["name"]
+        attempt(
+            "filebeat_stop",
+            lambda: self.compose("stop", "filebeat", run=name, check=False),
+        )
+        logs = attempt(
+            "api_logs",
+            lambda: self.compose("logs", "--no-color", "api", run=name, check=False),
+        )
+        if logs is not None:
+            attempt(
+                "api_log_write",
+                lambda: (run_dir / "api.log").write_text(logs.stdout + logs.stderr),
+            )
+        attempt(
+            "api_stop",
+            lambda: self.compose("stop", "api", run=name, bundle=bundle, check=False),
+        )
+        record["finished_utc"] = load.utc(now())
+        if primary_error is None and not errors:
+            collected = attempt(
+                "collection", lambda: self.collect(run_dir, graph, record)
+            )
+            if collected is not None:
+                record.update(collected)
+        else:
+            record["collection"] = {
+                "status": "skipped",
+                "reason": "run_failed_before_measurement_completed"
+                if primary_error
+                else "cleanup_failed",
+            }
+        record["status"] = (
+            "failed" if primary_error is not None or errors else "completed"
+        )
+        if primary_error is not None:
+            record["failure"] = {"error_type": type(primary_error).__name__}
+        try:
+            load.write_new(run_dir / "run.json", record)
+        except Exception as exc:
+            if primary_error is None:
+                raise RuntimeError("CG32 run receipt could not be persisted") from exc
+            primary_error.add_note(
+                "CG32 run receipt persistence failed: " + type(exc).__name__
+            )
+        if errors and primary_error is None:
+            raise RuntimeError(
+                "CG32 run cleanup or collection failed; inspect run.json"
+            )
 
     def measure(self, args, run_dir, lines, graph, processors):
         es = self.state["es_url"]
