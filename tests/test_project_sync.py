@@ -33,7 +33,7 @@ def project(items=()):
     }
 
 
-def item(repo="AABD-Ethazi-2627/B-taldea", values=None):
+def item(repo="AABD-Ethazi-2627/T2-erronka1", values=None):
     return {
         "id": "i",
         "isArchived": False,
