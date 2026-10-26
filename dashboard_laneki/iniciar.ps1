@@ -1,18 +1,15 @@
-# Iniciar Laneki IoT Dashboard y API
-Set-Location -Path $PSScriptRoot
-
-Write-Host "========================================================" -ForegroundColor Cyan
-Write-Host "  Iniciando Laneki IoT Dashboard y API Backend" -ForegroundColor Cyan
-Write-Host "========================================================" -ForegroundColor Cyan
-
-# 1. Iniciar FastAPI
-Write-Host "[1/2] Iniciando API Backend en http://127.0.0.1:8000 ..." -ForegroundColor Yellow
-Start-Process -FilePath ".\venv\Scripts\uvicorn.exe" -ArgumentList "main:app --reload --port 8000"
-
-# 2. Iniciar Streamlit Dashboard
-Write-Host "[2/2] Iniciando Dashboard Web en http://localhost:8501 ..." -ForegroundColor Green
-Start-Process -FilePath ".\venv\Scripts\streamlit.exe" -ArgumentList "run app.py"
-
-Write-Host "`nListo! Se han abierto las ventanas de los servidores:" -ForegroundColor Cyan
-Write-Host "  - Dashboard Web:  http://localhost:8501" -ForegroundColor Green
-Write-Host "  - Swagger API:    http://127.0.0.1:8000/docs" -ForegroundColor Yellow
+# Start the local prototype without exposing either server to the LAN.
+$ErrorActionPreference = 'Stop'
+$dashboardPython = if ($env:LANEKI_PYTHON) { $env:LANEKI_PYTHON } else { Join-Path $PSScriptRoot '.venv/Scripts/python.exe' }
+if (-not (Test-Path -LiteralPath $dashboardPython -PathType Leaf)) {
+    throw 'Python environment missing. Follow README.md and set LANEKI_PYTHON.'
+}
+$dashboardLogs = Join-Path $PSScriptRoot 'runtime'
+New-Item -ItemType Directory -Force -Path $dashboardLogs | Out-Null
+$dashboardStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+if (-not $env:LANEKI_MODE) { $env:LANEKI_MODE = 'demo' }
+$dashboardApi = Start-Process -FilePath $dashboardPython -ArgumentList @('-m', 'uvicorn', 'main:app', '--host', '127.0.0.1', '--port', '8001') -WorkingDirectory $PSScriptRoot -WindowStyle Hidden -RedirectStandardOutput (Join-Path $dashboardLogs "$dashboardStamp-api.out.log") -RedirectStandardError (Join-Path $dashboardLogs "$dashboardStamp-api.err.log") -PassThru
+$dashboardUi = Start-Process -FilePath $dashboardPython -ArgumentList @('-m', 'streamlit', 'run', 'app.py', '--server.address', '127.0.0.1', '--server.port', '8501', '--server.headless', 'true') -WorkingDirectory $PSScriptRoot -WindowStyle Hidden -RedirectStandardOutput (Join-Path $dashboardLogs "$dashboardStamp-ui.out.log") -RedirectStandardError (Join-Path $dashboardLogs "$dashboardStamp-ui.err.log") -PassThru
+@{ api = $dashboardApi.Id; dashboard = $dashboardUi.Id } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $dashboardLogs "$dashboardStamp-pids.json")
+Write-Host "Prototipoa: http://127.0.0.1:8501; modua=$env:LANEKI_MODE"
+Write-Host "Demo API: http://127.0.0.1:8001/docs; logs: $dashboardLogs"

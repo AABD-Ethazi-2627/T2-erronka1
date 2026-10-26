@@ -2,11 +2,11 @@
 
 from base64 import b64encode
 from collections.abc import Callable
-from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
 import streamlit as st
+from domain import gallery_machine
 
 Osagaia = Callable[[], None]
 
@@ -16,12 +16,6 @@ ARGAZKI_DIREKTORIOA = (
     / "images"
     / "cnc"
 )
-
-# 4 Egoera nagusiak: Larria, Ertaina, Arina, Normala
-LARRIAK_ID = {4, 9, 17, 28}
-ERTAINAK_ID = {3, 12, 15, 21, 35, 40, 47}
-ARINAK_ID = {7, 16, 20, 24, 27, 31, 38, 39, 41, 43, 46, 48}
-
 
 @st.cache_data(show_spinner=False)
 def _makinaren_uri_datuak(zenbakia: int) -> str:
@@ -34,183 +28,8 @@ def _makinaren_uri_datuak(zenbakia: int) -> str:
 
 
 def _makina_datuak(makina: dict[str, Any]) -> dict[str, Any]:
-    """Makinaren sailkapen zehatza, koloreak, alertak eta metrikak lortu."""
-    zenbakia = int(makina.get("zenbakia", int(makina["id"].replace("CNC-", ""))))
-
-    # 1. LARRIA (Gorria - 4 makina)
-    if zenbakia in LARRIAK_ID:
-        egoera_mota = "Larria"
-        klasea = "larria"
-        kolorea = "#DE4651"
-        bg_kolorea = "#FFF5F5"
-        border_kolorea = "#F87171"
-        badge_bg = "#FEE2E2"
-        badge_text = "#DC2626"
-        abisu_ikonoa = "⚠"
-
-        if zenbakia == 4:
-            tenp, rpm, torque, higadura = 90.3, 1212, 47.6, 246
-            abisua = "Tenperatura kritikoa"
-            kokapena = "D lerroa · 10. kokapena"
-            ekintza = "Tenperatura kritikoa. Berehalako arreta behar du."
-        elif zenbakia == 9:
-            tenp, rpm, torque, higadura = 80.3, 1577, 46.2, 235
-            abisua = "Bibrazio handiegia"
-            kokapena = "A lerroa · 1. kokapena"
-            ekintza = "Ardatz nagusiaren bibrazio-anomalia detektatu da."
-        elif zenbakia == 17:
-            tenp, rpm, torque, higadura = 91.3, 1471, 48.0, 240
-            abisua = "Bibrazio handiegia"
-            kokapena = "A lerroa · 1. kokapena"
-            ekintza = "Kojineteak berrikusi eta abiadura mugatu berehala."
-        else:  # 28
-            tenp, rpm, torque, higadura = 78.3, 1584, 45.8, 228
-            abisua = "Tenperatura kritikoa"
-            kokapena = "D lerroa · 10. kokapena"
-            ekintza = "Hozte-sistemaren presioa jaitsi da."
-
-    # 2. ERTAINA (Laranja - 7 makina)
-    elif zenbakia in ERTAINAK_ID:
-        egoera_mota = "Ertaina"
-        klasea = "ertaina"
-        kolorea = "#D97706"
-        bg_kolorea = "#FFF7E6"
-        border_kolorea = "#FBBF24"
-        badge_bg = "#FEF3C7"
-        badge_text = "#D97706"
-        abisu_ikonoa = "⚠"
-
-        if zenbakia == 3:
-            tenp, rpm, torque, higadura = 68.2, 1139, 44.5, 180
-            abisua = "Lubrifikazio-oharra"
-            kokapena = "C lerroa · 7. kokapena"
-            ekintza = "Lubrifikazio-oharra. Mantentze-lana lehenetsi."
-        elif zenbakia == 12:
-            tenp, rpm, torque, higadura = 69.2, 1106, 43.8, 175
-            abisua = "Abiadura irregularra"
-            kokapena = "D lerroa · 10. kokapena"
-            ekintza = "Bihurdura-momentuaren gorabeherak kontrolatu."
-        elif zenbakia == 15:
-            tenp, rpm, torque, higadura = 65.2, 1325, 51.5, 115
-            abisua = "Lubrifikazio-oharra"
-            kokapena = "C lerroa · 7. kokapena"
-            ekintza = "Lubrifikazio-oharra. Mantentze-lana lehenetsi."
-        elif zenbakia == 21:
-            tenp, rpm, torque, higadura = 67.4, 1280, 42.1, 160
-            abisua = "Abiadura irregularra"
-            kokapena = "B lerroa · 1. kokapena"
-            ekintza = "Txanda honetan ikuskapena egitea gomendatzen da."
-        elif zenbakia == 35:
-            tenp, rpm, torque, higadura = 66.8, 1310, 43.0, 155
-            abisua = "Lubrifikazio-oharra"
-            kokapena = "D lerroa · 5. kokapena"
-            ekintza = "Lubrifikazio-maila minimoaren azpitik dago."
-        elif zenbakia == 40:
-            tenp, rpm, torque, higadura = 64.9, 1295, 41.5, 148
-            abisua = "Presio-gorabehera"
-            kokapena = "D lerroa · 10. kokapena"
-            ekintza = "Hurrengo geldialdian sistema hidraulikoa aztertu."
-        else:  # 47
-            tenp, rpm, torque, higadura = 68.0, 1340, 44.0, 165
-            abisua = "Lubrifikazio-oharra"
-            kokapena = "E lerroa · 7. kokapena"
-            ekintza = "Kargaren egonkortasuna eta tenperatura kontrolatu."
-
-    # 3. ARINA (Urdina - 12 makina)
-    elif zenbakia in ARINAK_ID:
-        egoera_mota = "Arina"
-        klasea = "arina"
-        kolorea = "#2563EB"
-        bg_kolorea = "#F8FAFF"
-        border_kolorea = "#93C5FD"
-        badge_bg = "#DBEAFE"
-        badge_text = "#2563EB"
-        abisu_ikonoa = "ℹ"
-
-        tenp = round(48.0 + (zenbakia * 1.7) % 8, 1)
-        rpm = 1300 + (zenbakia * 23) % 280
-        torque = round(32.0 + (zenbakia * 1.3) % 7, 1)
-        higadura = 80 + (zenbakia * 9) % 55
-        abisua = "Higadura jarraipena" if zenbakia % 2 == 0 else "Ikuskapen arrunta"
-        kokapena = f"{chr(65 + (zenbakia - 1) // 10)} lerroa · {(zenbakia - 1) % 10 + 1}. kokapena"
-        ekintza = "Jarraipena egin. Ohiko mantentze-lanen egutegian integratu."
-
-    # 4. NORMALA (Berdea - 27 makina)
-    else:
-        egoera_mota = "Normala"
-        klasea = "normala"
-        kolorea = "#16A34A"
-        bg_kolorea = "#F8FDFB"
-        border_kolorea = "#86EFAC"
-        badge_bg = "#DCFCE7"
-        badge_text = "#16A34A"
-        abisu_ikonoa = "✓"
-
-        tenp = round(31.5 + (zenbakia * 1.1) % 6, 1)
-        rpm = 1420 + (zenbakia * 19) % 360
-        torque = round(23.0 + (zenbakia * 1.4) % 10, 1)
-        higadura = 40 + (zenbakia * 6) % 45
-        abisua = "Funtzionamendu normala"
-        kokapena = f"{chr(65 + (zenbakia - 1) // 10)} lerroa · {(zenbakia - 1) % 10 + 1}. kokapena"
-        ekintza = "Parametro guztiak tarte egokian daude. Ez da ekintzarik behar."
-
-    # Mantentze-historiala
-    if zenbakia == 15:
-        azken_berrikuspena = "2026-07-19"
-        fabrikazio_urtea = "2025"
-        azken_matxura = "2026-10-16"
-        teknikariaren_bisita = "2026-10-16"
-        hurrengo_berrikuspena = "2026-11-03"
-        huts_egindako_osagaia = "Lubrifikazio-ponpa"
-        geldialdiaren_iraupena = "3 ordu 25 min"
-    else:
-        erreferentzia = date(2026, 10, 23)
-        azken_berrikuspena = (erreferentzia - timedelta(days=12 + (zenbakia * 13) % 140)).isoformat()
-        fabrikazio_urtea = str(2017 + (zenbakia * 3) % 9)
-        azken_matxura = (erreferentzia - timedelta(days=6 + (zenbakia * 9) % 90)).isoformat()
-        teknikariaren_bisita = (erreferentzia - timedelta(days=4 + (zenbakia * 7) % 45)).isoformat()
-        hurrengo_berrikuspena = (
-            erreferentzia + timedelta(days=10 + (zenbakia * 5) % 50)
-        ).isoformat()
-        osagaiak = (
-            "Ardatz nagusiko errodamendua",
-            "Hozte-sistemako ponpa",
-            "Abiadura-sentsorea",
-            "Sistema hidraulikoko balbula",
-            "Lubrifikazio-ponpa",
-        )
-        huts_egindako_osagaia = osagaiak[(zenbakia - 1) % len(osagaiak)]
-        geldialdiaren_iraupena = (
-            f"{1 + (zenbakia * 3) % 7} ordu "
-            f"{(zenbakia * 11) % 60:02d} min"
-        )
-
-    return {
-        "id": makina["id"],
-        "zenbakia": zenbakia,
-        "egoera_mota": egoera_mota,
-        "klasea": klasea,
-        "kolorea": kolorea,
-        "bg_kolorea": bg_kolorea,
-        "border_kolorea": border_kolorea,
-        "badge_bg": badge_bg,
-        "badge_text": badge_text,
-        "abisu_ikonoa": abisu_ikonoa,
-        "tenperatura": tenp,
-        "rpm": rpm,
-        "torque": torque,
-        "higadura": higadura,
-        "abisua": abisua,
-        "ekintza": ekintza,
-        "kokapena": kokapena,
-        "azken_berrikuspena": azken_berrikuspena,
-        "fabrikazio_urtea": fabrikazio_urtea,
-        "azken_matxura": azken_matxura,
-        "teknikariaren_bisita": teknikariaren_bisita,
-        "hurrengo_berrikuspena": hurrengo_berrikuspena,
-        "huts_egindako_osagaia": huts_egindako_osagaia,
-        "geldialdiaren_iraupena": geldialdiaren_iraupena,
-    }
+    """Iturriaren neurketak eta egoera aldatu gabe aurkeztu."""
+    return gallery_machine(makina)
 
 
 def _estiloak_txertatu() -> None:
@@ -713,14 +532,6 @@ def makinak_erakutsi(
 
     _estiloak_txertatu()
 
-    # URL query param bidez hautapena detektatu
-    if "makina" in st.query_params:
-        makina_param = st.query_params.get("makina")
-        if makina_param and any(m["id"] == makina_param for m in makinak):
-            if makina_param != st.session_state.hautatutako_makina:
-                st.session_state.hautatutako_makina = makina_param
-                uneko_makina = next(m for m in makinak if m["id"] == makina_param)
-
     # Datu guztiak prestatu
     guztiak_datuekin = [_makina_datuak(m) for m in makinak]
     uneko_id = st.session_state.hautatutako_makina
@@ -745,26 +556,26 @@ def makinak_erakutsi(
         <div class="makina-kpi-box">
             <div class="kpi-label">Makina guztira</div>
             <div class="kpi-number" style="color:var(--main-text, #0F172A);">{kopuru_guztira}</div>
-            <div class="kpi-sub">50 makina monitorizatuta</div>
+            <div class="kpi-sub">{kopuru_guztira} makina iturrian</div>
             <div class="kpi-accent-circle" style="background:#EBF3FC;"></div>
         </div>
         <!-- 2. Larriak -->
         <div class="makina-kpi-box">
-            <div class="kpi-label">Akats larriak</div>
+            <div class="kpi-label">Akatsa</div>
             <div class="kpi-number" style="color:#DE4651;">{kopuru_larriak}</div>
             <div class="kpi-sub">Berehalako arreta</div>
             <div class="kpi-accent-circle" style="background:#FCE8E6;"></div>
         </div>
         <!-- 3. Ertainak -->
         <div class="makina-kpi-box">
-            <div class="kpi-label">Akats ertainak</div>
+            <div class="kpi-label">Berrikusteko</div>
             <div class="kpi-number" style="color:#D97706;">{kopuru_ertainak}</div>
             <div class="kpi-sub">Berrikuspena behar dute</div>
             <div class="kpi-accent-circle" style="background:#FEF3C7;"></div>
         </div>
         <!-- 4. Arinak -->
         <div class="makina-kpi-box">
-            <div class="kpi-label">Akats arinak</div>
+            <div class="kpi-label">Beste egoerak</div>
             <div class="kpi-number" style="color:#2563EB;">{kopuru_arinak}</div>
             <div class="kpi-sub">Jarraipena</div>
             <div class="kpi-accent-circle" style="background:#E0E7FF;"></div>
@@ -797,7 +608,7 @@ def makinak_erakutsi(
             if st.button(
                 f"Guztiak {kopuru_guztira}",
                 key="flt_guztiak",
-                use_container_width=True,
+                width="stretch",
                 type="primary" if st.session_state.makina_iragazkia == "Guztiak" else "secondary"
             ):
                 st.session_state.makina_iragazkia = "Guztiak"
@@ -806,7 +617,7 @@ def makinak_erakutsi(
             if st.button(
                 f"Larriak {kopuru_larriak}",
                 key="flt_larriak",
-                use_container_width=True,
+                width="stretch",
                 type="primary" if st.session_state.makina_iragazkia == "Larriak" else "secondary"
             ):
                 st.session_state.makina_iragazkia = "Larriak"
@@ -815,7 +626,7 @@ def makinak_erakutsi(
             if st.button(
                 f"Ertainak {kopuru_ertainak}",
                 key="flt_ertainak",
-                use_container_width=True,
+                width="stretch",
                 type="primary" if st.session_state.makina_iragazkia == "Ertainak" else "secondary"
             ):
                 st.session_state.makina_iragazkia = "Ertainak"
@@ -824,7 +635,7 @@ def makinak_erakutsi(
             if st.button(
                 f"Arinak {kopuru_arinak}",
                 key="flt_arinak",
-                use_container_width=True,
+                width="stretch",
                 type="primary" if st.session_state.makina_iragazkia == "Arinak" else "secondary"
             ):
                 st.session_state.makina_iragazkia = "Arinak"
@@ -835,7 +646,7 @@ def makinak_erakutsi(
             if st.button(
                 f"● Normalak {kopuru_normalak}",
                 key="flt_normalak",
-                use_container_width=True,
+                width="stretch",
                 type="primary" if st.session_state.makina_iragazkia == "Normalak" else "secondary"
             ):
                 st.session_state.makina_iragazkia = "Normalak"
@@ -1013,7 +824,7 @@ def makinak_erakutsi(
         )
 
         with col_prev:
-            if st.button("← Aurrekoa", key="btn_aurrekoa", use_container_width=True):
+            if st.button("← Aurrekoa", key="btn_aurrekoa", width="stretch"):
                 aurreko_idx = (uneko_indizea - 1) % len(guztiak_datuekin)
                 berria = guztiak_datuekin[aurreko_idx]["id"]
                 st.session_state.hautatutako_makina = berria
@@ -1021,7 +832,7 @@ def makinak_erakutsi(
                 st.rerun()
 
         with col_next:
-            if st.button("Hurrengoa →", key="btn_hurrengoa", use_container_width=True):
+            if st.button("Hurrengoa →", key="btn_hurrengoa", width="stretch"):
                 hurrengo_idx = (uneko_indizea + 1) % len(guztiak_datuekin)
                 berria = guztiak_datuekin[hurrengo_idx]["id"]
                 st.session_state.hautatutako_makina = berria

@@ -1754,21 +1754,13 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 }
 
 /* Diseinu osoa proportzio berean eskalatu, blokeak deformatu gabe. */
-@media (min-height: 1001px) {
-    [data-testid="stMainBlockContainer"] { zoom: 0.95; }
-}
 
-@media (min-height: 901px) and (max-height: 1000px) {
-    [data-testid="stMainBlockContainer"] { zoom: 0.87; }
-}
 
-@media (min-height: 801px) and (max-height: 900px) {
-    [data-testid="stMainBlockContainer"] { zoom: 0.77; }
-}
 
-@media (max-height: 800px) {
-    [data-testid="stMainBlockContainer"] { zoom: 0.68; }
-}
+
+
+
+
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -1895,4 +1887,19 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 .alert-machine-name strong,
 .alert-level span {
     color: var(--main-text);
+}
+
+/* Keep text at normal scale and allow vertical navigation on smaller screens. */
+html, body, .stApp, [data-testid="stAppViewContainer"],
+[data-testid="stMain"], [data-testid="stMainBlockContainer"] {
+    height: auto !important;
+    min-height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+[data-testid="stSidebar"] { overflow-y: auto !important; }
+@media (max-width: 640px) {
+    .alerts-summary { grid-template-columns: 1fr !important; }
+    .alert-machine-row { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+    .alerts-summary-card, .alert-machine-row { min-width: 0; }
 }

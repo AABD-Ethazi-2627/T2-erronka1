@@ -4,7 +4,6 @@ from collections.abc import Callable
 
 import streamlit as st
 
-
 Osagaia = Callable[[], None]
 
 
@@ -27,17 +26,14 @@ def hasiera_erakutsi(
         gap="small",
     )
 
-    with telemetria_zutabea:
-        with st.container(key="telemetry_panel"):
-            telemetria_taula()
+    with telemetria_zutabea, st.container(key="telemetry_panel"):
+        telemetria_taula()
 
-    with historiko_zutabea:
-        with st.container(key="history_panel"):
-            historiko_grafikoa()
+    with historiko_zutabea, st.container(key="history_panel"):
+        historiko_grafikoa()
 
-    with neurketa_zutabea:
-        with st.container(key="measure_panel"):
-            azken_neurketak()
+    with neurketa_zutabea, st.container(key="measure_panel"):
+        azken_neurketak()
 
     mapa_zutabea, egutegi_zutabea = st.columns(
         [1, 1.5],
@@ -47,6 +43,5 @@ def hasiera_erakutsi(
     with mapa_zutabea:
         makina_sarea()
 
-    with egutegi_zutabea:
-        with st.container(key="calendar_panel"):
-            egutegia()
+    with egutegi_zutabea, st.container(key="calendar_panel"):
+        egutegia()

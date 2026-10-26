@@ -4,7 +4,6 @@ from typing import Any
 
 import streamlit as st
 
-
 GALERA_ORDUKO = 1_200
 
 
@@ -21,7 +20,7 @@ def _lehentasun_datuak(makina: dict[str, Any]) -> dict[str, Any]:
     if makina["egoera"] == "Akatsa":
         maila = "Kritikoa"
         klasea = "alert-critical"
-        ekintza = "Makina gelditu eta berehala berrikusi"
+        ekintza = "Demo lehentasuna: berrikusteko adibidea"
         ordena = 3_000 + higadura
     elif higadura >= 200 or momentua >= 44:
         maila = "Lehentasun handia"
@@ -60,7 +59,7 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
         for datua in abisuak
     )
     berrikustekoak = len(abisuak) - kritikoak
-    galera_egiaztatua = kritikoak * GALERA_ORDUKO
+    kostu_eszenatokia = kritikoak * GALERA_ORDUKO
     balizko_galera = berrikustekoak * GALERA_ORDUKO
     gehieneko_esposizioa = len(abisuak) * GALERA_ORDUKO
 
@@ -77,7 +76,7 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
     <section class="alerts-summary">
         <div class="alerts-summary-card summary-red"><span>Akats kritikoak</span><strong>{kritikoak}</strong><small>Berehalako jarduketa</small></div>
         <div class="alerts-summary-card summary-amber"><span>Berrikusteko</span><strong>{berrikustekoak}</strong><small>Planifikatu beharrekoak</small></div>
-        <div class="alerts-summary-card summary-money"><span>Uneko galera</span><strong>{galera_egiaztatua:,} €/h</strong><small>Matxuratutako makinengatik, orduko</small></div>
+        <div class="alerts-summary-card summary-money"><span>Kostu-eszenatokia</span><strong>{kostu_eszenatokia:,} €/h</strong><small>Matxuratutako makinengatik, orduko</small></div>
         <div class="alerts-summary-card summary-risk"><span>Balizko galera</span><strong>{balizko_galera:,} €/h</strong><small>Berrikusteko makinak matxuratuz gero</small></div>
     </section>
     """)
@@ -95,7 +94,7 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
         for posizioa, datua in enumerate(abisuak, start=1):
             makina = datua["makina"]
             kostu_etiketa = (
-                "Egiaztatutako galera"
+                "Hipotesia: ordubeteko geldialdia"
                 if makina["egoera"] == "Akatsa"
                 else "Matxura-arriskua"
             )
@@ -119,15 +118,15 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
         st.html(f"""
         <section class="cost-panel">
             <div class="cost-panel-icon">€</div>
-            <span>GALERA EKONOMIKOAREN LABURPENA</span>
-            <strong>{galera_egiaztatua:,} €/h</strong>
-            <small>Matxuratutako makinek ordu bakoitzean eragindako galera</small>
+            <span>KOSTU ESZENATOKIA · EZ GALERA NEURTUA</span>
+            <strong>{kostu_eszenatokia:,} €/h</strong>
+            <small>Hipotesia: makina bakoitza ordubete geldirik, 1.200 €/h</small>
             <div class="cost-formula"><b>{kritikoak}</b> makina matxuratuta × <b>{GALERA_ORDUKO:,} €/h</b></div>
             <hr>
-            <div class="cost-detail"><span>Ordubeteko galera</span><b>{galera_egiaztatua:,} €</b></div>
-            <div class="cost-detail"><span>8 orduko txandako galera</span><b>{galera_egiaztatua * 8:,} €</b></div>
-            <div class="cost-detail"><span>24 orduko galera</span><b>{galera_egiaztatua * 24:,} €</b></div>
+            <div class="cost-detail"><span>Ordu 1eko eszenatokia</span><b>{kostu_eszenatokia:,} €</b></div>
+            <div class="cost-detail"><span>8 orduko eszenatokia</span><b>{kostu_eszenatokia * 8:,} €</b></div>
+            <div class="cost-detail"><span>24 orduko eszenatokia</span><b>{kostu_eszenatokia * 24:,} €</b></div>
             <div class="cost-detail"><span>Gehieneko arriskua orduko</span><b>{gehieneko_esposizioa:,} €/h</b></div>
-            <p>Kalkulua: 1.200 €/h matxuratutako makina bakoitzeko. Berrikusteko makinen zenbatekoa balizko arriskua da.</p>
+            <p>Hipotesia: 1.200 €/h makina bakoitzeko, adierazitako denbora guztian geldirik. Ez da benetako galera, aurrezkia edo 24 orduko iragarpena. Berrikusteko makinen zenbatekoa balizko arriskua da.</p>
         </section>
         """)

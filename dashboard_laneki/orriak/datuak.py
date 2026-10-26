@@ -2,7 +2,6 @@
 
 import streamlit as st
 
-
 OSASUN_MAILAK = (
     ("CNC-004", 19, "#E86B86"),
     ("CNC-012", 44, "#E5AE50"),
