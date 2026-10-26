@@ -1,4 +1,4 @@
-"""Reconcile B-taldea Project #2 into #1; dry-run unless --apply."""
+"""Reconcile T2-erronka1 Project #2 into #1; dry-run unless --apply."""
 
 import argparse
 import json
@@ -141,7 +141,7 @@ def plan(source, target):
                 "Use repository issues/PRs instead of draft or inaccessible items"
             )
         if content["repository"]["nameWithOwner"] != REPO:
-            raise ValueError("Source contains content outside B-taldea")
+            raise ValueError("Source contains content outside T2-erronka1")
         values = item["values"]
         if values.get("Taldea") not in (None, "B-taldea"):
             raise ValueError("Source team conflicts with B-taldea")
