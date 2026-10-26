@@ -1,14 +1,23 @@
+import argparse
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
+from scripts import cg32_lab as lab
 from scripts import cg32_load as load
 
 SOURCE = Path(__file__).resolve().parents[1] / "data/ai4i2020_train.csv"
 
 
 class FixtureTest(unittest.TestCase):
+    def test_run_label_rejects_path_and_topic_escapes(self):
+        self.assertEqual(lab.validate_run_label("steady-01"), "steady-01")
+        for label in ("../../escape", "UPPER", "bad space", "-edge", "edge-"):
+            with self.subTest(label=label), self.assertRaises(argparse.ArgumentTypeError):
+                lab.validate_run_label(label)
+
     def test_fixture_is_nominal_unique_and_stable(self):
         first = load.fixture_lines(SOURCE, 50)
         self.assertEqual(first, load.fixture_lines(SOURCE, 50))
@@ -113,6 +122,75 @@ class StatsTest(unittest.TestCase):
             self.assertEqual(json.loads(path.read_text()), {"a": 1})
             with self.assertRaises(FileExistsError):
                 load.write_new(path, {})
+
+
+class NifiTlsTest(unittest.TestCase):
+    def test_all_lab_images_use_reviewed_build_targets(self):
+        root = Path(lab.__file__).parents[1]
+        compose = (root / "deploy/cg32/compose.yaml").read_text()
+        dockerfiles = {
+            line.split(":", 1)[1].strip()
+            for line in compose.splitlines()
+            if "dockerfile:" in line
+        }
+        targets = json.loads((root / "deploy/build-targets.json").read_text())
+        self.assertEqual(
+            dockerfiles,
+            {
+                targets[key]
+                for key in (
+                    "api",
+                    "elasticsearch",
+                    "filebeat",
+                    "kafka",
+                    "kibana",
+                    "nifi",
+                )
+            },
+        )
+
+    def test_missing_or_changed_certificate_fails_closed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "state.json").write_text(json.dumps({"nifi_ca_sha256": "expected"}))
+            instance = lab.Lab(root)
+            with self.assertRaisesRegex(RuntimeError, "absent or has changed"):
+                instance.nifi_ssl_context()
+            (root / "nifi-ca.pem").write_text("different")
+            with self.assertRaisesRegex(RuntimeError, "absent or has changed"):
+                instance.nifi_ssl_context()
+
+    def test_token_uses_pinned_context_and_localhost(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".env").write_text(
+                "SINGLE_USER_CREDENTIALS_USERNAME=user\n"
+                "SINGLE_USER_CREDENTIALS_PASSWORD=password\n"
+            )
+            (root / "state.json").write_text(
+                json.dumps(
+                    {
+                        "project": "cg32-test",
+                        "uv_python": str(root),
+                        "nifi_port": 18443,
+                        "kafka_port": 19092,
+                    }
+                )
+            )
+            instance = lab.Lab(root)
+            context = object()
+            instance._nifi_ssl_context = context
+            response = mock.Mock(status_code=201, text="token")
+            with mock.patch.object(lab.httpx, "post", return_value=response) as post:
+                self.assertEqual(instance.nifi_token(), "token")
+            self.assertEqual(
+                post.call_args.args[0], "https://localhost:18443/nifi-api/access/token"
+            )
+            self.assertIs(post.call_args.kwargs["verify"], context)
+
+    def test_source_contains_no_tls_verification_bypass(self):
+        source = Path(lab.__file__).read_text()
+        self.assertNotIn("verify=False", source)
 
 
 if __name__ == "__main__":
