@@ -7,7 +7,7 @@ dependencies = [
   "numpy==1.26.4",
   "scikit-learn==1.5.0",
   "joblib==1.5.3",
-  "pyarrow==23.0.1",
+  "pyarrow==26.0.0",
   "duckdb==2.0.0",
   "jsonschema==4.26.0",
   "matplotlib==3.11.2",
@@ -15,7 +15,7 @@ dependencies = [
   "starlette==1.9.0",
   "uvicorn==0.54.0",
   "httpx==0.28.1",
-  "imbalanced-learn==0.12.4",
+  "imbalanced-learn==0.14.2",
 ]
 
 [project.optional-dependencies]
