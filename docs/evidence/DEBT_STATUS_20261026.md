@@ -6,15 +6,17 @@ La referencia anterior es el [informe de ramas](../workflows/pending-review/runs
 
 | Deuda | Trabajo efectuado | Cierre pendiente |
 | --- | --- | --- |
-| Composiciones locales anteriores a seguridad remota | PR91/PR92/PR93 incorporadas conservando bundle sellado, fixture ML, arreglo Windows y deltas documentales. | Revisión del SHA final, ejecución dinámica y publicación de una composición coherente. |
-| Gate acepta ausencia de escaneo | Rechaza informes sin identidad, targets o paquetes; exige correspondencia con el artefacto esperado y cobertura del runtime. Conserva JSON limpios válidos sin `Vulnerabilities`, y UV sin OS. | Regresión final y prueba de cada imagen construida. |
-| Cleanup CG32 oculta fallo primario | Token ausente produce fallo controlado; se intentan independientemente las paradas NiFi/Filebeat/API y se conserva el error primario junto al recibo. Una limpieza fallida tampoco produce éxito. | Regresión final; ensayo real de recuperación separado. |
+| Composiciones locales anteriores a seguridad remota | Main `b219398` y CG32 `d892486` incorporados conservando bundle sellado, fixture ML, arreglo Windows y deltas documentales. | Publicación y CI/revisión del head remoto; no equivale a aceptar el proyecto. |
+| Gate acepta ausencia de escaneo | Gate más estricto de upstream conservado, regresión final y nueve JSON de builds pasan con identidad/cobertura contrastadas. Conserva JSON limpios válidos sin `Vulnerabilities`, y UV sin OS. | Revisar diagnósticos nuevos en builds futuras; sin nuevas excepciones. |
+| Cleanup CG32 oculta fallo primario | Corregido, con regresiones e inspección independiente: paradas independientes, error primario y recibo conservados; cleanup fallido tampoco produce éxito. | Ensayo real de pausa/kill de CG32 separado, no se ha inducido una caída NiFi aquí. |
 | Falta observabilidad del ciclo | Spans monotónicos de comprobación ES y worker; el recibo conserva periodos exportados por procesador. No cambia scheduling, batch, ownership ni ACK. | Nuevo piloto para medir esas fases. El export no acredita por sí mismo la configuración observada del servidor. |
 | E2E y campaña CG32 | Recalculado el piloto archivado: p95 E2E 55748,094 ms y HTTP 60,320 ms sobre diez eventos. | A/B y campaña reproducible según presupuesto; el objetivo propuesto de 1 s y la carga condicionada de 50/s no se han demostrado. |
-| Coincidencias históricas de secretos | [24/24 verificadas como digests de contenido](SECRET_TRIAGE_20261026.md), sin nuevas supresiones. | Lectura/escaneo de los commits finales posteriores; esto no certifica todos los tipos de secreto. |
+| Coincidencias históricas de secretos | [25/25 verificadas como digests de contenido](SECRET_TRIAGE_FINAL_20261026.json) en el escaneo posterior; 24/24 iniciales conservadas, sin supresiones. | Esto no certifica todos los tipos de secreto ni commits futuros. |
 | Dependencias Python | Auditoría actual de 90 filas sin errores ni avisos activos en la integración; entorno research separado y estudio sellado intacto. | Conservar regresiones de la rueda local; PyPI no audita sus modificaciones propias. |
-| Imágenes y tres casos ES | Escaneos actuales de UV/HAProxy/Go, con cobertura inspeccionada. | Nueve builds y escaneos, pruebas de parches/alcanzabilidad y tres casos ES sobre runtime propio con datos en D:. No atribuirles los PASS antiguos. |
-| Integridad CG25 | Se conserva el manifiesto local completo y el snapshot histórico, sin sustituirlos por el de otra PR. | Repetir check sobre el árbol final y reconciliar únicamente hashes actuales si cambian archivos inventariados. |
+| Imágenes y tres casos ES | Nueve builds/escaneos, pruebas de backports/alcanzabilidad y tres verificadores ES pasan; se conservan cuatro avisos raw con disposición. | Sin garantía universal de vulnerabilidades o aceptación industrial; conservar pruebas de los backports. |
+| Portabilidad de verificadores ES | Corregida y probada directamente: imagen por ID, socket local/WSL, binds ext4 explícitos, UUID y cleanup por pertenencia. | No requiere ya el adaptador externo histórico. |
+| Incidente de almacenamiento | Primer daemon tocó metadatos compartidos en C:; aislamiento corregido y motor original operativo con recuentos previos. | Sin snapshot previo, no se puede probar ni restaurar el delta exacto. No se declara cumplimiento íntegro de D:; incidente conservado. |
+| Integridad CG25 | Check final pasa: 193 hashes actuales, 18 históricos intactos y unión del inventario local/upstream. | Revisión humana continúa pendiente; no es una aceptación técnica o académica global. |
 | Estado documental contradictorio | El estado CG32 separa piloto original medido de los bloqueos históricos por host. Los recuentos antiguos de imágenes conservan fecha y revisión. | Mantener referencias al informe de ejecución vigente. |
 | Projects | Fallo administrativo confirmado del [run programado 40270755905](https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/40270755905): tests pasan y falta `PROJECTS_SYNC_TOKEN`. No es CI de PR. | Administrador provisiona credencial dedicada con acceso a ambos Projects; después dry-run y apply autorizado/verificado. No copiar OAuth personal ni convertir el fallo en skip/pass. |
 | Rúbrica y equivalencias | Copias y aclaraciones disponibles; clasificación contemporánea y ETA/RUL siguen separadas. | Confirmación docente de versión/pesos, G49/G92/G62, cinco sensores frente a `machine_type` y condiciones definitivas de entrega/defensa. |
@@ -35,10 +37,11 @@ Python y persistencia/contabilidad final; ese límite queda en su contrato.
 
 ## Trabajo concurrente y límites
 
-La [PR96](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/96), head
-`716c940daf820e530e32f2d5b33610bdfd9f5c2d` al inspeccionarla, añade evidencia
-CG40 y preparación Niistal en otra rama. Se conserva fuera de esta composición.
-No se reemplaza su trabajo ni se copia su manifiesto sobre el local. La ausencia
+La [PR96](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/96), inspeccionada
+inicialmente en `716c940`, y su continuación PR97 ya están integradas en main
+`b219398` y se incorporaron por ese ancestro. No se reemplaza su trabajo ni se
+copia su manifiesto sobre el local: se conservan la unión y 193 hashes actuales.
+La ausencia
 de bundle en su host no desmiente la recuperación local del bundle original:
 identidad y disponibilidad se comprueban por host y tres hashes, sin reentrenar.
 
