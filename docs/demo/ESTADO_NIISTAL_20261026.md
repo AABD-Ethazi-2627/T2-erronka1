@@ -99,6 +99,17 @@ anuncia `runtimeModes` para sus proveedores: la política exige comprobar
 Claude, Luna ni MultiAgent Sync; ninguna herramienta con ese último nombre está
 expuesta. Esta limitación no se confunde con cuota agotada.
 
+## Actualización de Project #2
+
+Las cinco issues recibieron comentario con esta evidencia y PR #96. Se intentó
+poner #26/#27/#37/#81 en `Blokeatuta` y #89 en `Berrikusten`, sin cambiar
+responsables ni fechas. GitHub rechazó la primera mutación: `authentication
+token is missing required scopes [project]`. No se escribió ningún estado;
+la relectura confirma las cinco en `Egiteke`. El cambio de Project queda
+pendiente de una sesión autorizada con permiso `project`; no se amplió la
+autenticación ni se solicitaron/copiaron tokens. Los comentarios de las
+issues son el registro actual accesible.
+
 ## Checklist para el acto real
 
 1. Resolver #82: canal, formato, fecha/hora y modalidad; mientras no haya
