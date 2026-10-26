@@ -38,9 +38,9 @@ inclusión del test excluido, repetición de fold y fold ausente.
 Esto verifica las identidades **declaradas** en el manifiesto publicado, no
 que el proceso ejecutado las respetara. No abre CSV, ZIP, pickles ni modelos;
 no puntúa validación ni test. Las 173 recargas y la calibración 75/25 siguen
-siendo evidencias del autor de #90, no recargas nuevas de este host. Para
-repetir la auditoría completa de ejecución se necesita su archivo privado de
-unidades y scores, con procedencia y hashes; no basta este JSON agregado.
+siendo evidencias del autor de #90, no recargas nuevas de este host. Ampliación posterior: el ZIP público de #90 permite repetir la auditoría de
+unidades, scores y hashes. Véase la [auditoría de ejecución reproducida](../evidence/CG40_EXECUTION_AUDIT_20261026.md); corrige la afirmación anterior de que
+era necesario obtener un archivo privado. La recarga nativa no se repite.
 No se promueve ningún modelo. Se conserva RF y política 0,15/0,70 conforme
 al informe integrado, sin presentar la recomendación como aceptación PM nueva.
 
