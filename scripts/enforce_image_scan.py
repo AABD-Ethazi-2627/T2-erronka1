@@ -32,6 +32,21 @@ def findings(report: dict) -> set[tuple[str, str, str]]:
 
 
 def validate(image: str, report: dict) -> list[str]:
+    # An empty/misdirected report is missing coverage, not a clean image scan.
+    if not isinstance(report, dict) or (
+        report.get("SchemaVersion") != 2
+        or report.get("ArtifactType") != "container_image"
+        or not report.get("ArtifactName")
+    ):
+        return ["missing Trivy container image report identity"]
+    results = report.get("Results")
+    if not isinstance(results, list) or not results:
+        return ["image report contains no analyzed targets"]
+    for result in results:
+        if not isinstance(result, dict) or not all(
+            result.get(field) for field in ("Target", "Class", "Type")
+        ):
+            return ["image report contains an unidentified analysis target"]
     found = findings(report)
     permitted = VERIFIED_FINDINGS.get(image, set())
     unexpected = found - permitted

@@ -5,8 +5,14 @@ from scripts.enforce_image_scan import validate
 
 def report(*findings):
     return {
+        "SchemaVersion": 2,
+        "ArtifactType": "container_image",
+        "ArtifactName": "fixture@sha256:" + "0" * 64,
         "Results": [
             {
+                "Target": "fixture (alpine 3.23)",
+                "Class": "os-pkgs",
+                "Type": "alpine",
                 "Vulnerabilities": [
                     {
                         "VulnerabilityID": vulnerability,
@@ -21,6 +27,15 @@ def report(*findings):
 
 
 class ImageScanGateTests(unittest.TestCase):
+    def test_missing_coverage_is_not_a_clean_scan(self):
+        empty = report()
+        empty["Results"] = []
+        wrong_kind = {**report(), "ArtifactType": "filesystem"}
+        unidentified = {**report(), "Results": [{"Vulnerabilities": []}]}
+        for data in ({}, {"Results": []}, empty, wrong_kind, unidentified):
+            with self.subTest(report=data):
+                self.assertTrue(validate("api", data))
+
     def test_clean_regular_image_passes(self):
         self.assertEqual(validate("api", report()), [])
 
