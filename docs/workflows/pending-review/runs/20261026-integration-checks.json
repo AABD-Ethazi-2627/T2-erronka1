@@ -1,0 +1,650 @@
+{
+  "status": "local_static_and_regression_checks_pass; image_builds_and_live_ES_pending",
+  "validated_code_head": "ae0d3bb5e2a01246193de0ae9fb4d5ec922932c7",
+  "validated_code_tree": "259573a450c5d5683fdfdfdd1079ca6631b9a919",
+  "workspace": "C:\\Users\\unaiu\\.t3\\worktrees\\B-taldea\\t3-6a929eaa",
+  "branch": "kali/integrate-branch-readiness",
+  "ancestry": {
+    "local": {
+      "commit": "06510ad85c4e3d392d6e9e9f255a7ae8c57ab23c",
+      "is_ancestor_exit": 0
+    },
+    "pr91": {
+      "commit": "b8b4ff5a8e71aac77603f0fb0d7e9a9653b5e170",
+      "is_ancestor_exit": 0
+    },
+    "pr93": {
+      "commit": "4ff97684a0e0deb51b639daf30ca0c751a1652b4",
+      "is_ancestor_exit": 0
+    },
+    "pr95": {
+      "commit": "b02e620edc732ee1758d40a377f98bbdad65c3b6",
+      "is_ancestor_exit": 0
+    },
+    "windows": {
+      "commit": "82ae770",
+      "is_ancestor_exit": 0
+    },
+    "guard": {
+      "commit": "4a6e01a6004e87cc156d3a3944625e82a0855616",
+      "is_ancestor_exit": 0
+    },
+    "pr96_excluded": {
+      "commit": "716c940daf820e530e32f2d5b33610bdfd9f5c2d",
+      "is_ancestor_exit": 1
+    }
+  },
+  "checks": [
+    {
+      "name": "pytest",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "cache_dir=D:\\cnc-guard-integration-20261026/pytest-cache",
+        "--junitxml=D:\\cnc-guard-integration-20261026/pytest.xml"
+      ],
+      "exit_code": 1,
+      "seconds": 77.202,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\pytest.log",
+      "log_sha256": "9897b570cd0de4c8221c8cc332b1303ae3ef47431a6edfd2e871bef2fe2957a6"
+    },
+    {
+      "name": "unittest",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 1,
+      "seconds": 45.573,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\unittest.log",
+      "log_sha256": "09b66a4e68bd2963651b25a26317c4d955a936e45c4444c7c3d6fbce8eb396b0"
+    },
+    {
+      "name": "lock",
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.65,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\lock.log",
+      "log_sha256": "d109fb56e4f9cfb1ba93c2c77377d297193b086db2174b8202395acd0a1961ae"
+    },
+    {
+      "name": "actionlint",
+      "command": [
+        "actionlint"
+      ],
+      "exit_code": 0,
+      "seconds": 0.303,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\actionlint.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.084,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\diff.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cg02",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.audit_cg02",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.147,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\cg02.log",
+      "log_sha256": "ce96c060b21a60b9a05b0d4bf6e34d082aaf7808a91db8dac03f9e2f59fb147b"
+    },
+    {
+      "name": "layout",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.check_repository_layout"
+      ],
+      "exit_code": 0,
+      "seconds": 1.167,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\layout.log",
+      "log_sha256": "aae7bd1e782044ebcb12e8cecf0d2263d46d50c6dfe6a6de9564afcf558c6275"
+    },
+    {
+      "name": "cg25",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.check_cg25_memory"
+      ],
+      "exit_code": 0,
+      "seconds": 1.672,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\cg25.log",
+      "log_sha256": "5a16c044d93bd2cac237506d08557f0fd351e0080fb03f68f32cca661abd440a"
+    },
+    {
+      "name": "cg20",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.check_cg20_same_event"
+      ],
+      "exit_code": 0,
+      "seconds": 0.106,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\cg20.log",
+      "log_sha256": "89c03aa1ead97461f19442c2909c3c994f4c2f4efcd1dd16389a6e03915453e8"
+    },
+    {
+      "name": "runtime",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.export_runtime",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\runtime.log",
+      "log_sha256": "f2962d473f05a136e886aca581dce9200b1d69e0885f16b78c04098d67d01da5"
+    },
+    {
+      "name": "inventory",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.image_inventory",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.02,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\inventory.log",
+      "log_sha256": "9302651ff93ea5b8b6d3171b84ecbb23b6d281f58d7bc366d42d369e98a00c43"
+    },
+    {
+      "name": "flow",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.build_refreshed_lab_flow",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.076,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\flow.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "compose",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "scripts/check_lab_compose.py"
+      ],
+      "exit_code": 0,
+      "seconds": 2.224,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\compose.log",
+      "log_sha256": "895d5bd77548fece177771b91149505715ecc7ea78c94c323d91ebe2d9dba4fb"
+    },
+    {
+      "name": "research",
+      "command": [
+        "D:/cnc-guard-research/venv-20261023/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/research",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 16.39,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\research.log",
+      "log_sha256": "f5596c364f77e04527b21e20dfa752f4051211cfae0a8bd8deada2732807dead"
+    },
+    {
+      "name": "smoke50",
+      "command": [
+        "D:/cnc-guard-research/venv-20261023/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "scripts.ml_study",
+        "smoke",
+        "--output",
+        "D:\\cnc-guard-integration-20261026\\smoke50"
+      ],
+      "exit_code": 0,
+      "seconds": 33.388,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\smoke50.log",
+      "log_sha256": "fe742123f227758dfd75db03304e8f49c7558e69ddd4271225741be87a20f355"
+    },
+    {
+      "name": "dependencies",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.audit_dependencies",
+        "--latest",
+        "--output",
+        "D:\\cnc-guard-integration-20261026\\dependency-audit.json"
+      ],
+      "exit_code": 0,
+      "seconds": 9.514,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\dependencies.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "cache_dir=D:\\cnc-guard-integration-20261026/pytest-cache",
+        "--junitxml=D:\\cnc-guard-integration-20261026/pytest.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 49.815,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\pytest.2.log",
+      "log_sha256": "10a3d4d1be72c218a6e621a3fae647da6555bc6b603d0e736e2344f8d995e78f"
+    },
+    {
+      "name": "unittest",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 45.162,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\unittest.2.log",
+      "log_sha256": "acfcfbd94523e96643a36926e0052b8f9eab891ca91358209eba77f69f341175"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "-o",
+        "cache_dir=D:\\cnc-guard-integration-20261026/pytest-cache",
+        "--junitxml=D:\\cnc-guard-integration-20261026/pytest.xml"
+      ],
+      "exit_code": 0,
+      "seconds": 47.161,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\pytest.3.log",
+      "log_sha256": "3865bf4cdb6459b068f994d95681d79122d1826a1125a6bd6743487a010f119c"
+    },
+    {
+      "name": "unittest",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-W",
+        "error",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 46.798,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\unittest.3.log",
+      "log_sha256": "3cc1152545a500f481a5f1f80b78cf684200bb70bd585f72306b33f3fcd9b345"
+    },
+    {
+      "name": "lock",
+      "command": [
+        "uv",
+        "lock",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.046,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\lock.2.log",
+      "log_sha256": "532f3560ea5aad4cb9d9d7ecaf161a367c6b0997cc9f442c43b76c5c5141ab87"
+    },
+    {
+      "name": "actionlint",
+      "command": [
+        "actionlint"
+      ],
+      "exit_code": 0,
+      "seconds": 0.122,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\actionlint.2.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.085,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\diff.2.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "cg02",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.audit_cg02",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.159,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\cg02.2.log",
+      "log_sha256": "ce96c060b21a60b9a05b0d4bf6e34d082aaf7808a91db8dac03f9e2f59fb147b"
+    },
+    {
+      "name": "layout",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.check_repository_layout"
+      ],
+      "exit_code": 0,
+      "seconds": 1.218,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\layout.2.log",
+      "log_sha256": "aae7bd1e782044ebcb12e8cecf0d2263d46d50c6dfe6a6de9564afcf558c6275"
+    },
+    {
+      "name": "cg25",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.check_cg25_memory"
+      ],
+      "exit_code": 0,
+      "seconds": 1.041,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\cg25.2.log",
+      "log_sha256": "5a16c044d93bd2cac237506d08557f0fd351e0080fb03f68f32cca661abd440a"
+    },
+    {
+      "name": "cg20",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.check_cg20_same_event"
+      ],
+      "exit_code": 0,
+      "seconds": 0.066,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\cg20.2.log",
+      "log_sha256": "89c03aa1ead97461f19442c2909c3c994f4c2f4efcd1dd16389a6e03915453e8"
+    },
+    {
+      "name": "runtime",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.export_runtime",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.089,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\runtime.2.log",
+      "log_sha256": "f2962d473f05a136e886aca581dce9200b1d69e0885f16b78c04098d67d01da5"
+    },
+    {
+      "name": "inventory",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.image_inventory",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.023,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\inventory.2.log",
+      "log_sha256": "9302651ff93ea5b8b6d3171b84ecbb23b6d281f58d7bc366d42d369e98a00c43"
+    },
+    {
+      "name": "flow",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "-m",
+        "scripts.build_refreshed_lab_flow",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.076,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\flow.2.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "compose",
+      "command": [
+        "D:/cnc-guard-review-20261023/venv-t3-2fccec37/Scripts/python.exe",
+        "scripts/check_lab_compose.py"
+      ],
+      "exit_code": 0,
+      "seconds": 2.205,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\compose.2.log",
+      "log_sha256": "895d5bd77548fece177771b91149505715ecc7ea78c94c323d91ebe2d9dba4fb"
+    }
+  ],
+  "inspection": {
+    "candidate_before_local_fixes": "5c6a413947688ee009d629726bfac1d1a6818357",
+    "cg25": {
+      "current_paths": 191,
+      "changed_current_hashes": [],
+      "historical_paths": 18,
+      "historical_snapshot_unchanged": true,
+      "manifest_bytes_unchanged": true,
+      "human_review": "pending"
+    },
+    "research": {
+      "exact_pins_verified": 31,
+      "smoke_adapters": 50,
+      "complete_without_warnings": true
+    },
+    "dependencies": {
+      "rows": 90,
+      "errors": 0,
+      "active_advisory_groups": 0,
+      "coverage": "Every uv.lock row, including optional groups, platform markers and local sources; separate research pins and uv additionally",
+      "limit": "Advisory absence is not proof of safety or local patch correctness",
+      "local_wheel_limit": [
+        "Feed covers upstream; local changes require review and wheel regressions"
+      ]
+    }
+  },
+  "final_inspection": {
+    "gate_regression": {
+      "before": [
+        [],
+        []
+      ],
+      "after": [
+        [
+          "missing Trivy container image report identity"
+        ],
+        [
+          "missing Trivy container image report identity"
+        ]
+      ]
+    },
+    "image_scans": [
+      {
+        "image": "uv",
+        "artifact": "ghcr.io/astral-sh/uv:0.13.5@sha256:32a7bb39b496babbd997b0a39a4d66c126bdaf5661b302bf6f06abda8deca6ff",
+        "schema": 2,
+        "artifact_type": "container_image",
+        "metadata_os": null,
+        "image_id": "sha256:2ded3f959e5d71c0de7340c3dba896a4c03ecbc00c24f2720f9a560ec5ec4b1c",
+        "targets": 2,
+        "package_records": 1026,
+        "vulnerability_records": 0,
+        "gate_errors": [],
+        "sha256": "33e21b73dc82cfe7b9e701ed43af21a3048a8120433829ede70760dbae67dca0",
+        "gate_command": [
+          "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+          "-m",
+          "scripts.enforce_image_scan",
+          "uv",
+          "D:\\cnc-guard-integration-20261026\\image-uv.json"
+        ],
+        "gate_exit": 0
+      },
+      {
+        "image": "haproxy",
+        "artifact": "haproxy:3.2-alpine@sha256:5893840576071e6217cd52ebdcc14f454c6f7a631056fa6f4e0f40d3cac4215b",
+        "schema": 2,
+        "artifact_type": "container_image",
+        "metadata_os": {
+          "Family": "alpine",
+          "Name": "3.24.3"
+        },
+        "image_id": "sha256:92fa659751a39ced505c3d78f03387c463372b2b9129400e27edeb49abd347d2",
+        "targets": 1,
+        "package_records": 24,
+        "vulnerability_records": 0,
+        "gate_errors": [],
+        "sha256": "6fcd756bb3bf78a8ce5be53c1095d2c0189d950899c1b888d8ac0a2dec8c7522",
+        "gate_command": [
+          "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+          "-m",
+          "scripts.enforce_image_scan",
+          "haproxy",
+          "D:\\cnc-guard-integration-20261026\\image-haproxy.json"
+        ],
+        "gate_exit": 0
+      },
+      {
+        "image": "go",
+        "artifact": "golang:1.26.10-alpine3.23@sha256:0525c952defebc693cdaf62cdf43afa32be5a7f377e99260642ea19c240c708e",
+        "schema": 2,
+        "artifact_type": "container_image",
+        "metadata_os": {
+          "Family": "alpine",
+          "Name": "3.23.7"
+        },
+        "image_id": "sha256:c3b115201bc73f32bec28694395c415387ba16e1068e9f1c1ac4971db9ba20df",
+        "targets": 11,
+        "package_records": 27,
+        "vulnerability_records": 0,
+        "gate_errors": [],
+        "sha256": "def3abd9507dc0522f51fd5d3f1c82b22957def89edf91822bd3e172a6764784",
+        "gate_command": [
+          "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+          "-m",
+          "scripts.enforce_image_scan",
+          "go",
+          "D:\\cnc-guard-integration-20261026\\image-go.json"
+        ],
+        "gate_exit": 0
+      }
+    ],
+    "source_report_sha256": "b61281db2adf3f6e45fd53b39f11453cd66be2b56cd092e9ca8837842a56f9a2"
+  },
+  "dependency_report_sha256": "43a7542521cdf48c0abeb2f0656a768f36690f8202d5f48d0bf6ccb443b6ad73",
+  "junit_sha256": "3bf85e21502162d345f1db6894017a47dbc5071c3a5a4f2bbb361e2936139a34",
+  "trivy_db": {
+    "Version": 2,
+    "NextUpdate": "2026-10-27T07:15:18.945936953Z",
+    "UpdatedAt": "2026-10-26T07:15:18.945937093Z",
+    "DownloadedAt": "2026-10-26T11:55:58.5705754Z"
+  },
+  "probes": [
+    {
+      "name": "docker-desktop",
+      "executable": "docker",
+      "arguments": [
+        "info",
+        "--format",
+        "{{.ServerVersion}}"
+      ],
+      "exit_code": 1,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\docker-desktop.log"
+    },
+    {
+      "name": "fedora-docker",
+      "executable": "wsl",
+      "arguments": [
+        "-d",
+        "FedoraLinux-43",
+        "--",
+        "sh",
+        "-lc",
+        "docker info --format '{{.ServerVersion}} {{.DockerRootDir}}'; docker system df; docker ps --format '{{.Names}} {{.Image}}'"
+      ],
+      "exit_code": 0,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\fedora-docker.log"
+    },
+    {
+      "name": "fedora-storage-tools",
+      "executable": "wsl",
+      "arguments": [
+        "-d",
+        "FedoraLinux-43",
+        "--",
+        "sh",
+        "-lc",
+        "mount | grep 'on /mnt/d '; command -v mkfs.ext4; command -v mke2fs; command -v trivy"
+      ],
+      "exit_code": 1,
+      "log": "D:\\cnc-guard-integration-20261026\\logs\\fedora-storage-tools.log"
+    }
+  ],
+  "unexecuted": {
+    "images": [
+      "api",
+      "elasticsearch",
+      "filebeat",
+      "kafka",
+      "kibana",
+      "mock-python",
+      "nifi",
+      "python",
+      "wolfi"
+    ],
+    "ES_cases": 3,
+    "prerequisite": "Docker Linux build/runtime with its data-root on D: (or an already remediated own image/runtime stored on D:). Default Desktop pipe absent; Fedora engine data-root is on C:. No shared engine settings changed."
+  },
+  "unmodified": [
+    "CG26 guard and four tests",
+    "CG25 manifest and historical hashes",
+    "sealed research study",
+    "PR96",
+    "performance and defence scripts",
+    "other worktrees and author branches"
+  ],
+  "publication": "none; no push, PR, remote merge, Projects mutation or watchers"
+}
