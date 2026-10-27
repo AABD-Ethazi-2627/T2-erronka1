@@ -1,0 +1,255 @@
+{
+  "status": "pass",
+  "method": "stdlib csv/float and independent tied-score AP",
+  "manifest_sha256": "d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b",
+  "summary_sha256": "e874fc3fa7e1560d63ba830f2467d8fc4ee1257488f453e489bc6cdff2fb629e",
+  "cpu_seconds": {
+    "screening": 716.0406249999991,
+    "nested": 2857.9812500000085,
+    "secondary": 262.86875000000015,
+    "benchmark": 1175.228125
+  },
+  "gpu_seconds": 138.8079093999695,
+  "pilot_sum_process_wall_seconds": 167.55414410005324,
+  "observed_peak_rss_bytes": 856993792,
+  "evidence_bytes": 164309031,
+  "states": {
+    "complete": 831,
+    "complete_analysis": 10,
+    "complete_reserve": 2,
+    "complete_preflight": 1
+  },
+  "audit_self_accounting_finalized_after_this_output": [],
+  "verified_models": {
+    "rf_reference": {
+      "n": 5600,
+      "independent_ap": 0.9056729757022486,
+      "counts_and_costs": true
+    },
+    "gb_depth3": {
+      "n": 5600,
+      "independent_ap": 0.9094361241047051,
+      "counts_and_costs": true
+    },
+    "hist_reference": {
+      "n": 5600,
+      "independent_ap": 0.8665063011781958,
+      "counts_and_costs": true
+    },
+    "logistic_reference": {
+      "n": 5600,
+      "independent_ap": 0.4936703082499143,
+      "counts_and_costs": true
+    },
+    "always0": {
+      "n": 5600,
+      "independent_ap": 0.033928571428571426,
+      "counts_and_costs": true
+    },
+    "always1": {
+      "n": 5600,
+      "independent_ap": 0.033928571428571426,
+      "counts_and_costs": true
+    },
+    "rf_no_derived": {
+      "n": 5600,
+      "independent_ap": 0.7485576739575581,
+      "counts_and_costs": true
+    },
+    "gb_no_derived": {
+      "n": 5600,
+      "independent_ap": 0.7849067693378801,
+      "counts_and_costs": true
+    },
+    "cart_depth3": {
+      "n": 5600,
+      "independent_ap": 0.5671385889911578,
+      "counts_and_costs": true
+    },
+    "cart_depth5": {
+      "n": 5600,
+      "independent_ap": 0.8822941418850324,
+      "counts_and_costs": true
+    },
+    "cart_depth8": {
+      "n": 5600,
+      "independent_ap": 0.8787579672888229,
+      "counts_and_costs": true
+    },
+    "nb_1e-09": {
+      "n": 5600,
+      "independent_ap": 0.4813283703666247,
+      "counts_and_costs": true
+    },
+    "nb_1e-07": {
+      "n": 5600,
+      "independent_ap": 0.48132864675565723,
+      "counts_and_costs": true
+    },
+    "lda": {
+      "n": 5600,
+      "independent_ap": 0.4794004382593441,
+      "counts_and_costs": true
+    },
+    "qda_0.1": {
+      "n": 5600,
+      "independent_ap": 0.4480086441381366,
+      "counts_and_costs": true
+    },
+    "qda_0.5": {
+      "n": 5600,
+      "independent_ap": 0.4796426356501461,
+      "counts_and_costs": true
+    },
+    "knn5": {
+      "n": 5600,
+      "independent_ap": 0.5484655638030999,
+      "counts_and_costs": true
+    },
+    "knn15": {
+      "n": 5600,
+      "independent_ap": 0.6094013377654094,
+      "counts_and_costs": true
+    },
+    "knn35": {
+      "n": 5600,
+      "independent_ap": 0.6111964954581643,
+      "counts_and_costs": true
+    },
+    "ada_depth1": {
+      "n": 5600,
+      "independent_ap": 0.773016454868369,
+      "counts_and_costs": true
+    },
+    "ada_depth2": {
+      "n": 5600,
+      "independent_ap": 0.8884628253656056,
+      "counts_and_costs": true
+    },
+    "cat_d4_False": {
+      "n": 5600,
+      "independent_ap": 0.8537787771666783,
+      "counts_and_costs": true
+    },
+    "cat_d4_True": {
+      "n": 5600,
+      "independent_ap": 0.8322554899638571,
+      "counts_and_costs": true
+    },
+    "cat_d6_False": {
+      "n": 5600,
+      "independent_ap": 0.8509259263312906,
+      "counts_and_costs": true
+    },
+    "cat_d6_True": {
+      "n": 5600,
+      "independent_ap": 0.837392749830478,
+      "counts_and_costs": true
+    },
+    "xgb_d3_False": {
+      "n": 5600,
+      "independent_ap": 0.8969240399458945,
+      "counts_and_costs": true
+    },
+    "xgb_d3_True": {
+      "n": 5600,
+      "independent_ap": 0.8800747040599766,
+      "counts_and_costs": true
+    },
+    "xgb_d6_False": {
+      "n": 5600,
+      "independent_ap": 0.8806247142391698,
+      "counts_and_costs": true
+    },
+    "xgb_d6_True": {
+      "n": 5600,
+      "independent_ap": 0.8758685670118046,
+      "counts_and_costs": true
+    },
+    "lgb_7_False": {
+      "n": 5600,
+      "independent_ap": 0.8958302322416897,
+      "counts_and_costs": true
+    },
+    "lgb_7_True": {
+      "n": 5600,
+      "independent_ap": 0.883987067074469,
+      "counts_and_costs": true
+    },
+    "lgb_15_False": {
+      "n": 5600,
+      "independent_ap": 0.8940391749109261,
+      "counts_and_costs": true
+    },
+    "lgb_15_True": {
+      "n": 5600,
+      "independent_ap": 0.8946749518407816,
+      "counts_and_costs": true
+    },
+    "ebm_0": {
+      "n": 5600,
+      "independent_ap": 0.6199050562830017,
+      "counts_and_costs": true
+    },
+    "ebm_3": {
+      "n": 5600,
+      "independent_ap": 0.7226927807081028,
+      "counts_and_costs": true
+    },
+    "gam_3": {
+      "n": 5600,
+      "independent_ap": 0.5960531283688536,
+      "counts_and_costs": true
+    },
+    "gam_5": {
+      "n": 5600,
+      "independent_ap": 0.6291875688589293,
+      "counts_and_costs": true
+    },
+    "mlp_16": {
+      "n": 5600,
+      "independent_ap": 0.1422955555958561,
+      "counts_and_costs": true
+    },
+    "mlp_32": {
+      "n": 5600,
+      "independent_ap": 0.1610358001849736,
+      "counts_and_costs": true
+    },
+    "mlp_32_16": {
+      "n": 5600,
+      "independent_ap": 0.12459944845311231,
+      "counts_and_costs": true
+    }
+  },
+  "limits": [
+    "Self-run technical audit; no independent human review",
+    "RSS sampled; not a hardware memory peak guarantee",
+    "No final test, industrial acceptance or deployment",
+    "Native model reload results are historical declarations; this run checks model bytes only"
+  ],
+  "verified_hash_entries": 5163,
+  "warnings_count": 27,
+  "warning_categories": {
+    "UserWarning": 26,
+    "ConvergenceWarning": 1
+  },
+  "exact_task_fold_memberships": {
+    "inner": 450,
+    "outer": 150,
+    "calibration_inner": 54,
+    "calibration_outer": 18
+  },
+  "archive": {
+    "sha256": "640d75114324df4d8bafa20461cccf20da3850552c3bd6fa48080b9584e97896",
+    "entries": 5350,
+    "expanded_bytes_observed": 164309031,
+    "crc": "pass"
+  },
+  "full_audit_result_sha256": "87517623c8924c3f9803bb4bdf8aa86e1902f746451affcb0d7f8e9f5b741eaf",
+  "execution": {
+    "command": "python -m scripts.audit_ml_study --root <isolated-extraction> --summary <isolated-extraction>/analysis-v2/summary.json --destination <new-result.json>",
+    "auditor_sha256": "9608f7f78206de9e6f192583e9b612858dee7eb675a04ae233803833570d2811",
+    "scope": "No archived code executed; repository auditor only. No unpickling or fitting."
+  }
+}

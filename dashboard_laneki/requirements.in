@@ -1,0 +1,8 @@
+# Python 3.12; install requirements.txt, which pins the complete tested resolution.
+streamlit==1.66.1
+fastapi
+uvicorn
+pandas
+matplotlib
+seaborn
+requests

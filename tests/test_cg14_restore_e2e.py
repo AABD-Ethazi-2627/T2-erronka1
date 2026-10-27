@@ -62,6 +62,13 @@ def test_native_host_contract_before_state_creation(tmp_path, monkeypatch):
             assert (root / "target.lock").is_file()
 
 
+@pytest.fixture(autouse=True)
+def isolated_credentials(monkeypatch, tmp_path):
+    monkeypatch.setattr(m.auth, "ENV_FILE", tmp_path / ".env")
+    for key in m.auth.CREDENTIAL_KEYS:
+        monkeypatch.delenv(key, raising=False)
+
+
 @pytest.fixture
 def lab():
     flow, inv, _ = m.static()
@@ -483,7 +490,8 @@ def test_http_error_does_not_expose_credentials(monkeypatch, capsys):
     assert (
         "verify=False" not in source and "ssl._create_unverified_context" not in source
     )
-    assert "read_env" not in source and ".env" not in source.replace(".env access", "")
+    assert "read_env" not in source
+    assert m.Api.login is m.auth.Api.login
     assert "/upload" not in source
     monkeypatch.setattr(
         m.subprocess,

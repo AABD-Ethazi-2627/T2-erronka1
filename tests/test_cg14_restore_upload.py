@@ -12,6 +12,14 @@ import pytest
 
 import cg14_restore_upload as restore
 
+
+@pytest.fixture(autouse=True)
+def isolated_credentials(monkeypatch, tmp_path):
+    monkeypatch.setattr(restore, "ENV_FILE", tmp_path / ".env")
+    for key in restore.CREDENTIAL_KEYS:
+        monkeypatch.delenv(key, raising=False)
+
+
 FLOW = (
     Path(restore.__file__).parent
     / "nifi-flows/cg14_validation_flow_nifi_2.12.0_restore_safe_20261020.json"
@@ -34,6 +42,7 @@ def test_preflight_does_not_create_api_or_use_network(monkeypatch, capsys):
         pytest.fail("Offline preflight attempted network/API construction")
 
     monkeypatch.setattr(restore, "Api", forbidden)
+    monkeypatch.setattr(restore, "credentials", forbidden)
     monkeypatch.setattr(
         restore.ssl, "create_default_context", lambda **kwargs: object()
     )
@@ -422,3 +431,99 @@ def test_login_406_aborts_before_confirmation_or_upload(monkeypatch, capsys):
     assert "PATH: /nifi-api/access/token" in output.err
     assert "ACCEPT: text/plain" in output.err
     assert "synthetic-password" not in output.out + output.err
+
+
+@pytest.mark.parametrize(
+    "body,category",
+    [
+        (
+            b"<html>HTTP ERROR 400 Invalid SNI synthetic-private-marker</html>",
+            "TLS_SNI_REJECTED",
+        ),
+        (b"synthetic-private-marker", "UNCLASSIFIED"),
+        (b"x" * 16384 + b"Invalid SNI", "UNCLASSIFIED"),
+    ],
+)
+def test_token_400_classification_is_bounded_and_never_echoes_body(
+    body, category, capsys
+):
+    def reject(request):
+        raise urllib.error.HTTPError(
+            request.full_url,
+            400,
+            "synthetic-private-reason",
+            {"Set-Cookie": "synthetic-private-cookie"},
+            BytesIO(body),
+        )
+
+    api = api_with_stub(reject)
+    with pytest.raises(urllib.error.HTTPError):
+        api.request(
+            "/access/token",
+            b"synthetic-private-form",
+            "application/x-www-form-urlencoded",
+            accept="text/plain",
+        )
+    assert len(api.opener.requests) == 1
+    output = capsys.readouterr()
+    assert "AUTH_HTTP400: " + category in output.err
+    assert "synthetic-private" not in output.out + output.err
+
+
+@pytest.mark.parametrize("source", ["env", "file"])
+def test_login_uses_credentials_without_prompts(source, monkeypatch, capsys):
+    username, password = "  synthetic-user  ", "  synthetic-password+&=ñ\t "
+    if source == "env":
+        for key, value in zip(restore.CREDENTIAL_KEYS, (username, password)):
+            monkeypatch.setenv(key, value)
+        # A complete environment must not even read the file.
+        monkeypatch.setattr(
+            Path, "read_text", lambda *a, **kw: pytest.fail("File read")
+        )
+    else:
+        restore.ENV_FILE.write_text(
+            f'# ignored\nexport {restore.CREDENTIAL_KEYS[0]}="{username}"\n'
+            f"{restore.CREDENTIAL_KEYS[1]}='{password}'\n",
+            encoding="utf-8",
+        )
+    monkeypatch.setattr("builtins.input", lambda p: pytest.fail("Username requested"))
+    monkeypatch.setattr(
+        restore.getpass, "getpass", lambda p: pytest.fail("Password requested")
+    )
+    api = api_with_stub(lambda request: StubResponse(201, b"synthetic-token"))
+    api.login()
+    assert urllib.parse.parse_qs(api.opener.requests[0].data.decode()) == {
+        "username": [username.strip()],
+        "password": [password],
+    }
+    output = capsys.readouterr()
+    assert password not in output.out + output.err
+    assert username.strip() not in output.out + output.err
+
+
+def test_credentials_environment_overrides_file_and_preserves_literal_values(
+    monkeypatch,
+):
+    user_key, password_key = restore.CREDENTIAL_KEYS
+    restore.ENV_FILE.write_text(
+        f"{user_key}=file-user\n{password_key}=  literal$VALUE#hash=tail  \n"
+    )
+    monkeypatch.setenv(user_key, "env-user")
+    monkeypatch.setenv(password_key, "")
+    assert restore.credentials() == {
+        user_key: "env-user",
+        password_key: "  literal$VALUE#hash=tail  ",
+    }
+
+
+def test_login_prompts_only_for_missing_password(monkeypatch):
+    monkeypatch.setenv(restore.CREDENTIAL_KEYS[0], "env-user")
+    monkeypatch.setenv(restore.CREDENTIAL_KEYS[1], "")
+    monkeypatch.setattr("builtins.input", lambda p: pytest.fail("Username requested"))
+    monkeypatch.setattr(restore.getpass, "getpass", lambda p: "manual-password")
+    api = api_with_stub(lambda request: StubResponse(201, b"synthetic-token"))
+    api.login()
+    assert urllib.parse.parse_qs(api.opener.requests[0].data.decode()) == {
+        "username": ["env-user"],
+        "password": ["manual-password"],
+    }
