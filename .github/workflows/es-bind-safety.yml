@@ -1,0 +1,30 @@
+name: ES bind storage safety
+on:
+  pull_request:
+    paths:
+      - 'tests/es_workspace.py'
+      - 'tests/es_runtime.py'
+      - 'tests/verify_elasticsearch_contract.py'
+      - 'tests/verify_es_ingest_pipeline.py'
+      - 'tests/test_es_workspace.py'
+      - '.github/workflows/es-bind-safety.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  engine-paths:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.13.5'
+          python-version: '3.12'
+          enable-cache: false
+      - name: Install locked test dependencies
+        run: uv sync --frozen --all-groups --extra kafka
+      - name: Prove exclusive reservation, symlink rejection and retained data
+        run: uv run --frozen --all-groups --extra kafka python -W error -m unittest discover -s tests -p test_es_workspace.py -v

@@ -20,7 +20,7 @@ from es_runtime import (
     DockerRuntime,
     add_runtime_arguments,
     cluster_uuid,
-    mount_source,
+    reserve_bind_mounts,
     run_identity,
     write_evidence,
 )
@@ -40,8 +40,10 @@ def verify(work, distro=None, image_ref=IMAGE, docker_host=None, engine_work_dir
     if not (work.drive.lower() == "d:" or str(work).startswith("/mnt/d/")):
         raise ValueError("Lab data/evidence must be on D:")
     work.mkdir(parents=True, exist_ok=False)
-    for name in ("data", "java-temp", "logs"):
-        (work / name).mkdir()
+    run_id = uuid.uuid4().hex
+    sources = reserve_bind_mounts(
+        runtime, work, run_id, engine_work_dir=engine_work_dir
+    )
     docker = runtime.prefix
 
     def command(args, **kwargs):
@@ -55,7 +57,7 @@ def verify(work, distro=None, image_ref=IMAGE, docker_host=None, engine_work_dir
         ).stdout.strip()
 
     def mount(name):
-        return mount_source(work, name, distro=distro, engine_work_dir=engine_work_dir)
+        return sources[name]
 
     pipeline = json.loads(EXPORT.read_text(encoding="utf-8"))
     template_path = ROOT / "elasticsearch/index-template.json"
@@ -67,6 +69,7 @@ def verify(work, distro=None, image_ref=IMAGE, docker_host=None, engine_work_dir
         "image": image_ref,
         "docker_command": docker,
         "engine_work_dir": engine_work_dir,
+        "engine_mounts": sources,
         "fixture": {
             "kind": "constructed v4 contract fixture, NOT API inference",
             "document": doc,
@@ -79,7 +82,6 @@ def verify(work, distro=None, image_ref=IMAGE, docker_host=None, engine_work_dir
         "containers_before": command(["ps", "-aq"]).splitlines(),
     }
     container = None
-    run_id = uuid.uuid4().hex
     evidence["verification_id"] = run_id
 
     def request(method, path, body=None, expected=200):

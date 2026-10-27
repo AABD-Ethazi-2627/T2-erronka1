@@ -1,14 +1,16 @@
 """Explicit local Docker selection for opt-in disposable ES verifiers.
 
---engine-work-dir selects an existing engine-side directory under /mnt/d,
-including an ext4 filesystem mounted there. It must already contain writable
+--engine-work-dir selects a NEW engine-side directory under /mnt/d, with an
+existing parent (which may be on ext4). A host-side preflight reserves private
 data, java-temp and logs directories; local --work-dir keeps the receipts.
 This option neither formats storage nor claims that an arbitrary D: path is ext4.
 """
 
 import json
+import os
 import re
 import subprocess
+import sys
 from pathlib import Path, PurePosixPath
 
 
@@ -27,7 +29,7 @@ def add_runtime_arguments(parser, default_image, *, bind_mounts=False):
     if bind_mounts:
         parser.add_argument(
             "--engine-work-dir",
-            help="Existing engine-side /mnt/d directory with data/java-temp/logs",
+            help="New engine-side /mnt/d directory; parent must exist, no symlinks",
         )
 
 
@@ -74,6 +76,42 @@ def mount_source(work, name, *, distro=None, engine_work_dir=None):
     return str(path)
 
 
+def reserve_bind_mounts(runtime, work, run_id, *, engine_work_dir=None):
+    """Reserve storage on the explicitly selected local engine host before run."""
+    run_identity(run_id)
+    if runtime.host is None or not runtime.host.startswith("unix:///"):
+        raise ValueError(
+            "Bind verification requires an explicit local Unix Docker socket"
+        )
+    if runtime.distro:
+        python = ["wsl", "-d", runtime.distro, "--exec", "/usr/bin/python3"]
+    elif os.name == "posix":
+        python = [sys.executable]
+    else:
+        raise ValueError("Windows bind verification requires --docker-via-wsl")
+    base = engine_work_dir
+    if base is None:
+        parent = PurePosixPath(mount_source(work, "data", distro=runtime.distro)).parent
+        base = str(parent / ("engine-" + run_id))
+    # Apply the same lexical restrictions before asking the engine host to walk
+    # and exclusively create the path. Do not trust a pre-existing directory.
+    expected = {
+        name: mount_source(work, name, distro=runtime.distro, engine_work_dir=base)
+        for name in ("data", "java-temp", "logs")
+    }
+    script = Path(__file__).with_name("es_workspace.py").read_text(encoding="utf-8")
+    result = subprocess.run(
+        python + ["-c", script, base, run_id],
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    if json.loads(result.stdout) != expected:
+        raise ValueError("Engine returned unexpected ES bind workspace paths")
+    return expected
+
+
 def run_identity(run_id):
     if not re.fullmatch(r"[0-9a-f]{32}", run_id):
         raise ValueError("Invalid verification run ID")
@@ -98,6 +136,8 @@ class DockerRuntime:
         ):
             raise ValueError("Image must be a single local image ID or reference")
         self.image = image
+        self.distro = distro
+        self.host = host
         self.prefix = docker_prefix(distro, host)
 
     def command(self, arguments, **kwargs):

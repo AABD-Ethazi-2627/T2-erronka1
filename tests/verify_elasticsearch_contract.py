@@ -20,7 +20,7 @@ from es_runtime import (
     DockerRuntime,
     add_runtime_arguments,
     cluster_uuid,
-    mount_source,
+    reserve_bind_mounts,
     run_identity,
     write_evidence,
 )
@@ -51,13 +51,13 @@ def run(
     if not (work.drive.lower() == "d:" or str(work).startswith("/mnt/d/")):
         raise ValueError("Lab data/evidence must be on D:")
     work.mkdir(parents=True, exist_ok=False)
+    run_id = uuid.uuid4().hex
+    sources = reserve_bind_mounts(
+        runtime, work, run_id, engine_work_dir=engine_work_dir
+    )
     mounts = []
     for name in ("data", "java-temp", "logs"):
-        path = work / name
-        path.mkdir()
-        source = mount_source(
-            work, name, distro=distro, engine_work_dir=engine_work_dir
-        )
+        source = sources[name]
         mounts += [
             "--mount",
             f"type=bind,src={source},dst=/usr/share/elasticsearch/{name}",
@@ -77,7 +77,6 @@ def run(
     assert difference == baseline, "Expected three additive mappings and final pipeline"
 
     image_id = runtime.resolve_image()
-    run_id = uuid.uuid4().hex
     container = subprocess.check_output(
         docker
         + [
@@ -125,6 +124,7 @@ def run(
         "docker_command": docker,
         "verification_id": run_id,
         "engine_work_dir": engine_work_dir,
+        "engine_mounts": sources,
         "operations": [],
         "passed": False,
     }
