@@ -67,6 +67,13 @@ class DependencyAuditTests(unittest.TestCase):
             rows = requirements_rows(path)
             self.assertEqual([row["name"] for row in rows], ["numpy", "psutil"])
             self.assertTrue(audit(rows, Path("."), metadata)["passed"])
+            path.write_text("colorama==0.4.6 ; sys_platform == 'win32'\n"
+                            "nvidia-nccl-cu12==2.32.3 ; sys_platform == 'linux'\n")
+            self.assertEqual([row["name"] for row in requirements_rows(path)],
+                             ["colorama", "nvidia-nccl-cu12"])
+            path.write_text("numpy==1.26.4 ; sys_platform == 'unknown'\n")
+            with self.assertRaisesRegex(ValueError, "pin"):
+                requirements_rows(path)
             path.write_text("numpy>=1.26\n")
             with self.assertRaisesRegex(ValueError, "pin"):
                 requirements_rows(path)
