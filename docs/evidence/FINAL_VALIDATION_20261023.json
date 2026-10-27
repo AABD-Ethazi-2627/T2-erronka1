@@ -1,0 +1,180 @@
+{
+  "candidate_head_before_final_documentation": "55cfd63d71c848acbd7647eab7b69bec768b646d",
+  "environment": "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+  "uv_lock_sha256": "c3de3344bf59afdbd1242a89794aaa219f795538a5656a3832a8375ee9404a20",
+  "model_identity": {
+    "manifest.json": "a6cc7a29f0b061e114e046865cf7ac4a3969111a904a0281f1919aff35ea0945",
+    "rf.pkl": "803ee2e10e0486aaeb1fb65ed43df9d0069c2d5113d1e1ec45777346a0b6735a",
+    "if.pkl": "a12304b474f290841a435ffb7d9caaa65c0843ce537267d28686a9d0f49aae79"
+  },
+  "bundle_origin": "D:\\github\\_local\\t2-review-20261023\\delivery-bundle",
+  "model_note": "Exact original CG26 bundle, copied after three hash checks; no fitting",
+  "status": "passed_with_three_ES_skips_covered_separately",
+  "checks": [
+    {
+      "name": "environment",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-c",
+        "import sys,sklearn,matplotlib,fastapi,starlette; print(sys.version); print(sklearn.__version__,matplotlib.__version__,fastapi.__version__,starlette.__version__) "
+      ],
+      "started_utc": "2026-10-23T17:03:51.202305+00:00",
+      "seconds": 2.6433516000397503,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\environment.log",
+      "log_sha256": "5347cb05290b6f1fb6448ddbeb63f50aad8c8ce9e6b9de776bb8158409e6a004"
+    },
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\pytest.xml"
+      ],
+      "started_utc": "2026-10-23T17:03:53.851017+00:00",
+      "seconds": 59.45602370001143,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\pytest.log",
+      "log_sha256": "92af7912c4c1e3a59dc1044ce63edd0c00795022b7c707f5fff3c5b23e6b1f2b",
+      "summary": "653 passed, 3 skipped, 308 subtests passed in 58.30s"
+    },
+    {
+      "name": "unittest",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "started_utc": "2026-10-23T17:04:53.314842+00:00",
+      "seconds": 55.79599459999008,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\unittest.log",
+      "log_sha256": "30c4da17e5d73683673dae894e1799b3bee56c59136f2002b4a19443c0640f0d",
+      "summary": [
+        "Ran 361 tests in 52.437s",
+        "OK (skipped=3)"
+      ]
+    },
+    {
+      "name": "cg02",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "-m",
+        "scripts.audit_cg02",
+        "--check"
+      ],
+      "started_utc": "2026-10-23T17:05:49.118713+00:00",
+      "seconds": 0.18228420004015788,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\cg02.log",
+      "log_sha256": "530eeefb4e67136b8b117fe135ae61b1925c15a18bec0a4a577987abd68a8815"
+    },
+    {
+      "name": "layout",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "scripts/check_repository_layout.py"
+      ],
+      "started_utc": "2026-10-23T17:05:49.306695+00:00",
+      "seconds": 1.1606102000223473,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\layout.log",
+      "log_sha256": "660ea11889b3646995752354b0effe44227983c34bc8f8109cd6c25bda30a2a3"
+    },
+    {
+      "name": "cg25",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "scripts/check_cg25_memory.py"
+      ],
+      "started_utc": "2026-10-23T17:05:50.473120+00:00",
+      "seconds": 0.9664384000352584,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\cg25.log",
+      "log_sha256": "4ef8bb2b0e3b7e0018d353a995a438658a7744c9f9b745d8e5bffe2eb918bd30"
+    },
+    {
+      "name": "cg20-offline",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "-m",
+        "scripts.check_cg20_same_event"
+      ],
+      "started_utc": "2026-10-23T17:05:51.447052+00:00",
+      "seconds": 0.1465129000134766,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\cg20-offline.log",
+      "log_sha256": "05b918af8e80df8b6da9e8467c3431bc5d8987f0863d835de8155f3be09029f9"
+    },
+    {
+      "name": "runtime-export",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "-m",
+        "scripts.export_runtime",
+        "--check"
+      ],
+      "started_utc": "2026-10-23T17:05:51.599738+00:00",
+      "seconds": 0.11629860004177317,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\runtime-export.log",
+      "log_sha256": "b08143dfa632571f5fc5be091cc8ef3b332b3e3b8929634611e4e4b86e0e31b1"
+    },
+    {
+      "name": "image-inventory",
+      "command": [
+        "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+        "-W",
+        "error",
+        "-m",
+        "scripts.image_inventory",
+        "--check"
+      ],
+      "started_utc": "2026-10-23T17:05:51.720451+00:00",
+      "seconds": 0.8251512999995612,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\image-inventory.log",
+      "log_sha256": "00883f3854d9317ae2876ba54e4e2345cddff94f2dc599ac9593893348718313"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "5005ccde81f16cd2deac6ee3b30085d773e0fc88"
+      ],
+      "started_utc": "2026-10-23T17:05:52.550672+00:00",
+      "seconds": 0.059471599990502,
+      "exit_code": 0,
+      "log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\diff.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limits": [
+    "Local Windows CPython3.11.9, not a CI runner or container runtime.",
+    "Research has a separate environment and prior evidence; excluded by existing project configuration.",
+    "The three opt-in ES tests have a separate private Linux ES9.5.4 receipt."
+  ],
+  "finished_utc": "2026-10-23T17:05:52.610556+00:00"
+}

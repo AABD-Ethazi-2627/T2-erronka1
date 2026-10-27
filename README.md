@@ -13,7 +13,8 @@ de la entrega; los experimentos históricos se conservan separados y no se carga
 en esta API. [Corrección y verificación](docs/evidence/CG17_CURRENT_STATE_SCOPE.md).
 
 [Índice de evidencias: alcance vigente y registros históricos](docs/evidence/INDEX_2026-10-19.md)
-· [Rúbrica y revisión pendiente](docs/rubrica/SEGUIMIENTO.md)
+· [Rúbrica actual y pendientes del 23/10](docs/rubrica/ESTADO_20261023.md)
+· [Revisión, correcciones y bloqueos del 23/10](docs/evidence/PENDING_REVIEW_20261023.md)
 · [Enunciado original](ENUNTZIATUA.md) · [Documentación](docs/README.md).
 
 ## Entorno y experimentos
@@ -150,7 +151,7 @@ temporales quedan fuera del alcance vigente.
 [Mapa de carpetas y política de archivos](docs/REPOSITORY_LAYOUT.md).
 Ejecutar `python3 scripts/check_repository_layout.py` desde la raíz.
 
-## CG14: validación e integración pendiente
+## CG14: aceptación PM y mejoras separadas
 
 La validación CG14 y el laboratorio RESTORE tienen un alcance separado de la guía activa anterior. Consultar [contrato](docs/CG14_VALIDATION_CONTRACT.md), [RESTORE](docs/CG14_RESTORE_E2E.md) y [plan de integración PR42](docs/CG14_PR42_INTEGRATION.md). El mock RESTORE no acredita scoring ni archivo durable integrados.
 
@@ -160,5 +161,6 @@ canónica, archivo CG15 y ES opcional requerido. PR65 exige recibos `stored` o
 el ACK. La API limita el cuerpo a 32.768 bytes y la profundidad JSON a 64,
 con errores 422 acotados sin devolver la entrada. Véanse la
 [corrección y sus límites](docs/evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
-y la [matriz CG14](docs/CG14_ACCEPTANCE_MATRIX.md). La revisión padre y los
-ensayos Apache Kafka/NiFi reales siguen pendientes.
+y la [matriz histórica CG14](docs/CG14_ACCEPTANCE_MATRIX.md). El
+[estado del 23/10](docs/CG14_STATUS_20261023.md) distingue la aceptación PM
+ya otorgada a #14 de RESTORE, la nueva carga y la valoración académica pendientes.

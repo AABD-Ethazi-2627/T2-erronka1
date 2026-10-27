@@ -1,0 +1,63 @@
+{
+  "checked_utc": "2026-10-23T17:02:35.614309+00:00",
+  "candidate_before_reconciliation": "55cfd63d71c848acbd7647eab7b69bec768b646d",
+  "previous_manifest_sha256": "1375b800f44373c4f8db8ef29e82ea9d481f527a543a71c0431e0af9dd130fa2",
+  "files_retained": 191,
+  "changed_current_hashes": [
+    {
+      "file": "pyproject.toml",
+      "previous": "8b90ee5faf9dbc9afc79a47de46aba5d821315edc93bf0a0df3ec3a8755ac3b1",
+      "current": "1d962ee822718efd61ee0373e4faaf54bd8b4ddaa92e48fd2c588cb932d0593c"
+    },
+    {
+      "file": "uv.lock",
+      "previous": "ac930e19b18890a6fc6e3d9025c3e92f7250d5a92280afb8be9d6c32215f91e4",
+      "current": "c3de3344bf59afdbd1242a89794aaa219f795538a5656a3832a8375ee9404a20"
+    },
+    {
+      "file": "README.md",
+      "previous": "43f14b58e81aebf7768fadb5701d9aae6eeccacbe0d4b325ad7d5da7ab114af9",
+      "current": "a0a963692a18269ad73f89abb997ca4e8456a11322193981e7680925b7d17807"
+    },
+    {
+      "file": "scoring/requirements.txt",
+      "previous": "e935d21b6dc2e71c294cb4efe5117b8a77ccd5b1d197e9087df41900fce67635",
+      "current": "0e95d2a105d536b5cfb781ff7fb87e860678c3c0941c3306526015fd1e72da9a"
+    },
+    {
+      "file": "scripts/check_repository_layout.py",
+      "previous": "605a0d42a03013c08635ee4f40bd81532b5fe7e209cf10dc931f42bb45686ffd",
+      "current": "2bef665dc0a2192f19b4a8e7504f9d15b7ade12328f62e608e5a2057f8685475"
+    },
+    {
+      "file": "tests/verify_durable_pipeline.py",
+      "previous": "f41d2464b1124148959d5c2475f9a83432bc00f74ed6976620f82aa3dfe5fc80",
+      "current": "461a8d8e598221aefe253e3f44ab6cfccca64f52f5d1270949e209d8ded62493"
+    },
+    {
+      "file": "tests/verify_es_ingest_pipeline.py",
+      "previous": "e984e038a114f2533070374c24802ae7829b9d345679292452bca86005f43b54",
+      "current": "1dfa57149ff57b05b5c162588b401481ca17816d2fe0dc3091228ea045ba74a5"
+    },
+    {
+      "file": "tests/verify_elasticsearch_contract.py",
+      "previous": "ae6fb7203223e418ecbecb62b09b230a9ba8e6998c14d747e3e6cdae6b4b699d",
+      "current": "6612bc54269fc9603f812f3a3aaf45ebdb2e6ef927a8cd14e1c1256a5d8c71c3"
+    }
+  ],
+  "historical_snapshot_unchanged": true,
+  "active_scope_and_human_review_unchanged": true,
+  "reason": "Seven source files equal reviewed PR92 bytes; README contains reviewed dependency and current-status documentation",
+  "gate_result": "passed",
+  "gate_command": [
+    "D:\\cnc-guard-review-20261023\\venv-t3-2fccec37\\Scripts\\python.exe",
+    "-W",
+    "error",
+    "scripts/check_cg25_memory.py"
+  ],
+  "gate_log": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\review-final-20261023\\cg25.log",
+  "gate_log_sha256": "4ef8bb2b0e3b7e0018d353a995a438658a7744c9f9b745d8e5bffe2eb918bd30",
+  "independent_review": "docs/evidence/PENDING_HASH_REVIEW_20261023.md",
+  "independent_review_sha256": "b4384d79039582fdc63373f499ff3102868ac2bd9db9959e3dad028c3bef2462",
+  "finalised_utc": "2026-10-23T17:17:10.439457+00:00"
+}

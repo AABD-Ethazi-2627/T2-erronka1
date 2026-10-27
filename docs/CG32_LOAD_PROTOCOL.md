@@ -31,7 +31,9 @@ Herramientas nuevas del ensayo:
 - Secretos NiFi generados en `<lab>/.env` (0600), nunca impresos ni versionados.
 - El bundle se monta **solo lectura** en la API; NiFi recibe una copia byte a byte
   del `manifest.json` (el worker no carga pickles). `verify_bundle` exige que los
-  hashes de `rf.pkl`/`if.pkl` coincidan con el manifiesto antes de cada run.
+  hashes de `rf.pkl`/`if.pkl` y del manifiesto coincidan con el recibo sellado
+  `CG26_REHEARSAL_2026-10-21.json` antes de cada run. Un bundle internamente
+  coherente con el mismo `model_version` no sustituye esa identidad.
 - Presupuesto acordado antes de arrancar (`BUDGET` en `cg32_lab.py`): RAM libre
   ≥6 GiB y disco libre ≥20 GiB al iniciar; lab ≤4 GiB; drenaje ≤900 s; lag ≤20.000.
   Límites de contenedor: Kafka 768 MiB, ES 1,2 GiB, NiFi 2 GiB, API 768 MiB,

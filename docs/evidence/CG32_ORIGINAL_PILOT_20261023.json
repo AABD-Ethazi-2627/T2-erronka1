@@ -1,0 +1,156 @@
+{
+  "cycles": {
+    "completed": 4
+  },
+  "drain_s": 58.2586073450002,
+  "duration_s": 10,
+  "expected": 10,
+  "filebeat_sha256": "ab936a1785fa1d464e92764f578661c083aeaf4361029825e9fae29bfd7537da",
+  "finished_utc": "2026-10-23T16:48:04.683841Z",
+  "first_offer_mono": 37857.981764763,
+  "fixture_sha256": "803f912d71884c026dbd78e97271497d7a956c55303051fde84b3ffa05f142ad",
+  "graph": {
+    "attempts": 1,
+    "bootstrap_servers": "kafka:19092",
+    "es_index": "cnc-alerts-cg32-original-pilot-retry-r1-a1d2e9",
+    "es_url": "http://elasticsearch:9200",
+    "group_id": "cg32-original-pilot-retry-r1-a1d2e9",
+    "legacy_source_kind": "cg14-lab-kafka",
+    "manifest": "/home/Fedora/t2-review-20261023-cg32/runs/original-pilot-retry-r1-a1d2e9/pinned-manifest.json",
+    "max_poll_interval_ms": 300000,
+    "max_polls": 3,
+    "max_records": 1,
+    "offset_reset": "earliest",
+    "root": "/home/Fedora/t2-review-20261023-cg32/runs/original-pilot-retry-r1-a1d2e9/worker",
+    "scoring_url": "http://api:8000/predict",
+    "source_kind": "lab_fixture",
+    "source_namespace": "cg32-1ba594f6/original-pilot-retry-r1-a1d2e9",
+    "timeout": 0.5,
+    "topic": "cg32-original-pilot-retry-r1-a1d2e9"
+  },
+  "health": {
+    "model_version": "ai4i-current-state-v4",
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "status": "ready",
+    "temporal_prediction_enabled": false
+  },
+  "http_repeated_posts": 0,
+  "kafka_committed": {
+    "committed": 10,
+    "end": 10,
+    "lag": 0
+  },
+  "label": "original-pilot-retry",
+  "last_seen_mono": 37921.697501808,
+  "manifest_sha256": "a6cc7a29f0b061e114e046865cf7ac4a3969111a904a0281f1919aff35ea0945",
+  "metrics": {
+    "bytes": {
+      "es_index_store": 103931,
+      "input": 847,
+      "kafka_topic_values": 673,
+      "worker_root": 532480
+    },
+    "cpu_s": {
+      "api-1": 0.24771348805832236,
+      "elasticsearch-1": 4.2025507018875174,
+      "filebeat-1": 0.026147821812808978,
+      "kafka-1": 1.0784121094968884,
+      "nifi-1": 15.693766099564428
+    },
+    "drain_s": 58.2586073450002,
+    "e2e_max_ms": 55748.093946000154,
+    "e2e_n": 10,
+    "e2e_p50_ms": 26699.698946002172,
+    "e2e_p95_ms": 55748.093946000154,
+    "http_non_200": 0,
+    "http_p50_ms": 22.211355993931647,
+    "http_p95_ms": 60.320475000480656,
+    "http_requests": 10,
+    "lag_final": 0,
+    "lag_initial": 0,
+    "lag_max": 8,
+    "offered_eps": 1.002942567744983,
+    "producer_lag_max_ms": 34.44658899388742,
+    "rss_max_mib": {
+      "api-1": 191.9,
+      "elasticsearch-1": 1009.0,
+      "filebeat-1": 46.99,
+      "kafka-1": 354.9,
+      "nifi-1": 1396.736
+    },
+    "throughput_eps": 0.1569470975896789
+  },
+  "model_version": "ai4i-current-state-v4",
+  "name": "original-pilot-retry-r1-a1d2e9",
+  "nifi": {
+    "group": "69a82d36-01a1-1000-3562-e9cdefe8bb77",
+    "period": "2 sec"
+  },
+  "nifi_exit_status": {
+    "0": 4
+  },
+  "observer_errors": [],
+  "offer_elapsed_s": 9.008246990000771,
+  "pause": {
+    "at_s": null,
+    "for_s": 0,
+    "kill_at_s": null
+  },
+  "pause_observed": null,
+  "rate": 1,
+  "reconciliation": {
+    "backlog_uncommitted": 0,
+    "balance_ok": true,
+    "es_docs": 10,
+    "es_duplicate_event_ids": 0,
+    "es_without_saved_job": 0,
+    "jobs_not_in_kafka": 0,
+    "kafka_missing_offered": 0,
+    "kafka_not_observed": 0,
+    "kafka_records": 10,
+    "kafka_repeated_lines": 0,
+    "kafka_unexpected": 0,
+    "observed": 10,
+    "offered": 10,
+    "offered_unique": 10,
+    "pending": 0,
+    "rejected": 0,
+    "saved": 10,
+    "saved_missing_in_es": 0,
+    "valid_lost": 0
+  },
+  "started_utc": "2026-10-23T16:46:37.614182Z",
+  "stopped_by_budget": null,
+  "worker_attempts": {
+    "200": 10,
+    "201": 10
+  },
+  "driver_source_commit": "4a6e01a6004e87cc156d3a3944625e82a0855616",
+  "environment_versions": {
+    "api_server_sha256": "6a6afb7cad4b80834211ddc0cb2c2020ad237c355e71a310d3264a376bf2bcfc",
+    "compose_sha256": "e03616b6b9b8dfb3ab5aa9c1bac6eade621b94a28058a6feac56eced4fa5674a",
+    "cpus": 8,
+    "git_head": "4a6e01a6004e87cc156d3a3944625e82a0855616",
+    "images": {
+      "cg32-1ba594f6-elasticsearch-1": {
+        "id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+        "repository": "docker.elastic.co/elasticsearch/elasticsearch",
+        "tag": "9.5.4"
+      },
+      "cg32-1ba594f6-kafka-1": {
+        "id": "sha256:77e3df9054047a88b520d0cc46e16696d3b22022e1d580aeccd2632df6532837",
+        "repository": "apache/kafka",
+        "tag": ""
+      },
+      "cg32-1ba594f6-nifi-1": {
+        "id": "sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad",
+        "repository": "apache/nifi",
+        "tag": "2.12.0"
+      }
+    },
+    "kernel": "6.18.54.1-microsoft-standard-WSL2",
+    "lab_sha256": "5ba2cbcbe1f374d2838f386974bd4dfcf91c7fc005e344243dbe97d5a3c9b9ec",
+    "load_sha256": "d8edc2dd78696eacd47df4c1663369d55ded9b9de4690b3aaee50c3ba4e651dc",
+    "python": "3.11.15"
+  }
+}

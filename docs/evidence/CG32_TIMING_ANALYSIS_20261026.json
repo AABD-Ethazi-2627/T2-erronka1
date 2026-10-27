@@ -1,0 +1,215 @@
+{
+  "source": "/home/Fedora/t2-review-20261023-cg32/runs/original-pilot-retry-r1-a1d2e9",
+  "source_sha256": {
+    "offered.jsonl": "a6b7fd607c0af05362c026f1b026b6eeb836845b1d9d6f62511e603ec53f53b1",
+    "kafka-records.jsonl": "1d7aa26c2ff6086b71dac485261f1b7e3dcc32a93cc4ea3eb5e78a9ca30719d2",
+    "es-first-seen.json": "1d6377d37fe9f61bd707f7878909b51189b8f39f5fedf026fa88be7512275b1c",
+    "api-timing.jsonl": "aad6c51538433e421de831f2b33d2ea28f74c6ad13ad9a1bcf7f095744c77483",
+    "run.json": "0797d069e7131ad8a733fa124d9a919948ed201fbd40ce9da755a8be4bf2e7fc",
+    "nifi-flow.json": "930c2b83cec9c156b5c36d471c28b69127c28d7aaa7477bed591875c9fa7597a",
+    "graph.json": "e6911867da242d5bb3e02ce7f8b764817fc718e7428df544f00eedca75886f8c"
+  },
+  "rows": [
+    {
+      "offset": 0,
+      "offered_offset_s": 0.0,
+      "e2e_monotonic_ms": 12733.153717999812,
+      "offer_to_kafka_record_timestamp_wall_ms": 1171.779052734375,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 10283.407958984375,
+      "scored_at_to_first_seen_wall_ms": 1277.967929840088,
+      "first_seen_mono": 37870.714918481,
+      "scored_at_utc": "2026-10-23T16:47:03.499408Z"
+    },
+    {
+      "offset": 1,
+      "offered_offset_s": 0.9872776000047452,
+      "e2e_monotonic_ms": 11745.876117995067,
+      "offer_to_kafka_record_timestamp_wall_ms": 184.5009765625,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 10663.084228515625,
+      "scored_at_to_first_seen_wall_ms": 898.291826248169,
+      "first_seen_mono": 37870.714918481,
+      "scored_at_utc": "2026-10-23T16:47:03.879084Z"
+    },
+    {
+      "offset": 2,
+      "offered_offset_s": 1.96777806099999,
+      "e2e_monotonic_ms": 26699.698946002172,
+      "offer_to_kafka_record_timestamp_wall_ms": 1205.0,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 24541.528076171875,
+      "scored_at_to_first_seen_wall_ms": 953.1710147857666,
+      "first_seen_mono": 37886.64924177,
+      "scored_at_utc": "2026-10-23T16:47:19.758528Z"
+    },
+    {
+      "offset": 3,
+      "offered_offset_s": 2.9671389630020713,
+      "e2e_monotonic_ms": 25700.33804400009,
+      "offer_to_kafka_record_timestamp_wall_ms": 205.64013671875,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 24796.2548828125,
+      "scored_at_to_first_seen_wall_ms": 698.444128036499,
+      "first_seen_mono": 37886.64924177,
+      "scored_at_utc": "2026-10-23T16:47:20.013255Z"
+    },
+    {
+      "offset": 4,
+      "offered_offset_s": 3.971057799004484,
+      "e2e_monotonic_ms": 24696.41920799768,
+      "offer_to_kafka_record_timestamp_wall_ms": 1202.720947265625,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 23038.680908203125,
+      "scored_at_to_first_seen_wall_ms": 455.0180435180664,
+      "first_seen_mono": 37886.64924177,
+      "scored_at_utc": "2026-10-23T16:47:20.256681Z"
+    },
+    {
+      "offset": 5,
+      "offered_offset_s": 4.967334382999979,
+      "e2e_monotonic_ms": 41801.51753700193,
+      "offer_to_kafka_record_timestamp_wall_ms": 206.444091796875,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 40927.90087890625,
+      "scored_at_to_first_seen_wall_ms": 667.1731472015381,
+      "first_seen_mono": 37904.750616683,
+      "scored_at_utc": "2026-10-23T16:47:38.145901Z"
+    },
+    {
+      "offset": 6,
+      "offered_offset_s": 5.967617586000415,
+      "e2e_monotonic_ms": 40801.23433400149,
+      "offer_to_kafka_record_timestamp_wall_ms": 1206.1611328125,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 39195.68701171875,
+      "scored_at_to_first_seen_wall_ms": 399.3871212005615,
+      "first_seen_mono": 37904.750616683,
+      "scored_at_utc": "2026-10-23T16:47:38.413687Z"
+    },
+    {
+      "offset": 7,
+      "offered_offset_s": 6.9674871530005476,
+      "e2e_monotonic_ms": 40735.05845700129,
+      "offer_to_kafka_record_timestamp_wall_ms": 206.291015625,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 39424.156005859375,
+      "scored_at_to_first_seen_wall_ms": 1104.612112045288,
+      "first_seen_mono": 37905.684310373,
+      "scored_at_utc": "2026-10-23T16:47:38.642156Z"
+    },
+    {
+      "offset": 8,
+      "offered_offset_s": 7.96764309900027,
+      "e2e_monotonic_ms": 55748.093946000154,
+      "offer_to_kafka_record_timestamp_wall_ms": 1206.135009765625,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 54086.489013671875,
+      "scored_at_to_first_seen_wall_ms": 455.47008514404297,
+      "first_seen_mono": 37921.697501808,
+      "scored_at_utc": "2026-10-23T16:47:55.304489Z"
+    },
+    {
+      "offset": 9,
+      "offered_offset_s": 8.973594590002904,
+      "e2e_monotonic_ms": 54742.14245499752,
+      "offer_to_kafka_record_timestamp_wall_ms": 200.183837890625,
+      "kafka_record_timestamp_to_scored_at_wall_ms": 54326.2490234375,
+      "scored_at_to_first_seen_wall_ms": 215.70992469787598,
+      "first_seen_mono": 37921.697501808,
+      "scored_at_utc": "2026-10-23T16:47:55.544249Z"
+    }
+  ],
+  "e2e_recomputed": {
+    "n": 10,
+    "min_ms": 11745.876117995067,
+    "p50_ms": 26699.698946002172,
+    "p95_ms": 55748.093946000154,
+    "max_ms": 55748.093946000154
+  },
+  "e2e_recorded": 55748.093946000154,
+  "http_recomputed": {
+    "n": 10,
+    "min_ms": 16.094974002044182,
+    "p50_ms": 22.211355993931647,
+    "p95_ms": 60.320475000480656,
+    "max_ms": 60.320475000480656
+  },
+  "wall_stage_distributions": {
+    "offer_to_kafka_record_timestamp_wall_ms": {
+      "n": 10,
+      "min_ms": 184.5009765625,
+      "p50_ms": 206.444091796875,
+      "p95_ms": 1206.1611328125,
+      "max_ms": 1206.1611328125
+    },
+    "kafka_record_timestamp_to_scored_at_wall_ms": {
+      "n": 10,
+      "min_ms": 10283.407958984375,
+      "p50_ms": 24796.2548828125,
+      "p95_ms": 54326.2490234375,
+      "max_ms": 54326.2490234375
+    },
+    "scored_at_to_first_seen_wall_ms": {
+      "n": 10,
+      "min_ms": 215.70992469787598,
+      "p50_ms": 667.1731472015381,
+      "p95_ms": 1277.967929840088,
+      "max_ms": 1277.967929840088
+    }
+  },
+  "first_seen_groups": [
+    {
+      "first_seen_mono": 37870.714918481,
+      "offsets": [
+        0,
+        1
+      ],
+      "gap_since_previous_s": null
+    },
+    {
+      "first_seen_mono": 37886.64924177,
+      "offsets": [
+        2,
+        3,
+        4
+      ],
+      "gap_since_previous_s": 15.93432328900235
+    },
+    {
+      "first_seen_mono": 37904.750616683,
+      "offsets": [
+        5,
+        6
+      ],
+      "gap_since_previous_s": 18.101374912999745
+    },
+    {
+      "first_seen_mono": 37905.684310373,
+      "offsets": [
+        7
+      ],
+      "gap_since_previous_s": 0.9336936899999273
+    },
+    {
+      "first_seen_mono": 37921.697501808,
+      "offsets": [
+        8,
+        9
+      ],
+      "gap_since_previous_s": 16.01319143499859
+    }
+  ],
+  "processor_periods": {
+    "Schedule bounded source cycle": "2 sec",
+    "Single Kafka owner": "5 sec",
+    "Capture cycle exit diagnostics": "5 sec",
+    "Retain cycle output": "5 sec",
+    "Retain cycle diagnostics": "5 sec"
+  },
+  "graph_batch_bounds": {
+    "max_polls": 3,
+    "max_records": 1,
+    "max_poll_interval_ms": 300000,
+    "timeout": 0.5
+  },
+  "limits": [
+    "Read-only analysis of preserved files, not a new run.",
+    "E2E uses the same host monotonic timestamps; stage breakdown uses wall timestamps and is descriptive.",
+    "Kafka timestamp is the recorded message timestamp, not an instrumented broker ingress timestamp.",
+    "API timings omit event identity, so per-event API-to-Kafka correlation is not asserted.",
+    "Filesystem may contain additional cycle artifacts after the run receipt; no raw file was modified.",
+    "No proof that a larger max_records achieves 1 second E2E or any real deployment capacity."
+  ]
+}

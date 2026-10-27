@@ -1,0 +1,19 @@
+{
+  "started_utc": "2026-10-23T16:53:01.415360+00:00",
+  "status": "failed",
+  "container": "t2-review-cg19-20261023-6c74",
+  "owner_label": {
+    "cnc.review.owner": "t2-review-20261023-cg19"
+  },
+  "image_id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+  "image_digests": [
+    "docker.elastic.co/elasticsearch/elasticsearch@sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026"
+  ],
+  "data_preserved_at": "/home/Fedora/t2-review-cg19-20261023-6c74",
+  "test_source_sha256": "d63408b89af6f7f0780bc1119d312731e408667f50ddcdc5406a2b40cf91cd6e",
+  "scope": "Dashboard query tests only; fresh ES without product final pipeline",
+  "log": "/mnt/d/github/_local/t2-review-20261023/cg19-es-tests.log",
+  "error": "CalledProcessError: Command '['docker', 'port', 't2-review-cg19-20261023-6c74', '9200']' returned non-zero exit status 1.",
+  "container_stopped_data_preserved": true,
+  "finished_utc": "2026-10-23T16:53:02.032901+00:00"
+}

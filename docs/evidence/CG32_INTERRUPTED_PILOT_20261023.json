@@ -1,0 +1,37 @@
+{
+  "status": "interrupted_by_executor_timeout_not_a_completed_measurement",
+  "executor_timeout_ms": 60000,
+  "project": "cg32-1ba594f6",
+  "run": "original-pilot-r1-7de521",
+  "source_commit": "4a6e01a6004e87cc156d3a3944625e82a0855616",
+  "graph": {
+    "root": "/home/Fedora/t2-review-20261023-cg32/runs/original-pilot-r1-7de521/worker",
+    "manifest": "/home/Fedora/t2-review-20261023-cg32/runs/original-pilot-r1-7de521/pinned-manifest.json",
+    "source_namespace": "cg32-1ba594f6/original-pilot-r1-7de521",
+    "source_kind": "lab_fixture",
+    "legacy_source_kind": "cg14-lab-kafka",
+    "scoring_url": "http://api:8000/predict",
+    "es_url": "http://elasticsearch:9200",
+    "es_index": "cnc-alerts-cg32-original-pilot-r1-7de521",
+    "bootstrap_servers": "kafka:19092",
+    "group_id": "cg32-original-pilot-r1-7de521",
+    "topic": "cg32-original-pilot-r1-7de521",
+    "offset_reset": "earliest",
+    "max_records": 1,
+    "max_polls": 3,
+    "max_poll_interval_ms": 300000,
+    "attempts": 1,
+    "timeout": 0.5
+  },
+  "input_lines_including_header": 11,
+  "input_sha256": "19f2a068b84dbd9bb9f58520c97fe015708902a57b95402b8c20d55668082a1e",
+  "worker_jobs": {
+    "completed": 10
+  },
+  "es_documents": 10,
+  "limits": [
+    "Driver WSL ausente al inspeccionar; se detuvieron solo el grafo y API/Filebeat propios.",
+    "No se reconstruyen tiempos ni se atribuye un resultado de rendimiento.",
+    "Contenedores, datos y registros conservados; un nuevo intento usara IDs nuevos."
+  ]
+}

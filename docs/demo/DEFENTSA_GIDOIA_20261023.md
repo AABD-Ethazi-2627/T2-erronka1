@@ -1,0 +1,182 @@
+# CNC Guard: defentsarako gidoi editagarria
+
+2026-10-23. Proiektua: `AABD-Ethazi-2627/T2-erronka1`; lan-adarra: `review/pending-20261023`; erreferentziako HEAD: `55cfd63d71c848acbd7647eab7b69bec768b646d`, gehi checkout-eko azken dokumentazioa.
+
+Entsegua prestatzeko Markdown gidoia da. Ez da PPTX aurkezpena, egindako entseguaren akta edo euskararen giza balioztapena. Lau kiderentzako banaketa **proposamena** da; ez du inoren benetako parte-hartzea egiaztatzen. Kideek izenak eta txandak adostu behar dituzte.
+
+## Denbora eta erabilera
+
+**10 minutu orientagarri**, lehendik dagoen [demo-proposamena](README.md) abiapuntu hartuta. Ez da irakasleak ezarritako iraupena. Ez daude azken entregaren data, ordua, kanala edo defentsaren iraupen ofiziala baieztatuta. Galderen denbora hamar minutu horien barruan edo kanpoan dagoen ere argitu behar da.
+
+Erabiltzailearen arabera, entrega dokumentazioa eta gelako aurkezpena izan daiteke; oraingoz hipotesia da. Kostuei eta sailkapen tabularrari buruzko postek gai horiek argitzen dituzte, baina ez azken entregaren baldintzak.
+
+Proposatutako lau blokeak:
+
+1. **1. kidea, 0:00-2:00:** sarrera eta lehen ideia: uneko egoera sailkatzen dugu.
+2. **2. kidea, 2:00-4:30:** bigarren ideia: datuen mugak eta ebaluazioaren banaketa.
+3. **3. kidea, 4:30-7:00:** hirugarren ideia: ereduaren latentzia eta kate osoarena bereizi.
+4. **4. kidea, 7:00-10:00:** laugarren ideia: erabakiak kostuekin alderatu; amaiera eta galderetarako gonbita.
+
+Pantailako euskarriak eta hizlariaren oharrak bereizita daude behean. Pantailara izenburua, gako-hitzak eta aukeratutako irudia bakarrik eraman. Erabili letra handia; xehetasun teknikoak eta iturrien zerrenda kontsultarako utzi. Entseguan denbora neurtu eta gidoia egokitu; ez irakurri paragrafo guztiak pantailatik.
+
+## 1. blokea: zer sailkatzen dugu?
+
+### Pantailako euskarria
+
+**CNC Guard: uneko egoeraren sailkapena**
+
+- Uneko irakurketa → sailkapena → pertsonaren berrikuspena.
+- Bost sentsore + `machine_type` bundlean; azken aldagai hori argitzeko.
+- Makinen gaineko ekintza automatikorik ez.
+
+### Hizlariaren oharrak: 1. kidea
+
+> Egun on guztioi. B taldearen CNC Guard lana aurkeztuko dugu. Gure galdera hau da: zer ondorio atera dezakegu makina baten uneko irakurketatik, eta zer ezin dugu ondorioztatu?
+>
+> Lau ideia azalduko ditugu: lehenik, sistemaren helburua; ondoren, datuak eta ebaluazioa; gero, sistemaren neurketak; eta amaitzeko, alerta baten kostua eta lanaren mugak.
+>
+> Erronka honetan sailkapen tabularra egiten dugu. Errenkada bakoitza une bateko argazkia da. Sistemak une horretako egoera sailkatzen du; ez du esaten makina noiz apurtuko den, zenbat bizitza erabilgarri geratzen zaion edo hurrengo hogeita lau orduetan zer gertatuko den.
+>
+> Bundleak Random Forest eta Isolation Forest ditu. Lehenak uneko hutsegitearen sailkapenerako scorea ematen du; bigarrenak irakurketaren ezohikotasuna aztertzen du. Ezohikoa izateak ez du berez matxura baieztatzen. Gainera, zerbitzatutako scorea ez dago probabilitate kalibratu gisa egiaztatuta.
+>
+> Bost aldagai fisikoak hauek dira: giroko tenperatura, prozesuko tenperatura, biraketa-abiadura, torkea eta erremintaren higadura. Bundleak makina mota ere erabiltzen du. Erabiltzaileak ekarritako postaren adibideak bost sentsoreak bakarrik zerrendatzen ditu; `machine_type` onargarria den argitzea falta da. Ez dugu aldagai hori kendu, ezta bundlea aldatu ere.
+>
+> Sistemaren irteerak pertsona baten berrikuspena laguntzeko dira. Ez dute makina bat gelditzen edo martxan jartzen.
+
+**Ahotsa eta begirada:** lehen galderaren ondoren eten laburra egin; entzuleei begiratu. Ez zerrendatu aldagaiak presaka.
+
+**Erreleboa:** «Helburua zehaztuta, bigarren kideak azalduko du zer daturekin ebaluatu den eta zer muga dituen ebaluazio horrek».
+
+Iturriak: [CG26ko bundlearen erregistroa eta sarreren zerrenda](../evidence/CG26_REHEARSAL_2026-10-21.json), eta [iturri akademikoen aplikazioa](ORAL_GUIDE_APPLIED_20261023.md).
+
+## 2. blokea: zer frogatzen du ebaluazioak?
+
+### Pantailako euskarria
+
+**Datuen mugak ebaluazioan ere mantendu**
+
+- `tool_wear_min`: uneko kobariablea; ez denbora-historiala.
+- CG34: train-eko 5.600 errenkada / 190 positibo, baliozkotze gurutzatuan.
+- Test zaharra baztertuta; azken ebaluazio independentea ez dago egiaztatuta.
+
+### Hizlariaren oharrak: 2. kidea
+
+> Lehenengo muga datuen izaera da. `tool_wear_min` aldagaiak erremintaren higadura adierazten du uneko errenkadan. Minututan egoteak ez du errenkaden arteko sekuentziarik edo makina beraren historialik sortzen. Beraz, ez dugu denbora-serieen aurreikuspenik aldarrikatzen.
+>
+> `timestamp` ez da ereduaren X sarrera-matrizean sartzen. Hala ere, gertakariaren metadatu gisa mantendu daiteke trazabilitaterako, `event_id` identifikatzailearekin batera. Ereduaren sarrerak eta garraioaren metadatuak bereizten ditugu.
+>
+> Ezaugarri fisikoak interpretatzean ere unitateak zaindu behar dira. Adibidez, tenperaturen diferentzia bi tenperaturen arteko kenketa da. `rpm * torque_Nm` biderkadura potentziarekin lotutako proxy bat da; ez da zuzenean watt-etan emandako potentzia. Watt-etan adierazteko, `2π/60` bihurketa-faktorea behar da. Adibide horrek ez du esan nahi formula berririk gehitu dugunik.
+>
+> CG34 azterketak train-eko bost mila eta seiehun errenkada erabiltzen ditu; horietatik ehun eta laurogeita hamar positiboak dira. Baliozkotze gurutzatu habiaratuan, aukeraketa eta atalasearen doikuntza barneko zatian egiten dira; kanpoko zatiak emaitzak ebaluatzeko erabiltzen dira.
+>
+> Kostuen analisia lehendik gordetako scoreekin osatutako gehigarria da. Ez du entrenamendu berririk edo zerbitzuko atalaseen aldaketarik ekarri. Konparazio osagarri batek ere ez du automatikoki ordezkatzen zerbitzatutako RF+IF bundlea.
+>
+> Test zaharra ez da azterketa honen ebaluazio independente gisa erabiltzen. Aurreko baliozkotze-emaitzak ere ez ditugu azken test baten emaitzatzat aurkezten. Muga hori esatea beharrezkoa da emaitzak behar bezala ulertzeko.
+
+**Azalpenerako laguntza:** entzuleek galdetzen badute, azaldu «barnekoa aukeratzeko; kanpokoa ebaluatzeko». Ez gehitu aurkezpenean ez dagoen azken testaren emaitzarik.
+
+**Erreleboa:** «Orain, hirugarren kideak neurketak erakutsiko ditu: ereduaren kalkulua eta datuak kate osoa zeharkatzeko denbora bereizita».
+
+Iturriak: [CG34ren protokoloa eta mugak](../evidence/CG34_20261023/manifest.json), [kostuen analisiaren konfigurazioa](../evidence/CG34_20261023/business-costs.json), [CG34ren berrikuspena](../evidence/CG34_REVIEW_20261023.md) eta [CG26ren sarrerak](../evidence/CG26_REHEARSAL_2026-10-21.json).
+
+## 3. blokea: zer neurtu da benetan?
+
+### Pantailako euskarria
+
+**Ereduaren denbora eta kate osoarena**
+
+- RF+IF prozesuan: p95 **11,073 ms**, n = 600.
+- Pilotu pribatua: **10 bidali / 10 gorde**, offset baieztatua 10.
+- HTTP p95 **60,320 ms**; E2E p95 **55,748 s**. Proposatutako 1 s-ko helburua: **ez da betetzen**.
+
+### Hizlariaren oharrak: 3. kidea
+
+> Hemen hiru neurketa desberdin daude. Lehenengoa RF eta IF ereduak prozesu berean kalkulatzeko denbora da. Seiehun behaketatan p95a 11,073 milisegundokoa izan zen. Aurretiko hogei beroketa-deiak kanpoan utzi ziren. Neurketa horrek ez du sareko edo kate osoko denbora barne hartzen.
+>
+> Bigarrena HTTP eskaeren denbora da: pilotuan p95a 60,320 milisegundokoa izan zen. Hirugarrena muturretik muturrerako denbora da: p95a 55,748 segundokoa. Milisegundoak eta segundoak ez ditugu nahastu behar.
+>
+> Pilotu pribatuan hamar gertakari eskaini ziren. Hamar gorde ziren, Elasticsearchen hamar dokumentu zeuden eta baieztatutako offseta hamar zen. Erregistroak alderatzean, ez zen baliozko gertakari galdurik edo `event_id` bikoizturik aurkitu lagin horretan. Discoverren ere pilotuko identifikatzaile bera duen dokumentu bat behatu zen, gordetako erregistroaren arabera.
+>
+> Horrek pilotu horren trazabilitatea erakusten du. Hamar gertakarik ez dute edozein karga, makina edo hutsegiteren aurrean berme orokorrik ematen. Gainera, muturretik muturrerako segundo bateko ingeniaritza-helburu proposatua ez da bete. Helburu hori ez dugu irakaslearen eskakizun ofizialtzat aurkezten.
+>
+> Beste bereizketa bat ere badago: errenkada bakoitza aurreko irakurketarik gabe ebaluatzeak ez du esan nahi zerbitzuak erantzunak gorde ezin dituenik. Ledger idempotenteak eskaera beraren erantzun baieztatua gordetzen du, berriz saiatzean inferentzia errepikatu ez dadin. Ledgerra ez da ereduari emandako denbora-historiala.
+>
+> Aurkezpen honetan gordetako ebidentzia azaltzen ari gara. Ez gara zerbitzuak berriro martxan jartzen edo neurketa berri bat egiten ari.
+
+**Etenaldia:** «ez da betetzen» esan ondoren, tarte laburra utzi. Ez laburbildu sistema osoa «hamaika milisegundotan dabil» esanez.
+
+**Erreleboa:** «Denborak eta pilotuaren muga ikusita, laugarren kideak azalduko du zergatik alderatzen ditugun alertak kostuen bidez ere».
+
+Iturriak: [ereduaren 600 behaketak](../evidence/CG32_ORIGINAL_MODEL_20261023.json), [jatorrizko bundlearen pilotua](../evidence/CG32_ORIGINAL_PILOT_20261023.json), [Discoverren egiaztapen-erregistroa](../evidence/CG32_ORIGINAL_DISCOVER_20261023.json) eta [ledgerreko erantzunen kontratua](../SCORING_REPLAY_CONTRACT.md).
+
+## 4. blokea: nola alderatu alerten kostua?
+
+### Pantailako euskarria
+
+**Recall-a eta kostua batera aztertu**
+
+- FN **5.000 €** · FP **200 €** · TP **300 €** · TN **0 €**.
+- [Lehendik sortutako kostu-kurbak](../evidence/CG34_20261023/business-cost-curves.png): OOF train, ez azken ebaluazioa.
+- Kostu-eszenarioa; ez da benetan lortutako aurrezpena.
+
+Grafikoa erakusteko laguntza: horizontalean atalasea edo recall-a dago; bertikalean kostua, **€/1.000 gertakari**. Jatorrizko grafikoak hiru eredu erakusten ditu, ez katalogo osoa. Ez txikitu irudia testuarekin batera pilatzeko; iturriaren izenburua, ardatzak eta mugak ikusgai mantendu.
+
+### Hizlariaren oharrak: 4. kidea
+
+> Azken ideia da recall-a igotzea ez dela irizpide bakarra. Hutsegite gehiago atzematea baliagarria izan daiteke, baina alarma faltsuek eta alerta zuzenek ere kostua dute.
+>
+> Erabiltzaileak ekarritako, Aitor Aretxaga Agirreri egotzitako urriaren hogeita biko postak lau kostu ematen ditu: atzeman gabeko hutsegite bakoitzeko bost mila euro; alarma faltsu bakoitzeko berrehun; alerta zuzen bakoitzeko hirurehun; eta negatibo zuzen bakoitzeko zero. Erronkako kostu-parametro gisa erabiltzen ditugu. Ez ditugu enpresa baten kontabilitate erreal gisa egiaztatu.
+>
+> Kalkulua lau gelaxken batura da: FN kopurua bider bost mila, FP kopurua bider berrehun, TP kopurua bider hirurehun eta TN kopurua bider zero. TPren kostua ere sartzea beharrezkoa da. Ez dugu onartzen alerta zuzen oro doakoa denik.
+>
+> Hona hemen adibide aritmetiko bat: FN bat TP bihurtuz gero, eszenarioaren kostua lau mila eta zazpiehun euro jaisten da. Beste emaitzak berdin mantenduta, horrek hogeita hiru koma bost alarma faltsu gehigarriren kostua berdinduko luke. Hau ez da operazio-arau unibertsala; emandako lau kostuen ondorio aritmetikoa da.
+>
+> Grafikoan atalasea eta recall-a aldatzean kostua nola mugitzen den ikus dezakegu. Kurba horiek Python bidez egindako analisiaren barruan daude jada. OOF train-eko doikuntza-kurbak dira; ez dira azken testaren emaitza edo lantegian neurtutako aurrezpena. Kostuen gehigarriak ez du zerbitzuko bundlea edo atalasea aldatu.
+>
+> Amaitzeko: uneko egoera sailkatzen dugu; ebaluazioaren datuak eta mugak bereizten ditugu; ereduaren denbora eta kate osoarena ez ditugu nahasten; eta alertak lau kostuen bidez ere alderatzen ditugu. Hurrengo erabakietan argitu beharrekoak dira `machine_type` aldagaiaren onarpena eta entregaren baldintzak. Segundo bateko helburua betetzea ere ez dago frogatuta.
+>
+> Eskerrik asko zuen arretagatik. Orain, galderak erantzuteko prest gaude, gordetako ebidentziak eta haren mugak oinarri hartuta.
+
+**Grafikoa azaltzean:** lehenik ardatzak eta unitatea azaldu; gero kurba bat seinalatu. Ez aurkeztu kostu minimoa azken test independente batean edo ekoizpenean baieztatuta balego bezala.
+
+Iturriak: [lau kostuen konfigurazioa](../evidence/CG34_20261023/business-costs.json), [emaitzak eta 23,5eko oreka aritmetikoa](../evidence/CG34_20261023/business-summary.json), [kostu-taulak](../evidence/CG34_20261023/business-tables.md), [faseko kostu-koaderno osagarria](../../notebooks/02_business_costs_evidence.ipynb) eta [iturri akademikoen jatorria](ORAL_GUIDE_APPLIED_20261023.md).
+
+## Galderetarako erantzun laburrak
+
+Erantzuleak ere proposatuak dira. Galdera entzun, eten laburra egin eta erantzun. Daturik falta bada, esan argi; ez asmatu erantzunik.
+
+1. **«Noiz apurtuko den aurreikusten duzue?» (1. kidea)**
+   «Ez. Uneko snapshot-a sailkatzen dugu. Ez dago ETA, RUL edo etorkizuneko denbora-horizonte baten balioztapenik».
+2. **«`tool_wear_min` denbora-serie bat da?» (2. kidea)**
+   «Uneko higaduraren kobariablea da. Bere kabuz ez du makina beraren behaketa ordenatuen historialik ematen».
+3. **«Zergatik dago `machine_type`, postak bost sentsore esaten baditu?» (1. kidea)**
+   «Bundlearen kontratuak bost sentsoreak eta makina mota jasotzen ditu. Postaren adibidearekiko desberdintasuna dago; azken aldagaiaren onarpena irakaslearekin argitu behar da. Ez dugu bundlea aldatu».
+4. **«`rpm * torque_Nm` watt-ak dira?» (2. kidea)**
+   «Proxy bat da. Potentzia mekanikoa watt-etan kalkulatzeko, `P = torque_Nm * rpm * 2π/60` bihurketa behar da».
+5. **«Sarrera bakoitza independentea bada, zergatik ledgerra?» (3. kidea)**
+   «Ereduak ez du aurreko sentsore-errenkaden sekuentziarik behar. Ledgerra baieztatutako erantzun bera berreskuratzeko da, eskaera errepikatzean. Trazabilitatea eta inferentziaren sarrerak gauza desberdinak dira».
+6. **«11 ms-ko latentzia du sistema osoak?» (3. kidea)**
+   «11,073 ms RF+IFen prozesu bereko p95a da, 600 behaketatan. Pilotuaren HTTP p95a 60,320 ms da, eta E2E p95a 55,748 s. Proposatutako segundo bateko helburua ez da betetzen».
+7. **«Ez da inoiz daturik galtzen?» (3. kidea)**
+   «Hamar gertakariko pilotuaren erregistroen alderaketak zero galera eta zero ID bikoiztu erakusten ditu. Lagin horrek ez du karga edo hutsegite guztietarako bermerik ematen».
+8. **«Azken test independentea gainditu du?» (2. kidea)**
+   «Ez dugu hori aldarrikatzen. CG34k train-eko 5.600 errenkadetan baliozkotze gurutzatua erabiltzen du. Test zaharra baztertuta dago, eta aurreko baliozkotzea ez da azken test independentea».
+9. **«Zenbat diru aurreztu duzue benetan?» (4. kidea)**
+   «Ez dugu aurrezpen errealik neurtu. Emandako lau kostuekin eszenarioak kalkulatu ditugu. Benetako aurrezpena frogatzeko, operazio-emaitzak eta benetako kostuak egiaztatu beharko lirateke».
+10. **«Kostuek atalase berria jarri dute ekoizpenean?» (4. kidea)**
+    «Ez. Gehigarria lehendik gordetako scoreekin egin da. Ez da refit berririk edo aldaketa operatiborik egin. Analisiaren aukeraketa eta zerbitzatutako atalasea bereizita mantentzen ditugu».
+11. **«IFren alerta batek hutsegitea baieztatzen du?» (1. kidea)**
+    «Ez. IFk ezohikotasuna adierazten du. Hori eta RFren uneko sailkapen-scorea bereizten ditugu; ez dira etorkizuneko matxuraren probabilitate kalibratuak».
+12. **«Noiz, non eta zenbat denboran aurkeztu behar da? Nota berezia ziurtatuta dago?» (4. kidea)**
+    «Azken data, ordua, kanala eta iraupena ez daude material honekin baieztatuta. Hamar minutuak gure entsegu-proposamena dira. Postak analisi ekonomikoa baloratzen du, baina ez dugu nota edo ohorezko emaitzarik ziurtatzen».
+
+## Entsegu-fitxa: taldeak betetzeko
+
+- Adostutako izenak eta blokeak: ____________________
+- Irakasleak baieztatutako iraupena eta galderen tartea: ____________________
+- Entseguaren data eta benetako iraupena: ____________________
+- Euskararen giza berrikuslea eta egin beharreko zuzenketak: ____________________
+- Moztu edo argitu beharreko pasarteak: ____________________
+- `machine_type` eta azken entregaren baldintzei buruz jasotako baieztapena: ____________________
+
+Fitxa bete gabe dago. Prestaketa honek ez du egindako entsegurik, taldearen benetako parte-hartzerik, giza onarpenik edo entrega buruturik egiaztatzen.

@@ -1,32 +1,49 @@
 # CG14 — matriz de aceptación y evidencia
 
-Fecha de corte: 2026-10-21. Issue oficial: [#14](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/14). Los seis criterios oficiales exactos fueron recibidos del responsable; la matriz siguiente los transcribe y los vincula a evidencia existente. No se volvió a consultar GitHub.
+> Actualización verificada el 26/10/2026: #14 está cerrada desde el
+> 22/10/2026 a las 13:33:36 UTC. La [decisión PM](CG14_STATUS_20261023.md)
+> conserva su alcance; los diagnósticos RESTORE del corte técnico siguiente
+> no reabren esa aceptación ni prueban aceptación académica. Las referencias
+> a issues/PR abiertas de ese corte son históricas.
 
-## Corte vigente de publicación — 2026-10-21
+Fecha del corte técnico conservado: **2026-10-22**. Issue oficial: [#14](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/14).
 
-Actualización PR65 ronda 2: el [worker opt-in](CG14_DURABLE_PIPELINE.md) ya
-implementa raw→API canónica→CG15→ES configurado, con recibo durable aceptado
-por stream antes de completar/ACK. [La evidencia de corrección](evidence/DURABLE_PIPELINE_FIX_R2_20261021.md)
-separa regresiones HTTP/disco, crashes de procesos y ES aislado de la
-aceptación del grafo NiFi/Apache Kafka real. El conteo 209 y las reservas de
-runtime siguientes pertenecen al corte anterior; no son el total de esta
-ronda ni prueba de ausencia del worker. La revisión padre sigue pendiente.
+## Auditoría técnica del corte conservado
 
-La regresión actual es **209 tests superados**. La estructura RESTORE 23/27/1
-está verificada; su servicio fue importado DISABLED. El RESTORE E2E funcional y
-la habilitación del servicio restaurado siguen **NOT_TESTED**. El mock propio
-no estaba disponible durante el intento comunicado; existe soporte `--resume`,
-pero falta una ejecución completa acreditada. La recuperación Kafka 3/3 es
-histórica y pertenece al laboratorio, no a esta copia ni a CG13 real.
+Base revisada: `3c957235e81e449bace661f8723f91edb02eb3b7`, rama
+`feat/17-maintenance-planner`. Las seis ramas específicas de CG14 están
+contenidas en esa base, sin commits exclusivos pendientes de rescatar.
+[Auditoría y pendientes](evidence/CG14_BRANCH_AUDIT_20261022.md), con
+[inventario verificable](evidence/CG14_BRANCH_AUDIT_20261022.json).
 
-La tabla inferior conserva el corte histórico y sus reservas de evidencia HTTP;
-no autoriza cerrar los criterios oficiales. La revisión de otro integrante,
-contratos CG03/CG13/CG28, aceptación de idempotencia en runtime y SSH remoto
-siguen pendientes.
-La issue #14 continúa abierta; la referencia del PR es únicamente `Refs #14`.
-Evidencias de runtime ignoradas se citan como rutas locales, no como enlaces a
-archivos disponibles en GitHub. Ver el estado vigente en
-[CG14_TECHNICAL_HANDOFF.md](CG14_TECHNICAL_HANDOFF.md).
+| Criterio oficial | Evidencia actual | Estado / pendiente |
+|---|---|---|
+| 1. JSON exportado y versiones de processors | Exports 2.12.0, inventario local RESTORE 23/27/1; export staged importado en PR68 | VERIFIED_LAB; RESTORE conserva un Script Body anterior al export integrado |
+| 2. Rutas HTTP 2xx/422/5xx/timeout | Ensayos de PR65/68 y regresión local del worker; no nueva ejecución de las cuatro rutas InvokeHTTP en RESTORE | PARTIAL; alinear la copia y el broker antes de ejecutar |
+| 3. Rechazo 422 y retry 5xx limitado | Worker durable y pruebas de retries; runner exige tres intentos y reconciliación de terminales | PARTIAL; falta acreditar las rutas de la copia RESTORE |
+| 4. Contadores/provenance sin secretos | Evidencia histórica NiFi y staged PR68; consulta actual sólo de estados, conteos y huellas | VERIFIED_LAB limitado al laboratorio; no nueva provenance funcional RESTORE |
+| 5. Versiones, comandos, resultados y límites | Auditoría actual, manifiestos PR68 y documentos durable/restore | PARTIAL; completar ensayo reproducible sobre el candidato alineado |
+| 6. Otro integrante revisa con conclusión y fecha | No consta aceptación humana de esta publicación | NOT_TESTED; un agente no sustituye a otro integrante |
+
+La autenticación HTTPS local dio HTTP 201 y las colas de ambas copias estaban
+vacías. El original quedó intacto; RESTORE mantiene todos los processors y
+su Controller Service DISABLED. El gate actual falla por Script Body antiguo
+y almacenamiento Kafka legacy. No es falta de acceso Docker ni fallo de login.
+La consulta no ejecutó fixtures ni produjo mensajes.
+
+El worker durable, API canónica y ES **ya están implementados e integrados**;
+las frases históricas siguientes que indican su ausencia no describen la base
+actual. El ensayo PR68 usa modelos sintéticos y un driver staged externo;
+no acredita un ConsumeKafka del producto con ACK posterior a todos los destinos.
+La aceptación humana, los contratos externos y RESTORE funcional siguen
+pendientes. **El ensayo RESTORE de este corte continúa PARTIAL; no modifica la aceptación PM posterior de #14.**
+
+## Registro histórico hasta el 21 de octubre
+
+Las cifras de 209/113 tests, hashes antiguos, bloqueos Docker y ausencia de
+API/worker de las secciones siguientes son cortes históricos conservados.
+No son resultados de esta revisión. Prevalecen el estado vigente y la auditoría
+enlazada arriba.
 
 Estados usados:
 
@@ -63,7 +80,7 @@ Estados usados:
 | Revisión externa de issue #14 | Revisión por otro integrante con conclusión y fecha | No registrada en el repositorio | NOT_TESTED | Solicitar revisión independiente; no marcar el criterio 6 como cumplido |
 | Acceso directo LAN bloqueado | Publicación de NiFi CG14 es loopback | Estado de binding registrado; no existe prueba remota nueva desde LAN | PARTIAL | Probar desde segundo equipo cuando SSH/LAN autorizado esté disponible |
 
-## Decisión de cierre
+## Decisión histórica de cierre
 
 **Cierre funcional de CG14 en laboratorio: VERIFIED_LAB** para validador,
 pipeline sintético, recuperación del broker de laboratorio, provenance y DLQ,

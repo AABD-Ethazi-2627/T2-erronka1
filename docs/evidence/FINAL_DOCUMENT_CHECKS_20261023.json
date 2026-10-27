@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "relative_links_and_anchors": 225,
+  "rubric_rows": 40,
+  "notebook_code_cells_with_sequential_outputs": 10,
+  "embedded_pngs_equal_inspected_exports": 2,
+  "notebook_sha256": "ff221989bfc0cd1fe2173aa08960836487282210f4cfded1356451ae3023277c",
+  "cg25_stdout": "PASS: 40 criteria, 90 local links/anchors, 191 current and 18 historical hashes\nDocumentation only; no technical reruns, CI result or human acceptance asserted.",
+  "application_source_unchanged_from_tested_head": "55cfd63d71c848acbd7647eab7b69bec768b646d",
+  "limits": "Relative file existence/anchors and saved outputs only; no remote URL read, new model evaluation, human language review or presentation rehearsal"
+}

@@ -1,0 +1,381 @@
+{
+  "built_commit": "b7b9c05fc820516f3e1035194503a77b15460aa8",
+  "reconciled_parent_commit": "80f57f2c4f4056e12ffe95184db111ed3aed5997",
+  "image_inputs_unchanged": true,
+  "updated_gate_checks": [
+    {
+      "image": "api",
+      "image_id": "sha256:6d381961095a43c2866ef3598e773ed2b82cb70fb4375ae0412c0a81eb5c2cff",
+      "report_sha256": "de25546b52563145386525de08a9355746ff16f207678766edef0d3830349eb4",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 3,
+      "package_records": 576,
+      "raw_findings": [],
+      "scan_input": "image-api.tar"
+    },
+    {
+      "image": "elasticsearch",
+      "image_id": "sha256:8d7fea97676b4fa05ecc7c2c692843c04e767541ba9ba199dca573b401224948",
+      "report_sha256": "bc12f1bf8c197c06c6429d9c88c5ec738577e1ef837886c18c730dc95eea0f30",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 2,
+      "package_records": 1022,
+      "raw_findings": [],
+      "scan_input": "image-elasticsearch.tar"
+    },
+    {
+      "image": "filebeat",
+      "image_id": "sha256:6a7c7c9c59be62693307af6f1fada400e47501731f011421fa6db996f69538a9",
+      "report_sha256": "1c7a2fb4255237686474628a5880c393f8877c4831399452c286d6a85bbcccda",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 2,
+      "package_records": 247,
+      "raw_findings": [
+        {
+          "VulnerabilityID": "GO-2026-5932",
+          "PkgID": "golang.org/x/crypto@v0.57.0",
+          "PkgName": "golang.org/x/crypto",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/crypto@v0.57.0",
+            "UID": "42f1e4874f6f7477"
+          },
+          "InstalledVersion": "v0.57.0",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:61f06348e1f1b64e8154b2f09e2760d9b177110c75faaf316aeb4024c0fbca98"
+          },
+          "DataSource": {
+            "ID": "govulndb",
+            "Name": "The Go Vulnerability Database",
+            "URL": "https://pkg.go.dev/vuln/"
+          },
+          "Fingerprint": "sha256:5a5aad0885270e01c1caf7978ae19d6b3f565deeaa140f0c904181748778e9c7",
+          "Title": "The golang.org/x/crypto/openpgp package is unmaintained, unsafe by design, and has known security issues",
+          "Description": "The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.\n\nIf you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.",
+          "Severity": "UNKNOWN",
+          "References": [
+            "https://go.dev/issue/44226",
+            "https://pkg.go.dev/vuln/GO-2026-5932"
+          ]
+        }
+      ],
+      "scan_input": "image-filebeat.tar"
+    },
+    {
+      "image": "kafka",
+      "image_id": "sha256:b46f1be0b126c8942d39e134736f3d3ad8a567ba44174328c1e124f314a75672",
+      "report_sha256": "d48d1c5e05d9dd3faef96c3209e64fa8f0a137f8537be1c29ad8e8a8fc61e574",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 2,
+      "package_records": 189,
+      "raw_findings": [],
+      "scan_input": "image-kafka.tar"
+    },
+    {
+      "image": "kibana",
+      "image_id": "sha256:a55ccabd2e52391b1daabf30ca4c77213bd3f6a2b149f9c8899cdb3d6abad688",
+      "report_sha256": "71846f68bf0c0dfe9ce76c4fa82bcfd8f434a518e35381914e20edafa42d98ab",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 2,
+      "package_records": 2370,
+      "raw_findings": [
+        {
+          "VulnerabilityID": "CVE-2026-19693",
+          "VendorIDs": [
+            "GHSA-7pqw-9j4j-h8q3"
+          ],
+          "PkgID": "extract-zip@2.0.1+cncguard.1",
+          "PkgName": "extract-zip",
+          "PkgPath": "usr/share/kibana/node_modules/extract-zip/package.json",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/extract-zip@2.0.1%2Bcncguard.1",
+            "UID": "3987e73a9ee59a2e"
+          },
+          "InstalledVersion": "2.0.1+cncguard.1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:6d3c04a0d2c2a0d9b2e77c71e2158bd7a26f158558b8ce03251b35a830da1185"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-19693",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:32da91d9052bc631c0140a9e89a49ce4bad3cd137edcf778e3735800b2cc56c4",
+          "Title": "extract-zip: extract-zip: Arbitrary file write via symlink in archive",
+          "Description": "extract-zip through 2.0.1 containment-checks only the parent directory of each archive entry and never the entry's own final path component, so an archive containing two entries with identical names - a symlink whose target is outside the destination, followed by a regular file - writes through the planted symlink and yields an arbitrary file write outside the destination directory.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22",
+            "CWE-59"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:H",
+              "V3Score": 8.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:H/A:H",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-19693",
+            "https://github.com/max-mapper/extract-zip",
+            "https://github.com/max-mapper/extract-zip/pull/160",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-19693",
+            "https://www.cve.org/CVERecord?id=CVE-2026-19693",
+            "https://www.npmjs.com/package/extract-zip"
+          ],
+          "PublishedDate": "2026-08-17T14:20:20.737Z",
+          "LastModifiedDate": "2026-09-09T15:52:04.827Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-56876",
+          "VendorIDs": [
+            "GHSA-jmr9-qjv8-65gv"
+          ],
+          "PkgID": "extract-zip@2.0.1+cncguard.1",
+          "PkgName": "extract-zip",
+          "PkgPath": "usr/share/kibana/node_modules/extract-zip/package.json",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/extract-zip@2.0.1%2Bcncguard.1",
+            "UID": "3987e73a9ee59a2e"
+          },
+          "InstalledVersion": "2.0.1+cncguard.1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:6d3c04a0d2c2a0d9b2e77c71e2158bd7a26f158558b8ce03251b35a830da1185"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-56876",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:ab0d3a6d119daf0fa3a7ab264bed7f6a50efb54912d706e20b70bfde2da5db6b",
+          "Title": "extract-zip: github.com/maxogden/extract-zip: extract-zip: Arbitrary file write and information disclosure via symlink validation bypass",
+          "Description": "extract-zip does not validate symlink targets when extracting zip archives. When processing a malicious zip file containing a symlink with a relative path like '../../../../etc/passwd', extract-zip will extract the symlink without validation, allowing it to point outside the extraction directory. Depending on how extract-zip is used, an attacker could read or write to arbitrary files.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22",
+            "CWE-61"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:P/VC:H/VI:H/VA:N/SC:N/SI:N/SA:N",
+              "V3Score": 8.1,
+              "V40Score": 8.6
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-56876",
+            "https://github.com/max-mapper/extract-zip",
+            "https://github.com/ziad626/extract-zip-security-research/security/advisories/GHSA-x7jf-2287-qcpf",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-56876",
+            "https://raw.githubusercontent.com/cisagov/CSAF/develop/csaf_files/IT/white/2026/va-26-177-01.json",
+            "https://www.cve.org/CVERecord?id=CVE-2026-56876"
+          ],
+          "PublishedDate": "2026-06-26T18:17:03.447Z",
+          "LastModifiedDate": "2026-10-25T17:10:00.197Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-85393",
+          "VendorIDs": [
+            "GHSA-86w9-cpqp-85rv"
+          ],
+          "PkgID": "node-forge@1.4.0+cncguard.1",
+          "PkgName": "node-forge",
+          "PkgPath": "usr/share/kibana/node_modules/node-forge/package.json",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/node-forge@1.4.0%2Bcncguard.1",
+            "UID": "5eab3127ab1de723"
+          },
+          "InstalledVersion": "1.4.0+cncguard.1",
+          "Status": "affected",
+          "Layer": {
+            "DiffID": "sha256:484d6304fe6708e1d1a8e29ce92973474366915e0ebe809b7e699760ea37738f"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-85393",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Fingerprint": "sha256:c83cf2afa0620c19cb49742a7c3f37df153b60208e2cd4db2dfda462789d8e6c",
+          "Title": "node-forge: node-forge: Signature forgery vulnerability in RSA PKCS#1 v1.5 verification",
+          "Description": "node-forge through 1.4.0 fails to validate element count in nested DigestAlgorithm sequences during RSA PKCS#1 v1.5 signature verification. Attackers can embed garbage bytes inside the DigestAlgorithm sequence to forge valid signatures for arbitrary messages using low-exponent RSA keys. This is an incomplete fix for CVE-2026-33894.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-347"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:N/SA:N",
+              "V3Score": 7.5,
+              "V40Score": 8.7
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-85393",
+            "https://github.com/advisories/GHSA-ppp5-5v6c-4jwp",
+            "https://github.com/digitalbazaar/forge",
+            "https://github.com/digitalbazaar/forge/blob/v1.4.0/lib/asn1.js",
+            "https://github.com/digitalbazaar/forge/blob/v1.4.0/lib/rsa.js",
+            "https://github.com/digitalbazaar/forge/issues/1149",
+            "https://github.com/digitalbazaar/forge/pull/1152",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-85393",
+            "https://www.cve.org/CVERecord?id=CVE-2026-85393",
+            "https://www.vulncheck.com/advisories/node-forge-through-1.4.0-rsa-pkcs-1-1.5-signature-forgery-via-nested-digestalgorithm-padding"
+          ],
+          "PublishedDate": "2026-09-03T19:17:31.103Z",
+          "LastModifiedDate": "2026-09-24T20:43:32.537Z"
+        }
+      ],
+      "scan_input": "image-kibana.tar"
+    },
+    {
+      "image": "mock-python",
+      "image_id": "sha256:16f5bcc40766d10a2dfd631d41765f44e36543f215fa625af57d8f01878696e9",
+      "report_sha256": "192d5d3f5b6b959d266b00fb26b874200804345bc62f086454a9c7ab8da47301",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 1,
+      "package_records": 29,
+      "raw_findings": [],
+      "scan_input": "image-mock-python.tar"
+    },
+    {
+      "image": "nifi",
+      "image_id": "sha256:63ade061dad87e51098e42e9a742013e3dc097b68d8216937f09158cb48d4ab5",
+      "report_sha256": "649c9a11d1870363472907d78db4147976d111a4d5adc1222c9c4a78e1c062ec",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 4,
+      "package_records": 1206,
+      "raw_findings": [],
+      "scan_input": "image-nifi.tar"
+    },
+    {
+      "image": "python",
+      "image_id": "sha256:e2835d9194e0a45952666d2c67e5f05e5a13448945b1fa94fc6259ae411e9e7c",
+      "report_sha256": "517d93f99017774e1e4314e27e4da0e662afe1e155381e0b36e1545d5e6b3859",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 1,
+      "package_records": 34,
+      "raw_findings": [],
+      "scan_input": "image-python.tar"
+    },
+    {
+      "image": "wolfi",
+      "image_id": "sha256:f574295a15d0511ce4f87be61aa76351518bc73f822c195becdb5aff3f606314",
+      "report_sha256": "f1137c7d28f80aeae41e853a783fc42fc602ea2dbacf0ac94acd7f72b220d302",
+      "identity_and_layers_match": true,
+      "updated_gate_errors": [],
+      "targets": 1,
+      "package_records": 19,
+      "raw_findings": [],
+      "scan_input": "image-wolfi.tar"
+    }
+  ],
+  "runtime_summary": {
+    "image_builds": 9,
+    "image_scans": 9,
+    "image_gates_passed": 9,
+    "targets": 18,
+    "package_records": 5692,
+    "raw_findings": [
+      {
+        "image": "filebeat",
+        "id": "GO-2026-5932",
+        "package": "golang.org/x/crypto",
+        "version": "v0.57.0",
+        "severity": "UNKNOWN",
+        "disposition": "Existing VERIFIED_FINDINGS; current binary has no affected package or symbol",
+        "evidence": "filebeat-reachability-verbose.json and logs/filebeat-reachability-verbose.log"
+      },
+      {
+        "image": "kibana",
+        "id": "CVE-2026-19693",
+        "package": "extract-zip",
+        "version": "2.0.1+cncguard.1",
+        "severity": "HIGH",
+        "disposition": "Existing VERIFIED_FINDINGS; reproduced current backport regression",
+        "evidence": "backport-results.json and extract-zip-matrix.json"
+      },
+      {
+        "image": "kibana",
+        "id": "CVE-2026-56876",
+        "package": "extract-zip",
+        "version": "2.0.1+cncguard.1",
+        "severity": "HIGH",
+        "disposition": "Existing VERIFIED_FINDINGS; reproduced current backport regression",
+        "evidence": "backport-results.json and extract-zip-matrix.json"
+      },
+      {
+        "image": "kibana",
+        "id": "CVE-2026-85393",
+        "package": "node-forge",
+        "version": "1.4.0+cncguard.1",
+        "severity": "HIGH",
+        "disposition": "Existing VERIFIED_FINDINGS; reproduced current backport regression",
+        "evidence": "backport-results.json and extract-zip-matrix.json"
+      }
+    ],
+    "unexpected_findings": 0,
+    "es_scripts_passed": 3,
+    "dashboard_tests_passed": 3,
+    "cleanup_passed": true,
+    "strict_entire_execution_D_only": false
+  },
+  "raw_artifact_sha256": {
+    "image-results.json": "18beb860af216ce694f275c5e5b582bed96af09484ea880567888a83b8d49dcb",
+    "test-executions.json": "3bfc68780e12cfabf943950bd7863d5d7cd3f444de5a580452bc5dfc5802b5bd",
+    "verified-findings-evidence.json": "b8097f0f5687fa42be39f4e0c8268e36e288cac53dc0399a39cfe0caabfd80b8",
+    "backport-results.json": "d7714c256d8bd6b60e11d64d1f47e8335296b42486c407485a16be5a0efa5ce0",
+    "extract-zip-matrix.json": "1defddcc24f40e4d8fe6abd9c330556683e1fa7b84734b2a1adb1272d8bbc44b",
+    "filebeat-reachability-verbose.json": "d280d9242087308a269d60eb3a246f5a8f6d217b45eb6808b61ebb926db25c19",
+    "coverage-apk-crosscheck.json": "86ed907495c4b9384879791ba69299026d31da90832872dabf03479a69e87bec",
+    "dashboard-es.json": "7af77c950347921f6bfcb335ae8c607e64599b266dbca0e832b34acae4fd6185",
+    "summary.json": "22f06d7e6df46398fadfda5811b7c4fd47d7243707af3d31d57824569e19bc8f",
+    "handoff.json": "4082c13ed957fe2ae58dab9d99ebb4cc4d94295da5f0e1d89f0293cf4e2f2057"
+  },
+  "limits": [
+    "Final runtime was isolated on D; initial attempt touched existing system containerd metadata on C.",
+    "No pre-incident metadata DB hash: exact byte rollback cannot be established.",
+    "ES checks used a documented external adapter; direct verifier portability is being corrected separately.",
+    "No real NiFi/Kafka load campaign, OT/SMB, human acceptance or production deployment."
+  ]
+}
