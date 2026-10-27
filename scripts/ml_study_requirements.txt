@@ -59,7 +59,7 @@ plotly==7.1.0
     # via catboost
 pluggy==1.7.0
     # via pytest
-psutil==7.1.0
+psutil==7.2.2
     # via -r scripts/ml_study_requirements.in
 pygments==2.21.0
     # via pytest
