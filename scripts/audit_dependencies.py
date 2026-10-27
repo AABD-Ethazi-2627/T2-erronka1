@@ -221,7 +221,11 @@ def requirements_rows(path):
         line = line.strip()
         if not line or line.startswith("#"):
             continue
-        match = re.fullmatch(r"([A-Za-z0-9_.-]+)==([A-Za-z0-9_.+!-]+)", line)
+        match = re.fullmatch(
+            r"([A-Za-z0-9_.-]+)==([A-Za-z0-9_.+!-]+)"
+            r"(?:\s*;\s*sys_platform\s*==\s*'(?:win32|linux)')?",
+            line,
+        )
         if match is None:
             raise ValueError("Research requirements need exact public package pins")
         rows.append(

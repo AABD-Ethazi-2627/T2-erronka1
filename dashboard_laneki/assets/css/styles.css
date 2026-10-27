@@ -1,0 +1,1905 @@
+
+/* ==========================================
+   LANEKI IoT
+   Pastel-diseinu irisgarria
+   ========================================== */
+
+:root {
+    --pastel-blue: #DCEBFA;
+    --pastel-pink: #F9E2E4;
+    --pastel-ice: #E7F0F5;
+    --pastel-slate: #E5EDF5;
+    --pastel-green: #DFF4E9;
+
+    --dark-blue: #142A40;
+    --muted-blue: #435970;
+
+    --machine-green: #23856C;
+    --machine-yellow: #D4A63E;
+    --machine-red: #DE4651;
+}
+
+/* ==========================================
+   TIPOGRAFIA OROKORRA
+   ========================================== */
+
+html, body, .stApp, button, input {
+    font-family: Verdana, Arial, sans-serif !important;
+}
+
+html {
+    font-size: 14px;
+}
+
+.stApp {
+    line-height: 1.5;
+}
+
+.block-container {
+    max-width: 100% !important;
+    padding: 1rem 1.2rem 2rem !important;
+}
+
+/* Dashboard osoa pantaila bakarrean mantendu */
+html, body, .stApp,
+[data-testid="stAppViewContainer"] {
+    height: 100vh;
+    overflow: hidden !important;
+}
+
+[data-testid="stMain"] {
+    height: calc(100vh - 38px);
+    overflow: hidden !important;
+}
+
+[data-testid="stMainBlockContainer"] {
+    height: 100%;
+    overflow: hidden !important;
+}
+
+/* Birkargatzean Streamlit-ek edukia lausotzea saihestu. */
+.stale,
+[data-stale="true"] {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+[data-testid="stSidebar"] {
+    height: 100vh !important;
+    overflow: hidden !important;
+}
+
+/* Mantendu Streamlit-en goiburua
+   menua ezkutatu eta berreskuratzeko */
+[data-testid="stHeader"] {
+    height: 38px !important;
+}
+
+[data-testid="stToolbar"] {
+    visibility: hidden;
+}
+
+/* Foku ikusgaia irisgarritasunerako */
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #3976BD !important;
+    outline-offset: 2px !important;
+}
+
+/* ==========================================
+   ALBOKO MENUA
+   ========================================== */
+
+[data-testid="stSidebar"] {
+    background: #0a1725 !important;
+    width: 190px !important;
+    min-width: 190px !important;
+    transition: transform 0.25s ease, width 0.25s ease !important;
+}
+
+[data-testid="stSidebar"] .block-container {
+    padding: 0.35rem 10px 7.5rem !important;
+}
+
+/* Menua ezkutatu/erakusteko kontrolak; Streamlit-ek edukia doitzen du. */
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stSidebarCollapsedControl"] button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    border-radius: 8px !important;
+    background: #142E4B !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 3px 10px rgba(20, 46, 75, 0.22) !important;
+}
+
+[data-testid="stSidebarCollapseButton"] button:hover,
+[data-testid="stSidebarCollapsedControl"] button:hover {
+    background: #1D4268 !important;
+    border-color: #FFFFFF !important;
+}
+
+[data-testid="stSidebarCollapsedControl"] {
+    top: 8px !important;
+    left: 8px !important;
+}
+
+.sidebar-logo {
+    position: relative;
+    width: 100%;
+    height: 78px;
+    margin: 0 0 58px;
+    transform: translateY(-38px);
+}
+
+.sidebar-logo-image {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 170px;
+    height: auto;
+    object-fit: contain;
+    transform: translateX(-50%);
+}
+
+.sidebar-sub {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #D4E3F0;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+}
+
+[data-testid="stSidebar"] button {
+    border: 1px solid transparent;
+    border-radius: 6px;
+    min-height: 48px;
+    padding: 0 14px;
+    font-size: 18px;
+    font-weight: 800;
+    background: transparent;
+    color: white;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+/* Streamlit-ek etiketa bere paragrafo baten barruan kokatzen du. */
+[data-testid="stSidebar"] button p {
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+}
+
+[data-testid="stSidebar"] button[kind="primary"] {
+    background: #3498DB !important;
+    border-color: #55ADE5 !important;
+    color: #FFFFFF !important;
+}
+
+[data-testid="stSidebar"] button:hover {
+    background: #1D4268 !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.sidebar-footer {
+    position: absolute;
+    left: 20px;
+    right: 16px;
+    bottom: 20px;
+    color: #FFFFFF;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.sidebar-footer-mark {
+    color: #25D39B;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 7px;
+}
+
+.sidebar-footer small {
+    display: block;
+    margin-top: 16px;
+    color: #E5F1FA;
+    font-size: 10px;
+}
+
+/* Arau hauek nabigazio-botoien ondoren doaz lehentasuna izateko. */
+[data-testid="stSidebarCollapseButton"] button,
+[data-testid="stSidebarCollapsedControl"] button {
+    justify-content: center !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    background: #142E4B !important;
+}
+
+/* ==========================================
+   GOIBURU NAGUSIA
+   ========================================== */
+
+.dashboard-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    color: var(--main-text);
+    margin-bottom: 3px;
+}
+
+.dashboard-subtitle {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.sidebar-user-card {
+    position: fixed;
+    left: 12px;
+    bottom: 16px;
+    width: 166px;
+    min-height: 62px;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 14px;
+    align-items: center;
+    gap: 9px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+    z-index: 20;
+}
+
+.sidebar-system-card {
+    position: fixed;
+    left: 12px;
+    bottom: 90px;
+    width: 166px;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    padding: 12px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 11px;
+    background: rgba(255, 255, 255, 0.07);
+    box-sizing: border-box;
+    z-index: 20;
+}
+
+.sidebar-system-card strong {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #FFFFFF !important;
+    font-size: 11px;
+}
+
+.sidebar-system-card strong i {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background: #4ADE9F;
+    box-shadow: 0 0 0 2px rgba(74, 222, 159, 0.14);
+}
+
+.sidebar-system-card span {
+    color: #9FC4E0 !important;
+    font-size: 10px;
+}
+
+.sidebar-user-avatar {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #3498DB;
+    color: #FFFFFF !important;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.sidebar-user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.sidebar-user-info strong {
+    overflow: hidden;
+    color: #FFFFFF !important;
+    font-size: 11px;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sidebar-user-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #CFE0EC !important;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.sidebar-user-info i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #25D39B;
+    box-shadow: 0 0 0 2px rgba(37, 211, 155, 0.16);
+}
+
+.sidebar-user-menu {
+    color: #CFE0EC !important;
+    font-size: 17px;
+    line-height: 1;
+    text-align: center;
+}
+
+.header-datetime {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+    height: 36px;
+    color: var(--main-text);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.panel-heading {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 7px;
+    color: var(--main-text);
+}
+
+.panel-description {
+    font-size: 13px;
+    margin-bottom: 11px;
+}
+
+/* ==========================================
+   PASTEL KOLOREKO KPI TXARTELAK
+   KOLOREAK EZ DIRA GAIAREKIN ALDATZEN
+   ========================================== */
+
+.kpi-card {
+    min-height: 120px;
+    height: 100%;
+    border-radius: 12px;
+    padding: 14px 15px;
+    border: 1px solid rgba(38, 64, 85, 0.10);
+    box-shadow: 0 2px 5px rgba(20, 42, 64, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+    box-shadow: 0 4px 12px rgba(20, 42, 64, 0.10);
+}
+
+/* Kolore hauek finkoak dira */
+.kpi-blue {
+    background: var(--pastel-blue);
+}
+
+.kpi-pink {
+    background: var(--pastel-pink);
+}
+
+.kpi-ice {
+    background: var(--pastel-ice);
+}
+
+.kpi-slate {
+    background: var(--pastel-slate);
+}
+
+.kpi-green {
+    background: var(--pastel-green);
+}
+
+.kpi-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 9px;
+    font-size: 17px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--semantic-text);
+}
+
+.kpi-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border-radius: 7px;
+    background: rgba(20, 42, 64, 0.08);
+    color: #153B5C;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.kpi-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.kpi-icon svg .kpi-icon-fill {
+    fill: currentColor;
+    stroke: none;
+}
+
+.kpi-body {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    width: 100%;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.kpi-number {
+    color: var(--semantic-text);
+    font-size: clamp(32px, 2.2vw, 40px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.kpi-description {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--semantic-muted);
+}
+
+/* ==========================================
+   ERAZTUN-GRAFIKOA
+   ========================================== */
+
+.kpi-donut-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    gap: 7px;
+    flex: 1;
+    padding-top: 5px;
+}
+
+.donut {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.donut-center {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: var(--pastel-slate);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut-center strong {
+    font-size: 18px;
+    line-height: 1;
+    color: var(--semantic-text);
+}
+
+.donut-center small {
+    font-size: 11px;
+    color: var(--semantic-muted);
+}
+
+.donut-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--semantic-text);
+    white-space: nowrap;
+}
+
+.donut-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.donut-legend i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.legend-h { background: #4F83CC; }
+.legend-m { background: #48AD85; }
+.legend-l { background: #D9A72E; }
+
+/* ==========================================
+   EGOERA-BARRA
+   ========================================== */
+
+.status-bar {
+    border-radius: 9px;
+    min-height: 46px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    margin-bottom: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.st-key-machine_panel .panel-heading {
+    font-size: 18px;
+}
+
+.status-bar strong {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.status-bar span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ==========================================
+   ERDIKO PANELAK
+   ========================================== */
+
+.st-key-telemetry_panel,
+.st-key-history_panel,
+.st-key-measure_panel,
+.st-key-calendar_panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 13px;
+    min-width: 0;
+}
+
+.st-key-calendar_panel {
+    height: 372px;
+    min-height: 372px;
+    max-height: 372px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.st-key-telemetry_panel,
+.st-key-history_panel,
+.st-key-measure_panel {
+    min-height: 355px;
+    height: 355px;
+    max-height: 355px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.st-key-history_panel [data-testid="stImage"] img {
+    width: 100% !important;
+    height: 285px !important;
+    object-fit: contain;
+}
+
+.st-key-history_panel [data-testid="stImage"] {
+    margin: 0 !important;
+}
+
+/* ==========================================
+   TELEMETRIA-TAULA
+   ========================================== */
+
+.telemetria-taula-wrap {
+    height: 275px;
+    overflow: auto;
+    border: 1px solid #C8D5E0;
+    border-radius: 7px;
+    background: #FFFFFF;
+}
+
+.telemetria-taula {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: #102A43;
+    font-size: 13px;
+}
+
+.telemetria-taula thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #EAF1F5;
+}
+
+.telemetria-taula th {
+    height: 32px;
+    padding: 3px 8px;
+    text-align: center;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.telemetria-taula th:first-child,
+.telemetria-taula td:first-child {
+    text-align: left;
+}
+
+.telemetria-taula th small {
+    display: block;
+    margin-top: 5px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.telemetria-taula td {
+    height: 31px;
+    padding: 3px 8px;
+    border-bottom: 1px solid #D8E2EA;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.telemetria-taula td:last-child {
+    text-align: left;
+}
+
+.telemetria-taula tbody tr:hover {
+    background: #F2F7FA;
+}
+
+.telemetria-taula tbody tr.telemetria-akatsa {
+    background: #F8DADB;
+}
+
+.telemetria-taula tbody tr.telemetria-abisua {
+    background: #FFF9E8;
+}
+
+.higadura-marka {
+    display: inline-block;
+    min-width: 31px;
+    padding: 3px 5px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: 800;
+}
+
+.higadura-handia { background: #DF3F47; }
+.higadura-ertaina { background: #E4AD22; }
+.higadura-txikia { background: #2FB176; }
+
+.egoera-marka {
+    display: inline-grid;
+    place-items: center;
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.egoera-akatsa { background: #DF3F47; }
+.egoera-abisua { background: #E4AD22; }
+.egoera-normala { background: #2FB176; }
+
+/* ==========================================
+   SENTSOREEN BARRAK
+   ========================================== */
+
+.sensor-row {
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
+
+.sensor-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--main-text);
+    margin-bottom: 7px;
+}
+
+.sensor-heading strong {
+    font-weight: 800;
+}
+
+.sensor-track {
+    width: 100%;
+    height: 12px;
+    border-radius: 20px;
+    background: #D8E0E7;
+    overflow: hidden;
+}
+
+.sensor-fill {
+    height: 100%;
+    border-radius: 20px;
+}
+
+.st-key-active_fault_alert [data-testid="stAlertIcon"],
+.st-key-active_fault_alert [data-testid="stAlertIcon"] span {
+    width: 34px !important;
+    min-width: 34px !important;
+    font-size: 27px !important;
+    line-height: 1 !important;
+}
+
+/* ==========================================
+   50 MAKINEN SARETA
+   10 ZUTABE × 5 ERRRENKADA
+   ========================================== */
+
+.st-key-machine_panel {
+    padding: 13px;
+    background: #FFFFFF;
+    border-radius: 12px;
+    height: 372px;
+    min-height: 372px;
+    max-height: 372px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.st-key-machine_panel .stHorizontalBlock {
+    gap: 4px !important;
+    flex-wrap: nowrap !important;
+    margin-bottom: 5px;
+}
+
+.st-key-machine_panel [data-testid="column"] {
+    min-width: 0 !important;
+    padding: 0 !important;
+}
+
+.st-key-machine_panel [data-testid="stButton"] {
+    margin: 0 !important;
+}
+
+div[class*="st-key-machine_"] button {
+    width: 100%;
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 2px 0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 5px !important;
+    color: #FFFFFF !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    box-shadow: none !important;
+}
+
+div[class*="st-key-machine_normal_"] button {
+    background: #23856C !important;
+}
+
+div[class*="st-key-machine_warning_"] button {
+    background: #AD7D1F !important;
+}
+
+div[class*="st-key-machine_fault_"] button {
+    background: #D23845 !important;
+}
+
+div[class*="st-key-machine_"] button:hover {
+    filter: brightness(1.15);
+    border: 2px solid #FFFFFF !important;
+}
+
+div[class*="st-key-machine_"] button:focus-visible {
+    outline: 3px solid #FFFFFF !important;
+}
+
+.machine-grid-header {
+    display: none;
+}
+
+.machine-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 13px;
+    color: #FFFFFF;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.machine-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.machine-legend i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.state-normal { background: #23856C; }
+.state-warning { background: #D4A63E; }
+.state-fault { background: #DE4651; }
+
+.machine-legend strong {
+    margin-left: auto;
+}
+
+/* Lantegiko mapa operatiboaren diseinua */
+.st-key-machine_panel {
+    padding: 9px !important;
+    background: #F7FAFC !important;
+    border: 1px solid #D8E3EC;
+    border-radius: 13px;
+}
+
+.st-key-machine_panel .stHorizontalBlock {
+    gap: 3px !important;
+    margin-bottom: 3px !important;
+}
+
+.machine-map-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 1px 6px;
+    color: #92A4B7;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+}
+
+.machine-line-label {
+    display: flex;
+    min-height: 29px;
+    flex-direction: column;
+    justify-content: center;
+    color: #536B84;
+    line-height: 1.1;
+}
+
+.machine-line-label strong {
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.machine-line-label small {
+    margin-top: 2px;
+    color: #9AACC0;
+    font-size: 8px;
+}
+
+.st-key-machine_panel div[class*="st-key-machine_"] button {
+    min-height: 28px !important;
+    height: 28px !important;
+    border: 0 !important;
+    border-radius: 5px !important;
+    color: #FFFFFF !important;
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.10) !important;
+}
+
+.st-key-machine_panel div[class*="st-key-machine_"] button p {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+}
+
+div[class*="st-key-machine_normal_"] button { background: #29B58F !important; }
+div[class*="st-key-machine_recommended_"] button { background: #3E8FDB !important; }
+div[class*="st-key-machine_necessary_"] button { background: #EDC463 !important; color: #593D0B !important; }
+div[class*="st-key-machine_accelerated_"] button { background: #F29550 !important; }
+div[class*="st-key-machine_emergency_"] button { background: #DD4656 !important; }
+div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
+
+.st-key-machine_panel div[class*="_selected"] button {
+    outline: none !important;
+    box-shadow:
+        inset 0 0 0 3px #34495E,
+        inset 0 -3px 0 rgba(0, 0, 0, 0.10) !important;
+}
+
+.machine-map-corridor {
+    margin: 6px 0 5px 42px;
+    padding-top: 6px;
+    border-top: 1px dashed #C9D5E1;
+    color: #536B84;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.35px;
+    text-align: center;
+}
+
+.st-key-machine_panel .machine-legend {
+    gap: 6px;
+    margin-top: 5px;
+    color: #526980;
+    font-size: 9px;
+}
+
+.st-key-machine_panel .machine-legend i {
+    width: 7px;
+    height: 7px;
+}
+
+.state-normal { background: #29B58F; }
+.state-recommended { background: #3E8FDB; }
+.state-necessary { background: #EDC463; }
+.state-accelerated { background: #F29550; }
+.state-emergency { background: #DD4656; }
+.state-nodata { background: #9EADBD; }
+
+/* ==========================================
+   EGUTEGIA
+   ========================================== */
+
+.calendar-card {
+    border-radius: 9px;
+    padding: 14px;
+    min-height: 190px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #142A40;
+}
+
+.calendar-card strong {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.calendar-card p {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.calendar-saturday {
+    background: #FFF6DA;
+    border: 1px solid #E6CE77;
+}
+
+.calendar-sunday {
+    background: #E9F5FE;
+    border: 1px solid #B5DAF2;
+}
+
+.calendar-alert {
+    margin-top: 10px;
+    padding: 11px;
+    border-radius: 8px;
+    background: #FBE5E7;
+    border: 1px solid #F0BBC1;
+    color: #922535;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.st-key-calendar_open button {
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    padding: 0 !important;
+    border: 1px solid #B9CAD9 !important;
+    border-radius: 8px !important;
+    background: #EFF5FA !important;
+    box-shadow: none !important;
+}
+
+.st-key-calendar_open button p {
+    font-size: 29px !important;
+    line-height: 1 !important;
+}
+
+.st-key-calendar_open button:hover {
+    background: #DCECF8 !important;
+    border-color: #3976BD !important;
+}
+
+.calendar-heading {
+    padding-top: 1px;
+    color: var(--main-text);
+}
+
+.calendar-heading strong,
+.calendar-heading small {
+    display: block;
+}
+
+.calendar-heading strong {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.calendar-heading small {
+    margin-top: 5px;
+    color: var(--secondary-text);
+    font-size: 12px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 8px;
+}
+
+.calendar-day-title {
+    padding: 8px 10px;
+    border-radius: 5px;
+    background: #EAF1F5;
+    color: #142A40;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.calendar-event {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    min-height: 43px;
+    padding: 8px 10px;
+    border-left: 3px solid transparent;
+    border-radius: 5px;
+    color: #142A40;
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.calendar-event time {
+    grid-row: 1 / 3;
+    color: #6B8196;
+    font-size: 13px;
+}
+
+.calendar-event b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.calendar-event small {
+    margin-top: 4px;
+    color: #526A81;
+    font-size: 10px;
+}
+
+.calendar-event-warn {
+    border-left-color: #F0A035;
+    background: #FFF0D9;
+}
+
+.calendar-event-info {
+    border-left-color: #5B9FE0;
+    background: #E6F0FC;
+}
+
+.calendar-event-free {
+    border: 1px dashed #AFBECC;
+    background: #F8FAFC;
+}
+
+.calendar-grid + .calendar-alert {
+    margin-top: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+}
+
+.calendar-grid + .calendar-alert small {
+    display: block;
+    margin: 3px 0 0 17px;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+/* ==========================================
+   MAKINEN ORRIA
+   ========================================== */
+
+.machines-page-title {
+    color: var(--main-text);
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.machines-page-subtitle {
+    margin: 4px 0 10px;
+    color: var(--secondary-text);
+    font-size: 13px;
+}
+
+.machine-summary {
+    display: grid;
+    grid-template-columns: 1.15fr 1.5fr repeat(4, minmax(105px, 0.75fr));
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.machine-summary > div {
+    min-width: 0;
+    min-height: 82px;
+    padding: 11px 13px;
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    background: var(--panel-bg);
+    box-sizing: border-box;
+}
+
+.machine-identity,
+.machine-location,
+.machine-summary-metric {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.machine-identity-label,
+.machine-location > span,
+.machine-summary-metric span {
+    color: var(--secondary-text);
+    font-size: 9px;
+    letter-spacing: 0.65px;
+}
+
+.machine-identity > strong {
+    margin: 3px 0;
+    color: var(--main-text);
+    font-size: 23px;
+}
+
+.machine-state {
+    align-self: flex-start;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-size: 10px;
+}
+
+.makina-egoera-normala { background: #29A983; }
+.makina-egoera-abisua { background: #D49A24; }
+.makina-egoera-akatsa { background: #DC4655; }
+
+.machine-location strong {
+    margin: 5px 0 3px;
+    color: var(--main-text);
+    font-size: 17px;
+}
+
+.machine-location small {
+    color: var(--secondary-text);
+    font-size: 10px;
+}
+
+.machine-summary-metric strong {
+    margin-top: 7px;
+    color: var(--main-text);
+    font-size: 19px;
+    white-space: nowrap;
+}
+
+.st-key-history_panel,
+.st-key-measure_panel {
+    min-height: 0;
+}
+
+/* CNC makinen argazki-galeria */
+.cnc-gallery-summary {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-height: 38px;
+    margin: 2px 0 8px;
+    padding: 7px 12px;
+    border: 1px solid var(--panel-border);
+    border-radius: 9px;
+    background: var(--panel-bg);
+    color: var(--main-text);
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.cnc-gallery-summary span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cnc-gallery-summary b {
+    font-size: 14px;
+}
+
+.cnc-gallery-summary small {
+    margin-left: auto;
+    color: var(--secondary-text);
+    font-size: 10px;
+}
+
+.summary-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.summary-dot.akatsa { background: #DC4655; }
+.summary-dot.berrikusteko { background: #D49A24; }
+.summary-dot.normala { background: #29A983; }
+
+.cnc-gallery-scroll {
+    height: min(61vh, 650px);
+    padding: 0 12px 16px 0;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+}
+
+.cnc-gallery-scroll::-webkit-scrollbar {
+    width: 11px;
+}
+
+.cnc-gallery-scroll::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background: rgba(122, 143, 163, 0.16);
+}
+
+.cnc-gallery-scroll::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background: #6D879F;
+    background-clip: padding-box;
+}
+
+.cnc-status-section {
+    margin-bottom: 13px;
+}
+
+.cnc-status-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    padding: 7px 11px;
+    border-left: 5px solid;
+    border-radius: 7px;
+    color: var(--main-text);
+    font-size: 13px;
+}
+
+.cnc-status-heading strong {
+    min-width: 25px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.cnc-status-heading.egoera-akatsa {
+    border-color: #DC4655;
+    background: rgba(220, 70, 85, 0.12);
+}
+
+.cnc-status-heading.egoera-akatsa strong { background: #DC4655; }
+
+.cnc-status-heading.egoera-berrikusteko {
+    border-color: #D49A24;
+    background: rgba(212, 154, 36, 0.13);
+}
+
+.cnc-status-heading.egoera-berrikusteko strong { background: #D49A24; }
+
+.cnc-status-heading.egoera-normala {
+    border-color: #29A983;
+    background: rgba(41, 169, 131, 0.12);
+}
+
+.cnc-status-heading.egoera-normala strong { background: #29A983; }
+
+.cnc-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cnc-photo-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 2px solid var(--panel-border);
+    border-radius: 10px;
+    background: var(--panel-bg);
+    box-shadow: 0 2px 6px rgba(13, 42, 67, 0.07);
+}
+
+.cnc-photo-card.egoera-akatsa { border-color: #DC4655; }
+.cnc-photo-card.egoera-berrikusteko { border-color: #D49A24; }
+.cnc-photo-card.egoera-normala { border-color: #29A983; }
+
+.cnc-photo-card.hautatutako-makina {
+    outline: 3px solid #173E63;
+    outline-offset: 1px;
+}
+
+.cnc-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background-color: #E6EDF3;
+}
+
+.cnc-photo-content {
+    padding: 11px 12px 12px;
+}
+
+.cnc-photo-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    color: var(--main-text);
+}
+
+.cnc-photo-heading > strong {
+    font-size: 18px;
+}
+
+.cnc-status-badge {
+    padding: 4px 9px;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.egoera-akatsa .cnc-status-badge { background: #DC4655; }
+.egoera-berrikusteko .cnc-status-badge { background: #D49A24; }
+.egoera-normala .cnc-status-badge { background: #29A983; }
+
+.cnc-location {
+    display: block;
+    margin-top: 3px;
+    color: var(--secondary-text);
+    font-size: 12px;
+}
+
+.cnc-photo-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 9px;
+}
+
+.cnc-photo-metrics span {
+    padding: 6px 3px;
+    border-radius: 6px;
+    background: var(--soft-bg, #EFF4F8);
+    color: var(--main-text);
+    font-size: 11px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.cnc-maintenance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--panel-border);
+}
+
+.cnc-maintenance-grid > div {
+    min-width: 0;
+    padding: 8px 9px;
+    border-radius: 7px;
+    background: var(--soft-bg, #EFF4F8);
+}
+
+.cnc-maintenance-grid small,
+.cnc-maintenance-grid strong {
+    display: block;
+}
+
+.cnc-maintenance-grid small {
+    min-height: 28px;
+    color: var(--secondary-text);
+    font-size: 10px;
+    line-height: 1.25;
+}
+
+.cnc-maintenance-grid strong {
+    margin-top: 3px;
+    color: var(--main-text);
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+@media (max-width: 1450px) {
+    .cnc-photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1050px) {
+    .cnc-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ==========================================
+   ABISUEN ORRIA
+   ========================================== */
+
+.alerts-page-title {
+    color: var(--main-text);
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.alerts-page-subtitle {
+    margin: 4px 0 10px;
+    color: var(--secondary-text);
+    font-size: 13px;
+}
+
+.alerts-summary {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 9px;
+    margin-bottom: 11px;
+}
+
+.alerts-summary-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3px 8px;
+    min-height: 82px;
+    padding: 11px 14px;
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.alerts-summary-card span {
+    align-self: center;
+    font-size: 13px;
+}
+
+.alerts-summary-card strong {
+    grid-row: 1 / 3;
+    grid-column: 2;
+    align-self: center;
+    font-size: 25px;
+}
+
+.alerts-summary-card small {
+    color: #536A80;
+    font-size: 10px;
+}
+
+.summary-red { background: var(--state-red-bg); color: var(--semantic-text); }
+.summary-amber { background: var(--state-amber-bg); color: var(--semantic-text); }
+.summary-money { background: var(--state-green-bg); color: var(--semantic-text); }
+.summary-risk { background: var(--state-blue-bg); color: var(--semantic-text); }
+
+.alerts-section-heading {
+    margin-bottom: 7px;
+    color: var(--main-text);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.alerts-list {
+    height: 720px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.alert-machine-row {
+    display: grid;
+    grid-template-columns: 34px 1fr 1.55fr 1.2fr 0.8fr;
+    align-items: center;
+    gap: 9px;
+    min-height: 62px;
+    margin-bottom: 6px;
+    padding: 7px 10px;
+    border: 1px solid var(--panel-border);
+    border-left: 5px solid;
+    border-radius: 8px;
+    background: var(--panel-bg);
+    color: var(--main-text);
+    box-sizing: border-box;
+}
+
+.alert-critical { border-left-color: #DE4651; }
+.alert-high { border-left-color: #F0924B; }
+.alert-review { border-left-color: #D9A72E; }
+
+.alert-rank {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #E8EFF5;
+    color: #264B6D;
+    font-size: 12px;
+}
+
+.alert-machine-name,
+.alert-level,
+.alert-cost {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.alert-machine-name strong { font-size: 15px; }
+.alert-machine-name span,
+.alert-level small,
+.alert-cost small {
+    overflow: hidden;
+    color: var(--secondary-text);
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alert-level span { font-size: 12px; }
+
+.alert-readings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.alert-readings span {
+    padding: 2px 5px;
+    border-radius: 4px;
+    background: #EDF3F7;
+    color: #36546F;
+    font-size: 9px;
+}
+
+.alert-cost {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.alert-cost strong {
+    color: #C23845;
+    font-size: 15px;
+}
+
+.cost-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 751px;
+    min-height: 751px;
+    padding: 20px;
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    background: var(--panel-bg);
+    color: var(--main-text);
+    box-sizing: border-box;
+}
+
+.cost-panel-icon {
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 14px;
+    border-radius: 11px;
+    background: #E2F4EC;
+    color: #187159;
+    font-size: 25px;
+}
+
+.cost-panel > span {
+    color: var(--secondary-text);
+    font-size: 10px;
+    letter-spacing: 0.55px;
+}
+
+.cost-panel > strong {
+    display: block;
+    margin: 8px 0 2px;
+    color: #C23845;
+    font-size: 34px;
+}
+
+.cost-panel > small {
+    color: var(--secondary-text);
+    font-size: 10px;
+}
+
+.cost-formula {
+    margin: 17px 0;
+    padding: 10px;
+    border-radius: 7px;
+    background: #F2F6F9;
+    color: #38546D;
+    font-size: 11px;
+    text-align: center;
+}
+
+.cost-panel hr {
+    margin: 14px 0;
+    border: 0;
+    border-top: 1px solid var(--panel-border);
+}
+
+.cost-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    color: var(--secondary-text);
+    font-size: 12px;
+}
+
+.cost-detail b { color: var(--main-text); }
+
+.cost-panel p {
+    margin-top: 18px;
+    color: var(--secondary-text);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+[data-testid="stDialog"] {
+    background: rgba(9, 30, 50, 0.38);
+}
+
+/* ==========================================
+   DISEINU MOLDAGARRIA
+   ========================================== */
+
+@media (max-width: 1100px) {
+    .kpi-card {
+        padding: 10px;
+    }
+
+    .kpi-heading {
+        font-size: 11px;
+    }
+
+    .kpi-number {
+        font-size: 23px;
+    }
+
+    .donut {
+        width: 53px;
+        height: 53px;
+    }
+
+    .donut-center {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 700px) {
+    .block-container {
+        padding-left: 0.6rem !important;
+        padding-right: 0.6rem !important;
+    }
+
+    .kpi-card {
+        min-height: 110px;
+    }
+
+    .machine-legend {
+        gap: 7px;
+    }
+
+    div[class*="st-key-machine_"] button {
+        font-size: 10px !important;
+        min-height: 28px !important;
+        height: 28px !important;
+    }
+}
+
+/* Diseinu osoa proportzio berean eskalatu, blokeak deformatu gabe. */
+
+
+
+
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* Aplikazioko testu guztia lodiz erakutsi. */
+.stApp p,
+.stApp span,
+.stApp small,
+.stApp strong,
+.stApp label,
+.stApp button,
+.stApp th,
+.stApp td,
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp h5,
+.stApp h6,
+.stApp time {
+    font-weight: 700 !important;
+}
+
+/* ==========================================
+   GAI ARGIA / ILUNA: AZALERA EGITURALAK
+   Egoera-kolore semantikoak (gorri, anbar,
+   urdin eta berde pastelak) nahita mantentzen dira.
+   ========================================== */
+
+.telemetria-taula-wrap,
+.st-key-machine_panel,
+.alert-machine-row {
+    background: var(--panel-bg) !important;
+    border-color: var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+.telemetria-taula {
+    color: var(--main-text) !important;
+}
+
+.telemetria-taula thead,
+.alert-rank,
+.alert-readings span,
+.cost-formula {
+    background: var(--surface-muted) !important;
+    color: var(--main-text) !important;
+}
+
+.telemetria-taula td {
+    border-bottom-color: var(--panel-border) !important;
+}
+
+.telemetria-taula tbody tr:hover {
+    background: var(--surface-muted);
+}
+
+.telemetria-taula tbody tr.telemetria-akatsa {
+    background: var(--state-red-bg) !important;
+    color: var(--semantic-text) !important;
+}
+
+.telemetria-taula tbody tr.telemetria-abisua {
+    background: var(--state-amber-bg) !important;
+    color: var(--semantic-text) !important;
+}
+
+.telemetria-taula tbody tr.telemetria-akatsa td,
+.telemetria-taula tbody tr.telemetria-abisua td {
+    color: var(--semantic-text) !important;
+}
+
+.machine-map-top,
+.machine-line-label,
+.machine-line-label small,
+.machine-map-corridor,
+.st-key-machine_panel .machine-legend {
+    color: var(--secondary-text) !important;
+}
+
+.machine-map-corridor {
+    border-top-color: var(--panel-border) !important;
+}
+
+.sensor-track {
+    background: var(--surface-muted);
+}
+
+[data-testid="stAlert"] {
+    background: var(--surface-muted) !important;
+    border-color: var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] span {
+    color: var(--main-text) !important;
+}
+
+.st-key-calendar_open button {
+    background: var(--surface-muted) !important;
+    border-color: var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+.calendar-day-title,
+.calendar-event-free {
+    background: var(--surface-muted) !important;
+    border-color: var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+.calendar-event-free small,
+.calendar-event-free time {
+    color: var(--secondary-text) !important;
+}
+
+.alerts-page-title,
+.alerts-section-heading,
+.alert-machine-name strong,
+.alert-level span {
+    color: var(--main-text);
+}
+
+/* Keep text at normal scale and allow vertical navigation on smaller screens. */
+html, body, .stApp, [data-testid="stAppViewContainer"],
+[data-testid="stMain"], [data-testid="stMainBlockContainer"] {
+    height: auto !important;
+    min-height: 100%;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+[data-testid="stSidebar"] { overflow-y: auto !important; }
+@media (max-width: 640px) {
+    .alerts-summary { grid-template-columns: 1fr !important; }
+    .alert-machine-row { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+    .alerts-summary-card, .alert-machine-row { min-width: 0; }
+}

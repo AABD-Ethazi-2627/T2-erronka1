@@ -90,6 +90,12 @@ contener otra dirección de origen y se conservan con su procedencia original.
 | Kibana | http://127.0.0.1:15601 |
 | Kafka | kafka:9092, solo dentro de Docker |
 
+Para que los cuatro estudiantes accedan directamente desde la LAN a NiFi,
+Kafka, Elasticsearch, Kibana y la API, usar el Compose adicional y los
+certificados de cliente descritos en [Acceso LAN](docs/LAN_ACCESS.md). El
+Compose base conserva los puertos locales hasta configurar la IP del servidor
+y la confianza TLS de NiFi.
+
 NiFi conserva TLS y credenciales autogeneradas: no hay contraseña de ejemplo en
 este README. Importar y revisar
 `nifi-flows/cnc_lab_completed_nifi_2.12.0.json` en NiFi 2.12. El export mantiene

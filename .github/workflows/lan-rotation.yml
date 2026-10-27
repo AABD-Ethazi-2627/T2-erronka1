@@ -1,0 +1,29 @@
+name: LAN certificate rotation
+on:
+  pull_request:
+    paths:
+      - 'lan/**'
+      - 'docker-compose.lan.yml'
+      - 'deploy/images.json'
+      - 'scripts/create_lan_certs.sh'
+      - 'docs/LAN_ACCESS.md'
+      - 'tests/test_lan_ca_rotation.py'
+      - '.github/workflows/lan-rotation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  lan-rotation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Pull the deployment's pinned gateway
+        run: docker pull "$(python3 -c 'import json; print(json.load(open("deploy/images.json"))["haproxy"])')"
+      - name: Prove complete CA rotation and connection cutoff on five frontends
+        env:
+          CNC_RUN_LAN_TLS_TESTS: '1'
+          CNC_LAN_TLS_BACKEND: docker
+        run: python3 -W error -m unittest discover -s tests -p test_lan_ca_rotation.py -v
