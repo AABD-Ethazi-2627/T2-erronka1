@@ -49,9 +49,9 @@ El CLI `scripts.rehearse_cg26 --manifest ... --output ...` sigue disponible para
 
 ## Panel y explicación de 10 minutos
 
-- Minutos0–2: fuente 8000 / split 5600/1200/1200; TP32/FN9/FP9/TN1150 es validación reutilizada, no test final independiente. Solo cinco sensores+machine_type al estimador, metadatos para trazabilidad.
+- Minutos0–2: fuente 8000 / split 5600/1200/1200. En validación reutilizada, el umbral F2 `>=0,19082281465428477` produce TP32/FN9/FP9/TN1150; el umbral de AVISO `>=0,15` produce TP32/FN9/FP12/TN1147. Son puntos distintos sobre las mismas predicciones, no un test final independiente. Véase [la auditoría de precisión](../evidence/CG10_PRECISION_20261022.md). Solo cinco sensores+machine_type al estimador, metadatos para trazabilidad.
 - Minutos2–5: mostrar los resultados guardados de 200/replay,409,422,503 y explicar ledger/ACK, error transitorio frente a conflicto terminal y recuperación de proceso Windows sin powercut.
 - Minutos5–8: abrir [Kibana real del autor](../evidence/ISOLATED_RUNTIME_20261022.md) y [página20/DOM](../evidence/CG19_SVG_ARIA_20261022.md). Distinguir fixtures online de offline fijo; filtros 0/1/31/100, total frente a muestra, Kelvin/UTC y páginas. Son evidencias del autor, no panel levantado por el compañero. Para reproducción viva preparar lab propio con el padre, sin tocar servicios compartidos.
-- Minutos8–10: proponer inspección humana de una alerta y comparar FP/FN. Coste 1200 €/h es supuesto docente, no ahorro observado. Explicar IA estrecha, reglas 0,15/0,70 frente a risk_threshold y rareza IF. No ETA/RUL/forecast24h ni acción sobre CNC.
+- Minutos8–10: proponer inspección humana de una alerta y comparar FP/FN. El escenario histórico de 1200 €/h es un supuesto de coste de parada, no un coste fijo por FN ni ahorro observado; la [matriz docente posterior](../evidence/CG34_20261023/business-costs.json) usa otros importes por resultado. Explicar IA estrecha, reglas 0,15/0,70 frente a risk_threshold y rareza IF. No ETA/RUL/forecast24h ni acción sobre CNC.
 
 Preguntas: ¿qué confirma un 200 y qué falta hasta elACK? ¿Por qué no reintentar 409 como 503? ¿Por qué cuatro mensajes SMB y 35 estadosDOM no prueban SLA o lectura audible? ¿Qué cambia entre mononodo y clúster? ¿Qué dato haría falta para probar beneficio de mantenimiento? Registrar la respuesta del compañero, sin escribirla en su nombre.
