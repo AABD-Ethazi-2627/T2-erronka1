@@ -27,6 +27,7 @@ htmlcov/
 # remain versioned; do not add global *.csv, *.json, *.png or *.pkl rules.
 /outputs/
 /historical/
+/secrets/
 /models/*
 !/models/.gitkeep
 !/models/README.md
