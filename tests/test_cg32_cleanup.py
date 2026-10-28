@@ -103,6 +103,38 @@ class CleanupTests(unittest.TestCase):
     def receipt(self):
         return json.loads(next((self.root / "runs").glob("*/run.json")).read_bytes())
 
+    def test_real_measure_sampler_failure_persists_failed_run_and_stops_services(self):
+        self.prepared()
+        self.args.rate = 50
+        self.instance.state["kafka_port"] = 1
+        observer = Mock()
+        observer.lag.side_effect = [
+            {"lag": 0},
+            {"lag": lab.BUDGET["max_lag"] + 1},
+        ]
+        self.instance.measure.side_effect = lambda *args, **kwargs: lab.Lab.measure(
+            self.instance, *args, **kwargs
+        )
+        with (
+            patch.object(lab, "KafkaObserver", return_value=observer),
+            patch.object(lab, "docker_stats", side_effect=ValueError("Docker failed")),
+            patch.object(lab, "du", return_value=0),
+            patch.object(lab.httpx, "Client") as client,
+        ):
+            client.return_value.__enter__.return_value.post.return_value.json.return_value = {
+                "hits": {"hits": []}
+            }
+            with self.assertRaises(ValueError):
+                self.instance.run(self.args)
+        receipt = self.receipt()
+        self.assertEqual(receipt["status"], "failed")
+        self.assertEqual(receipt["failure"]["error_type"], "ValueError")
+        self.assertLess(receipt["offered"], 50)
+        self.assertEqual(receipt["stopped_by_budget"], "max_lag")
+        self.assertIn("sampler ValueError", receipt["observer_errors"])
+        self.assertIn(("stop", "filebeat"), self.commands)
+        self.assertIn(("stop", "api"), self.commands)
+
     def test_missing_token_fails_explicitly_before_an_authenticated_request(self):
         with (
             patch.object(self.instance, "nifi_token", return_value=None),

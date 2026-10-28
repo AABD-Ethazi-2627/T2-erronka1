@@ -708,12 +708,14 @@ class Lab:
                     item["kafka"] = observer.lag()
                 except (KafkaError, OSError, KeyError) as exc:  # observation only
                     item["kafka_error"] = type(exc).__name__
-                item["containers"] = docker_stats(self.state["project"])
                 samples.append(item)
+                # Kafka budget evidence must survive a Docker sampling failure.
+                item["containers"] = docker_stats(self.state["project"])
                 stop.wait(max(0.0, 2.0 - (time.monotonic() - started)))
 
         threads = []
         controller = None
+        sampler = None
         executor = None
         paused, offered = {}, []
         stopped_by = None
@@ -779,11 +781,11 @@ class Lab:
                 }
             )
             budget_exceeded(force=True)
-            for target in (poll_es, sample):
-                thread = threading.Thread(target=target)
-                thread.start()
-                threads.append(thread)
-            executor = ThreadPoolExecutor(max_workers=1)
+            thread = threading.Thread(target=poll_es)
+            thread.start()
+            threads.append(thread)
+            executor = ThreadPoolExecutor(max_workers=2)
+            sampler = executor.submit(sample)
             if stopped_by:
                 stop.set()
             controller = executor.submit(pause_control)
@@ -794,12 +796,18 @@ class Lab:
                 args.rate,
                 should_stop=lambda: (
                     (controller.done() and controller.exception() is not None)
+                    or (sampler.done() and sampler.exception() is not None)
                     or budget_exceeded()
                 ),
                 records=offered,
             )
             offer_elapsed = time.monotonic() - offer_start
+            budget_exceeded(force=True)
+            if sampler.done():
+                sampler.result()
             while not controller.done():
+                if sampler.done():
+                    sampler.result()
                 if budget_exceeded():
                     stop.set()
                 wait_futures([controller], timeout=0.1)
@@ -811,6 +819,8 @@ class Lab:
             drain_start = time.monotonic()
             deadline = drain_start + BUDGET["max_drain_s"]
             while not budget_exceeded(force=True):
+                if sampler.done():
+                    sampler.result()
                 jobs = worker_jobs(graph["root"])
                 done = sum(1 for v in jobs.values() if v is not None)
                 if len(seen) >= len(offered) or (
@@ -835,6 +845,9 @@ class Lab:
             )
             for thread in threads:
                 thread.join()
+            sampler_error = sampler.exception() if sampler is not None else None
+            if sampler_error is not None:
+                errors.append("sampler " + type(sampler_error).__name__)
             result = {
                 "offer_elapsed_s": offer_elapsed
                 if offer_elapsed is not None
@@ -875,6 +888,8 @@ class Lab:
                     primary_error.add_note(
                         "CG32 observer close failed: " + type(exc).__name__
                     )
+            if primary_error is None and sampler_error is not None:
+                raise sampler_error
         return result
 
     def kafka_topic(self, topic):

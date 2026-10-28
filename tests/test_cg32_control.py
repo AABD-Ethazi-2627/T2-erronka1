@@ -2,6 +2,7 @@
 
 import json
 import tempfile
+import threading
 import time
 import unittest
 from contextlib import ExitStack
@@ -177,6 +178,60 @@ class MeasureControlTests(unittest.TestCase):
         result = self.measure(count=600)
         self.assertEqual(result["stopped_by_budget"], "max_lag")
         self.assertEqual(result["offered"], 0)
+
+    def test_sampler_failure_preserves_excess_lag_and_cancels_offer(self):
+        primary = ValueError("synthetic malformed Docker stats")
+        self.observer.lag.side_effect = [
+            {"lag": 0},
+            {"lag": lab.BUDGET["max_lag"] + 1},
+        ]
+        with (
+            patch.object(lab, "docker_stats", side_effect=primary),
+            self.assertRaises(ValueError) as raised,
+        ):
+            self.measure(count=50)
+        self.assertIs(raised.exception, primary)
+        self.assertLess(self.record["offered"], 50)
+        self.assertEqual(self.record["stopped_by_budget"], "max_lag")
+        self.assertIn("sampler ValueError", self.record["observer_errors"])
+        samples = [
+            json.loads(row)
+            for row in (self.root / "samples.jsonl").read_text().splitlines()
+        ]
+        self.assertEqual(samples[-1]["kafka"]["lag"], lab.BUDGET["max_lag"] + 1)
+        self.observer.close.assert_called_once()
+
+    def test_sampler_failure_without_budget_excess_still_fails_measurement(self):
+        with (
+            patch.object(lab, "docker_stats", side_effect=OSError("Docker failed")),
+            self.assertRaises(OSError),
+        ):
+            self.measure(count=50)
+        self.assertLess(self.record["offered"], 50)
+        self.assertIn("sampler OSError", self.record["observer_errors"])
+
+    def test_sampler_failure_during_final_drain_cannot_return_success(self):
+        release = threading.Event()
+        self.addCleanup(release.set)
+
+        def fail_after_offer(project):
+            if not release.wait(5):
+                raise TimeoutError("fixture did not enter drain")
+            raise ValueError("late Docker failure")
+
+        def drained(root):
+            release.set()
+            return {"t/0/0": "completed"}
+
+        with (
+            patch.object(lab, "docker_stats", side_effect=fail_after_offer),
+            patch.object(lab, "worker_jobs", side_effect=drained),
+            self.assertRaisesRegex(ValueError, "late Docker failure"),
+        ):
+            self.measure()
+        self.assertEqual(self.record["offered"], 1)
+        self.assertIn("sampler ValueError", self.record["observer_errors"])
+        self.assertTrue((self.root / "samples.jsonl").exists())
 
     def test_budget_cancellation_cannot_claim_unperformed_fault_injection(self):
         self.args.kill_at = 60
