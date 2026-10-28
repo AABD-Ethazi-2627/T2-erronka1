@@ -1,0 +1,139 @@
+{
+  "cleanup_errors": [],
+  "cycles": {
+    "completed": 8
+  },
+  "drain_s": 87.88818921404891,
+  "duration_s": 60,
+  "expected": 600,
+  "filebeat_sha256": "a5319b24dbd51369c24fd5ce63e349b3224934f70895a60c2de6256c4fc865ea",
+  "finished_utc": "2026-10-28T10:06:23.791825Z",
+  "first_offer_mono": 529541.517389946,
+  "fixture_sha256": "d44e1114a73f63ac35228a28726e82fc8e75dd3dc11092aa5c2d012fc4edc5a1",
+  "graph": {
+    "attempts": 1,
+    "bootstrap_servers": "kafka:19092",
+    "es_index": "cnc-alerts-cg32-batch32-base-1-r10-eacaea",
+    "es_url": "http://elasticsearch:9200",
+    "group_id": "cg32-batch32-base-1-r10-eacaea",
+    "legacy_source_kind": "cg14-lab-kafka",
+    "manifest": "/home/admin/labs/cg32-campaign-20261028/runs/batch32-base-1-r10-eacaea/pinned-manifest.json",
+    "max_poll_interval_ms": 300000,
+    "max_polls": 3,
+    "max_records": 32,
+    "offset_reset": "earliest",
+    "root": "/home/admin/labs/cg32-campaign-20261028/runs/batch32-base-1-r10-eacaea/worker",
+    "scoring_url": "http://api:8000/predict",
+    "source_kind": "lab_fixture",
+    "source_namespace": "cg32-e5806044/batch32-base-1-r10-eacaea",
+    "timeout": 0.5,
+    "topic": "cg32-batch32-base-1-r10-eacaea"
+  },
+  "health": {
+    "model_version": "ai4i-current-state-v4",
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "status": "ready",
+    "temporal_prediction_enabled": false
+  },
+  "http_repeated_posts": 0,
+  "identity_kind": "rebuilt_candidate",
+  "identity_record_sha256": "0fe5eee773877f8946cce5db6fc6ecccc7a199bc44616d51519e4a66f1fc9d99",
+  "kafka_committed": {
+    "committed": 600,
+    "end": 600,
+    "lag": 0
+  },
+  "label": "batch32-base-1",
+  "last_seen_mono": 529686.848185214,
+  "manifest_sha256": "b85be76ef47ee88f34294fe009e9f4e21d3b3d78f10c8ba6b276389452136d5a",
+  "metrics": {
+    "bytes": {
+      "es_index_store": 1255212,
+      "input": 41225,
+      "kafka_topic_values": 40461,
+      "worker_root": 27869184
+    },
+    "cpu_s": {
+      "api-1": 5.799213635496133,
+      "elasticsearch-1": 9.058734962587918,
+      "filebeat-1": 0.06072196335867048,
+      "kafka-1": 1.0057135027479849,
+      "nifi-1": 52.95146617026145
+    },
+    "drain_s": 87.88818921404891,
+    "e2e_max_ms": 85530.5669879308,
+    "e2e_n": 600,
+    "e2e_p50_ms": 44769.323498010635,
+    "e2e_p95_ms": 82747.11878807284,
+    "http_non_200": 0,
+    "http_p50_ms": 12.716616969555616,
+    "http_p95_ms": 14.957848004996777,
+    "http_requests": 600,
+    "lag_final": 0,
+    "lag_initial": 0,
+    "lag_max": 340,
+    "offered_eps": 9.999888040650452,
+    "producer_lag_max_ms": 477.8210179647431,
+    "rss_max_mib": {
+      "api-1": 136.1,
+      "elasticsearch-1": 947.5,
+      "filebeat-1": 18.94,
+      "kafka-1": 308.1,
+      "nifi-1": 829.5
+    },
+    "throughput_eps": 4.128512466293061
+  },
+  "model_version": "ai4i-current-state-v4",
+  "name": "batch32-base-1-r10-eacaea",
+  "nifi": {
+    "group": "81f72946-01a1-1000-e748-ea41878e7b06",
+    "period": "2 sec",
+    "processor_periods": {
+      "Capture cycle exit diagnostics": "5 sec",
+      "Retain cycle diagnostics": "5 sec",
+      "Retain cycle output": "5 sec",
+      "Schedule bounded source cycle": "2 sec",
+      "Single Kafka owner": "5 sec"
+    }
+  },
+  "nifi_exit_status": {
+    "0": 8
+  },
+  "observer_errors": [],
+  "offer_elapsed_s": 59.90148248593323,
+  "pause": {
+    "at_s": null,
+    "for_s": 0,
+    "kill_at_s": null
+  },
+  "pause_observed": null,
+  "rate": 10,
+  "reconciliation": {
+    "backlog_uncommitted": 0,
+    "balance_ok": true,
+    "es_docs": 600,
+    "es_duplicate_event_ids": 0,
+    "es_without_saved_job": 0,
+    "jobs_not_in_kafka": 0,
+    "kafka_missing_offered": 0,
+    "kafka_not_observed": 0,
+    "kafka_records": 600,
+    "kafka_repeated_lines": 0,
+    "kafka_unexpected": 0,
+    "observed": 600,
+    "offered": 600,
+    "offered_unique": 600,
+    "pending": 0,
+    "rejected": 0,
+    "saved": 600,
+    "saved_missing_in_es": 0,
+    "valid_lost": 0
+  },
+  "started_utc": "2026-10-28T10:03:46.496424Z",
+  "status": "completed",
+  "stopped_by_budget": null,
+  "worker_attempts": {
+    "200": 600,
+    "201": 600
+  }
+}

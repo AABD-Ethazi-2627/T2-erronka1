@@ -5,7 +5,7 @@ ADD --checksum=sha256:ae4dae382249f28a53be500c0c5d5a6628677f3e65a7d35dfc148b9ad4
 RUN mkdir /src \
     && tar -xzf /tmp/beats.tar.gz --strip-components=1 -C /src \
     && cd /src \
-    && go get github.com/google/cel-go@v0.29.0 golang.org/x/net@v0.60.0 \
+    && go get github.com/google/cel-go@v0.29.0 golang.org/x/net@v0.62.0 \
     && CGO_ENABLED=0 go build -trimpath -o /tmp/filebeat ./filebeat
 
 FROM docker.elastic.co/beats/filebeat-wolfi:9.5.5@sha256:b644d58f79f2a53b46ce558efa706a51ba211e0d0f89352bfe33b3973958e3eb

@@ -1,9 +1,15 @@
 # CG14 — technical handoff
 
-Corte vigente: **2026-10-22**. Base integrada `3c957235e81e449bace661f8723f91edb02eb3b7`.
-Estado global **PARTIAL**; issue #14 abierta.
+> Actualización verificada el 26/10/2026: #14 está cerrada desde el
+> 22/10/2026 a las 13:33:36 UTC. La [decisión PM](CG14_STATUS_20261023.md)
+> conserva su alcance; los diagnósticos RESTORE del corte técnico siguiente
+> no reabren esa aceptación ni prueban aceptación académica. Las referencias
+> a issues/PR abiertas de ese corte son históricas.
 
-## Estado vigente para el revisor
+Corte técnico histórico: **2026-10-22**. Base integrada `3c957235e81e449bace661f8723f91edb02eb3b7`.
+Estado técnico de RESTORE **PARTIAL** en ese corte; el estado administrativo actual de #14 es el indicado arriba.
+
+## Estado técnico conservado para RESTORE
 
 Las seis ramas CG14 están integradas en `feat/17-maintenance-planner`.
 PR57 sigue abierta hacia main, pero su head ya es ancestro de esta integración;

@@ -2,6 +2,13 @@
 
 Fecha objetivo solicitada por el usuario: **6 de noviembre de 2026**, con inicio **16 de octubre**. [Project del equipo y vista GANTT](https://github.com/orgs/AABD-Ethazi-2627/projects/2). Fechas detalladas y dependencias: [plan versionado](PLAN_2026-11-06.json).
 
+**Actualización del 23/10:** el calendario y las estimaciones originales de las
+secciones siguientes son una referencia histórica. El
+[seguimiento restante](#seguimiento-restante-del-23102026) incorpora las 11
+issues todavía abiertas, las aceptaciones posteriores y la ampliación CG31–CG40.
+Los 86,5 persona-días brutos originales no son una estimación del trabajo restante.
+No se modifican fechas, responsables ni campos del Project desde esta revisión.
+
 ## Hitos y margen
 
 - 26 de octubre: datos y modelos reproducibles (#11).
@@ -64,3 +71,37 @@ Se actualizaron las fechas de las 27 issues iniciales del equipo: Hasiera-data/A
 Las 27 issues existentes se han ampliado y se han creado CG28/#35 (FastAPI, Niistal), CG29/#36 (Filebeat, petiteiker) y CG30/#37 (justificación IA/ML, tears-mysthrala y Angiecrizu). Sus objetivos de fecha son 27/10, 21/10 y 19–26/10 respectivamente, con revisiones previas el mismo día cuando proceda. No se ha validado que el esfuerzo quepa en esos intervalos.
 
 Estimaciones brutas nuevas: 2 + 1 + 1,5 = 4,5 persona-días. Suma bruta 86,5 frente a 64 de capacidad teórica (desfase 22,5), antes de reestimar trabajo restante y descontar posible solapamiento con trabajo antes implícito. La fecha del 6/11 sigue como objetivo, no garantía. La [guía de issues](../issues/README.md) contiene el alcance revisado.
+
+## Seguimiento restante del 23/10/2026
+
+Base verificada `5005ccde81f16cd2deac6ee3b30085d773e0fc88`. Se consultaron las
+issues en el remoto canónico `AABD-Ethazi-2627/T2-erronka1`: quedan abiertas las
+11 filas siguientes. #10/#11/#20/#24/#25 están cerradas y su revisión PM no se
+reabre. #84 y #86 también están cerradas; la ejecución ML de #90 está integrada.
+Los textos históricos que indican integración ML pendiente conservan su fecha.
+La [matriz actual de 40 celdas](../rubrica/ESTADO_20261023.md) y la
+[revisión por issue](../evidence/PENDING_REQUIREMENTS_20261023.md) fijan evidencias
+y límites. Las fechas siguientes proceden de las issues y del
+[feedback PM](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27#issuecomment-6359282684),
+incluida su [ampliación ML](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27#issuecomment-6359656502);
+son objetivos, no compromisos personales confirmados.
+
+| Issue abierta | Resultado pendiente | Responsable según planificación publicada | Fecha objetivo / dependencia |
+|---|---|---|---|
+| [#80 / CG31](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/80) | Revisar el nuevo corte 40/40 y reconciliarlo tras ensayo; preparación local realizada en esta revisión | Angiecrizu; tears-mysthrala contrasta | Primera versión 26/10; reconciliación 05/11 |
+| [#82 / CG33](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/82) | Registrar respuestas o pendientes de versión/pesos, G49/G62 y entrega, con atribución real | petiteiker portavoz; Angiecrizu registra; soporte técnico Niistal/tears-mysthrala | 27/10; seguimiento antes del 05/11 |
+| [#37 / CG30](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/37) | Explicación real de los cuatro, entrada/salida/error/límite y pregunta fuera de su especialidad | tears-mysthrala contenidos; Angiecrizu registro; participan los cuatro | Primera ronda 28/10; ensayo 05/11 |
+| [#81 / CG32](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/81) | Carga breve del grafo con bundle propio, IDs/lag/latencia/recursos y recuperación; informe aunque no alcance metas | petiteiker medidas; Niistal API/worker/archivo/ES; tears-mysthrala identidad bundle | Viabilidad 27/10; baseline 30/10; candidato listo 04/11, o conservar RF |
+| [#83 / CG34](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/83) | Consolidar interpretación de familias, límites y decisión PM; la exploración ya está ejecutada e integrada | tears-mysthrala, Angiecrizu | Síntesis/congelación 03/11; depende de #85/#87/#88/#89 |
+| [#85 / CG36](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/85) | Contrastar referencias/ablaciones, reglas CART y explicación FN/FP; mantener avisos QDA visibles | tears-mysthrala, Angiecrizu | 27/10; #84 cerrada |
+| [#87 / CG38](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/87) | Interpretar efectos globales/locales EBM/GAM y coste frente a RF, sin causalidad inventada | Angiecrizu coordina explicación; tears-mysthrala evalúa | 28/10; #84 cerrada |
+| [#88 / CG39](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/88) | Explicar rareza, FN recuperados/FP añadidos y avisos de convergencia; confirmar alternativas no ejecutadas | tears-mysthrala, petiteiker | 29/10; #84 cerrada |
+| [#89 / CG40](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/89) | Completar interpretación y aceptación de la recomendación RF; parte Niistal de fuga/recarga ya registrada | tears-mysthrala método; Niistal contraste; Angiecrizu interpretación | 03/11; #85/#87/#88 abiertas, #86 cerrada |
+| [#26 / CG26](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26) | Ensayo/defensa reales de 4/4; acta posterior con versión y resultados, sin firmas inventadas | Angiecrizu coordina; participa todo el equipo | 05/11; guion/justificación preparados aceptados PM |
+| [#27 / CG27](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27) | Reconciliar paquete y pendientes, realizar entrega/defensa y conservar recibo | Equipo; petiteiker canal; Angiecrizu registro/recibo | Objetivo 06/11; canal, hora y modalidad sin confirmar en #82 |
+
+Revisar capacidad restante por persona el 26/10 usando estas acciones y la
+disponibilidad real. No sumar de nuevo trabajo ya aceptado o experimentos
+terminados. No se ha medido el esfuerzo restante y no se declara factible el
+06/11 por haber adelantado código. La ampliación #81 conserva sus metas de
+ingeniería como hipótesis; documentación, comprensión y entrega siguen separadas.

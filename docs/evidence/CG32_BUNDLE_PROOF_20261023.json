@@ -1,0 +1,6 @@
+{
+  "base": "c49813df9eb0ee9a4735c1af4372ddc85c01d9e3",
+  "baseline_accepted_replacement": true,
+  "corrected_rejection": "Bundle manifest differs from the sealed CG26 delivery",
+  "model_deserialization": false
+}

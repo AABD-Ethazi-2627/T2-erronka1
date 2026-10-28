@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 import sqlite3
+import time
 import uuid
 from contextlib import closing
 from pathlib import Path
@@ -155,6 +156,7 @@ def check_es(config):
 
 
 def cycle(config):
+    started = time.monotonic()
     root = Path(config["root"])
     mkdir(root)
     # Held BEFORE constructing/subscribing the Kafka client until after close.
@@ -167,10 +169,30 @@ def cycle(config):
             "cycle_id": uuid.uuid4().hex,
             "status": "blocked",
             "source_ack": "worker-only",
+            # In-process cycle only: excludes Python startup/imports and final
+            # accounting/report persistence. None means a stage was not attempted.
+            "timing": {
+                "clock": "monotonic",
+                "started_mono": started,
+                "check_es_ms": None,
+                "worker_ms": None,
+            },
         }
         try:
-            check_es(config)  # no client joins Kafka if destination setup is wrong
-            result = run_worker(worker_arguments(config))
+            stage_started = time.monotonic()
+            try:
+                check_es(config)  # no client joins Kafka if setup is wrong
+            finally:
+                report["timing"]["check_es_ms"] = (
+                    time.monotonic() - stage_started
+                ) * 1000
+            stage_started = time.monotonic()
+            try:
+                result = run_worker(worker_arguments(config))
+            finally:
+                report["timing"]["worker_ms"] = (
+                    time.monotonic() - stage_started
+                ) * 1000
             if result != 0:
                 raise RuntimeError(f"Worker exited {result}")
             report["status"] = "completed"
@@ -180,6 +202,9 @@ def cycle(config):
             report["error_type"] = type(exc).__name__
             raise
         finally:
+            finished = time.monotonic()
+            report["timing"]["finished_mono"] = finished
+            report["timing"]["elapsed_ms"] = (finished - started) * 1000
             report["accounting"] = accounting(root)
             durable(
                 root / "automatic-cycles" / (report["cycle_id"] + ".json"),

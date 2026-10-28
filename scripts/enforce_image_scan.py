@@ -8,7 +8,7 @@ from pathlib import Path
 
 VERIFIED_FINDINGS = {
     "filebeat": {
-        ("GO-2026-5932", "golang.org/x/crypto", "v0.57.0"),
+        ("GO-2026-5932", "golang.org/x/crypto", "v0.58.0"),
     },
     "kibana": {
         ("CVE-2026-85393", "node-forge", "1.4.0+cncguard.1"),

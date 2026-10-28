@@ -1,0 +1,55 @@
+{
+  "baseline_job": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/40671358463/job/122758646661",
+  "baseline_head": "719c839489b56faea9db16de39a26a2b17f8e4fb",
+  "source_sha256": {
+    "deploy/images/uv-stage.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
+    "deploy/images/uv.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
+    "deploy/images/uv-rustls.patch": "4b28ce364b3865a2d5bfebff64faee810f9067e32cb6bee1a0967f23f6f09047",
+    "scoring/Dockerfile": "cc2059c9fc5f05e30b7de64dd6506886997bbc81c1cd5243e269a577f155a047",
+    "deploy/images/nifi.Dockerfile": "ea18c3b07f8854dbb4f19e00e713ceeec92a0ac852eea162ce912036d3ade99e",
+    "deploy/images.json": "70316311bb25a12199c0537b41c79e45bdf7d88f8061d4d301117b1aa9975789",
+    "deploy/build-targets.json": "ce5c4c8f0d30dfc554e5967b86bfbc77f16c616f4ac1ec46f03c37426893e593",
+    "scripts/image_inventory.py": "2b47caac6bff09eff606224299d84e4498349933caa992502ffda179402e068e",
+    "tests/test_dependency_infra.py": "b22aaa323f24286a54cd0bce497db0a3c86d385d0fb375188373719614506a5d"
+  },
+  "raw_validation_sha256": "d83a5bbdb71e2448e9ae25651919ecc44c96692ce2b1d6283056eb5da792f3fb",
+  "raw_entries_sha256": {
+    "old-api.json": "8f7650dbbc9d29d399158e06f7549e6ee871b41ebd2b5f0414435e27c1511275",
+    "api.json": "ac5e20fc6877286a13b735eefb63a73d126ede66c1a699023f7e45ef8d0ce147",
+    "nifi.json": "e71be65eff426b5ca56ce6a0eec0ebcf2534076dafbcde233247630ef22a0cb9",
+    "uv.json": "7afc73af4b2d3aaa26d34ae9f7b436eac4f993445ad89acc018789de16fbe732",
+    "auditable-build.log": "0d7e7d414cb0ac3aee65bd7a59443a6b6370bdf8ebf3827633a4806d306357e8",
+    "final-uv-build.log": "18203bffe7e88f1bdb5eb3b98c0393fb5c7f6e650b1d97a0c1b6c022ac5b7056",
+    "api-build.log": "a21cb294905548d829464c67d7c035679b45e62beb1cf1a9ea4bac6a43f361af",
+    "nifi-build.log": "3c6bdd8942c7ac76bee2c6a063e6ddbeb3066f80c41991dc20d4b2266cb85309",
+    "tests.log": "2d0710c92350e7d43eda2f3f6249bf8c9c9400b914c9c242f0b05f6b040f4449"
+  },
+  "scanner": "aquasec/trivy:0.76.1@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+  "scan_flags": {
+    "scanners": "vuln",
+    "severity": "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL",
+    "ignore_unfixed": false
+  },
+  "full_tests": {
+    "passed": 706,
+    "subtests_passed": 368,
+    "skipped": 7
+  },
+  "scoped_tests": {
+    "passed": 23,
+    "subtests_passed": 18
+  },
+  "cli_smoke": [
+    "uv 0.13.6 (x86_64-unknown-linux-musl)",
+    "uvx 0.13.6 (x86_64-unknown-linux-musl)",
+    "NiFi uv 0.13.6 (x86_64-unknown-linux-musl)"
+  ],
+  "cleanup": "No containers remain with task label uv-rustls-20261028",
+  "review": "SELF_REVIEW / NOT_INDEPENDENT; no delegate used",
+  "patch_format_equivalence": {
+    "build_patch_sha256": "c7547e64e61ee7e1cb8585a7f600c00ce57460c2bafd5befacd2fe55dd65eef6",
+    "current_patch_sha256": "4b28ce364b3865a2d5bfebff64faee810f9067e32cb6bee1a0967f23f6f09047",
+    "patched_Cargo_lock_sha256": "6d5b794c24468c28e8e897eb6d3a8aee52f77b53d0cbdd88cfcca3517eacf473",
+    "verified": "Zero-context patch applies to exact upstream Cargo.lock and produces byte-identical patched lock used by local image builds; no Rust source or dependency change"
+  }
+}

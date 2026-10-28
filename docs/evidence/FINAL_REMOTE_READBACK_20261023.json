@@ -1,0 +1,158 @@
+{
+  "checked_utc": "2026-10-23T17:07:51.192286+00:00",
+  "main": "5005ccde81f16cd2deac6ee3b30085d773e0fc88",
+  "expected_main": "5005ccde81f16cd2deac6ee3b30085d773e0fc88",
+  "main_unchanged": true,
+  "open_pr_count": 11,
+  "open_issue_count": 11,
+  "changed_or_new_pr_heads": [],
+  "all_audited_prs_still_open": true,
+  "pull_requests": [
+    {
+      "baseRefName": "main",
+      "headRefName": "fix/infra-dependency-refresh-20261023",
+      "headRefOid": "67ee0345aa6bddc4a4c22f8789f4ae9bb0098f35",
+      "isDraft": false,
+      "number": 92,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/92"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "perf/cg32-graph-load-20261023",
+      "headRefOid": "c49813df9eb0ee9a4735c1af4372ddc85c01d9e3",
+      "isDraft": true,
+      "number": 91,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/91"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "fix/cg14-completion-20261022",
+      "headRefOid": "505a8eb4c173b781426cb3db678429b949da664d",
+      "isDraft": false,
+      "number": 73,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/73"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "codex/secure-lab-compose",
+      "headRefOid": "8428d7a2e87761860ba50ab32fd7d0d7b354bb1c",
+      "isDraft": false,
+      "number": 44,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/44"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feat/cg04-python-reproducible-env",
+      "headRefOid": "a0c33600b99c9af9decb90d8129306244d59b35d",
+      "isDraft": false,
+      "number": 43,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/43"
+    },
+    {
+      "baseRefName": "feat/11-reproducible-acceptance",
+      "headRefName": "feat/2-ai4i-source-audit",
+      "headRefOid": "84dfb7cd0c1ad7b7392ef69f3696230d12fd51c9",
+      "isDraft": false,
+      "number": 41,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/41"
+    },
+    {
+      "baseRefName": "feat/8-rf-controlled-evaluation",
+      "headRefName": "feat/11-reproducible-acceptance",
+      "headRefOid": "01c196e2663d3a7ee697e64bcaa8095ae5e1f0df",
+      "isDraft": false,
+      "number": 40,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/40"
+    },
+    {
+      "baseRefName": "feat/27-delivery-evidence-index",
+      "headRefName": "feat/8-rf-controlled-evaluation",
+      "headRefOid": "ce06c47a72e1d73113251cd39178f9f5cf8fb44e",
+      "isDraft": false,
+      "number": 39,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/39"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feat/27-delivery-evidence-index",
+      "headRefOid": "9e3a15608f9359f3a74609c1fcfa8f0383ea5b8c",
+      "isDraft": false,
+      "number": 38,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/38"
+    },
+    {
+      "baseRefName": "t3/iniciar-tareas-asignadas",
+      "headRefName": "feat/cg03-smb-contracts",
+      "headRefOid": "9066c71cdcd1e70f7b346e4ab9fa6e73fe6e863c",
+      "isDraft": false,
+      "number": 30,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/30"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "t3/iniciar-tareas-asignadas",
+      "headRefOid": "4385209783871aaef15d267596364789e287546b",
+      "isDraft": false,
+      "number": 29,
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/29"
+    }
+  ],
+  "issues": [
+    {
+      "number": 89,
+      "title": "[CG40] Auditar selección anidada, calibración y decisión de modelo antes de escalar inferencia",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/89"
+    },
+    {
+      "number": 88,
+      "title": "[CG39] Evaluar MLP y nuevas señales de rareza y registrar alternativas condicionadas",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/88"
+    },
+    {
+      "number": 87,
+      "title": "[CG38] Evaluar EBM y GAM y documentar explicaciones de alertas",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/87"
+    },
+    {
+      "number": 85,
+      "title": "[CG36] Comparar referencias y clasificadores sencillos con coste y reglas interpretables",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/85"
+    },
+    {
+      "number": 83,
+      "title": "[CG34] Explorar alternativas ML y escalar la evidencia antes de elegir el modelo",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/83"
+    },
+    {
+      "number": 82,
+      "title": "[CG33] Registrar la interpretación docente de G49/G62, versión de rúbrica y vía de entrega",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/82"
+    },
+    {
+      "number": 81,
+      "title": "[CG32] Medir una carga breve del grafo integrado con el modelo propio de entrega",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/81"
+    },
+    {
+      "number": 80,
+      "title": "[CG31] Actualizar la matriz de 40 criterios con objetivos y aceptaciones vigentes",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/80"
+    },
+    {
+      "number": 37,
+      "title": "[CG30] IA ML eta diseinu aukeren justifikazioa",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/37"
+    },
+    {
+      "number": 27,
+      "title": "[CG27] 3. mugarria · Defentsa eta azken dokumentazioa",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/27"
+    },
+    {
+      "number": 26,
+      "title": "[CG26] Demo erreproduzigarria eta taldearen defentsa prestatu",
+      "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/26"
+    }
+  ],
+  "limits": "Read-only final state snapshot; no CI watcher, approval, merge or issue closure"
+}

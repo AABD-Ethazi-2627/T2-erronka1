@@ -1,0 +1,139 @@
+{
+  "cleanup_errors": [],
+  "cycles": {
+    "completed": 13
+  },
+  "drain_s": 29.045272010029294,
+  "duration_s": 10,
+  "expected": 10,
+  "filebeat_sha256": "6c8fce6c5a6f7ce3a37b7f5e31330680d66162ed90bb8c9cd80f97df159270b1",
+  "finished_utc": "2026-10-28T10:02:15.302766Z",
+  "first_offer_mono": 529403.99818974,
+  "fixture_sha256": "803f912d71884c026dbd78e97271497d7a956c55303051fde84b3ffa05f142ad",
+  "graph": {
+    "attempts": 1,
+    "bootstrap_servers": "kafka:19092",
+    "es_index": "cnc-alerts-cg32-rebuilt-pilot-r1-cab63c",
+    "es_url": "http://elasticsearch:9200",
+    "group_id": "cg32-rebuilt-pilot-r1-cab63c",
+    "legacy_source_kind": "cg14-lab-kafka",
+    "manifest": "/home/admin/labs/cg32-campaign-20261028/runs/rebuilt-pilot-r1-cab63c/pinned-manifest.json",
+    "max_poll_interval_ms": 300000,
+    "max_polls": 3,
+    "max_records": 1,
+    "offset_reset": "earliest",
+    "root": "/home/admin/labs/cg32-campaign-20261028/runs/rebuilt-pilot-r1-cab63c/worker",
+    "scoring_url": "http://api:8000/predict",
+    "source_kind": "lab_fixture",
+    "source_namespace": "cg32-e5806044/rebuilt-pilot-r1-cab63c",
+    "timeout": 0.5,
+    "topic": "cg32-rebuilt-pilot-r1-cab63c"
+  },
+  "health": {
+    "model_version": "ai4i-current-state-v4",
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "status": "ready",
+    "temporal_prediction_enabled": false
+  },
+  "http_repeated_posts": 0,
+  "identity_kind": "rebuilt_candidate",
+  "identity_record_sha256": "0fe5eee773877f8946cce5db6fc6ecccc7a199bc44616d51519e4a66f1fc9d99",
+  "kafka_committed": {
+    "committed": 10,
+    "end": 10,
+    "lag": 0
+  },
+  "label": "rebuilt-pilot",
+  "last_seen_mono": 529438.927731608,
+  "manifest_sha256": "b85be76ef47ee88f34294fe009e9f4e21d3b3d78f10c8ba6b276389452136d5a",
+  "metrics": {
+    "bytes": {
+      "es_index_store": 102883,
+      "input": 847,
+      "kafka_topic_values": 673,
+      "worker_root": 565248
+    },
+    "cpu_s": {
+      "api-1": 0.12731797191480873,
+      "elasticsearch-1": 1.8319402245314558,
+      "filebeat-1": 0.01132099075607257,
+      "kafka-1": 0.47166409352382177,
+      "nifi-1": 10.897992373784568
+    },
+    "drain_s": 29.045272010029294,
+    "e2e_max_ms": 25928.413645015098,
+    "e2e_n": 10,
+    "e2e_p50_ms": 17855.141396052204,
+    "e2e_p95_ms": 25928.413645015098,
+    "http_non_200": 0,
+    "http_p50_ms": 12.360941036604345,
+    "http_p95_ms": 19.906157976947725,
+    "http_requests": 10,
+    "lag_final": 0,
+    "lag_initial": 0,
+    "lag_max": 9,
+    "offered_eps": 0.999874657598668,
+    "producer_lag_max_ms": 1.7304890789091587,
+    "rss_max_mib": {
+      "api-1": 133.8,
+      "elasticsearch-1": 893.9,
+      "filebeat-1": 17.79,
+      "kafka-1": 308.3,
+      "nifi-1": 731.8
+    },
+    "throughput_eps": 0.28629061433953373
+  },
+  "model_version": "ai4i-current-state-v4",
+  "name": "rebuilt-pilot-r1-cab63c",
+  "nifi": {
+    "group": "81f3b79b-01a1-1000-b0ff-a68fc4d4f746",
+    "period": "2 sec",
+    "processor_periods": {
+      "Capture cycle exit diagnostics": "5 sec",
+      "Retain cycle diagnostics": "5 sec",
+      "Retain cycle output": "5 sec",
+      "Schedule bounded source cycle": "2 sec",
+      "Single Kafka owner": "5 sec"
+    }
+  },
+  "nifi_exit_status": {
+    "0": 13
+  },
+  "observer_errors": [],
+  "offer_elapsed_s": 9.001840631943196,
+  "pause": {
+    "at_s": null,
+    "for_s": 0,
+    "kill_at_s": null
+  },
+  "pause_observed": null,
+  "rate": 1,
+  "reconciliation": {
+    "backlog_uncommitted": 0,
+    "balance_ok": true,
+    "es_docs": 10,
+    "es_duplicate_event_ids": 0,
+    "es_without_saved_job": 0,
+    "jobs_not_in_kafka": 0,
+    "kafka_missing_offered": 0,
+    "kafka_not_observed": 0,
+    "kafka_records": 10,
+    "kafka_repeated_lines": 0,
+    "kafka_unexpected": 0,
+    "observed": 10,
+    "offered": 10,
+    "offered_unique": 10,
+    "pending": 0,
+    "rejected": 0,
+    "saved": 10,
+    "saved_missing_in_es": 0,
+    "valid_lost": 0
+  },
+  "started_utc": "2026-10-28T10:00:01.336157Z",
+  "status": "completed",
+  "stopped_by_budget": null,
+  "worker_attempts": {
+    "200": 10,
+    "201": 10
+  }
+}

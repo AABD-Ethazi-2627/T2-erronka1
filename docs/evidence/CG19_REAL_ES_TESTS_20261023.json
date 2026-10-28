@@ -1,0 +1,41 @@
+{
+  "started_utc": "2026-10-23T16:53:01.415360+00:00",
+  "status": "passed",
+  "container": "t2-review-cg19-20261023-6c74",
+  "owner_label": {
+    "cnc.review.owner": "t2-review-20261023-cg19"
+  },
+  "image_id": "sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026",
+  "image_digests": [
+    "docker.elastic.co/elasticsearch/elasticsearch@sha256:82ac14f43fe701992e601f4cc81e1c0d7dbc5a2576d8cd736006452925df4026"
+  ],
+  "data_preserved_at": "/home/Fedora/t2-review-cg19-20261023-6c74",
+  "test_source_sha256": "d63408b89af6f7f0780bc1119d312731e408667f50ddcdc5406a2b40cf91cd6e",
+  "scope": "Dashboard query tests only; fresh ES without product final pipeline",
+  "log": "/mnt/d/github/_local/t2-review-20261023/cg19-es-tests.log",
+  "container_stopped_data_preserved": true,
+  "finished_utc": "2026-10-23T16:54:33.850395+00:00",
+  "transport": "Host to verified own container on an internal Docker bridge; no published port",
+  "es_url": "http://172.29.0.2:9200",
+  "first_attempt": "CG19_REAL_ES_ATTEMPT1_20261023.json",
+  "resumed_utc": "2026-10-23T16:54:28.702039+00:00",
+  "exit_code": 0,
+  "tests": 3,
+  "skips": 0,
+  "warnings_as_errors": true,
+  "cluster_uuid": "s_hiae9lSpm2i5Oaene2_Q",
+  "command": [
+    "/mnt/d/github/_local/t2-review-20261023/cg32/.venv/bin/python",
+    "-W",
+    "error",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_lab_dashboard_es.py",
+    "-v"
+  ],
+  "log_sha256": "f03036323f4e905ed81b10a1889cb7a866f2fbd2d04290e2594c7b1b019f97b0"
+}

@@ -1,5 +1,20 @@
+# Shared pinned uv source build: only rustls changes relative to upstream 0.13.6.
+FROM rust:1.99.0-alpine@sha256:0cce0a5e0e8ba67b455257a3a02a1d99005f382748789d6464460028810f1627 AS uv-build
+RUN apk add --no-cache clang cmake make musl-dev perl pkgconf patch
+ADD --checksum=sha256:c2e01687fbbcb109277698ec97baca46e1547656ad580abf6d993f9c459af1c7 https://github.com/astral-sh/uv/archive/refs/tags/0.13.6.tar.gz /tmp/uv.tar.gz
+RUN mkdir /src && tar -xzf /tmp/uv.tar.gz -C /src --strip-components=1
+COPY deploy/images/uv-rustls.patch /tmp/uv-rustls.patch
+WORKDIR /src
+# Preserve embedded dependency metadata so Trivy can still audit the Rust closure.
+RUN patch -p1 < /tmp/uv-rustls.patch \
+    && cargo install --locked --version 0.7.7 cargo-auditable \
+    && CARGO_BUILD_JOBS=4 CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 \
+       cargo auditable build --locked --release --package uv --bin uv --bin uvx
+FROM scratch AS uv
+COPY --from=uv-build /src/target/release/uv /uv
+COPY --from=uv-build /src/target/release/uvx /uvx
+ENTRYPOINT ["/uv"]
 FROM apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad AS nifi
-FROM ghcr.io/astral-sh/uv:0.13.5@sha256:32a7bb39b496babbd997b0a39a4d66c126bdaf5661b302bf6f06abda8deca6ff AS uv
 FROM cgr.dev/chainguard/wolfi-base:latest@sha256:360896efb0753a5701c48f860e17130c205eae5a264797aa3e7ea126ee2923a7 AS jackson
 ADD --checksum=sha256:8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar /jackson-core-2.22.3.jar
 ADD --checksum=sha256:556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9 https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar /jackson-databind-2.22.3.jar

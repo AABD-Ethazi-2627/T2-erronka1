@@ -7,5 +7,6 @@
   "mock-python": "deploy/images/mock-python.Dockerfile",
   "nifi": "deploy/images/nifi.Dockerfile",
   "python": "deploy/images/python.Dockerfile",
-  "wolfi": "deploy/images/wolfi-base.Dockerfile"
+  "wolfi": "deploy/images/wolfi-base.Dockerfile",
+  "uv": "deploy/images/uv.Dockerfile"
 }

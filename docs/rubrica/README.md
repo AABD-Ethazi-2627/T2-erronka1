@@ -4,11 +4,22 @@ Este directorio mantiene el foco técnico del proyecto: qué exige el docente pa
 
 | Documento | Para qué usarlo |
 |---|---|
+| [Estado actual del 28/10: 40 criterios](ESTADO_20261028.md) | Consultar objetivos, evidencias por SHA, aceptaciones vigentes y pendientes concretos de CG31/#80 |
+| [Registro de aclaraciones docentes](ACLARACIONES_20261023.md) | Preparar CG33/#82 y registrar respuestas reales, sin atribuir aprobaciones pendientes |
 | [Objetivos y etapas](OBJETIVOS_Y_ETAPAS.md) | Diseñar el trabajo y consultar la interpretación de cada descriptor de 10 |
-| [Seguimiento](SEGUIMIENTO.md) | Asociar criterio, responsable, issue y evidencia revisable |
+| [Seguimiento histórico](SEGUIMIENTO.md) | Consultar el corte del 22/10 y sus añadidos fechados; sus estados remotos han sido superados por el corte actual |
 | [Fuente original extraída](fuente.json) | Consultar el texto docente exacto, coordenadas de celdas y SHA-256 |
 
 Las [30 guías de issues](../issues/README.md) concretan estos criterios en pasos y pruebas para estudiantes. CG28 (#35), CG29 (#36) y CG30 (#37) separan API, Filebeat y justificación conceptual.
+
+El corte actual parte de `main` `5005ccde81f16cd2deac6ee3b30085d773e0fc88`.
+#10, #11, #20, #24 y #25 están cerradas; #26, #27 y #37 siguen abiertas.
+La ampliación CG31–CG40 está recogida en el estado actual y en la
+[revisión de las 11 issues abiertas](../evidence/PENDING_REQUIREMENTS_20261023.md).
+`SEGUIMIENTO.md`, `ESTADO_20261022.md`, `OBJETIVOS_Y_ETAPAS.md` y `fuente.json`
+se conservan con sus hashes CG25. Sus reservas de aceptación genérica, test nuevo
+y procesadores NiFi nativos se leen con la fecha original y las decisiones PM
+posteriores. El nuevo corte no acredita defensa, entrega o aprobación docente.
 
 ## Cómo usarla durante el trabajo
 

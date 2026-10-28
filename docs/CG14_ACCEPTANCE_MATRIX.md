@@ -1,8 +1,14 @@
 # CG14 — matriz de aceptación y evidencia
 
-Fecha de corte vigente: **2026-10-22**. Issue oficial: [#14](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/14).
+> Actualización verificada el 26/10/2026: #14 está cerrada desde el
+> 22/10/2026 a las 13:33:36 UTC. La [decisión PM](CG14_STATUS_20261023.md)
+> conserva su alcance; los diagnósticos RESTORE del corte técnico siguiente
+> no reabren esa aceptación ni prueban aceptación académica. Las referencias
+> a issues/PR abiertas de ese corte son históricas.
 
-## Estado vigente sobre la base integrada
+Fecha del corte técnico conservado: **2026-10-22**. Issue oficial: [#14](https://github.com/AABD-Ethazi-2627/T2-erronka1/issues/14).
+
+## Auditoría técnica del corte conservado
 
 Base revisada: `3c957235e81e449bace661f8723f91edb02eb3b7`, rama
 `feat/17-maintenance-planner`. Las seis ramas específicas de CG14 están
@@ -30,7 +36,7 @@ las frases históricas siguientes que indican su ausencia no describen la base
 actual. El ensayo PR68 usa modelos sintéticos y un driver staged externo;
 no acredita un ConsumeKafka del producto con ACK posterior a todos los destinos.
 La aceptación humana, los contratos externos y RESTORE funcional siguen
-pendientes. **CG14 continúa PARTIAL y la issue permanece abierta.**
+pendientes. **El ensayo RESTORE de este corte continúa PARTIAL; no modifica la aceptación PM posterior de #14.**
 
 ## Registro histórico hasta el 21 de octubre
 

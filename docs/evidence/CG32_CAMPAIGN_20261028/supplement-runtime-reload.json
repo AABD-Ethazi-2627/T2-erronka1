@@ -1,0 +1,12 @@
+{
+  "python": "3.12.14",
+  "sklearn": "1.5.0",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "joblib": "1.5.3",
+  "reload_max_abs_difference": {
+    "rf.pkl": 0.0,
+    "if.pkl": 0.0
+  },
+  "thread_limits": "OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=MKL_NUM_THREADS=NUMEXPR_NUM_THREADS=1 for supplementary benchmark"
+}

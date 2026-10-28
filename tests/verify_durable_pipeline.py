@@ -21,6 +21,13 @@ from urllib.parse import urlsplit
 
 import httpx
 import uvicorn
+from es_runtime import (
+    DockerRuntime,
+    add_runtime_arguments,
+    cluster_uuid,
+    run_identity,
+    write_evidence,
+)
 from test_cg14_durable_pipeline import NAMESPACE, RAW, message
 from test_scoring_replay import AnomalyDouble, RiskDouble, manifest
 
@@ -33,7 +40,9 @@ from scripts.image_inventory import image
 IMAGE = image("elasticsearch")
 
 
-async def verify(output):
+async def verify(output, distro=None, image_ref=IMAGE, docker_host=None):
+    runtime = DockerRuntime(image_ref, distro=distro, host=docker_host)
+    run_id = uuid.uuid4().hex
     if output.exists():
         raise FileExistsError("Refuse replacing verification evidence")
     # Reserve the evidence filename before starting any process/container.
@@ -41,7 +50,9 @@ async def verify(output):
         handle.write('{"status":"RUNNING"}\n')
     evidence = {
         "status": "RUNNING",
-        "image": IMAGE,
+        "image": image_ref,
+        "docker_command": runtime.prefix,
+        "verification_id": run_id,
         "transport": "real-loopback-http+docker-exec-es",
         "kafka": "NOT_EXECUTED",
         "nifi": "NOT_EXECUTED",
@@ -53,6 +64,7 @@ async def verify(output):
         name: digest(Path(name).read_bytes())
         for name in (
             "tests/verify_durable_pipeline.py",
+            "tests/es_runtime.py",
             "scripts/durable_pipeline.py",
             "scripts/run_durable_pipeline.py",
             "scripts/kafka_archive.py",
@@ -71,15 +83,15 @@ async def verify(output):
     listener = socket.socket()
 
     def command(args, **kwargs):
+        if args[0] == "docker":
+            args = runtime.prefix + args[1:]
         return subprocess.run(
             args, capture_output=True, check=True, timeout=30, **kwargs
         )
 
     try:
-        image = command(
-            ["docker", "image", "inspect", IMAGE, "--format", "{{.Id}}"], text=True
-        ).stdout.strip()
-        evidence["image_id"] = image
+        image_id = runtime.resolve_image()
+        evidence["image_id"] = image_id
         container = command(
             [
                 "docker",
@@ -91,6 +103,7 @@ async def verify(output):
                 "--label",
                 "t2.purpose=durable-pipeline-verification",
                 "--network=none",
+                *run_identity(run_id),
                 "--cap-drop=ALL",
                 "--security-opt=no-new-privileges",
                 "--memory=1280m",
@@ -109,14 +122,12 @@ async def verify(output):
                 "ingest.geoip.downloader.enabled=false",
                 "-e",
                 "ES_JAVA_OPTS=-Xms384m -Xmx384m",
-                IMAGE,
+                image_id,
             ],
             text=True,
         ).stdout.strip()
         evidence["container"] = container
-        info = json.loads(command(["docker", "inspect", container], text=True).stdout)[
-            0
-        ]
+        info = runtime.verify_owned(container, run_id, image_id)
         assert info["HostConfig"]["NetworkMode"] == "none"
         assert not info["HostConfig"].get("PortBindings")
         assert all(m["Type"] == "tmpfs" for m in info["Mounts"])
@@ -167,6 +178,7 @@ async def verify(output):
                 ready = await asyncio.to_thread(es, "GET", "/")
                 if ready.status_code == 200:
                     evidence["es_version"] = ready.json()["version"]["number"]
+                    evidence["cluster_uuid"] = cluster_uuid(ready.json())
                     break
             except subprocess.CalledProcessError:
                 pass  # fresh disposable server is still booting, bounded below
@@ -418,24 +430,30 @@ async def verify(output):
         evidence.update(status="FAILED", error=type(exc).__name__ + ": " + str(exc))
         raise
     finally:
+        primary_error = sys.exc_info()[1]
         if server:
             server.should_exit = True
         if thread:
             await asyncio.to_thread(thread.join, 10)
             evidence["http_server_stopped"] = not thread.is_alive()
+            if not evidence["http_server_stopped"]:
+                evidence["status"] = "FAILED"
         listener.close()
-        if container:
-            cleanup = await asyncio.to_thread(
-                subprocess.run,
-                ["docker", "rm", "--force", container],
-                capture_output=True,
-                timeout=30,
-                check=False,
-            )
-            evidence["container_removed"] = cleanup.returncode == 0
-        output.write_text(json.dumps(evidence, indent=2) + "\n")
-        if not evidence.get("container_removed", True) or not evidence.get(
-            "http_server_stopped", True
+        try:
+            if container:
+                await asyncio.to_thread(
+                    runtime.cleanup,
+                    container,
+                    run_id,
+                    image_id,
+                    evidence,
+                    primary_error,
+                )
+        finally:
+            write_evidence(output, evidence, primary_error or sys.exc_info()[1])
+        if primary_error is None and (
+            not evidence.get("container_removed", True)
+            or not evidence.get("http_server_stopped", True)
         ):
             raise RuntimeError(
                 "Disposable verification resources did not stop cleanly; "
@@ -446,4 +464,6 @@ async def verify(output):
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--output", required=True, type=Path)
-    asyncio.run(verify(cli.parse_args().output))
+    add_runtime_arguments(cli, IMAGE)
+    args = cli.parse_args()
+    asyncio.run(verify(args.output, args.docker_via_wsl, args.image, args.docker_host))

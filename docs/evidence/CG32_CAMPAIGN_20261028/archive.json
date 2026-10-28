@@ -1,0 +1,13 @@
+{
+  "file": "raw-runs.zip",
+  "sha256": "ebde37ea97c9d43fb8725e9e0ccc083e626a8e60de83f93d672dd55b73c46641",
+  "bytes": 2646665,
+  "entries": 238,
+  "runs": 7,
+  "offered_and_saved": 1860,
+  "limits": [
+    "Synthetic nominal fixtures only",
+    "No historical bundle substitution",
+    "No secrets, lab .env, models, shared services or volume contents included"
+  ]
+}

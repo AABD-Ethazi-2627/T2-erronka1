@@ -1,0 +1,20 @@
+{
+  "candidate": "01a5f2b77ed890fac0d47e525ebced62733a1122",
+  "tree": "8ba28e6c6727419589e9498f57b6b7d44bb0b03d",
+  "base": "b7b9c05fc820516f3e1035194503a77b15460aa8",
+  "scope": "Correcciones cleanup/token, gate Trivy, observabilidad/scheduling y conservación de contratos/documentación",
+  "actionable_findings": [],
+  "result": "no_actionable_findings_in_reviewed_scope",
+  "focused_tests": {"run": 40, "failures": 0, "errors": 0, "skipped": 0, "process_exit": 0},
+  "trivy_report_contracts": {"accepted": 7, "negative_mutations_rejected": 42, "verified_findings_unchanged": true},
+  "validation_limits": [
+    "No operación real de NiFi/TLS/cleanup ni campaña CG32",
+    "Cuatro informes históricos solo prueban compatibilidad de formato",
+    "Nueve builds/escaneos, pruebas de parches y tres casos ES quedan fuera de esta revisión y pendientes del agente runtime",
+    "Recibos completos del padre inspeccionados, no ejecutados de nuevo por el revisor",
+    "No certificación de despliegue ni dictamen nuevo sobre CVE"
+  ],
+  "human_teacher_pending": ["Decisiones docentes y rúbrica", "Revisión humana del euskera", "Explicación de cuatro integrantes y ensayo", "Entrega efectiva y justificante"],
+  "report": "D:/cnc-guard-final-review-20261026/report.md",
+  "evidence": "D:/cnc-guard-final-review-20261026/review-evidence.json"
+}

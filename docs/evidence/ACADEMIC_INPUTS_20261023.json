@@ -1,0 +1,55 @@
+{
+  "capture_method": "User-supplied attachments; no Moodle download or authentication",
+  "files": [
+    {
+      "source": "C:\\Users\\unaiu\\.t3\\userdata\\attachments\\2b3d281e-e5ca-4618-99d1-43bcad6bc49d-95e18226-cd53-4140-8ca0-82675db208b3-pdf.pdf",
+      "preserved_copy": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\academic-inputs-20261023\\oral_guide.pdf",
+      "sha256": "ab3782ac487f4f3b7b9c0349bbf87e0aa4a638fe5344956b914b053ec6072318"
+    },
+    {
+      "source": "C:\\Users\\unaiu\\.t3\\userdata\\attachments\\2b3d281e-e5ca-4618-99d1-43bcad6bc49d-fd046465-5eb5-457c-bb6d-d6297c97880d.png",
+      "preserved_copy": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\academic-inputs-20261023\\course_screen.png",
+      "sha256": "d2411f79f4d9a485f4d44cff4ba00c426046340c295aa4af11837b929dda6250"
+    }
+  ],
+  "pages": 6,
+  "pdf_metadata": {
+    "format": "PDF 1.4",
+    "title": "GIDA: Ahozko komunikazioa euskeraz ",
+    "author": "",
+    "subject": "",
+    "keywords": "",
+    "creator": "",
+    "producer": "Skia/PDF m156 Google Docs Renderer",
+    "creationDate": "",
+    "modDate": "",
+    "trapped": "",
+    "encryption": null
+  },
+  "provided_in_conversation_utc": "2026-10-23T17:12:42.984371+00:00",
+  "forum_posts": [
+    {
+      "author_as_supplied": "Aitor Aretxaga Agirre",
+      "authored_as_supplied": "2026-10-22 18:52, timezone not specified in pasted post",
+      "private_transcription": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\academic-inputs-20261023\\forum-costs.txt",
+      "sha256": "f292e1ff07785552ace80eaefaf0b7b2fd25ecfcb94aa45886c73affdbbaca32",
+      "capture_method": "Body transcribed from user message; repetitive Moodle UI omitted; equations normalized in plain text",
+      "online_verification": false
+    },
+    {
+      "author_as_supplied": "Aitor Aretxaga Agirre",
+      "authored_as_supplied": "2026-10-21 14:51, timezone not specified in pasted post",
+      "private_transcription": "D:\\github\\AABD-Ethazi-2627\\B-taldea\\outputs\\academic-inputs-20261023\\forum-tabular.txt",
+      "sha256": "262414f2008a4c0a9c5d8cb9c2b234b31ff3b347c58b68a2bcc2b1ed6a80ff23",
+      "capture_method": "Body transcribed from user message; repetitive Moodle UI omitted; equations normalized in plain text",
+      "online_verification": false
+    }
+  ],
+  "interpretation_limits": [
+    "The supplied forum posts clarify exercise costs and snapshot/tabular modeling; they do not confirm academic acceptance of G49/G62.",
+    "Financial reality is asserted by the post, not independently audited here.",
+    "The screenshot shows the oral guide and previous submissions, not a final deadline or defense duration.",
+    "Documentation plus class presentation is the user's tentative interpretation, not a confirmed final submission specification.",
+    "The active model accepts five sensors plus machine_type; the five-column forum example requires a specific clarification before changing the sealed bundle."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "exact_fold_task_counts": {
+    "inner": 450,
+    "outer": 150,
+    "calibration_inner": 54,
+    "calibration_outer": 18
+  },
+  "RF_research_package_hash_verified": "34a14ab97a0e1facc4f4eff10b7ed9227516cc853d7400abd351ccef17cffe72",
+  "research_tests": {
+    "passed": 24,
+    "environment": "isolated scripts/ml_study_requirements.txt"
+  },
+  "scope": "Archived evidence and synthetic adapter tests; no new evaluation, promotion or human acceptance",
+  "synthetic_adapter_smoke": {
+    "complete": 50,
+    "warnings": 0
+  }
+}
