@@ -1,5 +1,22 @@
 # CG26: demo de la API vigente y preparación de defensa
 
+## Material listo para estudiar y ensayar
+
+1. [Explicaciones completas en castellano](AZALPENAK_20261028.md): cuatro
+   bloques, ejemplos y respuestas para comprender y explicar el proyecto.
+2. [Guion oral en euskera](DEFENTSA_GIDOIA_20261023.md): texto de exposición,
+   actualizado con la campaña del 28/10 y sus resultados.
+3. [Ensayo preparado](ENTSEGU_PRESTATUA_20261028.md): orden de archivos y
+   capturas, recorrido de casos, preguntas cruzadas y hoja de trabajo.
+4. [Consulta docente bilingüe y checklist de entrega](../rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md):
+   mensaje listo para copiar y selección de artefactos con sus fuentes.
+
+Empezar por las explicaciones y usar el ensayo para practicar con las evidencias
+ya guardadas. El enunciado contempla una demo live de diez minutos; el recorrido
+offline sirve para prepararla y como respaldo, sin sustituir la ejecución viva.
+Las condiciones finales se concretan mediante la consulta preparada. La sección
+técnica que sigue conserva sus comandos y su base histórica.
+
 Seguimiento vigente: [pendientes humanos del 28/10](PENDING_HANDOFF_20261028.md) y
 [matriz de 40 criterios del 28/10](../rubrica/ESTADO_20261028.md). El guion que
 sigue conserva su base histórica.
