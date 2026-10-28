@@ -91,24 +91,40 @@ def validate_plan(rate, duration):
     return rate * duration
 
 
-def offer(path, lines, rate, *, clock=time.monotonic, wall=time.time, sleep=None):
+def offer(
+    path,
+    lines,
+    rate,
+    *,
+    clock=time.monotonic,
+    wall=time.time,
+    sleep=None,
+    should_stop=None,
+    records=None,
+):
     """Append ``lines`` at a fixed schedule; never overwrite an existing file.
 
     The header and first line are written together so Filebeat's 228-byte
     fingerprint window is satisfied before the first scheduled instant.
-    Returns one record per line with scheduled/actual instants.
+    Returns one record per line actually written. ``should_stop`` is checked
+    before each write, including after a scheduled wait. A supplied ``records``
+    list retains partial evidence if a control or I/O error interrupts offering.
     """
     sleep = sleep or time.sleep
     fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_APPEND, 0o644)
-    records = []
+    records = records if records is not None else []
     try:
         start = clock()
         start_wall = wall()
         for index, line in enumerate(lines):
+            if should_stop is not None and should_stop():
+                break
             scheduled = start + index / rate
             delay = scheduled - clock()
             if delay > 0:
                 sleep(delay)
+                if should_stop is not None and should_stop():
+                    break
             payload = (line + "\n").encode()
             if index == 0:
                 payload = (HEADER + "\n").encode() + payload

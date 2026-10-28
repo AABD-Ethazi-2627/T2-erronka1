@@ -30,6 +30,8 @@ import sys
 import threading
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import wait as wait_futures
 from contextlib import closing
 from pathlib import Path
 
@@ -334,6 +336,14 @@ class Lab:
             f"/processors/{identifier}/run-status",
             json={"revision": entity["revision"], "state": state},
         )
+        wait(
+            lambda: (
+                self.nifi("GET", "/processors/" + identifier)["component"]["state"]
+                == state
+            ),
+            f"NiFi processor {identifier} did not reach {state}",
+            30,
+        )
 
     def stop_previous_groups(self):
         root = self.nifi("GET", "/flow/process-groups/root")["processGroupFlow"]
@@ -343,7 +353,7 @@ class Lab:
                 if processor["component"]["state"] == "RUNNING":
                     self.processor_state(processor["id"], "STOPPED")
 
-    def upload_graph(self, run_dir, period):
+    def upload_graph(self, run_dir, period, *, on_created=None):
         replacements = {
             "WORKER_CHECKOUT": str(REPO),
             "WORKER_PYTHON": self.state["python"],
@@ -377,10 +387,14 @@ class Lab:
         )
         response.raise_for_status()
         group = response.json()["id"]
+        if on_created:
+            on_created(group, {})
         flow = self.nifi("GET", "/flow/process-groups/" + group)["processGroupFlow"]
         processors = {
             p["component"]["name"]: p["id"] for p in flow["flow"]["processors"]
         }
+        if on_created:
+            on_created(group, processors)
         for identifier in processors.values():
             self.processor_state(identifier, "STOPPED")
 
@@ -404,9 +418,6 @@ class Lab:
         run_dir = (runs_root / name).resolve()
         if run_dir.parent != runs_root:
             raise ValueError("Run directory escapes the lab root")
-        for sub in ("input", "process-temp", "cycle-reports", "worker"):
-            (run_dir / sub).mkdir(parents=True)
-        lines = load.fixture_lines(REPO / "data/ai4i2020_train.csv", expected)
         topic, group = "cg32-" + name, "cg32-" + name
         index = "cnc-alerts-cg32-" + name.lower()
         graph = {
@@ -428,33 +439,12 @@ class Lab:
             "attempts": args.attempts,
             "timeout": args.timeout,
         }
-        # The worker only reads the manifest (never the pickles): pin a byte copy
-        # inside the run dir, which is the only lab path mounted into NiFi.
-        pinned = run_dir / "pinned-manifest.json"
-        pinned.write_bytes(manifest["path"].read_bytes())
-        graph["manifest"] = str(pinned)
-        (run_dir / "graph.json").write_text(json.dumps(graph, indent=1))
-        beat = (
-            (REPO / "filebeat/filebeat.yml")
-            .read_text()
-            .replace("['/mnt/cnc-stream/*.csv']", f"['/lab/runs/{name}/input/*.csv']")
-            .replace("['/mnt/cnc-smb/*.csv']", f"['/lab/runs/{name}/unused/*.csv']")
-            .replace("hosts: ['kafka:9092']", "hosts: ['kafka:19092']")
-            .replace("topic: cnc-sensors-lab-v2", "topic: " + topic)
-        )
-        (run_dir / "filebeat.yml").write_text(beat)
-        self.kafka_topic(topic)
-        create_index(self.state["es_url"], index)
-        self.compose("stop", "kibana", check=False)  # not part of measured graph
-        self.stop_previous_groups()  # single offset owner: one active graph only
-        nifi_group, processors = self.upload_graph(run_dir, args.period)
         record = {
             "name": name,
             "label": label,
             "rate": args.rate,
             "duration_s": args.duration,
             "expected": expected,
-            "fixture_sha256": load.fixture_hash(lines),
             "identity_kind": manifest["identity_kind"],
             "identity_record_sha256": manifest["identity_record_sha256"],
             "manifest_sha256": manifest["sha256"],
@@ -462,17 +452,11 @@ class Lab:
             "graph": graph,
             "nifi": {
                 "period": args.period,
-                "group": nifi_group,
-                # The trigger override does not change ExecuteStreamCommand's
-                # period; preserve the actual exported schedule for comparison.
-                "processor_periods": {
-                    processor["name"]: processor["schedulingPeriod"]
-                    for processor in json.loads(
-                        (run_dir / "nifi-flow.json").read_bytes()
-                    )["flowContents"]["processors"]
-                },
+                "group": None,
+                "processors": {},
             },
-            "filebeat_sha256": load.sha256(beat.encode()),
+            "status": "preparing",
+            "resources_attempted": [],
             "pause": {
                 "at_s": args.pause_at,
                 "for_s": args.pause_for,
@@ -480,10 +464,66 @@ class Lab:
             },
             "started_utc": load.utc(now()),
         }
-        self.state["runs"].append(name)
-        self.save()
+        # Reserve this attempt before preparing files or external resources.
+        run_dir.mkdir(parents=True)
+        load.write_new(run_dir / "run.json", record)
+        processors = record["nifi"]["processors"]
         bundle = manifest["path"].parent
+
+        def created(nifi_group, identifiers):
+            record["nifi"]["group"] = nifi_group
+            processors.update(identifiers)
+            self.persist_run(run_dir, record)
+
         try:
+            self.state["runs"].append(name)
+            self.save()
+            for sub in ("input", "process-temp", "cycle-reports", "worker"):
+                (run_dir / sub).mkdir()
+            lines = load.fixture_lines(REPO / "data/ai4i2020_train.csv", expected)
+            record["fixture_sha256"] = load.fixture_hash(lines)
+            # The worker only reads the manifest (never the pickles): pin a byte copy
+            # inside the run dir, which is the only lab path mounted into NiFi.
+            pinned = run_dir / "pinned-manifest.json"
+            pinned.write_bytes(manifest["path"].read_bytes())
+            graph["manifest"] = str(pinned)
+            (run_dir / "graph.json").write_text(json.dumps(graph, indent=1))
+            beat = (
+                (REPO / "filebeat/filebeat.yml")
+                .read_text()
+                .replace(
+                    "['/mnt/cnc-stream/*.csv']", f"['/lab/runs/{name}/input/*.csv']"
+                )
+                .replace("['/mnt/cnc-smb/*.csv']", f"['/lab/runs/{name}/unused/*.csv']")
+                .replace("hosts: ['kafka:9092']", "hosts: ['kafka:19092']")
+                .replace("topic: cnc-sensors-lab-v2", "topic: " + topic)
+            )
+            (run_dir / "filebeat.yml").write_text(beat)
+            record["filebeat_sha256"] = load.sha256(beat.encode())
+            for resource, prepare in (
+                ("topic", lambda: self.kafka_topic(topic)),
+                ("index", lambda: create_index(self.state["es_url"], index)),
+            ):
+                record["resources_attempted"].append(resource)
+                self.persist_run(run_dir, record)
+                prepare()
+            self.compose("stop", "kibana", check=False)
+            self.stop_previous_groups()
+            record["resources_attempted"].append("nifi")
+            self.persist_run(run_dir, record)
+            nifi_group, identifiers = self.upload_graph(
+                run_dir, args.period, on_created=created
+            )
+            created(nifi_group, identifiers)
+            record["nifi"]["processor_periods"] = {
+                p["name"]: p["schedulingPeriod"]
+                for p in json.loads((run_dir / "nifi-flow.json").read_bytes())[
+                    "flowContents"
+                ]["processors"]
+            }
+            record["resources_attempted"].append("api")
+            record["status"] = "running"
+            self.persist_run(run_dir, record)
             # Fresh API container per run: own ledger/timing files, same bundle.
             self.compose(
                 "up",
@@ -502,16 +542,29 @@ class Lab:
                 if pname != TRIGGER:
                     self.processor_state(identifier, "RUNNING")
             self.processor_state(processors[TRIGGER], "RUNNING")
+            record["resources_attempted"].append("filebeat")
+            self.persist_run(run_dir, record)
             self.compose(
                 "up", "-d", "--no-deps", "--force-recreate", "filebeat", run=name
             )
-            record.update(self.measure(args, run_dir, lines, graph, processors))
+            record.update(
+                self.measure(args, run_dir, lines, graph, processors, record=record)
+            )
         finally:
             self.finalize_run(
                 run_dir, graph, record, processors, bundle, sys.exc_info()[1]
             )
         print(json.dumps(record["metrics"], indent=1))
         return record
+
+    def persist_run(self, run_dir, record):
+        """Atomically update our reserved receipt; never expose truncated JSON."""
+        pending = run_dir / (".run-" + uuid.uuid4().hex + ".json")
+        try:
+            load.write_new(pending, record)
+            os.replace(pending, run_dir / "run.json")
+        finally:
+            pending.unlink(missing_ok=True)
 
     def finalize_run(self, run_dir, graph, record, processors, bundle, primary_error):
         # Cleanup boundaries are independent: a failed NiFi stop must not leave
@@ -546,23 +599,30 @@ class Lab:
                 ),
             )
         name = record["name"]
-        attempt(
-            "filebeat_stop",
-            lambda: self.compose("stop", "filebeat", run=name, check=False),
-        )
-        logs = attempt(
-            "api_logs",
-            lambda: self.compose("logs", "--no-color", "api", run=name, check=False),
-        )
-        if logs is not None:
+        resources = record.get("resources_attempted", ["api", "filebeat"])
+        if "filebeat" in resources:
             attempt(
-                "api_log_write",
-                lambda: (run_dir / "api.log").write_text(logs.stdout + logs.stderr),
+                "filebeat_stop",
+                lambda: self.compose("stop", "filebeat", run=name, check=False),
             )
-        attempt(
-            "api_stop",
-            lambda: self.compose("stop", "api", run=name, bundle=bundle, check=False),
-        )
+        if "api" in resources:
+            logs = attempt(
+                "api_logs",
+                lambda: self.compose(
+                    "logs", "--no-color", "api", run=name, check=False
+                ),
+            )
+            if logs is not None:
+                attempt(
+                    "api_log_write",
+                    lambda: (run_dir / "api.log").write_text(logs.stdout + logs.stderr),
+                )
+            attempt(
+                "api_stop",
+                lambda: self.compose(
+                    "stop", "api", run=name, bundle=bundle, check=False
+                ),
+            )
         record["finished_utc"] = load.utc(now())
         if primary_error is None and not errors:
             collected = attempt(
@@ -583,7 +643,7 @@ class Lab:
         if primary_error is not None:
             record["failure"] = {"error_type": type(primary_error).__name__}
         try:
-            load.write_new(run_dir / "run.json", record)
+            self.persist_run(run_dir, record)
         except Exception as exc:
             if primary_error is None:
                 raise RuntimeError("CG32 run receipt could not be persisted") from exc
@@ -595,7 +655,7 @@ class Lab:
                 "CG32 run cleanup or collection failed; inspect run.json"
             )
 
-    def measure(self, args, run_dir, lines, graph, processors):
+    def measure(self, args, run_dir, lines, graph, processors, *, record=None):
         es = self.state["es_url"]
         index = graph["es_index"]
         stop = threading.Event()
@@ -652,93 +712,170 @@ class Lab:
                 samples.append(item)
                 stop.wait(max(0.0, 2.0 - (time.monotonic() - started)))
 
-        threads = [threading.Thread(target=poll_es), threading.Thread(target=sample)]
-        for thread in threads:
-            thread.start()
-        try:
-            paused = {}
-            offer_thread_result = {}
+        threads = []
+        controller = None
+        executor = None
+        paused, offered = {}, []
+        stopped_by = None
+        offer_start = time.monotonic()
+        offer_elapsed = drain_start = drain_end = None
+        next_budget_check = 0.0
 
-            def pause_control():
-                if args.kill_at is not None:
-                    # Crash the worker mid-cycle (after HTTP, before offset commit
-                    # when it lands there): its uncommitted poll must be replayed.
-                    time.sleep(args.kill_at)
-                    deadline = time.monotonic() + 30
-                    while time.monotonic() < deadline:
-                        killed = self.compose(
-                            "exec",
-                            "-T",
-                            "nifi",
-                            "pkill",
-                            "-9",
-                            "-f",
-                            "scripts.run_automatic_graph",
-                            check=False,
-                        )
-                        if killed.returncode == 0:
-                            paused["killed_mono"] = time.monotonic()
-                            break
-                        time.sleep(0.05)
-                if args.pause_at is None:
+        def budget_exceeded(*, force=False):
+            nonlocal stopped_by, next_budget_check
+            if stopped_by:
+                return True
+            stamp = time.monotonic()
+            if not force and stamp < next_budget_check:
+                return False
+            next_budget_check = stamp + 0.5
+            lag = samples[-1].get("kafka", {}).get("lag") if samples else None
+            if lag is not None and lag > BUDGET["max_lag"]:
+                stopped_by = "max_lag"
+            elif du(self.root) > BUDGET["max_lab_disk_gib"] * 2**30:
+                stopped_by = "max_lab_disk"
+            return stopped_by is not None
+
+        def pause_control():
+            if args.kill_at is not None:
+                if stop.wait(args.kill_at):
                     return
-                time.sleep(args.pause_at)
-                paused["stop_mono"] = time.monotonic()
-                self.processor_state(processors[TRIGGER], "STOPPED")
-                time.sleep(args.pause_for)
-                self.processor_state(processors[TRIGGER], "RUNNING")
-                paused["resume_mono"] = time.monotonic()
+                deadline = time.monotonic() + 30
+                while time.monotonic() < deadline:
+                    killed = self.compose(
+                        "exec",
+                        "-T",
+                        "nifi",
+                        "pkill",
+                        "-9",
+                        "-f",
+                        "scripts.run_automatic_graph",
+                        check=False,
+                    )
+                    if killed.returncode == 0:
+                        paused["killed_mono"] = time.monotonic()
+                        break
+                    if stop.wait(0.05):
+                        return
+                else:
+                    raise TimeoutError("Requested worker SIGKILL was not confirmed")
+            if args.pause_at is None or stop.wait(args.pause_at):
+                return
+            self.processor_state(processors[TRIGGER], "STOPPED")
+            paused["stop_mono"] = time.monotonic()
+            if stop.wait(args.pause_for):
+                return
+            self.processor_state(processors[TRIGGER], "RUNNING")
+            paused["resume_mono"] = time.monotonic()
 
-            controller = threading.Thread(target=pause_control)
-            controller.start()
+        try:
+            # Obtain the first lag sample before offering anything. Subsequent
+            # OffsetFetch calls belong only to sample's thread (Kafka client).
+            samples.append(
+                {
+                    "mono": time.monotonic(),
+                    "utc": load.utc(now()),
+                    "kafka": observer.lag(),
+                }
+            )
+            budget_exceeded(force=True)
+            for target in (poll_es, sample):
+                thread = threading.Thread(target=target)
+                thread.start()
+                threads.append(thread)
+            executor = ThreadPoolExecutor(max_workers=1)
+            if stopped_by:
+                stop.set()
+            controller = executor.submit(pause_control)
             offer_start = time.monotonic()
-            offered = load.offer(run_dir / "input" / "load.csv", lines, args.rate)
-            offer_thread_result["elapsed_s"] = time.monotonic() - offer_start
-            controller.join()
+            load.offer(
+                run_dir / "input" / "load.csv",
+                lines,
+                args.rate,
+                should_stop=lambda: (
+                    (controller.done() and controller.exception() is not None)
+                    or budget_exceeded()
+                ),
+                records=offered,
+            )
+            offer_elapsed = time.monotonic() - offer_start
+            while not controller.done():
+                if budget_exceeded():
+                    stop.set()
+                wait_futures([controller], timeout=0.1)
+            controller.result()  # Re-raise any controller exception in the main thread.
+            if args.kill_at is not None and "killed_mono" not in paused:
+                raise RuntimeError("Requested worker SIGKILL was not confirmed")
+            if args.pause_at is not None and "resume_mono" not in paused:
+                raise RuntimeError("Requested NiFi pause/resume was not confirmed")
             drain_start = time.monotonic()
             deadline = drain_start + BUDGET["max_drain_s"]
-            stopped_by = None
-            while True:
+            while not budget_exceeded(force=True):
                 jobs = worker_jobs(graph["root"])
                 done = sum(1 for v in jobs.values() if v is not None)
-                if len(seen) >= len(lines) or (
-                    done >= len(lines) and all(v is not None for v in jobs.values())
+                if len(seen) >= len(offered) or (
+                    done >= len(offered) and all(v is not None for v in jobs.values())
                 ):
                     time.sleep(3)  # last refresh / final poll
                     break
                 if time.monotonic() > deadline:
                     stopped_by = "max_drain_s"
                     break
-                lag = samples[-1].get("kafka", {}).get("lag") if samples else None
-                if lag is not None and lag > BUDGET["max_lag"]:
-                    stopped_by = "max_lag"
-                    break
-                if du(self.root) > BUDGET["max_lab_disk_gib"] * 2**30:
-                    stopped_by = "max_lab_disk"
-                    break
                 time.sleep(1)
             drain_end = time.monotonic()
         finally:
+            primary_error = sys.exc_info()[1]
             stop.set()
+            if executor is not None:
+                executor.shutdown(wait=True)
+            controller_errors = (
+                [controller.exception()]
+                if controller is not None and controller.exception() is not None
+                else []
+            )
             for thread in threads:
                 thread.join()
-            observer.close()
-        (run_dir / "offered.jsonl").write_text(
-            "".join(json.dumps(r) + "\n" for r in offered)
-        )
-        (run_dir / "samples.jsonl").write_text(
-            "".join(json.dumps(s) + "\n" for s in samples)
-        )
-        (run_dir / "es-first-seen.json").write_text(json.dumps(seen, indent=1))
-        return {
-            "offer_elapsed_s": offer_thread_result["elapsed_s"],
-            "drain_s": drain_end - drain_start,
-            "first_offer_mono": offered[0]["written_mono"],
-            "last_seen_mono": max((v["mono"] for v in seen.values()), default=None),
-            "stopped_by_budget": stopped_by,
-            "pause_observed": paused or None,
-            "observer_errors": sorted(set(errors)),
-        }
+            result = {
+                "offer_elapsed_s": offer_elapsed
+                if offer_elapsed is not None
+                else time.monotonic() - offer_start,
+                "offered": len(offered),
+                "drain_s": drain_end - drain_start
+                if drain_end is not None and drain_start is not None
+                else None,
+                "first_offer_mono": offered[0]["written_mono"] if offered else None,
+                "last_seen_mono": max((v["mono"] for v in seen.values()), default=None),
+                "stopped_by_budget": stopped_by,
+                "pause_observed": paused or None,
+                "controller_errors": [type(e).__name__ for e in controller_errors],
+                "observer_errors": sorted(set(errors)),
+            }
+            if record is not None:
+                record.update(result)
+            try:
+                (run_dir / "offered.jsonl").write_text(
+                    "".join(json.dumps(r) + "\n" for r in offered)
+                )
+                (run_dir / "samples.jsonl").write_text(
+                    "".join(json.dumps(item) + "\n" for item in samples)
+                )
+                (run_dir / "es-first-seen.json").write_text(json.dumps(seen, indent=1))
+            except Exception as exc:
+                if primary_error is None:
+                    raise
+                primary_error.add_note(
+                    "CG32 measurement evidence failed: " + type(exc).__name__
+                )
+            finally:
+                try:
+                    observer.close()
+                except Exception as exc:
+                    if primary_error is None:
+                        raise
+                    primary_error.add_note(
+                        "CG32 observer close failed: " + type(exc).__name__
+                    )
+        return result
 
     def kafka_topic(self, topic):
         self.compose(
@@ -790,7 +927,7 @@ class Lab:
         lags = [s["kafka"]["lag"] for s in samples if "kafka" in s]
         span = (
             record["last_seen_mono"] - record["first_offer_mono"]
-            if record.get("last_seen_mono")
+            if record.get("last_seen_mono") and record.get("first_offer_mono")
             else None
         )
         http = load.percentiles(http_ok)
@@ -810,13 +947,15 @@ class Lab:
             "e2e_p95_ms": e2e_stats["p95"],
             "e2e_max_ms": e2e_stats["max"],
             "e2e_n": e2e_stats["n"],
-            "producer_lag_max_ms": max(r["producer_lag_ms"] for r in offered),
+            "producer_lag_max_ms": max(
+                (r["producer_lag_ms"] for r in offered), default=None
+            ),
             "lag_initial": lags[0] if lags else None,
             "lag_max": max(lags) if lags else None,
             "lag_final": lags[-1] if lags else None,
             "drain_s": record["drain_s"],
             "cpu_s": cpu_by_container(samples),
-            "rss_max_mib": rss_by_container(samples),
+            "container_mem_usage_max_mib": container_mem_usage_by_container(samples),
             "bytes": {
                 "input": (run_dir / "input/load.csv").stat().st_size,
                 "worker_root": du(run_dir / "worker"),
@@ -1151,7 +1290,8 @@ def cpu_by_container(samples):
     return totals
 
 
-def rss_by_container(samples):
+def container_mem_usage_by_container(samples):
+    """Sampled Docker CLI MemUsage maximum (Linux: cache subtracted), not RSS."""
     peaks = {}
     for sample in samples:
         for name, item in sample.get("containers", {}).items():

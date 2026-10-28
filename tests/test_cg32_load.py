@@ -15,7 +15,10 @@ class FixtureTest(unittest.TestCase):
     def test_run_label_rejects_path_and_topic_escapes(self):
         self.assertEqual(lab.validate_run_label("steady-01"), "steady-01")
         for label in ("../../escape", "UPPER", "bad space", "-edge", "edge-"):
-            with self.subTest(label=label), self.assertRaises(argparse.ArgumentTypeError):
+            with (
+                self.subTest(label=label),
+                self.assertRaises(argparse.ArgumentTypeError),
+            ):
                 lab.validate_run_label(label)
 
     def test_fixture_is_nominal_unique_and_stable(self):
@@ -40,6 +43,45 @@ class FixtureTest(unittest.TestCase):
 
 
 class OfferTest(unittest.TestCase):
+    def test_stop_after_wait_prevents_next_write_and_counts_only_written_rows(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "load.csv"
+            stopped = [False]
+
+            def wait(_):
+                stopped[0] = True
+
+            records = load.offer(
+                path,
+                ["first", "second", "third"],
+                1,
+                clock=lambda: 0.0,
+                wall=lambda: 0.0,
+                sleep=wait,
+                should_stop=lambda: stopped[0],
+            )
+            self.assertEqual(len(records), 1)
+            self.assertEqual(path.read_text().splitlines(), [load.HEADER, "first"])
+
+    def test_control_error_preserves_partial_offer_records(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            records = []
+
+            def control():
+                if records:
+                    raise RuntimeError("synthetic control failure")
+                return False
+
+            with self.assertRaisesRegex(RuntimeError, "control failure"):
+                load.offer(
+                    Path(tmp) / "load.csv",
+                    ["first", "second"],
+                    1,
+                    should_stop=control,
+                    records=records,
+                )
+            self.assertEqual(len(records), 1)
+
     def test_offer_writes_header_once_and_never_overwrites(self):
         ticks = iter(range(100))
         with tempfile.TemporaryDirectory() as tmp:

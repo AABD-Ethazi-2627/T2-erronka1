@@ -44,6 +44,13 @@ Herramientas nuevas del ensayo:
   Límites de contenedor: Kafka 768 MiB, ES 1,2 GiB, NiFi 2 GiB, API 768 MiB,
   Filebeat 256 MiB, Kibana 1,6 GiB (solo para Discover). El primer límite superado
   detiene la oferta/drenaje y queda en `stopped_by_budget`; el informe se produce igual.
+  Antes de la primera fila se comprueban disco y lag. Durante la oferta se consulta
+  el presupuesto antes de escribir cada fila y después de esperar el turno.
+  Las consultas de disco se separan al menos 0,5 s para limitar el coste del
+  recorrido; el intervalo efectivo depende de la tasa y de la E/S. Lag usa la
+  última muestra de 2 s. Es una parada cooperativa, no un límite instantáneo.
+  `expected` conserva el plan y `offered`/la reconciliación cuentan solo filas
+  escritas. Con cero filas, los tiempos/rates sin observaciones quedan en `null`.
 - Sin retención automática, sin borrar datos, sin `down -v`, sin cambios de firewall.
   El firewall del host bloquea contenedor→host: por eso la API corre como servicio
   del proyecto (debian-slim + intérprete/venv del checkout montados solo lectura).
@@ -53,6 +60,12 @@ Herramientas nuevas del ensayo:
 Topic, grupo, raíz del worker, ledger API, índice ES y grupo NiFi **nuevos**;
 `offset_reset=earliest` explícito en el primer arranque del grupo. Solo un grafo
 NiFi activo (los grupos anteriores se detienen antes de subir el nuevo).
+`run.json` se reserva con estado `preparing` y las identidades planeadas antes
+de preparar archivos o recursos externos. El estado del lab registra el intento;
+las identidades NiFi se añaden al obtenerlas. Un error de preparación o de control
+de pausa/SIGKILL deja `status=failed` y ejecuta el cleanup de los recursos
+intentados. STOPPED/RUNNING y SIGKILL deben confirmarse: una excepción del hilo
+de control o agotar sus 30 s de intentos no constituye una inyección realizada.
 
 Fixture: primeras N filas nominales (todas las etiquetas 0) de
 `data/ai4i2020_train.csv`, cinco sensores + `machine_type`, timestamp
@@ -70,8 +83,13 @@ por ocurrencia porque el `event_id` deriva de topic/partition/offset. No usa el 
 Percentiles nearest-rank **por run**; entre repeticiones solo media/mediana/min/max/
 desviación de los p50/p95 de cada run (`cg32_load summarize`), nunca mezclados.
 Lag Kafka: `end - committed` del grupo cada 2 s mediante OffsetFetch sin unirse al
-grupo. CPU: integración de `docker stats` cada 2 s (aproximación); RSS: máximo
-observado por contenedor. El worker corre dentro de NiFi y se contabiliza en `nifi`.
+grupo. CPU: integración de `docker stats` cada 2 s (aproximación). La métrica
+`container_mem_usage_max_mib` es el máximo muestreado de `MemUsage` por contenedor;
+la CLI Docker en Linux resta caché al uso total. No mide RSS ni un pico continuo.
+El worker corre dentro de NiFi y se contabiliza en `nifi`. Los recibos históricos
+con `rss_max_mib` conservan sus bytes y valores: ese campo representaba la misma
+lectura `MemUsage`, con un nombre incorrecto, y no una medición de RSS.
+Referencia: [Docker stats](https://docs.docker.com/reference/cli/docker/container/stats/).
 
 El cliente exporta el certificado público desde el contenedor NiFi perteneciente
 al proyecto Compose, guarda su SHA-256 en el estado privado del laboratorio y

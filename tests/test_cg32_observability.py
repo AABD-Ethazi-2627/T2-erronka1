@@ -152,7 +152,7 @@ class RunSchedulingReceiptTests(unittest.TestCase):
             )
             self.assertEqual(owner["schedulingPeriod"], "5 sec")
 
-            def upload(directory, period):
+            def upload(directory, period, *, on_created=None):
                 for processor in definition["flowContents"]["processors"]:
                     if processor["name"] == lab.TRIGGER:
                         processor["schedulingPeriod"] = period

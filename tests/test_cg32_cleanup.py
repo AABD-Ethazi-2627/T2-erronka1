@@ -50,7 +50,7 @@ class CleanupTests(unittest.TestCase):
             raise OSError("synthetic stop failure")
         return SimpleNamespace(returncode=0, stdout="127.0.0.1:1", stderr="")
 
-    def upload(self, directory, period):
+    def upload(self, directory, period, *, on_created=None):
         (directory / "nifi-flow.json").write_text(json.dumps(build()))
         return "group", {lab.TRIGGER: "trigger", "Single Kafka owner": "worker"}
 
@@ -143,14 +143,110 @@ class CleanupTests(unittest.TestCase):
         self.prepared(error=primary)
         with (
             patch.object(
-                lab.load, "write_new", side_effect=OSError("disk unavailable")
-            ),
+                self.instance, "persist_run", wraps=self.instance.persist_run
+            ) as persist,
             self.assertRaises(ValueError) as raised,
         ):
+
+            def fail_final_receipt(*args, **kwargs):
+                persist.side_effect = OSError("disk unavailable")
+                raise primary
+
+            self.instance.measure.side_effect = fail_final_receipt
             self.instance.run(self.args)
         self.assertIs(raised.exception, primary)
         self.assertIn(("stop", "api"), self.commands)
         self.assertIn("CG32 run receipt persistence failed: OSError", primary.__notes__)
+
+    def test_preparation_errors_leave_receipt_and_state_without_stopping_absent_services(
+        self,
+    ):
+        for target in (
+            "kafka_topic",
+            "create_index",
+            "stop_previous_groups",
+            "upload_graph",
+        ):
+            with self.subTest(target=target):
+                collect = self.prepared()
+                owner = lab if target == "create_index" else self.instance
+                primary = RuntimeError("synthetic " + target)
+                with (
+                    patch.object(owner, target, side_effect=primary),
+                    self.assertRaises(RuntimeError) as raised,
+                ):
+                    self.instance.run(self.args)
+                self.assertIs(raised.exception, primary)
+                name = self.instance.state["runs"][-1]
+                receipt_path = self.root / "runs" / name / "run.json"
+                receipt = json.loads(receipt_path.read_bytes())
+                self.assertEqual(receipt["status"], "failed")
+                self.assertEqual(receipt["failure"]["error_type"], "RuntimeError")
+                saved = json.loads(self.instance.state_path.read_bytes())
+                self.assertIn(name, saved["runs"])
+                self.assertIn("topic", receipt["resources_attempted"])
+                self.assertTrue(receipt["graph"]["topic"].endswith(name))
+                self.assertNotIn(("stop", "api"), self.commands)
+                self.assertNotIn(("stop", "filebeat"), self.commands)
+                collect.assert_not_called()
+
+    def test_initial_receipt_exists_before_first_external_side_effect(self):
+        self.prepared()
+
+        def inspect(topic):
+            receipt = self.receipt()
+            self.assertEqual(receipt["status"], "preparing")
+            self.assertEqual(receipt["graph"]["topic"], topic)
+            self.assertIn(receipt["name"], self.instance.state["runs"])
+            raise RuntimeError("stop before touching services")
+
+        self.instance.kafka_topic.side_effect = inspect
+        with self.assertRaisesRegex(RuntimeError, "stop before"):
+            self.instance.run(self.args)
+
+    def test_partial_upload_keeps_group_and_processors_for_cleanup(self):
+        self.prepared()
+        primary = RuntimeError("synthetic validation failure")
+
+        def partial(directory, period, *, on_created):
+            on_created("partial-group", {lab.TRIGGER: "partial-trigger"})
+            self.assertEqual(self.receipt()["nifi"]["group"], "partial-group")
+            raise primary
+
+        self.instance.upload_graph.side_effect = partial
+        with self.assertRaises(RuntimeError) as raised:
+            self.instance.run(self.args)
+        self.assertIs(raised.exception, primary)
+        self.instance.processor_state.assert_called_once_with(
+            "partial-trigger", "STOPPED"
+        )
+        receipt = self.receipt()
+        self.assertEqual(
+            receipt["nifi"]["processors"], {lab.TRIGGER: "partial-trigger"}
+        )
+        self.assertEqual(receipt["status"], "failed")
+
+    def test_upload_reports_group_before_flow_discovery_can_fail(self):
+        primary = RuntimeError("synthetic flow discovery failure")
+        created = Mock()
+        with (
+            patch.object(
+                self.instance,
+                "nifi",
+                side_effect=[
+                    {"processGroupFlow": {"id": "root"}},
+                    primary,
+                ],
+            ),
+            patch.object(self.instance, "require_nifi_token", return_value="fixture"),
+            patch.object(self.instance, "nifi_ssl_context"),
+            patch.object(lab.httpx, "post") as upload,
+            self.assertRaises(RuntimeError) as raised,
+        ):
+            upload.return_value.json.return_value = {"id": "uploaded-group"}
+            self.instance.upload_graph(self.root, "2 sec", on_created=created)
+        self.assertIs(raised.exception, primary)
+        created.assert_called_once_with("uploaded-group", {})
 
     def test_nonzero_stop_is_recorded_and_remaining_cleanup_runs(self):
         self.instance.processor_state = Mock()
