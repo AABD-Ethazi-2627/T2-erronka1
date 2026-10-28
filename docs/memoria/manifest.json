@@ -98,7 +98,7 @@
     "docs/evidence/CG19_SVG_ARIA_20261022.md": "c14ba808d62505c4412eccec670cf09668481ff9779904dd8236e9e8f8c73b44",
     "docs/evidence/CG19_SVG_ARIA_20261022/sha256.json": "e82ad4f4ed1f2802ade2267abc3590f7abeb59d003f332ef843ac3ad12ca0d31",
     "docs/rubrica/ESTADO_20261022.md": "a9914fd57a1ac2e0ec2ff758e849c22f1556b64b22cccc8072879d8e1820ea60",
-    "docs/demo/README.md": "ae24bae71367e4820e5087c5c9b9c5740cbe494ff3ae06a30c9d8296003f0bbe",
+    "docs/demo/README.md": "82898535707bfeb3378b0734c6fd241021b4c4f800588a0f8b7956ff7e2ce219",
     "docs/demo/ACTA_PENDIENTE_20261022.md": "99f30b7e33343adaa28d9b9c7fc030eb51bf73392c7c7c6fcc7f2d2060a4a1a7",
     "docs/evidence/ISOLATED_RUNTIME_20261022.md": "9e4042f8548776fe4052ac1ea1f4d33a7174555f8d02bad3210c86100029ea21",
     "docs/evidence/ISOLATED_RUNTIME_20261022/sha256.json": "d3368d311ecc73fbef19307e846137605abfa01ecdfff3d0669c1c609785c773",
@@ -199,7 +199,16 @@
     "docs/evidence/CG10_PRECISION_20261022/independent-audit.json": "5380a8e227b8a06be9a472323550b7f82d49919723133100b4bc710bb65929c5",
     "docs/evidence/CG10_PRECISION_20261022/parser-comparison.json": "c9e0f20e64db756d0796acf7f68e0be0e2e12cae515efcac47c8b641affd5f0b",
     "tests/es_runtime.py": "139e78576cf4a7106198682727fb6dfc5cb8cc9a49b7497a3e1f9d38cdf6b2f4",
-    "tests/test_es_runtime.py": "2df6b346f8510644530a0a8bdfeba4e0529fa85d8810be67c302102e7d75b6b3"
+    "tests/test_es_runtime.py": "2df6b346f8510644530a0a8bdfeba4e0529fa85d8810be67c302102e7d75b6b3",
+    "docs/demo/PENDING_HANDOFF_20261028.md": "2629c76075a568e5c305e8894f533af13dc26fc6616b0cbd680cd3a7f24d3b11",
+    "docs/rubrica/README.md": "a0447b90723afb5864f831cd159b1b4b09b0aea88f35c7d0cc99929b824fde99",
+    "docs/rubrica/ESTADO_20261028.md": "3fbff4c182be8abc1bdd7b495bb55d8c9de5d3d78839f6d3b2013391f749f92c",
+    "docs/evidence/ISSUE_CLOSEOUT_20261028.md": "913b9e8c68c9f439e02ce95f9eb70828844f3f414d102ba812d51e5c56520678",
+    "docs/evidence/CG34_CLOSEOUT_AUDIT_20261028.json": "b84d273e9db1851adf001e55b2df2c0b3980d1ae36f0c553fb0a72ba70322289",
+    "docs/evidence/CG40_CLOSEOUT_20261028.json": "739e2949f827dbfc6c7989cf75a292a00bfacda10be6ba0b33b8ea8f5de6df9a",
+    "docs/evidence/CG32_REBUILT_IDENTITY_20261028.json": "0fe5eee773877f8946cce5db6fc6ecccc7a199bc44616d51519e4a66f1fc9d99",
+    "docs/CG32_LOAD_PROTOCOL.md": "2c4339f82986704b65922911d4e01a5a4e700dab0aba9897836b5df638afe220",
+    "scripts/cg32_lab.py": "e0f3a51e0e4a1298bf143634f4ce67b6cbb7abc6d061812ff3fb2aaa1f4859c3"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
