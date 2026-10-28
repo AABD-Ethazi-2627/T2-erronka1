@@ -1,0 +1,10 @@
+{
+  "es_cluster_status": "green",
+  "es_create_status": 201,
+  "es_replay_status": 409,
+  "es_docs": 1,
+  "esql_status": 200,
+  "fixture": "Constructed contract fixture; no inference/training",
+  "kibana_overall": "available",
+  "cleanup": "Own containers stopped and removed and private network removed; no host data binds"
+}

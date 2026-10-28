@@ -4,7 +4,7 @@ Revisión de partida: `0fdf7efdbe176af05bf7c315ba10fa4776305bc9`.
 [Hallazgos independientes F1–F4](https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/91#pullrequestreview-5682305250).
 Alcance autorizado: laboratorio/productor, pruebas y documentación. La reparación
 de CI, imágenes y dependencias corresponde a otro agente. Sin autoaprobación,
-merge, servicios compartidos, campaña nueva ni cambios del bundle o umbrales.
+merge de la PR, servicios compartidos, campaña nueva ni cambios del bundle o umbrales.
 
 ## Cambios
 
@@ -72,3 +72,19 @@ se consulta y reconcilia antes de publicar, sin force-push.
 Los logs completos, JUnit y el recibo final con SHA quedan en el directorio de
 evidencia exclusivo indicado arriba. El estado remoto exacto se informa en el
 handoff, sin atribuir a este cambio los checks de otro SHA.
+
+## Reconciliación antes del push
+
+La comprobación remota detectó el commit concurrente de CI
+`ea6cf843f0a81e16f2a7f8e3b1b7c49b7f00616f`. Se integró sin conflictos. Frente a
+ese commit, los workflows, imágenes, gate y test del gate quedan idénticos.
+Sobre su manifiesto se conservaron todos los hashes ajenos y se comprobaron
+solo las tres entradas vivas propias (laboratorio, protocolo y aclaración de
+campaña); no cambió el snapshot histórico ni ningún crudo archivado.
+
+El árbol combinado repitió pytest: **718 passed, 14 skipped, 361 subtests passed**
+(60,41 s, exit 0), y unittest: **430 tests, OK (skipped=14)** (46,71 s, exit 0).
+CG25 pasó con **40 criterios, 90 enlaces, 260 hashes vivos y 18 históricos**.
+Logs `merged.log`, `merged.xml`, `merged-unittest.log` y `merged-cg25.log` en el
+directorio exclusivo de evidencia. Los tiempos corresponden a estas ejecuciones
+locales, no a una campaña de rendimiento ni al CI remoto.
