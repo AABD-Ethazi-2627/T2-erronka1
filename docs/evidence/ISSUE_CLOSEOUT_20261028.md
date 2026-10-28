@@ -49,5 +49,28 @@ Se conserva la discrepancia histórica de tamaño descomprimido documentada en
 Revisión SELF_REVIEW / NOT_INDEPENDENT por el agente principal. No se declara
 un experimento nuevo, test independiente, eficacia industrial, aceptación docente,
 ensayo, defensa o entrega. Las issues #37/#26/#27/#82 mantienen sus puertas humanas.
-#89 mantiene la reconciliación de recomendación y paquete; #81 mantiene campaña
+#89 se reconcilia en el apartado de cierre siguiente; #81 mantiene campaña
 real, ahora sobre un candidato reconstruido autorizado con identidad separada.
+
+## CG40 / #89 y CG34 / #83: cierre técnico de investigación
+
+Tras cerrar #85/#87/#88, se repitió la comparación exacta de listas fit/held
+contra cada fold sellado: 450 inner, 150 outer, 54 calibration_inner y
+18 calibration_outer coinciden, incluyendo orden. El paquete RF research V2
+coincide por bytes con `packages.json`. Se ejecutaron 24 tests y smoke 50/50
+adaptadores sin avisos en el entorno research aislado de su requirements propio.
+[Recibo del contraste](CG40_CLOSEOUT_20261028.json).
+
+El informe publicado distingue selector nested, refit fijo, política optimizada
+y contrato 0,15/0,70; incluye calibración 75/25, comparación raw75, fiabilidad,
+Brier/logloss, sensibilidad, bootstrap condicionado y límites. Stacking y
+abstención se registran como no ejecutados, con motivo. La recomendación
+congelada es conservar RF y el contrato vigente; no hay promoción de candidato.
+Los objetivos de materialidad propuestos no se presentan como significación,
+exigencia docente ni validación industrial. La reconstrucción autorizada del
+bundle operativo para #81 sigue una identidad distinta del paquete research.
+
+El inventario de investigación #83 queda completado técnicamente con evidencia
+integrada en main, incluyendo avisos y alternativas condicionadas. #83 permanece
+abierta como seguimiento de sus puertas explícitas #81/#80/#37/#26. La aplicación
+servida, la campaña de carga y las puertas humanas conservan sus issues propias.

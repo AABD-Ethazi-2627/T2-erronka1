@@ -4,7 +4,7 @@ Este directorio mantiene el foco técnico del proyecto: qué exige el docente pa
 
 | Documento | Para qué usarlo |
 |---|---|
-| [Estado actual del 23/10: 40 criterios](ESTADO_20261023.md) | Consultar objetivos, evidencias por SHA, aceptaciones vigentes y pendientes concretos de CG31/#80 |
+| [Estado actual del 28/10: 40 criterios](ESTADO_20261028.md) | Consultar objetivos, evidencias por SHA, aceptaciones vigentes y pendientes concretos de CG31/#80 |
 | [Registro de aclaraciones docentes](ACLARACIONES_20261023.md) | Preparar CG33/#82 y registrar respuestas reales, sin atribuir aprobaciones pendientes |
 | [Objetivos y etapas](OBJETIVOS_Y_ETAPAS.md) | Diseñar el trabajo y consultar la interpretación de cada descriptor de 10 |
 | [Seguimiento histórico](SEGUIMIENTO.md) | Consultar el corte del 22/10 y sus añadidos fechados; sus estados remotos han sido superados por el corte actual |
