@@ -6,10 +6,15 @@ sostenida; el rendimiento ML sigue siendo desarrollo sintético.
 
 ## Grafo medido
 
-`CSV append → Filebeat 9.5.4 → Kafka 4.3.1 (KRaft, 1 partición) → NiFi 2.12
+`CSV append → Filebeat → Kafka (KRaft, 1 partición) → NiFi 2.12
 (GenerateFlowFile + ExecuteStreamCommand) → scripts.run_automatic_graph →
-API real (scoring/score_api.py + bundle) → ledger/CG15 → ES 9.5.4 (_create, guard
+API real (scoring/score_api.py + bundle) → ledger/CG15 → ES (_create, guard
 cnc-prediction-v1) → Kibana Discover`.
+
+Las versiones e identidades actuales se fijan en `deploy/images.json` y en los
+Dockerfiles de `deploy/cg32/compose.yaml`; cada campaña registra sus imágenes
+efectivas. Las medidas históricas conservan su runtime original y no se
+atribuyen a imágenes posteriores.
 
 Producto sin cambios: worker, API, export NiFi (`build_automatic_graph_flow`),
 Filebeat (`filebeat/filebeat.yml`, solo rutas/host/topic), pipeline y template ES.
@@ -108,5 +113,6 @@ Configuración aceptada de partida (CG20): trigger 2 s, `max_records=1`,
 **una sola** variable (`--max-records`) y repite misma fixture y tasas; no se
 añaden hilos ni consumidores al grupo (propietario único del offset).
 
-Python 3.12 del checkout con `scikit-learn==1.5.0`; la API rechaza un bundle
-de otra versión sklearn (`Model/runtime sklearn mismatch`).
+El worker usa el Python del checkout y la API el Python 3.11 de su imagen
+(`scoring/Dockerfile`); ambos deben conservar `scikit-learn==1.5.0`. La API
+rechaza un bundle de otra versión sklearn (`Model/runtime sklearn mismatch`).
