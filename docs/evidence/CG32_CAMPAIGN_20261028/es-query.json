@@ -1,0 +1,46 @@
+{
+  "hits": [
+    {
+      "_id": "f4e62c50ac6257a3065d8f18bfdf4f9b2a5bed7b37bdd21788e8018393f4cccc",
+      "_index": "cnc-alerts-cg32-batch32-base-3-r10-4d8d8b",
+      "_score": 5.9931297,
+      "_source": {
+        "air_temp_K": 298.9,
+        "alert_level": "OK",
+        "anomaly_alert": false,
+        "anomaly_score": 0.432584402439625,
+        "anomaly_threshold": 0.6145036167334865,
+        "event_id": "003c2794002ec083e995ce56f882cd03ce3fd32f72209f3e9db471bda89e1542",
+        "failure_score": 7.076830454075572e-05,
+        "machine_id": "CNC-043",
+        "machine_type": "L",
+        "model_artifact_sha256": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+        "model_version": "ai4i-current-state-v4",
+        "policy": "f2",
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "process_temp_K": 310.0,
+        "quality_flag": "OK",
+        "risk_alert": false,
+        "risk_threshold": 0.19082281465428477,
+        "rpm": 1564.0,
+        "schema_version": "0.1.0",
+        "score_semantics": "uncalibrated_current_state_score",
+        "scored_at": "2026-10-28T10:09:39.459080Z",
+        "source": {
+          "kind": "lab_fixture",
+          "record_ref": "cg32-batch32-base-3-r10-4d8d8b/0/16",
+          "uri": "kafka://cg32-e5806044/batch32-base-3-r10-4d8d8b/cg32-batch32-base-3-r10-4d8d8b"
+        },
+        "temporal_prediction_enabled": false,
+        "timestamp": "2026-10-23T00:00:16Z",
+        "tool_wear_min": 183.0,
+        "torque_Nm": 33.8
+      }
+    }
+  ],
+  "max_score": 5.9931297,
+  "total": {
+    "relation": "eq",
+    "value": 1
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "initial_lab_state_versions": {
+    "api_server_sha256": "6a6afb7cad4b80834211ddc0cb2c2020ad237c355e71a310d3264a376bf2bcfc",
+    "compose_sha256": "257b01c9982ec73b6dd4a6aa895b92eb33a97290967a87e2df559b7453ebf3e0",
+    "cpus": 28,
+    "git_head": "b8157717230f28057ec8a2c9e7197967018d0f0b",
+    "images": {
+      "cg32-e5806044-elasticsearch-1": {
+        "id": "sha256:a3ee079a40b292a2f5dc2cf07af7fdfc57ceb9f6dfd8581437412e133a58e58d",
+        "repository": "cg32-e5806044-elasticsearch",
+        "tag": "latest"
+      },
+      "cg32-e5806044-kafka-1": {
+        "id": "sha256:ebac5f823eaa09cbea7026260a0c083316683af6fd7f06e27ec5d321d1328fb9",
+        "repository": "cg32-e5806044-kafka",
+        "tag": "latest"
+      },
+      "cg32-e5806044-nifi-1": {
+        "id": "sha256:2ab363a0e5e32b2bacf11ca0d7d5c901d68c248fbd409c3a2558e201842d0cf8",
+        "repository": "cg32-e5806044-nifi",
+        "tag": "latest"
+      }
+    },
+    "kernel": "7.2.8-10-omarchy",
+    "lab_sha256": "e0f3a51e0e4a1298bf143634f4ce67b6cbb7abc6d061812ff3fb2aaa1f4859c3",
+    "load_sha256": "d8edc2dd78696eacd47df4c1663369d55ded9b9de4690b3aaee50c3ba4e651dc",
+    "python": "3.12.14"
+  },
+  "budget": {
+    "max_drain_s": 900,
+    "max_lab_disk_gib": 4,
+    "max_lag": 20000,
+    "min_free_disk_gib": 20,
+    "min_free_ram_gib": 6
+  },
+  "project": "cg32-e5806044",
+  "source_code_committed_as": "3061a6c",
+  "note": "Lab up recorded b815771 while identity adaptation was uncommitted; exact lab source bytes match commit 3061a6c. Historical state preserved.",
+  "final_images_and_source": {
+    "images": {
+      "cg32-e5806044-nifi-1": {
+        "repository": "cg32-e5806044-nifi",
+        "tag": "latest",
+        "id": "sha256:2ab363a0e5e32b2bacf11ca0d7d5c901d68c248fbd409c3a2558e201842d0cf8"
+      },
+      "cg32-e5806044-api-1": {
+        "repository": "cg32-e5806044-api",
+        "tag": "latest",
+        "id": "sha256:71d8bbdcb9766190a32f57508db36b7fdccbe732a542f68a96e3da314da49587"
+      },
+      "cg32-e5806044-filebeat-1": {
+        "repository": "cg32-e5806044-filebeat",
+        "tag": "latest",
+        "id": "sha256:a4d36cbff9ca514c7f02dcf4b964335f6a0e206edd0ac0d4083af75db0fb1590"
+      },
+      "cg32-e5806044-elasticsearch-1": {
+        "repository": "cg32-e5806044-elasticsearch",
+        "tag": "latest",
+        "id": "sha256:a3ee079a40b292a2f5dc2cf07af7fdfc57ceb9f6dfd8581437412e133a58e58d"
+      },
+      "cg32-e5806044-kibana-1": {
+        "repository": "cg32-e5806044-kibana",
+        "tag": "latest",
+        "id": "sha256:051621a91771540c28302e4131e0bf97276924f5ceb843a4ccbbfc6e2b4ea4c6"
+      },
+      "cg32-e5806044-kafka-1": {
+        "repository": "cg32-e5806044-kafka",
+        "tag": "latest",
+        "id": "sha256:ebac5f823eaa09cbea7026260a0c083316683af6fd7f06e27ec5d321d1328fb9"
+      }
+    },
+    "python": "3.12.14",
+    "kernel": "7.2.8-10-omarchy",
+    "cpus": 28,
+    "git_head": "0745b57a9ef9df543280d382cf1b92dc654098e8",
+    "compose_sha256": "257b01c9982ec73b6dd4a6aa895b92eb33a97290967a87e2df559b7453ebf3e0",
+    "api_server_sha256": "6a6afb7cad4b80834211ddc0cb2c2020ad237c355e71a310d3264a376bf2bcfc",
+    "lab_sha256": "e0f3a51e0e4a1298bf143634f4ce67b6cbb7abc6d061812ff3fb2aaa1f4859c3",
+    "load_sha256": "d8edc2dd78696eacd47df4c1663369d55ded9b9de4690b3aaee50c3ba4e651dc"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "project": "cg32-e5806044",
+  "containers": [
+    {
+      "id": "dd2683852f29",
+      "name": "cg32-e5806044-kibana-1",
+      "state": "exited",
+      "status": "Exited (0) 2 minutes ago"
+    },
+    {
+      "id": "a80e5758b25a",
+      "name": "cg32-e5806044-filebeat-1",
+      "state": "exited",
+      "status": "Exited (0) 4 minutes ago"
+    },
+    {
+      "id": "c70b02f9be66",
+      "name": "cg32-e5806044-api-1",
+      "state": "exited",
+      "status": "Exited (0) 4 minutes ago"
+    },
+    {
+      "id": "b73109e504c7",
+      "name": "cg32-e5806044-elasticsearch-1",
+      "state": "exited",
+      "status": "Exited (143) About a minute ago"
+    },
+    {
+      "id": "bdc1bbd758d3",
+      "name": "cg32-e5806044-nifi-1",
+      "state": "exited",
+      "status": "Exited (0) About a minute ago"
+    },
+    {
+      "id": "9c5b8eccf5ac",
+      "name": "cg32-e5806044-kafka-1",
+      "state": "exited",
+      "status": "Exited (143) About a minute ago"
+    }
+  ],
+  "all_stopped": true,
+  "data_retained": true,
+  "no_down_v": true
+}

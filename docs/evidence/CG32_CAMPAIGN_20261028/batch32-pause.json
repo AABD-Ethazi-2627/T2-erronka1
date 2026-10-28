@@ -1,0 +1,142 @@
+{
+  "cleanup_errors": [],
+  "cycles": {
+    "completed": 3
+  },
+  "drain_s": 8.143893996020779,
+  "duration_s": 20,
+  "expected": 20,
+  "filebeat_sha256": "6e48aa2ba2c71c02f91768612f4b2664292c78ffe80024e6e4f81bc843c19a37",
+  "finished_utc": "2026-10-28T10:14:01.993032Z",
+  "first_offer_mono": 530115.105347548,
+  "fixture_sha256": "c3019350342f2eeb1422029b47575038e51876f25474f0eee8b920d6ce5ee005",
+  "graph": {
+    "attempts": 1,
+    "bootstrap_servers": "kafka:19092",
+    "es_index": "cnc-alerts-cg32-batch32-pause-r1-3ebd72",
+    "es_url": "http://elasticsearch:9200",
+    "group_id": "cg32-batch32-pause-r1-3ebd72",
+    "legacy_source_kind": "cg14-lab-kafka",
+    "manifest": "/home/admin/labs/cg32-campaign-20261028/runs/batch32-pause-r1-3ebd72/pinned-manifest.json",
+    "max_poll_interval_ms": 300000,
+    "max_polls": 3,
+    "max_records": 32,
+    "offset_reset": "earliest",
+    "root": "/home/admin/labs/cg32-campaign-20261028/runs/batch32-pause-r1-3ebd72/worker",
+    "scoring_url": "http://api:8000/predict",
+    "source_kind": "lab_fixture",
+    "source_namespace": "cg32-e5806044/batch32-pause-r1-3ebd72",
+    "timeout": 0.5,
+    "topic": "cg32-batch32-pause-r1-3ebd72"
+  },
+  "health": {
+    "model_version": "ai4i-current-state-v4",
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "status": "ready",
+    "temporal_prediction_enabled": false
+  },
+  "http_repeated_posts": 0,
+  "identity_kind": "rebuilt_candidate",
+  "identity_record_sha256": "0fe5eee773877f8946cce5db6fc6ecccc7a199bc44616d51519e4a66f1fc9d99",
+  "kafka_committed": {
+    "committed": 20,
+    "end": 20,
+    "lag": 0
+  },
+  "label": "batch32-pause",
+  "last_seen_mono": 530145.876262964,
+  "manifest_sha256": "b85be76ef47ee88f34294fe009e9f4e21d3b3d78f10c8ba6b276389452136d5a",
+  "metrics": {
+    "bytes": {
+      "es_index_store": 97265,
+      "input": 1533,
+      "kafka_topic_values": 1349,
+      "worker_root": 1007616
+    },
+    "cpu_s": {
+      "api-1": 0.22775482592282353,
+      "elasticsearch-1": 0.688648556100903,
+      "filebeat-1": 0.01131295910482295,
+      "kafka-1": 0.1737451138343196,
+      "nifi-1": 5.441646351430623
+    },
+    "drain_s": 8.143893996020779,
+    "e2e_max_ms": 26728.687949012965,
+    "e2e_n": 20,
+    "e2e_p50_ms": 17743.367038900033,
+    "e2e_p95_ms": 25728.47338207066,
+    "http_non_200": 0,
+    "http_p50_ms": 11.749407043680549,
+    "http_p95_ms": 13.413509936071932,
+    "http_requests": 20,
+    "lag_final": 0,
+    "lag_initial": 0,
+    "lag_max": 18,
+    "offered_eps": 1.0000191944242576,
+    "producer_lag_max_ms": 1.374774961732328,
+    "rss_max_mib": {
+      "api-1": 133.7,
+      "elasticsearch-1": 936.8,
+      "filebeat-1": 13.8,
+      "kafka-1": 238.8,
+      "nifi-1": 915.2
+    },
+    "throughput_eps": 0.6499644137863761
+  },
+  "model_version": "ai4i-current-state-v4",
+  "name": "batch32-pause-r1-3ebd72",
+  "nifi": {
+    "group": "81ffd406-01a1-1000-76d0-4af5e1fc0eb6",
+    "period": "2 sec",
+    "processor_periods": {
+      "Capture cycle exit diagnostics": "5 sec",
+      "Retain cycle diagnostics": "5 sec",
+      "Retain cycle output": "5 sec",
+      "Schedule bounded source cycle": "2 sec",
+      "Single Kafka owner": "5 sec"
+    }
+  },
+  "nifi_exit_status": {
+    "0": 3
+  },
+  "observer_errors": [],
+  "offer_elapsed_s": 19.00103067292366,
+  "pause": {
+    "at_s": 5.0,
+    "for_s": 20.0,
+    "kill_at_s": null
+  },
+  "pause_observed": {
+    "resume_mono": 530140.855479029,
+    "stop_mono": 530120.104052383
+  },
+  "rate": 1,
+  "reconciliation": {
+    "backlog_uncommitted": 0,
+    "balance_ok": true,
+    "es_docs": 20,
+    "es_duplicate_event_ids": 0,
+    "es_without_saved_job": 0,
+    "jobs_not_in_kafka": 0,
+    "kafka_missing_offered": 0,
+    "kafka_not_observed": 0,
+    "kafka_records": 20,
+    "kafka_repeated_lines": 0,
+    "kafka_unexpected": 0,
+    "observed": 20,
+    "offered": 20,
+    "offered_unique": 20,
+    "pending": 0,
+    "rejected": 0,
+    "saved": 20,
+    "saved_missing_in_es": 0,
+    "valid_lost": 0
+  },
+  "started_utc": "2026-10-28T10:13:17.822697Z",
+  "status": "completed",
+  "stopped_by_budget": null,
+  "worker_attempts": {
+    "200": 20,
+    "201": 20
+  }
+}

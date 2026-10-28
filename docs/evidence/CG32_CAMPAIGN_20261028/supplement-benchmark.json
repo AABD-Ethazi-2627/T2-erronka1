@@ -1,0 +1,116 @@
+{
+  "identity_kind": "rebuilt_candidate",
+  "manifest_sha256": "b85be76ef47ee88f34294fe009e9f4e21d3b3d78f10c8ba6b276389452136d5a",
+  "identity_record_sha256": "0fe5eee773877f8946cce5db6fc6ecccc7a199bc44616d51519e4a66f1fc9d99",
+  "scope": "Supplementary same-host candidate benchmark; no graph concurrency change",
+  "cold_load": [
+    {
+      "load_ms": 408.8051029248163,
+      "peak_rss_kib": 130260,
+      "process_wall_ms": 515.1106090052053
+    },
+    {
+      "load_ms": 341.13366599194705,
+      "peak_rss_kib": 130260,
+      "process_wall_ms": 458.7645139545202
+    },
+    {
+      "load_ms": 340.98920703399926,
+      "peak_rss_kib": 130260,
+      "process_wall_ms": 449.04581003356725
+    }
+  ],
+  "in_process": [
+    {
+      "batch_size": 1,
+      "concurrency": 1,
+      "warmup_excluded": 20,
+      "latency_ms": {
+        "n": 100,
+        "p50": 5.6154250632971525,
+        "p95": 5.79663401003927,
+        "max": 6.514431908726692
+      },
+      "rows_per_s": 177.1843569725166,
+      "driver_cpu_s": 0.5647417960000001
+    },
+    {
+      "batch_size": 1,
+      "concurrency": 4,
+      "warmup_excluded": 20,
+      "latency_ms": {
+        "n": 100,
+        "p50": 27.717103017494082,
+        "p95": 45.22845789324492,
+        "max": 50.38678797427565
+      },
+      "rows_per_s": 138.33085070643352,
+      "driver_cpu_s": 0.8306977740000001
+    },
+    {
+      "batch_size": 32,
+      "concurrency": 1,
+      "warmup_excluded": 20,
+      "latency_ms": {
+        "n": 100,
+        "p50": 6.074176984839141,
+        "p95": 6.413075956515968,
+        "max": 8.282252005301416
+      },
+      "rows_per_s": 5208.525906737006,
+      "driver_cpu_s": 0.613430476
+    },
+    {
+      "batch_size": 32,
+      "concurrency": 4,
+      "warmup_excluded": 20,
+      "latency_ms": {
+        "n": 100,
+        "p50": 22.887558094225824,
+        "p95": 62.53098708111793,
+        "max": 100.80242005642503
+      },
+      "rows_per_s": 4441.484688295474,
+      "driver_cpu_s": 0.8389026340000001
+    }
+  ],
+  "http": [
+    {
+      "batch_size": 1,
+      "concurrency": 1,
+      "warmup_excluded": 20,
+      "latency_ms": {
+        "n": 100,
+        "p50": 52.01279302127659,
+        "p95": 54.95424591936171,
+        "max": 60.934972018003464
+      },
+      "requests_per_s": 19.087593642177318,
+      "server_cpu_s": 0.83
+    },
+    {
+      "batch_size": 1,
+      "concurrency": 4,
+      "warmup_excluded": 20,
+      "latency_ms": {
+        "n": 100,
+        "p50": 51.97895294986665,
+        "p95": 57.964086066931486,
+        "max": 159.7233039792627
+      },
+      "requests_per_s": 73.46983885297918,
+      "server_cpu_s": 0.81
+    }
+  ],
+  "not_applicable": {
+    "HTTP_batch32": "API contract accepts one event per request; no batch endpoint",
+    "graph_concurrency4": "single offset owner and ledger/ACK guarantees preserved; no additional graph consumer"
+  },
+  "HTTP_cold_start_to_ready_ms": 697.528094984591,
+  "artifact_bytes": {
+    "manifest.json": 939,
+    "rf.pkl": 1127592,
+    "if.pkl": 2954012
+  },
+  "peak_driver_rss_kib": 216484
+}

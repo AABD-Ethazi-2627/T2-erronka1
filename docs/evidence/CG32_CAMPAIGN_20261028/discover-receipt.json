@@ -1,0 +1,9 @@
+{
+  "event_id": "003c2794002ec083e995ce56f882cd03ce3fd32f72209f3e9db471bda89e1542",
+  "model_artifact_sha256": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+  "source_record_ref": "cg32-batch32-base-3-r10-4d8d8b/0/16",
+  "es_exact_hits": 1,
+  "ui_observation": "Main agent inspected headless Chromium PNG: Documents (1), matching event_id and RF artifact hash visible",
+  "screenshot_sha256": "dc27b103554b0b641e308fcf3c407d6f748dfea630beac4321e5cfde042e10ed",
+  "limits": "One private candidate event; no accessibility, human rehearsal or industrial acceptance"
+}
