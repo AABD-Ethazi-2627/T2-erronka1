@@ -26,6 +26,18 @@ Las entradas y el alcance proceden del [recibo histórico CG26](../evidence/CG26
 
 ### Entrada, salida, error y límite
 
+**Si preguntan por FastAPI y Pydantic:** FastAPI expone el contrato HTTP;
+Pydantic valida los modelos de entrada antes de inferir. Esto permite separar
+un dato inválido de una indisponibilidad del modelo y mantener una respuesta
+con estructura conocida. Validar el formato no demuestra que el sensor mida
+bien: la revisión del dato y la interpretación física siguen siendo necesarias.
+
+**Si preguntan por el lazo de control:** aquí la salida llega a una persona
+que puede revisar y decidir mantenimiento. Un lazo cerrado automático requeriría
+que una acción sobre la máquina produjera nuevas medidas y que el sistema
+comprobara su efecto. No hemos implementado ni validado ese actuador o ese lazo;
+la autonomía del scheduler se limita a transportar y procesar eventos.
+
 La **entrada** es una lectura con esas seis variables y sus metadatos. La **salida** es una predicción trazable con score RF, `alert_level`, señal IF, umbrales e identidad del modelo. Un **error** de contrato, como `rpm` negativo o un tipo fuera de H/M/L, se rechaza con 422; no debe transformarse en una predicción aparentemente normal. El **límite** es la clasificación contemporánea sobre datos sintéticos tabulares: ni causalidad, ni pronóstico temporal, ni orden automática sobre la máquina.
 
 ### Ejemplo recorrido

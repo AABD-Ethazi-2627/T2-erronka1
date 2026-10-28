@@ -8,7 +8,7 @@ Ikasteko azalpen garatuak, adibideak eta bloke bakoitzeko galdera-erantzunak [ga
 
 ## Denbora eta erabilera
 
-**10 minutu orientagarri**, lehendik dagoen [demo-proposamena](README.md) abiapuntu hartuta. Ez da irakasleak ezarritako iraupena. Ez daude azken entregaren data, ordua, kanala edo defentsaren iraupen ofiziala baieztatuta. Galderen denbora hamar minutu horien barruan edo kanpoan dagoen ere argitu behar da.
+**Hamar minutuko egitura**, [enuntziatuko «Demo Aurkezpena (10 minutu)»](../../ENUNTZIATUA.md) atala abiapuntu hartuta. Atal horrek sistema live erakustea eskatzen du. Gidoi hau eta [artxibatutako ebidentzien entsegua](ENTSEGU_PRESTATUA_20261028.md) azalpena prestatzeko eta babeskopiatzat erabiltzeko dira; ez dute zuzeneko demo hori egiaztatzen. Azken entregaren data, ordua, kanala eta galderen tartea baieztatzea falta da.
 
 Erabiltzailearen arabera, entrega dokumentazioa eta gelako aurkezpena izan daiteke; oraingoz hipotesia da. Kostuei eta sailkapen tabularrari buruzko postek gai horiek argitzen dituzte, baina ez azken entregaren baldintzak.
 
@@ -195,7 +195,7 @@ Erantzuleak ere proposatuak dira. Galdera entzun, eten laburra egin eta erantzun
 11. **«IFren alerta batek hutsegitea baieztatzen du?» (1. kidea)**
     «Ez. IFk ezohikotasuna adierazten du. Hori eta RFren uneko sailkapen-scorea bereizten ditugu; ez dira etorkizuneko matxuraren probabilitate kalibratuak».
 12. **«Noiz, non eta zenbat denboran aurkeztu behar da? Nota berezia ziurtatuta dago?» (4. kidea)**
-    «Azken data, ordua, kanala eta iraupena ez daude material honekin baieztatuta. Hamar minutuak gure entsegu-proposamena dira. Postak analisi ekonomikoa baloratzen du, baina ez dugu nota edo ohorezko emaitzarik ziurtatzen».
+    «Enuntziatuak hamar minutuko demo live bat jasotzen du; egitura hori prestatzen ari gara. Azken data, ordua, kanala eta galderetarako tartea argitzea falta da. Postak analisi ekonomikoa baloratzen du, baina ez dugu nota edo ohorezko emaitzarik ziurtatzen».
 
 ## Entsegu-fitxa: taldeak betetzeko
 

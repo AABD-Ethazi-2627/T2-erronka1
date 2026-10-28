@@ -98,7 +98,7 @@
     "docs/evidence/CG19_SVG_ARIA_20261022.md": "c14ba808d62505c4412eccec670cf09668481ff9779904dd8236e9e8f8c73b44",
     "docs/evidence/CG19_SVG_ARIA_20261022/sha256.json": "e82ad4f4ed1f2802ade2267abc3590f7abeb59d003f332ef843ac3ad12ca0d31",
     "docs/rubrica/ESTADO_20261022.md": "a9914fd57a1ac2e0ec2ff758e849c22f1556b64b22cccc8072879d8e1820ea60",
-    "docs/demo/README.md": "82898535707bfeb3378b0734c6fd241021b4c4f800588a0f8b7956ff7e2ce219",
+    "docs/demo/README.md": "8250a25fe8b18fde91a07a44c4d961c81d5a0d88e0b039550f11c1d2ab5e5da3",
     "docs/demo/ACTA_PENDIENTE_20261022.md": "99f30b7e33343adaa28d9b9c7fc030eb51bf73392c7c7c6fcc7f2d2060a4a1a7",
     "docs/evidence/ISOLATED_RUNTIME_20261022.md": "9e4042f8548776fe4052ac1ea1f4d33a7174555f8d02bad3210c86100029ea21",
     "docs/evidence/ISOLATED_RUNTIME_20261022/sha256.json": "d3368d311ecc73fbef19307e846137605abfa01ecdfff3d0669c1c609785c773",
@@ -200,7 +200,7 @@
     "docs/evidence/CG10_PRECISION_20261022/parser-comparison.json": "c9e0f20e64db756d0796acf7f68e0be0e2e12cae515efcac47c8b641affd5f0b",
     "tests/es_runtime.py": "139e78576cf4a7106198682727fb6dfc5cb8cc9a49b7497a3e1f9d38cdf6b2f4",
     "tests/test_es_runtime.py": "2df6b346f8510644530a0a8bdfeba4e0529fa85d8810be67c302102e7d75b6b3",
-    "docs/demo/PENDING_HANDOFF_20261028.md": "2629c76075a568e5c305e8894f533af13dc26fc6616b0cbd680cd3a7f24d3b11",
+    "docs/demo/PENDING_HANDOFF_20261028.md": "f6144257a6924d5eec0f9da9d1b624139e0fb3565f103394f5afb611bebf6b8d",
     "docs/rubrica/README.md": "a0447b90723afb5864f831cd159b1b4b09b0aea88f35c7d0cc99929b824fde99",
     "docs/rubrica/ESTADO_20261028.md": "e28410d405d5bda7f5d5901f2caa8af5658930f4dd59d73f45322ebd086ee637",
     "docs/evidence/ISSUE_CLOSEOUT_20261028.md": "913b9e8c68c9f439e02ce95f9eb70828844f3f414d102ba812d51e5c56520678",
@@ -266,7 +266,11 @@
     "docs/evidence/CI_REFRESH_20261028.md": "2f8e0be6fc3e74a56849ee5f2bfafe068f1e225d741ab1cb8e539f69d5127589",
     "docs/evidence/CI_REFRESH_20261028/runtime-smoke.json": "6f5ae22f62b9eb54daa721b3fc477f7c391dc089f2708ad027bb3c33fa9eb3d9",
     "docs/evidence/CI_REFRESH_20261028/raw-validation.zip": "b14dd2dc4ae3817fe734d3a39d3f7a2d6b32a871951d4f76da5001c0d17cdfc1",
-    "docs/evidence/CI_REFRESH_20261028/receipt.json": "71e5b1e231e38ac0065784ede55c788cf3909f376893bffba6a44fee1c81fab1"
+    "docs/evidence/CI_REFRESH_20261028/receipt.json": "71e5b1e231e38ac0065784ede55c788cf3909f376893bffba6a44fee1c81fab1",
+    "docs/demo/AZALPENAK_20261028.md": "af807157993132099a3505b4eef1b84ed8fbdd73a07d21875a230110ddfb6c11",
+    "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
+    "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
+    "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
