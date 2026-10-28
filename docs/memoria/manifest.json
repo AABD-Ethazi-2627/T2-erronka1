@@ -234,7 +234,7 @@
     "docs/evidence/CG32_CAMPAIGN_20261028/cleanup.json": "ff421b79e6a10a85e37d4557adf317c5fbd3927f980f11674f31c0f3faacd029",
     "deploy/images/uv-stage.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
     "deploy/images/uv.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
-    "deploy/images/uv-rustls.patch": "c7547e64e61ee7e1cb8585a7f600c00ce57460c2bafd5befacd2fe55dd65eef6",
+    "deploy/images/uv-rustls.patch": "4b28ce364b3865a2d5bfebff64faee810f9067e32cb6bee1a0967f23f6f09047",
     "scoring/Dockerfile": "cc2059c9fc5f05e30b7de64dd6506886997bbc81c1cd5243e269a577f155a047",
     "deploy/images/nifi.Dockerfile": "ea18c3b07f8854dbb4f19e00e713ceeec92a0ac852eea162ce912036d3ade99e",
     "deploy/images.json": "70316311bb25a12199c0537b41c79e45bdf7d88f8061d4d301117b1aa9975789",
@@ -246,8 +246,8 @@
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/old-gate-rejection.json": "9c1ccbd4262a52306b4f1f8f051e9f28bfd5733b3962f7d24426a22e402cb8ea",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/trivy-db-metadata.json": "bbe5b6b2cff024c1591b1bf4892e314e97b9922adff1a5d54ed82b5fea4b3fa3",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/raw-validation.zip": "d83a5bbdb71e2448e9ae25651919ecc44c96692ce2b1d6283056eb5da792f3fb",
-    "docs/evidence/UV_RUSTLS_REPAIR_20261028/receipt.json": "aa05466105117e677e4e829d1c59d9711503b1591e3644a5658f00445428e0d4",
-    "docs/evidence/UV_RUSTLS_REPAIR_20261028.md": "c061f211a83efa379bef5e67b7c8193b66a76b79a7d90db77b3e26f2636fce9d"
+    "docs/evidence/UV_RUSTLS_REPAIR_20261028/receipt.json": "afccb394177056088bb91f0396a11f7410f78aaa9228d129bf34952d8c065875",
+    "docs/evidence/UV_RUSTLS_REPAIR_20261028.md": "f04a05779a0c5f74ed03de33c9b93fddb384282717ddd04ecdf815d728d40ca6"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",

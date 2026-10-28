@@ -46,3 +46,8 @@ contenedores propios de estas comprobaciones. Suite completa706 pruebas y368
 subpruebas,7 skips; grupo específico23 pruebas y18 subpruebas. Ruff, inventario,
 layout y diff check pasan. La CI remota del nuevo commit no se deduce de estos
 resultados locales.
+
+El parche se normalizó a contexto cero para evitar que una línea de contexto
+vacía se interpretase como whitespace sobrante. Se aplicó de nuevo al lock
+upstream exacto y se verificaron bytes idénticos al lock de los builds locales;
+los hashes y la equivalencia quedan en el recibo. No cambia el código compilado.
