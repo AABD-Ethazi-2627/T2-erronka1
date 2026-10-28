@@ -116,8 +116,16 @@ class ImageScanGateTests(unittest.TestCase):
         self.assertTrue(validate("nifi", nifi, expected_artifact=nifi["ArtifactName"]))
 
     def test_filebeat_requires_only_the_reachability_checked_module_finding(self):
-        verified = ("GO-2026-5932", "golang.org/x/crypto", "v0.57.0")
+        verified = ("GO-2026-5932", "golang.org/x/crypto", "v0.58.0")
         self.assertEqual(validate("filebeat", report(verified, image="filebeat")), [])
+        self.assertTrue(
+            validate(
+                "filebeat",
+                report(
+                    ("GO-2026-5932", "golang.org/x/crypto", "v0.57.0"), image="filebeat"
+                ),
+            )
+        )
         self.assertTrue(validate("filebeat", report(image="filebeat")))
         self.assertTrue(
             validate(

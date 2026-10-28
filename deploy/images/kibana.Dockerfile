@@ -6,6 +6,8 @@ RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
     && apk add --no-cache npm zip
 COPY deploy/images/kibana-patches/package.json deploy/images/kibana-patches/package-lock.json ./
 RUN npm ci --ignore-scripts --audit=false
+COPY deploy/images/kibana-patches/apply-deepmerge-patch.js deploy/images/kibana-patches/test-deepmerge-patch.js ./
+RUN node apply-deepmerge-patch.js && node test-deepmerge-patch.js
 COPY deploy/images/kibana-patches/apply-extract-zip-patch.js deploy/images/kibana-patches/test-extract-zip-patch.js ./
 RUN node apply-extract-zip-patch.js \
     && mkdir -p /tmp/fixture \
@@ -22,6 +24,8 @@ RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
     && apk upgrade --no-cache \
     && rm -rf /usr/share/kibana/node_modules/zod-to-json-schema/dist-test-v3 \
         /usr/share/kibana/node_modules/zod-to-json-schema/dist-test-v4
+COPY --from=patches /patches/node_modules/deepmerge-patched /usr/share/kibana/node_modules/deepmerge
+COPY --from=patches /patches/node_modules/qs-patched /usr/share/kibana/node_modules/qs
 COPY --from=patches /patches/node_modules/ai-provider-utils /usr/share/kibana/node_modules/@ai-sdk/provider-utils
 COPY --from=patches /patches/node_modules/grpc-js /usr/share/kibana/node_modules/@grpc/grpc-js
 COPY --from=patches /patches/node_modules/mcp-sdk /usr/share/kibana/node_modules/@modelcontextprotocol/sdk
