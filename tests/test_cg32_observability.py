@@ -170,6 +170,8 @@ class RunSchedulingReceiptTests(unittest.TestCase):
                         "path": manifest,
                         "sha256": "test-hash",
                         "model_version": "test",
+                        "identity_kind": "historical_CG26_delivery",
+                        "identity_record_sha256": "fixture",
                     },
                 ),
                 patch.object(lab, "create_index"),

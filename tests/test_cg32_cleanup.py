@@ -72,6 +72,8 @@ class CleanupTests(unittest.TestCase):
                     "path": self.manifest,
                     "sha256": "fixture",
                     "model_version": "fixture",
+                    "identity_kind": "historical_CG26_delivery",
+                    "identity_record_sha256": "fixture",
                 },
             )
         )

@@ -397,7 +397,7 @@ class Lab:
     # -------------------------------------------------------------------- run
     def run(self, args):
         label = validate_run_label(args.label)
-        manifest = verify_bundle(args.manifest)
+        manifest = verify_bundle(args.manifest, getattr(args, "identity_record", None))
         expected = load.validate_plan(args.rate, args.duration)
         name = f"{label}-r{args.rate}-{uuid.uuid4().hex[:6]}"
         runs_root = (self.root / "runs").resolve()
@@ -455,6 +455,8 @@ class Lab:
             "duration_s": args.duration,
             "expected": expected,
             "fixture_sha256": load.fixture_hash(lines),
+            "identity_kind": manifest["identity_kind"],
+            "identity_record_sha256": manifest["identity_record_sha256"],
             "manifest_sha256": manifest["sha256"],
             "model_version": manifest["model_version"],
             "graph": graph,
@@ -921,21 +923,35 @@ def preflight():
         )
 
 
-def verify_bundle(path):
+def verify_bundle(path, identity_record=None):
     path = Path(path).resolve()
-    identity = json.loads(DELIVERY_RECORD.read_bytes())
+    record = Path(identity_record).resolve() if identity_record else DELIVERY_RECORD
+    identity = json.loads(record.read_bytes())
+    identity_kind = (
+        "rebuilt_candidate" if identity_record else "historical_CG26_delivery"
+    )
+    if identity_record and identity.get("identity_kind") != "rebuilt_candidate":
+        raise SystemExit("Explicit identity record must declare rebuilt_candidate")
+    if set(identity.get("model_hashes", {})) != {"rf.pkl", "if.pkl"}:
+        raise SystemExit("Bundle file identities differ: RF and IF are required")
     manifest_bytes = path.read_bytes()
     manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
     if manifest_sha256 != identity["manifest_sha256"]:
-        raise SystemExit("Bundle manifest differs from the sealed CG26 delivery")
+        raise SystemExit(
+            "Bundle manifest differs from the sealed CG26 delivery or explicit candidate record"
+        )
     manifest = json.loads(manifest_bytes)
     if manifest.get("files") != identity["model_hashes"]:
-        raise SystemExit("Bundle file identities differ from the sealed CG26 delivery")
+        raise SystemExit(
+            "Bundle file identities differ from the sealed CG26 delivery or explicit candidate record"
+        )
     for name, expected in identity["model_hashes"].items():
         if sha_file(path.parent / name) != expected:
             raise SystemExit(f"Bundle artifact hash mismatch: {name}")
     return {
         "path": path,
+        "identity_kind": identity_kind,
+        "identity_record_sha256": sha_file(record),
         "sha256": manifest_sha256,
         "model_version": manifest.get("model_version"),
     }
@@ -1143,12 +1159,12 @@ def rss_by_container(samples):
     return peaks
 
 
-def model_latency(manifest_path, count, output):
+def model_latency(manifest_path, count, output, identity_record=None):
     """In-process RF+IF latency, one event at a time as the API does."""
     import joblib
     import pandas as pd
 
-    bundle = verify_bundle(manifest_path)
+    bundle = verify_bundle(manifest_path, identity_record)
     models = {
         name: joblib.load(bundle["path"].parent / name) for name in ("rf.pkl", "if.pkl")
     }
@@ -1170,6 +1186,8 @@ def model_latency(manifest_path, count, output):
         models["if.pkl"].score_samples(frame)
         values.append((time.perf_counter() - start) * 1000)
     result = {
+        "identity_kind": bundle["identity_kind"],
+        "identity_record_sha256": bundle["identity_record_sha256"],
         "manifest_sha256": bundle["sha256"],
         "model_version": bundle["model_version"],
         "measure": "predict_proba(RF)+score_samples(IF), 1 row DataFrame, perf_counter",
@@ -1217,10 +1235,16 @@ def main(argv=None):
     disc.add_argument("--index", required=True)
     disc.add_argument("--event-id", required=True)
     disc.add_argument("--output", type=Path, required=True)
+    for command in (run, model):
+        command.add_argument(
+            "--identity-record",
+            type=Path,
+            help="Explicit sealed rebuilt-candidate identity; defaults to historical CG26",
+        )
     args = cli.parse_args(argv)
     lab = Lab(args.lab)
     if args.command == "model":
-        model_latency(args.manifest, args.count, args.output)
+        model_latency(args.manifest, args.count, args.output, args.identity_record)
     elif args.command == "run":
         lab.run(args)
     elif args.command == "discover":

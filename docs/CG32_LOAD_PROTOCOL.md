@@ -116,3 +116,21 @@ añaden hilos ni consumidores al grupo (propietario único del offset).
 El worker usa el Python del checkout y la API el Python 3.11 de su imagen
 (`scoring/Dockerfile`); ambos deben conservar `scikit-learn==1.5.0`. La API
 rechaza un bundle de otra versión sklearn (`Model/runtime sklearn mismatch`).
+
+## Bundle reconstruido · 28/10/2026
+
+El propietario autorizó regenerar el bundle y continuar las issues. La identidad
+reconstruida se conserva en `docs/evidence/CG32_REBUILT_IDENTITY_20261028.json`;
+no reemplaza el sello histórico de CG26. Para medir este candidato, añadir a
+**cada** comando `model` o `run`:
+
+```bash
+--identity-record docs/evidence/CG32_REBUILT_IDENTITY_20261028.json
+```
+
+El valor por defecto sigue exigiendo CG26. La opción explícita exige ambos
+artefactos y sus hashes, y los recibos distinguen `rebuilt_candidate` y guardan
+el hash del registro de identidad. No mezclar corridas de ambas identidades.
+La API se comprobó con `/health` y `/predict` (HTTP 200, mismo event_id). Los
+pickles y el tar del bundle permanecen fuera de Git; el registro conserva rutas,
+comandos y hashes para reproducirlos.

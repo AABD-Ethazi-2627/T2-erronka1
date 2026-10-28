@@ -1,0 +1,35 @@
+{
+  "identity_kind": "rebuilt_candidate",
+  "manifest_sha256": "b85be76ef47ee88f34294fe009e9f4e21d3b3d78f10c8ba6b276389452136d5a",
+  "model_hashes": {
+    "rf.pkl": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+    "if.pkl": "4354475cb268fe5777ebeced69316261579070b7a5e184c02b7bae8a4cacacee"
+  },
+  "rebuild": {
+    "status": "rebuilt_candidate_not_historical_delivery",
+    "python": "3.12.14",
+    "bundle_path": "/home/admin/labs/cg32-rebuilt-20261028/api",
+    "historical_CG26_identity_matches": false,
+    "sha256": {
+      "if.pkl": "4354475cb268fe5777ebeced69316261579070b7a5e184c02b7bae8a4cacacee",
+      "manifest.json": "b85be76ef47ee88f34294fe009e9f4e21d3b3d78f10c8ba6b276389452136d5a",
+      "rf.pkl": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc"
+    },
+    "api_smoke": {
+      "health_status": 200,
+      "predict_status": 200,
+      "event_id_preserved": true
+    },
+    "training_source": "approved reduced AI4I source; existing RF/IF scripts and active partitions; excluded test not scored",
+    "commands": [
+      "uv run --frozen python -m scripts.experiment_rf --output <root>/cg08",
+      "uv run --frozen python -m scripts.experiment_anomaly --output <root>/cg09",
+      "uv run --frozen python -m scripts.package_model --output <root>/api --rf-dir <root>/cg08 --anomaly-dir <root>/cg09"
+    ],
+    "limits": [
+      "No graph load campaign executed",
+      "Historical CG26 seal preserved; CG32 default still rejects replacement"
+    ]
+  },
+  "supersedes_historical_delivery": false
+}

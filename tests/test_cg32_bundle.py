@@ -39,6 +39,21 @@ class DeliveryBundleTest(unittest.TestCase):
         self.reference.start()
         self.addCleanup(self.reference.stop)
 
+    def test_explicit_rebuilt_identity_is_labeled_and_pinned(self):
+        identity = json.loads(self.identity.read_text())
+        identity["identity_kind"] = "rebuilt_candidate"
+        self.identity.write_text(json.dumps(identity))
+        result = lab.verify_bundle(self.manifest, self.identity)
+        self.assertEqual(result["identity_kind"], "rebuilt_candidate")
+        self.assertEqual(result["identity_record_sha256"], lab.sha_file(self.identity))
+        self.manifest.write_text(self.manifest.read_text() + " ")
+        with self.assertRaisesRegex(SystemExit, "manifest differs"):
+            lab.verify_bundle(self.manifest, self.identity)
+
+    def test_explicit_record_requires_candidate_declaration(self):
+        with self.assertRaisesRegex(SystemExit, "declare rebuilt_candidate"):
+            lab.verify_bundle(self.manifest, self.identity)
+
     def test_accepts_exact_sealed_bundle(self):
         result = lab.verify_bundle(self.manifest)
         self.assertEqual(result["sha256"], lab.sha_file(self.manifest))
