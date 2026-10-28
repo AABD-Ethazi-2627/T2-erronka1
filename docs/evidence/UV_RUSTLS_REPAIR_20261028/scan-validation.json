@@ -1,0 +1,32 @@
+{
+  "uv": {
+    "artifact": "cnc-guard-uv-rustls:20261028",
+    "image_id": "sha256:5cbb4e306049220e706c46db8d9b26cec37ffd6f07b90fdef1decc81ec709d3d",
+    "gate_errors": [],
+    "rustls_versions": [
+      "0.23.46"
+    ],
+    "rust_package_records": 1026,
+    "raw_findings": []
+  },
+  "api": {
+    "artifact": "cnc-guard-api-rustls:20261028",
+    "image_id": "sha256:ba24228033e8a75e464c11ca4458248122147234176309b7ffe2ee184bc5c364",
+    "gate_errors": [],
+    "rustls_versions": [
+      "0.23.46"
+    ],
+    "rust_package_records": 513,
+    "raw_findings": []
+  },
+  "nifi": {
+    "artifact": "cnc-guard-nifi-rustls:20261028",
+    "image_id": "sha256:0d54be068ce243b81ed9de14b49bce15755eea2bbe9fa6d9cce2ebf40e60a170",
+    "gate_errors": [],
+    "rustls_versions": [
+      "0.23.46"
+    ],
+    "rust_package_records": 1026,
+    "raw_findings": []
+  }
+}

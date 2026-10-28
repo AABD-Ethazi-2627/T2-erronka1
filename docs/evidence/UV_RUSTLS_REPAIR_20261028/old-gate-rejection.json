@@ -1,0 +1,6 @@
+[
+  "unexpected vulnerability: ('GHSA-c8m5-c952-6cm4', 'rustls', '0.23.45')",
+  "unexpected vulnerability: ('GHSA-h2v8-394m-p7vv', 'rustls', '0.23.45')",
+  "unexpected vulnerability: ('GHSA-vp88-798v-h67f', 'rustls', '0.23.45')",
+  "unexpected vulnerability: ('GHSA-w44r-93j7-qv28', 'rustls', '0.23.45')"
+]

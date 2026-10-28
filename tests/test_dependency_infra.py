@@ -33,6 +33,8 @@ class InfrastructureRefreshTests(unittest.TestCase):
                 "deploy/images/nifi.Dockerfile",
                 "deploy/images/python.Dockerfile",
                 "deploy/images/wolfi-base.Dockerfile",
+                "deploy/images/uv.Dockerfile",
+                "deploy/images/uv-stage.Dockerfile",
                 "docker-compose.yml",
                 "deploy/cg14/compose.yaml",
                 "scoring/Dockerfile",
@@ -45,6 +47,14 @@ class InfrastructureRefreshTests(unittest.TestCase):
                 nifi.read_text().replace(read_images()["nifi"], "apache/nifi:2.0.0")
             )
             self.assertTrue(any("nifi" in error for error in check(root)))
+            api = root / "scoring/Dockerfile"
+            api.write_text(api.read_text().replace("uv-rustls.patch", "unpatched.lock"))
+            self.assertTrue(
+                any(
+                    "scoring/Dockerfile: patched uv source stage differs" in error
+                    for error in check(root)
+                )
+            )
             inventory = root / "deploy/images.json"
             images = read_images(root)
             images["nifi"] = "apache/nifi:2.12.0"

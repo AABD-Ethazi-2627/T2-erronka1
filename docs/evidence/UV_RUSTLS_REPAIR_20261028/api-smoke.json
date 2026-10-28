@@ -1,0 +1,9 @@
+{
+  "image": "cnc-guard-api-rustls:20261028",
+  "health_status": 200,
+  "predict_status": 200,
+  "event_id_preserved": true,
+  "model_artifact_sha256": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+  "container_removed": true,
+  "cleanup_note": "Verified after daemon completed asynchronous --rm cleanup"
+}

@@ -127,29 +127,56 @@ def check(root=ROOT):
             config = actual.get(service, {})
             if key in build_targets:
                 if config.get("build", {}).get("dockerfile") != build_targets[key]:
-                    errors.append(f"{path}: {service} differs from deploy/build-targets.json")
+                    errors.append(
+                        f"{path}: {service} differs from deploy/build-targets.json"
+                    )
             elif config.get("image") != images[key]:
                 errors.append(f"{path}: {service} differs from deploy/images.json")
         for service, config in actual.items():
             if "image" in config and config["image"] not in images.values():
                 errors.append(f"{path}: {service} has an unreviewed image")
-            if "build" in config and config["build"].get("dockerfile") not in build_targets.values():
+            if (
+                "build" in config
+                and config["build"].get("dockerfile") not in build_targets.values()
+            ):
                 errors.append(f"{path}: {service} has an unreviewed build")
     dockerfile = (root / build_targets["api"]).read_text()
-    for key in ("python", "uv"):
+    for key in ("python",):
         if "FROM " + images[key] not in dockerfile:
             errors.append(f"scoring/Dockerfile: {key} differs from deploy/images.json")
-    for key in ("elasticsearch", "filebeat", "kafka", "kibana", "mock-python", "nifi", "python", "wolfi"):
+    for key in (
+        "elasticsearch",
+        "filebeat",
+        "kafka",
+        "kibana",
+        "mock-python",
+        "nifi",
+        "python",
+        "wolfi",
+    ):
         dockerfile = (root / build_targets[key]).read_text()
         if "FROM " + images[key] not in dockerfile:
-            errors.append(f"{build_targets[key]}: {key} differs from deploy/images.json")
+            errors.append(
+                f"{build_targets[key]}: {key} differs from deploy/images.json"
+            )
     filebeat = (root / build_targets["filebeat"]).read_text()
     if "FROM " + images["go"] not in filebeat:
-        errors.append("deploy/images/filebeat.Dockerfile: go differs from deploy/images.json")
+        errors.append(
+            "deploy/images/filebeat.Dockerfile: go differs from deploy/images.json"
+        )
     nifi = (root / build_targets["nifi"]).read_text()
-    for key in ("uv", "wolfi"):
+    for key in ("wolfi",):
         if "FROM " + images[key] not in nifi:
-            errors.append(f"deploy/images/nifi.Dockerfile: {key} differs from deploy/images.json")
+            errors.append(
+                f"deploy/images/nifi.Dockerfile: {key} differs from deploy/images.json"
+            )
+    stage = (root / "deploy/images/uv-stage.Dockerfile").read_text()
+    uv_version = images["uv"].split(":", 1)[1].split("@", 1)[0]
+    if f"/refs/tags/{uv_version}.tar.gz" not in stage:
+        errors.append("Patched uv source version differs from upstream inventory")
+    for key in ("api", "nifi", "uv"):
+        if not (root / build_targets[key]).read_text().startswith(stage):
+            errors.append(f"{build_targets[key]}: patched uv source stage differs")
     return errors
 
 
