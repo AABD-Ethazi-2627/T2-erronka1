@@ -11,5 +11,7 @@
 
 [Procedimiento](procedure.md) · [Estado para continuar](state.md).
 
+28/10/2026 · [Explicaciones, guion, ensayo y consulta preparados](runs/20261028-defense-materials.md).
+
 [Informe histórico del 23/10](../../evidence/PENDING_REVIEW_20261023.md).
 El estado actual de esta composición está en la ejecución del 26/10.

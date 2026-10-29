@@ -1,12 +1,14 @@
 # CNC Guard: defentsarako gidoi editagarria
 
-2026-10-23. Proiektua: `AABD-Ethazi-2627/T2-erronka1`; lan-adarra: `review/pending-20261023`; erreferentziako HEAD: `55cfd63d71c848acbd7647eab7b69bec768b646d`, gehi checkout-eko azken dokumentazioa.
+Jatorrizko gidoia: 2026-10-23. **Eguneratzea: 2026-10-28**, PR91 integratu ondoren. Proiektua: `AABD-Ethazi-2627/T2-erronka1`; egiaztatutako dokumentu-oinarria: `main` `b2186e519e5444dcdb127d9409da105a8fe6d674`. Jatorrizko erreferentzia `55cfd63d71c848acbd7647eab7b69bec768b646d` zen; beheko 23/10eko emaitzak historiko gisa mantentzen dira. Lotutako iturriak egungo oinarrian kontsultatu dira, beren jatorrizko data eta mugekin.
 
 Entsegua prestatzeko Markdown gidoia da. Ez da PPTX aurkezpena, egindako entseguaren akta edo euskararen giza balioztapena. Lau kiderentzako banaketa **proposamena** da; ez du inoren benetako parte-hartzea egiaztatzen. Kideek izenak eta txandak adostu behar dituzte.
 
+Ikasteko azalpen garatuak, adibideak eta bloke bakoitzeko galdera-erantzunak [gaztelaniazko prestakuntza-materialean](AZALPENAK_20261028.md) daude. Uneko neurketa-erreferentzia [28/10eko CG32 kanpaina](../evidence/CG32_CAMPAIGN_20261028.md) da: berreraikitako hautagaia neurtzen du, ez CG26ko bundle historikoa edo RF research paketea.
+
 ## Denbora eta erabilera
 
-**10 minutu orientagarri**, lehendik dagoen [demo-proposamena](README.md) abiapuntu hartuta. Ez da irakasleak ezarritako iraupena. Ez daude azken entregaren data, ordua, kanala edo defentsaren iraupen ofiziala baieztatuta. Galderen denbora hamar minutu horien barruan edo kanpoan dagoen ere argitu behar da.
+**Hamar minutuko egitura**, [enuntziatuko «Demo Aurkezpena (10 minutu)»](../../ENUNTZIATUA.md) atala abiapuntu hartuta. Atal horrek sistema live erakustea eskatzen du. Gidoi hau eta [artxibatutako ebidentzien entsegua](ENTSEGU_PRESTATUA_20261028.md) azalpena prestatzeko eta babeskopiatzat erabiltzeko dira; ez dute zuzeneko demo hori egiaztatzen. Azken entregaren data, ordua, kanala eta galderen tartea baieztatzea falta da.
 
 Erabiltzailearen arabera, entrega dokumentazioa eta gelako aurkezpena izan daiteke; oraingoz hipotesia da. Kostuei eta sailkapen tabularrari buruzko postek gai horiek argitzen dituzte, baina ez azken entregaren baldintzak.
 
@@ -85,29 +87,54 @@ Iturriak: [CG34ren protokoloa eta mugak](../evidence/CG34_20261023/manifest.json
 
 **Ereduaren denbora eta kate osoarena**
 
-- RF+IF prozesuan: p95 **11,073 ms**, n = 600.
-- Pilotu pribatua: **10 bidali / 10 gorde**, offset baieztatua 10.
-- HTTP p95 **60,320 ms**; E2E p95 **55,748 s**. Proposatutako 1 s-ko helburua: **ez da betetzen**.
+- **28/10eko kanpaina:** zazpi exekuzio; **1.860 eskaini / 1.860 gorde**.
+- RF+IF prozesuan: p95 **5,929676 ms**, n = 600; ez HTTP/E2E.
+- Hiru oinarrizko exekuzioen E2E p95ak: **82,747 / 83,859 / 78,135 s**.
+- **Ez du 10 gertakari/s mantentzen ilara pilatu gabe; ez du E2E p95 ≤1 s betetzen.**
 
 ### Hizlariaren oharrak: 3. kidea
 
-> Hemen hiru neurketa desberdin daude. Lehenengoa RF eta IF ereduak prozesu berean kalkulatzeko denbora da. Seiehun behaketatan p95a 11,073 milisegundokoa izan zen. Aurretiko hogei beroketa-deiak kanpoan utzi ziren. Neurketa horrek ez du sareko edo kate osoko denbora barne hartzen.
+> Uneko erreferentzia urriaren hogeita zortziko kanpaina da. Zazpi exekuziotan mila zortziehun eta hirurogei gertakari eskaini eta gorde ziren. Exekuzio bakoitzeko alderaketaren arabera, ez zen baliozko gertakaririk galdu, ez zen azken ID bikoizturik agertu eta ez zen gertakaririk zain geratu; azken laga zero zen. Emaitza horiek laborategiko gertakari nominalei dagozkie; ez dute edozein hutsegiteren edo kargaren aurreko berme orokorrik ematen.
 >
-> Bigarrena HTTP eskaeren denbora da: pilotuan p95a 60,320 milisegundokoa izan zen. Hirugarrena muturretik muturrerako denbora da: p95a 55,748 segundokoa. Milisegundoak eta segundoak ez ditugu nahastu behar.
+> Hiru oinarrizko exekuziotan seiehun gertakari eskaini ziren bakoitzean, segundoko hamar, hirurogei segundoz. Gehieneko laga hirurehun eta berrogeira iritsi zen, eta ondoren hustu zen. Beraz, eskaintza hamar gertakari segundokoa izateak ez du esan nahi sistemak tasa hori ilara pilatu gabe mantentzen duenik. Hustea barne hartuta, behatutako throughput-a 4,1087 eta 4,2702 gertakari/s artekoa izan zen.
 >
-> Pilotu pribatuan hamar gertakari eskaini ziren. Hamar gorde ziren, Elasticsearchen hamar dokumentu zeuden eta baieztatutako offseta hamar zen. Erregistroak alderatzean, ez zen baliozko gertakari galdurik edo `event_id` bikoizturik aurkitu lagin horretan. Discoverren ere pilotuko identifikatzaile bera duen dokumentu bat behatu zen, gordetako erregistroaren arabera.
+> Hemen hiru denbora bereizten ditugu. RF eta IF prozesu berean kalkulatzeko p95a 5,929676 milisegundokoa da, seiehun behaketatan; aurreko hogei beroketa-deiak kanpoan utzi ziren. Hiru oinarrizko exekuzioen HTTP zerbitzariko p95ak 14,958, 15,116 eta 14,365 milisegundokoak dira. Kate osoko p95ak, aldiz, 82,747, 83,859 eta 78,135 segundokoak dira. Ez ditugu pertzentil horiek batzen edo exekuzio desberdinetako laginak nahasten.
 >
-> Horrek pilotu horren trazabilitatea erakusten du. Hamar gertakarik ez dute edozein karga, makina edo hutsegiteren aurrean berme orokorrik ematen. Gainera, muturretik muturrerako segundo bateko ingeniaritza-helburu proposatua ez da bete. Helburu hori ez dugu irakaslearen eskakizun ofizialtzat aurkezten.
+> E2E neurketa CSV lerroaren fsync egin ondoren hasten da eta ESko lehen kontsultak dokumentua ikusten duenean amaitzen da; refresh eta polling barne hartzen ditu. Ez du SMB bidezko deskarga neurtzen. Proposatutako segundo bateko E2E helburua ez da bete; hiru oinarrizko exekuzioek HTTPko ehun milisegundoko helburua bete dute. Ez ditugu helburu horiek irakaslearen baldintza ofizialtzat aurkezten.
 >
-> Beste bereizketa bat ere badago: errenkada bakoitza aurreko irakurketarik gabe ebaluatzeak ez du esan nahi zerbitzuak erantzunak gorde ezin dituenik. Ledger idempotenteak eskaera beraren erantzun baieztatua gordetzen du, berriz saiatzean inferentzia errepikatu ez dadin. Ledgerra ez da ereduari emandako denbora-historiala.
+> Hogei segundoko pausaren eta behatutako SIGKILLaren ondoren, hogeitik hogei gertakari berreskuratu ziren proba bakoitzean. Ez dago frogatuta etena HTTP erantzunaren eta Kafka commit-aren arteko une zehatzean gertatu zenik. Discoverren gordetako irudiak gertakari baten IDa eta RF hash bera erakusten ditu; ez da gertakari guztien banakako ikuskapena.
 >
-> Aurkezpen honetan gordetako ebidentzia azaltzen ari gara. Ez gara zerbitzuak berriro martxan jartzen edo neurketa berri bat egiten ari.
+> NiFik zikloak planifikatzen ditu, eta Python workerra da Kafka offsetaren jabe bakarra. APIak erantzuna ledgerrean baieztatzen du 200 eman aurretik; workerrak artxiboa eta ES baieztatu ondoren egiten du Kafka commit-a. Eskaera bera errepikatzean, ledger idempotenteak erantzun bera berreskuratzen du, `scored_at` barne. Ledgerra ez da ereduari emandako sentsore-historiala, eta mekanismo horrek ez du exactly-once banatua frogatzen.
+>
+> Kanpainak berreraikitako hautagaia erabili du, bere hash eta egiaztagiri propioekin. Ez da CG26ko bundle historikoa, nahiz eta model_version etiketa bera izan; RF research paketea ere beste artefaktu bat da. Hemen gordetako ebidentzia azaltzen dugu, neurketa berririk edo taldearen entsegurik egin gabe. Sistemak ez du CNCaren gaineko ekintza automatikorik egiten; pertsonak berrikusten du alerta.
 
-**Etenaldia:** «ez da betetzen» esan ondoren, tarte laburra utzi. Ez laburbildu sistema osoa «hamaika milisegundotan dabil» esanez.
+**Etenaldia:** «ez da betetzen» esan ondoren, tarte laburra utzi. Ez laburbildu sistema osoa «sei milisegundotan dabil» esanez.
 
-**Erreleboa:** «Denborak eta pilotuaren muga ikusita, laugarren kideak azalduko du zergatik alderatzen ditugun alertak kostuen bidez ere».
+**Erreleboa:** «Denborak eta kanpainaren muga ikusita, laugarren kideak azalduko du zergatik alderatzen ditugun alertak kostuen bidez ere».
 
-Iturriak: [ereduaren 600 behaketak](../evidence/CG32_ORIGINAL_MODEL_20261023.json), [jatorrizko bundlearen pilotua](../evidence/CG32_ORIGINAL_PILOT_20261023.json), [Discoverren egiaztapen-erregistroa](../evidence/CG32_ORIGINAL_DISCOVER_20261023.json) eta [ledgerreko erantzunen kontratua](../SCORING_REPLAY_CONTRACT.md).
+### Kontsultarako taula: 28/10eko exekuzioak
+
+Taula [kanpainaren txostenarekin](../evidence/CG32_CAMPAIGN_20261028.md) eta [`raw-runs.zip`](../evidence/CG32_CAMPAIGN_20261028/raw-runs.zip) artxiboko exekuzio bakoitzaren `run.json` fitxategiarekin alderatuta dago. [SHA-256 indizeak](../evidence/CG32_CAMPAIGN_20261028/raw-index.json) fitxategi zehatzak identifikatzen ditu. Hiru hamartar erakusten dira; pertzentilak exekuzio bakoitzekoak dira.
+
+| Exekuzioa | Eskaini / gorde | HTTP p95 ms | E2E p95 s | Lag gehien / azken | Hustea s |
+|---|---:|---:|---:|---:|---:|
+| batch32-base-1 | 600 / 600 | 14,958 | 82,747 | 340 / 0 | 87,888 |
+| batch32-base-2 | 600 / 600 | 15,116 | 83,859 | 340 / 0 | 88,596 |
+| batch32-base-3 | 600 / 600 | 14,365 | 78,135 | 340 / 0 | 83,132 |
+| batch32-kill | 20 / 20 | 15,905 | 39,762 | 20 / 0 | 27,714 |
+| batch32-pause | 20 / 20 | 13,414 | 25,728 | 18 / 0 | 8,144 |
+| batch32-pilot | 10 / 10 | 13,577 | 12,162 | 9 / 0 | 15,022 |
+| rebuilt-pilot | 10 / 10 | 19,906 | 25,928 | 9 / 0 | 29,045 |
+
+Guztira 1.860 dira, baina ez 1.860 behaketa independente recall-a neurtzeko: train-eko fixture nominalak dira, agerraldi bakoitzeko ID berriekin. `rebuilt-pilot` exekuzioak `max_records=1` erabili zuen; besteek 32. Ez da 50/s-ko probarik egin, 10/s-koak ilara pilatzen duelako eta helburua betetzen ez duelako. Pilotu bakoitzaren errepikapen bakarrak ez du A/B hobekuntza kausala frogatzen.
+
+**Jatorriaren muga:** [provenientziak](../evidence/CG32_CAMPAIGN_20261028/provenance.json) `b815771` gaineko hasiera gordetzen du, commit gabeko egokitzapenarekin; lab kodearen byteak `3061a6c`rekin bat datoz. Kanpaina ez zen goiburuko merge garbiaren gainean exekutatu. Grafoko APIak Python 3.11 darabil; tokiko osagarriak 3.12.14. Osagarriaren HTTP bezeroaren joan-etorria eta taulako HTTP zerbitzariaren denbora neurketa desberdinak dira.
+
+Iturriak: [ereduaren 600 behaketak](../evidence/CG32_CAMPAIGN_20261028/model-latency.json), [hautagaiaren identitatea](../evidence/CG32_REBUILT_IDENTITY_20261028.json), [runtime eta birkarga](../evidence/CG32_CAMPAIGN_20261028/supplement-runtime-reload.json), [Discoverren egiaztagiria](../evidence/CG32_CAMPAIGN_20261028/discover-receipt.json), [grafoko kontratua](../CG14_AUTOMATIC_GRAPH.md) eta [ledgerreko erantzunen kontratua](../SCORING_REPLAY_CONTRACT.md).
+
+### Erreferentzia historikoa: 23/10eko jatorrizko bundlea
+
+23/10eko [ereduaren neurketak](../evidence/CG32_ORIGINAL_MODEL_20261023.json) RF+IF p95 **11,073 ms** eman zuen, n=600. [Pilotuak](../evidence/CG32_ORIGINAL_PILOT_20261023.json) **10 eskaini / 10 gorde** eta hamar ES dokumentu jaso zituen; baieztatutako offseta 10 zen. HTTP p95 **60,320 ms** eta E2E p95 **55,748 s** ziren. [Discoverren orduko erregistroa](../evidence/CG32_ORIGINAL_DISCOVER_20261023.json) ere mantentzen da. Datu historikoak dira, ez azken kanpaina, eta ez dira 28/10eko hautagaiaren emaitzekin bateratzen edo hobekuntza kausal gisa aurkezten.
 
 ## 4. blokea: nola alderatu alerten kostua?
 
@@ -133,7 +160,7 @@ Grafikoa erakusteko laguntza: horizontalean atalasea edo recall-a dago; bertikal
 >
 > Grafikoan atalasea eta recall-a aldatzean kostua nola mugitzen den ikus dezakegu. Kurba horiek Python bidez egindako analisiaren barruan daude jada. OOF train-eko doikuntza-kurbak dira; ez dira azken testaren emaitza edo lantegian neurtutako aurrezpena. Kostuen gehigarriak ez du zerbitzuko bundlea edo atalasea aldatu.
 >
-> Amaitzeko: uneko egoera sailkatzen dugu; ebaluazioaren datuak eta mugak bereizten ditugu; ereduaren denbora eta kate osoarena ez ditugu nahasten; eta alertak lau kostuen bidez ere alderatzen ditugu. Hurrengo erabakietan argitu beharrekoak dira `machine_type` aldagaiaren onarpena eta entregaren baldintzak. Segundo bateko helburua betetzea ere ez dago frogatuta.
+> Amaitzeko: uneko egoera sailkatzen dugu; ebaluazioaren datuak eta mugak bereizten ditugu; ereduaren denbora eta kate osoarena ez ditugu nahasten; eta alertak lau kostuen bidez ere alderatzen ditugu. Hurrengo erabakietan argitu beharrekoak dira `machine_type` aldagaiaren onarpena eta entregaren baldintzak. Azken kanpainak ez du segundo bateko E2E helburua betetzen, eta ez du 10 gertakari/s ilararik gabe mantentzen.
 >
 > Eskerrik asko zuen arretagatik. Orain, galderak erantzuteko prest gaude, gordetako ebidentziak eta haren mugak oinarri hartuta.
 
@@ -156,9 +183,9 @@ Erantzuleak ere proposatuak dira. Galdera entzun, eten laburra egin eta erantzun
 5. **«Sarrera bakoitza independentea bada, zergatik ledgerra?» (3. kidea)**
    «Ereduak ez du aurreko sentsore-errenkaden sekuentziarik behar. Ledgerra baieztatutako erantzun bera berreskuratzeko da, eskaera errepikatzean. Trazabilitatea eta inferentziaren sarrerak gauza desberdinak dira».
 6. **«11 ms-ko latentzia du sistema osoak?» (3. kidea)**
-   «11,073 ms RF+IFen prozesu bereko p95a da, 600 behaketatan. Pilotuaren HTTP p95a 60,320 ms da, eta E2E p95a 55,748 s. Proposatutako segundo bateko helburua ez da betetzen».
+   «11,073 ms 23/10eko neurketa historikoa da, RF+IF prozesuan. 28/10eko hautagaiaren p95a 5,929676 ms da prozesuan; oinarrizko hiru exekuzioen HTTP p95ak 14,958/15,116/14,365 ms eta E2E p95ak 82,747/83,859/78,135 s dira. Ez da sistema osoaren latentzia bakarra, eta segundo bateko E2E helburua ez da betetzen».
 7. **«Ez da inoiz daturik galtzen?» (3. kidea)**
-   «Hamar gertakariko pilotuaren erregistroen alderaketak zero galera eta zero ID bikoiztu erakusten ditu. Lagin horrek ez du karga edo hutsegite guztietarako bermerik ematen».
+   «28/10eko zazpi exekuzioek 1.860 eskaini eta 1.860 gorde dituzte, zero galera eta zero azken ID bikoizturekin. Lagin nominal horrek eta behatutako etenek ez dute karga edo hutsegite guztietarako bermerik ematen; 10/s-ko eskaintzak ilara pilatzen du».
 8. **«Azken test independentea gainditu du?» (2. kidea)**
    «Ez dugu hori aldarrikatzen. CG34k train-eko 5.600 errenkadetan baliozkotze gurutzatua erabiltzen du. Test zaharra baztertuta dago, eta aurreko baliozkotzea ez da azken test independentea».
 9. **«Zenbat diru aurreztu duzue benetan?» (4. kidea)**
@@ -168,7 +195,7 @@ Erantzuleak ere proposatuak dira. Galdera entzun, eten laburra egin eta erantzun
 11. **«IFren alerta batek hutsegitea baieztatzen du?» (1. kidea)**
     «Ez. IFk ezohikotasuna adierazten du. Hori eta RFren uneko sailkapen-scorea bereizten ditugu; ez dira etorkizuneko matxuraren probabilitate kalibratuak».
 12. **«Noiz, non eta zenbat denboran aurkeztu behar da? Nota berezia ziurtatuta dago?» (4. kidea)**
-    «Azken data, ordua, kanala eta iraupena ez daude material honekin baieztatuta. Hamar minutuak gure entsegu-proposamena dira. Postak analisi ekonomikoa baloratzen du, baina ez dugu nota edo ohorezko emaitzarik ziurtatzen».
+    «Enuntziatuak hamar minutuko demo live bat jasotzen du; egitura hori prestatzen ari gara. Azken data, ordua, kanala eta galderetarako tartea argitzea falta da. Postak analisi ekonomikoa baloratzen du, baina ez dugu nota edo ohorezko emaitzarik ziurtatzen».
 
 ## Entsegu-fitxa: taldeak betetzeko
 
