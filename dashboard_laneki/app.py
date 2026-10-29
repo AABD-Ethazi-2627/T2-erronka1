@@ -307,11 +307,6 @@ gai_ikono_maskara = (
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E"
     "%3Cpath d='M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
 )
-kanpai_ikono_maskara = (
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E"
-    "%3Cpath d='M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
-)
-
 st.markdown(f"""
 <style>
 :root {{
@@ -403,18 +398,23 @@ div[data-testid="stDataFrame"] {{
 
 .st-key-menu_toggle {{
     position: fixed !important;
-    top: 8px;
-    left: {"198px" if st.session_state.menu_irekia else "10px"};
-    width: 40px;
+    top: 8px !important;
+    left: {"153px" if st.session_state.menu_irekia else "8px"} !important;
+    width: 34px !important;
+    height: 34px !important;
+    margin: 0 !important;
     z-index: 1000000;
     transition: left 0.25s ease;
 }}
 
 .st-key-menu_toggle button {{
-    width: 38px !important;
-    min-width: 38px !important;
-    height: 36px !important;
-    min-height: 36px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
+    margin: 0 !important;
     padding: 0 !important;
     border-radius: 8px !important;
     border: 1px solid #46627D !important;
@@ -470,15 +470,15 @@ div[data-testid="stDataFrame"] {{
 
 .st-key-goiburu_abisua_aktibo button,
 .st-key-goiburu_abisua_inaktibo button {{
-    width: 38px !important;
-    min-width: 38px !important;
-    height: 36px !important;
-    min-height: 36px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
     padding: 0 !important;
-    border: 1px solid {ertza} !important;
+    border: 1px solid #E2E8F0 !important;
     border-radius: 8px !important;
-    background: {panela} !important;
-    box-shadow: 0 2px 7px rgba(20, 42, 64, 0.10) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 3px 10px rgba(20, 42, 64, 0.16) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -490,29 +490,35 @@ div[data-testid="stDataFrame"] {{
 }}
 .st-key-goiburu_abisua_aktibo button::before,
 .st-key-goiburu_abisua_inaktibo button::before {{
-    content: "";
-    width: 21px;
-    height: 21px;
-    background: currentColor;
-    -webkit-mask: url("{kanpai_ikono_maskara}") center / contain no-repeat;
-    mask: url("{kanpai_ikono_maskara}") center / contain no-repeat;
+    content: "🔔";
+    width: auto;
+    height: auto;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+    font-size: 25px;
+    line-height: 1;
 }}
 .st-key-goiburu_abisua_inaktibo button,
 .st-key-goiburu_abisua_aktibo button {{
     color: #F4B942 !important;
-    border-color: {ertza} !important;
-    background: {panela} !important;
+}}
+.st-key-goiburu_abisua_aktibo button {{
+    box-shadow: 0 3px 12px rgba(230, 57, 70, 0.28) !important;
 }}
 .st-key-goiburu_abisua_aktibo button::after {{
-    content: "";
+    content: "!";
     position: absolute;
-    top: 5px;
-    right: 6px;
-    width: 7px;
-    height: 7px;
+    top: -3px;
+    right: -3px;
+    width: 19px;
+    height: 19px;
     border-radius: 50%;
     background: #E63946;
-    box-shadow: 0 0 0 2px {panela};
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 900;
+    line-height: 19px;
+    text-align: center;
+    box-shadow: 0 0 0 2px #FFFFFF;
 }}
 
 [data-testid="stSidebarCollapseButton"],
@@ -689,17 +695,27 @@ div[class*="st-key-machine_"] button:hover {{
 """, unsafe_allow_html=True)
 
 
-if st.button(
-    "☰" if not st.session_state.menu_irekia else "‹",
-    key="menu_toggle",
-    help=(
-        "Alboko menua erakutsi"
-        if not st.session_state.menu_irekia
-        else "Alboko menua ezkutatu"
-    )
-):
-    st.session_state.menu_irekia = not st.session_state.menu_irekia
-    st.rerun()
+def menu_toggle_botoia():
+    if st.button(
+        "☰" if not st.session_state.menu_irekia else "‹",
+        key="menu_toggle",
+        help=(
+            "Alboko menua erakutsi"
+            if not st.session_state.menu_irekia
+            else "Alboko menua ezkutatu"
+        )
+    ):
+        st.session_state.menu_irekia = not st.session_state.menu_irekia
+        st.rerun()
+
+
+# Menua irekita dagoenean kontrola alboko menuan bertan dago. Horrela,
+# orrialdeetako edukia eskalatzen denean botoiaren kokapena ez da aldatzen.
+if st.session_state.menu_irekia:
+    with st.sidebar:
+        menu_toggle_botoia()
+else:
+    menu_toggle_botoia()
 
 
 # =============================
@@ -788,11 +804,14 @@ uneko_tenperatura = kpis.get("tenperatura", "--")
 abisuak_goiburua = st.session_state.orria == "Abisuak"
 goiburu_klasea = " alerts-header-title" if abisuak_goiburua else ""
 azpititulu_klasea = " alerts-header-subtitle" if abisuak_goiburua else ""
-goiburu_testua = (
-    "Abisuak eta lehentasunak"
-    if abisuak_goiburua
-    else "Makinen egoera eta datuak"
-)
+if abisuak_goiburua:
+    goiburu_testua = "Abisuak eta lehentasunak"
+elif st.session_state.orria == "Makinak":
+    goiburu_testua = "Makinen datuak"
+elif st.session_state.orria == "Datuak":
+    goiburu_testua = "Makinen datu historikoak"
+else:
+    goiburu_testua = "Makinen egoera eta datuak"
 azpititulu_testua = (
     "Egoera okerrenetik onenera ordenatuta · "
     "geldialdi-kostua makina eta larritasun-mailaren arabera"
@@ -837,6 +856,11 @@ with abisu_zutabea:
         f"{abisu_kopurua} makina abisuekin"
         if abisu_kopurua else "Ez dago abisurik"
     )
+    if abisu_kopurua:
+        st.html(
+            f'<style>.st-key-goiburu_abisua_aktibo button::after'
+            f'{{content:"{min(abisu_kopurua, 99)}" !important;}}</style>'
+        )
     if st.button(
         abisu_etiketa,
         key=("goiburu_abisua_aktibo" if abisu_kopurua else "goiburu_abisua_inaktibo"),
@@ -1073,7 +1097,7 @@ def telemetria_taula():
             font-family: Verdana, Arial, sans-serif; font-weight: 700;
         }}
         .telemetry-title {{ font-size: 16px; font-weight: 800; margin: 0 90px 8px 0; }}
-        .telemetry-subtitle {{ font-size: 12px; font-weight: 500; margin: 0 90px 10px 0; color: {bigarren_mailakoa}; }}
+        .telemetry-subtitle {{ font-size: 12px; font-weight: 700; margin: 0 90px 10px 0; color: {bigarren_mailakoa}; }}
         .telemetry-actions {{ position: absolute; top: 0; right: 0; z-index: 5; display: flex; gap: 7px; opacity: 0; pointer-events: none; transition: opacity .15s ease; }}
         #telemetry-root:hover .telemetry-actions,
         .telemetry-actions:focus-within {{ opacity: 1; pointer-events: auto; }}

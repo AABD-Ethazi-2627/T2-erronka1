@@ -78,7 +78,7 @@ def _joera_diagrama(
     )
 
 
-@st.dialog("Makinen egoera eta datuak", width="large")
+@st.dialog("Makinen datuak", width="large")
 def _makina_xehetasunak_modal(datuak: dict[str, Any]) -> None:
     """Hautatutako CNCaren analisi prediktibo osoa erakutsi."""
     zenbakia = datuak["zenbakia"]
@@ -571,7 +571,7 @@ def _estiloak_txertatu() -> None:
         padding-bottom: 0;
         text-align: center;
         font-family: var(--kpi-font-family, Verdana, Arial, sans-serif) !important;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.2;
         color: var(--semantic-muted, #475569);
         font-weight: 700;

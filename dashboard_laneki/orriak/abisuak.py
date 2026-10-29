@@ -11,6 +11,18 @@ GALERA_MAILAKA = {
     "alert-review": 400,
 }
 
+PROBABILITATE_MAILAKA = {
+    "alert-critical": 1.00,
+    "alert-high": 0.72,
+    "alert-review": 0.42,
+}
+
+GELDIALDI_ORDUAK_MAILAKA = {
+    "alert-critical": 6.0,
+    "alert-high": 4.0,
+    "alert-review": 2.0,
+}
+
 
 def _lehentasun_datuak(makina: dict[str, Any]) -> dict[str, Any]:
     """Makinaren larritasuna eta gomendatutako ekintza kalkulatu."""
@@ -38,6 +50,21 @@ def _lehentasun_datuak(makina: dict[str, Any]) -> dict[str, Any]:
         ekintza = "Hurrengo geldialdian berrikusi"
         ordena = 1_000 + higadura + tenperatura
 
+    galera_orduko = float(
+        makina.get("geldialdi_kostua_orduko", GALERA_MAILAKA[klasea])
+    )
+    probabilitatea = float(
+        makina.get("matxura_probabilitatea", makina.get("riesgo_fallo", PROBABILITATE_MAILAKA[klasea]))
+    )
+    if probabilitatea > 1:
+        probabilitatea /= 100
+    probabilitatea = max(0.0, min(1.0, probabilitatea))
+    geldialdi_orduak = max(0.0, float(
+        makina.get("aurreikusitako_geldialdia_ordu", GELDIALDI_ORDUAK_MAILAKA[klasea])
+    ))
+    galera_potentziala = galera_orduko * geldialdi_orduak
+    galera_esperoa = galera_potentziala * probabilitatea
+
     return {
         "makina": makina,
         "maila": maila,
@@ -46,7 +73,11 @@ def _lehentasun_datuak(makina: dict[str, Any]) -> dict[str, Any]:
         "ordena": ordena,
         "lerroa": lerroa,
         "kokapena": kokapena,
-        "galera_orduko": GALERA_MAILAKA[klasea],
+        "galera_orduko": galera_orduko,
+        "probabilitatea": probabilitatea,
+        "geldialdi_orduak": geldialdi_orduak,
+        "galera_potentziala": galera_potentziala,
+        "galera_esperoa": galera_esperoa,
     }
 
 
@@ -63,17 +94,19 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
     kritikoak = sum(d["klasea"] == "alert-critical" for d in abisuak)
     handiak = sum(d["klasea"] == "alert-high" for d in abisuak)
     ertainak = sum(d["klasea"] == "alert-review" for d in abisuak)
-    galera_kritikoa = kritikoak * GALERA_MAILAKA["alert-critical"]
-    galera_handia = handiak * GALERA_MAILAKA["alert-high"]
-    galera_ertaina = ertainak * GALERA_MAILAKA["alert-review"]
+    galera_kritikoa = sum(d["galera_orduko"] for d in abisuak if d["klasea"] == "alert-critical")
+    galera_handia = sum(d["galera_orduko"] for d in abisuak if d["klasea"] == "alert-high")
+    galera_ertaina = sum(d["galera_orduko"] for d in abisuak if d["klasea"] == "alert-review")
     galera_guztira = sum(d["galera_orduko"] for d in abisuak)
+    galera_potentziala = sum(d["galera_potentziala"] for d in abisuak)
+    galera_esperoa = sum(d["galera_esperoa"] for d in abisuak)
 
     st.html(f"""
     <section class="alerts-summary">
         <div class="alerts-summary-card summary-red"><span>Kritikoa</span><strong>{kritikoak}</strong><small>{GALERA_MAILAKA['alert-critical']:,} €/h makina bakoitzeko</small></div>
         <div class="alerts-summary-card summary-high"><span>Altua</span><strong>{handiak}</strong><small>{GALERA_MAILAKA['alert-high']:,} €/h makina bakoitzeko</small></div>
         <div class="alerts-summary-card summary-medium"><span>Ertaina</span><strong>{ertainak}</strong><small>{GALERA_MAILAKA['alert-review']:,} €/h makina bakoitzeko</small></div>
-        <div class="alerts-summary-card summary-risk"><span>Galera guztira</span><strong>{galera_guztira:,} €/h</strong><small>Gelditutako makina guztien batura</small></div>
+        <div class="alerts-summary-card summary-risk"><span>Aurreikusitako galera</span><strong>{galera_esperoa:,.0f} €</strong><small>Arriskua eta geldialdi-denbora kontuan hartuta</small></div>
     </section>
     """)
 
@@ -89,14 +122,14 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
         txartelak = []
         for posizioa, datua in enumerate(abisuak, start=1):
             makina = datua["makina"]
-            kostu_etiketa = "Makina honen galera"
+            kostu_etiketa = "Aurreikusitako galera"
             txartelak.append(f"""
             <article class="alert-machine-row {datua['klasea']}">
                 <div class="alert-rank">{posizioa}</div>
                 <div class="alert-machine-name"><strong>{makina['id']}</strong><span>{datua['lerroa']} lerroa · {datua['kokapena']}. kokapena</span></div>
                 <div class="alert-level"><span>{datua['maila']}</span><small>{datua['ekintza']}</small></div>
                 <div class="alert-readings"><small>Neurketak</small><span>{makina['tenperatura']:.1f} °C</span><span>{makina['rpm']} RPM</span><span>{makina['higadura']} min</span></div>
-                <div class="alert-cost"><small>{kostu_etiketa}</small><strong>{datua['galera_orduko']:,} €/h</strong></div>
+                <div class="alert-cost"><small>{kostu_etiketa}</small><strong>{datua['galera_esperoa']:,.0f} €</strong><span>{datua['probabilitatea']:.0%} arriskua · {datua['geldialdi_orduak']:g} h · {datua['galera_orduko']:,.0f} €/h</span></div>
             </article>
             """)
 
@@ -110,17 +143,17 @@ def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
         st.html(f"""
         <section class="cost-panel">
             <div class="cost-panel-icon">€</div>
-            <span>GALERA EKONOMIKOAREN LABURPENA</span>
-            <strong>{galera_guztira:,} €/h</strong>
-            <small>Gelditutako makina guztien orduko galera</small>
-            <div class="cost-formula"><b>{kritikoak}</b> kritiko × 1.200 + <b>{handiak}</b> altu × 800 + <b>{ertainak}</b> ertain × 400</div>
+            <span>GALERA EKONOMIKO PREDIKTIBOAREN LABURPENA</span>
+            <strong>{galera_esperoa:,.0f} €</strong>
+            <small>Makina bakoitzaren arriskuaren arabera espero den galera</small>
+            <div class="cost-formula">Probabilitatea × aurreikusitako geldialdi-orduak × orduko kostua</div>
             <hr>
-            <div class="cost-detail"><span>Kritikoen galera / h</span><b>{galera_kritikoa:,} €</b></div>
-            <div class="cost-detail"><span>Altuen galera / h</span><b>{galera_handia:,} €</b></div>
-            <div class="cost-detail"><span>Ertainen galera / h</span><b>{galera_ertaina:,} €</b></div>
-            <div class="cost-detail"><span>Ordubeteko galera guztira</span><b>{galera_guztira:,} €</b></div>
-            <div class="cost-detail"><span>8 orduko txandako galera</span><b>{galera_guztira * 8:,} €</b></div>
-            <div class="cost-detail"><span>24 orduko galera</span><b>{galera_guztira * 24:,} €</b></div>
-            <p>Demo-kalkulua makina geldirik dagoela suposatuz: kritikoa 1.200 €/h, altua 800 €/h eta ertaina 400 €/h.</p>
+            <div class="cost-detail"><span>Espero den galera</span><b>{galera_esperoa:,.0f} €</b></div>
+            <div class="cost-detail"><span>Galera potentziala</span><b>{galera_potentziala:,.0f} €</b></div>
+            <div class="cost-detail"><span>Orduko esposizioa</span><b>{galera_guztira:,.0f} €/h</b></div>
+            <div class="cost-detail"><span>Kritikoen esposizioa / h</span><b>{galera_kritikoa:,} €</b></div>
+            <div class="cost-detail"><span>Altuen esposizioa / h</span><b>{galera_handia:,} €</b></div>
+            <div class="cost-detail"><span>Ertainen esposizioa / h</span><b>{galera_ertaina:,} €</b></div>
+            <p>Simulazioan larritasunaren araberako balioak erabiltzen dira. Datu errealekin makina bakoitzak bere probabilitatea, geldialdi-denbora eta orduko kostua izango ditu.</p>
         </section>
         """)

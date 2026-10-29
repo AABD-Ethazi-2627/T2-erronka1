@@ -17,6 +17,7 @@
     --machine-green: #23856C;
     --machine-yellow: #D4A63E;
     --machine-red: #DE4651;
+    --dashboard-font-family: Verdana, Arial, sans-serif;
     --kpi-font-family: Verdana, Arial, sans-serif;
     --kpi-title-size: 17px;
     --kpi-value-size: clamp(32px, 2.2vw, 40px);
@@ -27,16 +28,42 @@
    TIPOGRAFIA OROKORRA
    ========================================== */
 
-html, body, .stApp, button, input {
-    font-family: Verdana, Arial, sans-serif !important;
+html, body, .stApp,
+.stApp p, .stApp span, .stApp strong, .stApp small,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+.stApp button, .stApp input, .stApp select, .stApp textarea,
+.stApp table, .stApp th, .stApp td, .stApp label,
+[role="dialog"], [role="dialog"] button, [role="dialog"] input,
+svg text {
+    font-family: var(--dashboard-font-family) !important;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .stApp {
     line-height: 1.5;
+    letter-spacing: 0.005em;
+}
+
+.stApp small,
+.stApp caption {
+    line-height: 1.4;
+}
+
+/* Mantendu Material ikonoen berezko letra-tipoa. */
+.stApp [data-testid="stIconMaterial"],
+.stApp .material-symbols-rounded,
+.stApp .material-icons {
+    font-family: "Material Symbols Rounded", "Material Icons" !important;
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
 }
 
 .block-container {
@@ -400,6 +427,15 @@ input:focus-visible {
 .panel-description {
     font-size: 13px;
     margin-bottom: 11px;
+}
+
+/* Hasiera: azpititulu eta azalpen guztiak irakurgarriago. */
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .dashboard-subtitle,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .panel-description,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .calendar-heading small,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel [data-testid="stCaptionContainer"] p {
+    font-weight: 700 !important;
 }
 
 /* ==========================================
@@ -1725,6 +1761,15 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     font-size: 15px;
 }
 
+.alert-cost > span {
+    margin-top: 2px;
+    color: var(--secondary-text);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.15;
+    white-space: normal;
+}
+
 .cost-panel {
     display: flex;
     flex-direction: column;
@@ -1836,6 +1881,145 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     .donut-center {
         width: 35px;
         height: 35px;
+    }
+}
+
+/* Tablet: 768–1180 px. Ez da mugikorrerako diseinua. */
+@media (min-width: 768px) and (max-width: 1180px) {
+    html {
+        font-size: 14px;
+    }
+
+    [data-testid="stSidebar"] {
+        width: 160px !important;
+        min-width: 160px !important;
+    }
+
+    [data-testid="stSidebar"] .block-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .sidebar-logo-image {
+        width: 150px;
+    }
+
+    .sidebar-nav-link {
+        padding-left: 14px;
+        padding-right: 10px;
+        font-size: 15px;
+    }
+
+    [data-testid="stMainBlockContainer"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0.65rem 0.75rem 0.5rem !important;
+        overflow-x: hidden !important;
+    }
+
+    .dashboard-title {
+        font-size: 20px;
+        letter-spacing: -0.3px;
+    }
+
+    .dashboard-subtitle {
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .header-datetime {
+        gap: 4px;
+        font-size: 11px;
+    }
+
+    .kpi-card {
+        min-height: 96px;
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .kpi-heading {
+        gap: 5px;
+        font-size: 11px;
+    }
+
+    .kpi-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .kpi-number {
+        font-size: clamp(22px, 3vw, 29px);
+    }
+
+    .kpi-description {
+        font-size: 10px;
+    }
+
+    .panel-heading {
+        font-size: 14px;
+    }
+
+    .panel-description {
+        margin-bottom: 7px;
+        font-size: 11px;
+    }
+
+    .alerts-summary {
+        gap: 6px;
+    }
+
+    .alerts-summary-card {
+        min-height: 84px;
+        padding: 8px 10px;
+    }
+
+    .alert-machine-row {
+        grid-template-columns: 28px minmax(95px, 1fr) minmax(135px, 1.3fr) minmax(130px, 1fr) minmax(105px, .8fr);
+        gap: 7px;
+        padding: 7px;
+    }
+
+    .cost-panel {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+    }
+
+    img, svg, canvas, iframe {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 900px) and (orientation: portrait) {
+    [data-testid="stSidebar"] {
+        width: 150px !important;
+        min-width: 150px !important;
+    }
+
+    .sidebar-logo-image {
+        width: 140px;
+    }
+
+    .header-datetime span:first-child {
+        display: none;
+    }
+
+    .kpi-card {
+        min-height: 90px;
+        padding: 7px 5px;
+    }
+
+    .kpi-heading,
+    .kpi-description {
+        font-size: 9px;
+    }
+
+    .alerts-summary-card small {
+        font-size: 10px;
     }
 }
 
