@@ -1,6 +1,7 @@
 
 import base64
 import importlib
+import io
 import os
 from datetime import datetime, timezone
 
@@ -9,11 +10,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import requests
+import streamlit.components.v1 as components
 
 from orriak.hasiera import hasiera_erakutsi
 from orriak import makinak as makinak_orria
-from orriak.abisuak import abisuak_erakutsi
-from orriak.datuak import osasun_mailak_erakutsi
+from orriak import abisuak as abisuak_orria
+from orriak import datuak as datuak_orria
 
 
 FASTAPI_HELBIDEA = "http://127.0.0.1:8000/api"
@@ -179,6 +181,16 @@ def historikoa_lortu(kodea, makina):
     })
 
 
+def aldiko_historikoak_lortu(kodea):
+    """FastAPI: GET /api/historikoa/{kodea}/periodoak.
+
+    Espero diren gakoak: astea, hilabetea eta sei_hilabetea. APIa oraindik
+    erabilgarri ez badago, datuak.py-k simulazio-serieak sortzen ditu.
+    """
+    datuak = kontsultatu(f"historikoa/{kodea}/periodoak")
+    return datuak if isinstance(datuak, dict) else None
+
+
 # =============================
 # CSS ETA GAIAK
 # =============================
@@ -228,10 +240,26 @@ if iluna:
     pastel_berdea = "#294D42"
     semantiko_testua = "#F8FAFC"
     semantiko_bigarrena = "#D7E1EA"
-    egoera_gorria = "#57343A"
-    egoera_laranja = "#55451F"
-    egoera_urdina = "#294662"
-    egoera_berdea = "#294D42"
+    kpi_ikono_kolorea = "#E6F2FF"
+    kpi_ikono_atzeko_planoa = "rgba(248, 250, 252, 0.12)"
+    egoera_gorria = "#754957"
+    egoera_laranja = "#70623F"
+    egoera_melokotoia = "#765748"
+    egoera_urdina = "#45647D"
+    egoera_berdea = "#3F6858"
+    mapa_gorria = egoera_gorria
+    mapa_laranja = egoera_laranja
+    mapa_melokotoia = egoera_melokotoia
+    mapa_urdina = egoera_urdina
+    mapa_berdea = egoera_berdea
+    alerta_kritikoa = "#754957"
+    alerta_handia = "#765748"
+    alerta_berrikustea = "#70623F"
+    ertz_gorria = "#B97889"
+    ertz_laranja = "#B39B57"
+    ertz_melokotoia = "#B88469"
+    ertz_urdina = "#7299BA"
+    ertz_berdea = "#6B9C87"
 else:
     atzeko_planoa = "#F0F4F8"
     panela = "#FFFFFF"
@@ -243,17 +271,46 @@ else:
     sarrera_atzeko_planoa = "#FFFFFF"
     xehetasun_azalera = "#F8FAFC"
     xehetasun_ertza = "#E2E8F0"
-    pastel_urdina = "#DCEBFA"
-    pastel_arrosa = "#F9E2E4"
-    pastel_izotza = "#E7F0F5"
-    pastel_arbela = "#E5EDF5"
-    pastel_berdea = "#DFF4E9"
+    pastel_urdina = "#C5DCF3"
+    pastel_arrosa = "#F1C9CF"
+    pastel_izotza = "#D1E2EB"
+    pastel_arbela = "#CFDCE8"
+    pastel_berdea = "#C6E7D6"
     semantiko_testua = "#142A40"
     semantiko_bigarrena = "#475569"
-    egoera_gorria = "#FFF1F2"
-    egoera_laranja = "#FFF7E6"
-    egoera_urdina = "#EFF6FF"
-    egoera_berdea = "#F0FDF4"
+    kpi_ikono_kolorea = "#153B5C"
+    kpi_ikono_atzeko_planoa = "rgba(20, 42, 64, 0.08)"
+    egoera_gorria = "#F7CDD2"
+    egoera_laranja = "#F7E2AE"
+    egoera_melokotoia = "#F4D1BC"
+    egoera_urdina = "#C8DEF4"
+    egoera_berdea = "#C8EAD8"
+    mapa_gorria = "#EEAAB5"
+    mapa_laranja = "#F3D989"
+    mapa_melokotoia = "#F2BE9F"
+    mapa_urdina = "#AFCFEE"
+    mapa_berdea = "#A9DFC6"
+    alerta_kritikoa = "#F5D1D6"
+    alerta_handia = "#F6D9C4"
+    alerta_berrikustea = "#F5E4B8"
+    ertz_gorria = "#FCA7AF"
+    ertz_laranja = "#FDE48A"
+    ertz_melokotoia = "#FDC4A8"
+    ertz_urdina = "#A8D1FA"
+    ertz_berdea = "#A3E4C4"
+
+gai_ikono_maskara = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E"
+    "%3Ccircle cx='12' cy='12' r='4' fill='none' stroke='black' stroke-width='2'/%3E"
+    "%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"
+    if iluna else
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E"
+    "%3Cpath d='M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+)
+kanpai_ikono_maskara = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E"
+    "%3Cpath d='M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+)
 
 st.markdown(f"""
 <style>
@@ -274,10 +331,21 @@ st.markdown(f"""
     --pastel-green: {pastel_berdea};
     --semantic-text: {semantiko_testua};
     --semantic-muted: {semantiko_bigarrena};
+    --kpi-icon-color: {kpi_ikono_kolorea};
+    --kpi-icon-bg: {kpi_ikono_atzeko_planoa};
     --state-red-bg: {egoera_gorria};
     --state-amber-bg: {egoera_laranja};
+    --state-orange-bg: {egoera_melokotoia};
     --state-blue-bg: {egoera_urdina};
     --state-green-bg: {egoera_berdea};
+    --map-red-bg: {mapa_gorria};
+    --map-amber-bg: {mapa_laranja};
+    --map-orange-bg: {mapa_melokotoia};
+    --map-blue-bg: {mapa_urdina};
+    --map-green-bg: {mapa_berdea};
+    --alert-critical-bg: {alerta_kritikoa};
+    --alert-high-bg: {alerta_handia};
+    --alert-review-bg: {alerta_berrikustea};
 }}
 
 .stApp,
@@ -371,16 +439,80 @@ div[data-testid="stDataFrame"] {{
     background: {panela} !important;
     color: {testua} !important;
     box-shadow: 0 2px 7px rgba(20, 42, 64, 0.10) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
 }}
 
-.st-key-gaia_aldatu button p {{
-    font-size: 19px !important;
-    line-height: 1 !important;
+.st-key-gaia_aldatu button [data-testid="stMarkdownContainer"] {{
+    display: none !important;
+}}
+
+.st-key-gaia_aldatu button::before {{
+    content: "";
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: currentColor;
+    -webkit-mask: url("{gai_ikono_maskara}") center / contain no-repeat;
+    mask: url("{gai_ikono_maskara}") center / contain no-repeat;
 }}
 
 .st-key-gaia_aldatu button:hover {{
     background: {"#31475B" if iluna else "#E3EDF5"} !important;
     border-color: #3976BD !important;
+}}
+
+.st-key-goiburu_abisua_aktibo button,
+.st-key-goiburu_abisua_inaktibo button {{
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 !important;
+    border: 1px solid {ertza} !important;
+    border-radius: 8px !important;
+    background: {panela} !important;
+    box-shadow: 0 2px 7px rgba(20, 42, 64, 0.10) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+}}
+.st-key-goiburu_abisua_aktibo button [data-testid="stMarkdownContainer"],
+.st-key-goiburu_abisua_inaktibo button [data-testid="stMarkdownContainer"] {{
+    display: none !important;
+}}
+.st-key-goiburu_abisua_aktibo button::before,
+.st-key-goiburu_abisua_inaktibo button::before {{
+    content: "";
+    width: 21px;
+    height: 21px;
+    background: currentColor;
+    -webkit-mask: url("{kanpai_ikono_maskara}") center / contain no-repeat;
+    mask: url("{kanpai_ikono_maskara}") center / contain no-repeat;
+}}
+.st-key-goiburu_abisua_inaktibo button,
+.st-key-goiburu_abisua_aktibo button {{
+    color: #F4B942 !important;
+    border-color: {ertza} !important;
+    background: {panela} !important;
+}}
+.st-key-goiburu_abisua_aktibo button::after {{
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #E63946;
+    box-shadow: 0 0 0 2px {panela};
 }}
 
 [data-testid="stSidebarCollapseButton"],
@@ -453,40 +585,40 @@ div[class*="st-key-machine_"] button p {{
 }}
 
 div[class*="st-key-machine_normal_"] button {{
-    background: var(--state-green-bg) !important;
-    border: 1.5px solid #A3E4C4 !important;
+    background: var(--map-green-bg) !important;
+    border: 1.5px solid {ertz_berdea} !important;
 }}
 div[class*="st-key-machine_normal_"] button p {{
     color: var(--semantic-text) !important;
 }}
 
 div[class*="st-key-machine_recommended_"] button {{
-    background: var(--state-blue-bg) !important;
-    border: 1.5px solid #A8D1FA !important;
+    background: var(--map-blue-bg) !important;
+    border: 1.5px solid {ertz_urdina} !important;
 }}
 div[class*="st-key-machine_recommended_"] button p {{
     color: var(--semantic-text) !important;
 }}
 
 div[class*="st-key-machine_necessary_"] button {{
-    background: var(--state-amber-bg) !important;
-    border: 1.5px solid #FDE48A !important;
+    background: var(--map-amber-bg) !important;
+    border: 1.5px solid {ertz_laranja} !important;
 }}
 div[class*="st-key-machine_necessary_"] button p {{
     color: var(--semantic-text) !important;
 }}
 
 div[class*="st-key-machine_accelerated_"] button {{
-    background: var(--state-amber-bg) !important;
-    border: 1.5px solid #FDC4A8 !important;
+    background: var(--map-orange-bg) !important;
+    border: 1.5px solid {ertz_melokotoia} !important;
 }}
 div[class*="st-key-machine_accelerated_"] button p {{
     color: var(--semantic-text) !important;
 }}
 
 div[class*="st-key-machine_emergency_"] button {{
-    background: var(--state-red-bg) !important;
-    border: 1.5px solid #FCA7AF !important;
+    background: var(--map-red-bg) !important;
+    border: 1.5px solid {ertz_gorria} !important;
 }}
 div[class*="st-key-machine_emergency_"] button p {{
     color: var(--semantic-text) !important;
@@ -532,11 +664,11 @@ div[class*="st-key-machine_"] button:hover {{
     margin-left: auto !important;
     color: {testua} !important;
 }}
-.state-normal {{ background: #A3E4C4 !important; border: 1px solid #156648 !important; }}
-.state-recommended {{ background: #A8D1FA !important; border: 1px solid #174E82 !important; }}
-.state-necessary {{ background: #FDE48A !important; border: 1px solid #8C5505 !important; }}
-.state-accelerated {{ background: #FDC4A8 !important; border: 1px solid #963806 !important; }}
-.state-emergency {{ background: #FCA7AF !important; border: 1px solid #A31F2E !important; }}
+.state-normal {{ background: var(--map-green-bg) !important; border: 1px solid {ertz_berdea} !important; }}
+.state-recommended {{ background: var(--map-blue-bg) !important; border: 1px solid {ertz_urdina} !important; }}
+.state-necessary {{ background: var(--map-amber-bg) !important; border: 1px solid {ertz_laranja} !important; }}
+.state-accelerated {{ background: var(--map-orange-bg) !important; border: 1px solid {ertz_melokotoia} !important; }}
+.state-emergency {{ background: var(--map-red-bg) !important; border: 1px solid {ertz_gorria} !important; }}
 .state-nodata {{ background: #CBD8E5 !important; border: 1px solid #475E75 !important; }}
 
 .st-key-history_panel,
@@ -646,24 +778,47 @@ historikoa = historikoa_lortu(
 orain = datetime.now(timezone.utc)
 data = orain.strftime("%Y-%m-%d")
 ordua = orain.strftime("%H:%M UTC")
+uneko_tenperatura = kpis.get("tenperatura", "--")
 
 
 # =============================
 # GOIBURUA
 # =============================
 
-goiburu1, data_zutabea, gai_zutabea = st.columns([4, 1.35, 0.25])
+abisuak_goiburua = st.session_state.orria == "Abisuak"
+goiburu_klasea = " alerts-header-title" if abisuak_goiburua else ""
+azpititulu_klasea = " alerts-header-subtitle" if abisuak_goiburua else ""
+goiburu_testua = (
+    "Abisuak eta lehentasunak"
+    if abisuak_goiburua
+    else "Makinen egoera eta datuak"
+)
+azpititulu_testua = (
+    "Egoera okerrenetik onenera ordenatuta · "
+    "geldialdi-kostua makina eta larritasun-mailaren arabera"
+    if abisuak_goiburua
+    else "CNC Prediktiboa"
+)
+abisua_duten_makinak = [
+    makina for makina in makinak
+    if bool(makina.get("alerta_activa", makina.get("abisua_aktibo", False)))
+    or str(makina.get("egoera", "Normala")).strip().lower()
+    not in {"normala", "normal", "ondo", "ok"}
+]
+abisu_kopurua = len(abisua_duten_makinak)
+
+goiburu1, data_zutabea, abisu_zutabea, gai_zutabea = st.columns([4, 1.65, 0.25, 0.25])
 
 with goiburu1:
     st.markdown(
-        '<div class="dashboard-title">'
-        'Makinen egoera eta datuak</div>',
+        f'<div class="dashboard-title{goiburu_klasea}">'
+        f'{goiburu_testua}</div>',
         unsafe_allow_html=True
     )
 
     st.markdown(
-        '<div class="dashboard-subtitle">'
-        'CNC Prediktiboa'
+        f'<div class="dashboard-subtitle{azpititulu_klasea}">'
+        f'{azpititulu_testua}'
         '</div>',
         unsafe_allow_html=True
     )
@@ -672,12 +827,27 @@ with data_zutabea:
     st.markdown(
         f'<div class="header-datetime">'
         f'<span>📅 {data}</span><span>🕒 {ordua}</span>'
+        f'<span title="Uneko giro-tenperatura">🌡 {uneko_tenperatura} °C</span>'
         f'</div>',
         unsafe_allow_html=True
     )
 
+with abisu_zutabea:
+    abisu_etiketa = (
+        f"{abisu_kopurua} makina abisuekin"
+        if abisu_kopurua else "Ez dago abisurik"
+    )
+    if st.button(
+        abisu_etiketa,
+        key=("goiburu_abisua_aktibo" if abisu_kopurua else "goiburu_abisua_inaktibo"),
+        help=abisu_etiketa,
+    ):
+        st.session_state.orria = "Abisuak"
+        st.query_params["orria"] = "Abisuak"
+        st.rerun()
+
 with gai_zutabea:
-    etiketa = "☀️" if iluna else "🌙"
+    etiketa = "Cambiar a modo claro" if iluna else "Cambiar a modo oscuro"
 
     if st.button(
         etiketa,
@@ -753,7 +923,7 @@ def kpi_txartelak():
         {
             "klasea": "ice",
             "ikonoa": ikonoak["osasuna"],
-            "izenburua": "Batez besteko osasuna",
+            "izenburua": "Bataz besteko osasuna",
             "balioa": f"{kpis['osasuna']}%",
             "sub": "Flotaren osasun-indizea"
         }
@@ -823,7 +993,7 @@ def kpi_txartelak():
                     {kpis['tenperatura']} °C
                 </span>
                 <span class="kpi-description">
-                    Batez besteko tenperatura
+                    Bataz besteko tenperatura
                 </span>
             </div>
         </div>
@@ -831,11 +1001,6 @@ def kpi_txartelak():
 
 
 def telemetria_taula():
-    panel_izenburua(
-        "▣ Makinak · Telemetria",
-        "50 makinen neurketak"
-    )
-
     errenkadak_html = []
 
     for makina in makinak:
@@ -874,22 +1039,98 @@ def telemetria_taula():
             </tr>
         """)
 
-    st.html(f"""
-    <div class="telemetria-taula-wrap">
-        <table class="telemetria-taula">
+    csv_taula = pd.DataFrame([
+        {
+            "CNC": makina["id"].replace("CNC-", "M-"),
+            "Tenp. (°C)": f'{makina["tenperatura"]:.1f}',
+            "RPM": makina["rpm"],
+            "Higadura (min)": makina["higadura"],
+            "Torque": f'{makina["torque"]:.1f}',
+            "Egoera": makina["egoera"],
+        }
+        for makina in makinak
+    ]).to_csv(index=False).encode("utf-8-sig")
+    csv_base64 = base64.b64encode(csv_taula).decode("ascii")
+    telemetria_goiburua = azalera_leuna
+    telemetria_hover = "#30465A" if iluna else "#F2F7FA"
+    telemetria_akatsa = alerta_kritikoa
+    telemetria_abisua = alerta_berrikustea
+    telemetria_gorria = egoera_gorria if iluna else "#E94355"
+    telemetria_horia = egoera_laranja if iluna else "#E5A636"
+    telemetria_berdea = egoera_berdea if iluna else "#25B57A"
+    telemetria_gorri_testua = ertz_gorria if iluna else "#E94355"
+    telemetria_hori_testua = ertz_laranja if iluna else "#D68A00"
+    telemetria_berde_testua = ertz_berdea if iluna else "#25B57A"
+
+    components.html(f"""
+    <!doctype html>
+    <html lang="eu"><head><style>
+        * {{ box-sizing: border-box; }}
+        html, body {{ margin: 0; width: 100%; height: 100%; overflow: hidden; }}
+        #telemetry-root {{
+            position: relative; width: 100%; height: 100%; padding: 0;
+            background: {panela}; color: {testua};
+            font-family: Verdana, Arial, sans-serif; font-weight: 700;
+        }}
+        .telemetry-title {{ font-size: 16px; font-weight: 800; margin: 0 90px 8px 0; }}
+        .telemetry-subtitle {{ font-size: 12px; font-weight: 500; margin: 0 90px 10px 0; color: {bigarren_mailakoa}; }}
+        .telemetry-actions {{ position: absolute; top: 0; right: 0; z-index: 5; display: flex; gap: 7px; opacity: 0; pointer-events: none; transition: opacity .15s ease; }}
+        #telemetry-root:hover .telemetry-actions,
+        .telemetry-actions:focus-within {{ opacity: 1; pointer-events: auto; }}
+        .telemetry-action {{
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; padding: 0; border: 1px solid #3C4E60;
+            border-radius: 7px; background: #111820; color: #FFFFFF;
+            box-shadow: 0 2px 7px rgba(0,0,0,.24); text-decoration: none;
+            font: 800 18px/1 Verdana, Arial, sans-serif; cursor: pointer;
+        }}
+        .telemetry-action:hover {{ background: #274A6B; }}
+        .telemetry-table-wrap {{ height: 243px; overflow: auto; border: 1px solid {ertza}; border-radius: 7px; }}
+        table {{ width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; }}
+        thead {{ position: sticky; top: 0; z-index: 2; background: {telemetria_goiburua}; }}
+        th {{ height: 32px; padding: 3px 8px; text-align: center; font-weight: 800; line-height: 1; }}
+        th:first-child, td:first-child {{ text-align: left; }}
+        th small {{ display: block; margin-top: 5px; font-size: 10px; }}
+        td {{ height: 31px; padding: 3px 8px; border-bottom: 1px solid {ertza}; text-align: right; white-space: nowrap; }}
+        td:last-child {{ text-align: left; }}
+        tbody tr:hover {{ background: {telemetria_hover}; }}
+        tr.telemetria-akatsa {{ background: {telemetria_akatsa}; }}
+        tr.telemetria-abisua {{ background: {telemetria_abisua}; }}
+        .higadura-marka {{ display:inline-block; min-width:31px; padding:3px 5px; border-radius:4px; color:#FFF; text-align:center; }}
+        .higadura-handia {{ background:{telemetria_gorria}; }} .higadura-ertaina {{ background:{telemetria_horia}; }} .higadura-txikia {{ background:{telemetria_berdea}; }}
+        .egoera-marka {{ display:inline-block; margin-right:4px; font-weight:900; }}
+        .egoera-akatsa {{ color:{telemetria_gorri_testua}; }} .egoera-abisua {{ color:{telemetria_hori_testua}; }} .egoera-normala {{ color:{telemetria_berde_testua}; }}
+        #telemetry-root:fullscreen {{ padding: 24px; background: {panela}; }}
+        #telemetry-root:fullscreen .telemetry-table-wrap {{ height: calc(100vh - 105px); }}
+    </style></head><body>
+    <div id="telemetry-root">
+        <div class="telemetry-title">▣ Makinak · Telemetria</div>
+        <div class="telemetry-subtitle">50 makinen neurketak</div>
+        <div class="telemetry-actions">
+            <button class="telemetry-action" type="button" title="Pantaila osoan ikusi"
+                    aria-label="Pantaila osoan ikusi"
+                    onclick="document.getElementById('telemetry-root').requestFullscreen()">&#x26F6;</button>
+            <a class="telemetry-action" href="data:text/csv;base64,{csv_base64}"
+               download="makinen_telemetria.csv" title="CSV deskargatu"
+               aria-label="CSV deskargatu">&#x2B07;</a>
+        </div>
+        <div class="telemetry-table-wrap">
+        <table>
             <thead><tr>
                 <th>CNC</th><th>Tenp.<small>(°C)</small></th><th>RPM</th>
                 <th>Higadura<small>(min)</small></th><th>Torque</th><th>Egoera</th>
             </tr></thead>
             <tbody>{''.join(errenkadak_html)}</tbody>
         </table>
+        </div>
     </div>
-    """)
+    </body></html>
+    """, height=320, scrolling=False)
 
 
 def historiko_grafikoa():
     panel_izenburua(
-        f"📉 {kodea} · Erregistroen bilakaera"
+        f"📉 {kodea} · Tenperatura, momentua eta higaduraren bilakaera"
     )
 
     aldagaiak = [
@@ -899,6 +1140,12 @@ def historiko_grafikoa():
     ]
 
     sns.set_style("whitegrid")
+    plt.rcParams.update({
+        "font.family": "Verdana",
+        "font.size": 11,
+        "font.weight": "bold",
+        "axes.labelweight": "bold",
+    })
     fig, axes = plt.subplots(
         3, 1, figsize=(9, 4.5), sharex=True
     )
@@ -921,8 +1168,14 @@ def historiko_grafikoa():
         )
 
         ax.set_ylabel(
-            etiketa, fontsize=10, color=testua
+            etiketa,
+            fontsize=10,
+            color=testua,
+            rotation=90,
+            ha="center",
+            va="center",
         )
+        ax.yaxis.set_label_coords(-0.075, 0.5)
         ax.set_xlabel("")
         ax.tick_params(
             colors=testua, labelsize=10
@@ -934,6 +1187,7 @@ def historiko_grafikoa():
     axes[-1].tick_params(
         axis="x", rotation=0
     )
+    fig.align_ylabels(axes)
     plt.tight_layout(pad=0.65)
     fig.subplots_adjust(
         left=0.09,
@@ -942,7 +1196,89 @@ def historiko_grafikoa():
         bottom=0.12,
         hspace=0.18
     )
-    st.pyplot(fig, use_container_width=True)
+    irudi_bufferra = io.BytesIO()
+    fig.savefig(
+        irudi_bufferra,
+        format="png",
+        dpi=160,
+        bbox_inches="tight",
+        facecolor=grafiko_atzeko_planoa,
+    )
+    irudi_base64 = base64.b64encode(irudi_bufferra.getvalue()).decode("ascii")
+
+    components.html(
+        f"""
+        <!doctype html>
+        <html lang="eu">
+        <head>
+        <style>
+            html, body {{ margin: 0; width: 100%; height: 100%; overflow: hidden; }}
+            #chart-root {{
+                position: relative; width: 100%; height: 100%;
+                display: flex; flex-direction: column; align-items: stretch;
+                justify-content: center;
+                background: {grafiko_atzeko_planoa};
+                font-family: Verdana, Arial, sans-serif;
+            }}
+            .chart-legend {{
+                display: flex; align-items: center; justify-content: center;
+                gap: 20px; flex: 0 0 auto; margin: 2px 58px 3px 8px;
+                padding: 6px 10px; border: 1px solid {ertza}; border-radius: 8px;
+                background: {azalera_leuna}; color: {testua};
+                font-size: 11px; font-weight: 700; line-height: 1;
+            }}
+            .chart-legend span {{ display: inline-flex; align-items: center; gap: 6px; }}
+            .chart-legend i {{ width: 10px; height: 10px; border-radius: 50%; }}
+            .chart-image-wrap {{ flex: 1 1 auto; min-height: 0; }}
+            .chart-image-wrap img {{ width: 100%; height: 100%; object-fit: contain; }}
+            .chart-actions {{
+                position: absolute; top: 6px; right: 6px; z-index: 5;
+                display: flex; gap: 7px; opacity: 0; pointer-events: none;
+                transition: opacity .15s ease;
+            }}
+            #chart-root:hover .chart-actions,
+            .chart-actions:focus-within {{ opacity: 1; pointer-events: auto; }}
+            .chart-action {{
+                display: inline-flex; align-items: center; justify-content: center;
+                width: 36px; height: 36px; padding: 0;
+                border: 1px solid #3C4E60; border-radius: 7px;
+                background: #111820; color: #FFFFFF;
+                box-shadow: 0 2px 7px rgba(0,0,0,.24);
+                font: 800 18px/1 Verdana, Arial, sans-serif;
+                text-decoration: none; cursor: pointer;
+            }}
+            .chart-action:hover {{ background: #274A6B; }}
+            #chart-root:fullscreen {{ padding: 24px; box-sizing: border-box; }}
+            #chart-root:fullscreen .chart-actions {{ opacity: 1; }}
+        </style>
+        </head>
+        <body>
+          <div id="chart-root">
+            <div class="chart-legend" aria-label="Grafikoko koloreen azalpena">
+              <span><i style="background:#2EA885"></i>Berdea: prozesu-tenperatura</span>
+              <span><i style="background:#E5A636"></i>Laranja: momentua</span>
+              <span><i style="background:#E56F7C"></i>Gorria: erremintaren higadura</span>
+            </div>
+            <div class="chart-image-wrap">
+              <img src="data:image/png;base64,{irudi_base64}"
+                   alt="{kodea} tenperatura, momentua eta higaduraren bilakaera">
+            </div>
+            <div class="chart-actions">
+              <button class="chart-action" type="button"
+                      title="Pantaila osoan ikusi" aria-label="Pantaila osoan ikusi"
+                      onclick="document.getElementById('chart-root').requestFullscreen()">⛶</button>
+              <a class="chart-action"
+                 href="data:image/png;base64,{irudi_base64}"
+                 download="{kodea}_erregistroen_bilakaera.png"
+                 title="PNG deskargatu" aria-label="PNG deskargatu">↓</a>
+            </div>
+          </div>
+        </body>
+        </html>
+        """,
+        height=(310 if st.session_state.orria == "Datuak" else 285),
+        scrolling=False,
+    )
     plt.close(fig)
 
 
@@ -989,15 +1325,15 @@ def azken_neurketak():
     )
 
     if uneko_makina["egoera"] == "Akatsa":
-        st.html('<div style="background:#FFF1F2; border:1.5px solid #FDA4AF; color:#BE123C; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Akats aktiboa — Berehalako berrikuspena</span></div>')
+        st.html('<div style="background:#FFF1F2; border:1.5px solid #FDA4AF; color:#BE123C; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Akats aktiboa — Berehalako berrikuspena</span></div>')
         pass
         pass
         pass
         pass
     elif uneko_makina["egoera"] == "Berrikusteko":
-        st.html('<div style="background:#FFF7E6; border:1.5px solid #FDE68A; color:#B45309; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Makina hau berrikusteko dago</span></div>')
+        st.html('<div style="background:#FFF7E6; border:1.5px solid #FDE68A; color:#B45309; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Makina hau berrikusteko dago</span></div>')
     else:
-        st.html('<div style="background:#F0FDF4; border:1.5px solid #86EFAC; color:#15803D; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; gap:8px; margin-top:10px;"><span>✓</span><span>Makina egoera normalean</span></div>')
+        st.html('<div style="background:#F0FDF4; border:1.5px solid #86EFAC; color:#15803D; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px;"><span>✓</span><span>Makina egoera normalean</span></div>')
 
 
 def makina_sarea():
@@ -1114,14 +1450,9 @@ def asteko_egutegia_ireki():
 
 
 def egutegia():
-    ikono_zutabea, izenburu_zutabea = st.columns([0.28, 3.72])
-
-    with ikono_zutabea:
-        ireki = st.button(
-            "📅",
-            key="calendar_open",
-            help="Asteko egutegia ireki"
-        )
+    izenburu_zutabea, zabaldu_zutabea, deskargatu_zutabea = st.columns(
+        [3.5, 0.25, 0.25], gap="small"
+    )
 
     with izenburu_zutabea:
         st.markdown(
@@ -1132,6 +1463,32 @@ def egutegia():
             unsafe_allow_html=True
         )
 
+    with zabaldu_zutabea:
+        ireki = st.button(
+            "⛶",
+            key="calendar_open",
+            help="Asteko egutegia ireki"
+        )
+
+    with deskargatu_zutabea:
+        egutegi_csv = (
+            "Eguna,Ordua,Makina,Lana,Iraupena,Lehentasuna\n"
+            "Larunbata,08:00,CNC-007,Ikuskapen mekanikoa,2 ordu,Bizkortua\n"
+            "Larunbata,10:00,CNC-038,Erreminta,1 ordu,Beharrezkoa\n"
+            "Larunbata,11:00,CNC-028,Prebentzioa,3 ordu,Teknikariaren berrikuspena\n"
+            "Igandea,08:00,CNC-014,Berrikuspen termikoa,2 ordu,Gomendatua\n"
+            "Igandea,10:00,CNC-042,Ikuskapena,1 ordu,Gomendatua\n"
+            "Igandea,11:00,,Libre,,Erabilgarri\n"
+        )
+        st.download_button(
+            "⬇",
+            data=egutegi_csv.encode("utf-8-sig"),
+            file_name="asteko_berrikuspen_egutegia.csv",
+            mime="text/csv",
+            key="calendar_download",
+            help="Egutegia CSV formatuan deskargatu",
+        )
+
     egutegi_taula()
 
     if ireki:
@@ -1140,14 +1497,14 @@ def egutegia():
 
 def egoera_zerbitzuak():
     testua = (
-        "FastAPI konektatuta"
+        "Datu-zerbitzua konektatuta"
         if api_aktibo
         else "Datu lokal simulatuak"
     )
 
     st.markdown(f"""
     <div class="status-bar">
-        <strong>🛠 Zerbitzuen egoera</strong>
+        <strong>🛠 ZERBITZUEN EGOERA</strong>
         <span>
             ● {testua} 50 CNC 
             {kpis['akatsak']} akats aktibo · {ordua}
@@ -1163,6 +1520,7 @@ def egoera_zerbitzuak():
 orria = st.session_state.orria
 
 if orria == "Hasiera":
+    st.html('<span class="hasiera-page-marker" aria-hidden="true"></span>')
     hasiera_erakutsi(
         kpi_txartelak=kpi_txartelak,
         egoera_zerbitzuak=egoera_zerbitzuak,
@@ -1175,6 +1533,7 @@ if orria == "Hasiera":
 
 
 elif orria == "Makinak":
+    st.html('<span class="makinak-page-marker" aria-hidden="true"></span>')
     # Streamlit-ek inportatutako orriak memorian gordetzen ditu. Birkargatzeak
     # makinak.py-ko azken bertsioa berehala erabiltzea bermatzen du.
     makinak_orria = importlib.reload(makinak_orria)
@@ -1188,22 +1547,17 @@ elif orria == "Makinak":
 
 
 elif orria == "Datuak":
-    st.subheader(f"{kodea} · Analisi teknikoa")
-    makina_sarea()
-    c1, c2 = st.columns([2, 1], gap="medium")
-
-    with c1:
-        with st.container(key="history_panel"):
-            historiko_grafikoa()
-
-    with c2:
-        with st.container(key="measure_panel"):
-            azken_neurketak()
-        osasun_mailak_erakutsi()
-
+    st.html('<span class="datuak-page-marker" aria-hidden="true"></span>')
+    datuak_orria = importlib.reload(datuak_orria)
+    datuak_orria.datuak_erakutsi(
+        makina=uneko_makina,
+        makinak=makinak,
+        historikoen_kargatzailea=aldiko_historikoak_lortu,
+    )
 
 elif orria == "Abisuak":
-    abisuak_erakutsi(makinak)
+    abisuak_orria = importlib.reload(abisuak_orria)
+    abisuak_orria.abisuak_erakutsi(makinak)
 
 
 elif orria == "Ezarpenak":
