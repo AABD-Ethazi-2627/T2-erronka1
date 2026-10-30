@@ -39,6 +39,7 @@ def _egoera_normalizatu(balioa: Any) -> str:
     return "Normala"
 
 
+@st.cache_data(ttl=30, show_spinner=False)
 def _api_seriea(payload: Any) -> pd.DataFrame | None:
     """FastAPIren erantzuna barne-formatu bateratura egokitu."""
     if isinstance(payload, dict):
@@ -81,6 +82,7 @@ def _api_seriea(payload: Any) -> pd.DataFrame | None:
     return pd.DataFrame(errenkadak) if errenkadak else None
 
 
+@st.cache_data(show_spinner=False)
 def _demo_seriea(makina: dict[str, Any], puntuak: int, periodoa: str) -> pd.DataFrame:
     """FastAPI prest egon arte erabiltzen den serie determinista."""
     rng = random.Random(int(makina.get("zenbakia", 1)) * 97 + puntuak)
@@ -112,7 +114,7 @@ def _demo_seriea(makina: dict[str, Any], puntuak: int, periodoa: str) -> pd.Data
 
 
 def _grafikoa(df: pd.DataFrame, eremua: str, kolorea: str, gai_iluna: bool) -> alt.Chart:
-    testua = "#E7EEF7" if gai_iluna else "#18324A"
+    testua = "#FFFFFF" if gai_iluna else "#18324A"
     sareta = "#40556C" if gai_iluna else "#DCE6EF"
     atzea = "#182A3A" if gai_iluna else "#F8FAFC"
     oinarria = alt.Chart(df).encode(
@@ -122,12 +124,13 @@ def _grafikoa(df: pd.DataFrame, eremua: str, kolorea: str, gai_iluna: bool) -> a
     )
     area = oinarria.mark_area(color=kolorea, opacity=.13)
     line = oinarria.mark_line(color=kolorea, strokeWidth=2.6, point=alt.OverlayMarkDef(size=28))
-    return (area + line).properties(height=225, background=atzea).configure_axis(
+    return (area + line).properties(height=135, background=atzea).configure_axis(
         labelColor=testua, domainColor=sareta, tickColor=sareta, gridColor=sareta,
         labelFontSize=11,
     ).configure_view(strokeOpacity=0)
 
 
+@st.fragment
 def datuak_erakutsi(
     makina: dict[str, Any],
     makinak: list[dict[str, Any]] | None = None,
@@ -135,6 +138,14 @@ def datuak_erakutsi(
     historikoen_kargatzailea: Callable[[str], dict[str, Any] | None] | None = None,
 ) -> None:
     """Makina bakoitzaren uneko datuak eta serie historikoak erakutsi."""
+    gai_iluna = bool(st.session_state.get("gai_iluna", False))
+    datuak_dark_css = """
+      .datuak-history-head *, .model-title *, .confusion-wrap *,
+      .model-metrics *, .period-summary *, .historical-overview *,
+      .status-history * { color: #FFFFFF !important; }
+      .stApp [data-testid="stMarkdownContainer"] *,
+      .stApp [data-testid="stCaptionContainer"] { color: #FFFFFF !important; }
+    """ if gai_iluna else ""
     makinak = makinak or [makina]
     makina_idak = [m.get("id", "CNC") for m in makinak]
     uneko_kodea = makina.get("id", makina_idak[0])
@@ -193,7 +204,7 @@ def datuak_erakutsi(
     st.html(f"""
     <div class="datuak-history-head">
       <div><h2>{kodea} · Datu historikoak</h2>
-      <p>Modelo prediktiboaren ebaluazioa eta aldizkako bilakaera</p></div>
+      </div>
       <span>Datu dinamikoak</span>
     </div>
     <div class="model-title"><strong>Eredu prediktiboaren ebaluazioa · {kodea}</strong><span>Ereduaren metrikak</span></div>
@@ -217,40 +228,41 @@ def datuak_erakutsi(
       </div>
     </div>
     <style>
-      .datuak-history-head{{display:flex;justify-content:space-between;align-items:end;margin:0 0 8px}}
+      .datuak-history-head{{display:flex;justify-content:space-between;align-items:end;margin:0 0 4px}}
       .datuak-history-head h2{{margin:0;color:var(--main-text,#102A43);font-size:1.35rem}}
       .datuak-history-head p{{margin:4px 0 0;color:var(--secondary-text,#52677C);font-weight:700}}
       .datuak-history-head span{{padding:6px 10px;border-radius:8px;background:var(--state-green-bg,#DDF4E8);color:#087B49;font-weight:800;font-size:.75rem}}
-      .model-title{{display:flex;align-items:center;justify-content:space-between;margin:2px 0 5px;color:var(--main-text,#102A43)}}
+      .model-title{{display:flex;align-items:center;justify-content:space-between;margin:1px 0 3px;color:var(--main-text,#102A43)}}
       .model-title span{{font-size:.68rem;color:var(--secondary-text,#52677C);font-weight:800}}
-      .model-evaluation{{display:grid;grid-template-columns:minmax(420px,.9fr) minmax(0,1.1fr);gap:9px;margin-bottom:10px}}
-      .confusion-wrap{{padding:7px 9px;border:1px solid var(--panel-border,#D6E1EB);border-radius:9px;background:var(--panel-bg,#FFF)}}
+      .model-evaluation{{display:grid;grid-template-columns:minmax(420px,.9fr) minmax(0,1.1fr);gap:7px;margin-bottom:5px}}
+      .confusion-wrap{{padding:4px 8px;border:1px solid var(--panel-border,#D6E1EB);border-radius:9px;background:var(--panel-bg,#FFF)}}
       .matrix-axis{{text-align:right;font-size:.65rem;font-weight:800;color:var(--secondary-text,#52677C);margin-bottom:3px}}
-      .confusion-matrix{{width:100%;border-collapse:separate;border-spacing:4px;text-align:center;font-size:.7rem}}
+      .confusion-matrix{{width:100%;border-collapse:separate;border-spacing:3px;text-align:center;font-size:.7rem}}
       .confusion-matrix th{{color:var(--secondary-text,#52677C);font-weight:800}}
-      .confusion-matrix td{{padding:5px;border-radius:6px;background:var(--state-red-bg,#F8D6DA);color:var(--main-text,#102A43);font-weight:900}}
+      .confusion-matrix td{{padding:3px;border-radius:6px;background:var(--state-red-bg,#F5B8B8);color:var(--main-text,#102A43);font-weight:900}}
       .confusion-matrix td.hit{{background:var(--state-green-bg,#D8F0E4);color:#087B49}}
       .model-metrics{{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}}
-      .model-metrics>div{{min-width:0;padding:8px;border:1px solid var(--panel-border,#D6E1EB);border-radius:9px;background:var(--surface-muted,#F1F5F9);text-align:center}}
+      .model-metrics>div{{min-width:0;padding:5px;border:1px solid var(--panel-border,#D6E1EB);border-radius:9px;background:var(--surface-muted,#F1F5F9);text-align:center}}
       .model-metrics small,.model-metrics strong,.model-metrics span{{display:block}}
       .model-metrics small{{font-size:.65rem;font-weight:800;color:var(--secondary-text,#52677C)}}
-      .model-metrics strong{{margin:4px 0;color:var(--main-text,#102A43);font-size:1.1rem}}
+      .model-metrics strong{{margin:2px 0;color:var(--main-text,#102A43);font-size:1.1rem}}
       .model-metrics span{{font-size:.57rem;font-weight:700;color:var(--secondary-text,#52677C)}}
-      .period-summary{{display:flex;justify-content:space-between;align-items:center;margin:2px 0 5px;font-weight:800;color:var(--secondary-text,#52677C)}}
+      .period-summary{{display:flex;justify-content:space-between;align-items:center;margin:0 0 3px;font-weight:800;color:var(--secondary-text,#52677C)}}
       .period-summary strong{{color:var(--main-text,#102A43);font-size:1rem}}
-      .historical-overview{{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;margin:5px 0 9px}}
-      .historical-overview>div{{min-width:0;padding:7px 9px;border:1px solid var(--panel-border,#D6E1EB);border-radius:9px;background:var(--panel-bg,#FFF);text-align:center}}
+      .historical-overview{{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:3px 0 5px}}
+      .historical-overview>div{{min-width:0;padding:4px 8px;border:1px solid var(--panel-border,#D6E1EB);border-radius:9px;background:var(--panel-bg,#FFF);text-align:center}}
       .historical-overview small,.historical-overview strong,.historical-overview span{{display:block}}
       .historical-overview small{{font-size:.64rem;font-weight:800;color:var(--secondary-text,#52677C)}}
       .historical-overview strong{{margin:2px 0;color:var(--main-text,#102A43);font-size:.98rem}}
       .historical-overview span{{font-size:.56rem;font-weight:700;color:var(--secondary-text,#52677C)}}
-      .status-history{{display:flex;gap:7px;margin:0 0 8px}}
-      .status-history span{{flex:1;padding:5px 8px;border-radius:8px;text-align:center;font-size:.68rem;font-weight:900}}
+      .status-history{{display:flex;gap:7px;margin:0 0 4px}}
+      .status-history span{{flex:1;padding:4px 8px;border-radius:8px;text-align:center;font-size:.68rem;font-weight:900}}
       .status-normal{{background:var(--state-green-bg,#D8F0E4);color:#087B49}}
       .status-risk{{background:var(--state-amber-bg,#F8E7B5);color:#A85A05}}
-      .status-fault{{background:var(--state-red-bg,#F8D6DA);color:#C83246}}
-      div[data-testid="stVegaLiteChart"]{{border:1px solid var(--panel-border,#D6E1EB);border-radius:10px;padding:5px;background:var(--panel-bg,#FFF)}}
+      .status-fault{{background:var(--state-red-bg,#F5B8B8);color:#A61B1B}}
+      {datuak_dark_css}
       @media(max-width:1000px){{.model-evaluation{{grid-template-columns:1fr}}.historical-overview{{grid-template-columns:repeat(2,minmax(0,1fr))}}}}
+      div[data-testid="stVegaLiteChart"]{{border:1px solid var(--panel-border,#D6E1EB);border-radius:10px;padding:5px;background:var(--panel-bg,#FFF)}}
     </style>
     """)
 
@@ -292,7 +304,6 @@ def datuak_erakutsi(
       <div><small>Neurketa kopurua</small><strong>{len(df)}</strong><span>{aukeratutako_izena}</span></div>
     </div>
     """)
-    gai_iluna = bool(st.session_state.get("gai_iluna", False))
     for zutabea, (eremua, izenburua, unitatea, kolorea) in zip(st.columns(3, gap="medium"), METRIKAK):
         with zutabea:
             batezbestekoa = df[eremua].mean()

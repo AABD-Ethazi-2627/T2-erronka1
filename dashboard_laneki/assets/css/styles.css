@@ -6,7 +6,7 @@
 
 :root {
     --pastel-blue: #C5DCF3;
-    --pastel-pink: #F1C9CF;
+    --pastel-pink: #F5B8B8;
     --pastel-ice: #D1E2EB;
     --pastel-slate: #CFDCE8;
     --pastel-green: #C6E7D6;
@@ -408,13 +408,49 @@ input:focus-visible {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 9px;
-    height: 36px;
+    gap: 0;
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 0 7px;
+    border: 1px solid var(--panel-border);
+    border-radius: 9px;
+    background: var(--panel-bg);
     color: var(--main-text);
     font-size: 14px;
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
+    box-shadow: 0 2px 7px rgba(20, 42, 64, 0.07);
+}
+
+.header-data-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 26px;
+    padding: 0 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.header-data-item + .header-data-item {
+    border-left: 1px solid var(--panel-border);
+}
+
+.header-data-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: #276FA6;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.header-temperature .header-data-icon {
+    color: #C65E36;
 }
 
 .panel-heading {
@@ -1679,7 +1715,7 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 .alert-critical {
     border-color: #DE7A84;
     border-left-color: #DE4651;
-    background: var(--alert-critical-bg, #F5D1D6);
+    background: var(--alert-critical-bg, #F5B8B8);
 }
 
 .alert-high {
@@ -1779,7 +1815,7 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     padding: 28px;
     border: 1px solid var(--panel-border);
     border-radius: 12px;
-    background: var(--alert-critical-bg, #F5D1D6);
+    background: var(--alert-critical-bg, #F5B8B8);
     color: var(--main-text);
     box-sizing: border-box;
 }
@@ -1928,8 +1964,13 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     }
 
     .header-datetime {
-        gap: 4px;
         font-size: 11px;
+        padding: 0 3px;
+    }
+
+    .header-data-item {
+        gap: 3px;
+        padding: 0 5px;
     }
 
     .kpi-card {
@@ -2157,12 +2198,16 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     overflow: hidden !important;
 }
 
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .st-key-measure_panel {
+    position: relative !important;
+}
+
 [data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
     .st-key-measure_panel [data-testid="stVerticalBlock"] {
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     gap: 0.35rem !important;
 }
 
@@ -2176,10 +2221,295 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     height: 11px !important;
 }
 
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel [data-testid="stHtml"]:has(.latest-measure-layout) {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .latest-measure-layout {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .latest-measure-sensors {
+    display: grid !important;
+    gap: 8px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .latest-measure-caption {
+    margin-top: 10px !important;
+    color: var(--text-muted) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .measurement-status {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    transform: translateY(8px) !important;
+    padding: 10px 14px !important;
+    border: 1.5px solid !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+}
+
 /* Datuak: espazio erabilgarria bete eta lau panelak proportzio berean handitu. */
 [data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .panel-heading,
 [data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .health-panel-heading strong {
     font-size: 18px !important;
+}
+
+/* Datuak: hautatzailea eta denbora-tarteak uneko gaiaren koloreekin. */
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] > div {
+    background: var(--input-bg) !important;
+    border-color: var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"],
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] > div,
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] input {
+    background-color: var(--input-bg) !important;
+    color: var(--main-text) !important;
+}
+
+/* Datuak: hautatzaile itxiaren kanpoko azalera. */
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"],
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [role="combobox"] {
+    background: var(--input-bg) !important;
+    background-color: var(--input-bg) !important;
+    color: var(--main-text) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    position: relative !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 0 0 auto !important;
+    width: 34px !important;
+    border-radius: 0 7px 7px 0 !important;
+    background: var(--pastel-blue) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div > div {
+    background-color: transparent !important;
+    color: var(--main-text) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div > div:last-child {
+    background-color: var(--pastel-blue) !important;
+    border-radius: 0 7px 7px 0 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] svg {
+    color: var(--main-text) !important;
+    fill: var(--main-text) !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Ezabatu BaseWeb-ek geziaren inguruan gehitzen duen geruza iluna. */
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    background: linear-gradient(
+        to right,
+        var(--input-bg) 0,
+        var(--input-bg) calc(100% - 34px),
+        var(--pastel-blue) calc(100% - 34px),
+        var(--pastel-blue) 100%
+    ) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div * {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+.st-key-datuak_makina_hautatzailea {
+    width: 220px !important;
+    max-width: 220px !important;
+}
+
+/* Geziaren kutxa: estali Streamlit-en geruza beltza erabat. */
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] {
+    position: relative !important;
+    isolation: isolate !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"]::after {
+    content: "⌄" !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 34px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    border-left: 1px solid #80B7E8 !important;
+    border-radius: 0 7px 7px 0 !important;
+    background: var(--pastel-blue) !important;
+    color: var(--main-text) !important;
+    font-size: 18px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    pointer-events: none !important;
+    z-index: 2147483647 !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] svg {
+    opacity: 0 !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] span,
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] svg,
+.st-key-datuak_makina_hautatzailea label,
+.st-key-datuak_makina_hautatzailea label p {
+    color: var(--main-text) !important;
+    fill: var(--main-text) !important;
+}
+
+/* BaseWeb-ek hautatzailearen zerrenda orritik kanpoko portal batean sortzen du. */
+body:has(.datuak-page-marker) div[data-baseweb="popover"] {
+    width: 220px !important;
+    max-width: 220px !important;
+    background: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] > div,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] ul[role="listbox"] {
+    width: 220px !important;
+    max-width: 220px !important;
+    max-height: 260px !important;
+    background: var(--panel-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] ul,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li > div {
+    background-color: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li span {
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"] {
+    background: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"]:hover,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"][aria-selected="true"] {
+    background: var(--surface-muted) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"]:hover > div,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"][aria-selected="true"] > div {
+    background-color: var(--surface-muted) !important;
+}
+
+/* Streamlit/BaseWeb bertsio batzuetan menua popover-etik kanpo muntatzen da. */
+div[data-baseweb="menu"],
+ul[role="listbox"],
+div[role="listbox"] {
+    background-color: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+    border-color: var(--panel-border) !important;
+}
+
+li[role="option"],
+div[role="option"] {
+    background-color: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+li[role="option"] *,
+div[role="option"] * {
+    color: var(--main-text) !important;
+}
+
+li[role="option"]:hover,
+li[role="option"][aria-selected="true"],
+div[role="option"]:hover,
+div[role="option"][aria-selected="true"] {
+    background-color: var(--surface-muted) !important;
+    color: var(--main-text) !important;
+}
+
+.st-key-datuak_periodoa [data-testid="stSegmentedControl"] {
+    background: transparent !important;
+}
+
+.st-key-datuak_periodoa button {
+    background: var(--panel-bg) !important;
+    border: 1.5px solid #9CCBF2 !important;
+    color: var(--main-text) !important;
+    transition: background-color .16s ease, border-color .16s ease,
+                box-shadow .16s ease, transform .12s ease !important;
+}
+
+.st-key-datuak_periodoa button p,
+.st-key-datuak_periodoa button span {
+    color: var(--main-text) !important;
+}
+
+.st-key-datuak_periodoa button[aria-pressed="true"] {
+    background: var(--state-blue-bg) !important;
+    border-color: #5EA7E3 !important;
+    box-shadow: inset 0 0 0 1px rgba(37, 118, 189, .2) !important;
+}
+
+.st-key-datuak_periodoa button:hover {
+    background: var(--pastel-blue) !important;
+    border-color: #5EA7E3 !important;
+    box-shadow: 0 3px 8px rgba(37, 118, 189, .18) !important;
+    transform: translateY(-1px) !important;
+}
+
+.st-key-datuak_periodoa button:active {
+    box-shadow: inset 0 2px 5px rgba(37, 118, 189, .18) !important;
+    transform: translateY(0) scale(.995) !important;
 }
 
 [data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .panel-description,

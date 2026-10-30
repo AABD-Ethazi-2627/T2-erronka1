@@ -81,6 +81,7 @@ def _lehentasun_datuak(makina: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+@st.fragment
 def abisuak_erakutsi(makinak: list[dict[str, Any]]) -> None:
     """Abisuak larritasunaren arabera eta kostuekin erakutsi."""
 

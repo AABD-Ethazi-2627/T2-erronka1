@@ -1,14 +1,11 @@
 
 import base64
-import importlib
 import io
 import os
 from datetime import datetime, timezone
 
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import requests
 import streamlit.components.v1 as components
 
@@ -110,7 +107,7 @@ def demo_datuak():
     return makinak
 
 
-@st.cache_data(ttl=5, show_spinner=False)
+@st.cache_data(ttl=30, show_spinner=False)
 def kontsultatu(amaiera_puntua):
     try:
         erantzuna = requests.get(
@@ -200,22 +197,32 @@ css_bidea = os.path.join(
     "assets", "css", "styles.css"
 )
 
+@st.cache_data(show_spinner=False)
+def fitxategi_testua_irakurri(bidea, aldaketa_data):
+    with open(bidea, "r", encoding="utf-8") as fitxategia:
+        return fitxategia.read()
+
+
+@st.cache_data(show_spinner=False)
+def fitxategi_base64_irakurri(bidea, aldaketa_data):
+    with open(bidea, "rb") as fitxategia:
+        return base64.b64encode(fitxategia.read()).decode("ascii")
+
+
 if os.path.exists(css_bidea):
-    with open(css_bidea, "r", encoding="utf-8") as fitxategia:
-        st.markdown(
-            f"<style>{fitxategia.read()}</style>",
-            unsafe_allow_html=True
-        )
+    css_edukia = fitxategi_testua_irakurri(
+        css_bidea, os.path.getmtime(css_bidea)
+    )
+    st.markdown(f"<style>{css_edukia}</style>", unsafe_allow_html=True)
 
 logo_bidea = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     "assets", "images", "logo_laneki.webp"
 )
 
-with open(logo_bidea, "rb") as logo_fitxategia:
-    logo_base64 = base64.b64encode(
-        logo_fitxategia.read()
-    ).decode("ascii")
+logo_base64 = fitxategi_base64_irakurri(
+    logo_bidea, os.path.getmtime(logo_bidea)
+)
 
 iluna = st.session_state.gai_iluna
 
@@ -234,32 +241,32 @@ if iluna:
     xehetasun_azalera = "rgba(23, 35, 48, 0.10)"
     xehetasun_ertza = "rgba(15, 23, 42, 0.20)"
     pastel_urdina = "#294662"
-    pastel_arrosa = "#57343A"
+    pastel_arrosa = "#713B3B"
     pastel_izotza = "#304858"
     pastel_arbela = "#344759"
-    pastel_berdea = "#294D42"
+    pastel_berdea = "#456F60"
     semantiko_testua = "#F8FAFC"
     semantiko_bigarrena = "#D7E1EA"
     kpi_ikono_kolorea = "#E6F2FF"
     kpi_ikono_atzeko_planoa = "rgba(248, 250, 252, 0.12)"
-    egoera_gorria = "#754957"
+    egoera_gorria = "#713B3B"
     egoera_laranja = "#70623F"
     egoera_melokotoia = "#765748"
     egoera_urdina = "#45647D"
-    egoera_berdea = "#3F6858"
+    egoera_berdea = "#527D6B"
     mapa_gorria = egoera_gorria
     mapa_laranja = egoera_laranja
     mapa_melokotoia = egoera_melokotoia
     mapa_urdina = egoera_urdina
     mapa_berdea = egoera_berdea
-    alerta_kritikoa = "#754957"
-    alerta_handia = "#765748"
-    alerta_berrikustea = "#70623F"
-    ertz_gorria = "#B97889"
+    alerta_kritikoa = egoera_gorria
+    alerta_handia = egoera_melokotoia
+    alerta_berrikustea = egoera_laranja
+    ertz_gorria = "#C96868"
     ertz_laranja = "#B39B57"
     ertz_melokotoia = "#B88469"
     ertz_urdina = "#7299BA"
-    ertz_berdea = "#6B9C87"
+    ertz_berdea = "#89B5A2"
 else:
     atzeko_planoa = "#F0F4F8"
     panela = "#FFFFFF"
@@ -272,7 +279,7 @@ else:
     xehetasun_azalera = "#F8FAFC"
     xehetasun_ertza = "#E2E8F0"
     pastel_urdina = "#C5DCF3"
-    pastel_arrosa = "#F1C9CF"
+    pastel_arrosa = "#F5B8B8"
     pastel_izotza = "#D1E2EB"
     pastel_arbela = "#CFDCE8"
     pastel_berdea = "#C6E7D6"
@@ -280,20 +287,20 @@ else:
     semantiko_bigarrena = "#475569"
     kpi_ikono_kolorea = "#153B5C"
     kpi_ikono_atzeko_planoa = "rgba(20, 42, 64, 0.08)"
-    egoera_gorria = "#F7CDD2"
+    egoera_gorria = "#F5B8B8"
     egoera_laranja = "#F7E2AE"
     egoera_melokotoia = "#F4D1BC"
     egoera_urdina = "#C8DEF4"
     egoera_berdea = "#C8EAD8"
-    mapa_gorria = "#EEAAB5"
-    mapa_laranja = "#F3D989"
-    mapa_melokotoia = "#F2BE9F"
-    mapa_urdina = "#AFCFEE"
-    mapa_berdea = "#A9DFC6"
-    alerta_kritikoa = "#F5D1D6"
-    alerta_handia = "#F6D9C4"
-    alerta_berrikustea = "#F5E4B8"
-    ertz_gorria = "#FCA7AF"
+    mapa_gorria = egoera_gorria
+    mapa_laranja = egoera_laranja
+    mapa_melokotoia = egoera_melokotoia
+    mapa_urdina = egoera_urdina
+    mapa_berdea = egoera_berdea
+    alerta_kritikoa = egoera_gorria
+    alerta_handia = egoera_melokotoia
+    alerta_berrikustea = egoera_laranja
+    ertz_gorria = "#EC7474"
     ertz_laranja = "#FDE48A"
     ertz_melokotoia = "#FDC4A8"
     ertz_urdina = "#A8D1FA"
@@ -429,10 +436,12 @@ div[data-testid="stDataFrame"] {{
 }}
 
 .st-key-gaia_aldatu button {{
-    width: 38px !important;
-    min-width: 38px !important;
-    height: 36px !important;
-    min-height: 36px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
     padding: 0 !important;
     border: 1px solid {ertza} !important;
     border-radius: 8px !important;
@@ -472,13 +481,15 @@ div[data-testid="stDataFrame"] {{
 .st-key-goiburu_abisua_inaktibo button {{
     width: 44px !important;
     min-width: 44px !important;
+    max-width: 44px !important;
     height: 44px !important;
     min-height: 44px !important;
+    max-height: 44px !important;
     padding: 0 !important;
-    border: 1px solid #E2E8F0 !important;
+    border: 1px solid #9FC5E8 !important;
     border-radius: 8px !important;
-    background: #FFFFFF !important;
-    box-shadow: 0 3px 10px rgba(20, 42, 64, 0.16) !important;
+    background: transparent !important;
+    box-shadow: none !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -501,8 +512,13 @@ div[data-testid="stDataFrame"] {{
 .st-key-goiburu_abisua_aktibo button {{
     color: #F4B942 !important;
 }}
+.st-key-goiburu_abisua_aktibo button:hover,
+.st-key-goiburu_abisua_inaktibo button:hover {{
+    background: transparent !important;
+    border-color: #79ACDA !important;
+}}
 .st-key-goiburu_abisua_aktibo button {{
-    box-shadow: 0 3px 12px rgba(230, 57, 70, 0.28) !important;
+    box-shadow: none !important;
 }}
 .st-key-goiburu_abisua_aktibo button::after {{
     content: "!";
@@ -696,17 +712,19 @@ div[class*="st-key-machine_"] button:hover {{
 
 
 def menu_toggle_botoia():
-    if st.button(
+    def aldatu_menua():
+        st.session_state.menu_irekia = not st.session_state.menu_irekia
+
+    st.button(
         "☰" if not st.session_state.menu_irekia else "‹",
         key="menu_toggle",
         help=(
             "Alboko menua erakutsi"
             if not st.session_state.menu_irekia
             else "Alboko menua ezkutatu"
-        )
-    ):
-        st.session_state.menu_irekia = not st.session_state.menu_irekia
-        st.rerun()
+        ),
+        on_click=aldatu_menua,
+    )
 
 
 # Menua irekita dagoenean kontrola alboko menuan bertan dago. Horrela,
@@ -741,6 +759,10 @@ with st.sidebar:
         ("🔔 Abisuak", "Abisuak")
     ]
 
+    def nabigatu(orria):
+        st.session_state.orria = orria
+        st.query_params["orria"] = orria
+
     for etiketa, orria in aukerak:
         mota = (
             "primary"
@@ -748,15 +770,14 @@ with st.sidebar:
             else "secondary"
         )
 
-        if st.button(
+        st.button(
             etiketa,
             key=f"nav_{orria}",
             use_container_width=True,
-            type=mota
-        ):
-            st.session_state.orria = orria
-            st.query_params["orria"] = orria
-            st.rerun()
+            type=mota,
+            on_click=nabigatu,
+            args=(orria,),
+        )
 
     st.html("""
     <div class="sidebar-system-card" aria-label="Sistemaren egoera">
@@ -787,9 +808,13 @@ uneko_makina = next(
     makinak[0]
 )
 
-historikoa = historikoa_lortu(
-    uneko_makina["id"], uneko_makina
-)
+# Hasiera da sei puntuko grafiko historiko hau erabiltzen duen orri bakarra.
+# Beste orrietan ez dugu endpointa kontsultatzen ezta DataFramea prestatzen ere.
+historikoa = None
+if st.session_state.orria == "Hasiera":
+    historikoa = historikoa_lortu(
+        uneko_makina["id"], uneko_makina
+    )
 
 orain = datetime.now(timezone.utc)
 data = orain.strftime("%Y-%m-%d")
@@ -845,8 +870,14 @@ with goiburu1:
 with data_zutabea:
     st.markdown(
         f'<div class="header-datetime">'
-        f'<span>📅 {data}</span><span>🕒 {ordua}</span>'
-        f'<span title="Uneko giro-tenperatura">🌡 {uneko_tenperatura} °C</span>'
+        f'<span class="header-data-item header-date">'
+        f'<span class="header-data-icon" aria-hidden="true">▦</span>{data}</span>'
+        f'<span class="header-data-item header-time">'
+        f'<span class="header-data-icon" aria-hidden="true">◷</span>{ordua}</span>'
+        f'<span class="header-data-item header-temperature" '
+        f'title="Uneko giro-tenperatura">'
+        f'<span class="header-data-icon" aria-hidden="true">🌡</span>'
+        f'{uneko_tenperatura} °C</span>'
         f'</div>',
         unsafe_allow_html=True
     )
@@ -861,28 +892,32 @@ with abisu_zutabea:
             f'<style>.st-key-goiburu_abisua_aktibo button::after'
             f'{{content:"{min(abisu_kopurua, 99)}" !important;}}</style>'
         )
-    if st.button(
+    def abisuetara_joan():
+        st.session_state.orria = "Abisuak"
+        st.query_params["orria"] = "Abisuak"
+
+    st.button(
         abisu_etiketa,
         key=("goiburu_abisua_aktibo" if abisu_kopurua else "goiburu_abisua_inaktibo"),
         help=abisu_etiketa,
-    ):
-        st.session_state.orria = "Abisuak"
-        st.query_params["orria"] = "Abisuak"
-        st.rerun()
+        on_click=abisuetara_joan,
+    )
 
 with gai_zutabea:
     etiketa = "Cambiar a modo claro" if iluna else "Cambiar a modo oscuro"
 
-    if st.button(
-        etiketa,
-        key="gaia_aldatu",
-        help="Gai argia/iluna aldatu"
-    ):
-        st.session_state.gai_iluna = not iluna
+    def gaia_aldatu():
+        st.session_state.gai_iluna = not st.session_state.gai_iluna
         st.query_params["gaia"] = (
             "iluna" if st.session_state.gai_iluna else "argia"
         )
-        st.rerun()
+
+    st.button(
+        etiketa,
+        key="gaia_aldatu",
+        help="Gai argia/iluna aldatu",
+        on_click=gaia_aldatu,
+    )
 
 
 # =============================
@@ -1152,10 +1187,12 @@ def telemetria_taula():
     """, height=320, scrolling=False)
 
 
-def historiko_grafikoa():
-    panel_izenburua(
-        f"📉 {kodea} · Tenperatura, momentua eta higaduraren bilakaera"
-    )
+@st.cache_data(ttl=30, show_spinner=False)
+def historiko_irudia_sortu(historiko_df, atzeko_kolorea, testu_kolorea, ertz_kolorea):
+    """Historikoaren PNGa behin sortu eta datuak aldatu arte berrerabili."""
+    # Liburutegi astunak Hasiera grafikoa benetan behar denean soilik kargatu.
+    import matplotlib.pyplot as plt
+    import seaborn as sns
 
     aldagaiak = [
         ("Prozesu-tenperatura (°C)", "#2EA885", "Tenp. °C"),
@@ -1171,18 +1208,18 @@ def historiko_grafikoa():
         "axes.labelweight": "bold",
     })
     fig, axes = plt.subplots(
-        3, 1, figsize=(9, 4.5), sharex=True
+        3, 1, figsize=(12.5, 4.5), sharex=True
     )
 
-    fig.patch.set_facecolor(grafiko_atzeko_planoa)
+    fig.patch.set_facecolor(atzeko_kolorea)
 
     for ax, (eremua, kolorea, etiketa) in zip(
         axes, aldagaiak
     ):
-        ax.set_facecolor(grafiko_atzeko_planoa)
+        ax.set_facecolor(atzeko_kolorea)
 
         sns.lineplot(
-            data=historikoa,
+            data=historiko_df,
             x="Ordua",
             y=eremua,
             ax=ax,
@@ -1194,7 +1231,7 @@ def historiko_grafikoa():
         ax.set_ylabel(
             etiketa,
             fontsize=10,
-            color=testua,
+            color=testu_kolorea,
             rotation=90,
             ha="center",
             va="center",
@@ -1202,11 +1239,11 @@ def historiko_grafikoa():
         ax.yaxis.set_label_coords(-0.075, 0.5)
         ax.set_xlabel("")
         ax.tick_params(
-            colors=testua, labelsize=10
+            colors=testu_kolorea, labelsize=10
         )
-        ax.grid(True, linestyle="--", alpha=0.6, color=ertza)
+        ax.grid(True, linestyle="--", alpha=0.6, color=ertz_kolorea)
         ax.spines[["top", "right"]].set_visible(False)
-        ax.spines[["bottom", "left"]].set_color(ertza)
+        ax.spines[["bottom", "left"]].set_color(ertz_kolorea)
 
     axes[-1].tick_params(
         axis="x", rotation=0
@@ -1226,9 +1263,24 @@ def historiko_grafikoa():
         format="png",
         dpi=160,
         bbox_inches="tight",
-        facecolor=grafiko_atzeko_planoa,
+        facecolor=atzeko_kolorea,
     )
     irudi_base64 = base64.b64encode(irudi_bufferra.getvalue()).decode("ascii")
+    plt.close(fig)
+    return irudi_base64
+
+
+def historiko_grafikoa():
+    panel_izenburua(
+        f"📉 {kodea} · Tenperatura, momentua eta higaduraren bilakaera"
+    )
+
+    irudi_base64 = historiko_irudia_sortu(
+        historikoa,
+        grafiko_atzeko_planoa,
+        testua,
+        ertza,
+    )
 
     components.html(
         f"""
@@ -1253,8 +1305,10 @@ def historiko_grafikoa():
             }}
             .chart-legend span {{ display: inline-flex; align-items: center; gap: 6px; }}
             .chart-legend i {{ width: 10px; height: 10px; border-radius: 50%; }}
-            .chart-image-wrap {{ flex: 1 1 auto; min-height: 0; }}
-            .chart-image-wrap img {{ width: 100%; height: 100%; object-fit: contain; }}
+            .chart-image-wrap {{ flex: 1 1 auto; min-height: 0; width: 100%; }}
+            .chart-image-wrap img {{
+                display: block; width: 100%; height: 100%; object-fit: fill;
+            }}
             .chart-actions {{
                 position: absolute; top: 6px; right: 6px; z-index: 5;
                 display: flex; gap: 7px; opacity: 0; pointer-events: none;
@@ -1278,10 +1332,10 @@ def historiko_grafikoa():
         </head>
         <body>
           <div id="chart-root">
-            <div class="chart-legend" aria-label="Grafikoko koloreen azalpena">
-              <span><i style="background:#2EA885"></i>Berdea: prozesu-tenperatura</span>
-              <span><i style="background:#E5A636"></i>Laranja: momentua</span>
-              <span><i style="background:#E56F7C"></i>Gorria: erremintaren higadura</span>
+            <div class="chart-legend" aria-label="Grafikoko serieen azalpena">
+              <span><i style="background:#2EA885"></i>Prozesu-tenperatura</span>
+              <span><i style="background:#E5A636"></i>Momentua</span>
+              <span><i style="background:#E56F7C"></i>Erremintaren higadura</span>
             </div>
             <div class="chart-image-wrap">
               <img src="data:image/png;base64,{irudi_base64}"
@@ -1300,10 +1354,9 @@ def historiko_grafikoa():
         </body>
         </html>
         """,
-        height=(310 if st.session_state.orria == "Datuak" else 285),
+        height=(310 if st.session_state.orria == "Datuak" else 300),
         scrolling=False,
     )
-    plt.close(fig)
 
 
 def azken_neurketak():
@@ -1318,6 +1371,7 @@ def azken_neurketak():
         ("Tenp.", uneko_makina["tenperatura"], 50, "°C")
     ]
 
+    neurketen_htmla = []
     for izenburua, balioa, erreferentzia, unitatea in elementuak:
         proportzioa = min(
             balioa / erreferentzia * 100, 100
@@ -1328,7 +1382,7 @@ def azken_neurketak():
             else "#48C2A5"
         )
 
-        st.markdown(f"""
+        neurketen_htmla.append(f"""
         <div class="sensor-row">
             <div class="sensor-heading">
                 <span>{izenburua}</span>
@@ -1341,26 +1395,42 @@ def azken_neurketak():
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-
-    st.caption(
-        "Barrak: demoko erreferentziekiko proportzioa "
-        "(ez arrisku eredua)"
-    )
+        """)
 
     if uneko_makina["egoera"] == "Akatsa":
-        st.html('<div style="background:#FFF1F2; border:1.5px solid #FDA4AF; color:#BE123C; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Akats aktiboa — Berehalako berrikuspena</span></div>')
-        pass
-        pass
-        pass
-        pass
+        egoera_estiloa = "background:#F8C1C1; border-color:#EC7474; color:#A61B1B;"
+        egoera_ikonoa = "⚠"
+        egoera_testua = "Akats aktiboa — Berehalako berrikuspena"
     elif uneko_makina["egoera"] == "Berrikusteko":
-        st.html('<div style="background:#FFF7E6; border:1.5px solid #FDE68A; color:#B45309; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Makina hau berrikusteko dago</span></div>')
+        egoera_estiloa = "background:#FFF7E6; border-color:#FDE68A; color:#B45309;"
+        egoera_ikonoa = "⚠"
+        egoera_testua = "Makina hau berrikusteko dago"
     else:
-        st.html('<div style="background:#F0FDF4; border:1.5px solid #86EFAC; color:#15803D; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; justify-content:center; text-align:center; gap:8px; margin-top:10px;"><span>✓</span><span>Makina egoera normalean</span></div>')
+        egoera_estiloa = "background:#F0FDF4; border-color:#86EFAC; color:#15803D;"
+        egoera_ikonoa = "✓"
+        egoera_testua = "Makina egoera normalean"
+
+    st.html(f"""
+    <div class="latest-measure-layout">
+        <div class="latest-measure-sensors">
+            {''.join(neurketen_htmla)}
+        </div>
+        <div class="latest-measure-caption">
+            Barrak: demoko erreferentziekiko proportzioa (ez arrisku eredua)
+        </div>
+        <div class="measurement-status" style="{egoera_estiloa}">
+            <span>{egoera_ikonoa}</span>
+            <span>{egoera_testua}</span>
+        </div>
+    </div>
+    """)
 
 
 def makina_sarea():
+    def makina_hautatu(makina_id):
+        st.session_state.hautatutako_makina = makina_id
+        st.query_params["makina"] = makina_id
+
     with st.container(key="machine_panel"):
         panel_izenburua(
             "Lantegiko mapa operatiboa",
@@ -1371,7 +1441,6 @@ def makina_sarea():
         st.markdown("""
         <div class="machine-map-top">
             <strong>SARRERA / HARRERA</strong>
-            <strong>BIDALKETA-EREMUA →</strong>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1420,16 +1489,14 @@ def makina_sarea():
                     ):
                         etiketa = f"{zenbakia:02d}"
 
-                        if st.button(
+                        st.button(
                             etiketa,
                             key=f"machine_button_{zenbakia}",
                             use_container_width=True,
-                            help=f"{makina_id}: {egoera}"
-                        ):
-                            st.session_state.hautatutako_makina = (
-                                makina_id
-                            )
-                            st.rerun()
+                            help=f"{makina_id}: {egoera}",
+                            on_click=makina_hautatu,
+                            args=(makina_id,),
+                        )
 
         st.markdown(f"""
         <div class="machine-legend">
@@ -1558,9 +1625,6 @@ if orria == "Hasiera":
 
 elif orria == "Makinak":
     st.html('<span class="makinak-page-marker" aria-hidden="true"></span>')
-    # Streamlit-ek inportatutako orriak memorian gordetzen ditu. Birkargatzeak
-    # makinak.py-ko azken bertsioa berehala erabiltzea bermatzen du.
-    makinak_orria = importlib.reload(makinak_orria)
     makinak_orria.makinak_erakutsi(
         makinak=makinak,
         uneko_makina=uneko_makina,
@@ -1572,7 +1636,6 @@ elif orria == "Makinak":
 
 elif orria == "Datuak":
     st.html('<span class="datuak-page-marker" aria-hidden="true"></span>')
-    datuak_orria = importlib.reload(datuak_orria)
     datuak_orria.datuak_erakutsi(
         makina=uneko_makina,
         makinak=makinak,
@@ -1580,7 +1643,6 @@ elif orria == "Datuak":
     )
 
 elif orria == "Abisuak":
-    abisuak_orria = importlib.reload(abisuak_orria)
     abisuak_orria.abisuak_erakutsi(makinak)
 
 

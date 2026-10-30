@@ -2,7 +2,7 @@
 
 from base64 import b64encode
 from collections.abc import Callable
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -82,6 +82,10 @@ def _joera_diagrama(
 def _makina_xehetasunak_modal(datuak: dict[str, Any]) -> None:
     """Hautatutako CNCaren analisi prediktibo osoa erakutsi."""
     zenbakia = datuak["zenbakia"]
+    orain = datetime.now(timezone.utc)
+    modal_data = orain.strftime("%Y-%m-%d")
+    modal_ordua = orain.strftime("%H:%M UTC")
+    modal_tenperatura = float(datuak.get("giro_tenperatura", 27.3))
     faktorea = {"Larria": 1.0, "Ertaina": 0.72, "Arina": 0.42, "Normala": 0.16}[datuak["egoera_mota"]]
     arriskua = max(3, min(97, round((100 - datuak["osasuna"]) * 0.86 + faktorea * 18)))
     bibrazioa = round(1.1 + faktorea * 2.1 + (zenbakia % 5) * 0.08, 1)
@@ -122,33 +126,44 @@ def _makina_xehetasunak_modal(datuak: dict[str, Any]) -> None:
     joera = "Igotzen" if datuak["egoera_mota"] != "Normala" else "Egonkorra"
     alarma = f"SP-{3 + zenbakia % 8:02d}" if datuak["egoera_mota"] != "Normala" else "Ez dago"
     gai_iluna = bool(st.session_state.get("gai_iluna", False))
+    modal_theme_class = " theme-iluna" if gai_iluna else ""
     ikonoak = {
-        "egoera": "&#9888;",
-        "osasuna": "&#9829;",
-        "arriskua": "&#9650;",
-        "ekintza": "&#9874;",
-        "bibrazioa": "&#8767;",
-        "korrontea": "&#9889;",
-        "tenperatura": "&#9832;",
+        "egoera": "icon-egoera",
+        "osasuna": "icon-osasuna",
+        "arriskua": "icon-arriskua",
+        "ekintza": "icon-ekintza",
+        "bibrazioa": "icon-bibrazioa",
+        "korrontea": "icon-korrontea",
+        "tenperatura": "icon-tenperatura",
     }
 
     st.html(f"""
-    <div class="predictive-modal-top">
+    <div class="predictive-modal-top{modal_theme_class}">
       <div class="predictive-page-head">
         <small>CNC Prediktiboa</small>
-        <span>▦ 2026-10-27 &nbsp; ◷ 09:18 UTC &nbsp; ◐</span>
+        <div class="header-datetime modal-header-datetime">
+          <span class="header-data-item header-date">
+            <span class="header-data-icon" aria-hidden="true">▦</span>{modal_data}
+          </span>
+          <span class="header-data-item header-time">
+            <span class="header-data-icon" aria-hidden="true">◷</span>{modal_ordua}
+          </span>
+          <span class="header-data-item header-temperature">
+            <span class="header-data-icon" aria-hidden="true">🌡</span>{modal_tenperatura:.1f} °C
+          </span>
+        </div>
       </div>
       <div class="predictive-title">{datuak['id']} · Analisi prediktiboa</div>
       <div class="predictive-summary">
-        <div class="predictive-kpi tone-{egoera_tonua}"><i>{ikonoak['egoera']}</i><div><small>Egoera</small><strong>{datuak['egoera_mota']}</strong><p>Uneko makinaren egoera</p></div></div>
-        <div class="predictive-kpi tone-blue"><i>{ikonoak['osasuna']}</i><div><small>Osasun-maila</small><strong>{datuak['osasuna']}%</strong><p>Osasun-indize orokorra</p></div></div>
-        <div class="predictive-kpi tone-amber"><i>{ikonoak['arriskua']}</i><div><small>Arrisku-maila</small><strong>{arriskua}%</strong><p>Matxura-arriskua, hurrengo 7 egunetan</p></div></div>
-        <div class="predictive-kpi tone-green"><i>{ikonoak['ekintza']}</i><div><small>Hurrengo ekintza</small><strong class="action-text">{ekintza_laburra}</strong><p>{ekintza_azalpena}</p></div></div>
+        <div class="predictive-kpi tone-{egoera_tonua}"><i class="modal-icon {ikonoak['egoera']}"></i><div><small>Egoera</small><strong>{datuak['egoera_mota']}</strong><p>Uneko makinaren egoera</p></div></div>
+        <div class="predictive-kpi tone-blue"><i class="modal-icon {ikonoak['osasuna']}"></i><div><small>Osasun-maila</small><strong>{datuak['osasuna']}%</strong><p>Osasun-indize orokorra</p></div></div>
+        <div class="predictive-kpi tone-amber"><i class="modal-icon {ikonoak['arriskua']}"></i><div><small>Arrisku-maila</small><strong>{arriskua}%</strong><p>Matxura-arriskua, hurrengo 7 egunetan</p></div></div>
+        <div class="predictive-kpi tone-green"><i class="modal-icon {ikonoak['ekintza']}"></i><div><small>Hurrengo ekintza</small><strong class="action-text">{ekintza_laburra}</strong><p>{ekintza_azalpena}</p></div></div>
       </div>
       <div class="predictive-signals">
-        <div class="signal-card tone-{bibrazio_tonua}"><i>{ikonoak['bibrazioa']}</i><div><small>Bibrazio RMS</small><strong>{bibrazioa:.1f} mm/s</strong><em>{bibrazio_mezua}</em></div><aside><small>Balio maximoa</small><b>{bibrazioa * 1.65:.1f} mm/s</b></aside></div>
-        <div class="signal-card tone-{korronte_tonua}"><i>{ikonoak['korrontea']}</i><div><small>Ardatzaren korrontea</small><strong>{korrontea:.1f} A</strong><em>{'⚠ Aztertu' if korrontea >= 12 else '✓ Tarte egokian'}</em></div><aside><small>Piko balioa</small><b>{korrontea * 1.23:.1f} A</b></aside></div>
-        <div class="signal-card tone-{tenperatura_tonua}"><i>{ikonoak['tenperatura']}</i><div><small>Ardatzaren tenperatura</small><strong>{datuak['tenperatura']:.1f} °C</strong><em>{'⚠ Ohikotik gora' if datuak['tenperatura'] >= 60 else '✓ Tarte egokian'}</em></div><aside><small>Balio normala</small><b>&lt; 60 °C</b></aside></div>
+        <div class="signal-card tone-{bibrazio_tonua}"><i class="modal-icon {ikonoak['bibrazioa']}"></i><div><small>Bibrazio RMS</small><strong>{bibrazioa:.1f} mm/s</strong><em>{bibrazio_mezua}</em></div><aside><small>Balio maximoa</small><b>{bibrazioa * 1.65:.1f} mm/s</b></aside></div>
+        <div class="signal-card tone-{korronte_tonua}"><i class="modal-icon {ikonoak['korrontea']}"></i><div><small>Ardatzaren korrontea</small><strong>{korrontea:.1f} A</strong><em>{'⚠ Aztertu' if korrontea >= 12 else '✓ Tarte egokian'}</em></div><aside><small>Piko balioa</small><b>{korrontea * 1.23:.1f} A</b></aside></div>
+        <div class="signal-card tone-{tenperatura_tonua}"><i class="modal-icon {ikonoak['tenperatura']}"></i><div><small>Ardatzaren tenperatura</small><strong>{datuak['tenperatura']:.1f} °C</strong><em>{'⚠ Ohikotik gora' if datuak['tenperatura'] >= 60 else '✓ Tarte egokian'}</em></div><aside><small>Balio normala</small><b>&lt; 60 °C</b></aside></div>
       </div>
     </div>
     """)
@@ -177,7 +192,7 @@ def _makina_xehetasunak_modal(datuak: dict[str, Any]) -> None:
                 </div>""")
 
     with ondorio_zutabea:
-        st.html(f"""<section class="predictive-panel conclusions-panel native-conclusions"><h3>☀ Ondorio azkarra</h3>
+        st.html(f"""<section class="predictive-panel conclusions-panel native-conclusions{modal_theme_class}"><h3>☀ Ondorio azkarra</h3>
           <div class="conclusion-row"><b>1</b><div><strong>{datuak['abisua']}</strong><small>Azken orduetan joera adierazgarria hauteman da.</small></div></div>
           <div class="conclusion-row"><b>2</b><div><strong>Tenperatura: {datuak['tenperatura']:.1f} °C</strong><small>Balioa makinaren ohiko tartearekin alderatu da.</small></div></div>
           <div class="conclusion-row"><b>3</b><div><strong>Osasun-maila: %{datuak['osasuna']}</strong><small>Sentsoreen neurketa guztiak kontuan hartuta.</small></div></div>
@@ -185,10 +200,10 @@ def _makina_xehetasunak_modal(datuak: dict[str, Any]) -> None:
         </section>""")
 
     st.html(f"""
-      <div class="predictive-bottom predictive-bottom-native">
+      <div class="predictive-bottom predictive-bottom-native{modal_theme_class}">
         <section class="predictive-panel"><h3>⚙ Mekanizazio-baldintzak</h3><dl><div><dt>Materiala</dt><dd>Altzairua</dd></div><div><dt>Erreminta</dt><dd>Fresa Ø12</dd></div><div><dt>Aurrerapena</dt><dd>{1200 + zenbakia * 7} mm/min</dd></div></dl></section>
         <section class="predictive-panel"><h3>▣ Alarmak eta mantentzea</h3><dl><div><dt>Alarma-kodea</dt><dd>{alarma}</dd></div><div><dt>Azken matxura</dt><dd>{datuak['azken_matxura']}</dd></div><div><dt>Osagai kaltetua</dt><dd>{datuak['huts_egindako_osagaia']}</dd></div></dl></section>
-        <section class="predictive-panel"><h3>◎ Gomendatutako ekintza</h3>
+        <section class="predictive-panel recommended-panel"><h3>◎ Gomendatutako mantentze-ekintzak</h3>
           <div class="recommended-actions">
             <div><b>1</b><p><strong>{ekintza_laburra}</strong><small>Makinaren egoera mekanikoa aztertu.</small></p></div>
             <div><b>2</b><p><strong>{datuak['ekintza']}</strong><small>Parametro nagusiak egiaztatu.</small></p></div>
@@ -530,7 +545,7 @@ def _estiloak_txertatu() -> None:
         border-color: #9FB3C8;
     }
     .makina-kpi-box:nth-child(2) {
-        background: var(--state-red-bg, #FFF1F2);
+        background: var(--state-red-bg, #F8C1C1);
         border-color: #FCA5A5;
     }
     .makina-kpi-box:nth-child(3) {
@@ -594,7 +609,10 @@ def _estiloak_txertatu() -> None:
         border-radius: 14px !important;
         padding: 14px 16px !important;
         box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
-        min-height: calc(100vh - 80px) !important;
+        min-height: calc(100vh - 105px) !important;
+        height: calc(100vh - 105px) !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
     .gallery-head-row {
         display: flex;
@@ -620,7 +638,7 @@ def _estiloak_txertatu() -> None:
 
     /* Txartelen zerrenda scrollable */
     .gallery-scroll-list {
-        height: calc(100vh - 220px);
+        height: calc(100vh - 245px);
         min-height: 420px;
         max-height: none;
         overflow-y: scroll !important;
@@ -673,7 +691,7 @@ def _estiloak_txertatu() -> None:
     /* Ezkerreko txartelen egoera-koloreak */
     .cnc-item-card.card-larria {
         border: 1.5px solid #FCA5A5 !important;
-        background: var(--state-red-bg, #FFF1F2) !important;
+        background: var(--state-red-bg, #F8C1C1) !important;
         border-left: 4px solid #DE4651 !important;
     }
     .cnc-item-card.card-ertaina {
@@ -761,7 +779,8 @@ def _estiloak_txertatu() -> None:
         margin-bottom: 0;
         box-sizing: border-box;
         color: var(--semantic-text, #0F172A);
-        min-height: calc(100vh - 105px);
+        /* Utzi lekua beheko Aurrekoa/Hurrengoa nabigazioari. */
+        min-height: calc(100vh - 150px);
         display: flex;
         flex-direction: column;
     }
@@ -769,7 +788,7 @@ def _estiloak_txertatu() -> None:
     /* Eskuin-panelaren egoera-koloreak */
     .makina-detail-card.detail-larria {
         border: 2px solid #DE4651 !important;
-        background: var(--state-red-bg, #FFF1F2) !important;
+        background: var(--state-red-bg, #F8C1C1) !important;
         box-shadow: 0 4px 20px rgba(222, 70, 81, 0.14) !important;
     }
     .makina-detail-card.detail-ertaina {
@@ -868,6 +887,42 @@ def _estiloak_txertatu() -> None:
         width: 100%;
         margin-bottom: 7px;
     }
+    .detail-health-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 12px;
+    }
+    .detail-health-actions .detail-recom-box {
+        min-height: 39px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+    .detail-health-action-space {
+        min-height: 39px;
+        anchor-name: --info-gehiago-kokalekua;
+    }
+    .detail-navigation-slots {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+        margin-top: 8px;
+    }
+    .detail-navigation-prev,
+    .detail-navigation-next {
+        min-height: 40px;
+    }
+    .detail-navigation-prev {
+        anchor-name: --aurrekoa-kokalekua;
+    }
+    .detail-navigation-next {
+        anchor-name: --hurrengoa-kokalekua;
+    }
     .detail-health-row-heading {
         display: flex;
         align-items: center;
@@ -921,7 +976,7 @@ def _estiloak_txertatu() -> None:
         border: 2px solid #E5A636 !important;
     }
     .detail-metric-card.metric-fault {
-        background: var(--state-red-bg, #FAD1D6) !important;
+        background: var(--state-red-bg, #F5B8B8) !important;
         border: 2px solid #E94355 !important;
         box-shadow: 0 0 0 2px rgba(233, 67, 85, 0.10);
     }
@@ -1037,12 +1092,13 @@ def _estiloak_txertatu() -> None:
         margin-bottom: 4px;
     }
     .st-key-btn_info_gehiago {
-        width: calc(50% - 4px) !important;
-        margin-top: -71px !important;
-        margin-left: calc(50% + 4px) !important;
-        margin-bottom: 0 !important;
-        position: relative;
-        z-index: 4;
+        width: calc(25% - 10px) !important;
+        margin-top: -515px !important;
+        margin-right: 17px !important;
+        margin-bottom: 476px !important;
+        margin-left: calc(75% + 3px) !important;
+        position: relative !important;
+        z-index: 6;
     }
     .st-key-btn_info_gehiago button {
         width: 100% !important;
@@ -1059,6 +1115,46 @@ def _estiloak_txertatu() -> None:
         background: var(--state-blue-bg, #E8F2FC) !important;
         border-color: #2563EB !important;
     }
+    /* Nabigatzaile modernoetan botoia osasun-panelaren hutsune zehatzean ainguratu. */
+    @supports (position-anchor: --info-gehiago-kokalekua) {
+        .st-key-btn_info_gehiago {
+            position: absolute !important;
+            position-anchor: --info-gehiago-kokalekua;
+            top: anchor(top) !important;
+            left: anchor(left) !important;
+            width: anchor-size(width) !important;
+            height: anchor-size(height) !important;
+            margin: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        .st-key-btn_info_gehiago [data-testid="stButton"] {
+            width: 100% !important;
+            height: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        .st-key-btn_aurrekoa,
+        .st-key-btn_hurrengoa {
+            position: absolute !important;
+            top: anchor(top) !important;
+            left: anchor(left) !important;
+            width: anchor-size(width) !important;
+            height: anchor-size(height) !important;
+            margin: 0 !important;
+            z-index: 6;
+        }
+        .st-key-btn_aurrekoa {
+            position-anchor: --aurrekoa-kokalekua;
+        }
+        .st-key-btn_hurrengoa {
+            position-anchor: --hurrengoa-kokalekua;
+        }
+        .st-key-btn_aurrekoa button,
+        .st-key-btn_hurrengoa button {
+            height: 100% !important;
+        }
+    }
     .detail-recom-title {
         font-size: 0.82rem;
         font-weight: 800;
@@ -1068,7 +1164,7 @@ def _estiloak_txertatu() -> None:
         font-size: 0.76rem;
         color: var(--semantic-muted, #334155);
     }
-    .detail-larria .detail-recom-box { background: var(--state-red-bg, #FFF1F2) !important; }
+    .detail-larria .detail-recom-box { background: var(--state-red-bg, #F8C1C1) !important; }
     .detail-ertaina .detail-recom-box { background: var(--state-amber-bg, #FFF7E6) !important; }
     .detail-arina .detail-recom-box { background: var(--state-blue-bg, #EFF6FF) !important; }
     .detail-normala .detail-recom-box { background: var(--state-green-bg, #F0FDF4) !important; }
@@ -1122,7 +1218,7 @@ def _estiloak_txertatu() -> None:
         padding: 18px; border: 2px solid; border-radius: 12px; margin-bottom: 18px;
     }
     .machine-modal-alert.modal-larria {
-        background: var(--state-red-bg, #FFF1F2); border-color: #E94355;
+        background: var(--state-red-bg, #F8C1C1); border-color: #D94343;
     }
     .machine-modal-alert.modal-ertaina {
         background: var(--state-amber-bg, #FFF7E6); border-color: #E5A636;
@@ -1220,6 +1316,18 @@ def _estiloak_txertatu() -> None:
     }
     .predictive-page-head small { font-size: .64rem; font-weight: 800; }
     .predictive-page-head span { color: var(--main-text, #0F172A); }
+    .predictive-page-head .modal-header-datetime {
+        flex: 0 0 auto;
+        width: auto;
+        margin-left: auto;
+        font-size: 14px;
+    }
+    .predictive-page-head .modal-header-datetime .header-data-icon {
+        color: #276FA6;
+    }
+    .predictive-page-head .modal-header-datetime .header-temperature .header-data-icon {
+        color: #C65E36;
+    }
     .predictive-title { font-size: 1.16rem; line-height: 1; font-weight: 900; }
     .predictive-summary {
         display: grid;
@@ -1235,11 +1343,38 @@ def _estiloak_txertatu() -> None:
     }
     .predictive-kpi { min-height: 46px; padding: 3px 6px; gap: 5px; }
     .predictive-kpi i, .signal-card i {
-        width: 27px; height: 27px; flex: 0 0 27px; border-radius: 50%;
+        width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%;
         display: grid; place-items: center; font-style: normal;
-        font-family: "Segoe UI Symbol", Arial, sans-serif;
-        font-size: 1rem; line-height: 1; font-weight: 900;
         background: color-mix(in srgb, currentColor 12%, transparent);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 18%, transparent);
+    }
+    .modal-icon::before {
+        content: "";
+        width: 18px; height: 18px; display: block;
+        background: currentColor;
+        -webkit-mask: var(--modal-icon) center / contain no-repeat;
+        mask: var(--modal-icon) center / contain no-repeat;
+    }
+    .icon-egoera {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2 1 21h22L12 2Zm1 16h-2v-2h2v2Zm0-4h-2V9h2v5Z'/%3E%3C/svg%3E");
+    }
+    .icon-osasuna {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 21 3.5 13A5.6 5.6 0 0 1 11.4 5l.6.6.6-.6a5.6 5.6 0 0 1 7.9 8L12 21Zm-5.8-9h3l1-2.2 2.2 5 1.2-2.8h4.2v-2h-5.5l-1.8-4-2.6 5.9H6.2V12Z'/%3E%3C/svg%3E");
+    }
+    .icon-arriskua {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2 3 6v6c0 5.6 3.8 8.8 9 10 5.2-1.2 9-4.4 9-10V6l-9-4Zm1 15h-2v-2h2v2Zm0-4h-2V7h2v6Z'/%3E%3C/svg%3E");
+    }
+    .icon-ekintza {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M22 19.6 14.4 12a6 6 0 0 0-7.8-7.8l3.5 3.5-2.4 2.4-3.5-3.5A6 6 0 0 0 12 14.4l7.6 7.6L22 19.6ZM5.5 16 2 19.5 4.5 22 8 18.5 5.5 16Z'/%3E%3C/svg%3E");
+    }
+    .icon-bibrazioa {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M1 11h4l2-6 4 14 3-10 2 6h7v-2h-5.6L14 3l-3 10L7 0 3.6 9H1v2Z'/%3E%3C/svg%3E");
+    }
+    .icon-korrontea {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M13 1 3 14h7l-1 9 12-15h-8V1Z'/%3E%3C/svg%3E");
+    }
+    .icon-tenperatura {
+        --modal-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M15 13.8V5a5 5 0 0 0-10 0v8.8A7 7 0 1 0 15 13.8ZM10 20a4 4 0 0 1-2-7.5V5a2 2 0 0 1 4 0v7.5A4 4 0 0 1 10 20Zm1-5.8V7H9v7.2a2.5 2.5 0 1 0 2 0Z'/%3E%3C/svg%3E");
     }
     .predictive-kpi small, .signal-card small { display: block; font-weight: 800; }
     .predictive-kpi strong { display: block; font-size: 1.12rem; line-height: 1; margin: 1px 0; }
@@ -1251,10 +1386,14 @@ def _estiloak_txertatu() -> None:
         font-size: .57rem; line-height: 1.1; font-weight: 700;
         white-space: normal; overflow-wrap: anywhere;
     }
-    .tone-red { background: var(--state-red-bg, #F7CDD2); color: #D9364A; border-color: #F49AAA; }
+    .tone-red { background: var(--state-red-bg, #F5B8B8); color: #B42323; border-color: #E86F6F; }
     .tone-amber { background: var(--state-amber-bg, #F7E2AE); color: #B96208; border-color: #E8BC52; }
     .tone-blue { background: var(--state-blue-bg, #C8DEF4); color: #1769A8; border-color: #87BCE7; }
     .tone-green { background: var(--state-green-bg, #C8EAD8); color: #0B9253; border-color: #7BD3A5; }
+    .theme-iluna,
+    .theme-iluna * {
+        color: #FFFFFF !important;
+    }
     .predictive-signals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; min-width: 0; }
     .signal-card { min-height: 46px; padding: 3px 6px; gap: 5px; }
     .signal-card > div { min-width: 0; flex: 1; }
@@ -1303,12 +1442,12 @@ def _estiloak_txertatu() -> None:
     }
     .conclusion-row > b {
         width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
-        background: var(--state-red-bg, #F7CDD2); color: #DE4651;
+        background: var(--state-red-bg, #F5B8B8); color: #B42323;
         font-size: .78rem; font-weight: 900;
     }
     .recommended-actions > div > b {
         width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center;
-        background: var(--state-red-bg, #F7CDD2); color: #DE4651;
+        background: var(--state-red-bg, #F5B8B8); color: #B42323;
         font-size: .68rem; font-weight: 900;
     }
     .conclusion-row strong, .conclusion-row small { display: block; }
@@ -1319,7 +1458,7 @@ def _estiloak_txertatu() -> None:
     }
     .risk-result {
         margin-top: auto; padding: 8px; border: 1px solid #EF6676; border-radius: 8px;
-        text-align: center; background: var(--state-red-bg, #F7CDD2);
+        text-align: center; background: var(--state-red-bg, #F5B8B8);
     }
     .risk-result strong, .risk-result span { display: block; }
     .risk-result span { margin-top: 2px; font-size: .62rem; }
@@ -1338,22 +1477,30 @@ def _estiloak_txertatu() -> None:
     .predictive-panel dt { color: var(--secondary-text, #64748B); font-weight: 700; }
     .predictive-panel dd { margin: 0; font-weight: 900; }
     .recommended-actions {
-        height: calc(100% - 20px); padding: 4px 7px; border-radius: 8px;
-        background: var(--state-red-bg, #F7CDD2); box-sizing: border-box;
+        height: calc(100% - 28px); padding: 7px 9px; border-radius: 8px;
+        background: var(--state-red-bg, #F5B8B8); box-sizing: border-box;
+    }
+    .recommended-panel h3 {
+        margin: 0 0 7px !important; color: var(--main-text, #142A40) !important;
+        font-size: .9rem !important; font-weight: 900 !important;
+        line-height: 1.15 !important; opacity: 1 !important;
     }
     .recommended-actions > div {
-        display: grid; grid-template-columns: 25px minmax(0, 1fr); gap: 7px;
-        align-items: center; min-height: 24px;
+        display: grid; grid-template-columns: 27px minmax(0, 1fr); gap: 9px;
+        align-items: center; min-height: 34px;
+    }
+    .recommended-actions > div > b {
+        width: 27px; height: 27px; font-size: .75rem;
     }
     .recommended-actions p { margin: 0; min-width: 0; }
     .recommended-actions strong, .recommended-actions small { display: block; }
     .recommended-actions strong {
-        white-space: normal; overflow-wrap: anywhere; line-height: 1.05;
-        font-size: .61rem;
+        color: var(--main-text, #142A40); white-space: normal;
+        overflow-wrap: anywhere; line-height: 1.15; font-size: .72rem;
     }
     .recommended-actions small {
-        color: var(--secondary-text, #64748B); font-size: .53rem;
-        line-height: 1.05; overflow-wrap: anywhere;
+        color: var(--secondary-text, #64748B); font-size: .63rem;
+        line-height: 1.15; overflow-wrap: anywhere;
     }
     @media (max-height: 760px) {
         .predictive-modal {
@@ -1413,28 +1560,65 @@ def _estiloak_txertatu() -> None:
         color: var(--main-text, #0F172A) !important;
     }
     .st-key-makina_iragazkia {
-        width: 34px !important;
-        min-width: 34px !important;
+        width: 54px !important;
+        min-width: 54px !important;
         margin: 0 !important;
     }
     .st-key-makina_iragazkia button {
-        width: 34px !important;
-        min-width: 34px !important;
-        height: 34px !important;
-        min-height: 34px !important;
-        max-height: 34px !important;
+        width: 54px !important;
+        min-width: 54px !important;
+        max-width: 54px !important;
+        height: 44px !important;
+        min-height: 44px !important;
+        max-height: 44px !important;
         padding: 0 !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        background: var(--input-bg, #FFFFFF) !important;
-        border: 1.5px solid var(--panel-border, #CBD5E1) !important;
-        border-radius: 8px !important;
-        box-shadow: none !important;
+        position: relative !important;
+        overflow: hidden !important;
+        background: transparent !important;
+        border: 1.5px solid #3976BD !important;
+        border-radius: 9px !important;
+        box-shadow: 0 2px 6px rgba(39, 96, 142, 0.12) !important;
     }
     .st-key-makina_iragazkia button:hover {
-        background: var(--state-blue-bg, #E8F2FC) !important;
+        background: transparent !important;
         border-color: #3976BD !important;
+    }
+    .st-key-makina_iragazkia [data-testid="stIconMaterial"] {
+        display: none !important;
+    }
+    .st-key-makina_iragazkia button > * {
+        display: none !important;
+    }
+    .st-key-makina_iragazkia button::before {
+        content: "";
+        display: block !important;
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        width: 21px;
+        height: 20px;
+        background: currentColor;
+        clip-path: polygon(0 0, 100% 0, 62% 46%, 62% 100%, 38% 84%, 38% 46%);
+        transform: translateY(-50%);
+    }
+    .st-key-makina_iragazkia button::after {
+        content: "⌄";
+        display: block !important;
+        position: absolute;
+        right: 7px;
+        top: 50%;
+        color: currentColor;
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 1;
+        transform: translateY(-58%);
+    }
+    .st-key-makina_iragazkia button[aria-expanded="true"]::after {
+        content: "⌃";
+        transform: translateY(-38%);
     }
     .st-key-makina_iragazkia button p {
         display: none !important;
@@ -1443,9 +1627,9 @@ def _estiloak_txertatu() -> None:
         display: none !important;
     }
     .st-key-makina_bilaketa_tresnak {
-        gap: 6px !important;
+        gap: 10px !important;
         align-items: center !important;
-        min-height: 34px !important;
+        min-height: 44px !important;
     }
     .st-key-makina_bilaketa_tresnak > div {
         align-self: center !important;
@@ -1480,7 +1664,7 @@ def _estiloak_txertatu() -> None:
         border: 1px solid var(--panel-border, #CBD5E1) !important;
     }
     .st-key-iragazki_arrisku_handia {
-        background: var(--state-red-bg, #F7CDD2) !important;
+        background: var(--state-red-bg, #F5B8B8) !important;
     }
     .st-key-iragazki_arrisku_ertaina {
         background: var(--state-amber-bg, #F7E2AE) !important;
@@ -1503,7 +1687,8 @@ def _estiloak_txertatu() -> None:
     }
     .st-key-btn_aurrekoa,
     .st-key-btn_hurrengoa {
-        margin-top: 9px !important;
+        margin-top: 5px !important;
+        margin-bottom: 0 !important;
     }
     .st-key-btn_aurrekoa button p,
     .st-key-btn_hurrengoa button p {
@@ -1520,6 +1705,7 @@ def _estiloak_txertatu() -> None:
         .st-key-makina_gallery_panel,
         .makina-detail-card {
             min-height: auto !important;
+            height: auto !important;
         }
         .detail-info-grid {
             grid-template-columns: 1fr 1fr;
@@ -1527,11 +1713,17 @@ def _estiloak_txertatu() -> None:
         .detail-photo-wrapper {
             grid-template-columns: 1fr;
         }
+        .st-key-btn_info_gehiago {
+            position: static !important;
+            width: 100% !important;
+            margin: 6px 0 0 !important;
+        }
     }
     </style>
     """)
 
 
+@st.fragment
 def makinak_erakutsi(
     makinak: list[dict[str, Any]],
     uneko_makina: dict[str, Any],
@@ -1806,6 +1998,16 @@ def makinak_erakutsi(
                                  style="width:{uneko_datuak['osasuna']}%; background:{uneko_datuak['osasun_kolorea']};"></div>
                         </div>
                     </div>
+                    <div class="detail-health-actions">
+                        <div class="detail-recom-box"
+                             style="background:{uneko_datuak['bg_kolorea']}; border:1.5px solid {uneko_datuak['border_kolorea']};">
+                            <div class="detail-recom-title" style="color:{uneko_datuak['kolorea']};">
+                                {uneko_datuak['abisu_ikonoa']} {gomendio_izenburua}
+                            </div>
+                            <div class="detail-recom-desc">{uneko_datuak['ekintza']}</div>
+                        </div>
+                        <div class="detail-health-action-space" aria-hidden="true"></div>
+                    </div>
                 </div>
             </div>
 
@@ -1877,18 +2079,11 @@ def makinak_erakutsi(
                 </div>
             </div>
 
-            <!-- Gomendio-kutxa -->
-            <div class="detail-actions-row">
-                <div class="detail-recom-box"
-                     style="background:{uneko_datuak['bg_kolorea']}; border: 1.5px solid {uneko_datuak['border_kolorea']};">
-                    <div class="detail-recom-title" style="color:{uneko_datuak['kolorea']};">
-                        {uneko_datuak['abisu_ikonoa']} {gomendio_izenburua}
-                    </div>
-                    <div class="detail-recom-desc">
-                        {uneko_datuak['ekintza']}
-                    </div>
-                </div>
+            <div class="detail-navigation-slots">
+                <div class="detail-navigation-prev" aria-hidden="true"></div>
+                <div class="detail-navigation-next" aria-hidden="true"></div>
             </div>
+
         </div>
         """)
 
@@ -1906,27 +2101,27 @@ def makinak_erakutsi(
             0
         )
 
+        def nabigatu_makina(norabidea: int) -> None:
+            indizea = (uneko_indizea + norabidea) % len(zerrenda)
+            berria = zerrenda[indizea]["id"]
+            st.session_state.hautatutako_makina = berria
+            st.query_params["makina"] = berria
+
         with col_prev:
-            if st.button(
+            st.button(
                 "← Aurrekoa", key="btn_aurrekoa",
                 use_container_width=True, disabled=not zerrenda,
-            ):
-                aurreko_idx = (uneko_indizea - 1) % len(zerrenda)
-                berria = zerrenda[aurreko_idx]["id"]
-                st.session_state.hautatutako_makina = berria
-                st.query_params["makina"] = berria
-                st.rerun()
+                on_click=nabigatu_makina,
+                args=(-1,),
+            )
 
         with col_next:
-            if st.button(
+            st.button(
                 "Hurrengoa →", key="btn_hurrengoa",
                 use_container_width=True, disabled=not zerrenda,
-            ):
-                hurrengo_idx = (uneko_indizea + 1) % len(zerrenda)
-                berria = zerrenda[hurrengo_idx]["id"]
-                st.session_state.hautatutako_makina = berria
-                st.query_params["makina"] = berria
-                st.rerun()
+                on_click=nabigatu_makina,
+                args=(1,),
+            )
 
         st.html("""
         <div class="footer-note" style="text-align:center;">
