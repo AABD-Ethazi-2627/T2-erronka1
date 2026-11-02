@@ -287,7 +287,7 @@ cycler==0.12.1 \
 fastapi==0.162.0 \
     --hash=sha256:3785963de305dd09912426cb81f2d230fce98ab3521cdfe97265c8d14983128c \
     --hash=sha256:6a22c1e2e6e32e0633ee7e170f00009a29b8228b16feb219ee42f32fd8d88a8f
-    # via -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    # via -r dashboard_laneki/requirements.in
 fonttools==4.67.0 \
     --hash=sha256:0781fe22583529e1e98bb8a3a33040632e202a4c427ed7e65412c41a21b8ebcb \
     --hash=sha256:07a2f36b3263faadf5b7b548f62fd3cac401e490189c82b16f7139ac0df91cd4 \
@@ -727,7 +727,7 @@ matplotlib==3.11.2 \
     --hash=sha256:f2ac30cf5eb5dff1b584627ae0b0e1186551a4f69ae3c75073911da497a29170 \
     --hash=sha256:fea03cf56568cc1cba08b470be6a0559e71c3a5b688d54b7179bb35ba23d0821
     # via
-    #   -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    #   -r dashboard_laneki/requirements.in
     #   seaborn
 narwhals==2.27.1 \
     --hash=sha256:aed93076a3ea42d9c32c88e4eb5ea422a21937011cbe1f480f9572a523c82094 \
@@ -878,7 +878,7 @@ pandas==3.1.0 \
     --hash=sha256:f1a93c24175129bfc9922ef748ddae1d8137c743ed835e2615be329f606fed4d \
     --hash=sha256:f4772320b7735d96dbbef437129f840dec4175f8a18a2391bd1222ed8943825c
     # via
-    #   -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    #   -r dashboard_laneki/requirements.in
     #   seaborn
     #   streamlit
 pillow==13.0.0 \
@@ -1201,7 +1201,7 @@ requests==2.34.2 \
     --hash=sha256:2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0 \
     --hash=sha256:f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed
     # via
-    #   -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    #   -r dashboard_laneki/requirements.in
     #   streamlit
 rpds-py==2026.9.1 \
     --hash=sha256:00ba2d8c7dd4ee537978ddf4b3fbd712bef2d8751603f7f3146b3f4287768e25 \
@@ -1338,7 +1338,7 @@ rpds-py==2026.9.1 \
 seaborn==0.13.2 \
     --hash=sha256:636f8336facf092165e27924f223d3c62ca560b1f2bb5dff7ab7fad265361987 \
     --hash=sha256:93e60a40988f4d65e9f4885df477e2fdaff6b73a9ded434c1ab356dd57eefff7
-    # via -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    # via -r dashboard_laneki/requirements.in
 six==1.17.0 \
     --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274 \
     --hash=sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
@@ -1352,7 +1352,7 @@ starlette==1.10.0 \
 streamlit==1.66.1 \
     --hash=sha256:29607190a589fe1fa9bd7e154635d335d47dc09b4010c6cc273daa6e4430ee31 \
     --hash=sha256:7710a8b67469da7af7bf3503c9b68afca5676f832f62f9bda1221e0ce11941d1
-    # via -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    # via -r dashboard_laneki/requirements.in
 typing-extensions==4.16.0 \
     --hash=sha256:481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8 \
     --hash=sha256:dc983d19a509c94dba722ee6abd33940f7c05a89e243c47e907eb4db6f1a43e5
@@ -1376,9 +1376,7 @@ typing-inspection==0.4.4 \
 tzdata==2026.5 \
     --hash=sha256:8cc73c0a0bfca7dbfa59235d60b2eff82231dee33f53d206db1acd9173cfc0a7 \
     --hash=sha256:b683bd1b6659ddcd810ff02ad09ba821d4bf1065072805063eb35c49617905ac
-    # via
-    #   pandas
-    #   python-dateutil
+    # via python-dateutil
 urllib3==2.8.0 \
     --hash=sha256:0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3 \
     --hash=sha256:63bf2ead4c879426ebf22ef2a781eeb4aa3b4ae798a0435506f8687fd5bb9b63
@@ -1387,7 +1385,7 @@ uvicorn==0.54.0 \
     --hash=sha256:505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf \
     --hash=sha256:a2e33cbfaa0306f8e6b0c13e0cb89d7d7a2da3e62b90c66e18c33d9807b28620
     # via
-    #   -r outputs/babysit-20261026/dashboard-after/dashboard_laneki/requirements.in
+    #   -r dashboard_laneki/requirements.in
     #   streamlit
 watchdog==6.0.0 \
     --hash=sha256:07df1fdd701c5d4c8e55ef6cf55b8f0120fe1aef7ef39a1c6fc6bc2e606d517a \
