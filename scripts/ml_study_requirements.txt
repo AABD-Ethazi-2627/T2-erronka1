@@ -92,7 +92,7 @@ threadpoolctl==3.7.0
     # via
     #   -r scripts/ml_study_requirements.in
     #   scikit-learn
-tzdata==2026.5
+tzdata==2026.6
     # via
     #   pandas
     #   python-dateutil
