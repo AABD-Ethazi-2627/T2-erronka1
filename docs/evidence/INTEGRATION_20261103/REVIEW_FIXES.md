@@ -107,3 +107,10 @@ and the generic ES row reader now uses the same exact threshold scope filters
 before applying its capacity limit. Hash checks remain an integrity aid, not an
 authenticated execution sandbox or approval. Run outputs belong outside the
 restored source directory.
+
+Final source package: `integration-final.zip`,417 members, SHA-256
+`dd56e56c0ebf51dcaa28e4f16f6ba5770a2e2aafc434ea6ac7c81e2263a38502`.
+Source revision 9aaeb8cb67401b84ce86c4118ac2fe6c5a1972f2. The 63 affected tests pass.
+After a fresh extraction, inventory/NiFi flow/6 fixture scenarios pass, and the
+previously omitted CG14/scope resources support 20 tests with 1 skip. All 23 local
+Docker inputs remain present. No image build or external acceptance is implied.
