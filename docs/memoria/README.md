@@ -1,6 +1,38 @@
 # Memoria CNC Guard y trazabilidad CG25/CG27/CG30
 
-Borrador reconciliado el 22/10/2026 para revisión del equipo y docente. Cubre documentalmente 40 descriptores; no acredita nota, aceptación humana, firmas ni entrega final.
+Borrador con corte histórico del 22/10/2026 y conciliación documental local del
+03/11/2026 para revisión del equipo y docente. Cubre documentalmente 40
+descriptores; no acredita nota, aceptación humana, firmas ni entrega final.
+
+## Candidatura local al 03/11/2026
+
+La [conciliación fechada](RECONCILIACION_20261103.md) distingue el código local
+`7790393` de los ensayos y merges históricos. La matriz de 40 filas conserva
+su base `f770932` y sus revisores pendientes: no se cambia el resultado de una
+campaña anterior al actualizar los hashes de los ficheros actuales.
+
+La candidatura añade lecturas canónicas opt-in y un dashboard Laneki que consulta
+API, conserva el corte UTC y muestra la antigüedad de la observación. La
+[evidencia local](../evidence/LOCAL_PIPELINE_BROWSER_20261103.md) registra por
+separado navegador HTTP, evento del worker por stdin mostrado en navegador y
+Filebeat vendor → Kafka real → worker → API/CG15/ES/GET con offset confirmado.
+El evento Kafka de ese informe todavía no tiene reconciliación propia en
+navegador. El replay posterior usa stdin; no equivale a una reentrega del broker.
+
+Son lecturas sintéticas y un modelo de prueba local, no un modelo aprobado para
+despliegue. La evaluación offline permanece indisponible sin una vinculación
+independiente verificada al hash del modelo y al umbral. Ningún panel convierte
+el score de estado actual en probabilidad futura, ETA o RUL. Los resultados de
+validación de desarrollo de octubre conservan su población y no se atribuyen
+automáticamente al bundle de estos ensayos.
+
+Al corte de esta conciliación siguen pendientes las imágenes finales y sus
+comprobaciones completas, el recorrido NiFi/Kibana de esta candidatura, la
+capacidad del conjunto simultáneo, SMB actual, aceptación del modelo y revisión
+humana. Las builds que el coordinador tenga en curso no se cuentan como éxito.
+No se publica, despliega ni entrega este borrador. Las secciones históricas que
+siguen describen el corte del 22/10; sus estados de PR no son una consulta actual
+al remoto.
 
 ## Fuentes y atribución por sección
 
