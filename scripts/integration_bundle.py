@@ -98,6 +98,7 @@ def build(output, evidence):
                 "docs/integration/LOCAL_FILEBEAT.md",
                 "docs/integration/LOCAL_IMAGE_BUILDS.md",
                 "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md",
+                "docs/evidence/LOCAL_CONTAINERS_20261103.md",
                 "docs/evidence/LOCAL_HTTP_20261103.md",
                 "docs/integration/issues.json",
                 "docs/backend/READ_API.md",

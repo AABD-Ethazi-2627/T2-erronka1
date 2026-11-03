@@ -95,6 +95,13 @@ no duplicate lock or service-specific dependency export is added here.
 
 ## Remaining acceptance gates
 
+The later [image-backed local verification](../evidence/LOCAL_CONTAINERS_20261103.md)
+adds actual API/dashboard image builds and scan gates, a migrated copy of the
+committed archive, byte-identical POST replay, and the Filebeat/Kafka event verified
+through those images into desktop/mobile Chromium. It also records the complete
+local test rerun. This supersedes image/browser-pending statements below only for
+those exact components, event and limits; the full NiFi/Kibana campaign remains open.
+
 The bounded real HTTP/ES/CG15 rehearsal is documented in
 [LOCAL_HTTP.md](LOCAL_HTTP.md) and [its dated evidence](../evidence/LOCAL_HTTP_20261103.md).
 Later [pipeline and browser evidence](../evidence/LOCAL_PIPELINE_BROWSER_20261103.md)

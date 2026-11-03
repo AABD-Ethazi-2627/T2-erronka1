@@ -179,3 +179,18 @@ Se actualizan únicamente los hashes de `scripts/archive_consumer.py`,
 También se actualiza el hash de este apéndice. Los valores anteriores quedan en
 `local_archive_index_followup.previous_current_hashes`; la base histórica,
 `historical_snapshot`, el alcance del modelo y los revisores pendientes no cambian.
+
+
+## Comprobación posterior en imágenes locales
+
+El coordinador ejecutó en `b5d5d54` 894 pruebas y 374 subtests (4 omitidas),
+y 29 pruebas del dashboard con `-W error`. El informe
+`docs/evidence/LOCAL_CONTAINERS_20261103.md` distingue las imágenes API/dashboard
+construidas y escaneadas, la copia migrada del archivo del ensayo Kafka, el replay
+HTTP idéntico y la identidad visible en Chromium. Conserva también los intentos
+fallidos (permisos del montaje, URL de prueba errónea y revisión Claude interrumpida
+por memoria). No se modifica ninguna aceptación humana ni el alcance del modelo.
+
+El README de integración enlaza esa evidencia; el generador de ZIP incluye el
+informe. Se revisan solo esos tres inputs y este apéndice. Las afirmaciones sobre
+NiFi/Kibana, SMB, campaña completa y modelo aprobado siguen pendientes.

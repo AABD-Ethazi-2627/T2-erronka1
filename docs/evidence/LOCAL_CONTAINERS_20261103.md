@@ -1,0 +1,116 @@
+# Local image, archive and browser verification — 2026-11-03
+
+This supplements the earlier [pipeline/browser report](LOCAL_PIPELINE_BROWSER_20261103.md).
+The coordinator built and exercised the API and dashboard images against the real
+local Elasticsearch service and the retained Filebeat/Kafka event. The model and
+CSV are explicit local test inputs. No SMB, NiFi campaign, approved industrial
+model, human acceptance or full simultaneous stack acceptance is inferred.
+
+## Actual source and images
+
+The archive selection change is committed at
+`b5d5d545646ad3ba447be2312d9ae9c5b4d1b8e8`. Its API image contains the verified
+scoring files and all three copied Python helpers, including the new read index.
+The parent independently ran 130 focused tests and 126 subtests; Ruff passed.
+An initial `pytest` executable invocation failed collection because the repository
+root was absent from its import path; `python -m pytest` is the successful command.
+After stopping the services, the full repository suite passed **894 tests and
+374 subtests, with four skips** (59.59 s). The locked dashboard environment passed
+**29 tests with `-W error`**. These are local results at the stated source head,
+not CI or human acceptance.
+
+| Image | Actual ID | Verification |
+| --- | --- | --- |
+| `cnc-guard-local:api-index` | `sha256:65071be5769f160f7bb6c00dd9e26993e8ae345aadff3759f4a7d76215a1c8ba` | Offline DuckDB/Arrow/HTTPX/JSON probe; serving HTTP below; Trivy gate passes, three targets |
+| `cnc-guard-local:dashboard` | `sha256:ff6187e5f4a7e892ec896d27224c03db124a92a166330cd0df6ed26681b12bab` | Locked imports and actual Streamlit/browser session; Trivy gate passes, three targets |
+
+Both ran as UID 65532 with read-only root filesystems, 512 MiB memory and swap
+limits, `/tmp` bounded to 64 MiB, dropped capabilities and no-new-privileges.
+The offline dependency probes used `network=none`. The HTTP/browser phase used
+an internal Docker network and loopback-only host bridges. The API had only its
+own response-ledger volume writable; model, config and archive mounts were read-only.
+No source checkout or host virtualenv was mounted into either serving container.
+
+The final resource snapshot reports API 190.6 MiB, dashboard 152.9 MiB and ES
+611.3 MiB. These are one instant, not peak RSS or a concurrency/load benchmark.
+Both serving containers stopped with exit 0 and `OOMKilled=false`; ES stopped
+intentionally with exit 143 and `OOMKilled=false`. Volumes and evidence remain.
+
+## Producer, committed archive and same-event verification
+
+The documented [Filebeat runbook](../integration/LOCAL_FILEBEAT.md) was executed
+in a new isolated namespace. Filebeat produced one 72-byte record at partition 0,
+offset 0. Payload SHA-256:
+`33067ff45c666c8cc5baab6778515d6e2b8cc341e553cb3f23fb6094cf95eecd`.
+Run 03 used restored, hash-verified source `723ab6b29451578b27d7befdb4c8526310e6ae23`:
+one completed worker job, broker commit 1, staged stdin replay without advancing
+that commit, and exact KPI count 1. This is not forced broker redelivery.
+
+The coordinator copied run 03's archive, migrated that copy with the explicit
+offline read-index backfill, and verified that original object bytes and all
+rows of `objects`, `events` and `deliveries` were unchanged. The original run
+archive was not modified. GET never backfills or repairs storage.
+
+The first image GET returned 503 because host-owned private 0600 bronze files
+were unreadable by UID 65532. The rehearsal was corrected by copying the same
+bytes into a private volume owned by that image user, mounted read-only to serve.
+Original file permissions were preserved. The CG32 Compose already runs its
+API and writer as UID 1000; this rehearsal's default image user differs.
+
+The serving image then returned HTTP 200 for health, snapshot, history, periods,
+KPI and evaluation. Evaluation correctly returned `available=false`. A `/predict`
+replay against the copied canonical response ledger returned byte-identical output.
+An initial verification script used the wrong periods URL and got 404; the actual
+route `/api/historikoa/CNC-004/periodoak` passed. Both attempt logs are retained.
+
+The same canonical event was checked in POST replay, ES, migrated CG15, snapshot,
+history and browser text:
+
+- Event ID: `b872e51a8980ba9623fe8f83d5152becbc286ce09d5f8103fbaf28ff347e9e93`.
+- Event key: `cf2431835bd7bf3c426ba8f0097ec0371a2820bcd1f02b36a015ece321185745`.
+- Canonical SHA-256: `11e1d51b8acf81cb89405a23caa2032e7e76d8d7b8bb32381cbb30bca91cf7fb`.
+- Local test model manifest SHA-256: `3a78dff85e705b57c5d5e11c84f5a020f797ed70b59f4486671152e71034e6f9`.
+
+## Browser and failure boundaries
+
+An isolated Chromium session visited `http://127.0.0.1:18501`, the real dashboard
+image, at 1400 × 1000 and 390 × 844. It exercised Hasiera, Makinak, its details
+dialog, Datuak with six-month selection, and Abisuak. Desktop DOM extraction
+retains the actual event ID and key, rather than only booleans asserting presence.
+The modal showed 36.65 °C process temperature, 27.35 °C air temperature, 1345 RPM,
+62.7 Nm and 153 minutes of tool wear. Mobile document width was 390 with no
+horizontal overflow; inspected pages had no Streamlit exceptions.
+
+The real timer advanced the displayed query cut from `2026-11-03T12:10:13.681046Z`
+to `2026-11-03T12:10:24.130836Z` without a refresh click. No new telemetry was
+published during this browser run. The earlier report separately records live
+sample changes and ES outage/recovery; those are not relabelled as this image run.
+Off-screen controls required scrolling into view before clicking. The retained
+`machine-modal.png` is an unsuccessful early click; `modal-visible.png` is the
+successful dialog capture. The browser was closed after verification.
+
+A separate run stopped the real Kafka broker after its worker completed. The
+observer raised `KafkaConnectionError`, retained a failed result and shut down
+its API. About 10.94 seconds between broker exit and result-file modification is
+wall-clock evidence of prompt failure, not a monotonic timeout measurement.
+The injection script expected `KafkaTimeoutError`, so its final assertions did
+not execute. `source_ack_verified=false` means unverified, not absent ACK.
+
+## Evidence locations and remaining work
+
+- `/home/tears/.cache/cnc-local-container-integration-20261103/`: exact preparation
+  and correction scripts/commands, migration, HTTP bodies, image source hashes,
+  browser DOM/screenshots, runtime identities, logs and shutdown state.
+- `/home/tears/.cache/cnc-local-images-20261103/`: actual build logs, runtime probes,
+  image scans and gates; API baseline evidence is retained separately.
+- `/home/tears/.cache/cnc-ingress-VFYbx1/`: executed Filebeat runbook and captured record.
+- `/home/tears/.cache/cnc-local-kafka-worker-20261103/run-03/`: successful frozen-source
+  broker worker run. `run-04-broker-timeout/` and `BROKER_FAILURE_20261103.*` retain
+  the failed observer experiment without changing its outcome.
+
+Claude's new archive-index review was killed for memory exhaustion and provides
+no approval. Previous completed Claude reviews remain scoped to their exact heads.
+Final ES/NiFi/Kibana/Filebeat candidate image closure, NiFi execution, full-stack
+capacity, sustained rates, SMB and human acceptance remain separate gates. The
+full CG32 minimum of 6 GiB available RAM and 20 GiB free disk is unchanged.
+No push or PR belongs to this local verification phase.

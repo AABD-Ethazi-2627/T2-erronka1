@@ -271,9 +271,9 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "7981cc38d6cb51bfe07d687595aea3b05a1ad44b9eb77601ffc672abfeef093f",
+    "docs/memoria/RECONCILIACION_20261103.md": "29058d66769e63bae2027e332d988a2c23292ba2290665db273919a9bae04ec2",
     "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
-    "docs/integration/README.md": "75d16c5f068e0e37118796fa4e0c986c23821a79efd1308c54626720e82c8cb1",
+    "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
     "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
     "docs/integration/LOCAL_KAFKA.md": "ea9d0b9ddfe2cce4bcc48a0a85b42fa1ba6ddf59de3acadbf5e65cdfccae1824",
@@ -301,7 +301,7 @@
     "dashboard_laneki/test_app.py": "5ef975e468b538876fe7a593bcda63762478971a16f21530c59c4b86254759e7",
     "dashboard_laneki/test_domain.py": "f8c77cf900863f2a25b31bfaabd868bc04808f0198dcb06f9acc831417d90a90",
     "dashboard_laneki/test_read_contracts.py": "725ce24decdef02f4ce67d9e1baf71c6103552bac8b65d79c340b556ff48a308",
-    "scripts/integration_bundle.py": "7c990ac6c878fb72d7c90a546068862b7848cbe44b649f9a944920572ac2a652",
+    "scripts/integration_bundle.py": "82f5b1505152a8fc39958997cf20b02dd5fbfc8dbc4a28dfae8b5c2fea54f34e",
     "scripts/integration_dashboard_probe.py": "73a83f9a9ec0c32d184ef7da0e480398f3d27fe647482382d8ae501eb7b82a61",
     "scripts/integration_fixture.py": "efb76406e9a6c5ccaae4b780aae2127aa2ce41823b935ac8dd5751502429cb59",
     "scripts/integration_http.py": "b11589fb4a52d22dd4a25c9e2cfcc15ec2cdc5e540f504aa4c8a23f277703e83",
@@ -320,7 +320,8 @@
     "tests/test_read_es_scalability.py": "98676cdf5b8be656fcb6e23537bdddad06c925e4c5fb8c2256bec26caeaf6d0a",
     "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a",
     "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
-    "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712"
+    "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712",
+    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "bd4362d0efbb11b540a418117e35d75737089242ce805cdd17bce31f11e94f64"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -484,5 +485,17 @@
     ],
     "verification": "Documentary verifier only in this reconciliation; implementer reports 129 tests and 126 subtests plus one subsequent regression; independent parent tests and image/runtime validation recorded separately",
     "limits": "Selected 20000 objects / 64 MiB; at most 10000 predictions; no sustained writer throughput, complete retained-object audit, live archive migration, container acceptance, SMB or human approval claimed"
+  },
+  "local_container_evidence_followup": {
+    "source_commit": "b5d5d545646ad3ba447be2312d9ae9c5b4d1b8e8",
+    "previous_current_hashes": {
+      "scripts/integration_bundle.py": "7c990ac6c878fb72d7c90a546068862b7848cbe44b649f9a944920572ac2a652",
+      "docs/integration/README.md": "75d16c5f068e0e37118796fa4e0c986c23821a79efd1308c54626720e82c8cb1",
+      "docs/memoria/RECONCILIACION_20261103.md": "7981cc38d6cb51bfe07d687595aea3b05a1ad44b9eb77601ffc672abfeef093f"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/LOCAL_CONTAINERS_20261103.md"
+    ],
+    "verification": "894 tests,374 subtests,4 skipped;29 dashboard tests; bounded actual image HTTP/browser and image gates; no human acceptance"
   }
 }
