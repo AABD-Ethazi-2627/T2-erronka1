@@ -85,3 +85,10 @@ capacity, full Docker acceptance or successful browser/SMB/human acceptance.
 
 Full suite after these corrections: **798 passed, 4 skipped, 374 subtests passed**
 (61.74s). Focused backend/wiring:63 passed. Changed Python Ruff checks pass.
+
+Latest corrected bundle: `integration-review2.zip` (405 members), SHA-256
+`a3c18348e9f1d148bd0eb9b6b7fccc1bf20c3434ce15fe869e3b284a4df8057a`.
+Full restore checks all 23 local Docker COPY inputs, renders/checks image inventory,
+validates the refreshed NiFi flow, and reruns all 6 fixture scenarios with member
+hash verification enabled. This supersedes the 360-member bundle for lab sources;
+the earlier fixture-only restore result is retained as historical evidence.

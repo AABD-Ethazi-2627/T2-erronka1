@@ -1,5 +1,20 @@
 # Bounded integration evidence, 2026-11-03
 
+Current assembled source: `4d2d9e78c829c39138cae24524be7447172b4dfe`.
+Full suite: 798 tests + 374 subtests pass, 4 skipped. Dashboard: 26 AppTests previously passed;
+no UI application change in this follow-up. Current ZIP: `integration-review2.zip`,
+405 members, SHA-256 `a3c18348e9f1d148bd0eb9b6b7fccc1bf20c3434ce15fe869e3b284a4df8057a`.
+See `bundle-verification.json` for CRC/hash/restore results and source identity.
+Full extraction verifies 23 local Docker COPY inputs, image inventory and refreshed
+NiFi flow, then reproduces all 6 fixture scenarios. No containers were started.
+Image builds/scans/runtime/browser/SMB/human acceptance remain pending.
+
+## Initial child snapshot (historical)
+
+The following results and `fixture-result.json` describe the original child only.
+Its ZIP verification is preserved as `bundle-verification-initial.json`.
+
+
 Implementation tested: `75fb2f0345c52f4d769c05f334881a510e939c15`.
 Fixture result records exact script hashes, contracts, synthetic model identity,
 request accounting, sensor/event reconciliation and the current resource block.
