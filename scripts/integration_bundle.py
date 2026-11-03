@@ -30,6 +30,13 @@ EXTENSIONS = {
     ".css",
     ".schema",
     ".lock",
+    ".js",
+    ".sh",
+    ".webp",
+    ".png",
+    ".svg",
+    ".ndjson",
+    ".Dockerfile",
 }
 RESULTS = {
     "result.json",
@@ -60,6 +67,8 @@ def build(output, evidence):
             "pyproject.toml",
             "docs/integration/README.md",
             "docs/integration/issues.json",
+            "docs/backend/READ_API.md",
+            "dashboard_laneki/INTEGRATION.md",
         } or (
             p.parts[0] in TREES
             and p.suffix in EXTENSIONS

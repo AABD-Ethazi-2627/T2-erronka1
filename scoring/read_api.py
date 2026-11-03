@@ -14,6 +14,8 @@ from scoring.read_storage import compatible
 
 
 def utc(value):
+    if not isinstance(value, (str, datetime)):
+        raise TypeError("UTC timestamp must be text or datetime")
     result = datetime.fromisoformat(value) if isinstance(value, str) else value
     if result.tzinfo is None:
         raise ValueError("Timezone required")
@@ -66,7 +68,7 @@ def project(row):
             )
         },
         id=row["machine_id"],
-        zenbakia=row["machine_id"].split("-")[-1],
+        zenbakia=int(row["machine_id"].split("-")[-1]),
         timestamp=iso(utc(row["timestamp"])),
         tenperatura=sensor("process_temp_K", 273.15),
         giro_tenperatura=sensor("air_temp_K", 273.15),
@@ -94,6 +96,7 @@ def columns(rows):
 def window(as_of, desde=None, hasta=None):
     try:
         end = utc(hasta or as_of or datetime.now(UTC))
+        end - timedelta(days=185)  # all read windows must be representable
         start = utc(desde) if desde else end - timedelta(days=1)
         if not timedelta(0) < end - start <= timedelta(days=185):
             raise ValueError()
@@ -241,10 +244,36 @@ def create_read_router(
 ):
     router = APIRouter(prefix="/api")
 
-    def snapshot(as_of):
+    def snapshot(as_of, *, with_count=False):
         _, end = window(as_of)
         start = end - timedelta(days=185)
-        rows = load(current, scope, start, end)
+        if current is not None and hasattr(current, "snapshot"):
+            try:
+                result = current.snapshot(
+                    scope, start, end, include_event_count=with_count
+                )
+                rows = []
+                for row in result["rows"]:
+                    if (
+                        not compatible(row, scope)
+                        or not start <= utc(row["timestamp"]) < end
+                    ):
+                        raise ValueError("Unexpected snapshot scope")
+                    value = project(row).model_dump()
+                    value["scored_at"] = iso(utc(value["scored_at"]))
+                    rows.append(value)
+                event_count = result["event_count"]
+                if with_count and (type(event_count) is not int or event_count < 0):
+                    raise ValueError("Invalid exact event count")
+            except Exception:  # noqa: BLE001 -- adapters fail closed at HTTP boundary
+                raise HTTPException(
+                    503, "Read storage unavailable or incompatible"
+                ) from None
+        else:
+            rows = load(current, scope, start, end)
+            event_count = sum(
+                utc(r["timestamp"]) >= end - timedelta(days=1) for r in rows
+            )
         latest = {}
         for row in sorted(
             rows, key=lambda r: (-utc(r["timestamp"]).timestamp(), r["event_id"])
@@ -252,27 +281,28 @@ def create_read_router(
             latest.setdefault(row["id"], row)
         if len(latest) > 50:
             raise HTTPException(503, "Configured scope exceeds 50 machines")
-        return start, end, rows, [latest[k] for k in sorted(latest)]
+        return start, end, [latest[k] for k in sorted(latest)], event_count
 
     @router.get("/makinak", response_model=list[Machine])
     def machines(response: Response, as_of: str | None = None):
-        start, end, _rows, latest = snapshot(as_of)
+        start, end, latest, _count = snapshot(as_of)
         response.headers["X-CNC-As-Of"] = iso(end)
         response.headers["X-CNC-Lookback-Start"] = iso(start)
         return latest
 
     @router.get("/kpis", response_model=KPIs)
     def kpis(as_of: str | None = None):
-        start, end, rows, latest = snapshot(as_of)
+        start, end, latest, event_count = snapshot(as_of, with_count=True)
         temps = [r["tenperatura"] for r in latest if r["tenperatura"] is not None]
         critical = sum(r["alert_level"] == "CRITICA" for r in latest)
         counts = {
             kind: sum(r["machine_type"] == kind for r in latest)
             for kind in ("H", "M", "L")
         }
-        meta = metadata(scope, start, end, rows)
+        meta = metadata(scope, start, end, latest)
         meta.update(
             {
+                "coverage_basis": "latest_per_machine",
                 "event_window": {
                     "desde": iso(end - timedelta(days=1)),
                     "hasta": iso(end),
@@ -294,9 +324,7 @@ def create_read_router(
             akatsak=critical,
             motak=counts,
             tenperatura=sum(temps) / len(temps) if temps else None,
-            gertakariak=sum(
-                utc(r["timestamp"]) >= end - timedelta(days=1) for r in rows
-            ),
+            gertakariak=event_count,
             metadata=meta,
         )
 
@@ -324,7 +352,13 @@ def create_read_router(
         if cursor:
             try:
                 state = json.loads(base64.urlsafe_b64decode(cursor))
-                if state["id"] != id or state["scope"] != scope.model_dump():
+                if (
+                    not isinstance(state, dict)
+                    or not isinstance(state.get("start"), str)
+                    or not isinstance(state.get("end"), str)
+                    or state["id"] != id
+                    or state["scope"] != scope.model_dump()
+                ):
                     raise ValueError()
                 if not as_of and not hasta:
                     hasta = state["end"]
@@ -374,13 +408,14 @@ def create_read_router(
             month=month % 12 + 1,
             day=min(end.day, calendar.monthrange(month // 12, month % 12 + 1)[1]),
         )
+        all_rows = history_rows(id, six, end)
         result = {}
         for name, start, monthly in [
             ("astea", end - timedelta(days=7), False),
             ("hilabetea", end - timedelta(days=30), False),
             ("sei_hilabete", six, True),
         ]:
-            rows = history_rows(id, start, end)
+            rows = [r for r in all_rows if start <= utc(r["timestamp"]) < end]
             buckets = {}
             for row in rows:
                 stamp = utc(row["timestamp"]).replace(

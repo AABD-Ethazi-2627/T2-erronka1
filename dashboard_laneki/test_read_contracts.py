@@ -23,6 +23,7 @@ SENTINEL = {
     "score_semantics": "uncalibrated_current_state_score",
     "temporal_prediction_enabled": False,
     "failure_score": 0.123,
+    "risk_threshold": 0.5,
     "risk_alert": False,
     "alert_level": "OK",
 }
@@ -59,6 +60,8 @@ def evaluation_fixture():
 class ReadContracts(unittest.TestCase):
     def test_empty_single_full_nullable_and_provenance(self):
         self.assertEqual(validate_machines([]), [])
+        zero = {**SENTINEL, "id": "CNC-000", "zenbakia": 0}
+        self.assertEqual(validate_machines([zero]), [zero])
         self.assertEqual(validate_machines([SENTINEL]), [SENTINEL])
         self.assertEqual(gallery_machine(SENTINEL)["source"], SENTINEL["source"])
         row = {
@@ -128,6 +131,7 @@ class ReadContracts(unittest.TestCase):
             {"provenance": {}},
             {"model_artifact_sha256": None},
             {"threshold": float("nan")},
+            {"threshold": 0.7},
         ):
             with self.subTest(changes=changes), self.assertRaises(ValueError):
                 evaluation({**evaluation_fixture(), **changes}, SENTINEL)

@@ -22,7 +22,7 @@ class ReadSource(BaseModel):
 class Machine(BaseModel):
     model_config = ConfigDict(allow_inf_nan=False)
     id: str = Field(pattern=r"^CNC-[0-9]{3}$")
-    zenbakia: str
+    zenbakia: int = Field(ge=0, le=999)
     machine_type: Literal["H", "M", "L"] | None = None
     tenperatura: float | None
     giro_tenperatura: float | None

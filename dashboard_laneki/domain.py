@@ -43,8 +43,7 @@ def validate_machines(data):
             raise ValueError("Invalid machine identifier")
         n = int(row["id"][-3:])
         if (
-            n < 1
-            or type(row.get("zenbakia")) is not int
+            type(row.get("zenbakia")) is not int
             or row["zenbakia"] != n
             or row["id"] in seen
         ):

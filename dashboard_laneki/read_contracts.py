@@ -67,6 +67,11 @@ def evaluation(payload, machine):
     threshold = payload.get("threshold")
     if not finite(threshold) or not 0 <= threshold <= 1:
         raise ValueError("Atalase baliogabea")
+    if (
+        not finite(machine.get("risk_threshold"))
+        or threshold != machine["risk_threshold"]
+    ):
+        raise ValueError("Ebaluazioaren eta inferentziaren atalaseak ez datoz bat")
     matrix = payload.get("confusion_matrix")
     if (
         not isinstance(matrix, list)

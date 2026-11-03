@@ -106,7 +106,10 @@ class CanonicalAppTests(unittest.TestCase):
         self.addCleanup(os.environ.pop, "LANEKI_API_URL", None)
         payload = history_payload or history_fixture()
 
+        self.calls = []
+
         def get(url, **kwargs):
+            self.calls.append((url, kwargs))
             self.assertTrue(url.startswith("http://127.0.0.1:18271/api/"))
             if url.endswith("/makinak"):
                 data = rows
@@ -168,9 +171,37 @@ class CanonicalAppTests(unittest.TestCase):
             app.run()
             self.assert_clean(app)
             self.assertTrue(any(m.value == "Ez dago daturik" for m in app.metric))
+            self.assertNotIn("None °C", " ".join(m.value for m in app.markdown))
             if page == "Makinak":
                 app.button(key="machine_details").click().run()
                 self.assert_clean(app)
+
+    def test_shared_cutoff_visible_age_refresh_and_lazy_history(self):
+        from test_read_contracts import SENTINEL
+
+        app = self.api([SENTINEL])
+        cutoff = "2026-11-03T00:01:00Z"
+        app.session_state["read_as_of"] = cutoff
+        app.query_params["orria"] = "Makinak"
+        app.run()
+        self.assert_clean(app)
+        self.assertFalse(any("historikoa" in url for url, _ in self.calls))
+        for _, kwargs in self.calls:
+            self.assertEqual(kwargs["params"], {"as_of": cutoff})
+            self.assertEqual(kwargs["timeout"], (2, 20))
+        text = " ".join(m.value for m in app.markdown)
+        self.assertIn("Adina (s): 60", text)
+        self.assertIn(cutoff, text)
+        app.button(key="nav_Datuak").click().run()
+        self.assert_clean(app)
+        for url, kwargs in self.calls:
+            if not url.endswith("model-evaluation"):
+                self.assertEqual(kwargs["params"], {"as_of": cutoff})
+        app.session_state["history_cursor_CNC-004"] = "old-cutoff"
+        next(b for b in app.button if b.label == "Eguneratu").click().run()
+        self.assert_clean(app)
+        self.assertNotEqual(app.session_state["read_as_of"], cutoff)
+        self.assertNotIn("history_cursor_CNC-004", app.session_state)
 
     def test_empty_is_valid_duplicate_nan_are_degraded(self):
         from test_read_contracts import SENTINEL

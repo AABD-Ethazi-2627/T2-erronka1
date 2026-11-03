@@ -12,8 +12,7 @@ from orriak import makinak as makinak_orria
 from orriak.abisuak import abisuak_erakutsi
 from orriak.datuak import datuak_erakutsi, show_history
 from orriak.hasiera import hasiera_erakutsi
-from orriak.shared import measurements, provenance
-from read_contracts import history
+from orriak.shared import fmt, measurements, provenance
 
 FASTAPI_HELBIDEA = os.environ.get("LANEKI_API_URL", "http://127.0.0.1:8001/api").rstrip(
     "/"
@@ -58,10 +57,21 @@ if "menu_irekia" not in st.session_state:
 demo_datuak = demo_machines
 
 
+if "read_as_of" not in st.session_state:
+    st.session_state.read_as_of = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+READ_AS_OF = st.session_state.read_as_of
+
+
 @st.cache_data(ttl=5, show_spinner=False)
-def _kontsultatu(api_url, amaiera_puntua):
+def _kontsultatu(api_url, amaiera_puntua, as_of):
     try:
-        erantzuna = requests.get(f"{api_url}/{amaiera_puntua}", timeout=0.5)
+        erantzuna = requests.get(
+            f"{api_url}/{amaiera_puntua}",
+            timeout=(2, 20),
+            params={"as_of": as_of}
+            if amaiera_puntua != "model-evaluation" and "cursor=" not in amaiera_puntua
+            else None,
+        )
         erantzuna.raise_for_status()
         return erantzuna.json()
     except (requests.RequestException, ValueError):
@@ -69,10 +79,18 @@ def _kontsultatu(api_url, amaiera_puntua):
 
 
 def kontsultatu(endpoint):
-    return _kontsultatu(FASTAPI_HELBIDEA, endpoint)
+    return _kontsultatu(FASTAPI_HELBIDEA, endpoint, READ_AS_OF)
 
 
-kontsultatu.clear = _kontsultatu.clear
+def refresh_reads():
+    _kontsultatu.clear()
+    st.session_state.pop("read_as_of", None)
+    for key in list(st.session_state):
+        if key.startswith("history_cursor_"):
+            st.session_state.pop(key, None)
+
+
+kontsultatu.clear = refresh_reads
 
 
 def makinak_lortu():
@@ -83,15 +101,20 @@ def kpiak_lortu(makinak):
     return shared_kpis(makinak)
 
 
-def historikoa_lortu(kodea, makina):
-    payload = kontsultatu(f"historikoa/{kodea}") if DATU_MODUA == "api" else None
-    try:
-        return history(payload)
-    except (TypeError, ValueError, OverflowError):
-        return pd.DataFrame()
-
-
 makinak, iturri_egoera = makinak_lortu()
+if iturri_egoera == "api":
+    for makina in makinak:
+        makina["as_of"] = READ_AS_OF
+        try:
+            stamp = datetime.fromisoformat(makina["timestamp"])
+            makina["age_seconds"] = (
+                datetime.fromisoformat(READ_AS_OF) - stamp
+            ).total_seconds()
+        except (KeyError, TypeError, ValueError):
+            makina["age_seconds"] = None
+    st.caption(
+        f"API kontsulten UTC ebaketa: {READ_AS_OF} · ES irakurketak ez dira transakzio bakarra."
+    )
 st.warning(
     "PROTOTIPOA · "
     + (
@@ -139,7 +162,6 @@ st.session_state.hautatutako_makina = kodea
 st.session_state.azken_url_makina = eskatua
 uneko_makina = next(m for m in makinak if m["id"] == kodea)
 provenance(uneko_makina)
-historikoa = historikoa_lortu(kodea, uneko_makina)
 orain = datetime.now(UTC)
 data = orain.strftime("%Y-%m-%d")
 ordua = orain.strftime("%H:%M UTC")
@@ -610,7 +632,7 @@ with goiburu1:
 with data_zutabea:
     st.markdown(
         f'<div class="header-datetime">'
-        f"<span>📅 {data}</span><span>🕒 {ordua}</span>"
+        f"<span>Interfazea: {data}</span><span>🕒 {ordua}</span>"
         f"</div>",
         unsafe_allow_html=True,
     )
@@ -721,14 +743,14 @@ def kpi_txartelak():
         <div class="kpi-card kpi-green">
             <div class="kpi-heading">
                 <span class="kpi-icon">{ikonoak["tenperatura"]}</span>
-                <span>Iturriaren tenperatura</span>
+                <span>Prozesu-tenperatura</span>
             </div>
             <div class="kpi-body">
                 <span class="kpi-number">
-                    {kpis["tenperatura"]} °C
+                    {fmt(kpis["tenperatura"])}{" °C" if kpis["tenperatura"] is not None else ""}
                 </span>
                 <span class="kpi-description">
-                    Batez besteko tenperatura
+                    Batez besteko prozesu-tenperatura
                 </span>
             </div>
         </div>
@@ -847,7 +869,7 @@ def egoera_zerbitzuak():
         <strong>🛠 Zerbitzuen egoera</strong>
         <span>
             ● {testua} · {len(makinak)} CNC
-            {kpis["akatsak"]} CRITICA inferitu · {ordua}
+            {kpis["akatsak"]} CRITICA inferitu · UTC ebaketa: {READ_AS_OF}
         </span>
     </div>
     """,

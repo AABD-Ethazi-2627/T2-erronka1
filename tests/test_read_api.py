@@ -442,3 +442,85 @@ def test_mixed_ledger_telemetry_is_not_a_model_scoped_point(tmp_path):
         for p in (tmp_path / "prediction").rglob("*.parquet")
         if p.stem == result["metadata"]["events"][0]["event_key"]
     )
+
+
+def test_api_snapshot_is_accepted_by_dashboard_domain():
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "dashboard_domain_interop", Path("dashboard_laneki/domain.py")
+    )
+    domain = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(domain)
+    response = get(client([BASE]), "makinak")
+    rows = domain.validate_machines(response.json())
+    assert rows[0]["zenbakia"] == 49
+    assert f"{rows[0]['zenbakia']:03}" == "049"
+    assert rows[0]["event_id"] == BASE["event_id"]
+
+
+def test_archive_releases_sqlite_snapshot_before_object_validation(
+    tmp_path, monkeypatch
+):
+    from scoring import read_storage
+
+    reader = archive_at(tmp_path, [BASE])
+    original = read_storage.digest
+    written = False
+
+    def digest_with_writer(raw):
+        nonlocal written
+        if not written:
+            written = True
+            consume(
+                tmp_path,
+                [
+                    (
+                        "concurrent",
+                        "prediction",
+                        json.dumps({**BASE, "event_id": "c" * 64}).encode(),
+                    )
+                ],
+                lambda: None,
+            )
+        return original(raw)
+
+    monkeypatch.setattr(read_storage, "digest", digest_with_writer)
+    result = get(client(archive=reader), "historikoa/CNC-049")
+    assert result.status_code == 200
+    assert result.json()["metadata"]["count"] == 1
+    assert (
+        get(client(archive=reader), "historikoa/CNC-049").json()["metadata"]["count"]
+        == 2
+    )
+
+
+@pytest.mark.parametrize(
+    "endpoint", ["makinak", "kpis", "historikoa/CNC-049/periodoak"]
+)
+def test_early_cutoff_is_bounded_422(endpoint):
+    assert (
+        get(client([BASE]), endpoint, as_of="0001-01-02T00:00:00Z").status_code == 422
+    )
+
+
+def test_cursor_nonstring_bounds_is_422():
+    import base64
+
+    cursor = base64.urlsafe_b64encode(
+        json.dumps(
+            {"id": "CNC-049", "scope": SCOPE.model_dump(), "start": {}, "end": END}
+        ).encode()
+    ).decode()
+    assert get(client(), "historikoa/CNC-049", cursor=cursor).status_code == 422
+
+
+def test_periods_share_one_committed_archive_snapshot():
+    from unittest.mock import Mock
+
+    reader = Reader([BASE])
+    reader.rows = Mock(wraps=reader.rows)
+    assert (
+        get(client(archive=reader), "historikoa/CNC-049/periodoak").status_code == 200
+    )
+    assert reader.rows.call_count == 1

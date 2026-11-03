@@ -103,3 +103,27 @@ then writes `canonical.json`, `get-snapshot.json`, `get-history.json`, `es-live.
 and `integration-reconciliation.json`. A missing/different stage fails this gate.
 UI remains pending; `view` is a separate parent browser session. The worker and API
 manifest bytes must both match the run's reserved manifest SHA before activation.
+
+## Repeat the bounded browser rehearsal
+
+After a successful `integration_fixture` run, in separate local terminals:
+
+```sh
+python -m scripts.integration_preview --fixture /absolute/new/fixture-run --port 18271
+LANEKI_MODE=api LANEKI_API_URL=http://127.0.0.1:18271/api python -m streamlit run dashboard_laneki/app.py --server.address=127.0.0.1 --server.port=18501
+```
+
+Open http://127.0.0.1:18501, check Hasiera, Makinak and its details dialog,
+Datuak (including six months), Abisuak, and the refresh button. The preview serves
+actual read routes and the pristine CG15 archive over HTTP; Elasticsearch remains
+a frozen double and the canonical result was produced with synthetic models.
+It exposes no POST inference route. It must never be used as live acceptance.
+The event timestamp is frozen in the fixture: an empty last-day history is correct;
+select the six-month period to inspect it while it remains in that window.
+
+The parent attempted browser verification on 2026-11-03. API logs confirmed200
+for snapshot/KPI/history, but preview snapshot timed out twice (15000ms) and the
+alternate browser reported `Browser is not available: iab`. No screenshot or
+four-page visual acceptance was obtained. The tab and both local servers were
+closed. AppTest covers four pages/modal, explicit nulls, shared cutoff, visible
+age, refresh invalidation and incompatible evaluation thresholds.
