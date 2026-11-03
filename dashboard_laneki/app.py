@@ -58,11 +58,6 @@ if "menu_irekia" not in st.session_state:
 demo_datuak = demo_machines
 
 
-if "read_as_of" not in st.session_state:
-    st.session_state.read_as_of = datetime.now(UTC).isoformat().replace("+00:00", "Z")
-READ_AS_OF = st.session_state.read_as_of
-
-
 @st.cache_data(ttl=5, show_spinner=False)
 def _kontsultatu(api_url, amaiera_puntua, as_of):
     try:
@@ -103,7 +98,10 @@ def live_refresh_control():
     st.session_state.setdefault("live_last_refresh", now)
     if enabled and now - previous >= 5:
         refresh_reads()
-        st.rerun(scope="app")
+        # A full script run must consume pending widget clicks. Only a fragment
+        # rerun needs to request the rest of the page; inline runs continue below.
+        if not st.session_state.get("live_inline", False):
+            st.rerun(scope="app")
     st.caption(
         "API kontsulta automatikoak · behaketaren adina ikusgai. "
         "Historia orrikatzeko edo xehetasunak aztertzeko, pausatu."
@@ -114,7 +112,17 @@ def live_refresh_control():
 
 # Register before empty/error stops so polling can recover after an API outage.
 if DATU_MODUA == "api":
-    live_refresh_control()
+    st.session_state.live_inline = True
+    try:
+        live_refresh_control()
+    finally:
+        st.session_state.live_inline = False
+
+# Inline refresh may invalidate the previous cutoff. Bind it after the control,
+# before any data read, so every reader in this run uses the renewed value.
+if "read_as_of" not in st.session_state:
+    st.session_state.read_as_of = datetime.now(UTC).isoformat().replace("+00:00", "Z")
+READ_AS_OF = st.session_state.read_as_of
 
 
 def makinak_lortu():

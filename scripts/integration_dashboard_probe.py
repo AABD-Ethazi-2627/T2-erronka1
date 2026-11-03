@@ -4,21 +4,33 @@ import argparse
 import json
 import os
 from pathlib import Path
-from urllib.parse import urlsplit
+
+from scripts.integration_local import local_url
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def unavailable_report(app, component):
+    """Check display semantics only; do not infer the upstream HTTP status."""
+    assert component in {"ES", "API"}
+    assert not app.exception
+    assert any("DEGRADATUTA" in e.value for e in app.error)
+    assert not app.metric
+    assert app.toggle(key="live_updates").value
+    return {
+        "status": "passed",
+        "transport": "real_loopback_HTTP",
+        "ui": "Streamlit_AppTest",
+        "browser": False,
+        "unavailable_component": component,
+        "degraded_without_demo": True,
+    }
+
+
 def run(api_url, evidence, output, unavailable=None):
+    api_url = local_url(api_url)
     from streamlit.testing.v1 import AppTest, app_test
 
-    address = urlsplit(api_url)
-    if (
-        address.scheme != "http"
-        or address.hostname not in {"127.0.0.1", "localhost", "::1"}
-        or not address.port
-    ):
-        raise ValueError("Explicit loopback API required")
     evidence, output = Path(evidence), Path(output)
     initial = json.loads((evidence / "0-snapshot.json").read_text())[0]
     latest = json.loads((evidence / "1-snapshot.json").read_text())[0]
@@ -54,18 +66,7 @@ def run(api_url, evidence, output, unavailable=None):
     try:
         app.run()
         if unavailable:
-            assert not app.exception
-            assert any("DEGRADATUTA" in e.value for e in app.error)
-            assert not app.metric
-            assert app.toggle(key="live_updates").value
-            report = {
-                "status": "passed",
-                "transport": "real_loopback_HTTP",
-                "ui": "Streamlit_AppTest",
-                "browser": False,
-                "unavailable_component": unavailable,
-                "degraded_without_demo": True,
-            }
+            report = unavailable_report(app, unavailable)
             with output.open("x") as handle:
                 json.dump(report, handle, indent=2)
             return report

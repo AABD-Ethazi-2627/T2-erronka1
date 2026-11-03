@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 from read_contracts import COLUMNS, evaluation, history
 
-from orriak.shared import measurements
+from orriak.shared import measurements, pause_live_reads
 
 
 def show_history(payload, aggregate=False):
@@ -71,10 +71,14 @@ def datuak_erakutsi(machine, fetch, mode):
             next_cursor = (
                 payload.get("next_cursor") if isinstance(payload, dict) else None
             )
-            if next_cursor and st.button("Hurrengo orrialdea"):
+            if next_cursor or cursor:
+                st.caption("Orrialdez aldatzean zuzeneko eguneratzea pausatzen da.")
+            if next_cursor and st.button(
+                "Hurrengo orrialdea", on_click=pause_live_reads
+            ):
                 st.session_state[cursor_key] = next_cursor
                 st.rerun()
-            if cursor and st.button("Lehen orrialdea"):
+            if cursor and st.button("Lehen orrialdea", on_click=pause_live_reads):
                 st.session_state.pop(cursor_key, None)
                 st.rerun()
         else:

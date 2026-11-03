@@ -42,3 +42,9 @@ def provenance(machine):
         st.write(label + ":", fmt(machine.get(key)))
     with st.expander("Jatorria eta identitatea"):
         st.json(machine)
+
+
+def pause_live_reads():
+    """Widget callback runs before app widgets, preserving inspection cutoffs."""
+    if "live_updates" in st.session_state:
+        st.session_state.live_updates = False

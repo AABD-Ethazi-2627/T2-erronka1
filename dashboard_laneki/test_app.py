@@ -241,6 +241,22 @@ class CanonicalAppTests(unittest.TestCase):
         app.run()
         self.assert_sentinel(app)
 
+    def test_due_refresh_preserves_navigation_and_details_clicks(self):
+        from test_read_contracts import SENTINEL
+
+        app = self.api([SENTINEL]).run()
+        app.session_state["live_last_refresh"] = 0
+        app.button(key="nav_Makinak").click().run()
+        self.assert_clean(app)
+        self.assertEqual(app.session_state["orria"], "Makinak")
+        cutoff = app.session_state["read_as_of"]
+        app.session_state["live_last_refresh"] = 0
+        app.button(key="machine_details").click().run()
+        self.assert_clean(app)
+        self.assertFalse(app.toggle(key="live_updates").value)
+        self.assertEqual(app.session_state["read_as_of"], cutoff)
+        self.assertTrue(app.get("dialog"))
+
     def test_empty_is_valid_duplicate_nan_are_degraded(self):
         from test_read_contracts import SENTINEL
 
@@ -282,8 +298,15 @@ class CanonicalAppTests(unittest.TestCase):
         app.run()
         self.assert_clean(app)
         self.assertTrue(any("Orrialde partziala" in w.value for w in app.warning))
+        cutoff = app.session_state["read_as_of"]
+        app.session_state["live_last_refresh"] = 0
         next(b for b in app.button if b.label == "Hurrengo orrialdea").click().run()
         self.assert_clean(app)
+        self.assertEqual(app.session_state["history_cursor_CNC-004"], "opaque-token")
+        self.assertFalse(app.toggle(key="live_updates").value)
+        self.assertEqual(app.session_state["read_as_of"], cutoff)
+        app.session_state["live_last_refresh"] = 0
+        app.run()
         self.assertEqual(app.session_state["history_cursor_CNC-004"], "opaque-token")
 
     def test_invalid_evaluation_does_not_render_matrix(self):

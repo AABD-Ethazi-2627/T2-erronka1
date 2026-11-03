@@ -7,7 +7,7 @@ from pathlib import Path
 import streamlit as st
 from domain import gallery_machine
 
-from orriak.shared import fmt, measurements, provenance
+from orriak.shared import fmt, measurements, pause_live_reads, provenance
 
 
 def _estiloak_txertatu() -> None:
@@ -1300,6 +1300,6 @@ def makinak_erakutsi(makinak, uneko_makina, **kwargs):
         st.subheader(uneko_makina["id"])
         measurements(uneko_makina)
         st.write("Kokapena:", uneko_makina.get("kokapena") or "Ez dago daturik")
-        if st.button("Xehetasunak", key="machine_details"):
+        if st.button("Xehetasunak", key="machine_details", on_click=pause_live_reads):
             _makina_xehetasunak_modal(uneko_makina)
         provenance(uneko_makina)

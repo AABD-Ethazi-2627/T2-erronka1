@@ -90,3 +90,8 @@ queries may delay refresh. Observation time, cutoff and data age remain visible.
 Local AppTest verifies changed sensor values, pause, empty source and outage/recovery.
 Browser timer behavior and complete live pipeline latency still require acceptance.
 Work after this follow-up is local-first; no new push/PR is part of this phase.
+
+Review correction: inline refresh continues the current script so pending clicks
+are processed. Only independent fragment reruns request a full app rerun. Details
+and pagination buttons automatically pause live reads before changing view, keeping
+the cutoff stable; the toggle resumes polling. The corrected suite passes 28 tests.

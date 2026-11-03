@@ -14,32 +14,16 @@ import time
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
-from urllib.parse import urlsplit
 
 import httpx
 
 from scripts.archive_consumer import consume, event_key
 from scripts.integration_fixture import source_identity
+from scripts.integration_local import local_url
 from scripts.integration_verify import same_event
 from scripts.run_automatic_graph import check_es
 
 ROOT = Path(__file__).resolve().parents[1]
-
-
-def local_url(value):
-    parsed = urlsplit(value)
-    if (
-        parsed.scheme != "http"
-        or parsed.hostname not in {"127.0.0.1", "localhost", "::1"}
-        or not parsed.port
-        or parsed.username
-        or parsed.password
-        or parsed.query
-        or parsed.fragment
-        or parsed.path not in {"", "/"}
-    ):
-        raise ValueError("An explicit owned loopback HTTP endpoint is required")
-    return value.rstrip("/")
 
 
 def prepare_es(client, url, index):
@@ -228,10 +212,17 @@ def run(output, manifest_path, es_url):
                     hit.raise_for_status()
                     selected = snap.json()[0]
                     matched = next(
-                        row
-                        for row in history.json()["metadata"]["events"]
-                        if row["event_key"] == key
+                        (
+                            row
+                            for row in history.json()["metadata"]["events"]
+                            if row["event_key"] == key
+                        ),
+                        None,
                     )
+                    if matched is None:
+                        raise ValueError(
+                            "Canonical event missing from committed history: " + key
+                        )
                     reconciliation = same_event(
                         raw, output / "archive", hit.json(), selected, matched
                     )

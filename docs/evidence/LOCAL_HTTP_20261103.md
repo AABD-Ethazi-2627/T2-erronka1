@@ -20,7 +20,8 @@ to preserve the actual HTTP response bytes before run-02.
   `3a78dff85e705b57c5d5e11c84f5a020f797ed70b59f4486671152e71034e6f9`.
   This bundle is not an approved industrial model.
 - Two fresh telemetry samples, CNC-004, 1801 then 1902 RPM. Byte-identical POST
-  replay; real CG15 receipt/Parquet and duplicate delivery; real Elasticsearch
+  replay; real CG15 receipt/Parquet and repeated `consume()` call by the harness
+  (not Kafka redelivery); real Elasticsearch
   create-conflict replay; canonical bytes/CG15/ES/GET identity reconciliation.
 - Actual ES PIT/composite reads and exact KPI count: one machine, two events after
   replay, still two events after ES restart. No ES transport or model doubles.
@@ -29,7 +30,7 @@ to preserve the actual HTTP response bytes before run-02.
   modal preserve the same event key, 21°C process temperature, 5 Nm torque and
   7 minutes tool wear. Timer elapsed state is triggered explicitly, not observed
   in a browser over wall-clock time.
-- `dashboard-es-down.json`: own ES stopped, API returns unavailable, UI degraded
+- `dashboard-es-down.json`: own ES stopped, UI degraded
   without demo. `dashboard-recovered.json`: restart preserves data and restores
   all four pages/modal. First bounded readiness attempt timed out; later real
   readiness and recovery passed. No claim of fast restart or same-session browser
@@ -64,3 +65,26 @@ Still unverified: Filebeat/Kafka/NiFi traversal, final image builds/scans and
 read-only container RSS/concurrency, browser layout and real timer acceptance,
 SMB access, independently bound offline evaluation, and human rubric acceptance.
 The bounded local path is verified; complete project integration is not claimed.
+
+## Review corrections and evidence limits
+
+The review at `6b1d6cd` reproduced a lost navigation click when an inline refresh
+interrupted the full script before processing buttons. The correction allows
+inline refresh to renew the cutoff and continue; only fragment reruns request a
+full app rerun. Opening details or paging history pauses live reads in a widget
+callback before the page runs. Regression checks cover due-refresh navigation,
+modal opening and pagination with a stable cutoff. The corrected dashboard suite
+passes 28 tests; this is a local AppTest result, not a browser timer observation.
+
+The saved outage UI result does not establish whether the API returned HTTP 503
+or the client encountered another request error. The interactive API log was not
+retained. `run-02/result.json` honestly records `6c5a056` with a dirty tree. The
+five hashes in `tested-source-hashes.json` were captured after execution and match
+`6b1d6cd`, but do not prove the exact bytes executed earlier. Historical artifacts
+remain unchanged; do not retrofit a clean source identity onto them. Later code
+corrections are not implicitly covered by that earlier live rehearsal.
+
+The UI probe now shares the same dependency-free loopback URL validator as the
+HTTP runner, including credential/path/query rejection. Unit checks cover its
+outage assertions without services. Missing history identity now produces an
+explicit error instead of `StopIteration`.

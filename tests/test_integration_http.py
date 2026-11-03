@@ -2,10 +2,14 @@
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import Mock
 
 import httpx
 import pytest
 
+from scripts.integration_dashboard_probe import run as probe_run
+from scripts.integration_dashboard_probe import unavailable_report
 from scripts.integration_http import local_url, prepare_es
 
 
@@ -30,6 +34,27 @@ def test_explicit_loopback(url):
 def test_reject_shared_or_ambiguous_endpoints(url):
     with pytest.raises(ValueError):
         local_url(url)
+    # Validation happens before Streamlit imports, file reads or any requests.
+    with pytest.raises(ValueError):
+        probe_run(url, "unused", "unused")
+
+
+@pytest.mark.parametrize("component", ["ES", "API"])
+def test_outage_display_check_without_services(component):
+    app = SimpleNamespace(
+        exception=[],
+        error=[SimpleNamespace(value="DEGRADATUTA")],
+        metric=[],
+        toggle=Mock(return_value=SimpleNamespace(value=True)),
+    )
+    assert unavailable_report(app, component)["degraded_without_demo"]
+    app.metric = [SimpleNamespace(value="1801")]
+    with pytest.raises(AssertionError):
+        unavailable_report(app, component)
+    app.metric = []
+    app.error = []
+    with pytest.raises(AssertionError):
+        unavailable_report(app, component)
 
 
 def test_fresh_index_uses_pinned_guard_and_mapping(monkeypatch):
