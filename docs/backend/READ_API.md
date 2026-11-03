@@ -42,7 +42,8 @@ identities and >50 machines return 503. Empty ES returns an empty list.
   the snapshot interval without changing the list contract. Pass the same explicit
   as_of to KPI and snapshot to align cutoffs; separate ES PITs are not a cross-request
   transaction, so late ingestion can change their contents. The dashboard fixes
-  a shared as_of per refresh, displays the cutoff and per-observation age, and
+  a shared as_of per refresh (automatic best-effort polling every 5 seconds in API
+  mode, with pause control), displays the cutoff and per-observation age, and
   uses a 20-second read timeout (2-second connect timeout). History is requested
   by the relevant view rather than eagerly for every page.
 - `GET /api/kpis?as_of=...`: exact deduplicated events in `[as_of-24h,as_of)`,

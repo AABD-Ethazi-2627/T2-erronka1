@@ -1,9 +1,13 @@
 # Bounded integration evidence, 2026-11-03
 
-Current assembled source: `9aaeb8cb67401b84ce86c4118ac2fe6c5a1972f2`.
+For the later real local HTTP/ES/CG15/dashboard rehearsal and automatic refresh,
+see [LOCAL_HTTP_20261103.md](../LOCAL_HTTP_20261103.md). The results and ZIP below
+are the earlier immutable fixture/source snapshot, not the latest local source.
+
+Assembled source for this snapshot: `9aaeb8cb67401b84ce86c4118ac2fe6c5a1972f2`.
 Previous complete suite: 798 tests + 374 subtests pass, 4 skipped.
 After the final low-severity corrections, the 63 affected tests pass. Dashboard: 26 AppTests previously passed;
-no UI application change in this follow-up. Current ZIP: `integration-final.zip`,
+no UI application change in that follow-up. Snapshot ZIP: `integration-final.zip`,
 417 members, SHA-256 `dd56e56c0ebf51dcaa28e4f16f6ba5770a2e2aafc434ea6ac7c81e2263a38502`.
 See `bundle-verification.json` for CRC/hash/restore results and source identity.
 Full extraction verifies 23 local Docker COPY inputs, image inventory and refreshed

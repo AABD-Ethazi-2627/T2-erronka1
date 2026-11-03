@@ -95,6 +95,11 @@ no duplicate lock or service-specific dependency export is added here.
 
 ## Remaining acceptance gates
 
+The later bounded real HTTP/ES/CG15 rehearsal is documented in
+[LOCAL_HTTP.md](LOCAL_HTTP.md) and [its dated evidence](../evidence/LOCAL_HTTP_20261103.md).
+It verifies that subset and AppTest data display, including component outages;
+the full image/pipeline/browser gates below remain distinct.
+
 The generated configuration is a candidate until actually exercised on sufficient
 resources. Full image build/import/endpoint/RSS validation, NiFi interpreter execution,
 Filebeat→Kafka→worker→ES→GET reconciliation, actual read-only mount concurrency,

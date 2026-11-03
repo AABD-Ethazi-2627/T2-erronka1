@@ -1,6 +1,7 @@
 import base64
 import importlib
 import os
+import time
 from datetime import UTC, datetime
 
 import pandas as pd
@@ -85,12 +86,35 @@ def kontsultatu(endpoint):
 def refresh_reads():
     _kontsultatu.clear()
     st.session_state.pop("read_as_of", None)
+    st.session_state.live_last_refresh = time.monotonic()
     for key in list(st.session_state):
         if key.startswith("history_cursor_"):
             st.session_state.pop(key, None)
 
 
 kontsultatu.clear = refresh_reads
+
+
+@st.fragment(run_every=5)
+def live_refresh_control():
+    enabled = st.toggle("Zuzeneko eguneratzea · 5 s", value=True, key="live_updates")
+    now = time.monotonic()
+    previous = st.session_state.get("live_last_refresh", now)
+    st.session_state.setdefault("live_last_refresh", now)
+    if enabled and now - previous >= 5:
+        refresh_reads()
+        st.rerun(scope="app")
+    st.caption(
+        "API kontsulta automatikoak · behaketaren adina ikusgai. "
+        "Historia orrikatzeko edo xehetasunak aztertzeko, pausatu."
+        if enabled
+        else "PAUSATUTA · UTC ebaketa mantentzen da."
+    )
+
+
+# Register before empty/error stops so polling can recover after an API outage.
+if DATU_MODUA == "api":
+    live_refresh_control()
 
 
 def makinak_lortu():
@@ -135,7 +159,7 @@ if not makinak:
     st.stop()
 kpis = kpiak_lortu(makinak)
 st.caption(
-    "5 segundoko cachea · ez da auto-freskatzea. Eguneratu botoiak kontsulta berritzen du."
+    "5 segundoko cachea · Eguneratu botoiak UTC ebaketa eta kontsultak berritzen ditu."
 )
 st.button("Eguneratu", on_click=kontsultatu.clear)
 if DATU_MODUA == "api":

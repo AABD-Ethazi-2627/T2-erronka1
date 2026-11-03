@@ -92,6 +92,8 @@ def build(output, evidence):
                 "vendor/kafka_python-3.0.11+cncguard.2-py3-none-any.whl",
                 "pyproject.toml",
                 "docs/integration/README.md",
+                "docs/integration/LOCAL_HTTP.md",
+                "docs/evidence/LOCAL_HTTP_20261103.md",
                 "docs/integration/issues.json",
                 "docs/backend/READ_API.md",
                 "dashboard_laneki/INTEGRATION.md",

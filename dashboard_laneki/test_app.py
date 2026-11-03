@@ -110,6 +110,8 @@ class CanonicalAppTests(unittest.TestCase):
 
         def get(url, **kwargs):
             self.calls.append((url, kwargs))
+            if getattr(self, "api_down", False):
+                raise requests.ConnectionError("fixture API outage")
             self.assertTrue(url.startswith("http://127.0.0.1:18271/api/"))
             if url.endswith("/makinak"):
                 data = rows
@@ -202,6 +204,42 @@ class CanonicalAppTests(unittest.TestCase):
         self.assert_clean(app)
         self.assertNotEqual(app.session_state["read_as_of"], cutoff)
         self.assertNotIn("history_cursor_CNC-004", app.session_state)
+
+    def test_live_poll_updates_values_pause_and_empty_recovery(self):
+        from test_read_contracts import SENTINEL
+
+        rows = [dict(SENTINEL)]
+        app = self.api(rows).run()
+        self.assert_clean(app)
+        self.assertTrue(app.toggle(key="live_updates").value)
+        cutoff = app.session_state["read_as_of"]
+        rows[0] = {**SENTINEL, "rpm": 1902}
+        app.session_state["live_last_refresh"] = 0
+        app.run()
+        self.assert_clean(app)
+        self.assertNotEqual(app.session_state["read_as_of"], cutoff)
+        self.assertTrue(
+            any(m.label == "Abiadura (RPM)" and m.value == "1902" for m in app.metric)
+        )
+        app.toggle(key="live_updates").set_value(False).run()
+        cutoff = app.session_state["read_as_of"]
+        app.session_state["live_last_refresh"] = 0
+        app.run()
+        self.assertEqual(app.session_state["read_as_of"], cutoff)
+        rows.clear()
+        app.toggle(key="live_updates").set_value(True).run()
+        self.assert_clean(app)
+        self.assertTrue(any("0 makina" in m.value for m in app.info))
+        rows.append(dict(SENTINEL))
+        self.api_down = True
+        app.session_state["live_last_refresh"] = 0
+        app.run()
+        self.assert_clean(app)
+        self.assertTrue(any("DEGRADATUTA" in m.value for m in app.error))
+        self.api_down = False
+        app.session_state["live_last_refresh"] = 0
+        app.run()
+        self.assert_sentinel(app)
 
     def test_empty_is_valid_duplicate_nan_are_degraded(self):
         from test_read_contracts import SENTINEL

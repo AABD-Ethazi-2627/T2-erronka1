@@ -72,3 +72,21 @@ explanations about forecasting. Fixtures are declared, not industrial observatio
 These are local fixture/AppTest checks. Browser rendering, keyboard/mobile layout,
 real API/ES/CG15 alignment and cross-layer same-event reconciliation remain parent
 integration gates; no visual/browser or live pipeline acceptance is claimed here.
+
+## Local live refresh follow-up
+
+Remote rechecked: `origin/feat/dashboard` still points to
+`04d1bb12f0c0c156457ac346ced9385971e17a1a`; stylesheet is identical. The collaborator's
+presentation was selectively reconciled with canonical current-state semantics.
+
+API mode now enables a Streamlit timer fragment every five seconds. It renews the
+shared UTC cutoff and cached reads, invalidates historical pagination, and reruns
+the page. Polling is registered before empty/error stops to allow automatic recovery.
+The live toggle pauses the timer's reads for inspecting history/details; manual
+refresh remains available. This is best-effort periodic HTTP polling while the
+session is active, not a five-second ingestion SLA or websocket delivery. Long
+queries may delay refresh. Observation time, cutoff and data age remain visible.
+
+Local AppTest verifies changed sensor values, pause, empty source and outage/recovery.
+Browser timer behavior and complete live pipeline latency still require acceptance.
+Work after this follow-up is local-first; no new push/PR is part of this phase.
