@@ -53,6 +53,10 @@ def build(output, evidence):
         p = Path(name)
         if name in {
             "uv.lock",
+            "README.md",
+            "vendor/README.md",
+            "vendor/kafka-python-provenance.json",
+            "vendor/kafka_python-3.0.11+cncguard.2-py3-none-any.whl",
             "pyproject.toml",
             "docs/integration/README.md",
             "docs/integration/issues.json",

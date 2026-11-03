@@ -1,15 +1,73 @@
 """Opt-in CG32 extension. Never use against shared services; budgets unchanged."""
 
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
 
 from scripts import cg32_lab as lab
-from scripts.integration_verify import check_compose, check_wiring
+from scripts.integration_verify import check_compose, check_wiring, same_event
 
 
 class IntegrationLab(lab.Lab):
+    def measure(self, args, run_dir, lines, graph, processors, record=None):
+        result = super().measure(args, run_dir, lines, graph, processors, record=record)
+        # Ingestion has drained; capture the live GET boundary before finalization
+        # stops this run's API. A missing stage fails the run, never becomes demo.
+        port = self.compose("port", "api", "8000", run=run_dir.name).stdout.strip()
+        end = datetime.now(UTC).isoformat()
+        with httpx.Client(timeout=30, trust_env=False) as client:
+            client.post(
+                self.state["es_url"] + "/" + graph["es_index"] + "/_refresh"
+            ).raise_for_status()
+            snapshot = client.get(
+                "http://" + port + "/api/makinak", params={"as_of": end}
+            )
+            snapshot.raise_for_status()
+            rows = snapshot.json()
+            if not rows:
+                raise ValueError("Integration snapshot empty after own batch")
+            selected = rows[0]
+            history = client.get(
+                "http://" + port + "/api/historikoa/" + selected["id"],
+                params={"hasta": end},
+            )
+            history.raise_for_status()
+            event = next(
+                row
+                for row in history.json()["metadata"]["events"]
+                if row["event_key"] == selected["event_key"]
+            )
+            es = client.get(
+                self.state["es_url"]
+                + "/"
+                + graph["es_index"]
+                + "/_doc/"
+                + selected["event_key"]
+            )
+            es.raise_for_status()
+        raw = (
+            Path(graph["root"])
+            / "outbox/prediction"
+            / (selected["event_key"] + ".json")
+        ).read_bytes()
+        reconciled = same_event(
+            raw, Path(graph["root"]) / "archive", es.json(), selected, event
+        )
+        for name, content in (
+            ("canonical.json", raw),
+            ("get-snapshot.json", snapshot.content),
+            ("get-history.json", history.content),
+            ("es-live.json", es.content),
+        ):
+            (run_dir / name).write_bytes(content)
+        (run_dir / "integration-reconciliation.json").write_text(
+            json.dumps(reconciled, indent=2)
+        )
+        result["integration_reconciliation"] = reconciled
+        return result
+
     def compose(self, *args, run=None, bundle=None, check=True):
         if args[-1:] == ("stop",) and not run and self.state.get("runs"):
             run = self.state["runs"][-1]
@@ -84,6 +142,13 @@ class IntegrationLab(lab.Lab):
                 "profiles": ["dashboard"],
             }
             if args[:2] == ("up", "-d") and "api" in args:
+                if bundle is None or lab.sha_file(
+                    Path(bundle) / "manifest.json"
+                ) != lab.sha_file(graph["manifest"]):
+                    raise ValueError("API bundle and worker manifest mismatch")
+                original = json.loads((directory / "run.json").read_text())
+                if lab.sha_file(graph["manifest"]) != original["manifest_sha256"]:
+                    raise ValueError("Worker manifest changed after run reservation")
                 Path(graph["root"], "archive").mkdir(exist_ok=True)
                 result = lab.sh(
                     "docker",

@@ -70,6 +70,24 @@ def test_fixture_and_tampered_same_event(tmp_path):
     assert len(result["scenarios"]) == 6
     assert result["reconciliation_before_corruption"]["same_event_storage_get"]
     assert result["reconciliation_before_corruption"]["ui"] == "pending_browser"
+    raw = (root / "canonical.json").read_bytes()
+    es = json.loads((root / "es-double.json").read_text())
+    snapshot = json.loads((root / "get-snapshot.json").read_text())[0]
+    history = json.loads((root / "get-history.json").read_text())["metadata"]["events"][
+        0
+    ]
+    assert same_event(raw, root / "pristine-archive", es, snapshot, history)[
+        "same_event_storage_get"
+    ]
+    for field in ("event_key", "rpm", "torque", "higadura", "tenperatura"):
+        with pytest.raises(ValueError):
+            same_event(
+                raw,
+                root / "pristine-archive",
+                es,
+                {**snapshot, field: "tampered"},
+                history,
+            )
     # Post-run corruption is deliberately retained and fails mechanical verification.
     with pytest.raises(ValueError, match="Parquet mismatch"):
         same_event(

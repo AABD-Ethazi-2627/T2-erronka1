@@ -95,3 +95,11 @@ UI four-page/modal browser checks, real API/ES outage/recovery and all component
 accounting remain parent gates. `view` uses a Python slim container with a mounted
 locked host environment; validate ABI/imports on the target host before acceptance.
 SMB #111 and human/teacher acceptance are separate and remain pending.
+
+On a real run, the extension drains via CG32 then refreshes the own ES index and
+captures a current GET row and matching history event before API shutdown. It
+checks the retained worker canonical payload against CG15 and ES `_id/_source`,
+then writes `canonical.json`, `get-snapshot.json`, `get-history.json`, `es-live.json`
+and `integration-reconciliation.json`. A missing/different stage fails this gate.
+UI remains pending; `view` is a separate parent browser session. The worker and API
+manifest bytes must both match the run's reserved manifest SHA before activation.
