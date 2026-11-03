@@ -18,6 +18,11 @@ TREES = {
     "deploy",
     "elasticsearch",
     "filebeat",
+    "kibana",
+    "nifi",
+    "engine",
+    "cnc_guard",
+    "nifi-flows",
 }
 EXTENSIONS = {
     ".py",
@@ -37,6 +42,14 @@ EXTENSIONS = {
     ".svg",
     ".ndjson",
     ".Dockerfile",
+    ".patch",
+    ".xml",
+    ".csv",
+    ".rs",
+    ".go",
+    ".sum",
+    ".mod",
+    ".in",
 }
 RESULTS = {
     "result.json",
@@ -58,24 +71,34 @@ def build(output, evidence):
     selected = []
     for name in filter(None, tracked):
         p = Path(name)
-        if name in {
-            "uv.lock",
-            "README.md",
-            "vendor/README.md",
-            "vendor/kafka-python-provenance.json",
-            "vendor/kafka_python-3.0.11+cncguard.2-py3-none-any.whl",
-            "pyproject.toml",
-            "docs/integration/README.md",
-            "docs/integration/issues.json",
-            "docs/backend/READ_API.md",
-            "dashboard_laneki/INTEGRATION.md",
-        } or (
-            p.parts[0] in TREES
-            and p.suffix in EXTENSIONS
-            and not any(
-                part.startswith(".")
-                or part in {"models", "__pycache__", "node_modules"}
-                for part in p.parts
+        if (
+            name
+            in {
+                "uv.lock",
+                ".dockerignore",
+                "docker-compose.yml",
+                "docker-compose.lan.yml",
+                "data/ai4i2020_train.csv",
+                "docs/evidence/CG26_REHEARSAL_2026-10-21.json",
+                "README.md",
+                "vendor/README.md",
+                "vendor/kafka-python-provenance.json",
+                "vendor/kafka_python-3.0.11+cncguard.2-py3-none-any.whl",
+                "pyproject.toml",
+                "docs/integration/README.md",
+                "docs/integration/issues.json",
+                "docs/backend/READ_API.md",
+                "dashboard_laneki/INTEGRATION.md",
+            }
+            or (name.startswith(".github/workflows/") and p.suffix in {".yml", ".yaml"})
+            or (
+                p.parts[0] in TREES
+                and (p.suffix in EXTENSIONS or p.name == "Dockerfile")
+                and not any(
+                    part.startswith(".")
+                    or part in {"models", "__pycache__", "node_modules"}
+                    for part in p.parts
+                )
             )
         ):
             selected.append((name, ROOT / name))

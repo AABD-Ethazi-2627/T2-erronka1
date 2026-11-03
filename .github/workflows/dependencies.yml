@@ -45,7 +45,7 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, go, haproxy, wolfi]
+        image: [api, dashboard, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, go, haproxy, wolfi]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -71,6 +71,10 @@ jobs:
       - name: Verify offline API query under runtime limits
         if: matrix.image == 'api'
         run: python3 -m scripts.check_runtime_image "${{ steps.image.outputs.ref }}"
+      - name: Verify isolated dashboard runtime offline
+        if: matrix.image == 'dashboard'
+        run: |
+          docker run --rm --network none --read-only --memory 512m --tmpfs /tmp:rw,nosuid,nodev,size=64m "${{ steps.image.outputs.ref }}" /usr/bin/python3.12 -c "import streamlit,requests,pandas,pyarrow,matplotlib,seaborn; assert streamlit.__version__ == '1.66.1'"
       - name: Preserve the complete image scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:

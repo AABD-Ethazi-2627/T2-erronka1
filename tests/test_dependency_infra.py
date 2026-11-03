@@ -38,6 +38,7 @@ class InfrastructureRefreshTests(unittest.TestCase):
                 "docker-compose.yml",
                 "deploy/cg14/compose.yaml",
                 "scoring/Dockerfile",
+                "dashboard_laneki/Dockerfile",
             ):
                 destination = root / name
                 destination.parent.mkdir(parents=True, exist_ok=True)

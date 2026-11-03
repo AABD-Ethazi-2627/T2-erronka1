@@ -57,3 +57,31 @@ environment, reproducing all six scenarios and retaining source revision metadat
 This is not an offline dependency installation. The initial extraction exposed a
 Git-only runner assumption; the correction embeds hashed `BUNDLE_SOURCE.json`.
 Dashboard image assets and image-patch source are included in the revised allowlist.
+
+## Final-review follow-up
+
+Claude rechecked `62a6e10`: seven earlier findings were verified closed or improved,
+including a writer commit during 6000-event archive validation and single-pass
+periods. Its new findings were corrected as follows:
+
+- Dedicated dashboard image: pinned Wolfi base, Python 3.12, existing hashed dashboard
+  requirements, isolated read-only service, no mounted worker interpreter. `view`
+  builds and probes actual imports. CI includes its build, offline 512 MiB import
+  probe and OS/Python/Rust scan coverage. Actual image results remain pending.
+- Bundle source coverage now includes extensionless Dockerfiles, patch/XML inputs,
+  CSV fixtures, Compose, Kibana/NiFi resources, Python source package and the public
+  AI4I training fixture needed by CG32. The archived model remains externally supplied.
+- Extracted source identity verifies all listed file hashes before the fixture runs;
+  hashes detect mutation but are not an authenticated approval.
+- Live same-event reconciliation follows bounded history cursors, reports absence
+  explicitly and rejects a non-advancing cursor.
+- Generated read scope pins the model manifest's risk threshold. Server ES/CG15
+  filters and offline evaluation use that same threshold. Older configurations
+  without a pin keep reads but cannot expose an evaluation matrix.
+
+Elasticsearch's millisecond date sort and restricted replay-validation scope are
+explicit in READ_API.md. There is no new claim of real ES latency, long-term archive
+capacity, full Docker acceptance or successful browser/SMB/human acceptance.
+
+Full suite after these corrections: **798 passed, 4 skipped, 374 subtests passed**
+(61.74s). Focused backend/wiring:63 passed. Changed Python Ruff checks pass.

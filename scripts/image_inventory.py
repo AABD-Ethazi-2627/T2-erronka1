@@ -174,9 +174,14 @@ def check(root=ROOT):
     uv_version = images["uv"].split(":", 1)[1].split("@", 1)[0]
     if f"/refs/tags/{uv_version}.tar.gz" not in stage:
         errors.append("Patched uv source version differs from upstream inventory")
-    for key in ("api", "nifi", "uv"):
+    for key in ("api", "nifi", "uv", "dashboard"):
         if not (root / build_targets[key]).read_text().startswith(stage):
             errors.append(f"{build_targets[key]}: patched uv source stage differs")
+    if (
+        "FROM " + images["python"]
+        not in (root / build_targets["dashboard"]).read_text()
+    ):
+        errors.append("dashboard/Dockerfile: base differs from pinned inventory")
     return errors
 
 

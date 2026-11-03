@@ -21,6 +21,10 @@ def compatible(obj, scope):
         obj.get("source", {}).get("uri") == scope.source_uri
         and obj.get("model_artifact_sha256") == scope.model_artifact_sha256
         and obj.get("policy") == scope.policy
+        and (
+            scope.risk_threshold is None
+            or obj.get("risk_threshold") == scope.risk_threshold
+        )
     )
 
 
@@ -43,12 +47,16 @@ class ElasticsearchReader:
 
     @staticmethod
     def _filters(scope, start, end):
-        return [
+        filters = [
             {"term": {"source.uri": scope.source_uri}},
             {"term": {"model_artifact_sha256": scope.model_artifact_sha256}},
             {"term": {"policy": scope.policy}},
             {"range": {"timestamp": {"gte": start.isoformat(), "lt": end.isoformat()}}},
         ]
+
+        if scope.risk_threshold is not None:
+            filters.append({"term": {"risk_threshold": scope.risk_threshold}})
+        return filters
 
     def _search(self, pit, body):
         response = self.client.post(

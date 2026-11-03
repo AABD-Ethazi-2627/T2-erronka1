@@ -29,6 +29,7 @@ def create_preview(root):
                 source_uri=row["source"]["uri"],
                 model_artifact_sha256=row["model_artifact_sha256"],
                 policy=row["policy"],
+                risk_threshold=row["risk_threshold"],
             ),
             current=current,
             archive=ArchiveReader(root / "pristine-archive"),

@@ -10,7 +10,7 @@ from scripts.integration_verify import check_wiring, same_event
 
 @pytest.fixture
 def config(tmp_path):
-    manifest = {"files": {"rf.pkl": "a" * 64}, "policy": "f2"}
+    manifest = {"files": {"rf.pkl": "a" * 64}, "policy": "f2", "risk_threshold": 0.5}
     path = tmp_path / "manifest.json"
     path.write_text(json.dumps(manifest))
     graph = {
@@ -28,6 +28,7 @@ def config(tmp_path):
             "source_uri": "kafka://own/own",
             "model_artifact_sha256": "a" * 64,
             "policy": "f2",
+            "risk_threshold": 0.5,
         },
         "elasticsearch": {"url": graph["es_url"], "index": "cnc-alerts-own-read"},
         "archive_root": "/archive",
@@ -118,7 +119,11 @@ def test_resolved_compose_without_starting_docker(tmp_path):
     worker = directory / "worker"
     worker.mkdir()
     manifest = directory / "manifest.json"
-    manifest.write_text(json.dumps({"files": {"rf.pkl": "a" * 64}, "policy": "f2"}))
+    manifest.write_text(
+        json.dumps(
+            {"files": {"rf.pkl": "a" * 64}, "policy": "f2", "risk_threshold": 0.5}
+        )
+    )
     graph = {
         "root": str(worker),
         "manifest": str(manifest),
@@ -159,3 +164,82 @@ def test_resolved_compose_without_starting_docker(tmp_path):
             volume["read_only"] = False
     with pytest.raises(ValueError, match="archive writable"):
         check_compose(config, graph, sys.executable, str(Path.cwd()))
+
+
+def test_history_reconciliation_follows_cursor_and_reports_absence():
+    import httpx
+
+    from scripts.integration_lab import find_history_event
+
+    calls = []
+
+    def handle(request):
+        calls.append(dict(request.url.params))
+        page = (
+            {"metadata": {"events": [{"event_key": "old"}]}, "next_cursor": "page-2"}
+            if "cursor" not in request.url.params
+            else {
+                "metadata": {"events": [{"event_key": "target"}]},
+                "next_cursor": None,
+            }
+        )
+        return httpx.Response(200, json=page)
+
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+        row, response = find_history_event(
+            client, "http://fixture/history", {"event_key": "target"}, "cutoff"
+        )
+        assert row["event_key"] == "target" and response.status_code == 200
+        assert calls == [{"hasta": "cutoff"}, {"cursor": "page-2"}]
+        with pytest.raises(ValueError, match="absent from complete history"):
+            find_history_event(
+                client, "http://fixture/history", {"event_key": "absent"}, "cutoff"
+            )
+        with pytest.raises(ValueError, match="page budget"):
+            find_history_event(
+                client,
+                "http://fixture/history",
+                {"event_key": "target"},
+                "cutoff",
+                max_pages=1,
+            )
+
+
+def test_bundle_preserves_build_inputs_and_detects_extracted_tampering(
+    tmp_path, monkeypatch
+):
+    import zipfile
+    from pathlib import Path
+
+    from scripts import integration_bundle, integration_fixture
+
+    evidence = tmp_path / "fixture"
+    asyncio.run(run(evidence))
+    bundle = tmp_path / "bundle.zip"
+    integration_bundle.build(bundle, evidence)
+    restored = tmp_path / "restored"
+    with zipfile.ZipFile(bundle) as archive:
+        archive.extractall(restored)
+    for name in (
+        "scoring/Dockerfile",
+        "dashboard_laneki/Dockerfile",
+        "deploy/images/uv-rustls.patch",
+        "deploy/images/elasticsearch-patches/pom.xml",
+        "tests/fixtures/cg14/valid_event.csv",
+        "docker-compose.yml",
+        "kibana/acceptance-export.ndjson",
+    ):
+        assert (restored / name).read_bytes() == (Path.cwd() / name).read_bytes()
+    monkeypatch.setattr(
+        integration_fixture,
+        "__file__",
+        str(restored / "scripts/integration_fixture.py"),
+    )
+    assert (
+        integration_fixture.source_identity()["member_hashes"]
+        == "verified_not_authenticated"
+    )
+    target = restored / "scoring/Dockerfile"
+    target.write_text(target.read_text() + "\n# changed after restore\n")
+    with pytest.raises(ValueError, match="hash mismatch: scoring/Dockerfile"):
+        integration_fixture.source_identity()

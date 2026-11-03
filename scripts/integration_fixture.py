@@ -45,7 +45,25 @@ def source_identity():
     source = Path(__file__).resolve().parents[1]
     bundled = source / "BUNDLE_SOURCE.json"
     if bundled.is_file():
-        return {**json.loads(bundled.read_text()), "origin": "bundle_metadata"}
+        manifest = json.loads((source / "SHA256.json").read_text())
+        if "BUNDLE_SOURCE.json" not in manifest:
+            raise ValueError("Bundle source metadata is not hash-listed")
+        for name, expected in manifest.items():
+            path = source / name
+            if (
+                Path(name).is_absolute()
+                or ".." in Path(name).parts
+                or path.is_symlink()
+                or not path.resolve().is_relative_to(source)
+                or not path.is_file()
+                or hashlib.sha256(path.read_bytes()).hexdigest() != expected
+            ):
+                raise ValueError("Extracted bundle hash mismatch: " + name)
+        return {
+            **json.loads(bundled.read_text()),
+            "origin": "bundle_metadata",
+            "member_hashes": "verified_not_authenticated",
+        }
     revision = subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=source,
@@ -62,6 +80,7 @@ def source_identity():
 
 
 async def run(root):
+    identity = source_identity()
     root = Path(root).resolve()
     root.mkdir(parents=True, exist_ok=False)
     manifest = {
@@ -89,7 +108,10 @@ async def run(root):
     (root / "fixture.json").write_text(json.dumps(event, indent=2))
     current = ESDouble()
     scope = ReadScope(
-        source_uri=event["source"]["uri"], model_artifact_sha256="a" * 64, policy="f2"
+        source_uri=event["source"]["uri"],
+        model_artifact_sha256="a" * 64,
+        policy="f2",
+        risk_threshold=0.5,
     )
     archive = root / "archive"
     app = create_app(
@@ -173,8 +195,8 @@ async def run(root):
         statuses["corruption"] = "passed_no_ACK_and_GET_503"
     result = {
         "created_utc": datetime.now(UTC).isoformat(),
-        "code_sha": source_identity()["revision"],
-        "source_identity": source_identity(),
+        "code_sha": identity["revision"],
+        "source_identity": identity,
         "tool_hashes": {
             p.name: hashlib.sha256(p.read_bytes()).hexdigest()
             for p in Path("scripts").glob("integration_*.py")

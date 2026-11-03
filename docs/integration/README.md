@@ -35,8 +35,12 @@ real CG32 run.json and worker journals provide separate occurrence/offset counts
 
 ZIP inputs are tracked allowlisted source/lock/config, these six result JSON files,
 and the pristine synthetic archive. No venv/cache/credentials/private model trees.
-The builder verifies CRC, every member SHA and sample extraction/re-read; writes a
-sidecar SHA for the ZIP. A portable package reproduces fixture tests after installing
+The builder verifies CRC, every member SHA and sample extraction/re-read.
+The extracted runner verifies all listed member hashes before recording source
+identity. This detects accidental corruption, not an authenticated signature or
+approval. Source coverage includes Dockerfiles, XML/patch inputs, CSV fixtures,
+Compose, and Kibana resources; external build downloads still require network.
+The builder writes a sidecar SHA for the ZIP. A portable package reproduces fixture tests after installing
 the locked dependencies; it is not an offline vendored runtime or model package.
 Use an independently approved model bundle for the real lab. Restores must generate
 new host-specific mounts/config; do not reuse another host's absolute paths.
@@ -45,9 +49,9 @@ new host-specific mounts/config; do not reuse another host's absolute paths.
 
 Do not lower CG32 budget checks, prune others' resources, or start parallel builds.
 `integration_lab` inherits CG32 init/up/run/stop, TLS trust/bootstrap and private
-0600 generated credentials. Use a dedicated uv environment including Streamlit,
+0600 generated credentials. Use a dedicated uv environment including
 Kafka and the locked read dependencies. Its interpreter and runtime are mounted
-read-only into NiFi/UI; checkout, manifest and run state paths are regenerated for
+read-only into NiFi; checkout, manifest and run state paths are regenerated for
 this host. The API has two read-only archive mounts so the writable parent run
 mount does not expose an alternate writable archive path.
 
@@ -74,7 +78,7 @@ Explicit wiring generated per run:
 - POST: `http://api:8000/predict`; ES: `http://elasticsearch:9200`.
 - Concrete write index: `cnc-alerts-cg32-<unique-run>`; new read alias `<index>-read`.
 - GET config `CNC_READ_CONFIG=<run>/read.json`, archive `/archive`, scope source URI
-  `kafka://<project>/<run>/<topic>`, RF hash and policy from pinned manifest.
+  `kafka://<project>/<run>/<topic>`, RF hash, policy and risk threshold from pinned manifest.
 - UI `LANEKI_MODE=api`, `LANEKI_API_URL=http://api:8000/api`.
 - `candidate-data-view.json` uses only that alias. Import explicitly into own
   Kibana via POST `/api/data_views/data_view` with `kbn-xsrf: true`; no historical
@@ -92,15 +96,21 @@ The generated configuration is a candidate until actually exercised on sufficien
 resources. Full image build/import/endpoint/RSS validation, NiFi interpreter execution,
 Filebeat→Kafka→worker→ES→GET reconciliation, actual read-only mount concurrency,
 UI four-page/modal browser checks, real API/ES outage/recovery and all component
-accounting remain parent gates. `view` uses a Python slim container with a mounted
-locked host environment; validate ABI/imports on the target host before acceptance.
+accounting remain parent gates. `view` builds the dedicated dashboard image and
+checks imports before starting API/UI. It uses Python 3.12 from the digest-pinned
+Wolfi base and `dashboard_laneki/requirements.txt` with hashes; it never mounts
+the worker interpreter or a host virtualenv. The service is read-only with a 64 MiB
+scratch mount and a 512 MiB memory limit. CI builds/scans this image and verifies
+imports without network under these limits. Successful imports alone do not prove
+interactive RSS or visual acceptance.
 SMB #111 and human/teacher acceptance are separate and remain pending.
 
 On a real run, the extension drains via CG32 then refreshes the own ES index and
 captures a current GET row and matching history event before API shutdown. It
 checks the retained worker canonical payload against CG15 and ES `_id/_source`,
 then writes `canonical.json`, `get-snapshot.json`, `get-history.json`, `es-live.json`
-and `integration-reconciliation.json`. A missing/different stage fails this gate.
+and `integration-reconciliation.json`. A missing/different stage fails this gate. History cursors are followed until the
+selected event is found, with a 100-page bound and explicit absence/cycle errors.
 UI remains pending; `view` is a separate parent browser session. The worker and API
 manifest bytes must both match the run's reserved manifest SHA before activation.
 

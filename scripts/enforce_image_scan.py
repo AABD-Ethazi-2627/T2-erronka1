@@ -99,6 +99,7 @@ def validate(
         return ["image report contains no operating system package coverage"]
     required = {
         "api": {("lang-pkgs", "python-pkg"), ("lang-pkgs", "rustbinary")},
+        "dashboard": {("lang-pkgs", "python-pkg"), ("lang-pkgs", "rustbinary")},
         "uv": {("lang-pkgs", "rustbinary")},
         "go": {("lang-pkgs", "gobinary")},
         "filebeat": {("lang-pkgs", "gobinary")},

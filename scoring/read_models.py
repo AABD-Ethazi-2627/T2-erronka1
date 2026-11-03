@@ -10,6 +10,7 @@ class ReadScope(BaseModel):
     source_uri: str = Field(min_length=1)
     model_artifact_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     policy: str = Field(min_length=1)
+    risk_threshold: float | None = Field(default=None, ge=0, le=1, allow_inf_nan=False)
 
 
 class ReadSource(BaseModel):

@@ -10,6 +10,29 @@ from scripts import cg32_lab as lab
 from scripts.integration_verify import check_compose, check_wiring, same_event
 
 
+def find_history_event(client, url, selected, end, *, max_pages=100):
+    """Follow a stable history cursor; never infer absence from a partial page."""
+    params = {"hasta": end}
+    seen = set()
+    for _ in range(max_pages):
+        response = client.get(url, params=params)
+        response.raise_for_status()
+        payload = response.json()
+        for row in payload["metadata"]["events"]:
+            if row["event_key"] == selected["event_key"]:
+                return row, response
+        cursor = payload.get("next_cursor")
+        if cursor is None:
+            raise ValueError(
+                "Selected snapshot event absent from complete history window"
+            )
+        if not isinstance(cursor, str) or not cursor or cursor in seen:
+            raise ValueError("History cursor did not advance")
+        seen.add(cursor)
+        params = {"cursor": cursor}
+    raise ValueError("History reconciliation exceeded page budget")
+
+
 class IntegrationLab(lab.Lab):
     def measure(self, args, run_dir, lines, graph, processors, record=None):
         result = super().measure(args, run_dir, lines, graph, processors, record=record)
@@ -29,15 +52,11 @@ class IntegrationLab(lab.Lab):
             if not rows:
                 raise ValueError("Integration snapshot empty after own batch")
             selected = rows[0]
-            history = client.get(
+            event, history = find_history_event(
+                client,
                 "http://" + port + "/api/historikoa/" + selected["id"],
-                params={"hasta": end},
-            )
-            history.raise_for_status()
-            event = next(
-                row
-                for row in history.json()["metadata"]["events"]
-                if row["event_key"] == selected["event_key"]
+                selected,
+                end,
             )
             es = client.get(
                 self.state["es_url"]
@@ -85,6 +104,7 @@ class IntegrationLab(lab.Lab):
                     "source_uri": f"kafka://{graph['source_namespace']}/{graph['topic']}",
                     "model_artifact_sha256": manifest["files"]["rf.pkl"],
                     "policy": manifest["policy"],
+                    "risk_threshold": manifest["risk_threshold"],
                 },
                 "elasticsearch": {"url": graph["es_url"], "index": alias},
                 "archive_root": "/archive",
@@ -114,27 +134,18 @@ class IntegrationLab(lab.Lab):
                     SCORING_LEDGER=str(directory / "api-ledger.sqlite3"),
                 )
             services["streamlit"] = {
-                "image": "python:3.11-slim",
-                "user": "1000:1000",
-                "working_dir": str(lab.REPO),
-                "command": [
-                    self.state["python"],
-                    "-m",
-                    "streamlit",
-                    "run",
-                    "dashboard_laneki/app.py",
-                    "--server.address=0.0.0.0",
-                ],
+                "build": {
+                    "context": str(lab.REPO),
+                    "dockerfile": "dashboard_laneki/Dockerfile",
+                },
+                "user": "65532:65532",
+                "read_only": True,
+                "tmpfs": ["/tmp:rw,nosuid,nodev,size=64m"],
                 "environment": {
                     "LANEKI_MODE": "api",
                     "LANEKI_API_URL": "http://api:8000/api",
                     "PYTHONDONTWRITEBYTECODE": "1",
                 },
-                "volumes": [
-                    f"{lab.REPO}:{lab.REPO}:ro",
-                    f"{runtime}:{runtime}:ro",
-                    f"{self.state['uv_python']}:{self.state['uv_python']}:ro",
-                ],
                 "ports": ["127.0.0.1::8501"],
                 "mem_limit": "512m",
                 "cap_drop": ["ALL"],
@@ -255,6 +266,19 @@ def view(root, run, bundle, identity_record=None):
     if run not in instance.state["runs"]:
         raise ValueError("Run is not owned by this lab")
     instance.view_mode = True
+    instance.compose("build", "streamlit", run=run, bundle=bundle)
+    instance.compose(
+        "run",
+        "--rm",
+        "--no-deps",
+        "streamlit",
+        "/usr/bin/python3.12",
+        "-c",
+        "import streamlit,requests,pandas,pyarrow,matplotlib,seaborn; "
+        "assert streamlit.__version__ == '1.66.1'",
+        run=run,
+        bundle=bundle,
+    )
     instance.compose(
         "up", "-d", "--no-deps", "api", "streamlit", run=run, bundle=bundle
     )

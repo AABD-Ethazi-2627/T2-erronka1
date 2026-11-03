@@ -27,6 +27,7 @@ def check_wiring(graph, read, manifest, services, image):
         "source_uri": f"kafka://{graph['source_namespace']}/{graph['topic']}",
         "model_artifact_sha256": manifest["files"]["rf.pkl"],
         "policy": manifest["policy"],
+        "risk_threshold": manifest["risk_threshold"],
     }:
         raise ValueError("scope/manifest mismatch")
     if read["elasticsearch"] != {
@@ -168,6 +169,14 @@ def check_compose(config, graph, python, checkout):
             raise ValueError("archive writable or absent")
     if services["nifi"]["environment"].get("NIFI_WEB_HTTPS_PORT") != "8443":
         raise ValueError("NiFi TLS mismatch")
+    ui = services["streamlit"]
+    if (
+        ui.get("build", {}).get("dockerfile") != "dashboard_laneki/Dockerfile"
+        or not ui.get("read_only")
+        or ui.get("volumes")
+        or ui.get("user") != "65532:65532"
+    ):
+        raise ValueError("UI must use its isolated locked image without host runtimes")
     if (
         services["streamlit"]["environment"].get("LANEKI_API_URL")
         != "http://api:8000/api"

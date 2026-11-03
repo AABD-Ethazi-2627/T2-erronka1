@@ -26,6 +26,7 @@ SCOPE = ReadScope(
     source_uri=BASE["source"]["uri"],
     model_artifact_sha256=BASE["model_artifact_sha256"],
     policy=BASE["policy"],
+    risk_threshold=BASE["risk_threshold"],
 )
 END = "2026-10-16T00:00:00Z"
 
@@ -235,7 +236,7 @@ def test_es_pit_scope_and_failure():
 
 def evaluation_config(tmp_path):
     artifact = {
-        "threshold": 0.5,
+        "threshold": SCOPE.risk_threshold,
         "overall": {
             "tn": 8,
             "fp": 2,
@@ -265,7 +266,7 @@ def evaluation_config(tmp_path):
         json.dumps(
             {
                 "model_version": "fixture",
-                "risk_threshold": 0.5,
+                "risk_threshold": SCOPE.risk_threshold,
                 "policy": SCOPE.policy,
                 "files": {"rf.pkl": SCOPE.model_artifact_sha256},
             }
@@ -524,3 +525,22 @@ def test_periods_share_one_committed_archive_snapshot():
         get(client(archive=reader), "historikoa/CNC-049/periodoak").status_code == 200
     )
     assert reader.rows.call_count == 1
+
+
+def test_server_scope_binds_prediction_and_evaluation_threshold(tmp_path):
+    config = evaluation_config(tmp_path)
+    assert evaluation(config, SCOPE).available
+    assert not evaluation(
+        config, SCOPE.model_copy(update={"risk_threshold": None})
+    ).available
+    assert not evaluation(
+        config, SCOPE.model_copy(update={"risk_threshold": 0.9})
+    ).available
+    changed = {**BASE, "risk_threshold": 0.9}
+    with client([BASE, {**changed, "event_id": "f" * 64}]) as api:
+        rows = api.get("/api/makinak", params={"as_of": END}).json()
+        assert len(rows) == 1 and rows[0]["risk_threshold"] == SCOPE.risk_threshold
+    from scoring.read_api import utc
+
+    filters = ElasticsearchReader._filters(SCOPE, utc(END), utc(END))
+    assert {"term": {"risk_threshold": SCOPE.risk_threshold}} in filters

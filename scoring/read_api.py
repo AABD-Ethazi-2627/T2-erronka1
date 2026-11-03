@@ -154,6 +154,8 @@ def load(reader, scope, start, end, *, all_history=False):
 def evaluation(config, scope):
     if not config:
         return Evaluation(available=False, reason="not_configured")
+    if scope.risk_threshold is None:
+        return Evaluation(available=False, reason="read_threshold_not_pinned")
     try:
         raw = Path(config["path"]).read_bytes()
         if hashlib.sha256(raw).hexdigest() != config["sha256"]:
@@ -172,6 +174,7 @@ def evaluation(config, scope):
             != scope.model_artifact_sha256
             or model["policy"] != scope.policy
             or model["risk_threshold"] != artifact["threshold"]
+            or artifact["threshold"] != scope.risk_threshold
         ):
             raise ValueError()
         # An operator-pinned provenance manifest binds artifact + model + scope.

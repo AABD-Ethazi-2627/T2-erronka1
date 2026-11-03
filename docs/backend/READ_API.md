@@ -10,7 +10,8 @@ Enable using `create_app(read_config={"scope": ReadScope(...), "current": reader
   "scope": {
     "source_uri": "fixture://integration",
     "model_artifact_sha256": "<64 lowercase hex characters>",
-    "policy": "f2"
+    "policy": "f2",
+    "risk_threshold": 0.5
   },
   "elasticsearch": {"url": "http://elasticsearch:9200", "index": "explicit-alias"},
   "archive_root": "/archive"
@@ -22,6 +23,14 @@ An injected reader implements `rows(scope, start_datetime, end_datetime)`.
 ES uses an independent point-in-time search, exact keyword scope terms, and no
 approximate cardinality. Timestamp, machine_id and event_id must be sortable
 (existing CG18 mapping). Only the configured source/model/policy match.
+An optional `risk_threshold` binds prediction reads and offline evaluation to one
+exact decision threshold. The generated integration configuration always pins it
+from the manifest. Legacy configurations without it can read predictions, but
+model evaluation is unavailable (`read_threshold_not_pinned`). ES filters and
+CG15 use the same threshold scope; provenance/cursor scope includes the pin.
+ES `date` sorting has millisecond precision, while stored payloads and CG15 retain
+microseconds. Events within one ES millisecond tie by event_id, not by submillisecond
+time; callers must not assume microsecond ordering from the current-state snapshot.
 Failures, invalid persisted predictions, partial ES shards, conflicting duplicate
 identities and >50 machines return 503. Empty ES returns an empty list.
 
