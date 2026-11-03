@@ -7,6 +7,13 @@ import streamlit as st
 Osagaia = Callable[[], None]
 
 
+@st.fragment
+def _egutegi_fragmentua(_egutegia: Osagaia) -> None:
+    """Egutegiko klikek ez dute Hasiera osoa berriro marrazten."""
+    _egutegia()
+
+
+@st.fragment
 def hasiera_erakutsi(
     kpi_txartelak: Osagaia,
     egoera_zerbitzuak: Osagaia,
@@ -22,7 +29,7 @@ def hasiera_erakutsi(
     egoera_zerbitzuak()
 
     telemetria_zutabea, historiko_zutabea, neurketa_zutabea = st.columns(
-        [2.5, 2, 1.5],
+        [1.75, 2.4, 1.45],
         gap="small",
     )
 
@@ -44,4 +51,4 @@ def hasiera_erakutsi(
         makina_sarea()
 
     with egutegi_zutabea, st.container(key="calendar_panel"):
-        egutegia()
+        _egutegi_fragmentua(egutegia)

@@ -91,5 +91,172 @@ class AppTests(unittest.TestCase):
             )
 
 
+class CanonicalAppTests(unittest.TestCase):
+    """Assert displayed values, not just absence of Streamlit exceptions."""
+
+    setUp = AppTests.setUp
+    app = AppTests.app
+    assert_clean = AppTests.assert_clean
+
+    def api(self, rows, history_payload=None, evaluation_payload=None):
+        from test_read_contracts import history_fixture
+
+        os.environ["LANEKI_MODE"] = "api"
+        os.environ["LANEKI_API_URL"] = "http://127.0.0.1:18271/api"
+        self.addCleanup(os.environ.pop, "LANEKI_API_URL", None)
+        payload = history_payload or history_fixture()
+
+        def get(url, **kwargs):
+            self.assertTrue(url.startswith("http://127.0.0.1:18271/api/"))
+            if url.endswith("/makinak"):
+                data = rows
+            elif url.endswith("/periodoak"):
+                data = {key: payload for key in ("astea", "hilabetea", "sei_hilabete")}
+            elif url.endswith("/model-evaluation"):
+                data = evaluation_payload or {"available": False}
+            elif url.endswith("/kpis"):
+                data = {"metadata": {"coverage": 1}, "osasuna": None}
+            else:
+                data = payload
+            response = Mock()
+            response.json.return_value = data
+            return response
+
+        patcher = patch("requests.get", side_effect=get)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        return self.app()
+
+    def assert_sentinel(self, app):
+        self.assert_clean(app)
+        readings = {(m.label, m.value) for m in app.metric}
+        for pair in (
+            ("Prozesu-tenperatura (°C)", "21"),
+            ("Abiadura (RPM)", "1801"),
+            ("Bihurdura-momentua (Nm)", "5"),
+            ("Erremintaren higadura (min)", "7"),
+        ):
+            self.assertIn(pair, readings)
+        self.assertTrue(any("Normala" in m.value for m in app.markdown))
+
+    def test_sentinel_all_pages_and_modal(self):
+        from test_read_contracts import SENTINEL
+
+        app = self.api([SENTINEL]).run()
+        self.assert_sentinel(app)
+        for page in ("Makinak", "Datuak", "Abisuak"):
+            app.button(key=f"nav_{page}").click().run()
+            self.assert_sentinel(app)
+            if page == "Makinak":
+                app.button(key="machine_details").click().run()
+                self.assert_sentinel(app)
+                self.assertTrue(any("0.123" in m.value for m in app.markdown))
+
+    def test_null_all_pages_and_modal(self):
+        from test_read_contracts import SENTINEL
+
+        row = {
+            **SENTINEL,
+            **{
+                k: None
+                for k in ("tenperatura", "rpm", "torque", "higadura", "failure_score")
+            },
+        }
+        app = self.api([row]).run()
+        for page in ("Hasiera", "Makinak", "Datuak", "Abisuak"):
+            app.query_params["orria"] = page
+            app.run()
+            self.assert_clean(app)
+            self.assertTrue(any(m.value == "Ez dago daturik" for m in app.metric))
+            if page == "Makinak":
+                app.button(key="machine_details").click().run()
+                self.assert_clean(app)
+
+    def test_empty_is_valid_duplicate_nan_are_degraded(self):
+        from test_read_contracts import SENTINEL
+
+        app = self.api([]).run()
+        self.assert_clean(app)
+        self.assertFalse(app.error)
+        self.assertTrue(any("0 makina" in m.value for m in app.info))
+        # Separate test harness mocks for invalid snapshots.
+        for rows in ([SENTINEL, SENTINEL], [{**SENTINEL, "rpm": float("nan")}]):
+            st.cache_data.clear()
+            app = self.api(rows).run()
+            self.assert_clean(app)
+            self.assertTrue(any("DEGRADATUTA" in m.value for m in app.error))
+            self.assertFalse(app.metric)
+
+    def test_period_coverage_binary_evaluation_and_unavailable(self):
+        from test_read_contracts import SENTINEL, evaluation_fixture
+
+        app = self.api([SENTINEL], evaluation_payload=evaluation_fixture())
+        app.query_params["orria"] = "Datuak"
+        app.run()
+        self.assert_clean(app)
+        self.assertTrue(any("coverage" in j.value for j in app.json))
+        self.assertTrue(any(d.value.shape == (2, 2) for d in app.dataframe))
+        self.assertTrue(any("FP" in j.value and "FN" in j.value for j in app.json))
+
+    def test_six_month_key_and_partial_history_pagination(self):
+        from test_read_contracts import SENTINEL, history_fixture
+
+        payload = history_fixture()
+        payload["next_cursor"] = "opaque-token"
+        app = self.api([SENTINEL], history_payload=payload)
+        app.query_params["orria"] = "Datuak"
+        app.session_state["datuak_periodoa"] = "Sei hilabete"
+        app.run()
+        self.assert_clean(app)
+        self.assertTrue(any("coverage" in j.value for j in app.json))
+        app.session_state["datuak_periodoa"] = "Laginak"
+        app.run()
+        self.assert_clean(app)
+        self.assertTrue(any("Orrialde partziala" in w.value for w in app.warning))
+        next(b for b in app.button if b.label == "Hurrengo orrialdea").click().run()
+        self.assert_clean(app)
+        self.assertEqual(app.session_state["history_cursor_CNC-004"], "opaque-token")
+
+    def test_invalid_evaluation_does_not_render_matrix(self):
+        from test_read_contracts import SENTINEL, evaluation_fixture
+
+        payload = evaluation_fixture()
+        payload["model_artifact_sha256"] = "wrong"
+        app = self.api([SENTINEL], evaluation_payload=payload)
+        app.query_params["orria"] = "Datuak"
+        app.run()
+        self.assert_clean(app)
+        self.assertFalse(any(d.value.shape == (2, 2) for d in app.dataframe))
+        self.assertTrue(any("bateraezina" in i.value for i in app.info))
+
+    def test_claims_distinguish_current_state_and_cost_scenarios(self):
+        from test_read_contracts import SENTINEL
+
+        app = self.api([SENTINEL]).run()
+        for page in ("Hasiera", "Makinak", "Datuak", "Abisuak"):
+            app.query_params["orria"] = page
+            app.run()
+            self.assert_clean(app)
+            text = " ".join(m.value for m in app.markdown)
+            for misleading in (
+                "7 eguneko arriskua",
+                "Aurreikusitako galera",
+                "Akats aktiboa",
+                "Arriskurik ez",
+            ):
+                self.assertNotIn(misleading, text)
+            self.assertIn("sentinel", text)
+        self.assertEqual(len(app.number_input), 3)
+        app.number_input[0].set_value(20).run()
+        app.number_input[1].set_value(2).run()
+        app.number_input[2].set_value(100).run()
+        self.assertTrue(
+            any(
+                m.label == "Eszenarioaren esposizioa (€)" and m.value == "220"
+                for m in app.metric
+            )
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,37 +1,37 @@
-
 import base64
 import importlib
 import os
 from datetime import UTC, datetime
 
-import matplotlib.pyplot as plt
 import pandas as pd
 import requests
-import seaborn as sns
 import streamlit as st
 from domain import demo_machines, load_machines, selected_machine
 from domain import kpis as shared_kpis
 from orriak import makinak as makinak_orria
 from orriak.abisuak import abisuak_erakutsi
+from orriak.datuak import datuak_erakutsi, show_history
 from orriak.hasiera import hasiera_erakutsi
+from orriak.shared import measurements, provenance
+from read_contracts import history
 
-FASTAPI_HELBIDEA = os.environ.get("LANEKI_API_URL", "http://127.0.0.1:8001/api").rstrip("/")
+FASTAPI_HELBIDEA = os.environ.get("LANEKI_API_URL", "http://127.0.0.1:8001/api").rstrip(
+    "/"
+)
 DATU_MODUA = os.environ.get("LANEKI_MODE", "demo")
 
 st.set_page_config(
     page_title="Laneki IoT",
     page_icon="⚙️",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
 
 # =============================
 # APLIKAZIOAREN EGOERA
 # =============================
 
-ORRI_BALIOZKOAK = {
-    "Hasiera", "Makinak", "Datuak", "Abisuak", "Ezarpenak"
-}
+ORRI_BALIOZKOAK = {"Hasiera", "Makinak", "Datuak", "Abisuak", "Ezarpenak"}
 
 if "gai_iluna" not in st.session_state:
     url_gaia = st.query_params.get("gaia", "argia")
@@ -41,14 +41,9 @@ if "pastel_aktibatuta" not in st.session_state:
     st.session_state.pastel_aktibatuta = True
 
 
-
 if "orria" not in st.session_state:
     url_orria = st.query_params.get("orria", "Hasiera")
-    st.session_state.orria = (
-        url_orria
-        if url_orria in ORRI_BALIOZKOAK
-        else "Hasiera"
-    )
+    st.session_state.orria = url_orria if url_orria in ORRI_BALIOZKOAK else "Hasiera"
 elif "orria" in st.query_params and st.query_params["orria"] in ORRI_BALIOZKOAK:
     st.session_state.orria = st.query_params["orria"]
 
@@ -64,16 +59,20 @@ demo_datuak = demo_machines
 
 
 @st.cache_data(ttl=5, show_spinner=False)
-def kontsultatu(amaiera_puntua):
+def _kontsultatu(api_url, amaiera_puntua):
     try:
-        erantzuna = requests.get(
-            f"{FASTAPI_HELBIDEA}/{amaiera_puntua}",
-            timeout=0.5
-        )
+        erantzuna = requests.get(f"{api_url}/{amaiera_puntua}", timeout=0.5)
         erantzuna.raise_for_status()
         return erantzuna.json()
     except (requests.RequestException, ValueError):
         return None
+
+
+def kontsultatu(endpoint):
+    return _kontsultatu(FASTAPI_HELBIDEA, endpoint)
+
+
+kontsultatu.clear = _kontsultatu.clear
 
 
 def makinak_lortu():
@@ -85,60 +84,61 @@ def kpiak_lortu(makinak):
 
 
 def historikoa_lortu(kodea, makina):
-    datuak = kontsultatu(f"historikoa/{kodea}") if DATU_MODUA == "api" else None
-
-    required = {"Ordua", "Prozesu-tenperatura (°C)", "Bihurdura-momentua (Nm)", "Erremintaren higadura (min)"}
-    if isinstance(datuak, dict) and required <= datuak.keys():
-        try:
-            frame = pd.DataFrame({key: datuak[key] for key in required})
-            for key in required - {"Ordua"}:
-                frame[key] = pd.to_numeric(frame[key], errors="raise")
-            return frame
-        except (TypeError, ValueError):
-            return pd.DataFrame()
-
-    if DATU_MODUA != "demo":
+    payload = kontsultatu(f"historikoa/{kodea}") if DATU_MODUA == "api" else None
+    try:
+        return history(payload)
+    except (TypeError, ValueError, OverflowError):
         return pd.DataFrame()
-
-    import random
-    rng = random.Random(makina["zenbakia"] * 100)
-
-    orduak = [
-        "06:00", "06:30", "07:00",
-        "07:30", "08:00", "08:30"
-    ]
-
-    return pd.DataFrame({
-        "Ordua": orduak,
-        "Prozesu-tenperatura (°C)": [
-            round(makina["tenperatura"] + rng.uniform(-2, 2), 1)
-            for _ in orduak
-        ],
-        "Bihurdura-momentua (Nm)": [
-            round(makina["torque"] + rng.uniform(-4, 4), 1)
-            for _ in orduak
-        ],
-        "Erremintaren higadura (min)": [
-            max(0, makina["higadura"] - (5 - i) * 4)
-            for i in range(6)
-        ]
-    })
 
 
 makinak, iturri_egoera = makinak_lortu()
-st.warning("PROTOTIPOA · " + ("DEMO: datu guztiak simulatuak dira." if iturri_egoera == "demo" else "API prototipoa: ez du CNC Guard integrazioa egiaztatzen."))
+st.warning(
+    "PROTOTIPOA · "
+    + (
+        "DEMO: datu guztiak simulatuak dira."
+        if iturri_egoera == "demo"
+        else "API prototipoa: ez du CNC Guard integrazioa egiaztatzen."
+    )
+)
 if not makinak:
-    st.error("API ez dago eskuragarri edo datuak baliogabeak dira. Ez da demo-daturik ordezkatu. Egiaztatu zerbitzua eta freskatu.")
+    if iturri_egoera == "api":
+        st.info("API · Snapshot hutsa: 0 makina. Ez da demo-daturik sortu.")
+        st.button("Eguneratu", on_click=kontsultatu.clear)
+        st.stop()
+    st.error(
+        "DEGRADATUTA · API ez dago eskuragarri edo datuak baliogabeak dira. Ez da demo-daturik ordezkatu. Egiaztatu zerbitzua eta freskatu."
+    )
     st.button("Eguneratu", on_click=kontsultatu.clear)
     st.stop()
 kpis = kpiak_lortu(makinak)
+st.caption(
+    "5 segundoko cachea · ez da auto-freskatzea. Eguneratu botoiak kontsulta berritzen du."
+)
+st.button("Eguneratu", on_click=kontsultatu.clear)
+if DATU_MODUA == "api":
+    kpi_payload = kontsultatu("kpis")
+    with st.expander("KPI kanonikoak · definizioa, izendatzailea eta UTC estaldura"):
+        if isinstance(kpi_payload, dict):
+            st.json(kpi_payload)
+        else:
+            st.warning(
+                "KPI zerbitzua degradatuta; beheko kontaketak snapshot lokalekoak dira."
+            )
 eskatua = st.query_params.get("makina")
-kodea = selected_machine(st.session_state.get("hautatutako_makina"), eskatua, makinak, st.session_state.get("azken_url_makina"))
+kodea = selected_machine(
+    st.session_state.get("hautatutako_makina"),
+    eskatua,
+    makinak,
+    st.session_state.get("azken_url_makina"),
+)
 if eskatua is not None and eskatua not in {m["id"] for m in makinak}:
-    st.warning("URLko makina ez da iturrian agertzen; iturriko makina baliodun bat hautatu da.")
+    st.warning(
+        "URLko makina ez da iturrian agertzen; iturriko makina baliodun bat hautatu da."
+    )
 st.session_state.hautatutako_makina = kodea
 st.session_state.azken_url_makina = eskatua
 uneko_makina = next(m for m in makinak if m["id"] == kodea)
+provenance(uneko_makina)
 historikoa = historikoa_lortu(kodea, uneko_makina)
 orain = datetime.now(UTC)
 data = orain.strftime("%Y-%m-%d")
@@ -150,26 +150,19 @@ ordua = orain.strftime("%H:%M UTC")
 # =============================
 
 css_bidea = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "assets", "css", "styles.css"
+    os.path.dirname(os.path.abspath(__file__)), "assets", "css", "styles.css"
 )
 
 if os.path.exists(css_bidea):
     with open(css_bidea, "r", encoding="utf-8") as fitxategia:
-        st.markdown(
-            f"<style>{fitxategia.read()}</style>",
-            unsafe_allow_html=True
-        )
+        st.markdown(f"<style>{fitxategia.read()}</style>", unsafe_allow_html=True)
 
 logo_bidea = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "assets", "images", "logo_laneki.webp"
+    os.path.dirname(os.path.abspath(__file__)), "assets", "images", "logo_laneki.webp"
 )
 
 with open(logo_bidea, "rb") as logo_fitxategia:
-    logo_base64 = base64.b64encode(
-        logo_fitxategia.read()
-    ).decode("ascii")
+    logo_base64 = base64.b64encode(logo_fitxategia.read()).decode("ascii")
 
 iluna = st.session_state.gai_iluna
 
@@ -221,7 +214,8 @@ else:
     egoera_urdina = "#EFF6FF"
     egoera_berdea = "#F0FDF4"
 
-st.markdown(f"""
+st.markdown(
+    f"""
 <style>
 :root {{
     --app-bg: {atzeko_planoa};
@@ -520,7 +514,9 @@ div[class*="st-key-machine_"] button:hover {{
     height: 10px !important;
 }}
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 
 if st.button(
@@ -530,7 +526,7 @@ if st.button(
         "Alboko menua erakutsi"
         if not st.session_state.menu_irekia
         else "Alboko menua ezkutatu"
-    )
+    ),
 ):
     st.session_state.menu_irekia = not st.session_state.menu_irekia
     st.rerun()
@@ -541,7 +537,8 @@ if st.button(
 # =============================
 
 with st.sidebar:
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="sidebar-logo">
         <img
             src="data:image/webp;base64,{logo_base64}"
@@ -550,28 +547,21 @@ with st.sidebar:
         >
         <div class="sidebar-sub">IoT Sistema</div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     aukerak = [
         ("🏠 Hasiera", "Hasiera"),
         ("🏭 Makinak", "Makinak"),
         ("📊 Datuak", "Datuak"),
-        ("🔔 Abisuak", "Abisuak")
+        ("🔔 Abisuak", "Abisuak"),
     ]
 
     for etiketa, orria in aukerak:
-        mota = (
-            "primary"
-            if st.session_state.orria == orria
-            else "secondary"
-        )
+        mota = "primary" if st.session_state.orria == orria else "secondary"
 
-        if st.button(
-            etiketa,
-            key=f"nav_{orria}",
-            width="stretch",
-            type=mota
-        ):
+        if st.button(etiketa, key=f"nav_{orria}", width="stretch", type=mota):
             st.session_state.orria = orria
             st.query_params["orria"] = orria
             st.rerun()
@@ -608,38 +598,29 @@ goiburu1, data_zutabea, gai_zutabea = st.columns([4, 1.35, 0.25])
 
 with goiburu1:
     st.markdown(
-        '<div class="dashboard-title">'
-        'Makinen egoera eta datuak</div>',
-        unsafe_allow_html=True
+        '<div class="dashboard-title">Makinen egoera eta datuak</div>',
+        unsafe_allow_html=True,
     )
 
     st.markdown(
-        '<div class="dashboard-subtitle">'
-        'CNC egoera · prototipoa'
-        '</div>',
-        unsafe_allow_html=True
+        '<div class="dashboard-subtitle">CNC egoera · prototipoa</div>',
+        unsafe_allow_html=True,
     )
 
 with data_zutabea:
     st.markdown(
         f'<div class="header-datetime">'
-        f'<span>📅 {data}</span><span>🕒 {ordua}</span>'
-        f'</div>',
-        unsafe_allow_html=True
+        f"<span>📅 {data}</span><span>🕒 {ordua}</span>"
+        f"</div>",
+        unsafe_allow_html=True,
     )
 
 with gai_zutabea:
     etiketa = "☀️" if iluna else "🌙"
 
-    if st.button(
-        etiketa,
-        key="gaia_aldatu",
-        help="Gai argia/iluna aldatu"
-    ):
+    if st.button(etiketa, key="gaia_aldatu", help="Gai argia/iluna aldatu"):
         st.session_state.gai_iluna = not iluna
-        st.query_params["gaia"] = (
-            "iluna" if st.session_state.gai_iluna else "argia"
-        )
+        st.query_params["gaia"] = "iluna" if st.session_state.gai_iluna else "argia"
         st.rerun()
 
 
@@ -647,17 +628,16 @@ with gai_zutabea:
 # IKUSIZKO FUNTZIOAK
 # =============================
 
+
 def panel_izenburua(izenburu_testua, deskribapena=""):
     st.markdown(
-        f'<div class="panel-heading">{izenburu_testua}</div>',
-        unsafe_allow_html=True
+        f'<div class="panel-heading">{izenburu_testua}</div>', unsafe_allow_html=True
     )
 
     if deskribapena:
         st.markdown(
-            f'<div class="panel-description">'
-            f'{deskribapena}</div>',
-            unsafe_allow_html=True
+            f'<div class="panel-description">{deskribapena}</div>',
+            unsafe_allow_html=True,
         )
 
 
@@ -684,323 +664,119 @@ def kpi_txartelak():
             <path d="M8 8v9"/>
             <circle class="kpi-icon-fill" cx="8" cy="17" r="2.2"/>
             <path d="M16 5c1 1 1 2.2 0 3.2s-1 2.2 0 3.2 1 2.2 0 3.2M20 5c1 1 1 2.2 0 3.2s-1 2.2 0 3.2"/>
-        </svg>"""
+        </svg>""",
     }
 
     txartelen_datuak = [
         {
             "klasea": "blue",
             "ikonoa": ikonoak["makina"],
-            "izenburua": "Makina operatiboak",
+            "izenburua": "Ez-CRITICA inferituak",
             "balioa": f"{kpis['operatiboak']} / {kpis['guztira']}",
-            "sub": "Uneko egoera"
+            "sub": "Snapshoteko kontaketa; ez jarduera fisikoa",
         },
         {
             "klasea": "pink",
             "ikonoa": ikonoak["abisua"],
-            "izenburua": "Akats aktiboak",
+            "izenburua": "CRITICA inferituak",
             "balioa": str(kpis["akatsak"]),
-            "sub": f"{kpis['gertakariak']} historikorik egiaztatu gabe"
+            "sub": f"{kpis['gertakariak']} historikorik egiaztatu gabe",
         },
         {
             "klasea": "ice",
             "ikonoa": ikonoak["osasuna"],
             "izenburua": "Batez besteko osasuna",
             "balioa": "Ez dago daturik",
-            "sub": "Flotaren osasun-indizea"
-        }
+            "sub": "Flotaren osasun-indizea",
+        },
     ]
 
     for zutabea, datua in zip(zutabeak[:3], txartelen_datuak):
         with zutabea:
-            st.markdown(f"""
-            <div class="kpi-card kpi-{datua['klasea']}">
+            st.markdown(
+                f"""
+            <div class="kpi-card kpi-{datua["klasea"]}">
                 <div class="kpi-heading">
-                    <span class="kpi-icon">{datua['ikonoa']}</span>
-                    <span>{datua['izenburua']}</span>
+                    <span class="kpi-icon">{datua["ikonoa"]}</span>
+                    <span>{datua["izenburua"]}</span>
                 </div>
                 <div class="kpi-body">
-                    <span class="kpi-number">{datua['balioa']}</span>
-                    <span class="kpi-description">{datua['sub']}</span>
+                    <span class="kpi-number">{datua["balioa"]}</span>
+                    <span class="kpi-description">{datua["sub"]}</span>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
     with zutabeak[3]:
-        st.markdown('<div class="kpi-card kpi-slate"><span>Makina motak</span><p>Ez dago daturik</p></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="kpi-card kpi-slate"><span>Makina motak</span><p>Ez dago daturik</p></div>',
+            unsafe_allow_html=True,
+        )
 
     with zutabeak[4]:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="kpi-card kpi-green">
             <div class="kpi-heading">
-                <span class="kpi-icon">{ikonoak['tenperatura']}</span>
+                <span class="kpi-icon">{ikonoak["tenperatura"]}</span>
                 <span>Iturriaren tenperatura</span>
             </div>
             <div class="kpi-body">
                 <span class="kpi-number">
-                    {kpis['tenperatura']} °C
+                    {kpis["tenperatura"]} °C
                 </span>
                 <span class="kpi-description">
                     Batez besteko tenperatura
                 </span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
 
 def telemetria_taula():
-    panel_izenburua(
-        "▣ Makinak · Telemetria",
-        f"{len(makinak)} makinen neurketak"
+    st.caption("Snapshoteko neurketak · maila inferituak")
+    st.dataframe(
+        pd.DataFrame(makinak)[
+            ["id", "tenperatura", "rpm", "torque", "higadura", "egoera"]
+        ],
+        hide_index=True,
     )
-
-    errenkadak_html = []
-
-    for makina in makinak:
-        egoera = makina["egoera"]
-        higadura = makina["higadura"]
-
-        if egoera == "Akatsa":
-            errenkada_klasea = "telemetria-akatsa"
-            egoera_klasea = "egoera-akatsa"
-            egoera_ikonoa = "!"
-        elif egoera == "Berrikusteko":
-            errenkada_klasea = "telemetria-abisua"
-            egoera_klasea = "egoera-abisua"
-            egoera_ikonoa = "•"
-        else:
-            errenkada_klasea = ""
-            egoera_klasea = "egoera-normala"
-            egoera_ikonoa = "✓"
-
-        if higadura >= 230:
-            higadura_klasea = "higadura-handia"
-        elif higadura >= 200:
-            higadura_klasea = "higadura-ertaina"
-        else:
-            higadura_klasea = "higadura-txikia"
-
-        makina_kodea = makina["id"]
-        errenkadak_html.append(f"""
-            <tr class="{errenkada_klasea}">
-                <td>{makina_kodea}</td>
-                <td>{makina['tenperatura']:.1f}</td>
-                <td>{makina['rpm']}</td>
-                <td><span class="higadura-marka {higadura_klasea}">{higadura}</span></td>
-                <td>{makina['torque']:.1f}</td>
-                <td><span class="egoera-marka {egoera_klasea}">{egoera_ikonoa}</span>{egoera}</td>
-            </tr>
-        """)
-
-    st.html(f"""
-    <div class="telemetria-taula-wrap">
-        <table class="telemetria-taula">
-            <thead><tr>
-                <th>CNC</th><th>Tenp.<small>(°C)</small></th><th>RPM</th>
-                <th>Higadura<small>(min)</small></th><th>Torque</th><th>Egoera</th>
-            </tr></thead>
-            <tbody>{''.join(errenkadak_html)}</tbody>
-        </table>
-    </div>
-    """)
 
 
 def historiko_grafikoa():
-    if historikoa.empty:
-        st.info("Ez dago historiko erabilgarririk; ez da serie simulaturik sortu.")
-        return
-    panel_izenburua(
-        f"📉 {kodea} · Erregistroen bilakaera"
-    )
-
-    aldagaiak = [
-        ("Prozesu-tenperatura (°C)", "#2EA885", "Tenp. °C"),
-        ("Bihurdura-momentua (Nm)", "#E5A636", "Momentua Nm"),
-        ("Erremintaren higadura (min)", "#E56F7C", "Higadura min")
-    ]
-
-    sns.set_style("whitegrid")
-    fig, axes = plt.subplots(
-        3, 1, figsize=(9, 4.5), sharex=True
-    )
-
-    fig.patch.set_facecolor(grafiko_atzeko_planoa)
-
-    for ax, (eremua, kolorea, etiketa) in zip(
-        axes, aldagaiak
-    ):
-        ax.set_facecolor(grafiko_atzeko_planoa)
-
-        sns.lineplot(
-            data=historikoa,
-            x="Ordua",
-            y=eremua,
-            ax=ax,
-            color=kolorea,
-            marker="o",
-            linewidth=2
-        )
-
-        ax.set_ylabel(
-            etiketa, fontsize=10, color=testua
-        )
-        ax.set_xlabel("")
-        ax.tick_params(
-            colors=testua, labelsize=10
-        )
-        ax.grid(True, linestyle="--", alpha=0.6, color=ertza)
-        ax.spines[["top", "right"]].set_visible(False)
-        ax.spines[["bottom", "left"]].set_color(ertza)
-
-    axes[-1].tick_params(
-        axis="x", rotation=0
-    )
-    plt.tight_layout(pad=0.65)
-    fig.subplots_adjust(
-        left=0.09,
-        right=0.985,
-        top=0.98,
-        bottom=0.12,
-        hspace=0.18
-    )
-    st.pyplot(fig, width="stretch")
-    plt.close(fig)
+    st.subheader(f"{kodea} · Historikoa")
+    if DATU_MODUA == "api":
+        show_history(kontsultatu(f"historikoa/{kodea}"))
+    else:
+        st.info("DEMO · ez dago artxibatutako historiko egiaztaturik.")
 
 
 def azken_neurketak():
-    panel_izenburua(
-        f"📈 {kodea} · Azken neurketa"
-    )
-
-    elementuak = [
-        ("Higadura", uneko_makina["higadura"], 300, "min"),
-        ("Torque", uneko_makina["torque"], 100, "Nm"),
-        ("RPM", uneko_makina["rpm"], 2000, ""),
-        ("Tenp.", uneko_makina["tenperatura"], 50, "°C")
-    ]
-
-    for izenburua, balioa, erreferentzia, unitatea in elementuak:
-        proportzioa = min(
-            balioa / erreferentzia * 100, 100
-        )
-
-        kolorea = (
-            "#E5B652" if izenburua == "Higadura"
-            else "#48C2A5"
-        )
-
-        st.markdown(f"""
-        <div class="sensor-row">
-            <div class="sensor-heading">
-                <span>{izenburua}</span>
-                <strong>{balioa:g} {unitatea}</strong>
-            </div>
-            <div class="sensor-track">
-                <div class="sensor-fill"
-                     style="width:{proportzioa}%;
-                            background:{kolorea};">
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.caption(
-        "Barrak: demoko erreferentziekiko proportzioa "
-        "(ez arrisku eredua)"
-    )
-
-    if uneko_makina["egoera"] == "Akatsa":
-        st.html('<div style="background:#FFF1F2; border:1.5px solid #FDA4AF; color:#BE123C; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Akats aktiboa — Berehalako berrikuspena</span></div>')
-    elif uneko_makina["egoera"] == "Berrikusteko":
-        st.html('<div style="background:#FFF7E6; border:1.5px solid #FDE68A; color:#B45309; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; gap:8px; margin-top:10px;"><span>⚠️</span><span>Makina hau berrikusteko dago</span></div>')
-    else:
-        st.html('<div style="background:#F0FDF4; border:1.5px solid #86EFAC; color:#15803D; border-radius:10px; padding:11px 14px; font-weight:800; font-size:12px; display:flex; align-items:center; gap:8px; margin-top:10px;"><span>✓</span><span>Makina egoera normalean</span></div>')
+    measurements(uneko_makina)
 
 
 def makina_sarea():
     with st.container(key="machine_panel"):
         panel_izenburua(
-            "Lantegiko mapa operatiboa",
-            "Konfiguratutako kokapenak · 5 lerro · "
-            "10 makina lerro bakoitzeko"
+            "Makinen hautatzailea",
+            "IDaren araberako aurkezpena · ez da kokapen fisikoa",
         )
-
-        st.markdown("""
-        <div class="machine-map-top">
-            <strong>SARRERA / HARRERA</strong>
-            <strong>BIDALKETA-EREMUA →</strong>
-        </div>
-        """, unsafe_allow_html=True)
-
-        for errenkada in range(5):
-            zutabeak = st.columns([0.78] + [1] * 10, gap="small")
-
-            with zutabeak[0]:
-                st.markdown(f"""
-                <div class="machine-line-label">
-                    <strong>{chr(65 + errenkada)} LERROA</strong>
-                    <small>10 CNC</small>
-                </div>
-                """, unsafe_allow_html=True)
-
-            for zutabea in range(10):
-                indizea = errenkada * 10 + zutabea
-                makina = next((m for m in makinak if m["zenbakia"] == indizea + 1), None)
-                if makina is None:
-                    continue
-                zenbakia = makina["zenbakia"]
-                makina_id = makina["id"]
-
-                egoera = makina["egoera"]
-
-                if egoera == "Akatsa":
-                    klasea = "emergency"
-                elif egoera == "Berrikusteko":
-                    if makina["higadura"] >= 210:
-                        klasea = "accelerated"
-                    elif makina["higadura"] >= 160:
-                        klasea = "necessary"
-                    else:
-                        klasea = "recommended"
-                else:
-                    klasea = "normal"
-
-                hautatuta = (
-                    makina_id ==
-                    st.session_state.hautatutako_makina
-                )
-
-                with zutabeak[zutabea + 1], st.container(
-                    key=(
-                        f"machine_{klasea}_{zenbakia}"
-                        f"{'_selected' if hautatuta else ''}"
-                    )
-                ):
-                    etiketa = f"{zenbakia:02d}"
-
+        for start in range(0, len(makinak), 10):
+            for col, makina in zip(st.columns(10), makinak[start : start + 10]):
+                with col:
                     if st.button(
-                        etiketa,
-                        key=f"machine_button_{zenbakia}",
-                        width="stretch",
-                        help=f"{makina_id}: {egoera}"
+                        str(makina["zenbakia"]),
+                        key=f"machine_button_{makina['zenbakia']}",
+                        help=f"{makina['id']}: {makina['egoera']}",
                     ):
-                        st.session_state.hautatutako_makina = (
-                            makina_id
-                        )
-                        st.query_params["makina"] = makina_id
+                        st.session_state.hautatutako_makina = makina["id"]
+                        st.query_params["makina"] = makina["id"]
                         st.rerun()
-
-        st.markdown(f"""
-        <div class="machine-legend">
-            <span><i class="state-normal"></i> Normala</span>
-            <span><i class="state-recommended"></i> Gomendatua</span>
-            <span><i class="state-necessary"></i> Beharrezkoa</span>
-            <span><i class="state-accelerated"></i> Bizkortua</span>
-            <span><i class="state-emergency"></i> Larrialdia</span>
-            <span><i class="state-nodata"></i> Daturik gabe</span>
-            <strong>Hautatua: {kodea}</strong>
-        </div>
-        """, unsafe_allow_html=True)
+        st.caption(f"Hautatua: {kodea} · {len(makinak)} makina iturrian")
 
 
 def egutegi_taula():
@@ -1025,10 +801,7 @@ def egutegi_taula():
 
 @st.dialog("Asteko berrikuspen-egutegia", width="large")
 def asteko_egutegia_ireki():
-    st.caption(
-        "Demo adibidea · ez da benetako erregistroa. "
-        "Ez da agindu operatiboa"
-    )
+    st.caption("Demo adibidea · ez da benetako erregistroa. Ez da agindu operatiboa")
     if DATU_MODUA != "demo":
         st.info("Ez dago mantentze-egutegi egiaztaturik.")
         return
@@ -1040,19 +813,15 @@ def egutegia():
     ikono_zutabea, izenburu_zutabea = st.columns([0.28, 3.72])
 
     with ikono_zutabea:
-        ireki = st.button(
-            "📅",
-            key="calendar_open",
-            help="Asteko egutegia ireki"
-        )
+        ireki = st.button("📅", key="calendar_open", help="Asteko egutegia ireki")
 
     with izenburu_zutabea:
         st.markdown(
             '<div class="calendar-heading">'
-            '<strong>Aste honetako berrikuspen-egutegia</strong>'
-            '<small>Demo adibidea · ez da benetako erregistroa. '
-            'Ez da agindu operatiboa</small></div>',
-            unsafe_allow_html=True
+            "<strong>Aste honetako berrikuspen-egutegia</strong>"
+            "<small>Demo adibidea · ez da benetako erregistroa. "
+            "Ez da agindu operatiboa</small></div>",
+            unsafe_allow_html=True,
         )
 
     if DATU_MODUA != "demo":
@@ -1072,15 +841,18 @@ def egoera_zerbitzuak():
         else "DEMO · Datu lokal simulatuak"
     )
 
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="status-bar">
         <strong>🛠 Zerbitzuen egoera</strong>
         <span>
             ● {testua} · {len(makinak)} CNC
-            {kpis['akatsak']} akats aktibo · {ordua}
+            {kpis["akatsak"]} CRITICA inferitu · {ordua}
         </span>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 # =============================
@@ -1115,17 +887,7 @@ elif orria == "Makinak":
 
 
 elif orria == "Datuak":
-    st.subheader(f"{kodea} · Analisi teknikoa")
-    makina_sarea()
-    c1, c2 = st.columns([2, 1], gap="medium")
-
-    with c1, st.container(key="history_panel"):
-        historiko_grafikoa()
-
-    with c2:
-        with st.container(key="measure_panel"):
-            azken_neurketak()
-        st.info("Osasun-indizea: ez dago modeloaren daturik.")
+    datuak_erakutsi(uneko_makina, kontsultatu, DATU_MODUA)
 
 
 elif orria == "Abisuak":
@@ -1141,8 +903,5 @@ elif orria == "Ezarpenak":
     )
 
     st.write("API:", FASTAPI_HELBIDEA)
-    st.write(
-        "Uneko gaia:",
-        "Iluna" if iluna else "Argia"
-    )
+    st.write("Uneko gaia:", "Iluna" if iluna else "Argia")
     st.write("Konfiguratutako makinak:", len(makinak))
