@@ -342,6 +342,10 @@ div[data-testid="stDataFrame"] {{
 }}
 
 /* Menua aplikaziotik kontrolatzen da, ez nabigatzailearen egoeratik. */
+[data-testid="stMainBlockContainer"] {{
+    padding-top: 52px !important;
+}}
+
 [data-testid="stSidebar"] {{
     display: {"block" if st.session_state.menu_irekia else "none"} !important;
     transform: none !important;

@@ -29,18 +29,22 @@ def measurements(machine):
 
 def provenance(machine):
     st.caption("Akatsa: uneko alerta inferitua, ez behatutako matxura")
-    for key, label in (
-        ("event_id", "Gertaera"),
-        ("event_key", "Gertaera-gako kanonikoa"),
-        ("timestamp", "Behaketa (UTC)"),
-        ("scored_at", "Inferentzia (UTC)"),
-        ("as_of", "Kontsultaren ebaketa (UTC)"),
-        ("age_seconds", "Adina (s)"),
-        ("prediction_scope", "Eremua"),
-        ("score_semantics", "Scorearen esanahia"),
-    ):
-        st.write(label + ":", fmt(machine.get(key)))
+    st.caption(
+        f"Behaketa (UTC): {fmt(machine.get('timestamp'))} · "
+        f"Adina (s): {fmt(machine.get('age_seconds'))}"
+    )
     with st.expander("Jatorria eta identitatea"):
+        for key, label in (
+            ("event_id", "Gertaera"),
+            ("event_key", "Gertaera-gako kanonikoa"),
+            ("timestamp", "Behaketa (UTC)"),
+            ("scored_at", "Inferentzia (UTC)"),
+            ("as_of", "Kontsultaren ebaketa (UTC)"),
+            ("age_seconds", "Adina (s)"),
+            ("prediction_scope", "Eremua"),
+            ("score_semantics", "Scorearen esanahia"),
+        ):
+            st.write(label + ":", fmt(machine.get(key)))
         st.json(machine)
 
 
