@@ -62,8 +62,12 @@ COPY --from=patches /patches/node_modules/smol-toml-patched /usr/share/kibana/no
 COPY --from=patches /patches/node_modules/undici-v6 /usr/share/kibana/node_modules/@elastic/opamp-client-node/node_modules/undici
 COPY --from=patches /patches/node_modules/undici-v7 /usr/share/kibana/node_modules/undici
 COPY --from=patches /patches/node_modules/zod-patched /usr/share/kibana/node_modules/zod
-COPY deploy/images/kibana-patches/apply-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-patch.js /tmp/
-RUN /usr/share/kibana/node/default/bin/node /tmp/apply-node-forge-patch.js \
-    && /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-patch.js \
-    && rm /tmp/apply-node-forge-patch.js /tmp/test-node-forge-patch.js
+RUN rm -rf /usr/share/kibana/node_modules/node-forge
+# Replace actual upstream library and dist bytes; do not reapply the 1.4.0 backport.
+COPY --from=patches /patches/node_modules/node-forge-patched /usr/share/kibana/node_modules/node-forge
+COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js /tmp/
+RUN /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-patch.js \
+    && /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-chain.js \
+    && /usr/share/kibana/node/default/bin/node /tmp/test-follow-redirects.js \
+    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js
 USER 1000

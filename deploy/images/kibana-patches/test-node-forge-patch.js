@@ -1,5 +1,5 @@
 const assert = require('assert');
-const forge = require('/usr/share/kibana/node_modules/node-forge');
+const forge = require(process.argv[2] || '/usr/share/kibana/node_modules/node-forge');
 
 // Upstream CVE-2026-85393 regression vector from digitalbazaar/forge#1152.
 const N = new forge.jsbn.BigInteger(

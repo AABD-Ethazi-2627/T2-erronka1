@@ -8,12 +8,21 @@ RUN mkdir /src \
     && go get github.com/google/cel-go@v0.29.0 golang.org/x/net@v0.62.0 \
     && CGO_ENABLED=0 go build -trimpath -o /tmp/filebeat ./filebeat
 
-FROM docker.elastic.co/beats/filebeat-wolfi:9.5.5@sha256:b644d58f79f2a53b46ce558efa706a51ba211e0d0f89352bfe33b3973958e3eb
+FROM docker.elastic.co/beats/filebeat-wolfi:9.5.5@sha256:b644d58f79f2a53b46ce558efa706a51ba211e0d0f89352bfe33b3973958e3eb AS filebeat-base
 
 USER root
+# A cheap CI target isolates the OS failure from the expensive Go build.
+FROM filebeat-base AS filebeat-os
+RUN id \
+    && for entry in / /etc /etc/krb5.conf /tmp /var/cache/apk /lib/apk/db; do \
+         if test -e "$entry"; then stat -c '%a %u:%g %n' "$entry"; else echo "absent: $entry"; fi; \
+       done \
+    && apk info --who-owns /etc/krb5.conf \
+    && apk info -L krb5-conf
 RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
     && sed -i -E '/^(ca-certificates-bundle|curl|glibc-2[.]44|glibc-2[.]44-locale-posix|ld-linux-2[.]44|libbrotlicommon1|libbrotlidec1|libbrotlienc1|libcrypt1-2[.]44|libcurl-openssl4)=/s/=.*$//' /etc/apk/world \
-    && apk upgrade --no-cache \
+    && apk upgrade --no-cache --verbose \
     && rm -f /usr/share/filebeat/filebeat
+FROM filebeat-os AS filebeat-runtime
 COPY --from=filebeat-builder --chown=1000:0 --chmod=0755 /tmp/filebeat /usr/share/filebeat/filebeat
 USER 1000
