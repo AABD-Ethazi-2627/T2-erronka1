@@ -124,12 +124,17 @@ def metadata(scope, start, end, rows):
     }
 
 
-def load(reader, scope, start, end, *, all_history=False):
+def load(reader, scope, start, end, *, all_history=False, machine_id=None):
     if reader is None:
         raise HTTPException(503, "Read storage not configured")
     try:
         unique = {}
-        for row in reader.rows(scope, start, end):
+        selected = (
+            reader.rows_for_machine(scope, machine_id, start, end)
+            if machine_id is not None and hasattr(reader, "rows_for_machine")
+            else reader.rows(scope, start, end)
+        )
+        for row in selected:
             if not compatible(row, scope):
                 continue
             value = project(row).model_dump()
@@ -336,10 +341,25 @@ def create_read_router(
 
         if not re.fullmatch(r"CNC-[0-9]{3}", id):
             raise HTTPException(422, "Invalid machine ID")
-        rows = load(archive, scope, start, end, all_history=True)
+        rows = load(archive, scope, start, end, all_history=True, machine_id=id)
         machine = [r for r in rows if r["id"] == id]
         if not machine:
-            raise HTTPException(404, "Machine absent from configured archive scope")
+            try:
+                witness = (
+                    archive.known_machine(scope, id)
+                    if hasattr(archive, "known_machine")
+                    else None
+                )
+                if witness is not None and (
+                    not compatible(witness, scope) or project(witness).id != id
+                ):
+                    raise ValueError("Invalid machine existence witness")
+            except Exception:  # noqa: BLE001 -- adapters fail closed at HTTP boundary
+                raise HTTPException(
+                    503, "Read storage unavailable or incompatible"
+                ) from None
+            if witness is None:
+                raise HTTPException(404, "Machine absent from configured archive scope")
         return [r for r in machine if start <= utc(r["timestamp"]) < end]
 
     @router.get("/historikoa/{id}", response_model=History)

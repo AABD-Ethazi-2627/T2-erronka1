@@ -86,24 +86,73 @@ or schema are created. A concurrent writer's uncommitted objects are invisible. 
 points. Telemetry-only records do not imply model-scoped observations. Coverage
 means observed predictions, not expected physical sampling completeness.
 
-All committed objects are hash-checked, including out-of-window and other-kind
-objects. This deliberate strict policy mirrors CG15's writer corruption gate:
-503 signals an archive requiring reconciliation, rather than certifying an intact
-archive when a known committed object is corrupt. This is tested outside the
-query window. Unknown machines also require this check. Files absent from the
-ledger (orphans) are never scanned. Paths must resolve beneath the configured
-root. Event receipt/canonical hash, row identity and accepted delivery fingerprint
-must all match. DuckDB consumes verified Arrow bytes, avoiding a second unverified
-Parquet filesystem read. Reads never repair receipts or create inference results.
+The additive `prediction_read_index` selects committed predictions by source,
+model, policy, optional decision threshold, machine and exact UTC microsecond
+window **before** opening objects. Each entry links the composite event key and
+canonical hash to its Parquet path and one accepted delivery ID. The reader
+verifies both the selected Parquet and that delivery's original bronze bytes
+against their `objects` hashes, the `events` canonical hash, and the accepted
+`deliveries` fingerprint (`prediction` + NUL + original bytes). JSON need not use
+canonical whitespace. All indexed metadata must match the verified prediction,
+and Parquet must contain that same single prediction. A duplicate retains the
+first accepted representative receipt; it never substitutes a rejected delivery.
 
-Limits: 20,000 ledger objects/events/deliveries and 64 MiB verified bytes per
-request; fail 503 rather than truncate. ES snapshot/count limits are below.
+The reader checks every object it uses, not every retained object. Unrelated
+old, other-source, telemetry or rejected objects do not consume the query budget;
+their corruption is not detected or certified by this GET. For an empty interval,
+one separately bounded, verified latest prediction in the same machine/scope
+proves existence (200 empty rather than 404). This witness can be outside the
+requested interval; if corrupt, the request fails 503. Unknown machines require
+no object reads. Files absent from `objects` (orphans) are never scanned. Paths
+must resolve beneath the configured root. DuckDB consumes verified Arrow bytes,
+avoiding a second unverified Parquet filesystem read. Reads never repair receipts
+or create inference results.
+
+Limits remain 20,000 **selected** objects and 64 MiB verified bytes per request;
+each prediction needs two objects, so at most 10,000 predictions can participate.
+Exhaustion returns 503, never truncated counts. Pagination does not bypass this
+bound: full selected rows are validated before fingerprinting and aggregation.
+Six-month periods can still exceed these limits for a dense single-machine scope;
+this fix removes dependence on unrelated retention, not the need for a separate
+larger-scale aggregation design. ES snapshot/count limits are below.
 DuckDB: one in-memory connection per read, one thread, 128 MB internal memory,
 no spill directory, external access disabled after connection initialization,
 autoinstall/autoload extensions disabled. No JSON/network extension is required.
 These bounds do not prove total RSS below 512 MB under concurrent load; container
 RSS/concurrency acceptance remains #109/#110. Periods validate the archive once
 per request and then filter that snapshot into the three windows.
+
+### Index coverage and legacy migration
+
+New writes commit index entries in the same transaction as object/event/delivery
+receipts, before ACK. Small transactional coverage counters track prediction
+objects and index entries; missing coverage, version mismatch, missing triggers,
+or mutated/deleted index metadata fail closed. Prediction-object deletion or path
+mutation marks coverage dirty, so equal counts cannot hide replacement objects.
+An older writer appending predictions creates a detectable coverage gap. These
+checks assume the existing trusted SQLite ledger boundary; they do not authenticate
+an attacker rewriting the ledger and its triggers together.
+
+GET opens only `mode=ro`; it never initializes or repairs an index. A legacy archive
+without the index, or mixed legacy/new writes with incomplete coverage, returns
+503 until this explicit offline operation succeeds, with **all writers stopped**:
+
+```sh
+python -m scripts.archive_read_index /owned/archive --writer-stopped
+```
+
+The command requires an existing ledger, takes `BEGIN IMMEDIATE` without waiting
+for another writer, verifies accepted original bronze receipts and all resulting
+indexed predictions, and commits complete coverage atomically. It uses only ledger
+paths, preserves all existing objects and all three original receipt tables, and
+is idempotent. A failure rolls back new index changes. Back up the archive first;
+the flag confirms an operational prerequisite, it does not stop writer processes.
+This is a full offline verification pass and can be expensive for a large archive.
+
+The writer's pre-existing **global** committed-object reconciliation remains
+unchanged. Its per-write hash scan, deployment resource bounds and sustained-rate
+acceptance need separate measurements; this read fix makes no sustained 4 events/s
+or unlimited retention claim.
 
 ## Elasticsearch snapshot and exact KPI capacity
 
@@ -167,7 +216,9 @@ matrix. Reused validation must retain its original partition label.
 ## Assembly and verification limits
 
 Runtime additions for parent #109: `duckdb==2.0.0`, `pyarrow==23.0.1`,
-`httpx==0.28.1`, and copy `scripts/duckdb_output.py` into the scoring image.
+`httpx==0.28.1`, and copy `scripts/duckdb_output.py` and
+`scripts/archive_read_index.py` into the scoring image. The latter's read path has
+no Kafka imports; its offline backfill additionally needs `scripts/platform_io.py`.
 No dependency manifests, lock, exports, Dockerfile or dashboard changed here.
 Local tests use synthetic payloads, actual CG15 SQLite/Parquet and ASGI, with ES
 HTTP doubles; they do not establish live ES, SMB or image integration. Fixtures

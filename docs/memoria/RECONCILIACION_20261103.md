@@ -139,3 +139,43 @@ Los runbooks aclaran dónde obtener el nombre del contenedor y enlazan la
 preparación Filebeat desde el ensayo Kafka. No cambia ningún contrato, modelo,
 resultado histórico ni aceptación humana. El inventario actual actualiza solo
 el runner Kafka, su test, esos dos runbooks y este documento, tras revisarlos.
+
+
+## Ajuste posterior de selección del archivo comprometido
+
+Sobre el padre `723ab6b29451578b27d7befdb4c8526310e6ae23`, se inspecciona el delta
+local del índice de lectura CG15. El escritor añade la selección por fuente,
+modelo, política, umbral, máquina y ventana UTC en la misma transacción que los
+recibos aceptados. El lector toma un snapshot breve de SQLite en `mode=ro`, cierra
+la conexión y comprueba los hashes del Parquet seleccionado y de su bronze original,
+además del evento y recibo aceptado. Los objetos ajenos a esa selección dejan de
+consumir el presupuesto de la petición. El test de existencia distingue una máquina
+desconocida de una conocida sin observaciones dentro de la ventana.
+
+Esta implementación no certifica la integridad de todos los objetos retenidos.
+Los archivos anteriores sin cobertura del índice devuelven 503 hasta ejecutar la
+migración **offline y explícita**, con todos los escritores detenidos:
+`python -m scripts.archive_read_index /owned/archive --writer-stopped`.
+La migración verifica recibos/predicciones y conserva los bytes de los objetos y
+las tablas originales; GET nunca crea ni repara el índice. El Dockerfile de API
+incorpora el helper de lectura. Esto describe el código inspeccionado, no demuestra
+que una imagen reconstruida lo contenga ni que se haya migrado un archivo vivo.
+
+El agente implementador informa de 129 pruebas y 126 subtests en ocho suites
+focalizadas, más una regresión posterior de replay/bronze no canónico; también
+informa Ruff y `git diff --check` correctos. Son pruebas locales con SQLite,
+Parquet y ASGI, sin servicios ni red. Esta conciliación documental no las vuelve
+a ejecutar: la comprobación independiente del coordinador y la validación de la
+imagen corresponden a evidencias separadas. Los límites siguen siendo 20 000
+objetos seleccionados (dos por predicción, máximo 10 000 predicciones) y 64 MiB;
+la paginación no evita validar toda la selección. Los periodos densos todavía
+pueden devolver 503. El escaneo global del escritor no cambia y no se afirma
+caudal sostenido, RSS/concurrencia, SMB ni aceptación humana.
+
+Se actualizan únicamente los hashes de `scripts/archive_consumer.py`,
+`scoring/read_storage.py`, `scoring/read_api.py`, `scoring/Dockerfile`,
+`tests/test_read_api.py` y `docs/backend/READ_API.md`, y se añaden
+`scripts/archive_read_index.py` y `tests/test_archive_read_index.py`.
+También se actualiza el hash de este apéndice. Los valores anteriores quedan en
+`local_archive_index_followup.previous_current_hashes`; la base histórica,
+`historical_snapshot`, el alcance del modelo y los revisores pendientes no cambian.

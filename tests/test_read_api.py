@@ -375,7 +375,7 @@ def test_live_writer_uncommitted_object_invisible(tmp_path):
     )
 
 
-def test_archive_outside_window_corruption_fails_closed_and_capacity(tmp_path):
+def test_archive_existence_witness_corruption_fails_closed_and_capacity(tmp_path):
     reader = archive_at(tmp_path, [BASE])
     assert (
         get(
@@ -384,6 +384,8 @@ def test_archive_outside_window_corruption_fails_closed_and_capacity(tmp_path):
         == 503
     )
     next(tmp_path.rglob("*.parquet")).write_bytes(b"corrupt")
+    # Empty-window 200 requires one verified existence witness. The only
+    # witness is corrupt; this does not audit all unrelated historical objects.
     assert (
         get(
             client(archive=reader), "historikoa/CNC-049", as_of="2026-11-01T00:00:00Z"
@@ -464,13 +466,13 @@ def test_api_snapshot_is_accepted_by_dashboard_domain():
 def test_archive_releases_sqlite_snapshot_before_object_validation(
     tmp_path, monkeypatch
 ):
-    from scoring import read_storage
+    from scripts.archive_read_index import ObjectBudget
 
     reader = archive_at(tmp_path, [BASE])
-    original = read_storage.digest
+    original = ObjectBudget.read
     written = False
 
-    def digest_with_writer(raw):
+    def read_with_writer(budget, root, name, expected):
         nonlocal written
         if not written:
             written = True
@@ -485,9 +487,9 @@ def test_archive_releases_sqlite_snapshot_before_object_validation(
                 ],
                 lambda: None,
             )
-        return original(raw)
+        return original(budget, root, name, expected)
 
-    monkeypatch.setattr(read_storage, "digest", digest_with_writer)
+    monkeypatch.setattr(ObjectBudget, "read", read_with_writer)
     result = get(client(archive=reader), "historikoa/CNC-049")
     assert result.status_code == 200
     assert result.json()["metadata"]["count"] == 1

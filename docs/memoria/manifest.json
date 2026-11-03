@@ -65,7 +65,7 @@
     "deploy/cg14/scripts/run-restore-e2e.py": "5682303ad31681b58e59f004fd7d3392d09073f1f41140ebb2d30133b96d1076",
     "planning/registry.py": "7c13920ae73f76f3329eb612763a20f18544c9b04d28357bde31aa0f2f3b8879",
     "scoring/requirements.txt": "d33ff0616388dcc56aeeea134732172cbb46980e64e227a19c3b77a8092e1381",
-    "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
+    "scripts/archive_consumer.py": "dc6f5c25ba129bdad03aacf013f06422ab485de06b40f5f1d6f7ea3a26ef1875",
     "scripts/capture_smb.py": "b620d24c1cd7dc524c5e0975eb9731e093aa8610b232f3c586f142f00734858b",
     "scripts/cg23_capacity.py": "44294462f42a7b6b54ebd2d163e1dc46967305c7660bc36301a7cd0c2528e7bd",
     "scripts/check_repository_layout.py": "2bef665dc0a2192f19b4a8e7504f9d15b7ade12328f62e608e5a2057f8685475",
@@ -235,7 +235,7 @@
     "deploy/images/uv-stage.Dockerfile": "de1fd7afab25cc118c90bf7805d8a0d0034a4d6f7e0f3641609a70b5d6eb102c",
     "deploy/images/uv.Dockerfile": "de1fd7afab25cc118c90bf7805d8a0d0034a4d6f7e0f3641609a70b5d6eb102c",
     "deploy/images/uv-rustls.patch": "4b28ce364b3865a2d5bfebff64faee810f9067e32cb6bee1a0967f23f6f09047",
-    "scoring/Dockerfile": "17a843475a66da46fd1706bccac43e63337297d46bd0e63b435e76b4c8c5f1c9",
+    "scoring/Dockerfile": "b0b910974a1201baab5d4555334ac0195d5a07d86e137c1f95caf812560e30af",
     "deploy/images/nifi.Dockerfile": "a6e0c009b0656fa8c709511e132449f4c49b4dc14ba4c7dac5757f6c1f9f4b83",
     "deploy/images.json": "3251117ba04ef51276740ac0ef2553c604fad2a1ab762cdb3830ccfee0995cc1",
     "deploy/build-targets.json": "5852a393ca394f08c7351cb20ad30ee77d398ac89395ca92b9d96e89fbe449f2",
@@ -271,8 +271,8 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "9af68add92cf485f1cfa336e1c3ae0a98bb4b2c7c86b8354632bc540894e66a5",
-    "docs/backend/READ_API.md": "44ac7e573d67cf9245f204f0c9940ed829f2955e4d5bc464d73330fa38c9baa0",
+    "docs/memoria/RECONCILIACION_20261103.md": "7981cc38d6cb51bfe07d687595aea3b05a1ad44b9eb77601ffc672abfeef093f",
+    "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
     "docs/integration/README.md": "75d16c5f068e0e37118796fa4e0c986c23821a79efd1308c54626720e82c8cb1",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
     "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
@@ -283,9 +283,9 @@
     "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md": "fc823ceb43f0b0df5c2a2782f1468915a54089d0fb2f648e10c41261185ded02",
     "docs/evidence/DEPENDENCY_RECONCILIATION_20261103.md": "1ec16b364101c5dd9de53b0f717eb6ca5d812b1c6dc7d3e4e9871852df87b229",
     "docs/evidence/KIBANA_FILEBEAT_BOUNDED_20261103.md": "1bbd00c3ee0358ab989629dbc279e347745740a9fa87cfa51074f364fabfd3a0",
-    "scoring/read_api.py": "907bb290a5b054a378e3e475f8cf2c3d4b8a5a1caa768e7fa7c1211f89390b41",
+    "scoring/read_api.py": "0a76faa5ecc99f72d1e0b6bccfbc84d987d4be0f24d99e75a199a111c604f858",
     "scoring/read_models.py": "882d5071490e619a997880ffc0b971eea3fc6580442dd1dddb39d30d385d966c",
-    "scoring/read_storage.py": "61c5ae119c56ce128ed08295bb0ebf28399baf709e3ee8910cc7abae8eb36d1a",
+    "scoring/read_storage.py": "54d1420768e8a51b55dee92da62e2afb29228aadf9344a0acf4ca8135402b9fc",
     "scripts/check_runtime_image.py": "e794b6a64d8fc1a472aa171c41d59291e8e23b61e6b34cf310c04e20e94cdce2",
     "dashboard_laneki/Dockerfile": "422475721e154bce338254700c7a5ce9c6a7866f7d216c3f997b21edc8b5698d",
     "dashboard_laneki/INTEGRATION.md": "c6c489243e5ec75fb397c08e0c7e055003fb74a7ae1cbf1d62343ed6e4e9aa6e",
@@ -316,9 +316,11 @@
     "tests/test_integration_kafka_worker_local.py": "09b27a370a30929b7ede5579c93e424e5bbdc09d21ed8f939ab05afa21058e06",
     "tests/test_integration_wiring.py": "d6192c213323a0cf8ab1b1d31238a89e8b1eaa43d78582e4c8d077d2c5dd5624",
     "tests/test_integration_worker_local.py": "35dc033ba69e5d4716d2826382bcf0e57e738efed817c773030d46a0139149ff",
-    "tests/test_read_api.py": "99b956232ac323c74eb825876082f225bc16ed40d5c2f9a7c62b664c4260b0c9",
+    "tests/test_read_api.py": "a0f8d5f74f97acabfbd037f6150215fb2512c25526a4148fd3f9437bbbde2510",
     "tests/test_read_es_scalability.py": "98676cdf5b8be656fcb6e23537bdddad06c925e4c5fb8c2256bec26caeaf6d0a",
-    "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a"
+    "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a",
+    "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
+    "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -462,5 +464,25 @@
       "docs/memoria/RECONCILIACION_20261103.md": "32f129ffeef2c39ba85554d3f5ed16c14acb3411b99c2061837dd72dd3d991be"
     },
     "verification": "48 focused offline runner tests; Ruff; documentary verifier; no live timeout claim"
+  },
+  "local_archive_index_followup": {
+    "parent_commit": "723ab6b29451578b27d7befdb4c8526310e6ae23",
+    "document": "docs/memoria/RECONCILIACION_20261103.md",
+    "reason": "Select committed prediction objects before file verification; explicit offline legacy index migration; include reader helper in API image input",
+    "previous_current_hashes": {
+      "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
+      "scoring/read_storage.py": "61c5ae119c56ce128ed08295bb0ebf28399baf709e3ee8910cc7abae8eb36d1a",
+      "scoring/read_api.py": "907bb290a5b054a378e3e475f8cf2c3d4b8a5a1caa768e7fa7c1211f89390b41",
+      "scoring/Dockerfile": "17a843475a66da46fd1706bccac43e63337297d46bd0e63b435e76b4c8c5f1c9",
+      "tests/test_read_api.py": "99b956232ac323c74eb825876082f225bc16ed40d5c2f9a7c62b664c4260b0c9",
+      "docs/backend/READ_API.md": "44ac7e573d67cf9245f204f0c9940ed829f2955e4d5bc464d73330fa38c9baa0",
+      "docs/memoria/RECONCILIACION_20261103.md": "9af68add92cf485f1cfa336e1c3ae0a98bb4b2c7c86b8354632bc540894e66a5"
+    },
+    "new_inventory_paths": [
+      "scripts/archive_read_index.py",
+      "tests/test_archive_read_index.py"
+    ],
+    "verification": "Documentary verifier only in this reconciliation; implementer reports 129 tests and 126 subtests plus one subsequent regression; independent parent tests and image/runtime validation recorded separately",
+    "limits": "Selected 20000 objects / 64 MiB; at most 10000 predictions; no sustained writer throughput, complete retained-object audit, live archive migration, container acceptance, SMB or human approval claimed"
   }
 }

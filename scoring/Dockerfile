@@ -29,7 +29,7 @@ COPY scoring/requirements.txt /app/scoring/requirements.txt
 COPY --from=uv /uv /usr/local/bin/uv
 RUN uv pip sync --python /usr/bin/python3.11 --system --no-cache --require-hashes --only-binary :all: /app/scoring/requirements.txt
 COPY scoring /app/scoring
-COPY scripts/validate_contracts.py scripts/duckdb_output.py /app/scripts/
+COPY scripts/validate_contracts.py scripts/duckdb_output.py scripts/archive_read_index.py /app/scripts/
 COPY contracts /app/contracts
 RUN mkdir /state && chown 65532:65532 /state
 USER 65532:65532

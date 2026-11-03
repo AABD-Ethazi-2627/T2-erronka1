@@ -1,13 +1,7 @@
 """Explicit read sources. Never initialize, repair, or write an archive."""
 
-import hashlib
 import json
-import sqlite3
 from pathlib import Path
-
-
-def digest(raw):
-    return hashlib.sha256(raw).hexdigest()
 
 
 def canonical(obj):
@@ -288,104 +282,57 @@ class ElasticsearchReader:
 
 class ArchiveReader:
     def __init__(self, root, *, max_objects=20000, max_bytes=64 * 1024 * 1024):
+        if any(type(n) is not int or n < 1 for n in (max_objects, max_bytes)):
+            raise ValueError("Positive archive query limits required")
         self.max_objects, self.max_bytes = max_objects, max_bytes
         self.root = Path(root).resolve()
 
+    def _verified(self, entries):
+        from scripts.archive_read_index import ObjectBudget, verify_entry
+
+        budget = ObjectBudget(self.max_objects, self.max_bytes)
+        return [verify_entry(self.root, entry, budget) for entry in entries]
+
+    def known_machine(self, scope, machine_id):
+        """Return one verified existence witness, including outside the query window."""
+        from scripts.archive_read_index import read_snapshot
+
+        entries = read_snapshot(self.root, scope, machine_id=machine_id, limit=1)
+        return self._verified(entries)[0] if entries else None
+
+    def rows_for_machine(self, scope, machine_id, start, end):
+        return self._rows(scope, start, end, machine_id=machine_id)
+
     def rows(self, scope, start, end):
+        return self._rows(scope, start, end)
+
+    def _rows(self, scope, start, end, *, machine_id=None):
         import duckdb
         import pyarrow as pa
-        import pyarrow.parquet as pq
 
+        from scripts.archive_read_index import read_snapshot
         from scripts.duckdb_output import to_pandas_utc
 
-        root = self.root
-        # mode=ro forbids accidental creation; normal SQLite locking sees committed state.
-        con = sqlite3.connect((root / "ledger.sqlite").as_uri() + "?mode=ro", uri=True)
-        try:
-            con.execute("PRAGMA busy_timeout=1000")
-            con.execute("BEGIN")
-            objects = con.execute(
-                "SELECT path, hash FROM objects ORDER BY path LIMIT ?",
-                (self.max_objects + 1,),
-            ).fetchall()
-            if len(objects) > self.max_objects:
-                raise ValueError("Archive object capacity exceeded")
-            if (
-                con.execute("SELECT count(*) FROM deliveries").fetchone()[0]
-                > self.max_objects
-            ):
-                raise ValueError("Archive receipt capacity exceeded")
-            if (
-                con.execute("SELECT count(*) FROM events").fetchone()[0]
-                > self.max_objects
-            ):
-                raise ValueError("Archive event capacity exceeded")
-            events = dict(con.execute("SELECT id, hash FROM events"))
-            accepted = {
-                h
-                for h, outcome in con.execute("SELECT hash, outcome FROM deliveries")
-                if outcome in ("stored", "duplicate")
-            }
-        finally:
-            # Snapshot immutable receipt metadata, then release the SQLite read lock.
-            # Object bytes are immutable and verified against that snapshot below.
-            con.close()
-        if len(objects) > self.max_objects:
-            raise ValueError("Archive object capacity exceeded")
-        rows = []
-        accepted_keys = set()
-        total_bytes = 0
-        for name, expected in objects:
-            path = (root / name).resolve()
-            if not path.is_relative_to(root) or path == root:
-                raise ValueError("Archive path escapes root")
-            size = path.stat().st_size
-            total_bytes += size
-            if total_bytes > self.max_bytes:
-                raise ValueError("Archive byte capacity exceeded")
-            with path.open("rb") as handle:
-                raw = handle.read(size + 1)
-            if len(raw) != size:
-                raise ValueError("Archive changed during read")
-            if digest(raw) != expected:
-                raise ValueError("Committed archive corruption")
-            if name.startswith("bronze/") and digest(b"prediction\0" + raw) in accepted:
-                accepted_keys.add(digest(canonical(json.loads(raw))))
-            if not name.startswith("prediction/date=") or not name.endswith(".parquet"):
-                continue
-            table = pq.read_table(pa.BufferReader(raw))
-            for row in table.to_pylist():
-                obj = json.loads(row["payload_json"])
-                key = digest(
-                    json.dumps(
-                        [
-                            "prediction",
-                            obj["event_id"],
-                            obj["model_artifact_sha256"],
-                            obj["policy"],
-                        ]
-                    ).encode()
-                )
-                if (
-                    path.stem != key
-                    or events.get(key) != digest(canonical(obj))
-                    or any(
-                        row[k] != obj[k]
-                        for k in ("event_id", "machine_id", "timestamp")
-                    )
-                ):
-                    raise ValueError("Archive event receipt mismatch")
-                # The accepted delivery hashes bind original bronze bytes, which need
-                # not have canonical whitespace. Resolve their exact payload below.
-                rows.append(obj)
-        if any(digest(canonical(row)) not in accepted_keys for row in rows):
-            raise ValueError("No accepted delivery receipt")
-        # Read verified bytes via Arrow, not a second unverified filesystem scan.
-        scoped = [r for r in rows if compatible(r, scope)]
-        if not scoped:
+        # Each selected prediction uses exactly one Parquet and one accepted
+        # bronze receipt. Metadata is read under a short SQLite snapshot; no
+        # SQLite read lock remains while immutable bytes are verified below.
+        entries = read_snapshot(
+            self.root,
+            scope,
+            start,
+            end,
+            machine_id,
+            limit=self.max_objects // 2 + 1,
+        )
+        if len(entries) > self.max_objects // 2:
+            raise ValueError("Selected archive object capacity exceeded")
+        rows = self._verified(entries)
+        if any(not compatible(row, scope) for row in rows):
+            raise ValueError("Prediction scope differs from indexed selection")
+        if not rows:
             return []
         table = pa.Table.from_pylist(
-            [{"payload_json": canonical(r).decode()} for r in scoped]
+            [{"payload_json": canonical(row).decode()} for row in rows]
         )
         with duckdb.connect(
             ":memory:",
