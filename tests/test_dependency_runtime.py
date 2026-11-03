@@ -22,7 +22,17 @@ class RuntimeExportTests(unittest.TestCase):
             self.assertIn("==", line)
             self.assertIn("--hash=sha256:", line)
             packages[line.split("==", 1)[0]] = line
-        for name in ("fastapi", "pydantic", "pydantic-core", "h11", "scipy", "numpy", "duckdb", "pyarrow", "httpx"):
+        for name in (
+            "fastapi",
+            "pydantic",
+            "pydantic-core",
+            "h11",
+            "scipy",
+            "numpy",
+            "duckdb",
+            "pyarrow",
+            "httpx",
+        ):
             self.assertIn(name, packages)
         for name in ("catboost", "pytest", "httpx2", "kafka-python", "matplotlib"):
             self.assertNotIn(name, packages)

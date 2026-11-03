@@ -57,10 +57,13 @@ class ImageScanGateTests(unittest.TestCase):
         self.assertTrue(validate("nifi-archives", data))
         data["Results"][1]["Type"] = "jar"
         self.assertEqual(validate("nifi-archives", data), [])
-        data["Results"][1]["Vulnerabilities"] = [{
-            "VulnerabilityID": "CVE-fixture", "PkgName": "wire-runtime-jvm",
-            "InstalledVersion": "5.2.0",
-        }]
+        data["Results"][1]["Vulnerabilities"] = [
+            {
+                "VulnerabilityID": "CVE-fixture",
+                "PkgName": "wire-runtime-jvm",
+                "InstalledVersion": "5.2.0",
+            }
+        ]
         self.assertTrue(validate("nifi-archives", data))
 
     def test_clean_regular_image_passes(self):

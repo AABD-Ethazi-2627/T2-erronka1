@@ -1,8 +1,9 @@
 """Exercise the actual serving closure offline under the API container limits."""
+
 import argparse
 import subprocess
 
-PROBE = r'''
+PROBE = r"""
 import json
 import duckdb
 import pyarrow as pa
@@ -25,20 +26,37 @@ frame = to_pandas_utc(connection.sql("SELECT TIMESTAMPTZ '2026-11-03 00:00:00+00
 assert str(frame.ts.dtype) == "datetime64[us, UTC]", frame.ts.dtype
 assert connection.execute("SELECT current_setting('autoinstall_known_extensions')").fetchone() == (False,)
 print(json.dumps({"duckdb": duckdb.__version__, "pyarrow": pa.__version__, "httpx": httpx.__version__, "row": row}))
-'''
+"""
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('image')
+    parser.add_argument("image")
     args = parser.parse_args()
-    subprocess.run([
-        'docker', 'run', '--rm', '--network=none', '--read-only', '--memory=512m',
-        '--memory-swap=512m', '--cpus=1', '--pids-limit=64', '--cap-drop=ALL',
-        '--security-opt=no-new-privileges', '--tmpfs=/tmp:rw,noexec,nosuid,size=64m',
-        '--env=OPENBLAS_NUM_THREADS=1', '--entrypoint=python', args.image, '-c', PROBE,
-    ], check=True, timeout=90)
+    subprocess.run(
+        [
+            "docker",
+            "run",
+            "--rm",
+            "--network=none",
+            "--read-only",
+            "--memory=512m",
+            "--memory-swap=512m",
+            "--cpus=1",
+            "--pids-limit=64",
+            "--cap-drop=ALL",
+            "--security-opt=no-new-privileges",
+            "--tmpfs=/tmp:rw,noexec,nosuid,size=64m",
+            "--env=OPENBLAS_NUM_THREADS=1",
+            "--entrypoint=python",
+            args.image,
+            "-c",
+            PROBE,
+        ],
+        check=True,
+        timeout=90,
+    )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
