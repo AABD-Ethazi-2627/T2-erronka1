@@ -420,3 +420,25 @@ def test_get_never_infers_or_creates_response_ledger(tmp_path):
     assert get(c, "makinak").status_code == 200
     assert get(c, "kpis").status_code == 200
     assert not (tmp_path / "responses.sqlite3").exists()
+
+
+def test_mixed_ledger_telemetry_is_not_a_model_scoped_point(tmp_path):
+    telemetry = json.loads(Path("contracts/examples/valid/telemetry.json").read_text())
+    telemetry["source"] = BASE["source"]
+    reader = archive_at(tmp_path, [BASE, {**BASE, "policy": "f2"}])
+    consume(
+        tmp_path,
+        [
+            ("telemetry", "telemetry", json.dumps(telemetry).encode()),
+            ("rejected", "telemetry", b"invalid"),
+        ],
+        lambda: None,
+    )
+    result = get(client(archive=reader), "historikoa/CNC-049").json()
+    assert result["metadata"]["count"] == 1
+    assert result["metadata"]["events"][0]["policy"] == SCOPE.policy
+    assert result["metadata"]["events"][0]["event_key"] == next(
+        p.stem
+        for p in (tmp_path / "prediction").rglob("*.parquet")
+        if p.stem == result["metadata"]["events"][0]["event_key"]
+    )

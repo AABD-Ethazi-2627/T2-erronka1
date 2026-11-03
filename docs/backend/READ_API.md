@@ -131,3 +131,10 @@ on each interpreter. Both skips are the existing packaged-model tests without a
 bundle. Ruff and git diff --check passed. Live-writer test observes one committed
 row during a second pending delivery and two after its commit. This is local
 filesystem concurrency evidence, not a read-only Docker mount acceptance test.
+
+Interpreter verification: dedicated `/tmp/cnc-backend-311` uses CPython 3.11.17;
+`/tmp/cnc-backend-312` uses 3.12.14. The inherited repository venv turned out to
+use 3.12 and was not counted as 3.11 evidence. A subsequent mixed-ledger regression
+(telemetry + two prediction policies + rejected delivery) passed independently on
+both interpreters: **one additional passed test each**. It verifies only the scoped
+prediction contributes a history point and its event_key matches the Parquet name.
