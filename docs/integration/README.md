@@ -95,21 +95,36 @@ no duplicate lock or service-specific dependency export is added here.
 
 ## Remaining acceptance gates
 
-The later bounded real HTTP/ES/CG15 rehearsal is documented in
+The bounded real HTTP/ES/CG15 rehearsal is documented in
 [LOCAL_HTTP.md](LOCAL_HTTP.md) and [its dated evidence](../evidence/LOCAL_HTTP_20261103.md).
-It verifies that subset and AppTest data display, including component outages;
-the full image/pipeline/browser gates below remain distinct.
+Later [pipeline and browser evidence](../evidence/LOCAL_PIPELINE_BROWSER_20261103.md)
+extends it with three distinct scopes:
 
-The generated configuration is a candidate until actually exercised on sufficient
-resources. Full image build/import/endpoint/RSS validation, NiFi interpreter execution,
-Filebeat→Kafka→worker→ES→GET reconciliation, actual read-only mount concurrency,
-UI four-page/modal browser checks, real API/ES outage/recovery and all component
-accounting remain parent gates. `view` builds the dedicated dashboard image and
-checks imports before starting API/UI. It uses Python 3.12 from the digest-pinned
-Wolfi base and `dashboard_laneki/requirements.txt` with hashes; it never mounts
-the worker interpreter or a host virtualenv. The service is read-only with a 64 MiB
-scratch mount and a 512 MiB memory limit. CI builds/scans this image and verifies
-imports without network under these limits. Successful imports alone do not prove
+- Actual Chromium four-page/modal, desktop/mobile, automatic refresh and same-session
+  ES outage/recovery checks against the HTTP series.
+- The real durable worker over staged stdin, with replay and the same event verified
+  through API/CG15/ES/GET and browser DOM. See [LOCAL_WORKER.md](LOCAL_WORKER.md).
+- Actual Filebeat production into an own Kafka topic, real durable-worker consumption
+  and offset commit, then API/CG15/ES/GET reconciliation. Its event is distinct from
+  the browser-checked event; its later replay is staged stdin. See
+  [LOCAL_KAFKA.md](LOCAL_KAFKA.md).
+
+All use synthetic readings and an explicitly local test model. The bounded stages
+ran sequentially; they do not establish full simultaneous stack capacity. The
+Filebeat OS target and Kafka candidate were built; the Kafka scan gate also
+passed. Security/runtime closure for the other final images remains separate. See [LOCAL_IMAGE_BUILDS.md](LOCAL_IMAGE_BUILDS.md) for
+serial builds with bounded Cargo jobs.
+
+Remaining gates include final image build/import/endpoint/RSS validation under the
+actual container limits, NiFi interpreter/scheduling execution, Kibana candidate
+panel reconciliation, actual read-only mount concurrency and full component
+accounting. The latest Kafka event still needs its own browser reconciliation.
+`view` builds the dedicated dashboard image and checks imports before starting
+API/UI. It uses Python 3.12 from the digest-pinned Wolfi base and
+`dashboard_laneki/requirements.txt` with hashes; it never mounts the worker
+interpreter or a host virtualenv. The service is read-only with a 64 MiB scratch
+mount and a 512 MiB memory limit. CI builds/scans this image and verifies imports
+without network under these limits. Successful imports alone do not prove
 interactive RSS or visual acceptance.
 SMB #111 and human/teacher acceptance are separate and remain pending.
 
@@ -139,9 +154,12 @@ It exposes no POST inference route. It must never be used as live acceptance.
 The event timestamp is frozen in the fixture: an empty last-day history is correct;
 select the six-month period to inspect it while it remains in that window.
 
-The parent attempted browser verification on 2026-11-03. API logs confirmed200
-for snapshot/KPI/history, but preview snapshot timed out twice (15000ms) and the
-alternate browser reported `Browser is not available: iab`. No screenshot or
-four-page visual acceptance was obtained. The tab and both local servers were
-closed. AppTest covers four pages/modal, explicit nulls, shared cutoff, visible
-age, refresh invalidation and incompatible evaluation thresholds.
+The first browser attempt on 2026-11-03 failed: the shared preview timed out twice
+(15000ms), and another browser path reported `Browser is not available: iab`.
+Those attempts produced no visual acceptance. A later isolated Chromium session
+successfully exercised the four pages, modal, live refresh, mobile layout and
+same-session ES outage/recovery with the real local HTTP/ES setup, followed by a
+separate staged-worker event reconciliation. See the
+[dated browser evidence](../evidence/LOCAL_PIPELINE_BROWSER_20261103.md) for the
+actual artifacts, source identities and limitations. These later checks supersede
+the earlier browser-pending status only for their explicitly exercised scopes.
