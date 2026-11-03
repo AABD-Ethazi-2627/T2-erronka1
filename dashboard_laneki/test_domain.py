@@ -61,7 +61,7 @@ class SnapshotTests(unittest.TestCase):
         ]:
             with self.subTest(key=key, value=value), self.assertRaises(ValueError):
                 validate_machines([{**good, key: value}])
-        for rows in ([], [good, good], None, [None]):
+        for rows in ([good, good], None, [None]):
             with self.subTest(rows=rows), self.assertRaises(ValueError):
                 validate_machines(rows)
 
@@ -80,7 +80,7 @@ class SnapshotTests(unittest.TestCase):
     def test_maintenance_and_health_are_not_fabricated(self):
         row = gallery_machine(demo_machines()[3])
         self.assertEqual(row["tenperatura"], 36.3)
-        self.assertEqual(row["kokapena"], "A lerroa · 4. kokapena")
+        self.assertEqual(row["kokapena"], "Ez dago daturik")
         self.assertEqual(row["geldialdiaren_iraupena"], "Ez dago daturik")
         self.assertIsNone(kpis(demo_machines())["osasuna"])
 

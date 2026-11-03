@@ -33,12 +33,12 @@ def demo_machines():
 
 def validate_machines(data):
     """Reject malformed snapshots instead of replacing them with demo values."""
-    if not isinstance(data, list) or not data or len(data) > 50:
-        raise ValueError("Expected 1 to 50 prototype machines")
+    if not isinstance(data, list) or len(data) > 50:
+        raise ValueError("Expected 0 to 50 machines")
     cleaned, seen = [], set()
     for row in data:
         if not isinstance(row, dict) or not re.fullmatch(
-            r"CNC-0[0-4][0-9]|CNC-050", str(row.get("id", ""))
+            r"CNC-[0-9]{3}", str(row.get("id", ""))
         ):
             raise ValueError("Invalid machine identifier")
         n = int(row["id"][-3:])
@@ -51,13 +51,25 @@ def validate_machines(data):
             raise ValueError("Duplicate or inconsistent machine identifier")
         if not isinstance(row.get("egoera"), str) or row["egoera"] not in STATES:
             raise ValueError("Unknown source state")
-        result = {"id": row["id"], "zenbakia": n, "egoera": row["egoera"]}
-        for key in ("tenperatura", "rpm", "torque", "higadura"):
+        result = dict(row)
+        for key in (
+            "tenperatura",
+            "giro_tenperatura",
+            "rpm",
+            "torque",
+            "higadura",
+            "failure_score",
+        ):
             value = row.get(key)
+            if value is None:
+                if key in row or key in {"tenperatura", "rpm", "torque", "higadura"}:
+                    result[key] = None
+                continue
             if (
                 isinstance(value, bool)
                 or not isinstance(value, (int, float))
-                or value < 0
+                or (value < 0 and key not in {"tenperatura", "giro_tenperatura"})
+                or (key == "failure_score" and value > 1)
             ):
                 raise ValueError("Invalid or missing measurement")
             try:
@@ -94,22 +106,24 @@ def selected_machine(current, requested, machines, last_requested=None):
 
 
 def kpis(machines):
+    temperatures = [
+        m["tenperatura"] for m in machines if m.get("tenperatura") is not None
+    ]
     return {
         "operatiboak": sum(m["egoera"] != "Akatsa" for m in machines),
         "guztira": len(machines),
         "akatsak": sum(m["egoera"] == "Akatsa" for m in machines),
         "gertakariak": "—",
         "osasuna": None,
-        "tenperatura": round(
-            sum(m["tenperatura"] for m in machines) / len(machines), 1
-        ),
+        "tenperatura": round(sum(temperatures) / len(temperatures), 1)
+        if temperatures
+        else None,
         "motak": None,
     }
 
 
 def gallery_machine(machine):
     """Decorate source state without altering its measurements or identity."""
-    n = machine["zenbakia"]
     style = {
         "Akatsa": (
             "Larria",
@@ -160,8 +174,8 @@ def gallery_machine(machine):
     )
     result.update(
         abisua=machine["egoera"],
-        ekintza="Iturriaren egoera; ez da modeloaren iragarpena.",
-        kokapena=f"{chr(65 + (n - 1) // 10)} lerroa · {(n - 1) % 10 + 1}. kokapena",
+        ekintza="Uneko maila inferitua; ez da behatutako matxura.",
+        kokapena=machine.get("kokapena") or "Ez dago daturik",
     )
     for field in (
         "azken_berrikuspena",
@@ -172,5 +186,5 @@ def gallery_machine(machine):
         "huts_egindako_osagaia",
         "geldialdiaren_iraupena",
     ):
-        result[field] = "Ez dago daturik"
+        result[field] = machine.get(field) or "Ez dago daturik"
     return result
