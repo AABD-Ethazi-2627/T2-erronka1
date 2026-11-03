@@ -10,6 +10,9 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 import httpx
 from scripts.duckdb_output import to_pandas_utc
+from scripts.archive_read_index import read_snapshot, verify_entry
+from scoring.read_storage import ArchiveReader
+assert callable(read_snapshot) and callable(verify_entry) and callable(ArchiveReader)
 assert pa.__version__ == "23.0.1"
 assert httpx.__version__ == "0.28.1"
 assert duckdb.__version__ == "2.0.0"

@@ -286,7 +286,7 @@
     "scoring/read_api.py": "0a76faa5ecc99f72d1e0b6bccfbc84d987d4be0f24d99e75a199a111c604f858",
     "scoring/read_models.py": "882d5071490e619a997880ffc0b971eea3fc6580442dd1dddb39d30d385d966c",
     "scoring/read_storage.py": "54d1420768e8a51b55dee92da62e2afb29228aadf9344a0acf4ca8135402b9fc",
-    "scripts/check_runtime_image.py": "e794b6a64d8fc1a472aa171c41d59291e8e23b61e6b34cf310c04e20e94cdce2",
+    "scripts/check_runtime_image.py": "dbda218500beb5e6ddc50b983173c5236e57cee2e74f0702d3b41dfe285eb754",
     "dashboard_laneki/Dockerfile": "422475721e154bce338254700c7a5ce9c6a7866f7d216c3f997b21edc8b5698d",
     "dashboard_laneki/INTEGRATION.md": "c6c489243e5ec75fb397c08e0c7e055003fb74a7ae1cbf1d62343ed6e4e9aa6e",
     "dashboard_laneki/requirements.txt": "83826287275800226015ff4617c70796cde313f5068309442f0deb4354cba546",
@@ -509,5 +509,10 @@
       "tests/test_filebeat_build_jobs.py"
     ],
     "verification": "22 tests and18subtests;image inventory passes;build/runtime not claimed"
+  },
+  "local_read_import_preflight": {
+    "previous_hash": "e794b6a64d8fc1a472aa171c41d59291e8e23b61e6b34cf310c04e20e94cdce2",
+    "reason": "Image preflight imports archive selection and storage readers before lab activation",
+    "verification": "actual api-index image offline probe passes;11 wiring tests pass"
   }
 }
