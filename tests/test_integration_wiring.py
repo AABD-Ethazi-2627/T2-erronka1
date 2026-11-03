@@ -1,0 +1,143 @@
+import asyncio
+import copy
+import json
+
+import pytest
+
+from scripts.integration_fixture import run
+from scripts.integration_verify import check_wiring, same_event
+
+
+@pytest.fixture
+def config(tmp_path):
+    manifest = {"files": {"rf.pkl": "a" * 64}, "policy": "f2"}
+    path = tmp_path / "manifest.json"
+    path.write_text(json.dumps(manifest))
+    graph = {
+        "manifest": str(path),
+        "root": str(tmp_path / "worker"),
+        "source_namespace": "own",
+        "topic": "own",
+        "scoring_url": "http://api:8000/predict",
+        "es_url": "http://elasticsearch:9200",
+        "bootstrap_servers": "kafka:19092",
+        "es_index": "cnc-alerts-own",
+    }
+    read = {
+        "scope": {
+            "source_uri": "kafka://own/own",
+            "model_artifact_sha256": "a" * 64,
+            "policy": "f2",
+        },
+        "elasticsearch": {"url": graph["es_url"], "index": "cnc-alerts-own-read"},
+        "archive_root": "/archive",
+    }
+    services = {
+        "api": {"volumes": [f"{graph['root']}/archive:/archive:ro"]},
+        "nifi": {"volumes": ["/runtime:/runtime:ro"]},
+    }
+    return graph, read, manifest, services, {"imports_ok": True, "duckdb": "2.0.0"}
+
+
+def test_positive_static(config):
+    assert check_wiring(*config)
+
+
+@pytest.mark.parametrize(
+    "fault", ["hostname", "port", "index", "mount", "dependency", "manifest"]
+)
+def test_negative_wiring(config, fault):
+    graph, read, manifest, services, image = copy.deepcopy(config)
+    if fault == "hostname":
+        graph["scoring_url"] = "http://scoring:8000/predict"
+    elif fault == "port":
+        graph["bootstrap_servers"] = "kafka:9092"
+    elif fault == "index":
+        read["elasticsearch"]["index"] = "historical"
+    elif fault == "mount":
+        services["api"]["volumes"] = []
+    elif fault == "dependency":
+        image["imports_ok"] = False
+    else:
+        graph["manifest"] += "-absent"
+    with pytest.raises(ValueError):
+        check_wiring(graph, read, manifest, services, image)
+
+
+def test_fixture_and_tampered_same_event(tmp_path):
+    root = tmp_path / "fixture"
+    result = asyncio.run(run(root))
+    assert len(result["scenarios"]) == 6
+    assert result["reconciliation_before_corruption"]["same_event_storage_get"]
+    assert result["reconciliation_before_corruption"]["ui"] == "pending_browser"
+    # Post-run corruption is deliberately retained and fails mechanical verification.
+    with pytest.raises(ValueError, match="Parquet mismatch"):
+        same_event(
+            (root / "canonical.json").read_bytes(),
+            root / "archive",
+            json.loads((root / "es-double.json").read_text()),
+            json.loads((root / "get-snapshot.json").read_text())[0],
+            json.loads((root / "get-history.json").read_text())["metadata"]["events"][
+                0
+            ],
+        )
+
+
+def test_resolved_compose_without_starting_docker(tmp_path):
+    import os
+    import shutil
+    import sys
+    from pathlib import Path
+
+    from scripts.integration_lab import IntegrationLab
+    from scripts.integration_verify import check_compose
+
+    if not shutil.which("docker"):
+        pytest.skip("Docker CLI unavailable; no Compose verification")
+    root = tmp_path / "lab"
+    directory = root / "runs" / "own"
+    directory.mkdir(parents=True)
+    worker = directory / "worker"
+    worker.mkdir()
+    manifest = directory / "manifest.json"
+    manifest.write_text(json.dumps({"files": {"rf.pkl": "a" * 64}, "policy": "f2"}))
+    graph = {
+        "root": str(worker),
+        "manifest": str(manifest),
+        "source_namespace": "own",
+        "topic": "own",
+        "es_index": "cnc-alerts-own",
+        "es_url": "http://elasticsearch:9200",
+    }
+    (directory / "graph.json").write_text(json.dumps(graph))
+    (root / ".env").write_text(
+        "NIFI_SENSITIVE_PROPS_KEY=fixture-only\nSINGLE_USER_CREDENTIALS_USERNAME=fixture\nSINGLE_USER_CREDENTIALS_PASSWORD=fixture-only\n"
+    )
+    instance = IntegrationLab(root)
+    instance.state = {
+        "project": "cnc-test-config-only",
+        "python": sys.executable,
+        "uv_python": str(Path(os.path.realpath(sys.executable)).parents[2]),
+        "nifi_port": 18443,
+        "kafka_port": 19092,
+        "runs": ["own"],
+    }
+    result = instance.compose(
+        "--profile",
+        "run",
+        "--profile",
+        "dashboard",
+        "config",
+        "--format",
+        "json",
+        run="own",
+    )
+    config = json.loads(result.stdout)
+    assert check_compose(config, graph, sys.executable, str(Path.cwd()))
+    config["services"]["api"]["volumes"][0]["read_only"] = False
+    # Find the actual archive target rather than assuming Compose ordering.
+    for volume in config["services"]["api"]["volumes"]:
+        if volume["target"] == "/archive":
+            volume["read_only"] = False
+    with pytest.raises(ValueError, match="archive writable"):
+        check_compose(config, graph, sys.executable, str(Path.cwd()))

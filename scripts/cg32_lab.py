@@ -1362,7 +1362,7 @@ def validate_run_label(value):
     return value
 
 
-def main(argv=None):
+def main(argv=None, *, lab_class=Lab):
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("--lab", type=Path, required=True)
     sub = cli.add_subparsers(dest="command", required=True)
@@ -1397,7 +1397,7 @@ def main(argv=None):
             help="Explicit sealed rebuilt-candidate identity; defaults to historical CG26",
         )
     args = cli.parse_args(argv)
-    lab = Lab(args.lab)
+    lab = lab_class(args.lab)
     if args.command == "model":
         model_latency(args.manifest, args.count, args.output, args.identity_record)
     elif args.command == "run":
