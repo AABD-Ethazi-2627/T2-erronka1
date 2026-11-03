@@ -37,7 +37,10 @@ ZIP inputs are tracked allowlisted source/lock/config, these six result JSON fil
 and the pristine synthetic archive. No venv/cache/credentials/private model trees.
 The builder verifies CRC, every member SHA and sample extraction/re-read.
 The extracted runner verifies all listed member hashes before recording source
-identity. This detects accidental corruption, not an authenticated signature or
+identity and rejects added files. Python-generated `__pycache__` entries are
+allowed only for listed source modules; compiled bytecode is not authenticated.
+Keep new run outputs outside the restored source tree. This detects source-tree
+mutation, not an authenticated signature or
 approval. Source coverage includes Dockerfiles, XML/patch inputs, CSV fixtures,
 Compose, and Kibana resources; external build downloads still require network.
 The builder writes a sidecar SHA for the ZIP. A portable package reproduces fixture tests after installing

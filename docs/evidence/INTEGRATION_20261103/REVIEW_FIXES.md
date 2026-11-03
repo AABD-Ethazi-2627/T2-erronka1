@@ -92,3 +92,18 @@ Full restore checks all 23 local Docker COPY inputs, renders/checks image invent
 validates the refreshed NiFi flow, and reruns all 6 fixture scenarios with member
 hash verification enabled. This supersedes the 360-member bundle for lab sources;
 the earlier fixture-only restore result is retained as historical evidence.
+
+## Targeted independent recheck and low-severity follow-up
+
+Claude's immutable `7f740fd` recheck closed all five findings and found no new
+medium/high regression. It ran 80 affected tests and the 26 dashboard tests; images
+and external acceptance were explicitly excluded. The full local report is
+`/home/tears/.cache/cnc-integration-audit-20261103/CLAUDE_TARGETED_RECHECK.md`.
+
+Its three low-severity residues were corrected with focused regressions:
+Groovy/CG14/LAN resources are included in the source bundle; added extracted files
+are rejected (generated caches are permitted only for listed Python modules);
+and the generic ES row reader now uses the same exact threshold scope filters
+before applying its capacity limit. Hash checks remain an integrity aid, not an
+authenticated execution sandbox or approval. Run outputs belong outside the
+restored source directory.

@@ -228,6 +228,10 @@ def test_bundle_preserves_build_inputs_and_detects_extracted_tampering(
         "tests/fixtures/cg14/valid_event.csv",
         "docker-compose.yml",
         "kibana/acceptance-export.ndjson",
+        "nifi-flows/cg14_validate.groovy",
+        "cg14_validation/validator.py",
+        "deploy/cg14/scripts/kafka-volume.properties",
+        "lan/haproxy.cfg",
     ):
         assert (restored / name).read_bytes() == (Path.cwd() / name).read_bytes()
     monkeypatch.setattr(
@@ -239,6 +243,11 @@ def test_bundle_preserves_build_inputs_and_detects_extracted_tampering(
         integration_fixture.source_identity()["member_hashes"]
         == "verified_not_authenticated"
     )
+    extra = restored / "scripts/planted_extra.py"
+    extra.write_text("# unexpected module")
+    with pytest.raises(ValueError, match="Unexpected file"):
+        integration_fixture.source_identity()
+    extra.unlink()
     target = restored / "scoring/Dockerfile"
     target.write_text(target.read_text() + "\n# changed after restore\n")
     with pytest.raises(ValueError, match="hash mismatch: scoring/Dockerfile"):

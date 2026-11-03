@@ -263,27 +263,7 @@ class ElasticsearchReader:
                     {"event_id": "asc"},
                     {"_shard_doc": "asc"},
                 ],
-                "query": {
-                    "bool": {
-                        "filter": [
-                            {"term": {"source.uri": scope.source_uri}},
-                            {
-                                "term": {
-                                    "model_artifact_sha256": scope.model_artifact_sha256
-                                }
-                            },
-                            {"term": {"policy": scope.policy}},
-                            {
-                                "range": {
-                                    "timestamp": {
-                                        "gte": start.isoformat(),
-                                        "lt": end.isoformat(),
-                                    }
-                                }
-                            },
-                        ]
-                    }
-                },
+                "query": {"bool": {"filter": self._filters(scope, start, end)}},
             }
             rows = []
             while True:

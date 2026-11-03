@@ -23,6 +23,8 @@ TREES = {
     "engine",
     "cnc_guard",
     "nifi-flows",
+    "cg14_validation",
+    "lan",
 }
 EXTENSIONS = {
     ".py",
@@ -50,6 +52,10 @@ EXTENSIONS = {
     ".sum",
     ".mod",
     ".in",
+    ".groovy",
+    ".cjs",
+    ".properties",
+    ".cfg",
 }
 RESULTS = {
     "result.json",

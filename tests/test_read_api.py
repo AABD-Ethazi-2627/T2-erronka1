@@ -224,6 +224,7 @@ def test_es_pit_scope_and_failure():
     assert es.rows(SCOPE, utc("2026-01-01T00:00:00Z"), utc(END)) == []
     filters = json.loads(requests[1].content)["query"]["bool"]["filter"]
     assert filters[0]["term"]["source.uri"] == SCOPE.source_uri
+    assert {"term": {"risk_threshold": SCOPE.risk_threshold}} in filters
     assert requests[-1].method == "DELETE"
 
     class Down:
