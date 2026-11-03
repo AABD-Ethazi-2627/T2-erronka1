@@ -92,7 +92,8 @@ kontsultatu.clear = refresh_reads
 
 @st.fragment(run_every=5)
 def live_refresh_control():
-    enabled = st.toggle("Zuzeneko eguneratzea · 5 s", value=True, key="live_updates")
+    st.session_state.setdefault("live_updates", True)
+    enabled = st.toggle("Zuzeneko eguneratzea · 5 s", key="live_updates")
     now = time.monotonic()
     previous = st.session_state.get("live_last_refresh", now)
     st.session_state.setdefault("live_last_refresh", now)
@@ -343,7 +344,29 @@ div[data-testid="stDataFrame"] {{
 
 /* Menua aplikaziotik kontrolatzen da, ez nabigatzailearen egoeratik. */
 [data-testid="stMainBlockContainer"] {{
-    padding-top: 52px !important;
+    /* The transparent Streamlit header still intercepts clicks. Leave room
+       even when the collaborator's responsive CSS zooms the main container. */
+    padding-top: 80px !important;
+}}
+
+/* Canonical controls and provenance add content above the original single-screen
+   prototype. Keep every page reachable instead of clipping the lower controls. */
+[data-testid="stMain"],
+[data-testid="stMain"]:has(.datuak-page-marker) {{
+    overflow-y: auto !important;
+}}
+[data-testid="stMainBlockContainer"],
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) {{
+    height: auto !important;
+    min-height: 100%;
+    overflow: visible !important;
+}}
+@media (max-width: 640px) {{
+    [data-testid="stMainBlockContainer"] {{ zoom: 1 !important; }}
+    .dashboard-title, .machines-page-title, .alerts-page-title, h1, h2, h3 {{
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+    }}
 }}
 
 [data-testid="stSidebar"] {{
