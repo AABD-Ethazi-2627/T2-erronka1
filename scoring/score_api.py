@@ -87,7 +87,7 @@ class Telemetry(BaseModel):
         return value
 
 
-def create_app(manifest_path=None, *, ledger_path=None):
+def create_app(manifest_path=None, *, ledger_path=None, read_config=None):
     path = Path(
         manifest_path or os.getenv("MODEL_MANIFEST", "outputs/api/manifest.json")
     )
@@ -272,6 +272,11 @@ def create_app(manifest_path=None, *, ledger_path=None):
             "anomaly_threshold": manifest["anomaly_threshold"],
         }
         return result
+
+    if read_config is not None:
+        from scoring.read_api import create_read_router
+
+        app.include_router(create_read_router(**read_config))
 
     return app
 
