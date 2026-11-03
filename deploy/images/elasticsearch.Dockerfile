@@ -76,4 +76,20 @@ RUN mkdir -p /tmp/snappy-module/META-INF \
     && cd /tmp/snappy-module \
     && zip -q /usr/share/elasticsearch/modules/esql-datasource-compression-libs/snappy-java-1.1.10.9.jar META-INF/MANIFEST.MF \
     && rm -rf /tmp/snappy-module
+# GHSA-ccrj-gw8r-854m: replace real API bytes in all three isolated modules.
+# Keep API/context/common aligned; SDK and instrumentation remain vendor versions.
+ADD --checksum=sha256:538d1dff2f9a37aecbc0ef98fd17273a3affb058e734e6763a3a07a38a5fdc59 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.67.0/opentelemetry-api-1.67.0.jar /tmp/opentelemetry-api-1.67.0.jar
+ADD --checksum=sha256:40fb813fb5e27ec2691daa29c81b572b5b1541ef9b41e62490c3ee3e6407c55e https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-context/1.67.0/opentelemetry-context-1.67.0.jar /tmp/opentelemetry-context-1.67.0.jar
+ADD --checksum=sha256:da97bdb395418e16ecdcbe7ad3497f45b9e767ceda4ae7e86133e7a757ac377f https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-common/1.67.0/opentelemetry-common-1.67.0.jar /tmp/opentelemetry-common-1.67.0.jar
+RUN for module in apm esql-datasource-gcs repository-gcs; do \
+      for artifact in api context common; do \
+        target="/usr/share/elasticsearch/modules/$module"; \
+        test -f "$target/opentelemetry-$artifact-1.62.0.jar"; \
+        rm "$target/opentelemetry-$artifact-1.62.0.jar"; \
+        cp "/tmp/opentelemetry-$artifact-1.67.0.jar" "$target/"; \
+        chown 1000:0 "$target/opentelemetry-$artifact-1.67.0.jar"; \
+        chmod 0644 "$target/opentelemetry-$artifact-1.67.0.jar"; \
+      done; \
+    done \
+    && rm /tmp/opentelemetry-*-1.67.0.jar
 USER 1000

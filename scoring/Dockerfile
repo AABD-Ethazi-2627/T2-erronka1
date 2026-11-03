@@ -1,5 +1,5 @@
 # Shared pinned uv source build: only rustls changes relative to upstream 0.13.6.
-FROM rust:1.99.0-alpine@sha256:0cce0a5e0e8ba67b455257a3a02a1d99005f382748789d6464460028810f1627 AS uv-build
+FROM rust:1.99.1-alpine@sha256:7e9e2d068a107a2adafd19930011178d14a78326053cd4c3a9f7ad3fd049557d AS uv-build
 RUN apk add --no-cache clang cmake make musl-dev perl pkgconf patch
 ADD --checksum=sha256:c2e01687fbbcb109277698ec97baca46e1547656ad580abf6d993f9c459af1c7 https://github.com/astral-sh/uv/archive/refs/tags/0.13.6.tar.gz /tmp/uv.tar.gz
 RUN mkdir /src && tar -xzf /tmp/uv.tar.gz -C /src --strip-components=1
@@ -14,7 +14,7 @@ FROM scratch AS uv
 COPY --from=uv-build /src/target/release/uv /uv
 COPY --from=uv-build /src/target/release/uvx /uvx
 ENTRYPOINT ["/uv"]
-FROM cgr.dev/chainguard/wolfi-base:latest@sha256:360896efb0753a5701c48f860e17130c205eae5a264797aa3e7ea126ee2923a7
+FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73
 WORKDIR /app
 RUN apk upgrade --no-cache \
     && apk add --no-cache python-3.11 \
@@ -25,7 +25,7 @@ COPY scoring/requirements.txt /app/scoring/requirements.txt
 COPY --from=uv /uv /usr/local/bin/uv
 RUN uv pip sync --python /usr/bin/python3.11 --system --no-cache --require-hashes --only-binary :all: /app/scoring/requirements.txt
 COPY scoring /app/scoring
-COPY scripts/validate_contracts.py /app/scripts/validate_contracts.py
+COPY scripts/validate_contracts.py scripts/duckdb_output.py /app/scripts/
 COPY contracts /app/contracts
 RUN mkdir /state && chown 65532:65532 /state
 USER 65532:65532

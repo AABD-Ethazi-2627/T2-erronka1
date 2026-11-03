@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           version: '0.13.6'
           python-version: '3.11'
@@ -68,12 +68,16 @@ jobs:
       - name: Build actual runtime image
         if: steps.image.outputs.dockerfile != ''
         run: docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
+      - name: Verify offline API query under runtime limits
+        if: matrix.image == 'api'
+        run: python3 -m scripts.check_runtime_image "${{ steps.image.outputs.ref }}"
       - name: Preserve the complete image scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           version: 'v0.76.1'
           image-ref: ${{ steps.image.outputs.ref }}
           scanners: vuln
+          list-all-pkgs: true
           format: json
           output: image-scan.json
           timeout: 15m
@@ -81,6 +85,12 @@ jobs:
           ignore-unfixed: false
           severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
           cache: false
+      - name: Audit actual nested NiFi dependencies
+        if: matrix.image == 'nifi'
+        run: |
+          docker build --file deploy/images/nifi.Dockerfile --target archive-audit --tag cnc-guard-audit:nifi-archives .
+          trivy image --scanners vuln --format json --list-all-pkgs --timeout 15m --output nested-archive-scan.json cnc-guard-audit:nifi-archives
+          python3 -m scripts.enforce_image_scan nifi-archives nested-archive-scan.json
       - name: Reject unverified image vulnerabilities
         env:
           IMAGE_KEY: ${{ matrix.image }}
@@ -97,6 +107,8 @@ jobs:
         if: always()
         with:
           name: image-${{ matrix.image }}
-          path: image-scan.json
+          path: |
+            image-scan.json
+            nested-archive-scan.json
           if-no-files-found: error
           retention-days: 30

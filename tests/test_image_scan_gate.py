@@ -52,6 +52,17 @@ class ImageScanGateTests(unittest.TestCase):
             with self.subTest(report=data):
                 self.assertTrue(validate("api", data))
 
+    def test_nested_nifi_scan_requires_jar_coverage_and_rejects_findings(self):
+        data = report(image="nifi-archives")
+        self.assertTrue(validate("nifi-archives", data))
+        data["Results"][1]["Type"] = "jar"
+        self.assertEqual(validate("nifi-archives", data), [])
+        data["Results"][1]["Vulnerabilities"] = [{
+            "VulnerabilityID": "CVE-fixture", "PkgName": "wire-runtime-jvm",
+            "InstalledVersion": "5.2.0",
+        }]
+        self.assertTrue(validate("nifi-archives", data))
+
     def test_clean_regular_image_passes(self):
         self.assertEqual(validate("api", report()), [])
 
