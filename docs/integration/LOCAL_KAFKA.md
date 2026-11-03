@@ -1,7 +1,8 @@
 # Local Kafka worker and ACK rehearsal
 
 This extends `LOCAL_WORKER.md` with an actual broker input and worker-owned commit.
-The coordinator prepares an isolated broker/topic and external producer first; the
+The coordinator first follows [LOCAL_FILEBEAT.md](LOCAL_FILEBEAT.md) to prepare
+an isolated broker/topic and external producer; the
 runner never creates topics, publishes messages, starts/stops containers, or changes
 CG32's full-lab resource guard. Its only offset mutation is the real durable
 worker's commit for a fresh unique group after required destinations persist.
@@ -48,6 +49,8 @@ real `scripts.run_durable_pipeline kafka` CLI, one record per poll, at most 12 p
 and a 90-second subprocess deadline. Each offset lookup (beginning, end and group
 commit) has its own 15-second timeout, including observations after the worker.
 Advertised broker metadata is rechecked on each observation against loopback.
+The pinned fork's convenience metadata lookup has no deadline, so this runner
+uses a tested fork adapter with a 15-second bound on each metadata refresh wait.
 The single-message precondition is rechecked
 through the end offset after processing; a new append fails acceptance.
 

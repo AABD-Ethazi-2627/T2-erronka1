@@ -271,13 +271,13 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "32f129ffeef2c39ba85554d3f5ed16c14acb3411b99c2061837dd72dd3d991be",
+    "docs/memoria/RECONCILIACION_20261103.md": "9af68add92cf485f1cfa336e1c3ae0a98bb4b2c7c86b8354632bc540894e66a5",
     "docs/backend/READ_API.md": "44ac7e573d67cf9245f204f0c9940ed829f2955e4d5bc464d73330fa38c9baa0",
     "docs/integration/README.md": "75d16c5f068e0e37118796fa4e0c986c23821a79efd1308c54626720e82c8cb1",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
     "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
-    "docs/integration/LOCAL_KAFKA.md": "b4995475271798e05b13534810d59d875ef3d42688167ebe9f8f4cd2c5fbf735",
-    "docs/integration/LOCAL_FILEBEAT.md": "bb33daaabd93f69295cd5834fa6cc35021dafbc3125507099d7fbc4c49ccda93",
+    "docs/integration/LOCAL_KAFKA.md": "ea9d0b9ddfe2cce4bcc48a0a85b42fa1ba6ddf59de3acadbf5e65cdfccae1824",
+    "docs/integration/LOCAL_FILEBEAT.md": "30ca3dbbcbc59b0af64e0e2c4f1784daf51e6abccea31191df09bc7dde8fce9b",
     "docs/integration/LOCAL_IMAGE_BUILDS.md": "a51d58b51a23a404c8cb444f8d883ce053718eb953276b5e7c3c36737cbb7b70",
     "docs/evidence/LOCAL_HTTP_20261103.md": "eff09be19dbb50739c67cd2565d2042c25e31f1147126d2ecbed5c43774804f6",
     "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md": "fc823ceb43f0b0df5c2a2782f1468915a54089d0fb2f648e10c41261185ded02",
@@ -305,7 +305,7 @@
     "scripts/integration_dashboard_probe.py": "73a83f9a9ec0c32d184ef7da0e480398f3d27fe647482382d8ae501eb7b82a61",
     "scripts/integration_fixture.py": "efb76406e9a6c5ccaae4b780aae2127aa2ce41823b935ac8dd5751502429cb59",
     "scripts/integration_http.py": "b11589fb4a52d22dd4a25c9e2cfcc15ec2cdc5e540f504aa4c8a23f277703e83",
-    "scripts/integration_kafka_worker_local.py": "85b820a8caab17cf0b520167b77dbee9b2dbcc623ba80fc04692fadf33712c6b",
+    "scripts/integration_kafka_worker_local.py": "45d04b86f567b468e50556f1453e60a54c0d067320239a3467d193d42dbd4b5c",
     "scripts/integration_lab.py": "5799f72eef49a4d3ccb39ce1876162f92bdacc944ca137122f183d6e61ad607d",
     "scripts/integration_local.py": "e5c994bc0587e2664856d38017d05271d396b0a19b2807edd854cf067d268ea0",
     "scripts/integration_preflight.py": "08c5f62016966b9a87dad23759a91fb822c6d51b4d32aaa5f48ce96bc92f40d5",
@@ -313,7 +313,7 @@
     "scripts/integration_verify.py": "bb29b51d63101581bcf168b75b3243df34975447bcbc163ab330cd934db8b7a4",
     "scripts/integration_worker_local.py": "9bc0003573ee686c5c6d8884177a5e6edd654f5ab7d942cb8abb6080907a6e66",
     "tests/test_integration_http.py": "a9a34a9d46783b6f3a87f55299120f945cc3f25b81cba857b94c3610b2e9bd34",
-    "tests/test_integration_kafka_worker_local.py": "17e9067d39f7d3bd4a37266489eee32bbb2789e58a2379588aae29d8edd33e4d",
+    "tests/test_integration_kafka_worker_local.py": "09b27a370a30929b7ede5579c93e424e5bbdc09d21ed8f939ab05afa21058e06",
     "tests/test_integration_wiring.py": "d6192c213323a0cf8ab1b1d31238a89e8b1eaa43d78582e4c8d077d2c5dd5624",
     "tests/test_integration_worker_local.py": "35dc033ba69e5d4716d2826382bcf0e57e738efed817c773030d46a0139149ff",
     "tests/test_read_api.py": "99b956232ac323c74eb825876082f225bc16ed40d5c2f9a7c62b664c4260b0c9",
@@ -450,5 +450,17 @@
       "tests/test_uv_build_jobs.py"
     ],
     "note": "Current inventory bytes reconciled after classifying code/config deltas and documenting bounded evidence. Historical base/matrix/snapshot and pending human review unchanged. No services, training, image acceptance, CI or human approval asserted by this documentation update."
+  },
+  "local_metadata_timeout_followup": {
+    "parent_commit": "f9a949daea3b517164987adb8fb793f735378f99",
+    "reason": "Bound the pinned Kafka fork metadata wait, retain cleanup evidence and clarify producer runbook navigation",
+    "previous_current_hashes": {
+      "scripts/integration_kafka_worker_local.py": "85b820a8caab17cf0b520167b77dbee9b2dbcc623ba80fc04692fadf33712c6b",
+      "tests/test_integration_kafka_worker_local.py": "17e9067d39f7d3bd4a37266489eee32bbb2789e58a2379588aae29d8edd33e4d",
+      "docs/integration/LOCAL_FILEBEAT.md": "bb33daaabd93f69295cd5834fa6cc35021dafbc3125507099d7fbc4c49ccda93",
+      "docs/integration/LOCAL_KAFKA.md": "b4995475271798e05b13534810d59d875ef3d42688167ebe9f8f4cd2c5fbf735",
+      "docs/memoria/RECONCILIACION_20261103.md": "32f129ffeef2c39ba85554d3f5ed16c14acb3411b99c2061837dd72dd3d991be"
+    },
+    "verification": "48 focused offline runner tests; Ruff; documentary verifier; no live timeout claim"
   }
 }

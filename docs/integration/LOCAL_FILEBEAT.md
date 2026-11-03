@@ -75,7 +75,8 @@ docker run -d --name "$CNC_LAB_KAFKA" --network "$CNC_LAB_NETWORK" --network-ali
 docker inspect "$CNC_LAB_KAFKA" --format '{{.Image}}' > "$CNC_LAB_ROOT/kafka-image-id.txt"
 ```
 
-In a second terminal, use the `CNC_LAB_KAFKA` name printed/saved above to create
+In a second terminal, use `state.json.kafka_container` from the new directory
+(`CNC_LAB_ROOT` in the first terminal) as the `CNC_LAB_KAFKA` name to create
 the host-only bridge. Docker's internal network stays internal. Leave this
 command in the foreground and stop it with Ctrl-C after the consumer rehearsal.
 

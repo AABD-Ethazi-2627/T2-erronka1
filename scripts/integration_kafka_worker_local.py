@@ -76,9 +76,34 @@ def require_loopback_metadata(reader):
         raise ValueError("Broker metadata advertises a non-loopback endpoint")
 
 
+def bounded_partitions(reader, topic):
+    """Pinned fork equivalent of partitions_for_topic, with bounded metadata waits.
+
+    Its public convenience method uses wait_for(..., None). Keep this adapter
+    explicit so a fork upgrade must revalidate the network/cluster interface.
+    """
+    cluster = reader._cluster
+    partitions = cluster.partitions_for_topic(topic)
+    if partitions is None:
+        if cluster.metadata_refresh_in_progress:
+            reader._net.run(
+                reader._manager.wait_for, cluster.request_update(), OFFSET_TIMEOUT_MS
+            )
+        previous = cluster.need_all_topic_metadata
+        try:
+            cluster.need_all_topic_metadata = True
+            reader._net.run(
+                reader._manager.wait_for, cluster.request_update(), OFFSET_TIMEOUT_MS
+            )
+        finally:
+            cluster.need_all_topic_metadata = previous
+        partitions = cluster.partitions_for_topic(topic)
+    return partitions or set()
+
+
 def capture_record(reader, topic):
     """Manual assignment, no subscription/group and never a commit."""
-    partitions = reader.partitions_for_topic(topic)
+    partitions = bounded_partitions(reader, topic)
     if partitions != {0}:
         raise ValueError("Expected an existing single-partition own topic")
     require_loopback_metadata(reader)

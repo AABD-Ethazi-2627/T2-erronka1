@@ -127,3 +127,15 @@ ninguno de estos cambios altera `historical_snapshot`.
 | `deploy/images/kibana.Dockerfile` | `90d25722f7539564a027e141c4b1fe1daaad66e5865f353fbe20947bc30e04da` | `331658ec32c0193e9d71cd82739b164f00fa5efb85063a769a6f56bab5d7d3a6` |
 | `scripts/enforce_image_scan.py` | `2e987ddbf5043bb7ec4a636328424bf17305ad05c76592bc8489f9afe463b587` | `a7f6486085b229f3f7e92d27eab01890edfaf8d3567f82a94692fb1e7570eb41` |
 | `tests/test_image_scan_gate.py` | `11697399c1a620ea59d4cab7963f71c9d7d7cacc8d0854de2cbe3743a5705afe` | `65ca31fd654b2a4b1eeb39ed141d8ce5a058c94ca77a3914b79d384bf418d131` |
+
+## Ajuste posterior de espera de metadatos
+
+Tras la conciliación de `f9a949d`, se acota también la consulta inicial de
+particiones del observador Kafka. La función pública del fork usaba una espera
+sin plazo; el adaptador explícito conserva su comportamiento y limita cada
+espera de refresco a 15 segundos, restaurando el estado en caso de error. Se
+añaden tres regresiones sin servicios (48 pruebas de ambos runners pasan).
+Los runbooks aclaran dónde obtener el nombre del contenedor y enlazan la
+preparación Filebeat desde el ensayo Kafka. No cambia ningún contrato, modelo,
+resultado histórico ni aceptación humana. El inventario actual actualiza solo
+el runner Kafka, su test, esos dos runbooks y este documento, tras revisarlos.

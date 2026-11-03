@@ -66,7 +66,10 @@ def fake_reader(*, end=43, host="127.0.0.1", offset=42):
         key=b"producer-key",
     )
     reader = Mock()
-    reader.partitions_for_topic.return_value = {0}
+    reader._cluster = reader._client.cluster
+    reader._cluster.partitions_for_topic.return_value = {0}
+    reader._cluster.metadata_refresh_in_progress = False
+    reader._cluster.need_all_topic_metadata = False
     reader.beginning_offsets.return_value = {tp: 42}
     reader.end_offsets.return_value = {tp: end}
     reader.poll.return_value = {tp: [record]}
@@ -74,6 +77,39 @@ def fake_reader(*, end=43, host="127.0.0.1", offset=42):
         SimpleNamespace(host=host, port=19094)
     ]
     return reader
+
+
+@pytest.mark.parametrize("pending", [True, False])
+def test_metadata_timeout_restores_flags_and_retains_failure(
+    tmp_path, monkeypatch, pending
+):
+    reader = fake_reader()
+    reader._cluster.partitions_for_topic.return_value = None
+    reader._cluster.metadata_refresh_in_progress = pending
+    reader._net.run.side_effect = KafkaTimeoutError("offline metadata timeout")
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text("{}")
+    monkeypatch.setattr(lab, "source_identity", lambda: {"revision": "unit"})
+    monkeypatch.setattr(lab, "consumer", Mock(return_value=reader))
+    output = tmp_path / "new"
+    with pytest.raises(KafkaTimeoutError):
+        lab.run(output, manifest, ES, BOOTSTRAP, NAMESPACE, TOPIC)
+    result = json.loads((output / "result.json").read_text())
+    assert result["status"] == "failed" and result["api_stopped"]
+    assert reader._cluster.need_all_topic_metadata is False
+    assert reader._net.run.call_args.args[-1] == 15000
+    reader.close.assert_called_once_with(autocommit=False)
+
+
+def test_metadata_refresh_uses_bounded_fork_adapter():
+    reader = fake_reader()
+    reader._cluster.partitions_for_topic.side_effect = [None, {0}]
+    assert lab.bounded_partitions(reader, TOPIC) == {0}
+    reader._net.run.assert_called_once_with(
+        reader._manager.wait_for, reader._cluster.request_update.return_value, 15000
+    )
+    assert reader._cluster.need_all_topic_metadata is False
+    reader.partitions_for_topic.assert_not_called()
 
 
 def test_capture_retains_real_coordinates_key_and_bytes_without_commit():
