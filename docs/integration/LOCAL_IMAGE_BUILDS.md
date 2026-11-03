@@ -28,3 +28,23 @@ for this prefix: copy it byte-for-byte to the start of the four consumers, keepi
 their suffixes intact. `python -m scripts.image_inventory --check` rejects drift.
 The shell guard is tested without Cargo, Docker builds, services or network in
 `tests/test_uv_build_jobs.py`.
+
+The Filebeat builder separately accepts `GO_BUILD_JOBS`, with the same positive
+decimal validation and a default of two. It exports `GOMAXPROCS` for both Go
+commands and passes the same value to `go build -p` to bound concurrent package
+compilation. The Beats archive, Go image, module version changes, CGO setting,
+trimpath option, binary output path and final runtime stage are unchanged.
+
+```sh
+docker build --progress=plain --build-arg GO_BUILD_JOBS=1 \
+  -f deploy/images/filebeat.Dockerfile -t cnc-guard-audit:filebeat .
+```
+
+This is build preparation; the final Filebeat image has not been built or
+accepted by this change. The existing `filebeat-os` target isolates OS updates
+only and removes the old binary; it is not a final runnable Filebeat image.
+One Go job does not bound total memory, module-cache size or disk usage. Preserve
+the resource preflight, image scan gate and binary reachability check, then test
+configuration/startup and actual Kafka publishing from the resulting image.
+`tests/test_filebeat_build_jobs.py` executes the actual RUN guard with harmless
+Go/tar stubs, without compiling, contacting services or using the network.

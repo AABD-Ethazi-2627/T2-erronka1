@@ -194,3 +194,13 @@ por memoria). No se modifica ninguna aceptación humana ni el alcance del modelo
 El README de integración enlaza esa evidencia; el generador de ZIP incluye el
 informe. Se revisan solo esos tres inputs y este apéndice. Las afirmaciones sobre
 NiFi/Kibana, SMB, campaña completa y modelo aprobado siguen pendientes.
+
+
+## Preparación acotada de Filebeat
+
+Se revisó `GO_BUILD_JOBS`: entero decimal positivo, exportado como GOMAXPROCS
+y pasado a `go build -p`; no cambia las versiones fijadas ni el gate de imagen.
+El coordinador ejecutó 22 tests y 18 subtests de guardia/escaneo, y verificó
+el inventario de imágenes. Esto prepara una compilación local con un trabajo;
+no demuestra todavía la imagen final ni su publicación Kafka. Se registran solo
+Dockerfile, runbook, test nuevo y este apéndice; la base histórica permanece.

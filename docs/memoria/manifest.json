@@ -254,7 +254,7 @@
     ".github/workflows/ml-study.yml": "22fe2429f482a008727cc2ae8bc03eeb61f84774ebaa6cb17e35053887c5ab1e",
     ".github/workflows/validate.yml": "6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e",
     "deploy/images/elasticsearch.Dockerfile": "7cf7364680690a560ee5004d0ef4e2a7a6c3222159c62556da4568136d4fc73a",
-    "deploy/images/filebeat.Dockerfile": "e0947e3fa4030ba55a60541dfd3d8de3642d6577ee27867e8635c8968a575ad6",
+    "deploy/images/filebeat.Dockerfile": "03a244990855bdd17e683e699e7d3a4af3d82a75dad5a11cfed1a8a46635e299",
     "deploy/images/kibana-patches/package-lock.json": "e90fbb8f5cfc7d4e68829a2941aa9a8d50e2908317f5309c8fe3fa0b16f4b855",
     "deploy/images/kibana-patches/package.json": "76adab4ad02ee6b4673b9715a74e30caf3af7d7229c3de4015118bd48fe2783b",
     "deploy/images/kibana.Dockerfile": "331658ec32c0193e9d71cd82739b164f00fa5efb85063a769a6f56bab5d7d3a6",
@@ -271,14 +271,14 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "29058d66769e63bae2027e332d988a2c23292ba2290665db273919a9bae04ec2",
+    "docs/memoria/RECONCILIACION_20261103.md": "f5d900d4af74585f56ce0dd42a2499f175b63fbde37450231376d080fe07fa8c",
     "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
     "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
     "docs/integration/LOCAL_KAFKA.md": "ea9d0b9ddfe2cce4bcc48a0a85b42fa1ba6ddf59de3acadbf5e65cdfccae1824",
     "docs/integration/LOCAL_FILEBEAT.md": "30ca3dbbcbc59b0af64e0e2c4f1784daf51e6abccea31191df09bc7dde8fce9b",
-    "docs/integration/LOCAL_IMAGE_BUILDS.md": "a51d58b51a23a404c8cb444f8d883ce053718eb953276b5e7c3c36737cbb7b70",
+    "docs/integration/LOCAL_IMAGE_BUILDS.md": "0de0bcba4ce403b4542f8db373a028909df6eb35202aab120e6f2351984efa7b",
     "docs/evidence/LOCAL_HTTP_20261103.md": "eff09be19dbb50739c67cd2565d2042c25e31f1147126d2ecbed5c43774804f6",
     "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md": "fc823ceb43f0b0df5c2a2782f1468915a54089d0fb2f648e10c41261185ded02",
     "docs/evidence/DEPENDENCY_RECONCILIATION_20261103.md": "1ec16b364101c5dd9de53b0f717eb6ca5d812b1c6dc7d3e4e9871852df87b229",
@@ -321,7 +321,8 @@
     "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a",
     "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
     "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712",
-    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "bd4362d0efbb11b540a418117e35d75737089242ce805cdd17bce31f11e94f64"
+    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "bd4362d0efbb11b540a418117e35d75737089242ce805cdd17bce31f11e94f64",
+    "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -497,5 +498,16 @@
       "docs/evidence/LOCAL_CONTAINERS_20261103.md"
     ],
     "verification": "894 tests,374 subtests,4 skipped;29 dashboard tests; bounded actual image HTTP/browser and image gates; no human acceptance"
+  },
+  "local_filebeat_build_bound": {
+    "previous_current_hashes": {
+      "deploy/images/filebeat.Dockerfile": "e0947e3fa4030ba55a60541dfd3d8de3642d6577ee27867e8635c8968a575ad6",
+      "docs/integration/LOCAL_IMAGE_BUILDS.md": "a51d58b51a23a404c8cb444f8d883ce053718eb953276b5e7c3c36737cbb7b70",
+      "docs/memoria/RECONCILIACION_20261103.md": "29058d66769e63bae2027e332d988a2c23292ba2290665db273919a9bae04ec2"
+    },
+    "new_inventory_paths": [
+      "tests/test_filebeat_build_jobs.py"
+    ],
+    "verification": "22 tests and18subtests;image inventory passes;build/runtime not claimed"
   }
 }

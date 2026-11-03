@@ -2,11 +2,15 @@ FROM golang:1.26.10-alpine3.23@sha256:0525c952defebc693cdaf62cdf43afa32be5a7f377
 ADD --checksum=sha256:ae4dae382249f28a53be500c0c5d5a6628677f3e65a7d35dfc148b9ad4dc0635 \
     https://github.com/elastic/beats/archive/refs/tags/v9.5.5.tar.gz \
     /tmp/beats.tar.gz
-RUN mkdir /src \
+# Bound Go execution parallelism and concurrent package compilation together.
+ARG GO_BUILD_JOBS=2
+RUN case "$GO_BUILD_JOBS" in ''|0*|*[!0-9]*) echo "GO_BUILD_JOBS must be a positive decimal integer" >&2; exit 2;; esac \
+    && export GOMAXPROCS="$GO_BUILD_JOBS" \
+    && mkdir /src \
     && tar -xzf /tmp/beats.tar.gz --strip-components=1 -C /src \
     && cd /src \
     && go get github.com/google/cel-go@v0.29.0 golang.org/x/net@v0.62.0 \
-    && CGO_ENABLED=0 go build -trimpath -o /tmp/filebeat ./filebeat
+    && CGO_ENABLED=0 go build -p "$GO_BUILD_JOBS" -trimpath -o /tmp/filebeat ./filebeat
 
 FROM docker.elastic.co/beats/filebeat-wolfi:9.5.5@sha256:b644d58f79f2a53b46ce558efa706a51ba211e0d0f89352bfe33b3973958e3eb AS filebeat-base
 
