@@ -47,3 +47,13 @@ all-committed-object integrity verification. Long campaigns require a measured
 partitioned/compacted archive design; these bounds do not establish 185 day capacity.
 
 Assembled full suite: **795 passed, 4 skipped, 374 subtests passed** (47.47s).
+
+Portable assembled artifact at code `c7d627c84933323d894a6ab6911c74ff094be751`:
+`integration-portable.zip`, 360 members, SHA-256
+`4a3ac8aae651de92c4b9f821655ba209193991fa091545b27fc24a096ea4e7eb`.
+CRC/all member hashes/sample restore passed. A fresh full extraction (no `.git`)
+then executed the integration fixture successfully with the existing locked Python
+environment, reproducing all six scenarios and retaining source revision metadata.
+This is not an offline dependency installation. The initial extraction exposed a
+Git-only runner assumption; the correction embeds hashed `BUNDLE_SOURCE.json`.
+Dashboard image assets and image-patch source are included in the revised allowlist.
