@@ -271,14 +271,14 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "f5d900d4af74585f56ce0dd42a2499f175b63fbde37450231376d080fe07fa8c",
+    "docs/memoria/RECONCILIACION_20261103.md": "7c92a79d554441d40345b184ce4d9c955fbb201d82279eb465f54105d633aaf9",
     "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
     "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
     "docs/integration/LOCAL_KAFKA.md": "ea9d0b9ddfe2cce4bcc48a0a85b42fa1ba6ddf59de3acadbf5e65cdfccae1824",
-    "docs/integration/LOCAL_FILEBEAT.md": "30ca3dbbcbc59b0af64e0e2c4f1784daf51e6abccea31191df09bc7dde8fce9b",
-    "docs/integration/LOCAL_IMAGE_BUILDS.md": "0de0bcba4ce403b4542f8db373a028909df6eb35202aab120e6f2351984efa7b",
+    "docs/integration/LOCAL_FILEBEAT.md": "bb2721d8f88fb1a3892bc8daf7b3ada3a088d8e0e5425d3ac4585d63cdc30761",
+    "docs/integration/LOCAL_IMAGE_BUILDS.md": "31f83e828957d57b3c66d21eb2a766fafeb4b1bc9e4885248fc056032b87287a",
     "docs/evidence/LOCAL_HTTP_20261103.md": "eff09be19dbb50739c67cd2565d2042c25e31f1147126d2ecbed5c43774804f6",
     "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md": "fc823ceb43f0b0df5c2a2782f1468915a54089d0fb2f648e10c41261185ded02",
     "docs/evidence/DEPENDENCY_RECONCILIATION_20261103.md": "1ec16b364101c5dd9de53b0f717eb6ca5d812b1c6dc7d3e4e9871852df87b229",
@@ -321,7 +321,7 @@
     "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a",
     "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
     "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712",
-    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "bd4362d0efbb11b540a418117e35d75737089242ce805cdd17bce31f11e94f64",
+    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "8b5329fee1bd14f1f3aafbee023f28ab6c1efa9a2e464fcece7ca347400c93a9",
     "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d"
   },
   "historical_snapshot": {
@@ -514,5 +514,15 @@
     "previous_hash": "e794b6a64d8fc1a472aa171c41d59291e8e23b61e6b34cf310c04e20e94cdce2",
     "reason": "Image preflight imports archive selection and storage readers before lab activation",
     "verification": "actual api-index image offline probe passes;11 wiring tests pass"
+  },
+  "local_serial_image_evidence": {
+    "previous_current_hashes": {
+      "docs/evidence/LOCAL_CONTAINERS_20261103.md": "bd4362d0efbb11b540a418117e35d75737089242ce805cdd17bce31f11e94f64",
+      "docs/integration/LOCAL_IMAGE_BUILDS.md": "0de0bcba4ce403b4542f8db373a028909df6eb35202aab120e6f2351984efa7b",
+      "docs/integration/LOCAL_FILEBEAT.md": "30ca3dbbcbc59b0af64e0e2c4f1784daf51e6abccea31191df09bc7dde8fce9b",
+      "docs/memoria/RECONCILIACION_20261103.md": "f5d900d4af74585f56ce0dd42a2499f175b63fbde37450231376d080fe07fa8c"
+    },
+    "verification": "ES build+scan+12volatile-compatibility operations;Filebeatbuild+scan+binary reachability+actual Kafka production;isolated TLS1test60subtests",
+    "limits": "No final-image full pipeline,NiFi/Kibana,SMB,model or human acceptance;Claude final review unavailable"
   }
 }

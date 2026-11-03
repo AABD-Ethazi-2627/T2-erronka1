@@ -9,6 +9,12 @@ a constrained host. This runbook was reconstructed from the retained container
 configuration and capture after the first rehearsal; execute a new rehearsal to
 validate these exact instructions. Never overwrite the previous evidence.
 
+The [later local report](../evidence/LOCAL_CONTAINERS_20261103.md) records a clean
+execution of these instructions and another producer run using the rebuilt
+Filebeat candidate in place of the vendor image. Their event identities and
+image-specific results remain separate; the default commands below still pin
+the vendor producer explicitly.
+
 The commands below expect host UID 1000, matching the container's non-root user.
 They create fresh names and preserve every container, registry and broker log on
 stop. Port 19094 must be free; do not stop another service to claim it.

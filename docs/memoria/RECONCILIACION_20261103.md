@@ -204,3 +204,20 @@ El coordinador ejecutó 22 tests y 18 subtests de guardia/escaneo, y verificó
 el inventario de imágenes. Esto prepara una compilación local con un trabajo;
 no demuestra todavía la imagen final ni su publicación Kafka. Se registran solo
 Dockerfile, runbook, test nuevo y este apéndice; la base histórica permanece.
+
+
+## Imágenes posteriores y TLS, alcance acotado
+
+El informe local incorpora la imagen ES construida y sus dos análisis (feed
+Chainguard y complemento Wolfi), 12 operaciones de compatibilidad en tmpfs
+acotado, y el bloqueo real por espacio del ensayo en disco. No se cambian los
+watermarks. Filebeat final compila con un trabajo, pasa el gate conservando la
+excepción de módulo prevista y govulncheck confirma cero símbolos vulnerables
+alcanzables en el binario; publica un evento real confirmado por Kafka. Ese
+nuevo evento no se presenta como otro recorrido completo por modelo/UI.
+La rotación TLS aislada pasa 1 test y 60 subtests. Claude no pudo completar
+la revisión final (memoria y después límite API); no se inventa aprobación.
+
+Se actualizan exclusivamente el informe, sus dos runbooks enlazados y este
+apéndice. NiFi/Kibana y campaña completa siguen pendientes de recursos y
+verificación; SMB, modelo aprobado y revisión humana continúan abiertos.

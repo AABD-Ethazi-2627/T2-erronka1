@@ -40,8 +40,10 @@ docker build --progress=plain --build-arg GO_BUILD_JOBS=1 \
   -f deploy/images/filebeat.Dockerfile -t cnc-guard-audit:filebeat .
 ```
 
-This is build preparation; the final Filebeat image has not been built or
-accepted by this change. The existing `filebeat-os` target isolates OS updates
+This build control alone is not evidence of image acceptance. The later
+[local image report](../evidence/LOCAL_CONTAINERS_20261103.md) records an actual
+serial build, scan, binary reachability check and Kafka producer rehearsal.
+The existing `filebeat-os` target isolates OS updates
 only and removes the old binary; it is not a final runnable Filebeat image.
 One Go job does not bound total memory, module-cache size or disk usage. Preserve
 the resource preflight, image scan gate and binary reachability check, then test

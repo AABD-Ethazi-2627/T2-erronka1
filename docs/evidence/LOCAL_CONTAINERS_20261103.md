@@ -108,9 +108,95 @@ not execute. `source_ack_verified=false` means unverified, not absent ACK.
   broker worker run. `run-04-broker-timeout/` and `BROKER_FAILURE_20261103.*` retain
   the failed observer experiment without changing its outcome.
 
-Claude's new archive-index review was killed for memory exhaustion and provides
-no approval. Previous completed Claude reviews remain scoped to their exact heads.
-Final ES/NiFi/Kibana/Filebeat candidate image closure, NiFi execution, full-stack
+Claude's new archive-index review was killed for memory exhaustion; a subsequent
+bounded recheck failed at the provider's API rate limit. Neither provides approval.
+Previous completed Claude reviews remain scoped to their exact heads.
+Complete ES consumer compatibility, NiFi/Kibana candidate image closure, NiFi execution, full-stack
 capacity, sustained rates, SMB and human acceptance remain separate gates. The
 full CG32 minimum of 6 GiB available RAM and 20 GiB free disk is unchanged.
 No push or PR belongs to this local verification phase.
+
+## Subsequent serial checks: Elasticsearch and TLS
+
+The Elasticsearch candidate built successfully in 60 seconds from the cached
+Maven stages. Image ID:
+`sha256:ca84bbcccce962ff8507db208865935e2330fce800e6264a82345e02cd80d6a0`.
+Its normal image gate passes with 74 installed OS packages and 952 JAR package
+records. Trivy warned about 144 mismatched PURL references. A separate comparison
+confirmed that all 74 installed APK names, versions and origins are present in the
+report; the filtered references are duplicate SBOM metadata, not missing installs.
+Because the image identifies Chainguard while its repository is Wolfi, an additional
+OS-only scan explicitly used `--distro wolfi/20230201` on the same immutable image.
+Both advisory feeds reported zero vulnerabilities. The OS-only complement is not
+passed off as a complete JAR scan or used to bypass the normal gate.
+
+Both scans reused the vulnerability DB updated `2026-11-03T01:30:30Z` and the Java
+artifact-identification index updated `2026-10-26T00:59:12Z`. Their metadata and
+report hashes are retained in `elasticsearch-scan-union.json`. This is not a claim
+that a fresh Java index was downloaded during this phase.
+
+Three runtime attempts remain distinguishable:
+
+1. A `network=none` harness omitted an explicit hostname mapping and ES exited
+   before startup. Its logs/result are retained.
+2. With the hostname mapped to loopback, ES started and installed the real ingest
+   pipeline and mapping template, but index creation timed out. Its logs show the
+   disk flood-stage protection at 95%: the host had about 6 GiB free, only 2.5%.
+   No disk threshold or allocation protection was reduced or disabled.
+3. A new isolated container used a bounded **256 MiB volatile tmpfs** for its own
+   data and a 1 GiB memory limit. Twelve operations passed: current pipeline and
+   template installation, retained canonical-event create/read, replay 409, three
+   invalid-document rejections even with `pipeline=_none`, exact count, ES|QL count
+   and cluster-health request. It then stopped without OOM. This verifies the
+   exercised compatibility path, not disk durability, throughput, full-stack
+   capacity or all patched Parquet/Iceberg/GCS/APM consumers.
+
+Artifacts are `elasticsearch-build-serial.*`, `elasticsearch-runtime*.{json,log}`,
+the exact `probe_es_candidate*.py` scripts, both scans and `es-os-coverage-*` in
+the image evidence directory. The previous API/browser run used the pinned vendor
+ES image; it is not relabelled as this candidate's end-to-end run.
+
+The existing opt-in TLS test was repeated with the cached pinned HAProxy image:
+`CNC_RUN_LAN_TLS_TESTS=1 .venv/bin/python -m pytest tests/test_lan_ca_rotation.py -q`.
+It passed **one test and 60 subtests in 7.66 seconds**, checking the generated test
+CA rotation across all frontends and retiring old clients/sessions. Certificates
+were synthetic and isolated; no production certificate changed. This successful
+repeat does not diagnose the earlier startup/cleanup failure. The retained log is
+`lan-rotation-retry.log` in the image evidence directory.
+
+## Final Filebeat candidate
+
+The final image built in 549 seconds with `GO_BUILD_JOBS=1`, from the reviewed
+Dockerfile at `fedde9ab06ccc50b59a2be50631b0d7fb74728d1`, retaining the pinned
+Beats source and Go toolchain. Image ID:
+`sha256:86fc7b9e3f573b3fe2c9963e70f314873b7e8fc4c79369431ad20ff3e81eda5a`.
+Its actual binary reports Filebeat/libbeat 9.5.5. A single compiler process was
+observed above 2 GiB RSS; one job limits parallelism, not peak memory.
+
+The existing image gate passes with OS and Go-binary coverage. Trivy still reports
+the specifically allowlisted module finding `GO-2026-5932` in `golang.org/x/crypto`
+v0.58.0; it has not been silently removed or described as patched. The exact binary
+was extracted and checked by the workflow's pinned
+`golang.org/x/vuln/cmd/govulncheck@v1.9.0 -mode=binary`, using the pinned Go image.
+The tool exited 0: zero reachable vulnerabilities and one module-only finding.
+Binary SHA-256:
+`430e6ae01e65ea07157d2626cad7362ad4f5158a93c440dee2b2e8d55bf4aad5`.
+
+The Filebeat runbook was executed again in a fresh isolated namespace with only
+the vendor producer image replaced by this immutable candidate. Its registry and
+Kafka data were new. The actual captured record was partition 0, offset 0, end 1,
+72 bytes; payload SHA-256:
+`6d908aaec1191c9783a4682741d0864f20e0786793abc0dbcb92b57205af766e`.
+The payload and field-aware fingerprint/offset key matched the expected CSV.
+Filebeat's final monitoring recorded one output event, one ACK and zero failures.
+Both owned containers and their loopback bridge were stopped; data were retained.
+
+This producer-only stage does not repeat the worker/model/browser chain for the
+new event. The earlier contiguous run used vendor Filebeat and its distinct event;
+component checks must not be concatenated into a fabricated single final-image
+campaign. Evidence is in `final-filebeat-*`, `filebeat-final-*` and
+`filebeat-build-serial.*` under the image evidence directory, plus
+`/home/tears/.cache/cnc-ingress-gnGuKF/`. The exact executed shell blocks are saved.
+
+The API runtime preflight now imports the archive reader/index helpers as well as
+probing DuckDB/JSON/Arrow. That actual image probe and 11 wiring tests passed.
