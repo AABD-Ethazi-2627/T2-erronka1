@@ -273,6 +273,10 @@ def create_app(manifest_path=None, *, ledger_path=None, read_config=None):
         }
         return result
 
+    if read_config is None and os.getenv("CNC_READ_CONFIG"):
+        from scoring.read_api import read_config_from_file
+
+        read_config = read_config_from_file(os.environ["CNC_READ_CONFIG"])
     if read_config is not None:
         from scoring.read_api import create_read_router
 
