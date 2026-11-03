@@ -11,7 +11,7 @@ visible observation age and explicit unavailable state. This is not an ingestion
 ## Independently exercised local path
 
 Evidence directory: `/home/tears/.cache/cnc-local-http-20261103/`.
-Authoritative inference/storage run: `run-02/result.json`; the earlier `run-01`
+Initial reviewed inference/storage run: `run-02/result.json`; the earlier `run-01`
 is retained but superseded because its serialized canonical evidence was corrected
 to preserve the actual HTTP response bytes before run-02.
 
@@ -88,3 +88,36 @@ The UI probe now shares the same dependency-free loopback URL validator as the
 HTTP runner, including credential/path/query rejection. Unit checks cover its
 outage assertions without services. Missing history identity now produces an
 explicit error instead of `StopIteration`.
+
+## Clean-source repeat after corrections
+
+The latest executed source is `0d9752632d2d2f88840ef1fa6c6bf09bae9ca456`.
+`run-03/result.json` records that exact Git revision with `dirty=false` and passes
+inference, byte-identical replay, CG15/ES/GET reconciliation, refreshed snapshot
+and exact two-event KPI. The model remains the same local test bundle.
+`run03-ui-source.json` captures the UI/probe hashes before AppTest and verifies
+that they were unchanged and Git remained clean afterward.
+
+`dashboard-run03.json` passes all four pages and details modal over actual HTTP,
+including 1801 → 1902 RPM on the refreshed cutoff. Latest event key:
+`8079e7375a06451c0af3d8f4d553e29776c7eaa221d54f5c49e00d8194070f11`.
+The corrected UI's automatic inspection pause was exercised when opening details.
+`run03-es-down-http.json` explicitly captures HTTP 503 and its JSON response after
+stopping own ES; `run03-ui-api.log` now retains the matching access log.
+`dashboard-run03-es-down.json` and `dashboard-run03-api-down.json` both verify
+degraded UI without demo. This repeat did not repeat ES recovery: its separate
+earlier recovery evidence and limits remain above.
+
+The corrected suites pass 28 dashboard tests and 13 harness tests. The 11 wiring
+tests passed before the follow-up; no wiring changed. Ruff and diff checks pass.
+Own ES/API/bridge are stopped, listeners closed, data retained, no observed ES OOM.
+The full lab, browser timer and external acceptance gates remain pending.
+
+Portable source: `source-0d97526.zip`, 423 hash-listed members, SHA-256
+`331fa79593b97d3cc34cf8c811a3edf9b46abbb8bfd6f69313e69b0b92790dcd`.
+CRC, all member hashes, extraction and restored source identity verification pass.
+The source ZIP contains the earlier declared fixture evidence, which must not be
+confused with the real HTTP results. The local evidence package
+`/home/tears/.cache/cnc-local-http-20261103.zip` separately includes this source ZIP,
+run-02/run-03 artifacts, explicit UI results, logs and this report. No models or
+credentials are packaged. Its verification record is stored alongside the package.
