@@ -5,10 +5,14 @@ ADD --checksum=sha256:c2e01687fbbcb109277698ec97baca46e1547656ad580abf6d993f9c45
 RUN mkdir /src && tar -xzf /tmp/uv.tar.gz -C /src --strip-components=1
 COPY deploy/images/uv-rustls.patch /tmp/uv-rustls.patch
 WORKDIR /src
+# Limit both Cargo invocations; zero would disable the intended resource bound.
+ARG UV_BUILD_JOBS=4
 # Preserve embedded dependency metadata so Trivy can still audit the Rust closure.
-RUN patch -p1 < /tmp/uv-rustls.patch \
+RUN case "$UV_BUILD_JOBS" in ''|0*|*[!0-9]*) echo "UV_BUILD_JOBS must be a positive decimal integer" >&2; exit 2;; esac \
+    && export CARGO_BUILD_JOBS="$UV_BUILD_JOBS" \
+    && patch -p1 < /tmp/uv-rustls.patch \
     && cargo install --locked --version 0.7.7 cargo-auditable \
-    && CARGO_BUILD_JOBS=4 CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 \
+    && CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 \
        cargo auditable build --locked --release --package uv --bin uv --bin uvx
 FROM scratch AS uv
 COPY --from=uv-build /src/target/release/uv /uv
