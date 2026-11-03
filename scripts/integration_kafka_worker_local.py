@@ -33,6 +33,7 @@ from scripts.integration_worker_local import (
 from scripts.kafka_archive import delivery_id
 
 ROOT = Path(__file__).resolve().parents[1]
+OFFSET_TIMEOUT_MS = 15000
 
 
 def scope_guards(bootstrap, namespace, topic, es_url):
@@ -63,11 +64,8 @@ def consumer(bootstrap, group=None):
     )
 
 
-def capture_record(reader, topic):
-    """Manual assignment, no subscription/group and never a commit."""
-    partitions = reader.partitions_for_topic(topic)
-    if partitions != {0}:
-        raise ValueError("Expected an existing single-partition own topic")
+def require_loopback_metadata(reader):
+    """Pinned kafka-python fork metadata interface; checked on every observation."""
     brokers = reader._client.cluster.brokers()
     if not brokers or any(
         broker.host not in {"127.0.0.1", "localhost", "::1"}
@@ -76,10 +74,20 @@ def capture_record(reader, topic):
         for broker in brokers
     ):
         raise ValueError("Broker metadata advertises a non-loopback endpoint")
+
+
+def capture_record(reader, topic):
+    """Manual assignment, no subscription/group and never a commit."""
+    partitions = reader.partitions_for_topic(topic)
+    if partitions != {0}:
+        raise ValueError("Expected an existing single-partition own topic")
+    require_loopback_metadata(reader)
     partition = TopicPartition(topic, 0)
     reader.assign([partition])
-    begin = reader.beginning_offsets([partition])[partition]
-    end = reader.end_offsets([partition])[partition]
+    begin = reader.beginning_offsets([partition], timeout_ms=OFFSET_TIMEOUT_MS)[
+        partition
+    ]
+    end = reader.end_offsets([partition], timeout_ms=OFFSET_TIMEOUT_MS)[partition]
     if end - begin != 1:
         raise ValueError(
             f"Expected exactly one input record; offsets are [{begin}, {end})"
@@ -135,7 +143,12 @@ def capture_record(reader, topic):
 def broker_state(observer, record):
     """OffsetFetch and log-end reads only; do not subscribe or join the group."""
     tp = TopicPartition(record["topic"], record["partition"])
-    return {"committed": observer.committed(tp), "end": observer.end_offsets([tp])[tp]}
+    state = {
+        "committed": observer.committed(tp, timeout_ms=OFFSET_TIMEOUT_MS),
+        "end": observer.end_offsets([tp], timeout_ms=OFFSET_TIMEOUT_MS)[tp],
+    }
+    require_loopback_metadata(observer)
+    return state
 
 
 def require_ack(state, record):

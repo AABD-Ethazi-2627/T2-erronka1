@@ -342,10 +342,18 @@ def run(output, manifest_path, es_url):
         )
         raise
     finally:
+        cleanup_errors = []
         if process is not None:
-            stop(process)
+            try:
+                stop(process)
+            except (OSError, subprocess.SubprocessError) as error:
+                cleanup_errors.append(type(error).__name__)
         result["api_stopped"] = process is None or process.poll() is not None
+        if cleanup_errors:
+            result.update(status="failed", cleanup_errors=cleanup_errors)
         (output / "result.json").write_text(json.dumps(result, indent=2))
+        if cleanup_errors:
+            raise RuntimeError("Own process cleanup failed; inspect result.json")
     return result
 
 

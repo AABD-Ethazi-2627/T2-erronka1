@@ -5,6 +5,7 @@ import json
 import sqlite3
 import subprocess
 from types import SimpleNamespace
+from unittest.mock import Mock
 
 import pytest
 
@@ -210,3 +211,52 @@ def test_early_run_failure_retains_result_without_starting_api(tmp_path, monkeyp
     assert result["source_ack"] is False and result["source_identity"]["dirty"]
     assert result["error"] == "offline injected prepare failure"
     assert (output / "input.csv").is_file()
+
+
+def test_cleanup_failure_still_writes_result(tmp_path, monkeypatch):
+    """No sockets/services: fail the worker, then also fail process cleanup."""
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps({"files": {"rf.pkl": "unit"}, "policy": "f2", "risk_threshold": 0.2})
+    )
+    monkeypatch.setattr(lab, "source_identity", lambda: {"revision": "unit"})
+    client = Mock()
+    client.get.return_value.status_code = 200
+    monkeypatch.setattr(
+        lab.httpx,
+        "Client",
+        Mock(
+            return_value=Mock(
+                __enter__=Mock(return_value=client), __exit__=Mock(return_value=False)
+            )
+        ),
+    )
+    listener = Mock()
+    listener.getsockname.return_value = ("127.0.0.1", 18271)
+    monkeypatch.setattr(
+        lab.socket,
+        "socket",
+        Mock(
+            return_value=Mock(
+                __enter__=Mock(return_value=listener), __exit__=Mock(return_value=False)
+            )
+        ),
+    )
+    monkeypatch.setattr(lab, "prepare_es", Mock())
+    process = Mock()
+    process.poll.return_value = None
+    monkeypatch.setattr(lab.subprocess, "Popen", Mock(return_value=process))
+    monkeypatch.setattr(
+        lab, "execute_worker", Mock(side_effect=ValueError("offline worker failure"))
+    )
+    monkeypatch.setattr(
+        lab, "stop", Mock(side_effect=subprocess.TimeoutExpired("offline-process", 5))
+    )
+    output = tmp_path / "new"
+    with pytest.raises(RuntimeError, match="cleanup failed"):
+        lab.run(output, manifest, "http://127.0.0.1:18272")
+    result = json.loads((output / "result.json").read_text())
+    assert result["status"] == "failed"
+    assert result["error"] == "offline worker failure"
+    assert result["cleanup_errors"] == ["TimeoutExpired"]
+    assert result["api_stopped"] is False

@@ -109,6 +109,10 @@ extends it with three distinct scopes:
   the browser-checked event; its later replay is staged stdin. See
   [LOCAL_KAFKA.md](LOCAL_KAFKA.md).
 
+That producer used digest-pinned vendor Filebeat 9.5.5, not the final patched
+Filebeat image. [LOCAL_FILEBEAT.md](LOCAL_FILEBEAT.md) retains the producer setup
+and capture commands for a new isolated reproduction.
+
 All use synthetic readings and an explicitly local test model. The bounded stages
 ran sequentially; they do not establish full simultaneous stack capacity. The
 Filebeat OS target and Kafka candidate were built; the Kafka scan gate also

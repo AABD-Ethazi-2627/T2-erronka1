@@ -4,7 +4,9 @@ This supplements `LOCAL_HTTP.md`: the canonical CSV adapter and durable worker
 write CG15 and Elasticsearch themselves. The harness does not substitute direct
 archive/index writes for the worker. This is staged-stdin transport, with synthetic
 isolated topic/partition/offset coordinates. No Kafka record is consumed or ACKed;
-Filebeat, NiFi scheduling, SMB and browser acceptance remain unexecuted.
+This runner does not execute Filebeat, NiFi scheduling, SMB or a browser. A later
+separate browser check of its retained event is recorded in
+[the dated evidence](../evidence/LOCAL_PIPELINE_BROWSER_20261103.md).
 
 Prerequisites: the normal backend `.venv` with its pinned Kafka dependency, a trusted
 local test model bundle, and an Elasticsearch instance owned exclusively by this
@@ -77,4 +79,4 @@ ruff check scripts/integration_worker_local.py tests/test_integration_worker_loc
 These unit checks exercise guards, fixtures, journal validation and retained errors
 with explicit subprocess doubles. They are not live integration evidence. A successful
 actual invocation is additional local worker evidence, not full pipeline, final-image,
-source ACK, browser, SMB or rubric acceptance.
+source ACK, browser, SMB or rubric acceptance by this command alone.

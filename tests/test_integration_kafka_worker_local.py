@@ -8,6 +8,7 @@ from unittest.mock import Mock
 
 import pytest
 from kafka import TopicPartition
+from kafka.errors import KafkaTimeoutError
 
 from scripts import integration_kafka_worker_local as lab
 
@@ -82,6 +83,12 @@ def test_capture_retains_real_coordinates_key_and_bytes_without_commit():
     assert meta["offset"] == 42 and meta["end"] == 43
     assert meta["raw_sha256"] == hashlib.sha256(raw).hexdigest()
     reader.seek.assert_called_once_with(TopicPartition(TOPIC, 0), 42)
+    reader.beginning_offsets.assert_called_once_with(
+        [TopicPartition(TOPIC, 0)], timeout_ms=15000
+    )
+    reader.end_offsets.assert_called_once_with(
+        [TopicPartition(TOPIC, 0)], timeout_ms=15000
+    )
     reader.commit.assert_not_called()
     reader.subscribe.assert_not_called()
 
@@ -116,16 +123,94 @@ def test_ack_requires_expected_committed_offset_and_stable_log_end(state):
 
 
 def test_ack_observer_does_not_join_or_commit():
-    observer = Mock()
+    observer = fake_reader()
     observer.committed.return_value = 43
     observer.end_offsets.return_value = {TopicPartition(TOPIC, 0): 43}
     record = {"topic": TOPIC, "partition": 0, "offset": 42, "end": 43}
     state = lab.broker_state(observer, record)
     lab.require_ack(state, record)
+    observer.committed.assert_called_once_with(
+        TopicPartition(TOPIC, 0), timeout_ms=15000
+    )
+    observer.end_offsets.assert_called_once_with(
+        [TopicPartition(TOPIC, 0)], timeout_ms=15000
+    )
     observer.subscribe.assert_not_called()
     observer.assign.assert_not_called()
     observer.poll.assert_not_called()
     observer.commit.assert_not_called()
+
+
+def test_ack_observer_rechecks_advertised_brokers():
+    observer = fake_reader(host="external.example")
+    observer.committed.return_value = 43
+    with pytest.raises(ValueError, match="non-loopback"):
+        lab.broker_state(observer, {"topic": TOPIC, "partition": 0})
+
+
+@pytest.mark.parametrize(
+    "failure",
+    ["old_commit", "offset_timeout", "worker_failure", "replay_commit_changed"],
+)
+def test_run_failures_retain_result_and_stop_api(tmp_path, monkeypatch, failure):
+    """Declared socket/HTTP/process/broker doubles; no service or network."""
+    manifest = tmp_path / "manifest.json"
+    manifest.write_text(
+        json.dumps({"files": {"rf.pkl": "unit"}, "policy": "f2", "risk_threshold": 0.2})
+    )
+    monkeypatch.setattr(
+        lab, "source_identity", lambda: {"revision": "unit", "dirty": True}
+    )
+    reader, observer = fake_reader(), fake_reader()
+    committed = {
+        "old_commit": [42],
+        "offset_timeout": [None, KafkaTimeoutError("offline injected timeout")],
+        "worker_failure": [None],
+        "replay_commit_changed": [None, 43, 44],
+    }
+    observer.committed.side_effect = committed[failure]
+    monkeypatch.setattr(lab, "consumer", Mock(side_effect=[reader, observer]))
+    client = Mock()
+    client.get.return_value.status_code = 200
+    context = Mock(
+        __enter__=Mock(return_value=client), __exit__=Mock(return_value=False)
+    )
+    monkeypatch.setattr(lab.httpx, "Client", Mock(return_value=context))
+    listener = Mock()
+    listener.getsockname.return_value = ("127.0.0.1", 18271)
+    socket_context = Mock(
+        __enter__=Mock(return_value=listener), __exit__=Mock(return_value=False)
+    )
+    monkeypatch.setattr(lab.socket, "socket", Mock(return_value=socket_context))
+    monkeypatch.setattr(lab, "prepare_es", Mock())
+    process = Mock()
+    process.poll.return_value = None
+    start = Mock(return_value=process)
+    monkeypatch.setattr(lab.subprocess, "Popen", start)
+    stop = Mock(side_effect=lambda p: setattr(p.poll, "return_value", 0))
+    monkeypatch.setattr(lab, "stop", stop)
+    execute = Mock(return_value={"completed": 1, "rejected": 0, "replay": 0})
+    if failure == "worker_failure":
+        execute.side_effect = RuntimeError(
+            "offline injected worker failure after possible commit"
+        )
+    monkeypatch.setattr(lab, "execute_kafka", execute)
+    monkeypatch.setattr(
+        lab, "execute_worker", Mock(return_value={"replay": 1, "source_ack": False})
+    )
+    monkeypatch.setattr(lab, "journal_state", Mock(return_value=(b"{}", {})))
+    monkeypatch.setattr(lab, "verify_replay", Mock())
+    output = tmp_path / "new"
+    with pytest.raises((ValueError, RuntimeError, KafkaTimeoutError)):
+        lab.run(output, manifest, ES, BOOTSTRAP, NAMESPACE, TOPIC)
+    result = json.loads((output / "result.json").read_text())
+    assert result["status"] == "failed" and result["api_stopped"]
+    assert result["source_ack_verified"] is (failure == "replay_commit_changed")
+    observer.close.assert_called_once_with(autocommit=False)
+    if failure == "old_commit":
+        start.assert_not_called()
+    else:
+        stop.assert_called_once_with(process)
 
 
 def test_commands_preserve_namespace_and_actual_replay_offset(tmp_path):

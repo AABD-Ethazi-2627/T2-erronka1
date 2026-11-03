@@ -97,6 +97,13 @@ This equals `broker-record.json.raw_sha256` in the worker evidence, linking the
 producer capture to the actual consumed bytes rather than inferring provenance
 from a CSV payload alone.
 
+The retained key also matches the configured Filebeat fingerprint: SHA-256 of
+`b'|message|' + message_bytes + b'|'`, followed by `:164` (the header byte length).
+For this capture it is `90f6f9b42ac3fe4940c97272ee974154c01057b722515793c08ffb4d802b8a8e:164`.
+This field-aware hash differs from the raw payload hash above. The later
+[producer runbook](../integration/LOCAL_FILEBEAT.md) retains setup and capture
+commands; its exact reconstructed commands require a separate new execution.
+
 Worker evidence root:
 `/home/tears/.cache/cnc-local-kafka-worker-20261103/run-02/`.
 `result.json` records clean source

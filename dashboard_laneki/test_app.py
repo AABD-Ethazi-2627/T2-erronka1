@@ -1,8 +1,10 @@
 """Streamlit regression checks; no API server or industrial connection required."""
 
+import ast
 import os
 import unittest
 from pathlib import Path
+from types import CodeType, FunctionType
 from unittest.mock import Mock, patch
 
 import requests
@@ -18,6 +20,40 @@ def tearDownModule():
 
 
 class AppTests(unittest.TestCase):
+    def test_timer_requests_full_rerun_only_outside_inline_render(self):
+        # Execute the real control body with UI/time doubles. AppTest alone runs
+        # fragments inline and cannot exercise their independent timer context.
+        tree = ast.parse(Path(__file__).with_name("app.py").read_text())
+        function = next(
+            node
+            for node in tree.body
+            if isinstance(node, ast.FunctionDef) and node.name == "live_refresh_control"
+        )
+        function.decorator_list = []
+        code = compile(
+            ast.Module(body=[function], type_ignores=[]), "live_refresh_control", "exec"
+        )
+        for inline in (True, False):
+            with self.subTest(inline=inline):
+                ui = Mock()
+                ui.session_state = {"live_last_refresh": 0, "live_inline": inline}
+                ui.toggle.return_value = True
+                refresh = Mock()
+                namespace = {
+                    "st": ui,
+                    "time": Mock(monotonic=Mock(return_value=6)),
+                    "refresh_reads": refresh,
+                }
+                body = next(
+                    value for value in code.co_consts if isinstance(value, CodeType)
+                )
+                FunctionType(body, namespace)()
+                refresh.assert_called_once_with()
+                if inline:
+                    ui.rerun.assert_not_called()
+                else:
+                    ui.rerun.assert_called_once_with(scope="app")
+
     def setUp(self):
         self.environment = patch.dict(os.environ, {"LANEKI_MODE": "demo"})
         self.environment.start()

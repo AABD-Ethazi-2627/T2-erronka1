@@ -45,7 +45,10 @@ timestamp, start/end offsets and hashes. The own worker group must initially hav
 no committed offset. The runner starts its own ephemeral loopback API with the same
 manifest, strict scoped read configuration and trusted local model. It executes the
 real `scripts.run_durable_pipeline kafka` CLI, one record per poll, at most 12 polls
-and a 90-second subprocess deadline. The single-message precondition is rechecked
+and a 90-second subprocess deadline. Each offset lookup (beginning, end and group
+commit) has its own 15-second timeout, including observations after the worker.
+Advertised broker metadata is rechecked on each observation against loopback.
+The single-message precondition is rechecked
 through the end offset after processing; a new append fails acceptance.
 
 Success requires one completed worker delivery and a broker `committed` offset
