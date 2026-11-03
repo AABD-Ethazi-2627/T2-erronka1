@@ -1,7 +1,7 @@
 # Assembled review corrections, 2026-11-03
 
 Claude reviewed immutable c34cabe..c7adef8, independently reproducing the API/UI
-number mismatch, SQLite writer lock, history latency and invalid-date/cursor 500 s.
+number mismatch, SQLite writer lock, history latency and HTTP 500 responses for invalid dates/cursors.
 The full local review is retained at
 `/home/tears/.cache/cnc-integration-audit-20261103/CLAUDE_API_DASHBOARD_REVIEW.md`.
 

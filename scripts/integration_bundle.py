@@ -99,6 +99,19 @@ def build(output, evidence):
             raw = path.read_bytes()
             hashes[name] = hashlib.sha256(raw).hexdigest()
             archive.writestr(name, raw)
+        source = {
+            "revision": subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True
+            ).strip(),
+            "dirty": bool(
+                subprocess.check_output(
+                    ["git", "status", "--porcelain"], cwd=ROOT, text=True
+                )
+            ),
+        }
+        raw = json.dumps(source, indent=2).encode()
+        hashes["BUNDLE_SOURCE.json"] = hashlib.sha256(raw).hexdigest()
+        archive.writestr("BUNDLE_SOURCE.json", raw)
         archive.writestr("SHA256.json", json.dumps(hashes, indent=2))
     with zipfile.ZipFile(output) as archive, tempfile.TemporaryDirectory() as temp:
         if archive.testzip() is not None:

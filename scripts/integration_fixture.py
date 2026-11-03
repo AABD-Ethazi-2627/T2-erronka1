@@ -41,6 +41,26 @@ class ESDouble:
         return self.data
 
 
+def source_identity():
+    source = Path(__file__).resolve().parents[1]
+    bundled = source / "BUNDLE_SOURCE.json"
+    if bundled.is_file():
+        return {**json.loads(bundled.read_text()), "origin": "bundle_metadata"}
+    revision = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=source,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if revision.returncode:
+        return {"revision": None, "dirty": None, "origin": "unversioned_source"}
+    dirty = subprocess.check_output(
+        ["git", "status", "--porcelain"], cwd=source, text=True
+    )
+    return {"revision": revision.stdout.strip(), "dirty": bool(dirty), "origin": "git"}
+
+
 async def run(root):
     root = Path(root).resolve()
     root.mkdir(parents=True, exist_ok=False)
@@ -153,11 +173,8 @@ async def run(root):
         statuses["corruption"] = "passed_no_ACK_and_GET_503"
     result = {
         "created_utc": datetime.now(UTC).isoformat(),
-        "code_sha": (
-            await asyncio.to_thread(
-                subprocess.check_output, ["git", "rev-parse", "HEAD"], text=True
-            )
-        ).strip(),
+        "code_sha": source_identity()["revision"],
+        "source_identity": source_identity(),
         "tool_hashes": {
             p.name: hashlib.sha256(p.read_bytes()).hexdigest()
             for p in Path("scripts").glob("integration_*.py")
