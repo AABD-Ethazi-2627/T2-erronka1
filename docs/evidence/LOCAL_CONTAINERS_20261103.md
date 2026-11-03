@@ -108,9 +108,17 @@ not execute. `source_ack_verified=false` means unverified, not absent ACK.
   broker worker run. `run-04-broker-timeout/` and `BROKER_FAILURE_20261103.*` retain
   the failed observer experiment without changing its outcome.
 
-Claude's new archive-index review was killed for memory exhaustion; a subsequent
-bounded recheck failed at the provider's API rate limit. Neither provides approval.
-Previous completed Claude reviews remain scoped to their exact heads.
+The first Claude archive-index review was killed for memory exhaustion; a bounded
+recheck initially hit the provider's API rate limit. That recheck subsequently
+resumed and completed: no blocking correctness findings in `b5d5d54` versus
+`723ab6b`. It inspected five source files, including only test names, and executed
+no tests, builds, services or network operations. It did not inspect journal-mode
+behavior or the contract/platform helper implementations. The report is retained
+at `/home/tears/.cache/cnc-integration-audit-20261103/CLAUDE_ARCHIVE_INDEX_RECHECK.md`.
+Its two observations are documented: accepted duplicate deliveries can complete
+legacy index coverage, and direct ledger/trigger SQL writes remain trusted.
+This code review does not independently repeat the parent's runtime evidence or
+approve unrelated changes. Previous reviews remain scoped to their exact heads.
 Complete ES consumer compatibility, NiFi/Kibana candidate image closure, NiFi execution, full-stack
 capacity, sustained rates, SMB and human acceptance remain separate gates. The
 full CG32 minimum of 6 GiB available RAM and 20 GiB free disk is unchanged.

@@ -271,8 +271,8 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "7c92a79d554441d40345b184ce4d9c955fbb201d82279eb465f54105d633aaf9",
-    "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
+    "docs/memoria/RECONCILIACION_20261103.md": "2c31bab0b756d73588be8769d481b9faebbe47594280bb5386861ef92eccab5f",
+    "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
     "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
@@ -321,7 +321,7 @@
     "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a",
     "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
     "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712",
-    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "8b5329fee1bd14f1f3aafbee023f28ab6c1efa9a2e464fcece7ca347400c93a9",
+    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "d4843d19209e709f0105b36b36c293576f937c4ec38be61bc032f1f5cf772899",
     "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d"
   },
   "historical_snapshot": {
@@ -524,5 +524,23 @@
     },
     "verification": "ES build+scan+12volatile-compatibility operations;Filebeatbuild+scan+binary reachability+actual Kafka production;isolated TLS1test60subtests",
     "limits": "No final-image full pipeline,NiFi/Kibana,SMB,model or human acceptance;Claude final review unavailable"
+  },
+  "local_claude_index_review_completed": {
+    "reviewed_commit": "b5d5d545646ad3ba447be2312d9ae9c5b4d1b8e8",
+    "previous_current_hashes": {
+      "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
+      "docs/evidence/LOCAL_CONTAINERS_20261103.md": "8b5329fee1bd14f1f3aafbee023f28ab6c1efa9a2e464fcece7ca347400c93a9",
+      "docs/memoria/RECONCILIACION_20261103.md": "7c92a79d554441d40345b184ce4d9c955fbb201d82279eb465f54105d633aaf9"
+    },
+    "review_report_sha256": "48355a234a31ac6465ae26a647894d23cd46b353f02af4b986b234e3fc22dd2f",
+    "blocking_findings": 0,
+    "mode": "read-only source review;no execution",
+    "implementation_unchanged_since_reviewed_commit": [
+      "scripts/archive_read_index.py",
+      "scripts/archive_consumer.py",
+      "scoring/read_storage.py",
+      "scoring/read_api.py"
+    ],
+    "human_review": "pending"
   }
 }

@@ -153,13 +153,16 @@ consumir el presupuesto de la petición. El test de existencia distingue una má
 desconocida de una conocida sin observaciones dentro de la ventana.
 
 Esta implementación no certifica la integridad de todos los objetos retenidos.
-Los archivos anteriores sin cobertura del índice devuelven 503 hasta ejecutar la
-migración **offline y explícita**, con todos los escritores detenidos:
+Los archivos anteriores sin cobertura completa del índice devuelven 503. La vía
+recomendada es la migración **offline y explícita**, con todos los escritores detenidos:
 `python -m scripts.archive_read_index /owned/archive --writer-stopped`.
 La migración verifica recibos/predicciones y conserva los bytes de los objetos y
 las tablas originales; GET nunca crea ni repara el índice. El Dockerfile de API
 incorpora el helper de lectura. Esto describe el código inspeccionado, no demuestra
 que una imagen reconstruida lo contenga ni que se haya migrado un archivo vivo.
+También pueden completar la cobertura las predicciones duplicadas aceptadas con
+nuevos identificadores de entrega por el escritor actual, si llegan a cubrir todos
+los objetos y el índice no está sucio. GET sigue verificando cada entrada elegida.
 
 El agente implementador informa de 129 pruebas y 126 subtests en ocho suites
 focalizadas, más una regresión posterior de replay/bronze no canónico; también
@@ -221,3 +224,17 @@ la revisión final (memoria y después límite API); no se inventa aprobación.
 Se actualizan exclusivamente el informe, sus dos runbooks enlazados y este
 apéndice. NiFi/Kibana y campaña completa siguen pendientes de recursos y
 verificación; SMB, modelo aprobado y revisión humana continúan abiertos.
+
+
+## Revisión Claude reanudada y completada
+
+La revisión acotada del índice `b5d5d54` frente a `723ab6b` terminó tras
+reanudarse el proveedor. No encontró errores de corrección bloqueantes. Leyó
+cinco fuentes (de los tests solo los nombres); no ejecutó pruebas, Docker ni red,
+ni revisó los helpers de contrato/plataforma o el modo de journal en ejecución.
+No sustituye la evidencia de pruebas del coordinador ni la aceptación humana.
+Se aclara que los duplicados aceptados con nuevos identificadores de entrega
+pueden completar el índice antiguo, y que el acceso SQL directo permanece dentro
+de la frontera de confianza. Esta aclaración modifica documentación, no código.
+El ZIP anterior se conserva íntegro como evidencia histórica anterior a esta entrega
+tardía del informe; la revisión se distribuye en una adenda separada.

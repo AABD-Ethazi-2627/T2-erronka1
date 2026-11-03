@@ -135,7 +135,8 @@ an attacker rewriting the ledger and its triggers together.
 
 GET opens only `mode=ro`; it never initializes or repairs an index. A legacy archive
 without the index, or mixed legacy/new writes with incomplete coverage, returns
-503 until this explicit offline operation succeeds, with **all writers stopped**:
+503 while coverage remains incomplete. The recommended way to establish complete
+coverage is this explicit offline operation, with **all writers stopped**:
 
 ```sh
 python -m scripts.archive_read_index /owned/archive --writer-stopped
@@ -148,6 +149,11 @@ paths, preserves all existing objects and all three original receipt tables, and
 is idempotent. A failure rolls back new index changes. Back up the archive first;
 the flag confirms an operational prerequisite, it does not stop writer processes.
 This is a full offline verification pass and can be expensive for a large archive.
+Accepted duplicate predictions with new delivery IDs can also progressively add
+missing index entries through the current writer. If those entries cover every
+committed prediction and the index is not dirty, reads can become available
+without running backfill; each selected entry is still fully verified. GET itself
+never performs this reconciliation. Direct SQL access remains a trusted boundary.
 
 The writer's pre-existing **global** committed-object reconciliation remains
 unchanged. Its per-write hash scan, deployment resource bounds and sustained-rate
