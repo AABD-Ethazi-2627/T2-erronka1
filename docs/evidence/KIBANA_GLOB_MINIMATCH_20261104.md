@@ -27,7 +27,12 @@ read-only, network-disabled container. The audit read 78,273 JS files, totaling
 541,467,035 bytes; there were no symlinks. It records all literal quoted names
 `glob`, `rimraf`, `minimatch`, their context and their **CommonJS resolution**.
 Computed imports, ESM export-condition resolution and embedded copies are not
-established by this static inventory.
+established by this static inventory. The classifier also misses several literal
+forms (side-effect imports, templates, interleaved comments, aliases, subpaths)
+and scripts outside its JS extensions. The independent final-image scan found
+no actual bypass of those forms in the inspected files; its one 9.1 MiB
+TypeScript bundle exceeded that scan's per-file limit. This does not establish
+future coverage if the pinned base changes.
 
 The build guard requires these actual literal importer sets before migration:
 
@@ -41,7 +46,10 @@ The build guard requires these actual literal importer sets before migration:
 
 The audit guard fails if these sets, the exact 3.x source hash or the no-symlink
 assumption change. It is repeated in the image build rather than relying only
-on an upstream lockfile.
+on an upstream lockfile. The separate container inventory used Node 24.21.0;
+the build-stage guard used Node 26.13.0 installed with npm. The guard does not
+assert the starting package versions; those and its UTF-8 boundary handling
+remain improvements for the next rebuild.
 
 ## Code changes and regressions
 
@@ -50,13 +58,21 @@ uses Glob **14.0.3**, nested Minimatch **11.0.4** and a separate integrity-pinne
 lockfile for the full dependency closure. The old root Glob/Rimraf directories
 are removed before copying, so the old nested Minimatch 9 cannot survive.
 Glob 14.0.2 is rejected: its minified main still embeds the vulnerable optimizer.
+Glob's `main` executes its embedded Minimatch, not the separately inventoried
+11.0.4 copy. The override pins the external dependency used by `glob/raw`.
+The main-entry behavior tests establish that the embedded preprocessing bound
+is present; its precise embedded Minimatch version was not measured.
 
 Tests exercise the CJS and ESM **main** entrypoints, the 10,000-pattern bound,
 actual filesystem reads after abort (zero new reads), ordinary and synchronous
 Rimraf deletion, cancellation, preserved files, `ignore` and the `globSync`
-consumer API. Glob 14 includes `.` in a bare `**` result; this changed behavior
-is explicit in the control. This is not a promise that all Glob 10 semantics
-are unchanged. The retained `del` subtree uses its original Glob 7/Rimraf 3.
+consumer API. The `.` result for bare `**` is **the same in Glob 10.5.0 and
+14.0.3**; it is an expected-result control, not evidence of a changed behavior.
+The contrary comment in `test-glob-migration.js` is incorrect and is retained
+until the next rebuild because that file is part of the scanned image layers.
+This is not a promise that all Glob 10 semantics are unchanged: changes to
+`walk()`, `Pattern` methods, `debug` and rooted ignores were not exercised.
+The retained `del` subtree uses its original Glob 7/Rimraf 3.
 
 **Minimatch 10:** the official preprocessing fix
 [`77a0f5c`](https://github.com/isaacs/minimatch/commit/77a0f5c4b80bdc641c3c930a1d9edf5ad2db57f8)
@@ -96,12 +112,20 @@ Repository layout and image inventory checks pass; no full-suite rerun is claime
 ## New image scan
 
 Trivy **0.76.1** scanned the actual Docker image, with complete package listing,
-all severities, one worker, a 512 MiB process limit, and the recorded local DB
-(`UpdatedAt=2026-11-04T07:16:25.226375897Z`). The run used `--skip-db-update` and
-`--offline-scan`; CI uses its own fresh database and must repeat the result.
-The scan's image identity matches Docker inspection.
+all severities and the recorded local DB
+(`UpdatedAt=2026-11-04T07:16:25.226375897Z`). The parent invocation configured
+one worker, `MemoryMax=512M`, `--skip-db-update` and `--offline-scan`. The saved
+scanner log does not attest the transient scope configuration or record the
+command, so the memory limit is not independently verifiable from that log.
+The [reproduction notes](KIBANA_GLOB_REPRODUCE_20261104.md) give the command and
+repeatable probes, added after the review rather than presented as contemporaneous
+records. CI uses its own fresh database and must repeat the result. The scan's
+image identity matches Docker inspection.
 
-The corrected gate remains **failed**, with exactly these unexpected findings:
+Calling `validate("kibana", report,
+expected_artifact="cnc-guard-local:kibana-glob-candidate")` remains **failed**,
+with exactly these unexpected findings. The override identifies the local image;
+the ordinary CLI correctly rejects this report's non-CI artifact name instead.
 
 | CVE | Installed instance | State |
 | --- | --- | --- |
@@ -127,8 +151,13 @@ The first isolated bootstrap failed on the probe's own
 preserved; this setting is not present in the project's Kibana service. The
 trace already showed Fleet resolving the patched root Minimatch. A second
 probe removes that setting and retains security defaults, with no network or ES.
-It reaches setup of 203 plugins and traces all five root Minimatch importers,
-plus the retained `del` chain. It then reports a JavaScript heap exhaustion under
+It **initiates** setup of 203 plugins and exhausts the heap during that phase;
+neither completion of setup nor `start` is observed. It traces the five `@kbn`
+importers of root Minimatch and the retained `del` chain. The static inventory
+has eight root Minimatch import references: three `just-bash` bundles were not
+loaded by this bootstrap. Root Glob and root Rimraf were not loaded either;
+their compatibility evidence comes from isolated build controls. It reports
+a JavaScript heap exhaustion under
 the probe's 512 MiB heap. The 90-second observation limit is reached; cleanup
 stops the container (final exit 137), which is removed without cleanup errors.
 The recorded cgroup `OOMKilled` flag is false: this is not evidence of a cgroup
@@ -137,15 +166,27 @@ This is not a ready-service, browser or Elasticsearch integration test, and
 does not establish compatibility beyond the observed imports and build controls.
 The original pinned base image was then tested with the same network-disabled
 configuration, trace and 512 MiB heap/768 MiB container budget (`core=0` added).
-It also exhausts the JavaScript heap and exits 134 after 66.73 seconds. Both
+It also exhausts the JavaScript heap and exits 134 after 66.73 seconds, after
+tracing only three of the five `@kbn` importers. It does not reach the same
+point as the candidate, so this comparison establishes no later-phase behavior. Both
 containers are removed and no service remains running. This control establishes
 that the probe budget cannot boot the original image either; it does not measure
 the patch's memory overhead or justify lowering the project's larger budget.
 
-Independent review of the implementation, complete Kibana/ES acceptance,
-unmanifested copies, NiFi closure, fresh CI and the required GitHub approval
-remain separate gates. The earlier Claude assessment is research of prototypes,
-not approval of this patch. A new path/hash-bound exception or an external request
+The [independent review of `f80c37f`](CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md)
+found no high-severity finding or established runtime breakage. It identified
+two documentary findings corrected here and seven low-severity findings.
+It independently compared 2,816,000 matches with zero differences and verified
+528 copied files against the pinned dependency closure. Those results are the
+reviewer's bounded probes, not a full-suite or service acceptance result.
+The build guard, unused alias and test-comment improvements remain deferred
+to the next image rebuild. The earlier prototype report incorrectly attributed
+an embedded optimizer to `just-bash`; that file is absent from this image.
+The review instead locates an unbounded browser optimizer in `maps.chunk.957.js`,
+with default level 1. Its reachability with higher options is not established.
+
+Complete Kibana/ES acceptance, unmanifested copies, NiFi closure, fresh CI and
+the required GitHub approval remain separate gates. A new path/hash-bound exception or an external request
 to correct the GHSA requires a separate authorized decision; neither is performed.
 The CG32 resource gate, historical evidence and academic/human acceptance are
 unchanged.

@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "546cad8ff9348bd119ab8930c0576cada5dc4e92c5eff8dd78da55f4c5c70de6",
+    "docs/memoria/RECONCILIACION_20261103.md": "ba76e2b938ba21bd816f3760c2888bf0472708bf0678fc287bb174ddd51051d9",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -349,8 +349,10 @@
     "deploy/images/kibana-patches/test-glob-migration.js": "0a57b01221eb87d7c985f0d11fa8b250562e3feeebc437c51a98d7cec20e2da7",
     "deploy/images/kibana-patches/test-minimatch-limits.js": "85f6830a4ebe2eab37a43fd87710f250768e945ee855608e717900a98887a202",
     "deploy/images/kibana-patches/test-minimatch3-applicability.js": "5b5e8f29794ffde72e5339c4c45e51e7887e97ad3fda6e4f960e7c85be11d218",
-    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "5c67475b22767a07d347094702e66eb97d8bd7d04826dbfbbfcba413d6eb74e0",
-    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "606a4c3acf1e7a63843fb240f52327aeefb0aa981f0b23f86f7bebb9ec0393c8"
+    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "d3fe584ad8a814a1007a9d22b483029217fb885297cbb000215d44c16dde3dc9",
+    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "0fc8377c5a2aee5a84018eb5b37ecc1737ecefc6f6416e98b5eeb11d47f69ad1",
+    "docs/evidence/KIBANA_GLOB_REPRODUCE_20261104.md": "0c5f79b1e2766cfaa5268f321ec28d26c2f533c8d8426fb01fe788d4fedf27ec",
+    "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md": "7d52916c68567b66038adb23293980d28c329e36ee1072c4b746ce6ffed4b49a"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -683,5 +685,23 @@
     "new_scanner_exceptions": false,
     "independent_patch_review": "pending",
     "source_identity": "Pre-build hashes and exact image identity recorded in evidence index"
+  },
+  "pr119_kibana_review_corrections": {
+    "previous_current_hashes": {
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "5c67475b22767a07d347094702e66eb97d8bd7d04826dbfbbfcba413d6eb74e0",
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "606a4c3acf1e7a63843fb240f52327aeefb0aa981f0b23f86f7bebb9ec0393c8",
+      "docs/memoria/RECONCILIACION_20261103.md": "546cad8ff9348bd119ab8930c0576cada5dc4e92c5eff8dd78da55f4c5c70de6"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/KIBANA_GLOB_REPRODUCE_20261104.md",
+      "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md"
+    ],
+    "reviewed_commit": "f80c37f72e35d2a5568b5a0801e4304a23a1ce41",
+    "review_status": "completed; zero high or established runtime breakage; two documentary findings corrected",
+    "verification": "Own base/final dot-result control, raw trace inventory5vs3 @kbn modules out of8 literal references; documented drivers reexecuted successfully;22 image source hashes unchanged",
+    "image_rebuilt": false,
+    "new_scanner_exceptions": false,
+    "remaining_low_code_changes": "deferred to next image build; comment/guard/alias defects explicitly documented",
+    "external_acceptance": "pending"
   }
 }

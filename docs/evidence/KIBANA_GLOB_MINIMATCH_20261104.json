@@ -47,8 +47,8 @@
   "minimatch3_properties": 2048,
   "os_installed_and_scanned_packages": 68,
   "node_scanned_packages": 2309,
-  "bootstrap_candidate": "203-plugin setup; five patched root imports; heap exhausted at 512MiB; observation limit reached and cleanup exit137",
-  "bootstrap_original_control": "same config/trace/heap/container budget, core=0; heap exhausted and exit134",
+  "bootstrap_candidate": "Setup of203 plugins initiated; five @kbn rootMM modules observed out of eight static root references; three just-bash bundles and migrated rootGlob/Rimraf not loaded; heap exhausted during setup, no setup completion/start; cleanup exit137",
+  "bootstrap_original_control": "Same config/trace/heap/container budget, core=0; three @kbn rootMM modules observed; no migrated rootGlob/Rimraf; heap exhausted and exit134",
   "ready_service_acceptance": false,
   "raw_artifact_directory": "/home/tears/.cache/cnc-kibana-image-20261104",
   "raw_artifact_sha256": {
@@ -82,9 +82,37 @@
     "bootstrap-baseline-result.json": "3b0b80bc46ca8576951c506779d445a9f6d54d8e42b562b8270a45dcfc154517",
     "import-trace.cjs": "37a58b1197d431dcc6b43e4555b6d754d56618a162e77cf47968a7d4502634e2",
     "run_bootstrap.py": "d332a6cfc0d0f18fdda7da222e0382c3f4efa495496e96a64b855d8c5b38bfc2",
-    "run_bootstrap_baseline.py": "ec3f018ed8a3599e1e6a60f02ec849c4a6e2521644507838a10bdb8c8eb223b6"
+    "run_bootstrap_baseline.py": "ec3f018ed8a3599e1e6a60f02ec849c4a6e2521644507838a10bdb8c8eb223b6",
+    "m1-dot-control.js": "c65f48c9a60cc0c64c6bc7c9dd7fa781d2df1ee5b87fe685cc4cdc46affa268a",
+    "m1-dot-control-result.json": "b7479d5ed670244f56216023556c3d148c6f144a56f6dae84942b94012371a1e",
+    "review-doc-reproduction/differential.js": "b8df17f515e3aa5ce6807a50a245dac4e9e2443038b547dd1b42a46838ea8aab",
+    "review-doc-reproduction/differential.log": "d2fff5c3a2236ebb051f06b6eb76a484194e6062c4e81f57281adb8ac35d15c4",
+    "review-doc-reproduction/gate.log": "99fc876dacc5c308c568c1f2c79b4298aa5bfa0a120c7846f9d392b2b18416fd",
+    "review-doc-reproduction/gate.py": "2ed964ac34585ebe6a7b1a4c1953fde58f3a9c7f2405dd0197133b3f3caa621b",
+    "review-doc-reproduction/guards.log": "e47da5b4011b73f5ca05c7e59bcd037c4ec9a82aba3749d18d75db9287e9fe57",
+    "review-doc-reproduction/guards.py": "7adb1ac05c8fc537948af672c0f83853266c3781a7a0799cc08315b98dce91db",
+    "review-doc-reproduction/results.json": "9d1a6fdf41d0f6fb87edcb34035fc29f18f68f5a17c6fdab730a1df425892eff",
+    "review-doc-reproduction/source-before-execution.json": "53edaa43a5e7aca8225dd82b1ecdd66da5c1c72ffb708504dd0758c544644143"
   },
   "fresh_ci": "pending",
-  "independent_patch_review": "pending",
-  "human_approval": "pending"
+  "independent_patch_review": {
+    "status": "completed_for_f80c37f",
+    "commit": "f80c37f72e35d2a5568b5a0801e4304a23a1ce41",
+    "report": "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md",
+    "sha256": "7d52916c68567b66038adb23293980d28c329e36ee1072c4b746ce6ffed4b49a",
+    "high_findings": 0,
+    "medium_documentary_findings": 2,
+    "low_findings": 7,
+    "technical_verdict": "No runtime breakage established; technical integration candidate; documentary corrections recorded in followup",
+    "policy_exceptions_authorized": false
+  },
+  "human_approval": "pending",
+  "documentation_followup": {
+    "M1": "Dot result equals original; contrary copied test comment deferred to next rebuild",
+    "M2": "Setup initiated, not completed; five @kbn modules only; neither migrated root library loaded; baseline reaches only three @kbn modules",
+    "B5": "External MM11.0.4 is separate from main embedded optimizer",
+    "B6": "Reproduction drivers added after review; prior scope limit not independently attested by saved scanner log; build guard Node26.13, image inventory/final tests Node24.21",
+    "B1_B4": "Code hardening/alias/comment improvements deferred until next image rebuild"
+  },
+  "reproduction_notes": "docs/evidence/KIBANA_GLOB_REPRODUCE_20261104.md"
 }

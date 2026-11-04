@@ -331,19 +331,32 @@ límites de la prueba. La base histórica y la aceptación humana no cambian.
 
 ## Imagen Kibana: Glob y Minimatch
 
-La imagen candidata sustituye Glob por14.0.3 con Rimraf6.1.4 y una clausura
-fijada separada. El código principal de Minimatch10 conserva su API mediante
-un backport explícito con hashes y pruebas CJS/ESM. La imagen repite controles
-con su Node24.21 y comprueba antes el grafo de imports literales del vendor.
-Se verifican96000 comparaciones ordinarias, guardas de parche y2048 propiedades
-de los bytes instalados de Minimatch3, sin diferencias en el corpus ordinario.
+La imagen candidata sustituye Glob por 14.0.3 con Rimraf 6.1.4 y una clausura
+fijada separada. Minimatch 10 conserva su API mediante un backport explícito
+con hashes y pruebas CJS/ESM. Las regresiones finales usan Node 24.21 de Kibana;
+el guard del stage de construcción usa Node 26.13 instalado con npm. Se verifican
+96 000 comparaciones ordinarias y 2048 propiedades de los bytes instalados de
+Minimatch 3, además de las guardas del parche, con el alcance de cada prueba
+registrado en la evidencia.
 
-La construcción acotada termina y el scan real identifica la misma imagen.
+La construcción acotada termina y el scan identifica la misma imagen.
 Permanecen dos hallazgos de Minimatch y el gate sigue rojo; no hay excepciones
-nuevas. Los68 paquetes APK instalados están presentes en el inventarioOS.
-El arranque aislado candidato llega a configurar203 plugins pero agota el heap
-de512MiB; la base original también lo agota. Ambos contenedores se limpian.
-No hay aceptación de servicio listo, ES, campaña completa ni reducción del
-presupuestoCG32. La revisión independiente del parche y CI fresco siguen
-pendientes. Los hashes previos, los artefactos y los límites quedan registrados
-sin cambiar la base histórica, la revisión humana ni el alcance del modelo.
+nuevas. Los 68 paquetes APK instalados están en el inventario del escáner.
+El candidato inicia el setup de 203 plugins y agota el heap de 512 MiB durante
+esa fase, sin completar setup ni llegar a start. Solo se trazan los cinco
+importadores @kbn de Minimatch raíz; no los tres bundles just-bash, ni Glob
+ni Rimraf raíz. La base original también agota el heap, pero traza solo tres
+de esos importadores. Esa comparación no prueba el comportamiento posterior.
+Los contenedores se limpian. No hay aceptación de servicio listo, ES, campaña
+completa ni reducción del presupuesto CG32.
+
+La revisión independiente de f80c37f no establece roturas de runtime ni hallazgos
+altos; sí detecta dos errores documentales, corregidos aquí, y siete bajos.
+El control de punto en Glob coincide con la base y no demuestra un cambio de
+comportamiento. La revisión verifica 2 816 000 coincidencias y 528 ficheros de
+la clausura; son sondas acotadas del revisor. La evidencia diferencia el Node
+del guard, el ámbito de las trazas y los límites de procedencia del comando
+Trivy. Los cambios bajos de código quedan para una próxima reconstrucción.
+CI fresco, las aceptaciones externas y la aprobación de GitHub siguen pendientes.
+Los hashes previos quedan registrados y no cambia la base histórica, la revisión
+humana ni el alcance del modelo.
