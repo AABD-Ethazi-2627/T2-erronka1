@@ -45,6 +45,7 @@
     "systeminformation-patched": "npm:systeminformation@5.33.16",
     "re2js-patched": "npm:re2js@2.8.7",
     "joi-patched": "npm:joi@18.3.1",
-    "hapi-content-patched": "npm:@hapi/content@6.0.3"
+    "hapi-content-patched": "npm:@hapi/content@6.0.3",
+    "hono-node-server-patched": "npm:@hono/node-server@2.1.3"
   }
 }

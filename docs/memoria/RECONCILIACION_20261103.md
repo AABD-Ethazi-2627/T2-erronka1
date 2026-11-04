@@ -263,3 +263,16 @@ que consume Wire schema 5.2. Es diagnóstico, no reparación ni excepción de ga
 Un backport separado está en investigación y no forma parte de esta entrega.
 Estos informes y los inputs Kibana revisados actualizan el inventario actual;
 la base histórica, el alcance del modelo y la aceptación humana no cambian.
+
+
+## Adaptador Hono compatible con MCP
+
+Se incorpora @hono/node-server2.1.3 porque el consumidor MCP1.32 admite
+explícitamente esa rama, el peerHono4 existe y el Node de Kibana satisface
+su requisito. El coordinador repite pruebas HTTP y MCPinitialize CJS/ESM y
+controles de archivos estáticos codificados; el original1.19.17 reproduce200
+frente al404 esperado. El Dockerfile repite estas pruebas con los módulos
+y Node finales. No se añaden dependencias runtime; el lock conserva el resto
+de entradas. Glob/minimatch, las imágenes finales y NiFi siguen pendientes.
+La revisión independiente ha bloqueado promover el candidatoWire inicial;
+el trabajo de lectores ampliados sigue separado de la imagen y del gate.

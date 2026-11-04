@@ -29,7 +29,8 @@ RUN rm -rf /usr/share/kibana/node_modules/decode-uri-component \
     /usr/share/kibana/node_modules/systeminformation \
     /usr/share/kibana/node_modules/re2js \
     /usr/share/kibana/node_modules/joi \
-    /usr/share/kibana/node_modules/@hapi/content
+    /usr/share/kibana/node_modules/@hapi/content \
+    /usr/share/kibana/node_modules/@hono/node-server
 COPY --from=patches /patches/node_modules/deepmerge-patched /usr/share/kibana/node_modules/deepmerge
 COPY --from=patches /patches/node_modules/qs-patched /usr/share/kibana/node_modules/qs
 COPY --from=patches /patches/node_modules/ai-provider-utils /usr/share/kibana/node_modules/@ai-sdk/provider-utils
@@ -72,13 +73,15 @@ COPY --from=patches /patches/node_modules/systeminformation-patched /usr/share/k
 COPY --from=patches /patches/node_modules/re2js-patched /usr/share/kibana/node_modules/re2js
 COPY --from=patches /patches/node_modules/joi-patched /usr/share/kibana/node_modules/joi
 COPY --from=patches /patches/node_modules/hapi-content-patched /usr/share/kibana/node_modules/@hapi/content
+COPY --from=patches /patches/node_modules/hono-node-server-patched /usr/share/kibana/node_modules/@hono/node-server
 RUN rm -rf /usr/share/kibana/node_modules/node-forge
 # Replace actual upstream library and dist bytes; do not reapply the 1.4.0 backport.
 COPY --from=patches /patches/node_modules/node-forge-patched /usr/share/kibana/node_modules/node-forge
-COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js deploy/images/kibana-patches/test-same-line-updates.js /tmp/
+COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js deploy/images/kibana-patches/test-same-line-updates.js deploy/images/kibana-patches/test-hono-node-server.js /tmp/
 RUN /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-patch.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-chain.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-follow-redirects.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-same-line-updates.js \
-    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js /tmp/test-same-line-updates.js
+    && /usr/share/kibana/node/default/bin/node /tmp/test-hono-node-server.js \
+    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js /tmp/test-same-line-updates.js /tmp/test-hono-node-server.js
 USER 1000
