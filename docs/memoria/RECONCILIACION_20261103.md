@@ -291,3 +291,15 @@ revisiones y ambos escaneos de imagen. El resultado de Claudev1 no se atribuye a
 El bundle incluye fuentes.java para que conserve la regresión del candidato.
 Los archivos nuevos y documentos revisados actualizan el inventario; no cambian
 la aceptación humana, la base histórica ni el alcance del modelo.
+
+
+## Transporte del instalador Trivy
+
+Los jobsAPI/Kafka en d7cfa18 construyeron sus imágenes, pero fallaron al
+instalar Trivyv0.76.1 con curl exit6, antes de escanear. La falta de artefacto
+fue consecuencia, no hallazgo de vulnerabilidad. El workflow añade un wrapper
+curl local al job con reintentos y tiempos acotados; mantiene argumentos,
+checksums, pins, severidades y gate. La prueba usa curl real contra503/503/200
+en loopback y verifica tres peticiones, bytes finales y estado200. Pasan16tests
+y18subtests. La recuperación del runner requiere la nueva ejecuciónCI.
+No se afirma todavía escaneo verde ni se modifican las aprobaciones de GitHub.

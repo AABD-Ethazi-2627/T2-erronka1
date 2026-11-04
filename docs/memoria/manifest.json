@@ -249,7 +249,7 @@
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/receipt.json": "afccb394177056088bb91f0396a11f7410f78aaa9228d129bf34952d8c065875",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028.md": "f04a05779a0c5f74ed03de33c9b93fddb384282717ddd04ecdf815d728d40ca6",
     ".github/workflows/dashboard.yml": "b7e8f5c6b81b87af701efbd095928e3d770cf9477e50209352ff8f2a54161a37",
-    ".github/workflows/dependencies.yml": "bd8a367fb270594f3a664f13dab0501f0f0ef30b3aef5277dc0982c63006a878",
+    ".github/workflows/dependencies.yml": "58a9e4aeaad42378437998ac86192421b0990b2a8be3f96f7beb6981cac49466",
     ".github/workflows/es-bind-safety.yml": "95553c0af814f5bba1ccbe40cc0c17f0edcce57c9d7e6b3cfd835c2ec43626a7",
     ".github/workflows/ml-study.yml": "22fe2429f482a008727cc2ae8bc03eeb61f84774ebaa6cb17e35053887c5ab1e",
     ".github/workflows/validate.yml": "6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e",
@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "520300e0a98712bc0f54c8df64410ef2963e30c477d55e706999032bc0ed9f35",
+    "docs/memoria/RECONCILIACION_20261103.md": "dec7b933a6bba8a2181ee64683f8223afdab2a4cf8d55b853d5056b65e0b40a3",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -335,7 +335,10 @@
     "deploy/images/nifi-patches/wire5/verification-pins.json": "db286db64958abed49fbbdf2d8ab0f346b47b33fdcd3366049ead71a098a25a3",
     "deploy/images/nifi-patches/wire5/verify.py": "3547b3f120020c74c548efc6e25fb336cee2738afc7e66e4be19f79a1b505ca9",
     "deploy/images/nifi-patches/wire5/verify_scan.py": "bd2f5d048ae37d40a97f6c5ff3358ebb6d040040a6c12e780d54226798b34217",
-    "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md": "e88d0e17d5da5e7f8abdcf334b1af1999a5d16cec1b6bfafee78bd65a9c4e0bc"
+    "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md": "e88d0e17d5da5e7f8abdcf334b1af1999a5d16cec1b6bfafee78bd65a9c4e0bc",
+    "scripts/trivy-download-curl.sh": "4ef929e19c5a712b8466078db847d28cfce930bca07bca900f2040db1244a01a",
+    "tests/test_trivy_download_retry.py": "ab1621bd2688f09123595abf8b7f860fa15da9703fb054fbd485bb1497406b9b",
+    "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md": "749f87bd85207448429dc08308e5fe673bdcec8e159bc99163c30c2fbfda7f78"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -603,5 +606,19 @@
     ],
     "verification": "Parent44tests/upstream9failures,publicABI unchanged,exactpins,standaloneTrivyrecognition/findingvisible",
     "limits": "Candidate NOTusedbyNiFi;Claudev1blocked;v2review/fullinventory/runtime/imagegatespending"
+  },
+  "pr119_trivy_installer_retry": {
+    "previous_current_hashes": {
+      ".github/workflows/dependencies.yml": "bd8a367fb270594f3a664f13dab0501f0f0ef30b3aef5277dc0982c63006a878",
+      "docs/memoria/RECONCILIACION_20261103.md": "520300e0a98712bc0f54c8df64410ef2963e30c477d55e706999032bc0ed9f35"
+    },
+    "new_inventory_paths": [
+      "scripts/trivy-download-curl.sh",
+      "tests/test_trivy_download_retry.py",
+      "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md"
+    ],
+    "cause": "Actual jobs failed curl exit6 duringTrivyinstallation before scan",
+    "verification": "16tests18subtests;actualcurl503recovery;newCIpending",
+    "gate_unchanged": true
   }
 }
