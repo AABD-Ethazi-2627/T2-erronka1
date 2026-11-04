@@ -360,3 +360,20 @@ Trivy. Los cambios bajos de código quedan para una próxima reconstrucción.
 CI fresco, las aceptaciones externas y la aprobación de GitHub siguen pendientes.
 Los hashes previos quedan registrados y no cambia la base histórica, la revisión
 humana ni el alcance del modelo.
+
+
+## Candidatos de bibliotecas NiFi
+
+Se incorpora el código de comprobación del hijo 98eb0dc como 107edda. El padre
+repite las pruebas offline con una caché nueva y cuatro negativos de integridad.
+Pasan las sondas A/B de Guava 33.7.1, LZ4 y Snappy, con las limitaciones de ABI,
+plataforma y recursos registradas. El plan de seis objetos coincide con el hijo.
+Las dos copias antiguas de Guava tienen hashes distintos de los JAR oficiales;
+RabbitMQ necesita además validar la clausura Netty. Permanecen bloqueados.
+
+No se ha modificado ningún archivo NAR ni runtime. Faltan el inventario completo
+de ocurrencias, la validación por classloader, un escritor verificado de archivos,
+la revisión independiente y los escaneos y pruebas NiFi finales. El job nuevo
+confirma las mismas 59 tuplas anidadas, sin añadidas ni retiradas. El scan normal
+sin hallazgos no cierra esa deuda. No cambian el gate, sus excepciones, la base
+histórica, la aprobación humana ni el alcance del modelo.

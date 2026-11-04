@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "ba76e2b938ba21bd816f3760c2888bf0472708bf0678fc287bb174ddd51051d9",
+    "docs/memoria/RECONCILIACION_20261103.md": "3605252fac15bb578c41952bcc082d271ff0e9b25be6fe69cb4c49d641a9bc08",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -352,7 +352,17 @@
     "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "d3fe584ad8a814a1007a9d22b483029217fb885297cbb000215d44c16dde3dc9",
     "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "0fc8377c5a2aee5a84018eb5b37ecc1737ecefc6f6416e98b5eeb11d47f69ad1",
     "docs/evidence/KIBANA_GLOB_REPRODUCE_20261104.md": "0c5f79b1e2766cfaa5268f321ec28d26c2f533c8d8426fb01fe788d4fedf27ec",
-    "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md": "7d52916c68567b66038adb23293980d28c329e36ee1072c4b746ce6ffed4b49a"
+    "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md": "7d52916c68567b66038adb23293980d28c329e36ee1072c4b746ce6ffed4b49a",
+    "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java": "71642c704477b86189e843edd05228fcd1ad0ac8e7fc45a7d402e1684b9646d8",
+    "deploy/images/nifi-patches/compatible-libraries/README.md": "29a838a8fc079c33818e84c2d369bbf4a3671f08ee861e62ab9af908d69fddca",
+    "deploy/images/nifi-patches/compatible-libraries/candidate-plan.json": "63a7860a3b20d5b08db4a891c589c09874080c26a892dc78a9c0d0e6df06e203",
+    "deploy/images/nifi-patches/compatible-libraries/pins.json": "22d1819e20f318b8956f9b26c160590b5ab4c634762990973ce886d464c4e621",
+    "deploy/images/nifi-patches/compatible-libraries/test_verifier.py": "87fe5468a1d96214667784230695fa8f070421b01a210206892af7368a93075d",
+    "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9",
+    "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "761b0e1471673636d746b9c44cd3132a52d4bdfeeda4ace784559b3519df746f",
+    "deploy/images/nifi-patches/compatible-libraries/verify.py": "b0815c81225595ad4aea4a227dd62d4f943560a4d8afcb26d9ae4a53358d8503",
+    "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.md": "6ba421b20698095993a7678b469829e1cfa170efeef340f6af0ac621a92b388a",
+    "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.json": "1d159461d641c6f3540b88fde59ff748bc0f051f584442a8ac68e3f387159bf3"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -703,5 +713,29 @@
     "new_scanner_exceptions": false,
     "remaining_low_code_changes": "deferred to next image build; comment/guard/alias defects explicitly documented",
     "external_acceptance": "pending"
+  },
+  "pr119_nifi_component_candidates": {
+    "previous_current_hashes": {
+      "docs/memoria/RECONCILIACION_20261103.md": "ba76e2b938ba21bd816f3760c2888bf0472708bf0678fc287bb174ddd51051d9"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java",
+      "deploy/images/nifi-patches/compatible-libraries/README.md",
+      "deploy/images/nifi-patches/compatible-libraries/candidate-plan.json",
+      "deploy/images/nifi-patches/compatible-libraries/pins.json",
+      "deploy/images/nifi-patches/compatible-libraries/test_verifier.py",
+      "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json",
+      "deploy/images/nifi-patches/compatible-libraries/verification-summary.json",
+      "deploy/images/nifi-patches/compatible-libraries/verify.py",
+      "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.md",
+      "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.json"
+    ],
+    "child_commit": "98eb0dc4593c12e7c9837804f78efb4da6c1d967",
+    "integrated_source_commit": "107edda",
+    "parent_verification": "Offline component/A-B probes and4negative integrity tests pass;105856KiB peak childRSS; conditional six-object plan matches child",
+    "runtime_patched_objects": 0,
+    "blocked": "Two Guava object hashes differ; RabbitMQ requires Netty closure; all NAR occurrences/classloaders unmapped",
+    "gate": "59 nested tuples remain; no policy change",
+    "independent_component_review": "pending"
   }
 }
