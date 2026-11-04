@@ -429,6 +429,7 @@
       "io.netty:netty-codec-compression:4.2.18.Final",
       "io.netty:netty-codec-protobuf:4.2.18.Final",
       "io.netty:netty-codec-marshalling:4.2.18.Final",
+      "org.jboss.marshalling:jboss-marshalling:2.3.0",
       "com.google.protobuf:protobuf-java:3.25.9",
       "com.google.protobuf.nano:protobuf-javanano:3.1.0"
     ],
@@ -445,7 +446,8 @@
       "io.netty:netty-handler:4.2.18.Final",
       "io.netty:netty-resolver:4.2.18.Final",
       "io.netty:netty-transport-native-unix-common:4.2.18.Final",
-      "io.netty:netty-transport:4.2.18.Final"
+      "io.netty:netty-transport:4.2.18.Final",
+      "org.jboss.marshalling:jboss-marshalling:2.3.0"
     ],
     "declared_closure_complete": false,
     "abi": {
@@ -493,11 +495,10 @@
     "1.1.10.9": "passed"
   },
   "evidence": {
-    "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874",
-    "parent_execution": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component-final-execution.json",
-    "source_before": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/source-before.json",
-    "historical_child_commit": "98eb0dc4593c12e7c9837804f78efb4da6c1d967",
+    "tested_source_commit": "263c464449ac042544237c402f0c244be8f82c79",
+    "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793806719266788908",
+    "execution": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/component-execution.json",
     "runtime_patched": false,
-    "note": "Current parent reproduction after fail-closed review corrections. Rabbit parsers cannot grant transport readiness; see separate verify_rabbit.py proof."
+    "note": "Preparation only. Original verifier Rabbit listing is conservative/unpruned; separate Rabbit transport proof gives exact required closure."
   }
 }

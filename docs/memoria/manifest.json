@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "08f0756a462368438fa6ef82b0f9afbc31b94ebcea04e18d630b3127ea54fbb8",
+    "docs/memoria/RECONCILIACION_20261103.md": "53773c71c133f149a1e43eb8153d2dd0dbb1adfcc5993a3adb8289db7660151e",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -359,7 +359,7 @@
     "deploy/images/nifi-patches/compatible-libraries/pins.json": "ab7f2a301ffab32002813576043923864ea4cdd5a3afef120b7e48f17f197c46",
     "deploy/images/nifi-patches/compatible-libraries/test_verifier.py": "4849fe1c9c582f0b02ca3191dc008b5f757dfc54ab97924654e3278bce4b1376",
     "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9",
-    "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "9ead9568a6507eeab15c9676df096f6d38565bd66bac24a4d1fa29232927aef1",
+    "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "10e803141112d3e7555559010e993de11b60e4bdf7cf95a5d139b063c305dfa9",
     "deploy/images/nifi-patches/compatible-libraries/verify.py": "6c16e0163b6b237bc85a6aaf972d06a1d6e161b27e39c6d92cbcc8534e314ee1",
     "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.md": "2a3337b48eec55c42d927bdb96ba6a6f275fcf28836b6ffd376ced9781a9568a",
     "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.json": "1d159461d641c6f3540b88fde59ff748bc0f051f584442a8ac68e3f387159bf3",
@@ -394,7 +394,7 @@
     "deploy/images/nifi-patches/jackson/pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
     "deploy/images/nifi-patches/jackson/support-lock.json": "035c4b0b4e8f0d1039bfdf8146cfe40819e4d9f58a39b999ab4a4dd2078e4b2e",
     "deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
-    "deploy/images/nifi-patches/jackson/verification-summary.json": "28696db1d9dbba5e5992ec58aae0d95bbc6d40e2eec92d15721363ecd10ac508",
+    "deploy/images/nifi-patches/jackson/verification-summary.json": "a9e6ad649f57a0592f1c862c3d1875749a714e434885ed710fd882ed2fcd9f79",
     "deploy/images/nifi-patches/jackson/verify.py": "a413315d08788f9cac997cfe92a66b7212d4e4aa711f39a9e853bc04784d7270",
     "docs/evidence/NIFI_JACKSON_PARENT_20261104.json": "d8ac3ebfa6296d080fa4f943a9642aab6e44f9c5d1d931cf7a022fe386477351",
     "docs/evidence/NIFI_JACKSON_PARENT_20261104.md": "700276f9afa7515d96d9650085d5b29abe6ed6ab47bf89047227da3b140b23f1",
@@ -424,8 +424,9 @@
     "deploy/images/nifi-patches/jackson/jdk21-pins.json": "e28c21e719337f5610fefcc4dcba71c10ee24ea517d4bc8089107bea78f874b0",
     "docs/evidence/CLAUDE_NIFI_JACKSON_REVIEW_20261104.md": "6e8610f6d89beeda96732650d69e01d9ff3ec4b929291a45b3beeb3634e9671e",
     "docs/evidence/CLAUDE_NIFI_OCCURRENCE_TRANSPORT_RECHECK_20261104.md": "8d438869b0d7b357dd1235d0fc484182df91dc99b9958c6b9566ce482f0ec38b",
-    "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.md": "0e7b2d584c53891695551c4e6d22c422a342ec3415d650e44771e61ad9ad2761",
-    "tests/test_nifi_hadoop_snappy.py": "c051bfce0e3700369ba7107b1cc88985584a7a3dc51721cf30c5b56dd086fd99"
+    "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.md": "cb3a20f5359712872d896e9150ed1a11b65122ecc3e219d5e45d0db3a88fa125",
+    "tests/test_nifi_hadoop_snappy.py": "c051bfce0e3700369ba7107b1cc88985584a7a3dc51721cf30c5b56dd086fd99",
+    "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json": "0d88234c865b34af3e4563543dfcb08d46f4a34478a4aab802fa6d42438a2e5c"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -955,5 +956,20 @@
     "evidence": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.md",
     "verification": "focused working-source guards; 30 real-Maven comparison fixtures; component/Rabbit/JDK21Jackson/Hadoop repetitions; final immutable-source repeat pending",
     "limits": "No runtime plan approval, rooted application, final image/scans, exception, protected merge or human acceptance"
+  },
+  "pr119_nifi_immutable_repetition": {
+    "tested_source_commit": "263c464449ac042544237c402f0c244be8f82c79",
+    "previous_current_hashes": {
+      "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "9ead9568a6507eeab15c9676df096f6d38565bd66bac24a4d1fa29232927aef1",
+      "deploy/images/nifi-patches/jackson/verification-summary.json": "28696db1d9dbba5e5992ec58aae0d95bbc6d40e2eec92d15721363ecd10ac508",
+      "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.md": "0e7b2d584c53891695551c4e6d22c422a342ec3415d650e44771e61ad9ad2761",
+      "docs/memoria/RECONCILIACION_20261103.md": "08f0756a462368438fa6ef82b0f9afbc31b94ebcea04e18d630b3127ea54fbb8"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json"
+    ],
+    "evidence": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json",
+    "verification": "993 tests/416subtests/4skips; pinned Java21 original/Rabbit/Jackson/Hadoop probes; 215-file inventory; writer exercise10targets; source unchanged; derived output summaries explicit",
+    "limits": "Preparation only; exercise is not real approval/promotion; wrappers, SDKs, classloaders, final image/scans, CI/review and external gates pending"
   }
 }

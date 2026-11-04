@@ -477,3 +477,22 @@ modifican originales ni se desbloquean las nueve ocurrencias. Falta QA, montaje,
 classloaders, imágenes y gates externos. La verificación final sobre fuente
 inmutable queda pendiente en esta entrada. No cambian la base, los hashes
 históricos, el modelo, las excepciones ni la revisión humana.
+
+
+## Repetición final sobre 263c464 inmutable
+
+La fuente se congela limpia en 263c464 y conserva sus hashes durante la prueba.
+Pasan 993 tests, 416 subtests y cuatro omitidos; dos warnings son fixtures ZIP
+duplicados intencionales. Pasan las bibliotecas originales, siete transportes
+RabbitMQ, quince comandos Jackson con JDK21 fijado y veinte comandos Hadoop
+con setenta casos por Snappy y controles de media corrección. El inventario
+público completo conserva 215 archivos/2099 ocurrencias. El ejercicio aislado
+del escritor con diez objetivos Guava/LZ4 conserva originales y hermanos; no es
+aprobación de familias ni una imagen. Snappy queda fuera de ese ejercicio.
+
+Los dos resúmenes de salida se regeneran después y se separan explícitamente
+de la fuente ejecutable. La evidencia enlaza commit/tree, hashes antes/después,
+comandos, resultados y el alcance de cada prueba. Continúan pendientes una
+revisión independiente nueva, wrappers/SDKs, ABI/classloaders, imagen/scans y
+todos los gates externos. Ninguna aceptación humana, excepción, base histórica
+o contrato de clasificación actual se modifica.

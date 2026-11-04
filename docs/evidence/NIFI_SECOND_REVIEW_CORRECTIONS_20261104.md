@@ -1,6 +1,6 @@
 # NiFi second-review corrections and Hadoop candidate
 
-Status: **local preparation; final immutable-source verification pending**.
+Status: **locally verified preparation on immutable source `263c464`; new independent recheck and runtime gates pending**.
 The implementation and focused checks below do not approve a runtime plan,
 image, exception, merge, SMB or human acceptance.
 
@@ -48,7 +48,23 @@ JAR contents/attributes remain unchanged. All 215 originals remain unchanged.
 This is a standalone candidate, not an Apache release, rooted archive patch,
 classloader acceptance or permission to lift the nine-Snappy blocked group.
 
-Focused tests pass on the working source; final repeat, inventory/overlay checks,
-source bindings and exact counts will be recorded after freezing this commit.
+Final checks on the clean immutable code source `263c464` pass:
+
+| Check | Result |
+| --- | --- |
+| Root suite | 993 tests, 416 subtests, four skipped; two intentional duplicate-ZIP warnings |
+| Reviewer Maven fixtures | 15 equal closures, 15 rejected, no divergent successful result |
+| Original library probes / RabbitMQ | Pass; seven transport configurations, exact 13-coordinate lock |
+| Jackson on hash-pinned JDK21 | 15 Java commands; all 156 roots enforced; seven unassessed SDK occurrences retained |
+| Hadoop | 20 commands; 70 cases per Snappy version; both half-fix negatives and fixed security guards pass |
+| Complete supported public archive tree | 215 files / 2,099 occurrences; originals unchanged |
+| Writer regression exercise | Ten Guava/LZ4 targets in 10 outer archives; all sibling preservation checks pass |
+
+The writer exercise is explicitly test-only: its private overlay and test-status
+strings are not a real review/approval record, image change or family promotion.
+Snappy is excluded from it. Code/source hashes remain unchanged throughout the
+checks. Two derived output summaries are refreshed afterward and explicitly
+separated from executable source in the [source and artifact binding](NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json).
+The earlier JDK27 and working-tree proofs remain historical, not relabelled.
 Current metadata-scan, wrapper/SDK, classloader, image, CI/GitHub review,
 CG32-resource, NiFi/SMB and human gates remain open. No new exception is added.

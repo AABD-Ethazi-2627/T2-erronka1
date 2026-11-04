@@ -12,8 +12,8 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.21.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.21.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
@@ -28,7 +28,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "false",
         "false",
@@ -47,7 +47,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "true",
         "false",
@@ -68,8 +68,8 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
@@ -84,7 +84,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "JacksonProbe",
         "false",
         "false",
@@ -103,7 +103,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "JacksonProbe",
         "true",
         "false",
@@ -124,7 +124,7 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2",
         "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/ModuleProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -140,7 +140,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
         "ModuleProbe",
         "2.22.2"
       ],
@@ -157,7 +157,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
         "ModuleProbe",
         "2.22.3"
       ],
@@ -176,8 +176,8 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.1.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.1.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
@@ -192,7 +192,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "false",
         "false",
@@ -211,7 +211,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "true",
         "false",
@@ -232,8 +232,8 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.2.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.2.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
@@ -248,7 +248,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
         "JacksonProbe",
         "false",
         "true",
@@ -267,7 +267,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/jackson-proof/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
         "JacksonProbe",
         "true",
         "true",
@@ -356,7 +356,7 @@
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/support-lock.json": "035c4b0b4e8f0d1039bfdf8146cfe40819e4d9f58a39b999ab4a4dd2078e4b2e",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/verify.py": "a413315d08788f9cac997cfe92a66b7212d4e4aa711f39a9e853bc04784d7270",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "d0c6aba8c9655c1ca983f9979f665763d070875e10b6967fadf024d85dd6c6da"
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "99f1fc75c9f6c9bb4a79b7500c3a799fbddf18b230d582d93c6502ee75e9f576"
   },
   "sources_before": {
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "702c9868e7d993de5b4a23eca9ab69c4a5093a800e7d0f4987ec179ddaf050e9",
@@ -373,7 +373,7 @@
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/support-lock.json": "035c4b0b4e8f0d1039bfdf8146cfe40819e4d9f58a39b999ab4a4dd2078e4b2e",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/verify.py": "a413315d08788f9cac997cfe92a66b7212d4e4aa711f39a9e853bc04784d7270",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "d0c6aba8c9655c1ca983f9979f665763d070875e10b6967fadf024d85dd6c6da"
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "99f1fc75c9f6c9bb4a79b7500c3a799fbddf18b230d582d93c6502ee75e9f576"
   },
   "status": "component-prepared",
   "toolchain_sha256": {
