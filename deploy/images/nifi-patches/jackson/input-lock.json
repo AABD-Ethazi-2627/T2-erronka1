@@ -1,0 +1,14 @@
+{
+  "scan": {
+    "relative": "artifact-f80c37f/nested-archive-scan.json",
+    "sha256": "bb7b6625fac7d59118dd3e2f2f596aa38445f458ae36f6ddcb17265e722de2c1"
+  },
+  "objects": {
+    "relative": "vulnerable-objects.json",
+    "sha256": "f11af68b9381ca4b64f341cd3bb4baf82a86cc32499cc46d244d4682b12e9abb"
+  },
+  "inventory": {
+    "relative": "parent-verified-1793795867722215369/inventory.stdout",
+    "sha256": "ba7c03e835502cf3dca880fb53c1809d5493bd6187e8962ac664e1ebcdf819c2"
+  }
+}

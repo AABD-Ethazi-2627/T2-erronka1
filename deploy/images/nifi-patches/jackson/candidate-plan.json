@@ -1,0 +1,1714 @@
+{
+  "entries": [
+    {
+      "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+          ],
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+        }
+      ],
+      "package": "com.fasterxml.jackson.core:jackson-core",
+      "replacement": null,
+      "research_candidate": "com.fasterxml.jackson.core:jackson-core:2.21.7",
+      "status": "blocked-wrapper-specific-rebuild-required",
+      "symbolic_abi_changes": [
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaBigIntegerParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaFloatParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaBigDecimalParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaDoubleParser.class: class removed"
+      ],
+      "upstream_old_equal": false,
+      "version": "2.21.2"
+    },
+    {
+      "object_sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
+          ],
+          "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar"
+        }
+      ],
+      "package": "com.fasterxml.jackson.core:jackson-core",
+      "replacement": null,
+      "research_candidate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
+      "status": "blocked-wrapper-specific-rebuild-required",
+      "symbolic_abi_changes": [
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigIntegerParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaFloatParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigDecimalParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaDoubleParser.class: class removed"
+      ],
+      "upstream_old_equal": false,
+      "version": "2.22.2"
+    },
+    {
+      "object_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+      "occurrences": [
+        {
+          "members": [],
+          "outer": "bootstrap/jackson-core-2.22.2.jar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+          ],
+          "outer": "nifi-amqp-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+          ],
+          "outer": "nifi-framework-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+          ],
+          "outer": "nifi-kafka-to-s3-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+          ],
+          "outer": "nifi-standard-shared-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+            "WEB-INF/lib/jackson-core-2.22.2.jar"
+          ],
+          "outer": "nifi-update-attribute-nar-2.12.0.nar"
+        }
+      ],
+      "package": "com.fasterxml.jackson.core:jackson-core",
+      "replacement": {
+        "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
+        "file": "jackson-core-2.22.3.jar",
+        "sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+        "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar"
+      },
+      "research_candidate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
+      "status": "blocked-symbolic-ABI-and-consumer-review-required",
+      "symbolic_abi_changes": [
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigIntegerParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaFloatParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigDecimalParser.class: class removed",
+        "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaDoubleParser.class: class removed"
+      ],
+      "upstream_old_equal": true,
+      "version": "2.22.2"
+    },
+    {
+      "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+          ],
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+        }
+      ],
+      "package": "com.fasterxml.jackson.core:jackson-databind",
+      "replacement": null,
+      "research_candidate": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+      "status": "blocked-wrapper-specific-rebuild-required",
+      "symbolic_abi_changes": [],
+      "upstream_old_equal": false,
+      "version": "2.21.2"
+    },
+    {
+      "object_sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
+          ],
+          "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar"
+        }
+      ],
+      "package": "com.fasterxml.jackson.core:jackson-databind",
+      "replacement": null,
+      "research_candidate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+      "status": "blocked-wrapper-specific-rebuild-required",
+      "symbolic_abi_changes": [],
+      "upstream_old_equal": false,
+      "version": "2.22.2"
+    },
+    {
+      "object_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+      "occurrences": [
+        {
+          "members": [],
+          "outer": "bootstrap/jackson-databind-2.22.2.jar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+          ],
+          "outer": "nifi-amqp-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+          ],
+          "outer": "nifi-framework-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+          ],
+          "outer": "nifi-kafka-to-s3-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+          ],
+          "outer": "nifi-standard-shared-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+            "WEB-INF/lib/jackson-databind-2.22.2.jar"
+          ],
+          "outer": "nifi-update-attribute-nar-2.12.0.nar"
+        }
+      ],
+      "package": "com.fasterxml.jackson.core:jackson-databind",
+      "replacement": {
+        "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+        "file": "jackson-databind-2.22.3.jar",
+        "sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+        "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar"
+      },
+      "research_candidate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+      "status": "component-candidate-consumer-review-required",
+      "symbolic_abi_changes": [],
+      "upstream_old_equal": true,
+      "version": "2.22.2"
+    },
+    {
+      "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+          ],
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+        }
+      ],
+      "package": "tools.jackson.core:jackson-core",
+      "replacement": null,
+      "research_candidate": "tools.jackson.core:jackson-core:3.1.7",
+      "status": "blocked-wrapper-specific-rebuild-required",
+      "symbolic_abi_changes": [],
+      "upstream_old_equal": false,
+      "version": "3.1.2"
+    },
+    {
+      "object_sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+          ],
+          "outer": "nifi-jolt-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+            "WEB-INF/lib/jackson-core-3.2.2.jar"
+          ],
+          "outer": "nifi-jolt-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+          ],
+          "outer": "nifi-standard-nar-2.12.0.nar"
+        }
+      ],
+      "package": "tools.jackson.core:jackson-core",
+      "replacement": {
+        "coordinate": "tools.jackson.core:jackson-core:3.2.3",
+        "file": "jackson-core-3.2.3.jar",
+        "sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817",
+        "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.3/jackson-core-3.2.3.jar"
+      },
+      "research_candidate": "tools.jackson.core:jackson-core:3.2.3",
+      "status": "component-candidate-consumer-review-required",
+      "symbolic_abi_changes": [],
+      "upstream_old_equal": true,
+      "version": "3.2.2"
+    },
+    {
+      "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+          ],
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+        }
+      ],
+      "package": "tools.jackson.core:jackson-databind",
+      "replacement": null,
+      "research_candidate": "tools.jackson.core:jackson-databind:3.1.7",
+      "status": "blocked-wrapper-specific-rebuild-required",
+      "symbolic_abi_changes": [
+        "tools/jackson/databind/deser/impl/UnwrappedPropertyHandler.class: ('field', '_hasUnwrappedAnySetter', 'Z', 20)",
+        "tools/jackson/databind/util/StdDateFormat.class: ('field', 'DATE_FORMAT_RFC1123', 'Ljava/text/DateFormat;', 28)"
+      ],
+      "upstream_old_equal": false,
+      "version": "3.1.2"
+    },
+    {
+      "object_sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401",
+      "occurrences": [
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+          ],
+          "outer": "nifi-jolt-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+            "WEB-INF/lib/jackson-databind-3.2.2.jar"
+          ],
+          "outer": "nifi-jolt-nar-2.12.0.nar"
+        },
+        {
+          "members": [
+            "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+          ],
+          "outer": "nifi-standard-nar-2.12.0.nar"
+        }
+      ],
+      "package": "tools.jackson.core:jackson-databind",
+      "replacement": {
+        "coordinate": "tools.jackson.core:jackson-databind:3.2.3",
+        "file": "jackson-databind-3.2.3.jar",
+        "sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2",
+        "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.3/jackson-databind-3.2.3.jar"
+      },
+      "research_candidate": "tools.jackson.core:jackson-databind:3.2.3",
+      "status": "blocked-symbolic-ABI-and-consumer-review-required",
+      "symbolic_abi_changes": [
+        "tools/jackson/databind/util/StdDateFormat.class: ('field', 'DATE_FORMAT_RFC1123', 'Ljava/text/DateFormat;', 28)"
+      ],
+      "upstream_old_equal": true,
+      "version": "3.2.2"
+    }
+  ],
+  "results": {
+    "2.21.2->2.21.7": {
+      "2.21.2_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.21"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-core:2.21.2"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "jsr-275",
+              "exclusions": [],
+              "groupId": "javax.measure",
+              "scope": "test",
+              "version": "0.9.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "jol-core",
+              "exclusions": [],
+              "groupId": "org.openjdk.jol",
+              "scope": "test",
+              "version": "0.16"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "mockito-inline",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "junit-platform-suite-engine",
+              "exclusions": [],
+              "groupId": "org.junit.platform",
+              "scope": "test",
+              "version": "1.14.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+            "raw": {
+              "artifactId": "micronaut-test-type-pollution",
+              "exclusions": [],
+              "groupId": "io.micronaut.test",
+              "scope": "test",
+              "version": "4.8.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "com.fasterxml.jackson.core:jackson-core:2.21.2",
+          "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+          "com.fasterxml.jackson:jackson-base:2.21.2",
+          "com.fasterxml.jackson:jackson-bom:2.21.2",
+          "com.fasterxml.jackson:jackson-parent:2.21",
+          "com.fasterxml:oss-parent:75",
+          "org.junit:junit-bom:5.14.1"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:75"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java11",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java17",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "com.fasterxml.jackson.core:jackson-core:2.21.2",
+          "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+        ],
+        "root": "com.fasterxml.jackson.core:jackson-databind:2.21.2"
+      },
+      "2.21.7_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.21"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-core:2.21.7"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "jsr-275",
+              "exclusions": [],
+              "groupId": "javax.measure",
+              "scope": "test",
+              "version": "0.9.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "jol-core",
+              "exclusions": [],
+              "groupId": "org.openjdk.jol",
+              "scope": "test",
+              "version": "0.16"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "mockito-inline",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "junit-platform-suite-engine",
+              "exclusions": [],
+              "groupId": "org.junit.platform",
+              "scope": "test",
+              "version": "1.14.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+            "raw": {
+              "artifactId": "micronaut-test-type-pollution",
+              "exclusions": [],
+              "groupId": "io.micronaut.test",
+              "scope": "test",
+              "version": "4.8.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "com.fasterxml.jackson.core:jackson-core:2.21.7",
+          "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+          "com.fasterxml.jackson:jackson-base:2.21.7",
+          "com.fasterxml.jackson:jackson-bom:2.21.7",
+          "com.fasterxml.jackson:jackson-parent:2.21",
+          "com.fasterxml:oss-parent:75",
+          "org.junit:junit-bom:5.14.1"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:75"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java11",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java17",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "com.fasterxml.jackson.core:jackson-core:2.21.7",
+          "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+        ],
+        "root": "com.fasterxml.jackson.core:jackson-databind:2.21.7"
+      },
+      "jackson-core_symbolic_abi": {
+        "candidate_max_base_class_major": 52,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 158,
+        "removed_or_changed": [
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaBigIntegerParser.class: class removed",
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaFloatParser.class: class removed",
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaBigDecimalParser.class: class removed",
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_21_2/JavaDoubleParser.class: class removed"
+        ]
+      },
+      "jackson-databind_symbolic_abi": {
+        "candidate_max_base_class_major": 52,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 622,
+        "removed_or_changed": []
+      }
+    },
+    "2.22.2->2.22.3": {
+      "2.22.2_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.22"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-core:2.22.2"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "jsr-275",
+              "exclusions": [],
+              "groupId": "javax.measure",
+              "scope": "test",
+              "version": "0.9.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "jol-core",
+              "exclusions": [],
+              "groupId": "org.openjdk.jol",
+              "scope": "test",
+              "version": "0.16"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "mockito-inline",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "junit-platform-suite-engine",
+              "exclusions": [],
+              "groupId": "org.junit.platform",
+              "scope": "test",
+              "version": "1.14.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+            "raw": {
+              "artifactId": "micronaut-test-type-pollution",
+              "exclusions": [],
+              "groupId": "io.micronaut.test",
+              "scope": "test",
+              "version": "4.8.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "com.fasterxml.jackson.core:jackson-core:2.22.2",
+          "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+          "com.fasterxml.jackson:jackson-base:2.22.2",
+          "com.fasterxml.jackson:jackson-bom:2.22.2",
+          "com.fasterxml.jackson:jackson-parent:2.22",
+          "com.fasterxml:oss-parent:79",
+          "org.junit:junit-bom:5.14.3"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:79"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java11",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java17",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "com.fasterxml.jackson.core:jackson-core:2.22.2",
+          "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+        ],
+        "root": "com.fasterxml.jackson.core:jackson-databind:2.22.2"
+      },
+      "2.22.3_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.22"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-core:2.22.3"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "5.14.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "jsr-275",
+              "exclusions": [],
+              "groupId": "javax.measure",
+              "scope": "test",
+              "version": "0.9.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "jol-core",
+              "exclusions": [],
+              "groupId": "org.openjdk.jol",
+              "scope": "test",
+              "version": "0.16"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "mockito-inline",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "junit-platform-suite-engine",
+              "exclusions": [],
+              "groupId": "org.junit.platform",
+              "scope": "test",
+              "version": "1.14.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+            "raw": {
+              "artifactId": "micronaut-test-type-pollution",
+              "exclusions": [],
+              "groupId": "io.micronaut.test",
+              "scope": "test",
+              "version": "4.8.1"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "com.fasterxml.jackson.core:jackson-core:2.22.3",
+          "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+          "com.fasterxml.jackson:jackson-base:2.22.3",
+          "com.fasterxml.jackson:jackson-bom:2.22.3",
+          "com.fasterxml.jackson:jackson-parent:2.22",
+          "com.fasterxml:oss-parent:79",
+          "org.junit:junit-bom:5.14.3"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:79"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java11",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java17",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "com.fasterxml.jackson.core:jackson-core:2.22.3",
+          "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+        ],
+        "root": "com.fasterxml.jackson.core:jackson-databind:2.22.3"
+      },
+      "jackson-core_symbolic_abi": {
+        "candidate_max_base_class_major": 52,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 158,
+        "removed_or_changed": [
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigIntegerParser.class: class removed",
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaFloatParser.class: class removed",
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigDecimalParser.class: class removed",
+          "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaDoubleParser.class: class removed"
+        ]
+      },
+      "jackson-databind_symbolic_abi": {
+        "candidate_max_base_class_major": 52,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 622,
+        "removed_or_changed": []
+      }
+    },
+    "3.1.2->3.1.7": {
+      "3.1.2_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.1.2",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.21"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.1.2",
+            "scope": "compile",
+            "to": "tools.jackson.core:jackson-core:3.1.2"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2",
+            "raw": {
+              "artifactId": "junit-jupiter-params",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "com.fasterxml.jackson:jackson-parent:2.21",
+          "com.fasterxml:oss-parent:75",
+          "com.fasterxml:oss-parent:79",
+          "org.junit:junit-bom:6.0.3",
+          "tools.jackson.core:jackson-core:3.1.2",
+          "tools.jackson.core:jackson-databind:3.1.2",
+          "tools.jackson:jackson-base:3.1.2",
+          "tools.jackson:jackson-bom:3.1.2"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:79"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "tools.jackson.core:jackson-databind:3.1.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:75"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "tools.jackson.core:jackson-core:3.1.2",
+          "tools.jackson.core:jackson-databind:3.1.2"
+        ],
+        "root": "tools.jackson.core:jackson-databind:3.1.2"
+      },
+      "3.1.7_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.1.7",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.21"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.1.7",
+            "scope": "compile",
+            "to": "tools.jackson.core:jackson-core:3.1.7"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7",
+            "raw": {
+              "artifactId": "junit-jupiter-params",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "com.fasterxml.jackson:jackson-parent:2.21",
+          "com.fasterxml:oss-parent:75",
+          "com.fasterxml:oss-parent:79",
+          "org.junit:junit-bom:6.0.3",
+          "tools.jackson.core:jackson-core:3.1.7",
+          "tools.jackson.core:jackson-databind:3.1.7",
+          "tools.jackson:jackson-base:3.1.7",
+          "tools.jackson:jackson-bom:3.1.7"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:79"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "tools.jackson.core:jackson-databind:3.1.7"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:75"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-core:3.1.7"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.21",
+          "tools.jackson.core:jackson-core:3.1.7",
+          "tools.jackson.core:jackson-databind:3.1.7"
+        ],
+        "root": "tools.jackson.core:jackson-databind:3.1.7"
+      },
+      "jackson-core_symbolic_abi": {
+        "candidate_max_base_class_major": 61,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 160,
+        "removed_or_changed": []
+      },
+      "jackson-databind_symbolic_abi": {
+        "candidate_max_base_class_major": 61,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 695,
+        "removed_or_changed": [
+          "tools/jackson/databind/deser/impl/UnwrappedPropertyHandler.class: ('field', '_hasUnwrappedAnySetter', 'Z', 20)",
+          "tools/jackson/databind/util/StdDateFormat.class: ('field', 'DATE_FORMAT_RFC1123', 'Ljava/text/DateFormat;', 28)"
+        ]
+      }
+    },
+    "3.2.2->3.2.3": {
+      "3.2.2_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.2.2",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.22"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.2.2",
+            "scope": "compile",
+            "to": "tools.jackson.core:jackson-core:3.2.2"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2",
+            "raw": {
+              "artifactId": "junit-jupiter-params",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "com.fasterxml.jackson:jackson-parent:2.22",
+          "com.fasterxml:oss-parent:79",
+          "org.junit:junit-bom:6.0.3",
+          "tools.jackson.core:jackson-core:3.2.2",
+          "tools.jackson.core:jackson-databind:3.2.2",
+          "tools.jackson:jackson-base:3.2.2",
+          "tools.jackson:jackson-bom:3.2.2"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:79"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "tools.jackson.core:jackson-databind:3.2.2"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-core:3.2.2"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "tools.jackson.core:jackson-core:3.2.2",
+          "tools.jackson.core:jackson-databind:3.2.2"
+        ],
+        "root": "tools.jackson.core:jackson-databind:3.2.2"
+      },
+      "3.2.3_closure": {
+        "edges": [
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.2.3",
+            "scope": "compile",
+            "to": "com.fasterxml.jackson.core:jackson-annotations:2.22"
+          },
+          {
+            "additional_exclusions": [],
+            "excluded_by_path": false,
+            "from": "tools.jackson.core:jackson-databind:3.2.3",
+            "scope": "compile",
+            "to": "tools.jackson.core:jackson-core:3.2.3"
+          }
+        ],
+        "excluded_dependencies": [
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3",
+            "raw": {
+              "artifactId": "junit-jupiter-api",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3",
+            "raw": {
+              "artifactId": "junit-jupiter-params",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "6.0.3"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3",
+            "raw": {
+              "artifactId": "assertj-core",
+              "exclusions": [],
+              "groupId": "org.assertj",
+              "scope": "test",
+              "version": "${version.assertj}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3",
+            "raw": {
+              "artifactId": "guava-testlib",
+              "exclusions": [],
+              "groupId": "com.google.guava",
+              "scope": "test",
+              "version": "32.0.1-jre"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3",
+            "raw": {
+              "artifactId": "mockito-core",
+              "exclusions": [],
+              "groupId": "org.mockito",
+              "scope": "test",
+              "version": "${version.mockito}"
+            }
+          },
+          {
+            "disposition": "excluded-test",
+            "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+            "raw": {
+              "artifactId": "junit-jupiter",
+              "exclusions": [],
+              "groupId": "org.junit.jupiter",
+              "scope": "test",
+              "version": "${version.junit5}"
+            }
+          }
+        ],
+        "poms": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "com.fasterxml.jackson:jackson-parent:2.22",
+          "com.fasterxml:oss-parent:79",
+          "org.junit:junit-bom:6.0.3",
+          "tools.jackson.core:jackson-core:3.2.3",
+          "tools.jackson.core:jackson-databind:3.2.3",
+          "tools.jackson:jackson-base:3.2.3",
+          "tools.jackson:jackson-bom:3.2.3"
+        ],
+        "profiles": [
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "com.fasterxml:oss-parent:79"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "java21",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "errorprone",
+            "pom": "tools.jackson.core:jackson-databind:3.2.3"
+          },
+          {
+            "handling": "no dependency/dependencyManagement changes; required selectors must be profile-independent",
+            "id": "release",
+            "pom": "tools.jackson.core:jackson-core:3.2.3"
+          }
+        ],
+        "required_coordinates": [
+          "com.fasterxml.jackson.core:jackson-annotations:2.22",
+          "tools.jackson.core:jackson-core:3.2.3",
+          "tools.jackson.core:jackson-databind:3.2.3"
+        ],
+        "root": "tools.jackson.core:jackson-databind:3.2.3"
+      },
+      "jackson-core_symbolic_abi": {
+        "candidate_max_base_class_major": 61,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 161,
+        "removed_or_changed": []
+      },
+      "jackson-databind_symbolic_abi": {
+        "candidate_max_base_class_major": 61,
+        "missing_native_paths": [],
+        "native_resources": 0,
+        "public_classes": 699,
+        "removed_or_changed": [
+          "tools/jackson/databind/util/StdDateFormat.class: ('field', 'DATE_FORMAT_RFC1123', 'Ljava/text/DateFormat;', 28)"
+        ]
+      }
+    }
+  },
+  "runtime_approved": false,
+  "status": "component-prepared"
+}

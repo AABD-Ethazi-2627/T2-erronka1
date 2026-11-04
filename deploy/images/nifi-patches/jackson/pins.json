@@ -1,0 +1,518 @@
+[
+  {
+    "file": "jackson-core-2.21.2.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.2/jackson-core-2.21.2.pom",
+    "sha256": "bab0e5599649ccb5ab21a9cf9d2e57192de1e48e6d23524dc253d62fc73c9634"
+  },
+  {
+    "file": "jackson-base-2.21.2.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-base:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.21.2/jackson-base-2.21.2.pom",
+    "sha256": "38c7898c763b8991fffbd769459972e0176bf0c505c739518c70f7c57d16eed7"
+  },
+  {
+    "file": "jackson-bom-2.21.2.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-bom:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.21.2/jackson-bom-2.21.2.pom",
+    "sha256": "bc6c549e632927bb9d8a0ada20c8467b5007d3b797c7f5db03a9b60d1de59be3"
+  },
+  {
+    "file": "jackson-parent-2.21.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-parent:2.21",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.21/jackson-parent-2.21.pom",
+    "sha256": "3851df627faeb46887b956104630b74a8bbb5f7de22e974cf15982e20e0373de"
+  },
+  {
+    "file": "oss-parent-75.pom",
+    "coordinate": "com.fasterxml:oss-parent:75",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/75/oss-parent-75.pom",
+    "sha256": "fcbbf1c18c9047e6917d384f2064e21b42a58fc85fb0523a9e2e015eff7c619d"
+  },
+  {
+    "file": "jackson-core-2.21.2.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.2/jackson-core-2.21.2.jar",
+    "sha256": "12e8655b100267b44d0f14d01b1f5082a5105e616174dc4307be1a761e92407b"
+  },
+  {
+    "file": "jackson-core-2.21.2-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.2/jackson-core-2.21.2-sources.jar",
+    "sha256": "f756a72f5a8a0b53c7c80ee7425de4d29f46d03c6f9350549b28d182a6ee7ca9"
+  },
+  {
+    "file": "jackson-databind-2.21.2.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.2/jackson-databind-2.21.2.pom",
+    "sha256": "cf8e0ecdc35f02da06e27f4157600ba9d7649c5272e4d6b795ef2a42f070a262"
+  },
+  {
+    "file": "jackson-databind-2.21.2.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.2/jackson-databind-2.21.2.jar",
+    "sha256": "8c982f01f148d805f0aaac2339011244757e0df7c6ff8951f2fa3f433b8ed849"
+  },
+  {
+    "file": "jackson-databind-2.21.2-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.2/jackson-databind-2.21.2-sources.jar",
+    "sha256": "f2804ae5ec27efe04f3648f5d7fd6856d8b5b562f7a43c532e4c9ef4242a4d94"
+  },
+  {
+    "file": "jackson-core-2.21.7.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.7/jackson-core-2.21.7.pom",
+    "sha256": "70233c57a076fadb2f3af1ca25647dc65116d8c135df6c3cb79c95a2560eafce"
+  },
+  {
+    "file": "jackson-base-2.21.7.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-base:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.21.7/jackson-base-2.21.7.pom",
+    "sha256": "acf1265a240d27f58fb38fd8b6b2a57f5036bf6f8474e08da2eb626f29367f4c"
+  },
+  {
+    "file": "jackson-bom-2.21.7.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-bom:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.21.7/jackson-bom-2.21.7.pom",
+    "sha256": "ecf645e79390beae614e8f83e42bd3e91a166831c37a3e783f37e67e41939495"
+  },
+  {
+    "file": "jackson-core-2.21.7.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.7/jackson-core-2.21.7.jar",
+    "sha256": "8c5623b98f32d5f7e1287ff61ed50e08ab7b11381e991fff89327faabba42261"
+  },
+  {
+    "file": "jackson-core-2.21.7-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.21.7/jackson-core-2.21.7-sources.jar",
+    "sha256": "8c463d7b86fc44851f180c38e91580d32505b5e06443514212ca93c40efdde5c"
+  },
+  {
+    "file": "jackson-databind-2.21.7.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.7/jackson-databind-2.21.7.pom",
+    "sha256": "3191130a3cb7be2f1f05d4e68765e23a1880db719a23ee368a14a8b0477f7bb5"
+  },
+  {
+    "file": "jackson-databind-2.21.7.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.7/jackson-databind-2.21.7.jar",
+    "sha256": "1290c2795e93e8a6861a6c4d9ff0d844d32f5ea178362cb2721edf5561e828b1"
+  },
+  {
+    "file": "jackson-databind-2.21.7-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.21.7/jackson-databind-2.21.7-sources.jar",
+    "sha256": "9d0088f4990df572c2e3aa1c14d4c03fd8200283d801836c8044d01b9ccb7e73"
+  },
+  {
+    "file": "jackson-core-2.22.2.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.2/jackson-core-2.22.2.pom",
+    "sha256": "d2829cfef4c30d200e04d7f65009b4b112a46382aadf4534a30dd7f90cb164e5"
+  },
+  {
+    "file": "jackson-base-2.22.2.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-base:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.22.2/jackson-base-2.22.2.pom",
+    "sha256": "a8c82982bdcd64e5b7cc8575a0459eab53d535a8309d6966274c93536e354234"
+  },
+  {
+    "file": "jackson-bom-2.22.2.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-bom:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.22.2/jackson-bom-2.22.2.pom",
+    "sha256": "a93ad5b8462f8d5920b128647a9b9f236342b4fd4e71287da9f7187fd8642f02"
+  },
+  {
+    "file": "jackson-parent-2.22.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-parent:2.22",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.22/jackson-parent-2.22.pom",
+    "sha256": "7d45a7efb69df207bed7cc54b87a0bb012f10952c095570a273b49485da0d129"
+  },
+  {
+    "file": "oss-parent-79.pom",
+    "coordinate": "com.fasterxml:oss-parent:79",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/79/oss-parent-79.pom",
+    "sha256": "9206b7dd67fb138036576c3dfca947a2a8f3e2c4d2d9c1f2d1dea519b3a4dae1"
+  },
+  {
+    "file": "jackson-core-2.22.2.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.2/jackson-core-2.22.2.jar",
+    "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+  },
+  {
+    "file": "jackson-core-2.22.2-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.2/jackson-core-2.22.2-sources.jar",
+    "sha256": "544f2df3406129f9d99e090b05a5417ef8421608644b6b46a084325c6bde4de4"
+  },
+  {
+    "file": "jackson-databind-2.22.2.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.2/jackson-databind-2.22.2.pom",
+    "sha256": "a903aac4221725783341c8c7d30ccee43c1b5af67ff01325d2c5bc886d00941f"
+  },
+  {
+    "file": "jackson-databind-2.22.2.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.2/jackson-databind-2.22.2.jar",
+    "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+  },
+  {
+    "file": "jackson-databind-2.22.2-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.2/jackson-databind-2.22.2-sources.jar",
+    "sha256": "c14e77fd28bedde121ad260f84a9c52f13b72063e40030c464bd9f5f95e7274c"
+  },
+  {
+    "file": "jackson-core-2.22.3.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.pom",
+    "sha256": "bc74c18b24f3ebbfd42741f2b29b37eca9b25e512e6fa7add77f6973cee50bf1"
+  },
+  {
+    "file": "jackson-base-2.22.3.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-base:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.22.3/jackson-base-2.22.3.pom",
+    "sha256": "1991ff35885b389eb29c23ae318c8eca66562915205bdeea53c722a5bd1b3bcb"
+  },
+  {
+    "file": "jackson-bom-2.22.3.pom",
+    "coordinate": "com.fasterxml.jackson:jackson-bom:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.22.3/jackson-bom-2.22.3.pom",
+    "sha256": "8f499c6a8c017bb987a1a73b91f705c22fe24ec2777e7055c7a2a913f14b5440"
+  },
+  {
+    "file": "jackson-core-2.22.3.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar",
+    "sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+  },
+  {
+    "file": "jackson-core-2.22.3-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3-sources.jar",
+    "sha256": "547caff8197f49beccdcbab1b0178e1aba628aa3c4269302b0067f529101e0e4"
+  },
+  {
+    "file": "jackson-databind-2.22.3.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.pom",
+    "sha256": "27a5c6657b955d088daf586f2be9769224e33618ab4f44682a1b36ed98f7b904"
+  },
+  {
+    "file": "jackson-databind-2.22.3.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar",
+    "sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+  },
+  {
+    "file": "jackson-databind-2.22.3-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3-sources.jar",
+    "sha256": "e6237bfb27df92e14edb4555ebb7b32f325b66d956e213644b720b65cb273fbb"
+  },
+  {
+    "file": "jackson-core-3.1.2.pom",
+    "coordinate": "tools.jackson.core:jackson-core:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.1.2/jackson-core-3.1.2.pom",
+    "sha256": "3c7638e8f9c09c89244f772855210936f0b9ae600795497d6acdeda723a7eab9"
+  },
+  {
+    "file": "jackson-base-3.1.2.pom",
+    "coordinate": "tools.jackson:jackson-base:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-base/3.1.2/jackson-base-3.1.2.pom",
+    "sha256": "70b792ba33f4e79584599d2026df3d46374d6c370e155584e20ddba982ec2ab9"
+  },
+  {
+    "file": "jackson-bom-3.1.2.pom",
+    "coordinate": "tools.jackson:jackson-bom:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-bom/3.1.2/jackson-bom-3.1.2.pom",
+    "sha256": "be0e5e45807f4de5514d1e7933facf7388121b3dd9bf31a3ab3f87a200650aa2"
+  },
+  {
+    "file": "jackson-core-3.1.2.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.1.2/jackson-core-3.1.2.jar",
+    "sha256": "bbb00763f5998f03a26f21e47ed500f253c7fc5c158fa3e8a41dbf97aa7416fd"
+  },
+  {
+    "file": "jackson-core-3.1.2-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.1.2/jackson-core-3.1.2-sources.jar",
+    "sha256": "a0d6dbb49a2f424b12d3e0161e6f2d341ed2ef3aa697db87704f956df4a51b5a"
+  },
+  {
+    "file": "jackson-databind-3.1.2.pom",
+    "coordinate": "tools.jackson.core:jackson-databind:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.1.2/jackson-databind-3.1.2.pom",
+    "sha256": "1b1092cc33b9505c516da486c8ff775f6f37abfb698aa21e73b416a1ca80f254"
+  },
+  {
+    "file": "jackson-databind-3.1.2.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.1.2/jackson-databind-3.1.2.jar",
+    "sha256": "0a366b1c2f6321e466c2970847b1251a5dc7201b680f320594230b77bfc8ddb2"
+  },
+  {
+    "file": "jackson-databind-3.1.2-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.1.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.1.2/jackson-databind-3.1.2-sources.jar",
+    "sha256": "be5ae6b79a88c36c73caaa9353d2858e038045d51e50464b2b29a9a32ad63148"
+  },
+  {
+    "file": "jackson-core-3.1.7.pom",
+    "coordinate": "tools.jackson.core:jackson-core:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.1.7/jackson-core-3.1.7.pom",
+    "sha256": "94b0996a916055c908e95afb84fa286f3db38170dc40677246724906c27d9553"
+  },
+  {
+    "file": "jackson-base-3.1.7.pom",
+    "coordinate": "tools.jackson:jackson-base:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-base/3.1.7/jackson-base-3.1.7.pom",
+    "sha256": "7285af7629720e24db11084bc5a89cb7af4d4d35339e7163902958a5cdfd10fe"
+  },
+  {
+    "file": "jackson-bom-3.1.7.pom",
+    "coordinate": "tools.jackson:jackson-bom:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-bom/3.1.7/jackson-bom-3.1.7.pom",
+    "sha256": "26c28ddf86ee17de2da550e0e8e88a14ed22370c880d813c88618df5f67e27ff"
+  },
+  {
+    "file": "jackson-core-3.1.7.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.1.7/jackson-core-3.1.7.jar",
+    "sha256": "7608c367fd8a92666d28711519599543c180298259963184ce04d2947a8f71e7"
+  },
+  {
+    "file": "jackson-core-3.1.7-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.1.7/jackson-core-3.1.7-sources.jar",
+    "sha256": "21acf415bed17885780a3be3bbecdbb422b19c3154d34076e167a3e05b4af76f"
+  },
+  {
+    "file": "jackson-databind-3.1.7.pom",
+    "coordinate": "tools.jackson.core:jackson-databind:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.1.7/jackson-databind-3.1.7.pom",
+    "sha256": "e8d6eede027716b2b55fd9efcc93ab155ded881cfb473ff0f778446f8f1c7c9a"
+  },
+  {
+    "file": "jackson-databind-3.1.7.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.1.7/jackson-databind-3.1.7.jar",
+    "sha256": "48c781de87e2016e1f0d973748a27130f11643e7ac080173f40e2d9669d84be3"
+  },
+  {
+    "file": "jackson-databind-3.1.7-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.1.7",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.1.7/jackson-databind-3.1.7-sources.jar",
+    "sha256": "08b01404d41d3f1ba2f62d21cc644e3af261771c0da94f04dea67623b70da5f7"
+  },
+  {
+    "file": "jackson-core-3.2.2.pom",
+    "coordinate": "tools.jackson.core:jackson-core:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.2/jackson-core-3.2.2.pom",
+    "sha256": "32f6e0acf6c798c8ba5101d73fe5401b5c20f435779241134a99fe9f2cc29632"
+  },
+  {
+    "file": "jackson-base-3.2.2.pom",
+    "coordinate": "tools.jackson:jackson-base:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-base/3.2.2/jackson-base-3.2.2.pom",
+    "sha256": "4e4daa8acdcc2b445575f8fd064058e642f218cb5d4de35f099854f4ba147864"
+  },
+  {
+    "file": "jackson-bom-3.2.2.pom",
+    "coordinate": "tools.jackson:jackson-bom:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-bom/3.2.2/jackson-bom-3.2.2.pom",
+    "sha256": "1d6ca81311534231b34da71f0c8b2b08b0888333069d56edb05b9c5c00f51c29"
+  },
+  {
+    "file": "jackson-core-3.2.2.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.2/jackson-core-3.2.2.jar",
+    "sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+  },
+  {
+    "file": "jackson-core-3.2.2-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.2/jackson-core-3.2.2-sources.jar",
+    "sha256": "3d20867513cc78a44f56f1152f85f94492ba3e1f89a1065a3bd7629dbfdb3b94"
+  },
+  {
+    "file": "jackson-databind-3.2.2.pom",
+    "coordinate": "tools.jackson.core:jackson-databind:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.2/jackson-databind-3.2.2.pom",
+    "sha256": "afb706b09466b4308c449c944497818eea8ef9cdc012ca2e5a8d466709aab296"
+  },
+  {
+    "file": "jackson-databind-3.2.2.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.2/jackson-databind-3.2.2.jar",
+    "sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+  },
+  {
+    "file": "jackson-databind-3.2.2-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.2.2",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.2/jackson-databind-3.2.2-sources.jar",
+    "sha256": "da9d8f260e7cf527e9f26ccd2ccc7dec65d5c6eaad03bf6842b3a29425c644b7"
+  },
+  {
+    "file": "jackson-core-3.2.3.pom",
+    "coordinate": "tools.jackson.core:jackson-core:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.3/jackson-core-3.2.3.pom",
+    "sha256": "c89c26c7b3c32eb08311f7c7e0a96efd71a60591e56740556c7446daf9d12a97"
+  },
+  {
+    "file": "jackson-base-3.2.3.pom",
+    "coordinate": "tools.jackson:jackson-base:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-base/3.2.3/jackson-base-3.2.3.pom",
+    "sha256": "8f7ce73ab560fb52c545c44876ae602f18ebabd18217ab2746f17f65acb6da29"
+  },
+  {
+    "file": "jackson-bom-3.2.3.pom",
+    "coordinate": "tools.jackson:jackson-bom:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/jackson-bom/3.2.3/jackson-bom-3.2.3.pom",
+    "sha256": "ad181b150b3f22bcf8ead7227d51ccc09e610c457c8bcc97d8958d2439ef16ec"
+  },
+  {
+    "file": "jackson-core-3.2.3.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.3/jackson-core-3.2.3.jar",
+    "sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817"
+  },
+  {
+    "file": "jackson-core-3.2.3-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-core:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.3/jackson-core-3.2.3-sources.jar",
+    "sha256": "0363c48c320ac4e89acb8fb431cf3d016ed09835a358ed0ed113195abece7e0d"
+  },
+  {
+    "file": "jackson-databind-3.2.3.pom",
+    "coordinate": "tools.jackson.core:jackson-databind:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.3/jackson-databind-3.2.3.pom",
+    "sha256": "b2d27a02aed646aadb538cb107379c72b9d23944837330c782aad33897880a8b"
+  },
+  {
+    "file": "jackson-databind-3.2.3.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.3/jackson-databind-3.2.3.jar",
+    "sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2"
+  },
+  {
+    "file": "jackson-databind-3.2.3-sources.jar",
+    "coordinate": "tools.jackson.core:jackson-databind:3.2.3",
+    "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.3/jackson-databind-3.2.3-sources.jar",
+    "sha256": "d98fc10e359e961bc14598290a3e1b4fe14612906a256b48b3d0d57705246d70"
+  },
+  {
+    "file": "jackson-annotations-2.21.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.pom",
+    "sha256": "71cac5392151e2a528cc9a09179f0a334179f05c52f8e596cf58ddf12bb27f2b"
+  },
+  {
+    "file": "jackson-annotations-2.21.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar",
+    "sha256": "53ca085f4a150f703f49e1aabd935bd03b43e1ea3d55d135438292af22cef56b"
+  },
+  {
+    "file": "jackson-annotations-2.21-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.21",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21-sources.jar",
+    "sha256": "71fe6323d91b16d5d1007fd1e1533fa06bb369abde74f68a42a68c0f8f061a8b"
+  },
+  {
+    "file": "jackson-annotations-2.22.pom",
+    "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.22/jackson-annotations-2.22.pom",
+    "sha256": "38c3ba52a0eade3e3eacc5b13499d56e1038ccbad8ec4bb79426dc21432b46d0"
+  },
+  {
+    "file": "jackson-annotations-2.22.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.22/jackson-annotations-2.22.jar",
+    "sha256": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0"
+  },
+  {
+    "file": "jackson-annotations-2.22-sources.jar",
+    "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.22",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.22/jackson-annotations-2.22-sources.jar",
+    "sha256": "f5375c756ee3c585808f9937eb087d074743fd3f05f6aeff9b183cf19230c9f7"
+  },
+  {
+    "file": "junit-bom-5.14.1.pom",
+    "coordinate": "org.junit:junit-bom:5.14.1",
+    "url": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.1/junit-bom-5.14.1.pom",
+    "sha256": "01b01dfa366550b40ac5760548a7d728b6109d17c451e83864d1e5e0ce862c94"
+  },
+  {
+    "file": "junit-bom-5.14.3.pom",
+    "coordinate": "org.junit:junit-bom:5.14.3",
+    "url": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.3/junit-bom-5.14.3.pom",
+    "sha256": "08a02856e487c9357f9b29e38745f8ae805848111e72d15aad0352338f1632e1"
+  },
+  {
+    "file": "junit-bom-6.0.3.pom",
+    "coordinate": "org.junit:junit-bom:6.0.3",
+    "url": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/6.0.3/junit-bom-6.0.3.pom",
+    "sha256": "a655b6a5dc00d1bebc91fb2b15c0c7e8aeac9d6bdcf879595505370e27530287"
+  },
+  {
+    "file": "json-community-utils-1.3.0.jar",
+    "coordinate": "io.github.jolt-community.jolt:json-community-utils:1.3.0",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jolt-community/jolt/json-community-utils/1.3.0/json-community-utils-1.3.0.jar",
+    "sha256": "8dd279c107d4b57f8a4ba20c2e5d96adb6f8389345b2f6e9717be27668420ed5"
+  },
+  {
+    "file": "json-community-utils-1.3.0.pom",
+    "coordinate": "io.github.jolt-community.jolt:json-community-utils:1.3.0",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jolt-community/jolt/json-community-utils/1.3.0/json-community-utils-1.3.0.pom",
+    "sha256": "8075febc2863f6876daf64299dddd9c6d178ea871ecb256c1dd28b82849b658f"
+  },
+  {
+    "file": "json-community-utils-1.3.0-sources.jar",
+    "coordinate": "io.github.jolt-community.jolt:json-community-utils:1.3.0",
+    "url": "https://repo.maven.apache.org/maven2/io/github/jolt-community/jolt/json-community-utils/1.3.0/json-community-utils-1.3.0-sources.jar",
+    "sha256": "00c5cfab174ad8fae8f4f1a3925db6a27ddfbd1ab8b15ded69c73d584dc6c3a4"
+  },
+  {
+    "file": "jackson-datatype-jsr310-2.22.2.jar",
+    "coordinate": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.22.2/jackson-datatype-jsr310-2.22.2.jar",
+    "sha256": "9df71cc7fb3781fd0bed6c05eebbfa8b39292a49f5619e76fdd0d889f64c8f33"
+  },
+  {
+    "file": "jackson-datatype-jsr310-2.22.2.pom",
+    "coordinate": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.22.2/jackson-datatype-jsr310-2.22.2.pom",
+    "sha256": "9e792e2f3ff73211e9a94c789e4fce346a38ffc124a68da782de97a18e5db8fb"
+  },
+  {
+    "file": "jackson-datatype-jsr310-2.22.2-sources.jar",
+    "coordinate": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.22.2/jackson-datatype-jsr310-2.22.2-sources.jar",
+    "sha256": "156d41db147d106e516eb3256848889fb6c64305608ae83759dd23dc75cbfd7a"
+  },
+  {
+    "file": "jackson-dataformat-csv-2.22.2.jar",
+    "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.22.2/jackson-dataformat-csv-2.22.2.jar",
+    "sha256": "f28f3faa6743b8472d428bae2e2bfc1211820ca018f93206ccd8cfebe0fba337"
+  },
+  {
+    "file": "jackson-dataformat-csv-2.22.2.pom",
+    "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.22.2/jackson-dataformat-csv-2.22.2.pom",
+    "sha256": "8c2a69fc1b06900fbeea58925ffe1402688fe2f5989622940b3d3bab70bd1926"
+  },
+  {
+    "file": "jackson-dataformat-csv-2.22.2-sources.jar",
+    "coordinate": "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.22.2",
+    "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-csv/2.22.2/jackson-dataformat-csv-2.22.2-sources.jar",
+    "sha256": "8c3011945ac4c0780ad04bbc6ce06c18eb27788d12159934e9217062aae07b41"
+  }
+]

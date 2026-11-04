@@ -1,0 +1,395 @@
+{
+  "commands": [
+    {
+      "command": [
+        "javac",
+        "-J-XX:ActiveProcessorCount=1",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:ReservedCodeCacheSize=32m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.21.jar",
+        "-d",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.21.2",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.21.2/JacksonProbe.java"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.21.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.21.jar",
+        "JacksonProbe",
+        "false",
+        "false"
+      ],
+      "log_sha256": "21903353855b573dfcf0b4673e9f9290f92529cc59cb57bb648b3b528c6d3d1a",
+      "stdout": "roundtrip=pass distinctCache=1500 repeatedCache=1 dataErrorLength=4295 streamErrorLength=468 ignored=false\n"
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.21.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.21.7.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.21.7.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.21.jar",
+        "JacksonProbe",
+        "true",
+        "false"
+      ],
+      "log_sha256": "7955c07f37ad4cef1b94f5b68dbcd097a52e1106d66ae60b5f3fc24694dfce2a",
+      "stdout": "roundtrip=pass distinctCache=500 repeatedCache=1 dataErrorLength=457 streamErrorLength=468 ignored=true\n"
+    },
+    {
+      "command": [
+        "javac",
+        "-J-XX:ActiveProcessorCount=1",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:ReservedCodeCacheSize=32m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar",
+        "-d",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2/JacksonProbe.java"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar",
+        "JacksonProbe",
+        "false",
+        "false"
+      ],
+      "log_sha256": "d1150c0e6b4c20cb21bccbae6a804d71640d3499683384f8ed6afd84e9b6e181",
+      "stdout": "roundtrip=pass distinctCache=1500 repeatedCache=1 dataErrorLength=4295 streamErrorLength=468 ignored=true\n"
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar",
+        "JacksonProbe",
+        "true",
+        "false"
+      ],
+      "log_sha256": "7955c07f37ad4cef1b94f5b68dbcd097a52e1106d66ae60b5f3fc24694dfce2a",
+      "stdout": "roundtrip=pass distinctCache=500 repeatedCache=1 dataErrorLength=457 streamErrorLength=468 ignored=true\n"
+    },
+    {
+      "command": [
+        "javac",
+        "-J-XX:ActiveProcessorCount=1",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:ReservedCodeCacheSize=32m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-datatype-jsr310-2.22.2.jar",
+        "-d",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2",
+        "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/ModuleProbe.java"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-datatype-jsr310-2.22.2.jar",
+        "ModuleProbe"
+      ],
+      "log_sha256": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
+      "stdout": "actual-stock-jsr310-and-csv-roundtrips=pass\n"
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/2.22.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-datatype-jsr310-2.22.2.jar",
+        "ModuleProbe"
+      ],
+      "log_sha256": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
+      "stdout": "actual-stock-jsr310-and-csv-roundtrips=pass\n"
+    },
+    {
+      "command": [
+        "javac",
+        "-J-XX:ActiveProcessorCount=1",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:ReservedCodeCacheSize=32m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.21.jar",
+        "-d",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.1.2",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.1.2/JacksonProbe.java"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.1.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.21.jar",
+        "JacksonProbe",
+        "false",
+        "false"
+      ],
+      "log_sha256": "eaef1662d8e4d1a2e6f7b43267dee7a9a20c3b94b737c745d4dc8e57c1596df4",
+      "stdout": "roundtrip=pass distinctCache=1500 repeatedCache=1 dataErrorLength=4308 streamErrorLength=465 ignored=false\n"
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.1.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-3.1.7.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-3.1.7.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.21.jar",
+        "JacksonProbe",
+        "true",
+        "false"
+      ],
+      "log_sha256": "c88b1e6e3a286da2b0a78b07ae134688565bac916306aeb2e2346491b454d57f",
+      "stdout": "roundtrip=pass distinctCache=500 repeatedCache=1 dataErrorLength=471 streamErrorLength=465 ignored=true\n"
+    },
+    {
+      "command": [
+        "javac",
+        "-J-XX:ActiveProcessorCount=1",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:ReservedCodeCacheSize=32m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar",
+        "-d",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.2.2",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.2.2/JacksonProbe.java"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.2.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/json-community-utils-1.3.0.jar",
+        "JacksonProbe",
+        "false",
+        "true"
+      ],
+      "log_sha256": "685a5fe991c04fba4e685a67bb52a7bfdd8a00e2182bbc5be6fd70228a9d730f",
+      "stdout": "actual-stock-jolt-json-utils-roundtrip=pass\nroundtrip=pass distinctCache=1500 repeatedCache=1 dataErrorLength=4308 streamErrorLength=465 ignored=true\n"
+    },
+    {
+      "command": [
+        "java",
+        "-XX:ActiveProcessorCount=1",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:-CreateCoredumpOnCrash",
+        "-cp",
+        "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final/3.2.2:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-core-3.2.3.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-databind-3.2.3.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-jackson-uqUm81TR/json-community-utils-1.3.0.jar",
+        "JacksonProbe",
+        "true",
+        "true"
+      ],
+      "log_sha256": "1ba5a19c1e5b783b31e4c7160435d6ccc7865990f334c1b7128c3bc5d3d72cec",
+      "stdout": "actual-stock-jolt-json-utils-roundtrip=pass\nroundtrip=pass distinctCache=500 repeatedCache=1 dataErrorLength=471 streamErrorLength=465 ignored=true\n"
+    }
+  ],
+  "inputs": {
+    "inventory": {
+      "relative": "parent-verified-1793795867722215369/inventory.stdout",
+      "sha256": "ba7c03e835502cf3dca880fb53c1809d5493bd6187e8962ac664e1ebcdf819c2"
+    },
+    "objects": {
+      "relative": "vulnerable-objects.json",
+      "sha256": "f11af68b9381ca4b64f341cd3bb4baf82a86cc32499cc46d244d4682b12e9abb"
+    },
+    "scan": {
+      "relative": "artifact-f80c37f/nested-archive-scan.json",
+      "sha256": "bb7b6625fac7d59118dd3e2f2f596aa38445f458ae36f6ddcb17265e722de2c1"
+    }
+  },
+  "limits": {
+    "core_dumps": false,
+    "cpu_count": 1,
+    "cpu_seconds": 30,
+    "java_heap_mib": 256,
+    "java_metaspace_mib": 96,
+    "wall_seconds": 40
+  },
+  "pins_count": 86,
+  "plan_sha256": "e49cb0938d07d504c9655f18d1676722da20dee5c19245794523691b442616d3",
+  "portable_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s tests -p test_nifi_jackson_candidate.py -v",
+    "log": "/home/tears/.cache/cnc-jackson-uqUm81TR/final-tests.log",
+    "log_sha256": "e5a8c05f6ea5912dcb0cdc9b45147949904cb703edbcd36e73873a01442f77fc",
+    "result": "passed",
+    "tests": 10
+  },
+  "proof_artifacts": {
+    "2.21.2/2.21.2.log": "21903353855b573dfcf0b4673e9f9290f92529cc59cb57bb648b3b528c6d3d1a",
+    "2.21.2/2.21.7.log": "7955c07f37ad4cef1b94f5b68dbcd097a52e1106d66ae60b5f3fc24694dfce2a",
+    "2.21.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
+    "2.21.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
+    "2.21.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
+    "2.21.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
+    "2.21.2/JacksonProbe.class": "20c6515e667c25d4e98f1ef90d6eae0d3ffa36703710f64dc9e7fef12d14084c",
+    "2.21.2/JacksonProbe.java": "3b4786d7d43ed5d74ce17e505e3d227467837b7e8cb9a4172d75bc1b780873e6",
+    "2.21.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "2.22.2/2.22.2-modules.log": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
+    "2.22.2/2.22.2.log": "d1150c0e6b4c20cb21bccbae6a804d71640d3499683384f8ed6afd84e9b6e181",
+    "2.22.2/2.22.3-modules.log": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
+    "2.22.2/2.22.3.log": "7955c07f37ad4cef1b94f5b68dbcd097a52e1106d66ae60b5f3fc24694dfce2a",
+    "2.22.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
+    "2.22.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
+    "2.22.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
+    "2.22.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
+    "2.22.2/JacksonProbe.class": "20c6515e667c25d4e98f1ef90d6eae0d3ffa36703710f64dc9e7fef12d14084c",
+    "2.22.2/JacksonProbe.java": "3b4786d7d43ed5d74ce17e505e3d227467837b7e8cb9a4172d75bc1b780873e6",
+    "2.22.2/ModuleProbe.class": "e483bafb3c29fed4dbde784a32d0844003fbfdc73c649d1f342a164246b8ba25",
+    "2.22.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "2.22.2/module-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "3.1.2/3.1.2.log": "eaef1662d8e4d1a2e6f7b43267dee7a9a20c3b94b737c745d4dc8e57c1596df4",
+    "3.1.2/3.1.7.log": "c88b1e6e3a286da2b0a78b07ae134688565bac916306aeb2e2346491b454d57f",
+    "3.1.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
+    "3.1.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
+    "3.1.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
+    "3.1.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
+    "3.1.2/JacksonProbe.class": "1f1deaf679e5dd0ef0234a88af37e231139445c48f8321ee7afad87657a23340",
+    "3.1.2/JacksonProbe.java": "a144fc7b52fb924ccdcf84995f2bc0ce3a2383342998ead5ff7c7034b6b800c6",
+    "3.1.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "3.2.2/3.2.2.log": "685a5fe991c04fba4e685a67bb52a7bfdd8a00e2182bbc5be6fd70228a9d730f",
+    "3.2.2/3.2.3.log": "1ba5a19c1e5b783b31e4c7160435d6ccc7865990f334c1b7128c3bc5d3d72cec",
+    "3.2.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
+    "3.2.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
+    "3.2.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
+    "3.2.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
+    "3.2.2/JacksonProbe.class": "1f1deaf679e5dd0ef0234a88af37e231139445c48f8321ee7afad87657a23340",
+    "3.2.2/JacksonProbe.java": "a144fc7b52fb924ccdcf84995f2bc0ce3a2383342998ead5ff7c7034b6b800c6",
+    "3.2.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "candidate-plan.json": "e49cb0938d07d504c9655f18d1676722da20dee5c19245794523691b442616d3",
+    "consumer-contexts.json": "b45b1edaab4092b8c59954eb3d1ae0c6f41d8fa5ad8265ecc027afe36a685e1b",
+    "extension-inventory.json": "37c52d2879d8c8cc3f81455016b7d7e40832c199af608c3b17030ab14e157480",
+    "source-after.json": "20157c5faa7bd6ae879d52a8d66cdf48abaf81fa74a417b7092a0d59910a9274",
+    "source-before.json": "20157c5faa7bd6ae879d52a8d66cdf48abaf81fa74a417b7092a0d59910a9274"
+  },
+  "proof_directory": "/home/tears/.cache/cnc-jackson-uqUm81TR/proof-final",
+  "proof_summary_sha256": "96153b7b0c5db87d809d4b226db0cba3c24c92933e6afbff93ec31a667e0b1ac",
+  "source_archives": 156,
+  "sources_after": {
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "651c05afdc7c438bbbfa5676dd5e4c69f8877bd345ef5435ef29918ac9be2a01",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/compatible-libraries/verify.py": "9696c6d7d380baf4cea8936f8f5c47de134ed42ad4c6fb01b52060baa3576b90",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/JacksonProbe.java.in": "f4ca61a789cddb734484b04d07d2d1d7ad245427be12cad882246970648cc9d3",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/ModuleProbe.java": "44c5ce5f889bf9af4f574def744de1daa05a49e1d34f0fe0f9c418840683c74a",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/README.md": "64884627a1daff39cb3234f505d1ba438195e649595700c661981693065d2b67",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/coverage.json": "49a7f7ed9c225aa050a42921bdff480a642f44eb3f3084760691a1d7dc0224a8",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/input-lock.json": "e9e9bac109210b8cf1dbddea721bbda33c8c323d31f90354990857e6e1b9bca6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/support-lock.json": "1811671bb994a8ab87c033d76e2cee609f3ddbbe034640ec8615e7f551a6d1e6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/verify.py": "506e3a5747db720d70eadd1228e228f4440ec6e686461a16dfbe214a46e73b1c",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/tests/test_nifi_jackson_candidate.py": "90ddaf1fc05ea44b064c4bcdeb59595ea2cd3ca8e06f8b892d30e5a55f7f14fb"
+  },
+  "sources_before": {
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "651c05afdc7c438bbbfa5676dd5e4c69f8877bd345ef5435ef29918ac9be2a01",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/compatible-libraries/verify.py": "9696c6d7d380baf4cea8936f8f5c47de134ed42ad4c6fb01b52060baa3576b90",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/JacksonProbe.java.in": "f4ca61a789cddb734484b04d07d2d1d7ad245427be12cad882246970648cc9d3",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/ModuleProbe.java": "44c5ce5f889bf9af4f574def744de1daa05a49e1d34f0fe0f9c418840683c74a",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/README.md": "64884627a1daff39cb3234f505d1ba438195e649595700c661981693065d2b67",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/coverage.json": "49a7f7ed9c225aa050a42921bdff480a642f44eb3f3084760691a1d7dc0224a8",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/input-lock.json": "e9e9bac109210b8cf1dbddea721bbda33c8c323d31f90354990857e6e1b9bca6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/support-lock.json": "1811671bb994a8ab87c033d76e2cee609f3ddbbe034640ec8615e7f551a6d1e6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/deploy/images/nifi-patches/jackson/verify.py": "506e3a5747db720d70eadd1228e228f4440ec6e686461a16dfbe214a46e73b1c",
+    "/home/tears/.t3/worktrees/B-taldea/t3-a659a0f0/tests/test_nifi_jackson_candidate.py": "90ddaf1fc05ea44b064c4bcdeb59595ea2cd3ca8e06f8b892d30e5a55f7f14fb"
+  },
+  "status": "component-prepared",
+  "toolchain_sha256": {
+    "/usr/lib/jvm/java-27-openjdk/bin/java": "8f9be20e940d4e4fec9497a9179b80bbf3e7f1704df7ea77500b0968c024eaca",
+    "/usr/lib/jvm/java-27-openjdk/bin/javac": "f07b2b3074934540fccbf1a8b906fd6f5a6c15f1b20027e918ff5ef62441f66b",
+    "/usr/lib/jvm/java-27-openjdk/lib/modules": "6adc428946d05607a84be2425db80e1fc90ec437d9ab862f6e7d1734155b2b69",
+    "/usr/lib/jvm/java-27-openjdk/lib/server/libjvm.so": "43309cd90454678e0af31935f35151e1fc1956244ec873897fe8bf170becf291",
+    "/usr/lib/jvm/java-27-openjdk/release": "84fe5c0a1dc71a7f998abafd744205cb48b553318fcd271b29b104b6fcf219bb"
+  },
+  "unresolved": [
+    "Hazelcast and Parquet wrapper-specific rebuilds",
+    "symbolic ABI deltas",
+    "remaining 16 advisories not locally reproduced",
+    "unexercised extension closures and NiFi consumers/inherited classloaders",
+    "NiFi/image/SMB/human acceptance",
+    "unchanged nested59 and Kibana2 blocking gates"
+  ]
+}

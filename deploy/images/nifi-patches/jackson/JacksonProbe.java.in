@@ -1,0 +1,69 @@
+import @NS@.databind.*;
+import @NS@.databind.json.JsonMapper;
+import com.fasterxml.jackson.annotation.*;
+import java.io.*;
+import java.util.*;
+
+/** Bounded inputs only: no DNS, providers, services, malicious classes or OOM. */
+public class JacksonProbe {
+    public record Guarded(String displayName, @JsonIgnore String internalRole) {}
+    public record Normal(String label, List<Integer> values) {}
+    @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="kind", defaultImpl=Fallback.class)
+    public static abstract class Base {}
+    public static class Fallback extends Base { public int value; }
+    static Object field(Object obj, String name) throws Exception {
+        Class<?> c=obj.getClass();
+        while (c != null) {
+            try {var f=c.getDeclaredField(name);f.setAccessible(true);return f.get(obj);}
+            catch (NoSuchFieldException e) {c=c.getSuperclass();}
+        }
+        throw new AssertionError("missing field "+name);
+    }
+    static int cache(boolean distinct) throws Exception {
+        ObjectMapper mapper=JsonMapper.builder().build();
+        for(int i=0;i<1500;i++) mapper.readValue("{\"kind\":\"unknown"+(distinct ? i : 0)+"\",\"value\":7}",Base.class);
+        Map<?,?> roots=(Map<?,?>)field(mapper,"_rootDeserializers");
+        Object deser=roots.values().iterator().next();
+        return ((Map<?,?>)field(field(deser,"_typeDeserializer"),"_deserializers")).size();
+    }
+    public static void main(String[] args) throws Exception {
+        boolean fixed = Boolean.parseBoolean(args[0]);
+        int distinct=cache(true), repeated=cache(false);
+        if ((distinct <= 1000) != fixed || repeated > 1) throw new AssertionError("CVE-2026-91776 cache control");
+        if (Boolean.parseBoolean(args[1])) {
+            Class<?> utils=Class.forName("io.joltcommunity.jolt.JsonUtils");
+            Object obj=utils.getMethod("jsonToObject",String.class).invoke(null,"{\"a\":[1,2],\"n\":null}");
+            String serialized=(String)utils.getMethod("toJsonString",Object.class).invoke(null,obj);
+            Object again=utils.getMethod("jsonToObject",String.class).invoke(null,serialized);
+            if (!obj.equals(again)) throw new AssertionError("existing Jolt consumer roundtrip");
+            System.out.println("actual-stock-jolt-json-utils-roundtrip=pass");
+        }
+        ObjectMapper mapper = JsonMapper.builder().build();
+        Normal n = new Normal("é\\\"", List.of(1, 2, 3));
+        if (!n.equals(mapper.readValue(mapper.writeValueAsString(n), Normal.class)))
+            throw new AssertionError("record/list/unicode roundtrip");
+        if (!mapper.readTree("{\"n\":1.25,\"null\":null,\"a\":[true,false]}").equals(
+              mapper.readTree(mapper.writeValueAsString(mapper.readTree("{\"n\":1.25,\"null\":null,\"a\":[true,false]}")))))
+            throw new AssertionError("tree roundtrip");
+        String malformed = "x".repeat(4096) + " ";
+        int dataLength = errorLength(mapper, malformed, true);
+        int streamLength = errorLength(mapper, malformed, false);
+        boolean tokenBounded = dataLength < 1024;
+        if (streamLength >= 1024) throw new AssertionError("stream control unbounded");
+        if (tokenBounded != fixed) throw new AssertionError("CVE-2026-89425 old/fixed control");
+        ObjectMapper snake = JsonMapper.builder().propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE).build();
+        Guarded g = snake.readValue("{\"display_name\":\"ok\",\"internal_role\":\"admin\"}", Guarded.class);
+        boolean ignored = g.internalRole() == null;
+        // The 2.22/3.2 old pair already contains this earlier fix.
+        if (fixed && !ignored) throw new AssertionError("CVE-2026-59888 ignore bypass");
+        System.out.println("roundtrip=pass distinctCache="+distinct+" repeatedCache="+repeated+" dataErrorLength="+dataLength+" streamErrorLength="+streamLength+" ignored="+ignored);
+    }
+    static int errorLength(ObjectMapper m, String input, boolean data) throws Exception {
+        byte[] b = input.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+        try {
+            if (data) m.readValue((DataInput)new DataInputStream(new ByteArrayInputStream(b)), Object.class);
+            else m.readValue(new ByteArrayInputStream(b), Object.class);
+        } catch (Exception e) {return e.getMessage().length();}
+        throw new AssertionError("malformed token accepted");
+    }
+}
