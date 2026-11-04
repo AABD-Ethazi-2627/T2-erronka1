@@ -1,0 +1,27 @@
+[
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/maven-metadata.xml",
+    "file": "maven-metadata.xml",
+    "sha256": "6be914186b271394b4dfcf9636dcb794b40e272e3c60453499b82acb65c7e069"
+  },
+  {
+    "url": "https://hadoop.apache.org/releases.html",
+    "file": "releases.html",
+    "sha256": "ce2e2dd26d82705442bdf760d8e773f92b6cb773331a2b9542a17e452539af70"
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0-sources.jar",
+    "file": "hadoop-common-3.5.0-sources.jar",
+    "sha256": "188fbb7cbc70cdc3868bf8bcdb6a04ca7a22038e137be5ef5d4c0521cb844b1b"
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0.pom",
+    "file": "hadoop-common-3.5.0.pom",
+    "sha256": "04c584c89d7dc9ff50d659a3b75e3f811fbe43533258d6dde738cdb94bfcd759"
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0.jar",
+    "file": "hadoop-common-3.5.0.jar",
+    "sha256": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6"
+  }
+]
