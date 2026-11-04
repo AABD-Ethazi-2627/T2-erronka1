@@ -75,15 +75,15 @@ jobs:
         if: matrix.image == 'dashboard'
         run: |
           docker run --rm --network none --read-only --memory 512m --tmpfs /tmp:rw,nosuid,nodev,size=64m "${{ steps.image.outputs.ref }}" /usr/bin/python3.12 -c "import streamlit,requests,pandas,pyarrow,matplotlib,seaborn; assert streamlit.__version__ == '1.66.1'"
-      - name: Bound and retry Trivy installer downloads
+      - name: Install checksum-pinned Trivy directly from GitHub Releases
         run: |
-          mkdir -p "$RUNNER_TEMP/trivy-installer-retry"
-          install -m 0755 scripts/trivy-download-curl.sh "$RUNNER_TEMP/trivy-installer-retry/curl"
-          printf '%s\n' "$RUNNER_TEMP/trivy-installer-retry" >> "$GITHUB_PATH"
+          sh scripts/install_trivy_release.sh "$RUNNER_TEMP/cnc-trivy-bin"
+          printf '%s\n' "$RUNNER_TEMP/cnc-trivy-bin" >> "$GITHUB_PATH"
       - name: Preserve the complete image scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           version: 'v0.76.1'
+          skip-setup-trivy: 'true'
           image-ref: ${{ steps.image.outputs.ref }}
           scanners: vuln
           list-all-pkgs: true

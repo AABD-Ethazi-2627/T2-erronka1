@@ -303,3 +303,16 @@ checksums, pins, severidades y gate. La prueba usa curl real contra503/503/200
 en loopback y verifica tres peticiones, bytes finales y estado200. Pasan16tests
 y18subtests. La recuperación del runner requiere la nueva ejecuciónCI.
 No se afirma todavía escaneo verde ni se modifican las aprobaciones de GitHub.
+
+
+## Instalación directa del escáner
+
+El dashboard21ecb04 falló pese a reintentos. La URLreal del tarball del
+instalador es get.trivy.dev: su resolución falla también desde la comprobación
+local. La URLdirecta GitHub que se había probado no era la usada por el script.
+Se instala ahora Trivy0.76.1 desde su release oficial con SHA256 fijo, coincidente
+con digestAPI y checksum publicado; se omite solo el setup de la action, no su
+escaneo. Se mantiene el binario para el gate anidado NiFi. La instalación directa
+y un scanreal del candidatoWire funcionan y conservan el hallazgo. Pasan17tests
+y18subtests, con rechazo de descarga corrupta antes de instalar. CI nuevo debe
+validar el runner; no se cambia ninguna aceptación ni gate de vulnerabilidades.
