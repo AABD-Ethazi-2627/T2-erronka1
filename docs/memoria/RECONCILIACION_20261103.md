@@ -454,3 +454,26 @@ Las salidas del hijo mantienen su atribución; la evidencia del padre separa
 comandos, cambios de fuente, hashes y límites. No se ha parcheado ningún NAR,
 creado imagen o afirmado aceptación de classloader, NiFi, SMB, CI ni humana.
 Los gates, excepciones, base histórica, modelo y revisiones humanas no cambian.
+
+
+## Segunda revisión NiFi: Maven, archivos, Jackson y candidato Hadoop
+
+Se archivan las revisiones inmutables de f4e32bf y cd811e3, sin extender sus
+veredictos a cambios posteriores. Se corrigen la semántica de exclusiones y
+optional gestionado; las interpolaciones/herencias no modeladas fallan. Los
+30 fixtures del revisor coinciden con Maven real o se rechazan sin un cierre
+divergente. El escritor valida hermanos y metadatos, bloqueos completos y
+representaciones ZIP ambiguas antes de publicar.
+
+Jackson impone los hashes de todos los archivos, registra copias reubicadas
+AWS/Azure, mantiene bloqueos ABI y hace atómica cada pareja core/databind. Se
+fija JDK21 y se refuerzan versiones y entornos. Los tests cubren las regresiones
+reportadas, sin prometer exhaustividad de mutantes ni ausencia de otras copias.
+
+Se incorpora 5df3ca8 como 7b6f3b6. El candidato Hadoop independiente corrige la
+capacidad y el ciclo del buffer; el padre reproduce 20 comandos y 70 casos por
+cada Snappy, con controles de media corrección y la guarda fija intacta. No se
+modifican originales ni se desbloquean las nueve ocurrencias. Falta QA, montaje,
+classloaders, imágenes y gates externos. La verificación final sobre fuente
+inmutable queda pendiente en esta entrada. No cambian la base, los hashes
+históricos, el modelo, las excepciones ni la revisión humana.

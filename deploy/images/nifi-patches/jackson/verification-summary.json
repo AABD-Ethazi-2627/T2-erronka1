@@ -2,7 +2,7 @@
   "commands": [
     {
       "command": [
-        "javac",
+        "/usr/lib/jvm/java-21-openjdk/bin/javac",
         "-J-XX:ActiveProcessorCount=1",
         "-J-Xmx256m",
         "-J-XX:MaxMetaspaceSize=96m",
@@ -12,15 +12,15 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.21.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.21.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -28,7 +28,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "false",
         "false",
@@ -39,7 +39,7 @@
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -47,7 +47,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.21.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.21.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "true",
         "false",
@@ -58,7 +58,7 @@
     },
     {
       "command": [
-        "javac",
+        "/usr/lib/jvm/java-21-openjdk/bin/javac",
         "-J-XX:ActiveProcessorCount=1",
         "-J-Xmx256m",
         "-J-XX:MaxMetaspaceSize=96m",
@@ -68,15 +68,15 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -84,7 +84,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "JacksonProbe",
         "false",
         "false",
@@ -95,7 +95,7 @@
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -103,7 +103,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "JacksonProbe",
         "true",
         "false",
@@ -114,7 +114,7 @@
     },
     {
       "command": [
-        "javac",
+        "/usr/lib/jvm/java-21-openjdk/bin/javac",
         "-J-XX:ActiveProcessorCount=1",
         "-J-Xmx256m",
         "-J-XX:MaxMetaspaceSize=96m",
@@ -124,7 +124,7 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2",
         "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/ModuleProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -132,7 +132,7 @@
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -140,15 +140,16 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
-        "ModuleProbe"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
+        "ModuleProbe",
+        "2.22.2"
       ],
-      "log_sha256": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
-      "stdout": "actual-stock-jsr310-and-csv-roundtrips=pass\n"
+      "log_sha256": "b6d23269f6efb19ef57e58540a0594c543c09d388ec461a81fd4331b4fcef947",
+      "stdout": "actual-stock-jsr310-and-csv-roundtrips=pass core=2.22.2 databind=2.22.2\n"
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -156,15 +157,16 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
-        "ModuleProbe"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/2.22.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-2.22.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-dataformat-csv-2.22.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-datatype-jsr310-2.22.2.jar",
+        "ModuleProbe",
+        "2.22.3"
       ],
-      "log_sha256": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
-      "stdout": "actual-stock-jsr310-and-csv-roundtrips=pass\n"
+      "log_sha256": "1ffe1a2e401fa94612a8fc826398dbe9cdcabf6385faaaa6fdfae4395d190bb9",
+      "stdout": "actual-stock-jsr310-and-csv-roundtrips=pass core=2.22.3 databind=2.22.3\n"
     },
     {
       "command": [
-        "javac",
+        "/usr/lib/jvm/java-21-openjdk/bin/javac",
         "-J-XX:ActiveProcessorCount=1",
         "-J-Xmx256m",
         "-J-XX:MaxMetaspaceSize=96m",
@@ -174,15 +176,15 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.1.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.1.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -190,7 +192,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "false",
         "false",
@@ -201,7 +203,7 @@
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -209,7 +211,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.1.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.1.7.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.21.jar",
         "JacksonProbe",
         "true",
         "false",
@@ -220,7 +222,7 @@
     },
     {
       "command": [
-        "javac",
+        "/usr/lib/jvm/java-21-openjdk/bin/javac",
         "-J-XX:ActiveProcessorCount=1",
         "-J-Xmx256m",
         "-J-XX:MaxMetaspaceSize=96m",
@@ -230,15 +232,15 @@
         "-cp",
         "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar",
         "-d",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.2.2",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.2.2/JacksonProbe.java"
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2/JacksonProbe.java"
       ],
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout": ""
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -246,7 +248,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.2.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
         "JacksonProbe",
         "false",
         "true",
@@ -257,7 +259,7 @@
     },
     {
       "command": [
-        "java",
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
         "-XX:ActiveProcessorCount=1",
         "-Xmx256m",
         "-XX:MaxMetaspaceSize=96m",
@@ -265,7 +267,7 @@
         "-XX:MaxDirectMemorySize=32m",
         "-XX:-CreateCoredumpOnCrash",
         "-cp",
-        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/proof-final/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/jackson-proof/3.2.2:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-core-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-databind-3.2.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/jackson-annotations-2.22.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-jackson-1793797421287599369/cache/json-community-utils-1.3.0.jar",
         "JacksonProbe",
         "true",
         "true",
@@ -289,89 +291,96 @@
       "sha256": "bb7b6625fac7d59118dd3e2f2f596aa38445f458ae36f6ddcb17265e722de2c1"
     }
   },
-  "plan_sha256": "825c4d7b2b3b6667ab56baa94c455cfc07207cbb29c54710de1e895dfa4401ee",
+  "plan_sha256": "839779165091df99e3ffa55b711b1ed16eee5f9a635a40a2786cd6d97f746eba",
   "proof_artifacts": {
     "2.21.2/2.21.2.log": "21903353855b573dfcf0b4673e9f9290f92529cc59cb57bb648b3b528c6d3d1a",
     "2.21.2/2.21.7.log": "7955c07f37ad4cef1b94f5b68dbcd097a52e1106d66ae60b5f3fc24694dfce2a",
-    "2.21.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
-    "2.21.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
-    "2.21.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
-    "2.21.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
-    "2.21.2/JacksonProbe.class": "163b209932d62e066f09ca92ace6d554047231b9c29bb91db0bf354f32bdaf23",
+    "2.21.2/JacksonProbe$Base.class": "dab29e1451fad92c33be720ddd4b10805ca61c800692d6dd817a2211cdd962c4",
+    "2.21.2/JacksonProbe$Fallback.class": "5b5c75f239a7f2a4572160c3521c6a9353a0bb6d7ee917d800a2f219a80504d2",
+    "2.21.2/JacksonProbe$Guarded.class": "ddc752e8e6100d2648a62da3c4eb537161c97e922357edca57b32f1e175729d8",
+    "2.21.2/JacksonProbe$Normal.class": "27bc71eeb755e22acc5bfc9a499964d62f996caa4026a1b0cfc334880f649ce8",
+    "2.21.2/JacksonProbe.class": "18a944542752a1d836f803383ae2fd8cb545ab3a3b1b2bf3717a2309d36e4bd0",
     "2.21.2/JacksonProbe.java": "ed75c4650b7a39460bed497457710e58dc9e5534eac8192bc339e9eb7ada896f",
     "2.21.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "2.22.2/2.22.2-modules.log": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
+    "2.22.2/2.22.2-modules.log": "b6d23269f6efb19ef57e58540a0594c543c09d388ec461a81fd4331b4fcef947",
     "2.22.2/2.22.2.log": "d1150c0e6b4c20cb21bccbae6a804d71640d3499683384f8ed6afd84e9b6e181",
-    "2.22.2/2.22.3-modules.log": "8c2a9b692d618c1e1d694bc704966d99c63d9c28f94faaf0bdee8d72023d2387",
+    "2.22.2/2.22.3-modules.log": "1ffe1a2e401fa94612a8fc826398dbe9cdcabf6385faaaa6fdfae4395d190bb9",
     "2.22.2/2.22.3.log": "7955c07f37ad4cef1b94f5b68dbcd097a52e1106d66ae60b5f3fc24694dfce2a",
-    "2.22.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
-    "2.22.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
-    "2.22.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
-    "2.22.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
-    "2.22.2/JacksonProbe.class": "163b209932d62e066f09ca92ace6d554047231b9c29bb91db0bf354f32bdaf23",
+    "2.22.2/JacksonProbe$Base.class": "dab29e1451fad92c33be720ddd4b10805ca61c800692d6dd817a2211cdd962c4",
+    "2.22.2/JacksonProbe$Fallback.class": "5b5c75f239a7f2a4572160c3521c6a9353a0bb6d7ee917d800a2f219a80504d2",
+    "2.22.2/JacksonProbe$Guarded.class": "ddc752e8e6100d2648a62da3c4eb537161c97e922357edca57b32f1e175729d8",
+    "2.22.2/JacksonProbe$Normal.class": "27bc71eeb755e22acc5bfc9a499964d62f996caa4026a1b0cfc334880f649ce8",
+    "2.22.2/JacksonProbe.class": "18a944542752a1d836f803383ae2fd8cb545ab3a3b1b2bf3717a2309d36e4bd0",
     "2.22.2/JacksonProbe.java": "ed75c4650b7a39460bed497457710e58dc9e5534eac8192bc339e9eb7ada896f",
-    "2.22.2/ModuleProbe.class": "e483bafb3c29fed4dbde784a32d0844003fbfdc73c649d1f342a164246b8ba25",
+    "2.22.2/ModuleProbe.class": "f178c783da1dc5704331ef3010e4e1d0ac2d963e14b191156a2290b16d9bcada",
     "2.22.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "2.22.2/module-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "3.1.2/3.1.2.log": "eaef1662d8e4d1a2e6f7b43267dee7a9a20c3b94b737c745d4dc8e57c1596df4",
     "3.1.2/3.1.7.log": "c88b1e6e3a286da2b0a78b07ae134688565bac916306aeb2e2346491b454d57f",
-    "3.1.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
-    "3.1.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
-    "3.1.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
-    "3.1.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
-    "3.1.2/JacksonProbe.class": "bb299d6e33843c9362846167dcc89618254d743f63c1804c35dfa273d6863902",
+    "3.1.2/JacksonProbe$Base.class": "dab29e1451fad92c33be720ddd4b10805ca61c800692d6dd817a2211cdd962c4",
+    "3.1.2/JacksonProbe$Fallback.class": "5b5c75f239a7f2a4572160c3521c6a9353a0bb6d7ee917d800a2f219a80504d2",
+    "3.1.2/JacksonProbe$Guarded.class": "ddc752e8e6100d2648a62da3c4eb537161c97e922357edca57b32f1e175729d8",
+    "3.1.2/JacksonProbe$Normal.class": "27bc71eeb755e22acc5bfc9a499964d62f996caa4026a1b0cfc334880f649ce8",
+    "3.1.2/JacksonProbe.class": "5572a792ea727ff165335f278ccd36adfd856b70ad93a92004595e0a13ba2077",
     "3.1.2/JacksonProbe.java": "72c7855cb6f18c064677a55b55c94223d7ccc5c3fbe8209a73a75a21c5291aab",
     "3.1.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "3.2.2/3.2.2.log": "685a5fe991c04fba4e685a67bb52a7bfdd8a00e2182bbc5be6fd70228a9d730f",
     "3.2.2/3.2.3.log": "1ba5a19c1e5b783b31e4c7160435d6ccc7865990f334c1b7128c3bc5d3d72cec",
-    "3.2.2/JacksonProbe$Base.class": "e1caee9e403843cf2819473cd4ed74c3b91c94386eff65a4597b6e15bda9e371",
-    "3.2.2/JacksonProbe$Fallback.class": "a49bd0871c0f81144ba22438c08754629e9edb4e6225d8ae97b0ca704051cc58",
-    "3.2.2/JacksonProbe$Guarded.class": "e65e0cee13f5cfb23abe112a1645784d4390b19dea2e07654f545760eefc42f7",
-    "3.2.2/JacksonProbe$Normal.class": "1780f27fdbc3ba2062ddf7fd1e2c05870f502020f95b49ef04107a48c30ca340",
-    "3.2.2/JacksonProbe.class": "bb299d6e33843c9362846167dcc89618254d743f63c1804c35dfa273d6863902",
+    "3.2.2/JacksonProbe$Base.class": "dab29e1451fad92c33be720ddd4b10805ca61c800692d6dd817a2211cdd962c4",
+    "3.2.2/JacksonProbe$Fallback.class": "5b5c75f239a7f2a4572160c3521c6a9353a0bb6d7ee917d800a2f219a80504d2",
+    "3.2.2/JacksonProbe$Guarded.class": "ddc752e8e6100d2648a62da3c4eb537161c97e922357edca57b32f1e175729d8",
+    "3.2.2/JacksonProbe$Normal.class": "27bc71eeb755e22acc5bfc9a499964d62f996caa4026a1b0cfc334880f649ce8",
+    "3.2.2/JacksonProbe.class": "5572a792ea727ff165335f278ccd36adfd856b70ad93a92004595e0a13ba2077",
     "3.2.2/JacksonProbe.java": "72c7855cb6f18c064677a55b55c94223d7ccc5c3fbe8209a73a75a21c5291aab",
     "3.2.2/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "candidate-plan.json": "825c4d7b2b3b6667ab56baa94c455cfc07207cbb29c54710de1e895dfa4401ee",
-    "consumer-contexts.json": "b45b1edaab4092b8c59954eb3d1ae0c6f41d8fa5ad8265ecc027afe36a685e1b",
+    "candidate-plan.json": "839779165091df99e3ffa55b711b1ed16eee5f9a635a40a2786cd6d97f746eba",
+    "consumer-contexts.json": "13fb9a44372f98847b7d403d161c8019c250faf8b1b29af3f44d3a129c32b044",
+    "embedded-jackson-inventory.json": "22a3a7475eb91f47fbccc263bf103ea30ed0d5f55593e381313bcef063144c51",
     "extension-inventory.json": "37c52d2879d8c8cc3f81455016b7d7e40832c199af608c3b17030ab14e157480",
     "source-after.json": "20157c5faa7bd6ae879d52a8d66cdf48abaf81fa74a417b7092a0d59910a9274",
     "source-before.json": "20157c5faa7bd6ae879d52a8d66cdf48abaf81fa74a417b7092a0d59910a9274"
   },
   "source_archives": 156,
   "sources_after": {
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "651c05afdc7c438bbbfa5676dd5e4c69f8877bd345ef5435ef29918ac9be2a01",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/verify.py": "9696c6d7d380baf4cea8936f8f5c47de134ed42ad4c6fb01b52060baa3576b90",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "702c9868e7d993de5b4a23eca9ab69c4a5093a800e7d0f4987ec179ddaf050e9",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/verify.py": "6c16e0163b6b237bc85a6aaf972d06a1d6e161b27e39c6d92cbcc8534e314ee1",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/JacksonProbe.java.in": "f6cf4ef500819b7334043734eff549d614996ef1f0d5591129c0159bc103b526",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/ModuleProbe.java": "44c5ce5f889bf9af4f574def744de1daa05a49e1d34f0fe0f9c418840683c74a",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/README.md": "64884627a1daff39cb3234f505d1ba438195e649595700c661981693065d2b67",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/coverage.json": "49a7f7ed9c225aa050a42921bdff480a642f44eb3f3084760691a1d7dc0224a8",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/ModuleProbe.java": "8189771cf5cd86a3bc4ae0856ae4591399d9caef79a420cf81a2d1523f5710d9",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/README.md": "7f79b297b1e3bfe03d3dcf22df7c9cde545582a9be87502524c9abd218476d4f",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/advisory-map.json": "c4fc62deeb2369260d38e46aab64707ec2657ddf07da86eea598de77d5777b28",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/coverage.json": "d2fefc251e08cc72f66d1c833bde5b1b8aaa1ba33546b34be1d915d94af32d1d",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/input-lock.json": "e9e9bac109210b8cf1dbddea721bbda33c8c323d31f90354990857e6e1b9bca6",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/jdk21-pins.json": "e28c21e719337f5610fefcc4dcba71c10ee24ea517d4bc8089107bea78f874b0",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/official-advisories.json": "42f389b85307311543f96458a4f88e17372e2ea90f6f18063f8218ba147b0be6",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/support-lock.json": "1811671bb994a8ab87c033d76e2cee609f3ddbbe034640ec8615e7f551a6d1e6",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/support-lock.json": "035c4b0b4e8f0d1039bfdf8146cfe40819e4d9f58a39b999ab4a4dd2078e4b2e",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/verify.py": "d1c2ae4919aa7a18a6611e01230d5d86aa5bd9dd2e07409e053226017d0fea61",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "d534df66362dd0ca10cb6228f14dfa473d39c28a223a464c8ceb4ee2399eb378"
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/verify.py": "a413315d08788f9cac997cfe92a66b7212d4e4aa711f39a9e853bc04784d7270",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "d0c6aba8c9655c1ca983f9979f665763d070875e10b6967fadf024d85dd6c6da"
   },
   "sources_before": {
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "651c05afdc7c438bbbfa5676dd5e4c69f8877bd345ef5435ef29918ac9be2a01",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/verify.py": "9696c6d7d380baf4cea8936f8f5c47de134ed42ad4c6fb01b52060baa3576b90",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "702c9868e7d993de5b4a23eca9ab69c4a5093a800e7d0f4987ec179ddaf050e9",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/compatible-libraries/verify.py": "6c16e0163b6b237bc85a6aaf972d06a1d6e161b27e39c6d92cbcc8534e314ee1",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/JacksonProbe.java.in": "f6cf4ef500819b7334043734eff549d614996ef1f0d5591129c0159bc103b526",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/ModuleProbe.java": "44c5ce5f889bf9af4f574def744de1daa05a49e1d34f0fe0f9c418840683c74a",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/README.md": "64884627a1daff39cb3234f505d1ba438195e649595700c661981693065d2b67",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/coverage.json": "49a7f7ed9c225aa050a42921bdff480a642f44eb3f3084760691a1d7dc0224a8",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/ModuleProbe.java": "8189771cf5cd86a3bc4ae0856ae4591399d9caef79a420cf81a2d1523f5710d9",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/README.md": "7f79b297b1e3bfe03d3dcf22df7c9cde545582a9be87502524c9abd218476d4f",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/advisory-map.json": "c4fc62deeb2369260d38e46aab64707ec2657ddf07da86eea598de77d5777b28",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/coverage.json": "d2fefc251e08cc72f66d1c833bde5b1b8aaa1ba33546b34be1d915d94af32d1d",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/input-lock.json": "e9e9bac109210b8cf1dbddea721bbda33c8c323d31f90354990857e6e1b9bca6",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/jdk21-pins.json": "e28c21e719337f5610fefcc4dcba71c10ee24ea517d4bc8089107bea78f874b0",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/official-advisories.json": "42f389b85307311543f96458a4f88e17372e2ea90f6f18063f8218ba147b0be6",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/support-lock.json": "1811671bb994a8ab87c033d76e2cee609f3ddbbe034640ec8615e7f551a6d1e6",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/support-lock.json": "035c4b0b4e8f0d1039bfdf8146cfe40819e4d9f58a39b999ab4a4dd2078e4b2e",
     "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/verify.py": "d1c2ae4919aa7a18a6611e01230d5d86aa5bd9dd2e07409e053226017d0fea61",
-    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "d534df66362dd0ca10cb6228f14dfa473d39c28a223a464c8ceb4ee2399eb378"
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/deploy/images/nifi-patches/jackson/verify.py": "a413315d08788f9cac997cfe92a66b7212d4e4aa711f39a9e853bc04784d7270",
+    "/home/tears/.t3/worktrees/B-taldea/integration-complete-project-20261103/tests/test_nifi_jackson_candidate.py": "d0c6aba8c9655c1ca983f9979f665763d070875e10b6967fadf024d85dd6c6da"
   },
   "status": "component-prepared",
   "toolchain_sha256": {
-    "/usr/lib/jvm/java-27-openjdk/bin/java": "8f9be20e940d4e4fec9497a9179b80bbf3e7f1704df7ea77500b0968c024eaca",
-    "/usr/lib/jvm/java-27-openjdk/bin/javac": "f07b2b3074934540fccbf1a8b906fd6f5a6c15f1b20027e918ff5ef62441f66b",
-    "/usr/lib/jvm/java-27-openjdk/lib/modules": "6adc428946d05607a84be2425db80e1fc90ec437d9ab862f6e7d1734155b2b69",
-    "/usr/lib/jvm/java-27-openjdk/lib/server/libjvm.so": "43309cd90454678e0af31935f35151e1fc1956244ec873897fe8bf170becf291",
-    "/usr/lib/jvm/java-27-openjdk/release": "84fe5c0a1dc71a7f998abafd744205cb48b553318fcd271b29b104b6fcf219bb"
+    "/usr/lib/jvm/java-21-openjdk/bin/java": "8974a711edb55de716f1b396a3178ab98775fb1077b41440ba8e128a8404707a",
+    "/usr/lib/jvm/java-21-openjdk/bin/javac": "5d9371a81bc789e32b8886dd29be8df68ba14fee27c56ebece035f02b0b0faa3",
+    "/usr/lib/jvm/java-21-openjdk/lib/modules": "64d35542839493fbfd0d951e9bbaafd6c578833161199d32d7dce38761b39b23",
+    "/usr/lib/jvm/java-21-openjdk/lib/server/libjvm.so": "2c76a19bbe78c9b7e1618f5432410d1cfc70f2085fc52b907ea61664169679d7",
+    "/usr/lib/jvm/java-21-openjdk/release": "10f15d22e4d77e843ce737ce59bd68cc6558193697d8cb573c3b9e3e046e3fd1"
   }
 }

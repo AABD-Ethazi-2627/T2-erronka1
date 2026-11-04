@@ -27,6 +27,8 @@ def require(ok, message="verification failed"):
     if not ok: raise ValueError(message)
 def sha(b): return hashlib.sha256(b).hexdigest()
 def save(p, value): p.write_text(json.dumps(value, indent=2)+'\n')
+def clean_environment():
+    return {key:os.environ[key] for key in ('PATH','LANG','LC_ALL','TMPDIR') if key in os.environ}
 def limits():
     resource.setrlimit(resource.RLIMIT_CORE,(0,0))
     # RLIMIT_AS cannot cap JVM RSS (JVM reserves much more virtual memory).
@@ -34,7 +36,7 @@ def limits():
     resource.setrlimit(resource.RLIMIT_CPU,(60,60))
     os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
 def run(cmd, cache, name, timeout=60, expected_timeout=False):
-    env={k:v for k,v in os.environ.items() if k not in ('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','JDK_JAVAC_OPTIONS','_JAVA_OPTIONS','CLASSPATH','LD_PRELOAD','LD_LIBRARY_PATH')}
+    env=clean_environment()
     try:
         p=subprocess.run(list(map(str,cmd)),capture_output=True,check=False,timeout=timeout,env=env,preexec_fn=limits)
     except subprocess.TimeoutExpired as e:
@@ -216,7 +218,8 @@ def main():
     require(max(usage.values())<=512*1024,'process exceeded 512 MiB RSS: '+str(usage))
     save(proof/'component-results.json',results)
     require({n:sha((HERE/n).read_bytes()) for n in source_names}==source_at_start,'source changed during verification')
-    save(proof/'toolchain.json',{'java_version':subprocess.check_output([str(a.jdk/'bin/java'),'-version'],stderr=subprocess.STDOUT).decode(), 'tools':{n:sha((a.jdk/'bin'/n).read_bytes()) for n in ['java','javac']},'platform':os.uname().machine,'source_sha256':source_at_start})
+    run([a.jdk/'bin/java','-Xmx64m','-XX:ActiveProcessorCount=1','-version'],proof,'java-version')
+    save(proof/'toolchain.json',{'java_version':(proof/'java-version.log').read_text(), 'tools':{n:sha((a.jdk/'bin'/n).read_bytes()) for n in ['java','javac']},'platform':os.uname().machine,'source_sha256':source_at_start})
     save(proof/'replacement-plan.json',plan)
     print(json.dumps({'component_tests':'passed','plan':str(proof/'replacement-plan.json'),'results':str(proof/'component-results.json'),'patched':False}))
 if __name__=='__main__':main()

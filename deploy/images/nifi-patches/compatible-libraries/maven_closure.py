@@ -73,15 +73,32 @@ class Closure:
                 require(d.get('type')=='pom','non-POM BOM')
                 bc=':'.join(expand(d[k]) for k in ['groupId','artifactId','version'])
                 bm=self.model(bc,stack+(coordinate,))
-                for k,val in bm['management'].items():management.setdefault(k,val)
+                for k,val in bm['management'].items():
+                    # Do not interpolate BOM-owned values in the consumer's
+                    # property context. This subset refuses such required values.
+                    fields=set(val.get('_unsupported_bom_fields',[]))
+                    fields.update(name for name,value in val.items()
+                                  if not name.startswith('_') and '${' in str(value))
+                    management.setdefault(k,val|{'_unsupported_bom_fields':sorted(fields)})
         for d in managed:
             if d.get('scope')!='import':management[key(d)]=d
         deps={key(d):dict(d) for d in pm['deps']}
+        local_management={key(d):d for d in managed if d.get('scope')!='import'}
+        for k,d in deps.items():
+            local=local_management.get(k,{})
+            if any(field in local and expand(local[field])!=expand(d.get(field,default))
+                   for field,default in (('version',''),('scope','compile'))):
+                d['_unsupported_inherited_management']=True
         for n in root.findall('m:dependencies/m:dependency',NS):
             d=raw(n);k=key(d);md=management.get(k,{})
-            # Managed scope/optionality is significant: Netty's Mockito/Gson are tests.
-            effective=md|d
-            effective['exclusions']=md.get('exclusions',[])+d['exclusions']
+            # Maven manages scope, but not optionality. Explicit optional=true
+            # in the dependency itself still excludes that runtime path.
+            effective={field:value for field,value in md.items()
+                       if not field.startswith('_') and field!='optional'}|d
+            used={field for field in md if field not in d or (field=='exclusions' and not d['exclusions'])}
+            effective['_unsupported_bom_fields']=sorted(used & set(md.get('_unsupported_bom_fields',[])))
+            effective['_unsupported_exclusion_merge']=bool(md.get('exclusions') and d['exclusions'])
+            effective['exclusions']=d['exclusions'] or md.get('exclusions',[])
             deps[k]=effective
         profile_props=set()
         for profile in root.findall('m:profiles/m:profile',NS):
@@ -99,6 +116,9 @@ class Closure:
                 self.decisions.append({'pom':coordinate,'raw':d,'disposition':'excluded-'+('optional' if optional=='true' else scope)})
                 continue
             require(optional=='false','unsupported optional flag')
+            require(not d.get('_unsupported_inherited_management'), 'unsupported inherited dependency management override')
+            require(not d.get('_unsupported_bom_fields'), 'unsupported interpolated BOM requirement')
+            require(not d.get('_unsupported_exclusion_merge'), 'unsupported managed/local exclusion combination')
             required={k:d.get(k,default) for k,default in [('groupId',None),('artifactId',None),('version',None),('type','jar'),('classifier','')]}
             pending=list(required.values());seen=set()
             while pending:
@@ -119,19 +139,25 @@ class Closure:
         return result
     def resolve(self, root):
         jars={};visited=set();edges=[]
-        def visit(coord,excluded=frozenset()):
-            if (coord,excluded) in visited:return
-            visited.add((coord,excluded));g,a,v=coord.split(':')
-            if (g,a) in excluded or (g,'*') in excluded or ('*','*') in excluded:return
+        def excluded_by(g,a,excluded):
+            return any(pair in excluded for pair in ((g,a),(g,'*'),('*',a),('*','*')))
+        def visit(coord,excluded=frozenset(),below=frozenset()):
+            state=(coord,excluded,below)
+            if state in visited:return
+            visited.add(state);g,a,v=coord.split(':')
+            if excluded_by(g,a,excluded):return
             ga=g+':'+a
             require(ga not in jars or jars[ga]==v, 'version conflict requires review '+ga)
             jars[ga]=v
             model=self.model(coord)
+            children_excluded=excluded|below
             for d in model['required']:
                 target=':'.join(d[k] for k in ['groupId','artifactId','version'])
-                skip=(d['groupId'],d['artifactId']) in excluded
+                skip=excluded_by(d['groupId'],d['artifactId'],children_excluded)
                 edges.append({'from':coord,'to':target,'scope':d['scope'],'excluded_by_path':skip,'additional_exclusions':d['exclusions']})
-                visit(target,excluded|frozenset(d['exclusions']))
+                # An edge's exclusions apply below its target, not to the
+                # dependency declaring them (including self and wildcard rules).
+                visit(target,children_excluded,frozenset(d['exclusions']))
         visit(root)
         coordinates=sorted(g+':'+v for g,v in jars.items())
         for coord in coordinates:

@@ -62,6 +62,9 @@ for **every occurrence** of a selected leaf hash; `expected_occurrences` is its
 source-wide count, repeated identically in those rows. Paths are case sensitive.
 Unknown/missing fields, statuses, duplicate JSON keys, missing/extra occurrences,
 duplicate/overlapping selections, drift and count mismatches fail closed.
+Blocked identities are checked throughout each selected ancestry and throughout
+the replacement inventory. No-op replacements and replacements retaining any
+selected old archive hash are refused, including nested copies.
 The approval status is an explicit reviewer assertion; the tool never derives it
 from package labels, candidate status or successful component probes. Known blocked
 Guava 33.4.8/33.6 and RabbitMQ input hashes are additionally refused in code.
@@ -85,6 +88,10 @@ retain uncompressed bytes, order, timestamp, comments, extras, compression metho
 external/internal attributes and archive comment through copied `ZipInfo` records.
 ZIP writer bookkeeping (CRC, compressed sizes, offsets and flags) is regenerated;
 compressed containers are **not byte-identical**. No extraction uses member paths.
+Zero external attributes are explicitly restored after Python's writer sets its
+default. Before publication, the bounded output inventory and every rewritten
+ancestor are checked against the source: sibling names/order/content, comments
+and preserved metadata must match, with only selected leaves replaced.
 Duplicate/ambiguous names, absolute/traversal/backslash/drive paths, ZIP symlinks or
 special files, source/replacement symlinks, encrypted or unsupported compression,
 CRC/truncation failures and malformed archives are refused. Only STORED and
@@ -92,6 +99,10 @@ DEFLATED compression are supported. Unknown external file types are refused,
 except the exact legacy Unix `0xffff0010` representation of an empty STORED
 directory with a trailing slash, zero sizes and CRC. It is preserved as metadata;
 paths are never extracted. Four negative variants remain rejected.
+Normal empty deflated directories are allowed only when their bounded compressed
+stream decodes to empty. Any directory payload, ZIP preamble, non-ASCII name
+without UTF-8 flag, local/central header mismatch or invalid descriptor boundary
+is refused. ZIP64 sentinel sizes and bounded data descriptors are validated.
 
 After staged output validation and leaf hash verification, Linux `renameat2` with
 `RENAME_NOREPLACE` atomically publishes the entire tree. A concurrent existing

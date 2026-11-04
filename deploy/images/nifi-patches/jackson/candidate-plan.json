@@ -1,4 +1,118 @@
 {
+  "atomic_replacement_units": [
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "com.fasterxml.jackson.core",
+      "objects": [
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "old_version": "2.22.2",
+      "outer_or_directory": "bootstrap",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "com.fasterxml.jackson.core",
+      "objects": [
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "old_version": "2.22.2",
+      "outer_or_directory": "nifi-amqp-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "com.fasterxml.jackson.core",
+      "objects": [
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "old_version": "2.22.2",
+      "outer_or_directory": "nifi-framework-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "tools.jackson.core",
+      "objects": [
+        "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+        "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+      ],
+      "old_version": "3.2.2",
+      "outer_or_directory": "nifi-jolt-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [
+        "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war"
+      ],
+      "namespace_group": "tools.jackson.core",
+      "objects": [
+        "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+        "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+      ],
+      "old_version": "3.2.2",
+      "outer_or_directory": "nifi-jolt-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "com.fasterxml.jackson.core",
+      "objects": [
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "old_version": "2.22.2",
+      "outer_or_directory": "nifi-kafka-to-s3-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "tools.jackson.core",
+      "objects": [
+        "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+        "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+      ],
+      "old_version": "3.2.2",
+      "outer_or_directory": "nifi-standard-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [],
+      "namespace_group": "com.fasterxml.jackson.core",
+      "objects": [
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "old_version": "2.22.2",
+      "outer_or_directory": "nifi-standard-shared-nar-2.12.0.nar",
+      "status": "blocked"
+    },
+    {
+      "atomic": true,
+      "members": [
+        "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war"
+      ],
+      "namespace_group": "com.fasterxml.jackson.core",
+      "objects": [
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "old_version": "2.22.2",
+      "outer_or_directory": "nifi-update-attribute-nar-2.12.0.nar",
+      "status": "blocked"
+    }
+  ],
   "entries": [
     {
       "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
@@ -133,7 +247,7 @@
         "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar"
       },
       "research_candidate": "com.fasterxml.jackson.core:jackson-core:2.22.3",
-      "status": "blocked-symbolic-ABI-and-consumer-review-required",
+      "status": "blocked-atomic-core-databind-review-required",
       "symbolic_abi_changes": [
         "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaBigIntegerParser.class: class removed",
         "com/fasterxml/jackson/core/internal/shaded/fdp/v2_22_2/JavaFloatParser.class: class removed",
@@ -266,7 +380,7 @@
         "url": "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar"
       },
       "research_candidate": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
-      "status": "component-candidate-consumer-review-required",
+      "status": "blocked-atomic-core-databind-review-required",
       "symbolic_abi_changes": [],
       "upstream_old_equal": true,
       "version": "2.22.2"
@@ -341,7 +455,7 @@
         "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-core/3.2.3/jackson-core-3.2.3.jar"
       },
       "research_candidate": "tools.jackson.core:jackson-core:3.2.3",
-      "status": "component-candidate-consumer-review-required",
+      "status": "blocked-atomic-core-databind-review-required",
       "symbolic_abi_changes": [],
       "upstream_old_equal": true,
       "version": "3.2.2"
@@ -419,7 +533,7 @@
         "url": "https://repo.maven.apache.org/maven2/tools/jackson/core/jackson-databind/3.2.3/jackson-databind-3.2.3.jar"
       },
       "research_candidate": "tools.jackson.core:jackson-databind:3.2.3",
-      "status": "blocked-symbolic-ABI-and-consumer-review-required",
+      "status": "blocked-atomic-core-databind-review-required",
       "symbolic_abi_changes": [
         "tools/jackson/databind/util/StdDateFormat.class: ('field', 'DATE_FORMAT_RFC1123', 'Ljava/text/DateFormat;', 28)"
       ],
@@ -451,6 +565,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -462,6 +578,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -473,6 +591,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -484,6 +604,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -495,6 +617,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jsr-275",
               "exclusions": [],
               "groupId": "javax.measure",
@@ -506,6 +630,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jol-core",
               "exclusions": [],
               "groupId": "org.openjdk.jol",
@@ -517,6 +643,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -528,6 +656,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-inline",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -539,6 +669,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-platform-suite-engine",
               "exclusions": [],
               "groupId": "org.junit.platform",
@@ -550,6 +682,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "micronaut-test-type-pollution",
               "exclusions": [],
               "groupId": "io.micronaut.test",
@@ -561,6 +695,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -640,6 +776,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -651,6 +789,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -662,6 +802,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -673,6 +815,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -684,6 +828,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jsr-275",
               "exclusions": [],
               "groupId": "javax.measure",
@@ -695,6 +841,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jol-core",
               "exclusions": [],
               "groupId": "org.openjdk.jol",
@@ -706,6 +854,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -717,6 +867,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-inline",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -728,6 +880,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-platform-suite-engine",
               "exclusions": [],
               "groupId": "org.junit.platform",
@@ -739,6 +893,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.21.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "micronaut-test-type-pollution",
               "exclusions": [],
               "groupId": "io.micronaut.test",
@@ -750,6 +906,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -850,6 +1008,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -861,6 +1021,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -872,6 +1034,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -883,6 +1047,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -894,6 +1060,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jsr-275",
               "exclusions": [],
               "groupId": "javax.measure",
@@ -905,6 +1073,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jol-core",
               "exclusions": [],
               "groupId": "org.openjdk.jol",
@@ -916,6 +1086,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -927,6 +1099,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-inline",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -938,6 +1112,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-platform-suite-engine",
               "exclusions": [],
               "groupId": "org.junit.platform",
@@ -949,6 +1125,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "micronaut-test-type-pollution",
               "exclusions": [],
               "groupId": "io.micronaut.test",
@@ -960,6 +1138,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1039,6 +1219,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1050,6 +1232,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1061,6 +1245,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -1072,6 +1258,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -1083,6 +1271,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jsr-275",
               "exclusions": [],
               "groupId": "javax.measure",
@@ -1094,6 +1284,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "jol-core",
               "exclusions": [],
               "groupId": "org.openjdk.jol",
@@ -1105,6 +1297,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -1116,6 +1310,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-inline",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -1127,6 +1323,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-platform-suite-engine",
               "exclusions": [],
               "groupId": "org.junit.platform",
@@ -1138,6 +1336,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-databind:2.22.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "micronaut-test-type-pollution",
               "exclusions": [],
               "groupId": "io.micronaut.test",
@@ -1149,6 +1349,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1249,6 +1451,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1260,6 +1464,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1271,6 +1477,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-params",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1282,6 +1490,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -1293,6 +1503,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -1304,6 +1516,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -1315,6 +1529,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1390,6 +1606,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1401,6 +1619,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1412,6 +1632,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-params",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1423,6 +1645,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -1434,6 +1658,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -1445,6 +1671,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.1.7",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -1456,6 +1684,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.21",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1555,6 +1785,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1566,6 +1798,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1577,6 +1811,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-params",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1588,6 +1824,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -1599,6 +1837,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -1610,6 +1850,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.2",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -1621,6 +1863,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1695,6 +1939,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1706,6 +1952,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-api",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1717,6 +1965,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter-params",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1728,6 +1978,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "assertj-core",
               "exclusions": [],
               "groupId": "org.assertj",
@@ -1739,6 +1991,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "guava-testlib",
               "exclusions": [],
               "groupId": "com.google.guava",
@@ -1750,6 +2004,8 @@
             "disposition": "excluded-test",
             "pom": "tools.jackson.core:jackson-databind:3.2.3",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "mockito-core",
               "exclusions": [],
               "groupId": "org.mockito",
@@ -1761,6 +2017,8 @@
             "disposition": "excluded-test",
             "pom": "com.fasterxml.jackson.core:jackson-annotations:2.22",
             "raw": {
+              "_unsupported_bom_fields": [],
+              "_unsupported_exclusion_merge": false,
               "artifactId": "junit-jupiter",
               "exclusions": [],
               "groupId": "org.junit.jupiter",
@@ -1832,5 +2090,201 @@
     }
   },
   "runtime_approved": false,
-  "status": "component-prepared"
+  "status": "component-prepared",
+  "unassessed_embedded_copies": [
+    {
+      "chain_sha256": [
+        "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+        "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525"
+      ],
+      "class_packages": [
+        "software/amazon/awssdk/thirdparty/jackson/core",
+        "software/amazon/awssdk/thirdparty/jackson/core/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/base",
+        "software/amazon/awssdk/thirdparty/jackson/core/exc",
+        "software/amazon/awssdk/thirdparty/jackson/core/filter",
+        "software/amazon/awssdk/thirdparty/jackson/core/format",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/bte",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/chr",
+        "software/amazon/awssdk/thirdparty/jackson/core/io",
+        "software/amazon/awssdk/thirdparty/jackson/core/io/schubfach",
+        "software/amazon/awssdk/thirdparty/jackson/core/json",
+        "software/amazon/awssdk/thirdparty/jackson/core/json/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/sym",
+        "software/amazon/awssdk/thirdparty/jackson/core/type",
+        "software/amazon/awssdk/thirdparty/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/third-party-jackson-core-2.54.14.jar"
+      ],
+      "outer": "nifi-aws-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    },
+    {
+      "chain_sha256": [
+        "1da44c6d8513c1442be0b3db55ece3eaff56d6c8e727381c38bac344ea2bcf19",
+        "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525"
+      ],
+      "class_packages": [
+        "software/amazon/awssdk/thirdparty/jackson/core",
+        "software/amazon/awssdk/thirdparty/jackson/core/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/base",
+        "software/amazon/awssdk/thirdparty/jackson/core/exc",
+        "software/amazon/awssdk/thirdparty/jackson/core/filter",
+        "software/amazon/awssdk/thirdparty/jackson/core/format",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/bte",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/chr",
+        "software/amazon/awssdk/thirdparty/jackson/core/io",
+        "software/amazon/awssdk/thirdparty/jackson/core/io/schubfach",
+        "software/amazon/awssdk/thirdparty/jackson/core/json",
+        "software/amazon/awssdk/thirdparty/jackson/core/json/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/sym",
+        "software/amazon/awssdk/thirdparty/jackson/core/type",
+        "software/amazon/awssdk/thirdparty/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/third-party-jackson-core-2.54.14.jar"
+      ],
+      "outer": "nifi-aws-service-api-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    },
+    {
+      "chain_sha256": [
+        "1a642d6f86c383f8cceecabfab3563637f717bac887747df3503aa5cde3e06ad",
+        "bad21d5eb306d82b85951b58a1d9e501a9b09970e452bee6d4d445fd5a91c519"
+      ],
+      "class_packages": [
+        "com/azure/json/implementation/jackson/core",
+        "com/azure/json/implementation/jackson/core/exc",
+        "com/azure/json/implementation/jackson/core/io",
+        "com/azure/json/implementation/jackson/core/json",
+        "com/azure/json/implementation/jackson/core/sym",
+        "com/azure/json/implementation/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/azure-json-1.5.1.jar"
+      ],
+      "outer": "nifi-azure-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "bad21d5eb306d82b85951b58a1d9e501a9b09970e452bee6d4d445fd5a91c519",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    },
+    {
+      "chain_sha256": [
+        "37efef8cdd76bfe575b783c3c6001c8d2d585af851f6aabd219e4e9ae2433d33",
+        "bad21d5eb306d82b85951b58a1d9e501a9b09970e452bee6d4d445fd5a91c519"
+      ],
+      "class_packages": [
+        "com/azure/json/implementation/jackson/core",
+        "com/azure/json/implementation/jackson/core/exc",
+        "com/azure/json/implementation/jackson/core/io",
+        "com/azure/json/implementation/jackson/core/json",
+        "com/azure/json/implementation/jackson/core/sym",
+        "com/azure/json/implementation/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/azure-json-1.5.1.jar"
+      ],
+      "outer": "nifi-azure-services-api-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "bad21d5eb306d82b85951b58a1d9e501a9b09970e452bee6d4d445fd5a91c519",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    },
+    {
+      "chain_sha256": [
+        "9d105040f5f00e9c1905555ac8c7ffce92d55fcefd47ad455b3a9ff9ceca8f21",
+        "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525"
+      ],
+      "class_packages": [
+        "software/amazon/awssdk/thirdparty/jackson/core",
+        "software/amazon/awssdk/thirdparty/jackson/core/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/base",
+        "software/amazon/awssdk/thirdparty/jackson/core/exc",
+        "software/amazon/awssdk/thirdparty/jackson/core/filter",
+        "software/amazon/awssdk/thirdparty/jackson/core/format",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/bte",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/chr",
+        "software/amazon/awssdk/thirdparty/jackson/core/io",
+        "software/amazon/awssdk/thirdparty/jackson/core/io/schubfach",
+        "software/amazon/awssdk/thirdparty/jackson/core/json",
+        "software/amazon/awssdk/thirdparty/jackson/core/json/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/sym",
+        "software/amazon/awssdk/thirdparty/jackson/core/type",
+        "software/amazon/awssdk/thirdparty/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/third-party-jackson-core-2.54.14.jar"
+      ],
+      "outer": "nifi-iceberg-aws-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    },
+    {
+      "chain_sha256": [
+        "c144120d8814d08390fc1f35f81db224ac6a16c9ae1fdd4715e0aefff93ce9da",
+        "bad21d5eb306d82b85951b58a1d9e501a9b09970e452bee6d4d445fd5a91c519"
+      ],
+      "class_packages": [
+        "com/azure/json/implementation/jackson/core",
+        "com/azure/json/implementation/jackson/core/exc",
+        "com/azure/json/implementation/jackson/core/io",
+        "com/azure/json/implementation/jackson/core/json",
+        "com/azure/json/implementation/jackson/core/sym",
+        "com/azure/json/implementation/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/azure-json-1.5.1.jar"
+      ],
+      "outer": "nifi-iceberg-azure-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "bad21d5eb306d82b85951b58a1d9e501a9b09970e452bee6d4d445fd5a91c519",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    },
+    {
+      "chain_sha256": [
+        "dd3bfc01580d20386ffb419e09d8798592825be5377b8de0fb77a77a6c609967",
+        "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525"
+      ],
+      "class_packages": [
+        "software/amazon/awssdk/thirdparty/jackson/core",
+        "software/amazon/awssdk/thirdparty/jackson/core/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/base",
+        "software/amazon/awssdk/thirdparty/jackson/core/exc",
+        "software/amazon/awssdk/thirdparty/jackson/core/filter",
+        "software/amazon/awssdk/thirdparty/jackson/core/format",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/bte",
+        "software/amazon/awssdk/thirdparty/jackson/core/internal/shaded/fdp/v2_21_4/chr",
+        "software/amazon/awssdk/thirdparty/jackson/core/io",
+        "software/amazon/awssdk/thirdparty/jackson/core/io/schubfach",
+        "software/amazon/awssdk/thirdparty/jackson/core/json",
+        "software/amazon/awssdk/thirdparty/jackson/core/json/async",
+        "software/amazon/awssdk/thirdparty/jackson/core/sym",
+        "software/amazon/awssdk/thirdparty/jackson/core/type",
+        "software/amazon/awssdk/thirdparty/jackson/core/util"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/third-party-jackson-core-2.54.14.jar"
+      ],
+      "outer": "nifi-kafka-service-aws-nar-2.12.0.nar",
+      "scanner_mapped": false,
+      "sha256": "764ea60a1222b42f747a2bd0a2fb905395bbf67058bbab21366c06fb1abec525",
+      "status": "blocked-unassessed-relocated-jackson",
+      "version": "unassessed-by-this-verifier"
+    }
+  ]
 }

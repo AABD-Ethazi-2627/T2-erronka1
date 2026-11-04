@@ -3,6 +3,8 @@ import hashlib
 import importlib.util
 import io
 import json
+import struct
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -204,7 +206,7 @@ class PatcherTests(unittest.TestCase):
         planfile = self.root / 'plan.json'
         planfile.write_text(json.dumps(self.plan()))
         out = self.root / 'out'
-        args = ['python', str(SCRIPT), str(self.src), '--plan', str(planfile), '--output', str(out)]
+        args = [sys.executable, str(SCRIPT), str(self.src), '--plan', str(planfile), '--output', str(out)]
         r = subprocess.run(args, capture_output=True, check=False, text=True)
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(json.loads(r.stdout)['mode'], 'dry-run')
@@ -252,5 +254,106 @@ class PatcherTests(unittest.TestCase):
         self.p.patch(source, self.root / 'out', plan, apply=True)
         self.assertEqual((self.root / 'out/old.jar').read_bytes(), self.new)
         self.assertEqual((source / 'old.jar').read_bytes(), self.old)
+
+    def test_faulty_writer_cannot_drop_or_change_unselected_siblings(self):
+        from unittest.mock import patch
+        original=self.p.rewrite
+        for mutation in ('drop','change'):
+            with self.subTest(mutation=mutation):
+                def faulty(path,output,targets,depth=0,mutation=mutation):
+                    original(path,output,targets,depth)
+                    if depth==0:
+                        with zipfile.ZipFile(output) as z:
+                            entries=[(i.filename,z.read(i)) for i in z.infolist()]
+                        entries=[(name,b'changed' if name=='keep' and mutation=='change' else data)
+                                 for name,data in entries if name!='keep' or mutation!='drop']
+                        Path(output).write_bytes(jar(entries))
+                with patch.object(self.p,'rewrite',side_effect=faulty), self.assertRaisesRegex(ValueError,'post-write sibling'):
+                    self.p.patch(self.src,self.root/'out',self.plan(),apply=True)
+                self.assertFalse((self.root/'out').exists())
+
+    def test_zero_external_attributes_survive_rewrite(self):
+        for path in self.src.iterdir():
+            raw=bytearray(path.read_bytes())
+            with zipfile.ZipFile(path) as z:offset=z.start_dir
+            while raw[offset:offset+4]==b'PK\x01\x02':
+                length=struct.unpack_from('<H',raw,offset+28)[0]
+                extra,comment=struct.unpack_from('<HH',raw,offset+30)
+                if raw[offset+46:offset+46+length]==b'keep':
+                    struct.pack_into('<I',raw,offset+38,0)
+                offset+=46+length+extra+comment
+            path.write_bytes(raw)
+        self.p.patch(self.src,self.root/'out',self.plan(),apply=True)
+        for name in ('one.nar','two.nar'):
+            with zipfile.ZipFile(self.root/'out'/name) as z:
+                self.assertEqual(z.getinfo('keep').external_attr,0)
+
+    def test_blocked_ancestors_replacements_and_surviving_old_archive_fail(self):
+        from unittest.mock import patch
+        for blocked in (sha(self.outer),sha(self.new)):
+            with self.subTest(blocked=blocked), patch.object(self.p,'BLOCKED_INPUTS',{blocked}), self.assertRaisesRegex(ValueError,'blocked'):
+                self.p.patch(self.src,self.root/'out',self.plan(),apply=True)
+        for content,message in ((self.old,'no-op'),(jar([('hidden.jar',self.old)]),'selected old archive')):
+            with self.subTest(message=message):
+                self.repl.write_bytes(content)
+                plan=self.plan()
+                for t in plan['targets']:t['replacement_sha256']=sha(content)
+                with self.assertRaisesRegex(ValueError,message):
+                    self.p.patch(self.src,self.root/'out',plan,apply=True)
+                self.assertFalse((self.root/'out').exists())
+
+    def test_complete_ancestor_and_descendant_selections_are_rejected(self):
+        plan=self.plan()
+        for row in self.inventory():
+            if not row['members']:
+                plan['targets'].append({'outer':row['outer'],'members':[],
+                    'chain_sha256':row['chain_sha256'],'replacement':str(self.repl),
+                    'replacement_sha256':sha(self.new),'status':'approved-exact-occurrence',
+                    'expected_occurrences':2})
+        with self.assertRaisesRegex(ValueError,'overlapping ancestor/leaf'):
+            self.p.patch(self.src,self.root/'out',plan,apply=True)
+
+    def test_publication_race_preserves_even_an_empty_existing_directory(self):
+        import ctypes
+        from unittest.mock import patch
+        real=ctypes.CDLL(None,use_errno=True)
+        out=self.root/'out';identity=[]
+        class Race:
+            def renameat2(self,*args):
+                out.mkdir();identity.append(out.stat().st_ino)
+                return real.renameat2(*args)
+        with patch('ctypes.CDLL',return_value=Race()), self.assertRaises(OSError):
+            self.p.patch(self.src,out,self.plan(),apply=True)
+        self.assertEqual(out.stat().st_ino,identity[0])
+        self.assertEqual(list(out.iterdir()),[])
+
+    def test_preamble_and_unflagged_nonascii_names_are_refused(self):
+        bad=self.src/'bad.jar'
+        bad.write_bytes(b'#!/bin/sh\n'+jar([('payload',b'opaque')]))
+        with self.assertRaisesRegex(ValueError,'preamble'):self.inventory()
+        raw=bytearray(jar([('é',b'opaque')]))
+        struct.pack_into('<H',raw,raw.index(b'PK\x03\x04')+6,0)
+        struct.pack_into('<H',raw,raw.index(b'PK\x01\x02')+8,0)
+        bad.write_bytes(raw)
+        with self.assertRaisesRegex(ValueError,'non-ASCII'):self.inventory()
+
+    def test_directory_payload_and_local_header_disagreement_are_refused(self):
+        bad=self.src/'bad.jar'
+        bad.write_bytes(jar([('evil.jar/',self.old)]))
+        with self.assertRaisesRegex(ValueError,'directory has ZIP payload'):self.inventory()
+        raw=bytearray(jar([('evil.jar/',self.old)]))
+        with zipfile.ZipFile(io.BytesIO(raw)) as z:central=z.start_dir
+        for offset in (16,20,24):struct.pack_into('<I',raw,central+offset,0)
+        bad.write_bytes(raw)
+        with self.assertRaisesRegex(ValueError,'local/central ZIP'):self.inventory()
+        raw=bytearray(jar([('normal',b'opaque')]))
+        struct.pack_into('<I',raw,raw.index(b'PK\x03\x04')+22,0)
+        bad.write_bytes(raw)
+        with self.assertRaisesRegex(ValueError,'local/central ZIP'):self.inventory()
+
+    def test_empty_deflated_directory_remains_valid(self):
+        with zipfile.ZipFile(self.src/'directory.jar','w',zipfile.ZIP_DEFLATED) as z:
+            z.writestr('empty/',b'')
+        self.assertTrue(self.inventory())
 
 if __name__ == '__main__': unittest.main()

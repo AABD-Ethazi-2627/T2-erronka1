@@ -25,8 +25,9 @@ built/scanned, and no NiFi or broker is started. No exception or gate change is 
   aggregate: its empty class surface is recorded explicitly. The shared bounded
   comparator now handles this case (`class major = null`); original library
   regressions were rerun after that one-line extension.
-- The resolver reads inherited dependency-management **scope and optionality**,
-  not just versions. Netty's managed Mockito/Reflections/Gson entries are tests.
+- The resolver reads inherited dependency-management **scope and versions**.
+  Managed optionality is not inherited; only explicit dependency optionality
+  excludes a path. Netty's managed Mockito/Reflections/Gson entries are tests.
   Root `netty-codec` exclusions remove protobuf dependencies along those transitive
   paths; managed optional marshalling and compression/TLS provider dependencies
   are recorded as excluded. Imported Bouncy Castle 1.84 and JUnit 5.14.4 BOM POMs
@@ -35,6 +36,9 @@ built/scanned, and no NiFi or broker is started. No exception or gate change is 
   or alter required selectors, unknown inputs, unresolved versions, required
   classifiers, version conflicts and checksum mismatches fail closed. No nearest
   version selection, snapshot/range resolution or repository fallback occurs.
+  Required interpolated BOM values, inherited dependency-management overrides
+  and combined managed/local exclusions are rejected by this narrow subset.
+  Exclusions apply below the dependency declaring them, including wildcards.
 - Official Maven `nifi-amqp-nar:2.12.0` SHA-256 is
   `4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8`.
   Its `amqp-client-5.35.0.jar` hash is exactly the report's input object
@@ -95,7 +99,11 @@ installation. These tests use API-only SLF4J with its documented no-provider/NOP
 fallback. They do **not** validate NiFi's real logging provider, bridge ordering or
 parent-loader resolution. Metrics, tracing, automatic recovery, authentication
 variants, TLS certificate handshakes and broker redelivery semantics remain untested.
-The original parser/CVE probes continue to be separate evidence.
+The original parser/CVE probes continue to be separate evidence. Incoming delivery,
+`basicConsume`/`handleDelivery`, acknowledgements/QoS, publisher confirmations,
+return listeners and SASL EXTERNAL are also untested; none is implied by the
+simple publication fixture. Malformed-peer checks now require the intended
+MalformedFrameException/version-mismatch cause, rather than any IOException.
 
 The bounded public/protected declared surface comparison flags **zero changes**
 for RabbitMQ 5.35 -> 5.37 and for every Netty 4.2.17 -> 4.2.18 module. It is not a

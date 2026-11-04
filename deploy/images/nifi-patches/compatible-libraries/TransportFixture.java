@@ -65,7 +65,15 @@ public final class TransportFixture implements AutoCloseable {
             factory.setPort(fixture.server.getLocalPort());
             if(malformed) {
                 try(var c=connect(factory,executor,addresses)){throw new AssertionError("invalid version accepted");}
-                catch(IOException expected) {System.out.println("invalid peer rejected: "+expected.getClass().getSimpleName());}
+                catch(IOException expected) {
+                    Throwable cause=expected;boolean malformedCause=false;
+                    for(int depth=0;cause!=null && depth<16;depth++,cause=cause.getCause()) {
+                        if(cause instanceof MalformedFrameException && cause.getMessage()!=null &&
+                           cause.getMessage().contains("protocol version mismatch")) malformedCause=true;
+                    }
+                    check(malformedCause,"invalid peer must fail for protocol version mismatch, not transport loss");
+                    System.out.println("invalid peer rejected: MalformedFrameException protocol version mismatch");
+                }
             } else {
                 try(Connection c=connect(factory,executor,addresses);Channel channel=c.createChannel()) {
                     check(c.isOpen() && channel.isOpen(),"connection/channel open");

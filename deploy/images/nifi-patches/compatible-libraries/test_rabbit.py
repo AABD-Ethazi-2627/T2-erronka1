@@ -34,10 +34,11 @@ class ModelTests(unittest.TestCase):
         self.pom('root','<dependencies><dependency><groupId>x</groupId><artifactId>codec</artifactId><version>1</version><exclusions><exclusion><groupId>x</groupId><artifactId>protobuf</artifactId></exclusion></exclusions></dependency></dependencies>')
         self.pom('codec','<dependencies><dependency><groupId>x</groupId><artifactId>protobuf</artifactId><version>1</version></dependency></dependencies>')
         self.assertEqual(self.resolve()['required_coordinates'],['x:codec:1','x:root:1'])
-    def test_managed_optional_dependency_is_recorded_not_required(self):
+    def test_management_optional_does_not_exclude_required_dependency(self):
         self.pom('parent','<dependencyManagement><dependencies><dependency><groupId>x</groupId><artifactId>optional</artifactId><version>1</version><optional>true</optional></dependency></dependencies></dependencyManagement>')
         self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId><version>1</version></parent><dependencies><dependency><groupId>x</groupId><artifactId>optional</artifactId></dependency></dependencies>')
-        r=self.resolve();self.assertEqual(r['required_coordinates'],['x:root:1']);self.assertTrue(any(d['disposition']=='excluded-optional' for d in r['excluded_dependencies']))
+        self.pom('optional')
+        self.assertEqual(self.resolve()['required_coordinates'],['x:optional:1','x:root:1'])
     def test_two_required_versions_are_not_silently_mediated(self):
         self.pom('root','<dependencies><dependency><groupId>x</groupId><artifactId>leaf</artifactId><version>1</version></dependency><dependency><groupId>x</groupId><artifactId>other</artifactId><version>1</version></dependency></dependencies>')
         self.pom('leaf');self.pom('leaf',version='2')

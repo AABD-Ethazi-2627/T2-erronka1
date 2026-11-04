@@ -72,7 +72,7 @@ def run(source, component, output):
     probe = record(HERE / 'ConsumerProbe.java')
     for name in ('probe_consumers.py', 'map_candidates.py'):
         record(HERE / name)
-    env = {k: v for k, v in os.environ.items() if k not in {'CLASSPATH', 'JAVA_TOOL_OPTIONS', '_JAVA_OPTIONS', 'JDK_JAVA_OPTIONS', 'JDK_JAVAC_OPTIONS', 'LD_PRELOAD', 'LD_LIBRARY_PATH'}}
+    env = {key: os.environ[key] for key in ('PATH', 'LANG', 'LC_ALL', 'TMPDIR') if key in os.environ}
     commands = []
     def limits():
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))

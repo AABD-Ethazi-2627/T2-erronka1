@@ -9,7 +9,11 @@
       "https://github.com/FasterXML/jackson-core/pull/1611",
       "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-r7wm-3cxj-wff9"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.18.8, 2.21.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-89407": {
     "title": "com.fasterxml.jackson/jackson-core: tools.jackson.core/jackson-core: Jackson-core: Denial of Service via regular expression backtracking",
@@ -22,7 +26,11 @@
       "https://github.com/FasterXML/jackson-core/pull/1701",
       "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-p6pp-m3f8-5c89"
     ],
-    "fixed": "3.1.7, 3.2.2"
+    "upstream_fixed_excerpt": "3.1.7, 3.2.2",
+    "scanner_fixed_versions": [
+      "2.18.11, 2.21.7, 2.22.3",
+      "3.1.7, 3.2.2"
+    ]
   },
   "CVE-2026-89425": {
     "title": "com.fasterxml.jackson.core/jackson-core: Jackson-core: Denial of Service via unbounded StringBuilder growth during malformed token processing",
@@ -34,7 +42,11 @@
       "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-3.2.3",
       "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-7hhh-6rmp-j9qf"
     ],
-    "fixed": "3.1.7, 3.2.3"
+    "upstream_fixed_excerpt": "3.1.7, 3.2.3",
+    "scanner_fixed_versions": [
+      "2.21.7, 2.22.3, 2.18.11",
+      "3.1.7, 3.2.3"
+    ]
   },
   "CVE-2026-54512": {
     "title": "jackson-databind: jackson-databind: Arbitrary code execution via PolymorphicTypeValidator bypass",
@@ -45,7 +57,11 @@
       "https://github.com/FasterXML/jackson-databind/issues/5988",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.18.8, 3.1.4, 2.21.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-54513": {
     "title": "jackson-databind: Jackson-databind: Security bypass allows arbitrary code execution",
@@ -58,7 +74,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/5984",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rmj7-2vxq-3g9f"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.18.8, 2.21.4, 3.1.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-68497": {
     "title": "com.fasterxml.jackson.core/jackson-databind: tools.jackson.core/jackson-databind: jackson-databind: CPU Denial of Service via unbounded numeric parsing",
@@ -73,7 +93,11 @@
       "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-q4xh-88c3-wmh7"
     ],
-    "fixed": "3.2.2, 3.1.6"
+    "upstream_fixed_excerpt": "3.2.2, 3.1.6",
+    "scanner_fixed_versions": [
+      "2.18.10, 2.21.6, 2.22.2",
+      "3.2.2, 3.1.6"
+    ]
   },
   "CVE-2026-91776": {
     "title": "jackson-databind: com.fasterxml.jackson/jackson-core: jackson-databind: Denial of Service via unbounded cache growth in TypeDeserializerBase",
@@ -89,7 +113,11 @@
       "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wv8q-qhhj-9h54"
     ],
-    "fixed": "3.1.7, 3.2.3"
+    "upstream_fixed_excerpt": "3.1.7, 3.2.3",
+    "scanner_fixed_versions": [
+      "2.18.11, 2.21.7, 2.22.3",
+      "3.1.7, 3.2.3"
+    ]
   },
   "CVE-2026-91777": {
     "title": "com.fasterxml.jackson.core/jackson-databind: tools.jackson.core:jackson-databind: Jackson-databind: Denial of Service via quadratic forward-reference completion",
@@ -105,7 +133,11 @@
       "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-cxp5-3px4-pw24"
     ],
-    "fixed": "3.1.7, 3.2.3"
+    "upstream_fixed_excerpt": "3.1.7, 3.2.3",
+    "scanner_fixed_versions": [
+      "2.21.7, 2.18.11, 2.22.3",
+      "3.1.7, 3.2.3"
+    ]
   },
   "CVE-2026-19032": {
     "title": "com.fasterxml.jackson.core/jackson-databind: tools.jackson.core/jackson-databind: Jackson-databind: Uncontrolled URI scheme resolution in Path deserialization",
@@ -122,7 +154,11 @@
       "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wjgm-6hv5-3cvf"
     ],
-    "fixed": "3.1.6, 3.2.2"
+    "upstream_fixed_excerpt": "3.1.6, 3.2.2",
+    "scanner_fixed_versions": [
+      "2.18.10, 2.21.6, 2.22.2",
+      "3.1.6, 3.2.2"
+    ]
   },
   "CVE-2026-54514": {
     "title": "jackson-databind: jackson-databind: Information Disclosure via Eager DNS Resolution",
@@ -132,7 +168,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/5951",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-hgj6-7826-r7m5"
     ],
-    "fixed": "2.21.4, 3.1.4"
+    "upstream_fixed_excerpt": "2.21.4, 3.1.4",
+    "scanner_fixed_versions": [
+      "2.18.8, 2.21.4, 3.1.4",
+      "2.21.4, 3.1.4"
+    ]
   },
   "CVE-2026-54515": {
     "title": "jackson-databind: jackson-databind: Ignored properties can be unexpectedly modified",
@@ -143,7 +183,11 @@
       "https://github.com/FasterXML/jackson-databind/issues/5964",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5jmj-h7xm-6q6v"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "3.1.4",
+      "3.1.4, 2.18.9, 2.21.5, 2.22.1"
+    ]
   },
   "CVE-2026-54516": {
     "title": "jackson-databind: jackson-databind: Security bypass due to improper handling of renamed properties",
@@ -155,7 +199,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/5968",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-9fxm-vc8v-hj55"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.21.4, 3.1.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-54517": {
     "title": "jackson-databind: jackson-databind: Information disclosure via improper JsonView filter application",
@@ -167,7 +215,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/5970",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5hh8-q8hv-fr38"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.21.4, 3.1.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-54518": {
     "title": "jackson-databind: jackson-databind: Information disclosure and data manipulation via view-based access control bypass",
@@ -179,7 +231,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/5973",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rcqc-6cw3-h962"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.21.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-59888": {
     "title": "com.fasterxml.jackson.core/jackson-databind: tools.jackson.core/jackson-databind: jackson-databind: @JsonIgnore bypass in Java Records",
@@ -190,7 +246,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/5974",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-3pjw-73gf-8qr5"
     ],
-    "fixed": "3.1.4"
+    "upstream_fixed_excerpt": "3.1.4",
+    "scanner_fixed_versions": [
+      "2.18.8, 2.21.4",
+      "3.1.4"
+    ]
   },
   "CVE-2026-59889": {
     "title": "com.fasterxml.jackson.core/jackson-databind: Jackson-databind: Privilege escalation via improper handling of @JsonUnwrapped properties",
@@ -201,7 +261,11 @@
       "https://github.com/FasterXML/jackson-databind/pull/6056",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5gvw-p9qm-jgwh"
     ],
-    "fixed": "3.1.5, 3.2.1"
+    "upstream_fixed_excerpt": "3.1.5, 3.2.1",
+    "scanner_fixed_versions": [
+      "2.21.5, 2.18.9, 2.22.1",
+      "3.1.5, 3.2.1"
+    ]
   },
   "CVE-2026-77310": {
     "title": "com.fasterxml.jackson.core/jackson-databind: jackson-databind: Server-Side Request Forgery and internal host enumeration via eager DNS resolution",
@@ -216,7 +280,11 @@
       "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.1",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-vvgp-rfg2-7rr6"
     ],
-    "fixed": "3.1.5, 3.2.1"
+    "upstream_fixed_excerpt": "3.1.5, 3.2.1",
+    "scanner_fixed_versions": [
+      "2.18.9, 2.21.5, 2.22.1",
+      "3.1.5, 3.2.1"
+    ]
   },
   "CVE-2026-83557": {
     "title": "com.fasterxml.jackson.core/jackson-databind: tools.jackson.core/jackson-databind: jackson-databind: Path traversal via incomplete type validation",
@@ -232,7 +300,11 @@
       "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-gx83-3vf8-gh7j"
     ],
-    "fixed": "3.1.6, 3.2.2"
+    "upstream_fixed_excerpt": "3.1.6, 3.2.2",
+    "scanner_fixed_versions": [
+      "2.18.10, 2.21.6, 2.22.2",
+      "3.1.6, 3.2.2"
+    ]
   },
   "GHSA-mhm7-754m-9p8w": {
     "title": "jackson-databind: `@JsonView` bypass for creator properties with `@JsonTypeInfo(include=As.EXTERNAL_PROPERTY)`",
@@ -242,6 +314,9 @@
       "https://github.com/FasterXML/jackson-databind/commit/dea7eb466e98cc226c4ac65587581fb49926820c",
       "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-mhm7-754m-9p8w"
     ],
-    "fixed": "2.18.9, 2.21.5"
+    "upstream_fixed_excerpt": "2.18.9, 2.21.5",
+    "scanner_fixed_versions": [
+      "2.18.9, 2.21.5"
+    ]
   }
 }
