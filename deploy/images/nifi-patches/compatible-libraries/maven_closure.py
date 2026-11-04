@@ -6,19 +6,38 @@ mediation. Test/provided/optional paths are recorded, not treated as runtime jar
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from verify import require, NS
+
+from verify import NS, require, sha
+
+
+def model_namespace(root):
+    require(root.tag == '{'+NS['m']+'}project', 'unsupported Maven POM namespace')
+    def visit(node):
+        require(isinstance(node.tag, str) and node.tag.startswith('{'+NS['m']+'}'),
+                'unsupported Maven model namespace')
+        # Build/plugin configuration is never executed or used for runtime
+        # resolution. Its embedded XML need not use the Maven model namespace.
+        if node.tag.rsplit('}', 1)[-1] in ('build', 'reporting', 'reports'):
+            return
+        for child in node:
+            visit(child)
+    visit(root)
 
 class Closure:
     def __init__(self, cache, pins):
         self.cache=Path(cache)
         self.pins={p['file']:p for p in pins}
+        require(len(self.pins)==len(pins), 'duplicate pin name')
         self.models={}; self.decisions=[]; self.profiles=[]
     def model(self, coordinate, stack=()):
         if coordinate in self.models:return self.models[coordinate]
         require(coordinate not in stack, 'POM inheritance/BOM cycle')
         g,a,v=coordinate.split(':');name=f'{a}-{v}.pom'
-        require(name in self.pins and self.pins[name]['coordinate']==coordinate, 'unpinned POM '+coordinate)
-        root=ET.parse(self.cache/name).getroot()
+        require(name in self.pins and self.pins[name].get('coordinate')==coordinate, 'unpinned POM '+coordinate)
+        data=(self.cache/name).read_bytes()
+        require(sha(data)==self.pins[name].get('sha256'), 'POM integrity '+coordinate)
+        root=ET.fromstring(data)
+        model_namespace(root)
         def text(n,k,default=None):return n.findtext('m:'+k,default,NS)
         parent=root.find('m:parent',NS)
         pm={'props':{},'management':{},'deps':[]}
@@ -36,6 +55,9 @@ class Closure:
                 if new==s:break
                 s=new
             raise ValueError('unresolved POM property '+s+' in '+coordinate)
+        for field, expected in (('groupId',g), ('artifactId',a), ('version',v)):
+            inherited = text(parent,field) if parent is not None and field != 'artifactId' else None
+            require(expand(text(root,field,inherited)) == expected, 'POM coordinate mismatch '+coordinate)
         management=dict(pm['management'])
         def raw(n):
             allowed={'groupId','artifactId','version','scope','optional','type','classifier','exclusions'}

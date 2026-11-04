@@ -102,6 +102,29 @@ class PatcherTests(unittest.TestCase):
         for kw in ({'max_depth': 0}, {'max_entries': 1}, {'max_bytes': 10}, {'max_archive': 10}):
             with self.assertRaises(ValueError): self.inventory(**kw)
 
+    def test_legacy_unset_mode_only_accepts_empty_stored_directory(self):
+        info = zipfile.ZipInfo('META-INF/maven/')
+        info.create_system = 3
+        info.external_attr = 0xffff0010
+        payload = io.BytesIO()
+        with zipfile.ZipFile(payload, 'w') as z:
+            z.writestr(info, b'')
+            z.writestr('keep', b'opaque')
+        (self.src / 'legacy.jar').write_bytes(payload.getvalue())
+        self.assertTrue(self.inventory())
+        for mutation in ('nonempty', 'not-directory', 'compressed', 'different-mode'):
+            with self.subTest(mutation=mutation):
+                changed = copy.copy(info)
+                content = b''
+                if mutation == 'nonempty': content = b'not a directory'
+                if mutation == 'not-directory': changed.filename = 'META-INF/maven'
+                if mutation == 'compressed': changed.compress_type = zipfile.ZIP_DEFLATED
+                if mutation == 'different-mode': changed.external_attr = 0xfffe0010
+                with zipfile.ZipFile(self.src / 'legacy.jar', 'w') as z:
+                    z.writestr(changed, content)
+                with self.assertRaisesRegex(ValueError, 'special file/symlink'):
+                    self.inventory()
+
     def test_signed_enclosing_and_symlink_and_overlap(self):
         (self.src / 'signed.nar').write_bytes(jar([('META-INF/SIG-X', b'sig'), ('x.jar', self.old)]))
         plan = self.plan()
@@ -117,8 +140,8 @@ class PatcherTests(unittest.TestCase):
     def test_rollback_on_write_failure(self):
         from unittest.mock import patch
         plan = self.plan()
-        with patch.object(self.p, 'rewrite', side_effect=OSError('disk full')):
-            with self.assertRaises(OSError): self.p.patch(self.src, self.root / 'out', plan, apply=True)
+        with patch.object(self.p, 'rewrite', side_effect=OSError('disk full')), self.assertRaises(OSError):
+            self.p.patch(self.src, self.root / 'out', plan, apply=True)
         self.assertEqual(sorted(p.name for p in self.root.iterdir()), ['replacement.jar', 'src'])
 
     def test_loose_jar_maven_and_nar_identity(self):
@@ -182,12 +205,12 @@ class PatcherTests(unittest.TestCase):
         planfile.write_text(json.dumps(self.plan()))
         out = self.root / 'out'
         args = ['python', str(SCRIPT), str(self.src), '--plan', str(planfile), '--output', str(out)]
-        r = subprocess.run(args, capture_output=True, text=True)
+        r = subprocess.run(args, capture_output=True, check=False, text=True)
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(json.loads(r.stdout)['mode'], 'dry-run')
         self.assertFalse(out.exists())
         planfile.write_text('{"schema":1,"schema":1}')
-        r = subprocess.run(args, capture_output=True, text=True)
+        r = subprocess.run(args, capture_output=True, check=False, text=True)
         self.assertNotEqual(r.returncode, 0)
         self.assertIn('duplicate JSON key', r.stderr)
 
@@ -211,7 +234,7 @@ class PatcherTests(unittest.TestCase):
         with zipfile.ZipFile(b, 'w') as z:
             i = zipfile.ZipInfo('META-INF/maven/')
             i.create_system = 3
-            i.external_attr = 0xffff0010
+            i.external_attr = 0xfffe0010
             z.writestr(i, b'')
         (self.src / 'bad.jar').write_bytes(b.getvalue())
         with self.assertRaisesRegex(ValueError, 'special file'):

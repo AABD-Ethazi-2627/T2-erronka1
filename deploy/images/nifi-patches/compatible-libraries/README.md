@@ -1,5 +1,11 @@
 # Compatible-library candidate — component evidence only
 
+Parent review follow-up: [corrected guards, complete occurrence inventory and
+independent executions](../../../../docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md).
+The original scope and measurements below are historical. The current original
+verifier always blocks RabbitMQ; only the separate transport supplement executes
+its transport configurations. Current output plans leave shaded replacements null.
+
 Scoped source candidate on parent `f80c37f72e35d2a5568b5a0801e4304a23a1ce41`.
 No image/archive was patched. No NiFi/container build, service, scanner exception,
 metadata rewriting, root dependency change, push or PR operation is part of this
@@ -114,9 +120,10 @@ For fresh downloads omit `--offline`; only pinned official inputs are fetched,
 and wrong/missing bytes, symlinks, changed reports, unreviewed inherited/profile
 dependencies, compiler errors or probe failures abort verification. Each run
 creates its own `proof-<timestamp>/` containing logs and, only after probes pass,
-results and a conditional plan; failed runs have no new success plan. Four
+results and a conditional plan; failed runs have no new success plan. Six
 negative tests exercise missing input, modified bytes under Python `-O`, symlink
-input and report drift. Exit zero means component probes passed; consult plan
+input, report drift, empty grouping and source-local output. Portable model
+guards also run in the root test suite. Exit zero means component probes passed; consult plan
 statuses for unresolved blockers. The POM closure checker is deliberately narrow,
 not a general Maven resolver; it handles the inspected pinned POM shapes only.
 

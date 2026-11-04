@@ -1,5 +1,10 @@
 # Offline occurrence inventory and exact copy patching
 
+Parent follow-up: the [complete inventory and narrow ZIP metadata
+correction](../../../docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md)
+supersede the partial diagnostic below. All 156 copied lib files now traverse
+successfully (2,040 occurrences); no archive has been patched.
+
 `scripts/patch_nested_jars.py` uses only the Python standard library. It does not
 resolve dependencies, approve candidates, modify the distribution, relabel
 versions, strip signatures, build images or contact services. `candidate-plan.json`
@@ -83,7 +88,10 @@ compressed containers are **not byte-identical**. No extraction uses member path
 Duplicate/ambiguous names, absolute/traversal/backslash/drive paths, ZIP symlinks or
 special files, source/replacement symlinks, encrypted or unsupported compression,
 CRC/truncation failures and malformed archives are refused. Only STORED and
-DEFLATED compression are supported. Unknown external file types are refused.
+DEFLATED compression are supported. Unknown external file types are refused,
+except the exact legacy Unix `0xffff0010` representation of an empty STORED
+directory with a trailing slash, zero sizes and CRC. It is preserved as metadata;
+paths are never extracted. Four negative variants remain rejected.
 
 After staged output validation and leaf hash verification, Linux `renameat2` with
 `RENAME_NOREPLACE` atomically publishes the entire tree. A concurrent existing

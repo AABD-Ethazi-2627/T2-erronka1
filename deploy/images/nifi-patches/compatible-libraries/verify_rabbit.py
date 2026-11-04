@@ -3,14 +3,14 @@
 import argparse
 import hashlib
 import json
-import os
-from pathlib import Path
 import resource
 import time
 import urllib.request
 import zipfile
+from pathlib import Path
+
 from maven_closure import Closure
-from verify import HERE, require, sha, save, run, compare, class_api
+from verify import HERE, compare, require, run, save, sha
 
 JVM=['-Xmx256m','-XX:ActiveProcessorCount=1','-XX:MaxMetaspaceSize=96m','-XX:ReservedCodeCacheSize=48m','-XX:MaxDirectMemorySize=32m','-Xss512k']
 EXPECTED_INPUT='c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6'
@@ -35,7 +35,7 @@ def manifest(data):
 def inventory(cache,proof,pins):
     """Official NAR reference only. Inspect bundled jars and one declared NAR parent."""
     bundled=proof/'official-nar-jars';bundled.mkdir()
-    rows=[];native=[];parent=None;netty=[]
+    rows=[];parent=None;netty=[]
     for nar in ['nifi-amqp-nar-2.12.0.nar','nifi-standard-services-api-nar-2.12.0.nar']:
         with zipfile.ZipFile(cache/nar) as z:
             mf=manifest(z.read('META-INF/MANIFEST.MF'))
@@ -74,7 +74,7 @@ def main():
     closure=Closure(c,pins).resolve('com.rabbitmq:amqp-client:5.37.0')
     require(closure['required_coordinates']==json.loads((HERE/'rabbit-closure-lock.json').read_text()),'required closure changed')
     save(proof/'effective-required-closure.json',closure)
-    bundled,oldnetty,rows=inventory(c,proof,pins)
+    bundled,oldnetty,_rows=inventory(c,proof,pins)
     # Log real consumer bytecode; sources are corroborating reference, not runtime evidence.
     run([a.jdk/'bin/javap',*['-J'+x for x in JVM],'-c','-p','-classpath',bundled/'nifi-amqp-processors-2.12.0.jar','org.apache.nifi.amqp.processors.AbstractAMQPProcessor'],proof,'nifi-consumer-bytecode')
     bytecode=(proof/'nifi-consumer-bytecode.log').read_text()

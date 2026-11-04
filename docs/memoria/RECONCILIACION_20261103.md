@@ -377,3 +377,26 @@ la revisión independiente y los escaneos y pruebas NiFi finales. El job nuevo
 confirma las mismas 59 tuplas anidadas, sin añadidas ni retiradas. El scan normal
 sin hallazgos no cierra esa deuda. No cambian el gate, sus excepciones, la base
 histórica, la aprobación humana ni el alcance del modelo.
+
+
+## Inventario completo NiFi y correcciones de revisión
+
+Se integran el escritor por ocurrencia y el suplemento de transporte RabbitMQ.
+El padre corrige los dos defectos medios del verificador: la mera presencia de
+JARs no habilita RabbitMQ y los POM sin namespace o con ancestros no fijados
+fallan. Se fijan los POM adicionales y los hashes del agrupado del scan. Las
+salidas nuevas conservan los reemplazos shaded como nulos y los bloqueos.
+
+Tras admitir solo la representación exacta de directorios ZIP vacíos observada
+en la imagen, el inventario completo devuelve 2040 ocurrencias en 156 archivos
+lib. Los 17 grupos del scan tienen correspondencia por hash. Se comprueba que
+los originales siguen idénticos; ningún archivo NAR se modifica. El padre repite
+las sondas de biblioteca y las siete configuraciones RabbitMQ, y pasan 46 tests
+y 18 subtests focalizados. La evidencia enlazada fija los bytes antes de ejecutar
+y distingue las pruebas del hijo. El NAR AMQP de la imagen coincide con el oficial.
+
+Faltan revisión independiente de estas correcciones y del escritor, validación
+de consumidores y classloaders por ocurrencia, imagen final, scans y aceptación
+NiFi. Siguen 59 tuplas anidadas en el job f80c37f. No cambian las excepciones,
+la base histórica, los hashes históricos, la revisión humana ni el alcance del
+modelo. Las puertas de Kibana, CI, aprobación GitHub, SMB y CG32 siguen abiertas.

@@ -41,7 +41,7 @@ public class LibraryProbe {
     }
   }
   static void rabbit(boolean fixed, String mode) throws Exception {
-    if(mode.equals("comment")){try {new JSONReader().read("// eof");}catch(IllegalStateException expected){}System.out.println("comment terminated");return;}
+    if(mode.equals("comment")){System.out.println("ENTERING_EOF_COMMENT_PARSER");System.out.flush();try {new JSONReader().read("// eof");}catch(IllegalStateException expected){}System.out.println("comment terminated");return;}
     check(((Map)new JSONReader().read("{\"ok\":1}")).containsKey("ok"),"JSON roundtrip");
     var out=new ByteArrayOutputStream();new ValueWriter(new DataOutputStream(out)).writeShortstr("Kaixo 世界");
     check(new ValueReader(new DataInputStream(new ByteArrayInputStream(out.toByteArray()))).readShortstr().equals("Kaixo 世界"),"UTF8 roundtrip");

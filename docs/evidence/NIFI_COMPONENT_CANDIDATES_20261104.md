@@ -1,5 +1,10 @@
 # NiFi compatible-library candidates: independent parent verification
 
+This records the original `107edda` execution. The [review corrections and
+complete inventory](NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md) supersede its
+pending-inventory status and verifier output. Historical commands reproduce the
+old result only with the historical source; current source adds stricter guards.
+
 The parent integrated child commit `98eb0dc4593c12e7c9837804f78efb4da6c1d967`
 as `107edda`, preserving the eight candidate files byte for byte. The child's
 [README](../../deploy/images/nifi-patches/compatible-libraries/README.md) describes

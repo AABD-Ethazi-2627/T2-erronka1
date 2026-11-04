@@ -23,8 +23,8 @@ BLOCKED_INPUTS = {
     '396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1',
     'c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6',
 }
-DEFAULTS = dict(max_depth=8, max_entries=1000000, max_bytes=32 * 1024**3,
-                max_archive=256 * 1024**2)
+DEFAULTS = {'max_depth': 8, 'max_entries': 1000000, 'max_bytes': 32 * 1024**3,
+                'max_archive': 256 * 1024**2}
 
 
 def canonical(name):
@@ -109,7 +109,16 @@ def checked_entries(z, budget):
             raise ValueError(f'duplicate/ambiguous ZIP path: {i.filename}')
         seen.add(key)
         mode = i.external_attr >> 16
-        if stat.S_IFMT(mode) not in (0, stat.S_IFREG, stat.S_IFDIR):
+        # Several pinned legacy Maven JARs use -1 as an unset Unix mode on
+        # empty STORED directory records. No filesystem extraction occurs.
+        # Recognize only that exact inert representation; links, special files,
+        # nonempty records and other unknown modes remain rejected.
+        legacy_empty_directory = (
+            i.create_system == 3 and i.external_attr == 0xffff0010
+            and i.is_dir() and i.file_size == i.compress_size == i.CRC == 0
+            and i.compress_type == zipfile.ZIP_STORED
+        )
+        if not legacy_empty_directory and stat.S_IFMT(mode) not in (0, stat.S_IFREG, stat.S_IFDIR):
             raise ValueError(f'ZIP special file/symlink: {i.filename}')
         if i.flag_bits & 1 or i.compress_type not in (zipfile.ZIP_STORED, zipfile.ZIP_DEFLATED):
             raise ValueError(f'encrypted/unsupported ZIP entry: {i.filename}')
@@ -161,9 +170,9 @@ def inventory(source, **limits):
             raise ValueError(f'archive size budget exceeded: {outer}!{members}')
         hash_ = digest(path)
         chain = chain + [hash_]
-        row = dict(outer=outer, members=members, chain_sha256=chain,
-                   outer_sha256=chain[0], sha256=hash_, manifest={}, maven=[],
-                   class_packages=[], signed=False)
+        row = {'outer': outer, 'members': members, 'chain_sha256': chain,
+                   'outer_sha256': chain[0], 'sha256': hash_, 'manifest': {}, 'maven': [],
+                   'class_packages': [], 'signed': False}
         rows.append(row)
         with zipfile.ZipFile(path) as z:
             try:
@@ -196,8 +205,8 @@ def inventory(source, **limits):
                             if re.search(rb'(?im)^[-\w]+-Digest(?:-Manifest)?:', data):
                                 row['signed'] = True
                         else:
-                            row['maven'].append(dict(path=name, sha256=hashlib.sha256(data).hexdigest(),
-                                                     properties=data.decode('utf-8', errors='replace')))
+                            row['maven'].append({'path': name, 'sha256': hashlib.sha256(data).hexdigest(),
+                                                     'properties': data.decode('utf-8', errors='replace')})
                     else:
                         transfer(f, None, budget.limits['max_archive'])
             row['class_packages'] = sorted(packages)
@@ -295,7 +304,7 @@ def patch(source, output, plan, apply=False, **limits):
             if type(t['expected_occurrences']) is not int or t['expected_occurrences'] != count:
                 raise ValueError('occurrence count mismatch')
             if not isinstance(t['replacement'], str) or not isinstance(t['replacement_sha256'], str):
-                raise ValueError('replacement path/hash must be strings')
+                raise ValueError('replacement path/hash must be strings')  # noqa: TRY004 - all invalid external plans fail as ValueError
             replacement = regular(t['replacement'])
             if output == replacement or output in replacement.parents:
                 raise ValueError('overlapping replacement/output')

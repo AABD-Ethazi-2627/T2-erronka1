@@ -1,13 +1,14 @@
 """Focused synthetic-model and real downloader rejection regressions (no network)."""
 import json
 import os
-from pathlib import Path
 import subprocess
 import sys
 import tempfile
 import unittest
+from pathlib import Path
+
 from maven_closure import Closure
-from verify import compare
+from verify import compare, sha
 
 HERE=Path(__file__).resolve().parent
 CACHE=Path(os.environ['RABBIT_CACHE'])
@@ -17,7 +18,7 @@ class ModelTests(unittest.TestCase):
     def tearDown(self):self.tmp.cleanup()
     def pom(self,artifact,body='',version='1'):
         name=f'{artifact}-{version}.pom';(self.cache/name).write_text('<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion><groupId>x</groupId><artifactId>'+artifact+'</artifactId><version>'+version+'</version>'+body+'</project>')
-        self.pins.extend([{'file':name,'coordinate':f'x:{artifact}:{version}'},{'file':f'{artifact}-{version}.jar','coordinate':f'x:{artifact}:{version}'}])
+        self.pins.extend([{'file':name,'coordinate':f'x:{artifact}:{version}','sha256':sha((self.cache/name).read_bytes())},{'file':f'{artifact}-{version}.jar','coordinate':f'x:{artifact}:{version}'}])
     def resolve(self):return Closure(self.cache,self.pins).resolve('x:root:1')
     def test_inherited_managed_test_scope_is_not_a_runtime_dependency(self):
         self.pom('parent','<dependencyManagement><dependencies><dependency><groupId>x</groupId><artifactId>test-only</artifactId><version>1</version><scope>test</scope></dependency></dependencies></dependencyManagement>')
@@ -63,7 +64,7 @@ class ModelTests(unittest.TestCase):
 class DownloaderTests(unittest.TestCase):
     def invoke(self,cache):
         env=os.environ|{'PYTHONDONTWRITEBYTECODE':'1'}
-        return subprocess.run([sys.executable,'-O',str(HERE/'verify_rabbit.py'),'--cache',str(cache),'--offline'],capture_output=True,text=True,timeout=15,env=env)
+        return subprocess.run([sys.executable,'-O',str(HERE/'verify_rabbit.py'),'--cache',str(cache),'--offline'],capture_output=True,check=False,text=True,timeout=15,env=env)
     def test_missing_input_has_no_success_proof(self):
         with tempfile.TemporaryDirectory(dir=CACHE) as d:
             p=self.invoke(d);self.assertNotEqual(p.returncode,0);self.assertIn('missing offline input',p.stderr);self.assertFalse(list(Path(d).rglob('rabbit-transport-result.json')))

@@ -1,5 +1,10 @@
 # RabbitMQ transport follow-up — conditional component candidate
 
+The parent independently repeats all seven configurations after the strict
+resolver corrections and confirms the copied image AMQP NAR equals this official
+reference. See [parent evidence and remaining gates](../../../../docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md).
+The child proof and its source hashes below remain historical, not relabelled.
+
 This supplement resolves the **component-level** Netty dependency/transport blocker
 recorded in the original `98eb0dc` evidence. It does not replace the original proof
 or edit `candidate-plan.json`. Use the new `rabbit-candidate-plan.json` and reproduce

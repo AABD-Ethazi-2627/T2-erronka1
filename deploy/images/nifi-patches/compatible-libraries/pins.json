@@ -240,22 +240,26 @@
   {
     "file": "guava-parent-33.4.8-jre.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.4.8-jre/guava-parent-33.4.8-jre.pom",
-    "sha256": "a03c5199a1be14443df7fd40ba8673b1c6aae04deef6688ce7d573ea489e3a20"
+    "sha256": "a03c5199a1be14443df7fd40ba8673b1c6aae04deef6688ce7d573ea489e3a20",
+    "coordinate": "com.google.guava:guava-parent:33.4.8-jre"
   },
   {
     "file": "guava-parent-33.6.0-jre.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.6.0-jre/guava-parent-33.6.0-jre.pom",
-    "sha256": "374bd31f61b1cf612bee9ab2e4d70bbdf77dd85a49b431f809d4fbdc901f2dd4"
+    "sha256": "374bd31f61b1cf612bee9ab2e4d70bbdf77dd85a49b431f809d4fbdc901f2dd4",
+    "coordinate": "com.google.guava:guava-parent:33.6.0-jre"
   },
   {
     "file": "guava-parent-33.7.1-jre.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.7.1-jre/guava-parent-33.7.1-jre.pom",
-    "sha256": "4015e615a5674755c88d8112d8bbd763e8afde561be76c6790699edb5d5608f5"
+    "sha256": "4015e615a5674755c88d8112d8bbd763e8afde561be76c6790699edb5d5608f5",
+    "coordinate": "com.google.guava:guava-parent:33.7.1-jre"
   },
   {
     "file": "guava-parent-33.7.2-jre.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.7.2-jre/guava-parent-33.7.2-jre.pom",
-    "sha256": "a81570d53c8710355e0216a4405afa93834b17c4cdd0ed9aa8beede3a132bbbe"
+    "sha256": "a81570d53c8710355e0216a4405afa93834b17c4cdd0ed9aa8beede3a132bbbe",
+    "coordinate": "com.google.guava:guava-parent:33.7.2-jre"
   },
   {
     "file": "failureaccess-1.0.3.jar",
@@ -332,26 +336,227 @@
   {
     "file": "slf4j-parent-1.7.36.pom",
     "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
-    "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"
+    "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812",
+    "coordinate": "org.slf4j:slf4j-parent:1.7.36"
   },
   {
     "file": "error_prone_parent-2.50.0.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.50.0/error_prone_parent-2.50.0.pom",
-    "sha256": "abf45a019db125b50ff55134ec2af94ae3519761038adf0a60b9bd7b4b8b6254"
+    "sha256": "abf45a019db125b50ff55134ec2af94ae3519761038adf0a60b9bd7b4b8b6254",
+    "coordinate": "com.google.errorprone:error_prone_parent:2.50.0"
   },
   {
     "file": "guava-parent-26.0-android.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
-    "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04"
+    "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04",
+    "coordinate": "com.google.guava:guava-parent:26.0-android"
   },
   {
     "file": "oss-parent-9.pom",
     "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
-    "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a"
+    "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a",
+    "coordinate": "org.sonatype.oss:oss-parent:9"
   },
   {
     "file": "guava-parent-33.4.0-android.pom",
     "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.4.0-android/guava-parent-33.4.0-android.pom",
-    "sha256": "7220ede61026596fbc720ee4b93246fa2d14f328058532b59ef053de397c7d83"
+    "sha256": "7220ede61026596fbc720ee4b93246fa2d14f328058532b59ef053de397c7d83",
+    "coordinate": "com.google.guava:guava-parent:33.4.0-android"
+  },
+  {
+    "file": "netty-parent-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.2.18.Final/netty-parent-4.2.18.Final.pom",
+    "sha256": "eaba8a01e7da7b913eacb9158f9529ac1c828f92ceebc5bc125dda913d936855",
+    "coordinate": "io.netty:netty-parent:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-transport-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.2.18.Final/netty-transport-4.2.18.Final.pom",
+    "sha256": "2849f57c33af4d775602bb161fad27bf02fb5cba92e37a7aedb5ebde54480470",
+    "coordinate": "io.netty:netty-transport:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.2.18.Final/netty-codec-4.2.18.Final.pom",
+    "sha256": "17c4a7699fc2a13b70a5c29b21861c7ac03bd82689a82863383cc7e8c0cd0e27",
+    "coordinate": "io.netty:netty-codec:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-handler-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.2.18.Final/netty-handler-4.2.18.Final.pom",
+    "sha256": "f480dd0ad6abce8a4ec64d590bc7f2fa67f0fb4bca18f811a54fa491176f2ddd",
+    "coordinate": "io.netty:netty-handler:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "nifi-amqp-nar-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-amqp-nar/2.12.0/nifi-amqp-nar-2.12.0.pom",
+    "sha256": "01bb158fc8e74eed170d6212e6be73bc1d568f3d0d997e58a0b0cff9b95aae33",
+    "coordinate": "org.apache.nifi:nifi-amqp-nar:2.12.0",
+    "role": "official-consumer-reference"
+  },
+  {
+    "file": "nifi-amqp-processors-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-amqp-processors/2.12.0/nifi-amqp-processors-2.12.0.pom",
+    "sha256": "8ed3a0dd498b67789dacde56d09ab7ab02e7a873dc39568bbfd3776f04c15d16",
+    "coordinate": "org.apache.nifi:nifi-amqp-processors:2.12.0",
+    "role": "official-consumer-reference"
+  },
+  {
+    "file": "netty-buffer-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.2.18.Final/netty-buffer-4.2.18.Final.pom",
+    "sha256": "de9fa8147013f4df75c28bba030fdc62a495a8331314b317efd027a51eab43c9",
+    "coordinate": "io.netty:netty-buffer:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-common-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-common/4.2.18.Final/netty-common-4.2.18.Final.pom",
+    "sha256": "d87194f803e1bdc84bb8d5a982a28b57b99da1d6e71ecc172f52e4cd00e46914",
+    "coordinate": "io.netty:netty-common:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-resolver-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.2.18.Final/netty-resolver-4.2.18.Final.pom",
+    "sha256": "d87958d9f5e2b5e62223f8c7af79870b96b91ebc8fb77b846432989fcb71af78",
+    "coordinate": "io.netty:netty-resolver:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-base-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-base/4.2.18.Final/netty-codec-base-4.2.18.Final.pom",
+    "sha256": "ecf23b1309430129f053e7e0036e3299b6ac2947966b2b52c648f604bfa536da",
+    "coordinate": "io.netty:netty-codec-base:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-compression-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-compression/4.2.18.Final/netty-codec-compression-4.2.18.Final.pom",
+    "sha256": "20970622925f5838e3b32c823ddc495dd5af063c829c1e3041b679fda895e8a3",
+    "coordinate": "io.netty:netty-codec-compression:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-marshalling-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-marshalling/4.2.18.Final/netty-codec-marshalling-4.2.18.Final.pom",
+    "sha256": "1e0fd3d8bcc9c3e39d8b6975c73f19b2821d35ed1e202022652388faca85ade7",
+    "coordinate": "io.netty:netty-codec-marshalling:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-protobuf-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-protobuf/4.2.18.Final/netty-codec-protobuf-4.2.18.Final.pom",
+    "sha256": "c86fd467c09cfe6c48c79479ce009a477e6cb4a96aad2ca6e0eb5a3b0a6dec1c",
+    "coordinate": "io.netty:netty-codec-protobuf:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-transport-native-unix-common-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.2.18.Final/netty-transport-native-unix-common-4.2.18.Final.pom",
+    "sha256": "b2dff035c64795f3af1bfe4fc59ead2738e07bb94b284396c8c17f0ad3fb35de",
+    "coordinate": "io.netty:netty-transport-native-unix-common:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "nifi-standard-services-api-nar-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-services-api-nar/2.12.0/nifi-standard-services-api-nar-2.12.0.pom",
+    "sha256": "1fc08aa30432baf34b87c9ab4892c905b52402223bd463cc328b9776a68c586c",
+    "coordinate": "org.apache.nifi:nifi-standard-services-api-nar:2.12.0",
+    "role": "official-consumer-reference"
+  },
+  {
+    "file": "nifi-standard-services-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-services/2.12.0/nifi-standard-services-2.12.0.pom",
+    "sha256": "7f92ee076a6ed5d5a82d3ecfa4d9ed35264546deed051bff3bd85b5e6a1dddd3",
+    "coordinate": "org.apache.nifi:nifi-standard-services:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-standard-services-api-bom-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-services-api-bom/2.12.0/nifi-standard-services-api-bom-2.12.0.pom",
+    "sha256": "563a7e78828ceb4c6a02a8d6ee0b9542977435640648ed55b6bdddb92ad76286",
+    "coordinate": "org.apache.nifi:nifi-standard-services-api-bom:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-extension-bundles-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-extension-bundles/2.12.0/nifi-extension-bundles-2.12.0.pom",
+    "sha256": "5b1d6459c72546eee0a83ebfee863f8919c3a2885a206c6f512b608f498ad694",
+    "coordinate": "org.apache.nifi:nifi-extension-bundles:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-extension-bom-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-extension-bom/2.12.0/nifi-extension-bom-2.12.0.pom",
+    "sha256": "49b5db6eea3753d547d3e376ee50831dc4117a400313f46ea06396b1004d01b2",
+    "coordinate": "org.apache.nifi:nifi-extension-bom:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-bom-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-bom/2.12.0/nifi-bom-2.12.0.pom",
+    "sha256": "00be345b085731b7d64ed06db47ba6cf5349e08ad1acda03db3acbe7fdb7f8d8",
+    "coordinate": "org.apache.nifi:nifi-bom:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi/2.12.0/nifi-2.12.0.pom",
+    "sha256": "71541a6804e33b675c0a3e23d49b8078b42d6feff04d577dfece8d1bbc7bc743",
+    "coordinate": "org.apache.nifi:nifi:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "apache-39.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom",
+    "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+    "coordinate": "org.apache:apache:39",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-amqp-bundle-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-amqp-bundle/2.12.0/nifi-amqp-bundle-2.12.0.pom",
+    "sha256": "02e424d87f55ad8e2ffd80d12fd24e0a8f476fbce593e94388845f6b72a31b43",
+    "coordinate": "org.apache.nifi:nifi-amqp-bundle:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "bc-jdk18on-bom-1.84.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bc-jdk18on-bom/1.84/bc-jdk18on-bom-1.84.pom",
+    "sha256": "f0eee932bfb246b0dfbebc089261364c603dbadead18fc55fd6342c17c56f34c",
+    "coordinate": "org.bouncycastle:bc-jdk18on-bom:1.84",
+    "role": "imported-pom-bom"
+  },
+  {
+    "file": "junit-bom-5.14.4.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.4/junit-bom-5.14.4.pom",
+    "coordinate": "org.junit:junit-bom:5.14.4",
+    "sha256": "5706e8f29a0a07f56efbbea4a0670793414194bb8d24d8143ba1e787a2f32856",
+    "role": "inherited-or-imported-pom"
+  },
+  {
+    "file": "slf4j-api-2.0.19.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.19/slf4j-api-2.0.19.pom",
+    "sha256": "b04a4843eaa29966807cc9508a9f2513fa563d0d0794cb0edd6a8d2c8f4620d0",
+    "coordinate": "org.slf4j:slf4j-api:2.0.19",
+    "role": "nifi-managed-api-reference"
+  },
+  {
+    "file": "slf4j-parent-2.0.19.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/2.0.19/slf4j-parent-2.0.19.pom",
+    "sha256": "452831ef96fbebe64d855dd5c98ec6086d7478a9e568422c8343c6da00b2750d",
+    "coordinate": "org.slf4j:slf4j-parent:2.0.19",
+    "role": "nifi-managed-api-reference"
+  },
+  {
+    "file": "slf4j-bom-2.0.19.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-bom/2.0.19/slf4j-bom-2.0.19.pom",
+    "sha256": "e14a9ab180f60247f347de369b7a44ccd591d0c47f4d96bc644056c4f83b51a0",
+    "coordinate": "org.slf4j:slf4j-bom:2.0.19",
+    "role": "nifi-managed-api-reference"
   }
 ]
