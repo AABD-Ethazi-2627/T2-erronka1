@@ -1,0 +1,80 @@
+[
+  {
+    "package": "com.google.guava:guava",
+    "installed_version": "33.4.8-jre",
+    "input_sha256": "70d5c152622df6fffbf8836af7833215dc7acdd5d9c881af11b8c0fbf30cdc0a",
+    "scan_object_path": "usr/share/cnc-guard/nested-jars/70d5c152622df6fffbf8836af7833215dc7acdd5d9c881af11b8c0fbf30cdc0a.jar",
+    "original_nar_paths": null,
+    "input_matches_tested_upstream": false,
+    "replacement_file": "guava-33.7.2-jre.jar",
+    "replacement_sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "replacement_url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar",
+    "patched": false,
+    "status": "blocked-repacked-or-shaded-input"
+  },
+  {
+    "package": "com.google.guava:guava",
+    "installed_version": "33.6.0-jre",
+    "input_sha256": "396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1",
+    "scan_object_path": "usr/share/cnc-guard/nested-jars/396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1.jar",
+    "original_nar_paths": null,
+    "input_matches_tested_upstream": false,
+    "replacement_file": "guava-33.7.2-jre.jar",
+    "replacement_sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "replacement_url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar",
+    "patched": false,
+    "status": "blocked-repacked-or-shaded-input"
+  },
+  {
+    "package": "com.google.guava:guava",
+    "installed_version": "33.7.1-jre",
+    "input_sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46",
+    "scan_object_path": "usr/share/cnc-guard/nested-jars/796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46.jar",
+    "original_nar_paths": null,
+    "input_matches_tested_upstream": true,
+    "replacement_file": "guava-33.7.2-jre.jar",
+    "replacement_sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "replacement_url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar",
+    "patched": false,
+    "status": "component-tested-candidate"
+  },
+  {
+    "package": "com.rabbitmq:amqp-client",
+    "installed_version": "5.35.0",
+    "input_sha256": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6",
+    "scan_object_path": "usr/share/cnc-guard/nested-jars/c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6.jar",
+    "original_nar_paths": null,
+    "input_matches_tested_upstream": true,
+    "replacement_file": "amqp-client-5.37.0.jar",
+    "replacement_sha256": "b27134820890c5e56ed57d27cc50b70742fa2c31b36a6e9e28e14a43f34ff96f",
+    "replacement_url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.37.0/amqp-client-5.37.0.jar",
+    "patched": false,
+    "status": "blocked-compatibility"
+  },
+  {
+    "package": "at.yawk.lz4:lz4-java",
+    "installed_version": "1.11.2",
+    "input_sha256": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2",
+    "scan_object_path": "usr/share/cnc-guard/nested-jars/8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2.jar",
+    "original_nar_paths": null,
+    "input_matches_tested_upstream": true,
+    "replacement_file": "lz4-java-1.11.4.jar",
+    "replacement_sha256": "58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325",
+    "replacement_url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.4/lz4-java-1.11.4.jar",
+    "patched": false,
+    "status": "component-tested-candidate"
+  },
+  {
+    "package": "org.xerial.snappy:snappy-java",
+    "installed_version": "1.1.10.8",
+    "input_sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc",
+    "scan_object_path": "usr/share/cnc-guard/nested-jars/50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc.jar",
+    "original_nar_paths": null,
+    "input_matches_tested_upstream": true,
+    "replacement_file": "snappy-java-1.1.10.9.jar",
+    "replacement_sha256": "35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d",
+    "replacement_url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.9/snappy-java-1.1.10.9.jar",
+    "patched": false,
+    "status": "component-tested-candidate"
+  }
+]

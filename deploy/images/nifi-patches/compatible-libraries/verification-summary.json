@@ -1,0 +1,120 @@
+{
+  "guava": {
+    "required_direct_dependencies": [
+      "com.google.guava:failureaccess:1.0.3",
+      "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava",
+      "org.jspecify:jspecify:1.0.1",
+      "com.google.errorprone:error_prone_annotations:2.50.0",
+      "com.google.j2objc:j2objc-annotations:3.1"
+    ],
+    "unpinned_required_dependencies": [],
+    "33.4.8-jre": "passed",
+    "33.6.0-jre": "passed",
+    "33.7.1-jre": "passed",
+    "33.7.2-jre": "passed",
+    "abi": {
+      "33.4.8-jre": {
+        "public_classes": 441,
+        "native_resources": 0,
+        "missing_native_paths": [],
+        "candidate_max_base_class_major": 53,
+        "surface_change_count": 200
+      },
+      "33.6.0-jre": {
+        "public_classes": 443,
+        "native_resources": 0,
+        "missing_native_paths": [],
+        "candidate_max_base_class_major": 53,
+        "surface_change_count": 176
+      },
+      "33.7.1-jre": {
+        "public_classes": 443,
+        "native_resources": 0,
+        "missing_native_paths": [],
+        "candidate_max_base_class_major": 53,
+        "surface_change_count": 0
+      }
+    }
+  },
+  "rabbit": {
+    "required_direct_dependencies": [
+      "org.slf4j:slf4j-api:1.7.36",
+      "io.netty:netty-transport:4.2.18.Final",
+      "io.netty:netty-codec:4.2.18.Final",
+      "io.netty:netty-handler:4.2.18.Final"
+    ],
+    "unpinned_required_dependencies": [
+      "io.netty:netty-transport:4.2.18.Final",
+      "io.netty:netty-codec:4.2.18.Final",
+      "io.netty:netty-handler:4.2.18.Final"
+    ],
+    "5.35.0": "passed",
+    "5.37.0": "passed",
+    "abi": {
+      "5.35.0": {
+        "public_classes": 461,
+        "native_resources": 0,
+        "missing_native_paths": [],
+        "candidate_max_base_class_major": 52,
+        "surface_change_count": 0
+      }
+    }
+  },
+  "lz4": {
+    "required_direct_dependencies": [],
+    "unpinned_required_dependencies": [],
+    "1.11.2": "passed",
+    "1.11.4": "passed",
+    "abi": {
+      "1.11.2": {
+        "public_classes": 30,
+        "native_resources": 9,
+        "missing_native_paths": [],
+        "candidate_max_base_class_major": 51,
+        "surface_change_count": 0
+      }
+    }
+  },
+  "snappy": {
+    "required_direct_dependencies": [],
+    "unpinned_required_dependencies": [],
+    "1.1.10.8": "passed",
+    "1.1.10.9": "passed",
+    "abi": {
+      "1.1.10.8": {
+        "public_classes": 30,
+        "native_resources": 26,
+        "missing_native_paths": [],
+        "candidate_max_base_class_major": 52,
+        "surface_change_count": 0
+      }
+    }
+  },
+  "evidence": {
+    "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/compatible-libraries-3e7e9435/proof-1793791115278674668",
+    "baseline": "f80c37f72e35d2a5568b5a0801e4304a23a1ce41",
+    "ci_run": 41810126327,
+    "ci_job": 126507014432,
+    "standard_findings": 0,
+    "nested_distinct_tuples": 59,
+    "patched_objects": 0,
+    "tool": "javac 21 + Java 21; no Maven build/plugins executed",
+    "abi_scope": "declared public/protected descriptors, flags, superclass/interfaces; conservative changes include inheritance moves; not full consumer linkage",
+    "resource_usage": {
+      "max_child_rss_kib": 106172,
+      "self_max_rss_kib": 39708
+    },
+    "source_sha256": {
+      "verify.py": "b0815c81225595ad4aea4a227dd62d4f943560a4d8afcb26d9ae4a53358d8503",
+      "LibraryProbe.java": "71642c704477b86189e843edd05228fcd1ad0ac8e7fc45a7d402e1684b9646d8",
+      "pins.json": "22d1819e20f318b8956f9b26c160590b5ab4c634762990973ce886d464c4e621",
+      "toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9"
+    },
+    "negative_integrity_tests": 4,
+    "fresh_download_proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/compatible-libraries-3e7e9435/fresh-download/proof-1793791147494929200",
+    "fresh_download_resource_usage": {
+      "max_child_rss_kib": 105780,
+      "self_max_rss_kib": 45176
+    }
+  }
+}
