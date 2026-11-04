@@ -12,7 +12,7 @@
     "brace-expansion-v2": "npm:brace-expansion@2.1.7",
     "brace-expansion-v5": "npm:brace-expansion@5.0.12",
     "d3-color-patched": "npm:d3-color@3.1.0",
-    "decode-uri-component-patched": "npm:decode-uri-component@0.5.0",
+    "decode-uri-component-patched": "npm:decode-uri-component@0.5.1",
     "deepmerge-patched": "npm:deepmerge@4.3.1",
     "dompurify-patched": "npm:dompurify@3.4.17",
     "extract-zip-patched": "npm:extract-zip@2.0.1",
@@ -41,6 +41,10 @@
     "smol-toml-patched": "npm:smol-toml@1.9.0",
     "undici-v6": "npm:undici@6.29.1",
     "undici-v7": "npm:undici@7.30.1",
-    "zod-patched": "npm:zod@4.6.6"
+    "zod-patched": "npm:zod@4.6.6",
+    "systeminformation-patched": "npm:systeminformation@5.33.16",
+    "re2js-patched": "npm:re2js@2.8.7",
+    "joi-patched": "npm:joi@18.3.1",
+    "hapi-content-patched": "npm:@hapi/content@6.0.3"
   }
 }

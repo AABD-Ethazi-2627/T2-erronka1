@@ -255,9 +255,9 @@
     ".github/workflows/validate.yml": "6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e",
     "deploy/images/elasticsearch.Dockerfile": "7cf7364680690a560ee5004d0ef4e2a7a6c3222159c62556da4568136d4fc73a",
     "deploy/images/filebeat.Dockerfile": "03a244990855bdd17e683e699e7d3a4af3d82a75dad5a11cfed1a8a46635e299",
-    "deploy/images/kibana-patches/package-lock.json": "e90fbb8f5cfc7d4e68829a2941aa9a8d50e2908317f5309c8fe3fa0b16f4b855",
-    "deploy/images/kibana-patches/package.json": "76adab4ad02ee6b4673b9715a74e30caf3af7d7229c3de4015118bd48fe2783b",
-    "deploy/images/kibana.Dockerfile": "331658ec32c0193e9d71cd82739b164f00fa5efb85063a769a6f56bab5d7d3a6",
+    "deploy/images/kibana-patches/package-lock.json": "47ff18bc2d0e2f08a7aebfb643502ab78617251ecd53503733b4655adb30836e",
+    "deploy/images/kibana-patches/package.json": "12f363da03c45698e66aaeec1d8d9846e9ad04bcd572c21c57139a3f754bd020",
+    "deploy/images/kibana.Dockerfile": "8a1c0eebe2509ed97282383163ca5461f24a5e59d8d76d036c5a1cd8a7b70425",
     "scripts/enforce_image_scan.py": "a7f6486085b229f3f7e92d27eab01890edfaf8d3567f82a94692fb1e7570eb41",
     "tests/test_image_scan_gate.py": "65ca31fd654b2a4b1eeb39ed141d8ce5a058c94ca77a3914b79d384bf418d131",
     "deploy/images/elasticsearch-patches/guava-pom.xml": "9d52f490ec18bf8ae3a7af12826e086d13134de01e6b5c7b2d6bc7367efe04f6",
@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "2c31bab0b756d73588be8769d481b9faebbe47594280bb5386861ef92eccab5f",
+    "docs/memoria/RECONCILIACION_20261103.md": "65cb38941adeed5a47d0ee098e7f48275607ab107068234439914792bcfe8f94",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -322,7 +322,10 @@
     "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
     "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712",
     "docs/evidence/LOCAL_CONTAINERS_20261103.md": "d4843d19209e709f0105b36b36c293576f937c4ec38be61bc032f1f5cf772899",
-    "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d"
+    "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d",
+    "deploy/images/kibana-patches/test-same-line-updates.js": "582d6a01382564ebe30bc6322aae57cc8a1a0f40fbe488c92c52840e40e1da4f",
+    "docs/evidence/KIBANA_CI_SAME_LINE_20261104.md": "54ab78de7fc3155186dc3cdb1c76db8d9981b76d3fecfce4d9cbb93bb4fa18b2",
+    "docs/evidence/NIFI_CI_BLOCKERS_20261104.md": "0edb5ec007eca79e8a3517d113a60ce67b1f911a36670c42be6b58dbb66b4410"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -542,5 +545,20 @@
       "scoring/read_api.py"
     ],
     "human_review": "pending"
+  },
+  "pr119_kibana_same_line_followup": {
+    "source_commit": "6a11161fd1d6834167e741aea25ba595a0c0e01d",
+    "previous_current_hashes": {
+      "deploy/images/kibana.Dockerfile": "331658ec32c0193e9d71cd82739b164f00fa5efb85063a769a6f56bab5d7d3a6",
+      "deploy/images/kibana-patches/package.json": "76adab4ad02ee6b4673b9715a74e30caf3af7d7229c3de4015118bd48fe2783b",
+      "deploy/images/kibana-patches/package-lock.json": "e90fbb8f5cfc7d4e68829a2941aa9a8d50e2908317f5309c8fe3fa0b16f4b855",
+      "docs/memoria/RECONCILIACION_20261103.md": "2c31bab0b756d73588be8769d481b9faebbe47594280bb5386861ef92eccab5f"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/test-same-line-updates.js",
+      "docs/evidence/KIBANA_CI_SAME_LINE_20261104.md",
+      "docs/evidence/NIFI_CI_BLOCKERS_20261104.md"
+    ],
+    "verification": "five actualpackage regressions +vendorversion fixture repeated bycoordinator;finalimagepending;NiFi reportdiagnostic only"
   }
 }

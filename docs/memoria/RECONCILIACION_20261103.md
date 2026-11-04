@@ -238,3 +238,28 @@ pueden completar el índice antiguo, y que el acceso SQL directo permanece dentr
 de la frontera de confianza. Esta aclaración modifica documentación, no código.
 El ZIP anterior se conserva íntegro como evidencia histórica anterior a esta entrega
 tardía del informe; la revisión se distribuye en una adenda separada.
+
+
+## Seguimiento del PR119, 2026-11-04
+
+CI de `6a11161` pasa 906 pruebas y 374 subtests, con cuatro omisiones, en
+Python 3.11 y 3.12. La repetición local previa se interrumpió por memoria;
+se conserva como intento sin resultado completo. El PR exige además revisión
+de GitHub; no se cambia ninguna protección ni gate para permitir merge.
+
+Se revisan cinco sustituciones acotadas de paquetes Kibana (systeminformation,
+re2js raíz, decode-uri-component, Joi y @hapi/content), con lock SHA512 y borrado
+de directorios viejos antes de COPY. El coordinador repitió las cinco regresiones
+tanto con alias npm como con las versiones transitivas de la imagen vendor.
+El Dockerfile las repite con el Node real de la imagen. Todavía falta construir
+y escanear esa imagen: Hono, glob, minimatch y copias prebundled siguen abiertos.
+Los paquetes nuevos conservan sus dependencias declaradas y los rangos comprobados
+se satisfacen con las versiones vendor; el re2js anidado 1.4 queda fuera del rango
+afectado y no se cambia de major sin necesidad.
+
+El informe NiFi identifica 59 tuplas vulnerables anidadas y prueba mediante
+bytecode oficial que actualizar solo Wire runtime a 6.3 rompería un constructor
+que consume Wire schema 5.2. Es diagnóstico, no reparación ni excepción de gate.
+Un backport separado está en investigación y no forma parte de esta entrega.
+Estos informes y los inputs Kibana revisados actualizan el inventario actual;
+la base histórica, el alcance del modelo y la aceptación humana no cambian.
