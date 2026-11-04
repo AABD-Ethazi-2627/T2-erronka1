@@ -1,0 +1,108 @@
+{
+  "parent_head": "f4e32bf528536c36e5b14efbe702b68383c346aa",
+  "status": "preparation-only-snappy-blocked",
+  "archive_count": 215,
+  "occurrences": 2099,
+  "inventory_sha256": "5ef465917d5de6c50794c674f3866f22c8b604e4b7a9f7b5b8822ce773980e32",
+  "original_lib_156_hashes_verified": true,
+  "counts": {
+    "guava": 7,
+    "lz4": 3,
+    "snappy": 9
+  },
+  "selected_scan_tuples": [
+    {
+      "VulnerabilityID": "CVE-2026-106451",
+      "PkgName": "at.yawk.lz4:lz4-java",
+      "InstalledVersion": "1.11.2",
+      "FixedVersion": "1.11.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2.jar"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-106450",
+      "PkgName": "at.yawk.lz4:lz4-java",
+      "InstalledVersion": "1.11.2",
+      "FixedVersion": "1.11.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2.jar"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-106449",
+      "PkgName": "at.yawk.lz4:lz4-java",
+      "InstalledVersion": "1.11.2",
+      "FixedVersion": "1.11.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2.jar"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-102554",
+      "PkgName": "com.google.guava:guava",
+      "InstalledVersion": "33.7.1-jre",
+      "FixedVersion": "33.7.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46.jar"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-108106",
+      "PkgName": "org.xerial.snappy:snappy-java",
+      "InstalledVersion": "1.1.10.8",
+      "FixedVersion": "1.1.10.9",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc.jar"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-93451",
+      "PkgName": "org.xerial.snappy:snappy-java",
+      "InstalledVersion": "1.1.10.8",
+      "FixedVersion": "1.1.10.9",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc.jar"
+    },
+    {
+      "VulnerabilityID": "CVE-2026-116590",
+      "PkgName": "org.xerial.snappy:snappy-java",
+      "InstalledVersion": "1.1.10.8",
+      "FixedVersion": "1.1.10.9",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc.jar"
+    }
+  ],
+  "inputs": {
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/artifact-f80c37f/nested-archive-scan.json": "bb7b6625fac7d59118dd3e2f2f596aa38445f458ae36f6ddcb17265e722de2c1",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/vulnerable-objects.json": "f11af68b9381ca4b64f341cd3bb4baf82a86cc32499cc46d244d4682b12e9abb",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/nested-patcher-occurrences/source-hashes.json": "51f3cc3973b67027dd747baa9246134684a0497335e15efaebaf9118c04199ba",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/nested-patcher-occurrences/handoff-hashes.json": "9f8be8ad06d90591e1db7fe2f87146d89dbfb14595430ddc9b8209a90744bb9d",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/inventory.stdout": "ba7c03e835502cf3dca880fb53c1809d5493bd6187e8962ac664e1ebcdf819c2",
+    "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md": "3cd853eeaf1a8546e72971b70b88242d84987b2b9abc5cb785a1e75688e13ea7",
+    "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.json": "b86a627c0ff2a0d127493fde50b3fdb9e4b06f04c532bba654829bf85c96f5dd",
+    "/home/tears/.cache/cnc-integration-audit-20261103/CLAUDE_NIFI_COMPONENT_REVIEW.md": "3479d002304ab6698f78b7736b9f0fe59d0a8d3650b5aaddaf67fd9705de1661",
+    "scripts/patch_nested_jars.py": "31f95b8befe94a657455db0fdd601db1e004a038f78538d9507482572e097143",
+    "deploy/images/nifi.Dockerfile": "a6e0c009b0656fa8c709511e132449f4c49b4dc14ba4c7dac5757f6c1f9f4b83"
+  },
+  "owned_source_hashes": {
+    "deploy/images/nifi-patches/stock-occurrences/acquire.py": "75f2052a5dc30a2c25e2b810c82934747325bb94378ca056df936ad9d9209ed8",
+    "deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "f9b03a50541f4be86dd216475a5e350e4212154743f1eda7cf93df7a06fbe29f",
+    "deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java": "d40f4ec1beb5011ad501bfa198b223520785cae09bdbe2b8472212676406b4c6",
+    "deploy/images/nifi-patches/stock-occurrences/probe_consumers.py": "386b793a0ccf5d074e0ec0e15231689bf2a618f02260885d3007b7ad1f9c8913",
+    "deploy/images/nifi-patches/stock-occurrences/source-lock.json": "abc31418ffa242b71dd97b319f5f22a5c626c372dac6b0868abb56741f4e5a5d",
+    "deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java": "8c88a6e4c4c51aa8872c96e27fc6cd5d146f3b399f710871bf220b15630453a5",
+    "deploy/images/nifi-patches/stock-occurrences/emit_plan.py": "835d708b9df3c3179690cd92be391501faf8b0297da3b51aea71dcd57fd40e7a",
+    "deploy/images/nifi-patches/stock-occurrences/README.md": "4756384d51304bfff99d8ab811b9dc54b34b6822436902b8d378b4d56be3c50c",
+    "deploy/images/nifi-patches/stock-occurrences/candidate-plan.json": "3532233a98ed044aa9486cbdbe040468ba9c71e3dc0c61d646e0a1ce73b2ebec",
+    "deploy/images/nifi-patches/stock-occurrences/source-review.json": "bdf2804add21ebabab965db124c1c9f76593a2bc56104569b1055c5542d25e74",
+    "deploy/images/nifi-patches/stock-occurrences/consumer-execution.json": "38007ef77b91b52edd35bd0a5e09d4e2290d0c58095f168c8061633d9f7f2852",
+    "deploy/images/nifi-patches/stock-occurrences/consumer-summary.json": "0e830b5dbb08348afaaab9ff9804e71a3888949eecbf456c71273f5fb34eb3f9",
+    "deploy/images/nifi-patches/stock-occurrences/acquisition.json": "1693e65753a6a67fee2fdd58b757a0a2e3b5765247b1b4a744b36cdb5b4fd50a",
+    "tests/test_nifi_stock_occurrences.py": "52bd5c6f49c201a4fe3d26a99c395b9579d2f1439a681cbaacfb48bd91d1c733"
+  },
+  "proof_files": {
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/inventory.json": "5adda883a4a16eb593fde425229eba9227f56a4a4de0b663285f8c1592d49f16",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/image.json": "aa84f27f626209d462351f2999c86dc6b368eea32b02aef3742b5b3a5208c5dd",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/container.json": "50c420d572659d73ef4dfa116d95d38807814d44f8e79ce9abc42283a03a2dab",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/summary.json": "0e830b5dbb08348afaaab9ff9804e71a3888949eecbf456c71273f5fb34eb3f9",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/execution.json": "38007ef77b91b52edd35bd0a5e09d4e2290d0c58095f168c8061633d9f7f2852",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/candidate-reviewable.json": "3532233a98ed044aa9486cbdbe040468ba9c71e3dc0c61d646e0a1ce73b2ebec"
+  },
+  "verification": "Python 3.12.14 / pytest 9.1.1: 28 tests and 14 subtests; Java 21 exact bytes in consumer-summary.json",
+  "limits": [
+    "Technical consumer/component evidence only",
+    "No runtime archive or scanner metadata changed",
+    "Guava/LZ4 partial consumers, pending QA",
+    "Snappy all-nine-hash-group blocked by Hadoop normal-input regression",
+    "No NiFi/image/SMB/human acceptance"
+  ]
+}

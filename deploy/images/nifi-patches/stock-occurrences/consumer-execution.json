@@ -1,0 +1,130 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-version"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "openjdk version \"21.0.13\" 2026-10-20\nOpenJDK Runtime Environment (build 21.0.13+9)\nOpenJDK 64-Bit Server VM (build 21.0.13+9, mixed mode, sharing)\n"
+    },
+    {
+      "argv": [
+        "javac",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-d",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes",
+        "-cp",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/kafka-clients-4.3.1.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/jimfs-1.1.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.1-jre.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.8.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.2.jar",
+        "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-Djava.io.tmpdir=/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/native-cra2_p8s",
+        "-cp",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/kafka-clients-4.3.1.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/jimfs-1.1.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.1-jre.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.8.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.2.jar",
+        "ConsumerProbe"
+      ],
+      "returncode": 0,
+      "stdout": "Jimfs Guava normal filesystem PASS\nKafka snappy normal roundtrip PASS\nKafka lz4 normal roundtrip PASS\nSnappy maxCompressedLength array/direct PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-Djava.io.tmpdir=/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/native-2pq5j0i4",
+        "-cp",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/kafka-clients-4.3.1.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/jimfs-1.1.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.2-jre.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.9.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.4.jar",
+        "ConsumerProbe"
+      ],
+      "returncode": 0,
+      "stdout": "Jimfs Guava normal filesystem PASS\nKafka snappy normal roundtrip PASS\nKafka lz4 normal roundtrip PASS\nSnappy maxCompressedLength array/direct PASS\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "javac",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-d",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes",
+        "-cp",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-common-3.5.0.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.8.jar",
+        "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-Djava.io.tmpdir=/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-native-h1frmz9s",
+        "-cp",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-common-3.5.0.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.8.jar",
+        "HadoopProbe",
+        "old"
+      ],
+      "returncode": 0,
+      "stdout": "old Hadoop normal 4096-byte roundtrip PASS\n",
+      "stderr": "SLF4J(W): No SLF4J providers were found.\nSLF4J(W): Defaulting to no-operation (NOP) logger implementation\nSLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.\n"
+    },
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-Djava.io.tmpdir=/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-native-6m2sv7qm",
+        "-cp",
+        "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/classes:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-common-3.5.0.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.9.jar",
+        "HadoopProbe",
+        "new"
+      ],
+      "returncode": 0,
+      "stdout": "CONFIRMED new Snappy rejects Hadoop normal compression: java.lang.IllegalArgumentException: not enough space for output: need 4,810 bytes, but only 0 remaining\n",
+      "stderr": "SLF4J(W): No SLF4J providers were found.\nSLF4J(W): Defaulting to no-operation (NOP) logger implementation\nSLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.\n"
+    }
+  ],
+  "inputs": {
+    "/usr/lib/jvm/java-21-openjdk/bin/java": "8974a711edb55de716f1b396a3178ab98775fb1077b41440ba8e128a8404707a",
+    "/usr/lib/jvm/java-21-openjdk/bin/javac": "5d9371a81bc789e32b8886dd29be8df68ba14fee27c56ebece035f02b0b0faa3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.1-jre.jar": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.2-jre.jar": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.2.jar": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.4.jar": "58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.8.jar": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.9.jar": "35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/nifi-kafka-3-service-nar-2.12.0.nar": "6d0b9e7ebcb3ad080efe36070097b785ec133b1afab81e093cb3a12176480a2a",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/kafka-clients-4.3.1.jar": "52501b7b47510c66f898871adaf6d2968ab7246561d44ced43643a8a587f0b36",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/nifi-aws-nar-2.12.0.nar": "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/jimfs-1.1.jar": "c4828e28d7c0a930af9387510b3bada7daa5c04d7c25a75c7b8b081f1c257ddd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java": "d40f4ec1beb5011ad501bfa198b223520785cae09bdbe2b8472212676406b4c6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/probe_consumers.py": "386b793a0ccf5d074e0ec0e15231689bf2a618f02260885d3007b7ad1f9c8913",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "f9b03a50541f4be86dd216475a5e350e4212154743f1eda7cf93df7a06fbe29f",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/nifi-iceberg-parquet-writer-nar-2.12.0.nar": "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-common-3.5.0.jar": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java": "8c88a6e4c4c51aa8872c96e27fc6cd5d146f3b399f710871bf220b15630453a5"
+  }
+}
