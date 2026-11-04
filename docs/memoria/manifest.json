@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "2c630248884fc6c74e616cbd265d1445b5af024d338a0293e1daea27ab7a548b",
+    "docs/memoria/RECONCILIACION_20261103.md": "520300e0a98712bc0f54c8df64410ef2963e30c477d55e706999032bc0ed9f35",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -301,7 +301,7 @@
     "dashboard_laneki/test_app.py": "5ef975e468b538876fe7a593bcda63762478971a16f21530c59c4b86254759e7",
     "dashboard_laneki/test_domain.py": "f8c77cf900863f2a25b31bfaabd868bc04808f0198dcb06f9acc831417d90a90",
     "dashboard_laneki/test_read_contracts.py": "725ce24decdef02f4ce67d9e1baf71c6103552bac8b65d79c340b556ff48a308",
-    "scripts/integration_bundle.py": "82f5b1505152a8fc39958997cf20b02dd5fbfc8dbc4a28dfae8b5c2fea54f34e",
+    "scripts/integration_bundle.py": "7ef3f5d0dacd451686e99f337400dc241821a8b42d38e93406cc1adcbe46fa4f",
     "scripts/integration_dashboard_probe.py": "73a83f9a9ec0c32d184ef7da0e480398f3d27fe647482382d8ae501eb7b82a61",
     "scripts/integration_fixture.py": "efb76406e9a6c5ccaae4b780aae2127aa2ce41823b935ac8dd5751502429cb59",
     "scripts/integration_http.py": "b11589fb4a52d22dd4a25c9e2cfcc15ec2cdc5e540f504aa4c8a23f277703e83",
@@ -325,9 +325,17 @@
     "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d",
     "deploy/images/kibana-patches/test-same-line-updates.js": "582d6a01382564ebe30bc6322aae57cc8a1a0f40fbe488c92c52840e40e1da4f",
     "docs/evidence/KIBANA_CI_SAME_LINE_20261104.md": "54ab78de7fc3155186dc3cdb1c76db8d9981b76d3fecfce4d9cbb93bb4fa18b2",
-    "docs/evidence/NIFI_CI_BLOCKERS_20261104.md": "0edb5ec007eca79e8a3517d113a60ce67b1f911a36670c42be6b58dbb66b4410",
+    "docs/evidence/NIFI_CI_BLOCKERS_20261104.md": "69ab44f234b1247aff45aab8da365ed5cea1aecaac64acc2aa98b680b5faf6a0",
     "deploy/images/kibana-patches/test-hono-node-server.js": "7f72f5db62e77795700e2554426326cd708714115f596eec55d1ec1598c4d19b",
-    "docs/evidence/KIBANA_HONO_COMPATIBILITY_20261104.md": "08212423925d264d4ea48b66fd9f8c711211b1775e63efd1e2e05601cff2f5a7"
+    "docs/evidence/KIBANA_HONO_COMPATIBILITY_20261104.md": "08212423925d264d4ea48b66fd9f8c711211b1775e63efd1e2e05601cff2f5a7",
+    "deploy/images/nifi-patches/wire5/README.md": "ce233e1a0b9982e10b9d3c0fed21667566509f0682783a1509d22c930b8578a2",
+    "deploy/images/nifi-patches/wire5/Wire5ReaderRegression.java": "0067489410ecfc4cae15510186685b414725a0e96d2bf37f70e798d7555e9a53",
+    "deploy/images/nifi-patches/wire5/pom.xml": "ed2154b8a231ab0a7aa3db8c6f69a8215a9cd0df939ce81c923d0597b4d50b4d",
+    "deploy/images/nifi-patches/wire5/readers.patch": "fe4862207918691fb2f5ccf5ac282cd7e148a2fa8ebbeab759dd206287f6fc8a",
+    "deploy/images/nifi-patches/wire5/verification-pins.json": "db286db64958abed49fbbdf2d8ab0f346b47b33fdcd3366049ead71a098a25a3",
+    "deploy/images/nifi-patches/wire5/verify.py": "3547b3f120020c74c548efc6e25fb336cee2738afc7e66e4be19f79a1b505ca9",
+    "deploy/images/nifi-patches/wire5/verify_scan.py": "bd2f5d048ae37d40a97f6c5ff3358ebb6d040040a6c12e780d54226798b34217",
+    "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md": "e88d0e17d5da5e7f8abdcf334b1af1999a5d16cec1b6bfafee78bd65a9c4e0bc"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -576,5 +584,24 @@
     ],
     "verification": "ActualHTTP/MCP CJS+ESM and traversalcontrols repeated bycoordinator;finalimagepending",
     "remaining": "glob/minimatch,NiFi,finalCIandGitHubapproval"
+  },
+  "pr119_wire5_unpromoted_candidate": {
+    "previous_current_hashes": {
+      "docs/evidence/NIFI_CI_BLOCKERS_20261104.md": "0edb5ec007eca79e8a3517d113a60ce67b1f911a36670c42be6b58dbb66b4410",
+      "scripts/integration_bundle.py": "82f5b1505152a8fc39958997cf20b02dd5fbfc8dbc4a28dfae8b5c2fea54f34e",
+      "docs/memoria/RECONCILIACION_20261103.md": "2c630248884fc6c74e616cbd265d1445b5af024d338a0293e1daea27ab7a548b"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/wire5/README.md",
+      "deploy/images/nifi-patches/wire5/Wire5ReaderRegression.java",
+      "deploy/images/nifi-patches/wire5/pom.xml",
+      "deploy/images/nifi-patches/wire5/readers.patch",
+      "deploy/images/nifi-patches/wire5/verification-pins.json",
+      "deploy/images/nifi-patches/wire5/verify.py",
+      "deploy/images/nifi-patches/wire5/verify_scan.py",
+      "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md"
+    ],
+    "verification": "Parent44tests/upstream9failures,publicABI unchanged,exactpins,standaloneTrivyrecognition/findingvisible",
+    "limits": "Candidate NOTusedbyNiFi;Claudev1blocked;v2review/fullinventory/runtime/imagegatespending"
   }
 }

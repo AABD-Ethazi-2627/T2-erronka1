@@ -276,3 +276,18 @@ y Node finales. No se añaden dependencias runtime; el lock conserva el resto
 de entradas. Glob/minimatch, las imágenes finales y NiFi siguen pendientes.
 La revisión independiente ha bloqueado promover el candidatoWire inicial;
 el trabajo de lectores ampliados sigue separado de la imagen y del gate.
+
+
+## Candidato Wire separado de la imagen
+
+La revisión independiente bloqueó promover Wirev1. El implementador se detuvo
+por autenticación de clavehardware; el coordinador conservó sus cambios y amplió
+la prueba a44casos (original falla9), con pins de entradas, herramientas y salida.
+El scanrootfs reconoce el fork renombrado por hash y conserva el hallazgo visible;
+se rechazan inventarios sin cobertura. La varianteKMP se identificó sin clasesJVM.
+Todo ello prepara revisión: no cambia NiFi, su classpath ni el gate. Faltan
+comparación completa, inventario/classloaders reales, consumidores NiFi, nuevas
+revisiones y ambos escaneos de imagen. El resultado de Claudev1 no se atribuye aV2.
+El bundle incluye fuentes.java para que conserve la regresión del candidato.
+Los archivos nuevos y documentos revisados actualizan el inventario; no cambian
+la aceptación humana, la base histórica ni el alcance del modelo.

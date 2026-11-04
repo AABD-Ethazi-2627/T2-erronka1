@@ -49,6 +49,7 @@ EXTENSIONS = {
     ".csv",
     ".rs",
     ".go",
+    ".java",
     ".sum",
     ".mod",
     ".in",

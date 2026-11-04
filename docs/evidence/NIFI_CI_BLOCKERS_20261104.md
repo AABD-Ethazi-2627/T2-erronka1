@@ -43,7 +43,7 @@ These candidate versions come from the retained scan, not a compatibility result
 | LZ4 | 1.11.2 | 1.11.4 |
 | Snappy | 1.1.10.8 | 1.1.10.9 |
 | OpenTelemetry API | 1.62.0 | 1.67.0, with related API/context/common compatibility checked |
-| Wire runtime/runtime-jvm | 5.2.0 | Published fixes start at 6.3.0, requiring an ABI decision |
+| Wire runtime/runtime-jvm | 5.2.0 | CVE-2026-45799: 6.3.0; CVE-2026-63126: 6.4.5, requiring a coordinated ABI decision |
 
 The active Dockerfile only replaces the standalone bootstrap and toolkit Jackson
 2.22.2 JARs with 2.22.3. That does not replace dependencies inside NARs or relocated
@@ -110,3 +110,9 @@ and relocated bytes; compile/compare the Wire consumer ABI; exercise valid and
 malformed decoding and relevant NiFi processors; build both final and archive-audit
 images; then rerun both strict gates. The latest PR head must pass those checks
 and its required GitHub review before merge.
+
+Subsequent work produced an [unpromoted reader-only candidate](../../deploy/images/nifi-patches/wire5/README.md).
+The first independent review blocked promotion; the parent expanded its tests
+and added exact input/toolchain/output pins afterward. The parent reproduced
+44 tests with nine failures on upstream 5.2.0, but the candidate is not used in
+the NiFi image and its remaining review, inventory and scan gates stay open.
