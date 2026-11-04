@@ -4,14 +4,14 @@ Uses the existing bounded archive inventory, never writes or patches archives.
 Consumer references are constant-pool/package linkage candidates, not JVM proof.
 """
 import argparse
-from collections import Counter
-from functools import lru_cache
 import hashlib
 import io
 import json
-from pathlib import Path
 import sys
 import zipfile
+from collections import Counter
+from functools import lru_cache
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(ROOT / 'scripts'))

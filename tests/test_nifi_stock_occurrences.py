@@ -1,9 +1,9 @@
 """Fail-closed occurrence mapping and NAR closure regressions; synthetic only."""
 import importlib.util
 import json
-from pathlib import Path
 import sys
 import zipfile
+from pathlib import Path
 
 import pytest
 
@@ -47,7 +47,7 @@ def model(tmp_path, monkeypatch):
     source = tmp_path / 'source'; source.mkdir()
     component = tmp_path / 'component'; component.mkdir()
     pins = []
-    for family, (old, new, prefix) in m.PAIRS.items():
+    for old, new, _prefix in m.PAIRS.values():
         for name in (old, new):
             p = component / name
             with zipfile.ZipFile(p, 'w') as z:

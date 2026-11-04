@@ -15,7 +15,9 @@ public class HadoopProbe {
       if (!args[0].equals("old")) throw new AssertionError("expected stricter precondition rejection");
       System.out.println("old Hadoop normal 4096-byte roundtrip PASS");
     } catch (IllegalArgumentException e) {
-      if (!args[0].equals("new")) throw e;
+      if (!args[0].equals("new") || e.getMessage() == null ||
+          !e.getMessage().contains("not enough space for output") ||
+          !e.getMessage().contains("remaining")) throw e;
       System.out.println("CONFIRMED new Snappy rejects Hadoop normal compression: " + e);
     }
   }

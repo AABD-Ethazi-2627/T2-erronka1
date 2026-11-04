@@ -433,3 +433,24 @@ consumidores, classloaders, wrappers ni imagen final. Hay tres avisos con sonda
 local y dieciséis con evidencia upstream sin reproducción local. No se afirma
 cierre de las 59 tuplas, Kibana, CI, CG32, SMB ni aceptación humana. Los hashes
 históricos, la base y el estado de revisión humana permanecen intactos.
+
+
+## Guava/LZ4/Snappy: mapeo ampliado y bloqueo Hadoop confirmado
+
+Se incorpora el mapeo del hijo 7becad6 como c176080. La adquisición pública
+abarca 215 archivos (156 lib y 59 toolkit) y 2099 ocurrencias. No aparecen
+copias adicionales de las tres familias en toolkit: siguen siete Guava, tres
+LZ4 y nueve Snappy. El padre reproduce el mapeo completo con 512 MiB de espacio
+virtual y siete comandos Java con el JDK21 registrado, y pasan 28 tests y
+14 subtests. Las fuentes permanecen idénticas durante las pruebas.
+
+Hadoop3.5.0 comprime una entrada normal de 4096 bytes con Snappy1.1.10.8, pero
+1.1.10.9 rechaza su buffer por la nueva precondición de espacio. El padre
+confirma ese error concreto, no cualquier IllegalArgumentException. Las nueve
+ocurrencias siguen bloqueadas; no se omite la incompatible ni se elimina la
+guarda de seguridad. Guava/LZ4 conservan cobertura parcial y QA pendiente.
+
+Las salidas del hijo mantienen su atribución; la evidencia del padre separa
+comandos, cambios de fuente, hashes y límites. No se ha parcheado ningún NAR,
+creado imagen o afirmado aceptación de classloader, NiFi, SMB, CI ni humana.
+Los gates, excepciones, base histórica, modelo y revisiones humanas no cambian.

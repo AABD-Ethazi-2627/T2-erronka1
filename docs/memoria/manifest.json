@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "48a2a386f77d5421813cb17acc8cc1a41aa57ff42e032bed485bdf37d32cf81c",
+    "docs/memoria/RECONCILIACION_20261103.md": "c1169d1f0a3edc2c518add16525d524b7fcf97ec1807d094645a45d2879c9631",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -398,7 +398,24 @@
     "deploy/images/nifi-patches/jackson/verify.py": "d1c2ae4919aa7a18a6611e01230d5d86aa5bd9dd2e07409e053226017d0fea61",
     "docs/evidence/NIFI_JACKSON_PARENT_20261104.json": "d8ac3ebfa6296d080fa4f943a9642aab6e44f9c5d1d931cf7a022fe386477351",
     "docs/evidence/NIFI_JACKSON_PARENT_20261104.md": "700276f9afa7515d96d9650085d5b29abe6ed6ab47bf89047227da3b140b23f1",
-    "tests/test_nifi_jackson_candidate.py": "d534df66362dd0ca10cb6228f14dfa473d39c28a223a464c8ceb4ee2399eb378"
+    "tests/test_nifi_jackson_candidate.py": "d534df66362dd0ca10cb6228f14dfa473d39c28a223a464c8ceb4ee2399eb378",
+    "deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java": "d40f4ec1beb5011ad501bfa198b223520785cae09bdbe2b8472212676406b4c6",
+    "deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java": "534f36590c3747a770e33eb3a2efd3759a0d932a736c82ab2cb408f345404f02",
+    "deploy/images/nifi-patches/stock-occurrences/README.md": "4756384d51304bfff99d8ab811b9dc54b34b6822436902b8d378b4d56be3c50c",
+    "deploy/images/nifi-patches/stock-occurrences/acquire.py": "8242ca80a6dd451340e67c97f6c299c55385df2b071462c90dd2281d8d6ddaa6",
+    "deploy/images/nifi-patches/stock-occurrences/acquisition.json": "1693e65753a6a67fee2fdd58b757a0a2e3b5765247b1b4a744b36cdb5b4fd50a",
+    "deploy/images/nifi-patches/stock-occurrences/candidate-plan.json": "3532233a98ed044aa9486cbdbe040468ba9c71e3dc0c61d646e0a1ce73b2ebec",
+    "deploy/images/nifi-patches/stock-occurrences/consumer-execution.json": "38007ef77b91b52edd35bd0a5e09d4e2290d0c58095f168c8061633d9f7f2852",
+    "deploy/images/nifi-patches/stock-occurrences/consumer-summary.json": "0e830b5dbb08348afaaab9ff9804e71a3888949eecbf456c71273f5fb34eb3f9",
+    "deploy/images/nifi-patches/stock-occurrences/emit_plan.py": "b096485982d23b7b6f74114a98b2d3b6a2dcc7f1dc065e38e4b9f6745cf723ae",
+    "deploy/images/nifi-patches/stock-occurrences/handoff.json": "9c660a426a16d426bcf1c6da8bdf2290271ee358ee59e482435537f69d4c9d9d",
+    "deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "cd8440e5c20270c0909af6b5741067c73117cc305bae98f839c006de71a97a08",
+    "deploy/images/nifi-patches/stock-occurrences/probe_consumers.py": "68f56a518920e47f0c88504f2ac06393e0b7e533aba0e61735da245b451f9b0e",
+    "deploy/images/nifi-patches/stock-occurrences/source-lock.json": "abc31418ffa242b71dd97b319f5f22a5c626c372dac6b0868abb56741f4e5a5d",
+    "deploy/images/nifi-patches/stock-occurrences/source-review.json": "bdf2804add21ebabab965db124c1c9f76593a2bc56104569b1055c5542d25e74",
+    "docs/evidence/NIFI_STOCK_PARENT_20261104.json": "d6f5e8d9ad91633adaa6391b91881bfb071712d837c325137a7633ab2b595f46",
+    "docs/evidence/NIFI_STOCK_PARENT_20261104.md": "7b0addeb6dc1a2a8db8a652c47cd9ff2a5df9dd11675d39f90692a79a182f422",
+    "tests/test_nifi_stock_occurrences.py": "1f1f6f33afb49170c245e41d0b12ad47af471534d45de566ac2fa2b5c3d18938"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -857,5 +874,35 @@
     "evidence": "docs/evidence/NIFI_JACKSON_PARENT_20261104.json",
     "verification": "12 candidate guards; 24 tests and 4 subtests including existing dependency guards; 15 bounded Java/javac commands; four expectation-inversion controls; Ruff; original156 hashes preserved",
     "limits": "Component preparation only; ABI/consumer/classloader and wrapper blocks, independent review and final gates pending"
+  },
+  "pr119_nifi_stock_parent": {
+    "parent_commit": "cd811e35975a1823bc0003ca09738b4206e0e219",
+    "child_commit": "7becad6c079435e883b95ce7f706f89201a189f3",
+    "cherry_pick": "c176080",
+    "previous_current_hashes": {
+      "docs/memoria/RECONCILIACION_20261103.md": "48a2a386f77d5421813cb17acc8cc1a41aa57ff42e032bed485bdf37d32cf81c"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java",
+      "deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java",
+      "deploy/images/nifi-patches/stock-occurrences/README.md",
+      "deploy/images/nifi-patches/stock-occurrences/acquire.py",
+      "deploy/images/nifi-patches/stock-occurrences/acquisition.json",
+      "deploy/images/nifi-patches/stock-occurrences/candidate-plan.json",
+      "deploy/images/nifi-patches/stock-occurrences/consumer-execution.json",
+      "deploy/images/nifi-patches/stock-occurrences/consumer-summary.json",
+      "deploy/images/nifi-patches/stock-occurrences/emit_plan.py",
+      "deploy/images/nifi-patches/stock-occurrences/handoff.json",
+      "deploy/images/nifi-patches/stock-occurrences/map_candidates.py",
+      "deploy/images/nifi-patches/stock-occurrences/probe_consumers.py",
+      "deploy/images/nifi-patches/stock-occurrences/source-lock.json",
+      "deploy/images/nifi-patches/stock-occurrences/source-review.json",
+      "docs/evidence/NIFI_STOCK_PARENT_20261104.json",
+      "docs/evidence/NIFI_STOCK_PARENT_20261104.md",
+      "tests/test_nifi_stock_occurrences.py"
+    ],
+    "evidence": "docs/evidence/NIFI_STOCK_PARENT_20261104.json",
+    "verification": "215 archives/2099 occurrences; complete parent mapping; seven Java21 commands; 28 tests and14subtests; Ruff; source hashes unchanged",
+    "limits": "All9 Snappy blocked by normal Hadoop incompatibility; Guava/LZ4 partial consumers awaiting QA; no runtime application, final image/scan, classloader or external acceptance"
   }
 }

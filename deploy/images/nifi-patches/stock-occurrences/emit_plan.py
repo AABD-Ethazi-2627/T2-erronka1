@@ -4,10 +4,9 @@ After external QA, the parent can supply an explicit hash-bound review record.
 This record is an auditable assertion by the caller, not automated QA evidence.
 """
 import argparse
-import hashlib
 import json
-from pathlib import Path
 import sys
+from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import map_candidates as mapping

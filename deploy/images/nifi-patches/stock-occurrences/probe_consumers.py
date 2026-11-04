@@ -5,13 +5,13 @@ Never runs NiFi; no shared Maven cache, service or archive changes.
 import hashlib
 import json
 import os
-from pathlib import Path
 import resource
 import shutil
 import subprocess
 import sys
 import tempfile
 import zipfile
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -27,7 +27,7 @@ def run(source, component, output):
     if any(p.is_symlink() for p in (output, *output.parents)):
         raise ValueError('symlink proof path')
     output.mkdir(parents=True, exist_ok=False)
-    lock = {r['path']: r['sha256'] for r in mapping.load(HERE / 'source-lock.json')['archives']}
+    lock = {}
     inputs = {}
     def record(p):
         sha = hashlib.sha256(p.read_bytes()).hexdigest()
@@ -35,11 +35,18 @@ def run(source, component, output):
             raise ValueError('stock source-lock mismatch')
         inputs[str(p)] = sha
         return p
-    for tool in ('java', 'javac'):
-        record(Path(shutil.which(tool)).resolve())
+    record(HERE / 'source-lock.json')
+    lock = {r['path']: r['sha256'] for r in mapping.load(HERE / 'source-lock.json')['archives']}
+    java_home = Path(shutil.which('java')).resolve().parents[1]
+    if Path(shutil.which('javac')).resolve().parent != java_home / 'bin':
+        raise ValueError('mixed JDK tools')
+    for relative in ('bin/java', 'bin/javac', 'lib/modules', 'lib/server/libjvm.so', 'release'):
+        record(java_home / relative)
     # Verify replacement and control library inputs against reviewed pins.
+    record(HERE.parent / 'compatible-libraries/pins.json')
+    record(mapping.ROOT / 'scripts/patch_nested_jars.py')
     pins = {r['file']: r for r in mapping.load(HERE.parent / 'compatible-libraries/pins.json')}
-    for family, (old, new, _) in mapping.PAIRS.items():
+    for old, new, _ in mapping.PAIRS.values():
         for name in (old, new):
             if mapping.writer.digest(component / name) != pins[name]['sha256']:
                 raise ValueError('library pin mismatch')
@@ -72,7 +79,7 @@ def run(source, component, output):
         resource.setrlimit(resource.RLIMIT_CPU, (25, 25))
         os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
     def execute(args):
-        p = subprocess.run(args, env=env, preexec_fn=limits, timeout=40, capture_output=True, text=True)
+        p = subprocess.run(args, env=env, preexec_fn=limits, timeout=40, capture_output=True, text=True, check=False)
         commands.append({'argv': args, 'returncode': p.returncode, 'stdout': p.stdout, 'stderr': p.stderr})
         (output / 'execution.json').write_text(json.dumps({'commands': commands, 'inputs': inputs}, indent=2))
         if p.returncode:

@@ -6,9 +6,9 @@ omits volume contents. Non-library tar members are skipped, never materialized.
 import hashlib
 import json
 import subprocess
+import sys
 import tarfile
 from pathlib import Path
-import sys
 
 IMAGE = 'apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad'
 
@@ -29,7 +29,8 @@ def acquire(dest):
     rows = []
     try:
         state = json.loads(run(['docker', 'inspect', cid]))
-        assert state[0]['State']['Status'] == 'created'
+        if state[0]['State']['Status'] != 'created':
+            raise ValueError('owned acquisition container is not stopped/created')
         (dest / 'container.json').write_text(json.dumps(state, indent=2))
         args = ['docker', 'export', cid]
         commands.append(args)
@@ -59,7 +60,8 @@ def acquire(dest):
                 proc.kill()
                 proc.wait()
         final = json.loads(run(['docker', 'inspect', cid]))
-        assert final[0]['State']['Status'] == 'created'
+        if final[0]['State']['Status'] != 'created':
+            raise ValueError('owned acquisition container changed state')
     finally:
         run(['docker', 'rm', '-v', cid])
         (dest / 'acquisition.json').write_text(json.dumps({'commands': commands, 'image': IMAGE, 'archives': sorted(rows, key=lambda r: r['path']), 'scope': 'public archives only; volume contents excluded; never started'}, indent=2))
