@@ -249,7 +249,7 @@
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/receipt.json": "afccb394177056088bb91f0396a11f7410f78aaa9228d129bf34952d8c065875",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028.md": "f04a05779a0c5f74ed03de33c9b93fddb384282717ddd04ecdf815d728d40ca6",
     ".github/workflows/dashboard.yml": "b7e8f5c6b81b87af701efbd095928e3d770cf9477e50209352ff8f2a54161a37",
-    ".github/workflows/dependencies.yml": "0d935a111ddc5f53429b9823c26391080be2c96181bb819bd94394e43faf1f9e",
+    ".github/workflows/dependencies.yml": "59b0915953fbbb30b78eae41270618b0071db06fd65ef6e5c5ea336678fee5e5",
     ".github/workflows/es-bind-safety.yml": "95553c0af814f5bba1ccbe40cc0c17f0edcce57c9d7e6b3cfd835c2ec43626a7",
     ".github/workflows/ml-study.yml": "22fe2429f482a008727cc2ae8bc03eeb61f84774ebaa6cb17e35053887c5ab1e",
     ".github/workflows/validate.yml": "6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e",
@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "f8f4c551d085d473cebff849e47947c75174902f07db3db61a692cdc5a70c291",
+    "docs/memoria/RECONCILIACION_20261103.md": "8c4ab1413b7cf7ff1c18c62b108c87e47db017ed6026d242afde5a42d656c238",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -380,7 +380,9 @@
     "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md": "3cd853eeaf1a8546e72971b70b88242d84987b2b9abc5cb785a1e75688e13ea7",
     "scripts/patch_nested_jars.py": "31f95b8befe94a657455db0fdd601db1e004a038f78538d9507482572e097143",
     "tests/test_nifi_dependency_guards.py": "83512a0f68e182907bd55254d2eb11e5ed9aa17bc8ce928bfa0fb196344f00b8",
-    "tests/test_patch_nested_jars.py": "9e0f808828124a511044b394648ddb115c7a5d90fabd11531529bd11f2721097"
+    "tests/test_patch_nested_jars.py": "9e0f808828124a511044b394648ddb115c7a5d90fabd11531529bd11f2721097",
+    "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.md": "dc2f41c02dcebec9d00f5db62725ccddebb58eeb86a905459db3d150712330d0",
+    "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json": "abcd9d4f9cf2c87f17aa4e8c3be743cbfe3d0847dc2b76424b609e4fbb56e069"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -796,5 +798,19 @@
     "evidence": "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.json",
     "verification": "46 focused tests, 18 subtests; complete inventory; independent pinned offline component and seven loopback transport configurations; Ruff; full working-tree suite 935 tests, 395 subtests, 4 skipped (source timing limit recorded)",
     "limits": "Preparation only; no original archive modified, final image build/scan, NiFi runtime/classloader acceptance or exception; historical/human snapshots preserved"
+  },
+  "pr119_nifi_disk_export": {
+    "parent_commit": "f4e32bf528536c36e5b14efbe702b68383c346aa",
+    "previous_current_hashes": {
+      ".github/workflows/dependencies.yml": "0d935a111ddc5f53429b9823c26391080be2c96181bb819bd94394e43faf1f9e",
+      "docs/memoria/RECONCILIACION_20261103.md": "f8f4c551d085d473cebff849e47947c75174902f07db3db61a692cdc5a70c291"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.md",
+      "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json"
+    ],
+    "evidence": "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json",
+    "verification": "actionlint; 17 existing infrastructure/archive/gate tests, 23 subtests",
+    "limits": "No local cleanup/build, completed nested report, measured reclaimed bytes, successful CI rerun or exception; final image gates remain blocking"
   }
 }

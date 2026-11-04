@@ -400,3 +400,19 @@ de consumidores y classloaders por ocurrencia, imagen final, scans y aceptación
 NiFi. Siguen 59 tuplas anidadas en el job f80c37f. No cambian las excepciones,
 la base histórica, los hashes históricos, la revisión humana ni el alcance del
 modelo. Las puertas de Kibana, CI, aprobación GitHub, SMB y CG32 siguen abiertas.
+
+
+## NiFi: disco agotado al exportar la imagen de auditoría en CI
+
+El job 126549608040 de ea9e84f construye las imágenes y termina el scan normal
+sin hallazgos, pero Trivy no puede exportar la imagen de auditoría por falta de
+disco. No hay informe anidado completo de ese job, por lo que no se presenta
+como una nueva comparación de las 59 tuplas. El workflow libera únicamente
+la caché de construcción del runner efímero tras construir ambas imágenes,
+comprueba que las dos etiquetas siguen presentes e imprime el espacio antes
+y después. Mantiene el scan completo y el gate bloqueante sin excepciones.
+
+actionlint y 17 tests/23 subtests focalizados pasan. No se ha borrado caché
+local ni reconstruido una imagen aquí. Los bytes liberados y la exportación
+correcta quedan pendientes del CI fresco. Se preservan los hashes históricos,
+la base, la revisión humana y todas las aceptaciones externas pendientes.

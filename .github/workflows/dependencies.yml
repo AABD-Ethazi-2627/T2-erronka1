@@ -98,6 +98,13 @@ jobs:
         if: matrix.image == 'nifi'
         run: |
           docker build --file deploy/images/nifi.Dockerfile --target archive-audit --tag cnc-guard-audit:nifi-archives .
+          # This GitHub-hosted job owns its Docker daemon. Intermediate Rust/uv
+          # build cache is no longer needed; retain both tagged images for Trivy.
+          df -h "$RUNNER_TEMP" /var/lib/docker
+          docker system df
+          docker builder prune --all --force
+          docker image inspect --format '{{.Id}}' cnc-guard-audit:nifi cnc-guard-audit:nifi-archives
+          df -h "$RUNNER_TEMP" /var/lib/docker
           trivy image --scanners vuln --format json --list-all-pkgs --timeout 15m --output nested-archive-scan.json cnc-guard-audit:nifi-archives
           python3 -m scripts.enforce_image_scan nifi-archives nested-archive-scan.json
       - name: Reject unverified image vulnerabilities
