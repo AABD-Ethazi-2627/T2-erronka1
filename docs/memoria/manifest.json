@@ -258,8 +258,8 @@
     "deploy/images/kibana-patches/package-lock.json": "c43ec72a13fab36c0a48a61b05e050f18f80527cc50282cdba95dc29f7148aaf",
     "deploy/images/kibana-patches/package.json": "2a8ebdea42b461f5535e6025638375ae56498a0be0015bcf275254a61f23cf8d",
     "deploy/images/kibana.Dockerfile": "bcf9dd110437acc8bf84a33b5f36230057b2e9ba1150fb1ff3b49c665156a7b4",
-    "scripts/enforce_image_scan.py": "a7f6486085b229f3f7e92d27eab01890edfaf8d3567f82a94692fb1e7570eb41",
-    "tests/test_image_scan_gate.py": "65ca31fd654b2a4b1eeb39ed141d8ce5a058c94ca77a3914b79d384bf418d131",
+    "scripts/enforce_image_scan.py": "0d05e2dc6462e1c01bfc60852c00a88eeaa02a29d49f164fde6aa189494ce240",
+    "tests/test_image_scan_gate.py": "541188bfdfcd35cbf5c8a4ac227da8ee446b785f7a84bd6c8d9363b0a7321ee8",
     "deploy/images/elasticsearch-patches/guava-pom.xml": "9d52f490ec18bf8ae3a7af12826e086d13134de01e6b5c7b2d6bc7367efe04f6",
     "deploy/images/kibana-patches/apply-deepmerge-patch.js": "4ea52bdce6b4457ddd34ff62ceceb8215624d818d3a8ff81a22dd3e499a2c3ce",
     "deploy/images/kibana-patches/test-deepmerge-patch.js": "b3a90c73fea8138ab68896747e486a68ca4b48603b712c83cc306d1ad298c7ed",
@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "bc52430154ecd164c380e4b60b6214b6f5568f143b788bcd13ddea9713506e37",
+    "docs/memoria/RECONCILIACION_20261103.md": "3a08c1fc4c64a8977caba9bf8db6a6cd26bf8ac37585cd71a136e6a4af54565a",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -340,7 +340,8 @@
     "tests/test_trivy_download_retry.py": "ab1621bd2688f09123595abf8b7f860fa15da9703fb054fbd485bb1497406b9b",
     "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md": "d78de5cf363f5b44d83930b1a9a23c1e65ef9d7b9240671d1da27f46d2275adc",
     "scripts/install_trivy_release.sh": "f2254b52cc220a3037a5d8290638d64739941e0000471ec8f0efac8a33d0705d",
-    "tests/test_trivy_release_install.py": "925ab5b9cf22ba96fdb1025d33716045c4796c3359d47428a608a1c21e9e57a4"
+    "tests/test_trivy_release_install.py": "925ab5b9cf22ba96fdb1025d33716045c4796c3359d47428a608a1c21e9e57a4",
+    "docs/evidence/KIBANA_SCAN_EA0A89E_20261104.md": "935c22c1cb9d261e35183aceab779b5ec2dc93ba91550b0aed457d97680dc72b"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -637,5 +638,17 @@
     "root_cause": "Pinnedinstaller actuallydownloadsfromget.trivy.dev, independentlyreproducedDNSfailure",
     "verification": "Directofficialchecksum-pinnedinstall + actualscannerfixture;17tests18subtests;CIpending",
     "gate_unchanged": true
+  },
+  "pr119_kibana_forge_inventory": {
+    "previous_current_hashes": {
+      "scripts/enforce_image_scan.py": "a7f6486085b229f3f7e92d27eab01890edfaf8d3567f82a94692fb1e7570eb41",
+      "tests/test_image_scan_gate.py": "65ca31fd654b2a4b1eeb39ed141d8ce5a058c94ca77a3914b79d384bf418d131",
+      "docs/memoria/RECONCILIACION_20261103.md": "bc52430154ecd164c380e4b60b6214b6f5568f143b788bcd13ddea9713506e37"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/KIBANA_SCAN_EA0A89E_20261104.md"
+    ],
+    "verification": "Actual CI image scan revalidated: upstream Forge 1.4.1 only; 15 tests and 21 subtests pass; four Glob/Minimatch findings still block",
+    "new_scanner_exceptions": false
   }
 }

@@ -30,7 +30,11 @@ def report(*findings, image="api"):
                 "Type": {"filebeat": "gobinary", "kibana": "node-pkg"}.get(
                     image, "python-pkg"
                 ),
-                "Packages": [{"Name": "fixture-python-package", "Version": "1"}],
+                "Packages": (
+                    [{"Name": "node-forge", "Version": "1.4.1"}]
+                    if image == "kibana"
+                    else [{"Name": "fixture-python-package", "Version": "1"}]
+                ),
             },
             {
                 "Target": "uv",
@@ -147,9 +151,8 @@ class ImageScanGateTests(unittest.TestCase):
             )
         )
 
-    def test_kibana_requires_only_the_exact_backported_node_forge_finding(self):
+    def test_kibana_requires_upstream_forge_and_only_exact_zip_backports(self):
         verified = (
-            ("CVE-2026-85393", "node-forge", "1.4.0+cncguard.1"),
             ("CVE-2026-19693", "extract-zip", "2.0.1+cncguard.1"),
             ("CVE-2026-56876", "extract-zip", "2.0.1+cncguard.1"),
         )
@@ -158,3 +161,20 @@ class ImageScanGateTests(unittest.TestCase):
         self.assertTrue(
             validate("kibana", report(*verified, ("CVE-X", "pkg", "1"), image="kibana"))
         )
+        for packages in (
+            [{"Name": "unrelated", "Version": "1"}],
+            [{"Name": "node-forge", "Version": "1.4.0+cncguard.1"}],
+            [
+                {"Name": "node-forge", "Version": "1.4.1"},
+                {"Name": "node-forge", "Version": "1.4.0+cncguard.1"},
+            ],
+        ):
+            data = report(*verified, image="kibana")
+            data["Results"][1]["Packages"] = packages
+            with self.subTest(packages=packages):
+                self.assertIn(
+                    "Kibana must inventory only the reviewed node-forge 1.4.1 release",
+                    validate("kibana", data),
+                )
+        obsolete = ("CVE-2026-85393", "node-forge", "1.4.0+cncguard.1")
+        self.assertTrue(validate("kibana", report(*verified, obsolete, image="kibana")))

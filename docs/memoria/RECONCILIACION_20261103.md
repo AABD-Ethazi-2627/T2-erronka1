@@ -316,3 +316,14 @@ escaneo. Se mantiene el binario para el gate anidado NiFi. La instalación direc
 y un scanreal del candidatoWire funcionan y conservan el hallazgo. Pasan17tests
 y18subtests, con rechazo de descarga corrupta antes de instalar. CI nuevo debe
 validar el runner; no se cambia ninguna aceptación ni gate de vulnerabilidades.
+
+
+## Inventario real de Forge tras el escaneo CI
+
+En ea0a89e, Kibana construye y Trivy se instala y escanea correctamente. El
+inventario confirma solo Forge1.4.1. Se retira la excepción antigua1.4.0 y se
+exige el inventario1.4.1; copias ausentes, antiguas o mezcladas fallan. Los15tests
+y21subtests focalizados pasan. El artefacto real sigue fallando con cuatro
+hallazgosGlob/Minimatch; no se añaden excepciones ni se afirma aceptación de
+Kibana. El informe enlaza el job, identifica artefacto e imagen y conserva los
+límites de la prueba. La base histórica y la aceptación humana no cambian.
