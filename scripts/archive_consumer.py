@@ -11,6 +11,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from jsonschema import ValidationError
 
+from scripts.archive_read_index import ensure_schema, store_prediction
 from scripts.platform_io import (
     replace_file,
     sync_directory,
@@ -110,6 +111,7 @@ def consume(
         con.execute(
             "CREATE TABLE IF NOT EXISTS objects (path TEXT PRIMARY KEY, hash TEXT)"
         )
+        ensure_schema(con)
         con.commit()
         sync_dir(root)
         con.execute(
@@ -224,6 +226,8 @@ def consume(
                 "INSERT INTO deliveries VALUES (?, ?, ?)",
                 (delivery, fingerprint, outcome),
             )
+            if kind == "prediction" and outcome in ("stored", "duplicate"):
+                store_prediction(con, delivery, obj)
             checkpoint("after_write")
         checkpoint("before_commit")
         con.commit()

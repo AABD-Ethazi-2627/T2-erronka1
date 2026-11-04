@@ -26,3 +26,17 @@ Base auditada PR42 `f770932d61ff55158bb18c9d89120617e8c5db65`. La [matriz actual
 TP32/FN9/FP9/TN1150 es validación reutilizada. Split activo 5600/1200/1200, sin test final independiente nuevo. No se ejecutan entrenamientos ni se cambian modelos de entrega en esta actualización.
 
 Acuerdo, reproducción por compañero, explicación individual, firmas, Moodle y entrega final: pendientes. No se cierran issues ni se asigna calificación.
+
+## Actualización documental local al 03/11/2026
+
+La [conciliación de integración](RECONCILIACION_20261103.md) añade una candidatura
+local con API de lectura canónica y Laneki/Streamlit, además del recorrido Kibana
+histórico. Los ensayos del coordinador usan datos sintéticos y un bundle de prueba
+local; no promueven ese modelo ni vinculan automáticamente las matrices offline
+de octubre. Se conservan por separado el evento del worker observado en navegador
+y el evento consumido con ACK real de Kafka.
+
+La propuesta y las firmas siguen pendientes. No se deduce aceptación de la rúbrica
+a partir de pruebas de código, un hash actualizado o la ejecución de un navegador.
+La equivalencia académica SMB/NFS, la explicación de cada integrante y la defensa
+requieren evidencia humana real. El corte histórico anterior no se reescribe.

@@ -1,24 +1,28 @@
 # Shared pinned uv source build: only rustls changes relative to upstream 0.13.6.
-FROM rust:1.99.0-alpine@sha256:0cce0a5e0e8ba67b455257a3a02a1d99005f382748789d6464460028810f1627 AS uv-build
+FROM rust:1.99.1-alpine@sha256:7e9e2d068a107a2adafd19930011178d14a78326053cd4c3a9f7ad3fd049557d AS uv-build
 RUN apk add --no-cache clang cmake make musl-dev perl pkgconf patch
 ADD --checksum=sha256:c2e01687fbbcb109277698ec97baca46e1547656ad580abf6d993f9c459af1c7 https://github.com/astral-sh/uv/archive/refs/tags/0.13.6.tar.gz /tmp/uv.tar.gz
 RUN mkdir /src && tar -xzf /tmp/uv.tar.gz -C /src --strip-components=1
 COPY deploy/images/uv-rustls.patch /tmp/uv-rustls.patch
 WORKDIR /src
+# Limit both Cargo invocations; zero would disable the intended resource bound.
+ARG UV_BUILD_JOBS=4
 # Preserve embedded dependency metadata so Trivy can still audit the Rust closure.
-RUN patch -p1 < /tmp/uv-rustls.patch \
+RUN case "$UV_BUILD_JOBS" in ''|0*|*[!0-9]*) echo "UV_BUILD_JOBS must be a positive decimal integer" >&2; exit 2;; esac \
+    && export CARGO_BUILD_JOBS="$UV_BUILD_JOBS" \
+    && patch -p1 < /tmp/uv-rustls.patch \
     && cargo install --locked --version 0.7.7 cargo-auditable \
-    && CARGO_BUILD_JOBS=4 CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 \
+    && CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 \
        cargo auditable build --locked --release --package uv --bin uv --bin uvx
 FROM scratch AS uv
 COPY --from=uv-build /src/target/release/uv /uv
 COPY --from=uv-build /src/target/release/uvx /uvx
 ENTRYPOINT ["/uv"]
 FROM apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad AS nifi
-FROM cgr.dev/chainguard/wolfi-base:latest@sha256:360896efb0753a5701c48f860e17130c205eae5a264797aa3e7ea126ee2923a7 AS jackson
+FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73 AS jackson
 ADD --checksum=sha256:8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar /jackson-core-2.22.3.jar
 ADD --checksum=sha256:556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9 https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar /jackson-databind-2.22.3.jar
-FROM cgr.dev/chainguard/wolfi-base:latest@sha256:360896efb0753a5701c48f860e17130c205eae5a264797aa3e7ea126ee2923a7
+FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73 AS runtime
 
 USER root
 RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
@@ -49,3 +53,12 @@ USER 1000
 EXPOSE 8000 8443 10000
 VOLUME ["/opt/nifi/nifi-current/conf", "/opt/nifi/nifi-current/content_repository", "/opt/nifi/nifi-current/database_repository", "/opt/nifi/nifi-current/flowfile_repository", "/opt/nifi/nifi-current/logs", "/opt/nifi/nifi-current/nar_extensions", "/opt/nifi/nifi-current/provenance_repository", "/opt/nifi/nifi-current/python_extensions", "/opt/nifi/nifi-current/state"]
 ENTRYPOINT ["../scripts/start.sh"]
+
+# Audit nested dependencies without changing the serving classpath or Wire ABI.
+FROM runtime AS archive-audit
+USER root
+COPY scripts/expose_nested_jars.py /tmp/expose_nested_jars.py
+RUN python3 /tmp/expose_nested_jars.py /opt/nifi /usr/share/cnc-guard/nested-jars
+USER 1000
+
+FROM runtime AS final

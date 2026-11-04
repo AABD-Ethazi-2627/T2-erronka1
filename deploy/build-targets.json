@@ -8,5 +8,6 @@
   "nifi": "deploy/images/nifi.Dockerfile",
   "python": "deploy/images/python.Dockerfile",
   "wolfi": "deploy/images/wolfi-base.Dockerfile",
-  "uv": "deploy/images/uv.Dockerfile"
+  "uv": "deploy/images/uv.Dockerfile",
+  "dashboard": "dashboard_laneki/Dockerfile"
 }

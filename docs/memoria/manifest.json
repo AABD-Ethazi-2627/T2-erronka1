@@ -45,15 +45,15 @@
     "docs/evidence/INDEX_2026-10-19.md": "cf7a916bca8637be9199c5001982239cc32d1cbce08551252e67d33507541125",
     "docs/evidence/PR61_ES_FIXTURE_IDENTITY.md": "f5441d58d4d48b0719f3a7104e5798dd0499ecf8826fc540e67dde5fae67a31f",
     "docs/evidence/STARLETTE_TESTCLIENT_20261021.md": "bb8fafb02bff36460933ab4fc1c76272cd627dea27b760a9f1e2d606aee5c1a0",
-    "docs/memoria/ANEXO4_CNC_Guard.md": "24e2feecda4a0ad93c09d4d807b25daf6a23deefc784446ba370a97663888cd1",
-    "docs/memoria/README.md": "67ed3b2e1e4b59f08037ef08fb636082ca4579c5fb4b05787379ca81a70de14b",
+    "docs/memoria/ANEXO4_CNC_Guard.md": "096197f141b18d81d1c6fc54c46059d15177cb1496315588da9ee28bc798a70b",
+    "docs/memoria/README.md": "876db25806c016ab6cdc3b84a49d565470db7723ab39adc9d929fa6636aa0c1d",
     "docs/requisitos/ANEXO1_CNC_Guard.md": "1fe0c3a5ba9ef3e328c294320b162bb9b1d430fd3fe4e9e867d2c8195d8d0378",
     "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
     "docs/rubrica/SEGUIMIENTO.md": "05fc3cecc10b84942d4cc16c556acb2f46c0a1ec74a4eb8fa0e12188959adcc7",
     "docs/rubrica/fuente.json": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2",
-    "pyproject.toml": "7985c47365465de682b83cf8ebf28d00fe61992259803df46a084f13259d192b",
+    "pyproject.toml": "034084d48b7cee67f32ee042bca7fa8fa5f7bc709d163da26cd71acb04b416d2",
     "scripts/check_cg25_memory.py": "8b6a7d2d627502be154c0303f316e945eb6842c3ca545eb42532f0eb30aa02e7",
-    "uv.lock": "8367a28e49a9b17035a1fd9c303db94a29113ca799dc67c5a0475d96593504d8",
+    "uv.lock": "023da35f63b547e4cd09c0529d8d9cb8bf50827b626e61648e8b73bb15b4f149",
     "README.md": "a34eab8cc28311d4f4e62d8bf1c14794f6ac3f865b2d8cd9330d625f3ba999ca",
     "notebooks/01_EDA_evidence.ipynb": "a08bf85f0a4a4ac307a2496729ae46bda32160f94112e407bbca2744529f615b",
     "notebooks/02_training_TEMPLATE.ipynb": "888daa4a547911e072c782fb561ae547a4835bc7790b11b0023b8ab1057ed890",
@@ -64,8 +64,8 @@
     "docs/DUCKDB_2_MIGRATION.md": "216a4bfb9c58742234622c19cf4458097dc13fe8db8e5daa00483e837bbeb759",
     "deploy/cg14/scripts/run-restore-e2e.py": "5682303ad31681b58e59f004fd7d3392d09073f1f41140ebb2d30133b96d1076",
     "planning/registry.py": "7c13920ae73f76f3329eb612763a20f18544c9b04d28357bde31aa0f2f3b8879",
-    "scoring/requirements.txt": "0e95d2a105d536b5cfb781ff7fb87e860678c3c0941c3306526015fd1e72da9a",
-    "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
+    "scoring/requirements.txt": "d33ff0616388dcc56aeeea134732172cbb46980e64e227a19c3b77a8092e1381",
+    "scripts/archive_consumer.py": "dc6f5c25ba129bdad03aacf013f06422ab485de06b40f5f1d6f7ea3a26ef1875",
     "scripts/capture_smb.py": "b620d24c1cd7dc524c5e0975eb9731e093aa8610b232f3c586f142f00734858b",
     "scripts/cg23_capacity.py": "44294462f42a7b6b54ebd2d163e1dc46967305c7660bc36301a7cd0c2528e7bd",
     "scripts/check_repository_layout.py": "2bef665dc0a2192f19b4a8e7504f9d15b7ade12328f62e608e5a2057f8685475",
@@ -107,7 +107,7 @@
     "docs/workflows/scoring-response-import/procedure.md": "91466580fe7709d5a90320faca0251b7984eb3d2c558084511c718c1b5f90430",
     "docs/workflows/scoring-response-import/runs/20261022.md": "f1ffedc9a2102538dcec8f5eb52c9f2d119b571be4eb3f78144148f2be36247c",
     "scoring/response_ledger.py": "93355badf158753222b8c6fa6b1feb0327d03670fd93169e4b58c697344c43cd",
-    "scoring/score_api.py": "013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e",
+    "scoring/score_api.py": "7673b38ad5ab064e3eca2f34069ce741d27537d50b8717de372424f68fb359f4",
     "scripts/import_scoring_responses.py": "8c5a844a5164fcc6301f0df4ff89bd7dc3d24c10f340669f2f60ec05cac99404",
     "tests/test_scoring_import.py": "d6cfa1498457bcdc85c0cbc770b5b0f78d64911fa68746bec103ff90338f7072",
     "docs/evidence/SCORING_RESPONSE_IMPORT_20261022.md": "f88ba766a3b258ade1328749137c08fefadb6d7aeeba64290b6bc251970f777e",
@@ -208,7 +208,7 @@
     "docs/evidence/CG40_CLOSEOUT_20261028.json": "739e2949f827dbfc6c7989cf75a292a00bfacda10be6ba0b33b8ea8f5de6df9a",
     "docs/evidence/CG32_REBUILT_IDENTITY_20261028.json": "0fe5eee773877f8946cce5db6fc6ecccc7a199bc44616d51519e4a66f1fc9d99",
     "docs/CG32_LOAD_PROTOCOL.md": "7482a5fb46238a28e7886bab673ed034596e17fa8d777100fb59e06a1749de0a",
-    "scripts/cg32_lab.py": "b0c23cc14964e1ef41124bb34dba508b7414a89d2401000937b2456586acea54",
+    "scripts/cg32_lab.py": "0498ecd63b9d81b7026b2d0bec8231c29ae7fb81c207380b4b6e1e916c396f8b",
     "docs/evidence/CG32_CAMPAIGN_20261028.md": "c275ab20956a6607fd764f70dba7436e27fb8e95c8eeb7f3c987b760a112d329",
     "docs/evidence/CG32_STATUS_20261023.md": "c15ff3e05006ffbe497d15dad6d87c6bfc84bc8b69bbbadfaed81f15f5f035c3",
     "docs/evidence/CG32_CAMPAIGN_20261028/supplement-benchmark.py": "bd2735020dff77ba99c8d0abf0eabeebada6288bf0fe3e99cb107aeae49f04b3",
@@ -232,15 +232,15 @@
     "docs/evidence/CG32_CAMPAIGN_20261028/discover-url.txt": "ac4cd1d891f9cc7f33646caa355637c9428b99f624ca2d6f3ce3541f9bcfb041",
     "docs/evidence/CG32_CAMPAIGN_20261028/discover-receipt.json": "f6a70a56416d317c3fb1b21a684dde471a806faf54101e636e6fd258209d071e",
     "docs/evidence/CG32_CAMPAIGN_20261028/cleanup.json": "ff421b79e6a10a85e37d4557adf317c5fbd3927f980f11674f31c0f3faacd029",
-    "deploy/images/uv-stage.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
-    "deploy/images/uv.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
+    "deploy/images/uv-stage.Dockerfile": "de1fd7afab25cc118c90bf7805d8a0d0034a4d6f7e0f3641609a70b5d6eb102c",
+    "deploy/images/uv.Dockerfile": "de1fd7afab25cc118c90bf7805d8a0d0034a4d6f7e0f3641609a70b5d6eb102c",
     "deploy/images/uv-rustls.patch": "4b28ce364b3865a2d5bfebff64faee810f9067e32cb6bee1a0967f23f6f09047",
-    "scoring/Dockerfile": "cc2059c9fc5f05e30b7de64dd6506886997bbc81c1cd5243e269a577f155a047",
-    "deploy/images/nifi.Dockerfile": "ea18c3b07f8854dbb4f19e00e713ceeec92a0ac852eea162ce912036d3ade99e",
-    "deploy/images.json": "70316311bb25a12199c0537b41c79e45bdf7d88f8061d4d301117b1aa9975789",
-    "deploy/build-targets.json": "ce5c4c8f0d30dfc554e5967b86bfbc77f16c616f4ac1ec46f03c37426893e593",
-    "scripts/image_inventory.py": "2b47caac6bff09eff606224299d84e4498349933caa992502ffda179402e068e",
-    "tests/test_dependency_infra.py": "b22aaa323f24286a54cd0bce497db0a3c86d385d0fb375188373719614506a5d",
+    "scoring/Dockerfile": "b0b910974a1201baab5d4555334ac0195d5a07d86e137c1f95caf812560e30af",
+    "deploy/images/nifi.Dockerfile": "a6e0c009b0656fa8c709511e132449f4c49b4dc14ba4c7dac5757f6c1f9f4b83",
+    "deploy/images.json": "3251117ba04ef51276740ac0ef2553c604fad2a1ab762cdb3830ccfee0995cc1",
+    "deploy/build-targets.json": "5852a393ca394f08c7351cb20ad30ee77d398ac89395ca92b9d96e89fbe449f2",
+    "scripts/image_inventory.py": "5f4ea60005ce08e3f76cf56b05c4507dbde0a14822159aa07ddcb7101dd480ba",
+    "tests/test_dependency_infra.py": "a387b9477014e1677deb153fdb4aa3b8a572aec09084563f31f6cda43e426550",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/api-smoke.json": "0149493b8fd82dc28509509f480d164c698483aca2be590dec9afca1f29a5e4b",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/scan-validation.json": "eb9333eff3b352e99380e6890c00ccaa8382b9fccfb85621bfa0fd6c06c1f38a",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/old-gate-rejection.json": "9c1ccbd4262a52306b4f1f8f051e9f28bfd5733b3962f7d24426a22e402cb8ea",
@@ -248,18 +248,18 @@
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/raw-validation.zip": "d83a5bbdb71e2448e9ae25651919ecc44c96692ce2b1d6283056eb5da792f3fb",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028/receipt.json": "afccb394177056088bb91f0396a11f7410f78aaa9228d129bf34952d8c065875",
     "docs/evidence/UV_RUSTLS_REPAIR_20261028.md": "f04a05779a0c5f74ed03de33c9b93fddb384282717ddd04ecdf815d728d40ca6",
-    ".github/workflows/dashboard.yml": "272829e339478d6b0319566e17e5aedd5439785056ad3713f18e536281413095",
-    ".github/workflows/dependencies.yml": "69077b9a8b629a3b7735a65eb59dee7e3d4f2cb273bef62c60bb1ffb2629854b",
-    ".github/workflows/es-bind-safety.yml": "c7dd6a94ee45812cf05d7448d4744e621a56b75289992cef5a44516d6da2f734",
-    ".github/workflows/ml-study.yml": "0c00ed281375a5c6ee170f829e4a1c2b88005eb92c1cfbad50c23397bd575018",
-    ".github/workflows/validate.yml": "b7029429a7b678a7baaf2a1861b1ca5c7c6d37950bfef3e767f9ebdffa8ceefd",
-    "deploy/images/elasticsearch.Dockerfile": "188e64e8d404ba8be0f40fb1b776d6cf432c4cf755b04464aa72cbd578e47d3c",
-    "deploy/images/filebeat.Dockerfile": "01b40d29f663174315c96f9cb46b82c0b81d4a564ca7f5b423da502f169de6b2",
-    "deploy/images/kibana-patches/package-lock.json": "ab294885dd369f387fcb00aa9c4cacb0a39b77c9256a9298e7387612e52aedfe",
-    "deploy/images/kibana-patches/package.json": "8869584ee2528db729eea4b568fcdc3a2caffa8a69c51e0a09e9a6fa64936d23",
-    "deploy/images/kibana.Dockerfile": "90d25722f7539564a027e141c4b1fe1daaad66e5865f353fbe20947bc30e04da",
-    "scripts/enforce_image_scan.py": "2e987ddbf5043bb7ec4a636328424bf17305ad05c76592bc8489f9afe463b587",
-    "tests/test_image_scan_gate.py": "11697399c1a620ea59d4cab7963f71c9d7d7cacc8d0854de2cbe3743a5705afe",
+    ".github/workflows/dashboard.yml": "b7e8f5c6b81b87af701efbd095928e3d770cf9477e50209352ff8f2a54161a37",
+    ".github/workflows/dependencies.yml": "59b0915953fbbb30b78eae41270618b0071db06fd65ef6e5c5ea336678fee5e5",
+    ".github/workflows/es-bind-safety.yml": "95553c0af814f5bba1ccbe40cc0c17f0edcce57c9d7e6b3cfd835c2ec43626a7",
+    ".github/workflows/ml-study.yml": "22fe2429f482a008727cc2ae8bc03eeb61f84774ebaa6cb17e35053887c5ab1e",
+    ".github/workflows/validate.yml": "6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e",
+    "deploy/images/elasticsearch.Dockerfile": "7cf7364680690a560ee5004d0ef4e2a7a6c3222159c62556da4568136d4fc73a",
+    "deploy/images/filebeat.Dockerfile": "03a244990855bdd17e683e699e7d3a4af3d82a75dad5a11cfed1a8a46635e299",
+    "deploy/images/kibana-patches/package-lock.json": "6900855f696c1a6d9d8b8e6b1de92ed25483cd274da49286a31cce21f8fcd056",
+    "deploy/images/kibana-patches/package.json": "81bead4dbcca18458fec77214032245e1b8d9b17c79aab7a3468769369d834e1",
+    "deploy/images/kibana.Dockerfile": "ba08b18eadd3413fa8a4e72f76500491f230729d5ece503b214b8e0b4a777ace",
+    "scripts/enforce_image_scan.py": "0d05e2dc6462e1c01bfc60852c00a88eeaa02a29d49f164fde6aa189494ce240",
+    "tests/test_image_scan_gate.py": "541188bfdfcd35cbf5c8a4ac227da8ee446b785f7a84bd6c8d9363b0a7321ee8",
     "deploy/images/elasticsearch-patches/guava-pom.xml": "9d52f490ec18bf8ae3a7af12826e086d13134de01e6b5c7b2d6bc7367efe04f6",
     "deploy/images/kibana-patches/apply-deepmerge-patch.js": "4ea52bdce6b4457ddd34ff62ceceb8215624d818d3a8ff81a22dd3e499a2c3ce",
     "deploy/images/kibana-patches/test-deepmerge-patch.js": "b3a90c73fea8138ab68896747e486a68ca4b48603b712c83cc306d1ad298c7ed",
@@ -270,7 +270,119 @@
     "docs/demo/AZALPENAK_20261028.md": "af807157993132099a3505b4eef1b84ed8fbdd73a07d21875a230110ddfb6c11",
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
-    "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26"
+    "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
+    "docs/memoria/RECONCILIACION_20261103.md": "8c4ab1413b7cf7ff1c18c62b108c87e47db017ed6026d242afde5a42d656c238",
+    "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
+    "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
+    "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
+    "docs/integration/LOCAL_WORKER.md": "029f42d652194d0297b589ff94f2b48dc355d6667b6e067be666ff7bdb22bc76",
+    "docs/integration/LOCAL_KAFKA.md": "ea9d0b9ddfe2cce4bcc48a0a85b42fa1ba6ddf59de3acadbf5e65cdfccae1824",
+    "docs/integration/LOCAL_FILEBEAT.md": "bb2721d8f88fb1a3892bc8daf7b3ada3a088d8e0e5425d3ac4585d63cdc30761",
+    "docs/integration/LOCAL_IMAGE_BUILDS.md": "31f83e828957d57b3c66d21eb2a766fafeb4b1bc9e4885248fc056032b87287a",
+    "docs/evidence/LOCAL_HTTP_20261103.md": "eff09be19dbb50739c67cd2565d2042c25e31f1147126d2ecbed5c43774804f6",
+    "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md": "fc823ceb43f0b0df5c2a2782f1468915a54089d0fb2f648e10c41261185ded02",
+    "docs/evidence/DEPENDENCY_RECONCILIATION_20261103.md": "1ec16b364101c5dd9de53b0f717eb6ca5d812b1c6dc7d3e4e9871852df87b229",
+    "docs/evidence/KIBANA_FILEBEAT_BOUNDED_20261103.md": "1bbd00c3ee0358ab989629dbc279e347745740a9fa87cfa51074f364fabfd3a0",
+    "scoring/read_api.py": "0a76faa5ecc99f72d1e0b6bccfbc84d987d4be0f24d99e75a199a111c604f858",
+    "scoring/read_models.py": "882d5071490e619a997880ffc0b971eea3fc6580442dd1dddb39d30d385d966c",
+    "scoring/read_storage.py": "54d1420768e8a51b55dee92da62e2afb29228aadf9344a0acf4ca8135402b9fc",
+    "scripts/check_runtime_image.py": "dbda218500beb5e6ddc50b983173c5236e57cee2e74f0702d3b41dfe285eb754",
+    "dashboard_laneki/Dockerfile": "422475721e154bce338254700c7a5ce9c6a7866f7d216c3f997b21edc8b5698d",
+    "dashboard_laneki/INTEGRATION.md": "c6c489243e5ec75fb397c08e0c7e055003fb74a7ae1cbf1d62343ed6e4e9aa6e",
+    "dashboard_laneki/requirements.txt": "83826287275800226015ff4617c70796cde313f5068309442f0deb4354cba546",
+    "dashboard_laneki/app.py": "bfc6cba31cd01a4eb3f9b0d25dfd2f0a90cce8a347346b1333d7ed14fac642fa",
+    "dashboard_laneki/domain.py": "8515d7d4e2e6f10d3a99b34526f929b3ffa180fe903f6c789f4a64752c7a35ce",
+    "dashboard_laneki/read_contracts.py": "6594e9246014a498e3ce83d8fe8ad88be4737eef6e1a6d1207ec3d9913bae8ab",
+    "dashboard_laneki/orriak/shared.py": "6956c822c2bc1c9310675ff30553af852b7f146f14a026a23611ff8bfcf7c767",
+    "dashboard_laneki/orriak/hasiera.py": "2a41c30bb61b6137db72bd5bb8b8457d022df7ae3f38b45dde75f24c981b68ad",
+    "dashboard_laneki/orriak/makinak.py": "602775afac5a226402b08c29842f2716e285ed0f5675533d227fcfce19528197",
+    "dashboard_laneki/orriak/datuak.py": "8e956113fc72134da44ae3c9561e15e7d405e56a38917e0611bc32d41238bec8",
+    "dashboard_laneki/orriak/abisuak.py": "7de184dfa51912ed27ba34559eb55e4863ccd5e909793c3e30c53808746ec425",
+    "dashboard_laneki/test_app.py": "5ef975e468b538876fe7a593bcda63762478971a16f21530c59c4b86254759e7",
+    "dashboard_laneki/test_domain.py": "f8c77cf900863f2a25b31bfaabd868bc04808f0198dcb06f9acc831417d90a90",
+    "dashboard_laneki/test_read_contracts.py": "725ce24decdef02f4ce67d9e1baf71c6103552bac8b65d79c340b556ff48a308",
+    "scripts/integration_bundle.py": "7ef3f5d0dacd451686e99f337400dc241821a8b42d38e93406cc1adcbe46fa4f",
+    "scripts/integration_dashboard_probe.py": "73a83f9a9ec0c32d184ef7da0e480398f3d27fe647482382d8ae501eb7b82a61",
+    "scripts/integration_fixture.py": "efb76406e9a6c5ccaae4b780aae2127aa2ce41823b935ac8dd5751502429cb59",
+    "scripts/integration_http.py": "b11589fb4a52d22dd4a25c9e2cfcc15ec2cdc5e540f504aa4c8a23f277703e83",
+    "scripts/integration_kafka_worker_local.py": "45d04b86f567b468e50556f1453e60a54c0d067320239a3467d193d42dbd4b5c",
+    "scripts/integration_lab.py": "5799f72eef49a4d3ccb39ce1876162f92bdacc944ca137122f183d6e61ad607d",
+    "scripts/integration_local.py": "e5c994bc0587e2664856d38017d05271d396b0a19b2807edd854cf067d268ea0",
+    "scripts/integration_preflight.py": "08c5f62016966b9a87dad23759a91fb822c6d51b4d32aaa5f48ce96bc92f40d5",
+    "scripts/integration_preview.py": "53d0418dce9369e1d0a43edb4cc12bec7e00819e0f6b71df8fd2549a6161c632",
+    "scripts/integration_verify.py": "bb29b51d63101581bcf168b75b3243df34975447bcbc163ab330cd934db8b7a4",
+    "scripts/integration_worker_local.py": "9bc0003573ee686c5c6d8884177a5e6edd654f5ab7d942cb8abb6080907a6e66",
+    "tests/test_integration_http.py": "a9a34a9d46783b6f3a87f55299120f945cc3f25b81cba857b94c3610b2e9bd34",
+    "tests/test_integration_kafka_worker_local.py": "09b27a370a30929b7ede5579c93e424e5bbdc09d21ed8f939ab05afa21058e06",
+    "tests/test_integration_wiring.py": "d6192c213323a0cf8ab1b1d31238a89e8b1eaa43d78582e4c8d077d2c5dd5624",
+    "tests/test_integration_worker_local.py": "35dc033ba69e5d4716d2826382bcf0e57e738efed817c773030d46a0139149ff",
+    "tests/test_read_api.py": "a0f8d5f74f97acabfbd037f6150215fb2512c25526a4148fd3f9437bbbde2510",
+    "tests/test_read_es_scalability.py": "98676cdf5b8be656fcb6e23537bdddad06c925e4c5fb8c2256bec26caeaf6d0a",
+    "tests/test_uv_build_jobs.py": "3bbde0f527495c9452ed30f5d73c8397a93e8b4eebfc9bf5071466929179803a",
+    "scripts/archive_read_index.py": "75265e744eaa63b56dec2bcb1c5d133ebfe4ca504b45374cc776bcc010dc00fa",
+    "tests/test_archive_read_index.py": "fe7d34f2a468cacdf9efa4341449e280062ba1bc5f6f6130b478f51ece9cc712",
+    "docs/evidence/LOCAL_CONTAINERS_20261103.md": "d4843d19209e709f0105b36b36c293576f937c4ec38be61bc032f1f5cf772899",
+    "tests/test_filebeat_build_jobs.py": "c110d4d2281fed13219cdd20a6fb7a994b916814b414051098b90b60611d1a2d",
+    "deploy/images/kibana-patches/test-same-line-updates.js": "582d6a01382564ebe30bc6322aae57cc8a1a0f40fbe488c92c52840e40e1da4f",
+    "docs/evidence/KIBANA_CI_SAME_LINE_20261104.md": "54ab78de7fc3155186dc3cdb1c76db8d9981b76d3fecfce4d9cbb93bb4fa18b2",
+    "docs/evidence/NIFI_CI_BLOCKERS_20261104.md": "69ab44f234b1247aff45aab8da365ed5cea1aecaac64acc2aa98b680b5faf6a0",
+    "deploy/images/kibana-patches/test-hono-node-server.js": "7f72f5db62e77795700e2554426326cd708714115f596eec55d1ec1598c4d19b",
+    "docs/evidence/KIBANA_HONO_COMPATIBILITY_20261104.md": "08212423925d264d4ea48b66fd9f8c711211b1775e63efd1e2e05601cff2f5a7",
+    "deploy/images/nifi-patches/wire5/README.md": "ce233e1a0b9982e10b9d3c0fed21667566509f0682783a1509d22c930b8578a2",
+    "deploy/images/nifi-patches/wire5/Wire5ReaderRegression.java": "0067489410ecfc4cae15510186685b414725a0e96d2bf37f70e798d7555e9a53",
+    "deploy/images/nifi-patches/wire5/pom.xml": "ed2154b8a231ab0a7aa3db8c6f69a8215a9cd0df939ce81c923d0597b4d50b4d",
+    "deploy/images/nifi-patches/wire5/readers.patch": "fe4862207918691fb2f5ccf5ac282cd7e148a2fa8ebbeab759dd206287f6fc8a",
+    "deploy/images/nifi-patches/wire5/verification-pins.json": "db286db64958abed49fbbdf2d8ab0f346b47b33fdcd3366049ead71a098a25a3",
+    "deploy/images/nifi-patches/wire5/verify.py": "3547b3f120020c74c548efc6e25fb336cee2738afc7e66e4be19f79a1b505ca9",
+    "deploy/images/nifi-patches/wire5/verify_scan.py": "bd2f5d048ae37d40a97f6c5ff3358ebb6d040040a6c12e780d54226798b34217",
+    "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md": "e88d0e17d5da5e7f8abdcf334b1af1999a5d16cec1b6bfafee78bd65a9c4e0bc",
+    "scripts/trivy-download-curl.sh": "9669f3e6eb17122788e367b1d805017e46015526548b972d5a3605f51663a4ed",
+    "tests/test_trivy_download_retry.py": "ab1621bd2688f09123595abf8b7f860fa15da9703fb054fbd485bb1497406b9b",
+    "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md": "d78de5cf363f5b44d83930b1a9a23c1e65ef9d7b9240671d1da27f46d2275adc",
+    "scripts/install_trivy_release.sh": "f2254b52cc220a3037a5d8290638d64739941e0000471ec8f0efac8a33d0705d",
+    "tests/test_trivy_release_install.py": "925ab5b9cf22ba96fdb1025d33716045c4796c3359d47428a608a1c21e9e57a4",
+    "docs/evidence/KIBANA_SCAN_EA0A89E_20261104.md": "935c22c1cb9d261e35183aceab779b5ec2dc93ba91550b0aed457d97680dc72b",
+    "deploy/images/kibana-patches/apply-minimatch-patch.js": "ababf42fd339d306c7c5bcd36b758e0e7c9a61e20fdc4829516a87b7f49cb659",
+    "deploy/images/kibana-patches/audit-glob-consumers.js": "c8153cd1ca43dabd1e11ef44a211bcd632487ed0a615afbdcbafd5f2b283409d",
+    "deploy/images/kibana-patches/glob-migration/package.json": "6bb33b44c0e0cf2941228d986bf0898534ff3ac10e49cfbea4839e83f6e72369",
+    "deploy/images/kibana-patches/glob-migration/package-lock.json": "3474f1c4eeaad5d06e840356284a1c85cc4622b687f6dae56383485c04dedf8e",
+    "deploy/images/kibana-patches/test-glob-migration.js": "0a57b01221eb87d7c985f0d11fa8b250562e3feeebc437c51a98d7cec20e2da7",
+    "deploy/images/kibana-patches/test-minimatch-limits.js": "85f6830a4ebe2eab37a43fd87710f250768e945ee855608e717900a98887a202",
+    "deploy/images/kibana-patches/test-minimatch3-applicability.js": "5b5e8f29794ffde72e5339c4c45e51e7887e97ad3fda6e4f960e7c85be11d218",
+    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "d3fe584ad8a814a1007a9d22b483029217fb885297cbb000215d44c16dde3dc9",
+    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "0fc8377c5a2aee5a84018eb5b37ecc1737ecefc6f6416e98b5eeb11d47f69ad1",
+    "docs/evidence/KIBANA_GLOB_REPRODUCE_20261104.md": "0c5f79b1e2766cfaa5268f321ec28d26c2f533c8d8426fb01fe788d4fedf27ec",
+    "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md": "7d52916c68567b66038adb23293980d28c329e36ee1072c4b746ce6ffed4b49a",
+    "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java": "43fe0295818cf4239b368bc5649cb157acd6a57ace5c2a76c246e0ed6c7cc65b",
+    "deploy/images/nifi-patches/compatible-libraries/README.md": "1f32d39ced7c84c2888c958108731448e53a15563e1c1a525b307cffba6f259a",
+    "deploy/images/nifi-patches/compatible-libraries/candidate-plan.json": "a9836f8f9623edccba515a6010c069cdf84e662af00e84024c5749e078e61982",
+    "deploy/images/nifi-patches/compatible-libraries/pins.json": "ab7f2a301ffab32002813576043923864ea4cdd5a3afef120b7e48f17f197c46",
+    "deploy/images/nifi-patches/compatible-libraries/test_verifier.py": "4849fe1c9c582f0b02ca3191dc008b5f757dfc54ab97924654e3278bce4b1376",
+    "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9",
+    "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "9ead9568a6507eeab15c9676df096f6d38565bd66bac24a4d1fa29232927aef1",
+    "deploy/images/nifi-patches/compatible-libraries/verify.py": "9696c6d7d380baf4cea8936f8f5c47de134ed42ad4c6fb01b52060baa3576b90",
+    "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.md": "2a3337b48eec55c42d927bdb96ba6a6f275fcf28836b6ffd376ced9781a9568a",
+    "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.json": "1d159461d641c6f3540b88fde59ff748bc0f051f584442a8ac68e3f387159bf3",
+    "deploy/images/nifi-patches/NESTED_PATCHING.md": "881a68ac8072c8bc75cffe497184121a90822a6686af807dff7a7e8f913a235d",
+    "deploy/images/nifi-patches/compatible-libraries/DefaultTransportProbe.java": "1a7743a529ac7774dc69dac47d50b3275af963fb77272cb01f5cb445b3aa5497",
+    "deploy/images/nifi-patches/compatible-libraries/NettyTransportProbe.java": "0006d1dcd6073b0547ac62bf922e814855926e3d78dc398ae7bfe477299f00f0",
+    "deploy/images/nifi-patches/compatible-libraries/RABBIT_TRANSPORT.md": "b06390ebebffb848657a8fd0264ebc5b9b9e673e67acc2efe2e83f35f0918772",
+    "deploy/images/nifi-patches/compatible-libraries/TransportFixture.java": "3c38f7fa0fdd4ddf697630b15f2f714f4e25ab9350f6cb4e58c3689f9dc4568c",
+    "deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "651c05afdc7c438bbbfa5676dd5e4c69f8877bd345ef5435ef29918ac9be2a01",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-candidate-plan.json": "1bb87b43362874734f42ab8e5a4c79b835837239ca62cc6927a2c81226eeb3fb",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-closure-lock.json": "b5cb2471a39b72d7ddb95e8ad3b331264751889904a836920f28a7a580a6a702",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-pins.json": "9dee8b0bddce9f359461ff04754ba11db72801208d067eb3b509bcd15d1f8cf9",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-tool-pins.json": "25eb33acec17ed138202c75fcfb27a69b5b4a2d196967a0ff5dfc86a990e0378",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-transport-summary.json": "bb80c1417a8e918ee5dc920710aabe0228dec417156f67597b0042937e564163",
+    "deploy/images/nifi-patches/compatible-libraries/test_rabbit.py": "4234b30e00d4c5796ee8c1790fc7a2d79ba47bf7eb8c62da6820df676bb43555",
+    "deploy/images/nifi-patches/compatible-libraries/verify_rabbit.py": "b99b1e6f4fc6c69711dc300083c04a60d29ce430f99d96d096742abac807d5a7",
+    "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.json": "b86a627c0ff2a0d127493fde50b3fdb9e4b06f04c532bba654829bf85c96f5dd",
+    "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md": "3cd853eeaf1a8546e72971b70b88242d84987b2b9abc5cb785a1e75688e13ea7",
+    "scripts/patch_nested_jars.py": "31f95b8befe94a657455db0fdd601db1e004a038f78538d9507482572e097143",
+    "tests/test_nifi_dependency_guards.py": "83512a0f68e182907bd55254d2eb11e5ed9aa17bc8ce928bfa0fb196344f00b8",
+    "tests/test_patch_nested_jars.py": "9e0f808828124a511044b394648ddb115c7a5d90fabd11531529bd11f2721097",
+    "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.md": "dc2f41c02dcebec9d00f5db62725ccddebb58eeb86a905459db3d150712330d0",
+    "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json": "abcd9d4f9cf2c87f17aa4e8c3be743cbfe3d0847dc2b76424b609e4fbb56e069"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -306,7 +418,7 @@
     "eta_rul": false,
     "final_test_evaluated_by_this_change": false
   },
-  "evidence_status": "2026-10-22 documentary reconciliation; author suites reused; own checks separately recorded; human acceptance pending",
+  "evidence_status": "2026-11-03 local documentary reconciliation at 7790393; historical matrix retained; bounded coordinator evidence attributed separately; human acceptance pending",
   "not_integrated": {
     "PR68": "49800d7633257c45f962578383b211eae755c217",
     "note": "OPEN at audit cut; P2 docker diff order fix under review elsewhere; not part of f770932"
@@ -320,5 +432,385 @@
     "upstream": "b2193987b72f439c63d1e6c2d0a3a228333a076b",
     "current_files": 193,
     "note": "Union of upstream and local inventory; current merged bytes recomputed; historical snapshot preserved; human review remains pending."
+  },
+  "local_reconciliation_20261103": {
+    "inspected_code_commit": "77903937fde925e00bb46e8c32395e9f94f2f802",
+    "document": "docs/memoria/RECONCILIACION_20261103.md",
+    "previous_current_hashes": {
+      "pyproject.toml": "7985c47365465de682b83cf8ebf28d00fe61992259803df46a084f13259d192b",
+      "uv.lock": "8367a28e49a9b17035a1fd9c303db94a29113ca799dc67c5a0475d96593504d8",
+      "scoring/requirements.txt": "0e95d2a105d536b5cfb781ff7fb87e860678c3c0941c3306526015fd1e72da9a",
+      "scoring/score_api.py": "013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e",
+      "scripts/cg32_lab.py": "b0c23cc14964e1ef41124bb34dba508b7414a89d2401000937b2456586acea54",
+      "deploy/images/uv-stage.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
+      "deploy/images/uv.Dockerfile": "7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf",
+      "scoring/Dockerfile": "cc2059c9fc5f05e30b7de64dd6506886997bbc81c1cd5243e269a577f155a047",
+      "deploy/images/nifi.Dockerfile": "ea18c3b07f8854dbb4f19e00e713ceeec92a0ac852eea162ce912036d3ade99e",
+      "deploy/images.json": "70316311bb25a12199c0537b41c79e45bdf7d88f8061d4d301117b1aa9975789",
+      "deploy/build-targets.json": "ce5c4c8f0d30dfc554e5967b86bfbc77f16c616f4ac1ec46f03c37426893e593",
+      "scripts/image_inventory.py": "2b47caac6bff09eff606224299d84e4498349933caa992502ffda179402e068e",
+      "tests/test_dependency_infra.py": "b22aaa323f24286a54cd0bce497db0a3c86d385d0fb375188373719614506a5d",
+      ".github/workflows/dashboard.yml": "272829e339478d6b0319566e17e5aedd5439785056ad3713f18e536281413095",
+      ".github/workflows/dependencies.yml": "69077b9a8b629a3b7735a65eb59dee7e3d4f2cb273bef62c60bb1ffb2629854b",
+      ".github/workflows/es-bind-safety.yml": "c7dd6a94ee45812cf05d7448d4744e621a56b75289992cef5a44516d6da2f734",
+      ".github/workflows/ml-study.yml": "0c00ed281375a5c6ee170f829e4a1c2b88005eb92c1cfbad50c23397bd575018",
+      ".github/workflows/validate.yml": "b7029429a7b678a7baaf2a1861b1ca5c7c6d37950bfef3e767f9ebdffa8ceefd",
+      "deploy/images/elasticsearch.Dockerfile": "188e64e8d404ba8be0f40fb1b776d6cf432c4cf755b04464aa72cbd578e47d3c",
+      "deploy/images/filebeat.Dockerfile": "01b40d29f663174315c96f9cb46b82c0b81d4a564ca7f5b423da502f169de6b2",
+      "deploy/images/kibana-patches/package-lock.json": "ab294885dd369f387fcb00aa9c4cacb0a39b77c9256a9298e7387612e52aedfe",
+      "deploy/images/kibana-patches/package.json": "8869584ee2528db729eea4b568fcdc3a2caffa8a69c51e0a09e9a6fa64936d23",
+      "deploy/images/kibana.Dockerfile": "90d25722f7539564a027e141c4b1fe1daaad66e5865f353fbe20947bc30e04da",
+      "scripts/enforce_image_scan.py": "2e987ddbf5043bb7ec4a636328424bf17305ad05c76592bc8489f9afe463b587",
+      "tests/test_image_scan_gate.py": "11697399c1a620ea59d4cab7963f71c9d7d7cacc8d0854de2cbe3743a5705afe"
+    },
+    "new_inventory_paths": [
+      "docs/memoria/RECONCILIACION_20261103.md",
+      "docs/backend/READ_API.md",
+      "docs/integration/README.md",
+      "docs/integration/LOCAL_HTTP.md",
+      "docs/integration/LOCAL_WORKER.md",
+      "docs/integration/LOCAL_KAFKA.md",
+      "docs/integration/LOCAL_FILEBEAT.md",
+      "docs/integration/LOCAL_IMAGE_BUILDS.md",
+      "docs/evidence/LOCAL_HTTP_20261103.md",
+      "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md",
+      "docs/evidence/DEPENDENCY_RECONCILIATION_20261103.md",
+      "docs/evidence/KIBANA_FILEBEAT_BOUNDED_20261103.md",
+      "scoring/read_api.py",
+      "scoring/read_models.py",
+      "scoring/read_storage.py",
+      "scripts/check_runtime_image.py",
+      "dashboard_laneki/Dockerfile",
+      "dashboard_laneki/INTEGRATION.md",
+      "dashboard_laneki/requirements.txt",
+      "dashboard_laneki/app.py",
+      "dashboard_laneki/domain.py",
+      "dashboard_laneki/read_contracts.py",
+      "dashboard_laneki/orriak/shared.py",
+      "dashboard_laneki/orriak/hasiera.py",
+      "dashboard_laneki/orriak/makinak.py",
+      "dashboard_laneki/orriak/datuak.py",
+      "dashboard_laneki/orriak/abisuak.py",
+      "dashboard_laneki/test_app.py",
+      "dashboard_laneki/test_domain.py",
+      "dashboard_laneki/test_read_contracts.py",
+      "scripts/integration_bundle.py",
+      "scripts/integration_dashboard_probe.py",
+      "scripts/integration_fixture.py",
+      "scripts/integration_http.py",
+      "scripts/integration_kafka_worker_local.py",
+      "scripts/integration_lab.py",
+      "scripts/integration_local.py",
+      "scripts/integration_preflight.py",
+      "scripts/integration_preview.py",
+      "scripts/integration_verify.py",
+      "scripts/integration_worker_local.py",
+      "tests/test_integration_http.py",
+      "tests/test_integration_kafka_worker_local.py",
+      "tests/test_integration_wiring.py",
+      "tests/test_integration_worker_local.py",
+      "tests/test_read_api.py",
+      "tests/test_read_es_scalability.py",
+      "tests/test_uv_build_jobs.py"
+    ],
+    "note": "Current inventory bytes reconciled after classifying code/config deltas and documenting bounded evidence. Historical base/matrix/snapshot and pending human review unchanged. No services, training, image acceptance, CI or human approval asserted by this documentation update."
+  },
+  "local_metadata_timeout_followup": {
+    "parent_commit": "f9a949daea3b517164987adb8fb793f735378f99",
+    "reason": "Bound the pinned Kafka fork metadata wait, retain cleanup evidence and clarify producer runbook navigation",
+    "previous_current_hashes": {
+      "scripts/integration_kafka_worker_local.py": "85b820a8caab17cf0b520167b77dbee9b2dbcc623ba80fc04692fadf33712c6b",
+      "tests/test_integration_kafka_worker_local.py": "17e9067d39f7d3bd4a37266489eee32bbb2789e58a2379588aae29d8edd33e4d",
+      "docs/integration/LOCAL_FILEBEAT.md": "bb33daaabd93f69295cd5834fa6cc35021dafbc3125507099d7fbc4c49ccda93",
+      "docs/integration/LOCAL_KAFKA.md": "b4995475271798e05b13534810d59d875ef3d42688167ebe9f8f4cd2c5fbf735",
+      "docs/memoria/RECONCILIACION_20261103.md": "32f129ffeef2c39ba85554d3f5ed16c14acb3411b99c2061837dd72dd3d991be"
+    },
+    "verification": "48 focused offline runner tests; Ruff; documentary verifier; no live timeout claim"
+  },
+  "local_archive_index_followup": {
+    "parent_commit": "723ab6b29451578b27d7befdb4c8526310e6ae23",
+    "document": "docs/memoria/RECONCILIACION_20261103.md",
+    "reason": "Select committed prediction objects before file verification; explicit offline legacy index migration; include reader helper in API image input",
+    "previous_current_hashes": {
+      "scripts/archive_consumer.py": "d2e0d3c90243e8cca14b8f410edfb288d0c68aae9507dc916169df91ce37ee49",
+      "scoring/read_storage.py": "61c5ae119c56ce128ed08295bb0ebf28399baf709e3ee8910cc7abae8eb36d1a",
+      "scoring/read_api.py": "907bb290a5b054a378e3e475f8cf2c3d4b8a5a1caa768e7fa7c1211f89390b41",
+      "scoring/Dockerfile": "17a843475a66da46fd1706bccac43e63337297d46bd0e63b435e76b4c8c5f1c9",
+      "tests/test_read_api.py": "99b956232ac323c74eb825876082f225bc16ed40d5c2f9a7c62b664c4260b0c9",
+      "docs/backend/READ_API.md": "44ac7e573d67cf9245f204f0c9940ed829f2955e4d5bc464d73330fa38c9baa0",
+      "docs/memoria/RECONCILIACION_20261103.md": "9af68add92cf485f1cfa336e1c3ae0a98bb4b2c7c86b8354632bc540894e66a5"
+    },
+    "new_inventory_paths": [
+      "scripts/archive_read_index.py",
+      "tests/test_archive_read_index.py"
+    ],
+    "verification": "Documentary verifier only in this reconciliation; implementer reports 129 tests and 126 subtests plus one subsequent regression; independent parent tests and image/runtime validation recorded separately",
+    "limits": "Selected 20000 objects / 64 MiB; at most 10000 predictions; no sustained writer throughput, complete retained-object audit, live archive migration, container acceptance, SMB or human approval claimed"
+  },
+  "local_container_evidence_followup": {
+    "source_commit": "b5d5d545646ad3ba447be2312d9ae9c5b4d1b8e8",
+    "previous_current_hashes": {
+      "scripts/integration_bundle.py": "7c990ac6c878fb72d7c90a546068862b7848cbe44b649f9a944920572ac2a652",
+      "docs/integration/README.md": "75d16c5f068e0e37118796fa4e0c986c23821a79efd1308c54626720e82c8cb1",
+      "docs/memoria/RECONCILIACION_20261103.md": "7981cc38d6cb51bfe07d687595aea3b05a1ad44b9eb77601ffc672abfeef093f"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/LOCAL_CONTAINERS_20261103.md"
+    ],
+    "verification": "894 tests,374 subtests,4 skipped;29 dashboard tests; bounded actual image HTTP/browser and image gates; no human acceptance"
+  },
+  "local_filebeat_build_bound": {
+    "previous_current_hashes": {
+      "deploy/images/filebeat.Dockerfile": "e0947e3fa4030ba55a60541dfd3d8de3642d6577ee27867e8635c8968a575ad6",
+      "docs/integration/LOCAL_IMAGE_BUILDS.md": "a51d58b51a23a404c8cb444f8d883ce053718eb953276b5e7c3c36737cbb7b70",
+      "docs/memoria/RECONCILIACION_20261103.md": "29058d66769e63bae2027e332d988a2c23292ba2290665db273919a9bae04ec2"
+    },
+    "new_inventory_paths": [
+      "tests/test_filebeat_build_jobs.py"
+    ],
+    "verification": "22 tests and18subtests;image inventory passes;build/runtime not claimed"
+  },
+  "local_read_import_preflight": {
+    "previous_hash": "e794b6a64d8fc1a472aa171c41d59291e8e23b61e6b34cf310c04e20e94cdce2",
+    "reason": "Image preflight imports archive selection and storage readers before lab activation",
+    "verification": "actual api-index image offline probe passes;11 wiring tests pass"
+  },
+  "local_serial_image_evidence": {
+    "previous_current_hashes": {
+      "docs/evidence/LOCAL_CONTAINERS_20261103.md": "bd4362d0efbb11b540a418117e35d75737089242ce805cdd17bce31f11e94f64",
+      "docs/integration/LOCAL_IMAGE_BUILDS.md": "0de0bcba4ce403b4542f8db373a028909df6eb35202aab120e6f2351984efa7b",
+      "docs/integration/LOCAL_FILEBEAT.md": "30ca3dbbcbc59b0af64e0e2c4f1784daf51e6abccea31191df09bc7dde8fce9b",
+      "docs/memoria/RECONCILIACION_20261103.md": "f5d900d4af74585f56ce0dd42a2499f175b63fbde37450231376d080fe07fa8c"
+    },
+    "verification": "ES build+scan+12volatile-compatibility operations;Filebeatbuild+scan+binary reachability+actual Kafka production;isolated TLS1test60subtests",
+    "limits": "No final-image full pipeline,NiFi/Kibana,SMB,model or human acceptance;Claude final review unavailable"
+  },
+  "local_claude_index_review_completed": {
+    "reviewed_commit": "b5d5d545646ad3ba447be2312d9ae9c5b4d1b8e8",
+    "previous_current_hashes": {
+      "docs/backend/READ_API.md": "72e85b0b3556d01b472fd41f77d9b4c3b491272cfc64e1fcfe351d61cd11b14c",
+      "docs/evidence/LOCAL_CONTAINERS_20261103.md": "8b5329fee1bd14f1f3aafbee023f28ab6c1efa9a2e464fcece7ca347400c93a9",
+      "docs/memoria/RECONCILIACION_20261103.md": "7c92a79d554441d40345b184ce4d9c955fbb201d82279eb465f54105d633aaf9"
+    },
+    "review_report_sha256": "48355a234a31ac6465ae26a647894d23cd46b353f02af4b986b234e3fc22dd2f",
+    "blocking_findings": 0,
+    "mode": "read-only source review;no execution",
+    "implementation_unchanged_since_reviewed_commit": [
+      "scripts/archive_read_index.py",
+      "scripts/archive_consumer.py",
+      "scoring/read_storage.py",
+      "scoring/read_api.py"
+    ],
+    "human_review": "pending"
+  },
+  "pr119_kibana_same_line_followup": {
+    "source_commit": "6a11161fd1d6834167e741aea25ba595a0c0e01d",
+    "previous_current_hashes": {
+      "deploy/images/kibana.Dockerfile": "331658ec32c0193e9d71cd82739b164f00fa5efb85063a769a6f56bab5d7d3a6",
+      "deploy/images/kibana-patches/package.json": "76adab4ad02ee6b4673b9715a74e30caf3af7d7229c3de4015118bd48fe2783b",
+      "deploy/images/kibana-patches/package-lock.json": "e90fbb8f5cfc7d4e68829a2941aa9a8d50e2908317f5309c8fe3fa0b16f4b855",
+      "docs/memoria/RECONCILIACION_20261103.md": "2c31bab0b756d73588be8769d481b9faebbe47594280bb5386861ef92eccab5f"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/test-same-line-updates.js",
+      "docs/evidence/KIBANA_CI_SAME_LINE_20261104.md",
+      "docs/evidence/NIFI_CI_BLOCKERS_20261104.md"
+    ],
+    "verification": "five actualpackage regressions +vendorversion fixture repeated bycoordinator;finalimagepending;NiFi reportdiagnostic only"
+  },
+  "pr119_hono_compatibility": {
+    "previous_current_hashes": {
+      "deploy/images/kibana.Dockerfile": "8a1c0eebe2509ed97282383163ca5461f24a5e59d8d76d036c5a1cd8a7b70425",
+      "deploy/images/kibana-patches/package.json": "12f363da03c45698e66aaeec1d8d9846e9ad04bcd572c21c57139a3f754bd020",
+      "deploy/images/kibana-patches/package-lock.json": "47ff18bc2d0e2f08a7aebfb643502ab78617251ecd53503733b4655adb30836e",
+      "docs/memoria/RECONCILIACION_20261103.md": "65cb38941adeed5a47d0ee098e7f48275607ab107068234439914792bcfe8f94"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/test-hono-node-server.js",
+      "docs/evidence/KIBANA_HONO_COMPATIBILITY_20261104.md"
+    ],
+    "verification": "ActualHTTP/MCP CJS+ESM and traversalcontrols repeated bycoordinator;finalimagepending",
+    "remaining": "glob/minimatch,NiFi,finalCIandGitHubapproval"
+  },
+  "pr119_wire5_unpromoted_candidate": {
+    "previous_current_hashes": {
+      "docs/evidence/NIFI_CI_BLOCKERS_20261104.md": "0edb5ec007eca79e8a3517d113a60ce67b1f911a36670c42be6b58dbb66b4410",
+      "scripts/integration_bundle.py": "82f5b1505152a8fc39958997cf20b02dd5fbfc8dbc4a28dfae8b5c2fea54f34e",
+      "docs/memoria/RECONCILIACION_20261103.md": "2c630248884fc6c74e616cbd265d1445b5af024d338a0293e1daea27ab7a548b"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/wire5/README.md",
+      "deploy/images/nifi-patches/wire5/Wire5ReaderRegression.java",
+      "deploy/images/nifi-patches/wire5/pom.xml",
+      "deploy/images/nifi-patches/wire5/readers.patch",
+      "deploy/images/nifi-patches/wire5/verification-pins.json",
+      "deploy/images/nifi-patches/wire5/verify.py",
+      "deploy/images/nifi-patches/wire5/verify_scan.py",
+      "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md"
+    ],
+    "verification": "Parent44tests/upstream9failures,publicABI unchanged,exactpins,standaloneTrivyrecognition/findingvisible",
+    "limits": "Candidate NOTusedbyNiFi;Claudev1blocked;v2review/fullinventory/runtime/imagegatespending"
+  },
+  "pr119_trivy_installer_retry": {
+    "previous_current_hashes": {
+      ".github/workflows/dependencies.yml": "bd8a367fb270594f3a664f13dab0501f0f0ef30b3aef5277dc0982c63006a878",
+      "docs/memoria/RECONCILIACION_20261103.md": "520300e0a98712bc0f54c8df64410ef2963e30c477d55e706999032bc0ed9f35"
+    },
+    "new_inventory_paths": [
+      "scripts/trivy-download-curl.sh",
+      "tests/test_trivy_download_retry.py",
+      "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md"
+    ],
+    "cause": "Actual jobs failed curl exit6 duringTrivyinstallation before scan",
+    "verification": "16tests18subtests;actualcurl503recovery;newCIpending",
+    "gate_unchanged": true
+  },
+  "pr119_trivy_direct_release_install": {
+    "previous_current_hashes": {
+      ".github/workflows/dependencies.yml": "58a9e4aeaad42378437998ac86192421b0990b2a8be3f96f7beb6981cac49466",
+      "scripts/trivy-download-curl.sh": "4ef929e19c5a712b8466078db847d28cfce930bca07bca900f2040db1244a01a",
+      "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md": "749f87bd85207448429dc08308e5fe673bdcec8e159bc99163c30c2fbfda7f78",
+      "docs/memoria/RECONCILIACION_20261103.md": "dec7b933a6bba8a2181ee64683f8223afdab2a4cf8d55b853d5056b65e0b40a3"
+    },
+    "new_inventory_paths": [
+      "scripts/install_trivy_release.sh",
+      "tests/test_trivy_release_install.py"
+    ],
+    "root_cause": "Pinnedinstaller actuallydownloadsfromget.trivy.dev, independentlyreproducedDNSfailure",
+    "verification": "Directofficialchecksum-pinnedinstall + actualscannerfixture;17tests18subtests;CIpending",
+    "gate_unchanged": true
+  },
+  "pr119_kibana_forge_inventory": {
+    "previous_current_hashes": {
+      "scripts/enforce_image_scan.py": "a7f6486085b229f3f7e92d27eab01890edfaf8d3567f82a94692fb1e7570eb41",
+      "tests/test_image_scan_gate.py": "65ca31fd654b2a4b1eeb39ed141d8ce5a058c94ca77a3914b79d384bf418d131",
+      "docs/memoria/RECONCILIACION_20261103.md": "bc52430154ecd164c380e4b60b6214b6f5568f143b788bcd13ddea9713506e37"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/KIBANA_SCAN_EA0A89E_20261104.md"
+    ],
+    "verification": "Actual CI image scan revalidated: upstream Forge 1.4.1 only; 15 tests and 21 subtests pass; four Glob/Minimatch findings still block",
+    "new_scanner_exceptions": false
+  },
+  "pr119_kibana_glob_minimatch_image": {
+    "previous_current_hashes": {
+      "deploy/images/kibana.Dockerfile": "bcf9dd110437acc8bf84a33b5f36230057b2e9ba1150fb1ff3b49c665156a7b4",
+      "deploy/images/kibana-patches/package.json": "2a8ebdea42b461f5535e6025638375ae56498a0be0015bcf275254a61f23cf8d",
+      "deploy/images/kibana-patches/package-lock.json": "c43ec72a13fab36c0a48a61b05e050f18f80527cc50282cdba95dc29f7148aaf",
+      "docs/memoria/RECONCILIACION_20261103.md": "3a08c1fc4c64a8977caba9bf8db6a6cd26bf8ac37585cd71a136e6a4af54565a"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/apply-minimatch-patch.js",
+      "deploy/images/kibana-patches/audit-glob-consumers.js",
+      "deploy/images/kibana-patches/glob-migration/package.json",
+      "deploy/images/kibana-patches/glob-migration/package-lock.json",
+      "deploy/images/kibana-patches/test-glob-migration.js",
+      "deploy/images/kibana-patches/test-minimatch-limits.js",
+      "deploy/images/kibana-patches/test-minimatch3-applicability.js",
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md",
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json"
+    ],
+    "verification": "Standalone final image built; Node24 CJS/ESM regressions; 96000 ordinary match comparisons; real Trivy scan reduces four unexpected findings to two, gate remains failed",
+    "bootstrap": "Candidate and original both exhaust probe heap512MiB; no ready-service/full-stack acceptance",
+    "new_scanner_exceptions": false,
+    "independent_patch_review": "pending",
+    "source_identity": "Pre-build hashes and exact image identity recorded in evidence index"
+  },
+  "pr119_kibana_review_corrections": {
+    "previous_current_hashes": {
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "5c67475b22767a07d347094702e66eb97d8bd7d04826dbfbbfcba413d6eb74e0",
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "606a4c3acf1e7a63843fb240f52327aeefb0aa981f0b23f86f7bebb9ec0393c8",
+      "docs/memoria/RECONCILIACION_20261103.md": "546cad8ff9348bd119ab8930c0576cada5dc4e92c5eff8dd78da55f4c5c70de6"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/KIBANA_GLOB_REPRODUCE_20261104.md",
+      "docs/evidence/CLAUDE_KIBANA_GLOB_PATCH_RECHECK_20261104.md"
+    ],
+    "reviewed_commit": "f80c37f72e35d2a5568b5a0801e4304a23a1ce41",
+    "review_status": "completed; zero high or established runtime breakage; two documentary findings corrected",
+    "verification": "Own base/final dot-result control, raw trace inventory5vs3 @kbn modules out of8 literal references; documented drivers reexecuted successfully;22 image source hashes unchanged",
+    "image_rebuilt": false,
+    "new_scanner_exceptions": false,
+    "remaining_low_code_changes": "deferred to next image build; comment/guard/alias defects explicitly documented",
+    "external_acceptance": "pending"
+  },
+  "pr119_nifi_component_candidates": {
+    "previous_current_hashes": {
+      "docs/memoria/RECONCILIACION_20261103.md": "ba76e2b938ba21bd816f3760c2888bf0472708bf0678fc287bb174ddd51051d9"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java",
+      "deploy/images/nifi-patches/compatible-libraries/README.md",
+      "deploy/images/nifi-patches/compatible-libraries/candidate-plan.json",
+      "deploy/images/nifi-patches/compatible-libraries/pins.json",
+      "deploy/images/nifi-patches/compatible-libraries/test_verifier.py",
+      "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json",
+      "deploy/images/nifi-patches/compatible-libraries/verification-summary.json",
+      "deploy/images/nifi-patches/compatible-libraries/verify.py",
+      "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.md",
+      "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.json"
+    ],
+    "child_commit": "98eb0dc4593c12e7c9837804f78efb4da6c1d967",
+    "integrated_source_commit": "107edda",
+    "parent_verification": "Offline component/A-B probes and4negative integrity tests pass;105856KiB peak childRSS; conditional six-object plan matches child",
+    "runtime_patched_objects": 0,
+    "blocked": "Two Guava object hashes differ; RabbitMQ requires Netty closure; all NAR occurrences/classloaders unmapped",
+    "gate": "59 nested tuples remain; no policy change",
+    "independent_component_review": "pending"
+  },
+  "pr119_nifi_occurrences_review_fixes": {
+    "parent_commit": "ea9e84f566685daeb50be896eae4c3e0a6439fac",
+    "integrated_commits": [
+      "1a1af46",
+      "9634705"
+    ],
+    "previous_current_hashes": {
+      "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java": "71642c704477b86189e843edd05228fcd1ad0ac8e7fc45a7d402e1684b9646d8",
+      "deploy/images/nifi-patches/compatible-libraries/README.md": "29a838a8fc079c33818e84c2d369bbf4a3671f08ee861e62ab9af908d69fddca",
+      "deploy/images/nifi-patches/compatible-libraries/candidate-plan.json": "63a7860a3b20d5b08db4a891c589c09874080c26a892dc78a9c0d0e6df06e203",
+      "deploy/images/nifi-patches/compatible-libraries/pins.json": "22d1819e20f318b8956f9b26c160590b5ab4c634762990973ce886d464c4e621",
+      "deploy/images/nifi-patches/compatible-libraries/test_verifier.py": "87fe5468a1d96214667784230695fa8f070421b01a210206892af7368a93075d",
+      "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "761b0e1471673636d746b9c44cd3132a52d4bdfeeda4ace784559b3519df746f",
+      "deploy/images/nifi-patches/compatible-libraries/verify.py": "b0815c81225595ad4aea4a227dd62d4f943560a4d8afcb26d9ae4a53358d8503",
+      "docs/evidence/NIFI_COMPONENT_CANDIDATES_20261104.md": "6ba421b20698095993a7678b469829e1cfa170efeef340f6af0ac621a92b388a",
+      "docs/memoria/RECONCILIACION_20261103.md": "3605252fac15bb578c41952bcc082d271ff0e9b25be6fe69cb4c49d641a9bc08"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/NESTED_PATCHING.md",
+      "deploy/images/nifi-patches/compatible-libraries/DefaultTransportProbe.java",
+      "deploy/images/nifi-patches/compatible-libraries/NettyTransportProbe.java",
+      "deploy/images/nifi-patches/compatible-libraries/RABBIT_TRANSPORT.md",
+      "deploy/images/nifi-patches/compatible-libraries/TransportFixture.java",
+      "deploy/images/nifi-patches/compatible-libraries/maven_closure.py",
+      "deploy/images/nifi-patches/compatible-libraries/rabbit-candidate-plan.json",
+      "deploy/images/nifi-patches/compatible-libraries/rabbit-closure-lock.json",
+      "deploy/images/nifi-patches/compatible-libraries/rabbit-pins.json",
+      "deploy/images/nifi-patches/compatible-libraries/rabbit-tool-pins.json",
+      "deploy/images/nifi-patches/compatible-libraries/rabbit-transport-summary.json",
+      "deploy/images/nifi-patches/compatible-libraries/test_rabbit.py",
+      "deploy/images/nifi-patches/compatible-libraries/verify_rabbit.py",
+      "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.json",
+      "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.md",
+      "scripts/patch_nested_jars.py",
+      "tests/test_nifi_dependency_guards.py",
+      "tests/test_patch_nested_jars.py"
+    ],
+    "evidence": "docs/evidence/NIFI_OCCURRENCES_REVIEW_FIXES_20261104.json",
+    "verification": "46 focused tests, 18 subtests; complete inventory; independent pinned offline component and seven loopback transport configurations; Ruff; full working-tree suite 935 tests, 395 subtests, 4 skipped (source timing limit recorded)",
+    "limits": "Preparation only; no original archive modified, final image build/scan, NiFi runtime/classloader acceptance or exception; historical/human snapshots preserved"
+  },
+  "pr119_nifi_disk_export": {
+    "parent_commit": "f4e32bf528536c36e5b14efbe702b68383c346aa",
+    "previous_current_hashes": {
+      ".github/workflows/dependencies.yml": "0d935a111ddc5f53429b9823c26391080be2c96181bb819bd94394e43faf1f9e",
+      "docs/memoria/RECONCILIACION_20261103.md": "f8f4c551d085d473cebff849e47947c75174902f07db3db61a692cdc5a70c291"
+    },
+    "new_inventory_paths": [
+      "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.md",
+      "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json"
+    ],
+    "evidence": "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json",
+    "verification": "actionlint; 17 existing infrastructure/archive/gate tests, 23 subtests",
+    "limits": "No local cleanup/build, completed nested report, measured reclaimed bytes, successful CI rerun or exception; final image gates remain blocking"
   }
 }

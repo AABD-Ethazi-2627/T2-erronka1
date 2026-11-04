@@ -11,7 +11,6 @@ VERIFIED_FINDINGS = {
         ("GO-2026-5932", "golang.org/x/crypto", "v0.58.0"),
     },
     "kibana": {
-        ("CVE-2026-85393", "node-forge", "1.4.0+cncguard.1"),
         ("CVE-2026-19693", "extract-zip", "2.0.1+cncguard.1"),
         ("CVE-2026-56876", "extract-zip", "2.0.1+cncguard.1"),
     },
@@ -33,6 +32,8 @@ def findings(report: dict) -> set[tuple[str, str, str]]:
 def expected_reference(image: str) -> str | None:
     root = Path(__file__).resolve().parents[1]
     targets = json.loads((root / "deploy/build-targets.json").read_bytes())
+    if image == "nifi-archives":
+        return "cnc-guard-audit:nifi-archives"
     if image in targets:
         return "cnc-guard-audit:" + image
     return json.loads((root / "deploy/images.json").read_bytes()).get(image)
@@ -97,10 +98,12 @@ def validate(
         return ["image report contains no operating system package coverage"]
     required = {
         "api": {("lang-pkgs", "python-pkg"), ("lang-pkgs", "rustbinary")},
+        "dashboard": {("lang-pkgs", "python-pkg"), ("lang-pkgs", "rustbinary")},
         "uv": {("lang-pkgs", "rustbinary")},
         "go": {("lang-pkgs", "gobinary")},
         "filebeat": {("lang-pkgs", "gobinary")},
         "kafka": {("lang-pkgs", "jar")},
+        "nifi-archives": {("lang-pkgs", "jar"), ("lang-pkgs", "rustbinary")},
         "nifi": {("lang-pkgs", "jar"), ("lang-pkgs", "rustbinary")},
         "elasticsearch": {("lang-pkgs", "jar")},
         "kibana": {("lang-pkgs", "node-pkg")},
@@ -112,6 +115,18 @@ def validate(
     unexpected = found - permitted
     missing = permitted - found
     errors = [f"unexpected vulnerability: {item!r}" for item in sorted(unexpected)]
+    if image == "kibana":
+        forge_versions = {
+            package.get("Version")
+            for result in results
+            if (result["Class"], result["Type"]) == ("lang-pkgs", "node-pkg")
+            for package in result["Packages"]
+            if package["Name"] == "node-forge"
+        }
+        if forge_versions != {"1.4.1"}:
+            errors.append(
+                "Kibana must inventory only the reviewed node-forge 1.4.1 release"
+            )
     if image in VERIFIED_FINDINGS:
         errors.extend(
             f"verified patched finding disappeared; review the exception: {item!r}"

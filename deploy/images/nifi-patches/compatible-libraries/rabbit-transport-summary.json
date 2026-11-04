@@ -1,0 +1,75 @@
+{
+  "status": "transport-component-tested-nar-mapping-pending",
+  "component_tests": {
+    "default-no-netty-5.35.0": "passed",
+    "default-no-netty-5.37.0": "passed",
+    "default-no-netty-nifi-slf4j-2.0.19": "passed",
+    "declared-4.2.18": "passed",
+    "reference-nar-4.2.17": "passed",
+    "declared-4.2.18-nifi-slf4j": "passed",
+    "reference-nar-4.2.17-nifi-slf4j": "passed"
+  },
+  "required_closure_pinned": true,
+  "required_coordinates": [
+    "com.rabbitmq:amqp-client:5.37.0",
+    "io.netty:netty-buffer:4.2.18.Final",
+    "io.netty:netty-codec-base:4.2.18.Final",
+    "io.netty:netty-codec-compression:4.2.18.Final",
+    "io.netty:netty-codec-marshalling:4.2.18.Final",
+    "io.netty:netty-codec-protobuf:4.2.18.Final",
+    "io.netty:netty-codec:4.2.18.Final",
+    "io.netty:netty-common:4.2.18.Final",
+    "io.netty:netty-handler:4.2.18.Final",
+    "io.netty:netty-resolver:4.2.18.Final",
+    "io.netty:netty-transport-native-unix-common:4.2.18.Final",
+    "io.netty:netty-transport:4.2.18.Final",
+    "org.slf4j:slf4j-api:1.7.36"
+  ],
+  "input_rabbitmq_sha256": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6",
+  "replacement_file": "amqp-client-5.37.0.jar",
+  "replacement_url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.37.0/amqp-client-5.37.0.jar",
+  "replacement_sha256": "b27134820890c5e56ed57d27cc50b70742fa2c31b36a6e9e28e14a43f34ff96f",
+  "official_reference_nar_sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+  "nifi_managed_slf4j_reference": "2.0.19; API tested, actual logger provider/classloader pending",
+  "reference_consumer_uses": "blocking SocketFrameHandlerFactory; automatic recovery disabled",
+  "tested_reference_netty_versions": [
+    "4.2.17.Final",
+    "4.2.18.Final"
+  ],
+  "source_sha256": {
+    "TransportFixture.java": "3c38f7fa0fdd4ddf697630b15f2f714f4e25ab9350f6cb4e58c3689f9dc4568c",
+    "DefaultTransportProbe.java": "1a7743a529ac7774dc69dac47d50b3275af963fb77272cb01f5cb445b3aa5497",
+    "NettyTransportProbe.java": "0006d1dcd6073b0547ac62bf922e814855926e3d78dc398ae7bfe477299f00f0",
+    "verify_rabbit.py": "44e95784aa045fdca8029e31a6e832d55d73c7bbc5bff8542586e0f99252acd8",
+    "maven_closure.py": "c503de0cdc74797b925fe748066591cb497a071cc566a0446e0c7a61a9301da4",
+    "verify.py": "18f67228fa6f2320f16cf72e8227f228637c187296b508b0e013b1c2e481f43e",
+    "rabbit-pins.json": "9dee8b0bddce9f359461ff04754ba11db72801208d067eb3b509bcd15d1f8cf9",
+    "rabbit-closure-lock.json": "b5cb2471a39b72d7ddb95e8ad3b331264751889904a836920f28a7a580a6a702",
+    "rabbit-tool-pins.json": "25eb33acec17ed138202c75fcfb27a69b5b4a2d196967a0ff5dfc86a990e0378",
+    "toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9"
+  },
+  "resource_usage": {
+    "max_child_rss_kib": 112816,
+    "self_max_rss_kib": 32640
+  },
+  "patched": false,
+  "docker_occurrence_mapping": null,
+  "final_nifi_acceptance": false,
+  "full_image_scan": false,
+  "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/rabbit-transport-3e7e9435/proof-1793793759198298269",
+  "fresh_download_proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/rabbit-transport-3e7e9435/verified-download/proof-1793793760397726110",
+  "fresh_download_resource_usage": {
+    "max_child_rss_kib": 112492,
+    "self_max_rss_kib": 37808
+  },
+  "model_integrity_tests": 13,
+  "original_negative_tests": 4,
+  "original_library_component_result": {
+    "component_tests": "passed",
+    "plan": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/rabbit-transport-3e7e9435/proof-1793793658448093801/replacement-plan.json",
+    "results": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/rabbit-transport-3e7e9435/proof-1793793658448093801/component-results.json",
+    "patched": false
+  },
+  "local_parent_commit": "98eb0dc4593c12e7c9837804f78efb4da6c1d967",
+  "parent_integration_context": "Parent reports original candidate integrated unchanged as 107edda; parent source ea9e84f; not modified here."
+}
