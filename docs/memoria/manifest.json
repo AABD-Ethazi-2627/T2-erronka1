@@ -255,9 +255,9 @@
     ".github/workflows/validate.yml": "6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e",
     "deploy/images/elasticsearch.Dockerfile": "7cf7364680690a560ee5004d0ef4e2a7a6c3222159c62556da4568136d4fc73a",
     "deploy/images/filebeat.Dockerfile": "03a244990855bdd17e683e699e7d3a4af3d82a75dad5a11cfed1a8a46635e299",
-    "deploy/images/kibana-patches/package-lock.json": "c43ec72a13fab36c0a48a61b05e050f18f80527cc50282cdba95dc29f7148aaf",
-    "deploy/images/kibana-patches/package.json": "2a8ebdea42b461f5535e6025638375ae56498a0be0015bcf275254a61f23cf8d",
-    "deploy/images/kibana.Dockerfile": "bcf9dd110437acc8bf84a33b5f36230057b2e9ba1150fb1ff3b49c665156a7b4",
+    "deploy/images/kibana-patches/package-lock.json": "6900855f696c1a6d9d8b8e6b1de92ed25483cd274da49286a31cce21f8fcd056",
+    "deploy/images/kibana-patches/package.json": "81bead4dbcca18458fec77214032245e1b8d9b17c79aab7a3468769369d834e1",
+    "deploy/images/kibana.Dockerfile": "ba08b18eadd3413fa8a4e72f76500491f230729d5ece503b214b8e0b4a777ace",
     "scripts/enforce_image_scan.py": "0d05e2dc6462e1c01bfc60852c00a88eeaa02a29d49f164fde6aa189494ce240",
     "tests/test_image_scan_gate.py": "541188bfdfcd35cbf5c8a4ac227da8ee446b785f7a84bd6c8d9363b0a7321ee8",
     "deploy/images/elasticsearch-patches/guava-pom.xml": "9d52f490ec18bf8ae3a7af12826e086d13134de01e6b5c7b2d6bc7367efe04f6",
@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "3a08c1fc4c64a8977caba9bf8db6a6cd26bf8ac37585cd71a136e6a4af54565a",
+    "docs/memoria/RECONCILIACION_20261103.md": "546cad8ff9348bd119ab8930c0576cada5dc4e92c5eff8dd78da55f4c5c70de6",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -341,7 +341,16 @@
     "docs/evidence/TRIVY_INSTALL_TRANSPORT_20261104.md": "d78de5cf363f5b44d83930b1a9a23c1e65ef9d7b9240671d1da27f46d2275adc",
     "scripts/install_trivy_release.sh": "f2254b52cc220a3037a5d8290638d64739941e0000471ec8f0efac8a33d0705d",
     "tests/test_trivy_release_install.py": "925ab5b9cf22ba96fdb1025d33716045c4796c3359d47428a608a1c21e9e57a4",
-    "docs/evidence/KIBANA_SCAN_EA0A89E_20261104.md": "935c22c1cb9d261e35183aceab779b5ec2dc93ba91550b0aed457d97680dc72b"
+    "docs/evidence/KIBANA_SCAN_EA0A89E_20261104.md": "935c22c1cb9d261e35183aceab779b5ec2dc93ba91550b0aed457d97680dc72b",
+    "deploy/images/kibana-patches/apply-minimatch-patch.js": "ababf42fd339d306c7c5bcd36b758e0e7c9a61e20fdc4829516a87b7f49cb659",
+    "deploy/images/kibana-patches/audit-glob-consumers.js": "c8153cd1ca43dabd1e11ef44a211bcd632487ed0a615afbdcbafd5f2b283409d",
+    "deploy/images/kibana-patches/glob-migration/package.json": "6bb33b44c0e0cf2941228d986bf0898534ff3ac10e49cfbea4839e83f6e72369",
+    "deploy/images/kibana-patches/glob-migration/package-lock.json": "3474f1c4eeaad5d06e840356284a1c85cc4622b687f6dae56383485c04dedf8e",
+    "deploy/images/kibana-patches/test-glob-migration.js": "0a57b01221eb87d7c985f0d11fa8b250562e3feeebc437c51a98d7cec20e2da7",
+    "deploy/images/kibana-patches/test-minimatch-limits.js": "85f6830a4ebe2eab37a43fd87710f250768e945ee855608e717900a98887a202",
+    "deploy/images/kibana-patches/test-minimatch3-applicability.js": "5b5e8f29794ffde72e5339c4c45e51e7887e97ad3fda6e4f960e7c85be11d218",
+    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md": "5c67475b22767a07d347094702e66eb97d8bd7d04826dbfbbfcba413d6eb74e0",
+    "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json": "606a4c3acf1e7a63843fb240f52327aeefb0aa981f0b23f86f7bebb9ec0393c8"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -650,5 +659,29 @@
     ],
     "verification": "Actual CI image scan revalidated: upstream Forge 1.4.1 only; 15 tests and 21 subtests pass; four Glob/Minimatch findings still block",
     "new_scanner_exceptions": false
+  },
+  "pr119_kibana_glob_minimatch_image": {
+    "previous_current_hashes": {
+      "deploy/images/kibana.Dockerfile": "bcf9dd110437acc8bf84a33b5f36230057b2e9ba1150fb1ff3b49c665156a7b4",
+      "deploy/images/kibana-patches/package.json": "2a8ebdea42b461f5535e6025638375ae56498a0be0015bcf275254a61f23cf8d",
+      "deploy/images/kibana-patches/package-lock.json": "c43ec72a13fab36c0a48a61b05e050f18f80527cc50282cdba95dc29f7148aaf",
+      "docs/memoria/RECONCILIACION_20261103.md": "3a08c1fc4c64a8977caba9bf8db6a6cd26bf8ac37585cd71a136e6a4af54565a"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/apply-minimatch-patch.js",
+      "deploy/images/kibana-patches/audit-glob-consumers.js",
+      "deploy/images/kibana-patches/glob-migration/package.json",
+      "deploy/images/kibana-patches/glob-migration/package-lock.json",
+      "deploy/images/kibana-patches/test-glob-migration.js",
+      "deploy/images/kibana-patches/test-minimatch-limits.js",
+      "deploy/images/kibana-patches/test-minimatch3-applicability.js",
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.md",
+      "docs/evidence/KIBANA_GLOB_MINIMATCH_20261104.json"
+    ],
+    "verification": "Standalone final image built; Node24 CJS/ESM regressions; 96000 ordinary match comparisons; real Trivy scan reduces four unexpected findings to two, gate remains failed",
+    "bootstrap": "Candidate and original both exhaust probe heap512MiB; no ready-service/full-stack acceptance",
+    "new_scanner_exceptions": false,
+    "independent_patch_review": "pending",
+    "source_identity": "Pre-build hashes and exact image identity recorded in evidence index"
   }
 }

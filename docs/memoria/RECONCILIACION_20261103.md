@@ -327,3 +327,23 @@ y21subtests focalizados pasan. El artefacto real sigue fallando con cuatro
 hallazgosGlob/Minimatch; no se añaden excepciones ni se afirma aceptación de
 Kibana. El informe enlaza el job, identifica artefacto e imagen y conserva los
 límites de la prueba. La base histórica y la aceptación humana no cambian.
+
+
+## Imagen Kibana: Glob y Minimatch
+
+La imagen candidata sustituye Glob por14.0.3 con Rimraf6.1.4 y una clausura
+fijada separada. El código principal de Minimatch10 conserva su API mediante
+un backport explícito con hashes y pruebas CJS/ESM. La imagen repite controles
+con su Node24.21 y comprueba antes el grafo de imports literales del vendor.
+Se verifican96000 comparaciones ordinarias, guardas de parche y2048 propiedades
+de los bytes instalados de Minimatch3, sin diferencias en el corpus ordinario.
+
+La construcción acotada termina y el scan real identifica la misma imagen.
+Permanecen dos hallazgos de Minimatch y el gate sigue rojo; no hay excepciones
+nuevas. Los68 paquetes APK instalados están presentes en el inventarioOS.
+El arranque aislado candidato llega a configurar203 plugins pero agota el heap
+de512MiB; la base original también lo agota. Ambos contenedores se limpian.
+No hay aceptación de servicio listo, ES, campaña completa ni reducción del
+presupuestoCG32. La revisión independiente del parche y CI fresco siguen
+pendientes. Los hashes previos, los artefactos y los límites quedan registrados
+sin cambiar la base histórica, la revisión humana ni el alcance del modelo.
