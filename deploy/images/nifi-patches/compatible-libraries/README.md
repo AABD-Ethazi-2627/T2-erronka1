@@ -7,6 +7,13 @@ candidate. Final nested-image scanning and NiFi processor/runtime acceptance are
 **pending**, as are original archive occurrence/classloader mapping and integration.
 Component success does not establish a green gate or merge readiness.
 
+## RabbitMQ follow-up
+
+The original snapshot below is preserved. The [transport supplement](RABBIT_TRANSPORT.md)
+adds a fully pinned required Netty closure and real bounded transport probes. Its
+new conditional plan is `rabbit-candidate-plan.json`; actual NAR mapping, image
+scans and NiFi acceptance remain pending.
+
 ## Decisions and exact replacement bytes
 
 All bytes come unchanged from official Maven Central at
@@ -20,7 +27,7 @@ native resources, signatures, service descriptors and Maven metadata.
 | Candidate | SHA-256 | Current disposition |
 | --- | --- | --- |
 | Guava 33.7.2-jre | `b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c` | Component-tested for exact upstream 33.7.1-jre input only |
-| RabbitMQ 5.37.0 | `b27134820890c5e56ed57d27cc50b70742fa2c31b36a6e9e28e14a43f34ff96f` | Parser tested; dependency closure blocks replacement |
+| RabbitMQ 5.37.0 | `b27134820890c5e56ed57d27cc50b70742fa2c31b36a6e9e28e14a43f34ff96f` | Original parser-only blocker; see transport supplement |
 | at.yawk LZ4 1.11.4 | `58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325` | Component-tested candidate |
 | Snappy 1.1.10.9 | `35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d` | Component-tested candidate |
 
@@ -45,12 +52,14 @@ JAR, jspecify 1.0.1, error_prone_annotations 2.50.0 and j2objc-annotations 3.1.
 That proves the test classpath; NiFi's existing per-classloader closure must still
 be inspected before changing or adding any dependency.
 
-RabbitMQ 5.37.0 declares Netty transport/codec/handler **4.2.18.Final** (5.35.0
-used 4.2.17.Final). These Netty artifacts/closure were not approved as replacements,
-pinned or tested here. The plan therefore blocks RabbitMQ despite clean bounded
-API results and passing parser tests with pinned SLF4J 1.7.36. Optional metrics,
-Micrometer, OpenTelemetry and Jackson integrations and Netty transport are untested.
-Do not interpret the parser's small test classpath as a complete RabbitMQ runtime.
+The original `98eb0dc` snapshot recorded that RabbitMQ 5.37.0 declares Netty
+transport/codec/handler **4.2.18.Final** (5.35.0 used 4.2.17.Final). That snapshot
+had not pinned or tested the Netty closure. The [transport supplement](RABBIT_TRANSPORT.md)
+now supplies that component evidence. The preserved original plan still records
+the earlier blocker; the new conditional plan records transport-tested status.
+Optional metrics, Micrometer, OpenTelemetry and Jackson integrations remain
+untested. Do not interpret the parser's small test classpath as a complete
+RabbitMQ runtime.
 LZ4 and Snappy have no required external runtime POM dependencies (test/provided
 entries are excluded); their published JNI resources remain intact: 9 and 26 paths,
 respectively, with no native resource paths removed relative to the old JARs.

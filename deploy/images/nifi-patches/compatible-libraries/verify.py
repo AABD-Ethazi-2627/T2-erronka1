@@ -87,7 +87,7 @@ def compare(old,new):
         oldn=[n for n in a.namelist() if n.endswith(('.so','.dll','.dylib','.jnilib'))]
         missing=sorted(set(oldn)-set(natives))
         return dict(public_classes=count,removed_or_changed=removals,native_resources=len(natives),missing_native_paths=missing,
-                    candidate_max_base_class_major=max(class_api(b.read(n))['major'] for n in b.namelist() if n.endswith('.class') and not n.startswith('META-INF/')))
+                    candidate_max_base_class_major=max((class_api(b.read(n))['major'] for n in b.namelist() if n.endswith('.class') and not n.startswith('META-INF/')),default=None))
 
 def deps(cache, file):
     root=ET.parse(cache/file).getroot();props={};management={}

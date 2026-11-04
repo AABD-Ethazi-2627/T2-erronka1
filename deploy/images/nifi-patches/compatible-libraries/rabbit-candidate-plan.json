@@ -1,0 +1,43 @@
+{
+  "status": "transport-component-tested-nar-mapping-pending",
+  "input_rabbitmq_sha256": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6",
+  "replacement_file": "amqp-client-5.37.0.jar",
+  "replacement_url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.37.0/amqp-client-5.37.0.jar",
+  "replacement_sha256": "b27134820890c5e56ed57d27cc50b70742fa2c31b36a6e9e28e14a43f34ff96f",
+  "official_reference_nar_sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+  "required_closure_pinned": true,
+  "required_coordinates": [
+    "com.rabbitmq:amqp-client:5.37.0",
+    "io.netty:netty-buffer:4.2.18.Final",
+    "io.netty:netty-codec-base:4.2.18.Final",
+    "io.netty:netty-codec-compression:4.2.18.Final",
+    "io.netty:netty-codec-marshalling:4.2.18.Final",
+    "io.netty:netty-codec-protobuf:4.2.18.Final",
+    "io.netty:netty-codec:4.2.18.Final",
+    "io.netty:netty-common:4.2.18.Final",
+    "io.netty:netty-handler:4.2.18.Final",
+    "io.netty:netty-resolver:4.2.18.Final",
+    "io.netty:netty-transport-native-unix-common:4.2.18.Final",
+    "io.netty:netty-transport:4.2.18.Final",
+    "org.slf4j:slf4j-api:1.7.36"
+  ],
+  "patched": false,
+  "docker_occurrence_mapping": null,
+  "final_nifi_acceptance": false,
+  "full_image_scan": false,
+  "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/rabbit-transport-3e7e9435/proof-1793793759198298269",
+  "package": "com.rabbitmq:amqp-client",
+  "installed_version": "5.35.0",
+  "candidate_version": "5.37.0",
+  "scan_object_path": "usr/share/cnc-guard/nested-jars/c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6.jar",
+  "official_reference_entry": "META-INF/bundled-dependencies/amqp-client-5.35.0.jar",
+  "original_docker_nar_paths": null,
+  "requirements": [
+    "hash/map every actual occurrence before archive patching",
+    "inspect actual parent-loader logging and any shadowing",
+    "validate all enabled optional transports/providers",
+    "run final strict image/nested scans and real NiFi processor acceptance"
+  ],
+  "netty_change_required_by_this_candidate": false,
+  "netty_note": "Declared 4.2.18 closure and official reference NAR 4.2.17 closure both pass selected real transport probes. Neither POM nor these tests authorize a blanket Netty replacement."
+}
