@@ -2,10 +2,11 @@
 import importlib.util
 import io
 import json
-from pathlib import Path
 import tempfile
 import unittest
 import zipfile
+from pathlib import Path
+from unittest.mock import patch
 
 HERE=Path(__file__).resolve().parents[1]/'deploy/images/nifi-patches/jackson'
 spec=importlib.util.spec_from_file_location('cnc_jackson_candidate',HERE/'verify.py')
@@ -13,6 +14,9 @@ v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
 
 class JacksonCandidateTests(unittest.TestCase):
     def setUp(self): self.pins=json.loads((HERE/'pins.json').read_text())
+    def occurrence(self,digest,outer):
+        return {'sha256':digest,'outer':outer,'members':[],
+                'outer_sha256':digest,'chain_sha256':[digest]}
     def test_official_pins_and_family_annotations(self):
         v.validate_pins(self.pins)
         annotations=[p['coordinate'] for p in self.pins if 'annotations' in p['file']]
@@ -28,7 +32,7 @@ class JacksonCandidateTests(unittest.TestCase):
         with self.assertRaises(ValueError):v.validate_pins(self.pins)
     def test_shaded_wrapper_never_gets_plain_replacement(self):
         objects=[{'package':'tools.jackson.core:jackson-core','version':'3.1.2','object_paths':['nested/'+('a'*64)+'.jar']}]
-        result=v.classify(objects,[{'sha256':'a'*64,'outer':'hazelcast.jar','members':[]}],self.pins)
+        result=v.classify(objects,[self.occurrence('a'*64,'hazelcast.jar')],self.pins)
         self.assertIsNone(result[0]['replacement'])
         self.assertFalse(result[0]['upstream_old_equal'])
     def test_absent_occurrence_fails_closed(self):
@@ -39,15 +43,31 @@ class JacksonCandidateTests(unittest.TestCase):
             g='com.fasterxml.jackson.core' if old.startswith('2') else 'tools.jackson.core'
             pin=next(p for p in self.pins if p['coordinate']==g+':jackson-core:'+old and p['file'].endswith(old+'.jar'))
             objects=[{'package':g+':jackson-core','version':old,'object_paths':['nested/'+pin['sha256']+'.jar']}]
-            result=v.classify(objects,[{'sha256':pin['sha256'],'outer':'stock.jar','members':[]}],self.pins)[0]
+            result=v.classify(objects,[self.occurrence(pin['sha256'],'stock.jar')],self.pins)[0]
             self.assertEqual(result['replacement']['coordinate'],g+':jackson-core:'+new)
             self.assertEqual(old.split('.')[:2],new.split('.')[:2])
+            self.assertEqual(result['occurrences'][0]['chain_sha256'],[pin['sha256']])
+            self.assertEqual(result['occurrences'][0]['outer_sha256'],pin['sha256'])
     def test_changed_and_linked_artifact_rejected(self):
         with tempfile.TemporaryDirectory() as t:
             p=Path(t)/'jar';p.write_bytes(b'altered')
             with self.assertRaisesRegex(ValueError,'integrity'):v.checked(p,v.sha(b'original'))
             q=Path(t)/'link';q.symlink_to(p)
             with self.assertRaisesRegex(ValueError,'linked'):v.checked(q,v.sha(b'altered'))
+    def test_download_rejects_dangling_symlink_before_network_or_write(self):
+        with tempfile.TemporaryDirectory() as t:
+            outside=Path(t)/'outside';target=Path(t)/'cached';target.symlink_to(outside)
+            with patch.object(v.urllib.request,'urlopen') as network:
+                with self.assertRaisesRegex(ValueError,'linked download'):
+                    v.fetch_checked({'url':'https://repo.maven.apache.org/','sha256':v.sha(b'valid')},target)
+                network.assert_not_called()
+            self.assertFalse(outside.exists())
+    def test_oversized_download_never_publishes_cache_entry(self):
+        with tempfile.TemporaryDirectory() as t:
+            target=Path(t)/'cached'
+            with patch.object(v,'MAX_DOWNLOAD_BYTES',4), patch.object(v.urllib.request,'urlopen',return_value=io.BytesIO(b'12345')), self.assertRaisesRegex(ValueError,'integrity/size'):
+                v.fetch_checked({'url':'https://repo.maven.apache.org/','sha256':v.sha(b'12345')},target)
+            self.assertFalse(target.exists())
     def test_archive_chain_integrity_and_ambiguity(self):
         with tempfile.TemporaryDirectory() as t:
             b=io.BytesIO()

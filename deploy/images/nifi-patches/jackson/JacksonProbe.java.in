@@ -54,8 +54,9 @@ public class JacksonProbe {
         ObjectMapper snake = JsonMapper.builder().propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE).build();
         Guarded g = snake.readValue("{\"display_name\":\"ok\",\"internal_role\":\"admin\"}", Guarded.class);
         boolean ignored = g.internalRole() == null;
-        // The 2.22/3.2 old pair already contains this earlier fix.
-        if (fixed && !ignored) throw new AssertionError("CVE-2026-59888 ignore bypass");
+        // The 2.22/3.2 old pair already contains this earlier fix. For 2.21/3.1,
+        // assert the vulnerable result too, so a vacuous A/B control fails.
+        if (ignored != Boolean.parseBoolean(args[2])) throw new AssertionError("CVE-2026-59888 old/fixed ignore control");
         System.out.println("roundtrip=pass distinctCache="+distinct+" repeatedCache="+repeated+" dataErrorLength="+dataLength+" streamErrorLength="+streamLength+" ignored="+ignored);
     }
     static int errorLength(ObjectMapper m, String input, boolean data) throws Exception {

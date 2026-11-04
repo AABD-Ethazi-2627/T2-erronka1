@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "8c4ab1413b7cf7ff1c18c62b108c87e47db017ed6026d242afde5a42d656c238",
+    "docs/memoria/RECONCILIACION_20261103.md": "48a2a386f77d5421813cb17acc8cc1a41aa57ff42e032bed485bdf37d32cf81c",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -382,7 +382,23 @@
     "tests/test_nifi_dependency_guards.py": "83512a0f68e182907bd55254d2eb11e5ed9aa17bc8ce928bfa0fb196344f00b8",
     "tests/test_patch_nested_jars.py": "9e0f808828124a511044b394648ddb115c7a5d90fabd11531529bd11f2721097",
     "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.md": "dc2f41c02dcebec9d00f5db62725ccddebb58eeb86a905459db3d150712330d0",
-    "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json": "abcd9d4f9cf2c87f17aa4e8c3be743cbfe3d0847dc2b76424b609e4fbb56e069"
+    "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json": "abcd9d4f9cf2c87f17aa4e8c3be743cbfe3d0847dc2b76424b609e4fbb56e069",
+    "deploy/images/nifi-patches/jackson/JacksonProbe.java.in": "f6cf4ef500819b7334043734eff549d614996ef1f0d5591129c0159bc103b526",
+    "deploy/images/nifi-patches/jackson/ModuleProbe.java": "44c5ce5f889bf9af4f574def744de1daa05a49e1d34f0fe0f9c418840683c74a",
+    "deploy/images/nifi-patches/jackson/README.md": "64884627a1daff39cb3234f505d1ba438195e649595700c661981693065d2b67",
+    "deploy/images/nifi-patches/jackson/advisory-map.json": "811b849576428fd81dc087b87c3b6bb64aa0413700ee8f50a773f61c497a2507",
+    "deploy/images/nifi-patches/jackson/candidate-plan.json": "825c4d7b2b3b6667ab56baa94c455cfc07207cbb29c54710de1e895dfa4401ee",
+    "deploy/images/nifi-patches/jackson/coverage.json": "49a7f7ed9c225aa050a42921bdff480a642f44eb3f3084760691a1d7dc0224a8",
+    "deploy/images/nifi-patches/jackson/input-lock.json": "e9e9bac109210b8cf1dbddea721bbda33c8c323d31f90354990857e6e1b9bca6",
+    "deploy/images/nifi-patches/jackson/official-advisories.json": "42f389b85307311543f96458a4f88e17372e2ea90f6f18063f8218ba147b0be6",
+    "deploy/images/nifi-patches/jackson/pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
+    "deploy/images/nifi-patches/jackson/support-lock.json": "1811671bb994a8ab87c033d76e2cee609f3ddbbe034640ec8615e7f551a6d1e6",
+    "deploy/images/nifi-patches/jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09",
+    "deploy/images/nifi-patches/jackson/verification-summary.json": "d0291832526241f82340498e17a5278ddd8c1c8bc71724f268a3dc6cccc09670",
+    "deploy/images/nifi-patches/jackson/verify.py": "d1c2ae4919aa7a18a6611e01230d5d86aa5bd9dd2e07409e053226017d0fea61",
+    "docs/evidence/NIFI_JACKSON_PARENT_20261104.json": "d8ac3ebfa6296d080fa4f943a9642aab6e44f9c5d1d931cf7a022fe386477351",
+    "docs/evidence/NIFI_JACKSON_PARENT_20261104.md": "700276f9afa7515d96d9650085d5b29abe6ed6ab47bf89047227da3b140b23f1",
+    "tests/test_nifi_jackson_candidate.py": "d534df66362dd0ca10cb6228f14dfa473d39c28a223a464c8ceb4ee2399eb378"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -812,5 +828,34 @@
     "evidence": "docs/evidence/NIFI_CI_DISK_EXPORT_20261104.json",
     "verification": "actionlint; 17 existing infrastructure/archive/gate tests, 23 subtests",
     "limits": "No local cleanup/build, completed nested report, measured reclaimed bytes, successful CI rerun or exception; final image gates remain blocking"
+  },
+  "pr119_nifi_jackson_parent": {
+    "parent_commit": "6d67bc2ec72d931486174b906654bcc089250cba",
+    "child_commit": "06c2b21d8c129d01edb83d70fb1e92d45f25b348",
+    "cherry_pick": "16b86b5",
+    "previous_current_hashes": {
+      "docs/memoria/RECONCILIACION_20261103.md": "8c4ab1413b7cf7ff1c18c62b108c87e47db017ed6026d242afde5a42d656c238"
+    },
+    "new_inventory_paths": [
+      "deploy/images/nifi-patches/jackson/JacksonProbe.java.in",
+      "deploy/images/nifi-patches/jackson/ModuleProbe.java",
+      "deploy/images/nifi-patches/jackson/README.md",
+      "deploy/images/nifi-patches/jackson/advisory-map.json",
+      "deploy/images/nifi-patches/jackson/candidate-plan.json",
+      "deploy/images/nifi-patches/jackson/coverage.json",
+      "deploy/images/nifi-patches/jackson/input-lock.json",
+      "deploy/images/nifi-patches/jackson/official-advisories.json",
+      "deploy/images/nifi-patches/jackson/pins.json",
+      "deploy/images/nifi-patches/jackson/support-lock.json",
+      "deploy/images/nifi-patches/jackson/upstream-pins.json",
+      "deploy/images/nifi-patches/jackson/verification-summary.json",
+      "deploy/images/nifi-patches/jackson/verify.py",
+      "docs/evidence/NIFI_JACKSON_PARENT_20261104.json",
+      "docs/evidence/NIFI_JACKSON_PARENT_20261104.md",
+      "tests/test_nifi_jackson_candidate.py"
+    ],
+    "evidence": "docs/evidence/NIFI_JACKSON_PARENT_20261104.json",
+    "verification": "12 candidate guards; 24 tests and 4 subtests including existing dependency guards; 15 bounded Java/javac commands; four expectation-inversion controls; Ruff; original156 hashes preserved",
+    "limits": "Component preparation only; ABI/consumer/classloader and wrapper blocks, independent review and final gates pending"
   }
 }

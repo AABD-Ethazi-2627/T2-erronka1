@@ -6,17 +6,18 @@ import importlib.util
 import io
 import json
 import os
-from pathlib import Path
 import resource
 import shutil
 import subprocess
 import sys
 import urllib.request
 import zipfile
+from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SUPPORT = HERE.parent / 'compatible-libraries'
 PAIRS = [('2.21.2','2.21.7'), ('2.22.2','2.22.3'), ('3.1.2','3.1.7'), ('3.2.2','3.2.3')]
+MAX_DOWNLOAD_BYTES = 32 * 1024 * 1024
 def sha(data): return hashlib.sha256(data).hexdigest()
 def require(ok, message):
     if not ok: raise ValueError(message)
@@ -24,6 +25,14 @@ def save(path, data): path.write_text(json.dumps(data, indent=2, sort_keys=True)
 def checked(path, digest):
     require(path.is_file() and not path.is_symlink(), 'missing/linked input '+str(path))
     data=path.read_bytes(); require(sha(data)==digest, 'integrity '+str(path)); return data
+
+def fetch_checked(pin, target):
+    require(not target.is_symlink(), 'linked download target '+str(target))
+    with urllib.request.urlopen(pin['url'],timeout=30) as response:
+        data=response.read(MAX_DOWNLOAD_BYTES+1)
+    require(len(data)<=MAX_DOWNLOAD_BYTES and sha(data)==pin['sha256'],'download integrity/size')
+    with target.open('xb') as stream:
+        stream.write(data)
 
 def validate_pins(pins):
     require(pins and len({p['file'] for p in pins})==len(pins), 'empty/duplicate pins')
@@ -45,7 +54,8 @@ def classify(objects, occurrences, pins):
             require(matches, 'scan object absent from inventory')
             pure=digest==old['sha256']
             result.append({'package':o['package'],'version':v,'object_sha256':digest,
-                'occurrences':[{'outer':m['outer'],'members':m['members']} for m in matches],
+                'occurrences':[{'outer':m['outer'],'members':m['members'],
+                    'outer_sha256':m['outer_sha256'],'chain_sha256':m['chain_sha256']} for m in matches],
                 'upstream_old_equal':pure, 'replacement':replacement if pure else None,
                 'research_candidate':replacement['coordinate'],
                 'status':'component-candidate-consumer-review-required' if pure else 'blocked-wrapper-specific-rebuild-required'})
@@ -71,7 +81,7 @@ def limits():
     os.sched_setaffinity(0,{min(os.sched_getaffinity(0))})
 def run(cmd, out):
     env={k:v for k,v in os.environ.items() if k not in ('JAVA_TOOL_OPTIONS','JDK_JAVA_OPTIONS','JDK_JAVAC_OPTIONS','_JAVA_OPTIONS','CLASSPATH','LD_PRELOAD','LD_LIBRARY_PATH')}
-    p=subprocess.run(list(map(str,cmd)),env=env,preexec_fn=limits,capture_output=True,timeout=40)
+    p=subprocess.run(list(map(str,cmd)),env=env,preexec_fn=limits,capture_output=True,check=False,timeout=40)
     out.write_bytes(p.stdout+p.stderr); require(p.returncode==0,'probe failed '+str(out))
     return {'command':list(map(str,cmd)), 'log_sha256':sha(out.read_bytes()),'stdout':p.stdout.decode()}
 
@@ -112,15 +122,14 @@ def main():
     for p in pins:
         f=args.cache/p['file']
         if not f.exists() and args.fetch:
-            data=urllib.request.urlopen(p['url'],timeout=30).read();require(sha(data)==p['sha256'],'download integrity');f.write_bytes(data)
+            fetch_checked(p,f)
         checked(f,p['sha256'])
     for pin in json.loads((HERE/'upstream-pins.json').read_text()):
         require(Path(pin['file']).name==pin['file'],'upstream pin filename')
         require(pin['url'].startswith(('https://api.github.com/repos/FasterXML/','https://github.com/FasterXML/')),'untrusted upstream source')
         target=args.cache/pin['file']
         if not target.exists() and args.fetch:
-            data=urllib.request.urlopen(pin['url'],timeout=30).read()
-            require(sha(data)==pin['sha256'],'upstream download integrity');target.write_bytes(data)
+            fetch_checked(pin,target)
         checked(target,pin['sha256'])
     inputs={k:checked(args.inputs/v['relative'],v['sha256']) for k,v in lock.items()}
     inv=json.loads(inputs['inventory']);objects=json.loads(inputs['objects']);scan=json.loads(inputs['scan'])
@@ -153,11 +162,12 @@ def main():
         ann={'2.21.2':'2.21','2.22.2':'2.22','3.1.2':'2.21','3.2.2':'2.22'}[old];ns='com.fasterxml.jackson' if old[0]=='2' else 'tools.jackson'
         work=args.proof/old;work.mkdir();java=work/'JacksonProbe.java'
         java.write_text((HERE/'JacksonProbe.java.in').read_text().replace('@NS@',ns))
-        cp=lambda v:os.pathsep.join(str(args.cache/f'{a}-{b}.jar') for a,b in [('jackson-core',v),('jackson-databind',v),('jackson-annotations',ann)])
+        def cp(v, annotation_version=ann):
+            return os.pathsep.join(str(args.cache/f'{a}-{b}.jar') for a,b in [('jackson-core',v),('jackson-databind',v),('jackson-annotations',annotation_version)])
         opts=['-XX:ActiveProcessorCount=1','-Xmx256m','-XX:MaxMetaspaceSize=96m','-XX:ReservedCodeCacheSize=32m','-XX:MaxDirectMemorySize=32m','-XX:-CreateCoredumpOnCrash']
         commands.append(run(['javac',*['-J'+o for o in opts],'-cp',cp(old),'-d',work,java],work/'compile.log'))
         for v in [old,new]:
-            commands.append(run(['java',*opts,'-cp',str(work)+os.pathsep+cp(v)+ (os.pathsep+str(args.cache/consumer['file']) if old=='3.2.2' else ''),'JacksonProbe',str(v==new).lower(),str(old=='3.2.2').lower()],work/(v+'.log')))
+            commands.append(run(['java',*opts,'-cp',str(work)+os.pathsep+cp(v)+ (os.pathsep+str(args.cache/consumer['file']) if old=='3.2.2' else ''),'JacksonProbe',str(v==new).lower(),str(old=='3.2.2').lower(),str(v==new or old in ('2.22.2','3.2.2')).lower()],work/(v+'.log')))
         if old=='2.22.2':
             modules=os.pathsep.join(str(args.cache/n) for n in module_names)
             commands.append(run(['javac',*['-J'+o for o in opts],'-cp',cp(old)+os.pathsep+modules,'-d',work,HERE/'ModuleProbe.java'],work/'module-compile.log'))

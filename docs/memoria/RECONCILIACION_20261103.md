@@ -416,3 +416,20 @@ actionlint y 17 tests/23 subtests focalizados pasan. No se ha borrado caché
 local ni reconstruido una imagen aquí. Los bytes liberados y la exportación
 correcta quedan pendientes del CI fresco. Se preservan los hashes históricos,
 la base, la revisión humana y todas las aceptaciones externas pendientes.
+
+
+## Jackson: candidato local reproducido por el padre
+
+Se incorpora el candidato del hijo 06c2b21 como 16b86b5. El padre repite offline
+15 comandos Java/javac con 86 inputs Maven fijados, y pasan 12 tests de guardas
+(24 tests y 4 subtests junto con las guardas de dependencias existentes). Añade
+las cadenas de hashes al plan, acota las descargas y refuerza el control antiguo
+y corregido de record-ignore. La evidencia registra fuentes antes/después y
+confirma los 156 archivos lib originales idénticos a su adquisición.
+
+Cuatro objetos son JAR oficiales; Hazelcast y Parquet siguen bloqueados con
+reemplazos nulos. No se modifica runtime ni se aprueban ABI, clausuras completas,
+consumidores, classloaders, wrappers ni imagen final. Hay tres avisos con sonda
+local y dieciséis con evidencia upstream sin reproducción local. No se afirma
+cierre de las 59 tuplas, Kibana, CI, CG32, SMB ni aceptación humana. Los hashes
+históricos, la base y el estado de revisión humana permanecen intactos.

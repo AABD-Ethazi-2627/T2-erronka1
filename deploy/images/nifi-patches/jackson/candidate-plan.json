@@ -4,10 +4,15 @@
       "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
       "occurrences": [
         {
+          "chain_sha256": [
+            "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+            "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          ],
           "members": [
             "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
           ],
-          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+          "outer_sha256": "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08"
         }
       ],
       "package": "com.fasterxml.jackson.core:jackson-core",
@@ -27,10 +32,15 @@
       "object_sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7",
       "occurrences": [
         {
+          "chain_sha256": [
+            "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+            "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+          ],
           "members": [
             "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
           ],
-          "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar"
+          "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+          "outer_sha256": "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e"
         }
       ],
       "package": "com.fasterxml.jackson.core:jackson-core",
@@ -50,39 +60,69 @@
       "object_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
       "occurrences": [
         {
+          "chain_sha256": [
+            "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          ],
           "members": [],
-          "outer": "bootstrap/jackson-core-2.22.2.jar"
+          "outer": "bootstrap/jackson-core-2.22.2.jar",
+          "outer_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
         },
         {
+          "chain_sha256": [
+            "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+            "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
           ],
-          "outer": "nifi-amqp-nar-2.12.0.nar"
+          "outer": "nifi-amqp-nar-2.12.0.nar",
+          "outer_sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8"
         },
         {
+          "chain_sha256": [
+            "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc",
+            "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
           ],
-          "outer": "nifi-framework-nar-2.12.0.nar"
+          "outer": "nifi-framework-nar-2.12.0.nar",
+          "outer_sha256": "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc"
         },
         {
+          "chain_sha256": [
+            "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+            "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
           ],
-          "outer": "nifi-kafka-to-s3-nar-2.12.0.nar"
+          "outer": "nifi-kafka-to-s3-nar-2.12.0.nar",
+          "outer_sha256": "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa"
         },
         {
+          "chain_sha256": [
+            "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+            "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
           ],
-          "outer": "nifi-standard-shared-nar-2.12.0.nar"
+          "outer": "nifi-standard-shared-nar-2.12.0.nar",
+          "outer_sha256": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da"
         },
         {
+          "chain_sha256": [
+            "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+            "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093",
+            "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          ],
           "members": [
             "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
             "WEB-INF/lib/jackson-core-2.22.2.jar"
           ],
-          "outer": "nifi-update-attribute-nar-2.12.0.nar"
+          "outer": "nifi-update-attribute-nar-2.12.0.nar",
+          "outer_sha256": "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28"
         }
       ],
       "package": "com.fasterxml.jackson.core:jackson-core",
@@ -107,10 +147,15 @@
       "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
       "occurrences": [
         {
+          "chain_sha256": [
+            "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+            "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          ],
           "members": [
             "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
           ],
-          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+          "outer_sha256": "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08"
         }
       ],
       "package": "com.fasterxml.jackson.core:jackson-databind",
@@ -125,10 +170,15 @@
       "object_sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7",
       "occurrences": [
         {
+          "chain_sha256": [
+            "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+            "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+          ],
           "members": [
             "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
           ],
-          "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar"
+          "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+          "outer_sha256": "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e"
         }
       ],
       "package": "com.fasterxml.jackson.core:jackson-databind",
@@ -143,39 +193,69 @@
       "object_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
       "occurrences": [
         {
+          "chain_sha256": [
+            "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          ],
           "members": [],
-          "outer": "bootstrap/jackson-databind-2.22.2.jar"
+          "outer": "bootstrap/jackson-databind-2.22.2.jar",
+          "outer_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
         },
         {
+          "chain_sha256": [
+            "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+            "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
           ],
-          "outer": "nifi-amqp-nar-2.12.0.nar"
+          "outer": "nifi-amqp-nar-2.12.0.nar",
+          "outer_sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8"
         },
         {
+          "chain_sha256": [
+            "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc",
+            "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
           ],
-          "outer": "nifi-framework-nar-2.12.0.nar"
+          "outer": "nifi-framework-nar-2.12.0.nar",
+          "outer_sha256": "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc"
         },
         {
+          "chain_sha256": [
+            "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+            "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
           ],
-          "outer": "nifi-kafka-to-s3-nar-2.12.0.nar"
+          "outer": "nifi-kafka-to-s3-nar-2.12.0.nar",
+          "outer_sha256": "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa"
         },
         {
+          "chain_sha256": [
+            "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+            "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
           ],
-          "outer": "nifi-standard-shared-nar-2.12.0.nar"
+          "outer": "nifi-standard-shared-nar-2.12.0.nar",
+          "outer_sha256": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da"
         },
         {
+          "chain_sha256": [
+            "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+            "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093",
+            "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
             "WEB-INF/lib/jackson-databind-2.22.2.jar"
           ],
-          "outer": "nifi-update-attribute-nar-2.12.0.nar"
+          "outer": "nifi-update-attribute-nar-2.12.0.nar",
+          "outer_sha256": "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28"
         }
       ],
       "package": "com.fasterxml.jackson.core:jackson-databind",
@@ -195,10 +275,15 @@
       "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
       "occurrences": [
         {
+          "chain_sha256": [
+            "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+            "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          ],
           "members": [
             "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
           ],
-          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+          "outer_sha256": "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08"
         }
       ],
       "package": "tools.jackson.core:jackson-core",
@@ -213,23 +298,39 @@
       "object_sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
       "occurrences": [
         {
+          "chain_sha256": [
+            "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+            "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
           ],
-          "outer": "nifi-jolt-nar-2.12.0.nar"
+          "outer": "nifi-jolt-nar-2.12.0.nar",
+          "outer_sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
         },
         {
+          "chain_sha256": [
+            "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+            "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298",
+            "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
             "WEB-INF/lib/jackson-core-3.2.2.jar"
           ],
-          "outer": "nifi-jolt-nar-2.12.0.nar"
+          "outer": "nifi-jolt-nar-2.12.0.nar",
+          "outer_sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
         },
         {
+          "chain_sha256": [
+            "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+            "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
           ],
-          "outer": "nifi-standard-nar-2.12.0.nar"
+          "outer": "nifi-standard-nar-2.12.0.nar",
+          "outer_sha256": "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3"
         }
       ],
       "package": "tools.jackson.core:jackson-core",
@@ -249,10 +350,15 @@
       "object_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
       "occurrences": [
         {
+          "chain_sha256": [
+            "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+            "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          ],
           "members": [
             "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
           ],
-          "outer": "nifi-hazelcast-services-nar-2.12.0.nar"
+          "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+          "outer_sha256": "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08"
         }
       ],
       "package": "tools.jackson.core:jackson-databind",
@@ -270,23 +376,39 @@
       "object_sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401",
       "occurrences": [
         {
+          "chain_sha256": [
+            "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+            "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
           ],
-          "outer": "nifi-jolt-nar-2.12.0.nar"
+          "outer": "nifi-jolt-nar-2.12.0.nar",
+          "outer_sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
         },
         {
+          "chain_sha256": [
+            "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+            "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298",
+            "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+          ],
           "members": [
             "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
             "WEB-INF/lib/jackson-databind-3.2.2.jar"
           ],
-          "outer": "nifi-jolt-nar-2.12.0.nar"
+          "outer": "nifi-jolt-nar-2.12.0.nar",
+          "outer_sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
         },
         {
+          "chain_sha256": [
+            "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+            "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+          ],
           "members": [
             "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
           ],
-          "outer": "nifi-standard-nar-2.12.0.nar"
+          "outer": "nifi-standard-nar-2.12.0.nar",
+          "outer_sha256": "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3"
         }
       ],
       "package": "tools.jackson.core:jackson-databind",
