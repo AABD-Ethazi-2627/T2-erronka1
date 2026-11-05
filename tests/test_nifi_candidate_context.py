@@ -208,11 +208,36 @@ def test_self_written_review_cannot_authorize_a_new_family_or_payload(context):
 
 
 def test_profile_pins_every_current_component_replacement():
-    # Portable source expectations do not depend on the local proof cache.
-    assert len(c.REPLACEMENT_PROFILE)==6
-    assert sum(rule[2] for rule in c.REPLACEMENT_PROFILE.values())==22
-    assert {rule[0] for rule in c.REPLACEMENT_PROFILE.values()}=={'guava','lz4','snappy','hadoop','hazelcast','parquet'}
-    assert all(len(old)==len(rule[1])==64 for old,rule in c.REPLACEMENT_PROFILE.items())
+    # Independent literal contract from the reviewed 957916e2 candidate, not
+    # values read from the implementation or a mutable local proof cache.
+    expected = {'1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7': ('parquet',
+                                                                          'bad77fac2682d5441ce19e498056ddaf948e89739d933d302b5cf66c868344cf',
+                                                                          1),
+     '241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33': ('hazelcast',
+                                                                          '3c8e5d805a65ce91e2efe586f50fa1b9c482665f4d96c9e2384f066ea26cae85',
+                                                                          1),
+     '50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc': ('snappy',
+                                                                          '35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d',
+                                                                          9),
+     '796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46': ('guava',
+                                                                          'b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c',
+                                                                          7),
+     '8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2': ('lz4',
+                                                                          '58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325',
+                                                                          3),
+     'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6': ('hadoop',
+                                                                          'e2ff7c642f17743f0816a941d93714a0ae413203112e6a7d2e5f5bcf876329d2',
+                                                                          1)}
+    assert c.REPLACEMENT_PROFILE == expected
+    assert c.writer.ATOMIC_HADOOP_SNAPPY == {'50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc': {'count': 9,
+                                                                          'replacement_sha256': '35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d'},
+     'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6': {'count': 1,
+                                                                          'replacement_sha256': 'e2ff7c642f17743f0816a941d93714a0ae413203112e6a7d2e5f5bcf876329d2'}}
+    assert c.writer.BLOCKED_INPUTS == {
+        '70d5c152622df6fffbf8836af7833215dc7acdd5d9c881af11b8c0fbf30cdc0a',
+        '396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1',
+        'c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6',
+    }
 
 
 def rebind_inventory(ctx,rows,monkeypatch):
@@ -282,3 +307,68 @@ def test_cli_arms_and_cancels_wall_deadline_on_timeout(monkeypatch):
     monkeypatch.setattr(c,'verify',deadline_during_verify)
     with pytest.raises(TimeoutError,match='wall deadline'):c.main()
     assert alarms==[180,0]
+
+
+def test_plain_sibling_corruption_is_rejected_before_install(context):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    payload=ctx/'payload'/outer.relative_to(source)
+    replacement=io.BytesIO()
+    with zipfile.ZipFile(payload) as original, zipfile.ZipFile(replacement,'w') as changed:
+        for info in original.infolist():
+            changed.writestr(info,b'altered plain sibling' if info.filename=='keep' else original.read(info))
+    payload.write_bytes(replacement.getvalue())
+    manifest=c.load(ctx/'manifest.json')
+    manifest['files'][outer.relative_to(source).as_posix()]['after']=c.writer.digest(payload)
+    (ctx/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match='post-write sibling content mismatch'):
+        c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before
+
+
+@pytest.mark.parametrize('field', ['candidate_sha256','plan_sha256','review_sha256'])
+def test_each_manifest_metadata_digest_is_checked_independently(context,field):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    manifest=c.load(ctx/'manifest.json');manifest[field]='0'*64
+    (ctx/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match='context metadata drift'):
+        c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before
+
+
+def test_review_must_bind_the_actual_candidate_despite_a_rebound_manifest(context):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    review=c.load(ctx/'review.json');review['candidate_sha256']='0'*64
+    rebind_metadata(ctx,'review',review)
+    with pytest.raises(ValueError,match='review candidate drift'):
+        c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before
+
+
+def test_candidate_inventory_identity_is_not_merely_advisory(context):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    candidate=c.load(ctx/'candidate.json');candidate['inventory_sha256']='0'*64
+    rebind_metadata(ctx,'candidate',candidate)
+    review=c.load(ctx/'review.json');review['candidate_sha256']=c.writer.digest(ctx/'candidate.json')
+    rebind_metadata(ctx,'review',review)
+    with pytest.raises(ValueError,match='context inventory drift'):
+        c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before
+
+
+def test_only_the_complete_frozen_profile_is_eligible(context,monkeypatch):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    monkeypatch.setitem(c.REPLACEMENT_PROFILE,'f'*64,('guava','e'*64,1))
+    with pytest.raises(ValueError,match='incomplete frozen assembly profile'):
+        c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before
+
+
+def test_candidate_pending_status_cannot_be_removed_by_rebinding_metadata(context):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    candidate=c.load(ctx/'candidate.json');candidate['targets'][0]['status']='runtime-approved'
+    rebind_metadata(ctx,'candidate',candidate)
+    review=c.load(ctx/'review.json');review['candidate_sha256']=c.writer.digest(ctx/'candidate.json')
+    rebind_metadata(ctx,'review',review)
+    with pytest.raises(ValueError,match='unreviewed plan projection'):
+        c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before

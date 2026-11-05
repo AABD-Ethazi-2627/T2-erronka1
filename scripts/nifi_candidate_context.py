@@ -81,7 +81,7 @@ def verify(context,source,install=False):
     writer.exact_keys(plan,'schema inventory_sha256 targets')
     require(type(plan['schema']) is int and plan['schema']==1,'invalid plan schema')
     require(writer.inventory_hash(inv['occurrences'])==STOCK_INVENTORY_HASH==inv['inventory_sha256']
-            ==plan['inventory_sha256']==manifest['inventory_sha256'],'context inventory drift')
+            ==plan['inventory_sha256']==manifest['inventory_sha256']==candidate['inventory_sha256'],'context inventory drift')
     selected=[t for t in candidate['targets'] if t['family'] in review['families']]
     require(selected and {t['family'] for t in selected}==set(review['families']),'missing reviewed family')
     projection=[{k:t[k] for k in ('outer','members','chain_sha256','replacement',
@@ -93,6 +93,8 @@ def verify(context,source,install=False):
         rule=REPLACEMENT_PROFILE.get(target['chain_sha256'][-1])
         require(rule == (target['family'],target['replacement_sha256'],target['expected_occurrences']),
                 'replacement outside frozen assembly profile')
+    require({t['chain_sha256'][-1] for t in selected}==set(REPLACEMENT_PROFILE),
+            'incomplete frozen assembly profile')
     keys=[(t['outer'],tuple(t['members'])) for t in plan['targets']]
     require(len(set(keys))==len(keys),'duplicate candidate target')
     rows={(r['outer'],tuple(r['members'])):r for r in inv['occurrences']}

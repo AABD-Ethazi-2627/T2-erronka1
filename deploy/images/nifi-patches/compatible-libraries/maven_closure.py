@@ -67,6 +67,11 @@ class Closure:
             inherited = text(parent,field) if parent is not None and field != 'artifactId' else None
             require(expand(text(root,field,inherited)) == expected, 'POM coordinate mismatch '+coordinate)
         management=dict(pm['management'])
+        # Inherited dependency-management keys were interpolated in the parent.
+        # Refuse a changed child interpolation instead of retaining a stale key.
+        for inherited_key, inherited_dependency in management.items():
+            require(tuple(expand(inherited_dependency[field]) for field in ('groupId','artifactId'))
+                    == inherited_key[:2], 'unsupported inherited management key interpolation')
         def raw(n):
             allowed={'groupId','artifactId','version','scope','optional','type','classifier','exclusions'}
             require(all(x.tag.split('}')[-1] in allowed for x in n), 'unsupported dependency element')
@@ -175,13 +180,19 @@ class Closure:
             scope=d.get('scope','compile');optional=d.get('optional','false')
             require(scope in ('compile','runtime','provided','test','system'), 'unsupported scope '+scope)
             require(scope!='system', 'system dependency forbidden')
+            if optional!='true':
+                # An inherited test/provided path can become required through
+                # child management. Do not discard it before rejecting the mark.
+                require(not d.get('_unsupported_inherited_management'),
+                        'unsupported inherited dependency management override')
             if scope not in ('compile','runtime') or optional=='true':
                 self.decisions.append({'pom':coordinate,'raw':d,'disposition':'excluded-'+('optional' if optional=='true' else scope)})
                 continue
             require(optional=='false','unsupported optional flag')
             require((expand(d['groupId']),expand(d['artifactId'])) not in uncertain_management,
                     'unsupported management key for required dependency (profile-dependent runtime selector or interpolation)')
-            require(not d.get('_unsupported_inherited_management'), 'unsupported inherited dependency management override')
+            require(not any('${' in d.get(field,'') for field in ('type','classifier')),
+                    'unsupported interpolated dependency type/classifier')
             require(not d.get('_unsupported_bom_fields'), 'unsupported interpolated BOM requirement')
             require(not d.get('_unsupported_exclusion_merge'), 'unsupported managed/local exclusion combination')
             required={k:d.get(k,default) for k,default in [('groupId',None),('artifactId',None),('version',None),('type','jar'),('classifier','')]}

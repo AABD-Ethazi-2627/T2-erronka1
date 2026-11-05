@@ -314,3 +314,50 @@ class DependencyGuardTests(unittest.TestCase):
     def test_truncated_classfile_is_rejected(self):
         with self.assertRaisesRegex(ValueError, 'truncated classfile'):
             self.verify.class_api(bytes.fromhex('cafebabe000000340001'))
+
+    def test_inherited_scope_override_is_rejected_before_excluding_the_dependency(self):
+        for scope in ('test', 'provided'):
+            with self.subTest(scope=scope):
+                self.pins=[]
+                self.pom('leaf')
+                self.pom('parent','<dependencyManagement><dependencies><dependency><groupId>x</groupId>'
+                         '<artifactId>leaf</artifactId><version>1</version><scope>'+scope+'</scope>'
+                         '</dependency></dependencies></dependencyManagement><dependencies><dependency>'
+                         '<groupId>x</groupId><artifactId>leaf</artifactId></dependency></dependencies>')
+                self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId><version>1</version>'
+                         '</parent><dependencyManagement><dependencies><dependency><groupId>x</groupId>'
+                         '<artifactId>leaf</artifactId><version>1</version><scope>compile</scope>'
+                         '</dependency></dependencies></dependencyManagement>')
+                with self.assertRaisesRegex(ValueError,'inherited dependency management'):
+                    self.deps()
+
+    def test_changed_inherited_management_key_is_rejected(self):
+        for selector, properties in (('${selector}', '<properties><selector>leaf</selector></properties>'),
+                                     ('${project.artifactId}-api', '')):
+            with self.subTest(selector=selector):
+                self.pins=[]
+                leaf='leaf' if properties else 'parent-api'
+                self.pom(leaf)
+                self.pom('parent',properties+'<dependencyManagement><dependencies><dependency><groupId>x</groupId>'
+                         '<artifactId>'+selector+'</artifactId><version>1</version><scope>test</scope>'
+                         '</dependency></dependencies></dependencyManagement><dependencies><dependency>'
+                         '<groupId>x</groupId><artifactId>'+leaf+'</artifactId><version>1</version>'
+                         '</dependency></dependencies>')
+                self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId><version>1</version>'
+                         '</parent><properties><selector>other</selector></properties>')
+                with self.assertRaisesRegex(ValueError,'inherited management key interpolation'):
+                    self.deps()
+
+    def test_interpolated_artifact_key_cannot_bypass_managed_scope(self):
+        for selector in ('<type>${kind}</type>', '<classifier>${classifier}</classifier>'):
+            with self.subTest(selector=selector):
+                self.pins=[]
+                self.pom('leaf')
+                self.pom('root','<properties><kind>jar</kind><classifier></classifier></properties>'
+                         '<dependencyManagement><dependencies><dependency><groupId>x</groupId>'
+                         '<artifactId>leaf</artifactId><version>1</version><scope>test</scope>'
+                         '</dependency></dependencies></dependencyManagement><dependencies><dependency>'
+                         '<groupId>x</groupId><artifactId>leaf</artifactId><version>1</version>'+selector+
+                         '</dependency></dependencies>')
+                with self.assertRaisesRegex(ValueError,'interpolated dependency type/classifier'):
+                    self.deps()
