@@ -93,3 +93,35 @@ The source ZIP at `ffd31f4` was independently extracted and its indexed members
 verified. All six fixture scenarios pass from that extracted tree, with source
 identity `verified_not_authenticated`. It predates MM11 and is retained as
 historical portable-fixture evidence, not latest-source or live-service approval.
+
+## MM11 retention correction after independent review
+
+The [joint independent review](CLAUDE_KIBANA_MM11_DEL_REVIEW_20261105.md) reproduces
+the initial migration with no Critical/High finding, but finds a Medium memory
+retention risk: the real consumers did not use the test-only expansion cap.
+The coordinator fixes the inputs rather than accepting a license-dependent risk.
+At `6e54f11`, all five Kibana matching functions and both calls in each of the
+three just-bash bundles explicitly limit expansion to 1024. All six package
+forks and 105 outputs are honest and hash-bound; the 90 official files stay
+unchanged. Beyond-budget alternatives may not match. Large inputs can still
+throw, so neither exact MM10 equivalence nor arbitrary-input safety is claimed.
+
+The old physical fixture fails the new real-option assertion. The revised
+three-phase component proof passes with a spy on actual options and AST checks
+on all bundle calls before retention probes. **24 patterns retain 7,239,936
+bytes (about 6.9 MiB)** with explicit GC, below the 24 MiB aggregate fixture
+budget. Per-step stops avoid proceeding after unexpected growth. All three
+actual Bash variants pass the above-budget match and retention controls.
+The 36,000/216 and Fleet-only 9,000/0 corpora remain unchanged, and 252 default
+security-pattern comparisons give zero differences. Additional trailing-slash,
+final-empty-segment and positive-extglob-dotfile changes are documented/tested.
+The safer synchronous del rmdir terminal-error behavior is explicitly accepted
+for this candidate; no root-directory deletion runs.
+
+The old local images disappeared. The exact public base was restored by digest.
+A separate disposable UID1000 component image uses 451 Glob/Rimraf files matched
+independently to official locked tarballs. This is an auxiliary test fixture,
+not the full patched serving image. Missing-image/identity/UID failures are
+retained as failures. A revised source/artifact proof is recorded separately;
+the older 211-artifact proof is not retagged. Fresh targeted QA of this correction,
+actual serving-image builds/scans and service/human acceptance remain pending.

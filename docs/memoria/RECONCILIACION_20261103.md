@@ -563,3 +563,15 @@ seleccionadas. Cuatro comandos JDK21 con los wrappers congelados verifican
 Los cambios de metadatos/licencias y otras mejoras siguen pendientes. Otros
 portadores simples conservan las cuatro tuplas: no se afirma reducción del
 gate ni aprobación de imágenes/NiFi/SMB/humana. Los originales no cambian.
+
+## Presupuesto real de expansión MM11
+
+La revisión conjunta de `0dafc5d` descubre retención por la caché compilada.
+El padre la corrige en `6e54f11` pasando 1024 en las ocho ubicaciones reales,
+sin modificar los 90 ficheros oficiales. Pasan los tres bundles físicos y las
+252 comparaciones de seguridad por defecto; 24 patrones retienen 7.239.936 bytes.
+La cota es de esta prueba, no garantía global de memoria. Se documentan truncado,
+excepciones y diferencias fuera del corpus Fleet. Se construye solo una imagen
+auxiliar de componentes tras recuperar la base por digest; no una imagen de
+servicio aceptada. Nueva QA focal, escaneos, CI, servicios y aceptación humana
+siguen pendientes. Matriz, base, histórico y excepciones permanecen intactos.
