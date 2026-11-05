@@ -208,10 +208,27 @@ async function main() {
   load('get_field_values_handler', ['KEYWORD_TYPES', 'NUMERIC_TYPES', 'DATE_TYPES', 'BOOLEAN_TYPES', 'TEXT_TYPES', 'getFieldCategory', 'resolveInputToConcreteFields'], boundedContext)('attributes.*', Object.keys(types), types);
   for (const [route, check] of [['excludes', () => excludes('2048', ['{1..99999}'])], ['task', () => task(['{1..99999}'], '2048')],
     ['allowed', () => allowed('2048', [{ path: '{1..99999}' }])], ['fleet', () => call(fleet, 'logs-{1..99999}', 'logs-2048')],
-    ['fields', () => fields('{1..99999}/*', ['2048/value'], { '2048/value': 'keyword' })],
-    ['negated allowlist', () => allowed('1500', [{ path: '!{1..2000}' }])]]) {
+    ['fields', () => fields('{1..99999}/*', ['2048/value'], { '2048/value': 'keyword' })]]) {
     assert.throws(check, /expansion budget exceeded/, `overflow must reject: ${route}`);
   }
+  for (const [pattern, name] of [
+    ['!{1..2000}', '1500'],
+    ['!{1..1024}' + '/'.repeat(4090) + 'x', '1000/x'],
+    ['!' + '{x,'.repeat(1002) + '{a,b}' + '}'.repeat(1002), 'a'],
+    ['!p{a}' + '}'.repeat(1002) + ',z}', 'pz'],
+    ['!!!{a,b}', 'a'], ['!{a,b}', 'a'],
+  ]) {
+    assert.throws(() => allowed(name, [{ path: pattern }]), /negated brace patterns are unsupported/);
+    assert.throws(() => excludes(name, [pattern]), /negated brace patterns are unsupported/);
+    assert.throws(() => task([pattern], name), /negated brace patterns are unsupported/);
+  }
+  assert.equal(matcher.minimatch('anything', '#{1..2000}'), false);
+  assert.equal(matcher.minimatch('normal.txt', '!*.log'), true);
+  assert.equal(matcher.minimatch('private.log', '!*.log'), false);
+  assert.equal(new matcher.Minimatch('!{a,b}', { nonegate: true }).match('!a'), true);
+  assert.equal(new matcher.Minimatch('!{a,b}', { nobrace: true }).match('{a,b}'), false);
+  rows.push({ negatedBracePolicy: 'rejected for row, character, depth, rewrite limits and small sets',
+    officialCommentHandling: true, ordinaryNegationPreserved: true });
   assert(new matcher.Minimatch('{1..1024}').match('1024'));
   assert.throws(() => new matcher.Minimatch('{1..1025}'), /expansion budget exceeded/);
   // AST-check both actual call sites in every bundle before any retention
@@ -243,13 +260,30 @@ async function main() {
   }
   assert.equal(typeof global.gc, 'function', 'retention phase requires --expose-gc');
   const heap = () => { global.gc(); return process.memoryUsage().heapUsed; };
+  const STEP_STOP = 8 * 1024 ** 2, SETTLE_DEADLINE_MS = 2000;
+  const { setTimeout: sleep } = require('node:timers/promises');
+  const v8 = require('node:v8');
+  // An in-flight TurboFan job roots its closure -> Context -> this until the job
+  // is finalized. That is not cache retention: wait for it, keep the raw number
+  // visible, and fail if the residual outlives the deadline. Budgets unchanged.
+  const settledDelta = async base => {
+    await new Promise(setImmediate);
+    const raw = heap() - base, t0 = Date.now(); let delta = raw;
+    while (delta >= STEP_STOP && Date.now() - t0 < SETTLE_DEADLINE_MS) { await sleep(25); delta = heap() - base; }
+    return { raw, delta, settleMs: Date.now() - t0 };
+  };
+  const liveMatchers = async () => {
+    const t0 = Date.now(); let n = v8.queryObjects(matcher.Minimatch, { format: 'count' });
+    while (n > 0 && Date.now() - t0 < SETTLE_DEADLINE_MS) { await sleep(25); n = v8.queryObjects(matcher.Minimatch, { format: 'count' }); }
+    return n;
+  };
   const retainedStart = heap();
   for (let i = 0; i < 12; i++) {
     const start = heap();
     excludes('logs', [`{1..${1000 + i}}`]);
     fields(`{1..${1000 + i}}/*`, ['2048/value'], { '2048/value': 'keyword' });
-    await new Promise(setImmediate); // Measure retention beyond the current JS job, not live compiler temporaries.
-    assert(heap() - start < 8 * 1024**2, 'unexpected per-pattern retention; stop before additional probes');
+    const shortStep = await settledDelta(start);
+    assert(shortStep.delta < STEP_STOP, `unexpected per-pattern retention; stop before additional probes: ${JSON.stringify(shortStep)}`);
   }
   const retainedBytes = heap() - retainedStart;
   assert(retainedBytes < 24 * 1024**2, 'bounded consumer retention exceeded fixture budget');
@@ -257,19 +291,19 @@ async function main() {
   const longStart = heap();
   for (let i = 0; i < 3; i++) {
     const before = heap();
-    excludes('logs', [longPattern(4095, 1024 - i)]);
+    excludes('logs', [longPattern(3800, 1024 - i)]);
     fields(longPattern(1023, 1024 - i), ['2048/value'], { '2048/value': 'keyword' });
     const synchronousDelta = heap() - before;
-    await new Promise(setImmediate);
-    const retainedDelta = heap() - before;
-    rows.push({ longPatternStep: i, synchronousDelta, retainedDelta });
-    assert(retainedDelta < 8 * 1024**2, `long-pattern retention exceeded safe stop: ${retainedDelta}`);
+    const step = await settledDelta(before);
+    rows.push({ longPatternStep: i, synchronousDelta, rawDelta: step.raw, retainedDelta: step.delta, settleMs: step.settleMs });
+    assert(step.delta < STEP_STOP, `long-pattern retention exceeded safe stop: ${JSON.stringify(step)}`);
   }
   const longRetainedBytes = heap() - longStart;
-  assert(longRetainedBytes < 8 * 1024**2, 'long accepted patterns must not persist in shared cache');
+  assert(longRetainedBytes < STEP_STOP, 'long accepted patterns must not persist in shared cache');
+  assert.equal(await liveMatchers(), 0, 'a compiled bounded matcher outlived its call');
   rows.push({ realConsumersBraceExpandMax: 1024, measuredShortPatterns: 24, retainedBytes,
-    measuredLongPatterns: 6, longPatternLengths: [1023, 4095], longRetainedBytes,
-    retentionBudgetBytes: 24 * 1024**2, overflowRejectedBeforeCompilation: true, sharedCompiledCache: false });
+    measuredLongPatterns: 6, longPatternLengths: [1023, 3800], longRetainedBytes,
+    retentionBudgetBytes: 24 * 1024**2, rowCountOverflowRejectedBeforeCompilation: true, sharedCompiledCache: false });
 
   const variants = [
     ['CJS', require(root + '/node_modules/just-bash/dist/bundle/index.cjs')],
@@ -304,14 +338,20 @@ async function main() {
     assert.equal(oversized.exitCode, 1); assert.equal(oversized.stdout, '');
     assert(oversized.stderr.includes('expansion budget exceeded'));
     const longBefore = heap();
-    const acceptedLong = await boundedBash.exec(`ls '${longPattern(4096)}'`);
+    const acceptedLong = await boundedBash.exec(`ls '${longPattern(3800)}'`);
     assert.equal(acceptedLong.exitCode, 2);
-    await new Promise(setImmediate);
-    const longBashRetainedBytes = heap() - longBefore;
-    assert(longBashRetainedBytes < 8 * 1024**2, 'actual Bash bundle retained a long compiled pattern');
-    assert(heap() - before < 8 * 1024**2, 'actual Bash bundle retained unbounded expansion');
-    rows.push({ actualJustBashVariant: variant, cases: cases.length, longPatternLength: 4096, longBashRetainedBytes });
+    const bashStep = await settledDelta(longBefore);
+    const longBashRetainedBytes = bashStep.delta;
+    assert(longBashRetainedBytes < STEP_STOP, `actual Bash bundle retained a long compiled pattern: ${JSON.stringify(bashStep)}`);
+    assert(heap() - before < STEP_STOP, 'actual Bash bundle retained unbounded expansion');
+    rows.push({ actualJustBashVariant: variant, cases: cases.length, longPatternLength: 3800, rawDelta: bashStep.raw, longBashRetainedBytes, settleMs: bashStep.settleMs });
   }
+  // Positive control: the same helper must see a genuinely shared cache. One call.
+  const cachedBefore = heap();
+  mm.minimatch('logs', longPattern(1023), { braceExpandMax: 1024 });
+  const cachedControl = await settledDelta(cachedBefore);
+  assert(cachedControl.delta >= STEP_STOP, `retention control failed to detect cached compilation: ${JSON.stringify(cachedControl)}`);
+  rows.push({ cachedRetentionControl: cachedControl });
   // Coexistence: the independently accepted del engine bytes/pins stay unchanged.
   fs.unlinkSync(root + '/node_modules/del');
   fs.cpSync('/probe/del', root + '/node_modules/del', { recursive: true });

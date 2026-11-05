@@ -16,7 +16,7 @@ async function main() {
   }
   for (const file of Object.keys(inputs.packages)) {
     const metadata = JSON.parse(fs.readFileSync(path.join(root, file)));
-    assert(metadata.version.endsWith('+cncguard.mm11.3'));
+    assert(metadata.version.endsWith('+cncguard.mm11.4'));
     assert.equal(metadata.dependencies.minimatch, '11.0.4');
     assert.equal(metadata.cncGuardMinimatchMigration.braceExpandMax, 1024);
     assert.equal(metadata.cncGuardMinimatchMigration.cachePolicy, 'uncached-new-Minimatch');
@@ -28,7 +28,10 @@ async function main() {
   }
   const adapter = createRequire(path.join(root, 'package.json'))('@cnc-guard/bounded-minimatch');
   assert(new adapter.Minimatch('{1..1024}').match('1024'));
-  assert.throws(() => adapter.minimatch('1500', '!{1..2000}'), /expansion budget exceeded/);
+  for (const pattern of ['!{1..2000}', '!{1..1024}' + '/'.repeat(4090) + 'x',
+    '!' + '{x,'.repeat(1002) + '{a,b}' + '}'.repeat(1002), '!p{a}' + '}'.repeat(1002) + ',z}']) {
+    assert.throws(() => adapter.minimatch('1500', pattern), /negated brace patterns are unsupported/);
+  }
   const semver = require('/usr/share/kibana/node_modules/semver');
   const copies = [], runtimeDeclarations = [];
   function walk(directory) {

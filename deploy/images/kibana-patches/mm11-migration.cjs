@@ -71,16 +71,16 @@ function prepare(root, official, output, afterDelIndex) {
   patch.set(`node_modules/${ADAPTER}/package.json`, Buffer.from(JSON.stringify({ name: ADAPTER, version: '1.0.0',
     private: true, license: 'UNLICENSED', main: './index.cjs',
     exports: { '.': './index.cjs', './package.json': './package.json' }, dependencies: { minimatch: '11.0.4' },
-    description: 'Local integration adapter: uncached matchers, overflow rejected before compilation' }, null, 2) + '\n'));
+    description: 'Local integration adapter: uncached matchers; reject row overflow and negated brace input' }, null, 2) + '\n'));
   for (const file of Object.keys(inputs.packages)) {
     const metadata = JSON.parse(fs.readFileSync(path.join(root, file)));
     const upstreamVersion = metadata.version;
-    metadata.version += '+cncguard.mm11.3';
+    metadata.version += '+cncguard.mm11.4';
     metadata.dependencies = { ...metadata.dependencies, minimatch: '11.0.4', [ADAPTER]: '1.0.0' };
     metadata.cncGuardMinimatchMigration = { upstreamVersion, originalPackageSha256: inputs.packages[file],
       minimatch: '11.0.4', semanticPolicy: 'official MM11 semantics accepted for candidate; not MM10 equivalence',
       braceExpandMax: 1024,
-      cachePolicy: 'uncached-new-Minimatch', overflowPolicy: 'reject before compilation; no truncation',
+      cachePolicy: 'uncached-new-Minimatch', negativeBracePolicy: 'reject unless nonegate or nobrace', overflowPolicy: 'reject row overflow; positive internal bounds retain upstream semantics',
       sourceChange: file === FLEET_PACKAGE ? 'uncached boolean matcher through explicit bounded adapter' :
         file === BASH_PACKAGE ? 'all three ls bundles compile once per pattern through bounded adapter' :
           'bounded uncached adapter; field search compiles once per invocation',
@@ -115,7 +115,7 @@ function prepare(root, official, output, afterDelIndex) {
   find(updated); assert.equal(maps.length, 1);
   const bashLocator = Object.keys(maps[0]).filter(key => key.startsWith('just-bash@3.0.1') && maps[0][key].includes('node_modules/just-bash'));
   assert.equal(bashLocator.length, 1);
-  maps[0][bashLocator[0].replace('just-bash@3.0.1', 'just-bash@3.0.1+cncguard.mm11.3')] = maps[0][bashLocator[0]];
+  maps[0][bashLocator[0].replace('just-bash@3.0.1', 'just-bash@3.0.1+cncguard.mm11.4')] = maps[0][bashLocator[0]];
   delete maps[0][bashLocator[0]];
   for (const [name, location] of [
     [`${ADAPTER}@1.0.0`, `node_modules/${ADAPTER}`],
