@@ -419,6 +419,20 @@ class PatcherTests(unittest.TestCase):
         (self.src/'descriptor.jar').write_bytes(layout_zip(descriptor=True,false_placeholder=True))
         with self.assertRaisesRegex(ValueError,'descriptor placeholder'):self.inventory()
 
+    def test_redundant_zip64_sizes_are_exact_and_only_allowed_in_unchanged_leaves(self):
+        normal=layout_zip()
+        with zipfile.ZipFile(io.BytesIO(normal)) as z:
+            info=z.infolist()[0]
+            redundant=struct.pack('<HHQQ',1,16,info.file_size,info.compress_size)
+        data=layout_zip(local_extra=redundant)
+        (self.src/'redundant.jar').write_bytes(data)
+        self.assertTrue(self.inventory())
+        with zipfile.ZipFile(io.BytesIO(data)) as z,self.assertRaisesRegex(ValueError,'ZIP64 extra payload'):
+            self.p.validate_layout(z,z.infolist(),for_rewrite=True)
+        for extra in (redundant[:-1],struct.pack('<HHQQ',1,16,999,info.compress_size)):
+            (self.src/'redundant.jar').write_bytes(layout_zip(local_extra=extra))
+            with self.assertRaises(ValueError):self.inventory()
+
     def test_local_flag_method_name_and_descriptor_signature_cannot_drift(self):
         for mutation in ('flags','method','name','descriptor','gap'):
             with self.subTest(mutation=mutation):

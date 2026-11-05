@@ -228,7 +228,11 @@ def validate_layout(z, entries, *, for_rewrite=False):
             if values:
                 raise ValueError('unconsumed local ZIP64 extra payload')
         elif local_extra.get(1):
-            raise ValueError('unused local ZIP64 extra payload')
+            # Some Gradle JARs redundantly include both exact 64-bit sizes
+            # beside ordinary local sizes. This carries no opaque bytes, but
+            # can only remain inside an unchanged leaf, never be discarded.
+            if for_rewrite or local_extra[1] != struct.pack('<QQ',info.file_size,info.compress_size):
+                raise ValueError('unused local ZIP64 extra payload')
         end = info.header_offset + 30 + namesize + extrasize + info.compress_size
         gap = boundary - end
         if flags & 8:
