@@ -137,7 +137,7 @@ class PatcherTests(unittest.TestCase):
             z.writestr('keep', b'opaque')
         (self.src / 'legacy.jar').write_bytes(payload.getvalue())
         self.assertTrue(self.inventory())
-        for mutation in ('nonempty', 'not-directory', 'compressed', 'different-mode'):
+        for mutation in ('nonempty', 'not-directory', 'compressed', 'different-mode', 'different-system', 'different-attributes'):
             with self.subTest(mutation=mutation):
                 changed = copy.copy(info)
                 content = b''
@@ -145,6 +145,8 @@ class PatcherTests(unittest.TestCase):
                 if mutation == 'not-directory': changed.filename = 'META-INF/maven'
                 if mutation == 'compressed': changed.compress_type = zipfile.ZIP_DEFLATED
                 if mutation == 'different-mode': changed.external_attr = 0xfffe0010
+                if mutation == 'different-system': changed.create_system = 0
+                if mutation == 'different-attributes': changed.external_attr ^= 1
                 with zipfile.ZipFile(self.src / 'legacy.jar', 'w') as z:
                     z.writestr(changed, content)
                 with self.assertRaisesRegex(ValueError, 'special file/symlink'):
@@ -294,6 +296,25 @@ class PatcherTests(unittest.TestCase):
                 with patch.object(self.p,'rewrite',side_effect=faulty), self.assertRaisesRegex(ValueError,'post-write sibling'):
                     self.p.patch(self.src,self.root/'out',self.plan(),apply=True)
                 self.assertFalse((self.root/'out').exists())
+
+    def test_faulty_writer_cannot_change_preserved_central_metadata(self):
+        from unittest.mock import patch
+        original=self.p.rewrite
+        def faulty(path,output,targets,depth=0):
+            original(path,output,targets,depth)
+            if depth==0:
+                raw=bytearray(Path(output).read_bytes())
+                with zipfile.ZipFile(output) as z:offset=z.start_dir
+                while raw[offset:offset+4]==b'PK\x01\x02':
+                    size,extra,comment=struct.unpack_from('<HHH',raw,offset+28)
+                    if raw[offset+46:offset+46+size]==b'keep':
+                        mode=struct.unpack_from('<I',raw,offset+38)[0]
+                        struct.pack_into('<I',raw,offset+38,mode^(1<<22))
+                    offset+=46+size+extra+comment
+                Path(output).write_bytes(raw)
+        with patch.object(self.p,'rewrite',side_effect=faulty),self.assertRaisesRegex(ValueError,'sibling metadata'):
+            self.p.patch(self.src,self.root/'out',self.plan(),apply=True)
+        self.assertFalse((self.root/'out').exists())
 
     def test_zero_external_attributes_survive_rewrite(self):
         for path in self.src.iterdir():
