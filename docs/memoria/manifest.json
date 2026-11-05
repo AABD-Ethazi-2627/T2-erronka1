@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "53773c71c133f149a1e43eb8153d2dd0dbb1adfcc5993a3adb8289db7660151e",
+    "docs/memoria/RECONCILIACION_20261103.md": "f7928437c22da20424db445055aba127f1758bc84f895d3abdc4e30c56b5cb4f",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -426,7 +426,24 @@
     "docs/evidence/CLAUDE_NIFI_OCCURRENCE_TRANSPORT_RECHECK_20261104.md": "8d438869b0d7b357dd1235d0fc484182df91dc99b9958c6b9566ce482f0ec38b",
     "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.md": "cb3a20f5359712872d896e9150ed1a11b65122ecc3e219d5e45d0db3a88fa125",
     "tests/test_nifi_hadoop_snappy.py": "c051bfce0e3700369ba7107b1cc88985584a7a3dc51721cf30c5b56dd086fd99",
-    "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json": "0d88234c865b34af3e4563543dfcb08d46f4a34478a4aab802fa6d42438a2e5c"
+    "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json": "0d88234c865b34af3e4563543dfcb08d46f4a34478a4aab802fa6d42438a2e5c",
+    "deploy/images/kibana-patches/SUPPORTED_MIGRATION_20261105.md": "f1e5ab5c7f6860a283881a1f661a17a98cbc1e1d4a0dc1476f855ae502b30ad9",
+    "deploy/images/kibana-patches/probe-supported-migration.cjs": "7b3bdd1f51e4a6f53ad1680bc41b14fb9c4b8ece03de47090d22348bcef58ce1",
+    "deploy/images/kibana-patches/run-supported-migration-probe.py": "0a5e8bc000e2481e4b2c500c21894e072a0aec1bee0b9b25ac35e4675e1e6827",
+    "deploy/images/nifi-patches/hazelcast-jackson/HazelcastProbe.java": "ecd84b0363c651e1069c24ea662af6c4bcfb051fe62542ae9611f96aebfe38f7",
+    "deploy/images/nifi-patches/hazelcast-jackson/JacksonProbe.java.in": "f6cf4ef500819b7334043734eff549d614996ef1f0d5591129c0159bc103b526",
+    "deploy/images/nifi-patches/hazelcast-jackson/README.md": "dd7bd2f72aec91bcb50eb3286417627d125660193edcf5941178773c3225d566",
+    "deploy/images/nifi-patches/hazelcast-jackson/Shade.java": "424eb932c2feeca95d8db66834ecd01e069a141f969c7c83bee56e27c90c9ebc",
+    "deploy/images/nifi-patches/hazelcast-jackson/bounded.py": "d29dd07daf637f8f0ba842d2242887fbf003dd64e0e649c060c43bf1de567427",
+    "deploy/images/nifi-patches/hazelcast-jackson/candidate-plan.json": "5c310e56dc2ef7f41f73adc83fd5e0395360e28dca926d14bf6e6f79ed50523d",
+    "deploy/images/nifi-patches/hazelcast-jackson/linkage.py": "5cebec285951f840b4f81c205dcce2b46476f25d7f607b236a3616588b51b9de",
+    "deploy/images/nifi-patches/hazelcast-jackson/pins.json": "98ed44c683a048039040b2164a0b85dff7c3190b3edafb636e7556f919b239cf",
+    "deploy/images/nifi-patches/hazelcast-jackson/prepare.py": "a55e4b7a29d7997059c744a630c16c9f25af8b13e55a22f6ae9aef22877161a3",
+    "deploy/images/nifi-patches/hazelcast-jackson/probes.py": "b652b48e96511e45125aba3856be7d1e0fb52f9a347eb25d27d6b8fd69099132",
+    "deploy/images/nifi-patches/hazelcast-jackson/verification-summary.json": "791cb7872bad0a42c3822d8dc51316f41f0d58112a34bf0c698c23e13c3f57e6",
+    "tests/test_nifi_hazelcast_jackson.py": "905ab1dfc46efd22ca2efd75141b13a5463d12a88705377ecf534fea49080f82",
+    "docs/evidence/HAZELCAST_PARENT_20261105.md": "ed92e2e6e48251acb86978b063fefca0fe563faa742701f40043ec0c369456ad",
+    "docs/evidence/HAZELCAST_PARENT_20261105.json": "1d32cdd20d84f47fc8cc554cfc269e579c42056bad40ff3f43d16d2c7aaff660"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -971,5 +988,32 @@
     "evidence": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json",
     "verification": "993 tests/416subtests/4skips; pinned Java21 original/Rabbit/Jackson/Hadoop probes; 215-file inventory; writer exercise10targets; source unchanged; derived output summaries explicit",
     "limits": "Preparation only; exercise is not real approval/promotion; wrappers, SDKs, classloaders, final image/scans, CI/review and external gates pending"
+  },
+  "local_wrapper_preparation_20261105": {
+    "inspected_code_commit": "6b8d4fd868765054586173b4795587b05fb9b230",
+    "document": "docs/evidence/HAZELCAST_PARENT_20261105.md",
+    "previous_current_hashes": {
+      "docs/memoria/RECONCILIACION_20261103.md": "53773c71c133f149a1e43eb8153d2dd0dbb1adfcc5993a3adb8289db7660151e"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/SUPPORTED_MIGRATION_20261105.md",
+      "deploy/images/kibana-patches/probe-supported-migration.cjs",
+      "deploy/images/kibana-patches/run-supported-migration-probe.py",
+      "deploy/images/nifi-patches/hazelcast-jackson/HazelcastProbe.java",
+      "deploy/images/nifi-patches/hazelcast-jackson/JacksonProbe.java.in",
+      "deploy/images/nifi-patches/hazelcast-jackson/README.md",
+      "deploy/images/nifi-patches/hazelcast-jackson/Shade.java",
+      "deploy/images/nifi-patches/hazelcast-jackson/bounded.py",
+      "deploy/images/nifi-patches/hazelcast-jackson/candidate-plan.json",
+      "deploy/images/nifi-patches/hazelcast-jackson/linkage.py",
+      "deploy/images/nifi-patches/hazelcast-jackson/pins.json",
+      "deploy/images/nifi-patches/hazelcast-jackson/prepare.py",
+      "deploy/images/nifi-patches/hazelcast-jackson/probes.py",
+      "deploy/images/nifi-patches/hazelcast-jackson/verification-summary.json",
+      "docs/evidence/HAZELCAST_PARENT_20261105.json",
+      "docs/evidence/HAZELCAST_PARENT_20261105.md",
+      "tests/test_nifi_hazelcast_jackson.py"
+    ],
+    "note": "Verified component preparation and incompatible Kibana diagnostic only. Child artifact records retained historically; no runtime replacement, image scan, exception, human review or matrix/base change."
   }
 }

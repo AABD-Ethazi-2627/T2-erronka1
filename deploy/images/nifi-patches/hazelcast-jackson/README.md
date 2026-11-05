@@ -4,6 +4,13 @@ This owns only this directory and `tests/test_nifi_hazelcast_jackson.py`.
 It grants no runtime, scanner, NiFi, SMB, model, CG32, human or merge approval.
 No Dockerfile, parent checkout, academic manifest, scanner rule or exception changes.
 
+The child handoff below describes `f5fadedd` and its original artifact. Its plan
+and verification summary are retained as historical evidence. The parent later
+removed unused Python imports/an assignment and repeated construction/probes;
+only the embedded preparation-source provenance changed in the resulting JAR.
+[Current parent evidence](../../../../docs/evidence/HAZELCAST_PARENT_20261105.md)
+identifies that artifact separately. Neither candidate is runtime approved.
+
 ## Provenance and reconstruction
 
 The stock wrapper SHA-256 is

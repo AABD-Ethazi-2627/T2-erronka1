@@ -496,3 +496,22 @@ comandos, resultados y el alcance de cada prueba. Continúan pendientes una
 revisión independiente nueva, wrappers/SDKs, ABI/classloaders, imagen/scans y
 todos los gates externos. Ninguna aceptación humana, excepción, base histórica
 o contrato de clasificación actual se modifica.
+
+## Preparación Hazelcast y diagnóstico Kibana del 5 de noviembre
+
+Se incorpora el candidato experimental Hazelcast de `f5fadedd` y se verifica
+por separado en el padre sobre fuente limpia `6b8d4fd`. Primero se reproduce
+el hash del hijo; tras limpiar cuatro incidencias de lint, cambia únicamente
+la entrada de procedencia del JAR. Pasan 21 comandos Java acotados, 97 tests y
+43 subtests focalizados; no se repite la suite completa. Los 215 originales
+permanecen intactos. El análisis directo no resuelve herencia, multi-release,
+reflexión ni classloaders; seis de las 37 tuplas tienen sondas y 31 solo
+evidencia upstream. No se selecciona reemplazo ni se aprueba runtime.
+
+El diagnóstico Kibana incorporado en `a0126da` se repite desde el padre y
+confirma 216 diferencias en 36.000 comparaciones, incluida una invocación real
+de just-bash. No se instala esa migración. El CI de `6d67bc2` ya no falla por
+espacio, pero siguen abiertos NiFi 59/Kibana 2. La revisión nueva, las imágenes,
+CG32, SMB y las aceptaciones externas continúan pendientes. Se añaden hashes
+de las nuevas fuentes y evidencias; base, matriz, histórico y revisión humana
+no cambian. Los hashes antiguos del hijo se conservan como históricos.
