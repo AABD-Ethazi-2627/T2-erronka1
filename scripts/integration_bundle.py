@@ -55,6 +55,7 @@ EXTENSIONS = {
     ".in",
     ".groovy",
     ".cjs",
+    ".c",
     ".properties",
     ".cfg",
 }

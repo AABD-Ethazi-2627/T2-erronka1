@@ -232,6 +232,9 @@ def test_bundle_preserves_build_inputs_and_detects_extracted_tampering(
         "cg14_validation/validator.py",
         "deploy/cg14/scripts/kafka-volume.properties",
         "lan/haproxy.cfg",
+        "deploy/images/kibana-patches/del-fault-injection.c",
+        "scripts/nifi_candidate_context.py",
+        "deploy/images/nifi-patches/parquet-jackson/ParquetProbe.java",
     ):
         assert (restored / name).read_bytes() == (Path.cwd() / name).read_bytes()
     monkeypatch.setattr(
