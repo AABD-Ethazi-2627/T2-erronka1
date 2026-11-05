@@ -18,7 +18,7 @@ def jar(entries):
 
 
 @pytest.fixture
-def context(tmp_path):
+def context(tmp_path,monkeypatch):
     source=tmp_path/'source';library=source/c.SCOPES[0];library.mkdir(parents=True)
     original=jar([('Code.class',b'synthetic original')])
     fixed=jar([('Code.class',b'synthetic fixed')])
@@ -26,6 +26,7 @@ def context(tmp_path):
     replacement=tmp_path/'replacement.jar';replacement.write_bytes(fixed)
     rows=c.writer.inventory(source)
     inv={'schema':1,'inventory_sha256':c.writer.inventory_hash(rows),'occurrences':rows}
+    monkeypatch.setattr(c,'STOCK_INVENTORY_HASH',inv['inventory_sha256'])
     leaf=next(r for r in rows if r['members'])
     target={k:leaf[k] for k in ('outer','members','chain_sha256')}
     target|={'family':'lz4','status':'candidate-pending-parent-QA','replacement':str(replacement),
@@ -108,3 +109,24 @@ def test_context_output_cannot_alias_the_original_source(context,tmp_path):
     with pytest.raises(ValueError,match='overlapping context output'):
         c.prepare(source,tmp_path/'overlay',Path('missing'),Path('missing'),Path('missing'),Path('missing'),alias)
     assert not (source/'planted').exists()
+
+
+def test_self_consistent_forged_inventory_cannot_replace_the_pinned_stock_profile(context):
+    source,ctx,outer,_,_=context;before=outer.read_bytes()
+    inv=c.load(ctx/'inventory.json');inv['occurrences'][-1]['class_packages']=['forged']
+    new=c.writer.inventory_hash(inv['occurrences']);inv['inventory_sha256']=new
+    (ctx/'inventory.json').write_text(json.dumps(inv))
+    plan=c.load(ctx/'plan.json');plan['inventory_sha256']=new;rebind_metadata(ctx,'plan',plan)
+    candidate=c.load(ctx/'candidate.json');candidate['inventory_sha256']=new
+    rebind_metadata(ctx,'candidate',candidate)
+    review=c.load(ctx/'review.json');review['candidate_sha256']=c.writer.digest(ctx/'candidate.json')
+    rebind_metadata(ctx,'review',review)
+    manifest=c.load(ctx/'manifest.json');manifest['inventory_sha256']=new
+    (ctx/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ValueError,match='inventory drift'):c.verify(ctx,source,install=True)
+    assert outer.read_bytes()==before
+
+
+def test_stock_profile_matches_the_audited_occurrence_snapshot():
+    path=Path(__file__).resolve().parents[1]/'deploy/images/nifi-patches/stock-occurrences/candidate-plan.json'
+    assert c.STOCK_INVENTORY_HASH==json.loads(path.read_text())['inventory_sha256']

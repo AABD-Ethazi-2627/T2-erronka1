@@ -18,6 +18,10 @@ except ModuleNotFoundError:
     import patch_nested_jars as writer
 
 METADATA = {'manifest.json','inventory.json','candidate.json','plan.json','review.json'}
+# Frozen 215-root / 2,099-occurrence NiFi 2.12.0 profile. A self-consistent
+# caller-supplied inventory is insufficient: its canonical content must match
+# this independently reproduced stock snapshot, including every inner hash.
+STOCK_INVENTORY_HASH = '5ef465917d5de6c50794c674f3866f22c8b604e4b7a9f7b5b8822ce773980e32'
 SCOPES = ('opt/nifi/nifi-current/lib','opt/nifi/nifi-toolkit-current/lib')
 BOOTSTRAP = {
     scope+'/'+name+'-2.22.2.jar':(scope+'/'+name+'-2.22.3.jar',digest)
@@ -59,7 +63,7 @@ def verify(context,source,install=False):
             and len(set(review['families']))==len(review['families']),'invalid reviewed families')
     writer.exact_keys(plan,'schema inventory_sha256 targets')
     require(type(plan['schema']) is int and plan['schema']==1,'invalid plan schema')
-    require(writer.inventory_hash(inv['occurrences'])==inv['inventory_sha256']
+    require(writer.inventory_hash(inv['occurrences'])==STOCK_INVENTORY_HASH==inv['inventory_sha256']
             ==plan['inventory_sha256']==manifest['inventory_sha256'],'context inventory drift')
     selected=[t for t in candidate['targets'] if t['family'] in review['families']]
     require(selected and {t['family'] for t in selected}==set(review['families']),'missing reviewed family')
