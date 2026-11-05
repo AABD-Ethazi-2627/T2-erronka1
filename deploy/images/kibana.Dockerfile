@@ -8,6 +8,9 @@ COPY deploy/images/kibana-patches/package.json deploy/images/kibana-patches/pack
 RUN npm ci --ignore-scripts --audit=false
 COPY deploy/images/kibana-patches/audit-glob-consumers.js ./
 RUN node --max-old-space-size=256 audit-glob-consumers.js /usr/share/kibana --check-legacy-migration > glob-importers.json
+COPY deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/prepare-del-migration.cjs ./
+# Exact incoming tree guard includes CJS/ESM, bundles, compressed assets and metadata.
+RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 prepare-del-migration.cjs /usr/share/kibana /patches/del-patched > del-preparation.json
 COPY deploy/images/kibana-patches/apply-deepmerge-patch.js deploy/images/kibana-patches/test-deepmerge-patch.js ./
 RUN node apply-deepmerge-patch.js && node test-deepmerge-patch.js
 COPY deploy/images/kibana-patches/apply-extract-zip-patch.js deploy/images/kibana-patches/test-extract-zip-patch.js ./
@@ -35,6 +38,13 @@ RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
     && apk upgrade --no-cache \
     && rm -rf /usr/share/kibana/node_modules/zod-to-json-schema/dist-test-v3 \
         /usr/share/kibana/node_modules/zod-to-json-schema/dist-test-v4
+# Verify the complete legacy subtree again immediately before physical removal.
+# The output table pins actual adapted source bytes, not only package metadata.
+COPY --from=patches /patches/del-patched /tmp/del-patched
+COPY --from=patches /patches/del-patched.modules.yaml /tmp/del-patched.modules.yaml
+COPY deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json deploy/images/kibana-patches/install-del-migration.cjs /tmp/del-migration/
+RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/del-migration/install-del-migration.cjs /usr/share/kibana /tmp/del-patched \
+    && rm -rf /tmp/del-patched /tmp/del-patched.modules.yaml /tmp/del-migration
 # Remove the old package directories so removed upstream files cannot survive COPY.
 RUN rm -rf /usr/share/kibana/node_modules/decode-uri-component \
     /usr/share/kibana/node_modules/systeminformation \
@@ -62,7 +72,7 @@ COPY --from=patches /patches/node_modules/axios-patched /usr/share/kibana/node_m
 COPY --from=patches /patches/node_modules/basic-ftp-patched /usr/share/kibana/node_modules/basic-ftp
 COPY --from=patches /patches/node_modules/body-parser-v1 /usr/share/kibana/node_modules/@a2a-js/sdk/node_modules/body-parser
 COPY --from=patches /patches/node_modules/body-parser-v2 /usr/share/kibana/node_modules/body-parser
-COPY --from=patches /patches/node_modules/brace-expansion-v1 /usr/share/kibana/node_modules/del/node_modules/brace-expansion
+# del's old brace-expansion is removed with its unused Glob 7 closure above.
 COPY --from=patches /patches/node_modules/brace-expansion-v2 /usr/share/kibana/node_modules/brace-expansion
 COPY --from=patches /patches/node_modules/d3-color-patched /usr/share/kibana/node_modules/d3-scale/node_modules/d3-color
 COPY --from=patches /patches/node_modules/decode-uri-component-patched /usr/share/kibana/node_modules/decode-uri-component
@@ -96,7 +106,7 @@ RUN rm -rf /usr/share/kibana/node_modules/node-forge
 # Replace actual upstream library and dist bytes; do not reapply the 1.4.0 backport.
 COPY --from=patches /patches/node_modules/node-forge-patched /usr/share/kibana/node_modules/node-forge
 COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js deploy/images/kibana-patches/test-same-line-updates.js deploy/images/kibana-patches/test-hono-node-server.js /tmp/
-COPY deploy/images/kibana-patches/test-glob-migration.js deploy/images/kibana-patches/test-minimatch-limits.js deploy/images/kibana-patches/test-minimatch3-applicability.js /tmp/
+COPY deploy/images/kibana-patches/test-glob-migration.js deploy/images/kibana-patches/test-minimatch-limits.js deploy/images/kibana-patches/test-del-migration.cjs /tmp/
 RUN /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-patch.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-chain.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-follow-redirects.js \
@@ -104,6 +114,6 @@ RUN /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-patch.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-hono-node-server.js \
     && /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/test-glob-migration.js \
     && /usr/share/kibana/node/default/bin/node --max-old-space-size=384 /tmp/test-minimatch-limits.js \
-    && /usr/share/kibana/node/default/bin/node --max-old-space-size=128 /tmp/test-minimatch3-applicability.js \
-    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js /tmp/test-same-line-updates.js /tmp/test-hono-node-server.js /tmp/test-glob-migration.js /tmp/test-minimatch-limits.js /tmp/test-minimatch3-applicability.js
+    && /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/test-del-migration.cjs \
+    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js /tmp/test-same-line-updates.js /tmp/test-hono-node-server.js /tmp/test-glob-migration.js /tmp/test-minimatch-limits.js /tmp/test-del-migration.cjs
 USER 1000
