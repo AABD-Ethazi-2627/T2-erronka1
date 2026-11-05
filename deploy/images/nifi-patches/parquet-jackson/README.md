@@ -91,8 +91,9 @@ confirm the mapper's actual JAR and no Hadoop NativeCodeLoader path. No native
 codec, hostile input, malicious polymorphic class, OOM or image build runs.
 
 `consumer-pins.json` fixes the exact exercised classpath: six stock-equal Parquet
-JARs, stock-equal SLF4J/Hadoop common, official Hadoop MapReduce core and JTS core
-(the latter two close runtime symbol requirements for this isolated harness).
+JARs, stock-equal SLF4J/Hadoop common, stock-equal JTS core and official Hadoop MapReduce core
+(MapReduce is absent from the 215 acquired roots; it closes a symbol requirement
+for this isolated harness, which also fails without it against the stock wrapper).
 These libraries and POMs are read as data, never built. Early omitted-dependency
 controls are retained in `consumer-explore*`: default reader needs Hadoop
 Configuration; explicit Plain configuration additionally needs MapReduce's
@@ -150,3 +151,52 @@ claimed here. Parent QA, occurrence/atomic approval, complete symbolic and
 classloader closure, NiFi/image scans, unchanged CG32 resources, real SMB and
 human acceptance remain pending. Other wrappers, unmanifested AWS/Azure Jackson,
 Kibana and root integration work remain separate.
+
+## Independent review and parent regression supplement
+
+The independent review of `0dafc5d` reproduced `bad77fac…` and found no defect
+in its bytes, nor Critical/High finding. It permits continued bounded private
+assembly only. Its report is `docs/evidence/CLAUDE_PARQUET_WRAPPER_REVIEW_20261105.md`.
+The frozen preparation sources and JAR are unchanged. These additions live
+outside the candidate provenance and do not reattribute the original 19 tests.
+
+The parent now runs 27 portable tests. Added cases exercise external member and
+descriptor references, header/member access changes, CLI failure on a real
+consumer reference, the actual orchestration with data-only Shade/Java stubs,
+stock/source/baseline rejection before publication, obsolete-class removal,
+version metadata replacement, faulty-writer entry/content/raw/central changes,
+CPU/core/affinity limits and the NativeCodeLoader rejection path. All 21 hand-
+chosen mutations in the review now fail those tests. This is a bounded mutation
+set, not exhaustive proof. The CLI's explicit six-consumer minimum remains a
+future grouped reconstruction change; the current immutable consumer-pins and
+the independent review both record the six actual consumer JARs.
+
+`tests/fixtures/ParquetJacksonReferenceProbe.java` adds a separate benign
+128-reference reverse-order counter, interleaved list and map identity/order
+checks, and exact ObjectMapper origin checks. The parent compiles/runs it with
+both unchanged wrappers in four bounded JDK21 commands: **8384 stock versus 128
+candidate Key.equals calls**. No timing, hostile input, native codecs or NiFi
+services are involved. This supplements CVE-2026-91777; the historical candidate
+plan and its two-discriminant count remain historical. CVE-2026-89407 still has
+static/upstream evidence rather than a local complexity discriminant.
+
+The actual parent logs and source/JDK/artifact hashes are at
+`/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/`. Two preceding
+attempts failed to obtain a successful compile (empty logs, flock return 1);
+they are retained and are not counted as passes. Commands in each `.log.json`
+record the finite lock wait, CPU/core/heap and environment bounds.
+
+The review also records legacy DEPENDENCIES text, missing separate databind
+NOTICE, empty versioned directories and uncompressed delta entries. These are
+not represented as repaired or legally approved. Path canonicalization,
+additional consumer controls and those metadata changes must be grouped with
+any future source/JAR reconstruction, not silently applied to this frozen SHA.
+The automated 519-byte equality/origin assertions in the older probes remain
+a follow-up; equality was independently measured, not inferred as CVE closure.
+
+**Scan accounting:** removing this wrapper alone cannot reduce the distinct
+CI tuples: the same four Jackson 2.22.2 CVEs remain in simple carriers in five
+NARs outside the current assembly. At most four of 63 raw records would be
+removed; only a fresh actual scan can establish that effect. The authoritative
+gate remains 59 distinct tuples. AWS/Azure carriers, classloaders, images,
+CG32, SMB and human acceptance are still pending.

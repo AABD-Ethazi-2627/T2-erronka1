@@ -104,6 +104,7 @@ def build(output, evidence):
                 "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
                 "docs/evidence/CLAUDE_NIFI_GUARDS_HADOOP_FINAL_RECHECK_20261105.md",
                 "docs/evidence/CLAUDE_HAZELCAST_WRAPPER_REVIEW_20261105.md",
+                "docs/evidence/CLAUDE_PARQUET_WRAPPER_REVIEW_20261105.md",
                 "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md",
                 "docs/evidence/LOCAL_CONTAINERS_20261103.md",
                 "docs/evidence/LOCAL_HTTP_20261103.md",

@@ -40,14 +40,14 @@
     "deploy/images/nifi-patches/stock-occurrences/emit_plan.py": "90243940e1e1cc3bb2ddfbb1e2c838e5b287bdaf97fc43c742329ad365d6338b",
     "deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "216602bcce2694679a3499aeba63e2c804bbeb709f792903b0063b31df9aec5d",
     "deploy/images/nifi.Dockerfile": "ed6d55e8f6a097f96f81c87bc1a225259bef22768e2cdcae9653e9fb46c18807",
-    "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771",
+    "scripts/integration_bundle.py": "d241938272e37500792e318c024776afcaf52e05929ca740b1d5f4a74b80cf51",
     "scripts/nifi_candidate_context.py": "a73b32bb8071a45e30bc47f45b807198a98eec73d345edb79fa130b707eadc56",
     "scripts/patch_nested_jars.py": "6a07015f841cd54e9c3f56df30d0c669e804b7a49f5728fe85f83487c53daf9e",
     "tests/test_integration_wiring.py": "1cc579ad577ceb0ca9f5e41b4e402180aca24b4f7cec7a6d742f6f9c43cea0af",
     "tests/test_nifi_candidate_context.py": "e0508acb4c7b20065292b18bb50cda08c276dc36f3b58516cd74e42eeefe4e4d",
     "tests/test_nifi_dependency_guards.py": "0211ab6381abb0199908752cddea3801f240db390b489a9ccfcbcda508a31c4b",
     "tests/test_nifi_hadoop_snappy.py": "b8a0c4bbba55a5d4b1310896d57190c305c4bf31f11a0c42b195e53d732cad7b",
-    "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
+    "tests/test_nifi_parquet_jackson.py": "be1e2aca2c61fda31ce038b3cdc39d521076f3d111d782c37e78f7ba06b44b78",
     "tests/test_nifi_stock_occurrences.py": "eb99b6570df111b85d58ad5f159dbaa93f2918b93f84acdb013cb4e17b7b3a54",
     "tests/test_patch_nested_jars.py": "e72df844a1ac03c0138fa28986f51c1d618dd5c405a8bbfd2b50050006501677",
     "deploy/images/kibana-patches/mm11-inputs.json": "3ed819137c23147899b76ef3c5eadace547ba61729166394b81dd9b4fef5e1d6",
@@ -61,7 +61,8 @@
     "deploy/images/kibana-patches/test-mm11-installed.cjs": "627fc8eee7c48cef3287784fd43a4678bdd7dc025ca6556a13c63026517b0571",
     "deploy/images/kibana-patches/test-mm11-migration.cjs": "b1d03fca4ae589bb523b5fbd5c1c30a6adedd12c56c2b15d14e0138481e288fc",
     "deploy/images/kibana-patches/minimatch-migration/package-lock.json": "39eb885c0d2ad0813f2f4ae4ee5e3bdf454f67d3201bd5a319e2097e1b6fd9ec",
-    "deploy/images/kibana-patches/minimatch-migration/package.json": "7168c1d457338818e3ca60ff249203f1ab797f4ede0e06f7da62c5bd63f3b992"
+    "deploy/images/kibana-patches/minimatch-migration/package.json": "7168c1d457338818e3ca60ff249203f1ab797f4ede0e06f7da62c5bd63f3b992",
+    "tests/fixtures/ParquetJacksonReferenceProbe.java": "35e213f7be23ae639c4e185f2c85d13e3b10fc66dad8a91c610dad812828b160"
   },
   "post_proof_allowlist_update": {
     "path": "scripts/integration_bundle.py",
@@ -124,8 +125,28 @@
       "no reflective/resource/classloader proof",
       "multi-release entries excluded from this base-class analysis"
     ],
-    "independent_QA": "pending",
-    "runtime_approved": false
+    "independent_QA": {
+      "head": "0dafc5d9d150a813d5676baa0b11c9b459c53667",
+      "report": "docs/evidence/CLAUDE_PARQUET_WRAPPER_REVIEW_20261105.md",
+      "verdict": "eligible bounded private assembly, no Critical/High or candidate-byte defect; no runtime approval",
+      "Medium": 3,
+      "Low": 7
+    },
+    "runtime_approved": false,
+    "parent_regression_supplement": {
+      "tests": 27,
+      "selected_mutations_killed": 21,
+      "selected_mutations_total": 21,
+      "mutation_driver": "/home/tears/.cache/cnc-claude-parquet-review-20261105/mutate.py",
+      "mutation_log": "/home/tears/.cache/cnc-parquet-mutations-parent-20261105-02/result.log",
+      "test_log": "/home/tears/.cache/cnc-parquet-regression-parent-20261105.log",
+      "proof": "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03",
+      "java_commands": 4,
+      "stock_Key_equals": 8384,
+      "candidate_Key_equals": 128,
+      "candidate_and_preparation_sources": "unchanged",
+      "remaining": "CLI explicit consumer minimum, canonical output path, grouped metadata/NOTICE and additional consumers remain pending; not runtime closure"
+    }
   },
   "del": {
     "implementation_commit": "d8f6699",
@@ -583,7 +604,32 @@
     "/home/tears/.cache/cnc-mm11-parent-20261105-02/official/dist/esm/unescape.js.map": "11dca08b65b198c0a72baba3d8a866ff32f4875366e76d7205ca54b428bf39cf",
     "/home/tears/.cache/cnc-mm11-parent-20261105-02/sha256.json": "ec5cfa86a9f8b425e4f2fce868409645b18209d8f1a8020cc79029201f4dbc1d",
     "/home/tears/.cache/cnc-kibana-mm11-frontend-20261105.log": "e7ed653a31ebf31865e78d6cff4ff872c24ee07d1eddcbec2fd734225e9892ea",
-    "/home/tears/.cache/cnc-restored-fixture-ffd31f4-20261105.stdout": "7af2a2a4e9ef7237cb020fde40ee89697085bbc3a06b63e612c4f88c7f28cd0f"
+    "/home/tears/.cache/cnc-restored-fixture-ffd31f4-20261105.stdout": "7af2a2a4e9ef7237cb020fde40ee89697085bbc3a06b63e612c4f88c7f28cd0f",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/source.json": "c5053e77d1cdbad077beb3c52966b19f43a90c72ee239e33868a9a69e591c433",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe$Key.class": "a84729eaf6a9cba538fff0f63a0ba6d576ca303a7d4a45c12e22d259849925a3",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe$Node.class": "9698bf92f760e375599e5d21c6aee4055fcd8574e72b520c552518584a5253c0",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe$1.class": "90bad2d98c652753123e1d3c018465f5ca52a51e72ab29dc0a07f23de65c09e5",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe$2.class": "4fd198c06116e5811424c24af16941897493a76b324b98fe7d44791bb0ac243d",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe$3.class": "d1bfbf42d1101fccfe921a3626afdf1590b031eb455303ce4e3ab6cb7e3bfc70",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe.class": "acb8709c45fe24b2dca6af7dc5f5675a5d623fe4eff971372fd782a886db99bf",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/compile.log.json": "bdc2e89a6fc62d14733d3cce6a653c08925e6e284025274c9fa10c9e0d0dc374",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/run.log": "cc7389fa44dbd775acd63b10b57b4c5d2676607af1d84595b79c7ca36087956d",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/run.log.json": "401905b631393019013a7247601e8c989baa8f30064c29dd6529f632af4b1703",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe$Key.class": "a84729eaf6a9cba538fff0f63a0ba6d576ca303a7d4a45c12e22d259849925a3",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe$Node.class": "9698bf92f760e375599e5d21c6aee4055fcd8574e72b520c552518584a5253c0",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe$1.class": "90bad2d98c652753123e1d3c018465f5ca52a51e72ab29dc0a07f23de65c09e5",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe$2.class": "4fd198c06116e5811424c24af16941897493a76b324b98fe7d44791bb0ac243d",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe$3.class": "d1bfbf42d1101fccfe921a3626afdf1590b031eb455303ce4e3ab6cb7e3bfc70",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe.class": "acb8709c45fe24b2dca6af7dc5f5675a5d623fe4eff971372fd782a886db99bf",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/compile.log.json": "b4c3127b0ba60191a484f2f8d0b4057546be5b8e3c08ec1de756490ab1fae1fe",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/run.log": "c63135b5e2cc7f429c693a2a329467202487670dbde98a686294101c075dde23",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/run.log.json": "34403b5cef0f94f1f06cdbad3d867bf4df87b7c9230c2dc9b26b3363137fb883",
+    "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/sha256.json": "a24f42e6b1a4ae9df1d7fcff1fff10b6104bb8f095cf9833368e20d2a9c77744",
+    "/home/tears/.cache/cnc-claude-parquet-review-20261105/mutate.py": "b27e0345c533b073407a825d80a3e8cd1c1491e4025d6856558bcca0d020ebd1",
+    "/home/tears/.cache/cnc-parquet-mutations-parent-20261105-02/result.log": "b960e3ba3e1ac8eefe3ce7d86f0cb6a6273172cfa94c634b142bc96cbacc173e",
+    "/home/tears/.cache/cnc-parquet-regression-parent-20261105.log": "47f0fd61c33a24d3f95119b0ef084d8fd4ba21f23419581642145376943edf45"
   },
   "limits": [
     "new independent combined/Parquet/Kibana reviews pending",
@@ -624,5 +670,9 @@
     "six_scenarios": "passed ASGI/model/ES doubles only",
     "source_members": "verified_not_authenticated",
     "note": "Historical source before MM11; not relabeled as latest code or live integration"
+  },
+  "parquet_pre_regression_active_source_sha256": {
+    "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
+    "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771"
   }
 }

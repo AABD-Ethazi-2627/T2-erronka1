@@ -552,3 +552,14 @@ y el escaneo nuevos siguen pendientes. El ZIP de `ffd31f4` pasa sus seis
 fixtures restaurados y se conserva como evidencia histórica anterior a MM11.
 No cambian la matriz, la base, el histórico, las excepciones, el alcance del
 modelo ni el estado pendiente de aceptación humana.
+
+## Revisión Parquet y regresiones del padre
+
+La revisión independiente de `0dafc5d` reproduce el JAR Parquet sin defectos
+de bytes ni hallazgos Critical/High. Permite continuar el ensamblado privado,
+sin aceptación runtime. El padre añade 27 pruebas y detecta las 21 mutaciones
+seleccionadas. Cuatro comandos JDK21 con los wrappers congelados verifican
+8384 frente a 128 llamadas Key.equals y conservan identidad/orden y origen.
+Los cambios de metadatos/licencias y otras mejoras siguen pendientes. Otros
+portadores simples conservan las cuatro tuplas: no se afirma reducción del
+gate ni aprobación de imágenes/NiFi/SMB/humana. Los originales no cambian.

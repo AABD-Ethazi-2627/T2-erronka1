@@ -38,8 +38,16 @@ The parent reproduces Parquet JAR
 `bad77fac2682d5441ce19e498056ddaf948e89739d933d302b5cf66c868344cf`
 and all 11 bounded commands. Actual old/fixed wrappers write/read identical
 519-byte, three-row UNCOMPRESSED Parquet files. Two tuples have discriminating
-probes and two have upstream/partial controls. Independent review and complete
-linkage/classloader acceptance remain pending.
+probes and two have upstream/partial controls. The [independent review](CLAUDE_PARQUET_WRAPPER_REVIEW_20261105.md) reproduced
+the exact candidate and permits bounded assembly, with no Critical/High or
+byte defect. The parent adds 27 portable regressions, kills all 21 selected
+review mutations and runs a separate four-command JDK21 reverse-reference
+counter: 8384 stock versus 128 candidate Key.equals calls, with exact mapper
+origin and identity/order checks. The frozen JAR/preparation sources are
+unchanged. An explicit CLI consumer minimum, grouped path/metadata/notice
+changes and further consumer coverage remain pending. Other simple carriers
+still contain the same four CVEs, so this wrapper alone cannot reduce distinct
+CI tuples. Complete linkage/classloader and image acceptance remain pending.
 
 The del migration is incorporated as `d8f6699`; the parent repeats all 99 records
 with identical test-result hash. The coordinator accepts the explicit candidate

@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "8189e255d77cc02119642a075bb35bf17615e3c9b3361e182dd50ff1acdad10f",
+    "docs/memoria/RECONCILIACION_20261103.md": "8861585b8dd0f1cb21de6cadabd940c0c512865d4875aee366e8ee8c25e93048",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -301,7 +301,7 @@
     "dashboard_laneki/test_app.py": "5ef975e468b538876fe7a593bcda63762478971a16f21530c59c4b86254759e7",
     "dashboard_laneki/test_domain.py": "f8c77cf900863f2a25b31bfaabd868bc04808f0198dcb06f9acc831417d90a90",
     "dashboard_laneki/test_read_contracts.py": "725ce24decdef02f4ce67d9e1baf71c6103552bac8b65d79c340b556ff48a308",
-    "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771",
+    "scripts/integration_bundle.py": "d241938272e37500792e318c024776afcaf52e05929ca740b1d5f4a74b80cf51",
     "scripts/integration_dashboard_probe.py": "73a83f9a9ec0c32d184ef7da0e480398f3d27fe647482382d8ae501eb7b82a61",
     "scripts/integration_fixture.py": "efb76406e9a6c5ccaae4b780aae2127aa2ce41823b935ac8dd5751502429cb59",
     "scripts/integration_http.py": "b11589fb4a52d22dd4a25c9e2cfcc15ec2cdc5e540f504aa4c8a23f277703e83",
@@ -460,7 +460,7 @@
     "deploy/images/nifi-patches/hadoop-snappy/jdk21-pins.json": "6db470fdf6fafb2cf1dbc79bc8d8a35f4942aa28b60391c4d82891bc172b7581",
     "deploy/images/nifi-patches/parquet-jackson/JacksonProbe.java.in": "e964d6d5f618778e2c47a35a784f484164437eb0d0e270f51db099ab0e4b8121",
     "deploy/images/nifi-patches/parquet-jackson/ParquetProbe.java": "cf93ea8b20ca091dceb7f4fd3046af57748d3a2ebd9fffd9fd7b68a21952e42c",
-    "deploy/images/nifi-patches/parquet-jackson/README.md": "40b2b924fd3f35084f2362e9b60fc19af2f0d528fea6b9979e45c3cf5d250aa9",
+    "deploy/images/nifi-patches/parquet-jackson/README.md": "163a0927911141b1287e57ae303624d5ac707e9519b73f1adfd4120dd57a9fd2",
     "deploy/images/nifi-patches/parquet-jackson/Shade.java": "5455843612556e9f2d76eaf8bdd74e50f75872a95027964e511733965d6e8f71",
     "deploy/images/nifi-patches/parquet-jackson/bounded.py": "01b273836d6821e393d5d7e13fe0a4c57c0d561b12ce48595af22aa3a10870b9",
     "deploy/images/nifi-patches/parquet-jackson/candidate-plan.json": "a07215c847406cec53ce0da363095eda6d002a5384679a63e4fe8a60a46648db",
@@ -473,12 +473,12 @@
     "deploy/images/nifi-patches/parquet-jackson/verification-summary.json": "c262e878e2d393eeeab414fa25bf2280aa0d0772899f946db8503152086dfe3b",
     "docs/evidence/CLAUDE_HAZELCAST_WRAPPER_REVIEW_20261105.md": "7c6a79269de80a75db02ecd2a32e59693698a5f1b4bf164bc19d9c4f33f4a9b9",
     "docs/evidence/CLAUDE_NIFI_GUARDS_HADOOP_FINAL_RECHECK_20261105.md": "9b87caa1fde6ea95ffa6e3188d070e0eded817a1ea7a3482b3aea1bd94b262e5",
-    "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "8b98b170b48f8c65c404a3ff15535e7954088a9a0b8d39129208316fc60136ed",
-    "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "9c43e68a26afdbf59b64eb5a09023dd2302e556c22415bc5e604a3c7b942a956",
+    "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "7e5cd4568641785f2b878b0257073a38de0d54530d7e4a017889f54f1f0f6266",
+    "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "f420eea8b3ae5539c2d4d0757e4bca9b94cfe4293ea2f7f47b372637b30cedb6",
     "docs/integration/NIFI_CANDIDATE.md": "d0e84f114752fde3550a0b9dac573c2605109943c931e70ebf1a27474fcd6c26",
     "scripts/nifi_candidate_context.py": "a73b32bb8071a45e30bc47f45b807198a98eec73d345edb79fa130b707eadc56",
     "tests/test_nifi_candidate_context.py": "e0508acb4c7b20065292b18bb50cda08c276dc36f3b58516cd74e42eeefe4e4d",
-    "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
+    "tests/test_nifi_parquet_jackson.py": "be1e2aca2c61fda31ce038b3cdc39d521076f3d111d782c37e78f7ba06b44b78",
     "deploy/images/kibana-patches/MM11_MIGRATION_20261105.md": "e6910efa41337a7f008125cec5eac539ba3bb8c8bc5413e759e3ce3126c93953",
     "deploy/images/kibana-patches/minimatch-migration/package-lock.json": "39eb885c0d2ad0813f2f4ae4ee5e3bdf454f67d3201bd5a319e2097e1b6fd9ec",
     "deploy/images/kibana-patches/minimatch-migration/package.json": "7168c1d457338818e3ca60ff249203f1ab797f4ede0e06f7da62c5bd63f3b992",
@@ -491,7 +491,9 @@
     "deploy/images/kibana-patches/prepare-mm11-component.cjs": "b258cce65070a73660b6b8e7b27f22ef6ddb539530cd6bdcc571ca20f451fb46",
     "deploy/images/kibana-patches/run-mm11-migration.py": "b089bbf112f8a2d90373230a94abcff68df6ca6528ee8a7c792fdd1d0119b90e",
     "deploy/images/kibana-patches/test-mm11-installed.cjs": "627fc8eee7c48cef3287784fd43a4678bdd7dc025ca6556a13c63026517b0571",
-    "deploy/images/kibana-patches/test-mm11-migration.cjs": "b1d03fca4ae589bb523b5fbd5c1c30a6adedd12c56c2b15d14e0138481e288fc"
+    "deploy/images/kibana-patches/test-mm11-migration.cjs": "b1d03fca4ae589bb523b5fbd5c1c30a6adedd12c56c2b15d14e0138481e288fc",
+    "tests/fixtures/ParquetJacksonReferenceProbe.java": "35e213f7be23ae639c4e185f2c85d13e3b10fc66dad8a91c610dad812828b160",
+    "docs/evidence/CLAUDE_PARQUET_WRAPPER_REVIEW_20261105.md": "e2fd557d8f3167adda62e133bb8e007c2b3b842e210db5b94277d98214274029"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -1150,5 +1152,21 @@
       "deploy/images/kibana-patches/test-mm11-migration.cjs"
     ],
     "note": "Official MM11 consumer migration locally component-tested, explicitly adopted semantics; joint QA and image scans pending. Historical base/matrix, snapshot and human review unchanged."
+  },
+  "parquet_review_regressions_20261105": {
+    "reviewed_commit": "0dafc5d9d150a813d5676baa0b11c9b459c53667",
+    "previous_current_hashes": {
+      "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
+      "deploy/images/nifi-patches/parquet-jackson/README.md": "40b2b924fd3f35084f2362e9b60fc19af2f0d528fea6b9979e45c3cf5d250aa9",
+      "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771",
+      "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "9c43e68a26afdbf59b64eb5a09023dd2302e556c22415bc5e604a3c7b942a956",
+      "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "8b98b170b48f8c65c404a3ff15535e7954088a9a0b8d39129208316fc60136ed",
+      "docs/memoria/RECONCILIACION_20261103.md": "8189e255d77cc02119642a075bb35bf17615e3c9b3361e182dd50ff1acdad10f"
+    },
+    "new_inventory_paths": [
+      "tests/fixtures/ParquetJacksonReferenceProbe.java",
+      "docs/evidence/CLAUDE_PARQUET_WRAPPER_REVIEW_20261105.md"
+    ],
+    "note": "Parent tests and separate deterministic Java fixture; frozen candidate/preparation sources unchanged. Review and runtime/CI/human boundaries retained."
   }
 }
