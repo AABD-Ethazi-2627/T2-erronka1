@@ -540,3 +540,15 @@ los targets nuevos son opt-in. Permanecen los gates CG32, NAR/NiFi/SMB, CI/revie
 protegidas y aceptación humana. Base, matriz, histórico, alcance de clasificación
 actual y excepciones no cambian. Se conservan evidencias históricas sin reetiquetar.
 La fuente y los límites están en [la evidencia del ensamblado candidato](../evidence/INTEGRATION_CANDIDATES_20261105.md).
+
+## Migración candidata Minimatch 11 del 5 de noviembre
+
+El padre integra `a48683c` y repite los tres pasos con las fuentes de `80a1909`:
+90 ficheros oficiales, cinco consumidores compilados de Kibana, tres bundles
+just-bash en Node y coexistencia con del. Se adoptan explícitamente 216 cambios
+semánticos en 36.000 comparaciones; 9.000 comparaciones ordinarias coinciden.
+No se afirma compatibilidad exacta con MM10. La revisión conjunta, la imagen
+y el escaneo nuevos siguen pendientes. El ZIP de `ffd31f4` pasa sus seis
+fixtures restaurados y se conserva como evidencia histórica anterior a MM11.
+No cambian la matriz, la base, el histórico, las excepciones, el alcance del
+modelo ni el estado pendiente de aceptación humana.

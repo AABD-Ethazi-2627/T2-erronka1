@@ -46,9 +46,18 @@ with identical test-result hash. The coordinator accepts the explicit candidate
 policy of three bounded retries instead of graceful-fs's longer queue, with
 terminal errors retained. This is an intentional timing/count change. The real
 source adaptation, pinned-tree guard and physical legacy-closure removal still
-need independent QA and the built-image scan. A separate candidate migration to
-official Minimatch 11 semantics is in progress; the old/new negative-extglob
-diagnostic remains valid and is not called exact compatibility.
+need independent QA and the built-image scan. The official Minimatch 11 migration is now incorporated at `a48683c`, with
+the lint/finite-cleanup follow-up at `80a1909`. The parent independently repeats
+all three bounded phases: 90 installed files equal the official tarballs, five
+compiled Kibana consumers and three actual just-bash bundles run in Node.
+The historical 36,000-comparison corpus retains exactly 216 **intentional**
+negative-extglob differences; 9,000 ordinary comparisons have no differences.
+Fleet uses the supported boolean `.match()` API; just-bash is explicitly a local
+integration fork. Six drift cases and double application are rejected. Del
+engine bytes are unchanged and coexistence passes. The final-image del version
+assertion changed, so its historical 99 records are not attributed to this new
+test source. New joint QA and the actual image scan remain pending.
+The Docker frontend check passes without warnings, without building an image.
 
 ## Counts and remaining gates
 
@@ -71,3 +80,8 @@ Exact source/artifact bindings, commands and reviewer scope are recorded in
 [the verification record](INTEGRATION_CANDIDATES_20261105.json). The portable source
 bundle includes the new C fault shim and candidate tools; compiled runtime
 archives remain separate, explicitly experimental artifacts.
+
+The source ZIP at `ffd31f4` was independently extracted and its indexed members
+verified. All six fixture scenarios pass from that extracted tree, with source
+identity `verified_not_authenticated`. It predates MM11 and is retained as
+historical portable-fixture evidence, not latest-source or live-service approval.

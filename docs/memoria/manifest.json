@@ -257,7 +257,7 @@
     "deploy/images/filebeat.Dockerfile": "03a244990855bdd17e683e699e7d3a4af3d82a75dad5a11cfed1a8a46635e299",
     "deploy/images/kibana-patches/package-lock.json": "6900855f696c1a6d9d8b8e6b1de92ed25483cd274da49286a31cce21f8fcd056",
     "deploy/images/kibana-patches/package.json": "81bead4dbcca18458fec77214032245e1b8d9b17c79aab7a3468769369d834e1",
-    "deploy/images/kibana.Dockerfile": "bcf4a626e1ba5a7684a0c274e1cdbfb3022b8886b6f4ed1c3fe33a4dd63d9e42",
+    "deploy/images/kibana.Dockerfile": "465fe3051fcc89ba483830d8675aac360062b50d467fd710e0e74072f138d1d2",
     "scripts/enforce_image_scan.py": "0d05e2dc6462e1c01bfc60852c00a88eeaa02a29d49f164fde6aa189494ce240",
     "tests/test_image_scan_gate.py": "541188bfdfcd35cbf5c8a4ac227da8ee446b785f7a84bd6c8d9363b0a7321ee8",
     "deploy/images/elasticsearch-patches/guava-pom.xml": "9d52f490ec18bf8ae3a7af12826e086d13134de01e6b5c7b2d6bc7367efe04f6",
@@ -271,7 +271,7 @@
     "docs/demo/DEFENTSA_GIDOIA_20261023.md": "3cbb2c5d3e2e7588c67041d766b6563ca20a4817f88a3bfa3463213d0dc52779",
     "docs/demo/ENTSEGU_PRESTATUA_20261028.md": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
     "docs/rubrica/CONSULTA_DOCENTE_PREPARADA_20261028.md": "68bf80f8702ee9e40c4648eda0b2abc910bcc596ddb7a010d61fed7bdf009d26",
-    "docs/memoria/RECONCILIACION_20261103.md": "2c89a157814141f64c87fcf3ce51eb93bb00c142089198174d18fda9855a7d5a",
+    "docs/memoria/RECONCILIACION_20261103.md": "8189e255d77cc02119642a075bb35bf17615e3c9b3361e182dd50ff1acdad10f",
     "docs/backend/READ_API.md": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
     "docs/integration/README.md": "a61167967d2aa5b482f0ead436af88012253af77d468a35a1509e746ecf82964",
     "docs/integration/LOCAL_HTTP.md": "028904380898ea6238e8cf2bc53adc89ac3c9474d6feeb2fe55b58a42edd1f34",
@@ -453,7 +453,7 @@
     "deploy/images/kibana-patches/prepare-del-migration.cjs": "6ca4ebbb8fc5388500b6fac50a35c1f3f94413b6f8e786952d562177fc4f5cdc",
     "deploy/images/kibana-patches/run-del-migration.py": "34fc7feba77a2929097b1a3c68e768b0df463e7e3059179baba3627cf9d63591",
     "deploy/images/kibana-patches/test-del-guards.cjs": "2b0176b846770992102ecb78728c4c014e2fae99d93cf9bb53318bbc4135d485",
-    "deploy/images/kibana-patches/test-del-migration.cjs": "ef5b585e71d5ee967c38d7b7678239f26f7cc3ece4c4db8a0c0220d9332ef68b",
+    "deploy/images/kibana-patches/test-del-migration.cjs": "1745e89f9e1b7279e95f9af7a5015be2e1ad0f5209171ea3311caf74d57ee85e",
     "deploy/images/nifi-patches/hadoop-snappy/FaultProbe.java": "9e672d790981f0454bb73f1597ec88f3ada2cb1b9acd7dea86e15fe9c046762e",
     "deploy/images/nifi-patches/hadoop-snappy/SnappyFaultStub.java.in": "8cf060241ca74f39405b84751cb375a49d6ef1a1027f4ff7a145cae825851da1",
     "deploy/images/nifi-patches/hadoop-snappy/candidate-pin.json": "24b485c0b1f5b51aded1330fadba27e7c547ff4055a8b6f8cadc952a378eb6dc",
@@ -473,12 +473,25 @@
     "deploy/images/nifi-patches/parquet-jackson/verification-summary.json": "c262e878e2d393eeeab414fa25bf2280aa0d0772899f946db8503152086dfe3b",
     "docs/evidence/CLAUDE_HAZELCAST_WRAPPER_REVIEW_20261105.md": "7c6a79269de80a75db02ecd2a32e59693698a5f1b4bf164bc19d9c4f33f4a9b9",
     "docs/evidence/CLAUDE_NIFI_GUARDS_HADOOP_FINAL_RECHECK_20261105.md": "9b87caa1fde6ea95ffa6e3188d070e0eded817a1ea7a3482b3aea1bd94b262e5",
-    "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "095e8b22c6461e85060b401ccd7df71c7d80c33c91645d3216344f5a3799c077",
-    "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "30b8d8763474486255dc95463a01d288ed7ebb8713b89ec1e5b039def4f715f8",
+    "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "8b98b170b48f8c65c404a3ff15535e7954088a9a0b8d39129208316fc60136ed",
+    "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "9c43e68a26afdbf59b64eb5a09023dd2302e556c22415bc5e604a3c7b942a956",
     "docs/integration/NIFI_CANDIDATE.md": "d0e84f114752fde3550a0b9dac573c2605109943c931e70ebf1a27474fcd6c26",
     "scripts/nifi_candidate_context.py": "a73b32bb8071a45e30bc47f45b807198a98eec73d345edb79fa130b707eadc56",
     "tests/test_nifi_candidate_context.py": "e0508acb4c7b20065292b18bb50cda08c276dc36f3b58516cd74e42eeefe4e4d",
-    "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e"
+    "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
+    "deploy/images/kibana-patches/MM11_MIGRATION_20261105.md": "e6910efa41337a7f008125cec5eac539ba3bb8c8bc5413e759e3ce3126c93953",
+    "deploy/images/kibana-patches/minimatch-migration/package-lock.json": "39eb885c0d2ad0813f2f4ae4ee5e3bdf454f67d3201bd5a319e2097e1b6fd9ec",
+    "deploy/images/kibana-patches/minimatch-migration/package.json": "7168c1d457338818e3ca60ff249203f1ab797f4ede0e06f7da62c5bd63f3b992",
+    "deploy/images/kibana-patches/mm11-inputs.json": "3ed819137c23147899b76ef3c5eadace547ba61729166394b81dd9b4fef5e1d6",
+    "deploy/images/kibana-patches/mm11-migration.cjs": "0f1e8cdedf066fc1bfe73d50fe4f597973a4b64694a52d395b78e31d69d0c0b7",
+    "deploy/images/kibana-patches/mm11-official-files.json": "fe4321253edb40490abe251aadae204435aa68a74803fbf9a9f7641cbda6015b",
+    "deploy/images/kibana-patches/mm11-output-files.json": "753db563f11cb1c5b18f05b6fc4c51e20b8fb74173bbbc180bdbd4563e80cbfb",
+    "deploy/images/kibana-patches/mm11-primary-sources.json": "9fb152e7f2e1c10ee8f67731d09b1dd462882ad59a131740f29e804f77fd1afe",
+    "deploy/images/kibana-patches/npm-mm11-closure.cjs": "6a2e0ef3239cb5651bd437fcbe4d168884409c71813dbde573596296be955417",
+    "deploy/images/kibana-patches/prepare-mm11-component.cjs": "b258cce65070a73660b6b8e7b27f22ef6ddb539530cd6bdcc571ca20f451fb46",
+    "deploy/images/kibana-patches/run-mm11-migration.py": "b089bbf112f8a2d90373230a94abcff68df6ca6528ee8a7c792fdd1d0119b90e",
+    "deploy/images/kibana-patches/test-mm11-installed.cjs": "627fc8eee7c48cef3287784fd43a4678bdd7dc025ca6556a13c63026517b0571",
+    "deploy/images/kibana-patches/test-mm11-migration.cjs": "b1d03fca4ae589bb523b5fbd5c1c30a6adedd12c56c2b15d14e0138481e288fc"
   },
   "historical_snapshot": {
     "base_commit": "28a77543bfd67a36b96ddc2f4acc103b13f62c2e",
@@ -1111,5 +1124,31 @@
       "tests/test_nifi_parquet_jackson.py"
     ],
     "note": "Private combined candidate assembly and component tests only; provisional coordinator assembly scope, independent new QA pending. No runtime/image-scan/SMB/CG32/model/human approval or new exception. Historical base/matrix/snapshot unchanged. Distinguish 63 raw scan records from 59 distinct enforcement tuples."
+  },
+  "minimatch_candidate_20261105": {
+    "inspected_code_commit": "80a1909daab038135ff00d36a6da1ee9c5f56cdf",
+    "previous_current_hashes": {
+      "deploy/images/kibana-patches/test-del-migration.cjs": "ef5b585e71d5ee967c38d7b7678239f26f7cc3ece4c4db8a0c0220d9332ef68b",
+      "deploy/images/kibana.Dockerfile": "bcf4a626e1ba5a7684a0c274e1cdbfb3022b8886b6f4ed1c3fe33a4dd63d9e42",
+      "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "095e8b22c6461e85060b401ccd7df71c7d80c33c91645d3216344f5a3799c077",
+      "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "30b8d8763474486255dc95463a01d288ed7ebb8713b89ec1e5b039def4f715f8",
+      "docs/memoria/RECONCILIACION_20261103.md": "2c89a157814141f64c87fcf3ce51eb93bb00c142089198174d18fda9855a7d5a"
+    },
+    "new_inventory_paths": [
+      "deploy/images/kibana-patches/MM11_MIGRATION_20261105.md",
+      "deploy/images/kibana-patches/minimatch-migration/package-lock.json",
+      "deploy/images/kibana-patches/minimatch-migration/package.json",
+      "deploy/images/kibana-patches/mm11-inputs.json",
+      "deploy/images/kibana-patches/mm11-migration.cjs",
+      "deploy/images/kibana-patches/mm11-official-files.json",
+      "deploy/images/kibana-patches/mm11-output-files.json",
+      "deploy/images/kibana-patches/mm11-primary-sources.json",
+      "deploy/images/kibana-patches/npm-mm11-closure.cjs",
+      "deploy/images/kibana-patches/prepare-mm11-component.cjs",
+      "deploy/images/kibana-patches/run-mm11-migration.py",
+      "deploy/images/kibana-patches/test-mm11-installed.cjs",
+      "deploy/images/kibana-patches/test-mm11-migration.cjs"
+    ],
+    "note": "Official MM11 consumer migration locally component-tested, explicitly adopted semantics; joint QA and image scans pending. Historical base/matrix, snapshot and human review unchanged."
   }
 }
