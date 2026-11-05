@@ -515,3 +515,28 @@ espacio, pero siguen abiertos NiFi 59/Kibana 2. La revisión nueva, las imágene
 CG32, SMB y las aceptaciones externas continúan pendientes. Se añaden hashes
 de las nuevas fuentes y evidencias; base, matriz, histórico y revisión humana
 no cambian. Los hashes antiguos del hijo se conservan como históricos.
+
+## Ensamblado candidato acotado del 5 de noviembre
+
+El padre corrige las nuevas guardas Maven, el estado de error de Hadoop y la
+selección atómica de Hadoop más nueve Snappy. La comparación con Maven real da
+20 cierres iguales, siete rechazos y cero éxitos divergentes. Pasan 24 comandos
+Hadoop v2 con fallos sintéticos sin nativos, once comandos Parquet con un archivo
+real de tres filas y 99 controles del nuevo del. Los 135 tests/82 subtests son
+focalizados; no se presentan como una repetición completa ni aceptación viva.
+
+Se ensambla una única copia privada: 22 sustituciones en 16 NAR y un contexto
+verificado ligado a las 215 raíces/2099 ocurrencias originales. Los originales
+no cambian. El registro del coordinador selecciona solo este ensamblado
+reversible; no afirma QA final independiente, aprobación runtime ni humana.
+Las fuentes Hazelcast revisadas y su JAR se conservan congelados. Parquet y los
+arreglos combinados requieren revisiones nuevas; las mejoras documentadas de
+Hazelcast quedan para una reconstrucción posterior.
+
+Se distingue el total del escaneo: 63 registros representan 59 tuplas únicas,
+con cuatro repeticiones de Jackson 2.22.2. No hay un escaneo nuevo que reduzca
+ese gate ni los dos hallazgos Kibana. No se construye/arranca la imagen candidata;
+los targets nuevos son opt-in. Permanecen los gates CG32, NAR/NiFi/SMB, CI/review
+protegidas y aceptación humana. Base, matriz, histórico, alcance de clasificación
+actual y excepciones no cambian. Se conservan evidencias históricas sin reetiquetar.
+La fuente y los límites están en [la evidencia del ensamblado candidato](../evidence/INTEGRATION_CANDIDATES_20261105.md).

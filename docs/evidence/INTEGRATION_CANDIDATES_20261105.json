@@ -1,0 +1,370 @@
+{
+  "status": "locally-assembled-private-candidates-new-independent-QA-pending",
+  "observed_utc": "2026-11-05T09:27:00.132230+00:00",
+  "code_commit_before_documentary_update": "7dbbc77a0a1e7df8c7ef5268fbfe68bd94f86fa4",
+  "focused_tests_code_commit": "0acdcccb4b1684e8acc86ea956ffd11989abbc82",
+  "active_source_sha256": {
+    "deploy/images/kibana-patches/DEL_MIGRATION_20261105.md": "94947e4a0cfa351e4efb8a05a852d3c3ab41ecdd74f61b75662e614f207cbfac",
+    "deploy/images/kibana-patches/del-base-inventory.json": "155bf231c788c6a374b1eb29557a3d3c75a4a0749542543bb9ea51db045ab5ea",
+    "deploy/images/kibana-patches/del-fault-injection.c": "f5393940dfd495a7098a836d5abb2716335d62c52a11c05fa0154bbdf5bc1473",
+    "deploy/images/kibana-patches/del-inventory.cjs": "f307f2712564338c6adbd05db632d6540f854b4311562e11ff26c7139b62e8c0",
+    "deploy/images/kibana-patches/del-output-hashes.json": "a25ca82b6877398d100d53ce31ecb00297d26be27834ae4eccbef6fc6f30160e",
+    "deploy/images/kibana-patches/install-del-migration.cjs": "b021fc5a5ae7b5bdd7ce4c9d9fbc88216d8b31bc1903b923e745a92fe82f7150",
+    "deploy/images/kibana-patches/prepare-del-migration.cjs": "6ca4ebbb8fc5388500b6fac50a35c1f3f94413b6f8e786952d562177fc4f5cdc",
+    "deploy/images/kibana-patches/run-del-migration.py": "34fc7feba77a2929097b1a3c68e768b0df463e7e3059179baba3627cf9d63591",
+    "deploy/images/kibana-patches/test-del-guards.cjs": "2b0176b846770992102ecb78728c4c014e2fae99d93cf9bb53318bbc4135d485",
+    "deploy/images/kibana-patches/test-del-migration.cjs": "ef5b585e71d5ee967c38d7b7678239f26f7cc3ece4c4db8a0c0220d9332ef68b",
+    "deploy/images/kibana.Dockerfile": "bcf4a626e1ba5a7684a0c274e1cdbfb3022b8886b6f4ed1c3fe33a4dd63d9e42",
+    "deploy/images/nifi-patches/NESTED_PATCHING.md": "5ae2e94363c4b2a0e96d19b707da9a1b7c5065e3c02f15fd80888cc5c37028f2",
+    "deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "a792168b6dfd1546dc173a9c3254e98c0a293201b29af800a3842c8729abbef0",
+    "deploy/images/nifi-patches/hadoop-snappy/FaultProbe.java": "9e672d790981f0454bb73f1597ec88f3ada2cb1b9acd7dea86e15fe9c046762e",
+    "deploy/images/nifi-patches/hadoop-snappy/README.md": "defe4034d08f73c3aed7ef984cbbed3a3518320350511276e79ba0e5d5a7bfc6",
+    "deploy/images/nifi-patches/hadoop-snappy/SnappyFaultStub.java.in": "8cf060241ca74f39405b84751cb375a49d6ef1a1027f4ff7a145cae825851da1",
+    "deploy/images/nifi-patches/hadoop-snappy/buffer-protocol.patch": "5644878d5127169afe2fc085f53f67c3dabb21f956a0ef054bbc6a2bbd2f192e",
+    "deploy/images/nifi-patches/hadoop-snappy/candidate-pin.json": "24b485c0b1f5b51aded1330fadba27e7c547ff4055a8b6f8cadc952a378eb6dc",
+    "deploy/images/nifi-patches/hadoop-snappy/jdk21-pins.json": "6db470fdf6fafb2cf1dbc79bc8d8a35f4942aa28b60391c4d82891bc172b7581",
+    "deploy/images/nifi-patches/hadoop-snappy/prepare.py": "6e842313ab40628bab54fbe6b5d2071f05f53fd47c640a64bd7c3d2e99862a93",
+    "deploy/images/nifi-patches/parquet-jackson/JacksonProbe.java.in": "e964d6d5f618778e2c47a35a784f484164437eb0d0e270f51db099ab0e4b8121",
+    "deploy/images/nifi-patches/parquet-jackson/ParquetProbe.java": "cf93ea8b20ca091dceb7f4fd3046af57748d3a2ebd9fffd9fd7b68a21952e42c",
+    "deploy/images/nifi-patches/parquet-jackson/README.md": "40b2b924fd3f35084f2362e9b60fc19af2f0d528fea6b9979e45c3cf5d250aa9",
+    "deploy/images/nifi-patches/parquet-jackson/Shade.java": "5455843612556e9f2d76eaf8bdd74e50f75872a95027964e511733965d6e8f71",
+    "deploy/images/nifi-patches/parquet-jackson/bounded.py": "01b273836d6821e393d5d7e13fe0a4c57c0d561b12ce48595af22aa3a10870b9",
+    "deploy/images/nifi-patches/parquet-jackson/candidate-plan.json": "a07215c847406cec53ce0da363095eda6d002a5384679a63e4fe8a60a46648db",
+    "deploy/images/nifi-patches/parquet-jackson/consumer-pins.json": "0e2598d57193e038aae7c3d8b30f295ae2a6198fb75571fbc6fb144417b40210",
+    "deploy/images/nifi-patches/parquet-jackson/linkage.py": "58a4505c1233dfa7511d6d83ae08ad4fa40c9f2d3c99d53548f8c924527dcdbf",
+    "deploy/images/nifi-patches/parquet-jackson/pins.json": "de28ec0a648a743312170e6fbfdc10c80e6cc863d4913c47bf53e7b1f5a1c64a",
+    "deploy/images/nifi-patches/parquet-jackson/prepare.py": "3f9fe6b6d94cb5f001e2c327a611d09928e464134a525e4a0fc2649ea8172a79",
+    "deploy/images/nifi-patches/parquet-jackson/probes.py": "9954810f6de8be3c9ecddc58f4d2d23f20c08723b49c017388041a1eda45700d",
+    "deploy/images/nifi-patches/parquet-jackson/support-lock.json": "c2f00b7dc1e28fa8aa6746ab105cb07a2d54f4eca3246286af9fb240a10ca0d8",
+    "deploy/images/nifi-patches/parquet-jackson/verification-summary.json": "c262e878e2d393eeeab414fa25bf2280aa0d0772899f946db8503152086dfe3b",
+    "deploy/images/nifi-patches/stock-occurrences/emit_plan.py": "90243940e1e1cc3bb2ddfbb1e2c838e5b287bdaf97fc43c742329ad365d6338b",
+    "deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "216602bcce2694679a3499aeba63e2c804bbeb709f792903b0063b31df9aec5d",
+    "deploy/images/nifi.Dockerfile": "ed6d55e8f6a097f96f81c87bc1a225259bef22768e2cdcae9653e9fb46c18807",
+    "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771",
+    "scripts/nifi_candidate_context.py": "a73b32bb8071a45e30bc47f45b807198a98eec73d345edb79fa130b707eadc56",
+    "scripts/patch_nested_jars.py": "6a07015f841cd54e9c3f56df30d0c669e804b7a49f5728fe85f83487c53daf9e",
+    "tests/test_integration_wiring.py": "1cc579ad577ceb0ca9f5e41b4e402180aca24b4f7cec7a6d742f6f9c43cea0af",
+    "tests/test_nifi_candidate_context.py": "e0508acb4c7b20065292b18bb50cda08c276dc36f3b58516cd74e42eeefe4e4d",
+    "tests/test_nifi_dependency_guards.py": "0211ab6381abb0199908752cddea3801f240db390b489a9ccfcbcda508a31c4b",
+    "tests/test_nifi_hadoop_snappy.py": "b8a0c4bbba55a5d4b1310896d57190c305c4bf31f11a0c42b195e53d732cad7b",
+    "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
+    "tests/test_nifi_stock_occurrences.py": "eb99b6570df111b85d58ad5f159dbaa93f2918b93f84acdb013cb4e17b7b3a54",
+    "tests/test_patch_nested_jars.py": "e72df844a1ac03c0138fa28986f51c1d618dd5c405a8bbfd2b50050006501677"
+  },
+  "post_proof_allowlist_update": {
+    "path": "scripts/integration_bundle.py",
+    "scope": "add explicit candidate/review documentation paths; C shim inclusion and restoration regression were tested at 7dbbc77"
+  },
+  "runtime_approved": false,
+  "image_built": false,
+  "services_started": false,
+  "new_scan_executed": false,
+  "human_review": "pending",
+  "source": {
+    "roots": 215,
+    "archive_occurrences": 2099,
+    "inventory_sha256": "5ef465917d5de6c50794c674f3866f22c8b604e4b7a9f7b5b8822ce773980e32",
+    "originals_unchanged": true
+  },
+  "maven": {
+    "fixtures": 27,
+    "equal": 20,
+    "fail_closed": 7,
+    "divergent_success": 0,
+    "driver_sha256": "3fb91664291da3b9a4dbb811c22bd0d4199cc3a7b535f2649c21e89b75610bb5",
+    "offline": true,
+    "maven_version": "3.9.11"
+  },
+  "hadoop_v2": {
+    "proof": "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01",
+    "candidate_sha256": "e2ff7c642f17743f0816a941d93714a0ae413203112e6a7d2e5f5bcf876329d2",
+    "commands": 24,
+    "all_zero": true,
+    "class_sha256": "a2f96d7457257a50d4668bcf685abe3bcd6f36af73b7b5b52e867672f17dc1ed",
+    "non_native_faults": {
+      "original": 3,
+      "fixed": 6,
+      "stale_output": 0
+    },
+    "normal_cases_per_library": 70,
+    "originals_unchanged": true,
+    "scope": "flat bounded component evidence, not real NAR/runtime acceptance"
+  },
+  "hazelcast": {
+    "sha256": "3c8e5d805a65ce91e2efe586f50fa1b9c482665f4d96c9e2384f066ea26cae85",
+    "preparation_sources_frozen": true,
+    "independent_review_commit": "2b95e9a56a02c6ba8feefb1765393970ea52f5ce",
+    "review": "eligible for bounded assembly; four Medium/eight Low followups retained for later reconstruction",
+    "runtime_approved": false
+  },
+  "parquet": {
+    "proof": "/home/tears/.cache/cnc-parquet-parent-20261105-01",
+    "candidate_sha256": "bad77fac2682d5441ce19e498056ddaf948e89739d933d302b5cf66c868344cf",
+    "commands": 11,
+    "normal_file_bytes": 519,
+    "old_fixed_file_equal": true,
+    "normal_file_sha256": "191b157cb07d9bd5325fcb143a9c9e70cff45f034474faeb870aae52c3f4c4fe",
+    "removed_classes": 37,
+    "removed_members": 6,
+    "linkage_limits": [
+      "direct symbolic references only",
+      "no inherited member resolution",
+      "no reflective/resource/classloader proof",
+      "multi-release entries excluded from this base-class analysis"
+    ],
+    "independent_QA": "pending",
+    "runtime_approved": false
+  },
+  "del": {
+    "implementation_commit": "d8f6699",
+    "proof": "/home/tears/.cache/cnc-del-parent-20261105-01",
+    "node": "v24.21.0",
+    "records": 99,
+    "test_result_sha256": "960174d48aac566dd710ebc3d8d0dd1832dd9fe2453c460d546244c65b5af669",
+    "parent_candidate_retry_decision": "accepted bounded three retries; intentionally differs from graceful-fs queue, not exact timing equivalence",
+    "independent_QA": "pending joint final Kibana review",
+    "image_scan": "pending"
+  },
+  "combined": {
+    "path": "/home/tears/.cache/cnc-combined-candidate-20261105-01",
+    "context": "/home/tears/.cache/cnc-combined-candidate-20261105-01/image-context",
+    "counts": {
+      "guava": 7,
+      "hadoop": 1,
+      "hazelcast": 1,
+      "lz4": 3,
+      "parquet": 1,
+      "snappy": 9
+    },
+    "targets": 22,
+    "archives": 16,
+    "context_payload_sha256": {
+      "opt/nifi/nifi-current/lib/nifi-avro-nar-2.12.0.nar": {
+        "before": "9c11c3f56a08dd0089b22a976251e82eef5f86b4fd69f5721ba083be57f0330d",
+        "after": "7e8ceb26e10d60c8136416c74cd5b87c301d7819cc8d32291c79c4930b12ff15"
+      },
+      "opt/nifi/nifi-current/lib/nifi-aws-nar-2.12.0.nar": {
+        "before": "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+        "after": "a33915d188a2f4b252a106b757ca1018d8921fa2a990937253d9ad09236aa229"
+      },
+      "opt/nifi/nifi-current/lib/nifi-aws-service-api-nar-2.12.0.nar": {
+        "before": "1da44c6d8513c1442be0b3db55ece3eaff56d6c8e727381c38bac344ea2bcf19",
+        "after": "670da49bcd3d6662532025c7721835ba9e27d58a0ff1c0e1a853af5e14e41655"
+      },
+      "opt/nifi/nifi-current/lib/nifi-compress-nar-2.12.0.nar": {
+        "before": "4eb2857a3698494fb09c6cbe2c94a9c34c41b397f9e3b2bbe9157b2203c4590a",
+        "after": "1c80e11b94feae94dfad7e9c45aab1d4c23e6cc1d899e230210ec36b0f0f97c3"
+      },
+      "opt/nifi/nifi-current/lib/nifi-evtx-nar-2.12.0.nar": {
+        "before": "ac32f007dc5296099dcb418bed3a05631efcdf73dcc78e0ad6fcc18ca9fa046e",
+        "after": "7176892cf74dbf8b4c8e2dada5f0b1cb8cd6f3daf2d5b9ebe77e64d2b98d1ee1"
+      },
+      "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar": {
+        "before": "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc",
+        "after": "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293"
+      },
+      "opt/nifi/nifi-current/lib/nifi-framework-zookeeper-nar-2.12.0.nar": {
+        "before": "c1d5cd945720ea81da0903a8cfd263e08655b3d84ee953c395b40f6123bcd5cf",
+        "after": "f6b9564f063338af481338ae23eeb11e18378283f561a7d7fe9d7ba144040b75"
+      },
+      "opt/nifi/nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar": {
+        "before": "e72584063582b5a95af45c0836b6122a76a693db9186065b82fa3c4856eaf7be",
+        "after": "7b9a5eda2e05a94be416fd726efa23534e65df7012fe04cd484fdb4c648e6fd9"
+      },
+      "opt/nifi/nifi-current/lib/nifi-hazelcast-services-nar-2.12.0.nar": {
+        "before": "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+        "after": "d9b040ef4a9ff5cc03aef7e64563157caecc52b265ccc9ffb8243ab60e0422a9"
+      },
+      "opt/nifi/nifi-current/lib/nifi-iceberg-parquet-writer-nar-2.12.0.nar": {
+        "before": "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+        "after": "7c27ffae60b4896c20900f694ed70b2dd7906b9c58c990d9c1226e6c639d476d"
+      },
+      "opt/nifi/nifi-current/lib/nifi-kafka-3-service-nar-2.12.0.nar": {
+        "before": "6d0b9e7ebcb3ad080efe36070097b785ec133b1afab81e093cb3a12176480a2a",
+        "after": "bb13f06339f500caf9991b16ec7ad2787b0f5b4990920fc9dfb729b745cdefe2"
+      },
+      "opt/nifi/nifi-current/lib/nifi-kafka-service-aws-nar-2.12.0.nar": {
+        "before": "dd3bfc01580d20386ffb419e09d8798592825be5377b8de0fb77a77a6c609967",
+        "after": "2e7ae05ec461ecbb7312a89e0216ddf0c2f23133329e149e1cda69fb03742e2f"
+      },
+      "opt/nifi/nifi-current/lib/nifi-opentelemetry-nar-2.12.0.nar": {
+        "before": "8aaf62d5418a5506d2089a6f09de6f3d97e9203c74aaf8ac81a93785410ef529",
+        "after": "d3767880e6f60a0f6a7e0baa38057a1d64b700ea07195da91a328aeed64ca668"
+      },
+      "opt/nifi/nifi-current/lib/nifi-protobuf-services-nar-2.12.0.nar": {
+        "before": "416751ab628622c9dc6f4e66af259bd6737af54e309f0cc4f6741bc788844c78",
+        "after": "d7fcde6b1b3f4fac9d9bceace08871b6fbc2600a08e0981991c2bc3d282121a3"
+      },
+      "opt/nifi/nifi-current/lib/nifi-record-serialization-services-nar-2.12.0.nar": {
+        "before": "263f71c6a4e463889e0634553fe5cc928be5f7be06eeae8019b5fe388a83e602",
+        "after": "ebbaedd5a724b04c2f5a0f028b14c9bf6fe1cd30d3bfe1d92ef39884f94416ca"
+      },
+      "opt/nifi/nifi-current/lib/nifi-standard-nar-2.12.0.nar": {
+        "before": "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+        "after": "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8"
+      }
+    },
+    "context_manifest_sha256": "82e435f7f0a54ce76b8ab2d173817a6b5c4d1a94191025a66b2050b59f44ce0c",
+    "approval_scope": "Parent provisional BOUNDED CANDIDATE ASSEMBLY ONLY on private copies. No runtime/deployment/human approval. Prior independent reports CLAUDE_NIFI_GUARDS_HADOOP_FINAL_RECHECK (b5f158c, conditional M2) and CLAUDE_HAZELCAST_WRAPPER_REVIEW_20261105 (2b95e9a); parent fixes M2 with exact coupled hashes, pinned error-safe Hadoop v2 24-command proof, full 215/2099 source inventory and focused regressions; Parquet reproduced bad77fac with 11 bounded commands and actual 519-byte file roundtrip. Fresh combined/Parquet/del Claude reviews and image scans still pending. This record selects only this exact generated candidate for reversible assembly, never acceptance.",
+    "source_runtime_or_human_approval": false,
+    "fresh_combined_independent_review": "pending"
+  },
+  "focused_tests": {
+    "passed": 135,
+    "subtests_passed": 82,
+    "intentional_duplicate_zip_warnings": 2,
+    "full_suite_rerun": false
+  },
+  "docker_frontend": {
+    "default_target_check": "passed without warnings",
+    "outline": "candidate-runtime/candidate-archive-audit available, final remains default",
+    "actual_build": false,
+    "local_base_tag": "cnc-guard-audit:nifi",
+    "base_tag_present": false
+  },
+  "last_completed_CI": {
+    "head": "6d67bc2ec72d931486174b906654bcc089250cba",
+    "run": 41833235278,
+    "nifi_raw_records": 63,
+    "nifi_distinct_blocking_tuples": 59,
+    "kibana_blocking_tuples": 2,
+    "duplicate_records": [
+      {
+        "tuple": [
+          "CVE-2026-89407",
+          "com.fasterxml.jackson.core:jackson-core",
+          "2.22.2"
+        ],
+        "records": 2
+      },
+      {
+        "tuple": [
+          "CVE-2026-89425",
+          "com.fasterxml.jackson.core:jackson-core",
+          "2.22.2"
+        ],
+        "records": 2
+      },
+      {
+        "tuple": [
+          "CVE-2026-91776",
+          "com.fasterxml.jackson.core:jackson-databind",
+          "2.22.2"
+        ],
+        "records": 2
+      },
+      {
+        "tuple": [
+          "CVE-2026-91777",
+          "com.fasterxml.jackson.core:jackson-databind",
+          "2.22.2"
+        ],
+        "records": 2
+      }
+    ],
+    "disk_export_failure": "closed by this run",
+    "candidate_scan": false
+  },
+  "resources_observed": {
+    "available_RAM_MiB": 1105,
+    "disk_available_GiB_approx": 51,
+    "required_full_CG32_RAM_GiB": 6,
+    "required_full_CG32_disk_GiB": 20,
+    "gate_unchanged": true,
+    "full_CG32_resources": "blocked_RAM"
+  },
+  "artifact_sha256": {
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/occurrences.json": "fee009186bc3a58fdbd96aa1b8c7f4c087603dd120f4cc5e905d3d0dd24165d9",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/execution.json": "8a482d0a4dfaf2cb6a49d71a91f821f4b76817679ce7094676912d9cf23bf36e",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/source-before.java": "61bdaa24b53b192c76b7d76e5ad7eee979a31338bdad6467aaf1bddf8fe716fe",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/summary.json": "a08d2537557f2e5dd746f05df2503be99f28ff3084b3b5e642d4163062027d13",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/unmodified/SnappyCompressor.java": "61bdaa24b53b192c76b7d76e5ad7eee979a31338bdad6467aaf1bddf8fe716fe",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/fixed/SnappyCompressor.java": "20d08bad66afebe51b8e661609504114c114a3e32d4d1084d2001acb06f287d6",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/capacity-only/SnappyCompressor.java": "727279b09e74e3a27880eb538997db8fa3552287c056f62f3de061338d6d67ac",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/limit-only/SnappyCompressor.java": "8b070a2f4a980efc4e9e5ee910f7c5d6c56e331416f7dddfb616a76319949ec8",
+    "/home/tears/.cache/cnc-hadoop-v2-proof-20261105-01/fault-stub/Snappy.java": "8cf060241ca74f39405b84751cb375a49d6ef1a1027f4ff7a145cae825851da1",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/source-before.json": "bcd71f66b96cf5aa94cee0c1de19fc8dfd5c2128f8cd2970afd564a017310ea3",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/compile-shade.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/compile-shade.log.json": "3691c79b255a960dc95dce3997ee53a79aa0704e400387d603744230bc9d2177",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/jackson-2.22.2.log": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/jackson-2.22.2.log.json": "2312f8e29c0d0407f2452386c45cbc62b0d03f40eabcb40c8f84a594e7419e3b",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/jackson-2.22.3.log": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/jackson-2.22.3.log.json": "c242ab92cf187c0fa8ea21f418a08759a1b02186aad2c5573a14ab2ef694916c",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/baseline.json": "d36eebd26d29846fbcca77b3bcea788446f4c8ccab1410ac3d2c03deab340123",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/entry-delta.json": "96530c551b0af5b9fe27d4ff230dfcb95c19bf2a97b391fcb57017235d3fc807",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/source-after.json": "bcd71f66b96cf5aa94cee0c1de19fc8dfd5c2128f8cd2970afd564a017310ea3",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/summary.json": "501a86999d9e2ed67cbbc7b528e8eaa0b4c00612524759ab3eed52cf19b71a97",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01/linkage.json": "c4577a452850b5789d0ef58ea4acd75df34603a4389b2002967cb12381288ab2",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/summary.json": "8a676cf5224c7a80bec20081a8dd6ef64abcff6ce090beabe6657dffa007e680",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/JacksonProbe.java": "d8644989aa7ee67401bdc829860d947307c574cc835405d273d646c654045773",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/compile-jackson.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/compile-jackson.log.json": "4709de0406420e4bf581404e452933fb8b59a128be006ce3b9d7c2971f224ca2",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/run-jackson.log": "17ae39626d87b4e22e60f43928a3eca1895c62fca86d6468b340fae72094b402",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/run-jackson.log.json": "ae36ae6b053c4a419657b4a502ef1d6df98b55539a5c51b975dc71bc501f414a",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/compile-parquet.log": "62ce2e7edb9ce8f3c33276f7b360654a876edcd9ae1e2ea0e425ed61da126345",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/compile-parquet.log.json": "23077691343bee7c8db0d2f2276a50de44c60c801c0a789376a1365c73e5c937",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/classload.log": "7e1bd734e7f755e8aa82997934a1c3614874e592b278867ab782cb85ada21dab",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/normal.parquet": "191b157cb07d9bd5325fcb143a9c9e70cff45f034474faeb870aae52c3f4c4fe",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/run-parquet.log": "efc352451c86eb8a9d8c4b46cdaa088a92fc0e7ff1884db5f28237cc219c5cbb",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/old/run-parquet.log.json": "24311a31a4d2bfa5c11df03a281b7cbf7d8ba7a3474f65f79a4751165397ad4a",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/JacksonProbe.java": "d8644989aa7ee67401bdc829860d947307c574cc835405d273d646c654045773",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/compile-jackson.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/compile-jackson.log.json": "b65faf10f852a189b56d50354db1a0431935d2005cc97d9afea0879d4cf1f75e",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/run-jackson.log": "b57f8e4735d1a599a6f894251da567fa519f164edbc7649182a2167b6bf2fea0",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/run-jackson.log.json": "7c484c63a27d68db7dc7de96cfbdde2ff38b3da0bb0ca7fc82e114f7f3789c3e",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/compile-parquet.log": "62ce2e7edb9ce8f3c33276f7b360654a876edcd9ae1e2ea0e425ed61da126345",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/compile-parquet.log.json": "10a76c477b84a9426d999cf95c7c03b89411ca07ef15407e28187ee6efad7cef",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/classload.log": "1b2b6de577d7ed767b09ce59fa32ebb79db47d626ff97e66f04dee28a25eca0d",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/normal.parquet": "191b157cb07d9bd5325fcb143a9c9e70cff45f034474faeb870aae52c3f4c4fe",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/run-parquet.log": "02603b247ef6a8cb13c42700f2d31c6278e072257562af0d003a901a7cba25c9",
+    "/home/tears/.cache/cnc-parquet-parent-20261105-01-probes/fixed/run-parquet.log.json": "4924d1cf237b181bc5c7bcd3b0b1e57e4922f42ffa1088e9b32c5948c8e0dc9e",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/sources-before.json": "550ba59e921754419348c45cb8d3682938d17769e546b1bcdf536e451f3ebb8b",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/commands.json": "f4e5a3c537c9da4c6fc58292ba76fd1f8f96b03225b94cd3a7648708cd0b67b4",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/compile.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/compile.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/compile.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/prepare.json": "566f472913875e81ca7cd64971db3e3037ae32be9d4150c4d690d4602844dffc",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/prepare.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/prepare.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/prepare.cleanup.json": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/tests.json": "960174d48aac566dd710ebc3d8d0dd1832dd9fe2453c460d546244c65b5af669",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/tests.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/tests.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/tests.cleanup.json": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/guards.json": "8df814fc20573448686f2b87c0ffa587ac93a8008586bc001f377e3175477905",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/guards.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/guards.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/guards.cleanup.json": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/sha256.json": "70fc1d036b970095b7cf49453fddbf1c426c80e1a81da5a98efedaae101c9ec1",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/del/package.json": "7acd717a5d8fc928d9caa20fd39eb3b1fbf30e7b6dc08e6c45c367e886243e6e",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/legacy/package.json": "b27076f8a47b7d038125defc1dae903b963b74f0d8634d92a519bf76b9cc83f2",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/legacy/node_modules/brace-expansion/package.json": "b3d90a29e25c740191374e4ac67f6a4503f28e3b3ffa25e20d534c57419155d4",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/legacy/node_modules/glob/package.json": "b00b6d35eda6d4aa6893baf19e53b7d005019ed840e4fa116c926a532ec577cf",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/legacy/node_modules/minimatch/package.json": "eefa1c89527d52bbb2e8b053fe8ecf3e3ced399bdba82cf27e0e92edfd833938",
+    "/home/tears/.cache/cnc-del-parent-20261105-01/legacy/node_modules/rimraf/package.json": "fea6f9125ca35f3d20946205be39fb3758b21b5af44f75910799573bd1230d4c",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/candidate.json": "957916e2f85bc072bee4a33e7ea019d1a2d9cc5fdd3a42988ac5d8e94e37e5c8",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/plan.json": "477c6eff533b1ab9f6648f18bbe00c87f7a3e8f5fc64bb1d7f008239026996a7",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/review.json": "b2710de09597376a048d90908258c79b356ab94ba8fb2fb4563fde046e2be287",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/apply.json": "8aaa71b3ba4864e683ce3cf8c0af8e632076b780b8d8925ffcd0f907a6bb8d50",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/context-prepare.json": "c742069bad6a02fdb2c97ecfeea3372775041f56e106af201022a7cf728dfca2",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/context-verify-current.json": "c742069bad6a02fdb2c97ecfeea3372775041f56e106af201022a7cf728dfca2",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/focused-tests.log": "e56eda1ffebc33622ecd6f64c45534b595f69a092a9d6d6e69b2fc6cc14d502a",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/image-context/manifest.json": "82e435f7f0a54ce76b8ab2d173817a6b5c4d1a94191025a66b2050b59f44ce0c",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/image-context/plan.json": "477c6eff533b1ab9f6648f18bbe00c87f7a3e8f5fc64bb1d7f008239026996a7",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/image-context/candidate.json": "957916e2f85bc072bee4a33e7ea019d1a2d9cc5fdd3a42988ac5d8e94e37e5c8",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/image-context/review.json": "b2710de09597376a048d90908258c79b356ab94ba8fb2fb4563fde046e2be287",
+    "/home/tears/.cache/cnc-combined-candidate-20261105-01/image-context/inventory.json": "5adda883a4a16eb593fde425229eba9227f56a4a4de0b663285f8c1592d49f16",
+    "/home/tears/.cache/cnc-maven-review2-parent-20261105-01/result.log": "00789268a1d2e340f96d5cdf55be6aa8e9354bceb11ede9f9ff45d4bb32fd291",
+    "/home/tears/.cache/cnc-nifi-default-target-check-20261105.log": "42afb5d297759f2eea2c647ef7205ba40c3b452ceeb872efd56e0cb60bdfbdb9",
+    "/home/tears/.cache/cnc-nifi-candidate-targets-20261105.log": "49a46fb56f001360bf3831b5a135501f3d9163be79abef09e57eb4a52dacbf65",
+    "/home/tears/.cache/cnc-atomic-inventory-20261105-05.json": "5adda883a4a16eb593fde425229eba9227f56a4a4de0b663285f8c1592d49f16"
+  },
+  "limits": [
+    "new independent combined/Parquet/Kibana reviews pending",
+    "Hazelcast grouped reconstruction followups pending",
+    "real image builds/scans and NarClassLoader/service acceptance pending",
+    "unmanifested AWS/Azure carriers and other remaining dependency findings unapproved",
+    "SMB not contacted; no model or human/rubric acceptance",
+    "no new security exceptions; protected merge only with green checks and required approval"
+  ]
+}
