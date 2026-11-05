@@ -392,6 +392,18 @@ class PatcherTests(unittest.TestCase):
             (self.src/'bad.jar').write_bytes(data)
             with self.assertRaisesRegex(ValueError,'ZIP extra|Unicode ZIP path'):self.inventory()
 
+    def test_typed_extended_timestamps_can_be_inventoried_but_not_dropped_on_rewrite(self):
+        left=struct.pack('<HHBII',0x5455,9,3,123,456)
+        right=struct.pack('<HHBI',0x5455,5,3,123)
+        data=layout_zip(local_extra=left,central_extra=right)
+        (self.src/'timestamp.jar').write_bytes(data)
+        self.assertTrue(self.inventory())
+        with zipfile.ZipFile(io.BytesIO(data)) as z,self.assertRaisesRegex(ValueError,'ZIP extra mismatch'):
+            self.p.validate_layout(z,z.infolist(),for_rewrite=True)
+        for changed in (left+b'x',struct.pack('<HHBII',0x5455,9,3,999,456)):
+            (self.src/'timestamp.jar').write_bytes(layout_zip(local_extra=changed,central_extra=right))
+            with self.assertRaises(ValueError):self.inventory()
+
     def test_descriptor_placeholders_and_both_zip64_size_branches(self):
         for descriptor in (False,True):
             for zip64 in (False,True):

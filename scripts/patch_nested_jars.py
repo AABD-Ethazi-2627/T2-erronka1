@@ -149,7 +149,7 @@ def checked_entries(z, budget):
     return entries
 
 
-def validate_layout(z, entries):
+def validate_layout(z, entries, *, for_rewrite=False):
     """Refuse hidden payloads and ambiguous local/central ZIP representations."""
     length = z.fp.seek(0, os.SEEK_END)
     eocd = length - 22 - len(z.comment)
@@ -198,8 +198,22 @@ def validate_layout(z, entries):
         if not flags & 0x800 and not info.filename.isascii():
             raise ValueError('non-ASCII ZIP name without UTF-8 flag')
         local_extra, central_extra = extra_fields(extra), extra_fields(info.extra)
-        if {k:v for k,v in local_extra.items() if k != 1} != {k:v for k,v in central_extra.items() if k != 1}:
-            raise ValueError('local/central ZIP extra mismatch')
+        local_fields = {k:v for k,v in local_extra.items() if k != 1}
+        central_fields = {k:v for k,v in central_extra.items() if k != 1}
+        if local_fields != central_fields:
+            # Info-ZIP stores mtime/atime/ctime locally but only mtime centrally.
+            # Accept exactly that typed form for opaque, unchanged JARs. A
+            # rewritten ancestor must still reject it rather than lose atime.
+            left, right = local_fields.get(0x5455,b''), central_fields.get(0x5455,b'')
+            flag = left[0] if left else 0
+            extended_time = (not for_rewrite and left and right and flag == right[0]
+                and not flag & ~7 and len(left) == 1+4*flag.bit_count()
+                and len(right) == 1+(4 if flag & 1 else 0)
+                and (not flag & 1 or left[1:5] == right[1:5])
+                and {k:v for k,v in local_fields.items() if k != 0x5455}
+                    == {k:v for k,v in central_fields.items() if k != 0x5455})
+            if not extended_time:
+                raise ValueError('local/central ZIP extra mismatch')
         # ZIP64 values are ordered only for sentinel fields that are present.
         if size == 0xffffffff or compressed == 0xffffffff:
             values = local_extra.get(1,b'')
@@ -388,6 +402,7 @@ def rewrite(path, output, targets, depth=0):
         shutil.copyfile(direct[0]['replacement'], output)
         return
     with zipfile.ZipFile(path) as src, zipfile.ZipFile(output, 'w', allowZip64=True) as dst:
+        validate_layout(src,src.infolist(),for_rewrite=True)
         dst.comment = src.comment
         for i in src.infolist():
             copied = copy.copy(i)
