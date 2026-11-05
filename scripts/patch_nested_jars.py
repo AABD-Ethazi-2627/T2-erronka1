@@ -204,12 +204,12 @@ def validate_layout(z, entries, *, for_rewrite=False):
             # Info-ZIP stores mtime/atime/ctime locally but only mtime centrally.
             # Accept exactly that typed form for opaque, unchanged JARs. A
             # rewritten ancestor must still reject it rather than lose atime.
-            left, right = local_fields.get(0x5455,b''), central_fields.get(0x5455,b'')
-            flag = left[0] if left else 0
-            extended_time = (not for_rewrite and left and right and flag == right[0]
-                and not flag & ~7 and len(left) == 1+4*flag.bit_count()
-                and len(right) == 1+(4 if flag & 1 else 0)
-                and (not flag & 1 or left[1:5] == right[1:5])
+            left, right = local_fields.get(0x5455), central_fields.get(0x5455)
+            def valid_time(value,central):
+                return (value is None or (value and not value[0] & ~7
+                    and len(value) == 1+4*((1 if value[0] & 1 else 0) if central else value[0].bit_count())))
+            extended_time = (not for_rewrite and valid_time(left,False) and valid_time(right,True)
+                and (not left or not right or not left[0] & right[0] & 1 or left[1:5] == right[1:5])
                 and {k:v for k,v in local_fields.items() if k != 0x5455}
                     == {k:v for k,v in central_fields.items() if k != 0x5455})
             if not extended_time:

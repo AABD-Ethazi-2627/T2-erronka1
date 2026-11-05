@@ -400,6 +400,9 @@ class PatcherTests(unittest.TestCase):
         self.assertTrue(self.inventory())
         with zipfile.ZipFile(io.BytesIO(data)) as z,self.assertRaisesRegex(ValueError,'ZIP extra mismatch'):
             self.p.validate_layout(z,z.infolist(),for_rewrite=True)
+        for local,central in ((b'',right),(struct.pack('<HHBI',0x5455,5,1,123),right)):
+            (self.src/'timestamp.jar').write_bytes(layout_zip(local_extra=local,central_extra=central))
+            self.assertTrue(self.inventory())
         for changed in (left+b'x',struct.pack('<HHBII',0x5455,9,3,999,456)):
             (self.src/'timestamp.jar').write_bytes(layout_zip(local_extra=changed,central_extra=right))
             with self.assertRaises(ValueError):self.inventory()
