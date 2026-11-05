@@ -210,8 +210,8 @@ def validate_layout(z, entries, *, for_rewrite=False):
                     and len(value) == 1+4*((1 if value[0] & 1 else 0) if central else value[0].bit_count())))
             extended_time = (not for_rewrite and valid_time(left,False) and valid_time(right,True)
                 and (not left or not right or not left[0] & right[0] & 1 or left[1:5] == right[1:5])
-                and {k:v for k,v in local_fields.items() if k != 0x5455}
-                    == {k:v for k,v in central_fields.items() if k != 0x5455})
+                and {k:v for k,v in local_fields.items() if k != 0x5455 and not (k == 0xcafe and v == b'')}
+                    == {k:v for k,v in central_fields.items() if k != 0x5455 and not (k == 0xcafe and v == b'')})
             if not extended_time:
                 raise ValueError('local/central ZIP extra mismatch')
         # ZIP64 values are ordered only for sentinel fields that are present.
