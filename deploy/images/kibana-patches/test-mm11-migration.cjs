@@ -248,6 +248,7 @@ async function main() {
     const start = heap();
     excludes('logs', [`{1..${1000 + i}}`]);
     fields(`{1..${1000 + i}}/*`, ['2048/value'], { '2048/value': 'keyword' });
+    await new Promise(setImmediate); // Measure retention beyond the current JS job, not live compiler temporaries.
     assert(heap() - start < 8 * 1024**2, 'unexpected per-pattern retention; stop before additional probes');
   }
   const retainedBytes = heap() - retainedStart;
@@ -258,7 +259,11 @@ async function main() {
     const before = heap();
     excludes('logs', [longPattern(4095, 1024 - i)]);
     fields(longPattern(1023, 1024 - i), ['2048/value'], { '2048/value': 'keyword' });
-    assert(heap() - before < 8 * 1024**2, 'long-pattern retention exceeded safe stop');
+    const synchronousDelta = heap() - before;
+    await new Promise(setImmediate);
+    const retainedDelta = heap() - before;
+    rows.push({ longPatternStep: i, synchronousDelta, retainedDelta });
+    assert(retainedDelta < 8 * 1024**2, `long-pattern retention exceeded safe stop: ${retainedDelta}`);
   }
   const longRetainedBytes = heap() - longStart;
   assert(longRetainedBytes < 8 * 1024**2, 'long accepted patterns must not persist in shared cache');
