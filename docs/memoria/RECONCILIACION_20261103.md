@@ -575,3 +575,55 @@ excepciones y diferencias fuera del corpus Fleet. Se construye solo una imagen
 auxiliar de componentes tras recuperar la base por digest; no una imagen de
 servicio aceptada. Nueva QA focal, escaneos, CI, servicios y aceptación humana
 siguen pendientes. Matriz, base, histórico y excepciones permanecen intactos.
+
+
+## Benten: entorno preparado, guardas y build Kibana — 05/11/2026
+
+Se concilia el código de `0561cca51f6cf1fca8a02206276998d468464e9d` con los
+inputs documentales preparados después. La [VM 9600 de Benten](../evidence/BENTEN_VM_20261105.md)
+y su [runbook](../integration/BENTEN_VM.md) registran el nuevo entorno de
+4 CPU, 8 GiB y 120 GiB. El preflight real de la VM supera los mínimos intactos
+de 6 GiB disponibles y 20 GiB libres; no acredita carga simultánea ni campaña.
+
+Las [correcciones de guardas NiFi](../evidence/NIFI_GUARD_CORRECTIONS_20261105.md)
+comparten la política entre escritor/contexto, fijan los reemplazos y rechazan
+mediaciones Maven no modeladas de forma segura. Sobre `ce3c1d7`, pasan **111 tests
+y 65 subtests en cada uno de Python 3.11.17 y 3.12.14**. Los 18 fixtures frente a
+Maven 3.9.11 dan nueve cierres iguales, nueve rechazos y cero éxitos divergentes;
+los ocho cierres Jackson fijados y las trece coordenadas RabbitMQ 5.37.0 coinciden.
+Es una selección focalizada, no suite completa ni CI nueva. La [revisión del
+contexto anterior](../evidence/CLAUDE_NIFI_ATOMIC_CONTEXT_RECHECK_20261105.md)
+queda archivada con su revisión exacta, sin extenderla a correcciones posteriores.
+
+La imagen completa candidata de Kibana se construyó en Benten desde `2829a6f`:
+`sha256:f331e91ef0c80171e0663aad6c0b5f1aad0834f80e681e4122092976168fd006`.
+El escaneo y el gate existente pasan para la etiqueta exigida. Permanecen solo
+los dos hallazgos extract-zip ya permitidos; no se añade una excepción. El primer
+scan por digest falló la guarda de nombre y se conserva. El resultado de la imagen
+no es un resultado de CI protegida ni aceptación de arranque/servicio.
+
+La entrada anterior sobre la cota MM11 solo probaba patrones cortos. La
+[recomprobación independiente](../evidence/CLAUDE_MM11_RETENTION_RECHECK_20261105.md)
+mostró que el riesgo seguía abierto para patrones largos. El adaptador posterior
+usa `new Minimatch` sin caché compartida y rechaza el exceso de 1024 expansiones
+antes de compilar, también en listas negadas. Conserva 90 ficheros oficiales y
+107 salidas preparadas. **La repetibilidad de retención sigue sin resolver**:
+la primera ejecución 03 pasa, la 05 falla y la diagnóstica 07, tras un límite de
+job JavaScript, vuelve a detenerse en 10.042.616 bytes. Las 04/06 son contención
+del candado. No se eleva el presupuesto ni se convierte el primer pase en cierre.
+
+El [registro del coordinador](../evidence/INTEGRATION_CANDIDATES_20261105.json)
+vincula 70 fuentes activas y 812 artefactos; esta conciliación recalcula todos
+sus SHA-256, sin faltantes ni discrepancias. El inventario académico añade seis
+rutas y registra los hashes anteriores y nuevos de 19 entradas, incluida esta
+conciliación, en `benten_vm_guard_followup_20261105`. La allowlist del bundle
+incorpora explícitamente estos documentos; eso no demuestra un nuevo ZIP
+restaurado ni una imagen construida a partir de él.
+
+NiFi no tiene todavía imagen candidata nueva ni escaneo anidado fresco: el último
+CI atribuido sigue siendo `6d67bc2`, con 59 tuplas distintas y 63 registros. La
+prefetch de su base no se presenta como terminada ni como build. Quedan pendientes
+QA nueva, la suite completa actual, servicios y classloaders NAR, CG32 completo,
+SMB, aprobación protegida y aceptación humana. No se afirma nota 10 ni rúbrica
+aprobada. Base/matriz, 18 hashes históricos, alcance de clasificación actual,
+revisores pendientes y compuertas permanecen sin cambios.

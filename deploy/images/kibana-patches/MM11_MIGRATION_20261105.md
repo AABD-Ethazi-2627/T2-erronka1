@@ -72,16 +72,17 @@ files. The five `@kbn` consumers are:
 | Observability Agent Builder `get_field_values_handler.js` | Real concrete-field resolver, dot fields, Unicode names, type/category/error results |
 
 The three remaining references are just-bash's CJS bundle, its ESM
-`chunk-R4IFXNY5.js`, and `browser.js`. All call the supported boolean
-`minimatch` API. In the revised candidate, both actual matching call sites in
-each bundle explicitly pass `braceExpandMax: 1024`; no old compiler is retained. Their actual public `Bash` APIs were executed on virtual filesystems
+`chunk-R4IFXNY5.js`, and `browser.js`. All now import the private `@cnc-guard/bounded-minimatch` adapter, which
+constructs official `Minimatch` instances without the global function cache.
+Each bundle compiles once per ls pattern, then calls `.match()` at both file
+matching sites, with `braceExpandMax: 1024`; no old compiler is retained. Their actual public `Bash` APIs were executed on virtual filesystems
 through CJS, the ESM entrypoint/chunk and the browser entrypoint **in Node**.
 This is not browser/UI acceptance.
 
-Fleet is an honest local fork `9.5.5+cncguard.mm11.2`, with the compiled source
+Fleet is an honest local fork `9.5.5+cncguard.mm11.3`, with the compiled source
 adaptation, exact `minimatch:11.0.4` dependency and hash-bound provenance.
 just-bash is an honest local dependency-integration fork
-`3.0.1+cncguard.mm11.2`, with exact `minimatch:11.0.4`, original bundle hashes, the bounded source edits
+`3.0.1+cncguard.mm11.3`, with exact `minimatch:11.0.4`, original bundle hashes, the bounded source edits
 and an explicit note that upstream declared `^10.1.1`. This is not a claim of
 upstream support for an out-of-range dependency. Root MM security remediation
 comes from installing real official MM11 code, not from these fork labels.
@@ -109,7 +110,8 @@ range is silently rewritten as if upstream itself supported MM11.
 hash and **all prepared output hashes before the first mutation**. It removes
 the entire old 28-file root MM directory, then copies the 90-file official
 closure, all eight bounded consumer sources and six honest local package
-metadata files (105 output files including the packaging index).
+metadata files and the two-file private adapter (107 output files including
+the packaging index).
 It updates only relevant packaging-index paths/just-bash locator. There is no
 overlay that could preserve old AST code or stale old maps.
 
@@ -213,7 +215,7 @@ actual image build and fresh normal scan, then Kibana/ES/browser acceptance.
 No human, SMB, CG32, model or deployment approval is inferred. Existing two
 Kibana findings remain authoritative until that actual scan proves their removal.
 
-## Revised retention budget and semantic scope
+## Historical first retention correction: incomplete for long patterns
 
 The independent review of `0dafc5d` reproduced the migration but found that
 MM11's 256-entry compiled-pattern cache retained approximately 35–40 MiB per
@@ -221,7 +223,7 @@ short range pattern with the default 100,000-expansion limit. The old explicit
 test cap 64 was not a consumer control. No image/runtime impact or OOM was
 claimed; no license-based risk exception is accepted.
 
-The coordinator instead fixes **1024 expansions per matcher** in the actual
+The first correction fixed **1024 expansions per matcher** in the actual
 options of all five compiled Kibana matching functions and both matching sites
 in each of the three just-bash bundles. Official MM11 and its 90 official files
 remain unchanged. The five Kibana packages and just-bash are explicit local
@@ -269,3 +271,62 @@ The historical source, package-output hashes and proof table above are not
 retagged as this new revision. Fresh parent source/artifact hashes, revised QA,
 full serving-image build/scan, Kibana/ES/browser, CG32 and human acceptance are
 still separate gates.
+
+
+## Uncached adapter and overflow rejection on Benten
+
+The follow-up independent review of `080b6f9` found that the first cap still
+retained roughly 10 MiB for a 1023-character pattern and 40 MiB for a 4095-character
+pattern. That correction and its short-pattern run remain historical, incomplete
+evidence. No risk acceptance based on licensing was granted.
+
+Commit `2829a6f` routes all eight consumers through the private two-file adapter
+`@cnc-guard/bounded-minimatch@1.0.0`. All six owning packages declare that adapter
+and official MM11 exactly and carry `+cncguard.mm11.3`. The official 90-file
+closure is unchanged. The adapter creates a new official `Minimatch` instance;
+it never calls the cached `minimatch()` function. Fleet, fields and every ls
+variant compile once per invocation/pattern, outside the candidate-file loop.
+
+The adapter checks expansion using a 1025-row detection limit and rejects more
+than 1024 alternatives before compilation. This replaces silent truncation. In
+particular, `!{1..2000}` cannot broaden an allowlist by dropping alternatives: it
+throws a budget error. Bash reports exit 1 for budget errors. Normal unmatched
+patterns still report exit 2. This is an explicit supported-input limit, not a
+general transient-memory, CPU or application availability guarantee.
+
+The first Benten run exposed a test that skipped Fleet's matcher by omitting its
+required `logs-` prefix. The labelled regression now reaches that matcher. Its
+failed output is preserved. A later repeat encountered lock contention (`rc=75`),
+not a code failure; it is not counted as a passing execution.
+
+The VM component fixture uses the unchanged official Kibana base plus the pinned
+Glob14/Rimraf6 closure. It is separate from a serving Kibana image. All probe
+containers retain the finite lock/deadline, Node24, one CPU, 384 MiB total memory,
+256 MiB heap, read-only inputs and no network. The portable runner accepts an
+explicit image ID and npm11.20.0 source path, so no local Node26 binary is needed.
+
+Initial successful Benten proof:
+`/opt/cnc-guard/evidence/mm11-uncached-20261105-03` (local copy under
+`/home/tears/.cache/cnc-benten-vm-20261105/`). It verifies 90 official files,
+107 prepared outputs, six drift cases and double application, 36000 comparisons
+with the same 216 adopted semantic changes, 9000 ordinary and 252 default-security
+comparisons with no differences. Twenty-four short patterns and six long patterns
+(1023/4095 characters) pass retention stops; the long aggregate retained 11048
+bytes after GC. All three real Bash entrypoints pass seven public cases and a
+4096-character pattern. Their retained-byte deltas were -739424, -571752 and
+58200. Negative GC deltas are measurement noise, not a claim of negative memory.
+This is bounded component evidence; new independent review, serving image build,
+scan and service/ES acceptance remain separate gates.
+
+
+### Repeatability remains unresolved
+
+A subsequent identical synchronous retention check (run05) exceeded the 8 MiB
+per-step stop. The diagnostic test then yielded across a JS-job boundary before
+measurement; run07 still stopped at 10042616 retained bytes. That diagnostic
+source is not claimed as passing. Runs04 and06 failed with lock contention and
+are not code failures. The first passing run03 does not establish repeatability.
+The production adapter is built into the serving-image candidate from `2829a6f`,
+and its image guards passed, but the long-pattern measurement and independent
+quality decision remain open before runtime promotion. No limit is raised and
+no failed result is hidden.

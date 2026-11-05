@@ -35,6 +35,10 @@ under `payload/`. It contains public dependency code, not operator archives,
 credentials, models or private telemetry. Verification pins the canonical stock
 inventory, library-root bytes, review/candidate/plan identity, all occurrences,
 coupled hashes, payloads, sibling contents/metadata and the exact changed leaves.
+The context and writer share one policy validator. The context also freezes
+the six exact replacement families and occurrence counts in code, rather than
+trusting a locally written review JSON to authorize arbitrary replacements. Its
+CLI wall deadline is 180 seconds. See the [bounded guard verification](../evidence/NIFI_GUARD_CORRECTIONS_20261105.md).
 The existing four bootstrap/toolkit Jackson updates are the only accepted base
 deviation. Unknown files or a different base fail closed before layer mutation.
 

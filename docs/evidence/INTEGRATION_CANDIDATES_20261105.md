@@ -125,3 +125,35 @@ not the full patched serving image. Missing-image/identity/UID failures are
 retained as failures. A revised source/artifact proof is recorded separately;
 the older 211-artifact proof is not retagged. Fresh targeted QA of this correction,
 actual serving-image builds/scans and service/human acceptance remain pending.
+
+
+## Benten VM and actual Kibana image verification
+
+The [VM 9600 preparation](BENTEN_VM_20261105.md) removes the laptop resource
+blocker for future campaigns. The unchanged CG32 preflight actually passes on
+the VM; that is not a campaign. [New NiFi guard tests](NIFI_GUARD_CORRECTIONS_20261105.md)
+pass 111 tests plus 65 subtests on each of Python 3.11/3.12; 18 new Maven fixtures give 9 equal
+and 9 fail-closed, with 8 frozen Jackson closures and 13 RabbitMQ coordinates equal.
+
+Kibana was built from clean `2829a6f` on Benten. Actual image ID:
+`sha256:f331e91ef0c80171e0663aad6c0b5f1aad0834f80e681e4122092976168fd006`.
+The Dockerfile guards passed. A first scan named the digest and was correctly
+rejected by the expected-artifact guard. The same image was tagged with the
+required `cnc-guard-audit:kibana` alias and rescanned; both scanner and unchanged
+gate exit 0. It covers 68 OS packages and 2307 Node packages. Only the two pre-existing
+permitted extract-zip findings remain; both Minimatch findings are absent. No
+policy, exception or report bytes were changed. This supersedes the old two
+blocking Kibana findings for this exact VM image only, not protected CI.
+
+The uncached MM11 adapter and overflow rejection are implemented with 90 official
+files and 107 prepared outputs. The initial 225-artifact component run 03 passes, but
+run 05 repeats fail the long-pattern retention stop. Run 07, measured after a JS
+job boundary, still stops at10,042,616 bytes. Runs 04/06 are lock-contention failures.
+This remains an open quality question; neither a first passing run nor a green
+security scan approves runtime. The [follow-up review](CLAUDE_MM11_RETENTION_RECHECK_20261105.md)
+and all failed artifacts remain visible. No limit was raised.
+
+NiFi still has no newly built/accepted candidate image or fresh nested scan. The
+last authoritative NiFi result remains 59 distinct tuples / 63 records. Full suites,
+new independent reviews, real services/NAR/classloaders, complete CG32/SMB and
+human acceptance remain separate pending gates.
