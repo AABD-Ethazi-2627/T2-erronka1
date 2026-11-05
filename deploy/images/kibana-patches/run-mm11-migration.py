@@ -1,11 +1,13 @@
 """Pinned, finite Node24/npm component migration; no image builds or services.
 
-Pass a nonexistent private output directory. Uses only already-owned images.
+Pass a nonexistent private output directory and optionally an immutable component
+image ID. This runner never builds or pulls images.
 """
 import base64
 import hashlib
 import io
 import json
+import re
 import subprocess
 import sys
 import tarfile
@@ -26,7 +28,14 @@ def sha(data):
 
 def main():
     output = Path(sys.argv[1]).resolve()
+    image = sys.argv[2] if len(sys.argv) > 2 else IMAGE
+    assert re.fullmatch(r'sha256:[0-9a-f]{64}', image), 'component image must be an explicit immutable ID'
     output.mkdir(mode=0o700, exist_ok=False)
+    inspected = subprocess.run(['docker', 'image', 'inspect', '--format', '{{.Id}}', image],
+        capture_output=True, check=True, timeout=10)
+    assert inspected.stdout.decode().strip() == image, 'component image ID mismatch'
+    (output / 'component-image.json').write_text(json.dumps({'image_id': image,
+        'preparation_base': BASE, 'scope': 'component fixture, not service acceptance'}, indent=2) + '\n')
     sources = list(SCRIPTS.glob('*mm11*')) + list((SCRIPTS / 'minimatch-migration').glob('*.json'))
     sources += [SCRIPTS.parent / 'kibana.Dockerfile', SCRIPTS / 'test-del-migration.cjs',
                 SCRIPTS / 'prepare-del-migration.cjs', SCRIPTS / 'del-output-hashes.json',
@@ -100,7 +109,7 @@ def main():
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(base64.b64decode(data))
 
-    container(IMAGE, 'npm-ci', ['/scripts/npm-mm11-closure.cjs'], npm=True)
+    container(image, 'npm-ci', ['/scripts/npm-mm11-closure.cjs'], npm=True)
     closure = json.loads((output / 'npm-ci.json').read_bytes())
     assert {p: sha(base64.b64decode(b)) for p, b in closure['files'].items()} == tar_files
     decode(output / 'official', closure['files'])
@@ -111,7 +120,7 @@ def main():
     decode(output / 'del', prepared['del'])
     (output / 'del.modules.yaml').write_bytes(base64.b64decode(prepared['delIndex']))
     (output / 'capture.json').write_text(json.dumps(prepared['capture']))
-    container(IMAGE, 'consumers', ['/scripts/test-mm11-migration.cjs'])
+    container(image, 'consumers', ['--expose-gc', '/scripts/test-mm11-migration.cjs'])
     assert before == snapshot(), 'tested sources changed during execution'
     manifest = {str(p.relative_to(output)): sha(p.read_bytes()) for p in output.rglob('*') if p.is_file()}
     (output / 'sha256.json').write_text(json.dumps(manifest, indent=2) + '\n')

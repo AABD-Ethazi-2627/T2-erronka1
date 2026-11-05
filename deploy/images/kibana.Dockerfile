@@ -33,7 +33,7 @@ RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /patches/mm
 FROM patches AS glob-migration
 WORKDIR /glob-migration
 COPY deploy/images/kibana-patches/glob-migration/package.json deploy/images/kibana-patches/glob-migration/package-lock.json ./
-# Keep the upgraded Glob dependency closure nested; root Minimatch retains its API.
+# Keep the upgraded Glob dependency closure nested; root MM11 consumers are adapted separately.
 RUN npm ci --ignore-scripts --audit=false --install-strategy=nested
 
 FROM docker.elastic.co/kibana/kibana-wolfi:9.5.5@sha256:46b0a3adf85186f9153fbd322e55ea8f70bc4039dcd55d58826fc1caa372dee5

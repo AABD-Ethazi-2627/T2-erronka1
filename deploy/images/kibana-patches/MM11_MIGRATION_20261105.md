@@ -2,11 +2,12 @@
 
 Status: actual dependency/consumer migration implemented and component-tested.
 The coordinator explicitly accepted official MM11 semantics for this reversible
-candidate, including the previously reproduced negative-extglob changes. This
+candidate, including the reproduced negative-extglob changes and the additional
+trailing-slash, final-empty-segment and dotfile differences documented below. This
 supersedes the earlier requirement to preserve MM10 matching exactly; it does
 not supersede the historical diagnostic or imply image/runtime/human approval.
-No scanner policy, exceptions, NiFi, dashboard/model contracts, workflows or
-academic manifests are changed.
+No scanner policy, exceptions, NiFi, dashboard/model contracts or workflows
+are changed. The coordinator separately reconciles source/evidence manifests.
 
 ## Official inputs and semantic policy
 
@@ -72,15 +73,15 @@ files. The five `@kbn` consumers are:
 
 The three remaining references are just-bash's CJS bundle, its ESM
 `chunk-R4IFXNY5.js`, and `browser.js`. All call the supported boolean
-`minimatch` API; no removed API needs a source shim. Their source bytes remain
-unchanged. Their actual public `Bash` APIs were executed on virtual filesystems
+`minimatch` API. In the revised candidate, both actual matching call sites in
+each bundle explicitly pass `braceExpandMax: 1024`; no old compiler is retained. Their actual public `Bash` APIs were executed on virtual filesystems
 through CJS, the ESM entrypoint/chunk and the browser entrypoint **in Node**.
 This is not browser/UI acceptance.
 
-Fleet is an honest local fork `9.5.5+cncguard.mm11.1`, with the compiled source
+Fleet is an honest local fork `9.5.5+cncguard.mm11.2`, with the compiled source
 adaptation, exact `minimatch:11.0.4` dependency and hash-bound provenance.
 just-bash is an honest local dependency-integration fork
-`3.0.1+cncguard.mm11.1`, with exact `minimatch:11.0.4`, original bundle hashes
+`3.0.1+cncguard.mm11.2`, with exact `minimatch:11.0.4`, original bundle hashes, the bounded source edits
 and an explicit note that upstream declared `^10.1.1`. This is not a claim of
 upstream support for an out-of-range dependency. Root MM security remediation
 comes from installing real official MM11 code, not from these fork labels.
@@ -96,9 +97,10 @@ Full inbound dependency declaration census (including dev/optional/peer):
 | Glob10 runtime `^9.0.4` → nested MM9 | Already replaced by the retained Glob14 migration/own MM11 closure |
 | del/Glob7 runtime `^3.1.1` → nested MM3 | Removed by the independently accepted del candidate |
 
-The four other `@kbn` matching functions have no declared MM range in their
-packaged workspace metadata. Their supported API calls and source bytes remain
-unchanged. Fleet gains an explicit runtime declaration. No existing dependency
+The four other `@kbn` matching functions originally had no declared MM range
+in their packaged workspace metadata. All five now carry an honest local fork
+version, exact runtime declaration and the same explicit expansion budget in
+their actual matcher options. Fleet also adapts the removed API. No existing dependency
 range is silently rewritten as if upstream itself supported MM11.
 
 ## Physical installation and regressions
@@ -106,7 +108,8 @@ range is silently rewritten as if upstream itself supported MM11.
 `mm11-migration.cjs` checks original package/consumer bytes, the post-del index
 hash and **all prepared output hashes before the first mutation**. It removes
 the entire old 28-file root MM directory, then copies the 90-file official
-closure and three consumer files (Fleet source plus two package metadata files).
+closure, all eight bounded consumer sources and six honest local package
+metadata files (105 output files including the packaging index).
 It updates only relevant packaging-index paths/just-bash locator. There is no
 overlay that could preserve old AST code or stale old maps.
 
@@ -123,9 +126,11 @@ The finite component run passes:
 * Historical corpus: **36,000 comparisons, exactly 216 differences**, all
   classified as adopted negative-extglob semantics. Any other difference in
   that corpus fails. The original diagnostic is unchanged, not hidden.
-* An additional **9,000 ordinary-domain comparisons, zero differences**, plus
+* An additional **9,000 Fleet-domain comparisons, zero differences**, plus
   explicit wildcard, dot, Unicode, decomposition, case-folding and path controls.
-* CJS/ESM public API controls and bounded expansion cap 64; a small modern-only
+* CJS/ESM public API controls with an explicit test-only expansion cap 64;
+  that historical option did not bound real consumers. The revised candidate
+  applies 1024 at every real call site, as described below. A small modern-only
   repeated-extglob negative control, without old-native hostile/OOM probes.
 * Five actual compiled `@kbn` matching functions in isolation. No ES, saved-object
   server or whole-plugin lifecycle is simulated as live integration.
@@ -159,7 +164,7 @@ consumer source hashes and all official root bytes. It is wired, **not executed
 against a newly built image here**. Embedded unrelated maps/CLI matchers remain
 outside this root-package migration; no general claim about them is made.
 
-## Exact reproduction, proof and remaining gates
+## Historical initial reproduction and proof (before retention correction)
 
 ```sh
 python deploy/images/kibana-patches/run-mm11-migration.py \
@@ -202,7 +207,65 @@ source tarballs, and `mm11-primary-sources.json` pins the official API/release
 notes. This is not bit-for-bit MM10 compatibility or a broad security guarantee
 for arbitrary hostile pattern inputs.
 
-Parent gates remain fresh QA, owned manifest/evidence integration, resource-gated
+The records above describe the initial source, not the retention correction.
+Parent gates remain new QA of revised sources, owned evidence integration, resource-gated
 actual image build and fresh normal scan, then Kibana/ES/browser acceptance.
 No human, SMB, CG32, model or deployment approval is inferred. Existing two
 Kibana findings remain authoritative until that actual scan proves their removal.
+
+## Revised retention budget and semantic scope
+
+The independent review of `0dafc5d` reproduced the migration but found that
+MM11's 256-entry compiled-pattern cache retained approximately 35–40 MiB per
+short range pattern with the default 100,000-expansion limit. The old explicit
+test cap 64 was not a consumer control. No image/runtime impact or OOM was
+claimed; no license-based risk exception is accepted.
+
+The coordinator instead fixes **1024 expansions per matcher** in the actual
+options of all five compiled Kibana matching functions and both matching sites
+in each of the three just-bash bundles. Official MM11 and its 90 official files
+remain unchanged. The five Kibana packages and just-bash are explicit local
+`+cncguard.mm11.2` source/dependency integration forks. All outputs are pinned
+before installation and the image guard verifies their hashes/metadata.
+
+This budget is an intentional supported-input limit: alternatives after 1024
+may not match. It can therefore exclude an otherwise valid match, or stop an
+exclusion from matching. It is not full equivalence for arbitrary huge patterns
+or a general upper bound on all application memory. No old compiler or silent
+license dependency is used to preserve the unbounded behavior.
+
+The regression first fails on the old physical fixture because the actual
+Fleet options omit the budget. The revised tests inspect real consumer options,
+AST-check both matcher calls in every bundle before allocation, and test
+above-budget results in the installed matching functions. Retention probes use
+24 distinct bounded patterns, explicit GC, a 24 MiB aggregate fixture limit and
+an 8 MiB per-step stop. Actual Bash APIs additionally exercise the revised
+physical bundles with an above-budget pattern and the same finite stop. No OOM
+or root deletion is attempted. Actual measured values belong to the parent
+proof recorded in `docs/evidence/INTEGRATION_CANDIDATES_20261105.json`.
+
+The 9000-comparison corpus is only the Fleet name domain; it does not establish
+all-consumer equivalence. The independent broader 1234-case corpus found 19
+differences: 15 Fleet trailing-slash cases, three empty final path segments and
+one positive-extglob dotfile case. The revised regression fixes representative
+results for these classes. The 252 default security-pattern comparisons remain
+equal; this does not approve arbitrary configured allowlists. MM11 can also
+throw `TypeError: pattern is too long` after expanding/merging very large inputs,
+where MM10 returned a boolean. The budget reduces expansion, but this remains
+a documented failure behavior rather than a total-function guarantee.
+
+The original local component images disappeared during the correction. The
+coordinator restores the exact public base digest and builds only a disposable
+component fixture with the 451 Glob/Rimraf closure files independently matched
+to official SHA-512-pinned tarballs. This is not the full patched serving image.
+The fixture keeps original MM10.2.4 as the old comparison (the former fixture
+used its backport, inert in modes 0/1), runs as the base UID1000, and has a
+recorded immutable image ID. `run-mm11-migration.py OUTPUT IMAGE_ID` validates
+that exact local ID, never pulls/builds, and supplies `--expose-gc` only for the
+component retention test. All phases retain the CPU, memory, network and finite
+lock bounds. Failed fixture identity/UID attempts remain historical failures.
+
+The historical source, package-output hashes and proof table above are not
+retagged as this new revision. Fresh parent source/artifact hashes, revised QA,
+full serving-image build/scan, Kibana/ES/browser, CG32 and human acceptance are
+still separate gates.

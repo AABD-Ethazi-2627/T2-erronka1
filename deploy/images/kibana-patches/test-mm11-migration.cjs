@@ -160,6 +160,90 @@ async function main() {
   assert.equal(normalize(fields('*', Object.keys(types), types)).some(f => f.field === '.hidden'), true);
   assert.equal(normalize(fields('absent', Object.keys(types), types))[0].error, 'Field "absent" not found');
   rows.push({ realCompiledKbnConsumers: 5, noServicesOrElasticsearch: true });
+  // These domains were absent from the original Fleet-only 9,000 corpus.
+  assert.deepEqual(call(fleet, 'logs-*', 'logs-a-default/'), [{ name: 'logs-*', title: 'stream' }]);
+  assert.deepEqual(call(original, 'logs-*', 'logs-a-default/'), []);
+  assert.equal(excludes('.kibana-x', ['?(logs)*']), false);
+  assert.equal(old.minimatch('.kibana-x', '?(logs)*'), true);
+  assert.equal(allowed('/_cluster/', [{ path: '/_cluster/?(x)' }]), false);
+  assert.equal(old.minimatch('/_cluster/', '/_cluster/?(x)', { nocase: false }), true);
+  const securityPatterns = ['_transform/*/_stats', '_nodes/stats', '_nodes/*/stats', '_cluster/stats',
+    '_ml/anomaly_detectors/_stats', '_ml/anomaly_detectors/*/_stats', '_ml/trained_models/_stats', '_ilm/status', '_watcher/stats'];
+  const apiNames = ['_nodes/stats', '_nodes/abc/stats', '_nodes/a/b/stats', '_nodes//stats', '_nodes/./stats', '_nodes/../stats',
+    '_nodes/.x/stats', '_nodes/%2e%2e/stats', '_nodes/stats/', '/_nodes/stats', '_cluster/stats', '_cluster/stats/',
+    '_transform/x/_stats', '_transform/../_stats', '_transform//_stats', '_ml/anomaly_detectors/_stats',
+    '_ml/anomaly_detectors/x/_stats', '_ml/anomaly_detectors/../_stats', '_ml/trained_models/_stats', '_ilm/status',
+    '_watcher/stats', '_security/user', '_nodes/../_security/user', '_nodes/../../_security/stats', '_transform/../_security/_stats', '', '/', '*'];
+  for (const pattern of securityPatterns) for (const name of apiNames) {
+    assert.equal(allowed(name, [{ path: pattern }]), old.minimatch(name, pattern, { nocase: false }));
+  }
+  rows.push({ securityDefaultPatternComparisons: 252, differences: 0,
+    additionalDeclaredSemanticClasses: ['trailing slash in Fleet matcher API', 'positive extglob dotfile', 'empty final path segment'] });
+
+  // Check the options passed by the actual consumers, rather than an option
+  // invented by this test. All eight import sites share the same finite budget.
+  const checkedMatch = (name, pattern, options) => {
+    assert.equal(options?.braceExpandMax, 1024, 'real consumer expansion budget missing');
+    return mm.minimatch(name, pattern, options);
+  };
+  checkedMatch.Minimatch = class extends mm.Minimatch {
+    constructor(pattern, options) {
+      assert.equal(options?.braceExpandMax, 1024, 'real Fleet expansion budget missing');
+      super(pattern, options);
+    }
+  };
+  const boundedContext = { _minimatch: { minimatch: checkedMatch } };
+  const boundedFleet = extract(fs.readFileSync(root + '/' + FLEET, 'utf8'), ['getInstalledPackageSavedObjectDataStreams'], boundedContext);
+  call(boundedFleet, 'logs-*', 'logs-a-default');
+  load('task_claimers/index.js', ['isTaskTypeExcluded'], boundedContext)(['alerting:*'], 'alerting:x');
+  load('health_diagnostic_receiver', ['isPathAllowed'], boundedContext)('/_cluster/health', [{ path: '/_cluster/*' }]);
+  load('classify_streams', ['matchesExcludePatterns'], boundedContext)('logs', ['logs*']);
+  load('get_field_values_handler', ['KEYWORD_TYPES', 'NUMERIC_TYPES', 'DATE_TYPES', 'BOOLEAN_TYPES', 'TEXT_TYPES', 'getFieldCategory', 'resolveInputToConcreteFields'], boundedContext)('attributes.*', Object.keys(types), types);
+  assert.equal(excludes('2048', ['{1..99999}']), false, 'expansion budget must affect actual matcher');
+  assert.equal(task(['{1..99999}'], '2048'), false);
+  assert.equal(allowed('2048', [{ path: '{1..99999}' }]), false);
+  assert.deepEqual(call(fleet, '{1..99999}', '2048'), []);
+  assert.equal(normalize(fields('{1..99999}/*', ['2048/value'], { '2048/value': 'keyword' }))[0].error,
+    'No fields match pattern "{1..99999}/*"');
+  // AST-check both actual call sites in every bundle before any retention
+  // probe. A missing budget fails without repeatedly allocating large caches.
+  for (const [suffix, identifier] of [['browser.js', 'Xf'], ['chunks/chunk-R4IFXNY5.js', 'R'], ['index.cjs', 'Dp']]) {
+    const file = Object.keys(inputs.consumers).find(p => p.endsWith('just-bash/dist/bundle/' + suffix));
+    const tree = acorn.parse(fs.readFileSync(root + '/' + file, 'utf8'), { ecmaVersion: 'latest', sourceType: 'module' });
+    const pending = [tree]; let calls = 0;
+    while (pending.length) {
+      const node = pending.pop();
+      if (node.type === 'CallExpression') {
+        const last = node.callee.type === 'SequenceExpression' ? node.callee.expressions.at(-1) : node.callee;
+        const matcher = last.type === 'Identifier' && last.name === identifier ||
+          last.type === 'MemberExpression' && last.object.name === identifier && last.property.name === 'minimatch';
+        if (matcher) {
+          calls++;
+          const options = node.arguments[2];
+          assert.equal(options?.type, 'ObjectExpression', 'actual bundle matcher options missing');
+          assert(options.properties.some(p => p.key.name === 'braceExpandMax' && p.value.value === 1024));
+        }
+      }
+      for (const value of Object.values(node)) {
+        if (Array.isArray(value)) { for (const child of value) if (child?.type) pending.push(child); }
+        else if (value?.type) pending.push(value);
+      }
+    }
+    assert.equal(calls, 2, 'both actual bundle match sites must be bounded');
+  }
+  assert.equal(typeof global.gc, 'function', 'retention phase requires --expose-gc');
+  const heap = () => { global.gc(); return process.memoryUsage().heapUsed; };
+  const retainedStart = heap();
+  for (let i = 0; i < 12; i++) {
+    const start = heap();
+    excludes('logs', [`{1..${99980 + i}}`]);
+    fields(`{1..${99980 + i}}/*`, ['2048/value'], { '2048/value': 'keyword' });
+    assert(heap() - start < 8 * 1024**2, 'unexpected per-pattern retention; stop before additional probes');
+  }
+  const retainedBytes = heap() - retainedStart;
+  assert(retainedBytes < 24 * 1024**2, 'bounded consumer retention exceeded fixture budget');
+  rows.push({ realConsumersBraceExpandMax: 1024, measuredPatterns: 24, retainedBytes,
+    retentionBudgetBytes: 24 * 1024**2, beyondBudgetMayNotMatch: true });
 
   const variants = [
     ['CJS', require(root + '/node_modules/just-bash/dist/bundle/index.cjs')],
@@ -188,6 +272,11 @@ async function main() {
       assert.equal(result.stdout, stdout, variant + ': ' + pattern); assert.equal(result.exitCode, exitCode);
     }
     assert.equal((await bash.exec("ls 'logs-@(a|ab)-default'")).exitCode, 2);
+    const boundedBash = new Bash({ cwd: '/budget', files: { '/budget/2048/value': 'owned virtual data' } });
+    const before = heap();
+    const oversized = await boundedBash.exec("ls '{1..99999}/*'");
+    assert.equal(oversized.exitCode, 2); assert.equal(oversized.stdout, '');
+    assert(heap() - before < 8 * 1024**2, 'actual Bash bundle retained unbounded expansion');
     rows.push({ actualJustBashVariant: variant, cases: cases.length });
   }
   // Coexistence: the independently accepted del engine bytes/pins stay unchanged.

@@ -14,6 +14,12 @@ async function main() {
   for (const [file, sha256] of Object.entries(inputs.consumers)) {
     assert.equal(hash(fs.readFileSync(path.join(root, file))), outputs[file] || sha256);
   }
+  for (const file of Object.keys(inputs.packages)) {
+    const metadata = JSON.parse(fs.readFileSync(path.join(root, file)));
+    assert(metadata.version.endsWith('+cncguard.mm11.2'));
+    assert.equal(metadata.dependencies.minimatch, '11.0.4');
+    assert.equal(metadata.cncGuardMinimatchMigration.braceExpandMax, 1024);
+  }
   const semver = require('/usr/share/kibana/node_modules/semver');
   const copies = [], runtimeDeclarations = [];
   function walk(directory) {

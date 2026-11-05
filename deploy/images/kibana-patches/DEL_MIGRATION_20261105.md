@@ -1,9 +1,10 @@
 # Independent del consumer migration
 
-Status: implemented and component-tested; parent acceptance of the retry-policy
-differences below, image build, fresh scan and runtime acceptance remain pending.
-This change does not install root Minimatch 11 or alter the earlier incompatibility
-diagnostic. The current two image findings remain authoritative until a new image
+Status: implemented and component-tested. The coordinator accepts the bounded
+retry policy and the safer synchronous rmdir error behavior described below.
+Image build, fresh scan and runtime acceptance remain pending. This independent
+del patch originally left root MM10 in place; the current joint candidate installs
+MM11 through a separate consumer migration. The earlier diagnostic is retained. The current two image findings remain authoritative until a new image
 scan establishes the result.
 
 ## Actual adaptation and pinned inputs
@@ -31,8 +32,9 @@ The supported image platform is Linux/Wolfi. The fork declares the exact Rimraf
 dependency. Root Rimraf 6.1.4/Glob 14.0.3 and their nested Minimatch 11.0.4 are
 already pinned by `glob-migration/package-lock.json`; that lock and its
 `npm ci --ignore-scripts --install-strategy=nested` build step are unchanged.
-No new npm installation or lifecycle script was run locally. No root MM10,
-security allowlist, scanner or unrelated image patch changes.
+The original del-only run performed no new npm installation or lifecycle scripts.
+This del patch does not change security allowlists or scanner policy. The later
+joint candidate installs official root MM11 separately.
 
 The async approach also exists in official del 8.0.1; this is a scoped CJS source
 adaptation, **not** a claim to have installed upstream del 8. Its official tarball
@@ -90,7 +92,7 @@ The original license is retained. The old Brace Expansion copy step is removed
 from the Dockerfile so it cannot recreate an orphan nested directory.
 
 The final-image test asserts no nested del directory, walks installed package
-metadata to reject Rimraf3/Glob7/Minimatch3 copies, checks root MM10 and Rimraf6,
+metadata to reject Rimraf3/Glob7/Minimatch3 copies, checks root MM11 and Rimraf6,
 and exercises normal del controls. **This final-image test is wired but has not
 run against a newly built image here.** Embedded unrelated browser/CLI matchers
 are not removed or claimed fixed by this migration.
@@ -180,5 +182,16 @@ The parent must accept the explicit retry-policy changes, apply this local
 commit, update its owned source/evidence manifests, obtain QA, then build and
 scan the actual image with the normal fresh database and unchanged enforcement
 gate. Existing resource gates apply. Only that scan can establish removal of
-the 3.1.5 finding; the root 10.x finding is expected to remain. No push, PR,
+the 3.1.5 finding in isolation. The joint MM11 candidate also replaces root
+10.x; neither removal is claimed until an actual fresh image scan. No push, PR,
 watch, exception, academic-manifest edit or parent checkout mutation is included.
+
+## Accepted synchronous error behavior
+
+The review independently confirmed a second behavior change: with persistent
+`rmdir` EACCES/EBUSY/EMFILE/ENFILE, the old synchronous path returned success
+while leaving the directory present. The candidate throws the actual terminal
+error (one EACCES attempt; four attempts for retryable codes). The coordinator
+accepts this safer failure behavior for the candidate. Callers may now reject
+cleanup instead of announcing success falsely; real plugin-lifecycle acceptance
+remains pending. No root-directory deletion is tested or authorized.

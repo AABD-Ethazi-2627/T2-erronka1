@@ -29,6 +29,7 @@ function prepare(root, official, output, afterDelIndex) {
     ['const patternRegex = new _minimatch.minimatch.Minimatch(stream.name, {', 'const patternMatcher = new _minimatch.minimatch.Minimatch(stream.name, {'],
     ['}).makeRe();', '});'],
     ['dataStreamName.match(patternRegex)', 'patternMatcher.match(dataStreamName)'],
+    ['noglobstar: true,', 'braceExpandMax: 1024,\n        noglobstar: true,'],
   ];
   let fleet = original;
   for (const [before, after] of replacements) {
@@ -37,14 +38,33 @@ function prepare(root, official, output, afterDelIndex) {
   }
   assert(!fleet.includes('.makeRe('));
   const patch = new Map([[FLEET, Buffer.from(fleet)]]);
-  for (const file of [FLEET_PACKAGE, BASH_PACKAGE]) {
+  const budgetChanges = [
+    ['get_field_values_handler.js', ['(f, input, {\n    dot: true', '(f, input, {\n    braceExpandMax: 1024,\n    dot: true']],
+    ['health_diagnostic_receiver.js', ['(resolvedPath, path, {\n    nocase: false', '(resolvedPath, path, {\n    braceExpandMax: 1024,\n    nocase: false']],
+    ['classify_streams.js', ['(name, pattern)', '(name, pattern, { braceExpandMax: 1024 })']],
+    ['task_claimers/index.js', ['(taskType, excludedTypePattern)', '(taskType, excludedTypePattern, { braceExpandMax: 1024 })']],
+    ['just-bash/dist/bundle/browser.js', ['Xf(d,e)||Xf(h,e)', 'Xf(d,e,{braceExpandMax:1024})||Xf(h,e,{braceExpandMax:1024})']],
+    ['just-bash/dist/bundle/chunks/chunk-R4IFXNY5.js', ['R(a,n)||R(r,n)', 'R(a,n,{braceExpandMax:1024})||R(r,n,{braceExpandMax:1024})']],
+    ['just-bash/dist/bundle/index.cjs', ['(0,Dp.minimatch)(m,t)||(0,Dp.minimatch)(p,t)', '(0,Dp.minimatch)(m,t,{braceExpandMax:1024})||(0,Dp.minimatch)(p,t,{braceExpandMax:1024})']],
+  ];
+  for (const [suffix, [before, after]] of budgetChanges) {
+    const matches = Object.keys(inputs.consumers).filter(file => file.endsWith(suffix));
+    assert.equal(matches.length, 1, `unique consumer: ${suffix}`);
+    const file = matches[0], source = fs.readFileSync(path.join(root, file), 'utf8');
+    assert.equal(source.split(before).length, 2, `unique budget patch context: ${file}`);
+    patch.set(file, Buffer.from(source.replace(before, after)));
+  }
+  for (const file of Object.keys(inputs.packages)) {
     const metadata = JSON.parse(fs.readFileSync(path.join(root, file)));
     const upstreamVersion = metadata.version;
-    metadata.version += '+cncguard.mm11.1';
+    metadata.version += '+cncguard.mm11.2';
     metadata.dependencies = { ...metadata.dependencies, minimatch: '11.0.4' };
     metadata.cncGuardMinimatchMigration = { upstreamVersion, originalPackageSha256: inputs.packages[file],
       minimatch: '11.0.4', semanticPolicy: 'official MM11 semantics accepted for candidate; not MM10 equivalence',
-      sourceChange: file === FLEET_PACKAGE ? 'get.js: boolean Minimatch.match instead of makeRe/String.match' : 'bundle bytes unchanged; local dependency integration of upstream ^10 consumer',
+      braceExpandMax: 1024,
+      sourceChange: file === FLEET_PACKAGE ? 'boolean Minimatch.match plus finite expansion budget' :
+        file === BASH_PACKAGE ? 'all three ls bundles pass finite expansion budget; local integration of upstream ^10 consumer' :
+          'actual matching function passes finite expansion budget',
       inputSources: Object.fromEntries(Object.entries(inputs.consumers).filter(([name]) => name.startsWith(path.dirname(file) + '/'))),
     };
     patch.set(file, Buffer.from(JSON.stringify(metadata, null, 2) + '\n'));
@@ -76,7 +96,7 @@ function prepare(root, official, output, afterDelIndex) {
   find(updated); assert.equal(maps.length, 1);
   const bashLocator = Object.keys(maps[0]).filter(key => key.startsWith('just-bash@3.0.1') && maps[0][key].includes('node_modules/just-bash'));
   assert.equal(bashLocator.length, 1);
-  maps[0][bashLocator[0].replace('just-bash@3.0.1', 'just-bash@3.0.1+cncguard.mm11.1')] = maps[0][bashLocator[0]];
+  maps[0][bashLocator[0].replace('just-bash@3.0.1', 'just-bash@3.0.1+cncguard.mm11.2')] = maps[0][bashLocator[0]];
   delete maps[0][bashLocator[0]];
   for (const [name, location] of [
     ['minimatch@11.0.4', 'node_modules/minimatch'],

@@ -45,8 +45,7 @@ async function check(glob, rimraf) {
   // Minified main must include the Minimatch bound, not merely ./raw.
   const amplified = new glob.Glob(Array(30).fill('**/../a/b').join('/'), { cwd: fixture });
   assert.equal(amplified.patterns.length, 10000);
-  // Glob 14 includes the cwd itself for this pattern; callers must not assume
-  // the older glob 10 result shape for a bare **.
+  // Both Glob 10 and 14 include cwd for this pattern; preserve that result shape.
   assert.deepEqual(new Set(glob.globSync('**', { cwd: fixture, ignore: '**/*.txt' })), new Set(['.', 'a', 'a/b']));
 }
 
