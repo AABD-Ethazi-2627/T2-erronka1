@@ -6,13 +6,12 @@ import base64
 import hashlib
 import io
 import json
-import os
-from pathlib import Path
 import subprocess
 import sys
 import tarfile
 import urllib.request
 import uuid
+from pathlib import Path
 
 BASE = 'sha256:46b0a3adf85186f9153fbd322e55ea8f70bc4039dcd55d58826fc1caa372dee5'
 IMAGE = 'sha256:34a89b0e71b3339c51e5144d363a782a4d6b78cf96b712719da429be38fd5ddd'
@@ -84,12 +83,12 @@ def main():
         (output / 'commands.json').write_text(json.dumps(commands, indent=2) + '\n')
         try:
             with (output / f'{stem}.json').open('wb') as stdout, (output / f'{stem}.stderr').open('wb') as stderr:
-                result = subprocess.run(command, stdout=stdout, stderr=stderr, timeout=140,
+                result = subprocess.run(command, check=False, stdout=stdout, stderr=stderr, timeout=140,
                     env={'PATH': '/usr/bin:/bin', 'HOME': '/home/tears'})
             (output / f'{stem}.exit').write_text(str(result.returncode) + '\n')
             assert result.returncode == 0, (stem, result.returncode, (output / f'{stem}.stderr').read_text())
         finally:
-            result = subprocess.run(['docker', 'rm', '-f', name], capture_output=True)
+            result = subprocess.run(['docker', 'rm', '-f', name], check=False, capture_output=True, timeout=15)
             (output / f'{stem}.cleanup.json').write_text(json.dumps({'returncode': result.returncode,
                 'stdout': result.stdout.decode(), 'stderr': result.stderr.decode()}, indent=2) + '\n')
 
