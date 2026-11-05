@@ -10,6 +10,7 @@ import json
 import os
 import resource
 import shutil
+import signal
 from pathlib import Path
 
 try:
@@ -22,6 +23,22 @@ METADATA = {'manifest.json','inventory.json','candidate.json','plan.json','revie
 # caller-supplied inventory is insufficient: its canonical content must match
 # this independently reproduced stock snapshot, including every inner hash.
 STOCK_INVENTORY_HASH = '5ef465917d5de6c50794c674f3866f22c8b604e4b7a9f7b5b8822ce773980e32'
+# Bounded assembly eligibility from the independently reproduced components.
+# Caller-written JSON cannot authorize another family, version or payload.
+REPLACEMENT_PROFILE = {
+    '796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46':
+        ('guava', 'b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c', 7),
+    '8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2':
+        ('lz4', '58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325', 3),
+    '50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc':
+        ('snappy', '35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d', 9),
+    'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6':
+        ('hadoop', 'e2ff7c642f17743f0816a941d93714a0ae413203112e6a7d2e5f5bcf876329d2', 1),
+    '241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33':
+        ('hazelcast', '3c8e5d805a65ce91e2efe586f50fa1b9c482665f4d96c9e2384f066ea26cae85', 1),
+    '1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7':
+        ('parquet', 'bad77fac2682d5441ce19e498056ddaf948e89739d933d302b5cf66c868344cf', 1),
+}
 SCOPES = ('opt/nifi/nifi-current/lib','opt/nifi/nifi-toolkit-current/lib')
 BOOTSTRAP = {
     scope+'/'+name+'-2.22.2.jar':(scope+'/'+name+'-2.22.3.jar',digest)
@@ -71,6 +88,11 @@ def verify(context,source,install=False):
                 'replacement_sha256','expected_occurrences')}|{'status':'approved-exact-occurrence'} for t in selected]
     require(all(t['status']=='candidate-pending-parent-QA' for t in selected)
             and plan['targets']==projection,'unreviewed plan projection')
+    writer.validate_targets(inv['occurrences'], plan['targets'])
+    for target in selected:
+        rule=REPLACEMENT_PROFILE.get(target['chain_sha256'][-1])
+        require(rule == (target['family'],target['replacement_sha256'],target['expected_occurrences']),
+                'replacement outside frozen assembly profile')
     keys=[(t['outer'],tuple(t['members'])) for t in plan['targets']]
     require(len(set(keys))==len(keys),'duplicate candidate target')
     rows={(r['outer'],tuple(r['members'])):r for r in inv['occurrences']}
@@ -97,7 +119,6 @@ def verify(context,source,install=False):
         occurrences=[k for k,r in rows.items() if r['sha256']==old]
         require(type(t['expected_occurrences']) is int and len(occurrences)==t['expected_occurrences']
                 and set(occurrences)<=set(keys),'incomplete context occurrences')
-    writer.validate_atomic_targets(inv['occurrences'],plan['targets'])
     outers={t['outer'] for t in plan['targets']}
     require(isinstance(manifest['files'],dict) and set(manifest['files'])==outers,'context payload scope mismatch')
     expected_files=METADATA|{'payload/'+name for name in outers}
@@ -118,6 +139,10 @@ def verify(context,source,install=False):
     bykey={(r['outer'],tuple(r['members'])):r for r in post}
     for t,key in zip(plan['targets'],keys):
         require(key in bykey and bykey[key]['sha256']==t['replacement_sha256'],'candidate leaf mismatch')
+    writer.validate_replacements(plan['targets'], [
+        [r | {'members':r['members'][len(t['members']):]} for r in post
+         if r['outer']==t['outer'] and r['members'][:len(t['members'])]==t['members']]
+        for t in plan['targets']])
     require(not any(r['sha256'] in {t['chain_sha256'][-1] for t in plan['targets']} for r in post),
             'selected old library survives overlay')
     for outer in outers:
@@ -173,11 +198,18 @@ def main():
     p.add_argument('--context',type=Path,required=True)
     for name in ('overlay','inventory','candidate','plan','review'):p.add_argument('--'+name,type=Path)
     a=p.parse_args()
-    if a.mode=='prepare':
-        require(all(getattr(a,n) is not None for n in ('overlay','inventory','candidate','plan','review')),'missing preparation inputs')
-        result=prepare(a.source,a.overlay,a.inventory,a.candidate,a.plan,a.review,a.context)
-    else:result=verify(a.context,a.source,a.mode=='install')
-    print(json.dumps(result,sort_keys=True))
+    def deadline(signum,frame):
+        raise TimeoutError('candidate context wall deadline exceeded')
+    signal.signal(signal.SIGALRM,deadline)
+    signal.alarm(180)
+    try:
+        if a.mode=='prepare':
+            require(all(getattr(a,n) is not None for n in ('overlay','inventory','candidate','plan','review')),'missing preparation inputs')
+            result=prepare(a.source,a.overlay,a.inventory,a.candidate,a.plan,a.review,a.context)
+        else:result=verify(a.context,a.source,a.mode=='install')
+        print(json.dumps(result,sort_keys=True))
+    finally:
+        signal.alarm(0)
 
 
 if __name__=='__main__':main()

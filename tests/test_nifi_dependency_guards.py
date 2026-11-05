@@ -192,9 +192,9 @@ class DependencyGuardTests(unittest.TestCase):
             self.deps()
 
     def test_distribution_relocation_is_not_silently_ignored(self):
-        for own_dependencies in ('', '<dependencies><dependency><groupId>x</groupId>'
+        for own_dependencies in ('', ('<dependencies><dependency><groupId>x</groupId>'
                                  '<artifactId>old</artifactId><version>1</version>'
-                                 '</dependency></dependencies>'):
+                                 '</dependency></dependencies>')):
             with self.subTest(own_dependencies=own_dependencies):
                 self.pins=[]
                 self.pom('root','<distributionManagement><relocation><artifactId>new'
@@ -228,6 +228,82 @@ class DependencyGuardTests(unittest.TestCase):
         entry = {'input_matches_tested_upstream': True}
         self.assertEqual(self.verify.candidate_status('rabbit', entry, [], api),
                          'blocked-compatibility')
+
+    def dependency(self,name,version='1',extra=''):
+        return '<dependency><groupId>x</groupId><artifactId>'+name+'</artifactId>'+(
+            '<version>'+version+'</version>' if version else '')+extra+'</dependency>'
+
+    def management(self,*dependencies):
+        return '<dependencyManagement><dependencies>'+''.join(dependencies)+'</dependencies></dependencyManagement>'
+
+    def test_inherited_import_interpolation_and_child_import_priority_fail_closed(self):
+        for child in ('<properties><v>2</v></properties>',self.management(self.dependency('bom','2','<type>pom</type><scope>import</scope>'))):
+            with self.subTest(child=child):
+                self.pins=[]
+                for version in ('1','2'):
+                    self.pom('bom','<packaging>pom</packaging>'+self.management(self.dependency('leaf',version)),version=version)
+                self.pom('leaf');self.pom('leaf',version='2')
+                self.pom('parent','<packaging>pom</packaging><properties><v>1</v></properties>'+self.management(self.dependency('bom','${v}','<type>pom</type><scope>import</scope>')))
+                self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId><version>1</version></parent>'+child+'<dependencies>'+self.dependency('leaf',None)+'</dependencies>')
+                with self.assertRaisesRegex(ValueError,'inherited BOM'):
+                    self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+
+    def test_imported_management_cannot_change_inherited_dependency_silently(self):
+        for extra in ('<scope>test</scope>','<exclusions><exclusion><groupId>x</groupId><artifactId>leaf</artifactId></exclusion></exclusions>'):
+            with self.subTest(extra=extra):
+                self.pins=[];self.pom('leaf');self.pom('mid','<dependencies>'+self.dependency('leaf')+'</dependencies>')
+                self.pom('bom','<packaging>pom</packaging>'+self.management(self.dependency('mid','1',extra)))
+                self.pom('parent','<dependencies>'+self.dependency('mid')+'</dependencies>')
+                self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId><version>1</version></parent>'+self.management(self.dependency('bom','1','<type>pom</type><scope>import</scope>')))
+                with self.assertRaisesRegex(ValueError,'inherited dependency management'):
+                    self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+
+    def test_profile_dependent_management_key_cannot_hide_a_runtime_edge(self):
+        self.pom('mid');self.pom('leaf')
+        profile='<properties><m>other</m></properties><profiles><profile><id>active</id><activation><activeByDefault>true</activeByDefault></activation><properties><m>mid</m></properties></profile></profiles>'
+        self.pom('root',profile+self.management(self.dependency('${m}','1'))+'<dependencies>'+self.dependency('mid')+'</dependencies>')
+        with self.assertRaisesRegex(ValueError,'profile-dependent runtime selector'):
+            self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+
+    def test_whitespace_exclusion_selectors_are_explicitly_unsupported(self):
+        self.pom('leaf');self.pom('mid','<dependencies>'+self.dependency('leaf')+'</dependencies>')
+        self.pom('root','<dependencies>'+self.dependency('mid','1','<exclusions><exclusion><groupId> x </groupId><artifactId> leaf </artifactId></exclusion></exclusions>')+'</dependencies>')
+        with self.assertRaisesRegex(ValueError,'selector whitespace'):
+            self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+
+    def test_diamond_with_differing_exclusions_requires_real_mediation(self):
+        for second in ('','<exclusions><exclusion><groupId>x</groupId><artifactId>other</artifactId></exclusion></exclusions>'):
+            with self.subTest(second=second):
+                self.pins=[];self.pom('leaf');self.pom('other')
+                self.pom('shared','<dependencies>'+self.dependency('leaf')+self.dependency('other')+'</dependencies>')
+                self.pom('near','<dependencies>'+self.dependency('shared','1','<exclusions><exclusion><groupId>x</groupId><artifactId>leaf</artifactId></exclusion></exclusions>')+'</dependencies>')
+                self.pom('far','<dependencies>'+self.dependency('shared','1',second)+'</dependencies>')
+                self.pom('root','<dependencies>'+self.dependency('near')+self.dependency('far')+'</dependencies>')
+                with self.assertRaisesRegex(ValueError,'path-dependent exclusions'):
+                    self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+
+    def test_unused_native_profile_selectors_do_not_block_plain_runtime_closure(self):
+        self.pom('leaf')
+        profile='<properties><native>unused</native><classifier>base</classifier></properties><profiles><profile><id>native-platform</id><properties><native>unused-other</native><classifier>platform</classifier></properties></profile></profiles>'
+        management=self.management(self.dependency('${native}','1','<classifier>${classifier}</classifier>'))
+        optional=self.dependency('${native}','1','<classifier>${classifier}</classifier><optional>true</optional>')
+        self.pom('root',profile+management+'<dependencies>'+self.dependency('leaf')+optional+'</dependencies>')
+        result=self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+        self.assertEqual(result['required_coordinates'],['x:leaf:1','x:root:1'])
+
+    def test_distinct_exclusions_are_allowed_only_when_unreachable_in_the_subtree(self):
+        self.pom('leaf');self.pom('shared','<dependencies>'+self.dependency('leaf')+'</dependencies>')
+        self.pom('near','<dependencies>'+self.dependency('shared','1','<exclusions><exclusion><groupId>x</groupId><artifactId>not-reachable</artifactId></exclusion></exclusions>')+'</dependencies>')
+        self.pom('far','<dependencies>'+self.dependency('shared')+'</dependencies>')
+        self.pom('root','<dependencies>'+self.dependency('near')+self.dependency('far')+'</dependencies>')
+        result=self.model.Closure(self.cache,self.pins).resolve('x:root:1')
+        self.assertEqual(result['required_coordinates'],['x:far:1','x:leaf:1','x:near:1','x:root:1','x:shared:1'])
+
+    def test_runtime_cycle_cannot_make_subtree_reachability_incomplete(self):
+        self.pom('root','<dependencies>'+self.dependency('mid')+'</dependencies>')
+        self.pom('mid','<dependencies>'+self.dependency('root')+'</dependencies>')
+        with self.assertRaisesRegex(ValueError,'runtime dependency cycle'):
+            self.model.Closure(self.cache,self.pins).resolve('x:root:1')
 
     def test_all_java_launches_share_an_allowlisted_environment(self):
         with patch.dict(os.environ,{'LD_AUDIT':'not-real','JAVA_TOOL_OPTIONS':'injection','JDK_AOT_VM_OPTIONS':'injection'}):

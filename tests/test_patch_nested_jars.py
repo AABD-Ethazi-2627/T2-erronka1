@@ -29,8 +29,8 @@ def sha(b):
 
 
 def layout_zip(*, local_extra=b'', central_extra=b'', tail=b'', descriptor=False,
-               zip64=False, false_placeholder=False, descriptor_signature=True):
-    name=b'ordinary';payload=b'normal bounded payload'
+               zip64=False, false_placeholder=False, descriptor_signature=True,
+               name=b'ordinary', payload=b'normal bounded payload'):
     encoder=zlib.compressobj(wbits=-15)
     compressed=encoder.compress(payload)+encoder.flush()+tail
     crc=zlib.crc32(payload);flags=8 if descriptor else 0
@@ -411,7 +411,7 @@ class PatcherTests(unittest.TestCase):
         unicode=struct.pack('<HH',0x7075,13)+b'\x01'+struct.pack('<I',zlib.crc32(b'ordinary'))+b'evil.jar'
         for data in (layout_zip(local_extra=opaque),layout_zip(local_extra=unicode,central_extra=unicode)):
             (self.src/'bad.jar').write_bytes(data)
-            with self.assertRaisesRegex(ValueError,'ZIP extra|Unicode ZIP path'):self.inventory()
+            with self.assertRaisesRegex(ValueError,'ZIP extra|Unicode ZIP path|duplicate/ambiguous ZIP path'):self.inventory()
 
     def test_typed_extended_timestamps_can_be_inventoried_but_not_dropped_on_rewrite(self):
         left=struct.pack('<HHBII',0x5455,9,3,123,456)
@@ -472,8 +472,8 @@ class PatcherTests(unittest.TestCase):
              {'outer':'a.nar','members':['s.jar'],'chain_sha256':['outer','old-s'],'sha256':'old-s'},
              {'outer':'b.nar','members':['s.jar'],'chain_sha256':['other','old-s'],'sha256':'old-s'}]
         policy={'old-h':{'replacement_sha256':'new-h','count':1},'old-s':{'replacement_sha256':'new-s','count':2}}
-        targets=[dict(outer=r['outer'],members=r['members'],chain_sha256=r['chain_sha256'],
-                      replacement_sha256=policy[r['sha256']]['replacement_sha256'],expected_occurrences=policy[r['sha256']]['count']) for r in inv]
+        targets=[{'outer':r['outer'],'members':r['members'],'chain_sha256':r['chain_sha256'],
+                  'replacement_sha256':policy[r['sha256']]['replacement_sha256'],'expected_occurrences':policy[r['sha256']]['count']} for r in inv]
         with patch.object(self.p,'ATOMIC_HADOOP_SNAPPY',policy):
             self.p.validate_atomic_targets(inv,targets)
             for mutation in ('no-consumer','no-library','wrong-library','wrong-consumer','missing-source','ancestor'):
@@ -507,5 +507,25 @@ class PatcherTests(unittest.TestCase):
             self.p.patch(self.src,self.root/'out',plan,apply=True)
             self.assertEqual((self.root/'out/consumer.jar').read_bytes(),fixed)
             self.assertEqual((self.src/'consumer.jar').read_bytes(),consumer)
+
+    def test_apply_rejects_typed_metadata_on_an_ancestor_that_would_be_rewritten(self):
+        left=struct.pack('<HHBII',0x5455,9,3,123,456)
+        right=struct.pack('<HHBI',0x5455,5,3,123)
+        (self.src/'timestamp.nar').write_bytes(layout_zip(name=b'inner.jar',payload=self.old,
+            local_extra=left,central_extra=right))
+        plan=self.plan()
+        for target in plan['targets']:target['expected_occurrences']=5
+        with self.assertRaisesRegex(ValueError,'ZIP extra mismatch'):
+            self.p.patch(self.src,self.root/'rejected',plan,apply=True)
+        self.assertFalse((self.root/'rejected').exists())
+
+    def test_verify_rewrite_rejects_tolerated_leaf_extras_on_rewritten_output(self):
+        source=self.root/'original.nar';output=self.root/'forged.nar'
+        source.write_bytes(layout_zip(name=b'inner.jar',payload=self.old))
+        output.write_bytes(layout_zip(name=b'inner.jar',payload=self.new,
+            local_extra=struct.pack('<HHBI',0x5455,5,1,123)))
+        target={'members':['inner.jar'],'replacement_sha256':sha(self.new)}
+        with self.assertRaisesRegex(ValueError,'ZIP extra mismatch'):
+            self.p.verify_rewrite(source,output,[target])
 
 if __name__ == '__main__': unittest.main()

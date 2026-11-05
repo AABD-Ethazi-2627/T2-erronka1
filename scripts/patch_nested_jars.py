@@ -437,6 +437,7 @@ def verify_rewrite(original, output, targets, depth=0):
         return
     with zipfile.ZipFile(original) as src, zipfile.ZipFile(output) as dst:
         validate_layout(src,src.infolist(),for_rewrite=True)
+        validate_layout(dst,dst.infolist(),for_rewrite=True)
         left, right = src.infolist(), dst.infolist()
         if src.comment != dst.comment or [i.filename for i in left] != [i.filename for i in right]:
             raise ValueError('post-write sibling names/order/comment mismatch')
@@ -461,6 +462,76 @@ def verify_rewrite(original, output, targets, depth=0):
                     hashes.append(h.digest())
                 if hashes[0] != hashes[1]:
                     raise ValueError('post-write sibling content mismatch')
+
+
+def validate_targets(rows, targets):
+    """Shared occurrence/policy preflight for the writer and candidate layer.
+
+    Replacement paths are opaque strings here: the layer verifies bytes from
+    its own payload, never files at a caller's original host path.
+    """
+    if not isinstance(targets, list) or not targets:
+        raise ValueError('unsupported/empty executable plan')
+    bykey = {(r['outer'], tuple(r['members'])): r for r in rows}
+    if len(bykey) != len(rows):
+        raise ValueError('duplicate inventory occurrence')
+    selected = {}
+    for t in targets:
+        exact_keys(t, 'outer members chain_sha256 replacement replacement_sha256 status expected_occurrences')
+        if t['status'] != 'approved-exact-occurrence':
+            raise ValueError('blocked/unapproved plan entry')
+        canonical(t['outer'])
+        if not isinstance(t['members'], list) or any(not isinstance(m, str) for m in t['members']):
+            raise ValueError('members must be exact path strings')
+        for member in t['members']: canonical(member)
+        key = (t['outer'], tuple(t['members']))
+        r = bykey.get(key)
+        if key in selected or r is None or t['chain_sha256'] != r['chain_sha256']:
+            raise ValueError('duplicate/missing occurrence or preimage hash mismatch')
+        if set(r['chain_sha256']) & BLOCKED_INPUTS:
+            raise ValueError('known blocked candidate input; separate review required')
+        count = sum(x['sha256'] == r['sha256'] for x in rows)
+        if type(t['expected_occurrences']) is not int or t['expected_occurrences'] != count:
+            raise ValueError('occurrence count mismatch')
+        if (not isinstance(t['replacement'], str) or not t['replacement']
+                or not isinstance(t['replacement_sha256'], str)
+                or not re.fullmatch(r'[0-9a-f]{64}', t['replacement_sha256'])):
+            raise ValueError('replacement path/hash must be strings with an exact digest')
+        if t['replacement_sha256'] == r['sha256']:
+            raise ValueError('no-op replacement is forbidden')
+        selected[key] = r
+    selected_hashes = {r['sha256'] for r in selected.values()}
+    validate_atomic_targets(rows, targets)
+    for key, r in bykey.items():
+        if r['sha256'] in selected_hashes and key not in selected:
+            raise ValueError('selected leaf hash has unmapped occurrences')
+    for outer, members in selected:
+        for n in range(len(members)):
+            ancestor = (outer, members[:n])
+            if ancestor in selected:
+                raise ValueError('overlapping ancestor/leaf targets')
+            if ancestor not in bykey:
+                raise ValueError('missing enclosing archive occurrence')
+            if bykey[ancestor]['signed']:
+                raise ValueError('refusing modification inside signed enclosing archive')
+    return selected
+
+
+def validate_replacements(targets, replacement_groups):
+    """Inspect each exact replacement root and its relative nested archives."""
+    if len(targets) != len(replacement_groups):
+        raise ValueError('replacement inventory group mismatch')
+    selected_hashes = {t['chain_sha256'][-1] for t in targets}
+    new_atomic = {rule['replacement_sha256']: old for old, rule in ATOMIC_HADOOP_SNAPPY.items()}
+    for target, rows in zip(targets, replacement_groups):
+        roots = [r for r in rows if not r['members']]
+        if len(roots) != 1 or roots[0]['sha256'] != target['replacement_sha256']:
+            raise ValueError('replacement root inventory mismatch')
+        for r in rows:
+            if r['sha256'] in new_atomic and (r['members'] or target['chain_sha256'][-1] != new_atomic[r['sha256']]):
+                raise ValueError('atomic Hadoop/Snappy replacement introduced outside its exact target')
+            if r['sha256'] in BLOCKED_INPUTS | selected_hashes:
+                raise ValueError('replacement contains blocked or selected old archive')
 
 
 def patch(source, output, plan, apply=False, **limits):
@@ -497,29 +568,11 @@ def patch(source, output, plan, apply=False, **limits):
         inv = inventory(snapshot, **limits)
         if inventory_hash(inv) != plan['inventory_sha256']:
             raise ValueError('complete inventory hash mismatch')
-        bykey = {(r['outer'], tuple(r['members'])): r for r in inv}
-        selected, checked = {}, []
+        selected = validate_targets(inv, plan['targets'])
+        checked = []
         replacements = staging / 'replacements'
         replacements.mkdir()
         for index, t in enumerate(plan['targets']):
-            exact_keys(t, 'outer members chain_sha256 replacement replacement_sha256 status expected_occurrences')
-            if t['status'] != 'approved-exact-occurrence':
-                raise ValueError('blocked/unapproved plan entry')
-            canonical(t['outer'])
-            if not isinstance(t['members'], list) or any(not isinstance(m, str) for m in t['members']):
-                raise ValueError('members must be exact path strings')
-            for member in t['members']: canonical(member)
-            key = (t['outer'], tuple(t['members']))
-            r = bykey.get(key)
-            if key in selected or r is None or t['chain_sha256'] != r['chain_sha256']:
-                raise ValueError('duplicate/missing occurrence or preimage hash mismatch')
-            if set(r['chain_sha256']) & BLOCKED_INPUTS:
-                raise ValueError('known blocked candidate input; separate review required')
-            count = sum(x['sha256'] == r['sha256'] for x in inv)
-            if type(t['expected_occurrences']) is not int or t['expected_occurrences'] != count:
-                raise ValueError('occurrence count mismatch')
-            if not isinstance(t['replacement'], str) or not isinstance(t['replacement_sha256'], str):
-                raise ValueError('replacement path/hash must be strings')  # noqa: TRY004 - all invalid external plans fail as ValueError
             replacement = regular(t['replacement'])
             if output == replacement or output in replacement.parents:
                 raise ValueError('overlapping replacement/output')
@@ -529,33 +582,11 @@ def patch(source, output, plan, apply=False, **limits):
             shutil.copyfile(replacement, dest)
             if digest(dest) != t['replacement_sha256']:
                 raise ValueError('replacement hash mismatch')
-            if t['replacement_sha256'] == r['sha256']:
-                raise ValueError('no-op replacement is forbidden')
-            inventory(replacements, **limits)  # validates stock signatures/resources without editing
-            selected[key] = r
             checked.append(t | {'replacement': str(dest)})
-        selected_hashes = {r['sha256'] for r in selected.values()}
-        validate_atomic_targets(inv, checked)
         replacement_rows = inventory(replacements, **limits)
-        new_atomic = {rule['replacement_sha256']: old for old, rule in ATOMIC_HADOOP_SNAPPY.items()}
-        for r in replacement_rows:
-            if r['sha256'] in new_atomic:
-                target = checked[int(Path(r['outer']).stem)]
-                if r['members'] or target['chain_sha256'][-1] != new_atomic[r['sha256']]:
-                    raise ValueError('atomic Hadoop/Snappy replacement introduced outside its exact target')
-        if any(r['sha256'] in BLOCKED_INPUTS | selected_hashes for r in replacement_rows):
-            raise ValueError('replacement contains blocked or selected old archive')
-        for key, r in bykey.items():
-            if r['sha256'] in selected_hashes and key not in selected:
-                raise ValueError('selected leaf hash has unmapped occurrences')
-        for key in selected:
-            outer, members = key
-            for n in range(len(members)):
-                ancestor = (outer, members[:n])
-                if ancestor in selected:
-                    raise ValueError('overlapping ancestor/leaf targets')
-                if bykey[ancestor]['signed']:
-                    raise ValueError('refusing modification inside signed enclosing archive')
+        validate_replacements(checked, [[r for r in replacement_rows if r['outer'] == f'{i}.jar']
+                                       for i in range(len(checked))])
+        selected_hashes = {r['sha256'] for r in selected.values()}
         if not apply:
             return {'mode': 'dry-run', 'inventory_sha256': inventory_hash(inv), 'targets': len(checked)}
         result = staging / 'result'

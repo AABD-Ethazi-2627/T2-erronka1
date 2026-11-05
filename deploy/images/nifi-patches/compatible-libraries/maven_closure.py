@@ -49,6 +49,12 @@ class Closure:
             pm=self.model(pc,stack+(coordinate,))
         props=pm['props']|{x.tag.split('}')[-1]:x.text or '' for x in root.findall('m:properties/*',NS)}
         props.update({'project.groupId':g,'pom.groupId':g,'project.artifactId':a,'project.version':v,'pom.version':v})
+        profile_props=set(pm.get('profile_props',set()))
+        profile_values={k:set(values) for k,values in pm.get('profile_values',{}).items()}
+        for profile in root.findall('m:profiles/m:profile',NS):
+            for x in profile.findall('m:properties/*',NS):
+                name=x.tag.split('}')[-1];profile_props.add(name)
+                profile_values.setdefault(name,set()).add(x.text or '')
         def expand(s):
             require(s is not None, 'missing POM value in '+coordinate)
             for _ in range(20):
@@ -67,25 +73,79 @@ class Closure:
             d={k:text(n,k) for k in allowed-{'exclusions'} if text(n,k) is not None}
             d['exclusions']=[(text(x,'groupId'),text(x,'artifactId')) for x in n.findall('m:exclusions/m:exclusion',NS)]
             return d
-        def key(d):return (expand(d['groupId']),expand(d['artifactId']),d.get('type','jar'),d.get('classifier',''))
+        def independent(values):
+            pending=list(values);seen=set()
+            while pending:
+                value=pending.pop()
+                require(value is not None,'missing required dependency selector')
+                require(value==value.strip(),'unsupported selector whitespace')
+                for prop in re.findall(r'\$\{([^}]+)\}',value):
+                    require(prop not in profile_props,'profile-dependent runtime selector '+prop)
+                    if prop not in seen:
+                        seen.add(prop);pending.append(props.get(prop,''))
+        def key(d,managed=False):
+            values=(d['groupId'],d['artifactId'],d.get('type','jar'),d.get('classifier',''))
+            if not managed:independent(values[:2])
+            # Optional/native management can contain profile-specific classifier
+            # keys. Do not resolve an unused classifier as a runtime dependency.
+            # Its GA is marked uncertain below and rejected if actually required.
+            result=tuple(expand(value) for value in values[:2])+values[2:]
+            require(all(value==value.strip() for value in result),'unsupported selector whitespace')
+            return result
         # Imported BOMs first, local management overrides imported/inherited entries.
         managed=[raw(n) for n in root.findall('m:dependencyManagement/m:dependencies/m:dependency',NS)]
+        uncertain_management=set(pm.get('uncertain_management',set()))
+        def possibilities(value,stack=()):
+            match=re.search(r'\$\{([^}]+)\}',value)
+            if match is None:
+                require(value==value.strip(),'unsupported selector whitespace')
+                return {value}
+            prop=match[1]
+            require(prop not in stack,'cyclic management selector')
+            values=profile_values.get(prop,set())|{props.get(prop,'${'+prop+'}')}
+            result=set()
+            for replacement in values:
+                require(replacement!='${'+prop+'}','unresolved management selector '+prop)
+                for resolved in possibilities(replacement,stack+(prop,)):
+                    result.update(possibilities(value[:match.start()]+resolved+value[match.end():],stack))
+                    require(len(result)<=64,'unsupported management selector variant count')
+            return result
+        for dependency in managed:
+            groups=possibilities(dependency['groupId']);artifacts=possibilities(dependency['artifactId'])
+            if len(groups)>1 or len(artifacts)>1 or any('${' in dependency.get(field,'') for field in ('type','classifier')):
+                uncertain_management.update((group,artifact) for group in groups for artifact in artifacts)
+        imports=[d for d in managed if d.get('scope')=='import']
+        inherited_imports=pm.get('imports',[])
+        require(not (inherited_imports and imports),'unsupported inherited BOM import priority')
+        pending=[str(d) for d in inherited_imports];import_props=set()
+        while pending:
+            for prop in re.findall(r'\$\{([^}]+)\}',pending.pop()):
+                if prop not in import_props:
+                    import_props.add(prop);pending.append(pm['props'].get(prop,''))
+        require(not any(props.get(prop)!=pm['props'].get(prop) for prop in import_props),
+                'unsupported inherited BOM property interpolation')
+        imported_management={}
         for d in managed:
+            key(d,managed=True)
             if d.get('scope')=='import':
                 require(d.get('type')=='pom','non-POM BOM')
+                independent(d[k] for k in ['groupId','artifactId','version'])
                 bc=':'.join(expand(d[k]) for k in ['groupId','artifactId','version'])
                 bm=self.model(bc,stack+(coordinate,))
+                uncertain_management.update(bm.get('uncertain_management',set()))
                 for k,val in bm['management'].items():
                     # Do not interpolate BOM-owned values in the consumer's
                     # property context. This subset refuses such required values.
                     fields=set(val.get('_unsupported_bom_fields',[]))
                     fields.update(name for name,value in val.items()
                                   if not name.startswith('_') and '${' in str(value))
-                    management.setdefault(k,val|{'_unsupported_bom_fields':sorted(fields)})
+                    if k not in management:
+                        management[k]=val|{'_unsupported_bom_fields':sorted(fields)}
+                        imported_management[k]=management[k]
         for d in managed:
-            if d.get('scope')!='import':management[key(d)]=d
-        deps={key(d):dict(d) for d in pm['deps']}
-        local_management={key(d):d for d in managed if d.get('scope')!='import'}
+            if d.get('scope')!='import':management[key(d,managed=True)]=d
+        deps={key(d,managed=True):dict(d) for d in pm['deps']}
+        local_management=imported_management|{key(d,managed=True):d for d in managed if d.get('scope')!='import'}
         for k,d in deps.items():
             local=local_management.get(k,{})
             if (any(field in local and expand(local[field])!=expand(d.get(field,default))
@@ -94,7 +154,7 @@ class Closure:
                     or (local.get('exclusions') and local['exclusions']!=d.get('exclusions',[]))):
                 d['_unsupported_inherited_management']=True
         for n in root.findall('m:dependencies/m:dependency',NS):
-            d=raw(n);k=key(d);md=management.get(k,{})
+            d=raw(n);k=key(d,managed=True);md=management.get(k,{})
             # Maven manages scope, but not optionality. Explicit optional=true
             # in the dependency itself still excludes that runtime path.
             effective={field:value for field,value in md.items()
@@ -104,7 +164,6 @@ class Closure:
             effective['_unsupported_exclusion_merge']=bool(md.get('exclusions') and d['exclusions'])
             effective['exclusions']=d['exclusions'] or md.get('exclusions',[])
             deps[k]=effective
-        profile_props=set()
         for profile in root.findall('m:profiles/m:profile',NS):
             require(not profile.findall('m:dependencies/*',NS) and not profile.findall('m:dependencyManagement/*',NS), 'unsupported profile dependency shape')
             profile_props.update(x.tag.split('}')[-1] for x in profile.findall('m:properties/*',NS))
@@ -120,6 +179,8 @@ class Closure:
                 self.decisions.append({'pom':coordinate,'raw':d,'disposition':'excluded-'+('optional' if optional=='true' else scope)})
                 continue
             require(optional=='false','unsupported optional flag')
+            require((expand(d['groupId']),expand(d['artifactId'])) not in uncertain_management,
+                    'unsupported management key for required dependency (profile-dependent runtime selector or interpolation)')
             require(not d.get('_unsupported_inherited_management'), 'unsupported inherited dependency management override')
             require(not d.get('_unsupported_bom_fields'), 'unsupported interpolated BOM requirement')
             require(not d.get('_unsupported_exclusion_merge'), 'unsupported managed/local exclusion combination')
@@ -137,19 +198,42 @@ class Closure:
             require(re.fullmatch(r'[0-9][A-Za-z0-9_.-]*',rd['version']) and 'SNAPSHOT' not in rd['version'],'non-exact version')
             rd['scope']=scope
             rd['exclusions']=[(expand(x),expand(y)) for x,y in d['exclusions']]
+            require(all(value==value.strip() for pair in rd['exclusions'] for value in pair),
+                    'unsupported selector whitespace')
             resolved.append(rd)
-        result={'props':props,'management':management,'deps':list(deps.values()),'required':resolved,'profile_props':profile_props}
+        result={'props':props,'management':management,'deps':list(deps.values()),'required':resolved,'profile_props':profile_props,
+                'imports':inherited_imports+imports,'uncertain_management':uncertain_management,
+                'profile_values':profile_values}
         self.models[coordinate]=result
         return result
     def resolve(self, root):
-        jars={};visited=set();edges=[]
+        jars={};visited=set();edges=[];contexts={};descendants={}
         def excluded_by(g,a,excluded):
             return any(pair in excluded for pair in ((g,a),(g,'*'),('*',a),('*','*')))
-        def visit(coord,excluded=frozenset(),below=frozenset()):
+        def reachable(coord,stack=()):
+            if coord in descendants:return descendants[coord]
+            require(coord not in stack,'runtime dependency cycle unsupported')
+            result=set()
+            for d in self.model(coord)['required']:
+                result.add((d['groupId'],d['artifactId']))
+                child=':'.join(d[k] for k in ['groupId','artifactId','version'])
+                result.update(reachable(child,stack+(coord,)))
+            descendants[coord]=result
+            return result
+        def visit(coord,excluded=frozenset(),below=frozenset(),ancestry=()):
+            require(coord not in ancestry,'runtime dependency cycle unsupported')
             state=(coord,excluded,below)
             if state in visited:return
             visited.add(state);g,a,v=coord.split(':')
             if excluded_by(g,a,excluded):return
+            context=(excluded,below)
+            if coord in contexts and contexts[coord]!=context:
+                previous=contexts[coord][0]|contexts[coord][1]
+                current=excluded|below
+                require(all(excluded_by(g,a,previous)==excluded_by(g,a,current)
+                            for g,a in reachable(coord)),
+                        'path-dependent exclusions require real Maven mediation '+coord)
+            contexts[coord]=context
             ga=g+':'+a
             require(ga not in jars or jars[ga]==v, 'version conflict requires review '+ga)
             jars[ga]=v
@@ -161,7 +245,7 @@ class Closure:
                 edges.append({'from':coord,'to':target,'scope':d['scope'],'excluded_by_path':skip,'additional_exclusions':d['exclusions']})
                 # An edge's exclusions apply below its target, not to the
                 # dependency declaring them (including self and wildcard rules).
-                visit(target,children_excluded,frozenset(d['exclusions']))
+                visit(target,children_excluded,frozenset(d['exclusions']),ancestry+(coord,))
         visit(root)
         coordinates=sorted(g+':'+v for g,v in jars.items())
         for coord in coordinates:
