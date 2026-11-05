@@ -26,7 +26,7 @@
     "deploy/images/nifi-patches/hadoop-snappy/prepare.py": "6e842313ab40628bab54fbe6b5d2071f05f53fd47c640a64bd7c3d2e99862a93",
     "deploy/images/nifi-patches/parquet-jackson/JacksonProbe.java.in": "e964d6d5f618778e2c47a35a784f484164437eb0d0e270f51db099ab0e4b8121",
     "deploy/images/nifi-patches/parquet-jackson/ParquetProbe.java": "cf93ea8b20ca091dceb7f4fd3046af57748d3a2ebd9fffd9fd7b68a21952e42c",
-    "deploy/images/nifi-patches/parquet-jackson/README.md": "40b2b924fd3f35084f2362e9b60fc19af2f0d528fea6b9979e45c3cf5d250aa9",
+    "deploy/images/nifi-patches/parquet-jackson/README.md": "163a0927911141b1287e57ae303624d5ac707e9519b73f1adfd4120dd57a9fd2",
     "deploy/images/nifi-patches/parquet-jackson/Shade.java": "5455843612556e9f2d76eaf8bdd74e50f75872a95027964e511733965d6e8f71",
     "deploy/images/nifi-patches/parquet-jackson/bounded.py": "01b273836d6821e393d5d7e13fe0a4c57c0d561b12ce48595af22aa3a10870b9",
     "deploy/images/nifi-patches/parquet-jackson/candidate-plan.json": "a07215c847406cec53ce0da363095eda6d002a5384679a63e4fe8a60a46648db",
@@ -145,7 +145,8 @@
       "stock_Key_equals": 8384,
       "candidate_Key_equals": 128,
       "candidate_and_preparation_sources": "unchanged",
-      "remaining": "CLI explicit consumer minimum, canonical output path, grouped metadata/NOTICE and additional consumers remain pending; not runtime closure"
+      "remaining": "CLI explicit consumer minimum, canonical output path, grouped metadata/NOTICE and additional consumers remain pending; not runtime closure",
+      "bundle_regression": "1 passed, 10 deselected; portable source allowlist includes the archived review and Java fixture"
     }
   },
   "del": {
@@ -629,10 +630,11 @@
     "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/sha256.json": "a24f42e6b1a4ae9df1d7fcff1fff10b6104bb8f095cf9833368e20d2a9c77744",
     "/home/tears/.cache/cnc-claude-parquet-review-20261105/mutate.py": "b27e0345c533b073407a825d80a3e8cd1c1491e4025d6856558bcca0d020ebd1",
     "/home/tears/.cache/cnc-parquet-mutations-parent-20261105-02/result.log": "b960e3ba3e1ac8eefe3ce7d86f0cb6a6273172cfa94c634b142bc96cbacc173e",
-    "/home/tears/.cache/cnc-parquet-regression-parent-20261105.log": "47f0fd61c33a24d3f95119b0ef084d8fd4ba21f23419581642145376943edf45"
+    "/home/tears/.cache/cnc-parquet-regression-parent-20261105.log": "47f0fd61c33a24d3f95119b0ef084d8fd4ba21f23419581642145376943edf45",
+    "/home/tears/.cache/cnc-parquet-bundle-regression-parent-20261105.log": "c9ff843516b720ca6ec5b760113b0f5a06d050336bf7e2295c97f55530364ba3"
   },
   "limits": [
-    "new independent combined/Parquet/Kibana reviews pending",
+    "new independent combined/Kibana reviews pending; Parquet review permits bounded private assembly with declared follow-ups",
     "Hazelcast grouped reconstruction followups pending",
     "real image builds/scans and NarClassLoader/service acceptance pending",
     "unmanifested AWS/Azure carriers and other remaining dependency findings unapproved",
@@ -673,6 +675,7 @@
   },
   "parquet_pre_regression_active_source_sha256": {
     "tests/test_nifi_parquet_jackson.py": "9b3e5568487cc633c2cf1562ff463f0bd849ec7b0d7541bf41a434b334275b7e",
-    "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771"
+    "scripts/integration_bundle.py": "5d7125221a9975b64a5e868fccefe7582f95c5ecba65af3f83a20a40f4b5b771",
+    "deploy/images/nifi-patches/parquet-jackson/README.md": "40b2b924fd3f35084f2362e9b60fc19af2f0d528fea6b9979e45c3cf5d250aa9"
   }
 }

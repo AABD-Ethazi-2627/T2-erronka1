@@ -473,7 +473,7 @@
     "deploy/images/nifi-patches/parquet-jackson/verification-summary.json": "c262e878e2d393eeeab414fa25bf2280aa0d0772899f946db8503152086dfe3b",
     "docs/evidence/CLAUDE_HAZELCAST_WRAPPER_REVIEW_20261105.md": "7c6a79269de80a75db02ecd2a32e59693698a5f1b4bf164bc19d9c4f33f4a9b9",
     "docs/evidence/CLAUDE_NIFI_GUARDS_HADOOP_FINAL_RECHECK_20261105.md": "9b87caa1fde6ea95ffa6e3188d070e0eded817a1ea7a3482b3aea1bd94b262e5",
-    "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "7e5cd4568641785f2b878b0257073a38de0d54530d7e4a017889f54f1f0f6266",
+    "docs/evidence/INTEGRATION_CANDIDATES_20261105.json": "89840919e6d55ccfc95e746978c66cff89d722878af1ef71c3768122c42791ff",
     "docs/evidence/INTEGRATION_CANDIDATES_20261105.md": "f420eea8b3ae5539c2d4d0757e4bca9b94cfe4293ea2f7f47b372637b30cedb6",
     "docs/integration/NIFI_CANDIDATE.md": "d0e84f114752fde3550a0b9dac573c2605109943c931e70ebf1a27474fcd6c26",
     "scripts/nifi_candidate_context.py": "a73b32bb8071a45e30bc47f45b807198a98eec73d345edb79fa130b707eadc56",
