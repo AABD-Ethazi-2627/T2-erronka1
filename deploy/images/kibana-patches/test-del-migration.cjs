@@ -41,7 +41,7 @@ if (patched) {
     }
   }
   walk(root);
-  assert.equal(require(`${root}/minimatch/package.json`).version, '10.2.4+cncguard.1');
+  assert.equal(require(`${root}/minimatch/package.json`).version, '11.0.4');
   assert.equal(require(`${root}/rimraf/package.json`).version, '6.1.4');
   console.error(JSON.stringify({ installedCopies: copies }));
 }

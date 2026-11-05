@@ -1,0 +1,13 @@
+{
+  "name": "cnc-guard-kibana-minimatch-migration",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "minimatch": "11.0.4"
+  },
+  "overrides": {
+    "@isaacs/nonrecursive-glob-match": "1.0.3",
+    "brace-expansion": "5.0.12",
+    "balanced-match": "4.0.4"
+  }
+}

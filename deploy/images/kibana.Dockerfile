@@ -20,9 +20,15 @@ RUN node apply-extract-zip-patch.js \
     && cd /tmp/fixture \
     && zip -y /tmp/symlink.zip escape \
     && node /patches/test-extract-zip-patch.js
-COPY deploy/images/kibana-patches/apply-minimatch-patch.js deploy/images/kibana-patches/test-minimatch-limits.js ./
-RUN node apply-minimatch-patch.js \
-    && node --max-old-space-size=384 test-minimatch-limits.js /patches/node_modules/minimatch-v10
+# Historical MM10 backport drivers remain in source; no fork is copied to runtime.
+
+FROM patches AS minimatch-migration
+WORKDIR /minimatch-migration
+COPY deploy/images/kibana-patches/minimatch-migration/package.json deploy/images/kibana-patches/minimatch-migration/package-lock.json ./
+RUN npm ci --ignore-scripts --audit=false --install-strategy=nested
+COPY deploy/images/kibana-patches/mm11-migration.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-output-hashes.json /patches/
+# Both preparations inspect the unchanged original base; del was prepared first.
+RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /patches/mm11-migration.cjs prepare /usr/share/kibana /minimatch-migration/node_modules/minimatch /patches/mm11-prepared /patches/del-patched.modules.yaml > /patches/mm11-preparation.json
 
 FROM patches AS glob-migration
 WORKDIR /glob-migration
@@ -45,6 +51,10 @@ COPY --from=patches /patches/del-patched.modules.yaml /tmp/del-patched.modules.y
 COPY deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json deploy/images/kibana-patches/install-del-migration.cjs /tmp/del-migration/
 RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/del-migration/install-del-migration.cjs /usr/share/kibana /tmp/del-patched \
     && rm -rf /tmp/del-patched /tmp/del-patched.modules.yaml /tmp/del-migration
+COPY --from=minimatch-migration /patches/mm11-prepared /tmp/mm11-prepared
+COPY deploy/images/kibana-patches/mm11-migration.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json /tmp/mm11-migration/
+RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/mm11-migration/mm11-migration.cjs install /usr/share/kibana /tmp/mm11-prepared \
+    && rm -rf /tmp/mm11-prepared /tmp/mm11-migration
 # Remove the old package directories so removed upstream files cannot survive COPY.
 RUN rm -rf /usr/share/kibana/node_modules/decode-uri-component \
     /usr/share/kibana/node_modules/systeminformation \
@@ -53,8 +63,7 @@ RUN rm -rf /usr/share/kibana/node_modules/decode-uri-component \
     /usr/share/kibana/node_modules/@hapi/content \
     /usr/share/kibana/node_modules/@hono/node-server \
     /usr/share/kibana/node_modules/glob \
-    /usr/share/kibana/node_modules/rimraf \
-    /usr/share/kibana/node_modules/minimatch
+    /usr/share/kibana/node_modules/rimraf
 COPY --from=patches /patches/node_modules/deepmerge-patched /usr/share/kibana/node_modules/deepmerge
 COPY --from=patches /patches/node_modules/qs-patched /usr/share/kibana/node_modules/qs
 COPY --from=patches /patches/node_modules/ai-provider-utils /usr/share/kibana/node_modules/@ai-sdk/provider-utils
@@ -99,21 +108,21 @@ COPY --from=patches /patches/node_modules/hapi-content-patched /usr/share/kibana
 COPY --from=patches /patches/node_modules/hono-node-server-patched /usr/share/kibana/node_modules/@hono/node-server
 COPY --from=glob-migration /glob-migration/node_modules/glob /usr/share/kibana/node_modules/glob
 COPY --from=glob-migration /glob-migration/node_modules/rimraf /usr/share/kibana/node_modules/rimraf
-COPY --from=patches /patches/node_modules/minimatch-v10 /usr/share/kibana/node_modules/minimatch
-# This copy needs brace-expansion 5 and its balanced-match 4, not the root v2 copy.
-COPY --from=patches /patches/node_modules/brace-expansion /usr/share/kibana/node_modules/minimatch/node_modules/brace-expansion
+# Root Minimatch and its complete official nested closure were installed above.
 RUN rm -rf /usr/share/kibana/node_modules/node-forge
 # Replace actual upstream library and dist bytes; do not reapply the 1.4.0 backport.
 COPY --from=patches /patches/node_modules/node-forge-patched /usr/share/kibana/node_modules/node-forge
 COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js deploy/images/kibana-patches/test-same-line-updates.js deploy/images/kibana-patches/test-hono-node-server.js /tmp/
-COPY deploy/images/kibana-patches/test-glob-migration.js deploy/images/kibana-patches/test-minimatch-limits.js deploy/images/kibana-patches/test-del-migration.cjs /tmp/
+COPY deploy/images/kibana-patches/test-glob-migration.js deploy/images/kibana-patches/test-del-migration.cjs /tmp/
+COPY deploy/images/kibana-patches/test-mm11-installed.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json /tmp/mm11-test/
 RUN /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-patch.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-node-forge-chain.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-follow-redirects.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-same-line-updates.js \
     && /usr/share/kibana/node/default/bin/node /tmp/test-hono-node-server.js \
     && /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/test-glob-migration.js \
-    && /usr/share/kibana/node/default/bin/node --max-old-space-size=384 /tmp/test-minimatch-limits.js \
+    && /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/mm11-test/test-mm11-installed.cjs \
     && /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/test-del-migration.cjs \
-    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js /tmp/test-same-line-updates.js /tmp/test-hono-node-server.js /tmp/test-glob-migration.js /tmp/test-minimatch-limits.js /tmp/test-del-migration.cjs
+    && rm /tmp/test-node-forge-patch.js /tmp/test-node-forge-chain.js /tmp/test-follow-redirects.js /tmp/test-same-line-updates.js /tmp/test-hono-node-server.js /tmp/test-glob-migration.js /tmp/test-del-migration.cjs \
+    && rm -rf /tmp/mm11-test
 USER 1000
