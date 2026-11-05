@@ -8,6 +8,7 @@ const inputs = require('./mm11-inputs.json');
 const FLEET = 'node_modules/@kbn/fleet-plugin/server/services/epm/packages/get.js';
 const FLEET_PACKAGE = 'node_modules/@kbn/fleet-plugin/package.json';
 const BASH_PACKAGE = 'node_modules/just-bash/package.json';
+const ADAPTER = '@cnc-guard/bounded-minimatch';
 
 function checkInputs(root) {
   assert.deepEqual(files(path.join(root, 'node_modules/minimatch')), inputs.legacy, 'legacy root MM bytes drifted');
@@ -26,7 +27,7 @@ function prepare(root, official, output, afterDelIndex) {
   assert.equal(JSON.parse(fs.readFileSync(path.join(official, 'package.json'))).version, '11.0.4');
   const original = fs.readFileSync(path.join(root, FLEET), 'utf8');
   const replacements = [
-    ['const patternRegex = new _minimatch.minimatch.Minimatch(stream.name, {', 'const patternMatcher = new _minimatch.minimatch.Minimatch(stream.name, {'],
+    ['const patternRegex = new _minimatch.minimatch.Minimatch(stream.name, {', 'const patternMatcher = new _minimatch.Minimatch(stream.name, {'],
     ['}).makeRe();', '});'],
     ['dataStreamName.match(patternRegex)', 'patternMatcher.match(dataStreamName)'],
     ['noglobstar: true,', 'braceExpandMax: 1024,\n        noglobstar: true,'],
@@ -39,13 +40,13 @@ function prepare(root, official, output, afterDelIndex) {
   assert(!fleet.includes('.makeRe('));
   const patch = new Map([[FLEET, Buffer.from(fleet)]]);
   const budgetChanges = [
-    ['get_field_values_handler.js', ['(f, input, {\n    dot: true', '(f, input, {\n    braceExpandMax: 1024,\n    dot: true']],
+    ['get_field_values_handler.js', ['const matchingFields = allFieldNames.filter(f => (0, _minimatch.minimatch)(f, input, {\n    dot: true\n  }) && fieldNameToTypeMap[f]);', 'const patternMatcher = new _minimatch.Minimatch(input, { braceExpandMax: 1024, dot: true });\n  const matchingFields = allFieldNames.filter(f => patternMatcher.match(f) && fieldNameToTypeMap[f]);']],
     ['health_diagnostic_receiver.js', ['(resolvedPath, path, {\n    nocase: false', '(resolvedPath, path, {\n    braceExpandMax: 1024,\n    nocase: false']],
     ['classify_streams.js', ['(name, pattern)', '(name, pattern, { braceExpandMax: 1024 })']],
     ['task_claimers/index.js', ['(taskType, excludedTypePattern)', '(taskType, excludedTypePattern, { braceExpandMax: 1024 })']],
-    ['just-bash/dist/bundle/browser.js', ['Xf(d,e)||Xf(h,e)', 'Xf(d,e,{braceExpandMax:1024})||Xf(h,e,{braceExpandMax:1024})']],
-    ['just-bash/dist/bundle/chunks/chunk-R4IFXNY5.js', ['R(a,n)||R(r,n)', 'R(a,n,{braceExpandMax:1024})||R(r,n,{braceExpandMax:1024})']],
-    ['just-bash/dist/bundle/index.cjs', ['(0,Dp.minimatch)(m,t)||(0,Dp.minimatch)(p,t)', '(0,Dp.minimatch)(m,t,{braceExpandMax:1024})||(0,Dp.minimatch)(p,t,{braceExpandMax:1024})']],
+    ['just-bash/dist/bundle/browser.js', ['p=[];for(let h of u){let d=h.startsWith(f)&&h.slice(f.length+1)||h;if(Xf(d,e)||Xf(h,e))', 'p=[],CncPattern=new CncBoundedMinimatch(e,{braceExpandMax:1024});for(let h of u){let d=h.startsWith(f)&&h.slice(f.length+1)||h;if(CncPattern.match(d)||CncPattern.match(h))']],
+    ['just-bash/dist/bundle/chunks/chunk-R4IFXNY5.js', ['p=[];for(let r of $){let a=r.startsWith(A)&&r.slice(A.length+1)||r;if(R(a,n)||R(r,n))', 'p=[],CncPattern=new CncBoundedMinimatch(n,{braceExpandMax:1024});for(let r of $){let a=r.startsWith(A)&&r.slice(A.length+1)||r;if(CncPattern.match(a)||CncPattern.match(r))']],
+    ['just-bash/dist/bundle/index.cjs', ['h=[];for(let p of u){let m=p.startsWith(f)&&p.slice(f.length+1)||p;if((0,Dp.minimatch)(m,t)||(0,Dp.minimatch)(p,t))', 'h=[],CncPattern=new Dp.Minimatch(t,{braceExpandMax:1024});for(let p of u){let m=p.startsWith(f)&&p.slice(f.length+1)||p;if(CncPattern.match(m)||CncPattern.match(p))']],
   ];
   for (const [suffix, [before, after]] of budgetChanges) {
     const matches = Object.keys(inputs.consumers).filter(file => file.endsWith(suffix));
@@ -54,17 +55,35 @@ function prepare(root, official, output, afterDelIndex) {
     assert.equal(source.split(before).length, 2, `unique budget patch context: ${file}`);
     patch.set(file, Buffer.from(source.replace(before, after)));
   }
+  for (const file of Object.keys(inputs.consumers)) {
+    let source = patch.get(file).toString();
+    if (file.endsWith('/browser.js') || file.endsWith('/chunk-R4IFXNY5.js')) {
+      const declaration = file.endsWith('/browser.js') ? 'import{minimatch as Xf}from"minimatch"' : 'import{minimatch as R}from"minimatch"';
+      assert.equal(source.split(declaration).length, 2, 'unique adapter import');
+      source = source.replace(declaration, `import{Minimatch as CncBoundedMinimatch}from"${ADAPTER}"`);
+    } else {
+      assert.equal(source.split('require("minimatch")').length, 2, 'unique adapter require');
+      source = source.replace('require("minimatch")', `require("${ADAPTER}")`);
+    }
+    patch.set(file, Buffer.from(source));
+  }
+  patch.set(`node_modules/${ADAPTER}/index.cjs`, fs.readFileSync(path.join(__dirname, 'mm11-bounded-match.cjs')));
+  patch.set(`node_modules/${ADAPTER}/package.json`, Buffer.from(JSON.stringify({ name: ADAPTER, version: '1.0.0',
+    private: true, license: 'UNLICENSED', main: './index.cjs',
+    exports: { '.': './index.cjs', './package.json': './package.json' }, dependencies: { minimatch: '11.0.4' },
+    description: 'Local integration adapter: uncached matchers, overflow rejected before compilation' }, null, 2) + '\n'));
   for (const file of Object.keys(inputs.packages)) {
     const metadata = JSON.parse(fs.readFileSync(path.join(root, file)));
     const upstreamVersion = metadata.version;
-    metadata.version += '+cncguard.mm11.2';
-    metadata.dependencies = { ...metadata.dependencies, minimatch: '11.0.4' };
+    metadata.version += '+cncguard.mm11.3';
+    metadata.dependencies = { ...metadata.dependencies, minimatch: '11.0.4', [ADAPTER]: '1.0.0' };
     metadata.cncGuardMinimatchMigration = { upstreamVersion, originalPackageSha256: inputs.packages[file],
       minimatch: '11.0.4', semanticPolicy: 'official MM11 semantics accepted for candidate; not MM10 equivalence',
       braceExpandMax: 1024,
-      sourceChange: file === FLEET_PACKAGE ? 'boolean Minimatch.match plus finite expansion budget' :
-        file === BASH_PACKAGE ? 'all three ls bundles pass finite expansion budget; local integration of upstream ^10 consumer' :
-          'actual matching function passes finite expansion budget',
+      cachePolicy: 'uncached-new-Minimatch', overflowPolicy: 'reject before compilation; no truncation',
+      sourceChange: file === FLEET_PACKAGE ? 'uncached boolean matcher through explicit bounded adapter' :
+        file === BASH_PACKAGE ? 'all three ls bundles compile once per pattern through bounded adapter' :
+          'bounded uncached adapter; field search compiles once per invocation',
       inputSources: Object.fromEntries(Object.entries(inputs.consumers).filter(([name]) => name.startsWith(path.dirname(file) + '/'))),
     };
     patch.set(file, Buffer.from(JSON.stringify(metadata, null, 2) + '\n'));
@@ -96,9 +115,10 @@ function prepare(root, official, output, afterDelIndex) {
   find(updated); assert.equal(maps.length, 1);
   const bashLocator = Object.keys(maps[0]).filter(key => key.startsWith('just-bash@3.0.1') && maps[0][key].includes('node_modules/just-bash'));
   assert.equal(bashLocator.length, 1);
-  maps[0][bashLocator[0].replace('just-bash@3.0.1', 'just-bash@3.0.1+cncguard.mm11.2')] = maps[0][bashLocator[0]];
+  maps[0][bashLocator[0].replace('just-bash@3.0.1', 'just-bash@3.0.1+cncguard.mm11.3')] = maps[0][bashLocator[0]];
   delete maps[0][bashLocator[0]];
   for (const [name, location] of [
+    [`${ADAPTER}@1.0.0`, `node_modules/${ADAPTER}`],
     ['minimatch@11.0.4', 'node_modules/minimatch'],
     ['@isaacs/nonrecursive-glob-match@1.0.3', 'node_modules/minimatch/node_modules/@isaacs/nonrecursive-glob-match'],
     ['brace-expansion@5.0.12', 'node_modules/minimatch/node_modules/brace-expansion'],

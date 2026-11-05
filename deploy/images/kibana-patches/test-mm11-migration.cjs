@@ -45,7 +45,8 @@ function fixture(data) {
 function controls(root, old) {
   const requireFrom = createRequire(root + '/' + FLEET);
   const mm = requireFrom('minimatch');
-  const fleet = extract(fs.readFileSync(root + '/' + FLEET, 'utf8'), ['getInstalledPackageSavedObjectDataStreams'], { _minimatch: mm });
+  const matcher = requireFrom('@cnc-guard/bounded-minimatch');
+  const fleet = extract(fs.readFileSync(root + '/' + FLEET, 'utf8'), ['getInstalledPackageSavedObjectDataStreams'], { _minimatch: matcher });
   const original = extract(fs.readFileSync(VENDOR + '/' + FLEET, 'utf8'), ['getInstalledPackageSavedObjectDataStreams'], { _minimatch: old });
   const call = (fn, p, name) => normalize(fn({ stream: p }, 'logs', [{ name }]));
   const yes = [{ name: 'logs-*-default', title: 'stream' }];
@@ -58,7 +59,7 @@ function controls(root, old) {
   const random = n => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return (seed >>> 16) % n; };
   const atoms = ['a', 'b', '*', '?', '[ab]', '[!a]', '@(a|b)', '!(a|b)', '+(a|b)', '*(a|b)', '?(a|b)', '{a,b}', 'foo'];
   const names = ['a', 'b', 'aa', 'ab', 'ba', 'foo', 'foobar', 'foo.bar', 'x'];
-  return { mm, fleet, original, call, random, atoms, names, rows };
+  return { mm, matcher, fleet, original, call, random, atoms, names, rows };
 }
 async function main() {
   assert.equal(process.version, 'v24.21.0');
@@ -93,7 +94,13 @@ async function main() {
   assert.deepEqual(files(root + '/node_modules/minimatch'), require('./mm11-official-files.json'));
   assert.throws(() => install(root, prepared));
   const old = require(VENDOR + '/node_modules/minimatch');
-  const { mm, fleet, original, call, random, atoms, names } = controls(root, old);
+  const { mm, matcher, fleet, original, call, random, atoms, names } = controls(root, old);
+  const cachedFunction = mm.minimatch;
+  mm.minimatch = () => { throw new Error('official shared compiled cache must not be called'); };
+  try {
+    assert(matcher.minimatch('logs-a', 'logs-*'));
+    assert(new matcher.Minimatch('logs-*').match('logs-a'));
+  } finally { mm.minimatch = cachedFunction; }
   const esm = await import(pathToFileURL(root + '/node_modules/minimatch/dist/esm/index.js'));
   assert.equal(mm.Minimatch.prototype.makeRe, undefined);
   assert.equal(mm.makeRe, undefined);
@@ -140,7 +147,7 @@ async function main() {
   rows.push({ ordinaryComparisons: ordinary, unicodeAndBounds: true, formats: ['CJS', 'ESM'] });
   const load = (suffix, names, context = {}) => {
     const file = Object.keys(inputs.consumers).find(p => p.includes(suffix)); assert(file);
-    return extract(fs.readFileSync(root + '/' + file, 'utf8'), names, { _minimatch: mm, ...context });
+    return extract(fs.readFileSync(root + '/' + file, 'utf8'), names, { _minimatch: matcher, ...context });
   };
   const task = load('task_claimers/index.js', ['isTaskTypeExcluded']);
   assert.equal(task(['alerting:*'], 'alerting:é'), true); assert.equal(task(['alerting:*'], 'reports:daily'), false);
@@ -192,37 +199,39 @@ async function main() {
       super(pattern, options);
     }
   };
-  const boundedContext = { _minimatch: { minimatch: checkedMatch } };
+  const boundedContext = { _minimatch: { minimatch: checkedMatch, Minimatch: checkedMatch.Minimatch } };
   const boundedFleet = extract(fs.readFileSync(root + '/' + FLEET, 'utf8'), ['getInstalledPackageSavedObjectDataStreams'], boundedContext);
   call(boundedFleet, 'logs-*', 'logs-a-default');
   load('task_claimers/index.js', ['isTaskTypeExcluded'], boundedContext)(['alerting:*'], 'alerting:x');
   load('health_diagnostic_receiver', ['isPathAllowed'], boundedContext)('/_cluster/health', [{ path: '/_cluster/*' }]);
   load('classify_streams', ['matchesExcludePatterns'], boundedContext)('logs', ['logs*']);
   load('get_field_values_handler', ['KEYWORD_TYPES', 'NUMERIC_TYPES', 'DATE_TYPES', 'BOOLEAN_TYPES', 'TEXT_TYPES', 'getFieldCategory', 'resolveInputToConcreteFields'], boundedContext)('attributes.*', Object.keys(types), types);
-  assert.equal(excludes('2048', ['{1..99999}']), false, 'expansion budget must affect actual matcher');
-  assert.equal(task(['{1..99999}'], '2048'), false);
-  assert.equal(allowed('2048', [{ path: '{1..99999}' }]), false);
-  assert.deepEqual(call(fleet, '{1..99999}', '2048'), []);
-  assert.equal(normalize(fields('{1..99999}/*', ['2048/value'], { '2048/value': 'keyword' }))[0].error,
-    'No fields match pattern "{1..99999}/*"');
+  for (const [route, check] of [['excludes', () => excludes('2048', ['{1..99999}'])], ['task', () => task(['{1..99999}'], '2048')],
+    ['allowed', () => allowed('2048', [{ path: '{1..99999}' }])], ['fleet', () => call(fleet, 'logs-{1..99999}', 'logs-2048')],
+    ['fields', () => fields('{1..99999}/*', ['2048/value'], { '2048/value': 'keyword' })],
+    ['negated allowlist', () => allowed('1500', [{ path: '!{1..2000}' }])]]) {
+    assert.throws(check, /expansion budget exceeded/, `overflow must reject: ${route}`);
+  }
+  assert(new matcher.Minimatch('{1..1024}').match('1024'));
+  assert.throws(() => new matcher.Minimatch('{1..1025}'), /expansion budget exceeded/);
   // AST-check both actual call sites in every bundle before any retention
   // probe. A missing budget fails without repeatedly allocating large caches.
-  for (const [suffix, identifier] of [['browser.js', 'Xf'], ['chunks/chunk-R4IFXNY5.js', 'R'], ['index.cjs', 'Dp']]) {
+  for (const suffix of ['browser.js', 'chunks/chunk-R4IFXNY5.js', 'index.cjs']) {
     const file = Object.keys(inputs.consumers).find(p => p.endsWith('just-bash/dist/bundle/' + suffix));
     const tree = acorn.parse(fs.readFileSync(root + '/' + file, 'utf8'), { ecmaVersion: 'latest', sourceType: 'module' });
-    const pending = [tree]; let calls = 0;
+    const pending = [tree]; let calls = 0, constructors = 0;
     while (pending.length) {
       const node = pending.pop();
       if (node.type === 'CallExpression') {
-        const last = node.callee.type === 'SequenceExpression' ? node.callee.expressions.at(-1) : node.callee;
-        const matcher = last.type === 'Identifier' && last.name === identifier ||
-          last.type === 'MemberExpression' && last.object.name === identifier && last.property.name === 'minimatch';
-        if (matcher) {
-          calls++;
-          const options = node.arguments[2];
-          assert.equal(options?.type, 'ObjectExpression', 'actual bundle matcher options missing');
-          assert(options.properties.some(p => p.key.name === 'braceExpandMax' && p.value.value === 1024));
-        }
+        const last = node.callee;
+        if (last.type === 'MemberExpression' && last.object.name === 'CncPattern' && last.property.name === 'match') calls++;
+      }
+      if (node.type === 'NewExpression' && (node.callee.name === 'CncBoundedMinimatch' ||
+        node.callee.type === 'MemberExpression' && node.callee.object.name === 'Dp' && node.callee.property.name === 'Minimatch')) {
+        constructors++;
+        const options = node.arguments[1];
+        assert.equal(options?.type, 'ObjectExpression', 'actual bundle matcher options missing');
+        assert(options.properties.some(p => p.key.name === 'braceExpandMax' && p.value.value === 1024));
       }
       for (const value of Object.values(node)) {
         if (Array.isArray(value)) { for (const child of value) if (child?.type) pending.push(child); }
@@ -230,20 +239,32 @@ async function main() {
       }
     }
     assert.equal(calls, 2, 'both actual bundle match sites must be bounded');
+    assert.equal(constructors, 1, 'compile once per ls pattern, never per filesystem entry');
   }
   assert.equal(typeof global.gc, 'function', 'retention phase requires --expose-gc');
   const heap = () => { global.gc(); return process.memoryUsage().heapUsed; };
   const retainedStart = heap();
   for (let i = 0; i < 12; i++) {
     const start = heap();
-    excludes('logs', [`{1..${99980 + i}}`]);
-    fields(`{1..${99980 + i}}/*`, ['2048/value'], { '2048/value': 'keyword' });
+    excludes('logs', [`{1..${1000 + i}}`]);
+    fields(`{1..${1000 + i}}/*`, ['2048/value'], { '2048/value': 'keyword' });
     assert(heap() - start < 8 * 1024**2, 'unexpected per-pattern retention; stop before additional probes');
   }
   const retainedBytes = heap() - retainedStart;
   assert(retainedBytes < 24 * 1024**2, 'bounded consumer retention exceeded fixture budget');
-  rows.push({ realConsumersBraceExpandMax: 1024, measuredPatterns: 24, retainedBytes,
-    retentionBudgetBytes: 24 * 1024**2, beyondBudgetMayNotMatch: true });
+  const longPattern = (length, end = 1024) => (`{1..${end}}/` + 'a/'.repeat(length)).slice(0, length - 1) + '*';
+  const longStart = heap();
+  for (let i = 0; i < 3; i++) {
+    const before = heap();
+    excludes('logs', [longPattern(4095, 1024 - i)]);
+    fields(longPattern(1023, 1024 - i), ['2048/value'], { '2048/value': 'keyword' });
+    assert(heap() - before < 8 * 1024**2, 'long-pattern retention exceeded safe stop');
+  }
+  const longRetainedBytes = heap() - longStart;
+  assert(longRetainedBytes < 8 * 1024**2, 'long accepted patterns must not persist in shared cache');
+  rows.push({ realConsumersBraceExpandMax: 1024, measuredShortPatterns: 24, retainedBytes,
+    measuredLongPatterns: 6, longPatternLengths: [1023, 4095], longRetainedBytes,
+    retentionBudgetBytes: 24 * 1024**2, overflowRejectedBeforeCompilation: true, sharedCompiledCache: false });
 
   const variants = [
     ['CJS', require(root + '/node_modules/just-bash/dist/bundle/index.cjs')],
@@ -275,9 +296,16 @@ async function main() {
     const boundedBash = new Bash({ cwd: '/budget', files: { '/budget/2048/value': 'owned virtual data' } });
     const before = heap();
     const oversized = await boundedBash.exec("ls '{1..99999}/*'");
-    assert.equal(oversized.exitCode, 2); assert.equal(oversized.stdout, '');
+    assert.equal(oversized.exitCode, 1); assert.equal(oversized.stdout, '');
+    assert(oversized.stderr.includes('expansion budget exceeded'));
+    const longBefore = heap();
+    const acceptedLong = await boundedBash.exec(`ls '${longPattern(4096)}'`);
+    assert.equal(acceptedLong.exitCode, 2);
+    await new Promise(setImmediate);
+    const longBashRetainedBytes = heap() - longBefore;
+    assert(longBashRetainedBytes < 8 * 1024**2, 'actual Bash bundle retained a long compiled pattern');
     assert(heap() - before < 8 * 1024**2, 'actual Bash bundle retained unbounded expansion');
-    rows.push({ actualJustBashVariant: variant, cases: cases.length });
+    rows.push({ actualJustBashVariant: variant, cases: cases.length, longPatternLength: 4096, longBashRetainedBytes });
   }
   // Coexistence: the independently accepted del engine bytes/pins stay unchanged.
   fs.unlinkSync(root + '/node_modules/del');

@@ -7,6 +7,7 @@ import base64
 import hashlib
 import io
 import json
+import os
 import re
 import subprocess
 import sys
@@ -17,7 +18,7 @@ from pathlib import Path
 
 BASE = 'sha256:46b0a3adf85186f9153fbd322e55ea8f70bc4039dcd55d58826fc1caa372dee5'
 IMAGE = 'sha256:34a89b0e71b3339c51e5144d363a782a4d6b78cf96b712719da429be38fd5ddd'
-LOCK = '/home/tears/.cache/cnc-integration-audit-20261103/candidate-heavy.lock'
+LOCK = os.environ.get('CNC_CANDIDATE_HEAVY_LOCK', '/home/tears/.cache/cnc-integration-audit-20261103/candidate-heavy.lock')
 SCRIPTS = Path(__file__).resolve().parent
 NPM = Path('/home/tears/.local/share/mise/installs/node/26.13.0/lib/node_modules/npm')
 
@@ -29,6 +30,7 @@ def sha(data):
 def main():
     output = Path(sys.argv[1]).resolve()
     image = sys.argv[2] if len(sys.argv) > 2 else IMAGE
+    npm_source = Path(sys.argv[3]).resolve() if len(sys.argv) > 3 else NPM
     assert re.fullmatch(r'sha256:[0-9a-f]{64}', image), 'component image must be an explicit immutable ID'
     output.mkdir(mode=0o700, exist_ok=False)
     inspected = subprocess.run(['docker', 'image', 'inspect', '--format', '{{.Id}}', image],
@@ -71,9 +73,10 @@ def main():
         data = urllib.request.urlopen(url, timeout=20).read()
         assert sha(data) == expected
         (output / f'primary-source-{i}.md').write_bytes(data)
-    assert (NPM / 'bin/npm-cli.js').is_file(), 'existing npm CLI unavailable; no fallback Node allowed'
-    (output / 'npm-tool-files.json').write_text(json.dumps({str(p.relative_to(NPM)): sha(p.read_bytes())
-        for p in NPM.rglob('*') if p.is_file()}, indent=2) + '\n')
+    assert (npm_source / 'bin/npm-cli.js').is_file(), 'existing npm CLI unavailable; no fallback Node allowed'
+    assert json.loads((npm_source / 'package.json').read_bytes())['version'] == '11.20.0', 'npm CLI version drift'
+    (output / 'npm-tool-files.json').write_text(json.dumps({str(p.relative_to(npm_source)): sha(p.read_bytes())
+        for p in npm_source.rglob('*') if p.is_file()}, indent=2) + '\n')
     commands = []
     def container(image, stem, args, npm=False):
         name = 'cnc-mm11-' + uuid.uuid4().hex[:12]
@@ -84,7 +87,7 @@ def main():
             '--mount', f'type=bind,src={SCRIPTS},dst=/scripts,readonly',
             '--mount', f'type=bind,src={output},dst=/probe,readonly']
         if npm:
-            command += ['--mount', f'type=bind,src={NPM},dst=/npm,readonly',
+            command += ['--mount', f'type=bind,src={npm_source},dst=/npm,readonly',
                 '--mount', f'type=bind,src={SCRIPTS / "minimatch-migration"},dst=/lock,readonly']
         command += ['--entrypoint', '/usr/share/kibana/node/default/bin/node', image,
                     '--max-old-space-size=256', *args]

@@ -16,10 +16,19 @@ async function main() {
   }
   for (const file of Object.keys(inputs.packages)) {
     const metadata = JSON.parse(fs.readFileSync(path.join(root, file)));
-    assert(metadata.version.endsWith('+cncguard.mm11.2'));
+    assert(metadata.version.endsWith('+cncguard.mm11.3'));
     assert.equal(metadata.dependencies.minimatch, '11.0.4');
     assert.equal(metadata.cncGuardMinimatchMigration.braceExpandMax, 1024);
+    assert.equal(metadata.cncGuardMinimatchMigration.cachePolicy, 'uncached-new-Minimatch');
+    assert.equal(metadata.dependencies['@cnc-guard/bounded-minimatch'], '1.0.0');
   }
+  for (const name of ['index.cjs', 'package.json']) {
+    const file = 'node_modules/@cnc-guard/bounded-minimatch/' + name;
+    assert.equal(hash(fs.readFileSync(path.join(root, file))), outputs[file], `adapter drift: ${file}`);
+  }
+  const adapter = createRequire(path.join(root, 'package.json'))('@cnc-guard/bounded-minimatch');
+  assert(new adapter.Minimatch('{1..1024}').match('1024'));
+  assert.throws(() => adapter.minimatch('1500', '!{1..2000}'), /expansion budget exceeded/);
   const semver = require('/usr/share/kibana/node_modules/semver');
   const copies = [], runtimeDeclarations = [];
   function walk(directory) {

@@ -26,7 +26,7 @@ FROM patches AS minimatch-migration
 WORKDIR /minimatch-migration
 COPY deploy/images/kibana-patches/minimatch-migration/package.json deploy/images/kibana-patches/minimatch-migration/package-lock.json ./
 RUN npm ci --ignore-scripts --audit=false --install-strategy=nested
-COPY deploy/images/kibana-patches/mm11-migration.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-output-hashes.json /patches/
+COPY deploy/images/kibana-patches/mm11-migration.cjs deploy/images/kibana-patches/mm11-bounded-match.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-output-hashes.json /patches/
 # Both preparations inspect the unchanged original base; del was prepared first.
 RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /patches/mm11-migration.cjs prepare /usr/share/kibana /minimatch-migration/node_modules/minimatch /patches/mm11-prepared /patches/del-patched.modules.yaml > /patches/mm11-preparation.json
 
@@ -52,7 +52,7 @@ COPY deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches
 RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/del-migration/install-del-migration.cjs /usr/share/kibana /tmp/del-patched \
     && rm -rf /tmp/del-patched /tmp/del-patched.modules.yaml /tmp/del-migration
 COPY --from=minimatch-migration /patches/mm11-prepared /tmp/mm11-prepared
-COPY deploy/images/kibana-patches/mm11-migration.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json /tmp/mm11-migration/
+COPY deploy/images/kibana-patches/mm11-migration.cjs deploy/images/kibana-patches/mm11-bounded-match.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json /tmp/mm11-migration/
 RUN /usr/share/kibana/node/default/bin/node --max-old-space-size=256 /tmp/mm11-migration/mm11-migration.cjs install /usr/share/kibana /tmp/mm11-prepared \
     && rm -rf /tmp/mm11-prepared /tmp/mm11-migration
 # Remove the old package directories so removed upstream files cannot survive COPY.
