@@ -1,0 +1,141 @@
+{
+  "status": "experimental-wrapper-prepared-independent-QA-required",
+  "runtime_approved": false,
+  "replacement": null,
+  "original_sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7",
+  "occurrences": [
+    {
+      "chain_sha256": [
+        "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+        "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+      ],
+      "members": [
+        "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
+      ],
+      "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+      "outer_sha256": "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e"
+    }
+  ],
+  "source_root_prefix": "opt/nifi/nifi-current/lib/",
+  "candidate_sha256": "bad77fac2682d5441ce19e498056ddaf948e89739d933d302b5cf66c868344cf",
+  "candidate_path": "/home/tears/.cache/cnc-parquet-jackson-20261105T080058Z-final2/parquet-jackson-1.18.1-cnc-jackson.jar",
+  "scan_sha256": "670afc98bdf35dd441e6cc34c0afe791d170e2e1632f2b052df22b917547f20c",
+  "ci_run": 41833235278,
+  "parent_requested_base": "2b95e9a",
+  "local_base": "f5fadedd4f0f5923d4056255f99a457f921fa29c",
+  "tuples": [
+    {
+      "VulnerabilityID": "CVE-2026-89407",
+      "PkgName": "com.fasterxml.jackson.core:jackson-core",
+      "InstalledVersion": "2.22.2",
+      "FixedVersion": "2.18.11, 2.21.7, 2.22.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7.jar",
+      "proposed_component_version": "2.22.3",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/731e794f62623aa0d86ced52490166be903fbb1d",
+        "https://github.com/FasterXML/jackson-core/commit/e7acd64cc99bd346704423dc2bfea1ab0a08ddff",
+        "https://github.com/FasterXML/jackson-core/issues/1649",
+        "https://github.com/FasterXML/jackson-core/pull/1650",
+        "https://github.com/FasterXML/jackson-core/pull/1701",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-p6pp-m3f8-5c89"
+      ],
+      "code_entry": "shaded/parquet/com/fasterxml/jackson/core/io/NumberInput.class",
+      "old_code_sha256": "21140852e07e35b72a3cb26fd5e648544fdfbdcbfdcfa176ac1e7bbcf3684ccc",
+      "new_code_sha256": "9384d793cbc06c01c0d8f61ddb12cdbb08795f1a4bf2803e7a96c1ecf069312f",
+      "local_runtime_discriminating_probe": false,
+      "other_evidence": "Upstream primary evidence and absence of old PATTERN_FLOAT field; static marker only, no regex timing/DoS reproduction",
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-89425",
+      "PkgName": "com.fasterxml.jackson.core:jackson-core",
+      "InstalledVersion": "2.22.2",
+      "FixedVersion": "2.21.7, 2.22.3, 2.18.11",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7.jar",
+      "proposed_component_version": "2.22.3",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/211cf2c5d91abbec38067f37efc1363cd4e88ee3",
+        "https://github.com/FasterXML/jackson-core/pull/1698",
+        "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-2.18.11",
+        "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-3.2.3",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-7hhh-6rmp-j9qf"
+      ],
+      "code_entry": "shaded/parquet/com/fasterxml/jackson/core/json/UTF8DataInputJsonParser.class",
+      "old_code_sha256": "015bb944ad8f1b2a0999abd11c6a47e182746c4ab47bb2337842fa0500b42bba",
+      "new_code_sha256": "24ca7589d955cbe3f4ba19cbe0c7c59aa70272641d63b6bb0e57963a47592175",
+      "local_runtime_discriminating_probe": true,
+      "other_evidence": "Old/fixed bounded 4096-byte DataInput token vs stable InputStream control",
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-91776",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.22.2",
+      "FixedVersion": "2.18.11, 2.21.7, 2.22.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7.jar",
+      "proposed_component_version": "2.22.3",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/2870d1d6dc1b7e1c07ee11dd5b04ab71cddbb577",
+        "https://github.com/FasterXML/jackson-databind/issues/6203",
+        "https://github.com/FasterXML/jackson-databind/pull/6203",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.11",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.3",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wv8q-qhhj-9h54"
+      ],
+      "code_entry": "shaded/parquet/com/fasterxml/jackson/databind/jsontype/impl/TypeDeserializerBase.class",
+      "old_code_sha256": "b2dbf9c3a5db2411155e1a73e67fe0005af5acc046a9330aba13f24fb74fe05a",
+      "new_code_sha256": "a534bc8de15700a250e215c16e2307008c655974be98d43f89ca338fa632b38a",
+      "local_runtime_discriminating_probe": true,
+      "other_evidence": "1500 benign distinct fallback type IDs vs repeated-ID control, actual wrapper",
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-91777",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.22.2",
+      "FixedVersion": "2.21.7, 2.18.11, 2.22.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7.jar",
+      "proposed_component_version": "2.22.3",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/37ad9b81712cbb9fb62c2d2c1813593252a24b67",
+        "https://github.com/FasterXML/jackson-databind/issues/6204",
+        "https://github.com/FasterXML/jackson-databind/pull/6204",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.11",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.3",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-cxp5-3px4-pw24"
+      ],
+      "code_entry": "shaded/parquet/com/fasterxml/jackson/databind/deser/std/CollectionDeserializer$CollectionReferringAccumulator.class",
+      "old_code_sha256": "6dd446e9c82570f2ef87913aadf48b73577b09e29e0e0464173f8ee9ab9e7539",
+      "new_code_sha256": "bf0b3c3afb1562f835c8fa93d45ac3112a086fd3d2a7c32b2707fd350fad033a",
+      "local_runtime_discriminating_probe": false,
+      "other_evidence": "Upstream primary evidence and 128 benign forward-reference identity resolutions; no quadratic-cost reproduction",
+      "closure_approved": false
+    }
+  ],
+  "upstream_coverage_sha256": "d2fefc251e08cc72f66d1c833bde5b1b8aaa1ba33546b34be1d915d94af32d1d",
+  "remaining_gates": [
+    "independent QA and parent occurrence/atomic plan approval",
+    "inherited/interface and MR symbolic linkage",
+    "full optional dependencies and NiFi NAR classloader closure",
+    "NiFi/final-image scans",
+    "unchanged CG32 resource gate",
+    "real SMB and human acceptance"
+  ],
+  "excluded": [
+    "Hazelcast (owned by separate QA)",
+    "AWS/Azure unmanifested Jackson carriers",
+    "plain Jackson objects",
+    "Kibana",
+    "common Maven/Hadoop/atomic plan helpers"
+  ]
+}

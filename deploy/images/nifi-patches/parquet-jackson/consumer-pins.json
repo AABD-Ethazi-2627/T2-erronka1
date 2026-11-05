@@ -1,0 +1,152 @@
+[
+  {
+    "file": "parquet-hadoop-1.18.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-hadoop/1.18.1/parquet-hadoop-1.18.1.jar",
+    "sha256": "efbf7b0374a14f075afbad53632fb6ed76d39239ce39d970f581f3512d00ee0b",
+    "size": 1655031
+  },
+  {
+    "file": "parquet-hadoop-1.18.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-hadoop/1.18.1/parquet-hadoop-1.18.1.pom",
+    "sha256": "e79c78407d75a1c212863d0d8231fd61b09ade4100644f584405489000e78ca5",
+    "size": 11422
+  },
+  {
+    "file": "parquet-hadoop-1.18.1-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-hadoop/1.18.1/parquet-hadoop-1.18.1-sources.jar",
+    "sha256": "b654080f6b3725d32deb944a20c5afa80bab9ce27f7b726942fdb0a82b1ea4c8",
+    "size": 352770
+  },
+  {
+    "file": "parquet-column-1.18.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-column/1.18.1/parquet-column-1.18.1.jar",
+    "sha256": "2bfc18fbf3fe8e971780a080e46f6d6cb3e69695ad3a746bd11d46ea8fd90171",
+    "size": 3265116
+  },
+  {
+    "file": "parquet-column-1.18.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-column/1.18.1/parquet-column-1.18.1.pom",
+    "sha256": "2d5bae3e241f65f0da5ed7686686c71cf3dc492b00faa713b03e6a31fcebe98f",
+    "size": 7895
+  },
+  {
+    "file": "parquet-column-1.18.1-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-column/1.18.1/parquet-column-1.18.1-sources.jar",
+    "sha256": "e1e2910d2033af0844c1241a0dfcd062ece77591902e1a163793d9fd069a541e",
+    "size": 388649
+  },
+  {
+    "file": "parquet-common-1.18.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-common/1.18.1/parquet-common-1.18.1.jar",
+    "sha256": "a8c710f2d0ddb4b1332e596cd91f74305b66ae1d7235c798a8b48ddbfb9d31d6",
+    "size": 131243
+  },
+  {
+    "file": "parquet-common-1.18.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-common/1.18.1/parquet-common-1.18.1.pom",
+    "sha256": "0430ba734e69d731cbec754186f93e1c29b4a43ad78cd99f29488fa5b3d85f2d",
+    "size": 4189
+  },
+  {
+    "file": "parquet-common-1.18.1-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-common/1.18.1/parquet-common-1.18.1-sources.jar",
+    "sha256": "25fc79cbb1414f81537cdfae1353623f9a972ca4dffa3c3837ac5ff9c5a69f35",
+    "size": 94700
+  },
+  {
+    "file": "parquet-encoding-1.18.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-encoding/1.18.1/parquet-encoding-1.18.1.jar",
+    "sha256": "a9414b00d8a4658933476aab8a7a64c51ad669fd7b752cbe5809bcd0e29e2c00",
+    "size": 835487
+  },
+  {
+    "file": "parquet-encoding-1.18.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-encoding/1.18.1/parquet-encoding-1.18.1.pom",
+    "sha256": "181b875aef4238879c9b609d197d9b30cf99cffb2ddeab7ed908b672c0ec2d41",
+    "size": 3817
+  },
+  {
+    "file": "parquet-encoding-1.18.1-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-encoding/1.18.1/parquet-encoding-1.18.1-sources.jar",
+    "sha256": "26a9e10b4a5a62feda2afa1e3a39387ccb406c3e7a2487d166a15343b810ea11",
+    "size": 839461
+  },
+  {
+    "file": "parquet-format-structures-1.18.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-format-structures/1.18.1/parquet-format-structures-1.18.1.jar",
+    "sha256": "6613a8fd105c4f7f1578ff1f39476c30fdf485b0ac714c30444a9f70045892bb",
+    "size": 866270
+  },
+  {
+    "file": "parquet-format-structures-1.18.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-format-structures/1.18.1/parquet-format-structures-1.18.1.pom",
+    "sha256": "89f7a0a21faef9f65cd1a025f57f145527834578b9804f8b2351c224ec77dffc",
+    "size": 8921
+  },
+  {
+    "file": "parquet-format-structures-1.18.1-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-format-structures/1.18.1/parquet-format-structures-1.18.1-sources.jar",
+    "sha256": "e3fa98021ee040452c2ba9a4715b5e5a9e36ca6447906b590ca114345f2df99f",
+    "size": 288374
+  },
+  {
+    "file": "parquet-variant-1.18.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-variant/1.18.1/parquet-variant-1.18.1.jar",
+    "sha256": "2b0554970e8a1cf922427fd4337e8256f5b01edf87ddc60f956834cfba5ff6e6",
+    "size": 92955
+  },
+  {
+    "file": "parquet-variant-1.18.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-variant/1.18.1/parquet-variant-1.18.1.pom",
+    "sha256": "0adc64de9cd328702d07d07dfc4c94a14bdc8617a7a05266b330a26d7361d107",
+    "size": 5068
+  },
+  {
+    "file": "parquet-variant-1.18.1-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-variant/1.18.1/parquet-variant-1.18.1-sources.jar",
+    "sha256": "69cb37a025814a662b703937546eb6d0dca0e5dc231c0aba9d59d95ab7505e87",
+    "size": 42066
+  },
+  {
+    "file": "slf4j-api-2.0.19.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.19/slf4j-api-2.0.19.jar",
+    "sha256": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "size": 70246
+  },
+  {
+    "file": "hadoop-common-3.5.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0.jar",
+    "sha256": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+    "size": 4862416
+  },
+  {
+    "file": "hadoop-common-3.5.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0.pom",
+    "sha256": "04c584c89d7dc9ff50d659a3b75e3f811fbe43533258d6dde738cdb94bfcd759",
+    "size": 47776
+  },
+  {
+    "file": "hadoop-mapreduce-client-core-3.5.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/3.5.0/hadoop-mapreduce-client-core-3.5.0.jar",
+    "sha256": "59cd4a0ae2c7d504336883ab4b1e6b4307eaf82105f05f8c527ec43a792aeaed",
+    "size": 1856106
+  },
+  {
+    "file": "hadoop-mapreduce-client-core-3.5.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/3.5.0/hadoop-mapreduce-client-core-3.5.0.pom",
+    "sha256": "e447243b3c38741f7f34b8bbf4e1be2c9ce1ac513b17114c602d0d4f2155bc6a",
+    "size": 6929
+  },
+  {
+    "file": "jts-core-1.20.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/locationtech/jts/jts-core/1.20.0/jts-core-1.20.0.jar",
+    "sha256": "6a783d8f9dba3d3cf7265435f134402f63c05838aa6cbcc4297ad3a5b2842baf",
+    "size": 1239978
+  },
+  {
+    "file": "jts-core-1.20.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/locationtech/jts/jts-core/1.20.0/jts-core-1.20.0.pom",
+    "sha256": "aaab506d3942149d5466c7ea3ea154cc3ea50c06bb39a533799dd9c7ff8b2146",
+    "size": 2457
+  }
+]
