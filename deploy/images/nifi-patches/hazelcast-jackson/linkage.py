@@ -6,7 +6,6 @@ Missing symbols remain an integration block even with no direct reference.
 import argparse
 import io
 from pathlib import Path
-import struct
 from prepare import entries, save, sha
 
 def parse(b):
@@ -46,7 +45,7 @@ def parse(b):
     members=set()
     for kind in ('field','method'):
         for _ in range(u(2)):
-            access=u(2);n=cp[u(2)];d=cp[u(2)];members.add((name,n,d,kind));attrs()
+            u(2);n=cp[u(2)];d=cp[u(2)];members.add((name,n,d,kind));attrs()
     return name,members,refs
 
 def analyze(original,candidate):

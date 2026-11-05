@@ -2,7 +2,7 @@
 import argparse
 from pathlib import Path
 from bounded import run, FLAGS, JDK, digest
-from prepare import checked, save, HERE, OLD
+from prepare import checked, save, HERE
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--candidate',type=Path,required=True);p.add_argument('--output',type=Path,required=True)

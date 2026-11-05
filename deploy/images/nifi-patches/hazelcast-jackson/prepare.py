@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Offline wrapper-specific experimental reconstruction; never runtime approval."""
 import argparse
-import copy
 import hashlib
 import io
 import json
