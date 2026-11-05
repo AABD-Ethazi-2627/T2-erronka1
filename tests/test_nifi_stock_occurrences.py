@@ -83,6 +83,18 @@ def test_complete_synthetic_mapping_can_reach_all_readiness_guards(model):
     assert next(t for t in result['targets'] if t['family']=='guava')['guava_failureaccess_verified']
 
 
+def test_wrapper_hashes_and_occurrences_require_exact_candidates(model,tmp_path):
+    source,component,rows,_,_=model
+    replacement=tmp_path/'wrapper.jar';replacement.write_bytes(b'unreviewed wrapper')
+    for family in ('hazelcast','parquet'):
+        with pytest.raises(ValueError,match='wrapper candidate hash'):
+            m.prepare(source,{'occurrences':rows,'inventory_sha256':m.writer.inventory_hash(rows)},component,
+                      wrapper_candidates={family:replacement})
+    with pytest.raises(ValueError,match='unknown wrapper family'):
+        m.prepare(source,{'occurrences':rows,'inventory_sha256':m.writer.inventory_hash(rows)},component,
+                  wrapper_candidates={'unsupported':replacement})
+
+
 def test_source_lock_and_complete_source_guards(model,monkeypatch):
     source,component,rows,lock,_=model
     lock['archives'][0]['sha256']='0'*64

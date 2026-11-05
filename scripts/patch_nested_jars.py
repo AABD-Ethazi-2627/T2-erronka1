@@ -436,6 +436,7 @@ def verify_rewrite(original, output, targets, depth=0):
             raise ValueError('post-write leaf verification failed')
         return
     with zipfile.ZipFile(original) as src, zipfile.ZipFile(output) as dst:
+        validate_layout(src,src.infolist(),for_rewrite=True)
         left, right = src.infolist(), dst.infolist()
         if src.comment != dst.comment or [i.filename for i in left] != [i.filename for i in right]:
             raise ValueError('post-write sibling names/order/comment mismatch')

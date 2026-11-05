@@ -23,7 +23,13 @@ PAIRS = {
  'snappy': ('snappy-java-1.1.10.8.jar', 'snappy-java-1.1.10.9.jar', b'org/xerial/snappy/'),
 }
 HADOOP_HASH = 'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6'
-FAMILIES = set(PAIRS) | {'hadoop'}
+WRAPPERS = {
+    'hazelcast': ('241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33',
+                  '3c8e5d805a65ce91e2efe586f50fa1b9c482665f4d96c9e2384f066ea26cae85'),
+    'parquet': ('1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7',
+                'bad77fac2682d5441ce19e498056ddaf948e89739d933d302b5cf66c868344cf'),
+}
+FAMILIES = set(PAIRS) | {'hadoop'} | set(WRAPPERS)
 
 
 def load(path):
@@ -77,7 +83,7 @@ def closure(outer, nars):
     return result
 
 
-def prepare(source, inv, component, hadoop_candidate=None):
+def prepare(source, inv, component, hadoop_candidate=None, *, wrapper_candidates=None):
     source, component = Path(source), Path(component)
     outer_bytes.cache_clear()
     rows = writer.inventory(source)
@@ -129,6 +135,18 @@ def prepare(source, inv, component, hadoop_candidate=None):
         selected[HADOOP_HASH] = ('hadoop',str(replacement))
         replacement_paths['hadoop'] = str(replacement)
         replacement_hashes['hadoop'] = expected
+    for family,path in (wrapper_candidates or {}).items():
+        if family not in WRAPPERS:
+            raise ValueError('unknown wrapper family')
+        old,expected = WRAPPERS[family]
+        replacement = writer.regular(path)
+        if writer.digest(replacement) != expected:
+            raise ValueError('unreviewed wrapper candidate hash')
+        if sum(r['sha256']==old for r in rows) != 1:
+            raise ValueError('missing/ambiguous exact wrapper occurrence')
+        selected[old] = (family,str(replacement))
+        replacement_paths[family] = str(replacement)
+        replacement_hashes[family] = expected
     if set(selected) & writer.BLOCKED_INPUTS:
         raise ValueError('blocked library')
     nars = {p: r for p, r in roots.items() if r['manifest'].get('Nar-Id')}
@@ -181,6 +199,8 @@ def prepare(source, inv, component, hadoop_candidate=None):
             'guava_failureaccess_verified': bool(guava_support) if family == 'guava' else None,
             'visible_dependencies': [{k: x[k] for k in ('outer', 'members', 'sha256', 'maven')} for x in visible],
             'consumers': consumers,
+            'consumer_scope': ('library prefix-reference scan' if family in PAIRS else
+                               'separate consumer evidence required; empty list does not mean no consumers'),
             'eligibility': 'exact-stock-bytes-only; consumer/runtime review pending',
             'blockers': (['Hadoop SnappyCompressor rejects normal input on 1.1.10.9; complete-hash replacement cannot omit this occurrence'] if family == 'snappy' and snappy_hadoop and hadoop_candidate is None else []) + ['NiFi classloader dispatch and full consumer behavior unverified', 'parent QA/review approval absent'],
         })
@@ -198,9 +218,12 @@ def main():
     p.add_argument('component', type=Path)
     p.add_argument('--hadoop-candidate', type=Path,
                    help='exact pinned consumer; enables only the complete atomic Hadoop/Snappy candidate group')
+    p.add_argument('--hazelcast-candidate',type=Path)
+    p.add_argument('--parquet-candidate',type=Path)
     # Recompute the full bounded inventory. No caller-provided completeness claim.
     a = p.parse_args()
-    print(json.dumps(prepare(a.source, None, a.component, a.hadoop_candidate), indent=2, sort_keys=True))
+    wrappers={family:path for family,path in [('hazelcast',a.hazelcast_candidate),('parquet',a.parquet_candidate)] if path is not None}
+    print(json.dumps(prepare(a.source, None, a.component, a.hadoop_candidate,wrapper_candidates=wrappers), indent=2, sort_keys=True))
 
 
 if __name__ == '__main__':

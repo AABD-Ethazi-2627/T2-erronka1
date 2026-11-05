@@ -61,4 +61,22 @@ COPY scripts/expose_nested_jars.py /tmp/expose_nested_jars.py
 RUN python3 /tmp/expose_nested_jars.py /opt/nifi /usr/share/cnc-guard/nested-jars
 USER 1000
 
+# Opt-in, locally prepared candidate only. Supply the verified context with
+# --build-context nifi_candidate_overlay=/ABS/CONTEXT and explicitly select one
+# of these targets. The default final stage below retains the serving image.
+FROM runtime AS candidate-runtime
+USER root
+COPY scripts/patch_nested_jars.py scripts/nifi_candidate_context.py /tmp/cnc-candidate-tools/
+COPY --from=nifi_candidate_overlay / /tmp/cnc-nifi-candidate/
+RUN --network=none python3 /tmp/cnc-candidate-tools/nifi_candidate_context.py install \
+    --source / --context /tmp/cnc-nifi-candidate \
+    && rm -rf /tmp/cnc-candidate-tools /tmp/cnc-nifi-candidate
+USER 1000
+
+FROM candidate-runtime AS candidate-archive-audit
+USER root
+COPY scripts/expose_nested_jars.py /tmp/expose_nested_jars.py
+RUN python3 /tmp/expose_nested_jars.py /opt/nifi /usr/share/cnc-guard/nested-jars
+USER 1000
+
 FROM runtime AS final
