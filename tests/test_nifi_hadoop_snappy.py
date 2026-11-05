@@ -6,6 +6,7 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parents[1] / 'deploy/images/nifi-patches/hadoop-snappy'
 spec = importlib.util.spec_from_file_location('hadoop_snappy_prepare', HERE / 'prepare.py')
@@ -72,6 +73,54 @@ class HadoopSnappyGuards(unittest.TestCase):
     def test_source_transform_rejects_missing_or_wrong_preimage(self):
         for text in ['', 'int size = Snappy.compress();', 'compressedDirectBuf.clear();']:
             with self.assertRaisesRegex(ValueError,'preimage'): p.patch_source(text)
+
+    def test_transformed_compressor_guards_capacity_initial_state_and_error_state(self):
+        # Minimal exact upstream statements; the compiled fault probe separately
+        # executes the real pinned Hadoop source with a non-native Snappy stub.
+        original=('compressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);\n'
+                  '    compressedDirectBuf.position(directBufferSize);\n'
+                  '      int size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,\n'
+                  '              (ByteBuffer) compressedDirectBuf);')
+        fixed=p.patch_source(original)
+        self.assertIn('Snappy.maxCompressedLength(directBufferSize)',fixed)
+        self.assertEqual(fixed.count('compressedDirectBuf.limit(0);'),2)
+        self.assertLess(fixed.index('compressedDirectBuf.clear();'),fixed.index('try {'))
+        self.assertIn('catch (IOException | RuntimeException | Error failure)',fixed)
+        self.assertLess(fixed.rindex('compressedDirectBuf.limit(0);'),fixed.index('throw failure;'))
+        with self.assertRaisesRegex(ValueError,'preimage'):p.patch_source(original,'unknown')
+        with self.assertRaisesRegex(ValueError,'preimage'):p.patch_source(fixed)
+
+    def test_jdk_pins_cover_every_executed_tool_and_vm(self):
+        pins=json.loads((HERE/'jdk21-pins.json').read_text())
+        self.assertEqual(set(pins),{'bin/java','bin/javac','bin/javap','release','lib/modules','lib/server/libjvm.so'})
+        for value in pins.values():self.assertRegex(value,r'^[0-9a-f]{64}$')
+
+    def test_candidate_and_provenance_are_both_required_to_match_pins(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);data=jar([(p.CLASS,b'fixed')])
+            provenance={'patched_source_sha256':'1'*64,'replacement_class_sha256':p.sha(b'fixed'),
+                        'input_sha256':'2'*64,'snappy_unchanged_sha256':'3'*64}
+            pins={'candidate_sha256':p.sha(data),'patched_source_sha256':'1'*64,
+                  'replacement_class_sha256':p.sha(b'fixed'),'original_sha256':'2'*64,
+                  'snappy_sha256':'3'*64}
+            (root/'candidate-pin.json').write_text(json.dumps(pins))
+            with patch.object(p,'HERE',root):
+                p.verify_candidate(data,provenance)
+                with self.assertRaisesRegex(ValueError,'candidate hash'):p.verify_candidate(b'drift',provenance)
+                for field in provenance:
+                    with self.subTest(field=field),self.assertRaisesRegex(ValueError,'pin mismatch'):
+                        p.verify_candidate(data,provenance|{field:'0'*64})
+
+    def test_atomic_writer_policy_uses_the_exact_pinned_candidate_and_nine_libraries(self):
+        root=Path(__file__).resolve().parents[1]
+        spec=importlib.util.spec_from_file_location('atomic_policy_writer',root/'scripts/patch_nested_jars.py')
+        writer=importlib.util.module_from_spec(spec);spec.loader.exec_module(writer)
+        pins=json.loads((HERE/'candidate-pin.json').read_text())
+        self.assertEqual(writer.ATOMIC_HADOOP_SNAPPY[p.HADOOP],
+                         {'replacement_sha256':pins['candidate_sha256'],'count':1})
+        old='50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc'
+        self.assertEqual(writer.ATOMIC_HADOOP_SNAPPY[old],
+                         {'replacement_sha256':p.SNAPPY,'count':9})
 
     def test_wrong_preimage_hash_rejected(self):
         with tempfile.TemporaryDirectory() as d:

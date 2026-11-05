@@ -24,6 +24,18 @@ BLOCKED_INPUTS = {
     '396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1',
     'c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6',
 }
+# Assembly eligibility only: the corrected consumer and every matching Snappy
+# occurrence are inseparable. This is not runtime or human approval.
+ATOMIC_HADOOP_SNAPPY = {
+    'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6': {
+        'replacement_sha256': 'e2ff7c642f17743f0816a941d93714a0ae413203112e6a7d2e5f5bcf876329d2',
+        'count': 1,
+    },
+    '50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc': {
+        'replacement_sha256': '35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d',
+        'count': 9,
+    },
+}
 DEFAULTS = {'max_depth': 8, 'max_entries': 1000000, 'max_bytes': 32 * 1024**3,
                 'max_archive': 256 * 1024**2}
 
@@ -139,6 +151,32 @@ def checked_entries(z, budget):
 
 def validate_layout(z, entries):
     """Refuse hidden payloads and ambiguous local/central ZIP representations."""
+    length = z.fp.seek(0, os.SEEK_END)
+    eocd = length - 22 - len(z.comment)
+    if eocd < 0:
+        raise ValueError('invalid ZIP EOCD boundary')
+    z.fp.seek(eocd)
+    footer = z.fp.read(22)
+    if (len(footer) != 22 or footer[:4] != b'PK\x05\x06'
+            or struct.unpack_from('<H',footer,20)[0] != len(z.comment)):
+        raise ValueError('ZIP EOCD must end at the file boundary')
+
+    def extra_fields(data):
+        result = {}
+        offset = 0
+        while offset < len(data):
+            if offset + 4 > len(data):
+                raise ValueError('truncated ZIP extra field')
+            kind, size = struct.unpack_from('<HH',data,offset)
+            offset += 4
+            if offset + size > len(data) or kind in result:
+                raise ValueError('truncated/duplicate ZIP extra field')
+            result[kind] = data[offset:offset+size]
+            offset += size
+        if 0x7075 in result:
+            raise ValueError('alternative Unicode ZIP path is unsupported')
+        return result
+
     ordered = sorted(entries, key=lambda i: i.header_offset)
     if (ordered and ordered[0].header_offset != 0) or (not ordered and z.start_dir != 0):
         raise ValueError('ZIP preamble is unsupported')
@@ -159,19 +197,12 @@ def validate_layout(z, entries):
             raise ValueError('local/central ZIP name mismatch')
         if not flags & 0x800 and not info.filename.isascii():
             raise ValueError('non-ASCII ZIP name without UTF-8 flag')
+        local_extra, central_extra = extra_fields(extra), extra_fields(info.extra)
+        if {k:v for k,v in local_extra.items() if k != 1} != {k:v for k,v in central_extra.items() if k != 1}:
+            raise ValueError('local/central ZIP extra mismatch')
         # ZIP64 values are ordered only for sentinel fields that are present.
         if size == 0xffffffff or compressed == 0xffffffff:
-            offset = 0
-            values = b''
-            while offset + 4 <= len(extra):
-                kind, length = struct.unpack_from('<HH', extra, offset)
-                offset += 4
-                if offset + length > len(extra):
-                    raise ValueError('truncated ZIP64 extra')
-                if kind == 1:
-                    values = extra[offset:offset + length]
-                    break
-                offset += length
+            values = local_extra.get(1,b'')
             for field in ('size', 'compressed'):
                 if (size if field == 'size' else compressed) == 0xffffffff:
                     if len(values) < 8:
@@ -180,9 +211,15 @@ def validate_layout(z, entries):
                     values = values[8:]
                     if field == 'size': size = value
                     else: compressed = value
+            if values:
+                raise ValueError('unconsumed local ZIP64 extra payload')
+        elif local_extra.get(1):
+            raise ValueError('unused local ZIP64 extra payload')
         end = info.header_offset + 30 + namesize + extrasize + info.compress_size
         gap = boundary - end
         if flags & 8:
+            if crc not in (0,info.CRC) or compressed not in (0,info.compress_size) or size not in (0,info.file_size):
+                raise ValueError('invalid local ZIP descriptor placeholder')
             if gap not in (12, 16, 20, 24):
                 raise ValueError('invalid ZIP data descriptor boundary')
             z.fp.seek(end)
@@ -198,10 +235,29 @@ def validate_layout(z, entries):
                 raise ValueError('local/central ZIP descriptor mismatch')
         elif gap != 0 or (crc, compressed, size) != (info.CRC, info.compress_size, info.file_size):
             raise ValueError('local/central ZIP size/CRC boundary mismatch')
+        payload_offset = info.header_offset + 30 + namesize + extrasize
+        if method == zipfile.ZIP_STORED and info.file_size != info.compress_size:
+            raise ValueError('stored ZIP entry has hidden compressed payload')
+        if method == zipfile.ZIP_DEFLATED:
+            z.fp.seek(payload_offset)
+            decoder = zlib.decompressobj(-15)
+            remaining, size_read = info.compress_size, 0
+            while remaining:
+                data = z.fp.read(min(CHUNK,remaining))
+                if not data:
+                    raise ValueError('truncated ZIP deflate stream')
+                remaining -= len(data)
+                while data:
+                    size_read += len(decoder.decompress(data,CHUNK))
+                    if size_read > info.file_size or decoder.unused_data:
+                        raise ValueError('hidden ZIP deflate payload or size mismatch')
+                    data = decoder.unconsumed_tail
+            if not decoder.eof or decoder.unused_data or decoder.unconsumed_tail or size_read != info.file_size:
+                raise ValueError('incomplete ZIP deflate stream')
         if info.is_dir():
             if info.file_size or info.CRC or info.compress_size > 16:
                 raise ValueError('directory has ZIP payload')
-            z.fp.seek(info.header_offset + 30 + namesize + extrasize)
+            z.fp.seek(payload_offset)
             payload = z.fp.read(info.compress_size)
             if method == zipfile.ZIP_STORED:
                 if payload: raise ValueError('directory has ZIP payload')
@@ -299,6 +355,30 @@ def inventory(source, **limits):
 def exact_keys(obj, keys):
     if not isinstance(obj, dict) or set(obj) != set(keys.split()):
         raise ValueError(f'unknown/missing plan fields; expected {keys}')
+
+
+def validate_atomic_targets(rows, targets):
+    """Reject partial, drifted or enclosing replacements of the coupled group."""
+    coupled = [r for r in rows if r['sha256'] in ATOMIC_HADOOP_SNAPPY]
+    selected = {(t['outer'], tuple(t['members'])): t for t in targets}
+    for r in coupled:
+        for outer, members in selected:
+            if (outer == r['outer'] and len(members) < len(r['members'])
+                    and tuple(r['members'][:len(members)]) == members):
+                raise ValueError('atomic Hadoop/Snappy requires exact member targets, not an enclosing archive')
+    touched = any(t['chain_sha256'][-1] in ATOMIC_HADOOP_SNAPPY for t in targets)
+    if not touched:
+        return
+    for old, rule in ATOMIC_HADOOP_SNAPPY.items():
+        occurrences = [r for r in coupled if r['sha256'] == old]
+        if len(occurrences) != rule['count']:
+            raise ValueError('atomic Hadoop/Snappy source occurrence count mismatch')
+        for r in occurrences:
+            t = selected.get((r['outer'], tuple(r['members'])))
+            if (t is None or t['chain_sha256'] != r['chain_sha256']
+                    or t['replacement_sha256'] != rule['replacement_sha256']
+                    or t['expected_occurrences'] != rule['count']):
+                raise ValueError('atomic Hadoop/Snappy group is incomplete or has an unreviewed hash')
 
 
 def rewrite(path, output, targets, depth=0):
@@ -435,7 +515,15 @@ def patch(source, output, plan, apply=False, **limits):
             selected[key] = r
             checked.append(t | {'replacement': str(dest)})
         selected_hashes = {r['sha256'] for r in selected.values()}
-        if any(r['sha256'] in BLOCKED_INPUTS | selected_hashes for r in inventory(replacements, **limits)):
+        validate_atomic_targets(inv, checked)
+        replacement_rows = inventory(replacements, **limits)
+        new_atomic = {rule['replacement_sha256']: old for old, rule in ATOMIC_HADOOP_SNAPPY.items()}
+        for r in replacement_rows:
+            if r['sha256'] in new_atomic:
+                target = checked[int(Path(r['outer']).stem)]
+                if r['members'] or target['chain_sha256'][-1] != new_atomic[r['sha256']]:
+                    raise ValueError('atomic Hadoop/Snappy replacement introduced outside its exact target')
+        if any(r['sha256'] in BLOCKED_INPUTS | selected_hashes for r in replacement_rows):
             raise ValueError('replacement contains blocked or selected old archive')
         for key, r in bykey.items():
             if r['sha256'] in selected_hashes and key not in selected:

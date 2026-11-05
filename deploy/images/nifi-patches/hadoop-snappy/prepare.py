@@ -19,6 +19,10 @@ SOURCE = CLASS.removesuffix('.class') + '.java'
 PROVENANCE = 'META-INF/cnc-guard/hadoop-snappy-local-patch.json'
 HADOOP = 'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6'
 SNAPPY = '35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d'
+VM_FLAGS = ['-Xmx256m', '-XX:MaxMetaspaceSize=96m', '-XX:ActiveProcessorCount=1',
+            '-XX:ReservedCodeCacheSize=48m', '-XX:MaxDirectMemorySize=32m',
+            '-XX:-CreateCoredumpOnCrash']
+HEAVY_LOCK = '/home/tears/.cache/cnc-integration-audit-20261103/candidate-heavy.lock'
 
 
 def sha(b):
@@ -63,13 +67,25 @@ def checked(z):
 def patch_source(text, mode='fixed'):
     a = 'compressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);\n    compressedDirectBuf.position(directBufferSize);'
     b = 'compressedDirectBuf = ByteBuffer.allocateDirect(\n        Snappy.maxCompressedLength(directBufferSize));\n    compressedDirectBuf.limit(0);'
-    c = '      int size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,'
+    c = ('      int size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,\n'
+         '              (ByteBuffer) compressedDirectBuf);')
     d = '      compressedDirectBuf.clear(); // full writable worst-case output capacity\n' + c
-    if text.count(a) != 1 or text.count(c) != 1:
+    guarded = ('      compressedDirectBuf.clear(); // full writable worst-case output capacity\n'
+               '      int size;\n'
+               '      try {\n'
+               '        size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,\n'
+               '            (ByteBuffer) compressedDirectBuf);\n'
+               '      } catch (IOException | RuntimeException | Error failure) {\n'
+               '        compressedDirectBuf.limit(0); // never expose stale output after failure\n'
+               '        throw failure;\n'
+               '      }')
+    if mode not in ('fixed', 'capacity-only', 'limit-only') or text.count(a) != 1 or text.count(c) != 1:
         raise ValueError('unexpected source preimage')
     if mode in ('fixed', 'capacity-only'):
         text = text.replace(a, b)
-    if mode in ('fixed', 'limit-only'):
+    if mode == 'fixed':
+        text = text.replace(c, guarded)
+    elif mode == 'limit-only':
         text = text.replace(c, d)
     return text
 
@@ -112,6 +128,22 @@ def publish(path, data):
     # Exclusive creation: failed/repeated publication never overwrites an artifact.
     with Path(path).open('xb') as f:
         f.write(data)
+
+
+def verify_candidate(data, provenance):
+    expected = json.loads(regular(HERE / 'candidate-pin.json'))
+    if set(expected) != {'candidate_sha256','patched_source_sha256','replacement_class_sha256',
+                         'original_sha256','snappy_sha256'}:
+        raise ValueError('incomplete candidate pin')
+    if sha(data) != expected['candidate_sha256']:
+        raise ValueError('candidate hash mismatch')
+    with zipfile.ZipFile(io.BytesIO(data)) as z:
+        class_hash = sha(z.read(CLASS))
+    actual = {'candidate_sha256':sha(data), 'patched_source_sha256':provenance.get('patched_source_sha256'),
+              'replacement_class_sha256':class_hash, 'original_sha256':provenance.get('input_sha256'),
+              'snappy_sha256':provenance.get('snappy_unchanged_sha256')}
+    if actual != expected or provenance.get('replacement_class_sha256') != class_hash:
+        raise ValueError('candidate provenance/class pin mismatch')
 
 
 def external_fresh(output, forbidden):
@@ -165,7 +197,7 @@ def run(source, component, acquired, output):
                 n = info.filename
                 if n.endswith('/SnappyCompressor.class') or n == 'SnappyCompressor.class':
                     occurrences.append({'chain': chain, 'chain_sha256': hashes, 'class': n, 'class_sha256': sha(z.read(n)), 'signed_ancestor': is_signed})
-                if n.lower().endswith(('.jar', '.nar', '.zip')) and not info.is_dir():
+                if n.lower().endswith(('.jar', '.nar', '.war', '.zip')) and not info.is_dir():
                     if info.file_size > 256 * 1024 * 1024:
                         raise ValueError('archive size')
                     b = z.read(info)
@@ -195,25 +227,30 @@ def run(source, component, acquired, output):
     record(old, next(x['sha256'] for x in library_pins if x['file'] == old.name))
     slf = source / 'opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar'
     java_home = Path('/usr/lib/jvm/java-21-openjdk')
-    for n in ('bin/java', 'bin/javac', 'bin/javap', 'release', 'lib/modules', 'lib/server/libjvm.so'):
-        record(java_home / n)
+    jdk_pins = json.loads(record(HERE / 'jdk21-pins.json'))
+    if set(jdk_pins) != {'bin/java', 'bin/javac', 'bin/javap', 'release', 'lib/modules', 'lib/server/libjvm.so'}:
+        raise ValueError('incomplete pinned JDK')
+    for n, expected in jdk_pins.items():
+        record(java_home / n, expected)
     env = {'PATH':str(java_home / 'bin') + ':/usr/bin:/bin', 'HOME':str(output), 'LANG':'C.UTF-8', 'LC_ALL':'C.UTF-8', 'TMPDIR':str(output)}
     commands = []
     def execute(tool, args):
         tmp = tempfile.mkdtemp(prefix='tool-tmp-', dir=output)
         args = [('-D' if tool == 'java' else '-J-D') + 'java.io.tmpdir=' + tmp] + args
         if tool == 'java' and '-Xmx256m' not in args:
-            args = ['-Xmx256m', '-XX:MaxMetaspaceSize=96m', '-XX:ActiveProcessorCount=1'] + args
+            args = VM_FLAGS + args
         if tool == 'javap':
-            args = ['-J-Xmx256m', '-J-XX:MaxMetaspaceSize=96m', '-J-XX:ActiveProcessorCount=1'] + args
-        p = subprocess.run([str(java_home / 'bin' / tool)] + args, env=env, preexec_fn=limits, timeout=40, capture_output=True, text=True, check=False)
+            args = ['-J'+flag for flag in VM_FLAGS] + args
+        command = ['flock', '-w', '30', HEAVY_LOCK, 'timeout', '-k', '2s', '40s',
+                   str(java_home / 'bin' / tool)] + args
+        p = subprocess.run(command, env=env, preexec_fn=limits, timeout=75, capture_output=True, text=True, check=False)
         commands.append({'argv':p.args,'rc':p.returncode,'stdout':p.stdout,'stderr':p.stderr})
         (output / 'execution.json').write_text(json.dumps(commands, indent=2))
         if p.returncode:
             raise ValueError('command failed; see execution.json')
         return p.stdout
     execute('java', ['-version'])
-    common = ['-Xmx256m','-XX:MaxMetaspaceSize=96m','-XX:ActiveProcessorCount=1']
+    common = VM_FLAGS
     cp = os.pathsep.join(map(str, (output / 'original.jar', snappy, slf)))
     with zipfile.ZipFile(acquired / 'hadoop-common-3.5.0-sources.jar') as z:
         text = z.read(SOURCE).decode()
@@ -237,7 +274,8 @@ def run(source, component, acquired, output):
         raise ValueError('official source does not reproduce exact symbolic instruction disassembly')
     prov = {'kind':'CNC Guard local source correction, NOT an upstream release','upstream_version':'3.5.0','input_sha256':HADOOP,'source_jar_sha256':next(x['sha256'] for x in pins if x['file'].endswith('-sources.jar')),'patched_source_sha256':sha(regular(output / 'fixed/SnappyCompressor.java')),'changed_entry':CLASS,'original_class_sha256':sha(original_class),'replacement_class_sha256':sha(regular(output / 'fixed' / CLASS)),'snappy_unchanged_sha256':SNAPPY,'approval':False}
     candidate = rebuild(original, regular(output / 'fixed' / CLASS), prov)
-    publish(output / 'hadoop-common-3.5.0-cnc-snappy-buffer-v1.jar', candidate)
+    verify_candidate(candidate, prov)
+    publish(output / 'hadoop-common-3.5.0-cnc-snappy-buffer-v2.jar', candidate)
     # Recheck every content and preserved ZipInfo attribute (CRC/size/offset are derived).
     attrs = ('date_time','compress_type','comment','extra','create_system','create_version','extract_version','flag_bits','volume','internal_attr','external_attr')
     with zipfile.ZipFile(io.BytesIO(original)) as a, zipfile.ZipFile(io.BytesIO(candidate)) as b:
@@ -258,7 +296,18 @@ def run(source, component, acquired, output):
     for mode in ('capacity-only','limit-only'):
         java([output/mode,output/'original.jar',snappy,slf], 'CompatibilityProbe','reject')
     for lib in (snappy,old):
-        java([output/'hadoop-common-3.5.0-cnc-snappy-buffer-v1.jar',lib,slf], 'CompatibilityProbe','pass', 'guard' if lib == snappy else 'control')
+        java([output/'hadoop-common-3.5.0-cnc-snappy-buffer-v2.jar',lib,slf], 'CompatibilityProbe','pass', 'guard' if lib == snappy else 'control')
+    # Fault controls are pure Java: never load a native Snappy implementation.
+    stub = output / 'fault-stub'; stub.mkdir()
+    stub_source = stub / 'Snappy.java'
+    stub_source.write_bytes(regular(HERE / 'SnappyFaultStub.java.in'))
+    execute('javac', ['-J'+x for x in common] + ['--release','17','-proc:none',
+            '-d',str(stub),str(stub_source)])
+    execute('javac', ['-J'+x for x in common] + ['--release','17','-proc:none',
+            '-d',str(probes),'-cp',os.pathsep.join(map(str,[stub,output/'original.jar',slf])),
+            str(HERE/'FaultProbe.java')])
+    java([stub,output/'original.jar',slf], 'FaultProbe','original')
+    java([stub,output/'hadoop-common-3.5.0-cnc-snappy-buffer-v2.jar',slf], 'FaultProbe','fixed')
     for p,digest in inputs.items():
         if sha(regular(p)) != digest:
             raise ValueError('input drift during proof')

@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 import zipfile
+import zlib
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / 'scripts/patch_nested_jars.py'
@@ -25,6 +26,28 @@ def jar(entries):
 
 def sha(b):
     return hashlib.sha256(b).hexdigest()
+
+
+def layout_zip(*, local_extra=b'', central_extra=b'', tail=b'', descriptor=False,
+               zip64=False, false_placeholder=False, descriptor_signature=True):
+    name=b'ordinary';payload=b'normal bounded payload'
+    encoder=zlib.compressobj(wbits=-15)
+    compressed=encoder.compress(payload)+encoder.flush()+tail
+    crc=zlib.crc32(payload);flags=8 if descriptor else 0
+    size,csize=len(payload),len(compressed)
+    if zip64:local_extra=struct.pack('<HHQQ',1,16,size,csize)+local_extra
+    local_crc=0 if descriptor else crc
+    local_size=0xffffffff if zip64 else (0 if descriptor else size)
+    local_compressed=0xffffffff if zip64 else (0 if descriptor else csize)
+    if false_placeholder:local_size=2
+    header=struct.pack('<4s5H3I2H',b'PK\x03\x04',45 if zip64 else 20,flags,8,0,33,
+                       local_crc,local_compressed,local_size,len(name),len(local_extra))
+    local=header+name+local_extra+compressed
+    if descriptor:
+        local+=(b'PK\x07\x08' if descriptor_signature else b'')+struct.pack('<IQQ' if zip64 else '<III',crc,csize,size)
+    central=struct.pack('<4s6H3I5H2I',b'PK\x01\x02',3*256+20,45 if zip64 else 20,flags,8,0,33,
+                        crc,csize,size,len(name),len(central_extra),0,0,0,0o100644<<16,0)+name+central_extra
+    return local+central+struct.pack('<4s4H2IH',b'PK\x05\x06',0,0,1,1,len(central),len(local),0)
 
 class PatcherTests(unittest.TestCase):
     def setUp(self):
@@ -355,5 +378,82 @@ class PatcherTests(unittest.TestCase):
         with zipfile.ZipFile(self.src/'directory.jar','w',zipfile.ZIP_DEFLATED) as z:
             z.writestr('empty/',b'')
         self.assertTrue(self.inventory())
+
+    def test_eocd_and_deflate_trailing_payloads_are_rejected(self):
+        for data in (layout_zip()+b'hidden',layout_zip(tail=b'hidden')):
+            with self.subTest(length=len(data)):
+                (self.src/'bad.jar').write_bytes(data)
+                with self.assertRaisesRegex(ValueError,'EOCD|deflate'):self.inventory()
+
+    def test_local_extra_and_alternative_unicode_paths_are_rejected(self):
+        opaque=struct.pack('<HH',0xcafe,6)+b'hidden'
+        unicode=struct.pack('<HH',0x7075,13)+b'\x01'+struct.pack('<I',zlib.crc32(b'ordinary'))+b'evil.jar'
+        for data in (layout_zip(local_extra=opaque),layout_zip(local_extra=unicode,central_extra=unicode)):
+            (self.src/'bad.jar').write_bytes(data)
+            with self.assertRaisesRegex(ValueError,'ZIP extra|Unicode ZIP path'):self.inventory()
+
+    def test_descriptor_placeholders_and_both_zip64_size_branches(self):
+        for descriptor in (False,True):
+            for zip64 in (False,True):
+                for signature in (False,True):
+                    with self.subTest(descriptor=descriptor,zip64=zip64,signature=signature):
+                        (self.src/'descriptor.jar').write_bytes(layout_zip(descriptor=descriptor,zip64=zip64,descriptor_signature=signature))
+                        self.assertTrue(self.inventory())
+        (self.src/'descriptor.jar').write_bytes(layout_zip(descriptor=True,false_placeholder=True))
+        with self.assertRaisesRegex(ValueError,'descriptor placeholder'):self.inventory()
+
+    def test_local_flag_method_name_and_descriptor_signature_cannot_drift(self):
+        for mutation in ('flags','method','name','descriptor','gap'):
+            with self.subTest(mutation=mutation):
+                raw=bytearray(layout_zip(descriptor=True))
+                if mutation=='flags':struct.pack_into('<H',raw,6,0)
+                elif mutation=='method':struct.pack_into('<H',raw,8,0)
+                elif mutation=='name':raw[30]=ord('x')
+                elif mutation=='descriptor':raw[raw.index(b'PK\x07\x08')]=0
+                elif mutation=='gap':raw.insert(raw.index(b'PK\x01\x02'),0)
+                (self.src/'bad.jar').write_bytes(raw)
+                with self.assertRaises(ValueError):self.inventory()
+
+    def test_atomic_group_requires_exact_hashes_all_members_and_no_ancestor_shortcut(self):
+        from unittest.mock import patch
+        inv=[{'outer':'a.nar','members':['h.jar'],'chain_sha256':['outer','old-h'],'sha256':'old-h'},
+             {'outer':'a.nar','members':['s.jar'],'chain_sha256':['outer','old-s'],'sha256':'old-s'},
+             {'outer':'b.nar','members':['s.jar'],'chain_sha256':['other','old-s'],'sha256':'old-s'}]
+        policy={'old-h':{'replacement_sha256':'new-h','count':1},'old-s':{'replacement_sha256':'new-s','count':2}}
+        targets=[dict(outer=r['outer'],members=r['members'],chain_sha256=r['chain_sha256'],
+                      replacement_sha256=policy[r['sha256']]['replacement_sha256'],expected_occurrences=policy[r['sha256']]['count']) for r in inv]
+        with patch.object(self.p,'ATOMIC_HADOOP_SNAPPY',policy):
+            self.p.validate_atomic_targets(inv,targets)
+            for mutation in ('no-consumer','no-library','wrong-library','wrong-consumer','missing-source','ancestor'):
+                changed=copy.deepcopy(targets);rows=copy.deepcopy(inv)
+                if mutation=='no-consumer':changed.pop(0)
+                elif mutation=='no-library':changed.pop()
+                elif mutation=='wrong-library':changed[1]['replacement_sha256']='other'
+                elif mutation=='wrong-consumer':changed[0]['replacement_sha256']='other'
+                elif mutation=='missing-source':rows.pop()
+                else:changed=[dict(changed[0],members=[],chain_sha256=['outer'])]
+                with self.subTest(mutation=mutation),self.assertRaisesRegex(ValueError,'atomic Hadoop/Snappy'):
+                    self.p.validate_atomic_targets(rows,changed)
+
+    def test_writer_enforces_coupling_before_any_publication(self):
+        from unittest.mock import patch
+        consumer=jar([('Consumer.class',b'old consumer')])
+        fixed=jar([('Consumer.class',b'fixed consumer')])
+        (self.src/'consumer.jar').write_bytes(consumer)
+        replacement=self.root/'fixed-consumer.jar';replacement.write_bytes(fixed)
+        policy={sha(self.old):{'replacement_sha256':sha(self.new),'count':4},
+                sha(consumer):{'replacement_sha256':sha(fixed),'count':1}}
+        with patch.object(self.p,'ATOMIC_HADOOP_SNAPPY',policy):
+            plan=self.plan()
+            with self.assertRaisesRegex(ValueError,'atomic Hadoop/Snappy'):
+                self.p.patch(self.src,self.root/'out',plan,apply=True)
+            self.assertFalse((self.root/'out').exists())
+            plan['targets'].append({'outer':'consumer.jar','members':[],
+                'chain_sha256':[sha(consumer)],'replacement':str(replacement),
+                'replacement_sha256':sha(fixed),'expected_occurrences':1,
+                'status':'approved-exact-occurrence'})
+            self.p.patch(self.src,self.root/'out',plan,apply=True)
+            self.assertEqual((self.root/'out/consumer.jar').read_bytes(),fixed)
+            self.assertEqual((self.src/'consumer.jar').read_bytes(),consumer)
 
 if __name__ == '__main__': unittest.main()

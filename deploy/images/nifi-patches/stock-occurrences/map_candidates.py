@@ -22,6 +22,8 @@ PAIRS = {
  'lz4': ('lz4-java-1.11.2.jar', 'lz4-java-1.11.4.jar', b'net/jpountz/'),
  'snappy': ('snappy-java-1.1.10.8.jar', 'snappy-java-1.1.10.9.jar', b'org/xerial/snappy/'),
 }
+HADOOP_HASH = 'dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6'
+FAMILIES = set(PAIRS) | {'hadoop'}
 
 
 def load(path):
@@ -75,7 +77,7 @@ def closure(outer, nars):
     return result
 
 
-def prepare(source, inv, component):
+def prepare(source, inv, component, hadoop_candidate=None):
     source, component = Path(source), Path(component)
     outer_bytes.cache_clear()
     rows = writer.inventory(source)
@@ -99,11 +101,15 @@ def prepare(source, inv, component):
     pins = {r['file']: r for r in load(Path(__file__).parent.parent / 'compatible-libraries/pins.json')}
     selected = {}
     resources = {}
+    replacement_paths = {}
+    replacement_hashes = {}
     for family, (old, new, prefix) in PAIRS.items():
         for name in (old, new):
             if writer.digest(component / name) != pins[name]['sha256']:
                 raise ValueError('component hash drift')
         selected[pins[old]['sha256']] = (family, new)
+        replacement_paths[family] = str((component/new).absolute())
+        replacement_hashes[family] = pins[new]['sha256']
         with zipfile.ZipFile(component / old) as a, zipfile.ZipFile(component / new) as b:
             aa = {n: hashlib.sha256(a.read(n)).hexdigest() for n in a.namelist() if not n.endswith('/') and not n.endswith('.class')}
             bb = {n: hashlib.sha256(b.read(n)).hexdigest() for n in b.namelist() if not n.endswith('/') and not n.endswith('.class')}
@@ -111,6 +117,18 @@ def prepare(source, inv, component):
             if removed:
                 raise ValueError('resource removed: ' + str(removed))
             resources[family] = {'old': aa, 'new': bb, 'removed': removed, 'changed': sorted(n for n in aa if aa[n] != bb[n])}
+    library_hashes = set(selected)
+    if hadoop_candidate is not None:
+        replacement = writer.regular(hadoop_candidate)
+        expected = writer.ATOMIC_HADOOP_SNAPPY[HADOOP_HASH]['replacement_sha256']
+        if writer.digest(replacement) != expected:
+            raise ValueError('unreviewed Hadoop candidate hash')
+        original = [r for r in rows if r['sha256'] == HADOOP_HASH]
+        if len(original) != writer.ATOMIC_HADOOP_SNAPPY[HADOOP_HASH]['count']:
+            raise ValueError('missing/ambiguous exact Hadoop consumer')
+        selected[HADOOP_HASH] = ('hadoop',str(replacement))
+        replacement_paths['hadoop'] = str(replacement)
+        replacement_hashes['hadoop'] = expected
     if set(selected) & writer.BLOCKED_INPUTS:
         raise ValueError('blocked library')
     nars = {p: r for p, r in roots.items() if r['manifest'].get('Nar-Id')}
@@ -121,7 +139,7 @@ def prepare(source, inv, component):
     # Scan every archive with direct classes. No image-wide synthetic Java classpath.
     references = []
     for r in rows:
-        if not r['class_packages'] or r['sha256'] in selected:
+        if not r['class_packages'] or r['sha256'] in library_hashes:
             continue
         data = payload(source, r)
         with zipfile.ZipFile(io.BytesIO(data)) as z:
@@ -135,7 +153,11 @@ def prepare(source, inv, component):
                     found.setdefault(f, []).append({'class': name, 'sha256': hashlib.sha256(data).hexdigest()})
             if found:
                 references.append({k: r[k] for k in ('outer', 'members', 'chain_sha256', 'sha256')} | {'references': found})
-    snappy_hadoop = any('snappy' in x['references'] and any('hadoop-common-' in n for n in x['members']) for x in references)
+    hadoop_consumers = [x for x in references if 'snappy' in x['references']
+                        and any('hadoop-common-' in n for n in [x['outer'],*x['members']])]
+    snappy_hadoop = bool(hadoop_consumers)
+    if hadoop_candidate is not None and any(x['sha256'] != HADOOP_HASH for x in hadoop_consumers):
+        raise ValueError('unknown Hadoop/Snappy consumer requires separate review')
     result = []
     for r in relevant:
         if r['signed'] or r['sha256'] in writer.BLOCKED_INPUTS:
@@ -152,16 +174,18 @@ def prepare(source, inv, component):
         if family == 'guava' and not guava_support:
             raise ValueError('missing visible pinned failureaccess')
         result.append({k: r[k] for k in ('outer', 'members', 'chain_sha256', 'sha256')} | {
-            'family': family, 'status': 'blocked-consumer-incompatibility' if family == 'snappy' and snappy_hadoop else 'candidate-pending-parent-QA',
-            'replacement': str((component / new).absolute()), 'replacement_sha256': pins[new]['sha256'],
+            'family': family, 'status': 'blocked-consumer-incompatibility' if family == 'snappy' and snappy_hadoop and hadoop_candidate is None else 'candidate-pending-parent-QA',
+            'replacement': replacement_paths[family], 'replacement_sha256': replacement_hashes[family],
             'expected_occurrences': sum(x['sha256'] == r['sha256'] for x in rows),
             'nar_closure': [{'outer': p, 'sha256': nars[p]['sha256'], 'manifest': nars[p]['manifest']} for p in scope],
             'guava_failureaccess_verified': bool(guava_support) if family == 'guava' else None,
             'visible_dependencies': [{k: x[k] for k in ('outer', 'members', 'sha256', 'maven')} for x in visible],
             'consumers': consumers,
             'eligibility': 'exact-stock-bytes-only; consumer/runtime review pending',
-            'blockers': (['Hadoop SnappyCompressor rejects normal input on 1.1.10.9; complete-hash replacement cannot omit this occurrence'] if family == 'snappy' and snappy_hadoop else []) + ['NiFi classloader dispatch and full consumer behavior unverified', 'parent QA/review approval absent'],
+            'blockers': (['Hadoop SnappyCompressor rejects normal input on 1.1.10.9; complete-hash replacement cannot omit this occurrence'] if family == 'snappy' and snappy_hadoop and hadoop_candidate is None else []) + ['NiFi classloader dispatch and full consumer behavior unverified', 'parent QA/review approval absent'],
         })
+    if hadoop_candidate is not None:
+        writer.validate_atomic_targets(rows,result)
     return {'schema': 1, 'inventory_sha256': inv['inventory_sha256'], 'dry_run': True,
             'executable': False, 'targets': result, 'resources': resources,
             'limitations': ['Manifest closure is not classloader execution', 'Constant-pool package references include unused paths and omit reflection', 'Global framework visibility and native extraction require runtime acceptance'],
@@ -172,9 +196,11 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('source', type=Path)
     p.add_argument('component', type=Path)
+    p.add_argument('--hadoop-candidate', type=Path,
+                   help='exact pinned consumer; enables only the complete atomic Hadoop/Snappy candidate group')
     # Recompute the full bounded inventory. No caller-provided completeness claim.
     a = p.parse_args()
-    print(json.dumps(prepare(a.source, None, a.component), indent=2, sort_keys=True))
+    print(json.dumps(prepare(a.source, None, a.component, a.hadoop_candidate), indent=2, sort_keys=True))
 
 
 if __name__ == '__main__':

@@ -14,8 +14,10 @@ import map_candidates as mapping
 
 def emit(candidate_path, families, approval=None):
     candidate = mapping.load(candidate_path)
-    if not families or set(families) - set(mapping.PAIRS):
+    if not families or set(families) - mapping.FAMILIES:
         raise ValueError('explicit known families required')
+    if set(families) & {'hadoop','snappy'} and not {'hadoop','snappy'} <= set(families):
+        raise ValueError('atomic Hadoop/Snappy families must be selected together')
     selected = [t for t in candidate['targets'] if t['family'] in families]
     if not selected or any(t['status'] != 'candidate-pending-parent-QA' for t in selected):
         raise ValueError('missing/blocked family; no executable plan')
@@ -40,13 +42,18 @@ def emit(candidate_path, families, approval=None):
                 or mapping.writer.digest(t['replacement']) != t['replacement_sha256']):
             raise ValueError('null/blocked/drifted replacement')
         targets.append({k: t[k] for k in ('outer', 'members', 'chain_sha256', 'replacement', 'replacement_sha256', 'expected_occurrences')} | {'status': status})
+    if {'hadoop','snappy'} <= set(families):
+        # The writer repeats this check against its own freshly computed
+        # inventory. This check also prevents emitting an incomplete group.
+        rows=[t | {'sha256':t['chain_sha256'][-1]} for t in selected]
+        mapping.writer.validate_atomic_targets(rows,targets)
     return {'schema': 1, 'inventory_sha256': candidate['inventory_sha256'], 'targets': targets}
 
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('candidate', type=Path)
-    p.add_argument('--families', nargs='+', required=True, choices=sorted(mapping.PAIRS))
+    p.add_argument('--families', nargs='+', required=True, choices=sorted(mapping.FAMILIES))
     p.add_argument('--review-record', type=Path)
     a = p.parse_args()
     print(json.dumps(emit(a.candidate, a.families, a.review_record), indent=2, sort_keys=True))

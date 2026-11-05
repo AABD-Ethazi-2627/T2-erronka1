@@ -69,10 +69,20 @@ The approval status is an explicit reviewer assertion; the tool never derives it
 from package labels, candidate status or successful component probes. Known blocked
 Guava 33.4.8/33.6 and RabbitMQ input hashes are additionally refused in code.
 
-The reviewer must inspect every classloader's dependency closure before approving
-any conditional Guava 33.7.1, LZ4 or Snappy occurrence. Never approve a whole fat
-JAR from a Guava package label. RabbitMQ closure remains separate work. No automatic
-mapped-plan generator is provided deliberately.
+The reviewer must inspect the consumer/classloader risks before selecting exact
+occurrences for bounded candidate assembly. Actual classloader acceptance remains
+a later runtime gate. Never approve a whole fat JAR from a Guava package label.
+RabbitMQ closure remains separate work. `stock-occurrences/emit_plan.py` generates
+hash-bound mapped plans and requires a separate exact review record for executable
+entries; probes do not grant approval. Its review reference must say when the
+scope is candidate assembly only.
+
+Hadoop and all nine matching Snappy occurrences form one code-enforced atomic
+group, bound to the exact corrected consumer and official fixed library hashes.
+Neither family, incomplete occurrences, changed replacement hashes, enclosing
+archive shortcuts nor nested injection of those replacements can bypass the
+group. Merge every selected family into one plan and rewrite shared NARs once;
+copying separate family overlays can restore old siblings.
 
 ## Safety and byte guarantees
 

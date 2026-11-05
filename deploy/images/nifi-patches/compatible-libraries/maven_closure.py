@@ -38,6 +38,8 @@ class Closure:
         require(sha(data)==self.pins[name].get('sha256'), 'POM integrity '+coordinate)
         root=ET.fromstring(data)
         model_namespace(root)
+        require(root.find('m:distributionManagement/m:relocation',NS) is None,
+                'unsupported Maven distribution relocation')
         def text(n,k,default=None):return n.findtext('m:'+k,default,NS)
         parent=root.find('m:parent',NS)
         pm={'props':{},'management':{},'deps':[]}
@@ -86,8 +88,10 @@ class Closure:
         local_management={key(d):d for d in managed if d.get('scope')!='import'}
         for k,d in deps.items():
             local=local_management.get(k,{})
-            if any(field in local and expand(local[field])!=expand(d.get(field,default))
-                   for field,default in (('version',''),('scope','compile'))):
+            if (any(field in local and expand(local[field])!=expand(d.get(field,default))
+                    for field,default in (('version',''),('scope','compile'),
+                                          ('type','jar'),('classifier',''),('optional','false')))
+                    or (local.get('exclusions') and local['exclusions']!=d.get('exclusions',[]))):
                 d['_unsupported_inherited_management']=True
         for n in root.findall('m:dependencies/m:dependency',NS):
             d=raw(n);k=key(d);md=management.get(k,{})
@@ -120,7 +124,7 @@ class Closure:
             require(not d.get('_unsupported_bom_fields'), 'unsupported interpolated BOM requirement')
             require(not d.get('_unsupported_exclusion_merge'), 'unsupported managed/local exclusion combination')
             required={k:d.get(k,default) for k,default in [('groupId',None),('artifactId',None),('version',None),('type','jar'),('classifier','')]}
-            pending=list(required.values());seen=set()
+            pending=list(required.values())+[value for pair in d['exclusions'] for value in pair];seen=set()
             while pending:
                 value=pending.pop()
                 require(value is not None,'missing required dependency version')

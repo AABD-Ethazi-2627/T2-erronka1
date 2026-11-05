@@ -191,6 +191,38 @@ class DependencyGuardTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'managed/local exclusion'):
             self.deps()
 
+    def test_distribution_relocation_is_not_silently_ignored(self):
+        for own_dependencies in ('', '<dependencies><dependency><groupId>x</groupId>'
+                                 '<artifactId>old</artifactId><version>1</version>'
+                                 '</dependency></dependencies>'):
+            with self.subTest(own_dependencies=own_dependencies):
+                self.pins=[]
+                self.pom('root','<distributionManagement><relocation><artifactId>new'
+                         '</artifactId></relocation></distributionManagement>'+own_dependencies)
+                with self.assertRaisesRegex(ValueError,'relocation'):
+                    self.deps()
+
+    def test_child_management_exclusions_on_inherited_dependency_are_rejected(self):
+        self.pom('parent','<dependencies><dependency><groupId>x</groupId><artifactId>mid'
+                 '</artifactId><version>1</version></dependency></dependencies>')
+        self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId><version>1'
+                 '</version></parent><dependencyManagement><dependencies><dependency><groupId>x'
+                 '</groupId><artifactId>mid</artifactId><version>1</version><exclusions><exclusion>'
+                 '<groupId>x</groupId><artifactId>leaf</artifactId></exclusion></exclusions>'
+                 '</dependency></dependencies></dependencyManagement>')
+        with self.assertRaisesRegex(ValueError,'inherited dependency management'):
+            self.deps()
+
+    def test_profile_dependent_exclusion_selector_is_rejected_before_expansion(self):
+        self.pom('root','<properties><ex>a</ex><alias>${ex}</alias></properties>'
+                 '<profiles><profile><id>active</id><activation><activeByDefault>true'
+                 '</activeByDefault></activation><properties><ex>b</ex></properties></profile>'
+                 '</profiles><dependencies><dependency><groupId>x</groupId><artifactId>mid'
+                 '</artifactId><version>1</version><exclusions><exclusion><groupId>x</groupId>'
+                 '<artifactId>${alias}</artifactId></exclusion></exclusions></dependency></dependencies>')
+        with self.assertRaisesRegex(ValueError,'profile-dependent runtime selector'):
+            self.deps()
+
     def test_parser_verifier_never_grants_rabbit_transport_readiness(self):
         api = {'removed_or_changed': [], 'missing_native_paths': []}
         entry = {'input_matches_tested_upstream': True}
