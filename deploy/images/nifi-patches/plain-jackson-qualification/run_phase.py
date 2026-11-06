@@ -6,6 +6,7 @@ No NiFi process is started. Only the exact candidate image runs Python/Java.
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 import time
 import uuid
@@ -18,9 +19,15 @@ PYTHON=PYHOME/'bin/python3.11'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def save(p,v):p.write_text(json.dumps(v,indent=2,sort_keys=True)+'\n')
 def main():
- p=argparse.ArgumentParser();p.add_argument('mode');p.add_argument('--context',type=int);a=p.parse_args()
+ global BASE
+ p=argparse.ArgumentParser();p.add_argument('mode');p.add_argument('--context',type=int);p.add_argument('--proof-root',type=Path,default=BASE);a=p.parse_args()
+ if not re.fullmatch(r'[a-z][a-z0-9-]{0,63}',a.mode):raise ValueError('invalid phase label')
+ if not a.proof_root.is_dir() or a.proof_root.is_symlink():raise ValueError('proof root must be an existing directory')
+ BASE=a.proof_root.resolve()
  label=a.mode+('-v2' if a.mode=='inventory' else '')+('-jdk21' if a.mode=='analyze' and (BASE/'jdk-classes').exists() else '')+('-'+str(a.context) if a.context is not None else '')
- out=BASE/(label+'.json');assert not out.exists(),str(out)
+ out=BASE/(label+'.json')
+ for existing in (out,BASE/(label+'.stdout'),BASE/(label+'.stderr'),BASE/(label+'-execution.json')):
+  if existing.exists() or existing.is_symlink():raise ValueError('phase evidence already exists: '+str(existing))
  cmd=['docker','run','--rm','--pull=never','--name','plain-jackson-'+uuid.uuid4().hex[:10],'--read-only','--network','none','--cpus','1','--cpuset-cpus','0','--memory','512m','--memory-swap','512m','--pids-limit','64','--cap-drop','ALL','--security-opt','no-new-privileges','--user','1000:1000','--ulimit','core=0:0','--tmpfs','/tmp:rw,nosuid,nodev,size=64m','--mount',f'type=bind,src={PYHOME},dst={PYHOME},readonly','--mount',f'type=bind,src={BASE},dst=/proof','--mount','type=bind,src=/usr/lib/jvm/java-21-openjdk-amd64,dst=/jdk,readonly','--mount','type=bind,src=/etc/java-21-openjdk,dst=/etc/java-21-openjdk,readonly','--mount',f'type=bind,src={BASE}/tools,dst=/proof/tools,readonly','--mount',f'type=bind,src={BASE}/pins.json,dst=/proof/pins.json,readonly','--mount',f'type=bind,src={BASE}/cache,dst=/proof/cache,readonly','--env','PYTHONDONTWRITEBYTECODE=1','--entrypoint',str(PYTHON),IMAGE,'-B']
  if a.mode in ('inventory','analyze'):
   cmd+=['/proof/tools/qualify.py',a.mode,'--pins','/proof/pins.json','--output','/proof/'+out.name]

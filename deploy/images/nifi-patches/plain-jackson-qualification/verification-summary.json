@@ -10,6 +10,7 @@
     "static consumer pass excludes internals of the four changed target JARs; their complete internal dynamic linkage is not established"
   ],
   "completed_static_contexts": 13,
+  "current_source_status": "review corrections prepared; actual VM denominator/AWS/Java rerun pending",
   "failed_static_phases": [
     {
       "path": "analyze-jdk21-6-execution.json",
@@ -370,6 +371,25 @@
   "promotion_eligible": false,
   "replacement": null,
   "required_contexts": 92,
+  "review_corrections_prepared": {
+    "code_source_checks": "prepared, unverified in VM",
+    "historical_92_not_closure_criterion": true,
+    "implicit_Jetty_parent": true,
+    "inherited_WAR_and_WEB_INF_classes": true,
+    "inventory_schema": 2,
+    "original_854": "preexisting absent references, optionality unproven",
+    "portable_tests": 33,
+    "processor_Class_forName": "loading only, initialization false",
+    "promotion_eligible": false,
+    "ruff": "passed",
+    "runtime_approved": false,
+    "source_sha256": {
+      "NarProbe.java": "e1cbd82a02c48f504db071f37df84c4fa1480101ba5f4e3cb0e3caee9226ba14",
+      "qualify.py": "fe3168853bedbb81b7232635e70207688e82df13394dceec7ec3f55452d82923",
+      "run_phase.py": "e22348da8cb11b28ae080cccd0bfd174a5601882e80165946bf921e2a5eaca3b",
+      "runtime.py": "7e1fb8aef8aae07c96e2b56c86229809cee30b835cf00ba1590c94d163d9e3c7"
+    }
+  },
   "runtime_approved": false,
   "runtime_component_result_sha256": "8baa37e6d40a49309bd801cfbf45695d6c93cc76bbc9550b0fa2e7b17c7273fa",
   "runtime_java_commands": [

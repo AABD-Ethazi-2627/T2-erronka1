@@ -39,7 +39,9 @@ checkedrun(['/jdk/bin/javac',*jopts,'-d',classes,'-cp',cp,BASE/'tools/NarProbe.j
 if not (BASE/'jdk-classes').exists():
  checkedrun([java,*opts,'-cp',str(classes)+os.pathsep+cp,'NarProbe','jdk',BASE/'jdk-classes'],'export-actual-image-jdk21-base')
 checkedrun(['/jdk/bin/javap',*jopts,'-p','-c','-cp',cp,'org.apache.nifi.nar.NarClassLoader','org.apache.nifi.nar.AbstractNativeLibHandlingClassLoader'],'actual-nar-bytecode')
-inv=json.loads((BASE/'inventory.json').read_text());rows={r['manifest']['Nar-Id']:r for r in inv['roots']}
+inv=json.loads((BASE/'inventory.json').read_text())
+if inv.get('inventory_schema')!=q.INVENTORY_SCHEMA:raise ValueError('obsolete inventory; regenerate WAR and Jetty coverage')
+rows={r['manifest']['Nar-Id']:r for r in inv['roots']}
 ids=['nifi-amqp-nar','nifi-framework-nar','nifi-jolt-nar','nifi-kafka-to-s3-nar','nifi-standard-nar','nifi-standard-shared-nar']
 needed=set(ids)
 for id in ids:needed.update(rows[id]['parents'])
@@ -53,8 +55,9 @@ for variant in ('old','fixed'):
    name=Path(n).name;new=None
    if variant=='fixed' and name in q.OLD_NEW:
     new=q.OLD_NEW[name];blob=(BASE/'cache'/new).read_bytes();assert q.sha(blob)==pins[new]['sha256']
-   assert not (dest/name).exists(),'duplicate expanded JAR basename'
-   (dest/name).write_bytes(blob);records.append({'variant':variant,'context':id,'source_entry':n,'sha256':q.sha(blob),'pinned_fixed':new})
+   target_name=new if new is not None else name
+   assert not (dest/target_name).exists(),'duplicate expanded JAR basename'
+   (dest/target_name).write_bytes(blob);records.append({'variant':variant,'context':id,'source_entry':n,'expanded_name':target_name,'sha256':q.sha(blob),'pinned_fixed':new})
 q.save(out/'expanded-inputs.json',records)
 # Compile probes against the actual original carrier closure; only generated
 # probe classes are added to the disposable expanded NAR roots.

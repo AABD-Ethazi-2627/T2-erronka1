@@ -68,9 +68,34 @@ CI and human acceptance are distinct later gates.
 
 Parent lint cleanup removes unused imports, sorts imports, states the existing
 `subprocess.run(check=False)` default explicitly and combines equivalent string
-prefix checks. Executable modes now match the shebangs. The committed executable
-bytes pass Ruff, seven portable tests, and a fresh twelve-JVM real-NarClassLoader
+prefix checks. Executable modes now match the shebangs. The executable
+bytes at `1bb4811` passed Ruff, seven portable tests, and a twelve-JVM real-NarClassLoader
 repeat (20.616 seconds) in `plain-jackson-parent-lint-20261106-01`. The original
 13-context static campaign is retained with its own pre-cleanup hashes; it is
 not relabeled as a rerun of these bytes. The old `frozen_tools` record is historical.
 No occurrence is promoted and no runtime approval changes.
+
+## Corrections after independent review (not VM-verified yet)
+
+The original 92-context inventory is historical and is not a closure criterion.
+Inventory schema 2 includes inherited-only WARs, their `WEB-INF/classes`, and
+implicit Jetty parents for dependency-free NARs. Old inventories are rejected;
+regenerate `inventory.json` before the next static or runtime phase. WAR order
+remains a provisional static model, not verified Jetty webapp delegation.
+
+The corrected Java probe checks parent identity and exact defining loader/code
+source for mapper/core/databind. Prepared fixed JARs use their official new
+filenames. These are disposable experiment trees, not an applicable archive
+writer plan. Current VM execution, actual denominator and AWS memory remain
+pending. No promotion is enabled.
+
+NiFi processor `Class.forName(..., false, ...)` records only class loading without
+initialization, not processor execution or complete linkage. Only Jolt JsonUtils
+is executed in the existing consumer probes. The 854 old unresolved records are
+preexisting absent references; optionality was not established.
+
+The bounded phase runner now accepts `--proof-root /ABS/FRESH/DIRECTORY` for
+repetitions without an undeclared wrapper. It refuses any existing output,
+stdout, stderr or execution record, including under Python `-O`. All source
+changes after `1bb4811` have 33 portable tests and Ruff passing; previous VM
+results retain their original hashes and are not relabeled as current execution.
