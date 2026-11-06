@@ -1,0 +1,1230 @@
+{
+  "schema": 1,
+  "name": "cnc-serving-conservative-v1-preparation-only",
+  "source_image_config_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "source_commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+  "runtime_approved": false,
+  "replacement": null,
+  "active_configuration_qualified": false,
+  "nars": [
+    {
+      "id": "nifi-airtable-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-airtable-nar-2.12.0.nar",
+      "sha256": "b10f01908da2e7b02d8fd557dc7b2fe3e7af30541be90b35805436c57152dfd8",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-amqp-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-amqp-nar-2.12.0.nar",
+      "sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "exclude",
+      "reason": "AMQP/RabbitMQ NiFi processors; no loss of Kafka broker/worker capability is inferred."
+    },
+    {
+      "id": "nifi-apicurio-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-apicurio-nar-2.12.0.nar",
+      "sha256": "7f1a2a5773f75b0772586bbd51e569abb085e7cd8bd422e68fd2e671783708ff",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-atlassian-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-atlassian-nar-2.12.0.nar",
+      "sha256": "b9aea903518cb860290373019983ac0adca0b364f49a961cf976e7134dc7efdc",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-avro-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-avro-nar-2.12.0.nar",
+      "sha256": "7e8ceb26e10d60c8136416c74cd5b87c301d7819cc8d32291c79c4930b12ff15",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-aws-kinesis-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-aws-kinesis-nar-2.12.0.nar",
+      "sha256": "d944d4f2e67a214c84cf19989d7479f9672520ec9359ac7c92595633c076913d",
+      "parent": "nifi-aws-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi AWS Kinesis extension."
+    },
+    {
+      "id": "nifi-aws-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-aws-nar-2.12.0.nar",
+      "sha256": "a33915d188a2f4b252a106b757ca1018d8921fa2a990937253d9ad09236aa229",
+      "parent": "nifi-aws-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi AWS processors and their Wire consumers."
+    },
+    {
+      "id": "nifi-aws-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-aws-service-api-nar-2.12.0.nar",
+      "sha256": "670da49bcd3d6662532025c7721835ba9e27d58a0ff1c0e1a853af5e14e41655",
+      "parent": "nifi-standard-shared-nar",
+      "action": "exclude",
+      "reason": "NiFi AWS service interfaces; no retained declared NAR parent uses this interface."
+    },
+    {
+      "id": "nifi-azure-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-azure-nar-2.12.0.nar",
+      "sha256": "1a642d6f86c383f8cceecabfab3563637f717bac887747df3503aa5cde3e06ad",
+      "parent": "nifi-azure-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-azure-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-azure-services-api-nar-2.12.0.nar",
+      "sha256": "37efef8cdd76bfe575b783c3c6001c8d2d585af851f6aabd219e4e9ae2433d33",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-box-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-box-nar-2.12.0.nar",
+      "sha256": "553c1dd6b7e85b5646abebdfd33295d6408053884172aec081c75c1030b37b7a",
+      "parent": "nifi-box-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-box-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-box-services-api-nar-2.12.0.nar",
+      "sha256": "40e225c781bbab93abbf9548d300fb3f9603fad904955aef468d4578460c7ecd",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-box-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-box-services-nar-2.12.0.nar",
+      "sha256": "db06e2bb1a36d9b0667f61172562ff7aea632cb127028cea80d535bf6f68f8dc",
+      "parent": "nifi-box-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-cdc-mysql-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-cdc-mysql-nar-2.12.0.nar",
+      "sha256": "947a2ac0ba76855a4608022c86e50cbaeb0a2ef378e8521063339e04cf7a141e",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-cipher-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-cipher-nar-2.12.0.nar",
+      "sha256": "0d185b61d146f01252ff722b23a0e71a34ba23681223f3aee55cf7f41fa54378",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-compress-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-compress-nar-2.12.0.nar",
+      "sha256": "1c80e11b94feae94dfad7e9c45aab1d4c23e6cc1d899e230210ec36b0f0f97c3",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-confluent-platform-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-confluent-platform-nar-2.12.0.nar",
+      "sha256": "2f6e9722860657ca8f43dee203e773e8c2e0065ffbbb074905a5b607742d2a25",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-database-dialect-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-database-dialect-service-nar-2.12.0.nar",
+      "sha256": "025fafb541d54f4a8bd0c3c929c613a51063b63a1fd46601019a91f7ea448d3f",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-db-schema-registry-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-db-schema-registry-service-nar-2.12.0.nar",
+      "sha256": "75e5c39fb9ffc3860556de72e90ff547db08ce95ff0b5c4a56f518f7a78f0b7a",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-dbcp-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-dbcp-service-nar-2.12.0.nar",
+      "sha256": "86278caa61e4fcb512c27da09198978be1f5c9ed3d8d8fb5f7d3ade65f003a3a",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-distributed-cache-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-distributed-cache-services-nar-2.12.0.nar",
+      "sha256": "0c6b0d6b62609d38c3f84ee470da36bd67804bfa665a791beab6d0f2969a15cc",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-dropbox-processors-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-dropbox-processors-nar-2.12.0.nar",
+      "sha256": "291dd6702efb791f3d3cf8373437400f11842c02a37e7490760338b0d1bf10a6",
+      "parent": "nifi-dropbox-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-dropbox-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-dropbox-services-api-nar-2.12.0.nar",
+      "sha256": "6975113621577baa91321cd11b958f38a937bfefe434afdb5e2d436aa05287c3",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-dropbox-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-dropbox-services-nar-2.12.0.nar",
+      "sha256": "1833207ced4c97aa6c0d11dbc30e98132352ddcb69efecd6cdd73eb30ae3b9c1",
+      "parent": "nifi-dropbox-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-elasticsearch-client-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-elasticsearch-client-service-api-nar-2.12.0.nar",
+      "sha256": "37ecf9af7e184e5b08a2913af4fc528acbcdb7c85549637f7d32d2bde54870fe",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-elasticsearch-client-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-elasticsearch-client-service-nar-2.12.0.nar",
+      "sha256": "daad4d5602271978851a702a180a8993c3cc83a281fe12abdf753c2428e0920d",
+      "parent": "nifi-elasticsearch-client-service-api-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-elasticsearch-restapi-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-elasticsearch-restapi-nar-2.12.0.nar",
+      "sha256": "aedc7d637a4bf3eb360abd0073568f24e87ef0a652210c63229f030927e92738",
+      "parent": "nifi-elasticsearch-client-service-api-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-email-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-email-nar-2.12.0.nar",
+      "sha256": "59776a8e24f50bc0700896a85efed9be70acca5f93070d34a3f3cb4802ca7249",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-enrich-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-enrich-nar-2.12.0.nar",
+      "sha256": "4fdef6c23b1b5e13cb4ac2132ac3cd1646d4679604eff6ba85fc43f34f065ee8",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-evtx-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-evtx-nar-2.12.0.nar",
+      "sha256": "7176892cf74dbf8b4c8e2dada5f0b1cb8cd6f3daf2d5b9ebe77e64d2b98d1ee1",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-file-resource-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-file-resource-service-nar-2.12.0.nar",
+      "sha256": "0a6000fe3c6accc9d7f3d4e15baf9c88dd3b8fe051d178df4070a850875162fc",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-flow-registry-client-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-flow-registry-client-nar-2.12.0.nar",
+      "sha256": "463007c73305f4257b7d657fee92aa5a9ebee2815e325741a5caf12aae3e44ff",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-framework-kubernetes-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-framework-kubernetes-nar-2.12.0.nar",
+      "sha256": "b3c8d4e3fae0e5ef0315360d8226f76a1327df6ca14ec601511700ff70adf10e",
+      "parent": "nifi-framework-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-framework-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar",
+      "sha256": "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293",
+      "parent": "nifi-jetty-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-framework-zookeeper-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-framework-zookeeper-nar-2.12.0.nar",
+      "sha256": "f6b9564f063338af481338ae23eeb11e18378283f561a7d7fe9d7ba144040b75",
+      "parent": "nifi-framework-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-gcp-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-gcp-nar-2.12.0.nar",
+      "sha256": "afdb93209e3f0a9eba7f49b5d4245e59706a1641dfee866b4ddf269b92349c4f",
+      "parent": "nifi-gcp-services-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Google Cloud processors and embedded GCP OpenTelemetry closure."
+    },
+    {
+      "id": "nifi-gcp-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar",
+      "sha256": "7b9a5eda2e05a94be416fd726efa23534e65df7012fe04cd484fdb4c648e6fd9",
+      "parent": "nifi-standard-shared-nar",
+      "action": "exclude",
+      "reason": "NiFi Google Cloud service interfaces."
+    },
+    {
+      "id": "nifi-geohash-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-geohash-nar-2.12.0.nar",
+      "sha256": "c4fe7fad28652a9de3f4819bddf1297749b0425314bea9d458b70a49b07cf23f",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-github-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-github-nar-2.12.0.nar",
+      "sha256": "033d569f3b5c36bea9724f19537501142235c1ed7eec29fa69bae7e4906bc0a6",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-gitlab-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-gitlab-nar-2.12.0.nar",
+      "sha256": "f641145d1a46440a975e59cf45ff2693166aff46ac0ca6cfe23400762ba9c761",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-groovyx-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-groovyx-nar-2.12.0.nar",
+      "sha256": "6217c5b1a23dd7daf932cad1d8f54bb3ff3d86d235019a3b219426915287dc15",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-hashicorp-vault-client-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-hashicorp-vault-client-service-api-nar-2.12.0.nar",
+      "sha256": "9b3abc0e2002d32e1f4c651675c9fe1190952b70a6148f96c787f099540c3c68",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-hashicorp-vault-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-hashicorp-vault-nar-2.12.0.nar",
+      "sha256": "b4cea35c24af345a39a7f3a59adfc9be95ab25d83c77454f4d3bdcddd44aa28c",
+      "parent": "nifi-hashicorp-vault-client-service-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-hazelcast-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-hazelcast-services-api-nar-2.12.0.nar",
+      "sha256": "a66c4534a32c0ccfaae752394da88004d2b2023d6ced8e9a980e0632edef7a1b",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-hazelcast-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-hazelcast-services-nar-2.12.0.nar",
+      "sha256": "d9b040ef4a9ff5cc03aef7e64563157caecc52b265ccc9ffb8243ab60e0422a9",
+      "parent": "nifi-hazelcast-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-hl7-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-hl7-nar-2.12.0.nar",
+      "sha256": "cec028585751842afdc8bd14bf09e430928711cfafefa8462c525f1c50244891",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-http-context-map-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-http-context-map-nar-2.12.0.nar",
+      "sha256": "f4a946dd0922e468376096afa2726c9a9295f010639625268879514985a4300c",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-hubspot-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-hubspot-nar-2.12.0.nar",
+      "sha256": "314233da2e3d43feb2f577cb4f2c3ad93e158508920eed89e0248341ee091338",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-iceberg-aws-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-aws-nar-2.12.0.nar",
+      "sha256": "9d105040f5f00e9c1905555ac8c7ffce92d55fcefd47ad455b3a9ff9ceca8f21",
+      "parent": "nifi-iceberg-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-azure-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-azure-nar-2.12.0.nar",
+      "sha256": "c144120d8814d08390fc1f35f81db224ac6a16c9ae1fdd4715e0aefff93ce9da",
+      "parent": "nifi-iceberg-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-gcs-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-gcs-nar-2.12.0.nar",
+      "sha256": "92a9cb6ed2e386fb33180369a0bba46ccc0e173d9d8183255864e7e0735bc1a9",
+      "parent": "nifi-iceberg-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-parquet-writer-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+      "sha256": "7c27ffae60b4896c20900f694ed70b2dd7906b9c58c990d9c1226e6c639d476d",
+      "parent": "nifi-iceberg-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-processors-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-processors-nar-2.12.0.nar",
+      "sha256": "c5f5ee70fc2b4e3f64fdb99206322764f83e002041e96e04dcb666dab5d5d46c",
+      "parent": "nifi-iceberg-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-rest-catalog-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-rest-catalog-nar-2.12.0.nar",
+      "sha256": "ab6b0945311a7b85ac57457b74e4bf83de36d1a2286f11c26962b41c3bdce0dc",
+      "parent": "nifi-iceberg-service-api-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-service-api-nar-2.12.0.nar",
+      "sha256": "7a9ebd81448d50366bd6fbc456474a53a3bc6145bf0104d65b1c8c22921ef67a",
+      "parent": "nifi-iceberg-shared-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-iceberg-shared-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-iceberg-shared-nar-2.12.0.nar",
+      "sha256": "3096009e01b71cb5f7124bc72a7b35b161a9e9e4f6321eebba48091aeda63b60",
+      "parent": "nifi-standard-shared-nar",
+      "action": "exclude",
+      "reason": "NiFi Iceberg catalog/table/Parquet/cloud adapter capability; external Python CG15 Parquet is retained."
+    },
+    {
+      "id": "nifi-jetty-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-jetty-nar-2.12.0.nar",
+      "sha256": "3506b30b3f45fe8d57fe6fc25625420f9863aaa881fee32861010889538ff890",
+      "parent": null,
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-jms-cf-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-jms-cf-service-nar-2.12.0.nar",
+      "sha256": "ac1f6d6ea8345f0fbc671ed5a3c9c4e50941f4243f3a7412c3b98c4c90607ee7",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-jms-processors-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-jms-processors-nar-2.12.0.nar",
+      "sha256": "f3ccfdc053b09bc69113f0321ee398a7a7969ddeb65ae7700dc8361b38dfe4a7",
+      "parent": "nifi-jms-cf-service-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-jolt-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+      "sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-jslt-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-jslt-nar-2.12.0.nar",
+      "sha256": "73a72e87926282e2796960ce24502082d5b26652344b61e5cedc5c8c5427b536",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-kafka-3-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kafka-3-service-nar-2.12.0.nar",
+      "sha256": "bb13f06339f500caf9991b16ec7ad2787b0f5b4990920fc9dfb729b745cdefe2",
+      "parent": "nifi-kafka-service-api-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-kafka-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kafka-nar-2.12.0.nar",
+      "sha256": "1592740b9befaffa82b562e8d9a34f7aa26943f37f8ea37b9768ffa4457e71aa",
+      "parent": "nifi-kafka-service-api-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-kafka-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kafka-service-api-nar-2.12.0.nar",
+      "sha256": "46468f00a5eaf516c97bd88c0605ecb06e48a9007978b568d7f6a0a7512bf7ec",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-kafka-service-aws-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kafka-service-aws-nar-2.12.0.nar",
+      "sha256": "2e7ae05ec461ecbb7312a89e0216ddf0c2f23133329e149e1cda69fb03742e2f",
+      "parent": "nifi-kafka-service-api-nar",
+      "action": "exclude",
+      "reason": "AWS-specific Kafka service/authentication integration; ordinary Kafka3 PLAINTEXT retained."
+    },
+    {
+      "id": "nifi-kafka-to-s3-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar",
+      "sha256": "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+      "parent": null,
+      "action": "exclude",
+      "reason": "NiFi Kafka-to-S3 path; CG15 local Parquet archive is separate and retained."
+    },
+    {
+      "id": "nifi-kerberos-iaa-providers-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kerberos-iaa-providers-nar-2.12.0.nar",
+      "sha256": "6db8005ed987f74a33b8ff736997e58d7ddda358f5981bac95401955938f6627",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-kerberos-user-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-kerberos-user-service-nar-2.12.0.nar",
+      "sha256": "e610d0b835c640abbc92026b8fca3ee57330a9230bc6975baf1f6de412867fd4",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-key-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-key-service-nar-2.12.0.nar",
+      "sha256": "bf516cc344ef7494433509f61d946ed52406779ac3f375a01824791e7b9ef43a",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-ldap-iaa-providers-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-ldap-iaa-providers-nar-2.12.0.nar",
+      "sha256": "2b2774c7ef1a45a1bd5b41775fc896bca18e37bd4795f29d4939b15af3cb22bf",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-lookup-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-lookup-services-nar-2.12.0.nar",
+      "sha256": "9b417711a31fc28a15306170ff352a7e845396daa5af5cdda714d3d53727dc90",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-mongodb-client-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-mongodb-client-service-api-nar-2.12.0.nar",
+      "sha256": "595c03dc1ae487a62552df1fe68f0f443decf75efe06f39baf30cecf032dfeb4",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-mongodb-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-mongodb-nar-2.12.0.nar",
+      "sha256": "b526d53cda1a8d97b9df2b1b860bab64680dde71ffeeaeb22b59731420debfff",
+      "parent": "nifi-mongodb-client-service-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-mongodb-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-mongodb-services-nar-2.12.0.nar",
+      "sha256": "171901d0b926d2c5ed9d985491d60e5d504fe562a3d4f5aead0f7f73d507ea7f",
+      "parent": "nifi-mongodb-client-service-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-mqtt-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-mqtt-nar-2.12.0.nar",
+      "sha256": "a551f9c0da3a00f69024f506f761c781b96bc6d2839466121490fc52f0861ca1",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-network-processors-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-network-processors-nar-2.12.0.nar",
+      "sha256": "56e79658442d6e1edd00ec0ed8b3530f5e67c3d500dfc85807869739c87a663e",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-oauth2-provider-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-oauth2-provider-nar-2.12.0.nar",
+      "sha256": "02fb8de6094fb7bb35ad610619a8ac26c0f6a03e186986acb5540ffe676196ac",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-opentelemetry-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-opentelemetry-nar-2.12.0.nar",
+      "sha256": "d3767880e6f60a0f6a7e0baa38057a1d64b700ea07195da91a328aeed64ca668",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-password-based-property-encryption-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-password-based-property-encryption-nar-2.12.0.nar",
+      "sha256": "7b68e3d15c7d2f18355fa9ce743c3e011629d74603303d1ff5dea0b4ab9f8d1a",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-pgp-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-pgp-nar-2.12.0.nar",
+      "sha256": "74e42db8021924a90d6a616b8c2be09be80215f3b9afeee260083558caf3d0d9",
+      "parent": "nifi-pgp-service-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-pgp-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-pgp-service-api-nar-2.12.0.nar",
+      "sha256": "209a142e88a12bc9c5d0ea8c543c670e7f6e3d8106ee957a486a8c7fe86ce6ff",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-pgp-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-pgp-service-nar-2.12.0.nar",
+      "sha256": "84dbf0a779bf2999f9d20c5ce08d8ea600a1a83ca82850f39360232c5e6df590",
+      "parent": "nifi-pgp-service-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-poi-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-poi-nar-2.12.0.nar",
+      "sha256": "e06db10d5708fc1c6d47b3fe85e650f068b7f702c87e5da13db974ca59375d42",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-protobuf-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-protobuf-services-nar-2.12.0.nar",
+      "sha256": "d7fcde6b1b3f4fac9d9bceace08871b6fbc2600a08e0981991c2bc3d282121a3",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-provenance-repository-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-provenance-repository-nar-2.12.0.nar",
+      "sha256": "ffe7e13869f9fde3ccdd1257ed273bc7c3227d90994cf360d0e9e41894339263",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-proxy-configuration-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-proxy-configuration-nar-2.12.0.nar",
+      "sha256": "32d4ea7a0cc4045484c3b71a7bae287c2ebe29395924665983131f49c6aa06c2",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-py4j-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-py4j-nar-2.12.0.nar",
+      "sha256": "8f3ef4a197030dabf04736189364671c8cd81a860e096a388f0fa71c92b22457",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-record-serialization-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-record-serialization-services-nar-2.12.0.nar",
+      "sha256": "ebbaedd5a724b04c2f5a0f028b14c9bf6fe1cd30d3bfe1d92ef39884f94416ca",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-record-sink-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-record-sink-service-nar-2.12.0.nar",
+      "sha256": "8069c22d44688a9bd928e44953e1fe75db27bc8cb466ee7deac548553502ac8c",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-redis-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-redis-nar-2.12.0.nar",
+      "sha256": "8579dadeda3b54416915b832a9175f6c35fa412d0948e3139d5517e32a2a600a",
+      "parent": "nifi-redis-service-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-redis-service-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-redis-service-api-nar-2.12.0.nar",
+      "sha256": "219acece0ebcc1e6a03ac2f06a5120129f9ea7a234154a429cd4b19d9252eb06",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-registry-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-registry-nar-2.12.0.nar",
+      "sha256": "b3108330883998e92c99927e84bbbd8044939961b97813627564253353841a0f",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-salesforce-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-salesforce-nar-2.12.0.nar",
+      "sha256": "59c27515394894ebce1272fcaef4df79793c2f8d5a8989140267c9be691c8f3d",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-scripting-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-scripting-nar-2.12.0.nar",
+      "sha256": "3fc758ab579be8903a783679aaf9b134de31273c84afb96f6ea9b0cf3b120ad9",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-server-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-server-nar-2.12.0.nar",
+      "sha256": "53bf9d143a9f560227742051954aa497fb15deedd34a1bcfb08c7ba97d4d48ef",
+      "parent": "nifi-framework-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-shopify-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-shopify-nar-2.12.0.nar",
+      "sha256": "45afc8a237965a5b7385337908dc4809da1e0ba5de780f9cdc4bf01d429302f0",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-single-user-iaa-providers-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-single-user-iaa-providers-nar-2.12.0.nar",
+      "sha256": "7cbb8cd936b19a45d922c1d230837ad2bef2e2fb7154122dff0de59ce4961535",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-site-to-site-reporting-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-site-to-site-reporting-nar-2.12.0.nar",
+      "sha256": "0c30d6f9c3043ee5fd3d4c6d66a31b95ad5975785a8c184b09611bfdcfa3f1ab",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-slack-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-slack-nar-2.12.0.nar",
+      "sha256": "1bf04c374e70abcd66736711d40f5d3b8b8532e1f76ea84905a3549aa5d11e98",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-smb-client-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-smb-client-api-nar-2.12.0.nar",
+      "sha256": "48958d549d344ffbdf41e59fe3428a2b73d506efb97ba8f67b4362f9930db019",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-smb-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-smb-nar-2.12.0.nar",
+      "sha256": "2d70d69c0274284c9cfba7171a9ae5710c5c63cd0cf5e6f58f8123600aa2ac42",
+      "parent": "nifi-smb-client-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-smb-smbj-client-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-smb-smbj-client-nar-2.12.0.nar",
+      "sha256": "2839b1cda2f98790508b9b54d6f24d4e9b4ffb60c033e6b29210662371851827",
+      "parent": "nifi-smb-client-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-snmp-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-snmp-nar-2.12.0.nar",
+      "sha256": "d5388233f7dd91e3fb00123678271e5d533d10b2fd1d03b72d9c9f9383f22ac1",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-splunk-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-splunk-nar-2.12.0.nar",
+      "sha256": "71359db8005565303ddb64ebefe068d3d76c76d847125ed83f7b3b046eb129bc",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-ssl-context-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-ssl-context-service-nar-2.12.0.nar",
+      "sha256": "bde06a2278a8ef2a8c2fe2dcbc8ef3a61168ad2dd83b55f8f05baf1d91479380",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-standard-content-viewer-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-standard-content-viewer-nar-2.12.0.nar",
+      "sha256": "cb3de44d3ea3c2642e07a04a44066a127d85c6fdc5d638150c9ae490f0a1b5fd",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-standard-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-standard-nar-2.12.0.nar",
+      "sha256": "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-standard-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-standard-services-api-nar-2.12.0.nar",
+      "sha256": "89aacd317517b6b9198b2bb1ace2ccd7b1d61c7ba1aa7df178afc2fc28db6fb0",
+      "parent": null,
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-standard-shared-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar",
+      "sha256": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-stateful-analysis-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-stateful-analysis-nar-2.12.0.nar",
+      "sha256": "9996b1d3380d179a7cc82dfa235543f691fce122eefb6fc8d5c547df271ee4e7",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-update-attribute-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar",
+      "sha256": "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+      "parent": "nifi-jetty-nar",
+      "action": "retain",
+      "reason": "required-modern-flow-or-declared-parent"
+    },
+    {
+      "id": "nifi-web-client-provider-service-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-web-client-provider-service-nar-2.12.0.nar",
+      "sha256": "3dfa85868684a0a75b8693b7fdad9e9ddd5b6a4b7b3973a52c7d6d9a9b0486aa",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-websocket-processors-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-websocket-processors-nar-2.12.0.nar",
+      "sha256": "065d560f0ca988b96588271ab7f7596bfa2089c293464b7d7e680453c55fbd1b",
+      "parent": "nifi-websocket-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-websocket-services-api-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-websocket-services-api-nar-2.12.0.nar",
+      "sha256": "5f7ce05bcfadc96dd1d16344a49c4a2ac9049a7c1c687b126a376784601d8e84",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-websocket-services-jetty-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-websocket-services-jetty-nar-2.12.0.nar",
+      "sha256": "271ed9aca01d0f30688f86b64cd730ce266e601ba193f62848ffa52b3c80e0b9",
+      "parent": "nifi-websocket-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-windows-event-log-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-windows-event-log-nar-2.12.0.nar",
+      "sha256": "3408275f4c7590e1b6cdfd45cf1cf40e2509f25adf6506e880334311b9a1410d",
+      "parent": null,
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-workday-processors-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-workday-processors-nar-2.12.0.nar",
+      "sha256": "4e06d84298622b857fc2e92e09e0bc80bbd59b5aa7091e70757e3a5642318699",
+      "parent": "nifi-standard-services-api-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-zendesk-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-zendesk-nar-2.12.0.nar",
+      "sha256": "711b18b6edfac0894c4c4b3e5ff7f5e37b3d0eeee934660bacd027d40d69a266",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    },
+    {
+      "id": "nifi-zendesk-services-nar",
+      "group": "org.apache.nifi",
+      "version": "2.12.0",
+      "path": "opt/nifi/nifi-current/lib/nifi-zendesk-services-nar-2.12.0.nar",
+      "sha256": "7871df5ed1339d01b17d327b000c77f8777ff6117db1bc0e0ca19674741ffd7f",
+      "parent": "nifi-standard-shared-nar",
+      "action": "retain",
+      "reason": "preserve-platform-default-security-ui-or-unclassified"
+    }
+  ],
+  "required_flow_bundle_ids": [
+    "nifi-elasticsearch-client-service-api-nar",
+    "nifi-elasticsearch-client-service-nar",
+    "nifi-elasticsearch-restapi-nar",
+    "nifi-groovyx-nar",
+    "nifi-jetty-nar",
+    "nifi-kafka-3-service-nar",
+    "nifi-kafka-nar",
+    "nifi-kafka-service-api-nar",
+    "nifi-record-serialization-services-nar",
+    "nifi-standard-nar",
+    "nifi-standard-services-api-nar",
+    "nifi-standard-shared-nar",
+    "nifi-update-attribute-nar"
+  ],
+  "implicit_jetty_root": "nifi-jetty-nar",
+  "preserve_scopes": [
+    "opt/nifi",
+    "usr/local/bin/uv",
+    "usr/local/bin/uvx"
+  ],
+  "source_inventory_provenance": {
+    "path": "reports-final/inventory-v2.json",
+    "sha256": "7bec2a9e8abedb456a9617d59a090e744ac0bb48465cff820f8d6f3bbbb00c6e",
+    "limits": "119 whole-NAR identities only; inherited WAR/consumer closure is not qualified. Complete non-NAR tree is copied and compared, not pruned."
+  },
+  "capability_scope": "Retain CNC 13 declared-flow bundle closure plus all unknown, framework, security, defaults, UI, SMB, scripting, Jolt, Kafka and ES bundles. Sixteen whole optional NAR exclusions remove AMQP, AWS/Kinesis, GCP, Iceberg and Kafka cloud adapters; no complete runtime-equivalence claim.",
+  "observed_configuration_sha256": "069aa606f0a1900bc1211c80d417b218937f72b0bb11a71d409886e3dce31455",
+  "observed_configuration_scope": "Own running six-event CG32 lab only; provider classes are declarations, property hashes do not qualify selected provider or SPI closure."
+}
