@@ -172,6 +172,7 @@ def test_history_reconciliation_follows_cursor_and_reports_absence():
     from scripts.integration_lab import find_history_event
 
     calls = []
+    stamp = "2026-10-23T00:00:00Z"
 
     def handle(request):
         calls.append(dict(request.url.params))
@@ -187,22 +188,43 @@ def test_history_reconciliation_follows_cursor_and_reports_absence():
 
     with httpx.Client(transport=httpx.MockTransport(handle)) as client:
         row, response = find_history_event(
-            client, "http://fixture/history", {"event_key": "target"}, "cutoff"
+            client, "http://fixture/history", {"event_key": "target", "timestamp": stamp}, "cutoff"
         )
         assert row["event_key"] == "target" and response.status_code == 200
-        assert calls == [{"hasta": "cutoff"}, {"cursor": "page-2"}]
+        assert calls == [{"desde": stamp, "hasta": "cutoff"}, {"cursor": "page-2"}]
         with pytest.raises(ValueError, match="absent from complete history"):
             find_history_event(
-                client, "http://fixture/history", {"event_key": "absent"}, "cutoff"
+                client, "http://fixture/history", {"event_key": "absent", "timestamp": stamp}, "cutoff"
             )
         with pytest.raises(ValueError, match="page budget"):
             find_history_event(
                 client,
                 "http://fixture/history",
-                {"event_key": "target"},
+                {"event_key": "target", "timestamp": stamp},
                 "cutoff",
                 max_pages=1,
             )
+
+
+def test_history_reconciliation_includes_selected_event_older_than_default_day():
+    from datetime import UTC, datetime, timedelta
+
+    import httpx
+
+    from scripts.integration_lab import find_history_event
+
+    end = datetime(2026, 11, 6, tzinfo=UTC)
+    stamp = datetime(2026, 10, 23, tzinfo=UTC)
+    selected = {"event_key": "actual-archived-event", "timestamp": stamp.isoformat()}
+
+    def handle(request):
+        start = datetime.fromisoformat(request.url.params["desde"]) if "desde" in request.url.params else end - timedelta(days=1)
+        rows = [selected] if start <= stamp < end else []
+        return httpx.Response(200, json={"metadata": {"events": rows}, "next_cursor": None})
+
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+        row, _ = find_history_event(client, "http://fixture/history", selected, end.isoformat())
+    assert row == selected
 
 
 def test_bundle_preserves_build_inputs_and_detects_extracted_tampering(

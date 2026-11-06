@@ -12,7 +12,9 @@ from scripts.integration_verify import check_compose, check_wiring, same_event
 
 def find_history_event(client, url, selected, end, *, max_pages=100):
     """Follow a stable history cursor; never infer absence from a partial page."""
-    params = {"hasta": end}
+    # Snapshot reads span 185 days; history defaults to one day. Start at the
+    # selected observation so an older persisted fixture remains reconcilable.
+    params = {"desde": selected["timestamp"], "hasta": end}
     seen = set()
     for _ in range(max_pages):
         response = client.get(url, params=params)
