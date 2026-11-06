@@ -48,6 +48,19 @@ public class OtelExercise {
             propagator.inject(extracted,injected,Map::put);
             if (!headers.get("traceparent").equals(injected.get("traceparent")))
                 throw new AssertionError("injected traceparent");
+            // Bounded compatibility/security-limit controls, not timing/OOM probes.
+            headers.put("tracestate", "invalid member");
+            if (!Span.fromContext(propagator.extract(Context.root(),headers,GETTER))
+                .getSpanContext().getTraceState().isEmpty())
+                throw new AssertionError("malformed tracestate accepted");
+            StringJoiner tooMany=new StringJoiner(",");
+            for(int i=0;i<33;i++)tooMany.add("k"+i+"=v");
+            headers.put("tracestate",tooMany.toString());
+            int[] members={0};
+            Span.fromContext(propagator.extract(Context.root(),headers,GETTER))
+                .getSpanContext().getTraceState().forEach((k,v)->members[0]++);
+            if(members[0]>32)throw new AssertionError("tracestate member maximum exceeded");
+            System.out.println("tracestate-bounded-valid-invalid-overmaximum=pass retained="+members[0]);
             headers.put("traceparent", "invalid");
             if (Span.fromContext(propagator.extract(Context.root(),headers,GETTER)).getSpanContext().isValid())
                 throw new AssertionError("malformed traceparent accepted");

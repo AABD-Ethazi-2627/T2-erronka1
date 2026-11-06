@@ -17,6 +17,23 @@ SPEC = importlib.util.spec_from_file_location(
 )
 q = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(q)
+COVERAGE_SPEC = importlib.util.spec_from_file_location(
+    "_otel_coverage", HERE / "coverage.py"
+)
+c = importlib.util.module_from_spec(COVERAGE_SPEC)
+COVERAGE_SPEC.loader.exec_module(c)
+
+EXTERNAL_CONSUMERS = [
+    "io.grpc.opentelemetry.GrpcOpenTelemetry",
+    "io.grpc.opentelemetry.OpenTelemetryMetricSink",
+    "com.google.cloud.opentelemetry.metric.MetricTranslator",
+    "com.google.cloud.opentelemetry.metric.InternalMetricExporter",
+    "com.google.cloud.storage.OpenTelemetryBootstrappingUtils",
+    "com.google.cloud.bigquery.storage.v1.TelemetryMetrics",
+    "com.google.cloud.pubsub.v1.OpenTelemetryPubsubTracer",
+    "com.google.api.gax.tracing.OpenTelemetryMetricsRecorder",
+    "io.opentelemetry.contrib.gcp.resource.GCPResourceProvider",
+]
 
 
 def select_observed(known, artifacts):
@@ -34,6 +51,24 @@ def collect(known, original, cache, replacements):
     references = []
     consumers = []
     count = 0
+    external = {}
+    external_details = []
+    all_references = []
+    family = {
+        "opentelemetry-" + a + "-" + v + ".jar"
+        for a in (
+            "api",
+            "context",
+            "common",
+            "sdk",
+            "sdk-common",
+            "sdk-trace",
+            "sdk-metrics",
+            "sdk-logs",
+            "sdk-extension-autoconfigure-spi",
+        )
+        for v in ("1.62.0", "1.67.0")
+    }
     api = {
         "opentelemetry-" + a + "-" + v + ".jar"
         for a in ("api", "context", "common")
@@ -52,8 +87,19 @@ def collect(known, original, cache, replacements):
                 count += 1
                 if model["name"].startswith("io/opentelemetry/"):
                     models.setdefault(model["name"], model)
+                label = row["id"] + "!" + file.name + "!" + name
+                all_references.extend(
+                    (label, tuple(ref)) for ref in model["references"]
+                )
+                is_external = file.name not in family and not file.name.startswith(
+                    "opentelemetry-semconv-"
+                )
+                if is_external and (model["references"] or model["descriptor_types"]):
+                    external[model["name"]] = model
+                    external_details.extend(
+                        (label, tuple(ref)) for ref in model["reference_details"]
+                    )
                 if file.name not in api and model["references"]:
-                    label = row["id"] + "!" + file.name + "!" + name
                     references.extend(
                         (label, tuple(ref)) for ref in model["references"]
                     )
@@ -66,7 +112,15 @@ def collect(known, original, cache, replacements):
                     )
     if not references:
         raise ValueError("empty applicable consumer set")
-    return models, references, consumers, count
+    return {
+        "models": models,
+        "references": references,
+        "consumers": consumers,
+        "class_entries": count,
+        "external_models": external,
+        "external_details": external_details,
+        "all_references": all_references,
+    }
 
 
 def main():
@@ -80,6 +134,8 @@ def main():
     known = json.loads((HERE / "known-inputs.json").read_text())
     pins = json.loads((HERE / "aligned-pins.json").read_text())
     original = baseline / "attempt-03/expanded-old"
+    top = baseline / "attempt-03/top"
+    input_verification = c.verify_expanded(known, original, top)
     replacements = select_observed(known, pins["artifacts"])
     if len(replacements) != 9:
         raise ValueError("incomplete observed family")
@@ -90,13 +146,12 @@ def main():
     # Oracle also launches a bounded JVM; its virtual reservation is not RSS.
     if a.phase == "static":
         resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2,) * 2)
-    report = {
-        "phase": a.phase,
-        "replacement": None,
-        "runtime_approved": False,
-        "sources_before": source,
-        "commands": [],
-    }
+    report = q.preparation_report(
+        phase=a.phase,
+        sources_before=source,
+        commands=[],
+        verified_inputs=input_verification,
+    )
     start = time.monotonic()
 
     def run(cmd, label, expected=0):
@@ -212,56 +267,150 @@ def main():
                 ),
             )
         elif a.phase == "static":
-            old, oldrefs, oldconsumers, oldcount = collect(known, original, cache, {})
+            old_data = collect(known, original, cache, {})
+            old, oldrefs = old_data["models"], old_data["references"]
+            old_unresolved = c.classify_unresolved(old, oldrefs, "old", set())
+            old_identities = {
+                c.reference_identity(r["consumer"], r["reference"])
+                for r in old_unresolved
+            }
+            c.require_closed(old_unresolved)
             narrow = {
                 k: v
                 for k, v in replacements.items()
-                if any(
-                    k == "opentelemetry-" + x + "-1.62.0.jar"
+                if k
+                in {
+                    "opentelemetry-" + x + "-1.62.0.jar"
                     for x in ("api", "context", "common")
-                )
+                }
             }
-            narrowmodels, _, _, _ = collect(known, original, cache, narrow)
-            narrow_fail = q.newly_broken(old, narrowmodels, oldrefs)
+            narrow_data = collect(known, original, cache, narrow)
+            narrow_fail = q.newly_broken(old, narrow_data["models"], oldrefs)
             if len(narrow_fail) != 10:
                 raise ValueError("sealed ten-reference negative control changed")
-            aligned, refs, consumers, count = collect(
-                known, original, cache, replacements
-            )
+            aligned_data = collect(known, original, cache, replacements)
+            aligned, refs = aligned_data["models"], aligned_data["references"]
             failures = q.newly_broken(old, aligned, refs)
+            classified = c.classify_unresolved(aligned, refs, "aligned", old_identities)
+            all_classified = c.classify_unresolved(
+                aligned,
+                aligned_data["all_references"],
+                "aligned-all-family-including-api",
+                old_identities,
+            )
+            c.require_closed(classified)
+            c.require_closed(all_classified)
+            if failures:
+                raise ValueError("newly broken aligned symbolic references")
+            reversed_data = collect(
+                known,
+                original,
+                cache,
+                {k: v for k, v in replacements.items() if k not in narrow},
+            )
+            reversed_unresolved = c.classify_unresolved(
+                reversed_data["models"],
+                reversed_data["references"],
+                "sdk-new-api-old",
+                old_identities,
+            )
+            reversed_unknown = [
+                r for r in reversed_unresolved if r["category"] == "unknown"
+            ]
+            if len(reversed_unknown) != 8 or any(
+                r["reference"][0] != "io/opentelemetry/common/impl/ConfigUtil"
+                for r in reversed_unknown
+            ):
+                raise ValueError(
+                    "reversed SDK/API negative control lost its eight ConfigUtil references"
+                )
+            try:
+                c.require_closed(reversed_unresolved)
+            except ValueError:
+                pass
+            else:
+                raise ValueError("reversed SDK/API unknown references accepted")
             mutant = dict(aligned)
             mutant.pop("io/opentelemetry/api/OpenTelemetry", None)
             control = q.newly_broken(old, mutant, refs)
             if not control:
                 raise ValueError("missing API mutation did not discriminate")
-            unresolved = [
-                {"consumer": c, "reference": list(r)}
-                for c, r in refs
-                if q.resolve(aligned, r[0], (r[3], r[1], r[2])) is None
-            ]
-            q.save(b / "aligned-consumers.json", consumers)
+            abi = c.abi_delta(
+                old,
+                aligned,
+                aligned_data["external_models"],
+                aligned_data["external_details"],
+            )
+            if abi["external_impacts"]:
+                raise ValueError("observed external ABI impact")
+            actual_external_classes = {
+                x.replace("/", ".") for x in aligned_data["external_models"]
+            }
+            if not set(EXTERNAL_CONSUMERS) <= actual_external_classes:
+                raise ValueError(
+                    "selected probe class is not an observed external OTel consumer"
+                )
+            q.save(b / "external-consumers-for-probe.json", EXTERNAL_CONSUMERS)
+            q.save(b / "aligned-consumers.json", aligned_data["consumers"])
+            # The first narrow proof compared the unchanged propagator. Preserve it;
+            # here require the actual encoding source and shipped bytecode change.
+            public = json.loads((HERE / "public-pins.json").read_text())["files"]
+            old_source = baseline / "public-cache/opentelemetry-api-1.62.0-sources.jar"
+            old_pin = next(x for x in public if x["file"] == old_source.name)
+            q.verify_file(old_source, old_pin["sha256"])
+            encoding = "io/opentelemetry/api/trace/propagation/internal/W3CTraceContextEncoding.java"
+            patch = c.source_change(
+                old_source, cache / "opentelemetry-api-1.67.0-sources.jar", encoding
+            )
+            (b / "tracestate-encoding-source-diff.patch").write_text(patch)
+            encoding_class = encoding.removesuffix(".java") + ".class"
+            with __import__("zipfile").ZipFile(
+                original
+                / "nifi-gcp-nar/NAR-INF/bundled-dependencies/opentelemetry-api-1.62.0.jar"
+            ) as z:
+                old_code = z.read(encoding_class)
+            with __import__("zipfile").ZipFile(
+                cache / "opentelemetry-api-1.67.0.jar"
+            ) as z:
+                new_code = z.read(encoding_class)
+            if (
+                b"java/util/regex/Pattern" not in old_code
+                or b"TRACESTATE_ENTRY_DELIMITER_SPLIT_PATTERN" not in old_code
+                or b"java/util/regex/Pattern" in new_code
+                or b"lastIndexOf" not in new_code
+            ):
+                raise ValueError(
+                    "encoding bytecode security-change control did not discriminate"
+                )
             report.update(
                 status="aligned-symbolic-analysis-completed",
-                old_class_entries=oldcount,
-                new_class_entries=count,
-                old_consumer_entries=len(oldconsumers),
-                aligned_consumer_entries=len(consumers),
+                old_class_entries=old_data["class_entries"],
+                new_class_entries=aligned_data["class_entries"],
+                old_consumer_entries=len(old_data["consumers"]),
+                aligned_consumer_entries=len(aligned_data["consumers"]),
                 old_references=len(oldrefs),
                 aligned_references=len(refs),
                 narrow_negative_control=narrow_fail,
+                reversed_sdk_api_negative_control=reversed_unknown,
                 newly_broken_references=failures,
                 missing_api_negative_new_failures=len(control),
-                unresolved_current_references=unresolved,
+                unresolved_old=old_unresolved,
+                unresolved_current_references=classified,
+                unresolved_including_api_family=all_classified,
+                abi_delta=abi,
+                actual_external_consumer_classes=len(aligned_data["external_models"]),
+                selected_external_consumers=EXTERNAL_CONSUMERS,
+                security_source_patch_sha256=q.sha(patch.encode()),
+                security_evidence="actual changed encoding source and shipped bytecode; benign runtime limits are compatibility controls, not CVE closure",
                 limits=[
-                    "direct CP and inheritance within OTel model only; no full JVM access/reflection/default-method proof",
-                    "descriptor-only references and JDK-inherited symbols incompletely modeled",
-                    "physical duplicate/shadowed entries counted; actual loader tested separately",
+                    "CP/inheritance/declared ABI and observed external implementations only; no complete JVM access/reflection/method-handle verifier",
+                    "optional internal incubator symbols remain absent and paths unexecuted; external unresolved non-JDK symbols fail closed",
+                    "physical duplicate/shadowed entries counted; loader checked separately",
                 ],
             )
         else:
             out = b / "runtime"
             out.mkdir(exist_ok=False)
-            top = baseline / "attempt-03/top"
             cp = os.pathsep.join(map(str, sorted(top.glob("*.jar"))))
             classes = out / "classes"
             classes.mkdir()
@@ -350,10 +499,12 @@ def main():
                 for suffix in filenames:
                     oldname = "opentelemetry-" + suffix + "-1.62.0.jar"
                     file = mapping.get(oldname, oldname)
-                    arguments.extend([file, q.sha((leaf / file).read_bytes())])
+                    arguments.extend([file, c.expected_origin(known, pins, file)])
                 consumers = json.loads(
-                    (baseline / "attempt-03/nifi-consumer-candidates.json").read_text()
-                )[:3]
+                    (b / "external-consumers-for-probe.json").read_text()
+                )
+                if consumers != EXTERNAL_CONSUMERS:
+                    raise ValueError("external consumer selection drift")
                 stdout, stderr = run(
                     [
                         java,
@@ -364,7 +515,6 @@ def main():
                         tree,
                         baseline / "attempt-03/parents.tsv",
                         *arguments,
-                        "io.grpc.opentelemetry.GrpcOpenTelemetry",
                         *consumers,
                     ],
                     "real-nar-" + name,
@@ -380,19 +530,52 @@ def main():
                     {
                         "variant": name,
                         "returncode": report["commands"][-1]["returncode"],
-                        "actual_loaded_consumer_names": consumers,
+                        "observed_external_consumer_initialization": c.observed_consumers(
+                            stdout
+                        ),
+                        "service_provider_lines": [
+                            line
+                            for line in stdout.splitlines()
+                            if line.startswith(
+                                ("service-provider\t", "service-result\t")
+                            )
+                        ],
                         "configutil_consumer_passed": "actual-sdk-configutil-consumer=pass"
                         in stdout,
                     }
                 )
+            c.require_consumer_parity(
+                outcomes[0]["observed_external_consumer_initialization"],
+                outcomes[2]["observed_external_consumer_initialization"],
+                EXTERNAL_CONSUMERS,
+            )
+            if outcomes[1]["observed_external_consumer_initialization"]:
+                raise ValueError(
+                    "narrow early failure unexpectedly claimed later consumer initialization"
+                )
+            if (
+                outcomes[0]["service_provider_lines"]
+                != outcomes[2]["service_provider_lines"]
+                or not outcomes[2]["service_provider_lines"]
+            ):
+                raise ValueError(
+                    "explicit ResourceProvider loader coverage/parity mismatch"
+                )
+            if (
+                not outcomes[0]["configutil_consumer_passed"]
+                or not outcomes[2]["configutil_consumer_passed"]
+            ):
+                raise ValueError("SDK actual configuration consumer not observed")
             report.update(
                 status="bounded-real-NarClassLoader-aligned-controls-passed",
                 outcomes=outcomes,
                 limits=[
-                    "not NiFi scheduling/server, exporters, resource-provider traversal or GCP service acceptance",
-                    "unrelated gRPC/alpha artifacts stay unchanged; selected classes loaded only",
+                    "not NiFi scheduling/server, exporter operations, resource-provider getAttributes or GCP service acceptance",
+                    "ResourceProvider constructors traversed with explicit NAR loader; actual processor InstanceClassLoader and TCCL remain unmodeled",
+                    "unrelated gRPC/alpha artifacts unchanged; selected actual external consumers initialized with old/aligned parity",
                 ],
             )
+        c.verify_expanded(known, original, top)
         report["sources_after"] = {
             str(f): q.sha(f.read_bytes()) for f in HERE.iterdir() if f.is_file()
         }

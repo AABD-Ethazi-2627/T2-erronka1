@@ -67,7 +67,13 @@ Maven, and may not promote any overlay/runtime/profile or unrelated gRPC/alpha
 package. The current narrow baseline remains intact.
 
 
-## Aligned observed SDK result
+## Historical aligned SDK result (before independent QA)
+
+Independent QA of `a6bddd0` found an evidence defect: the three previously
+selected GCP classes were not demonstrated to consume OTel, and loading with
+initialization disabled did not qualify their behavior. The raw result below
+is preserved as history. Its SDK/configuration controls remain observations;
+its former GCP consumer claim must not be used as acceptance evidence.
 
 See `aligned-result.json`. The frozen batch ran after the VM's authorized RAM
 resize to 10 GiB; its resource preflight retained the 6 GiB available / 20 GiB
@@ -98,15 +104,16 @@ Using the installed `NarClassLoader` and actual four-NAR parent chain:
 | API/context/common 1.67, old SDK 1.62 | Fails specifically with missing `api.internal.ConfigUtil` |
 | All nine observed modules 1.67 | Config conversion, SDK trace/context/baggage/metrics/log and benign propagation pass |
 
-The probe checks the nine loaded class origins and their JAR hashes. It also
-loads the actual gRPC facade and three GCP consumer classes without initializing
-or scheduling them. The launcher TCCL is not changed; SPI/resource-provider
-traversal, exporter operations, NiFi scheduling/server and GCP operations remain
-unqualified. Actual image NAR hashes, image identity and tested sources remain
+The historical probe checks nine loaded class origins and JAR hashes, and loads
+selected classes without initialization. This is not evidence of actual GCP
+consumer execution. The launcher TCCL is not changed; SPI/resource-provider
+traversal, exporter operations, NiFi scheduling/server and GCP operations were
+unqualified in that run. Actual image NAR hashes, image identity and tested sources remain
 unchanged, with no owned containers left behind.
 
-The aligned component is ready for independent QA before any occurrence/overlay
-selection. `replacement:null` and `runtime_approved:false` remain enforced in
+The historical aligned component underwent independent QA, which required a
+corrected experiment before occurrence/overlay selection. `replacement:null`
+and `runtime_approved:false` remain enforced in
 result metadata. No fresh image scan, CG32, SMB, model or human acceptance follows
 from this proof. The earlier narrow failures and their immutable proof stay
 available. This section and `aligned-result.json` were added after execution;
@@ -115,3 +122,25 @@ the compact evidence includes the exact earlier source snapshot that ran.
 The separate ES inventory observation is conditional: its APM directory contains
 old 1.62 SDK modules beside the new triple, but the ES loader/exporter/agent
 closure has not been qualified. This GCP nine-module result does not qualify ES.
+
+## Corrected experiment prepared after QA
+
+The corrected source selects nine actual external OTel consumers, records their
+initialization outcomes instead of presumed loading, requires old/aligned
+parity, and traverses ResourceProvider SPI with the explicit NAR loader. A
+matching failure in both versions is recorded as a failure, not qualified
+consumer behavior. Exporter operations, provider attributes, processor TCCL and
+NiFi services remain outside this experiment.
+
+All 189 expanded direct JARs and 16 launcher inputs are verified independently
+before and after each phase. Unknown unresolved references fail the symbolic
+gate; inherited JDK members and internal optional incubator references are
+classified by caller and symbol. A reversed SDK-new/API-old control must expose
+eight ConfigUtil references. Declared ABI changes and external impacts are
+reported separately. The actual encoding source diff and bytecode markers must
+discriminate; benign propagation tests do not establish CVE closure.
+
+The runner now fails on blocked phases, source/image drift and cleanup errors.
+Its versioned summary generator refuses incomplete reports and existing output.
+Both portable suites pass locally: 49 tests and 3 subtests. A fresh corrected
+VM batch is pending; the historical result is not relabeled as this source.

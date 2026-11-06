@@ -3,6 +3,7 @@
 import hashlib
 import io
 import json
+import re
 import stat
 import zipfile
 from pathlib import Path
@@ -17,6 +18,15 @@ def sha(data):
 
 def save(path, value):
     Path(path).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def preparation_report(**values):
+    if (
+        values.get("runtime_approved", False) is not False
+        or values.get("replacement") is not None
+    ):
+        raise ValueError("qualification cannot emit promotion")
+    return values | {"replacement": None, "runtime_approved": False}
 
 
 def verify_file(path, expected):
@@ -193,18 +203,29 @@ def parse(data):
         return cp[cp[index][1]]
 
     refs = set()
+    details = set()
+    descriptors = set()
     for item in cp:
+        if isinstance(item, tuple) and item[0] in (12, 16):
+            descriptor = cp[item[2] if item[0] == 12 else item[1]]
+            descriptors.update(re.findall(r"L(io/opentelemetry/[^;]+);", descriptor))
         if isinstance(item, tuple) and item[0] == 7:
             name = cp[item[1]]
             if name.startswith("io/opentelemetry/"):
                 refs.add((name, "", "", "class"))
+                details.add((name, "", "", "class", 7))
         if isinstance(item, tuple) and item[0] in (9, 10, 11):
             owner = cls(item[1])
             if owner.startswith("io/opentelemetry/"):
                 nt = cp[item[2]]
-                refs.add(
-                    (owner, cp[nt[1]], cp[nt[2]], "field" if item[0] == 9 else "method")
+                reference = (
+                    owner,
+                    cp[nt[1]],
+                    cp[nt[2]],
+                    "field" if item[0] == 9 else "method",
                 )
+                refs.add(reference)
+                details.add((*reference, item[0]))
     flags = u(2)
     name = cls(u(2))
     sup = u(2)
@@ -214,6 +235,7 @@ def parse(data):
         for _ in range(u(2)):
             access, member, descriptor = u(2), cp[u(2)], cp[u(2)]
             members[(kind, member, descriptor)] = access
+            descriptors.update(re.findall(r"L(io/opentelemetry/[^;]+);", descriptor))
             for _ in range(u(2)):
                 u(2)
                 size = u(4)
@@ -226,6 +248,8 @@ def parse(data):
         "parents": parents,
         "members": members,
         "references": sorted(refs),
+        "reference_details": sorted(details),
+        "descriptor_types": sorted(descriptors),
     }
 
 

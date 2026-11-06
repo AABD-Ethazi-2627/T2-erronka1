@@ -60,13 +60,10 @@ def run_qualification(base=BASE):
                 "/opt/cnc-guard/venvs/py311/bin/python",
                 "-B",
                 "-m",
-                "unittest",
-                "discover",
-                "-s",
-                str(BASE / "source/tests"),
-                "-p",
-                "test_nifi_otel_qualification.py",
-                "-v",
+                "pytest",
+                "-q",
+                str(BASE / "source/tests/test_nifi_otel_qualification.py"),
+                str(BASE / "source/tests/test_nifi_otel_proof_guards.py"),
             ]
             t = subprocess.run(
                 test, stdout=f, stderr=subprocess.STDOUT, timeout=35, check=False

@@ -365,5 +365,266 @@ class OtelQualificationGuards(unittest.TestCase):
             module.select_observed(known, ["api", "sdk-common", "exporter-otlp"])
 
 
+class CorrectedCoverageGuards(unittest.TestCase):
+    def helper(self):
+        path = TOOL.with_name("coverage.py")
+        spec = importlib.util.spec_from_file_location("otel_coverage", path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+    def model(self, parents=(), members=None, flags=1):
+        return {
+            "parents": list(parents),
+            "members": members or {},
+            "flags": flags,
+            "references": [],
+            "reference_details": [],
+            "descriptor_types": [],
+        }
+
+    def test_emitted_report_cannot_promote_qualification(self):
+        q = load_tool()
+        r = q.preparation_report(status="component-tested")
+        self.assertIsNone(r["replacement"])
+        self.assertFalse(r["runtime_approved"])
+        for kw in ({"runtime_approved": True}, {"replacement": "applied"}):
+            with self.assertRaisesRegex(ValueError, "promotion"):
+                q.preparation_report(**kw)
+
+    def test_unresolved_classifies_exact_jdk_inheritance_and_new_incubator(self):
+        c = self.helper()
+        owner = "io/opentelemetry/Enum"
+        model = {owner: self.model(["java/lang/Enum"])}
+        refs = [
+            (
+                "gcp!exporter.jar!outside/Caller.class",
+                (owner, "ordinal", "()I", "method"),
+            ),
+            (
+                "gcp!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/Sdk.class",
+                ("io/opentelemetry/api/incubator/BoundThing", "", "", "class"),
+            ),
+        ]
+        records = c.classify_unresolved(model, refs, "aligned", set())
+        self.assertEqual(
+            [r["category"] for r in records],
+            ["jdk-inherited-member", "internal-optional-incubator"],
+        )
+        self.assertTrue(
+            all(r["scenario"] == "aligned" and not r["seen_in_old"] for r in records)
+        )
+        c.require_closed(records)
+
+    def test_unresolved_unknown_new_sdk_symbol_fails_even_if_absent_before(self):
+        c = self.helper()
+        refs = [
+            (
+                "gcp!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/Sdk.class",
+                ("io/opentelemetry/common/impl/ConfigUtil", "", "", "class"),
+            )
+        ]
+        records = c.classify_unresolved({}, refs, "sdk-new-api-old", set())
+        self.assertEqual(records[0]["category"], "unknown")
+        with self.assertRaisesRegex(ValueError, "unclassified"):
+            c.require_closed(records)
+
+    def test_external_incubator_reference_fails_closed(self):
+        c = self.helper()
+        r = c.classify_unresolved(
+            {},
+            [
+                (
+                    "gcp!consumer.jar!outside/C.class",
+                    ("io/opentelemetry/api/incubator/Thing", "", "", "class"),
+                )
+            ],
+            "aligned",
+            set(),
+        )
+        with self.assertRaisesRegex(ValueError, "unclassified"):
+            c.require_closed(r)
+
+    def test_external_otel_contrib_incubator_is_not_sdk_internal(self):
+        c = self.helper()
+        rows = c.classify_unresolved(
+            {},
+            [
+                (
+                    "g!opentelemetry-gcp-resources-1.37.0-alpha.jar!io/opentelemetry/contrib/C.class",
+                    ("io/opentelemetry/api/incubator/Missing", "", "", "class"),
+                )
+            ],
+            "aligned",
+            set(),
+        )
+        with self.assertRaisesRegex(ValueError, "unclassified"):
+            c.require_closed(rows)
+
+    def test_jdk_method_name_alone_cannot_hide_missing_owner_or_wrong_signature(self):
+        c = self.helper()
+        owner = "io/opentelemetry/Missing"
+        for models, ref in [
+            ({}, (owner, "ordinal", "()I", "method")),
+            (
+                {owner: self.model(["java/lang/Object"])},
+                (owner, "ordinal", "()I", "method"),
+            ),
+            (
+                {owner: self.model(["java/lang/Enum"])},
+                (owner, "ordinal", "()J", "method"),
+            ),
+        ]:
+            with self.subTest(ref=ref, models=models):
+                rows = c.classify_unresolved(
+                    models, [("g!x.jar!C.class", ref)], "aligned", set()
+                )
+                with self.assertRaises(ValueError):
+                    c.require_closed(rows)
+
+    def test_abi_delta_reports_removed_abstract_access_static_and_external_impact(self):
+        c = self.helper()
+        key = ("method", "work", "()V")
+        old = {"io/opentelemetry/Base": self.model(members={key: 1})}
+        new = {"io/opentelemetry/Base": self.model(members={key: 0x409})}
+        outside = {"outside/Impl": self.model(["io/opentelemetry/Base"])}
+        report = c.abi_delta(
+            old,
+            new,
+            outside,
+            [
+                (
+                    "g!outside.jar!outside/Impl.class",
+                    ("io/opentelemetry/Base", "work", "()V", "method", 10),
+                )
+            ],
+        )
+        self.assertEqual(len(report["new_abstract_members"]), 1)
+        self.assertEqual(len(report["static_changes"]), 1)
+        self.assertTrue(report["external_impacts"])
+        removed = c.abi_delta(old, {"io/opentelemetry/Base": self.model()}, {}, [])
+        self.assertEqual(len(removed["declared_public_protected_removals"]), 1)
+
+    def test_existing_input_inventory_is_verified_before_class_parsing(self):
+        c = self.helper()
+        q = load_tool()
+        with tempfile.TemporaryDirectory() as tmp:
+            b = Path(tmp)
+            top = b / "top"
+            top.mkdir()
+            leaf = b / "expanded/gcp/NAR-INF/bundled-dependencies"
+            leaf.mkdir(parents=True)
+            (leaf / "a.jar").write_bytes(b"changed")
+            known = {
+                "nar_chain": [
+                    {
+                        "id": "gcp",
+                        "direct_jars": [
+                            {
+                                "entry": "META-INF/bundled-dependencies/a.jar",
+                                "sha256": q.sha(b"old"),
+                            }
+                        ],
+                    }
+                ],
+                "launcher_jars": [],
+            }
+            with self.assertRaisesRegex(ValueError, "integrity"):
+                c.verify_expanded(known, b / "expanded", top)
+
+    def test_inventory_rejects_extra_jars_and_expected_origins_use_pins(self):
+        c = self.helper()
+        q = load_tool()
+        with tempfile.TemporaryDirectory() as tmp:
+            b = Path(tmp)
+            top = b / "top"
+            top.mkdir()
+            leaf = b / "expanded/gcp/NAR-INF/bundled-dependencies"
+            leaf.mkdir(parents=True)
+            (leaf / "a.jar").write_bytes(b"old")
+            known = {
+                "nar_chain": [
+                    {
+                        "id": "gcp",
+                        "direct_jars": [
+                            {
+                                "entry": "META-INF/bundled-dependencies/a.jar",
+                                "sha256": q.sha(b"old"),
+                            }
+                        ],
+                    }
+                ],
+                "launcher_jars": [],
+            }
+            c.verify_expanded(known, b / "expanded", top)
+            self.assertEqual(
+                c.expected_origin(known, {"files": []}, "a.jar"), q.sha(b"old")
+            )
+            (leaf / "planted.jar").write_bytes(b"new")
+            with self.assertRaisesRegex(ValueError, "inventory"):
+                c.verify_expanded(known, b / "expanded", top)
+
+    def test_consumer_results_are_parsed_from_observed_output_only(self):
+        c = self.helper()
+        rows = c.observed_consumers(
+            "consumer-init\tA\tPASS\t-\nconsumer-init\tB\tFAIL\tjava.lang.NoClassDefFoundError\n"
+        )
+        self.assertEqual(
+            rows,
+            {
+                "A": {"status": "PASS", "cause": "-"},
+                "B": {"status": "FAIL", "cause": "java.lang.NoClassDefFoundError"},
+            },
+        )
+        with self.assertRaisesRegex(ValueError, "coverage"):
+            c.require_consumer_parity(rows, {"A": rows["A"]}, ["A", "B"])
+        c.require_consumer_parity(rows, rows, ["A", "B"])
+
+    def test_parser_retains_methodref_interface_methodref_and_descriptor_types(self):
+        pool = []
+
+        def utf(value):
+            pool.append(b"\x01" + struct.pack(">H", len(value)) + value.encode())
+            return len(pool)
+
+        def entry(tag, *values):
+            pool.append(bytes([tag]) + b"".join(struct.pack(">H", v) for v in values))
+            return len(pool)
+
+        caller = entry(7, utf("outside/Caller"))
+        parent = entry(7, utf("java/lang/Object"))
+        owner = entry(7, utf("io/opentelemetry/Api"))
+        name = utf("work")
+        desc = utf("()Lio/opentelemetry/Result;")
+        nt = entry(12, name, desc)
+        entry(10, owner, nt)
+        entry(11, owner, nt)
+        data = struct.pack(">IHHH", 0xCAFEBABE, 0, 52, len(pool) + 1) + b"".join(pool)
+        data += struct.pack(">HHHHH", 0x21, caller, parent, 0, 0)
+        data += struct.pack(">HHHHHH", 1, 1, name, desc, 0, 0)
+        model = load_tool().parse(data)
+        methods = [r for r in model["reference_details"] if r[3] == "method"]
+        self.assertEqual({r[4] for r in methods}, {10, 11})
+        self.assertEqual(model["descriptor_types"], ["io/opentelemetry/Result"])
+
+    def test_abi_guard_accepts_external_implementation_of_new_abstract(self):
+        c = self.helper()
+        key = ("method", "work", "()V")
+        old = {"io/opentelemetry/Base": self.model(members={key: 1})}
+        new = {"io/opentelemetry/Base": self.model(members={key: 0x401})}
+        outside = {"outside/Impl": self.model(["io/opentelemetry/Base"], {key: 1})}
+        self.assertEqual(c.abi_delta(old, new, outside, [])["external_impacts"], [])
+
+    def test_security_source_diff_requires_real_encoding_change(self):
+        c = self.helper()
+        with tempfile.TemporaryDirectory() as tmp:
+            b = Path(tmp)
+            entry = "io/opentelemetry/api/trace/propagation/internal/W3CTraceContextEncoding.java"
+            for v in ("1.62.0", "1.67.0"):
+                (b / (v + ".jar")).write_bytes(jar([(entry, b"same")]))
+            with self.assertRaisesRegex(ValueError, "empty"):
+                c.source_change(b / "1.62.0.jar", b / "1.67.0.jar", entry)
+
+
 if __name__ == "__main__":
     unittest.main()
