@@ -55,11 +55,12 @@ class Closure:
             for x in profile.findall('m:properties/*',NS):
                 name=x.tag.split('}')[-1];profile_props.add(name)
                 profile_values.setdefault(name,set()).add(x.text or '')
-        def expand(s):
+        def expand(s, property_values=None):
+            property_values=props if property_values is None else property_values
             require(s is not None, 'missing POM value in '+coordinate)
             for _ in range(20):
                 if '${' not in s:return s
-                new=re.sub(r'\$\{([^}]+)\}',lambda m:props.get(m[1],m[0]),s)
+                new=re.sub(r'\$\{([^}]+)\}',lambda m:property_values.get(m[1],m[0]),s)
                 if new==s:break
                 s=new
             raise ValueError('unresolved POM property '+s+' in '+coordinate)
@@ -149,6 +150,12 @@ class Closure:
                         imported_management[k]=management[k]
         for d in managed:
             if d.get('scope')!='import':management[key(d,managed=True)]=d
+        # Parent dependencies already carry their parent's management. Refuse
+        # to re-key them in a child while silently retaining that old scope.
+        for inherited_dependency in pm['deps']:
+            require(tuple(expand(inherited_dependency[field]) for field in ('groupId','artifactId'))
+                    == tuple(expand(inherited_dependency[field],pm['props']) for field in ('groupId','artifactId')),
+                    'unsupported inherited dependency key interpolation')
         deps={key(d,managed=True):dict(d) for d in pm['deps']}
         local_management=imported_management|{key(d,managed=True):d for d in managed if d.get('scope')!='import'}
         for k,d in deps.items():
@@ -185,6 +192,12 @@ class Closure:
                 # child management. Do not discard it before rejecting the mark.
                 require(not d.get('_unsupported_inherited_management'),
                         'unsupported inherited dependency management override')
+                # An ambiguous plain-JAR key can hide a runtime edge as test.
+                # A classified test-only artifact is a different Maven key;
+                # keep unused native test classifiers out of runtime resolution.
+                if d.get('type','jar')=='jar' and not d.get('classifier'):
+                    require((expand(d['groupId']),expand(d['artifactId'])) not in uncertain_management,
+                            'unsupported management key for required dependency (profile-dependent runtime selector or interpolation)')
             if scope not in ('compile','runtime') or optional=='true':
                 self.decisions.append({'pom':coordinate,'raw':d,'disposition':'excluded-'+('optional' if optional=='true' else scope)})
                 continue

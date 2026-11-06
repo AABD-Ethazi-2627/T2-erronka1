@@ -361,3 +361,34 @@ class DependencyGuardTests(unittest.TestCase):
                          '</dependency></dependencies>')
                 with self.assertRaisesRegex(ValueError,'interpolated dependency type/classifier'):
                     self.deps()
+
+    def test_child_interpolation_of_inherited_dependency_key_is_unsupported(self):
+        for parent_value, child_value in (('other', 'leaf'), ('leaf', 'other')):
+            with self.subTest(parent_value=parent_value):
+                self.pins=[]
+                self.pom('leaf');self.pom('other')
+                self.pom('parent','<packaging>pom</packaging><properties><a>'+parent_value+
+                         '</a></properties>'+self.management(self.dependency('leaf','1','<scope>test</scope>'))+
+                         '<dependencies>'+self.dependency('${a}')+'</dependencies>')
+                self.pom('root','<parent><groupId>x</groupId><artifactId>parent</artifactId>'
+                         '<version>1</version></parent><properties><a>'+child_value+'</a></properties>')
+                with self.assertRaisesRegex(ValueError,'inherited dependency key interpolation'):
+                    self.deps()
+
+    def test_uncertain_managed_type_cannot_hide_required_dependency_as_test(self):
+        interpolated=self.dependency('leaf','1','<type>${t}</type><scope>compile</scope>')
+        literal=self.dependency('leaf','1','<scope>test</scope>')
+        for entries in ((interpolated,literal),(literal,interpolated)):
+            with self.subTest(entries=entries):
+                self.pins=[];self.pom('leaf')
+                self.pom('root','<properties><t>jar</t></properties>'+self.management(*entries)+
+                         '<dependencies>'+self.dependency('leaf')+'</dependencies>')
+                with self.assertRaisesRegex(ValueError,'unsupported management key'):
+                    self.deps()
+
+    def test_classified_native_test_dependency_stays_outside_runtime_closure(self):
+        classified=self.dependency('native','1','<classifier>${native.classifier}</classifier><scope>test</scope>')
+        self.pom('root','<properties><native.classifier>${os.name}-${os.arch}</native.classifier></properties>'+
+                 self.management(classified)+'<dependencies>'+classified+'</dependencies>')
+        self.assertEqual(self.model.Closure(self.cache,self.pins).resolve('x:root:1')['required_coordinates'],
+                         ['x:root:1'])
