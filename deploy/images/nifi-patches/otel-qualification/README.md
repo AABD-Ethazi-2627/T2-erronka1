@@ -152,5 +152,37 @@ mounted compiler JDK21 `java.base.jmod`, recording its hash and scope separately
 from the image JVM. Only the one exact old internal incubator caller/member/path
 is classified as optional inheritance; external or changed signatures still
 fail. Classified rows are saved before the gate, including on failure. Both
-portable suites pass locally: 52 tests and 3 subtests. A fresh VM batch is
-pending; the historical result is not relabeled as this source.
+portable suites pass locally: 52 tests and 3 subtests.
+
+## Corrected bounded VM result
+
+Frozen source `8429e12` passed those 52 tests and 3 subtests, followed by Maven
+(1.179 s), symbolic analysis (30.554 s) and real-loader controls (5.491 s), with
+the original limits unchanged. The versioned sealer generated `summary.json`.
+The downloaded archive SHA-256 is
+`54896f8f44cf5c3d142055387bb0dbe52a3c7a2120810438e5050af1396a4749`;
+all 54 payload hashes were checked after download. It is retained at
+`/home/tears/.cache/cnc-benten-vm-20261105/otel-aligned-reviewfix-8429e12/`.
+
+All nine selected external classes initialized successfully in both original
+and aligned trees. One ResourceProvider was instantiated through explicit
+ServiceLoader traversal in each. The narrow control failed at ConfigUtil before
+claiming any later initialization. SDK configuration and benign propagation
+controls passed in original/aligned trees. Provider attributes, exporter
+operations, actual NiFi processor TCCL and scheduling remain unexecuted.
+
+The 205 current unresolved references classify as 155 inherited JDK members and
+50 internal optional incubator references; none is unclassified. The old 228
+classify as 161 JDK, 66 optional incubator and the one exact old inherited
+incubator member. The reverse SDK-new/API-old control exposes eight unknown
+ConfigUtil references and is rejected. ABI differences include 10 new abstract
+members, 29 declared removals, 22 access restrictions and one static change,
+with zero modeled external impacts. This remains a bounded symbolic model.
+Its 144 external classes include descriptor-only users; the earlier review's
+110 counted constant-pool users, so those denominators are not interchangeable.
+
+All 189 expanded JARs, 16 launcher JARs, original image NARs, source bytes and
+image identity were verified unchanged, with no owned probe containers left.
+No serving image, archive replacement or approval flag changed. Independent
+recheck and remaining service/image/acceptance gates still apply; this result
+does not close the CVE, qualify ES, or reduce the current NiFi scan count.
