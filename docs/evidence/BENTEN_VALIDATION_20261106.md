@@ -116,3 +116,183 @@ Es inclusión preparada en el working tree. La prueba focalizada de restauració
 tampering y la comprobación de miembros tras incorporar los documentos a Git
 corresponden al coordinador; no se atribuye aquí su resultado. No se declara ZIP
 final publicado, suite completa nueva ni aceptación de entrega/runtime/humana.
+
+## Corte posterior: VM de 10 GiB, recorrido de seis eventos y navegador real
+
+Este corte amplía los resultados anteriores, que conservan su fuente y sus
+limitaciones históricas. Se inspecciona código `e4c5751`; **las imágenes y el worker
+que sirvieron la prueba siguen siendo `12ca2fa`, con Kibana `06e7e46`**. Las nuevas
+cualificaciones de dependencias son preparación posterior, sin imagen reconstruida
+ni nueva aceptación. Los gates normales de las imágenes y el gate anidado NiFi
+son puertas diferentes: este último sigue rojo con 15 hallazgos y ninguna excepción
+nueva. Un recorrido funcional no lo vuelve verde.
+
+La VM dimensionada a 10 GiB informa 10 428 280 832 bytes de memoria total y
+9 912 504 320 disponibles después del ajuste. Los preflight/up posteriores
+registran exit 0, manteniendo el requisito 6 GiB/20 GiB. Esta conciliación no modifica
+la VM ni repite el laboratorio. El resultado no establece capacidad bajo carga.
+
+Se conservan dos ejecuciones diferenciadas:
+
+- `benten-smoke-r1-966e5d`, exit 1: el selector pedía por defecto un día de historia,
+  mientras el snapshot admitía 185 días. No encontró el evento seleccionado y
+  la medición/reconciliación quedó incompleta. No se transforma en ejecución válida.
+- `benten-reconciled-r1-24fe26`, exit 0: nuevo topic/group/index, clon `12ca2fa`
+  intacto y **solo el selector** de `a1ed9d4`, fijado por SHA-256
+  `595e7e6e01f69f10540997f65be989338000ea91d177690a8be65e23559e235e`.
+  Solicita `desde=timestamp` del evento seleccionado. No se etiqueta el conjunto
+  mixto como ejecución íntegra del HEAD actual.
+
+El segundo ensayo ofrece seis eventos AI4I públicos con `source.kind=lab_fixture`,
+a 1 evento/s durante seis segundos y modelo público de desarrollo. El recorrido
+real Filebeat → Kafka → ciclo de worker programado por NiFi → API → CG15/ES → GET
+reconcilia **6 ofrecidos, 6 Kafka, 6 guardados y 6 documentos ES**, cero pérdidas,
+pendientes, rechazos, duplicados ES o elementos ajenos. Kafka termina committed/end
+6/6 y lag 0; se observan seis POST con respuesta 200, sin POST repetidos. No hay
+errores de controlador, observador o limpieza del run. El flujo demostrado usa ese
+worker: no se convierte en prueba general de InvokeHTTP u otros procesadores/NARs.
+
+El p95 HTTP es 28,66 ms; el p95 fin a fin, 24 533,51 ms; el drenaje, 28,12 s.
+Con solo seis muestras son medidas descriptivas de esta ejecución, sin garantía de
+latencia, caudal ni carga sostenida. Los máximos observados `container_mem_usage`
+son API 142,2 MiB, ES 941,3, Filebeat 12,9, Kafka 472,2 y NiFi 993,7; no son una
+medición de RSS del proceso ni un presupuesto simultáneo de toda la plataforma.
+No hay pausa, reinicio, fallo inyectado, soak ni campaña completa de carga CG32.
+
+El navegador real muestra el mismo evento seleccionado. Se verifican
+mecánicamente **26 campos del JSON visible del modal contra el snapshot GET**,
+con cero discrepancias, además de identidad canónica/CG15/ES del registro. Se
+observan escritorio 1280×800, móvil 390×844, modal, página de datos y avance real
+del temporizador. La ventana semanal vacía se conserva vacía; la de seis meses
+muestra una observación, `n=1`, último evento y procedencia, con agregación mensual
+UTC. No se inventan muestras, tendencia ni pronóstico. La evaluación offline
+figura no disponible/incompatible; no se acepta el modelo. No se observaron
+elementos de excepción Streamlit, pero **no se inspeccionaron exhaustivamente
+consola ni red** ni se certifica accesibilidad global.
+
+La exportación local `cg32-benten-public-20261106-01.tgz` tiene SHA-256
+`d172c47fd26408c37ca715b467ea9f0701b408f7da6f4b8ec4294905c541e308`:
+82 payloads verificados por el manifiesto, 83 ficheros regulares si se incluye el
+propio manifiesto. Se verifican además los siete artefactos del manifiesto de
+navegador, incluidas las dos capturas. Los nombres `ui:pending_browser` del run y
+`view-result` se conservan históricos: la reconciliación/capturas posteriores
+aportan el resultado de navegador separado. La exportación excluye credenciales,
+modelos/configuración/claves. No es una publicación final ni aceptación de entrega.
+
+Se demuestra este recorrido de fixture con servicios y navegador; siguen sin
+aceptarse CNC físico, SMB, modelo industrial, carga completa, CI/merge, rúbrica
+humana ni cierre de los 15 hallazgos NiFi. El alcance sigue siendo clasificación
+contemporánea AI4I2020, sin ETA/RUL, forecasting o probabilidad futura.
+
+## Plain Jackson: nueva cobertura 2/95, separada de la histórica
+
+La prueba corregida de fuente `7ccc986`, sobre imagen NiFi `03f3e9a1…12d5`, usa
+inventario esquema 2, SHA-256
+`9a59bb0de97927ca731262477e32a3db6441f3c3000f6a78a6a2cc0abee540cb`.
+Mide dos contextos del denominador nuevo de **95**; quedan 93 sin medir en este
+lote. El 13/92 anterior queda histórico con su denominador obsoleto: no se suma
+para afirmar 15/95 ni se convierte en cobertura del inventario nuevo.
+
+AWS NAR inspecciona 77 298 clases y 589 consumidores externos; el WAR de framework,
+49 419 clases y 202 consumidores. No aparecen nuevas referencias rotas en ese
+modelo estático; el WAR conserva 767 ausencias preexistentes cuya opcionalidad
+no está probada. Doce casos JVM corrigen/assertan la cadena padre Jetty y loader/
+CodeSource exactos de mapper/core/databind; el control de origen incorrecto falla
+con `AssertionError: code source mismatch`, sin cambiar bytes positivos. La
+alcanzabilidad `WEB-INF/classes` de cuatro WARs es estática, no arranque Jetty.
+Se verifican los 84 miembros del manifiesto de prueba, sin faltantes/discrepancias.
+
+Persisten delegación WAR/Jetty real, enlaces internos/dinámicos/reflexivos/providers,
+triage ABI, guard/writer de familia, imagen reconstruida, scans y QA independiente.
+`Class.forName(false)` no acredita uso compatible de Jackson. Continúan
+`replacement:null`, `promotion_eligible:false` y `runtime_approved:false`.
+
+## OTel corregido: preparación actual pendiente de resultado
+
+`e4c5751` prepara el experimento corregido con consumidores externos reales,
+paridad old/aligned, SPI, procedencia y guardas de cobertura/fallo cerrado. La
+nueva ejecución VM sigue pendiente del informe final del coordinador a este corte.
+No se declara PASS ni se convierte la preparación en remediación de la imagen.
+
+El `aligned-result.json` anterior permanece histórico: sus pruebas SDK no ejecutaron
+consumidores GCP reales. El README corrige explícitamente aquella atribución; no
+se reetiqueta el resultado antiguo como ejecución del experimento corregido.
+Las nuevas fuentes, informes y tests versionados se inventarían como preparación
+identificada por bytes, no como aceptación de componentes, CVE, servicios o CI.
+
+### Escaneos normales ES, Kafka y Filebeat comprobados
+
+Se verifican los 33 hashes (11 por imagen) del `gates.json` exportado. Las builds,
+scans y gates de las tres imágenes `12ca2fa` terminan en 0, vinculados a los IDs
+del recorrido: ES `2005cca9…ccb4` (74 OS/952 JAR, cero hallazgos), Kafka
+`416bb85c…0c8a` (80 OS/109 JAR, cero) y Filebeat `53fe1a05…b557`
+(55 OS/193 Go, un hallazgo permitido existente `GO-2026-5932` en
+`golang.org/x/crypto v0.58.0`). No se presenta Filebeat como cero vulnerabilidades.
+Junto a las pruebas anteriores, los siete gates normales pasan; NiFi anidado sigue
+exit 1/15 hallazgos. No se crea excepción ni se cambia la política.
+
+Actualización OTel comunicada por el coordinador: el primer intento corregido
+`e4c5751` se detiene cerrado por ocho símbolos originales no clasificados. Sigue
+en diagnóstico y pendiente de evidencia final; no se declara cualificación nueva.
+Esta conciliación no ha verificado independientemente ese batch todavía.
+
+El HEAD de preparación avanza después a `8429e12`, con resolución explícita de
+declaraciones JDK heredadas. Se registran sus bytes actuales, sin atribuirles aún
+un resultado VM. El intento fallido de `e4c5751` conserva su identidad; no se
+convierte retrospectivamente en PASS. Las imágenes servidas no cambian.
+
+## OTel: resultado corregido nuevo, fuente congelada `8429e12`
+
+Este resultado **sustituye solo el estado pendiente de la ejecución corregida**.
+Los registros anteriores siguen fechados y no se reetiquetan. El batch de fuente
+`8429e12` pasa 52 tests y 3 subtests, seguido de Maven (1,179 s), análisis simbólico
+(30,554 s) y controles de loader real (5,491 s), todos exit 0. El sealer versionado
+procedente de `2f7f6eb` produce `summary.json`; se comprueba el hash de su fuente.
+`6d064ce` añade después documentación del resultado, sin cambiar código runtime.
+
+La nueva exportación local `reviewfix-evidence.tgz` tiene SHA-256
+`54896f8f44cf5c3d142055387bb0dbe52a3c7a2120810438e5050af1396a4749`.
+Se verifican 54 payloads del manifiesto, 55 ficheros incluyendo el manifiesto, y
+las 20 fuentes archivadas contra Git `8429e12`, con cero faltantes/discrepancias.
+El intento fallido `e4c5751` también se conserva: archivo SHA-256
+`8d97be9bb82377ad39dc52e0e02f65864a0337b41f1fb20b9fdb99b2900be7fd`,
+37 payloads verificados más manifiesto. Pasó oracle y 49 guards antes de detenerse
+cerrado en ocho referencias originales no clasificadas; conserva dos diagnósticos
+acotados. Ese fallo no se convierte retrospectivamente en resultado verde.
+
+Con el `NarClassLoader` instalado y la cadena real de cuatro NARs, las **nueve
+clases consumidoras externas seleccionadas se inicializan** correctamente tanto
+en old como en aligned. Un `ResourceProvider` se instancia por ServiceLoader
+con loader NAR explícito en cada variante. El control narrow falla en ConfigUtil
+antes de atribuirse inicialización posterior. Esto sí aporta inicialización real
+de esas clases, separada de la antigua mera carga sin inicialización. No ejercita
+operaciones de exporter/GCP, atributos del provider, `InstanceClassLoader`/TCCL del
+procesador real, scheduler o servidor NiFi. El resultado SDK anterior de `a6bddd0`
+y su `aligned-result.json` conservan su corrección de alcance; no se hacen pasar
+por este batch.
+
+En el modelo simbólico actual, las 205 referencias no resueltas se clasifican
+como **155 miembros JDK heredados y 50 internos incubator opcionales**; no quedan
+sin clasificar. Las 228 de old son 161 JDK, 66 incubator y una llamada heredada
+interna antigua exacta. Clasificarlas no demuestra que las rutas opcionales
+funcionen. El control inverso SDK nuevo/API antigua expone ocho referencias
+ConfigUtil no admitidas y falla; quitar API produce 37 fallos nuevos. El análisis
+no detecta referencias modeladas rotas nuevas, pero declara diez miembros
+abstractos nuevos, 29 removals públicos/protegidos, 22 restricciones de acceso y
+un cambio static, con cero impactos externos **modelados**. No es una garantía ABI.
+
+Las 144 clases externas incluyen usos solo en descriptores; las 110 de la revisión
+antigua contaban constant pool. No son denominadores intercambiables ni cobertura
+completa. Las declaraciones heredadas se modelan desde `java.base.jmod` del
+**compilador Ubuntu JDK21 montado**, con hash propio: no es un verificador JVM
+completo de la imagen. Persisten límites de accesos, reflexión, method handles,
+herencia/JVM completa y rutas opcionales. Se discriminan fuente de encoding
+modificada y marcadores de bytecode; los controles benignos no cierran la CVE.
+
+Los 189 JARs expandidos, 16 de launcher, NARs originales, fuentes e identidad de
+imagen se verifican antes/después sin cambios; no quedan contenedores propios de
+la prueba ni errores de finalización. La clausura Maven medida cubre los nueve
+módulos observados (SDK 8, SPI 9, unión 9), sin actualizar familias ajenas.
+**No cambia overlay, writer, imagen servida, scan ni cuenta de 15 hallazgos NiFi**.
+Continúan `replacement:null`, `promotion_eligible:false` y `runtime_approved:false`.
+La prueba no cualifica ES ni añade aceptación CG32, SMB, modelo, CI/merge o humana.

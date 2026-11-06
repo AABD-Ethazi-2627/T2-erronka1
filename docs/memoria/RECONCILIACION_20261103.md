@@ -793,3 +793,115 @@ está preparada; el coordinador realiza la prueba focalizada y comprobará los
 cuatro miembros de un ZIP creado tras registrar los documentos. Esta conciliación
 no afirma ese resultado todavía ni publicación del ZIP final. No cambia ninguna
 suite histórica, entrega, evaluación de rúbrica o aceptación runtime/humana.
+
+
+## Corte de integración fixture y navegador, posterior a `e4c5751`
+
+La [validación Benten ampliada](../evidence/BENTEN_VALIDATION_20261106.md) y su
+[JSON](../evidence/BENTEN_VALIDATION_20261106.json) añaden un recorrido vivo
+acotado. La VM configurada con 10 GiB pasa preflight manteniendo 6 GiB/20 GiB.
+El primer run falla por historia por defecto de un día frente a snapshot de
+185 días; queda conservado. El segundo usa worker/imágenes `12ca2fa` y solo el
+selector de historia `a1ed9d4`, fijado por hash y probado con recursos propios
+nuevos. No se presenta como ejecución íntegra de `e4c5751`.
+
+Se ofrecen seis eventos públicos AI4I como `lab_fixture`, con modelo de desarrollo.
+El recorrido Filebeat/Kafka/ciclo de worker programado por NiFi/API/CG15/ES/GET
+reconcilia 6/6/6/6 y Kafka committed/end 6/6, lag final 0, cero pérdida/pendiente/
+rechazo/duplicado ES. El p95 HTTP 28,66 ms y fin a fin 24 533,51 ms describen solo
+seis muestras; no acreditan carga, disponibilidad o latencia industrial.
+El navegador real verifica 26 campos visibles contra GET del mismo evento,
+escritorio/móvil, modal, página de datos y temporizador. La semana vacía no se
+rellena; seis meses muestran un evento y su cobertura/procedencia. No hay
+inspección exhaustiva de consola/red ni aceptación global de accesibilidad.
+El modelo no recibe aceptación ni nueva evaluación final.
+
+El archivo local público tiene SHA-256
+`d172c47fd26408c37ca715b467ea9f0701b408f7da6f4b8ec4294905c541e308`:
+82 payloads verificados, más su manifiesto; se verifican aparte siete artefactos
+browser. Las marcas anteriores `pending_browser` conservan su fecha; la prueba
+posterior se añade por separado. Todas las puertas normales de imagen y la
+puerta anidada NiFi se distinguen: los **15 hallazgos anidados siguen bloqueando**,
+sin excepción nueva. El servicio NiFi usado por el fixture no prueba todos los
+NARs, Jetty, providers, futuros overlays o una remediación de esos hallazgos.
+
+La cobertura Plain Jackson nueva pertenece a `7ccc986`, esquema 2: **2/95**
+contextos estáticos, 93 pendientes. Los 13/92 históricos no se suman ni se
+reetiquetan. Hay doce casos JVM con loader/CodeSource corregidos y control negativo
+de origen, sin aprobación Jetty real; las 767 ausencias WAR preexistentes siguen
+sin probar opcionalidad. Sus 84 miembros de prueba se comprueban por hash.
+OTel actual `e4c5751` es preparación de experimento corregido; su nueva ejecución
+sigue pendiente. El resultado aligned antiguo no ejerció consumidores GCP reales;
+el README lo corrige y este informe no lo convierte en el experimento nuevo.
+
+### Alcance adicional defendible frente a la rúbrica
+
+| Celdas | Evidencia concreta añadida | Límite de la ampliación |
+| --- | --- | --- |
+| G41/G61 | API real integrada con el worker programado por NiFi y seis eventos válidos. | Modelo de desarrollo; no garantía industrial, InvokeHTTP genérico o carga completa. |
+| G46/G49/G66/G68/G77/G90/G92/G95/G101 | Continuidad y procedencia del mismo lote Filebeat/Kafka/worker/API/CG15/ES/GET; seis registros sin pérdida/duplicado ES, offset final comprobado. | No SMB/CNC físico, volúmenes grandes, pausa/reinicio/fallo ni campaña sostenida; no todos los escenarios del descriptor. |
+| G71/G87/G105 | Navegador real con modal, datos, escritorio/móvil y refresco; 26 campos coincidentes y ventana vacía honesta. | No valoración humana, accesibilidad global, consola/red exhaustivas ni BI industrial validado. |
+| G19/G80 | Preflight preservado y límites/consumo observados con puertas de seguridad separadas. | Los 15 hallazgos NiFi siguen rojos; seis eventos no acreditan capacidad o seguridad integral. |
+| G39/G45/G60/G62 | Procedencia del modelo conservada y evaluación offline no disponible declarada. | Sin aceptación del modelo ni métricas nuevas de evaluación final. |
+
+Las 40 filas históricas, la base, `historical_snapshot`, todos los mapas previos,
+los revisores `Pendiente`, la clasificación contemporánea y la entrega humana
+siguen intactos. La nueva conciliación técnica actualiza dos bindings existentes:
+`scripts/integration_lab.py` y `tests/test_integration_wiring.py`, ambos por el
+selector explícito `desde=timestamp` de `a1ed9d4` y su regresión. Se añaden las
+fuentes/tests de cualificación ya versionados como **preparación**; sus pines,
+resultados y revisiones propios mantienen su ámbito. No se añade código ni se
+repite runtime desde esta conciliación. El mapa anterior queda en
+`cg32_browser_qualification_followup_20261106.previous_current_hashes`; no se
+sobrescribe ninguna evidencia anterior ni se inventa aceptación humana/CI/merge.
+
+Se comprueban además 33 hashes de los scans/builds/gates normales ES/Kafka/Filebeat:
+todos exit 0 para las imágenes `12ca2fa` del recorrido. Filebeat conserva un
+hallazgo Go permitido existente; ES/Kafka ninguno. Con las cuatro pruebas normales
+anteriores, los siete gates normales pasan sin añadir excepciones; NiFi anidado
+sigue rojo. El coordinador informa que el primer batch OTel corregido se detiene
+cerrado por ocho símbolos originales aún no clasificados; el diagnóstico y la
+prueba final siguen pendientes, sin cualificación nueva atribuida.
+
+Al fijar hashes, el HEAD ya es `8429e12`; sus fuentes OTel actualizan la resolución
+de declaraciones JDK heredadas como preparación. No hay fuentes dirty en ese
+instante ni resultado VM nuevo atribuido. Se conserva por separado el fallo de
+`e4c5751` y la fuente de imágenes/worker `12ca2fa`.
+
+
+### Resultado OTel corregido posterior, sin promoción
+
+La prueba nueva congelada `8429e12`, documentada después en `6d064ce` sin cambio
+runtime, pasa 52 tests/3 subtests, Maven, análisis estático y controles de loader
+real. Nueve consumidores externos seleccionados inicializan en old/aligned;
+un ResourceProvider se instancia mediante loader NAR explícito en cada variante.
+Narrow falla antes en ConfigUtil. No se ejercitan exporter/GCP, atributos del
+provider, processor TCCL/InstanceClassLoader ni servidor/scheduling NiFi.
+No se convierte el antiguo `aligned-result.json` SDK en esta ejecución nueva.
+
+Se verifican 54 payloads más manifiesto de la exportación SHA-256
+`54896f8f44cf5c3d142055387bb0dbe52a3c7a2120810438e5050af1396a4749`
+y 20 fuentes contra Git `8429e12`. El intento fallido de `e4c5751`, con ocho
+referencias sin clasificar y dos diagnósticos, conserva sus 37 payloads más
+manifiesto y SHA-256
+`8d97be9bb82377ad39dc52e0e02f65864a0337b41f1fb20b9fdb99b2900be7fd`.
+No se corrigen retrospectivamente sus resultados.
+
+Las 205 referencias actuales se clasifican 155 JDK/50 incubator opcionales;
+old 228 se clasifica 161/66 más una llamada heredada interna antigua exacta.
+No quedan sin clasificar; las rutas opcionales siguen sin ejecutarse. Ocho
+referencias ConfigUtil del control inverso fallan. Se declaran diez abstractos,
+29 removals, 22 restricciones y un cambio static, con cero impactos externos
+modelados. Las 144 clases externas incluyen descriptor-only frente a 110 CP de
+la revisión antigua; no se mezclan denominadores. El modelo JDK procede del
+compilador Ubuntu21 montado, no verifica toda la JVM de imagen. Fuente/bytecode
+encoding y pruebas benignas no acreditan cierre CVE.
+
+Se conservan las comprobaciones before/after de 189 JARs, 16 launcher, fuentes,
+NARs e imagen. No se promociona overlay ni reconstruye imagen, no se añade
+excepción ni se reduce el gate NiFi anidado de 15 hallazgos. Sigue pendiente
+QA independiente del resultado corregido y el resto de aceptación. El manifiesto
+actualiza aparte README OTel de resultado y hashes documentales; incorpora el
+verificador portable ya versionado `tests/test_nifi_otel_proof_guards.py` como
+fuente, sin inventar nueva suite completa. Todos los mapas anteriores, base,
+matriz, snapshots y revisión humana pendiente quedan intactos.
