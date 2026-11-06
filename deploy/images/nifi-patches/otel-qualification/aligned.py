@@ -251,8 +251,8 @@ def main():
                 if not pin["file"].endswith(".pom"):
                     continue
                 models[pin["coordinate"]] = pin["dependencies"]
-                g, artifact, version = pin["coordinate"].split(":")
-                directory = repo / g.replace(".", "/") / artifact / version
+                group, artifact, version = pin["coordinate"].split(":")
+                directory = repo / group.replace(".", "/") / artifact / version
                 directory.mkdir(parents=True)
                 for ext in ("pom", "jar"):
                     name = artifact + "-" + version + "." + ext
