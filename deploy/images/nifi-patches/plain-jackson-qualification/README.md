@@ -99,3 +99,73 @@ repetitions without an undeclared wrapper. It refuses any existing output,
 stdout, stderr or execution record, including under Python `-O`. All source
 changes after `1bb4811` have 33 portable tests and Ruff passing; previous VM
 results retain their original hashes and are not relabeled as current execution.
+
+## Prepared real Jetty WAR component probe (not executed)
+
+`JettyWarProbe.java`, `war_runtime.py` and `war-runtime-inputs.json` prepare a
+separate **component** experiment for all five schema-2 WAR contexts, original
+and fixed. The 95-context symbolic campaign retains its original source and
+provisional parent-first WAR hypothesis. It is not relabeled as a measurement
+of Jetty's default child-first policy.
+
+The new probe constructs the installed ee11 `WebAppContext` and actual
+`WebAppClassLoader(parent, context)`, sets a fresh private temporary directory,
+and invokes the installed `WebInfConfiguration.preConfigure/configure` to add
+`WEB-INF/classes` and JARs. It checks the default parent-priority flag is false,
+sets/restores TCCL explicitly, and asserts the exact effective mapper/core/
+databind loader, file origin and version. It performs a benign mapper roundtrip
+per WAR. The framework and UpdateAttribute `ObjectMapperResolver` constructors,
+`getContext(Class)` and returned mapper `readValue` bodies are invoked; content
+viewer initialization is labeled only initialization. A parent-first mutation
+of the fixed Jolt context must fail specifically at the Jackson origin check.
+
+The installed-class signatures of both actual resolvers were inspected read-only
+in the unchanged `03f…` image: each has a public no-argument constructor and
+`getContext(Class)`. This is API preparation, not an execution result. Official
+NiFi `JettyServer.loadWar` and Jetty 12.1.13 configuration source hashes/URLs are
+recorded in the inputs file; no source-to-installed-bytecode equivalence is
+claimed. Complete server/environment matcher configuration, servlet/filter/
+listener lifecycle, HTTP behavior and NiFi UI acceptance remain unproved.
+
+The script verifies the exact inventory/pins, unchanged supporting qualifier and
+NAR probe, compiler/JVM files and compiler security configuration before use.
+Extraction rejects ambiguous/escaping paths, duplicate effective names, symlinks,
+file/directory conflicts, directory payloads, source/replacement drift and size
+budgets. Existing evidence is not overwritten. The five expected WARs and actual
+selected consumer files cannot silently disappear. Both status and metadata
+retain `replacement:null`, `runtime_approved:false`, `promotion_eligible:false`.
+
+Portable verification currently passes **20 tests**, plus Ruff, without a JVM.
+Compilation and all new WAR executions remain pending. Root must provide a fresh
+proof with unchanged schema-2 `inventory.json`, `pins.json`, and the four official
+fixed JARs under `cache/`; stage this directory as `tools/`. Keep the complete
+proof and failure logs separate from previous campaigns. A coordinator-owned
+wrapper must verify image identity and unchanged 6 GiB/20 GiB resource gate,
+acquire the common finite lock, and use the following container shape:
+
+```sh
+# Run only after the coordinator grants this exact phase its VM slot.
+# CNC_JETTY_PROOF is a fresh absolute directory; CNC_PYHOME is the resolved
+# existing Python3.11 distribution used in the earlier image experiments.
+timeout --signal=TERM --kill-after=5s 175s docker run --rm --pull=never \
+  --name cnc-jetty-war-UNIQUE --network none --cpus 1 --cpuset-cpus 0 \
+  --memory 512m --memory-swap 512m --pids-limit 64 --read-only \
+  --cap-drop ALL --security-opt no-new-privileges --user 1000:1000 \
+  --ulimit core=0:0 --tmpfs /tmp:rw,nosuid,nodev,noexec,size=64m \
+  --mount "type=bind,src=$CNC_PYHOME,dst=$CNC_PYHOME,readonly" \
+  --mount "type=bind,src=$CNC_JETTY_PROOF,dst=/proof" \
+  --mount "type=bind,src=$CNC_JETTY_PROOF/tools,dst=/proof/tools,readonly" \
+  --mount "type=bind,src=$CNC_JETTY_PROOF/cache,dst=/proof/cache,readonly" \
+  --mount type=bind,src=/usr/lib/jvm/java-21-openjdk-amd64,dst=/jdk,readonly \
+  --mount type=bind,src=/etc/java-21-openjdk,dst=/etc/java-21-openjdk,readonly \
+  --env PYTHONDONTWRITEBYTECODE=1 --entrypoint "$CNC_PYHOME/bin/python3.11" \
+  sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5 \
+  -B /proof/tools/war_runtime.py --proof /proof
+```
+
+The outer wrapper must remove only its unique container even on timeout and
+capture before/after source/image identities. JVMs use heap256/metaspace96/
+direct32/code-cache32/compressed-class-space32 MiB, one active CPU and no cores.
+No server, servlet, exporter, NiFi scheduling, SMB or image build is started by
+this script. A successful component result cannot alone approve the four JARs,
+family writer, final image, security gates or deployment.
