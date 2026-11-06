@@ -123,3 +123,38 @@ Es una acción preparada, no ejecutada por este documento. Antes de cualquier
 eliminación hay que inspeccionar los volúmenes propios y conservar los datos
 necesarios; aquí no se da una orden de destrucción. No cambiar otras VMs, el
 clúster, HA, firewall, VPN ni la red del host para reproducir el laboratorio.
+
+
+## Regresión local posterior y correcciones de fuente
+
+Se conservan el bootstrap histórico y `review-ce3c1d7`. La regresión local completa
+posterior corresponde a **`a098a860e4b183d6a0817c527a4a6e9cd1999c97`**: pasan
+1096 tests pytest y 479 subtests, con cuatro omitidos y dos warnings ZIP deliberados,
+en cada Python; unittest da 574 tests y cuatro omitidos en cada uno; pasan ambas
+auditorías y 29 pruebas del dashboard con `-W error`. Ese resultado no corresponde
+a las correcciones posteriores `caec8a9`/`06e7e46`. Se conservan los 1345 archivos
+versionados y nueve ficheros de modelo/report/manifest sin cambios; el SQLite de
+replay mutable se registra aparte. El modelo es de prueba, sin aprobación independiente.
+
+Esa regresión usó el binario oficial Compose **5.6.1**, aislado mediante
+`DOCKER_CONFIG=/opt/cnc-guard/tooling/docker-config-compose-v5.6.1`; el Compose
+2.40.3 del sistema sigue disponible. El intento anterior expuso la sintaxis
+`required` de env no soportada por 2.40 y una guarda demasiado amplia del harness
+sobre SQLite de replay. No se presentan como un test pasado. Otros dos intentos
+se detuvieron por contención del candado. No reemplazar la configuración global
+del host para reproducir esta selección de herramientas.
+
+Para una matriz completa, mantener el candado común exterior durante todos los
+intérpretes, auditorías y dashboard, evitando intercalarlos con sondas o builds.
+Solo mientras esté retenido puede el harness usar un candado privado por fase.
+Acotar adquisición, ejecución total y cada fase; conservar el resultado del
+wrapper además de las salidas de los tests. Los comandos históricos exactos
+están en el [registro del coordinador](../evidence/INTEGRATION_CANDIDATES_20261105.json).
+
+Las últimas correcciones NiFi tienen pruebas focalizadas y comparaciones Maven.
+MM11.4 tiene tres repeticiones de componentes con las mismas fuentes; ninguna es
+una nueva suite completa. La nueva imagen Kibana de `06e7e46` pasa build y scan/gate
+con solo los dos hallazgos extract-zip ya permitidos. Ese resultado se separa del
+histórico `2829a6f` y no acepta servicios. Siguen pendientes P1 de instalación real
+del candidato NiFi, imagen/scans NiFi, campaña simultánea, NAR/classloaders, SMB y
+aceptación humana.

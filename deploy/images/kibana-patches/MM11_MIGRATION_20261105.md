@@ -79,10 +79,10 @@ matching sites, with `braceExpandMax: 1024`; no old compiler is retained. Their 
 through CJS, the ESM entrypoint/chunk and the browser entrypoint **in Node**.
 This is not browser/UI acceptance.
 
-Fleet is an honest local fork `9.5.5+cncguard.mm11.3`, with the compiled source
+Fleet is an honest local fork `9.5.5+cncguard.mm11.4`, with the compiled source
 adaptation, exact `minimatch:11.0.4` dependency and hash-bound provenance.
 just-bash is an honest local dependency-integration fork
-`3.0.1+cncguard.mm11.3`, with exact `minimatch:11.0.4`, original bundle hashes, the bounded source edits
+`3.0.1+cncguard.mm11.4`, with exact `minimatch:11.0.4`, original bundle hashes, the bounded source edits
 and an explicit note that upstream declared `^10.1.1`. This is not a claim of
 upstream support for an out-of-range dependency. Root MM security remediation
 comes from installing real official MM11 code, not from these fork labels.
@@ -273,7 +273,7 @@ full serving-image build/scan, Kibana/ES/browser, CG32 and human acceptance are
 still separate gates.
 
 
-## Uncached adapter and overflow rejection on Benten
+## Historical MM11.3 uncached adapter and row-overflow rejection on Benten
 
 The follow-up independent review of `080b6f9` found that the first cap still
 retained roughly 10 MiB for a 1023-character pattern and 40 MiB for a 4095-character
@@ -287,10 +287,11 @@ closure is unchanged. The adapter creates a new official `Minimatch` instance;
 it never calls the cached `minimatch()` function. Fleet, fields and every ls
 variant compile once per invocation/pattern, outside the candidate-file loop.
 
-The adapter checks expansion using a 1025-row detection limit and rejects more
-than 1024 alternatives before compilation. This replaces silent truncation. In
-particular, `!{1..2000}` cannot broaden an allowlist by dropping alternatives: it
-throws a budget error. Bash reports exit 1 for budget errors. Normal unmatched
+That adapter checked expansion using a 1025-row detection limit and rejected
+more than 1024 alternatives before compilation. This detects row-count overflow,
+but does not detect all upstream internal truncation limits. In particular,
+`!{1..2000}` throws a budget error, while the later independent review found
+other negated brace forms that could still broaden an allowlist. Bash reports exit 1 for budget errors. Normal unmatched
 patterns still report exit 2. This is an explicit supported-input limit, not a
 general transient-memory, CPU or application availability guarantee.
 
@@ -319,7 +320,7 @@ This is bounded component evidence; new independent review, serving image build,
 scan and service/ES acceptance remain separate gates.
 
 
-### Repeatability remains unresolved
+### Historical MM11.3 repeatability stop: cause later identified
 
 A subsequent identical synchronous retention check (run05) exceeded the 8 MiB
 per-step stop. The diagnostic test then yielded across a JS-job boundary before
@@ -330,3 +331,57 @@ The production adapter is built into the serving-image candidate from `2829a6f`,
 and its image guards passed, but the long-pattern measurement and independent
 quality decision remain open before runtime promotion. No limit is raised and
 no failed result is hidden.
+
+
+## MM11.4: reject negated brace input and wait for V8 compilation to settle
+
+The [independent Benten review](../../../docs/evidence/CLAUDE_MM11_UNCACHED_BENTEN_RECHECK_20261105.md)
+covers immutable `a098a86`. It found no persistent adapter cache in its bounded
+measurements: concurrent V8 optimization jobs temporarily retained the matcher.
+The old synchronous/one-job-boundary test could report a false retention failure.
+It also found N1-R: internal character/depth/rewrite truncation could broaden a
+negated brace allowlist despite the row-count preview. Those findings belong to
+the reviewed source; this paragraph does not extend the review to later edits.
+
+Production correction `06e7e46cf05db6008a64eefc871af3de7f676668` keeps all 90 official
+files unchanged and the adapter uncached. All six owning packages now identify
+`+cncguard.mm11.4`; 107 prepared outputs are hash-bound. With normal brace and
+negation handling, **every odd-leading-negated pattern containing either brace
+character is rejected**, including small sets. This deliberately unsupported
+class fails closed rather than guessing which upstream limit may truncate it.
+Ordinary negation remains supported. Explicit `nonegate`/`nobrace` options and
+official comment handling are preserved and tested. Bash reports exit 1 for
+these unsupported inputs; ordinary no-match remains exit 2.
+
+**Positive patterns retain upstream internal truncation semantics (P1).** The
+adapter rejects detected row-count overflow above 1024; it does not promise to
+detect all positive character, depth or rewrite limits. Such inputs can omit
+matches. This low residual is documented, not a claim of arbitrary-pattern
+compatibility, total-function behavior, transient-memory or request-concurrency
+safety. No matching bound, scanner policy or exception is relaxed.
+
+The corrected retention test waits at most two seconds for outstanding optimizer
+work to settle, without compiling another long pattern during the wait. It records
+synchronous/raw/final deltas and `settleMs`, retains the **8 MiB per-step stop** and
+24 MiB aggregate fixture budget, and requires `queryObjects` to find no live
+adapter instance. Accepted long patterns are 1023 and 3800 characters; the latter
+avoids upstream character truncation. A positive control deliberately uses the
+official cached function and must still retain at least 8 MiB after the same wait.
+
+Three new Benten executions, `mm11-mm114-20261105-01` through `03`, pass all three
+bounded phases. Each preserves **225 artifact hashes and the same 20 source
+hashes**, independently rechecked against the current committed bytes. All three
+install exactly the official 90 files and 107 prepared outputs. Long-pattern
+aggregate deltas are **576, -12640 and -9720 bytes**; negative deltas are GC noise.
+The positive controls retain **10062848, 10069784 and 10062952 bytes** after about
+two seconds, so the test distinguishes the real cache. Existing 36000/216,
+Fleet-only 9000/0 and default-security 252/0 comparison results are unchanged.
+All three physical Bash entrypoints pass. No OOM, service or browser runs.
+
+The older run05/run07 failures and lock-contention runs remain preserved. These
+new measurements supersede their unresolved-test status only for this bounded
+source/probe. A new serving-image build from `06e7e46` completed separately. Its fresh scan
+and unchanged gate pass for exact image `15d5723a…`; only the two pre-existing
+permitted extract-zip findings remain. This does not accept service/runtime behavior. The previous image
+`f331e91e…` and scan belong to `2829a6f`, not to this correction. Full stack,
+Kibana/ES, protected CI, SMB and human acceptance remain pending.

@@ -36,11 +36,14 @@ credentials, models or private telemetry. Verification pins the canonical stock
 inventory, library-root bytes, review/candidate/plan identity, all occurrences,
 coupled hashes, payloads, sibling contents/metadata and the exact changed leaves.
 The context and writer share one policy validator. The context also freezes
-the six exact replacement families and occurrence counts in code, rather than
-trusting a locally written review JSON to authorize arbitrary replacements. Its
+the six exact replacement families and occurrence counts in code and requires
+the complete 22-target profile, rather than trusting a locally written review
+JSON to authorize arbitrary or partial replacements. Candidate/inventory identity
+must also match. The tests fix all six literal profiles, the coupled Hadoop/Snappy
+pins and all three blocked inputs, and exercise sibling-content corruption. Its
 CLI wall deadline is 180 seconds. See the [bounded guard verification](../evidence/NIFI_GUARD_CORRECTIONS_20261105.md).
 The existing four bootstrap/toolkit Jackson updates are the only accepted base
-deviation. Unknown files or a different base fail closed before layer mutation.
+deviation. Unknown archives or a different base fail closed before layer mutation.
 
 On adequately resourced machinery, use BuildKit's named context explicitly:
 
@@ -66,3 +69,31 @@ the experimental overlay. Neither a frontend `--check`, a source bundle, a
 fixture nor a flat-classpath probe constitutes image or real NAR acceptance.
 Compare actual fresh scan tuples and test real classloader/service behavior
 before considering promotion. No scanner policy changes are part of this flow.
+
+
+## Post-review source and limits
+
+The [Benten shared-policy review](../evidence/CLAUDE_NIFI_SHARED_POLICY_BENTEN_RECHECK_20261105.md)
+covers `a098a86`, not the later changes. Correction `caec8a9` moves the inherited
+scope ambiguity check before scope exclusion, rejects inherited managed keys
+whose interpolation changes in the child, and rejects required type/classifier
+properties. The Jackson support lock is updated with the same source change.
+These are fixes for reproduced forms within a bounded Maven subset; they do not
+prove a complete Maven model or justify a new family/re-pin without review.
+
+Post-review scratch tests pass 122 tests and 71 subtests on each Python 3.11/3.12.
+The source was bound to the committed correction after execution; that observation
+is not a contemporaneous immutable-run certificate. Offline Maven checks give
+9 equal/9 rejected for the earlier 18 rows, 11 equal/4 rejected for the new 15 and
+13 rejected for the other 13. Four rows overlap between the two new drivers.
+All eight frozen Jackson closures and 13 RabbitMQ 5.37.0 coordinates match;
+RabbitMQ 5.35.0 fails closed on its unpinned old Netty POM. The first driver failed
+because its harness expected a missing TALLY line; that failure is retained.
+
+The original 22-target context and overlay bytes remain frozen. P1, actual
+`verify`/`install` with the latest guard against the real image tree, remains
+pending. A base pull, including its intentionally interrupted attempt, is not
+an installed candidate, image build, scan or NAR/classloader acceptance. Last
+attributed nested CI remains 59 distinct tuples/63 records. Do not infer a new
+scan count from the replacement plan. See the [coordinator record](../evidence/INTEGRATION_CANDIDATES_20261105.json)
+for exact source/artifact bindings and later phase results.

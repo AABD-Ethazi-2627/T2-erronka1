@@ -105,6 +105,8 @@ def build(output, evidence):
                 "docs/evidence/NIFI_GUARD_CORRECTIONS_20261105.md",
                 "docs/evidence/CLAUDE_NIFI_ATOMIC_CONTEXT_RECHECK_20261105.md",
                 "docs/evidence/CLAUDE_MM11_RETENTION_RECHECK_20261105.md",
+                "docs/evidence/CLAUDE_NIFI_SHARED_POLICY_BENTEN_RECHECK_20261105.md",
+                "docs/evidence/CLAUDE_MM11_UNCACHED_BENTEN_RECHECK_20261105.md",
                 "docs/evidence/INTEGRATION_CANDIDATES_20261105.md",
                 "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
                 "docs/evidence/CLAUDE_NIFI_GUARDS_HADOOP_FINAL_RECHECK_20261105.md",

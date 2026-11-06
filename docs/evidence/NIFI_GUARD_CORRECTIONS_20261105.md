@@ -10,8 +10,8 @@ de 180 segundos. Un JSON de revisión sigue siendo una selección del coordinado
 no una firma criptográfica ni una aprobación humana o runtime.
 
 Se actualiza el pin de `jackson/support-lock.json` y se acepta la distinta
-redacción del rechazo seguro de Unicode ZIP en Python 3.12. Maven rechaza las
-formas de mediación/herencia/perfiles que no modela con seguridad. Los contextos
+redacción del rechazo seguro de Unicode ZIP en Python 3.12. Se rechazan las formas de mediación/herencia/perfiles cubiertas por las
+reproducciones documentadas; eso no garantiza rechazo de toda forma no modelada. Los contextos
 de exclusión distintos solo se admiten si sus diferencias son irrelevantes para
 los descendientes requeridos. Las dependencias nativas opcionales no alcanzables
 no desbloquean bibliotecas nuevas. No se afirma implementar Maven completo.

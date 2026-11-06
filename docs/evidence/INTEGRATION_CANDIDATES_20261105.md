@@ -1,7 +1,8 @@
 # Local integration candidates, 2026-11-05
 
-Status: **assembled and locally verified preparation; new independent reviews,
-image scans and runtime acceptance pending**. No runtime, deployment, security
+Status: **bounded post-review corrections and component repetitions verified;
+new Kibana image built/scanned, service and runtime acceptance pending**. Historical
+sections below retain their own revisions; the latest update is the final section. No runtime, deployment, security
 exception, merge, SMB, CG32, model or human approval is asserted.
 
 ## Parent verification
@@ -67,7 +68,7 @@ assertion changed, so its historical 99 records are not attributed to this new
 test source. New joint QA and the actual image scan remain pending.
 The Docker frontend check passes without warnings, without building an image.
 
-## Counts and remaining gates
+## Historical assembly counts and gates before Benten
 
 The saved `6d67bc2` nested report contains **63 vulnerability records and 59
 distinct `(ID, package, version)` tuples**. Four 2.22.2 tuples each occur twice:
@@ -157,3 +158,69 @@ NiFi still has no newly built/accepted candidate image or fresh nested scan. The
 last authoritative NiFi result remains 59 distinct tuples / 63 records. Full suites,
 new independent reviews, real services/NAR/classloaders, complete CG32/SMB and
 human acceptance remain separate pending gates.
+
+
+## Post-review corrections and MM11.4 repetitions (documented 2026-11-06)
+
+The [NiFi shared-policy review](CLAUDE_NIFI_SHARED_POLICY_BENTEN_RECHECK_20261105.md)
+and [MM11 uncached review](CLAUDE_MM11_UNCACHED_BENTEN_RECHECK_20261105.md) cover
+immutable `a098a86`. They do not approve subsequent corrections. The latter
+identifies concurrent V8 optimizer jobs as the cause of the old false retention
+stops, finds no persistent adapter cache in its measurements, and reproduces
+N1-R negated-brace fail-open plus positive internal truncation P1.
+
+NiFi correction `caec8a9` requires the complete six-family/22-target context and
+candidate/inventory identity, tests literal pins/blocklists and sibling corruption,
+and rejects the reproduced inherited-scope/key/type/classifier ambiguities.
+The support lock is repinned. Red-before-fix evidence has eight failures; new
+scratch tests pass **122 tests and 71 subtests on each Python 3.11/3.12** with one
+intentional ZIP warning. Five scratch source/test files match committed bytes in
+a post-run observation; this is not a contemporaneous immutable execution proof.
+Maven 3.9.11 offline driver results are 18 rows: 9 equal/9 fail-closed; new15:
+11 equal/4 fail-closed; new13: 13 fail-closed. Four rows overlap in the two new
+drivers, so 28 new driver rows are not 28 distinct forms. No chosen row succeeds
+with a divergent closure. Eight frozen Jackson closures and 13 RabbitMQ 5.37.0
+coordinates match; 5.35.0 rejects its unpinned old Netty POM. The first oracle
+harness failed on a missing TALLY line and is preserved. This is a bounded subset,
+not a complete Maven implementation or blanket reject-all-unsupported guarantee.
+
+MM11 correction `06e7e46` preserves official 90-file bytes and 107 prepared outputs;
+all six integration forks are now `+cncguard.mm11.4`. It rejects every odd-leading
+negated pattern containing braces unless `nonegate` or `nobrace` applies, preserves
+ordinary negation and comments, and retains the 1024 row-count budget. Positive
+patterns still inherit upstream character/depth/rewrite truncation (P1); no claim
+of general non-truncation or arbitrary-input availability is made.
+
+The retention harness waits at most two seconds for optimizer work, records raw,
+settled and timing values, requires no live adapter instance, and keeps the 8 MiB
+per-step stop. Three new runs each verify **225 artifact hashes and 20 identical
+current source hashes**, official 90 files and prepared 107 outputs. For accepted
+1023/3800-character patterns, aggregate long deltas are 576, -12640 and -9720 bytes.
+Official cached positive controls still retain about 10 MB after two seconds.
+Thus the test distinguishes persistent caching rather than hiding it by raising a
+limit. Historical run05/run07 failures and contention remain visible. The first
+passing MM11.3 run is not relabeled as MM11.4 evidence.
+
+Full regression **04 belongs only to `a098a86`**: each interpreter passes 1096
+pytest tests and 479 subtests (four skips, two intentional warnings), 574 unittest
+tests with four skips, and the audit; the dashboard passes 29 with `-W error`.
+The preserved 26-member evidence manifest, 1345 git-source hashes and nine
+model/report/manifest hashes were independently checked. Replay SQLite is mutable
+and recorded separately. Official Compose 5.6.1 uses an isolated `DOCKER_CONFIG`;
+uv remains 0.13.7 versus CI's 0.13.6. Prior attempts 01/03 are lock contention;
+02 has the Compose 2.40 syntax failure and a harness misclassification of replay
+SQLite, both retained. The successful matrix holds the common outer lock across
+all phases. Later source corrections have targeted/component evidence only.
+
+A **new full Kibana image** built from `06e7e46` has ID
+`sha256:15d5723a25cf02baa9785d7213a5850c240d653ad623a4a8e4f2a444cd791e64`.
+Its build exit and inspect record are verified. Its fresh scan and unchanged
+gate both exit 0 with the required `cnc-guard-audit:kibana` name, 68 OS packages
+and 2307 Node packages. Only `CVE-2026-19693` and `CVE-2026-56876` in the existing
+extract-zip `2.0.1+cncguard.1` remain; no exception or scanner policy changed. The
+report is dated `2026-11-06T07:15:17.460777884Z` and matches the exact image ID.
+The earlier `f331e91e…` scan/gate pass remains historical, for `2829a6f` only. Neither image has service/runtime acceptance here. NiFi's
+interrupted base pull remains visible; actual candidate installation P1, new
+NiFi image/nested scan, NAR/classloaders, full CG32/SMB, protected CI/reviews and
+human acceptance remain pending. No gates, exceptions, model scope or human
+approval state change.

@@ -627,3 +627,76 @@ QA nueva, la suite completa actual, servicios y classloaders NAR, CG32 completo,
 SMB, aprobación protegida y aceptación humana. No se afirma nota 10 ni rúbrica
 aprobada. Base/matriz, 18 hashes históricos, alcance de clasificación actual,
 revisores pendientes y compuertas permanecen sin cambios.
+
+
+## Correcciones tras revisión y MM11.4 — conciliación del 06/11/2026
+
+Las revisiones de [política NiFi](../evidence/CLAUDE_NIFI_SHARED_POLICY_BENTEN_RECHECK_20261105.md)
+y [MM11 sin caché](../evidence/CLAUDE_MM11_UNCACHED_BENTEN_RECHECK_20261105.md)
+se conservan literalmente con su fecha del 5 de noviembre y fuente inmutable
+`a098a86`. No revisan los cambios posteriores. El código actual inspeccionado es
+`06e7e46cf05db6008a64eefc871af3de7f676668`, con la corrección NiFi `caec8a9`.
+
+El padre corrige los casos reproducidos de ámbito heredado antes de la exclusión,
+claves heredadas que cambian por interpolación y type/classifier requeridos con
+propiedades, y repinea el support-lock. Contexto e inventario deben coincidir y
+solo se admite el perfil completo de seis familias/22 objetivos. Los tests fijan
+los hashes literales, el grupo atómico y los bloqueos, y ejercitan corrupción de
+hermanos. Ocho tests fallan antes; después pasan **122 tests y 71 subtests en cada
+Python**, con el warning ZIP deliberado. Se ejecutaron en scratch y cinco fuentes
+se vinculan al commit después: no se fabrica un certificado de ejecución
+inmutable contemporáneo. Los 18 casos Maven anteriores dan 9 iguales/9 rechazos;
+los nuevos drivers dan 11 iguales/4 rechazos y 13 rechazos. Hay cuatro filas
+repetidas entre los 28 registros nuevos. Los ocho cierres Jackson y trece
+coordenadas RabbitMQ 5.37.0 coinciden; 5.35.0 falla por su viejo POM sin pin.
+No hay éxito divergente en los casos elegidos. Esto no garantiza cubrir Maven
+completo ni rechazar toda forma no modelada. Se conserva el primer fallo del
+harness, que esperaba una línea TALLY ausente.
+
+La revisión identifica jobs de optimización V8 como causa de los falsos rojos de
+retención previos, y un nuevo fallo abierto en patrones negados con llaves. El
+adaptador MM11.4 rechaza toda esa clase con negación efectiva salvo `nonegate` o
+`nobrace`, preserva comentarios/negación ordinaria y mantiene la cota de 1024.
+Los patrones positivos conservan truncados internos upstream (P1): no se promete
+ausencia general de truncado. Sus 90 ficheros oficiales y 107 salidas se verifican.
+La prueba espera como máximo dos segundos sin compilar otro patrón, conserva la
+parada de 8 MiB y registra deltas crudos/finales y plazo. Tres repeticiones dan
+576, -12640 y -9720 bytes agregados para patrones de 1023/3800 caracteres, mientras
+el control de caché oficial retiene unos 10 MB tras dos segundos. Cada ejecución
+conserva 225 hashes de artefacto y las mismas 20 fuentes actuales. No se afirma
+una cota de memoria transitoria/concurrencia ni disponibilidad del servicio.
+Los intentos 05/07 y las contenciones anteriores no se borran ni reetiquetan.
+
+La regresión completa 04 corresponde solo a **`a098a86`**: en cada Python pasan
+1096 pytest y 479 subtests, con cuatro omitidos y dos warnings deliberados;
+unittest da 574 tests y cuatro omitidos; pasan auditorías y 29 pruebas de
+dashboard con `-W error`. Se comprueban 26 hashes de evidencia, 1345 de fuentes
+Git y nueve de modelos/report/manifest sin cambios. SQLite de replay mutable se
+registra aparte; el modelo sigue siendo de prueba. Compose 5.6.1 usa configuración
+Docker aislada y la matriz mantiene el candado exterior completo. Los intentos
+01/03 son contención; 02 conserva el fallo Compose 2.40 y el falso diagnóstico
+del harness sobre SQLite. Los cambios posteriores tienen pruebas focales y de
+componentes, sin atribuirles esa suite completa anterior.
+
+La nueva imagen Kibana `06e7e46`, ID
+`sha256:15d5723a25cf02baa9785d7213a5850c240d653ad623a4a8e4f2a444cd791e64`,
+pasa build y scan/gate existentes, con 68 paquetes OS y 2307 Node. Solo siguen
+los dos hallazgos extract-zip ya permitidos, sin excepciones nuevas. La imagen
+`f331e91e…` anterior conserva su revisión y scan históricos. No se afirma arranque
+de servicios ni aceptación runtime de ninguna de ellas.
+
+El [registro actualizado](../evidence/INTEGRATION_CANDIDATES_20261105.json)
+conserva los 812 artefactos previos y añade las nuevas pruebas/build/scan. Esta
+conciliación comprueba **72 fuentes activas y 2161 artefactos**, sin discrepancias,
+y añade ambos informes al inventario y allowlist documental. Los 18 pares exactos
+de hash anterior/nuevo, incluida esta conciliación, quedan en
+`post_review_mm114_reconciliation_20261106`; los 19 pares de la etapa Benten previa
+se conservan intactos. No se afirma un nuevo ZIP restaurado por añadir su allowlist.
+
+P1 de NiFi (`verify`/`install` real con las guardas actuales), su imagen y nuevo
+scan anidado siguen pendientes; la descarga de base interrumpida no se presenta
+como integración. El CI atribuido sigue en `6d67bc2`, con 59 tuplas/63 registros.
+Siguen pendientes nueva QA del código corregido, servicios/NAR/classloaders,
+CG32 completo, SMB, aprobación protegida y aceptación humana. La verificación
+CG25 es documental: no cambia base, matriz, 18 hashes históricos, alcance activo,
+gates, excepciones, revisores ni nota de rúbrica.
