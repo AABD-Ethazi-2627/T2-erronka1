@@ -700,3 +700,96 @@ Siguen pendientes nueva QA del código corregido, servicios/NAR/classloaders,
 CG32 completo, SMB, aprobación protegida y aceptación humana. La verificación
 CG25 es documental: no cambia base, matriz, 18 hashes históricos, alcance activo,
 gates, excepciones, revisores ni nota de rúbrica.
+
+
+## Benten: suites, instalación e imágenes medidas — 06/11/2026
+
+La [validación atribuida](../evidence/BENTEN_VALIDATION_20261106.md) y su
+[registro con hashes](../evidence/BENTEN_VALIDATION_20261106.json) incorporan
+resultados nuevos sin reescribir los cortes anteriores. Se inspecciona `92ff99e`;
+la regresión completa y las imágenes nuevas pertenecen a `12ca2fa`, antes de la
+última corrección Maven. Cada Python 3.11/3.12 pasa 1107 pytest + 485 subtests
+(4 omisiones/2 warnings intencionales), unittest 577 (4 omisiones) y auditoría;
+dashboard 29 con `-W error`. Se comprueban documentalmente sus 27 miembros de
+prueba y 1347 hashes fuente contra Git, sin volver a ejecutar la suite.
+
+P1 stock original en `06e7e46` verifica/instala 22 objetivos/16 NARs como UID1000,
+sin Java/NiFi. La build real NiFi `12ca2fa` cierra además la variante Wolfi/root:
+instala esos 22 objetivos/16 NARs en 25,82 s. La imagen normal pasa scan/gate;
+la auditoría anidada nueva mide **15 hallazgos y gate exit 1**. El informe histórico
+conserva 63 registros/59 tuplas distintas. No se añade excepción ni se afirma NiFi
+en servicio. API y dashboard se construyen/escanean y pasan sus gates con cero
+vulnerabilidades; la imagen Kibana ya comprobada conserva solo las dos excepciones
+extract-zip existentes.
+
+El smoke offline de ambas imágenes pasa como UID65532, rootfs solo lectura,
+sin red, memoria 512 MiB y tmpfs 64 MiB. Verifica imports, consulta JSON builtin
+DuckDB y UTC/null con Arrow. Un ensayo posterior arranca ambos servicios en bridge
+interno propio, sin puertos host: TCP directo confirma health ready, POST, replay
+idéntico, conflicto 409 y health Streamlit. GET opt-in permanece deshabilitado
+(404 esperado). No hay navegador/render UI ni aceptación de datos del dashboard.
+El modelo público es de desarrollo; se conservan manifests/hashes, sin cambiar
+alcance ni afirmar evaluación nueva. Los contenedores/red propios se retiran;
+no hay errores de limpieza. Los intentos previos de harness se conservan.
+
+La [revisión final archivada](../evidence/CLAUDE_FINAL_GUARDS_MM114_RECHECK_20261106.md)
+cubre solo `12ca2fa`: no encuentra Critical/High/Medium del candidato fijado.
+Sus hipótesis Maven fueron medidas después con controles de padre válidos,
+conservando las formas originales sin `packaging=pom`. La
+[corrección Maven](../evidence/MAVEN_H_GUARDS_20261106.md) `92ff99e` rechaza las cinco
+formas escogidas, conserva ocho cierres Jackson y 13 coordenadas RabbitMQ iguales
+al Maven real y pasa 36 tests/27 subtests por intérprete. La falsa exclusión Rabbit
+v1 sigue registrada. El manifiesto final export02 verifica 419 miembros; el hash
+obsoleto del primer log en crecimiento no se oculta. Esto no vuelve a atribuir la
+suite completa a `92ff99e` ni amplía el alcance de aquella revisión.
+
+### Vinculación con descriptores avanzados, sin nota ni aceptación
+
+| Celdas de la fuente de rúbrica | Evidencia añadida y alcance que puede defenderse | Parte todavía pendiente |
+| --- | --- | --- |
+| G19 | Guardas de contexto/Maven, fallos cerrados, aislamiento del smoke y gate anidado que sigue bloqueando los 15 hallazgos. | Seguridad de la solución completa y aceptación independiente; no basta con scans de componentes. |
+| G32/G52/G55 | Dependencias concretas importadas en las imágenes y regresiones/bytes reproducibles; separación del entrenamiento y del servicio. | Justificación académica de herramientas/lenguaje/arquitectura y revisión del descriptor completo. |
+| G41/G61 | Arranque API con modelo público de desarrollo; health/POST/replay/conflicto medidos por TCP. | NiFi/InvokeHTTP, validación industrial, latencia/carga y vinculación del modelo aprobado. El umbral del modelo y AVISO/CRITICA son políticas distintas. |
+| G66/G95/G101 | UTC/null en Arrow y contrato de evento/predicción/replay en ensayo sintético, junto a tests locales atribuidos. | Calidad e integridad en el recorrido vivo completo y almacenamiento distribuido; no se infiere de un smoke. |
+| G71/G87/G105 | Imagen dashboard construida/escaneada, imports y health Streamlit reales. | Render por navegador, datos/gráficos, visualización/accesibilidad y valoración humana. Un health no evalúa un dashboard. |
+| G39/G45/G60/G62 | Se preserva la procedencia de nueve ficheros de modelo/prueba, sin nueva evaluación final. | Métricas, explicación/adecuación y aceptación independiente del modelo; no cambia su estado por pasar HTTP. |
+| G14/G46/G49/G65/G68/G72/G77/G80/G85/G90/G92/G96/G100/G104 | Se delimitan explícitamente los resultados parciales; no se suman como campaña simultánea. | ES/Kafka/CG15/NiFi/SMB, caudal/pérdidas/reinicio/carga, BI y justificaciones del descriptor. No ETA/RUL, forecast ni pérdidas calculadas a partir del score. |
+
+Las demás celdas no adquieren nueva aceptación por esta actualización. Las 40
+filas de la matriz, su base histórica, comandos `git show`, revisores `Pendiente`,
+`historical_snapshot`, alcance activo y todos los mapas de hashes anteriores se
+conservan. CG32 completo mantiene 6 GiB/20 GiB; preflight o arranque parcial no
+son campaña. CI protegido, merge, SMB, modelo, defensa, firmas y entrega siguen
+sus propias puertas.
+
+### Deriva exacta del inventario actual
+
+Se inspeccionan únicamente tres cambios técnicos ya incorporados en `92ff99e`:
+parser Maven, tests y su support-lock. No cambian pines de bibliotecas ni bytes
+del overlay de `12ca2fa`. Los hashes previos quedan en
+`benten_validation_reconciliation_20261106.previous_current_hashes`, incluidos
+los tres documentos editados de esta conciliación. El nuevo mapa
+`inspected_current_hashes` fija los bytes revisados; no reemplaza mapas históricos.
+Se añaden solo este informe Benten MD/JSON, la copia exacta de revisión y el informe
+Maven del coordinador. Las cualificaciones aún sin integrar no se inventarían.
+La comprobación CG25 sigue verificando enlaces, 40 celdas, hashes actuales e
+históricos y revisión humana pendiente; no concede una nota ni una aprobación.
+
+
+### Preparación posterior de inclusión documental en el ZIP
+
+Sobre `92ff99e`, el coordinador modifica solo cuatro strings del allowlist de
+`scripts/integration_bundle.py`, para incluir Benten MD/JSON, el informe Maven
+y la copia de revisión final. Se añade una deriva técnica separada, sin modificar
+los seis registros anteriores ni sus mapas históricos:
+
+| Fichero | SHA-256 en `92ff99e` | SHA-256 actual inspeccionado |
+| --- | --- | --- |
+| `scripts/integration_bundle.py` | `af39c4e4fa7732c70aed7b35a33ff3ceb646fcc859ade153e27efc63f09813b1` | `7d737f47f58d69c5c6427acd077aa2be83685274a5cf0c4d0fe2f4df6f8ffe0b` |
+
+El registro `bundle_document_inclusion_followup_20261106` conserva ese delta
+respecto a la base y actualiza los hashes documentales derivados. La inclusión
+está preparada; el coordinador realiza la prueba focalizada y comprobará los
+cuatro miembros de un ZIP creado tras registrar los documentos. Esta conciliación
+no afirma ese resultado todavía ni publicación del ZIP final. No cambia ninguna
+suite histórica, entrega, evaluación de rúbrica o aceptación runtime/humana.

@@ -1,7 +1,7 @@
 # Local integration candidates, 2026-11-05
 
-Status: **bounded post-review corrections and component repetitions verified;
-new Kibana image built/scanned, service and runtime acceptance pending**. Historical
+Status: **Benten local regression and actual image evidence reconciled; NiFi
+nested gate fails with 15 findings; runtime and human acceptance pending**. Historical
 sections below retain their own revisions; the latest update is the final section. No runtime, deployment, security
 exception, merge, SMB, CG32, model or human approval is asserted.
 
@@ -224,3 +224,52 @@ interrupted base pull remains visible; actual candidate installation P1, new
 NiFi image/nested scan, NAR/classloaders, full CG32/SMB, protected CI/reviews and
 human acceptance remain pending. No gates, exceptions, model scope or human
 approval state change.
+
+
+## Benten regression, installation and fresh image scans (2026-11-06)
+
+The [dated validation](BENTEN_VALIDATION_20261106.md) and
+[hash-bound record](BENTEN_VALIDATION_20261106.json) supersede only the earlier
+latest-status statements. Every older section/map retains its source and result.
+Full local regression belongs to `12ca2fa` only: each Python 3.11/3.12 passes
+1107 pytest tests plus 485 subtests, four skips/two intentional ZIP warnings,
+577 unittest tests with four skips, and audit; dashboard passes 29 with `-W error`.
+The documentary check independently verifies 27 evidence members and all 1347
+source hashes against that Git commit. It does not rerun those technical suites.
+
+Actual stock P1 at `06e7e46` verifies/installs 22 targets in 16 NARs as UID1000,
+without starting Java/NiFi. The actual `12ca2fa` Wolfi/root Docker RUN installs
+the same target/archive counts in 25.82 seconds and builds image `03f3e9a1…12d5`.
+Its normal scan/gate pass, while its fresh nested audit scans 1191 JAR packages
+and **fails the unchanged gate with 15 measured findings**. The historical
+59 distinct tuples/63 records remain historical; no exception or projected count
+replaces them. API/dashboard `12ca2fa` builds and scans pass their existing gates
+with zero vulnerabilities. Existing Kibana `15d5723a…` evidence is retained.
+
+The [final independent review](CLAUDE_FINAL_GUARDS_MM114_RECHECK_20261106.md)
+covers `12ca2fa`, finding no Critical/High/Medium production-diff defect for the
+frozen candidate. Its inferred Maven forms were subsequently measured using valid
+parent-POM controls; original invalid-parent forms and the first fix's false
+RabbitMQ rejection remain preserved. The [Maven correction](MAVEN_H_GUARDS_20261106.md)
+at `92ff99e` rejects the five selected uncertain forms and keeps all eight Jackson
+closures and 13 RabbitMQ coordinates equal to real offline Maven. Each interpreter
+passes 36 tests/27 subtests. This focused result is not a new full regression,
+and the earlier review does not cover those later bytes. Maven export02's final
+closed manifest verifies 419 files; the old streaming-log hash discrepancy remains
+declared. No unfinished qualification path is promoted by this reconciliation.
+
+API/dashboard offline image smoke passes under network-none/read-only/UID65532
+constraints. A later own-internal-bridge direct HTTP rehearsal starts both services
+and passes health/POST/replay/conflict/Streamlit health with a public development
+model; two own containers/network are cleaned. GET remains deliberately disabled
+(404); no browser/UI/data acceptance follows. Earlier harness failures are retained.
+No latest NiFi service, NAR/classloader, ES/Kafka/browser/SMB campaign, full CG32,
+model, protected CI/merge or human acceptance is claimed. All 40 rubric review
+cells remain pending.
+
+The parent subsequently prepares four explicit source-bundle allowlist entries
+for the Benten MD/JSON, Maven report and final Claude review. Only four strings
+change relative to `92ff99e`; the prior/current helper hashes are recorded in
+the validation JSON. This prepares inclusion. The parent owns the focused bundle
+check and actual tracked ZIP member verification; no new full suite, final source
+ZIP publication, delivery or runtime/human acceptance is asserted here.

@@ -1,0 +1,1175 @@
+{
+  "status": "Verified local12ca regression, actual builds/scans, offline image smoke and bounded synthetic direct HTTP; NiFi nestedgate1with15findings;92Maven focused correction; full runtime/humanpending",
+  "observed_utc": "2026-11-06T10:09:34.026848+00:00",
+  "inspected_code_commit": "92ff99ecbfae6ac70dc28e36b2a2f4fa05e99245",
+  "source_scope": {
+    "full_regression_and_images": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+    "original_stock_P1": "06e7e46cf05db6008a64eefc871af3de7f676668",
+    "maven_tool_commit": "92ff99ecbfae6ac70dc28e36b2a2f4fa05e99245",
+    "maven_execution": "hash-bound uncommitted v2 scratch, then integrated at92ff99e; sourceclone12ca unchanged",
+    "later_untracked_qualification_paths": "excluded; no integration or acceptance inferred"
+  },
+  "full_regression_12ca2fa": {
+    "scope": "full locked local regression in VM with official Compose5.6.1; not runtime or CI acceptance",
+    "tracked_files_verified": 1347,
+    "evidence_files_verified": 27,
+    "source_clean_unchanged": true,
+    "runner_equivalence": "VM uses exact Compose5.6.1 binary and uv0.13.7 versus CIuv0.13.6; local result only",
+    "phases": [
+      {
+        "phase": "compose-focused",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 0.6667430400848389,
+        "log": "compose-focused.log",
+        "pytest_summary": "1 passed in 0.44s",
+        "maximum_rss_kib": 37344
+      },
+      {
+        "phase": "py311-pytest",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 106.87043523788452,
+        "log": "py311-pytest.log",
+        "pytest_summary": "1107 passed, 4 skipped, 2 warnings, 485 subtests passed in 105.28s (0:01:45)",
+        "maximum_rss_kib": 456168
+      },
+      {
+        "phase": "py311-unittest",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 91.46063876152039,
+        "log": "py311-unittest.log",
+        "unittest_summary": {
+          "tests": 577,
+          "seconds": 85.858,
+          "status": "OK (skipped=4)"
+        },
+        "maximum_rss_kib": 401468
+      },
+      {
+        "phase": "py311-audit",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 0.11469292640686035,
+        "log": "py311-audit.log",
+        "maximum_rss_kib": 31616
+      },
+      {
+        "phase": "py312-pytest",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 160.0239760875702,
+        "log": "py312-pytest.log",
+        "pytest_summary": "1107 passed, 4 skipped, 2 warnings, 485 subtests passed in 157.64s (0:02:37)",
+        "maximum_rss_kib": 442688
+      },
+      {
+        "phase": "py312-unittest",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 67.25653266906738,
+        "log": "py312-unittest.log",
+        "unittest_summary": {
+          "tests": 577,
+          "seconds": 62.186,
+          "status": "OK (skipped=4)"
+        },
+        "maximum_rss_kib": 397692
+      },
+      {
+        "phase": "py312-audit",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 0.1650221347808838,
+        "log": "py312-audit.log",
+        "maximum_rss_kib": 27112
+      },
+      {
+        "phase": "dashboard-unittest",
+        "attempt": 1,
+        "exit_code": 0,
+        "elapsed_seconds": 5.0360047817230225,
+        "log": "dashboard-unittest.log",
+        "unittest_summary": {
+          "tests": 29,
+          "seconds": 4.015,
+          "status": "OK"
+        },
+        "maximum_rss_kib": 235944
+      }
+    ],
+    "skip_details": {
+      "py311": [
+        "test_recent_query_returns_50_with_stable_ties_and_filter (test_lab_dashboard_es.DashboardESQueries.test_recent_query_returns_50_with_stable_ties_and_filter) ... skipped 'Disposable CG19 ES not configured'",
+        "test_summary_denominators_filter_and_empty_window (test_lab_dashboard_es.DashboardESQueries.test_summary_denominators_filter_and_empty_window) ... skipped 'Disposable CG19 ES not configured'",
+        "test_temperature_hour_gap_sensor_means_and_sources (test_lab_dashboard_es.DashboardESQueries.test_temperature_hour_gap_sensor_means_and_sources) ... skipped 'Disposable CG19 ES not configured'",
+        "test_all_frontends_retire_old_clients_and_sessions (test_lan_ca_rotation.LanCARotationTests.test_all_frontends_retire_old_clients_and_sessions) ... skipped 'Opt-in isolated TLS test; required by the LAN rotation CI job'"
+      ],
+      "py312": [
+        "test_recent_query_returns_50_with_stable_ties_and_filter (test_lab_dashboard_es.DashboardESQueries.test_recent_query_returns_50_with_stable_ties_and_filter) ... skipped 'Disposable CG19 ES not configured'",
+        "test_summary_denominators_filter_and_empty_window (test_lab_dashboard_es.DashboardESQueries.test_summary_denominators_filter_and_empty_window) ... skipped 'Disposable CG19 ES not configured'",
+        "test_temperature_hour_gap_sensor_means_and_sources (test_lab_dashboard_es.DashboardESQueries.test_temperature_hour_gap_sensor_means_and_sources) ... skipped 'Disposable CG19 ES not configured'",
+        "test_all_frontends_retire_old_clients_and_sessions (test_lan_ca_rotation.LanCARotationTests.test_all_frontends_retire_old_clients_and_sessions) ... skipped 'Opt-in isolated TLS test; required by the LAN rotation CI job'"
+      ]
+    },
+    "warnings": "two intentional duplicate ZIP entry controls per interpreter",
+    "model_generation_source_head": "a098a860e4b183d6a0817c527a4a6e9cd1999c97",
+    "model_verification_source_head": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+    "model_role": "only9public-data local test model/report files copied froma098 and verified against04record; generationcode/data unchanged; no replaySQLite copied; fresh ledger generated by tests",
+    "model_artifacts_sha256": {
+      "outputs/cg08/report.json": "ed8039c0f8d9dfb41c2a6089dc8894ab45b7a1dc0c047a0c6627c3c52799c951",
+      "outputs/cg08/validation.csv": "d0ab30a6f6f0676175bfad77af7b5336f0b03766255eea454d24e41afccefc33",
+      "outputs/cg08/rf.pkl": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+      "outputs/cg09/if.pkl": "4354475cb268fe5777ebeced69316261579070b7a5e184c02b7bae8a4cacacee",
+      "outputs/cg09/report.json": "318886ef99b3b1d4e654d23b51d1ac547c5d38bc215e9237a09887aeab34011c",
+      "outputs/cg09/validation.csv": "b6c47a1257e71f7d18b1610d6aae74d19bf611fb0409644d0410c99d732addde",
+      "outputs/api/if.pkl": "4354475cb268fe5777ebeced69316261579070b7a5e184c02b7bae8a4cacacee",
+      "outputs/api/manifest.json": "3a78dff85e705b57c5d5e11c84f5a020f797ed70b59f4486671152e71034e6f9",
+      "outputs/api/rf.pkl": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc"
+    },
+    "unchanged_generation_code_and_data": {
+      "scripts/experiment_rf.py": "df162ef199ed0d90ae504b786b9fa99bcb792249b784df40b43fe3a4f0d81f43",
+      "scripts/experiment_anomaly.py": "89680e544aea41e2c0dba3bd8bf4d9d7900e696011b737fcda4322dfc50f8d59",
+      "scripts/package_model.py": "17ce434f8e41682cffadc8fda018052ea614530389acd98550c4c8ee89679b5b",
+      "scoring/preparation.py": "2578e9497dc16d8501d88c4fe472b0f4146dc4661548a5abfa0019251ee80c1d",
+      "scoring/scope.py": "f8f9443f96465fe96d922a380af6940928a863d21a2f7a26e8db19ca35e4d7e7",
+      "data/ai4i2020_train.csv": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce"
+    },
+    "live_ES_or_TLS_acceptance": false,
+    "human_acceptance": false
+  },
+  "maven_H_guard": {
+    "scope": "Maven3.9.11/Aether consumer dependency semantics, not mvn project builds or runtime approval",
+    "baseline_head": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+    "baseline_maven_sha256": "304bc7217aab191565ed60fbc9b75209e275e1e22eb787d3d81e3c0edbcb4516",
+    "fixed_v1_sha256": "e1bc9e3d3f45432f6b68c1518cbb390a4a27b0e8725280ea2024474c9b42165b",
+    "fixed_v2_sha256": "fbeaeb8564c8da3587eab82ab95f80fbb8d8ef0703a3ae86f22e4d29267f9dc9",
+    "fixed_v2_test_sha256": "7bd5a21e215f230cd214d60cb744e55a7f4062c5f9bd6452d6cf26553a055de3",
+    "fixture_correction": "H1/H1b/H1c original parent POMs omit packaging=pom. Exact raw forms preserved; three controlled variants insert only that parent declaration. Valid controls are authoritative for inheritance; original equality does not disprove review hypotheses.",
+    "current_frozen_comparison": "all8Jackson roots and Rabbit13coordinates equal real oracle for baseline andv2",
+    "v1_regression_preserved": "broad pre-exclusion GA uncertainty rejects test-scoped classified AmazonCorrettoCryptoProvider in Nettyhandler; v2 fixes by restricting pre-exclusion check to plain JAR/no classifier and retaining required-path check",
+    "unit_tests": {
+      "py311": "36passed+27subtests",
+      "py312": "36passed+27subtests"
+    },
+    "shape_scan_summary": {
+      "jackson": {
+        "pinned_poms_verified": 44,
+        "raw_dependency_GA_flags": 0,
+        "managed_type_classifier_flags": 0
+      },
+      "rabbit": {
+        "pinned_poms_verified": 33,
+        "raw_dependency_GA_flags": 51,
+        "managed_type_classifier_flags": 3
+      }
+    },
+    "applicability": "Jackson44pinnedPOMs have neither affected raw shape. Rabbit33have51rawGAand3managedclassifier occurrences, so broad no-properties claim wouldbe false; current13coordinate closure is measured equal withv2. Classified optional/testnative paths remain excluded. No extrapolation to future repins.",
+    "no_timeouts_or_oom": true,
+    "network_scope": "private netnamespace, UID1000, onlyloopback; JVMheap256/metaspace96/direct32,CPU0,core0; sharedlock phases175smaximum",
+    "final_closed_files_verified": 419,
+    "legacy_manifest_caveat": {
+      "legacy_first_phase_manifest_caveat": "The original sha256.json was generated while driver.log was open; that one streaming log subsequently grew. Original evidence preserved. final-manifest.json is authoritative and generated only after all subprocesses/logs finished.",
+      "legacy_mismatches": {
+        "driver.log": {
+          "recorded": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "actual": "5a9cc97131924e0c61ee3750f501a249360b8f57f4fb3b73083aa29a8ed58bea"
+        }
+      },
+      "documentation_correction": "README timeout175 spacing corrected to timeout 175 before final export02; measured execution commands were always correct and no tests or source bytes changed. Initial export archive preserved."
+    }
+  },
+  "original_stock_P1": {
+    "source_commit": "06e7e46cf05db6008a64eefc871af3de7f676668",
+    "status": "verified-and-installed-in-disposable-stock-layers-as-nifi-user",
+    "base_reference": "apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de467a35a267f4d28ad",
+    "stock_user": {
+      "configured_image_user": "nifi",
+      "gid": 1000,
+      "public_account": "nifi",
+      "uid": 1000
+    },
+    "cli_results": {
+      "install": {
+        "archives": 16,
+        "mode": "installed-candidate-layer",
+        "runtime_approved": false,
+        "services_started": false,
+        "targets": 22
+      },
+      "verify": {
+        "archives": 16,
+        "mode": "verified-candidate-context",
+        "runtime_approved": false,
+        "services_started": false,
+        "targets": 22
+      }
+    },
+    "elapsed_seconds": {
+      "install": 20.47,
+      "metadata-owner": 0.458,
+      "metadata-root": 0.407,
+      "smoke": 0.466,
+      "verify": 19.46
+    },
+    "historical_attempts_preserved": {
+      "attempt01": "Harness -I import failure, corrected externally only; not context/stock verification",
+      "attempt02": "UID0 with capdropALL was denied by stock nifi-owned0770lib. Both CLIcommands stopped before mutation; original report/errors preserved",
+      "attempt03": "Metadata-confirmed stocknonrootowner1000:1000; no chmod/chown/capabilityaddition; verifyread-onlyroot and installseparatefreshwritableephemeralroot"
+    },
+    "source_before_after_equal": true,
+    "context_before_after_equal": true,
+    "base_image_identity_before_after_equal": true,
+    "bootstrap_scope": "Official pinned original apache/nifi stock proof. Does not prove updated four-Jackson bootstrap/toolkit default branch, customWolfi/UVcandidateDockerbuild, or rootDockerRUNpermissions. Tool accepts exactly the originalcompletefourset or completepinnedupdatedset; no partialset exemption.",
+    "acceptance": {
+      "CG32": false,
+      "SMB": false,
+      "browser": false,
+      "classloader_or_runtime_approved": false,
+      "human": false,
+      "image_built": false,
+      "image_scanned": false,
+      "java_or_nifi_started": false,
+      "services_started": false
+    }
+  },
+  "nifi_candidate_12ca2fa": {
+    "source_commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+    "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+    "build_exit": 0,
+    "wolfi_root_install": {
+      "targets": 22,
+      "archives": 16,
+      "docker_elapsed_seconds": 25.82,
+      "scope": "actual DockerRUN candidate installation; closes Wolfi/root P1variant only, no Java/NiFi startup"
+    },
+    "normal_scan": {
+      "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+      "created_at": "2026-11-06T09:26:05.148154379Z",
+      "artifact_name": "cnc-guard-audit:nifi",
+      "coverage": [
+        {
+          "type": "wolfi",
+          "class": "os-pkgs",
+          "packages": 80,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "jar",
+          "class": "lang-pkgs",
+          "packages": 107,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "rustbinary",
+          "class": "lang-pkgs",
+          "packages": 513,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "rustbinary",
+          "class": "lang-pkgs",
+          "packages": 513,
+          "vulnerability_records": 0
+        }
+      ],
+      "scan_exit": 0,
+      "gate_exit": 0
+    },
+    "nested_scan": {
+      "image_id": "sha256:c3513d44e8f1eef6596e73f8845b2cd2c83afe11dd541b8d43d797a67d1db8d1",
+      "created_at": "2026-11-06T09:26:59.698460284Z",
+      "artifact_name": "cnc-guard-audit:nifi-archives",
+      "coverage": [
+        {
+          "type": "wolfi",
+          "class": "os-pkgs",
+          "packages": 80,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "jar",
+          "class": "lang-pkgs",
+          "packages": 1191,
+          "vulnerability_records": 15
+        },
+        {
+          "type": "rustbinary",
+          "class": "lang-pkgs",
+          "packages": 513,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "rustbinary",
+          "class": "lang-pkgs",
+          "packages": 513,
+          "vulnerability_records": 0
+        }
+      ],
+      "scan_exit": 0,
+      "gate_exit": 1,
+      "vulnerability_records": 15,
+      "distinct_tuples": 15,
+      "findings": [
+        {
+          "VulnerabilityID": "CVE-2026-89407",
+          "PkgName": "com.fasterxml.jackson.core:jackson-core",
+          "InstalledVersion": "2.22.2",
+          "FixedVersion": "2.18.11, 2.21.7, 2.22.3",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89425",
+          "PkgName": "com.fasterxml.jackson.core:jackson-core",
+          "InstalledVersion": "2.22.2",
+          "FixedVersion": "2.21.7, 2.22.3, 2.18.11",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-91776",
+          "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+          "InstalledVersion": "2.22.2",
+          "FixedVersion": "2.18.11, 2.21.7, 2.22.3",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-91777",
+          "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+          "InstalledVersion": "2.22.2",
+          "FixedVersion": "2.21.7, 2.18.11, 2.22.3",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-102554",
+          "PkgName": "com.google.guava:guava",
+          "InstalledVersion": "33.4.8-jre",
+          "FixedVersion": "33.7.2",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-102554",
+          "PkgName": "com.google.guava:guava",
+          "InstalledVersion": "33.6.0-jre",
+          "FixedVersion": "33.7.2",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-106121",
+          "PkgName": "com.rabbitmq:amqp-client",
+          "InstalledVersion": "5.35.0",
+          "FixedVersion": "5.36.1",
+          "Severity": "MEDIUM"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-106122",
+          "PkgName": "com.rabbitmq:amqp-client",
+          "InstalledVersion": "5.35.0",
+          "FixedVersion": "5.36.0",
+          "Severity": "MEDIUM"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45799",
+          "PkgName": "com.squareup.wire:wire-runtime",
+          "InstalledVersion": "5.2.0",
+          "FixedVersion": "6.3.0, 7.0.0-alpha03",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-63126",
+          "PkgName": "com.squareup.wire:wire-runtime",
+          "InstalledVersion": "5.2.0",
+          "FixedVersion": "6.4.5, 7.0.0-alpha04",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-45799",
+          "PkgName": "com.squareup.wire:wire-runtime-jvm",
+          "InstalledVersion": "5.2.0",
+          "FixedVersion": "6.3.0, 7.0.0-alpha03",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-118259",
+          "PkgName": "io.opentelemetry:opentelemetry-api",
+          "InstalledVersion": "1.62.0",
+          "FixedVersion": "1.67.0",
+          "Severity": "MEDIUM"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-89425",
+          "PkgName": "tools.jackson.core:jackson-core",
+          "InstalledVersion": "3.2.2",
+          "FixedVersion": "3.1.7, 3.2.3",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-91776",
+          "PkgName": "tools.jackson.core:jackson-databind",
+          "InstalledVersion": "3.2.2",
+          "FixedVersion": "3.1.7, 3.2.3",
+          "Severity": "HIGH"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-91777",
+          "PkgName": "tools.jackson.core:jackson-databind",
+          "InstalledVersion": "3.2.2",
+          "FixedVersion": "3.1.7, 3.2.3",
+          "Severity": "HIGH"
+        }
+      ]
+    },
+    "historical_scan": {
+      "source": "6d67bc2",
+      "records": 63,
+      "distinct_tuples": 59,
+      "scope": "unchanged historical report; new exact image reports15 measured findings, no projected count or new exception"
+    },
+    "runtime_approved": false
+  },
+  "api_dashboard_12ca2fa": {
+    "api": {
+      "image_id": "sha256:0b3f1dab2896b16e595623067e6eea7ff8e70d58f2f236c1bec7db9018c133f2",
+      "created_at": "2026-11-06T09:47:47.308230244Z",
+      "artifact_name": "cnc-guard-audit:api",
+      "coverage": [
+        {
+          "type": "wolfi",
+          "class": "os-pkgs",
+          "packages": 34,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "python-pkg",
+          "class": "lang-pkgs",
+          "packages": 34,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "rustbinary",
+          "class": "lang-pkgs",
+          "packages": 513,
+          "vulnerability_records": 0
+        }
+      ],
+      "build_exit": 0,
+      "scan_exit": 0,
+      "gate_exit": 0
+    },
+    "dashboard": {
+      "image_id": "sha256:307debae49122fd9d273533faf6e4004318bf529757ac5b3af05bd11096b66a2",
+      "created_at": "2026-11-06T09:49:34.362765478Z",
+      "artifact_name": "cnc-guard-audit:dashboard",
+      "coverage": [
+        {
+          "type": "wolfi",
+          "class": "os-pkgs",
+          "packages": 34,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "python-pkg",
+          "class": "lang-pkgs",
+          "packages": 49,
+          "vulnerability_records": 0
+        },
+        {
+          "type": "rustbinary",
+          "class": "lang-pkgs",
+          "packages": 513,
+          "vulnerability_records": 0
+        }
+      ],
+      "build_exit": 0,
+      "scan_exit": 0,
+      "gate_exit": 0
+    }
+  },
+  "kibana": {
+    "source_commit": "06e7e46cf05db6008a64eefc871af3de7f676668",
+    "image_id": "sha256:15d5723a25cf02baa9785d7213a5850c240d653ad623a4a8e4f2a444cd791e64",
+    "gate_exit": 0,
+    "existing_permitted_findings": [
+      "CVE-2026-19693",
+      "CVE-2026-56876"
+    ],
+    "scope": "existing committed exact image evidence retained; no new exception or runtime result"
+  },
+  "independent_review": {
+    "path": "docs/evidence/CLAUDE_FINAL_GUARDS_MM114_RECHECK_20261106.md",
+    "sha256": "f5cb4fdec3d952b25b3bcae20e292a371eb97f7c411a085adae05c1296f5980c",
+    "reviewed_commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+    "result": "no Critical/High/Medium production-diff defect found for frozen candidate12ca; hypothetical future-repin Maven forms inferred, subsequently measured/fixed separately at92",
+    "executes_tests_or_services": false,
+    "covers_maven_92_correction": false,
+    "grants_runtime_merge_or_human_acceptance": false
+  },
+  "container_smoke_http": {
+    "status": "bounded offline image smoke and synthetic direct HTTP passed; not complete runtime acceptance",
+    "source_commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+    "offline_smoke": {
+      "api": {
+        "uid": 65532,
+        "duckdb": "2.0.0",
+        "pyarrow": "23.0.1",
+        "httpx": "0.28.1",
+        "json_extension": "query-passed-offline",
+        "read_api": "imported",
+        "timezone": "UTC",
+        "null_preserved": true,
+        "rootfs": "read-only",
+        "tmpfs": "writable",
+        "model": "not-loaded",
+        "services_started": false
+      },
+      "dashboard": {
+        "uid": 65532,
+        "streamlit": "1.66.1",
+        "requests": "2.34.2",
+        "domain": "imported",
+        "rootfs": "read-only",
+        "tmpfs": "writable",
+        "services_started": false
+      },
+      "exit_codes": {
+        "api": 0,
+        "dashboard": 0
+      },
+      "limits": {
+        "network": "none",
+        "rootfs": "read-only",
+        "uid": 65532,
+        "memory_bytes": 536870912,
+        "tmpfs_bytes": 67108864,
+        "cpus": 1,
+        "pids": 64,
+        "capabilities": "ALL dropped",
+        "no_new_privileges": true
+      },
+      "rss_caveat": "time-v RSS describes docker client, not measured service/container RSS"
+    },
+    "http_smoke_02": {
+      "source_head": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "scope": "synthetic direct HTTP fixture with own public development model; no Kafka/CG15/ES/browser/SMB acceptance",
+      "runtime_approved": false,
+      "model_files": {
+        "rf.pkl": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+        "if.pkl": "4354475cb268fe5777ebeced69316261579070b7a5e184c02b7bae8a4cacacee"
+      },
+      "started_at": 1793959764.7596602,
+      "api_health": {
+        "status": "ready",
+        "model_version": "ai4i-current-state-v4",
+        "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+        "temporal_prediction_enabled": false
+      },
+      "prediction_status": 200,
+      "exact_http_replay": true,
+      "conflict_status": 409,
+      "read_api_disabled_status": 404,
+      "dashboard_health": "ok",
+      "dashboard_data_acceptance": false,
+      "network": "own internal Docker bridge; no host port or external listener",
+      "http_client": "stdlib inside own API container, real TCP requests to both services",
+      "passed": true,
+      "cleanup_errors": [],
+      "finished_at": 1793959770.7398493
+    },
+    "historical_failed_attempts": {
+      "smoke_attempt1": "DuckDB setup order rejected external extension operation; corrected harness only",
+      "smoke_attempt2": "DuckDB relation.fetchone API absent; corrected harness only",
+      "http_smoke_01": "Docker29 internal bridge host-port lookup failed; no service acceptance from this attempt"
+    },
+    "export_omits_public_model_pkl_bytes": true,
+    "retains_model_hashes_and_manifests": true,
+    "runtime_approved": false,
+    "additional_limits": [
+      "No GET read API acceptance:opt-in deliberatelydisabled and404expected",
+      "No browser/UI rendering/dashboard data acceptance",
+      "No ES/Kafka/CG15/NiFi/SMB/fullCG32 campaign or model/human acceptance"
+    ]
+  },
+  "documentary_verification": {
+    "technical_tests_repeated_by_this_reconciliation": false,
+    "manifests": [
+      {
+        "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/maven-H-final-20261106/download-02/maven-H-final-20261106/final-manifest.json",
+        "sha256": "6850aa1b6d7bb6b17261458b8ca509eef0567b8e6206224dae64b89a4ced7a38",
+        "bytes": 60220,
+        "verified_members": 419,
+        "missing": 0,
+        "mismatches": 0
+      },
+      {
+        "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/full-regression-12ca2fa-01/download/full-regression-12ca2fa-01/sha256.json",
+        "sha256": "4a041d9d3c1cc656eab56be4509368ba3ae228a8009ee93c18bb22465a5682da",
+        "bytes": 2635,
+        "verified_members": 27,
+        "missing": 0,
+        "mismatches": 0
+      }
+    ],
+    "git_source_bytes_verified_against_commit": {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "files": 1347,
+      "mismatches": 0
+    },
+    "proof_files": 104,
+    "proof_missing": 0,
+    "proof_hash_mismatches": 0
+  },
+  "proofs": {
+    "full-regression-12ca2fa-01/report.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/full-regression-12ca2fa-01/report.json",
+      "sha256": "519ec7c098ce63189c76b552caec9af2e02945e258c3cf08c52671ba40d8d739",
+      "bytes": 8592
+    },
+    "full-regression-12ca2fa-01/full-regression-12ca2fa-01-export.tgz": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/full-regression-12ca2fa-01/full-regression-12ca2fa-01-export.tgz",
+      "sha256": "876df215c057510778d6494bfa431fe3714e9c81d3faddff53c5896a24a505ad",
+      "bytes": 188916
+    },
+    "maven-H-final-20261106/report.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/maven-H-final-20261106/report.json",
+      "sha256": "ef1ba74f867ca95ff9210b9215b6554e04bf870ee1b8661e443cc6c9c9fecd7d",
+      "bytes": 40619
+    },
+    "maven-H-final-20261106/maven-H-final-20261106-export-02.tgz": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/maven-H-final-20261106/maven-H-final-20261106-export-02.tgz",
+      "sha256": "9eb24ccb23570300f449f9dd9bcaa74b48f95477327e727ae673668d643502fe",
+      "bytes": 403466
+    },
+    "nifi-stock-P1-20261106/P1-summary-03.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-stock-P1-20261106/P1-summary-03.json",
+      "sha256": "da8b82278554bd7b69d9653b0e73e2b4b8d966d9c99f560dce55110acf5d37dd",
+      "bytes": 9457
+    },
+    "nifi-stock-P1-20261106/P1-evidence-03.tar.gz": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-stock-P1-20261106/P1-evidence-03.tar.gz",
+      "sha256": "6296fba5a44e0171c58fa38012b47d02ad123f2eae600a7f97da50cb6e2271bf",
+      "bytes": 71448
+    },
+    "nifi-build-scans-12ca2fa.tgz": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa.tgz",
+      "sha256": "35e25b63a4186880ecc8658a83d4d14e36a537970772ea631a651e499dd69b9d",
+      "bytes": 310419
+    },
+    "api-dashboard-build-12ca2fa.tgz": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa.tgz",
+      "sha256": "dfa63763b52ab888883cc96c18531645e46e249430782d9c7c3b02394e49105a",
+      "bytes": 109667
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-candidate-build-12ca2fa/build.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-candidate-build-12ca2fa/build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-candidate-build-12ca2fa/build.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-candidate-build-12ca2fa/build.log",
+      "sha256": "c7c4f0ac5c5e623b6e3fef5a0cc1b630944d77e51b58d769f371d0453ae9b429",
+      "bytes": 77953
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-candidate-build-12ca2fa/image-inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-candidate-build-12ca2fa/image-inspect.json",
+      "sha256": "f541222518bc8df9d34bc567299e36714617dbf3b356f803b9a81c62d6e9de5c",
+      "bytes": 5056
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-scan.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-scan.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-gate.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-gate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-gate.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-gate.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-scan.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-scan.log",
+      "sha256": "6ff83707c6b976a00053a2bd8c0234e68168543f738df3c3d8edf8680a13eebe",
+      "bytes": 585
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/nested-archive-scan.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/nested-archive-scan.json",
+      "sha256": "f4a1a226fdc99d85a290bd55f6c5a02dceea1db4db6e166d097716a2c2a9a4ec",
+      "bytes": 1903448
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-gate.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-gate.log",
+      "sha256": "9aec99de4ec8c06196ddf9131ca5cb6a17130d9e14aca95c9b585fbd9cd1c0b8",
+      "bytes": 1377
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-gate.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-gate.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-scan.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-scan.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-build.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-build.log",
+      "sha256": "83ed669f6310f3e67b387e7aad0783349652e8355946b351e36360f6a629fbd5",
+      "bytes": 7283
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/image-scan.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/image-scan.json",
+      "sha256": "9f6b786957c5f756ae7e204a091d93980c41e2cee10ca7ff2246ae5be0330b00",
+      "bytes": 1117949
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-build.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-scan.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/normal-scan.log",
+      "sha256": "b7ad8a31a04fc69abbb7e0442f22411cd75c438d8ecd9f148568ff4e68e79103",
+      "bytes": 1030
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/image-inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/image-inspect.json",
+      "sha256": "f541222518bc8df9d34bc567299e36714617dbf3b356f803b9a81c62d6e9de5c",
+      "bytes": 5056
+    },
+    "nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-image-inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/nifi-build-scans-12ca2fa-export/nifi-scans-12ca2fa/archive-image-inspect.json",
+      "sha256": "ef0d4e1fff0a55951b7c65d1ce3a8a0fa52c2ff9a209939595da7c90e987b54a",
+      "bytes": 5233
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/finished": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/finished",
+      "sha256": "3c9c03151eb798877ccfdae3a38f97f01e3433edc40b6e012807665ed310eb82",
+      "bytes": 21
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.started": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.started",
+      "sha256": "dee2ecf4333d35f765c40d38325e4ee344530f8739518c4144c1019ea9543768",
+      "bytes": 21
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.build.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.build.log",
+      "sha256": "ff7f204d1a754b2998042d5cf22a448c74ed13819abeb3ca0998130b0d75a414",
+      "bytes": 7193
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.gate.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.gate.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.gate.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.gate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.scan.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.scan.log",
+      "sha256": "ab195477d26dee4ffd5f9036238c3c15342a79603ae1f8b783a93b3b0619db23",
+      "bytes": 762
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.build.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.build.log",
+      "sha256": "acf8088d96f3ebd55419d7f327aea7f472aca8d8b8ee32e8f4efc9ffec6719c1",
+      "bytes": 7579
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/source-status-before.txt": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/source-status-before.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.gate.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.gate.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.scan.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.scan.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.scan.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.scan.log",
+      "sha256": "370b9bf214a9a019231f29761ec6ee15e45cf2645b5229509c1af290a8c1e897",
+      "bytes": 762
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api-smoke.py": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api-smoke.py",
+      "sha256": "1cb9f4e3b8aaffa2f7f0db6b0d9dcd26cd24bd619755c588afd49c4db3430012",
+      "bytes": 1158
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.scan.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.scan.json",
+      "sha256": "604f1b4c97f875abd8ddafde2a78761785b5798f0d202e00718bc5fbf5bdcf58",
+      "bytes": 571940
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard-smoke.py": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard-smoke.py",
+      "sha256": "199a4943ea8bb25bfeec1419e9f6bb2a33e8e8879ecab060e9a7be5f63078c02",
+      "bytes": 467
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.build.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.inspect.json",
+      "sha256": "658014cf9078f82aaff70dac02b955beae8da5038b6f9b003d155259af6b21ae",
+      "bytes": 4138
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.scan.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.scan.json",
+      "sha256": "7f644eb163458df994dac6a17c237f44f3dd3de45916f57186a622afd4537b16",
+      "bytes": 561499
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/api.inspect.json",
+      "sha256": "1dd86bad5187dc34f8d9864e2ac1b31aef6d9c95c5829b1fb9eb3cc4eae491df",
+      "bytes": 4389
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.scan.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.scan.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.gate.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.gate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.started": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.started",
+      "sha256": "cac99b0877a91329bd57740b1e65ccfa5760c9e0b20b1e2a6115af547f29cc74",
+      "bytes": 21
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/source-status-after.txt": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/source-status-after.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.build.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-build-12ca2fa-export/api-dashboard-build-12ca2fa/dashboard.build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2.tgz": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2.tgz",
+      "sha256": "4f185a6ebec6f46b782da0bc46aa02581b597251568363b7b8e6bf573a733007",
+      "bytes": 119957
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/finished": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/finished",
+      "sha256": "3c9c03151eb798877ccfdae3a38f97f01e3433edc40b6e012807665ed310eb82",
+      "bytes": 21
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.started": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.started",
+      "sha256": "dee2ecf4333d35f765c40d38325e4ee344530f8739518c4144c1019ea9543768",
+      "bytes": 21
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.build.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.build.log",
+      "sha256": "ff7f204d1a754b2998042d5cf22a448c74ed13819abeb3ca0998130b0d75a414",
+      "bytes": 7193
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.smoke.stderr": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.smoke.stderr",
+      "sha256": "190051cf64028509c351c27b74555ea61dbac0338e0e3722c0f158f78b692d4f",
+      "bytes": 1281
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.gate.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.gate.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.smoke.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.smoke.log",
+      "sha256": "0c8df14976cd4b0be89e3e080a103d17b6a945a00e029f81f3f786c06d35efac",
+      "bytes": 153
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.smoke.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.smoke.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.gate.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.gate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.scan.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.scan.log",
+      "sha256": "ab195477d26dee4ffd5f9036238c3c15342a79603ae1f8b783a93b3b0619db23",
+      "bytes": 762
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.build.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.build.log",
+      "sha256": "acf8088d96f3ebd55419d7f327aea7f472aca8d8b8ee32e8f4efc9ffec6719c1",
+      "bytes": 7579
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/source-status-before.txt": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/source-status-before.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.gate.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.gate.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.scan.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.scan.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke.finished": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke.finished",
+      "sha256": "8d3283f6545cc0d967c514f622a64afa6790f7ceec9eb431ce2e404e8331e2e8",
+      "bytes": 21
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.scan.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.scan.log",
+      "sha256": "370b9bf214a9a019231f29761ec6ee15e45cf2645b5229509c1af290a8c1e897",
+      "bytes": 762
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api-smoke.py": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api-smoke.py",
+      "sha256": "b5f6ea9cbc3f8eaed665f1756c0979c8622a4d99206157498f27aa486fe1eaf9",
+      "bytes": 1217
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.scan.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.scan.json",
+      "sha256": "604f1b4c97f875abd8ddafde2a78761785b5798f0d202e00718bc5fbf5bdcf58",
+      "bytes": 571940
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard-smoke.py": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard-smoke.py",
+      "sha256": "199a4943ea8bb25bfeec1419e9f6bb2a33e8e8879ecab060e9a7be5f63078c02",
+      "bytes": 467
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.build.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.smoke.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.smoke.log",
+      "sha256": "0ab683ef043c7fd5301bcc79991d2aad4df07b86891970575ba41c3b4432bc7e",
+      "bytes": 277
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.inspect.json",
+      "sha256": "658014cf9078f82aaff70dac02b955beae8da5038b6f9b003d155259af6b21ae",
+      "bytes": 4138
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.scan.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.scan.json",
+      "sha256": "7f644eb163458df994dac6a17c237f44f3dd3de45916f57186a622afd4537b16",
+      "bytes": 561499
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/api.inspect.json",
+      "sha256": "1dd86bad5187dc34f8d9864e2ac1b31aef6d9c95c5829b1fb9eb3cc4eae491df",
+      "bytes": 4389
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.scan.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.scan.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.gate.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.gate.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.started": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.started",
+      "sha256": "cac99b0877a91329bd57740b1e65ccfa5760c9e0b20b1e2a6115af547f29cc74",
+      "bytes": 21
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.smoke.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.smoke.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/source-status-after.txt": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/source-status-after.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.smoke.stderr": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.smoke.stderr",
+      "sha256": "1ff49701543447aa2875aeade4a6a1eeaef790319669d8045bf3c0a4c381288c",
+      "bytes": 1299
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.build.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/dashboard.build.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-01/cnc-api-http-12ca2fa.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-01/cnc-api-http-12ca2fa.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-01/result.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-01/result.json",
+      "sha256": "b9ebb22acf24a562cdc492821efd941522bf6c5718545bb1a17341450ae88b35",
+      "bytes": 646
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api.smoke.stderr": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api.smoke.stderr",
+      "sha256": "d3be8ccbfc762a8b1709012a87f8ff14b11327f5fbab511d949ad603ba12fad8",
+      "bytes": 2176
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/dashboard.smoke.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/dashboard.smoke.log",
+      "sha256": "0c8df14976cd4b0be89e3e080a103d17b6a945a00e029f81f3f786c06d35efac",
+      "bytes": 153
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api.smoke.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api.smoke.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api-smoke.py": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api-smoke.py",
+      "sha256": "2c1997ad6517d2254faaefb86da57e52190a4c575bae7b0e9f920d01cbf6202f",
+      "bytes": 1187
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api.smoke.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/api.smoke.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/dashboard.smoke.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/dashboard.smoke.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/dashboard.smoke.stderr": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt2/dashboard.smoke.stderr",
+      "sha256": "e6475486eeab1b946fc73c0a71da7eb70cb4e9d1fa74e414d2e72f963d6090a4",
+      "bytes": 1299
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api.smoke.stderr": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api.smoke.stderr",
+      "sha256": "ad45d3bcd3c96d735540001e71e6fb4cef00820f07948d9caa59ab8bfd48d46d",
+      "bytes": 1558
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/dashboard.smoke.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/dashboard.smoke.log",
+      "sha256": "0c8df14976cd4b0be89e3e080a103d17b6a945a00e029f81f3f786c06d35efac",
+      "bytes": 153
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api.smoke.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api.smoke.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api-smoke.py": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api-smoke.py",
+      "sha256": "1cb9f4e3b8aaffa2f7f0db6b0d9dcd26cd24bd619755c588afd49c4db3430012",
+      "bytes": 1158
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api.smoke.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/api.smoke.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/dashboard.smoke.exit": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/dashboard.smoke.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "bytes": 2
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/dashboard.smoke.stderr": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/smoke-attempt1/dashboard.smoke.stderr",
+      "sha256": "cd49957db3c506840d74abf27f2d6d71257e55fa53e03c9c46d8335719c20e2e",
+      "bytes": 1301
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-api-http-12ca2fa.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-api-http-12ca2fa.log",
+      "sha256": "9ac29a8fd9c476f004a4a33718de9205f123187a2b2740aa093dcb266520762e",
+      "bytes": 506
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-dashboard-http-12ca2fa.log": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-dashboard-http-12ca2fa.log",
+      "sha256": "d39009c330584eb88a543f6f1d1bb83006045cb31a3225b0cd6e9174b3a2b08d",
+      "bytes": 311
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/event.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/event.json",
+      "sha256": "ae7b1fd8bcc381c9d96938dbdd995333889188dd904718395aede79da47a2d1e",
+      "bytes": 466
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/prediction.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/prediction.json",
+      "sha256": "afa1e73917ac974a8fba21220412a4e67a61295f64542ac79ce1193d16ea4dd7",
+      "bytes": 926
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-dashboard-http-12ca2fa.inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-dashboard-http-12ca2fa.inspect.json",
+      "sha256": "648becb6318c575965207f29fcec73efc86911d5e54bef76a4b66653e0dabe3a",
+      "bytes": 8651
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-api-http-12ca2fa.inspect.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/cnc-api-http-12ca2fa.inspect.json",
+      "sha256": "1862b42cbfdd4d7be1138a51b4fed63c7b1bba29bb01077ab3dd15ad96a7c5ff",
+      "bytes": 9294
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/result.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/result.json",
+      "sha256": "daf7ca6f21a4f1c2dac541319305c55a79100cef70449fc9fe503b9adf7de0a7",
+      "bytes": 1048
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/fixture-bundle/manifest.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-02/fixture-bundle/manifest.json",
+      "sha256": "3a78dff85e705b57c5d5e11c84f5a020f797ed70b59f4486671152e71034e6f9",
+      "bytes": 939
+    },
+    "api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-01/fixture-bundle/manifest.json": {
+      "local_path": "/home/tears/.cache/cnc-benten-vm-20261105/api-dashboard-rehearsal-12ca2fa-v2-export/api-dashboard-build-12ca2fa/http-smoke-01/fixture-bundle/manifest.json",
+      "sha256": "3a78dff85e705b57c5d5e11c84f5a020f797ed70b59f4486671152e71034e6f9",
+      "bytes": 939
+    }
+  },
+  "acceptance": {
+    "NiFi_service_or_NarClassLoader": false,
+    "ES_Kafka_browser_SMB_current_campaign": false,
+    "full_CG32_campaign": false,
+    "model_acceptance": false,
+    "human_rubric": false,
+    "protected_CI_or_merge": false,
+    "new_security_exceptions": false
+  },
+  "limits": [
+    "Full suite belongs12ca only;92Maven has focused36tests+27subtests each interpreter, no fresh full-suite attribution.",
+    "MM11.4 positive upstream truncationP1 and bounded memory/availability limits remain declared.",
+    "Build/scan/CLI installation are separate from actual service/NAR/classloader acceptance.",
+    "No retrospective rewrite of historical source maps, matrices, base/snapshot or humanpending review."
+  ],
+  "bundle_document_inclusion_followup": {
+    "scope": "parent working-tree packaging delta after92ff99e; exactly four allowlist strings, no source helper/test edits by this reconciliation",
+    "path": "scripts/integration_bundle.py",
+    "base_commit": "92ff99e",
+    "previous_sha256": "af39c4e4fa7732c70aed7b35a33ff3ceb646fcc859ade153e27efc63f09813b1",
+    "inspected_current_sha256": "7d737f47f58d69c5c6427acd077aa2be83685274a5cf0c4d0fe2f4df6f8ffe0b",
+    "added_allowlist_paths": [
+      "docs/evidence/BENTEN_VALIDATION_20261106.md",
+      "docs/evidence/BENTEN_VALIDATION_20261106.json",
+      "docs/evidence/MAVEN_H_GUARDS_20261106.md",
+      "docs/evidence/CLAUDE_FINAL_GUARDS_MM114_RECHECK_20261106.md"
+    ],
+    "status": "prepared inclusion only; restoration/tampering check and actual tracked ZIP member verification belong to coordinator",
+    "new_full_suite_claim": false,
+    "source_ZIP_published": false,
+    "runtime_or_human_acceptance": false
+  }
+}
