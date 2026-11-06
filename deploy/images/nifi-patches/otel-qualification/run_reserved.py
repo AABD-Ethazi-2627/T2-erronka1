@@ -10,6 +10,8 @@ import time
 import uuid
 from pathlib import Path
 
+from qualification_proof import finish_narrow_report
+
 BASE = Path(
     os.environ.get(
         "CNC_OTEL_PROOF_ROOT", "/opt/cnc-guard/evidence/otel-qualification-20261106"
@@ -211,6 +213,7 @@ finally:
         ["docker", "ps", "-a", "--filter", "name=cnc-otel-", "--format", "{{.Names}}"],
         text=True,
     ).splitlines()
+    exit_code = finish_narrow_report(report, PHASES)
     report["finished_utc"] = datetime.datetime.now(datetime.UTC).isoformat()
     save(report)
     print(
@@ -224,3 +227,5 @@ finally:
         ),
         flush=True,
     )
+
+raise SystemExit(exit_code)
