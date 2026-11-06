@@ -1,0 +1,49 @@
+{
+  "evidence_local": "/home/tears/.cache/cnc-benten-vm-20261105/otel-aligned-qualification-20261106",
+  "evidence_vm": "/opt/cnc-guard/evidence/otel-aligned-qualification-20261106",
+  "guards": 13,
+  "images_originals_tested_sources_unchanged": true,
+  "limits": [
+    "No complete ABI/JVM access/reflection/descriptor/method-handle proof",
+    "No NiFi scheduling/server, GCP/exporter operations, SMB, CG32, model or human acceptance",
+    "No overlay, profile, Dockerfile or security gate changes",
+    "No ES APM module compatibility conclusion"
+  ],
+  "oracle": {
+    "equal": true,
+    "maven_version": "3.9.11",
+    "offline": true,
+    "sdk_count": 8,
+    "spi_count": 9,
+    "union_count": 9
+  },
+  "real_NarClassLoader": {
+    "TCCL_SPI_exporter_traversal_qualified": false,
+    "aligned_nine": 0,
+    "negative_control_cause": "NoClassDefFoundError: io/opentelemetry/api/internal/ConfigUtil",
+    "new_triple_old_sdk": 1,
+    "nine_origins_verified": true,
+    "old": 0,
+    "service_runtime_approval": false
+  },
+  "replacement": null,
+  "runtime_approved": false,
+  "seal": {
+    "archive_sha256": "7857abf1974146871e4145a701aa477b111bd51ec9f6f54664b6685b2e4d2b03",
+    "archive_size": 1459960,
+    "manifest_entries": 75,
+    "manifest_sha256": "d84c6f7a6621920220f1acfd553642511512325916b83f16e24e2faf44dd040f",
+    "summary_sha256": "990045d07f4d667ace30903b07ee82ceee2c4a9e0a00611895d0fa9521f11db5"
+  },
+  "source_snapshot": "source/ inside aligned-evidence.tar.gz; README and this metadata added after execution",
+  "static": {
+    "consumer_entries": 740,
+    "missing_api_negative_failures": 37,
+    "narrow_old_sdk_negative_failures": 10,
+    "newly_broken_modeled_references": 0,
+    "physical_class_entries": 44499,
+    "reference_records": 9021,
+    "unresolved_current_references": 205
+  },
+  "status": "component-prepared-independent-QA-pending"
+}

@@ -1,0 +1,921 @@
+{
+  "status": "existing-pins-and-current-image-inputs-only",
+  "image": "cnc-guard-candidate:nifi-12ca2fa",
+  "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "nar_chain": [
+    {
+      "id": "nifi-gcp-nar",
+      "path": "opt/nifi/nifi-current/lib/nifi-gcp-nar-2.12.0.nar",
+      "sha256": "afdb93209e3f0a9eba7f49b5d4245e59706a1641dfee866b4ddf269b92349c4f",
+      "manifest": {
+        "Nar-Dependency-Group": "org.apache.nifi",
+        "Nar-Dependency-Id": "nifi-gcp-services-api-nar",
+        "Nar-Dependency-Version": "2.12.0",
+        "Nar-Group": "org.apache.nifi",
+        "Nar-Id": "nifi-gcp-nar",
+        "Nar-Version": "2.12.0"
+      },
+      "direct_jars": [
+        {
+          "entry": "META-INF/bundled-dependencies/api-common-2.68.0.jar",
+          "sha256": "499d5aa4a554630bb59ee07e62da8e0b149c8a3f0ecd195940b4b87bd292c4ac"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/arrow-format-17.0.0.jar",
+          "sha256": "3110cc535059b5d8f2ac7fc776c930c1bb3ab8e103ce4863346760f1692b3ec0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/arrow-memory-core-17.0.0.jar",
+          "sha256": "27b7d85a152b23dc9b03356b71dec6ae3335c3a704ee70f6454f92791eb64e7a"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/arrow-memory-netty-17.0.0.jar",
+          "sha256": "1dc550cd8242056d7fcedc9ed9cd36d9b194c6ae139234c567bf0ce4af54b893"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/arrow-memory-netty-buffer-patch-17.0.0.jar",
+          "sha256": "8540acb104d41294cfea6b027e6607da96b685c5b3cd9d77abb1152b695c5232"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/arrow-vector-17.0.0.jar",
+          "sha256": "8aeacff8d78d933e5f00310a725a9d40c254b32c32594b752dca477b169341fb"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/checker-compat-qual-2.5.6.jar",
+          "sha256": "11d134b245e9cacc474514d2d66b5b8618f8039a1465cdc55bbc0b34e0008b7a"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/common-0.13.0.jar",
+          "sha256": "d4ccdb74ce41ddf06c53d13750eafda6a0ce500c36df15280b3d0e4cd9bf7a21"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/conscrypt-openjdk-uber-2.6.2.jar",
+          "sha256": "f8a8f5020c66abc53a3d33cbc855ef8fc06187fa652fb3c0eda6c94e4335b2e9"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/detector-resources-support-0.33.0.jar",
+          "sha256": "94b0def27754083ceaa67b56a4d483d294e9f17066493df3ef7e81ec5c3bb2c0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/exporter-metrics-0.33.0.jar",
+          "sha256": "7a9ab87683a97357a95389ff3cec9684785648076f9b158d44da3becb93bb036"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/flatbuffers-java-24.3.25.jar",
+          "sha256": "f5b50034a53debda980aca803b8b06949f93a40163bc1db6cd69581d3718e355"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/gapic-google-cloud-storage-v2-2.73.0.jar",
+          "sha256": "27125c5320de6196e36e0a8ec60ddc47fe833e393a7dcb718c5903991b1f7855"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/gax-2.85.0.jar",
+          "sha256": "11cb25d6584daf9268b3d0f18b51e29d45d3d0e7a940dc57b922526a6cfd83fc"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/gax-grpc-2.85.0.jar",
+          "sha256": "b995cf401d338a86323d60f3ec93949cf0500e67f8f71881d969cdb16e90302e"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/gax-httpjson-2.85.0.jar",
+          "sha256": "c3ad56d3bdf967b0548f913816098db091cc56c1606e09fd701c081b5a7db513"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-api-client-2.7.2.jar",
+          "sha256": "63b754b7c4a92347c4992c42d295812f8d2ed6b9e8743edba4a8c98b92e9ca9b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-api-services-bigquery-v2-rev20260731-2.0.0.jar",
+          "sha256": "f8fee8a7a2fd62e6ac284943c38993980d4113250d770243c4ceaac3441d5849"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-api-services-drive-v3-rev20260901-2.0.0.jar",
+          "sha256": "2fc0e26a5859d196a3271cd6b372fbc6f2e838f9b0fb09a69be138fa2fba94a4"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-api-services-storage-v1-rev20260524-2.0.0.jar",
+          "sha256": "a00a1466c80f21318d134d77382082f2ffbad3fef537d1cb22ff9a913c9d95d9"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-bigquery-2.71.0.jar",
+          "sha256": "b23381aff32fe1090be2a81b801e9d0c50724656cc6bfc823f955d6650741747"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-bigquerystorage-3.33.0.jar",
+          "sha256": "92764bb719c812507cd0403999f3c90164f90114fe00a25ff839c4ae41fa24c6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-core-2.75.0.jar",
+          "sha256": "c17528e514c5f9d48b45f3d9f1b616f4c356acc4d71d925c9fd33729e7642abd"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-core-grpc-2.75.0.jar",
+          "sha256": "1f45e087279be48801ce97225cd713d26fff1d6417c667852fd69ad4f6913b3b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-core-http-2.75.0.jar",
+          "sha256": "fbcfe5e65e7a556d1cc0d5a1bf84aad5d96422435e32123a46abf45de922f42e"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-monitoring-3.98.0.jar",
+          "sha256": "88b5bf3227efff4bdcb211cba0550c628e977a0398f7ce789997da89efb59c49"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-pubsub-1.155.0.jar",
+          "sha256": "b71d74419c91aaeaed4de7cd4e0dcea896ac73d4b6d934df7ea1eac8536bdf83"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-secretmanager-2.97.0.jar",
+          "sha256": "a058ddcf741613cac825f41900b0b6a5f0d35a095714cf568f826329f8889b49"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-storage-2.73.0.jar",
+          "sha256": "bf5715c7afb9d4d28214ed04b35ef1d1682133dee4d612165163c0e2cfae57fd"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-cloud-vision-3.95.0.jar",
+          "sha256": "8d2fc8026a533ec950a4635cda2167894fca2bbed65980a07305e5bf239dfa9c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-http-client-apache-v2-2.2.0.jar",
+          "sha256": "aa62efa466a08426bfdf1dfac22b76738075057aa09f44324a569585a92c1441"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-http-client-appengine-2.2.0.jar",
+          "sha256": "620fe5bc633acf62446cbe483664fc3691695bafa706c35f1238a788fe201ac6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-http-client-jackson2-2.2.0.jar",
+          "sha256": "a31b42bba74a1b83a29cd3a816b00f26096aa808d2581831e575b94fa9aec2c8"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-oauth-client-1.39.0.jar",
+          "sha256": "27fc61ee2d526e33d31350b5ea383091c0879345e261f9b2e6fcc97a20c86f88"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-alts-1.83.0.jar",
+          "sha256": "423d2932b6dbdf5022b3edabd6784e36135282196c337d04ecb6fd078a6e318e"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-auth-1.83.0.jar",
+          "sha256": "1111a6f70ba238c80649dbc25bcf6bbf72798198020a817975f059faa0072e2c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-google-cloud-bigquerystorage-v1-3.33.0.jar",
+          "sha256": "53ab5271218eadc303b392ec59845aac68e0546b453b41a26a4be411dfde4969"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-google-cloud-bigquerystorage-v1beta1-3.33.0.jar",
+          "sha256": "491523fdd1318c7202003daabc4e3525508c9c9c55f0e0f1718d0e235909e166"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-google-cloud-bigquerystorage-v1beta2-3.33.0.jar",
+          "sha256": "4a5c732b3557e0e1a61bb6bda38d5e385d50884c43e9142cd6ddb7a8f45936ce"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-google-cloud-storage-v2-2.73.0.jar",
+          "sha256": "585006a9888d824eb561fdf43f952ef8d94ada1ba5b0aa2dee3133af4d8aa2a8"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-googleapis-1.83.0.jar",
+          "sha256": "bb08c1e456cf9829a42451405f36be0c97a77249470bccacf06283132811556d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-grpclb-1.83.0.jar",
+          "sha256": "6350a6ee83a083b98738f0ac0a5edca7a442cec8bba566cc4fed44e2a0f3a957"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-inprocess-1.83.0.jar",
+          "sha256": "2be7fd8a079f6e04bae3b8ce4ae874d1846f0ea253b001fce149f7e5130f1985"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-netty-shaded-1.83.0.jar",
+          "sha256": "c84635f7ab38d7efc57dbd5274349f776f5ac88d69e2ec2405b20d420f77ae6c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-opentelemetry-1.83.0.jar",
+          "sha256": "79941f76555f5fb0297d2412918f97849b26eb42c2bb4eaaafd197b426405893"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-protobuf-1.83.0.jar",
+          "sha256": "a471cee26a10c46e9ce186854bfc7c300db0b8aef4e35a5a2ff30d93faf34f67"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-protobuf-lite-1.83.0.jar",
+          "sha256": "af588bc8046963b6d56770a7804303a6815b0e6cf1efb3f4a2f4f951209e7a3b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-rls-1.83.0.jar",
+          "sha256": "6b48a2f1ee08b3ebfbbb0e0ffab87346fe6700116e82c2a3296d8efaea5f9914"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-services-1.83.0.jar",
+          "sha256": "d52fee092b21842a0387222cf9dead2bcd314347deb134982c910889fa9557be"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-stub-1.83.0.jar",
+          "sha256": "b51b11f4cf48e413a676cb39345b1a9db88943fc64db081bf8e711e16e25680b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-xds-1.83.0.jar",
+          "sha256": "bf9621a87ccdb45dd42c3770dcdb42635a5b0a011b3302f67d17e8d1e82b6ede"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jackson-dataformat-xml-2.22.2.jar",
+          "sha256": "3e1e0e4b68cf579a67c5e2915aacd1f05f33d0ba290f38ca76e1b0605e54aabd"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jackson-datatype-jsr310-2.22.2.jar",
+          "sha256": "9df71cc7fb3781fd0bed6c05eebbfa8b39292a49f5619e76fdd0d889f64c8f33"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jakarta.activation-api-2.1.4.jar",
+          "sha256": "c9db52100ce6c8aac95cc39075f95720d2e561b11f8051b81c121ad4effd7004"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jakarta.xml.bind-api-4.0.5.jar",
+          "sha256": "5e489b6c874c4119e003ff1403db523ee3a8959ec499f3de29e77245efccf216"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/javax.annotation-api-1.3.2.jar",
+          "sha256": "e04ba5195bcd555dc95650f7cc614d151e4bcd52d29a10b8aa2197f3ab89ab9b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/json-1.8.jar",
+          "sha256": "e0b487de3ccd3d1c288976677835e49880799c35507059039a18fa4ae1e7c59a"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jspecify-1.0.0.jar",
+          "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-conflict-resolution-2.12.0.jar",
+          "sha256": "42caa8ab0ae7d1d1dffc16a76073ebf130e94be9e8724917aba39ae61aa90e1b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-gcp-parameter-providers-2.12.0.jar",
+          "sha256": "9546d6c69be25b6c4cd71193dae2c469fdd46a30c7bfd25b118ccc6cd0ac534d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-gcp-processors-2.12.0.jar",
+          "sha256": "4ee100c90f39b3295659700c9ddf5805c96ac8031b706c84814ff7fbec13e924"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-json-validator-2.12.0.jar",
+          "sha256": "10eebdff7ca395c9b215647db882d80c7aa0a4225a6e3a855bc98c9f5a22baf6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-listed-entity-2.12.0.jar",
+          "sha256": "bfd156ac43c92f11c3e5355865f9472b0d237cd555ba9bddde72833dea5314d9"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-migration-utils-2.12.0.jar",
+          "sha256": "9ec6f3eed8ead914ea8231c6fe85f421c1556293c43238e581ee7a0e47449c4c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-resource-transfer-2.12.0.jar",
+          "sha256": "f7bb0e5764dbefb6de5f2c1039d5593f2d29b2b27169a2347500d438d0a1a067"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-api-1.62.0.jar",
+          "sha256": "d58143928c049233653e6bf1282ff8a767ebdd5e6a82b3f336158c30e40b431d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-common-1.62.0.jar",
+          "sha256": "d6310bebde67d65c1519696728d8604005315ed08ab14071956fc0826fd71815"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-context-1.62.0.jar",
+          "sha256": "8ec86c3609222b9b6307bf40154c1f1c288d1f18ada0155409e7797adbdbe517"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-gcp-resources-1.37.0-alpha.jar",
+          "sha256": "f7b6baddfbbe57f0e3e1e3cc08eb68bb61c29ef6c17898ce7ce35b1f3029d3e6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-sdk-1.62.0.jar",
+          "sha256": "99d421ea0e5a1ca8e45cb67f1d5db7f0e8a718dd55eeb86c1323597e1f10aed3"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-sdk-common-1.62.0.jar",
+          "sha256": "bf9d13df9a50e49a5db664ba8ebfad79f73f03219d2ac6f6709d432f6896eba0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.jar",
+          "sha256": "220c22bcf420faae59b7225c789f572eaa22e7af2304d55508aaf2a3efcfecf8"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-sdk-logs-1.62.0.jar",
+          "sha256": "51c94329bc8e335ed79027d29d49c075c11b91b39e48679edf590e784a392406"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-sdk-metrics-1.62.0.jar",
+          "sha256": "50b057fbf063f6801f623212f4b51b6a3fefc77837314a1316b2f54894c8b5d4"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-sdk-trace-1.62.0.jar",
+          "sha256": "fb6c0953b229a6da1db813135ae11a621bf9da56b7356c1e93049ed4b088c232"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opentelemetry-semconv-1.29.0-alpha.jar",
+          "sha256": "a95f1aed7e3f64353ec625c6def72a0caaf06b6c53970f578fdd513dafd995fd"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-bigquerystorage-v1-3.33.0.jar",
+          "sha256": "2530d59ad23aa9535e399da6ad18d7c48c3f4e28f079c68a55ac7a3beef4a53c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-bigquerystorage-v1alpha-3.33.0.jar",
+          "sha256": "f42e16f1bac07d070d7cecae9af9e89c199c67cfda7a5190d7c6eb70b86e104c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-bigquerystorage-v1beta-3.33.0.jar",
+          "sha256": "38f1fea5e53fd59bf549741fcd77d1fc26d20265a43d7f6adfa3333eb3d46c04"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-bigquerystorage-v1beta1-3.33.0.jar",
+          "sha256": "f6b1c57b139f425abe436a627f10783da9ec294f85e5fc1e868857fddb854410"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-bigquerystorage-v1beta2-3.33.0.jar",
+          "sha256": "b2cf71e5262b0141c33c50ff2ef7be23408fbc994c21392e37417630c95639bc"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-monitoring-v3-3.98.0.jar",
+          "sha256": "a29707a0457df09392913d6cd6ae50ca93fbb7c61437aa4b192362e40a96d17d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-pubsub-v1-1.155.0.jar",
+          "sha256": "6307b1b0dfe977d570f60747053613cf26b81156a7b92edc6d2284b6f3bff70b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-secretmanager-v1-2.97.0.jar",
+          "sha256": "e3ba42228cbf9475cc9c85c0c5ce673ca3abbc2210eda158ac9950455dde4771"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-secretmanager-v1beta1-2.97.0.jar",
+          "sha256": "aac7c43ca6009023154a7fe5d44d926fbb255a105dc6694b7834b0fc605d44b8"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-secretmanager-v1beta2-2.97.0.jar",
+          "sha256": "979d4bdcf74832c513ef0bdf55dcf94959506273c0a61e6ff51ec1cf1f5e3ac5"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-storage-v2-2.73.0.jar",
+          "sha256": "e729c393340dad51b71096a50b637a5d813d8c6c6a09c27ffc26ed7e7c0578b7"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-vision-v1-3.95.0.jar",
+          "sha256": "ec9ffd5b9a7fe77509aac1aefe9efc36286233556ba590cecaa16096a14cf700"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-vision-v1p1beta1-3.95.0.jar",
+          "sha256": "99979d55ff198048c00d26615de0a4ceb841a4c49248211fe32954b1cef79f21"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-vision-v1p2beta1-3.95.0.jar",
+          "sha256": "d2eeb41816ea058460f6c776f3c1a57c60d8c91e8a73880944c3e6cede3a202d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-vision-v1p3beta1-3.95.0.jar",
+          "sha256": "874e39be3c3d7cb8433c052e21a4acb4b99349e4f11c1810c4196ea4163605e0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-cloud-vision-v1p4beta1-3.95.0.jar",
+          "sha256": "f1f923398cc279c6c99642c0b8ace5f684288750a314562eb46b07bc57e6ba19"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-common-protos-2.76.0.jar",
+          "sha256": "1a8c3d48018d033c39819a20d852f0273da7ec2a1a513e53567685a8593ba554"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/proto-google-iam-v1-1.71.0.jar",
+          "sha256": "5da513ed901131f93b54dbf5dae2a2d74b492a154ba7496c3968cf0ef3561416"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/protobuf-0.13.0.jar",
+          "sha256": "d343b22e4d1507c636fca5d61c8272f2394a3fd0c1e1729568a8f575a9002143"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/protobuf-java-4.33.6.jar",
+          "sha256": "c24b2464ecfe9ac1d44e3a8fe281fca09e6ad2ca73dbd689dd7d6d719df987b5"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/protobuf-java-util-4.33.6.jar",
+          "sha256": "8e40de8e522770e83eb445bfad0fb55ede64648faf70367f27e62c4a578b90b4"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/re2j-1.8.jar",
+          "sha256": "7b52c72156dd7f98b3237a5b35c1d34fba381b21048c89208913ad80a45dfbd7"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/runtime-0.13.0.jar",
+          "sha256": "3deaba45e430e26370953c6982d0c4f6421a1fac575f9be06f5687e0f982d005"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/shared-resourcemapping-0.33.0.jar",
+          "sha256": "eea9a3e11db783626cc15dd1835c1ed09f53b70a1fca8c58bf723ce813e9f843"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/stax2-api-4.2.2.jar",
+          "sha256": "a61c48d553efad78bc01fffc4ac528bebbae64cbaec170b2a5e39cf61eb51abe"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/threeten-extra-1.8.0.jar",
+          "sha256": "51e4d21edc4e9447f7760c050e0baee75d7d973f387ba605a17abdc4d24fd6d8"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/threetenbp-1.7.0.jar",
+          "sha256": "857917d2319a4e92dc1c5e3aeb75a0dac84445ed315e7ac3d82bb8d2b298977f"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/woodstox-core-7.0.0.jar",
+          "sha256": "eeb3853282c24964a93a6eb4c1bbcb60c8d09fd8e0ffc75ab64ad21045a1fa78"
+        }
+      ]
+    },
+    {
+      "id": "nifi-gcp-services-api-nar",
+      "path": "opt/nifi/nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar",
+      "sha256": "7b9a5eda2e05a94be416fd726efa23534e65df7012fe04cd484fdb4c648e6fd9",
+      "manifest": {
+        "Nar-Dependency-Group": "org.apache.nifi",
+        "Nar-Dependency-Id": "nifi-standard-shared-nar",
+        "Nar-Dependency-Version": "2.12.0",
+        "Nar-Group": "org.apache.nifi",
+        "Nar-Id": "nifi-gcp-services-api-nar",
+        "Nar-Version": "2.12.0"
+      },
+      "direct_jars": [
+        {
+          "entry": "META-INF/bundled-dependencies/animal-sniffer-annotations-1.27.jar",
+          "sha256": "cfd7e51a828fe6b98bc0dbb99e34900c9e9012322cb9ddd57fd8dd0b02da5e27"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/annotations-4.1.1.4.jar",
+          "sha256": "ba734e1e84c09d615af6a09d33034b4f0442f8772dec120efb376d86a565ae15"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/api-common-2.68.0.jar",
+          "sha256": "499d5aa4a554630bb59ee07e62da8e0b149c8a3f0ecd195940b4b87bd292c4ac"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/auto-value-annotations-1.11.0.jar",
+          "sha256": "5a055ce4255333b3346e1a8703da5bf8ff049532286fdcd31712d624abe111dd"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/failureaccess-1.0.3.jar",
+          "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-auth-library-credentials-1.52.0.jar",
+          "sha256": "fa78b2d850b944be7f2e4182e979dc21e3160e04afc79ee6155fbfe0499136c2"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-auth-library-oauth2-http-1.52.0.jar",
+          "sha256": "bf998504deb2ac4c5b402fb8983dd08dd7a9ea2fd23817be273f09bb34a2ede0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-http-client-2.2.0.jar",
+          "sha256": "36cea7079c550aeb12fa7366a1ae65d503eaf15bcfc4f50124fde2a8f784e568"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/google-http-client-gson-2.2.0.jar",
+          "sha256": "3242dc7e91d355d118a355c5d586271bedfeb84c3f2f6fa2f3b9b42503a4dc59"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-api-1.83.0.jar",
+          "sha256": "c6c4df7de641a26f02993c176a27158584c3d4628e40b54ac7d750e7e6a1bceb"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-context-1.83.0.jar",
+          "sha256": "c781b317eba2867d14221ce63702997ccfa5f8ae65a72a911745a09fb1c32596"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-core-1.83.0.jar",
+          "sha256": "d69fee3874ba1af9cb55dc06bd678567b3d90dff2ba2d0fd65f5224085246f59"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/grpc-util-1.83.0.jar",
+          "sha256": "a69e1545047b350627b314dd74e989b7035e0db8e67fb7c519b57d664711a92d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/gson-2.14.0.jar",
+          "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/guava-33.7.1-jre.jar",
+          "sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+          "source_entry_before_candidate": "META-INF/bundled-dependencies/guava-33.7.1-jre.jar",
+          "sha256_before_candidate": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/httpclient-4.5.14.jar",
+          "sha256": "c8bc7e1c51a6d4ce72f40d2ebbabf1c4b68bfe76e732104b04381b493478e9d6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/httpcore-4.4.16.jar",
+          "sha256": "6c9b3dd142a09dc468e23ad39aad6f75a0f2b85125104469f026e52a474e464f"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/j2objc-annotations-3.1.jar",
+          "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/javax.annotation-api-1.3.2.jar",
+          "sha256": "e04ba5195bcd555dc95650f7cc614d151e4bcd52d29a10b8aa2197f3ab89ab9b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jspecify-1.0.0.jar",
+          "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jsr305-3.0.2.jar",
+          "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+          "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-gcp-services-api-2.12.0.jar",
+          "sha256": "ff20d4a12e9add824a9263b5985365a4f96fdef83c93856f7a873ca359f7d0b6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opencensus-api-0.31.1.jar",
+          "sha256": "f1474d47f4b6b001558ad27b952e35eda5cc7146788877fc52938c6eba24b382"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/opencensus-contrib-http-util-0.31.1.jar",
+          "sha256": "3ea995b55a4068be22989b70cc29a4d788c2d328d1d50613a7a9afd13fdd2d0a"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/perfmark-api-0.27.0.jar",
+          "sha256": "c7b478503ec524e55df19b424d46d27c8a68aeb801664fadd4f069b71f52d0f6"
+        }
+      ]
+    },
+    {
+      "id": "nifi-standard-shared-nar",
+      "path": "opt/nifi/nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar",
+      "sha256": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+      "manifest": {
+        "Nar-Dependency-Group": "org.apache.nifi",
+        "Nar-Dependency-Id": "nifi-standard-services-api-nar",
+        "Nar-Dependency-Version": "2.12.0",
+        "Nar-Group": "org.apache.nifi",
+        "Nar-Id": "nifi-standard-shared-nar",
+        "Nar-Version": "2.12.0"
+      },
+      "direct_jars": [
+        {
+          "entry": "META-INF/bundled-dependencies/annotations-26.1.0.jar",
+          "sha256": "ebc7aec252ed0c7d2d04c039d7f00e69f7b86b1f493c741d67b3ef31b986b054"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/bcpkix-jdk18on-1.85.jar",
+          "sha256": "c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/bcprov-jdk18on-1.85.2.jar",
+          "sha256": "986b0fb92ec10e0c66b43e036ce0077e6150cfaecd1db9fb92b56672e157afe5"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/bcutil-jdk18on-1.85.jar",
+          "sha256": "590f55ed5d68529239898a4a5c4f730b6e37f45d1cfa3fbe51f8485abe32c42d"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/caffeine-3.2.4.jar",
+          "sha256": "9d9d2cfd681fd9272ded3d27c9930db12f89f732345975aa113ebc223bbf1224"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/checker-qual-4.2.3.jar",
+          "sha256": "f868f731f6e37db3e1c2140d06016477989959a2d13fc5bed9c46760cffd5ba0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/commons-codec-1.22.1.jar",
+          "sha256": "78a5d732fbd715e2d10bd7150d2f8030bae57267f8aacc5c88f642cb6c2e5d3f"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/commons-compress-1.28.0.jar",
+          "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/commons-io-2.22.0.jar",
+          "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/commons-lang3-3.20.0.jar",
+          "sha256": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/commons-net-3.13.0.jar",
+          "sha256": "9e88444afadc9467f0bf3d328f93b9538da35a9be05cdee430766e64fddbd6c5"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/commons-text-1.15.0.jar",
+          "sha256": "58d2da30f058512a1e7f914e39241deca4dff5c27a085b4ed2faa9e7208067f6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/error_prone_annotations-2.50.0.jar",
+          "sha256": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jackson-annotations-2.22.jar",
+          "sha256": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jackson-core-2.22.2.jar",
+          "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar",
+          "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/jspecify-1.0.0.jar",
+          "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/kotlin-stdlib-2.4.20.jar",
+          "sha256": "2226de463d309d4a5500a481320b3dea515a6981dcae1def531fbc158884e25f"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/kotlin-stdlib-jdk7-2.4.20.jar",
+          "sha256": "f734859ccafd60897d7afa1fd58ad76842286f625630c6403c4271e417f1a8d9"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/kotlin-stdlib-jdk8-2.4.20.jar",
+          "sha256": "a39cf9486d1fefb22fc38c35b4ecab658b0cfea90a7135a723881d961f605cc8"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-buffer-4.2.17.Final.jar",
+          "sha256": "0d249178ec0204b35a6ad3e5ac8a6c2ecb3eb496c6cdae40b8eca4fa3cb6a0c7"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-4.2.17.Final.jar",
+          "sha256": "ac76f972446a2f72818441f746d0e73c58519a4687bf680d2b687d7dc5e28e2e"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-base-4.2.17.Final.jar",
+          "sha256": "3b92bc3b7d231fa6f4889b2b9281cae6b634428b8121fb1b9b5fccba1543d352"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-compression-4.2.17.Final.jar",
+          "sha256": "425b287a1f36986a5c8edd76379a49decdf99d284f3454f3fa607a073bfb2c18"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-http-4.2.17.Final.jar",
+          "sha256": "a5bde91ac82ab90579df6559c0bd7ea6ae37460e3f18116ab4122194283b3669"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-http2-4.2.17.Final.jar",
+          "sha256": "450af97424cf58d2d72ad4d476d9e290f2fdf69fa181c289a6e6dd176bb86a7b"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-marshalling-4.2.17.Final.jar",
+          "sha256": "ee5ffed638da6b7e2b4567559bd5f78b18f635cdaa4f3b6d23aa27ccf6cb57c2"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-codec-protobuf-4.2.17.Final.jar",
+          "sha256": "44b2fcc4bc1d6c01edafe6ae6c8a7de7c3c5bad59697a93b6b879a45a78a5387"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-common-4.2.17.Final.jar",
+          "sha256": "502aae2a6680e9bca3558a3fa098f06dc4d87340b8b714e925a6d690871c092a"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-handler-4.2.17.Final.jar",
+          "sha256": "4df11c7520b556c5e2c84b939182699d48fcbb09e97a6bb5e1c0b6835227d126"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-resolver-4.2.17.Final.jar",
+          "sha256": "7a4b599b9c0c29a505d3b7311f142df883fb27d0f67495a7cbaf533b0e456623"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-transport-4.2.17.Final.jar",
+          "sha256": "d2409ce3a735cbab4188d0ea5d82abed823a6a07a8389f49af4a9e1243a562bc"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/netty-transport-native-unix-common-4.2.17.Final.jar",
+          "sha256": "e01aa467b9104de54a57c08c290f70b22e53ec97cf5583c87c112170ef5832cc"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/okhttp-5.5.0.jar",
+          "sha256": "aebaab3fe77633befcf69fd0ee3052083999a7eaa98d6f2f7c4b498e7bdbb732"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/okhttp-jvm-5.5.0.jar",
+          "sha256": "234194a04aac54858df0a750d243af7b2e39df5e4eb86e9912043ad33a9f9a52"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/okio-3.18.2.jar",
+          "sha256": "6d9746592170dee6db877969b520a5f79d974083835c911a3e1a58295ee51f67"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/okio-jvm-3.18.2.jar",
+          "sha256": "681fed549d1d2c63710f42c9eab433d642c71af778babd67035c50f8c425aaff"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/zstd-jni-1.5.7-16.jar",
+          "sha256": "d84360d39f57a40dc1e26ea2d4bb66da0cb88057ba117edae67431a719057edc"
+        }
+      ]
+    },
+    {
+      "id": "nifi-standard-services-api-nar",
+      "path": "opt/nifi/nifi-current/lib/nifi-standard-services-api-nar-2.12.0.nar",
+      "sha256": "89aacd317517b6b9198b2bb1ace2ccd7b1d61c7ba1aa7df178afc2fc28db6fb0",
+      "manifest": {
+        "Nar-Group": "org.apache.nifi",
+        "Nar-Id": "nifi-standard-services-api-nar",
+        "Nar-Version": "2.12.0"
+      },
+      "direct_jars": [
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-database-dialect-service-api-2.12.0.jar",
+          "sha256": "52023cabc1c559ebc302c88f4b9bc01c13d93981346f16302b2eb5295d80b395"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-dbcp-service-api-2.12.0.jar",
+          "sha256": "d74bfb1d13a3d7d12c871526f56cc419a91072abec3b6582ec04d243e10bc8fb"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-distributed-cache-client-service-api-2.12.0.jar",
+          "sha256": "81214c48928530ba942ae61d8a408358e61133aa1e55a2b50a84f12653667c42"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-file-resource-service-api-2.12.0.jar",
+          "sha256": "767fc348d403bfc87ae48aebd0f48e030e9b623142dc5c7368e99db805d75b23"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-http-context-map-api-2.12.0.jar",
+          "sha256": "e9848e7025429fc8088adfedb2486c8be42ad3f0784237eddcf9cf8260f1b0e4"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-json-schema-api-2.12.0.jar",
+          "sha256": "c6df6ddb59356c70a197380a7abf1038eec28ce54e3e50648b29a62d44683e9f"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-kerberos-user-service-api-2.12.0.jar",
+          "sha256": "63199d90d2eb8d3c9eeca41092d536c638b83ba2ba270efe975773b61ab867ff"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-key-service-api-2.12.0.jar",
+          "sha256": "b8d38fac8278723be3e9a8623dc73bd2ca1530c918b84ffc79f01554be47b472"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-lookup-service-api-2.12.0.jar",
+          "sha256": "1ec233ac5e0d86f7cbbc6fcb2cd41e4b2ff9aa12bbbd80416b346afcd316eb08"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-oauth2-provider-api-2.12.0.jar",
+          "sha256": "a198ac8a314e1e095fa97f735013655e81973e288bfab1147ca8d354361b8194"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-proxy-configuration-api-2.12.0.jar",
+          "sha256": "7c57628319573434defb743fa64ace100694b137bd89070c69344c9b9f8f8822"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-record-2.12.0.jar",
+          "sha256": "cdd5fa464d1c05eed42c1920b9b7261a6c3e49e85230f4e43b7e3efa8de884ea"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-record-serialization-service-api-2.12.0.jar",
+          "sha256": "9e600b44a221d1a1a77d0db7b7487c800039722a1f65de2c38b6e1884d3a12bf"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-record-sink-api-2.12.0.jar",
+          "sha256": "01cfdd5e941be7a6d69c0fd84461046eedb042ce91b1bcc10eb6a6490e11189c"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-schema-registry-service-api-2.12.0.jar",
+          "sha256": "25422cf7d45ffbb42d638de2125cd0fa92e586bcffb078e0de653c7e97eac448"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-security-kerberos-api-2.12.0.jar",
+          "sha256": "b482775d819261e20742eef31da1ec61fcb78ea19e8231072ee6ae922f014ea2"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-security-utils-api-2.12.0.jar",
+          "sha256": "2d7a02b0e552346702ffcd27d73da0aa3ee6150582575b55cb32055708dece40"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-ssl-context-service-api-2.12.0.jar",
+          "sha256": "861358498728860b7266314219dc48bffa9cbc6317c3cfe49f3888e3717c46a0"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-utils-2.12.0.jar",
+          "sha256": "ab1f11b84f074ee8ebde7f35398e1c2f0199282916eab884bfb7ba982cec331e"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-web-client-api-2.12.0.jar",
+          "sha256": "c26250be3c21c6559b2daab259effd65550c983c3457490997e5278791b218b9"
+        },
+        {
+          "entry": "META-INF/bundled-dependencies/nifi-web-client-provider-api-2.12.0.jar",
+          "sha256": "f91a7388036276ba0afbd40652caa1ce0a8e2754812a5f7a3ba25f92fb0d8aa7"
+        }
+      ]
+    }
+  ],
+  "launcher_jars": [
+    {
+      "path": "opt/nifi/nifi-current/lib/jcl-over-slf4j-2.0.19.jar",
+      "sha256": "efc3848f79638d9fa74ccbae3fd18c8735dcc0127b393ae53dce638827f8a2f3"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/jul-to-slf4j-2.0.19.jar",
+      "sha256": "a5764fbd2f0053399ef75d40653c4e7c97e733b45676946b0a072416fc56ff30"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/log4j-over-slf4j-2.0.19.jar",
+      "sha256": "7d5be917811ee275929a608d51e0f6a9eb8d17b25460ecb160e81e9ee23538c0"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/logback-classic-1.6.3.jar",
+      "sha256": "beebede8db065fe1b72909ecc66bb49acda618901635d86c25fce14a5915e37e"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/logback-core-1.6.3.jar",
+      "sha256": "a6967a28c8b086dee75a694d2f6fb8830c71153539866d7d8af065c9b6df91e0"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-api-2.12.0.jar",
+      "sha256": "190c96b9ce13e5c749f1624cf071fc3b9d8897cdf6114d676e8092dd5b51de85"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-framework-api-2.12.0.jar",
+      "sha256": "e66fbdac6f3c9d184d15fdef2d7104f2cd2161943fd055a111b3982cb23ed508"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-nar-utils-2.12.0.jar",
+      "sha256": "5ce400f96e353d36fd34713dcc4238c1867b633379566dc0dec3483bda3bf97b"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-per-process-group-logging-2.12.0.jar",
+      "sha256": "3213180f3908422aca6652a2de01586ec4e9e56a3715ad999ba0ac37423e2274"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-properties-2.12.0.jar",
+      "sha256": "a8f69598ca7d4f23dd2c65f0e44f5dffdfffb965c8331d1c3589e023acab871d"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-property-utils-2.12.0.jar",
+      "sha256": "1b97307307ae8619f31788d9a39f9a9cb3e6533bdcbcc375ce9f892b244261f0"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-python-framework-api-2.12.0.jar",
+      "sha256": "70fea8c720fef30383a697e263c93271434aec9a9cb03906e34e79701776f3e5"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-runtime-2.12.0.jar",
+      "sha256": "c31e233406a3f71de031cd1fe92cfe9550dfbc9308f95a0e3315b527edc46e94"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-server-api-2.12.0.jar",
+      "sha256": "d6b692c38b560ca43d8425e0fbb1f2862f5b0432a1645d74ddffcef45f4ebf62"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/nifi-stateless-api-2.12.0.jar",
+      "sha256": "16dc173e4f26779e5eed5723800b699a0e3b3bcac73d2e8a2947235001f943c8"
+    },
+    {
+      "path": "opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar",
+      "sha256": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb"
+    }
+  ],
+  "old_gcp_otel": {
+    "opentelemetry-api-1.62.0.jar": "d58143928c049233653e6bf1282ff8a767ebdd5e6a82b3f336158c30e40b431d",
+    "opentelemetry-common-1.62.0.jar": "d6310bebde67d65c1519696728d8604005315ed08ab14071956fc0826fd71815",
+    "opentelemetry-context-1.62.0.jar": "8ec86c3609222b9b6307bf40154c1f1c288d1f18ada0155409e7797adbdbe517",
+    "opentelemetry-gcp-resources-1.37.0-alpha.jar": "f7b6baddfbbe57f0e3e1e3cc08eb68bb61c29ef6c17898ce7ce35b1f3029d3e6",
+    "opentelemetry-sdk-1.62.0.jar": "99d421ea0e5a1ca8e45cb67f1d5db7f0e8a718dd55eeb86c1323597e1f10aed3",
+    "opentelemetry-sdk-common-1.62.0.jar": "bf9d13df9a50e49a5db664ba8ebfad79f73f03219d2ac6f6709d432f6896eba0",
+    "opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.jar": "220c22bcf420faae59b7225c789f572eaa22e7af2304d55508aaf2a3efcfecf8",
+    "opentelemetry-sdk-logs-1.62.0.jar": "51c94329bc8e335ed79027d29d49c075c11b91b39e48679edf590e784a392406",
+    "opentelemetry-sdk-metrics-1.62.0.jar": "50b057fbf063f6801f623212f4b51b6a3fefc77837314a1316b2f54894c8b5d4",
+    "opentelemetry-sdk-trace-1.62.0.jar": "fb6c0953b229a6da1db813135ae11a621bf9da56b7356c1e93049ed4b088c232",
+    "opentelemetry-semconv-1.29.0-alpha.jar": "a95f1aed7e3f64353ec625c6def72a0caaf06b6c53970f578fdd513dafd995fd"
+  },
+  "existing_fixed_artifacts": {
+    "opentelemetry-api-1.67.0.jar": {
+      "sha256": "538d1dff2f9a37aecbc0ef98fd17273a3affb058e734e6763a3a07a38a5fdc59",
+      "existing_pin_source": "deploy/images/elasticsearch.Dockerfile",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.67.0/opentelemetry-api-1.67.0.jar"
+    },
+    "opentelemetry-context-1.67.0.jar": {
+      "sha256": "40fb813fb5e27ec2691daa29c81b572b5b1541ef9b41e62490c3ee3e6407c55e",
+      "existing_pin_source": "deploy/images/elasticsearch.Dockerfile",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-context/1.67.0/opentelemetry-context-1.67.0.jar"
+    },
+    "opentelemetry-common-1.67.0.jar": {
+      "sha256": "da97bdb395418e16ecdcbe7ad3497f45b9e767ceda4ae7e86133e7a757ac377f",
+      "existing_pin_source": "deploy/images/elasticsearch.Dockerfile",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-common/1.67.0/opentelemetry-common-1.67.0.jar"
+    }
+  },
+  "new_public_pins_added": false,
+  "replacement": null,
+  "runtime_approved": false
+}
