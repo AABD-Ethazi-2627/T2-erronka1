@@ -396,14 +396,15 @@ class CorrectedCoverageGuards(unittest.TestCase):
         c = self.helper()
         owner = "io/opentelemetry/Enum"
         model = {owner: self.model(["java/lang/Enum"])}
+        allowed = c.optional_records("aligned")[0]
         refs = [
             (
                 "gcp!exporter.jar!outside/Caller.class",
                 (owner, "ordinal", "()I", "method"),
             ),
             (
-                "gcp!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/Sdk.class",
-                ("io/opentelemetry/api/incubator/BoundThing", "", "", "class"),
+                allowed["consumer"],
+                tuple(allowed["reference"]),
             ),
         ]
         records = c.classify_unresolved(model, refs, "aligned", set())
@@ -623,24 +624,38 @@ class CorrectedCoverageGuards(unittest.TestCase):
         jdk = {"java/util/HashMap": self.model(members={key: 1})}
         ref = (owner, key[1], key[2], key[0])
         row = c.classify_unresolved(models, [("external", ref)], "old", set(), jdk)[0]
-        self.assertEqual((row["category"], row["jdk_declaring_type"]), ("jdk-inherited-member", "java/util/HashMap"))
+        self.assertEqual(
+            (row["category"], row["jdk_declaring_type"]),
+            ("jdk-inherited-member", "java/util/HashMap"),
+        )
         for bad_models, bad_jdk, bad_ref in [
             ({owner: self.model(["java/lang/Object"])}, jdk, ref),
             (models, jdk, (owner, "containsKey", "()Z", "method")),
             (models, {"java/util/HashMap": self.model(members={key: 2})}, ref),
         ]:
             with self.assertRaisesRegex(ValueError, "unclassified"):
-                c.require_closed(c.classify_unresolved(bad_models, [("external", bad_ref)], "old", set(), bad_jdk))
+                c.require_closed(
+                    c.classify_unresolved(
+                        bad_models, [("external", bad_ref)], "old", set(), bad_jdk
+                    )
+                )
 
     def test_old_optional_inherited_member_is_one_exact_internal_path(self):
         c = self.helper()
         owner = "io/opentelemetry/sdk/common/internal/ExtendedAttributesMap"
         parent = "io/opentelemetry/api/incubator/common/ExtendedAttributes"
         caller = "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class"
-        ref = (owner, "get", "(Lio/opentelemetry/api/common/AttributeKey;)Ljava/lang/Object;", "method")
+        ref = (
+            owner,
+            "get",
+            "(Lio/opentelemetry/api/common/AttributeKey;)Ljava/lang/Object;",
+            "method",
+        )
         models = {owner: self.model([parent])}
         row = c.classify_unresolved(models, [(caller, ref)], "old", set(), {})[0]
-        self.assertEqual(row["category"], "internal-optional-incubator-inherited-member")
+        self.assertEqual(
+            row["category"], "internal-optional-incubator-inherited-member"
+        )
         for bad_caller, bad_ref, bad_models in [
             ("external", ref, models),
             (caller, (owner, "get", "()Ljava/lang/Object;", "method"), models),
@@ -648,10 +663,15 @@ class CorrectedCoverageGuards(unittest.TestCase):
             (caller, ref, models | {parent: self.model()}),
         ]:
             with self.assertRaisesRegex(ValueError, "unclassified"):
-                c.require_closed(c.classify_unresolved(bad_models, [(bad_caller, bad_ref)], "old", set(), {}))
+                c.require_closed(
+                    c.classify_unresolved(
+                        bad_models, [(bad_caller, bad_ref)], "old", set(), {}
+                    )
+                )
 
     def test_jdk_ancestor_loader_reads_only_required_declarations(self):
         from unittest.mock import patch
+
         c = self.helper()
         models = {"io/opentelemetry/Map": self.model(["java/util/HashMap"])}
         declarations = {
@@ -660,14 +680,173 @@ class CorrectedCoverageGuards(unittest.TestCase):
         }
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "java.base.jmod"
-            path.write_bytes(jar([("classes/" + name + ".class", name.encode()) for name in declarations]))
+            path.write_bytes(
+                jar(
+                    [
+                        ("classes/" + name + ".class", name.encode())
+                        for name in declarations
+                    ]
+                )
+            )
+
             def parse(raw):
                 name = raw.decode()
                 return declarations[name] | {"name": name}
+
             with patch.object(c.q, "parse", side_effect=parse):
-                self.assertEqual(set(c.load_jdk_ancestors(models, path)), set(declarations))
-            with patch.object(c.q, "parse", return_value={"name": "wrong"}), self.assertRaisesRegex(ValueError, "identity"):
+                self.assertEqual(
+                    set(c.load_jdk_ancestors(models, path)), set(declarations)
+                )
+            with (
+                patch.object(c.q, "parse", return_value={"name": "wrong"}),
+                self.assertRaisesRegex(ValueError, "identity"),
+            ):
                 c.load_jdk_ancestors(models, path)
+
+    def test_each_abi_impact_has_an_independent_discriminating_case(self):
+        c = self.helper()
+        key = ("method", "work", "()V")
+        owner = "io/opentelemetry/Base"
+        cases = []
+        cases.append(
+            (
+                "removed-reference",
+                {owner: self.model(members={key: 1})},
+                {owner: self.model()},
+                {},
+                [("outside", (owner, "work", "()V", "method", 10))],
+            )
+        )
+        cases.append(
+            (
+                "removed-descriptor-type",
+                {owner: self.model()},
+                {},
+                {"outside": self.model() | {"descriptor_types": [owner]}},
+                [],
+            )
+        )
+        cases.append(
+            (
+                "unimplemented-new-abstract",
+                {owner: self.model(members={key: 1})},
+                {owner: self.model(members={key: 0x401})},
+                {"outside": self.model([owner])},
+                [],
+            )
+        )
+        cases.append(
+            (
+                "access-or-static-change",
+                {owner: self.model(members={key: 1})},
+                {owner: self.model(members={key: 2})},
+                {},
+                [("outside", (owner, "work", "()V", "method", 10))],
+            )
+        )
+        cases.append(
+            (
+                "methodref-interface-kind-change",
+                {owner: self.model(members={key: 1}, flags=0x201)},
+                {owner: self.model(members={key: 1}, flags=1)},
+                {},
+                [("outside", (owner, "work", "()V", "method", 11))],
+            )
+        )
+        for kind, old, new, external, details in cases:
+            with self.subTest(kind=kind):
+                impacts = c.abi_delta(old, new, external, details)["external_impacts"]
+                self.assertIn(kind, {r["kind"] for r in impacts})
+
+    def test_launcher_hash_inventory_and_origin_ambiguity_are_checked(self):
+        c = self.helper()
+        q = load_tool()
+        with tempfile.TemporaryDirectory() as tmp:
+            b = Path(tmp)
+            expanded = b / "expanded"
+            expanded.mkdir()
+            top = b / "top"
+            top.mkdir()
+            known = {
+                "nar_chain": [],
+                "launcher_jars": [
+                    {"path": "lib/launcher.jar", "sha256": q.sha(b"original")}
+                ],
+            }
+            (top / "launcher.jar").write_bytes(b"changed")
+            with self.assertRaisesRegex(ValueError, "integrity"):
+                c.verify_expanded(known, expanded, top)
+            (top / "launcher.jar").write_bytes(b"original")
+            (top / "extra.jar").write_bytes(b"extra")
+            with self.assertRaisesRegex(ValueError, "inventory"):
+                c.verify_expanded(known, expanded, top)
+        known = {
+            "nar_chain": [
+                {
+                    "direct_jars": [
+                        {"entry": "a.jar", "sha256": "old-a"},
+                        {"entry": "a.jar", "sha256": "old-b"},
+                    ]
+                }
+            ]
+        }
+        with self.assertRaisesRegex(ValueError, "ambiguous"):
+            c.expected_origin(known, {"files": []}, "a.jar")
+        self.assertEqual(
+            c.expected_origin(
+                known, {"files": [{"file": "a.jar", "sha256": "fixed"}]}, "a.jar"
+            ),
+            "fixed",
+        )
+
+    def test_duplicate_consumer_output_and_arbitrary_incubator_callers_fail(self):
+        c = self.helper()
+        with self.assertRaisesRegex(ValueError, "ambiguous"):
+            c.observed_consumers(
+                "consumer-init\tA\tPASS\t-\nconsumer-init\tA\tPASS\t-\n"
+            )
+        allowed = c.optional_records("aligned")[0]
+        reference = tuple(allowed["reference"])
+        caller = (
+            allowed["consumer"].rsplit("!", 1)[0]
+            + "!io/opentelemetry/sdk/trace/SdkTracerProvider.class"
+        )
+        rows = c.classify_unresolved({}, [(caller, reference)], "aligned", set())
+        with self.assertRaises(ValueError):
+            c.require_closed(rows)
+        if reference[3] != "class":
+            rows = c.classify_unresolved(
+                {reference[0]: self.model()},
+                [(allowed["consumer"], reference)],
+                "aligned",
+                set(),
+            )
+            with self.assertRaises(ValueError):
+                c.require_closed(rows)
+
+    def test_pinned_parent_table_and_expanded_root_reject_injection(self):
+        path = TOOL.with_name("loader_context.py")
+        spec = importlib.util.spec_from_file_location("otel_parent_table", path)
+        m = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(m)
+        with tempfile.TemporaryDirectory() as tmp:
+            b = Path(tmp)
+            table = b / "parents.tsv"
+            table.write_text("child\t\n")
+            known = {"nar_chain": [{"id": "child", "manifest": {}}]}
+            m.verify_parent_table(known, table)
+            table.write_text("child\tinjected\n")
+            with self.assertRaisesRegex(ValueError, "integrity"):
+                m.verify_parent_table(known, table)
+            old = b / "expanded"
+            old.mkdir()
+            (old / "planted.class").write_bytes(b"not a pinned JAR")
+            top = b / "top"
+            top.mkdir()
+            with self.assertRaisesRegex(ValueError, "inventory"):
+                self.helper().verify_expanded(
+                    {"nar_chain": [], "launcher_jars": []}, old, top
+                )
 
     def test_security_source_diff_requires_real_encoding_change(self):
         c = self.helper()

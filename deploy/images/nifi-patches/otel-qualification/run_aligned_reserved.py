@@ -24,13 +24,21 @@ from qualification_proof import check_metadata, finish_report
 def run_qualification(base=BASE):
     BASE = Path(base)
     TOOLS = BASE / "source/deploy/images/nifi-patches/otel-qualification"
-    outputs = ['aligned-reserved-result.json', 'guards-green.log']
-    outputs += [phase + suffix for phase in ('oracle', 'static', 'runtime') for suffix in ('.stdout', '.stderr', '-result.json')]
+    outputs = ["aligned-reserved-result.json", "guards-green.log"]
+    outputs += [
+        phase + suffix
+        for phase in ("oracle", "static", "runtime")
+        for suffix in (".stdout", ".stderr", "-result.json")
+    ]
     if any((BASE / name).exists() or (BASE / name).is_symlink() for name in outputs):
-        raise ValueError('existing qualification evidence; use a fresh proof root')
-    image = json.loads(subprocess.check_output(["docker", "image", "inspect", IMAGE]))[0]
-    if image["Id"] != IMAGE or not (CONFIG / "security/java.security").is_file():raise ValueError("image or JDK configuration drift")
-    if (BASE / "aligned-reserved-result.json").exists():raise ValueError("existing qualification evidence")
+        raise ValueError("existing qualification evidence; use a fresh proof root")
+    image = json.loads(subprocess.check_output(["docker", "image", "inspect", IMAGE]))[
+        0
+    ]
+    if image["Id"] != IMAGE or not (CONFIG / "security/java.security").is_file():
+        raise ValueError("image or JDK configuration drift")
+    if (BASE / "aligned-reserved-result.json").exists():
+        raise ValueError("existing qualification evidence")
     check_metadata(TOOLS)
     report = {
         "status": "started",
@@ -46,12 +54,10 @@ def run_qualification(base=BASE):
         },
     }
 
-
     def save():
         (BASE / "aligned-reserved-result.json").write_text(
             json.dumps(report, indent=2, sort_keys=True) + "\n"
         )
-
 
     save()
     try:
@@ -62,6 +68,8 @@ def run_qualification(base=BASE):
                 "-m",
                 "pytest",
                 "-q",
+                "-p",
+                "no:cacheprovider",
                 str(BASE / "source/tests/test_nifi_otel_qualification.py"),
                 str(BASE / "source/tests/test_nifi_otel_proof_guards.py"),
             ]
@@ -181,34 +189,53 @@ def run_qualification(base=BASE):
             error=type(error).__name__ + ": " + str(error),
         )
     finally:
-        report['finalization_errors'] = []
-        report['image_identity_unchanged'] = False
-        report['source_unchanged'] = False
-        report['remaining_owned_containers'] = None
+        report["finalization_errors"] = []
+        report["image_identity_unchanged"] = False
+        report["source_unchanged"] = False
+        report["remaining_owned_containers"] = None
         try:
-            after = json.loads(subprocess.check_output(['docker', 'image', 'inspect', IMAGE]))[0]
-            report['image_identity_unchanged'] = after['Id'] == image['Id'] and after['RootFS'] == image['RootFS']
+            after = json.loads(
+                subprocess.check_output(["docker", "image", "inspect", IMAGE])
+            )[0]
+            report["image_identity_unchanged"] = (
+                after["Id"] == image["Id"] and after["RootFS"] == image["RootFS"]
+            )
         except (ValueError, OSError, KeyError, subprocess.SubprocessError) as error:
-            report['finalization_errors'].append('image: ' + type(error).__name__)
+            report["finalization_errors"].append("image: " + type(error).__name__)
         try:
-            report['source_unchanged'] = report['source_sha256'] == {str(f.relative_to(BASE / 'source')): sha(f) for f in (BASE / 'source').rglob('*') if f.is_file()}
+            report["source_unchanged"] = report["source_sha256"] == {
+                str(f.relative_to(BASE / "source")): sha(f)
+                for f in (BASE / "source").rglob("*")
+                if f.is_file()
+            }
         except OSError as error:
-            report['finalization_errors'].append('source: ' + type(error).__name__)
+            report["finalization_errors"].append("source: " + type(error).__name__)
         try:
-            report['remaining_owned_containers'] = subprocess.check_output(['docker', 'ps', '-a', '--filter', 'name=cnc-otel-aligned-', '--format', '{{.Names}}'], text=True).splitlines()
+            report["remaining_owned_containers"] = subprocess.check_output(
+                [
+                    "docker",
+                    "ps",
+                    "-a",
+                    "--filter",
+                    "name=cnc-otel-aligned-",
+                    "--format",
+                    "{{.Names}}",
+                ],
+                text=True,
+            ).splitlines()
         except (OSError, subprocess.SubprocessError) as error:
-            report['finalization_errors'].append('cleanup: ' + type(error).__name__)
+            report["finalization_errors"].append("cleanup: " + type(error).__name__)
         code = finish_report(report)
-        report['finished_utc'] = datetime.datetime.now(datetime.UTC).isoformat()
+        report["finished_utc"] = datetime.datetime.now(datetime.UTC).isoformat()
         save()
-        print(json.dumps({'status': report['status'], 'exit_code': code}), flush=True)
+        print(json.dumps({"status": report["status"], "exit_code": code}), flush=True)
     return code
 
 
 def main():
-    parser=argparse.ArgumentParser()
-    parser.add_argument("--proof-root",type=Path,default=BASE)
-    args=parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--proof-root", type=Path, default=BASE)
+    args = parser.parse_args()
     return run_qualification(args.proof_root)
 
 

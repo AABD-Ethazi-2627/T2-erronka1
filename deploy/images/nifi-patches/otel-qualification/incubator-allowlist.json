@@ -1,0 +1,1688 @@
+{
+  "records": {
+    "aligned": [
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/IncubatingUtil.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/IncubatingUtil.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "empty",
+          "()Lio/opentelemetry/api/incubator/config/DeclarativeConfigProperties;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/ExtendedOpenTelemetrySdk$ObfuscatedConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/ConfigProvider",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/ExtendedOpenTelemetrySdk.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/ExtendedOpenTelemetry",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/ConfigProvider",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "get",
+          "(Ljava/lang/String;)Lio/opentelemetry/api/incubator/config/DeclarativeConfigProperties;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-extension-autoconfigure-spi-1.67.0.jar!io/opentelemetry/sdk/autoconfigure/spi/internal/ExtendedDeclarativeConfigProperties.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.67.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogRecordBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.67.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogger.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogRecordBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.67.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogger.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogger",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter$ExtendedSdkDoubleCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge$ExtendedSdkDoubleGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge$ExtendedSdkDoubleGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram$ExtendedSdkDoubleHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram$ExtendedSdkDoubleHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter$ExtendedSdkDoubleUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter$ExtendedSdkDoubleUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter$ExtendedSdkLongCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter$ExtendedSdkLongCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge$ExtendedSdkLongGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram$ExtendedSdkLongHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/propagation/ExtendedContextPropagators",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/propagation/ExtendedContextPropagators",
+          "extractTextMapPropagationContext",
+          "(Ljava/util/Map;Lio/opentelemetry/context/propagation/ContextPropagators;)Lio/opentelemetry/context/Context;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedSpanBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanCallable",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanCallable",
+          "callInSpan",
+          "()Ljava/lang/Object;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanRunnable",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanRunnable",
+          "runInSpan",
+          "()V",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkTracer.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedSpanBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkTracer.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedTracer",
+          "",
+          "",
+          "class"
+        ]
+      }
+    ],
+    "aligned-all-family-including-api": [
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/IncubatingUtil.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/IncubatingUtil.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "empty",
+          "()Lio/opentelemetry/api/incubator/config/DeclarativeConfigProperties;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/ExtendedOpenTelemetrySdk$ObfuscatedConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/ConfigProvider",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/ExtendedOpenTelemetrySdk.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/ExtendedOpenTelemetry",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/ConfigProvider",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.67.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "get",
+          "(Ljava/lang/String;)Lio/opentelemetry/api/incubator/config/DeclarativeConfigProperties;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-extension-autoconfigure-spi-1.67.0.jar!io/opentelemetry/sdk/autoconfigure/spi/internal/ExtendedDeclarativeConfigProperties.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.67.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogRecordBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.67.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogger.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogRecordBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.67.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogger.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogger",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter$ExtendedSdkDoubleCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge$ExtendedSdkDoubleGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge$ExtendedSdkDoubleGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram$ExtendedSdkDoubleHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram$ExtendedSdkDoubleHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter$ExtendedSdkDoubleUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter$ExtendedSdkDoubleUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter$ExtendedSdkLongCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter$ExtendedSdkLongCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge$ExtendedSdkLongGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram$ExtendedSdkLongHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/BoundLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.67.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/propagation/ExtendedContextPropagators",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/propagation/ExtendedContextPropagators",
+          "extractTextMapPropagationContext",
+          "(Ljava/util/Map;Lio/opentelemetry/context/propagation/ContextPropagators;)Lio/opentelemetry/context/Context;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedSpanBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanCallable",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanCallable",
+          "callInSpan",
+          "()Ljava/lang/Object;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanRunnable",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanRunnable",
+          "runInSpan",
+          "()V",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkTracer.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedSpanBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.67.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkTracer.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedTracer",
+          "",
+          "",
+          "class"
+        ]
+      }
+    ],
+    "old": [
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/IncubatingUtil.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/IncubatingUtil.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "empty",
+          "()Lio/opentelemetry/api/incubator/config/DeclarativeConfigProperties;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/internal/ExtendedOpenTelemetrySdk$ObfuscatedConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/ConfigProvider",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/internal/ExtendedOpenTelemetrySdk.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/ExtendedOpenTelemetry",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/ConfigProvider",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-1.62.0.jar!io/opentelemetry/sdk/internal/SdkConfigProvider.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "get",
+          "(Ljava/lang/String;)Lio/opentelemetry/api/incubator/config/DeclarativeConfigProperties;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "asAttributes",
+          "()Lio/opentelemetry/api/common/Attributes;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "builder",
+          "()Lio/opentelemetry/api/incubator/common/ExtendedAttributesBuilder;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributesBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributesBuilder",
+          "build",
+          "()Lio/opentelemetry/api/incubator/common/ExtendedAttributes;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-common-1.62.0.jar!io/opentelemetry/sdk/common/internal/ExtendedAttributesMap.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributesBuilder",
+          "putAll",
+          "(Lio/opentelemetry/api/incubator/common/ExtendedAttributes;)Lio/opentelemetry/api/incubator/common/ExtendedAttributesBuilder;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.jar!io/opentelemetry/sdk/autoconfigure/spi/internal/ExtendedDeclarativeConfigProperties.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/config/DeclarativeConfigProperties",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/AutoValue_ExtendedSdkLogRecordData.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/AutoValue_ExtendedSdkLogRecordData.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "equals",
+          "(Ljava/lang/Object;)Z",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/AutoValue_ExtendedSdkLogRecordData.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "hashCode",
+          "()I",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "fromAttributeKey",
+          "(Lio/opentelemetry/api/common/AttributeKey;)Lio/opentelemetry/api/incubator/common/ExtendedAttributeKey;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "getKey",
+          "()Ljava/lang/String;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogRecordBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator-inherited-member",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class",
+        "reference": [
+          "io/opentelemetry/sdk/common/internal/ExtendedAttributesMap",
+          "get",
+          "(Lio/opentelemetry/api/common/AttributeKey;)Ljava/lang/Object;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogger.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogRecordBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogger.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/logs/ExtendedLogger",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "fromAttributeKey",
+          "(Lio/opentelemetry/api/common/AttributeKey;)Lio/opentelemetry/api/incubator/common/ExtendedAttributeKey;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributeKey",
+          "getKey",
+          "()Ljava/lang/String;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "asAttributes",
+          "()Lio/opentelemetry/api/common/Attributes;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "empty",
+          "()Lio/opentelemetry/api/incubator/common/ExtendedAttributes;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/data/internal/ExtendedLogRecordData.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/data/internal/ExtendedLogRecordData.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "asAttributes",
+          "()Lio/opentelemetry/api/common/Attributes;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/internal/ExtendedReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/internal/ExtendedReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "forEach",
+          "(Ljava/util/function/BiConsumer;)V",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/internal/ExtendedReadWriteLogRecord.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/common/ExtendedAttributes",
+          "isEmpty",
+          "()Z",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter$ExtendedSdkDoubleCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge$ExtendedSdkDoubleGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge$ExtendedSdkDoubleGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram$ExtendedSdkDoubleHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram$ExtendedSdkDoubleHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter$ExtendedSdkDoubleUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter$ExtendedSdkDoubleUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkDoubleUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter$ExtendedSdkLongCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter$ExtendedSdkLongCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge$ExtendedSdkLongGaugeBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGaugeBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongGauge.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongGauge",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram$ExtendedSdkLongHistogramBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogramBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongHistogram.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongHistogram",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedDoubleUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter$ExtendedSdkLongUpDownCounterBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounterBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-metrics-1.62.0.jar!io/opentelemetry/sdk/metrics/ExtendedSdkLongUpDownCounter.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/metrics/ExtendedLongUpDownCounter",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/propagation/ExtendedContextPropagators",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/propagation/ExtendedContextPropagators",
+          "extractTextMapPropagationContext",
+          "(Ljava/util/Map;Lio/opentelemetry/context/propagation/ContextPropagators;)Lio/opentelemetry/context/Context;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedSpanBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanCallable",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanCallable",
+          "callInSpan",
+          "()Ljava/lang/Object;",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanRunnable",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkSpanBuilder.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/SpanRunnable",
+          "runInSpan",
+          "()V",
+          "method"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkTracer.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedSpanBuilder",
+          "",
+          "",
+          "class"
+        ]
+      },
+      {
+        "category": "internal-optional-incubator",
+        "consumer": "nifi-gcp-nar!opentelemetry-sdk-trace-1.62.0.jar!io/opentelemetry/sdk/trace/ExtendedSdkTracer.class",
+        "reference": [
+          "io/opentelemetry/api/incubator/trace/ExtendedTracer",
+          "",
+          "",
+          "class"
+        ]
+      }
+    ]
+  },
+  "replacement": null,
+  "runtime_approved": false,
+  "scenario_aliases": {
+    "sdk-new-api-old": "aligned"
+  },
+  "schema": 1,
+  "source_commit": "8429e12",
+  "source_static_sha256": "366fde723fa81aee706f3989b9083d2d74f6fd4c034ce5c74eba9ad608b0b15e"
+}

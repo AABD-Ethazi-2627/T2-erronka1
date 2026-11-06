@@ -9,6 +9,7 @@ import resource
 import shutil
 import subprocess
 import time
+import zipfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -23,17 +24,52 @@ COVERAGE_SPEC = importlib.util.spec_from_file_location(
 c = importlib.util.module_from_spec(COVERAGE_SPEC)
 COVERAGE_SPEC.loader.exec_module(c)
 
-EXTERNAL_CONSUMERS = [
-    "io.grpc.opentelemetry.GrpcOpenTelemetry",
-    "io.grpc.opentelemetry.OpenTelemetryMetricSink",
-    "com.google.cloud.opentelemetry.metric.MetricTranslator",
-    "com.google.cloud.opentelemetry.metric.InternalMetricExporter",
-    "com.google.cloud.storage.OpenTelemetryBootstrappingUtils",
-    "com.google.cloud.bigquery.storage.v1.TelemetryMetrics",
-    "com.google.cloud.pubsub.v1.OpenTelemetryPubsubTracer",
-    "com.google.api.gax.tracing.OpenTelemetryMetricsRecorder",
-    "io.opentelemetry.contrib.gcp.resource.GCPResourceProvider",
-]
+GATES_SPEC = importlib.util.spec_from_file_location("_otel_gates", HERE / "gates.py")
+g = importlib.util.module_from_spec(GATES_SPEC)
+GATES_SPEC.loader.exec_module(g)
+EXTERNAL_CONSUMERS = list(g.EXTERNAL_CONSUMERS)
+
+
+def complete_phase(report, proof):
+    if report["phase"] == "static":
+        g.gate_static(report)
+    elif report["phase"] == "runtime":
+        g.gate_runtime(report)
+    q.save(proof / (report["phase"] + "-result.json"), report)
+
+
+LOADER_SPEC = importlib.util.spec_from_file_location(
+    "_otel_loader_inputs", HERE / "loader_context.py"
+)
+l = importlib.util.module_from_spec(LOADER_SPEC)
+LOADER_SPEC.loader.exec_module(l)
+
+
+def observed_behaviors(stdout):
+    result = {}
+    for line in stdout.splitlines():
+        if line.startswith("behavior\t"):
+            _, name, status, value = line.split("\t")
+            if name in result or status not in ("PASS", "FAIL"):
+                raise ValueError("ambiguous functional coverage")
+            result[name] = {"status": status, "value": value}
+    return result
+
+
+def omit_attribute_key(path):
+    """Explicit non-candidate mutation in a private tree, with the original pinned first."""
+    target = "io/opentelemetry/api/common/AttributeKey.class"
+    with zipfile.ZipFile(path) as z:
+        records = [(i, z.read(i)) for i in z.infolist()]
+    if sum(i.filename == target for i, _ in records) != 1:
+        raise ValueError("negative API class missing or ambiguous")
+    temporary = path.with_suffix(".negative-tmp")
+    with zipfile.ZipFile(temporary, "x") as z:
+        for info, data in records:
+            if info.filename != target:
+                z.writestr(info, data)
+    path.unlink()
+    temporary.rename(path)
 
 
 def select_observed(known, artifacts):
@@ -136,6 +172,12 @@ def main():
     original = baseline / "attempt-03/expanded-old"
     top = baseline / "attempt-03/top"
     input_verification = c.verify_expanded(known, original, top)
+    parent_table_sha = l.verify_parent_table(known, baseline / "attempt-03/parents.tsv")
+    l.verify_image_roots(known)
+    loader_inputs = json.loads((HERE / "loader-inputs.json").read_text())
+    if loader_inputs["image_id"] != known["image_id"]:
+        raise ValueError("loader input image identity mismatch")
+    q.verify_file(Path("/jdk/jmods/java.base.jmod"), loader_inputs["java_base_jmod"])
     replacements = select_observed(known, pins["artifacts"])
     if len(replacements) != 9:
         raise ValueError("incomplete observed family")
@@ -151,6 +193,8 @@ def main():
         sources_before=source,
         commands=[],
         verified_inputs=input_verification,
+        parent_table_sha256=parent_table_sha,
+        qualification_generation="offline-behavior-v2",
     )
     start = time.monotonic()
 
@@ -297,7 +341,9 @@ def main():
             aligned, refs = aligned_data["models"], aligned_data["references"]
             failures = q.newly_broken(old, aligned, refs)
             jdk = c.load_jdk_ancestors(aligned, jdk_path)
-            classified = c.classify_unresolved(aligned, refs, "aligned", old_identities, jdk)
+            classified = c.classify_unresolved(
+                aligned, refs, "aligned", old_identities, jdk
+            )
             all_classified = c.classify_unresolved(
                 aligned,
                 aligned_data["all_references"],
@@ -364,6 +410,25 @@ def main():
                     "selected probe class is not an observed external OTel consumer"
                 )
             q.save(b / "external-consumers-for-probe.json", EXTERNAL_CONSUMERS)
+            consumer_origins = []
+            for consumer in EXTERNAL_CONSUMERS:
+                matches = [
+                    r
+                    for r in aligned_data["consumers"]
+                    if r["class"].replace("/", ".") == consumer
+                ]
+                if len(matches) != 1:
+                    raise ValueError("ambiguous actual external consumer origin")
+                filename = matches[0]["jar"]
+                consumer_origins.append(
+                    {
+                        "class": consumer,
+                        "jar": filename,
+                        "sha256": c.expected_origin(known, pins, filename),
+                    }
+                )
+            g.require_consumer_origins(known, pins, consumer_origins)
+            q.save(b / "consumer-origins.json", consumer_origins)
             q.save(b / "aligned-consumers.json", aligned_data["consumers"])
             # The first narrow proof compared the unchanged propagator. Preserve it;
             # here require the actual encoding source and shipped bytecode change.
@@ -412,8 +477,13 @@ def main():
                 unresolved_including_api_family=all_classified,
                 abi_delta=abi,
                 actual_external_consumer_classes=len(aligned_data["external_models"]),
+                observed_external_class_names=sorted(actual_external_classes),
                 selected_external_consumers=EXTERNAL_CONSUMERS,
-                jdk_model={"source": str(jdk_path), "sha256": jdk_sha, "scope": "mounted Ubuntu compiler JDK21 declarations; not a complete image JVM verifier"},
+                jdk_model={
+                    "source": str(jdk_path),
+                    "sha256": jdk_sha,
+                    "scope": "mounted Ubuntu compiler JDK21 declarations; not a complete image JVM verifier",
+                },
                 security_source_patch_sha256=q.sha(patch.encode()),
                 security_evidence="actual changed encoding source and shipped bytecode; benign runtime limits are compatibility controls, not CVE closure",
                 limits=[
@@ -425,7 +495,22 @@ def main():
         else:
             out = b / "runtime"
             out.mkdir(exist_ok=False)
+            extra_root = l.extract_loader_inputs(loader_inputs, out / "loader-inputs")
             cp = os.pathsep.join(map(str, sorted(top.glob("*.jar"))))
+            table = b / "runtime-parents.tsv"
+            table.write_text(
+                (baseline / "attempt-03/parents.tsv").read_text()
+                + "nifi-framework-nar\tnifi-jetty-nar\nnifi-jetty-nar\t\n"
+            )
+            consumer_origins = json.loads((b / "consumer-origins.json").read_text())
+            g.require_consumer_origins(known, pins, consumer_origins)
+            origin_table = b / "consumer-origins.tsv"
+            origin_table.write_text(
+                "".join(
+                    r["class"] + "\t" + r["jar"] + "\t" + r["sha256"] + "\n"
+                    for r in consumer_origins
+                )
+            )
             classes = out / "classes"
             classes.mkdir()
             javac = Path("/jdk/bin/javac")
@@ -465,12 +550,16 @@ def main():
                     exercise,
                     HERE / "OtelExercise.java",
                     HERE / "ConfigPropertiesProbe.java",
+                    HERE / "ConsumerBehavior.java",
+                    HERE / "OfflineGcpDetector.java",
                 ],
                 "compile-actual-consumer-exercises",
             )
             # Copy once across read-only mount boundary; hardlink only private descendants.
             first = out / "old"
             shutil.copytree(original, first)
+            for name in ("nifi-jetty-nar", "nifi-framework-nar"):
+                shutil.copytree(extra_root / name, first / name, copy_function=os.link)
             variants = [
                 ("old", {}),
                 (
@@ -486,6 +575,7 @@ def main():
                     },
                 ),
                 ("aligned", replacements),
+                ("aligned-missing-attributekey", replacements),
             ]
             filenames = [
                 "api",
@@ -499,6 +589,7 @@ def main():
                 "sdk-extension-autoconfigure-spi",
             ]
             outcomes = []
+            report["outcomes"] = outcomes
             for name, mapping in variants:
                 tree = first if name == "old" else out / name
                 if name != "old":
@@ -507,8 +598,20 @@ def main():
                 for oldname, newname in mapping.items():
                     (leaf / oldname).unlink()
                     shutil.copyfile(cache / newname, leaf / newname)
-                for f in exercise.glob("*.class"):
-                    shutil.copyfile(f, tree / "nifi-gcp-nar" / f.name)
+                for f in exercise.rglob("*.class"):
+                    destination = tree / "nifi-gcp-nar" / f.relative_to(exercise)
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(f, destination)
+                mutation = None
+                if name == "aligned-missing-attributekey":
+                    mutated = leaf / "opentelemetry-api-1.67.0.jar"
+                    q.verify_file(mutated, c.expected_origin(known, pins, mutated.name))
+                    omit_attribute_key(mutated)
+                    mutation = {
+                        "kind": "non-candidate-remove-AttributeKey",
+                        "official_sha256": c.expected_origin(known, pins, mutated.name),
+                        "mutated_sha256": q.sha(mutated.read_bytes()),
+                    }
                 arguments = []
                 for suffix in filenames:
                     oldname = "opentelemetry-" + suffix + "-1.62.0.jar"
@@ -523,16 +626,25 @@ def main():
                     [
                         java,
                         *options,
+                        "-Xlog:class+load=info:file="
+                        + str(b / ("real-nar-" + name + ".class-load.log")),
                         "-cp",
                         str(classes) + os.pathsep + cp,
                         "AlignedNarProbe",
                         tree,
-                        baseline / "attempt-03/parents.tsv",
+                        table,
                         *arguments,
-                        *consumers,
+                        origin_table,
+                        *(
+                            ["--consumer-init-negative"]
+                            if name == "aligned-missing-attributekey"
+                            else []
+                        ),
                     ],
                     "real-nar-" + name,
-                    expected=1 if name == "narrow" else 0,
+                    expected=1
+                    if name in ("narrow", "aligned-missing-attributekey")
+                    else 0,
                 )
                 if (
                     name == "narrow"
@@ -543,6 +655,37 @@ def main():
                 outcomes.append(
                     {
                         "variant": name,
+                        "mutation": mutation,
+                        "behavior_results": observed_behaviors(stdout),
+                        "loader_model": next(
+                            (
+                                line.split("\t", 1)[1]
+                                for line in stdout.splitlines()
+                                if line.startswith("loader-model\t")
+                            ),
+                            None,
+                        ),
+                        "instance_loader_origin": next(
+                            (
+                                line.split("\t", 1)[1]
+                                for line in stdout.splitlines()
+                                if line.startswith("instance-loader-origin\t")
+                            ),
+                            None,
+                        ),
+                        "class_load_otel_count": sum(
+                            " io.opentelemetry." in line
+                            for line in (b / ("real-nar-" + name + ".class-load.log"))
+                            .read_text()
+                            .splitlines()
+                        ),
+                        "class_load_log_sha256": q.sha(
+                            (b / ("real-nar-" + name + ".class-load.log")).read_bytes()
+                        ),
+                        "expected_configutil_failure": "NoClassDefFoundError: io/opentelemetry/api/internal/ConfigUtil"
+                        in stderr,
+                        "expected_attribute_key_failure": "io/opentelemetry/api/common/AttributeKey"
+                        in stderr,
                         "returncode": report["commands"][-1]["returncode"],
                         "observed_external_consumer_initialization": c.observed_consumers(
                             stdout
@@ -583,13 +726,25 @@ def main():
             report.update(
                 status="bounded-real-NarClassLoader-aligned-controls-passed",
                 outcomes=outcomes,
+                loader_inputs=loader_inputs,
+                consumer_initialization={
+                    r["variant"]: g.initialization_counts(
+                        r["observed_external_consumer_initialization"]
+                    )
+                    for r in outcomes
+                },
                 limits=[
-                    "not NiFi scheduling/server, exporter operations, resource-provider getAttributes or GCP service acceptance",
-                    "ResourceProvider constructors traversed with explicit NAR loader; actual processor InstanceClassLoader and TCCL remain unmodeled",
-                    "unrelated gRPC/alpha artifacts unchanged; selected actual external consumers initialized with old/aligned parity",
+                    "not NiFi scheduling/server, exporter network operations or GCP service acceptance; GCP getAttributes uses an explicit local detector stub",
+                    "real InstanceClassLoader pass-through constructor and TCCL with pinned framework/Jetty loaders; not full NiFi-managed instance cloning or processor scheduling",
+                    "four selected local functional paths and nine initializations require old/aligned parity; other consumer methods remain untested",
                 ],
             )
         c.verify_expanded(known, original, top)
+        l.verify_parent_table(known, baseline / "attempt-03/parents.tsv")
+        if a.phase == "runtime":
+            l.verify_loader_sources(loader_inputs)
+            l.verify_extracted_loader_inputs(loader_inputs, extra_root)
+            report["private_loader_inputs_unchanged"] = True
         report["sources_after"] = {
             str(f): q.sha(f.read_bytes()) for f in HERE.iterdir() if f.is_file()
         }
@@ -599,7 +754,7 @@ def main():
             q.verify_file(Path("/") / row["path"], row["sha256"])
         report["original_image_NARs_unchanged"] = True
         report["elapsed_seconds"] = round(time.monotonic() - start, 3)
-        q.save(b / (a.phase + "-result.json"), report)
+        complete_phase(report, b)
         print(
             json.dumps(
                 {

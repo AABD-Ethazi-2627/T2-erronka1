@@ -2,8 +2,10 @@
 
 import difflib
 import importlib.util
+import json
 import re
 import zipfile
+from functools import lru_cache
 from pathlib import Path
 
 spec = importlib.util.spec_from_file_location(
@@ -52,7 +54,9 @@ def reference_identity(consumer, reference):
 
 def load_jdk_ancestors(models, jmod):
     """Read the mounted compiler JDK declarations, not name-only exemptions."""
-    pending = {p for m in models.values() for p in m["parents"] if p.startswith("java/")}
+    pending = {
+        p for m in models.values() for p in m["parents"] if p.startswith("java/")
+    }
     result = {}
     with zipfile.ZipFile(jmod) as archive:
         while pending:
@@ -63,8 +67,31 @@ def load_jdk_ancestors(models, jmod):
             if model["name"] != owner:
                 raise ValueError("JDK class identity mismatch")
             result[owner] = model
-            pending.update(p for p in model["parents"] if p.startswith("java/") and p not in result)
+            pending.update(
+                p for p in model["parents"] if p.startswith("java/") and p not in result
+            )
     return result
+
+
+@lru_cache(maxsize=8)
+def optional_records(scenario):
+    data = json.loads(Path(__file__).with_name("incubator-allowlist.json").read_text())
+    scenario = data["scenario_aliases"].get(scenario, scenario)
+    return data["records"].get(scenario, [])
+
+
+def require_optional_boundary(records, scenario):
+    expected = {
+        (r["consumer"], tuple(r["reference"]), r["category"])
+        for r in optional_records(scenario)
+    }
+    actual = [
+        (r["consumer"], tuple(r["reference"]), r["category"])
+        for r in records
+        if r["category"].startswith("internal-optional-incubator")
+    ]
+    if len(actual) != len(expected) or set(actual) != expected:
+        raise ValueError("exact optional caller/symbol coverage changed")
 
 
 def classify_unresolved(models, references, scenario, old_identities, jdk_models=None):
@@ -77,38 +104,40 @@ def classify_unresolved(models, references, scenario, old_identities, jdk_models
         inherited_from = None
         if jdk_models is not None and owner in models and kind == "method":
             declaring = q.resolve(models | jdk_models, owner, (kind, name, descriptor))
-            if declaring in jdk_models and jdk_models[declaring]["members"].get((kind, name, descriptor), 0) & 1:
+            if (
+                declaring in jdk_models
+                and jdk_models[declaring]["members"].get((kind, name, descriptor), 0)
+                & 1
+            ):
                 category, inherited_from = "jdk-inherited-member", declaring
         elif owner in models and kind == "method":
             for parent in sorted(ancestry(models, owner)):
                 if (name, descriptor) in JDK_MEMBERS.get(parent, set()):
                     category, inherited_from = "jdk-inherited-member", parent
                     break
-        parts = caller.split("!")
-        internal = (
-            len(parts) == 3
-            and re.fullmatch(
-                r"opentelemetry-(?:api|context|common|sdk(?:-(?:common|trace|metrics|logs|extension-autoconfigure-spi))?)-1\.(?:62|67)\.0\.jar",
-                parts[1],
-            )
-            and parts[2].startswith("io/opentelemetry/")
+        positive = optional_records(scenario)
+        matched = next(
+            (
+                r
+                for r in positive
+                if r["consumer"] == caller and tuple(r["reference"]) == ref
+            ),
+            None,
         )
         if (
-            owner.startswith("io/opentelemetry/api/incubator/")
+            matched
             and owner not in models
-            and internal
+            and owner.startswith("io/opentelemetry/api/incubator/")
         ):
-            category = "internal-optional-incubator"
-        # The original SDK logs invokes an inherited default from an absent
-        # incubator interface. Keep this one observed optional path explicit;
-        # do not exempt other missing members merely because an interface is absent.
+            category = matched["category"]
         if (
-            caller == "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class"
-            and ref == ("io/opentelemetry/sdk/common/internal/ExtendedAttributesMap", "get", "(Lio/opentelemetry/api/common/AttributeKey;)Ljava/lang/Object;", "method")
-            and "io/opentelemetry/api/incubator/common/ExtendedAttributes" in ancestry(models, owner)
+            matched
+            and matched["category"] == "internal-optional-incubator-inherited-member"
+            and "io/opentelemetry/api/incubator/common/ExtendedAttributes"
+            in ancestry(models, owner)
             and "io/opentelemetry/api/incubator/common/ExtendedAttributes" not in models
         ):
-            category = "internal-optional-incubator-inherited-member"
+            category = matched["category"]
         rows.append(
             {
                 "consumer": caller,
@@ -129,6 +158,22 @@ def require_closed(records):
 
 
 def verify_expanded(known, original, top):
+    expected_paths = {
+        str(Path(row["id"]) / "NAR-INF/bundled-dependencies" / Path(x["entry"]).name)
+        for row in known["nar_chain"]
+        for x in row["direct_jars"]
+    }
+    actual_paths = {
+        str(p.relative_to(original)) for p in original.rglob("*") if p.is_file()
+    }
+    if actual_paths != expected_paths or any(
+        p.is_symlink() for p in original.rglob("*")
+    ):
+        raise ValueError("expanded root inventory mismatch")
+    if {p.name for p in top.iterdir()} != {
+        Path(x["path"]).name for x in known["launcher_jars"]
+    }:
+        raise ValueError("launcher root inventory mismatch")
     checked = []
     for row in known["nar_chain"]:
         root = original / row["id"] / "NAR-INF/bundled-dependencies"

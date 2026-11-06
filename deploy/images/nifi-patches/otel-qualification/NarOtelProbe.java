@@ -11,7 +11,10 @@ public class NarOtelProbe {
     static NarClassLoader loader(String id) throws Exception {
         if(loaders.containsKey(id))return loaders.get(id);
         String parentId=parents.get(id);
-        ClassLoader parent=parentId==null || parentId.isBlank() ? NarOtelProbe.class.getClassLoader() : loader(parentId);
+        ClassLoader parent;
+        if(parentId==null || parentId.isBlank())
+            parent=!id.equals("nifi-jetty-nar") && Files.isDirectory(root.resolve("nifi-jetty-nar")) ? loader("nifi-jetty-nar") : NarOtelProbe.class.getClassLoader();
+        else parent=loader(parentId);
         NarClassLoader result=new NarClassLoader(root.resolve(id).toFile(),parent);
         loaders.put(id,result);return result;
     }
