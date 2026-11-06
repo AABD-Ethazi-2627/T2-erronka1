@@ -50,7 +50,24 @@ def reference_identity(consumer, reference):
     return label, tuple(reference)
 
 
-def classify_unresolved(models, references, scenario, old_identities):
+def load_jdk_ancestors(models, jmod):
+    """Read the mounted compiler JDK declarations, not name-only exemptions."""
+    pending = {p for m in models.values() for p in m["parents"] if p.startswith("java/")}
+    result = {}
+    with zipfile.ZipFile(jmod) as archive:
+        while pending:
+            owner = pending.pop()
+            if owner in result:
+                continue
+            model = q.parse(archive.read("classes/" + owner + ".class"))
+            if model["name"] != owner:
+                raise ValueError("JDK class identity mismatch")
+            result[owner] = model
+            pending.update(p for p in model["parents"] if p.startswith("java/") and p not in result)
+    return result
+
+
+def classify_unresolved(models, references, scenario, old_identities, jdk_models=None):
     rows = []
     for caller, ref in references:
         owner, name, descriptor, kind = ref
@@ -58,7 +75,11 @@ def classify_unresolved(models, references, scenario, old_identities):
             continue
         category = "unknown"
         inherited_from = None
-        if owner in models and kind == "method":
+        if jdk_models is not None and owner in models and kind == "method":
+            declaring = q.resolve(models | jdk_models, owner, (kind, name, descriptor))
+            if declaring in jdk_models and jdk_models[declaring]["members"].get((kind, name, descriptor), 0) & 1:
+                category, inherited_from = "jdk-inherited-member", declaring
+        elif owner in models and kind == "method":
             for parent in sorted(ancestry(models, owner)):
                 if (name, descriptor) in JDK_MEMBERS.get(parent, set()):
                     category, inherited_from = "jdk-inherited-member", parent
@@ -78,6 +99,16 @@ def classify_unresolved(models, references, scenario, old_identities):
             and internal
         ):
             category = "internal-optional-incubator"
+        # The original SDK logs invokes an inherited default from an absent
+        # incubator interface. Keep this one observed optional path explicit;
+        # do not exempt other missing members merely because an interface is absent.
+        if (
+            caller == "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class"
+            and ref == ("io/opentelemetry/sdk/common/internal/ExtendedAttributesMap", "get", "(Lio/opentelemetry/api/common/AttributeKey;)Ljava/lang/Object;", "method")
+            and "io/opentelemetry/api/incubator/common/ExtendedAttributes" in ancestry(models, owner)
+            and "io/opentelemetry/api/incubator/common/ExtendedAttributes" not in models
+        ):
+            category = "internal-optional-incubator-inherited-member"
         rows.append(
             {
                 "consumer": caller,

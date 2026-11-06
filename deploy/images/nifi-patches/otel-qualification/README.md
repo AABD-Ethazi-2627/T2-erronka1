@@ -142,5 +142,15 @@ discriminate; benign propagation tests do not establish CVE closure.
 
 The runner now fails on blocked phases, source/image drift and cleanup errors.
 Its versioned summary generator refuses incomplete reports and existing output.
-Both portable suites pass locally: 49 tests and 3 subtests. A fresh corrected
-VM batch is pending; the historical result is not relabeled as this source.
+The first corrected batch (`e4c5751`) passed the oracle and 49 portable tests,
+then failed closed on eight original references. Two bounded diagnostics found
+seven inherited JDK methods and one internal SDK-logs call through the absent
+incubator interface. That failed attempt and diagnostics are preserved.
+
+The next source reads exact public method declarations and ancestors from the
+mounted compiler JDK21 `java.base.jmod`, recording its hash and scope separately
+from the image JVM. Only the one exact old internal incubator caller/member/path
+is classified as optional inheritance; external or changed signatures still
+fail. Classified rows are saved before the gate, including on failure. Both
+portable suites pass locally: 52 tests and 3 subtests. A fresh VM batch is
+pending; the historical result is not relabeled as this source.

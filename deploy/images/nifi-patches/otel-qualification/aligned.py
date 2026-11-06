@@ -269,7 +269,12 @@ def main():
         elif a.phase == "static":
             old_data = collect(known, original, cache, {})
             old, oldrefs = old_data["models"], old_data["references"]
-            old_unresolved = c.classify_unresolved(old, oldrefs, "old", set())
+            jdk_path = Path("/jdk/jmods/java.base.jmod")
+            jdk_sha = q.sha(jdk_path.read_bytes())
+            jdk = c.load_jdk_ancestors(old, jdk_path)
+            old_unresolved = c.classify_unresolved(old, oldrefs, "old", set(), jdk)
+            report["unresolved_old"] = old_unresolved
+            q.save(b / "static-result.json", report)
             old_identities = {
                 c.reference_identity(r["consumer"], r["reference"])
                 for r in old_unresolved
@@ -291,13 +296,18 @@ def main():
             aligned_data = collect(known, original, cache, replacements)
             aligned, refs = aligned_data["models"], aligned_data["references"]
             failures = q.newly_broken(old, aligned, refs)
-            classified = c.classify_unresolved(aligned, refs, "aligned", old_identities)
+            jdk = c.load_jdk_ancestors(aligned, jdk_path)
+            classified = c.classify_unresolved(aligned, refs, "aligned", old_identities, jdk)
             all_classified = c.classify_unresolved(
                 aligned,
                 aligned_data["all_references"],
                 "aligned-all-family-including-api",
                 old_identities,
+                jdk,
             )
+            report["unresolved_current_references"] = classified
+            report["unresolved_including_api_family"] = all_classified
+            q.save(b / "static-result.json", report)
             c.require_closed(classified)
             c.require_closed(all_classified)
             if failures:
@@ -313,6 +323,7 @@ def main():
                 reversed_data["references"],
                 "sdk-new-api-old",
                 old_identities,
+                c.load_jdk_ancestors(reversed_data["models"], jdk_path),
             )
             reversed_unknown = [
                 r for r in reversed_unresolved if r["category"] == "unknown"
@@ -335,6 +346,8 @@ def main():
             control = q.newly_broken(old, mutant, refs)
             if not control:
                 raise ValueError("missing API mutation did not discriminate")
+            if q.sha(jdk_path.read_bytes()) != jdk_sha:
+                raise ValueError("JDK declarations changed")
             abi = c.abi_delta(
                 old,
                 aligned,
@@ -400,6 +413,7 @@ def main():
                 abi_delta=abi,
                 actual_external_consumer_classes=len(aligned_data["external_models"]),
                 selected_external_consumers=EXTERNAL_CONSUMERS,
+                jdk_model={"source": str(jdk_path), "sha256": jdk_sha, "scope": "mounted Ubuntu compiler JDK21 declarations; not a complete image JVM verifier"},
                 security_source_patch_sha256=q.sha(patch.encode()),
                 security_evidence="actual changed encoding source and shipped bytecode; benign runtime limits are compatibility controls, not CVE closure",
                 limits=[

@@ -615,6 +615,60 @@ class CorrectedCoverageGuards(unittest.TestCase):
         outside = {"outside/Impl": self.model(["io/opentelemetry/Base"], {key: 1})}
         self.assertEqual(c.abi_delta(old, new, outside, [])["external_impacts"], [])
 
+    def test_actual_jdk_declaration_requires_exact_signature_and_ancestry(self):
+        c = self.helper()
+        owner = "io/opentelemetry/Map"
+        models = {owner: self.model(["java/util/HashMap"])}
+        key = ("method", "containsKey", "(Ljava/lang/Object;)Z")
+        jdk = {"java/util/HashMap": self.model(members={key: 1})}
+        ref = (owner, key[1], key[2], key[0])
+        row = c.classify_unresolved(models, [("external", ref)], "old", set(), jdk)[0]
+        self.assertEqual((row["category"], row["jdk_declaring_type"]), ("jdk-inherited-member", "java/util/HashMap"))
+        for bad_models, bad_jdk, bad_ref in [
+            ({owner: self.model(["java/lang/Object"])}, jdk, ref),
+            (models, jdk, (owner, "containsKey", "()Z", "method")),
+            (models, {"java/util/HashMap": self.model(members={key: 2})}, ref),
+        ]:
+            with self.assertRaisesRegex(ValueError, "unclassified"):
+                c.require_closed(c.classify_unresolved(bad_models, [("external", bad_ref)], "old", set(), bad_jdk))
+
+    def test_old_optional_inherited_member_is_one_exact_internal_path(self):
+        c = self.helper()
+        owner = "io/opentelemetry/sdk/common/internal/ExtendedAttributesMap"
+        parent = "io/opentelemetry/api/incubator/common/ExtendedAttributes"
+        caller = "nifi-gcp-nar!opentelemetry-sdk-logs-1.62.0.jar!io/opentelemetry/sdk/logs/ExtendedSdkLogRecordBuilder.class"
+        ref = (owner, "get", "(Lio/opentelemetry/api/common/AttributeKey;)Ljava/lang/Object;", "method")
+        models = {owner: self.model([parent])}
+        row = c.classify_unresolved(models, [(caller, ref)], "old", set(), {})[0]
+        self.assertEqual(row["category"], "internal-optional-incubator-inherited-member")
+        for bad_caller, bad_ref, bad_models in [
+            ("external", ref, models),
+            (caller, (owner, "get", "()Ljava/lang/Object;", "method"), models),
+            (caller, ref, {owner: self.model()}),
+            (caller, ref, models | {parent: self.model()}),
+        ]:
+            with self.assertRaisesRegex(ValueError, "unclassified"):
+                c.require_closed(c.classify_unresolved(bad_models, [(bad_caller, bad_ref)], "old", set(), {}))
+
+    def test_jdk_ancestor_loader_reads_only_required_declarations(self):
+        from unittest.mock import patch
+        c = self.helper()
+        models = {"io/opentelemetry/Map": self.model(["java/util/HashMap"])}
+        declarations = {
+            "java/util/HashMap": self.model(["java/lang/Object"]),
+            "java/lang/Object": self.model(),
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "java.base.jmod"
+            path.write_bytes(jar([("classes/" + name + ".class", name.encode()) for name in declarations]))
+            def parse(raw):
+                name = raw.decode()
+                return declarations[name] | {"name": name}
+            with patch.object(c.q, "parse", side_effect=parse):
+                self.assertEqual(set(c.load_jdk_ancestors(models, path)), set(declarations))
+            with patch.object(c.q, "parse", return_value={"name": "wrong"}), self.assertRaisesRegex(ValueError, "identity"):
+                c.load_jdk_ancestors(models, path)
+
     def test_security_source_diff_requires_real_encoding_change(self):
         c = self.helper()
         with tempfile.TemporaryDirectory() as tmp:
