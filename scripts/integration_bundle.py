@@ -110,6 +110,8 @@ def build(output, evidence):
                 "docs/evidence/ES_CLOSEOUT_20261108.md",
                 "docs/evidence/KIBANA_ES_CONNECTED_20261108.md",
                 "docs/evidence/KIBANA_ES_CONNECTED_20261108.json",
+                "docs/evidence/IMAGE_TRANSFER_20261108.md",
+                "docs/evidence/IMAGE_TRANSFER_20261108.json",
                 "docs/evidence/NIFI_CLOSEOUT_20261108.md",
                 "docs/evidence/INTEGRATION_CLOSEOUT_20261108.md",
                 "docs/evidence/MAVEN_H_GUARDS_20261106.md",
