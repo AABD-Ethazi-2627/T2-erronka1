@@ -1,5 +1,7 @@
 {
   "api": "scoring/Dockerfile",
+  "go": "deploy/images/go.Dockerfile",
+  "haproxy": "deploy/images/haproxy.Dockerfile",
   "elasticsearch": "deploy/images/elasticsearch.Dockerfile",
   "filebeat": "deploy/images/filebeat.Dockerfile",
   "kafka": "deploy/images/kafka.Dockerfile",

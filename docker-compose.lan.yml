@@ -11,7 +11,9 @@ services:
     environment:
       NIFI_WEB_PROXY_HOST: '${CNC_LAN_HOST:?Set the server LAN hostname or IP}:18080,localhost:18080,127.0.0.1:18080'
   lan-gateway:
-    image: haproxy:3.4-alpine@sha256:2caaf8b1a1ef67f3f1ea9b721f2821675d3ba4500fb518e23884fecb93e8dbaa
+    build:
+      context: .
+      dockerfile: deploy/images/haproxy.Dockerfile
     user: '${CNC_LAN_CERT_UID:?Set id -u}:${CNC_LAN_CERT_GID:?Set id -g}'
     environment:
       CNC_NIFI_CERT_NAME: ${CNC_NIFI_CERT_NAME:?Set the verified NiFi certificate hostname}

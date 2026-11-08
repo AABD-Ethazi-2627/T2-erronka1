@@ -6,6 +6,11 @@ servidor**. Cada estudiante usa su propio certificado de cliente. NiFi mantiene
 su autenticación interna; el gateway comprueba además el certificado de cliente
 y verifica el certificado TLS de NiFi antes de reenviar tráfico.
 
+El gateway se construye con `deploy/images/haproxy.Dockerfile`: parte de la
+imagen oficial fijada en `deploy/images.json` e instala zlib `1.4-r0` de Alpine.
+La imagen oficial actual aún incluye la versión afectada por CVE-2026-4738.
+El CI escanea la imagen construida y ejecuta sobre ella las pruebas TLS de LAN.
+
 | Servicio | URL o broker desde otro equipo | Control LAN |
 |---|---|---|
 | NiFi | `https://IP-SERVIDOR:18080/nifi` | mTLS + login NiFi |

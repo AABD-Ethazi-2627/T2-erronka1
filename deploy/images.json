@@ -8,6 +8,6 @@
   "python": "cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73",
   "mock-python": "python:3.13.17-alpine3.23@sha256:85c3e958f9448b4c75069957f1f6a3be5325e8ea7ad1f205142fc9d023d0531b",
   "uv": "ghcr.io/astral-sh/uv:0.13.6@sha256:af22a52f5eafef3d78e551599d405c02df61919d18028f0cea8eda93bc9986d0",
-  "haproxy": "haproxy:3.4-alpine@sha256:2caaf8b1a1ef67f3f1ea9b721f2821675d3ba4500fb518e23884fecb93e8dbaa",
+  "haproxy": "haproxy:3.4.7-alpine@sha256:5312d37032c079c4937d45ef63758852434351f3b425a3703521fd999837abcf",
   "wolfi": "cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73"
 }

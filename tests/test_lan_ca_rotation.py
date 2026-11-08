@@ -1,6 +1,6 @@
 """Opt-in real TLS regression for the documented complete-CA emergency rotation.
 
-No production services or certificates are used. CI runs the pinned HAProxy
+No production services or certificates are used. CI builds the pinned HAProxy
 container; native HAProxy is supported for an isolated developer check.
 """
 
@@ -94,14 +94,23 @@ class LanCARotationTests(unittest.TestCase):
         backend = os.environ.get("CNC_LAN_TLS_BACKEND", "docker")
         name = "cnc-lan-tls-" + uuid.uuid4().hex[:12]
         if backend == "docker":
-            image = json.loads((ROOT / "deploy/images.json").read_text())["haproxy"]
+            base = json.loads((ROOT / "deploy/images.json").read_text())["haproxy"]
             self.assertIn(
-                "image: " + image, (ROOT / "docker-compose.lan.yml").read_text()
+                "FROM " + base, (ROOT / "deploy/images/haproxy.Dockerfile").read_text()
             )
+            self.assertIn(
+                "dockerfile: deploy/images/haproxy.Dockerfile",
+                (ROOT / "docker-compose.lan.yml").read_text(),
+            )
+            image = os.environ["CNC_LAN_TLS_IMAGE"]
             command = [
                 "docker",
                 "run",
                 "--rm",
+                "--memory",
+                "256m",
+                "--cpus",
+                "1",
                 "--name",
                 name,
                 "--network",
