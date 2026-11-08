@@ -52,7 +52,10 @@ def test_go_commands_receive_matching_limits(tmp_path, jobs):
     assert result.returncode == 0, result.stderr
     assert commands == [
         "tar",
-        f"{jobs}|unset|get github.com/google/cel-go@v0.29.0 golang.org/x/net@v0.62.0",
+        (
+            f"{jobs}|unset|get github.com/google/cel-go@v0.29.0 golang.org/x/net@v0.62.0 "
+            "github.com/klauspost/compress@v1.20.2"
+        ),
         f"{jobs}|0|build -p {jobs} -trimpath -o /tmp/filebeat ./filebeat",
     ]
     assert "ARG GO_BUILD_JOBS=2\n" in STAGE
