@@ -72,8 +72,11 @@ ajustes existentes. La nueva compilación termina y el análisis binario real
 devuelve exit 0, **cero vulnerabilidades alcanzables**. La identidad de la imagen
 y el hash del binario extraído, el buildinfo con el hash Go de 1.20.2 y el hash
 del log se conservan en [runtime-result.json](runtime-result.json).
-Su nuevo Trivy sigue pendiente; no se reutiliza el reporte de la imagen anterior.
-La imagen previa y ambos binarios se conservan para contrastar el cambio.
+El nuevo Trivy de esa imagen termina con gate `[]` y solo la disposición
+GO-2026-5932 preexistente; el hash del reporte nuevo figura en el mismo JSON.
+No se reutiliza el reporte de la imagen anterior. La imagen previa y ambos
+binarios se conservan para contrastar el cambio. Sigue pendiente el recorrido
+Filebeat/Kafka/NiFi del conjunto, que no se deduce de estas pruebas.
 
 El primer intento del harness Go no pudo ejecutar su binario compilado porque
 el tmpfs temporal era noexec. El segundo habilitó ejecución solo en ese tmpfs,
