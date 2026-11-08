@@ -22,3 +22,14 @@ Kibana a las imágenes cargadas. No es una nueva ejecución funcional, aceptaci�
 del otro host ni prueba de NiFi/Filebeat, que no estaban en este archivo.
 El JSON crudo de ambas inspecciones sigue en
 `outputs/image-transfer-inspection.json`; TAR e imágenes se conservan.
+
+## Filebeat final
+
+Transferencia adicional mediante `filebeat-final.tar`: 532.616.192 bytes,
+SHA256 `ed1ab300df887006043d5bc93aee2ea23f64bf35bf9bb34e7fd3210d0cf2cee1`.
+Se repitieron todas las comprobaciones índice/manifiesto/config y comparación
+de campos y capas. Config de origen `aabe875e...`; manifiesto OCI de destino
+`aea160cd...`. El JSON contiene los digests completos y el inventario del
+archivo adicional. Crudo: `outputs/filebeat-transfer-inspection.json`.
+Esta imagen corresponde al binario con compress 1.20.2 ya escaneado y revisado;
+su E2E sigue pendiente. NiFi todavía no está transferido.

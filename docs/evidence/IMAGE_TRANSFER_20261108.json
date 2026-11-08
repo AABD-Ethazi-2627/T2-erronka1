@@ -84,7 +84,33 @@
         "Config": true,
         "RootFS": true
       }
+    },
+    {
+      "tag": "cnc-closeout-filebeat:final",
+      "source_config_digest": "sha256:aabe875ef120f50889e2c3b4043b69b61110c62ac69a885e3b525d92405039c2",
+      "target_oci_manifest_digest": "sha256:aea160cdd18f60e4488a3e4e5099ce79864a78734a91cf787c750d56cf29cefb",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 25,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
     }
   ],
-  "production_acceptance": false
+  "production_acceptance": false,
+  "additional_archives": [
+    {
+      "archive": "D:/github/_local/cnc-closeout-20261108/filebeat-final.tar",
+      "archive_bytes": 532616192,
+      "archive_sha256": "ed1ab300df887006043d5bc93aee2ea23f64bf35bf9bb34e7fd3210d0cf2cee1",
+      "images": [
+        "cnc-closeout-filebeat:final"
+      ]
+    }
+  ]
 }
