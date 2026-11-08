@@ -315,3 +315,9 @@ Snapshot tras detener los recursos: MemAvailable global6.338.508KiB
 El builder confirma `Status: stopped`; `docker ps` filtrado por el prefijo propio
 no devuelve contenedores activos. Es una medida puntual compartida, no una
 reserva para CG32; el coordinador debe usar su preflight en el instante del E2E.
+
+El primer check del índice detectó CRLF como trailing whitespace en JSON/scripts
+nuevos generados en Windows; el commit continuó por el comportamiento del shell.
+Se normalizaron a LF todos los archivos nuevos afectados, incluido el resumen
+inicial, y el diff completo desde481b693 pasó `git diff --check`. Los JSON de
+scanner originales y sus hashes permanecen intactos en la cache.
