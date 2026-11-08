@@ -49,5 +49,22 @@
     "path": "outputs/closeout-kibana-es-smoke-01",
     "endpoints": "passed",
     "runtime": "two index_not_found_exception records; corrected and rerun in attempt02"
+  },
+  "scan": {
+    "sha256": "01a138b97c86914368f016053b65ef055c3d7a03a6fd372c0a6da20e1d995682",
+    "image_id": "sha256:2d52fc60f9ae3c12453004544bbe77b95472aa0e48bfab9ad546845aa958365c",
+    "raw_findings": [
+      [
+        "CVE-2026-19693",
+        "extract-zip",
+        "2.0.1+cncguard.1"
+      ],
+      [
+        "CVE-2026-56876",
+        "extract-zip",
+        "2.0.1+cncguard.1"
+      ]
+    ],
+    "gate_errors": []
   }
 }

@@ -40,8 +40,10 @@ con solo `allow_no_indices` devuelve 404; añadiendo `ignore_unavailable` devuel
 ERROR** durante el ensayo. Esta es la imagen `cnc-closeout-kibana:connected`,
 ID `sha256:2d52fc60f9ae3c12453004544bbe77b95472aa0e48bfab9ad546845aa958365c`.
 El build vuelve a ejecutar todos los controles de componentes. Su nuevo escaneo
-Trivy sigue en ejecución al redactar esta sección; el gate final no se deduce
-del reporte de la imagen anterior.
+Trivy 0.76.1 completo termina con gate `[]`, atribuido al ID anterior; SHA256
+del JSON crudo `01a138b97c86914368f016053b65ef055c3d7a03a6fd372c0a6da20e1d995682`.
+Conserva únicamente las dos tuplas verificadas de extract-zip ya existentes;
+no se añade ninguna excepción ni se afirma cero diagnósticos brutos.
 
 Repetición sobre las imágenes ya construidas:
 
