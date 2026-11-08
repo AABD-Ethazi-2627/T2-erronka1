@@ -1,6 +1,8 @@
 FROM golang:1.26.10-alpine3.23@sha256:0525c952defebc693cdaf62cdf43afa32be5a7f377e99260642ea19c240c708e AS filebeat-builder
-ADD --checksum=sha256:ae4dae382249f28a53be500c0c5d5a6628677f3e65a7d35dfc148b9ad4dc0635 \
-    https://github.com/elastic/beats/archive/refs/tags/v9.5.5.tar.gz \
+# Every blob/mode checked against the complete tree of the signed v9.5.5 commit.
+# Avoid the non-reproducible tag archive; provenance is in filebeat-source/.
+ADD --checksum=sha256:9174fdb1d926bcf717e90338538746026a44216a4690a5a1b8a30015ebe1b2bf \
+    https://codeload.github.com/elastic/beats/tar.gz/b80bf8464fba72f582cefed91dd72909eb7116db \
     /tmp/beats.tar.gz
 # Bound Go execution parallelism and concurrent package compilation together.
 ARG GO_BUILD_JOBS=2
