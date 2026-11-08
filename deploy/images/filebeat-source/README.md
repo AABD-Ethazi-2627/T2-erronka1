@@ -14,6 +14,9 @@ No se acredita la causa exacta de la diferencia ni se afirma una intrusión.
 `b80bf8464fba72f582cefed91dd72909eb7116db`. La API informa firma válida;
 el [commit público](https://github.com/elastic/beats/commit/b80bf8464fba72f582cefed91dd72909eb7116db)
 y su respuesta completa se conservan en [commit.json](commit.json).
+Los metadatos de referencia se obtuvieron por HTTPS de la API oficial. El
+verificador local contrasta integridad y exige la firma declarada válida por
+esa API; no verifica OpenPGP por sí mismo ni autentica JSON aportado por terceros.
 
 Se descargó el archivo por ese commit desde el host oficial codeload y se
 compararon todos sus miembros con el árbol completo, no truncado,
