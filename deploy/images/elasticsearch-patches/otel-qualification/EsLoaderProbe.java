@@ -1,4 +1,4 @@
-/* Prepared, not yet compiled/executed. Uses installed PluginsLoader on the boot
+/* Uses installed PluginsLoader on the boot
  * module path; does not instantiate plugins, start a node or attach an agent.
  * Entitlement instrumentation is not enabled: this is loader/component evidence. */
 import java.nio.file.*;
@@ -28,6 +28,64 @@ public class EsLoaderProbe {
             while((n=in.read(b))!=-1)d.update(b,0,n);}
         return HexFormat.of().formatHex(d.digest());
     }
+    static Object call(ClassLoader loader,String type,Object receiver,String method,Class<?>[] parameters,Object...args)throws Exception{
+        return Class.forName(type,true,loader).getMethod(method,parameters).invoke(receiver,args);
+    }
+    static void components(ClassLoader loader)throws Exception{
+        var none=new Class<?>[0];
+        for(var signal:List.of("trace", "metrics", "logs")){
+            String provider=switch(signal){case "trace" -> "SdkTracerProvider";case "metrics" -> "SdkMeterProvider";default -> "SdkLoggerProvider";};
+            String type="io.opentelemetry.sdk."+signal+"."+provider;
+            Object builder=call(loader,type,null,"builder",none);
+            Object instance=call(loader,type+"Builder",builder,"build",none);
+            Object instrument=call(loader,type,instance,"get",new Class<?>[]{String.class},"cnc.synthetic");
+            if(signal.equals("trace")){
+                Object spanBuilder=call(loader,"io.opentelemetry.api.trace.Tracer",instrument,"spanBuilder",new Class<?>[]{String.class},"synthetic");
+                Object span=call(loader,"io.opentelemetry.api.trace.SpanBuilder",spanBuilder,"startSpan",none);
+                Object scope=call(loader,"io.opentelemetry.api.trace.Span",span,"makeCurrent",none);
+                call(loader,"io.opentelemetry.context.Scope",scope,"close",none);
+                call(loader,"io.opentelemetry.api.trace.Span",span,"end",none);
+            }else if(signal.equals("metrics")){
+                Object cb=call(loader,"io.opentelemetry.api.metrics.Meter",instrument,"counterBuilder",new Class<?>[]{String.class},"cnc.synthetic");
+                Object counter=call(loader,"io.opentelemetry.api.metrics.LongCounterBuilder",cb,"build",none);
+                call(loader,"io.opentelemetry.api.metrics.LongCounter",counter,"add",new Class<?>[]{long.class},7L);
+            }else{
+                Object record=call(loader,"io.opentelemetry.api.logs.Logger",instrument,"logRecordBuilder",none);
+                call(loader,"io.opentelemetry.api.logs.LogRecordBuilder",record,"setBody",new Class<?>[]{String.class},"synthetic");
+                call(loader,"io.opentelemetry.api.logs.LogRecordBuilder",record,"emit",none);
+            }
+            call(loader,type,instance,"close",none);
+            System.out.println("COMPONENT\t"+signal+"\tpass");
+        }
+        // Build and close exporters without exporting a payload or opening an endpoint.
+        for(var signal:List.of("trace.OtlpHttpSpanExporter", "metrics.OtlpHttpMetricExporter", "logs.OtlpHttpLogRecordExporter")){
+            String type="io.opentelemetry.exporter.otlp.http."+signal;
+            Object builder=call(loader,type,null,"builder",none);
+            Object exporter=call(loader,type+"Builder",builder,"build",none);
+            call(loader,type,exporter,"close",none);
+            System.out.println("EXPORTER-BUILD-CLOSE\t"+signal+"\tpass");
+        }
+        // ES uses gRPC with LATEST exporter self-metrics. Default HTTP builders
+        // do not exercise this internal SDK/exporter ABI (SemConvAttributes).
+        var telemetryType=Class.forName("io.opentelemetry.sdk.common.InternalTelemetryVersion",true,loader);
+        Object latest=telemetryType.getField("LATEST").get(null);
+        for(var signal:List.of("metrics.OtlpGrpcMetricExporter", "trace.OtlpGrpcSpanExporter", "logs.OtlpGrpcLogRecordExporter")){
+            String type="io.opentelemetry.exporter.otlp."+signal;
+            // getMethod enumerates optional ManagedChannel overloads, although
+            // ES's OkHttp sender needs no grpc-java ManagedChannel. Resolve only
+            // the exact public descriptors used by ES, without adding grpc-java.
+            var lookup=java.lang.invoke.MethodHandles.publicLookup();
+            var exporterType=Class.forName(type,true,loader);
+            var builderType=Class.forName(type+"Builder",true,loader);
+            try{
+                Object builder=lookup.findStatic(exporterType,"builder",java.lang.invoke.MethodType.methodType(builderType)).invoke();
+                lookup.findVirtual(builderType,"setInternalTelemetryVersion",java.lang.invoke.MethodType.methodType(builderType,telemetryType)).invoke(builder,latest);
+                Object exporter=lookup.findVirtual(builderType,"build",java.lang.invoke.MethodType.methodType(exporterType)).invoke(builder);
+                lookup.findVirtual(exporterType,"close",java.lang.invoke.MethodType.methodType(void.class)).invoke(exporter);
+            }catch(Throwable error){throw new IllegalStateException("gRPC LATEST probe",error);}
+            System.out.println("GRPC-LATEST-BUILD-CLOSE\t"+signal+"\tpass");
+        }
+    }
     static void origin(String realm,String name,ClassLoader loader,String expected)throws Exception{
         var type=Class.forName(name,false,loader);
         var path=Path.of(type.getProtectionDomain().getCodeSource().getLocation().toURI());
@@ -40,10 +98,14 @@ public class EsLoaderProbe {
         System.out.println("ORIGIN\t"+realm+"\t"+name+"\t"+type.getModule().getName()+"\t"+path+"\t"+sha(path));
     }
     public static void main(String[] args)throws Exception{
-        if(args.length!=3||!Set.of("current","sdk-six").contains(args[1]))
-            throw new IllegalArgumentException("home + current/sdk-six + origin pins required");
+        if(args.length!=3||!Set.of("current","sdk-six","aligned").contains(args[1]))
+            throw new IllegalArgumentException("home + current/sdk-six/aligned + origin pins required");
         try(var in=Files.newInputStream(Path.of(args[2]))){PINS.load(in);}
         Path home=Path.of(args[0]);String variant=args[1];
+        // Same public logging initialization used by the server bootstrap.
+        // PluginsLoader initializes ModuleQualifiedExportsService, which logs
+        // through ES LoggerFactory rather than Log4j's independent provider.
+        org.elasticsearch.common.logging.LogConfigurator.configureESLogging();
         var all=PluginsLoader.loadModulesBundles(home.resolve("modules"),false);
         Set<PluginBundle> selected=new LinkedHashSet<>();
         for(var b:all)if(CLOSURE.contains(b.pluginDescriptor().getName()))selected.add(b);
@@ -83,7 +145,8 @@ public class EsLoaderProbe {
                 "io.opentelemetry.exporter.otlp.http.logs.OtlpHttpLogRecordExporter")){
                 Class.forName(name,false,loader);System.out.println("EXPORTER-LOAD\t"+name);
             }
+            components(loader);
         }
-        System.out.println("STATUS\tloader-only\treplacement=null\truntime_approved=false");
+        System.out.println("STATUS\tloader-components-only\treplacement=null\truntime_approved=false");
     }
 }

@@ -4,6 +4,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 import zipfile
 from pathlib import Path
 
@@ -206,6 +207,29 @@ class RuntimeAndModelGuards(unittest.TestCase):
 
 
 class NextPhaseGuards(unittest.TestCase):
+    def test_oracle_preserves_vendor_jvm_variants_without_common_wire_duplicate(self):
+        oracle = load("maven_oracle")
+        roots = json.loads((HERE / "published-roots.json").read_text())["sdk_six_roots"]
+        root = ET.fromstring(oracle.pom(roots + oracle.VENDOR_JVM_ROOTS))
+        ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+        deps = root.findall("m:dependencies/m:dependency", ns)
+        coordinates = [
+            ":".join(
+                d.find("m:" + k, ns).text for k in ("groupId", "artifactId", "version")
+            )
+            for d in deps
+        ]
+        self.assertEqual(len(coordinates), len(set(coordinates)))
+        self.assertIn("org.jetbrains.kotlin:kotlin-stdlib:2.2.21", coordinates)
+        self.assertIn("com.squareup.wire:wire-runtime-jvm:6.4.0", coordinates)
+        disk = next(
+            d
+            for d in deps
+            if d.find("m:artifactId", ns).text == "opentelemetry-disk-buffering"
+        )
+        excluded = disk.find("m:exclusions/m:exclusion/m:artifactId", ns)
+        self.assertEqual(excluded.text, "wire-runtime")
+
     def test_extension_closure_preserves_graph_and_rejects_cycles(self):
         seal = load("seal_inventory")
         graph = {

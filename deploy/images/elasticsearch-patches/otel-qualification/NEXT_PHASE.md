@@ -1,5 +1,12 @@
 # ES inventory sealed; next stage prepared
 
+2026-11-08 local closeout supersedes the pending execution described below:
+[ES_CLOSEOUT_20261108.md](../../../../docs/evidence/ES_CLOSEOUT_20261108.md).
+The historical inventory and 89f58fc source remain unchanged. The new run proves
+actual Maven mediation, JDK27 compilation, loader/components, and enabled
+metrics/traces export with entitlements. Six SDKs alone failed runtime; the new
+candidate also aligns exporters/incubator and their published JVM dependencies.
+
 `inventory-result.json` was regenerated from the downloaded **executed 89f58fc**
 source and metadata. `seal_inventory.py` checks every frozen metadata digest,
 source-before hashes, image/source preservation, exit codes and exact generator

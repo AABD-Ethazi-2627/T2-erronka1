@@ -77,7 +77,8 @@ RUN mkdir -p /tmp/snappy-module/META-INF \
     && zip -q /usr/share/elasticsearch/modules/esql-datasource-compression-libs/snappy-java-1.1.10.9.jar META-INF/MANIFEST.MF \
     && rm -rf /tmp/snappy-module
 # GHSA-ccrj-gw8r-854m: replace real API bytes in all three isolated modules.
-# Keep API/context/common aligned; SDK and instrumentation remain vendor versions.
+# Keep API/context/common aligned. The six SDKs are aligned below; retain the
+# aligned exporters below and vendor instrumentation.
 ADD --checksum=sha256:538d1dff2f9a37aecbc0ef98fd17273a3affb058e734e6763a3a07a38a5fdc59 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.67.0/opentelemetry-api-1.67.0.jar /tmp/opentelemetry-api-1.67.0.jar
 ADD --checksum=sha256:40fb813fb5e27ec2691daa29c81b572b5b1541ef9b41e62490c3ee3e6407c55e https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-context/1.67.0/opentelemetry-context-1.67.0.jar /tmp/opentelemetry-context-1.67.0.jar
 ADD --checksum=sha256:da97bdb395418e16ecdcbe7ad3497f45b9e767ceda4ae7e86133e7a757ac377f https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-common/1.67.0/opentelemetry-common-1.67.0.jar /tmp/opentelemetry-common-1.67.0.jar
@@ -92,4 +93,55 @@ RUN for module in apm esql-datasource-gcs repository-gcs; do \
       done; \
     done \
     && rm /tmp/opentelemetry-*-1.67.0.jar
+# SDK 1.62 uses API-internal ConfigUtil removed by API 1.67. Align the six SDK
+# artifacts; EsLoaderProbe exercises configuration, signals and exporter builders.
+ADD --checksum=sha256:52a8f599a368a3d62185e37053f6a53175d6fbe3ecc1d565baba13b1a854267f https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk/1.67.0/opentelemetry-sdk-1.67.0.jar /tmp/sdk/opentelemetry-sdk-1.67.0.jar
+ADD --checksum=sha256:628a4c00db9561ff4c608a650d5e7fd66a1e153ccdf1ba3cdc5ac0b7c6518fea https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-common/1.67.0/opentelemetry-sdk-common-1.67.0.jar /tmp/sdk/opentelemetry-sdk-common-1.67.0.jar
+ADD --checksum=sha256:14d9615c8a5dcf471dcbb74902b771dcfa8656b755ac38dce904042289ccd198 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-trace/1.67.0/opentelemetry-sdk-trace-1.67.0.jar /tmp/sdk/opentelemetry-sdk-trace-1.67.0.jar
+ADD --checksum=sha256:c157ff10da59a87a57e5236d9f3290792d9b749433be5e5b449a7d1604c320a9 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-metrics/1.67.0/opentelemetry-sdk-metrics-1.67.0.jar /tmp/sdk/opentelemetry-sdk-metrics-1.67.0.jar
+ADD --checksum=sha256:dd0f0b625e08787af49d7e270abc6def4c2eabc2f18f5f145b7924024a3311e3 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-logs/1.67.0/opentelemetry-sdk-logs-1.67.0.jar /tmp/sdk/opentelemetry-sdk-logs-1.67.0.jar
+ADD --checksum=sha256:41eb19f6caf2c655ac3139d331f5c34283f2efdb0f0b0e58765a6cc9e27f66bc https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.67.0/opentelemetry-sdk-extension-autoconfigure-spi-1.67.0.jar /tmp/sdk/opentelemetry-sdk-extension-autoconfigure-spi-1.67.0.jar
+RUN for artifact in sdk sdk-common sdk-trace sdk-metrics sdk-logs sdk-extension-autoconfigure-spi; do \
+      target=/usr/share/elasticsearch/modules/apm; \
+      test -f "$target/opentelemetry-$artifact-1.62.0.jar"; \
+      rm "$target/opentelemetry-$artifact-1.62.0.jar"; \
+      cp "/tmp/sdk/opentelemetry-$artifact-1.67.0.jar" "$target/"; \
+      chown 1000:0 "$target/opentelemetry-$artifact-1.67.0.jar"; \
+      chmod 0644 "$target/opentelemetry-$artifact-1.67.0.jar"; \
+    done && rm -r /tmp/sdk
+# Align exporter internal ABI with SDK 1.67; retain isolated APM realm/policy.
+ADD --checksum=sha256:eb61aab6d20bf105102dfa061b478b659cec17e82a50969898046456768ba09b https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-common/1.67.0/opentelemetry-exporter-common-1.67.0.jar /tmp/exporters/opentelemetry-exporter-common-1.67.0.jar
+ADD --checksum=sha256:6724a9c8f9f42de757682c6194c48d9fee4670cd19a85c37954eba526c58b836 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-otlp/1.67.0/opentelemetry-exporter-otlp-1.67.0.jar /tmp/exporters/opentelemetry-exporter-otlp-1.67.0.jar
+ADD --checksum=sha256:75530ab4d93e6fdef478d3e112713337625e70a63df357e6e7b9060c13788015 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-otlp-common/1.67.0/opentelemetry-exporter-otlp-common-1.67.0.jar /tmp/exporters/opentelemetry-exporter-otlp-common-1.67.0.jar
+ADD --checksum=sha256:0ccb54e5e1db24680b0b7b818299552477dcc7114de7ca0f7b054e6e20958b83 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-sender-okhttp/1.67.0/opentelemetry-exporter-sender-okhttp-1.67.0.jar /tmp/exporters/opentelemetry-exporter-sender-okhttp-1.67.0.jar
+ADD --checksum=sha256:234194a04aac54858df0a750d243af7b2e39df5e4eb86e9912043ad33a9f9a52 https://repo.maven.apache.org/maven2/com/squareup/okhttp3/okhttp-jvm/5.5.0/okhttp-jvm-5.5.0.jar /tmp/exporters/okhttp-jvm-5.5.0.jar
+ADD --checksum=sha256:b97b640557a650d15411f2be29aef558c4e422a83653cb18ba494311dbed18be https://repo.maven.apache.org/maven2/com/squareup/okio/okio-jvm/3.18.1/okio-jvm-3.18.1.jar /tmp/exporters/okio-jvm-3.18.1.jar
+RUN rm /usr/share/elasticsearch/modules/apm/opentelemetry-exporter-*-1.62.0.jar /usr/share/elasticsearch/modules/apm/okhttp-jvm-5.3.2.jar /usr/share/elasticsearch/modules/apm/okio-jvm-3.17.0.jar \
+    && cp /tmp/exporters/*.jar /usr/share/elasticsearch/modules/apm/ \
+    && chown 1000:0 /usr/share/elasticsearch/modules/apm/*.jar \
+    && chmod 0644 /usr/share/elasticsearch/modules/apm/*.jar \
+    && rm -r /tmp/exporters
+ADD --checksum=sha256:fea3d78726e49620168c3f6194ff491edfd1ec89b2df06fd5d5b73e55d74a342 https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api-incubator/1.67.0-alpha/opentelemetry-api-incubator-1.67.0-alpha.jar /tmp/incubator.jar
+RUN rm /usr/share/elasticsearch/modules/apm/opentelemetry-api-incubator-1.60.1-alpha.jar \
+    && cp /tmp/incubator.jar /usr/share/elasticsearch/modules/apm/opentelemetry-api-incubator-1.67.0-alpha.jar \
+    && chown 1000:0 /usr/share/elasticsearch/modules/apm/opentelemetry-api-incubator-1.67.0-alpha.jar \
+    && chmod 0644 /usr/share/elasticsearch/modules/apm/opentelemetry-api-incubator-1.67.0-alpha.jar \
+    && rm /tmp/incubator.jar
+# Official v9.5.5 source, with a null guard at the eight nullable span lookups.
+# Preserve the named APM module and entitlement policy. No API diagnostic is
+# suppressed: absent spans are handled before calling the non-null OTel API.
+COPY deploy/images/elasticsearch-patches/otel-qualification/closeout-20261108/APMTracer.java /tmp/apm-source/APMTracer.java
+RUN echo '5bd12c7a170309f026bb9bc2728c2294fcfcb59595926bb2fe8c0176392a841a  /tmp/apm-source/APMTracer.java' | sha256sum -c - \
+    && sed -i \
+      -e 's/final var span = Span.fromContextOrNull(spans.remove(spanId));/final var context = spans.remove(spanId); final var span = context == null ? null : Span.fromContextOrNull(context);/' \
+      -e 's/final var span = Span.fromContextOrNull(spans.get(traceable.getSpanId()));/final var context = spans.get(traceable.getSpanId()); final var span = context == null ? null : Span.fromContextOrNull(context);/g' \
+      /tmp/apm-source/APMTracer.java \
+    && test "$(grep -c 'context == null ? null' /tmp/apm-source/APMTracer.java)" = 8 \
+    && /usr/share/elasticsearch/jdk/bin/javac -J-Xmx256m \
+       --module-path /usr/share/elasticsearch/lib:/usr/share/elasticsearch/modules/apm \
+       --patch-module org.elasticsearch.telemetry.apm=/tmp/apm-source \
+       -d /tmp/apm-classes /tmp/apm-source/APMTracer.java \
+    && /usr/share/elasticsearch/jdk/bin/jar uf /usr/share/elasticsearch/modules/apm/apm-9.5.5.jar \
+       -C /tmp/apm-classes org/elasticsearch/telemetry/apm/internal/tracing \
+    && rm -r /tmp/apm-source /tmp/apm-classes
 USER 1000

@@ -3,7 +3,6 @@
 import argparse
 import importlib.util
 import json
-import resource
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -130,6 +129,9 @@ def main():
     parser.add_argument("--realm", choices=q.REALMS, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    # The model is portable; bounded execution requires POSIX resource limits.
+    import resource
+
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     resource.setrlimit(resource.RLIMIT_AS, (400 * 1024**2,) * 2)
     resource.setrlimit(resource.RLIMIT_CPU, (165, 165))

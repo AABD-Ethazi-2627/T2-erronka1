@@ -2,7 +2,6 @@
 
 import argparse
 import datetime
-import fcntl
 import hashlib
 import json
 import shutil
@@ -134,6 +133,10 @@ def main():
     ):
         raise ValueError("unsafe attempt name")
     # Never occupy an idle reservation. A busy lock returns 75 once, without retry.
+    # Planning and portable contract tests need no POSIX lock. Execution remains
+    # Linux-only and must fail closed if flock is unavailable.
+    import fcntl
+
     with LOCK.open("a+") as lock:
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
