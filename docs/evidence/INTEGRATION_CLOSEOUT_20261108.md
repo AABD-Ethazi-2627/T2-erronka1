@@ -66,6 +66,14 @@ la regresión conjunta: 1382 tests y 497 subtests, 5 skips, dos warnings esperad
 de fixtures ZIP negativos. Muse también cerró sin findings ES/Kibana, Filebeat
 y control LAN; sus alcances no equivalen a aprobación GitHub.
 
-Pendientes para integrar: corrección oficial del gateway HAProxy/zlib y fallos
-auxiliares, revisión del delta que corresponda y CI sobre el SHA final publicado.
+HAProxy/Go incorporados en `6143d66`: zlib oficial Alpine 1.4-r0 sobre bases
+oficiales fijadas, ambos scans con cero hallazgos. El padre repitió TLS real
+con la imagen corregida: dos pruebas pasan, incluidos los cinco frontends,
+mTLS/IP y retirada de sesiones. Regresión final `6143d66`: 1383 tests y 499
+subtests pasan, 5 skips y dos warnings de fixtures ZIP negativos; 41,31 s.
+Se mantienen export de runtime, inventario, Ruff y diff-check en verde.
+El cambio auxiliar no modifica las siete imágenes del E2E ya atribuido.
+
+Pendientes para integrar: revisión independiente del delta auxiliar y CI sobre
+el SHA final publicado, además de la aprobación GitHub que corresponda.
 No se ha fusionado ni desplegado el PR119. No hay nuevas excepciones del gate.
