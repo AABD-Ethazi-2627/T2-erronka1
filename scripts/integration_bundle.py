@@ -114,6 +114,8 @@ def build(output, evidence):
                 "docs/evidence/IMAGE_TRANSFER_20261108.json",
                 "docs/evidence/NIFI_CLOSEOUT_20261108.md",
                 "docs/evidence/INTEGRATION_CLOSEOUT_20261108.md",
+                "docs/evidence/INTEGRATION_CLOSEOUT_20261108.json",
+                "docs/evidence/INFRA_CI_CLOSEOUT_20261108.md",
                 "docs/evidence/MAVEN_H_GUARDS_20261106.md",
                 "docs/evidence/CLAUDE_FINAL_GUARDS_MM114_RECHECK_20261106.md",
                 "docs/evidence/NIFI_GUARD_CORRECTIONS_20261105.md",

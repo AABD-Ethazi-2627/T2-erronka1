@@ -26,6 +26,8 @@ htmlcov/
 # Sources in data/, compact evidence in docs/evidence/, fixtures and uv.lock
 # remain versioned; do not add global *.csv, *.json, *.png or *.pkl rules.
 /outputs/
+/.playwright-cli/
+/output/playwright/
 /historical/
 /secrets/
 /models/*

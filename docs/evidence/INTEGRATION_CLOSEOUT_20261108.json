@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "code_head_tested": "5176fe8",
+  "project": "cg32-bbf35ca8",
+  "run": "closeout-final-r1-3b2291",
+  "raw_root": "/home/Fedora/.cache/cnc-closeout-20261108/e2e-final-20261108",
+  "raw_run_sha256": "af5109e4336db61707ad16ad49100dbe4e81cc234e9ec087a2055ffe2bf7e794",
+  "status": "completed",
+  "identity_kind": "rebuilt_candidate",
+  "manifest_sha256": "2a75e1fdcf7c755e4a1a2cc1bbe23f3e53023079c0bfaf5982da27e9c9f98417",
+  "reconciliation": {
+    "backlog_uncommitted": 0,
+    "balance_ok": true,
+    "es_docs": 6,
+    "es_duplicate_event_ids": 0,
+    "es_without_saved_job": 0,
+    "jobs_not_in_kafka": 0,
+    "kafka_missing_offered": 0,
+    "kafka_not_observed": 0,
+    "kafka_records": 6,
+    "kafka_repeated_lines": 0,
+    "kafka_unexpected": 0,
+    "observed": 6,
+    "offered": 6,
+    "offered_unique": 6,
+    "pending": 0,
+    "rejected": 0,
+    "saved": 6,
+    "saved_missing_in_es": 0,
+    "valid_lost": 0
+  },
+  "kafka_committed": {
+    "committed": 6,
+    "end": 6,
+    "lag": 0
+  },
+  "integration_reconciliation": {
+    "canonical_sha256": "5a5ca7c0059ee48d9f83ba7f1d3805a96f9c232fc843495ff235822ea6d545dc",
+    "event_key": "a416cdc2a853cb9a6b328051af51e16e87b6af117b1d515abf7f663973a4f481",
+    "same_event_storage_get": true,
+    "ui": "supplied_separate_evidence"
+  },
+  "metrics": {
+    "bytes": {
+      "es_index_store": 37879,
+      "input": 573,
+      "kafka_topic_values": 403,
+      "worker_root": 368640
+    },
+    "container_mem_usage_max_mib": {
+      "api-1": 163.9,
+      "elasticsearch-1": 1048.576,
+      "filebeat-1": 25.11,
+      "kafka-1": 435.6,
+      "nifi-1": 1251.328
+    },
+    "cpu_s": {
+      "api-1": 0.06692881837829628,
+      "elasticsearch-1": 1.7656500607049923,
+      "filebeat-1": 0.007076165240899354,
+      "kafka-1": 0.49397090794022414,
+      "nifi-1": 4.009078095164333
+    },
+    "drain_s": 17.07590611699925,
+    "e2e_max_ms": 15882.69265100098,
+    "e2e_n": 6,
+    "e2e_p50_ms": 11884.50279999961,
+    "e2e_p95_ms": 15882.69265100098,
+    "http_non_200": 0,
+    "http_p50_ms": 22.05988399873604,
+    "http_p95_ms": 42.86093900009291,
+    "http_requests": 6,
+    "lag_final": 0,
+    "lag_initial": 0,
+    "lag_max": 3,
+    "offered_eps": 0.9995663889002572,
+    "producer_lag_max_ms": 4.325010000684415,
+    "throughput_eps": 0.31771984207185694
+  },
+  "cleanup_errors": [],
+  "controller_errors": [],
+  "observer_errors": [],
+  "nifi_exit_status": {
+    "0": 3
+  },
+  "browser": {
+    "engine": "Edge Chromium via Playwright CLI",
+    "desktop_viewport": [
+      1440,
+      1000
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "mobile_document_scroll_width": 390,
+    "selected_event_key": "a416cdc2a853cb9a6b328051af51e16e87b6af117b1d515abf7f663973a4f481",
+    "selected_machine": "CNC-009",
+    "history_window": "six months",
+    "same_event_key_in_live_dom": true,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "live_update_paused_via_visible_label": true,
+    "navigation": "home -> Datuak -> Sei hilabete",
+    "browser_closed": true,
+    "artifacts": {
+      "output/playwright/history-six-months.log": {
+        "sha256": "cb949c31e39206fc13c32340afb63428c2c399ea2ed89469fbc8c924b1ad0c3d",
+        "bytes": 47043
+      },
+      "output/playwright/mobile-snapshot.log": {
+        "sha256": "c82d9bf63c79103f407997956e304ea18cbefe984d9c33b5ea751adf6aa2ae9c",
+        "bytes": 47047
+      },
+      "output/playwright/closeout-desktop.png": {
+        "sha256": "3cdddba615c0aa7258d4a93d3a7b337eb0e4468aa9fcc6819c6aab9d3db91fb9",
+        "bytes": 65959
+      },
+      "output/playwright/closeout-history-desktop.png": {
+        "sha256": "4580de12fe076a099bbb4a6ae4ec24736dbc2f018441506b3215d49bca98bbc4",
+        "bytes": 83565
+      },
+      "output/playwright/closeout-mobile.png": {
+        "sha256": "48efcfbcab93a2cbbd444d4fb6a5e473e6205fa6be418811b085d1bf7eae0696",
+        "bytes": 42953
+      }
+    }
+  },
+  "raw_files": {
+    "runs/closeout-final-r1-3b2291/run.json": {
+      "sha256": "af5109e4336db61707ad16ad49100dbe4e81cc234e9ec087a2055ffe2bf7e794",
+      "bytes": 4940
+    },
+    "runs/closeout-final-r1-3b2291/integration-reconciliation.json": {
+      "sha256": "a3140aee2579143e02d463cacedb87f670905183162743d0e0863c82a46b066c",
+      "bytes": 236
+    },
+    "runs/closeout-final-r1-3b2291/canonical.json": {
+      "sha256": "5a5ca7c0059ee48d9f83ba7f1d3805a96f9c232fc843495ff235822ea6d545dc",
+      "bytes": 989
+    },
+    "runs/closeout-final-r1-3b2291/get-snapshot.json": {
+      "sha256": "c53ba9668ca66c474edb31a7994442072dbae121dae6a22aae6f6dced972a966",
+      "bytes": 6321
+    },
+    "runs/closeout-final-r1-3b2291/get-history.json": {
+      "sha256": "e4b1ab3fa942a4acf38aa63d19c831a43dd49491ca76725f5f2ce1356ab21e40",
+      "bytes": 1823
+    },
+    "runs/closeout-final-r1-3b2291/es-live.json": {
+      "sha256": "df49d8e6283007e322768b82b608f395a1fdd49674238d18af2e49ee878a22bb",
+      "bytes": 1182
+    },
+    "view-result.json": {
+      "sha256": "790173106b57b941d53f38c081163c7223fab638d37da8b674ba684320ca612a",
+      "bytes": 515
+    },
+    "candidate-identity.json": {
+      "sha256": "29ffd61131c1a79c90a84c9eaa1d933aeee089b60a5a0e0f2813445f01d60219",
+      "bytes": 319
+    },
+    "up.log": {
+      "sha256": "975b7c8925605ba34e3dbde627fd7bf14e19710c5629c8b930bc6912c3fa277b",
+      "bytes": 58
+    },
+    "run-01.log": {
+      "sha256": "56399c92b16cb45fa542590f114e0655bdd6859337bf70f41d6b5d0041cf8649",
+      "bytes": 884
+    },
+    "view.log": {
+      "sha256": "d4ad18288519fff2f4a6f605f301e0a6a14f523a90786239ad3723302c3ba51b",
+      "bytes": 482
+    }
+  },
+  "containers_stopped": true,
+  "data_preserved": true,
+  "production_acceptance": false,
+  "physical_smb_verified": false,
+  "industrial_model_accepted": false,
+  "github_ci_final_sha_verified": false
+}
