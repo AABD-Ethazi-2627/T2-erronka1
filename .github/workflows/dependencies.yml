@@ -65,9 +65,31 @@ jobs:
               print('ref=' + ref, file=output)
               print('dockerfile=' + targets.get(key, ''), file=output)
           PY
+      - name: Reserve hosted runner disk for Kibana image export
+        if: matrix.image == 'kibana'
+        run: |
+          # This job owns a disposable GitHub-hosted runner. These SDKs are
+          # unused: Kibana and its tests build entirely inside Docker.
+          df -h / /var/lib/docker
+          sudo du -sh /usr/share/dotnet /usr/local/lib/android /opt/ghc 2>/dev/null || true
+          sudo rm -rf -- /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          df -h / /var/lib/docker
       - name: Build actual runtime image
         if: steps.image.outputs.dockerfile != ''
-        run: docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
+        run: |
+          # Preserve resource measurements in the job log even if the runner
+          # shuts down before an artifact upload can execute.
+          (
+            while true; do
+              date -u
+              df -h / /var/lib/docker
+              free -m
+              sleep 15
+            done
+          ) &
+          resource_monitor=$!
+          trap 'kill "$resource_monitor" 2>/dev/null || true' EXIT
+          docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
       - name: Verify offline API query under runtime limits
         if: matrix.image == 'api'
         run: python3 -m scripts.check_runtime_image "${{ steps.image.outputs.ref }}"
