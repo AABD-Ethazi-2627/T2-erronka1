@@ -1,3 +1,8 @@
+# Elastic ESA-2026-232 fixes the reachable Node Brotli decoder in 24.22.1.
+# Keep the reviewed 9.5.5 application migration; take both runtime variants
+# unmodified from the immutable official security release (not the build npm Node).
+FROM docker.elastic.co/kibana/kibana-wolfi:9.5.6@sha256:fcc4fd28898aec394dc45c568ba811e34c132f5a0ebadfa8f8d1d412f55e00c3 AS node-security-runtime
+
 FROM docker.elastic.co/kibana/kibana-wolfi:9.5.5@sha256:46b0a3adf85186f9153fbd322e55ea8f70bc4039dcd55d58826fc1caa372dee5 AS patches
 
 USER root
@@ -112,6 +117,14 @@ COPY --from=glob-migration /glob-migration/node_modules/rimraf /usr/share/kibana
 RUN rm -rf /usr/share/kibana/node_modules/node-forge
 # Replace actual upstream library and dist bytes; do not reapply the 1.4.0 backport.
 COPY --from=patches /patches/node_modules/node-forge-patched /usr/share/kibana/node_modules/node-forge
+# Install the security runtime before exercising all final-image consumers.
+# Remove all old runtime bytes, including the launcher's glibc fallback.
+RUN rm -rf /usr/share/kibana/node
+COPY --from=node-security-runtime /usr/share/kibana/node /usr/share/kibana/node
+COPY deploy/images/kibana-patches/apply-node-security-runtime.cjs deploy/images/kibana-patches/test-node-security-runtime.cjs /tmp/
+RUN /usr/share/kibana/node/default/bin/node /tmp/apply-node-security-runtime.cjs \
+    && /usr/share/kibana/node/default/bin/node /tmp/test-node-security-runtime.cjs \
+    && rm /tmp/apply-node-security-runtime.cjs /tmp/test-node-security-runtime.cjs
 COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js deploy/images/kibana-patches/test-same-line-updates.js deploy/images/kibana-patches/test-hono-node-server.js /tmp/
 COPY deploy/images/kibana-patches/test-glob-migration.js deploy/images/kibana-patches/test-del-migration.cjs /tmp/
 COPY deploy/images/kibana-patches/test-mm11-installed.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json /tmp/mm11-test/

@@ -165,7 +165,9 @@ async function oldCallbackTerminals() {
   } finally { graceful.unlink = originalUnlink; global.setTimeout = realSetTimeout; Date.now = realDate; }
 }
 async function main() {
-  assert.equal(process.version, 'v24.21.0');
+  // Preparation fixtures retain the pinned original base. The final serving
+  // image must execute the same controls on the official fixed runtime.
+  assert.equal(process.version, patched ? 'v24.21.0' : 'v24.22.1');
   if (patched) await normal(old, 'old');
   await normal(candidate, 'new');
   assert.equal((await import(pathToFileURL(sourceFile))).default.sync instanceof Function, true);
