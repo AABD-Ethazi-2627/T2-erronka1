@@ -125,6 +125,10 @@ COPY deploy/images/kibana-patches/apply-node-security-runtime.cjs deploy/images/
 RUN /usr/share/kibana/node/default/bin/node /tmp/apply-node-security-runtime.cjs \
     && /usr/share/kibana/node/default/bin/node /tmp/test-node-security-runtime.cjs \
     && rm /tmp/apply-node-security-runtime.cjs /tmp/test-node-security-runtime.cjs
+COPY deploy/images/kibana-patches/apply-workflows-cold-start.cjs deploy/images/kibana-patches/test-workflows-cold-start.cjs /tmp/
+RUN /usr/share/kibana/node/default/bin/node /tmp/apply-workflows-cold-start.cjs \
+    && /usr/share/kibana/node/default/bin/node /tmp/test-workflows-cold-start.cjs \
+    && rm /tmp/apply-workflows-cold-start.cjs /tmp/test-workflows-cold-start.cjs
 COPY deploy/images/kibana-patches/test-node-forge-patch.js deploy/images/kibana-patches/test-node-forge-chain.js deploy/images/kibana-patches/test-follow-redirects.js deploy/images/kibana-patches/test-same-line-updates.js deploy/images/kibana-patches/test-hono-node-server.js /tmp/
 COPY deploy/images/kibana-patches/test-glob-migration.js deploy/images/kibana-patches/test-del-migration.cjs /tmp/
 COPY deploy/images/kibana-patches/test-mm11-installed.cjs deploy/images/kibana-patches/mm11-inputs.json deploy/images/kibana-patches/mm11-official-files.json deploy/images/kibana-patches/mm11-output-files.json deploy/images/kibana-patches/install-del-migration.cjs deploy/images/kibana-patches/del-inventory.cjs deploy/images/kibana-patches/del-base-inventory.json deploy/images/kibana-patches/del-output-hashes.json /tmp/mm11-test/
