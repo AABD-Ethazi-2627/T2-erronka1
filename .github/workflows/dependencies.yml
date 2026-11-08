@@ -4,10 +4,19 @@ on:
   schedule:
     - cron: '23 6 * * 1'
   workflow_dispatch:
+    inputs:
+      kibana_bounded:
+        description: Run only the isolated Kibana build and complete scan
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
+  kibana-bounded:
+    if: github.event_name == 'workflow_dispatch' && inputs.kibana_bounded
+    uses: ./.github/workflows/kibana-manual.yml
   lock:
+    if: ${{ !inputs.kibana_bounded }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -39,6 +48,7 @@ jobs:
           if-no-files-found: error
           retention-days: 30
   images:
+    if: ${{ !inputs.kibana_bounded }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
