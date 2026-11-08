@@ -7,18 +7,35 @@ from __future__ import annotations
 
 import argparse
 import base64
+import gzip
 import hashlib
 import json
 import os
 import re
 import stat
 import zipfile
+import zlib
 from pathlib import Path, PurePosixPath
 
 PROFILE_PATH = Path(__file__).resolve().parents[1] / 'deploy/images/nifi-patches/cnc-runtime/profile.json'
-PROFILE_SHA256 = 'b1c5414e562737063e62460aad469581e7191bc6fcd0a8070fc43a36408fee81'
+PROFILE_SHA256 = '6d91648d042f750f2ae7267843bfbe45500fa9cd93f5592c9611fb695489de74'
 SOURCE_IMAGE_ID = 'sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5'
 SCOPES = ('opt/nifi', 'usr/local/bin/uv', 'usr/local/bin/uvx')
+MAX_BLOB_BYTES = 8 * 1024**3
+MAX_COMPRESSED_BYTES = 16 * 1024**3
+MAX_DECODED_BYTES = 32 * 1024**3
+MAX_LAYER_COUNT = 256
+JSON_BYTES = 16 * 1024**2
+IMAGE_MEDIA = {'application/vnd.oci.image.manifest.v1+json',
+               'application/vnd.docker.distribution.manifest.v2+json'}
+CONFIG_MEDIA = {'application/vnd.oci.image.config.v1+json',
+                'application/vnd.docker.container.image.v1+json'}
+LAYER_MEDIA = {
+    'application/vnd.oci.image.layer.v1.tar': 'tar',
+    'application/vnd.oci.image.layer.v1.tar+gzip': 'gzip',
+    'application/vnd.docker.image.rootfs.diff.tar': 'tar',
+    'application/vnd.docker.image.rootfs.diff.tar.gzip': 'gzip',
+}
 EXCLUDED = frozenset({
     'nifi-amqp-nar', 'nifi-aws-kinesis-nar', 'nifi-aws-nar',
     'nifi-aws-service-api-nar', 'nifi-gcp-nar', 'nifi-gcp-services-api-nar',
@@ -152,11 +169,6 @@ def snapshot(source):
                 entry(name + '/' + child)
 
     for scope in SCOPES:
-        parts = PurePosixPath(scope).parts
-        for i in range(1, len(parts)):
-            parent = '/'.join(parts[:i])
-            if parent not in result:
-                entry(parent, descend=False)
         require(os.path.lexists(source / scope), 'missing preserved scope: ' + scope)
         entry(scope)
     return result
@@ -164,7 +176,7 @@ def snapshot(source):
 
 def validate_profile(profile):
     require(canonical_sha256(profile) == PROFILE_SHA256, 'profile fingerprint drift')
-    require(profile['schema'] == 1 and profile['source_image_config_id'] == SOURCE_IMAGE_ID,
+    require(profile['schema'] == 1 and profile['expected_source_image_config_id'] == SOURCE_IMAGE_ID,
             'source image profile drift')
     require(profile['runtime_approved'] is False and profile['replacement'] is None
             and profile['active_configuration_qualified'] is False, 'profile cannot authorize runtime')
@@ -198,6 +210,76 @@ def validate_profile(profile):
             seen.add(current)
             current = by_id[current]['parent']
     return by_id
+
+
+def flow_guard(repo, profile):
+    """Derive today's flow requirements; new excluded use must break local CI."""
+    repo = Path(repo)
+    paths = sorted((repo / 'nifi-flows').glob('*.json'))
+    require(bool(paths), 'missing current flow exports')
+    paths.append(repo / 'deploy/cg14/restore-inventory.json')
+    known = {r['id']: r for r in profile['nars']}
+    seeds = set()
+    historical = {
+        '1.25.0': {'cg14_validation_flow_v0.1.0.json', 'cnc_fase1_INCOMPLETO.json'},
+        '2.0.0': {'cg14_validation_snapshot.json', 'cnc_lab_completed.json'},
+    }
+    legacy = {'nifi-kafka-2-6-nar', 'nifi-scripting-nar'}
+
+    def walk(value, path):
+        if isinstance(value, dict):
+            if 'bundle' in value:
+                bundle = value['bundle']
+                require(isinstance(bundle, dict) and bundle.get('group') == 'org.apache.nifi',
+                        'unknown flow bundle group')
+                artifact, version = bundle.get('artifact'), bundle.get('version')
+                require(artifact not in EXCLUDED, 'current flow references excluded extension')
+                if version != '2.12.0':
+                    require(path.name in historical.get(version, set()), 'unknown historical flow version')
+                if not (artifact in legacy and version == '1.25.0'):
+                    require(artifact in known and known[artifact]['action'] == 'retain',
+                            'unknown or excluded flow bundle')
+                if version == '2.12.0':
+                    seeds.add(artifact)
+            for child in value.values():
+                walk(child, path)
+        elif isinstance(value, list):
+            for child in value:
+                walk(child, path)
+
+    for path in paths:
+        walk(load(path), path)
+    closure = set(seeds) | {'nifi-jetty-nar'}
+    pending = list(closure)
+    while pending:
+        parent = known[pending.pop()]['parent']
+        if parent is not None and parent not in closure:
+            require(parent in known and known[parent]['action'] == 'retain', 'flow parent closure gap')
+            closure.add(parent)
+            pending.append(parent)
+    require(closure == set(profile['required_flow_bundle_ids']), 'current flow closure drift requires review')
+    return {'modern_seeds': sorted(seeds), 'closure': sorted(closure), 'runtime_approved': False}
+
+
+def source_binding(profile, baseline, rows):
+    pin = profile['source_baseline']
+    require(pin['status'] == 'frozen-independent-cold-capture'
+            and baseline is not None and pin['canonical_sha256'] is not None,
+            'source baseline pending independent cold image binding')
+    require(canonical_sha256(baseline) == pin['canonical_sha256'], 'source baseline fingerprint drift')
+    require(baseline['schema'] == 1 and baseline['expected_source_image_config_id'] == SOURCE_IMAGE_ID
+            and tuple(baseline['scope_roots']) == SCOPES and baseline['runtime_approved'] is False,
+            'source baseline identity mismatch')
+    binding = baseline['binding']
+    require(binding['method'] == 'cold-image-export-and-verified-oci'
+            and binding['config_id'] == SOURCE_IMAGE_ID
+            and re.fullmatch('sha256:[0-9a-f]{64}', binding['oci_manifest_digest'])
+            and re.fullmatch('[0-9a-f]{64}', binding['oci_verification_sha256']),
+            'source baseline OCI binding missing')
+    require(canonical_sha256(rows) == pin['source_tree_sha256']
+            and baseline['source_tree'] == rows, 'source baseline bytes or metadata drift')
+    require(all(in_scope(name) for name in rows), 'source baseline contains untrusted parent stubs')
+    return binding
 
 
 def manifest(path):
@@ -261,10 +343,44 @@ def _copy_metadata(path, row):
     os.utime(path, ns=(row['mtime_ns'], row['mtime_ns']), follow_symlinks=False)
 
 
-def prepare(source, output, profile, *, prepare_only, active_context=None, observed_config=None):
+def materialize_scopes(source, target, rows):
+    """Copy verified scopes into fresh locations; never restore parent stubs."""
+    source, target = Path(source), Path(target)
+    require(all(in_scope(name) for name in rows), 'unexpected metadata scope')
+    current = snapshot(source)
+    require(all(name in current and current[name] == row for name, row in rows.items()),
+            'prepared source tree differs')
+    require(all(not os.path.lexists(target / scope) for scope in SCOPES),
+            'materialization requires fresh scope roots')
+    for name, row in rows.items():
+        dest = target / name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if row['kind'] == 'directory':
+            dest.mkdir(mode=0o700)
+        elif row['kind'] == 'symlink':
+            dest.symlink_to(row['target'])
+        elif 'hardlink_to' in row:
+            os.link(target / row['hardlink_to'], dest)
+        else:
+            with (
+                os.fdopen(os.open(source / name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NOATIME), 'rb') as src,
+                dest.open('xb') as dst,
+            ):
+                while chunk := src.read(1024 * 1024):
+                    dst.write(chunk)
+    for name in sorted(rows, key=lambda x: (len(PurePosixPath(x).parts), x), reverse=True):
+        _copy_metadata(target / name, rows[name])
+    require(snapshot(target) == rows, 'prepared tree metadata or bytes differ')
+
+
+def prepare(source, output, profile, *, prepare_only, active_context=None, observed_config=None,
+            baseline=None, flow_root=None):
     require(prepare_only is True, 'only explicit prepare-only mode is available')
     validate_profile(profile)
+    flow_evidence = flow_guard(flow_root or PROFILE_PATH.parents[4], profile)
     context = active_guard(active_context, observed_config, profile)
+    require(baseline is not None and profile['source_baseline']['status'] == 'frozen-independent-cold-capture',
+            'source baseline pending independent cold image binding')
     source, output = Path(source).absolute(), Path(output).absolute()
     require(source.resolve(strict=True) == source and source.is_dir(), 'linked source root')
     require(output.parent.resolve(strict=True) == output.parent, 'linked output parent')
@@ -272,6 +388,7 @@ def prepare(source, output, profile, *, prepare_only, active_context=None, obser
     require(not output.is_relative_to(source) and not source.is_relative_to(output),
             'overlapping source and output')
     before = snapshot(source)
+    binding = source_binding(profile, baseline, before)
     physical = {}
     for row in profile['nars']:
         name = virtual(source, row['path'])
@@ -302,32 +419,18 @@ def prepare(source, output, profile, *, prepare_only, active_context=None, obser
     output.mkdir(mode=0o700)
     tree = output / 'tree'
     tree.mkdir(mode=0o755)
-    for name, row in expected_tree.items():
-        dest = tree / name
-        if row['kind'] == 'directory':
-            dest.mkdir(mode=0o700)
-        elif row['kind'] == 'symlink':
-            dest.symlink_to(row['target'])
-        elif 'hardlink_to' in row:
-            os.link(tree / row['hardlink_to'], dest)
-        else:
-            with (
-                os.fdopen(os.open(source / name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NOATIME), 'rb') as src,
-                dest.open('xb') as dst,
-            ):
-                while chunk := src.read(1024 * 1024):
-                    dst.write(chunk)
-    for name in sorted(expected_tree, key=lambda x: (len(PurePosixPath(x).parts), x), reverse=True):
-        _copy_metadata(tree / name, expected_tree[name])
-    require(snapshot(tree) == expected_tree, 'prepared tree metadata or bytes differ')
+    materialize_scopes(source, tree, expected_tree)
     require(snapshot(source) == before, 'source changed during copy')
     result = {'schema': 1, 'mode': 'prepared-whole-extension-tree-only',
-              'source_image_config_id': SOURCE_IMAGE_ID, 'profile_sha256': canonical_sha256(profile),
+              'expected_source_image_config_id': SOURCE_IMAGE_ID,
+              'bound_source_image_config_id': binding['config_id'],
+              'source_binding': 'independently-frozen-cold-scope-baseline',
+              'oci_binding': binding, 'profile_sha256': canonical_sha256(profile),
               'source_tree_sha256': canonical_sha256(before), 'prepared_tree_sha256': canonical_sha256(expected_tree),
               'retained_nars': 103, 'excluded_nars': 16, 'removed_paths': sorted(removed),
               'runtime_approved': False, 'promotion_eligible': False, 'replacement': None,
               'active_configuration_qualified': False, 'observed_configuration': context,
-              'source_image_provenance': 'requires separately verified immutable OCI context',
+              'flow_requirements': flow_evidence,
               'normal_scan': 'not-run', 'nested_scan': 'not-run', 'runtime_tests': 'not-run'}
     for name, value in [('source-tree.json', before), ('prepared-tree.json', expected_tree),
                         ('preparation.json', result)]:
@@ -336,32 +439,94 @@ def prepare(source, output, profile, *, prepare_only, active_context=None, obser
 
 
 def verify_oci(layout, manifest_digest):
-    """Bind a local immutable OCI layout to config ID 03f; validate every blob."""
+    """Bind index -> platform manifest -> config -> ordered decoded layer bytes."""
     layout = Path(layout).absolute()
     require(layout.resolve(strict=True) == layout, 'linked OCI layout')
     require(re.fullmatch('sha256:[0-9a-f]{64}', manifest_digest), 'invalid OCI manifest digest')
 
-    def blob(digest):
-        require(re.fullmatch('sha256:[0-9a-f]{64}', digest), 'unsupported OCI blob digest')
+    def metadata(path):
+        require(path.is_file() and path.resolve(strict=True) == path
+                and path.stat().st_size <= JSON_BYTES, 'invalid or oversized OCI metadata')
+        return load(path)
+
+    require(metadata(layout / 'oci-layout') == {'imageLayoutVersion': '1.0.0'}, 'invalid OCI layout version')
+    index = metadata(layout / 'index.json')
+    require(index.get('schemaVersion') == 2 and isinstance(index.get('manifests'), list), 'invalid OCI index')
+    selected = [d for d in index['manifests'] if d.get('digest') == manifest_digest]
+    require(len(selected) == 1, 'selected manifest is not unique OCI index member')
+    descriptor = selected[0]
+    require(descriptor.get('mediaType') in IMAGE_MEDIA, 'select platform image manifest, not index')
+    if 'platform' in descriptor:
+        platform = descriptor['platform']
+        require(platform.get('os') == 'linux' and platform.get('architecture') == 'amd64'
+                and platform.get('variant') in (None, ''), 'OCI index platform mismatch')
+
+    def blob(d):
+        digest = d.get('digest')
+        require(isinstance(digest, str) and re.fullmatch('sha256:[0-9a-f]{64}', digest),
+                'unsupported OCI blob digest')
+        require('urls' not in d, 'foreign or external OCI blob is unsupported')
+        size = d.get('size')
+        require(type(size) is int and 0 < size <= MAX_BLOB_BYTES, 'OCI blob size budget exceeded')
         path = layout / 'blobs/sha256' / digest.split(':')[1]
-        require(path.resolve(strict=True) == path and path.is_file(), 'linked OCI blob')
+        require(path.is_file() and path.resolve(strict=True) == path, 'missing or linked OCI blob')
+        require(path.stat().st_size == size, 'OCI blob size drift')
         require(file_digest(path) == digest.split(':')[1], 'OCI blob digest drift')
         return path
 
-    manifest_data = load(blob(manifest_digest))
-    require(manifest_data.get('schemaVersion') == 2 and 'layers' in manifest_data,
-            'select a platform image manifest, not an OCI index')
-    config = manifest_data['config']['digest']
+    manifest_data = metadata(blob(descriptor))
+    require(manifest_data.get('schemaVersion') == 2
+            and manifest_data.get('mediaType') == descriptor['mediaType'], 'invalid platform manifest')
+    config_descriptor = manifest_data.get('config', {})
+    require(config_descriptor.get('mediaType') in CONFIG_MEDIA, 'unsupported OCI config media type')
+    config = config_descriptor.get('digest')
     require(config == SOURCE_IMAGE_ID, 'OCI source image config ID mismatch')
-    config_data = load(blob(config))
+    config_data = metadata(blob(config_descriptor))
     require(config_data.get('os') == 'linux' and config_data.get('architecture') == 'amd64',
             'unexpected source image platform')
-    for layer in manifest_data['layers']:
-        path = blob(layer['digest'])
-        require(path.stat().st_size == layer['size'], 'OCI layer size drift')
-    return {'source_image_config_id': config, 'manifest_digest': manifest_digest,
+    rootfs = config_data.get('rootfs', {})
+    diff_ids = rootfs.get('diff_ids')
+    layers = manifest_data.get('layers')
+    require(rootfs.get('type') == 'layers' and isinstance(diff_ids, list)
+            and isinstance(layers, list) and 0 < len(layers) == len(diff_ids) <= MAX_LAYER_COUNT,
+            'zero, missing, or mismatched OCI rootfs layers')
+    require(all(isinstance(d, str) and re.fullmatch('sha256:[0-9a-f]{64}', d) for d in diff_ids),
+            'invalid rootfs diff ID')
+    require(all(type(layer.get('size')) is int and 0 < layer['size'] <= MAX_BLOB_BYTES for layer in layers)
+            and sum(layer['size'] for layer in layers) <= MAX_COMPRESSED_BYTES,
+            'compressed layer size budget exceeded')
+    receipts = []
+    total = 0
+    for number, (layer, diff_id) in enumerate(zip(layers, diff_ids)):
+        compression = LAYER_MEDIA.get(layer.get('mediaType'))
+        require(compression is not None, 'unknown or foreign layer compression/media type')
+        path = blob(layer)
+        digest = hashlib.sha256()
+        decoded = 0
+        try:
+            with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NOATIME), 'rb') as raw:
+                stream = gzip.GzipFile(fileobj=raw) if compression == 'gzip' else raw
+                try:
+                    while chunk := stream.read(1024 * 1024):
+                        decoded += len(chunk)
+                        total += len(chunk)
+                        require(decoded <= MAX_BLOB_BYTES and total <= MAX_DECODED_BYTES,
+                                'decoded layer decompression budget exceeded')
+                        digest.update(chunk)
+                finally:
+                    if stream is not raw:
+                        stream.close()
+        except (EOFError, OSError, zlib.error) as exc:
+            raise ValueError('invalid or truncated gzip layer/CRC') from exc
+        require(decoded > 0 and 'sha256:' + digest.hexdigest() == diff_id,
+                'decoded layer rootfs.diff_ids mismatch or order drift')
+        receipts.append({'position': number, 'digest': layer['digest'], 'mediaType': layer['mediaType'],
+                         'compressed_bytes': layer['size'], 'decoded_bytes': decoded, 'diff_id': diff_id})
+    return {'expected_source_image_config_id': SOURCE_IMAGE_ID, 'bound_source_image_config_id': config,
+            'source_binding': 'verified-oci-index-config-ordered-layer-diff-ids',
+            'manifest_digest': manifest_digest,
             'build_context': 'oci-layout://' + str(layout) + '@' + manifest_digest,
-            'runtime_approved': False, 'layers': len(manifest_data['layers'])}
+            'runtime_approved': False, 'layers': receipts}
 
 
 def main(argv=None):
@@ -374,14 +539,23 @@ def main(argv=None):
     prep.add_argument('--prepare-only', action='store_true')
     prep.add_argument('--active-context', type=Path)
     prep.add_argument('--observed-config', type=Path)
+    prep.add_argument('--baseline', type=Path)
+    prep.add_argument('--flow-root', type=Path)
     oci = sub.add_parser('verify-oci')
     oci.add_argument('--layout', type=Path, required=True)
     oci.add_argument('--manifest-digest', required=True)
     args = parser.parse_args(argv)
     if args.command == 'prepare':
-        result = prepare(args.source, args.output, load(args.profile), prepare_only=args.prepare_only,
+        profile = load(args.profile)
+        baseline_path = args.baseline
+        if baseline_path is None and profile['source_baseline']['file'] is not None:
+            name = profile['source_baseline']['file']
+            require(len(relative(name).parts) == 1, 'baseline must be adjacent frozen metadata')
+            baseline_path = args.profile.parent / name
+        result = prepare(args.source, args.output, profile, prepare_only=args.prepare_only,
                          active_context=load(args.active_context) if args.active_context else None,
-                         observed_config=args.observed_config)
+                         observed_config=args.observed_config,
+                         baseline=load(baseline_path) if baseline_path else None, flow_root=args.flow_root)
     else:
         result = verify_oci(args.layout, args.manifest_digest)
     print(json.dumps(result, sort_keys=True))

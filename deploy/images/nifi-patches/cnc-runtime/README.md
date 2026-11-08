@@ -8,6 +8,13 @@ compatible-library overlay). That identifier is a **Docker image config digest**
 not a registry manifest digest. Do not put it after a registry tag's `@` and claim
 that pins a manifest. The OCI protocol below binds the distinct identities.
 
+**Current source binding is pending.** The checked-in profile has no invented
+cold-tree hash: `source_baseline.status=pending-independent-cold-capture` and
+its pins are null. `prepare` and the private Dockerfile fail closed before
+creating output until the independently captured full scopes baseline is frozen
+in the profile and the canonical profile pin is updated in reviewed code.
+No synthetic test tree can claim provenance from 03f through the real profile.
+
 No default Dockerfile, Compose service, workflow, gate or dependency plan is
 changed. This directory grants no runtime, model, deployment, merge or human
 approval. `replacement:null`, `runtime_approved:false`,
@@ -19,7 +26,8 @@ lab candidate and cannot be represented as a fully equivalent NiFi installation.
 
 `profile.json` positively names every retained and excluded NAR, its complete
 source path, group/version, actual full-image SHA-256 and declared parent.
-The script pins the canonical profile hash independently; caller-written JSON
+The script pins the canonical profile hash independently; a literal real-profile
+test checks that pin without fixture overrides. Caller-written JSON
 cannot change the classifier or rebind source hashes. Eleven modern flow root
 bundles and their 13-member declared parent closure remain. Jetty is also required
 as the implicit loader root for parentless NARs. This check establishes the
@@ -39,7 +47,11 @@ certificates, entrypoint/start scripts, Python extensions and unknown resources.
 The source's `/usr/local/bin/uv` and `uvx` are copied too. Symlinks are preserved
 verbatim, including image-absolute links; virtual-root resolution never follows
 an image link into the host `/opt`. Ownership, permissions, modification times,
-extended attributes and hardlinks are compared before/after; unsupported special
+extended attributes and hardlinks are compared against the independently frozen
+cold baseline and before/after copying. The identity includes exactly the three
+scope roots and their children; `opt`, `usr`, `usr/local` and `usr/local/bin` are
+mount stubs or fresh OS parents, so their metadata is neither inventoried nor
+restored. Unsupported special
 files and uncopyable metadata fail. Access times are not an identity/acceptance
 field. New output must be absent and disjoint from source. Failure may leave a
 private partial output without a successful `preparation.json`; never reuse it.
@@ -57,7 +69,18 @@ Exactly these capabilities are absent if the profile is later built:
 - `nifi-kafka-service-aws-nar`, `nifi-kafka-to-s3-nar`: AWS-specific Kafka
   integration/authentication and Kafka-to-S3.
 
-The script validates exact identifiers, not a wildcard prefix. Source-declared
+Selection is conservative: these sixteen have no declared modern CNC use and
+contain physical carriers relevant to outstanding findings. Other unused generic
+bundles remain because they are unclassified, preserving optional/default
+capability until separately reviewed. This is scope reduction, not library
+remediation, and a future finding count change is not evidence of a library fix.
+
+The script validates exact identifiers, not a wildcard prefix. It also derives the
+current modern roots and full declared-parent plus Jetty closure from every
+`nifi-flows/*.json` and `deploy/cg14/restore-inventory.json`. Any new excluded or
+unknown bundle, unknown historical version, or changed modern closure fails CI
+and preparation until explicitly reviewed. Historical versions are restricted to
+the existing named historical files. Source-declared
 modern CNC flows do not reference those 16. That does not prove absence from all
 persisted/global/dynamic configurations or future operator intent. Any such use
 means the profile scope is unsuitable; retain/remediate the affected extension
@@ -112,6 +135,7 @@ python -m scripts.nifi_runtime_profile prepare \
   --source /absolute/private/source-rootfs \
   --output /absolute/private/new-cnc-preparation \
   --profile deploy/images/nifi-patches/cnc-runtime/profile.json \
+  --baseline /absolute/private/reviewed-source-baseline.json \
   --observed-config /absolute/private/sanitized-v2.json \
   --prepare-only
 ```
@@ -148,11 +172,19 @@ python -m scripts.nifi_runtime_profile verify-oci \
   --manifest-digest sha256:ACTUAL_PLATFORM_MANIFEST_DIGEST
 ```
 
-`verify-oci` rejects an index instead of a platform manifest, a different config
-ID/platform, linked blob paths or corrupt config/layer digests. Its returned
+`verify-oci` requires `oci-layout` version 1.0.0, unique selected-manifest membership
+in `index.json`, the correct Linux/amd64 platform, manifest/config descriptor
+sizes/media types, and config ID 03f. It then verifies every compressed layer blob
+and compares each decoded stream hash with the config's **ordered**
+`rootfs.diff_ids`. Zero/mismatched layers, unknown/zstd/foreign media types,
+external blob URLs, corrupt/truncated gzip or CRC, wrong order and compressed/
+decoded byte-budget overruns are rejected. Only raw tar and gzip are supported;
+layer streams are hashed without extraction. Its returned
 `build_context` is the exact immutable reference for the next build. Keep the
 layout private, immutable and hash-verified through the build; do not substitute
-a mutable Docker tag. OCI layer hashes are checked by the preparer and BuildKit;
+a mutable Docker tag. Compressed and decoded OCI layer hashes are checked by the separate `verify-oci`
+command; the in-build tree preparer has no OCI access. BuildKit behavior remains
+part of actual image acceptance;
 no registry push is required. A source whose serialization changes its config ID
 is rejected rather than re-labelled as 03f.
 
@@ -176,10 +208,15 @@ image IDs, source OCI manifest/config hashes, complete commands and exits.
 Default final target is the same opt-in CNC serving stage; nothing references it
 from the project's normal build flow.
 
-The Dockerfile prunes only in `preparation`. The serving stage starts from the
+The Dockerfile's preparation stage reads the original scopes through read-only
+source-stage mounts, runs the current-flow guard and requires the independently
+frozen baseline. It prunes only in `preparation`. The serving stage starts from the
 same pinned Wolfi base as the full-image Dockerfile, with the same package names,
-users, environment, entrypoint, ports and volumes. It copies only the approved
-tree; it does **not** inherit any full/preparation layer. Excluded archives cannot
+users, environment, entrypoint, ports and volumes. A single write layer reads the
+approved tree through a read-only mount, writes bytes and original scope metadata,
+and compares the result. It never applies mount-stub parent metadata and avoids a
+COPY followed by a second full-tree metadata copy-up. It does **not** inherit any
+full/preparation layer. Excluded archives cannot
 remain in lower serving layers. Source-image OS package versions and freshly
 resolved package versions still need an actual final inventory comparison and
 scan; pinned base plus matching package names is not a claim of identical OS
@@ -198,7 +235,18 @@ independently confirm preservation, rather than relying on the build guard.
    source NiFi resources, scripts, security/cert/default resources and uv match
    in bytes, permissions, ownership, links and relevant attributes. Check
    entrypoint/env/ports/volumes and OS/JRE/package identities explicitly.
-2. Freeze the complete effective sanitized active flow/configuration inventory:
+2. **Before mounting/restoring existing persisted flow state**, implement and run
+   the still-pending runtime acceptance checker against actual private API captures.
+   Compare full-image versus profile `/flow/processor-types`,
+   `/flow/controller-service-types`, `/flow/reporting-task-types`,
+   `/flow/parameter-provider-types` and `/flow/registry-types`. Lost types must be
+   exactly those exported by the sixteen excluded bundles, with no other loss or
+   unexpected addition. Recursively inspect restored processors/services/reporting
+   tasks/providers for `extensionMissing`, missing/ghost implementations and
+   validation errors. Startup/login success does not prove absence of ghost
+   components. This preparer does not implement that live checker and its success
+   must never be reported as this acceptance.
+   Freeze the complete effective sanitized active flow/configuration inventory:
    selected auth/authz/state/provenance providers, root/child controller services,
    reporting tasks, parameter providers, registry clients, dynamic classpaths,
    Python/Groovy/reflection resources and implicit Jetty/inherited WARs. Bind each

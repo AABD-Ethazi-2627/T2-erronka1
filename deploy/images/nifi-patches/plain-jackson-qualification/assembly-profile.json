@@ -1,0 +1,481 @@
+{
+  "archive_root": "opt/nifi",
+  "artifacts": {
+    "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca": {
+      "occurrences": 3,
+      "old_file": "jackson-core-3.2.2.jar",
+      "replacement_file": "jackson-core-3.2.3.jar",
+      "replacement_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817"
+    },
+    "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca": {
+      "occurrences": 5,
+      "old_file": "jackson-databind-2.22.2.jar",
+      "replacement_file": "jackson-databind-2.22.3.jar",
+      "replacement_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+    },
+    "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401": {
+      "occurrences": 3,
+      "old_file": "jackson-databind-3.2.2.jar",
+      "replacement_file": "jackson-databind-3.2.3.jar",
+      "replacement_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2"
+    },
+    "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6": {
+      "occurrences": 5,
+      "old_file": "jackson-core-2.22.2.jar",
+      "replacement_file": "jackson-core-2.22.3.jar",
+      "replacement_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+    }
+  },
+  "name": "plain-jackson-03f-private-atomic16",
+  "promotion_eligible": false,
+  "provenance": {
+    "derivation": "Current119NARhashesfromfrozen03f schema2 plusunchanged96stocknonNARroots withonlyfouralready-fixedbootstrap/toolkitrenamehashes; futureprivatevalidationmustmatchall215exactly. No old22overlayreapplied.",
+    "jackson_pins_sha256": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
+    "schema2_inventory_sha256": "9a59bb0de97927ca731262477e32a3db6441f3c3000f6a78a6a2cc0abee540cb",
+    "stock_full_inventory_canonical_sha256": "5ef465917d5de6c50794c674f3866f22c8b604e4b7a9f7b5b8822ce773980e32",
+    "stock_root_lock_sha256": "abc31418ffa242b71dd97b319f5f22a5c626c372dac6b0868abb56741f4e5a5d"
+  },
+  "replacement": null,
+  "runtime_approved": false,
+  "schema": 1,
+  "source_archives": {
+    "nifi-current/lib/aspectj/aspectjweaver-1.9.25.1.jar": "4fe86fdc18faea571f29129c70eaad5d121363504a06d7907be88f6c60ba3116",
+    "nifi-current/lib/bootstrap/bcpkix-jdk18on-1.85.jar": "c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996",
+    "nifi-current/lib/bootstrap/bcprov-jdk18on-1.85.2.jar": "986b0fb92ec10e0c66b43e036ce0077e6150cfaecd1db9fb92b56672e157afe5",
+    "nifi-current/lib/bootstrap/bcrypt-0.10.2.jar": "0b1fb99db605955de904d8e61782a53dddbadd12619a0cf37dd88b5d14a61957",
+    "nifi-current/lib/bootstrap/bcutil-jdk18on-1.85.jar": "590f55ed5d68529239898a4a5c4f730b6e37f45d1cfa3fbe51f8485abe32c42d",
+    "nifi-current/lib/bootstrap/bytes-1.5.0.jar": "b933631573148647943040d8d7496a64458b432610e6da2eb87ec3458814dee5",
+    "nifi-current/lib/bootstrap/jackson-annotations-2.22.jar": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0",
+    "nifi-current/lib/bootstrap/jackson-core-2.22.3.jar": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+    "nifi-current/lib/bootstrap/jackson-databind-2.22.3.jar": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+    "nifi-current/lib/bootstrap/logback-classic-1.6.3.jar": "beebede8db065fe1b72909ecc66bb49acda618901635d86c25fce14a5915e37e",
+    "nifi-current/lib/bootstrap/logback-core-1.6.3.jar": "a6967a28c8b086dee75a694d2f6fb8830c71153539866d7d8af065c9b6df91e0",
+    "nifi-current/lib/bootstrap/nifi-api-2.12.0.jar": "190c96b9ce13e5c749f1624cf071fc3b9d8897cdf6114d676e8092dd5b51de85",
+    "nifi-current/lib/bootstrap/nifi-bootstrap-2.12.0.jar": "0df47261e7979a7f98cb64951aca5566791cefdc26a6c04c6cf16a4d39292a44",
+    "nifi-current/lib/bootstrap/nifi-flow-encryptor-2.12.0.jar": "b3a1c6d6cf4cf23e4a3a3be964f4c61b6beec3e74de58006ad46a7f8644103a3",
+    "nifi-current/lib/bootstrap/nifi-per-process-group-logging-2.12.0.jar": "3213180f3908422aca6652a2de01586ec4e9e56a3715ad999ba0ac37423e2274",
+    "nifi-current/lib/bootstrap/nifi-property-encryptor-2.12.0.jar": "cd2b19dc38b7958105fa94bea10e235fc0f0ef4b08590350e90f38078e2d39ee",
+    "nifi-current/lib/bootstrap/nifi-security-cert-builder-2.12.0.jar": "8e525b5075f01b8684e228cc63170a9f36078dfe7beea58f5864be39d95e8398",
+    "nifi-current/lib/bootstrap/nifi-security-crypto-key-2.12.0.jar": "6e0495ba9847c58624977738820d7ca747b6591fc853c0dcb56ce71f898ecb36",
+    "nifi-current/lib/bootstrap/nifi-single-user-utils-2.12.0.jar": "64f5fb80b850a9c91fdeefa9e478ea2d1c4fc63736e090692c35312100d70010",
+    "nifi-current/lib/bootstrap/nifi-xml-processing-2.12.0.jar": "282d6f17d4f01b9b9e04c0f76fd3207790dd2123606ca857c8229c46798a9cf7",
+    "nifi-current/lib/bootstrap/slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "nifi-current/lib/jcl-over-slf4j-2.0.19.jar": "efc3848f79638d9fa74ccbae3fd18c8735dcc0127b393ae53dce638827f8a2f3",
+    "nifi-current/lib/jul-to-slf4j-2.0.19.jar": "a5764fbd2f0053399ef75d40653c4e7c97e733b45676946b0a072416fc56ff30",
+    "nifi-current/lib/log4j-over-slf4j-2.0.19.jar": "7d5be917811ee275929a608d51e0f6a9eb8d17b25460ecb160e81e9ee23538c0",
+    "nifi-current/lib/logback-classic-1.6.3.jar": "beebede8db065fe1b72909ecc66bb49acda618901635d86c25fce14a5915e37e",
+    "nifi-current/lib/logback-core-1.6.3.jar": "a6967a28c8b086dee75a694d2f6fb8830c71153539866d7d8af065c9b6df91e0",
+    "nifi-current/lib/nifi-airtable-nar-2.12.0.nar": "b10f01908da2e7b02d8fd557dc7b2fe3e7af30541be90b35805436c57152dfd8",
+    "nifi-current/lib/nifi-amqp-nar-2.12.0.nar": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+    "nifi-current/lib/nifi-api-2.12.0.jar": "190c96b9ce13e5c749f1624cf071fc3b9d8897cdf6114d676e8092dd5b51de85",
+    "nifi-current/lib/nifi-apicurio-nar-2.12.0.nar": "7f1a2a5773f75b0772586bbd51e569abb085e7cd8bd422e68fd2e671783708ff",
+    "nifi-current/lib/nifi-atlassian-nar-2.12.0.nar": "b9aea903518cb860290373019983ac0adca0b364f49a961cf976e7134dc7efdc",
+    "nifi-current/lib/nifi-avro-nar-2.12.0.nar": "7e8ceb26e10d60c8136416c74cd5b87c301d7819cc8d32291c79c4930b12ff15",
+    "nifi-current/lib/nifi-aws-kinesis-nar-2.12.0.nar": "d944d4f2e67a214c84cf19989d7479f9672520ec9359ac7c92595633c076913d",
+    "nifi-current/lib/nifi-aws-nar-2.12.0.nar": "a33915d188a2f4b252a106b757ca1018d8921fa2a990937253d9ad09236aa229",
+    "nifi-current/lib/nifi-aws-service-api-nar-2.12.0.nar": "670da49bcd3d6662532025c7721835ba9e27d58a0ff1c0e1a853af5e14e41655",
+    "nifi-current/lib/nifi-azure-nar-2.12.0.nar": "1a642d6f86c383f8cceecabfab3563637f717bac887747df3503aa5cde3e06ad",
+    "nifi-current/lib/nifi-azure-services-api-nar-2.12.0.nar": "37efef8cdd76bfe575b783c3c6001c8d2d585af851f6aabd219e4e9ae2433d33",
+    "nifi-current/lib/nifi-box-nar-2.12.0.nar": "553c1dd6b7e85b5646abebdfd33295d6408053884172aec081c75c1030b37b7a",
+    "nifi-current/lib/nifi-box-services-api-nar-2.12.0.nar": "40e225c781bbab93abbf9548d300fb3f9603fad904955aef468d4578460c7ecd",
+    "nifi-current/lib/nifi-box-services-nar-2.12.0.nar": "db06e2bb1a36d9b0667f61172562ff7aea632cb127028cea80d535bf6f68f8dc",
+    "nifi-current/lib/nifi-cdc-mysql-nar-2.12.0.nar": "947a2ac0ba76855a4608022c86e50cbaeb0a2ef378e8521063339e04cf7a141e",
+    "nifi-current/lib/nifi-cipher-nar-2.12.0.nar": "0d185b61d146f01252ff722b23a0e71a34ba23681223f3aee55cf7f41fa54378",
+    "nifi-current/lib/nifi-compress-nar-2.12.0.nar": "1c80e11b94feae94dfad7e9c45aab1d4c23e6cc1d899e230210ec36b0f0f97c3",
+    "nifi-current/lib/nifi-confluent-platform-nar-2.12.0.nar": "2f6e9722860657ca8f43dee203e773e8c2e0065ffbbb074905a5b607742d2a25",
+    "nifi-current/lib/nifi-database-dialect-service-nar-2.12.0.nar": "025fafb541d54f4a8bd0c3c929c613a51063b63a1fd46601019a91f7ea448d3f",
+    "nifi-current/lib/nifi-db-schema-registry-service-nar-2.12.0.nar": "75e5c39fb9ffc3860556de72e90ff547db08ce95ff0b5c4a56f518f7a78f0b7a",
+    "nifi-current/lib/nifi-dbcp-service-nar-2.12.0.nar": "86278caa61e4fcb512c27da09198978be1f5c9ed3d8d8fb5f7d3ade65f003a3a",
+    "nifi-current/lib/nifi-distributed-cache-services-nar-2.12.0.nar": "0c6b0d6b62609d38c3f84ee470da36bd67804bfa665a791beab6d0f2969a15cc",
+    "nifi-current/lib/nifi-dropbox-processors-nar-2.12.0.nar": "291dd6702efb791f3d3cf8373437400f11842c02a37e7490760338b0d1bf10a6",
+    "nifi-current/lib/nifi-dropbox-services-api-nar-2.12.0.nar": "6975113621577baa91321cd11b958f38a937bfefe434afdb5e2d436aa05287c3",
+    "nifi-current/lib/nifi-dropbox-services-nar-2.12.0.nar": "1833207ced4c97aa6c0d11dbc30e98132352ddcb69efecd6cdd73eb30ae3b9c1",
+    "nifi-current/lib/nifi-elasticsearch-client-service-api-nar-2.12.0.nar": "37ecf9af7e184e5b08a2913af4fc528acbcdb7c85549637f7d32d2bde54870fe",
+    "nifi-current/lib/nifi-elasticsearch-client-service-nar-2.12.0.nar": "daad4d5602271978851a702a180a8993c3cc83a281fe12abdf753c2428e0920d",
+    "nifi-current/lib/nifi-elasticsearch-restapi-nar-2.12.0.nar": "aedc7d637a4bf3eb360abd0073568f24e87ef0a652210c63229f030927e92738",
+    "nifi-current/lib/nifi-email-nar-2.12.0.nar": "59776a8e24f50bc0700896a85efed9be70acca5f93070d34a3f3cb4802ca7249",
+    "nifi-current/lib/nifi-enrich-nar-2.12.0.nar": "4fdef6c23b1b5e13cb4ac2132ac3cd1646d4679604eff6ba85fc43f34f065ee8",
+    "nifi-current/lib/nifi-evtx-nar-2.12.0.nar": "7176892cf74dbf8b4c8e2dada5f0b1cb8cd6f3daf2d5b9ebe77e64d2b98d1ee1",
+    "nifi-current/lib/nifi-file-resource-service-nar-2.12.0.nar": "0a6000fe3c6accc9d7f3d4e15baf9c88dd3b8fe051d178df4070a850875162fc",
+    "nifi-current/lib/nifi-flow-registry-client-nar-2.12.0.nar": "463007c73305f4257b7d657fee92aa5a9ebee2815e325741a5caf12aae3e44ff",
+    "nifi-current/lib/nifi-framework-api-2.12.0.jar": "e66fbdac6f3c9d184d15fdef2d7104f2cd2161943fd055a111b3982cb23ed508",
+    "nifi-current/lib/nifi-framework-kubernetes-nar-2.12.0.nar": "b3c8d4e3fae0e5ef0315360d8226f76a1327df6ca14ec601511700ff70adf10e",
+    "nifi-current/lib/nifi-framework-nar-2.12.0.nar": "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293",
+    "nifi-current/lib/nifi-framework-zookeeper-nar-2.12.0.nar": "f6b9564f063338af481338ae23eeb11e18378283f561a7d7fe9d7ba144040b75",
+    "nifi-current/lib/nifi-gcp-nar-2.12.0.nar": "afdb93209e3f0a9eba7f49b5d4245e59706a1641dfee866b4ddf269b92349c4f",
+    "nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar": "7b9a5eda2e05a94be416fd726efa23534e65df7012fe04cd484fdb4c648e6fd9",
+    "nifi-current/lib/nifi-geohash-nar-2.12.0.nar": "c4fe7fad28652a9de3f4819bddf1297749b0425314bea9d458b70a49b07cf23f",
+    "nifi-current/lib/nifi-github-nar-2.12.0.nar": "033d569f3b5c36bea9724f19537501142235c1ed7eec29fa69bae7e4906bc0a6",
+    "nifi-current/lib/nifi-gitlab-nar-2.12.0.nar": "f641145d1a46440a975e59cf45ff2693166aff46ac0ca6cfe23400762ba9c761",
+    "nifi-current/lib/nifi-groovyx-nar-2.12.0.nar": "6217c5b1a23dd7daf932cad1d8f54bb3ff3d86d235019a3b219426915287dc15",
+    "nifi-current/lib/nifi-hashicorp-vault-client-service-api-nar-2.12.0.nar": "9b3abc0e2002d32e1f4c651675c9fe1190952b70a6148f96c787f099540c3c68",
+    "nifi-current/lib/nifi-hashicorp-vault-nar-2.12.0.nar": "b4cea35c24af345a39a7f3a59adfc9be95ab25d83c77454f4d3bdcddd44aa28c",
+    "nifi-current/lib/nifi-hazelcast-services-api-nar-2.12.0.nar": "a66c4534a32c0ccfaae752394da88004d2b2023d6ced8e9a980e0632edef7a1b",
+    "nifi-current/lib/nifi-hazelcast-services-nar-2.12.0.nar": "d9b040ef4a9ff5cc03aef7e64563157caecc52b265ccc9ffb8243ab60e0422a9",
+    "nifi-current/lib/nifi-hl7-nar-2.12.0.nar": "cec028585751842afdc8bd14bf09e430928711cfafefa8462c525f1c50244891",
+    "nifi-current/lib/nifi-http-context-map-nar-2.12.0.nar": "f4a946dd0922e468376096afa2726c9a9295f010639625268879514985a4300c",
+    "nifi-current/lib/nifi-hubspot-nar-2.12.0.nar": "314233da2e3d43feb2f577cb4f2c3ad93e158508920eed89e0248341ee091338",
+    "nifi-current/lib/nifi-iceberg-aws-nar-2.12.0.nar": "9d105040f5f00e9c1905555ac8c7ffce92d55fcefd47ad455b3a9ff9ceca8f21",
+    "nifi-current/lib/nifi-iceberg-azure-nar-2.12.0.nar": "c144120d8814d08390fc1f35f81db224ac6a16c9ae1fdd4715e0aefff93ce9da",
+    "nifi-current/lib/nifi-iceberg-gcs-nar-2.12.0.nar": "92a9cb6ed2e386fb33180369a0bba46ccc0e173d9d8183255864e7e0735bc1a9",
+    "nifi-current/lib/nifi-iceberg-parquet-writer-nar-2.12.0.nar": "7c27ffae60b4896c20900f694ed70b2dd7906b9c58c990d9c1226e6c639d476d",
+    "nifi-current/lib/nifi-iceberg-processors-nar-2.12.0.nar": "c5f5ee70fc2b4e3f64fdb99206322764f83e002041e96e04dcb666dab5d5d46c",
+    "nifi-current/lib/nifi-iceberg-rest-catalog-nar-2.12.0.nar": "ab6b0945311a7b85ac57457b74e4bf83de36d1a2286f11c26962b41c3bdce0dc",
+    "nifi-current/lib/nifi-iceberg-service-api-nar-2.12.0.nar": "7a9ebd81448d50366bd6fbc456474a53a3bc6145bf0104d65b1c8c22921ef67a",
+    "nifi-current/lib/nifi-iceberg-shared-nar-2.12.0.nar": "3096009e01b71cb5f7124bc72a7b35b161a9e9e4f6321eebba48091aeda63b60",
+    "nifi-current/lib/nifi-jetty-nar-2.12.0.nar": "3506b30b3f45fe8d57fe6fc25625420f9863aaa881fee32861010889538ff890",
+    "nifi-current/lib/nifi-jms-cf-service-nar-2.12.0.nar": "ac1f6d6ea8345f0fbc671ed5a3c9c4e50941f4243f3a7412c3b98c4c90607ee7",
+    "nifi-current/lib/nifi-jms-processors-nar-2.12.0.nar": "f3ccfdc053b09bc69113f0321ee398a7a7969ddeb65ae7700dc8361b38dfe4a7",
+    "nifi-current/lib/nifi-jolt-nar-2.12.0.nar": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+    "nifi-current/lib/nifi-jslt-nar-2.12.0.nar": "73a72e87926282e2796960ce24502082d5b26652344b61e5cedc5c8c5427b536",
+    "nifi-current/lib/nifi-kafka-3-service-nar-2.12.0.nar": "bb13f06339f500caf9991b16ec7ad2787b0f5b4990920fc9dfb729b745cdefe2",
+    "nifi-current/lib/nifi-kafka-nar-2.12.0.nar": "1592740b9befaffa82b562e8d9a34f7aa26943f37f8ea37b9768ffa4457e71aa",
+    "nifi-current/lib/nifi-kafka-service-api-nar-2.12.0.nar": "46468f00a5eaf516c97bd88c0605ecb06e48a9007978b568d7f6a0a7512bf7ec",
+    "nifi-current/lib/nifi-kafka-service-aws-nar-2.12.0.nar": "2e7ae05ec461ecbb7312a89e0216ddf0c2f23133329e149e1cda69fb03742e2f",
+    "nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar": "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+    "nifi-current/lib/nifi-kerberos-iaa-providers-nar-2.12.0.nar": "6db8005ed987f74a33b8ff736997e58d7ddda358f5981bac95401955938f6627",
+    "nifi-current/lib/nifi-kerberos-user-service-nar-2.12.0.nar": "e610d0b835c640abbc92026b8fca3ee57330a9230bc6975baf1f6de412867fd4",
+    "nifi-current/lib/nifi-key-service-nar-2.12.0.nar": "bf516cc344ef7494433509f61d946ed52406779ac3f375a01824791e7b9ef43a",
+    "nifi-current/lib/nifi-ldap-iaa-providers-nar-2.12.0.nar": "2b2774c7ef1a45a1bd5b41775fc896bca18e37bd4795f29d4939b15af3cb22bf",
+    "nifi-current/lib/nifi-lookup-services-nar-2.12.0.nar": "9b417711a31fc28a15306170ff352a7e845396daa5af5cdda714d3d53727dc90",
+    "nifi-current/lib/nifi-mongodb-client-service-api-nar-2.12.0.nar": "595c03dc1ae487a62552df1fe68f0f443decf75efe06f39baf30cecf032dfeb4",
+    "nifi-current/lib/nifi-mongodb-nar-2.12.0.nar": "b526d53cda1a8d97b9df2b1b860bab64680dde71ffeeaeb22b59731420debfff",
+    "nifi-current/lib/nifi-mongodb-services-nar-2.12.0.nar": "171901d0b926d2c5ed9d985491d60e5d504fe562a3d4f5aead0f7f73d507ea7f",
+    "nifi-current/lib/nifi-mqtt-nar-2.12.0.nar": "a551f9c0da3a00f69024f506f761c781b96bc6d2839466121490fc52f0861ca1",
+    "nifi-current/lib/nifi-nar-utils-2.12.0.jar": "5ce400f96e353d36fd34713dcc4238c1867b633379566dc0dec3483bda3bf97b",
+    "nifi-current/lib/nifi-network-processors-nar-2.12.0.nar": "56e79658442d6e1edd00ec0ed8b3530f5e67c3d500dfc85807869739c87a663e",
+    "nifi-current/lib/nifi-oauth2-provider-nar-2.12.0.nar": "02fb8de6094fb7bb35ad610619a8ac26c0f6a03e186986acb5540ffe676196ac",
+    "nifi-current/lib/nifi-opentelemetry-nar-2.12.0.nar": "d3767880e6f60a0f6a7e0baa38057a1d64b700ea07195da91a328aeed64ca668",
+    "nifi-current/lib/nifi-password-based-property-encryption-nar-2.12.0.nar": "7b68e3d15c7d2f18355fa9ce743c3e011629d74603303d1ff5dea0b4ab9f8d1a",
+    "nifi-current/lib/nifi-per-process-group-logging-2.12.0.jar": "3213180f3908422aca6652a2de01586ec4e9e56a3715ad999ba0ac37423e2274",
+    "nifi-current/lib/nifi-pgp-nar-2.12.0.nar": "74e42db8021924a90d6a616b8c2be09be80215f3b9afeee260083558caf3d0d9",
+    "nifi-current/lib/nifi-pgp-service-api-nar-2.12.0.nar": "209a142e88a12bc9c5d0ea8c543c670e7f6e3d8106ee957a486a8c7fe86ce6ff",
+    "nifi-current/lib/nifi-pgp-service-nar-2.12.0.nar": "84dbf0a779bf2999f9d20c5ce08d8ea600a1a83ca82850f39360232c5e6df590",
+    "nifi-current/lib/nifi-poi-nar-2.12.0.nar": "e06db10d5708fc1c6d47b3fe85e650f068b7f702c87e5da13db974ca59375d42",
+    "nifi-current/lib/nifi-properties-2.12.0.jar": "a8f69598ca7d4f23dd2c65f0e44f5dffdfffb965c8331d1c3589e023acab871d",
+    "nifi-current/lib/nifi-property-utils-2.12.0.jar": "1b97307307ae8619f31788d9a39f9a9cb3e6533bdcbcc375ce9f892b244261f0",
+    "nifi-current/lib/nifi-protobuf-services-nar-2.12.0.nar": "d7fcde6b1b3f4fac9d9bceace08871b6fbc2600a08e0981991c2bc3d282121a3",
+    "nifi-current/lib/nifi-provenance-repository-nar-2.12.0.nar": "ffe7e13869f9fde3ccdd1257ed273bc7c3227d90994cf360d0e9e41894339263",
+    "nifi-current/lib/nifi-proxy-configuration-nar-2.12.0.nar": "32d4ea7a0cc4045484c3b71a7bae287c2ebe29395924665983131f49c6aa06c2",
+    "nifi-current/lib/nifi-py4j-nar-2.12.0.nar": "8f3ef4a197030dabf04736189364671c8cd81a860e096a388f0fa71c92b22457",
+    "nifi-current/lib/nifi-python-framework-api-2.12.0.jar": "70fea8c720fef30383a697e263c93271434aec9a9cb03906e34e79701776f3e5",
+    "nifi-current/lib/nifi-record-serialization-services-nar-2.12.0.nar": "ebbaedd5a724b04c2f5a0f028b14c9bf6fe1cd30d3bfe1d92ef39884f94416ca",
+    "nifi-current/lib/nifi-record-sink-service-nar-2.12.0.nar": "8069c22d44688a9bd928e44953e1fe75db27bc8cb466ee7deac548553502ac8c",
+    "nifi-current/lib/nifi-redis-nar-2.12.0.nar": "8579dadeda3b54416915b832a9175f6c35fa412d0948e3139d5517e32a2a600a",
+    "nifi-current/lib/nifi-redis-service-api-nar-2.12.0.nar": "219acece0ebcc1e6a03ac2f06a5120129f9ea7a234154a429cd4b19d9252eb06",
+    "nifi-current/lib/nifi-registry-nar-2.12.0.nar": "b3108330883998e92c99927e84bbbd8044939961b97813627564253353841a0f",
+    "nifi-current/lib/nifi-runtime-2.12.0.jar": "c31e233406a3f71de031cd1fe92cfe9550dfbc9308f95a0e3315b527edc46e94",
+    "nifi-current/lib/nifi-salesforce-nar-2.12.0.nar": "59c27515394894ebce1272fcaef4df79793c2f8d5a8989140267c9be691c8f3d",
+    "nifi-current/lib/nifi-scripting-nar-2.12.0.nar": "3fc758ab579be8903a783679aaf9b134de31273c84afb96f6ea9b0cf3b120ad9",
+    "nifi-current/lib/nifi-server-api-2.12.0.jar": "d6b692c38b560ca43d8425e0fbb1f2862f5b0432a1645d74ddffcef45f4ebf62",
+    "nifi-current/lib/nifi-server-nar-2.12.0.nar": "53bf9d143a9f560227742051954aa497fb15deedd34a1bcfb08c7ba97d4d48ef",
+    "nifi-current/lib/nifi-shopify-nar-2.12.0.nar": "45afc8a237965a5b7385337908dc4809da1e0ba5de780f9cdc4bf01d429302f0",
+    "nifi-current/lib/nifi-single-user-iaa-providers-nar-2.12.0.nar": "7cbb8cd936b19a45d922c1d230837ad2bef2e2fb7154122dff0de59ce4961535",
+    "nifi-current/lib/nifi-site-to-site-reporting-nar-2.12.0.nar": "0c30d6f9c3043ee5fd3d4c6d66a31b95ad5975785a8c184b09611bfdcfa3f1ab",
+    "nifi-current/lib/nifi-slack-nar-2.12.0.nar": "1bf04c374e70abcd66736711d40f5d3b8b8532e1f76ea84905a3549aa5d11e98",
+    "nifi-current/lib/nifi-smb-client-api-nar-2.12.0.nar": "48958d549d344ffbdf41e59fe3428a2b73d506efb97ba8f67b4362f9930db019",
+    "nifi-current/lib/nifi-smb-nar-2.12.0.nar": "2d70d69c0274284c9cfba7171a9ae5710c5c63cd0cf5e6f58f8123600aa2ac42",
+    "nifi-current/lib/nifi-smb-smbj-client-nar-2.12.0.nar": "2839b1cda2f98790508b9b54d6f24d4e9b4ffb60c033e6b29210662371851827",
+    "nifi-current/lib/nifi-snmp-nar-2.12.0.nar": "d5388233f7dd91e3fb00123678271e5d533d10b2fd1d03b72d9c9f9383f22ac1",
+    "nifi-current/lib/nifi-splunk-nar-2.12.0.nar": "71359db8005565303ddb64ebefe068d3d76c76d847125ed83f7b3b046eb129bc",
+    "nifi-current/lib/nifi-ssl-context-service-nar-2.12.0.nar": "bde06a2278a8ef2a8c2fe2dcbc8ef3a61168ad2dd83b55f8f05baf1d91479380",
+    "nifi-current/lib/nifi-standard-content-viewer-nar-2.12.0.nar": "cb3de44d3ea3c2642e07a04a44066a127d85c6fdc5d638150c9ae490f0a1b5fd",
+    "nifi-current/lib/nifi-standard-nar-2.12.0.nar": "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8",
+    "nifi-current/lib/nifi-standard-services-api-nar-2.12.0.nar": "89aacd317517b6b9198b2bb1ace2ccd7b1d61c7ba1aa7df178afc2fc28db6fb0",
+    "nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+    "nifi-current/lib/nifi-stateful-analysis-nar-2.12.0.nar": "9996b1d3380d179a7cc82dfa235543f691fce122eefb6fc8d5c547df271ee4e7",
+    "nifi-current/lib/nifi-stateless-api-2.12.0.jar": "16dc173e4f26779e5eed5723800b699a0e3b3bcac73d2e8a2947235001f943c8",
+    "nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar": "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+    "nifi-current/lib/nifi-web-client-provider-service-nar-2.12.0.nar": "3dfa85868684a0a75b8693b7fdad9e9ddd5b6a4b7b3973a52c7d6d9a9b0486aa",
+    "nifi-current/lib/nifi-websocket-processors-nar-2.12.0.nar": "065d560f0ca988b96588271ab7f7596bfa2089c293464b7d7e680453c55fbd1b",
+    "nifi-current/lib/nifi-websocket-services-api-nar-2.12.0.nar": "5f7ce05bcfadc96dd1d16344a49c4a2ac9049a7c1c687b126a376784601d8e84",
+    "nifi-current/lib/nifi-websocket-services-jetty-nar-2.12.0.nar": "271ed9aca01d0f30688f86b64cd730ce266e601ba193f62848ffa52b3c80e0b9",
+    "nifi-current/lib/nifi-windows-event-log-nar-2.12.0.nar": "3408275f4c7590e1b6cdfd45cf1cf40e2509f25adf6506e880334311b9a1410d",
+    "nifi-current/lib/nifi-workday-processors-nar-2.12.0.nar": "4e06d84298622b857fc2e92e09e0bc80bbd59b5aa7091e70757e3a5642318699",
+    "nifi-current/lib/nifi-zendesk-nar-2.12.0.nar": "711b18b6edfac0894c4c4b3e5ff7f5e37b3d0eeee934660bacd027d40d69a266",
+    "nifi-current/lib/nifi-zendesk-services-nar-2.12.0.nar": "7871df5ed1339d01b17d327b000c77f8777ff6117db1bc0e0ca19674741ffd7f",
+    "nifi-current/lib/slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "nifi-toolkit-current/lib/aopalliance-repackaged-4.0.0-M3.jar": "65c0abb946d2ab3a1237c610f24bf15f04696151e9cafbe1afa6cee52fbed5ed",
+    "nifi-toolkit-current/lib/c2-protocol-component-api-2.12.0.jar": "8bddc6c3a6e5b25929bfb5c31b2d6685d1e6fcda25a77387eb12a10091c45777",
+    "nifi-toolkit-current/lib/commons-beanutils-1.11.0.jar": "9e44ba68ec9a3f21286fa2a8bbb003b735c0f69101bb43144b79f4f8aaa74709",
+    "nifi-toolkit-current/lib/commons-cli-1.11.0.jar": "8f7f8605d68e15bf32db61ec94eac6fdafc51b1bdbe1e0e0802b57d23f387792",
+    "nifi-toolkit-current/lib/commons-codec-1.22.1.jar": "78a5d732fbd715e2d10bd7150d2f8030bae57267f8aacc5c88f642cb6c2e5d3f",
+    "nifi-toolkit-current/lib/commons-collections-3.2.2.jar": "eeeae917917144a68a741d4c0dff66aa5c5c5fd85593ff217bced3fc8ca783b8",
+    "nifi-toolkit-current/lib/commons-collections4-4.5.0.jar": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845",
+    "nifi-toolkit-current/lib/commons-io-2.22.0.jar": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758",
+    "nifi-toolkit-current/lib/commons-lang3-3.20.0.jar": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4",
+    "nifi-toolkit-current/lib/commons-text-1.15.0.jar": "58d2da30f058512a1e7f914e39241deca4dff5c27a085b4ed2faa9e7208067f6",
+    "nifi-toolkit-current/lib/hk2-api-4.0.0-M3.jar": "66f859916e6a7de3622973acf7f672a895c9bac81622080dfbb95ac9b021b1f8",
+    "nifi-toolkit-current/lib/hk2-locator-4.0.0-M3.jar": "290027395d95bfcbb5f40c992376a6f21c75bf63c9c8d4df3cfc034ba1a85ded",
+    "nifi-toolkit-current/lib/hk2-utils-4.0.0-M3.jar": "ba7087827fe89af3d824fc26556c985ce9afa0cc30faa24e8b65145ca0fefcf1",
+    "nifi-toolkit-current/lib/jackson-annotations-2.22.jar": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0",
+    "nifi-toolkit-current/lib/jackson-core-2.22.3.jar": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+    "nifi-toolkit-current/lib/jackson-databind-2.22.3.jar": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+    "nifi-toolkit-current/lib/jackson-module-jakarta-xmlbind-annotations-2.22.2.jar": "e5f7efb6086f5036ae4c64d3c2059cf193a980099d7079d562006275c60badb7",
+    "nifi-toolkit-current/lib/jakarta.activation-api-2.1.4.jar": "c9db52100ce6c8aac95cc39075f95720d2e561b11f8051b81c121ad4effd7004",
+    "nifi-toolkit-current/lib/jakarta.annotation-api-3.0.0.jar": "b01f55552284cfb149411e64eabca75e942d26d2e1786b32914250e4330afaa2",
+    "nifi-toolkit-current/lib/jakarta.inject-api-2.0.1.jar": "f7dc98062fccf14126abb751b64fab12c312566e8cbdc8483598bffcea93af7c",
+    "nifi-toolkit-current/lib/jakarta.servlet-api-6.1.0.jar": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4",
+    "nifi-toolkit-current/lib/jakarta.validation-api-3.1.1.jar": "63ce00156388c365f3ac1be71fcfaf114682fc0c452020b5df6e7ec236e142ab",
+    "nifi-toolkit-current/lib/jakarta.ws.rs-api-4.0.0.jar": "6368b126cbcf34e694bb9ba5b9fe3e5040b7acea7ce622e636d698bb085fd2a6",
+    "nifi-toolkit-current/lib/jakarta.xml.bind-api-4.0.5.jar": "5e489b6c874c4119e003ff1403db523ee3a8959ec499f3de29e77245efccf216",
+    "nifi-toolkit-current/lib/javassist-3.30.2-GA.jar": "eba37290994b5e4868f3af98ff113f6244a6b099385d9ad46881307d3cb01aaf",
+    "nifi-toolkit-current/lib/jcl-over-slf4j-2.0.19.jar": "efc3848f79638d9fa74ccbae3fd18c8735dcc0127b393ae53dce638827f8a2f3",
+    "nifi-toolkit-current/lib/jersey-client-4.0.2.jar": "91fd986ee7c7fa468b2f601d7a2cdf9bfad6ce4fa0fbf5d4f7e6d0c07c12a023",
+    "nifi-toolkit-current/lib/jersey-common-4.0.2.jar": "83466815c46d8f813509411986a22d1d3a2abe572b15b03078f98bc020154538",
+    "nifi-toolkit-current/lib/jersey-entity-filtering-4.0.2.jar": "633afbf5f3c1ae53aeffbec1f486a878446f19ec8df42b2f795cb06620d1db90",
+    "nifi-toolkit-current/lib/jersey-hk2-4.0.2.jar": "5df758fc55d0d7cdb431b4c9ab50fbf613965ce0a7898d1a923d957e3a93df2c",
+    "nifi-toolkit-current/lib/jersey-media-json-jackson-4.0.2.jar": "efa2fdad26e994adde4f827c11e44ab5fd3cf3c3e0aa4f99e8eefd1b83449fa7",
+    "nifi-toolkit-current/lib/jersey-media-multipart-4.0.2.jar": "b9bbd74fa5337753c1f96e2ef1e9ab5c7ab1ad3b8fe1c4f719a311e8f3821aed",
+    "nifi-toolkit-current/lib/jetty-http-12.1.13.jar": "3bb84bfdd0992453986a8f7422dbf55cf779a0a780ff8a68041bb6119fb997fd",
+    "nifi-toolkit-current/lib/jetty-io-12.1.13.jar": "946338a5db4e906ba0698dcdae350394736062cf915b5f16ebf787bcee7fffae",
+    "nifi-toolkit-current/lib/jetty-server-12.1.13.jar": "978265f1ac637c504b537f5d56e07d4a47e7c4bb0752d9dd66b79f5be754abfa",
+    "nifi-toolkit-current/lib/jetty-util-12.1.13.jar": "3e408e60fe71a337979004fc4e47bfd3c08a931cf33b46b6a5dc4dbdd088c2fd",
+    "nifi-toolkit-current/lib/jline-4.4.3-jdk11.jar": "073996b4322dc2ff6fb38de868bdc50d7103d12e79f1ca577a53d8d8f007a34d",
+    "nifi-toolkit-current/lib/mimepull-1.9.15.jar": "b9f586bf8844b14a33e75fe7a4b94896dc80d80b732d128777e287af14c836fa",
+    "nifi-toolkit-current/lib/nifi-api-2.12.0.jar": "190c96b9ce13e5c749f1624cf071fc3b9d8897cdf6114d676e8092dd5b51de85",
+    "nifi-toolkit-current/lib/nifi-client-dto-2.12.0.jar": "ce102f5a6aa04d7a6558de05204c7da06b3ce82309fad9390e3929a9dc652a81",
+    "nifi-toolkit-current/lib/nifi-extension-manifest-model-2.12.0.jar": "c48927af17fefa96e3a35628ddf5f11ff73a99d842c95472644ad7ef3a540aa0",
+    "nifi-toolkit-current/lib/nifi-framework-api-2.12.0.jar": "e66fbdac6f3c9d184d15fdef2d7104f2cd2161943fd055a111b3982cb23ed508",
+    "nifi-toolkit-current/lib/nifi-property-utils-2.12.0.jar": "1b97307307ae8619f31788d9a39f9a9cb3e6533bdcbcc375ce9f892b244261f0",
+    "nifi-toolkit-current/lib/nifi-registry-client-2.12.0.jar": "3c1f95cd76a780565703c17f319d0c195d48c9a60cff2aa2d6d6301255942abc",
+    "nifi-toolkit-current/lib/nifi-registry-data-model-2.12.0.jar": "d36c5fd85dc5e0175ed82e148b0c4f945f84d2b3840b35e28d8ed987e4051b67",
+    "nifi-toolkit-current/lib/nifi-registry-revision-entity-model-2.12.0.jar": "033c5a5e53437293f69295c4a2ad41d47d5f5865e3fc613302dfca270b16e42e",
+    "nifi-toolkit-current/lib/nifi-registry-security-utils-2.12.0.jar": "cc0bde334d1733476fea27dc8585d16bb20c8d6809bf919234d956c4ae26b1eb",
+    "nifi-toolkit-current/lib/nifi-security-kerberos-2.12.0.jar": "266782553e7190782befc7c6b9c679e2827db7b8d3d7d5946788985fe1f86fd9",
+    "nifi-toolkit-current/lib/nifi-security-kerberos-api-2.12.0.jar": "b482775d819261e20742eef31da1ec61fcb78ea19e8231072ee6ae922f014ea2",
+    "nifi-toolkit-current/lib/nifi-security-proxied-entity-2.12.0.jar": "d2c74f08bd6531aeab1044df171e354268eb6f6f5cad0a43bb891754c31fc6f2",
+    "nifi-toolkit-current/lib/nifi-security-ssl-2.12.0.jar": "aecf9074e7d3a331d4448164f327c8669c3abf78a893f854da3dd88c944408d5",
+    "nifi-toolkit-current/lib/nifi-security-utils-api-2.12.0.jar": "2d7a02b0e552346702ffcd27d73da0aa3ee6150582575b55cb32055708dece40",
+    "nifi-toolkit-current/lib/nifi-toolkit-cli-2.12.0.jar": "0c905c048227596ec3435f5b6f6e2b5d4df626d8bc2225497176d0b428c68505",
+    "nifi-toolkit-current/lib/nifi-toolkit-client-2.12.0.jar": "7cc830b1aa03bf7ac77cd2ba8263658d7cff2883be163c3389f257e84108d547",
+    "nifi-toolkit-current/lib/opencsv-5.12.0.jar": "f1c55d80a92c8ecfe3f15fb71785d5b156f3674cb5b9ad55dcfd378ffeed2960",
+    "nifi-toolkit-current/lib/osgi-resource-locator-3.0.0.jar": "a1866ccfddaa29f18da5d39df662894ab2dd9902994a5000e7644f6cc1e37e55",
+    "nifi-toolkit-current/lib/slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "nifi-toolkit-current/lib/slf4j-simple-2.0.19.jar": "1d20cbfc8f97a719112a72c6d4c2323259d179a7478d1f694b54409d412bb731",
+    "nifi-toolkit-current/lib/swagger-annotations-2.2.55.jar": "7e12244732b10d831eabb58c038c8e604cd8d828d4ae1ace4dd589da543c6261"
+  },
+  "source_image_config_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "source_nar_count": 119,
+  "source_root_count": 215,
+  "status": "prepared-pending-independent-QA-and-private-validation",
+  "target_count": 16,
+  "targets": [
+    {
+      "chain_sha256": [
+        "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-amqp-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-2.22.3.jar",
+      "replacement_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+    },
+    {
+      "chain_sha256": [
+        "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-amqp-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-2.22.3.jar",
+      "replacement_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+    },
+    {
+      "chain_sha256": [
+        "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-framework-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-2.22.3.jar",
+      "replacement_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+    },
+    {
+      "chain_sha256": [
+        "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293",
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-framework-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-2.22.3.jar",
+      "replacement_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+    },
+    {
+      "chain_sha256": [
+        "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+        "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+      ],
+      "expected_occurrences": 3,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-3.2.3.jar",
+      "replacement_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817"
+    },
+    {
+      "chain_sha256": [
+        "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+        "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+      ],
+      "expected_occurrences": 3,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-3.2.3.jar",
+      "replacement_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2"
+    },
+    {
+      "chain_sha256": [
+        "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+        "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298",
+        "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+      ],
+      "expected_occurrences": 3,
+      "members": [
+        "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-core-3.2.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-3.2.3.jar",
+      "replacement_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817"
+    },
+    {
+      "chain_sha256": [
+        "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+        "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298",
+        "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+      ],
+      "expected_occurrences": 3,
+      "members": [
+        "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-databind-3.2.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-3.2.3.jar",
+      "replacement_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2"
+    },
+    {
+      "chain_sha256": [
+        "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-2.22.3.jar",
+      "replacement_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+    },
+    {
+      "chain_sha256": [
+        "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-2.22.3.jar",
+      "replacement_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+    },
+    {
+      "chain_sha256": [
+        "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8",
+        "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+      ],
+      "expected_occurrences": 3,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-standard-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-3.2.3.jar",
+      "replacement_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817"
+    },
+    {
+      "chain_sha256": [
+        "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8",
+        "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+      ],
+      "expected_occurrences": 3,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-standard-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-3.2.3.jar",
+      "replacement_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2"
+    },
+    {
+      "chain_sha256": [
+        "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-2.22.3.jar",
+      "replacement_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+    },
+    {
+      "chain_sha256": [
+        "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-2.22.3.jar",
+      "replacement_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+    },
+    {
+      "chain_sha256": [
+        "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+        "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093",
+        "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-core-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar",
+      "replacement_file": "jackson-core-2.22.3.jar",
+      "replacement_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c"
+    },
+    {
+      "chain_sha256": [
+        "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+        "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093",
+        "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+      ],
+      "expected_occurrences": 5,
+      "members": [
+        "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-databind-2.22.2.jar"
+      ],
+      "outer": "nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar",
+      "replacement_file": "jackson-databind-2.22.3.jar",
+      "replacement_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9"
+    }
+  ]
+}

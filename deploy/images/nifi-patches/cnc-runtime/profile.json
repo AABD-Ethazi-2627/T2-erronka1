@@ -1,7 +1,6 @@
 {
   "schema": 1,
   "name": "cnc-serving-conservative-v1-preparation-only",
-  "source_image_config_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
   "source_commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
   "runtime_approved": false,
   "replacement": null,
@@ -1226,5 +1225,12 @@
   },
   "capability_scope": "Retain CNC 13 declared-flow bundle closure plus all unknown, framework, security, defaults, UI, SMB, scripting, Jolt, Kafka and ES bundles. Sixteen whole optional NAR exclusions remove AMQP, AWS/Kinesis, GCP, Iceberg and Kafka cloud adapters; no complete runtime-equivalence claim.",
   "observed_configuration_sha256": "069aa606f0a1900bc1211c80d417b218937f72b0bb11a71d409886e3dce31455",
-  "observed_configuration_scope": "Own running six-event CG32 lab only; provider classes are declarations, property hashes do not qualify selected provider or SPI closure."
+  "observed_configuration_scope": "Own running six-event CG32 lab only; provider classes are declarations, property hashes do not qualify selected provider or SPI closure.",
+  "expected_source_image_config_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "source_baseline": {
+    "status": "pending-independent-cold-capture",
+    "canonical_sha256": null,
+    "source_tree_sha256": null,
+    "file": null
+  }
 }

@@ -2,6 +2,7 @@
 Source: deploy/images/nifi-patches/otel-qualification/qualify.py at preparation.
 ES realm semantics, module checks and runtime qualification are separate.
 """
+
 import io
 import re
 import zipfile

@@ -1,5 +1,9 @@
 # Elasticsearch OTel compatibility preparation
 
+Actual inventory is now sealed in `inventory-result.json`; see `NEXT_PHASE.md`
+for measured JDK27/93-JAR boundaries and the next finite input-stage plan.
+The original preparation below is retained; later loader/component evidence is pending.
+
 Owned scope is this new directory and `tests/test_es_otel_qualification.py`.
 This preparation does not alter the Dockerfile, installed image, defaults,
 source manifest, security policy, Maven resolver or serving containers.
@@ -62,7 +66,7 @@ family and any nonconforming closure as named controls; no exceptions or fake
 versions. Any newly required artifact outside the installed observed families
 returns to the coordinator before selection.
 
-## Prepared tools and exact next phase
+## Initial metadata tools and executed phase
 
 `ModuleAudit.java` runs against the image's bundled JDK without Elasticsearch,
 agent attachment, module initialization, exporters or network. It emits per-JAR
@@ -72,8 +76,8 @@ It preserves realms, rejects duplicate ZIP entries and allows no silent
 ModuleFinder name collision in the parser. Nested/shaded agent classes are
 inventory only. It never treats an agent nested class as an APM provider.
 
-`run_reserved.py` defaults to a JSON dry-run. Once the coordinator grants this
-specific phase, freeze this source and invoke the following **on the VM**:
+`run_reserved.py` defaults to a JSON dry-run. The initial metadata command below ran from frozen 89f58fc source. It is
+retained for reproducibility; the next input-stage command is in `NEXT_PHASE.md`:
 
 ```sh
 python3 -B /opt/cnc-guard/evidence/es-otel-qualification-20261106/source/deploy/images/elasticsearch-patches/otel-qualification/run_reserved.py --execute-reserved --attempt inventory-01
@@ -105,8 +109,8 @@ cannot establish JVM or APM approval.
 
 ## Outstanding evidence
 
-1. Execute the metadata phase under a coordinator-granted slot; seal exact paths,
-   hashes, graph and real JPMS identities. Preserve original image/source hashes.
+1. Completed: metadata phase and exact paths/hashes/graph/JPMS inventory are sealed
+   in `inventory-result.json`; image/source preservation passed. This is inventory only.
 2. Stage a private exact extracted tree **on the VM**, including server/extension
    boundaries as needed; do not copy large JARs to the laptop. Run current and
    candidate public/internal linkage, access and mutation controls.

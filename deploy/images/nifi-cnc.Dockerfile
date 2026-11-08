@@ -7,7 +7,9 @@ FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e
 USER root
 RUN apk add --no-cache python-3.11
 COPY scripts/nifi_runtime_profile.py /tools/nifi_runtime_profile.py
-COPY deploy/images/nifi-patches/cnc-runtime/profile.json /tools/profile.json
+COPY deploy/images/nifi-patches/cnc-runtime/ /tools/cnc-runtime/
+COPY nifi-flows/ /flow-input/nifi-flows/
+COPY deploy/cg14/restore-inventory.json /flow-input/deploy/cg14/restore-inventory.json
 # Read original stage metadata through immutable mounts; COPY ownership defaults
 # must not become the supposed source identity.
 RUN --network=none \
@@ -15,7 +17,8 @@ RUN --network=none \
     --mount=type=bind,from=full,source=/usr/local/bin/uv,target=/input/usr/local/bin/uv,readonly \
     --mount=type=bind,from=full,source=/usr/local/bin/uvx,target=/input/usr/local/bin/uvx,readonly \
     python3 /tools/nifi_runtime_profile.py prepare \
-    --source /input --output /approved --profile /tools/profile.json --prepare-only
+    --source /input --output /approved --profile /tools/cnc-runtime/profile.json \
+    --flow-root /flow-input --prepare-only
 
 # Fresh serving ancestry: the full image/preparation layers are NOT serving layers.
 # Same pinned base, packages and accounts as deploy/images/nifi.Dockerfile.
@@ -26,16 +29,13 @@ RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
     && apk add --no-cache bash coreutils openjdk-21-jre procps python-3.11 shadow \
     && groupadd --gid 1000 nifi \
     && useradd --uid 1000 --gid 1000 --home-dir /home/nifi --create-home --shell /bin/bash nifi
-COPY --from=preparation /approved/tree/opt/nifi /opt/nifi
-COPY --from=preparation /approved/tree/usr/local/bin/ /usr/local/bin/
-# Restore and verify original metadata after COPY, inside this disposable build
-# stage only. There is deliberately no host installation command in the CLI.
+# One write layer for bytes and metadata. Only scope entries are restored;
+# opt/usr/usr/local/usr/local/bin belong to the fresh OS and are not source stubs.
 RUN --network=none \
     --mount=type=bind,from=preparation,source=/approved,target=/proof,readonly \
     --mount=type=bind,source=scripts/nifi_runtime_profile.py,target=/tools/nifi_runtime_profile.py,readonly \
     python3 - <<'PY'
 import importlib.util
-import os
 from pathlib import Path
 spec = importlib.util.spec_from_file_location('cnc_profile', '/tools/nifi_runtime_profile.py')
 p = importlib.util.module_from_spec(spec)
@@ -43,24 +43,10 @@ spec.loader.exec_module(p)
 rows = p.load('/proof/prepared-tree.json')
 proof = p.load('/proof/preparation.json')
 p.require(proof['prepared_tree_sha256'] == p.canonical_sha256(rows), 'prepared metadata mismatch')
-current = p.snapshot(Path('/'))
-p.require(set(current) == set(rows), 'serving paths changed during COPY')
-for name, row in rows.items():
-    p.relative(name)
-    p.require(p.in_scope(name) or name in ('opt', 'usr', 'usr/local', 'usr/local/bin'), 'unexpected metadata scope')
-    p.require(current[name]['kind'] == row['kind'], 'serving path kind changed')
-    if row['kind'] == 'file':
-        p.require(current[name]['sha256'] == row['sha256'], 'serving bytes changed during COPY')
-        if 'hardlink_to' in row:
-            target = row['hardlink_to']
-            p.relative(target)
-            p.require(target in rows and rows[target]['kind'] == 'file' and rows[target]['sha256'] == row['sha256'], 'invalid prepared hardlink')
-            os.unlink('/' + name)
-            os.link('/' + target, '/' + name)
-    elif row['kind'] == 'symlink':
-        p.require(current[name]['target'] == row['target'], 'serving link changed during COPY')
-for name in sorted(rows, key=lambda x: (len(Path(x).parts), x), reverse=True):
-    p._copy_metadata(Path('/') / name, rows[name])
+p.require(proof['source_binding'] == 'independently-frozen-cold-scope-baseline', 'source binding missing')
+p.require(proof['bound_source_image_config_id'] == p.SOURCE_IMAGE_ID, 'bound source identity mismatch')
+p.require(p.snapshot(Path('/proof/tree')) == rows, 'prepared bytes or metadata changed')
+p.materialize_scopes(Path('/proof/tree'), Path('/'), rows)
 p.require(p.snapshot(Path('/')) == rows, 'serving metadata differs from prepared source')
 PY
 COPY --from=preparation /approved/preparation.json /usr/share/cnc-guard/cnc-runtime/preparation.json
