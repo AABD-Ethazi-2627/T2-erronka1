@@ -239,7 +239,9 @@ independently confirm preservation, rather than relying on the build guard.
    the still-pending runtime acceptance checker against actual private API captures.
    Compare full-image versus profile `/flow/processor-types`,
    `/flow/controller-service-types`, `/flow/reporting-task-types`,
-   `/flow/parameter-provider-types` and `/flow/registry-types`. Lost types must be
+   `/flow/parameter-provider-types` and `/controller/registry-types`. The latter
+   path was checked against official 2.12.0 source and a live stock instance on
+   2026-11-08; `/flow/registry-types` returns 404. Lost types must be
    exactly those exported by the sixteen excluded bundles, with no other loss or
    unexpected addition. Recursively inspect restored processors/services/reporting
    tasks/providers for `extensionMissing`, missing/ghost implementations and
