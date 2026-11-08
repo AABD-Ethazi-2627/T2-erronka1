@@ -59,10 +59,21 @@ class LanCARotationTests(unittest.TestCase):
         )
 
     @contextmanager
-    def gateway(self, certificates, backend_port):
+    def gateway(self, certificates, backend_port, allowed_sources="127.0.0.1/32\n"):
         production = (ROOT / "lan/haproxy.cfg").read_text()
         binds = re.findall(r"^    bind :\d+ (.+)$", production, re.MULTILINE)
         self.assertEqual(len(binds), 5)
+        rules = re.findall(
+            r"^    tcp-request connection reject .+$", production, re.MULTILINE
+        )
+        self.assertEqual(len(rules), 5)
+        self.assertEqual(
+            set(rules),
+            {
+                "    tcp-request connection reject unless { src -n -f /certs/allowed-clients.txt }"
+            },
+        )
+        (certificates / "gateway/allowed-clients.txt").write_text(allowed_sources)
         for bind in binds:
             self.assertIn("ca-file /certs/clients-ca.pem verify required", bind)
         ports = [free_port() for _ in binds]
@@ -73,6 +84,10 @@ class LanCARotationTests(unittest.TestCase):
         for index, (port, bind) in enumerate(zip(ports, binds, strict=True)):
             bind = bind.replace("/certs/", str(certificates / "gateway") + "/")
             contents += f"frontend test{index}\n    bind 127.0.0.1:{port} {bind}\n"
+            contents += (
+                rules[index].replace("/certs/", str(certificates / "gateway") + "/")
+                + "\n"
+            )
             contents += "    default_backend echo\n"
         contents += f"backend echo\n    server echo 127.0.0.1:{backend_port}\n"
         config.write_text(contents)
@@ -159,8 +174,10 @@ class LanCARotationTests(unittest.TestCase):
             context.minimum_version = context.maximum_version = version
         return context
 
-    def connect(self, context, port, session=None):
-        plain = socket.create_connection(("127.0.0.1", port), timeout=2)
+    def connect(self, context, port, session=None, source="127.0.0.1"):
+        plain = socket.create_connection(
+            ("127.0.0.1", port), timeout=2, source_address=(source, 0)
+        )
         try:
             return context.wrap_socket(
                 plain, server_hostname="127.0.0.1", session=session
@@ -174,10 +191,10 @@ class LanCARotationTests(unittest.TestCase):
             connection.sendall(b"rotation-proof")
             self.assertEqual(connection.recv(1024), b"rotation-proof")
 
-    def assert_rejected(self, context, port, session=None):
+    def assert_rejected(self, context, port, session=None, source="127.0.0.1"):
         # A TLS1.3 certificate alert may arrive only after wrap_socket returns.
         try:
-            with self.connect(context, port, session) as connection:
+            with self.connect(context, port, session, source) as connection:
                 connection.sendall(b"must-not-reach-backend")
                 self.assertEqual(connection.recv(1024), b"")
         except (ssl.SSLError, ConnectionError):
@@ -204,6 +221,12 @@ class LanCARotationTests(unittest.TestCase):
                     try:
                         with self.gateway(old, echo.server_address[1]) as old_ports:
                             for port in old_ports:
+                                with self.subTest(stage="unlisted-source", port=port):
+                                    self.assert_rejected(
+                                        self.context(old, (old, 1)),
+                                        port,
+                                        source="127.0.0.2",
+                                    )
                                 for number in range(1, 5):
                                     with self.subTest(
                                         stage="before", port=port, client=number
@@ -261,6 +284,28 @@ class LanCARotationTests(unittest.TestCase):
                     finally:
                         for connection in held:
                             connection.close()
+                finally:
+                    echo.shutdown()
+                    thread.join(timeout=5)
+
+    def test_empty_allowlist_rejects_valid_client_on_every_frontend(self):
+        with tempfile.TemporaryDirectory(
+            dir=os.environ.get("CNC_LAN_TEST_TMP")
+        ) as directory:
+            certificates = Path(directory) / "certificates"
+            self.generate(certificates)
+            with EchoServer(("127.0.0.1", 0), Echo) as echo:
+                thread = threading.Thread(target=echo.serve_forever, daemon=True)
+                thread.start()
+                try:
+                    with self.gateway(
+                        certificates, echo.server_address[1], allowed_sources=""
+                    ) as ports:
+                        for port in ports:
+                            with self.subTest(port=port):
+                                self.assert_rejected(
+                                    self.context(certificates, (certificates, 1)), port
+                                )
                 finally:
                     echo.shutdown()
                     thread.join(timeout=5)

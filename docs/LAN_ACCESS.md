@@ -42,6 +42,19 @@ esta confianza antes de volver a abrir el acceso LAN.
 
 Configurar en el servidor, usando su IP real en vez de la IP de ejemplo:
 
+Antes de abrir la LAN, crear `gateway/allowed-clients.txt` en el directorio
+privado de certificados. Incluir una IP por línea para cada equipo autorizado
+(preferiblemente reservas DHCP y máscaras `/32` IPv4 o `/128` IPv6). No usar
+`0.0.0.0/0`, `::/0` ni toda la subred. El gateway comprueba el origen antes de
+la negociación TLS y exige además el certificado de cliente. Un certificado
+válido desde una IP no incluida también se rechaza. El archivo ausente impide
+arrancar; vacío no autoriza ningún origen. No se versionan las IP reales.
+Al rotar la CA, copiar esta lista al nuevo directorio `gateway/` después de
+revalidar los equipos. Tras cambiar la lista, recrear el gateway para cortar
+también conexiones anteriores. Si existe NAT, la regla identifica la IP que
+ve HAProxy: el certificado individual sigue siendo obligatorio y no debe
+autorizarse un router compartido como sustituto de los equipos.
+
 ```bash
 export CNC_LAN_BIND_IP=IP-SERVIDOR
 export CNC_LAN_HOST=IP-SERVIDOR
@@ -112,6 +125,9 @@ No se modifican Kafka, NiFi, los otros servicios o sus volúmenes.
    Copiar únicamente la confianza pública de NiFi a `"$NEW/gateway/nifi-ca.pem"`,
    desde la fuente verificada de la instancia, y volver a comprobar su huella.
    Esa confianza es independiente de la CA de clientes; no regenerar NiFi.
+   Revalidar las IP de los equipos y escribir la lista resultante en
+   `"$NEW/gateway/allowed-clients.txt"` antes de recrear el gateway. No copiar
+   orígenes que deban perder acceso durante el incidente.
 
 3. Entregar a **cada uno de los cuatro estudiantes** su nuevo par y el nuevo
    `clients/ca.crt` por canal privado. La CA del servidor también cambia;
