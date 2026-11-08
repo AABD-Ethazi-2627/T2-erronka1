@@ -22,7 +22,7 @@ FROM apache/nifi:2.12.0@sha256:6f7f2840dbf178c6dd3fa13435b9b358f3be3c6fb7417de46
 FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73 AS jackson
 ADD --checksum=sha256:8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.22.3/jackson-core-2.22.3.jar /jackson-core-2.22.3.jar
 ADD --checksum=sha256:556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9 https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.22.3/jackson-databind-2.22.3.jar /jackson-databind-2.22.3.jar
-FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73 AS runtime
+FROM cgr.dev/chainguard/wolfi-base:latest@sha256:88a20e2d017bd20cdc0cb3910de603e7bea9512a6c351a8dd3c9df212ab03d73 AS runtime-base
 
 USER root
 RUN printf '%s\n' 'https://packages.wolfi.dev/os' > /etc/apk/repositories \
@@ -53,6 +53,44 @@ USER 1000
 EXPOSE 8000 8443 10000
 VOLUME ["/opt/nifi/nifi-current/conf", "/opt/nifi/nifi-current/content_repository", "/opt/nifi/nifi-current/database_repository", "/opt/nifi/nifi-current/flowfile_repository", "/opt/nifi/nifi-current/logs", "/opt/nifi/nifi-current/nar_extensions", "/opt/nifi/nifi-current/provenance_repository", "/opt/nifi/nifi-current/python_extensions", "/opt/nifi/nifi-current/state"]
 ENTRYPOINT ["../scripts/start.sh"]
+
+FROM maven:3.9.11-eclipse-temurin-17@sha256:e4a7ace3dc0d645ed97f8d9ad0b0d3f0b14fa8d150138f27f116d7105a639b82 AS aws-build
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends python3 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+COPY deploy/images/nifi-patches /workspace/deploy/images/nifi-patches
+RUN python3 /workspace/deploy/images/nifi-patches/closeout/fetch.py --cache /cache --aws-only \
+    && python3 /workspace/deploy/images/nifi-patches/wire6/prepare.py --source-archive /cache/aws-original.tar.gz \
+       --output /src --protobuf4-compatible --descriptor-source /cache/protobuf36-descriptor.proto \
+       --descriptor-license /cache/protobuf36-LICENSE
+WORKDIR /src
+ENV MAVEN_OPTS="-Xmx512m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=1"
+RUN --mount=type=cache,target=/root/.m2 \
+    mvn -B -ntp -pl serializer-deserializer -am verify \
+    && python3 /workspace/deploy/images/nifi-patches/closeout/check_aws_build.py /src
+
+FROM runtime-base AS remediation-build
+USER root
+RUN apk add --no-cache openjdk-21
+COPY deploy/images/nifi-patches /workspace/deploy/images/nifi-patches
+COPY --from=nifi /opt/nifi /cache/full-source/opt/nifi
+RUN ln -s /cache/full-source/opt/nifi/nifi-current/lib /cache/stock-lib
+ENV CNC_CLOSEOUT_CACHE=/cache \
+    CNC_CLOSEOUT_JAVA_BIN=/usr/lib/jvm/java-21-openjdk/bin \
+    CNC_CLOSEOUT_OVERLAY=/overlay
+RUN python3 /workspace/deploy/images/nifi-patches/closeout/fetch.py --cache /cache
+RUN python3 /workspace/deploy/images/nifi-patches/closeout/build_wrappers.py \
+    && python3 /workspace/deploy/images/nifi-patches/closeout/build_iceberg_guava.py
+COPY --from=aws-build /src/build-tools/target/schema-registry-build-tools-1.1.24-cnc-wire6.5.jar /cache/aws-linux-result-6/build-tools/target/
+COPY --from=aws-build /src/common/target/schema-registry-common-1.1.24-cnc-wire6.5.jar /cache/aws-linux-result-6/common/target/
+COPY --from=aws-build /src/serializer-deserializer/target/schema-registry-serde-1.1.24-cnc-wire6.5.jar /cache/aws-linux-result-6/serializer-deserializer/target/
+RUN python3 /workspace/deploy/images/nifi-patches/closeout/assemble.py
+
+FROM runtime-base AS runtime
+USER root
+COPY --from=remediation-build --chown=1000:1000 /overlay/opt/ /opt/
+COPY --from=remediation-build /overlay/changes.json /usr/share/cnc-guard/nifi-closeout-changes.json
+USER 1000
 
 # Audit nested dependencies without changing the serving classpath or Wire ABI.
 FROM runtime AS archive-audit

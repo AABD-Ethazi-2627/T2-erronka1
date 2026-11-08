@@ -2,8 +2,12 @@
 import hashlib
 import json
 import os
-import resource
 import subprocess
+
+try:
+    import resource
+except ImportError:
+    resource = None
 from pathlib import Path
 
 LOCK = '/home/tears/.cache/cnc-integration-audit-20261103/candidate-heavy.lock'
@@ -16,6 +20,8 @@ def digest(path):
         return hashlib.file_digest(f, 'sha256').hexdigest()
 
 def run(args, output):
+    if resource is None:
+        raise RuntimeError('bounded execution requires POSIX resource controls')
     def limits():
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
         resource.setrlimit(resource.RLIMIT_CPU, (30, 30))

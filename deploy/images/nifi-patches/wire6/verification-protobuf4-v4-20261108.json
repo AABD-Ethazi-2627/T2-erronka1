@@ -1,0 +1,93 @@
+{
+  "base_commit": "481b6936e8a090b79e7e83d3b0e38bd1f21a1109",
+  "ci": {
+    "run_id": 41833235278,
+    "artifact_id": 13328790828,
+    "head_sha": "6d67bc2ec72d931486174b906654bcc089250cba",
+    "scans": {
+      "image-scan.json": {
+        "sha256": "ac2a3f808e002cc98cec934f7c6e3c376e39b2d4f640a905d7bd704ac3c6f161",
+        "occurrences": 0,
+        "tuples": 0
+      },
+      "nested-archive-scan.json": {
+        "sha256": "670afc98bdf35dd441e6cc34c0afe791d170e2e1632f2b052df22b917547f20c",
+        "occurrences": 63,
+        "tuples": 59
+      }
+    }
+  },
+  "wire_build": {
+    "counts": {
+      "tests": 1445,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "maven_log_sha256": "e2df525738416446683a1723ec483c429d43a9adcd8ad81ea0bc5135ac0ea30d",
+    "container_id": "3e3862b59b8b7af393228fd71d5dcb6251a227ed04ff336e748b373d2b0bea93",
+    "image_config_id": "sha256:bbb7e05a6487b189e3dc833b6360b4f9eaf0154299fb4e67e764cad5cca33800",
+    "exit_code": 0,
+    "surefire_reports": {
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.caching.SchemaTest.xml": "674e155bc643bdf402658b96624e3bc7d30742195a1fdd44b99ed8b03222f4df",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.AWSDeserializerInputTest.xml": "303068aca0c11aea2369d300f9af1b30d4ef6017e6ebef51f36f1f7097772942",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.AWSSchemaRegistryClientTest.xml": "db9b1dc570a76799e9fb8826d981e374abcb24c768deecb28b546a07b0087ee7",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.AWSSerializerInputTest.xml": "d0ef1652d0ead2c9b7cfa64105d294924c69621d3724d7d2a05b978b9b329f6a",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.configs.GlueSchemaRegistryConfigurationTest.xml": "214dd0988a9a5f301b0bc1473ab31f19fe5eb76766e1a7d7f3633c045a190b5c",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.GlueSchemaRegistryCompressionFactoryTest.xml": "a73682d94764e682e64d1dda43ca0104407d5d7f326e3302066bc043ee7ef495",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.GlueSchemaRegistryDefaultCompressionTest.xml": "77dc75b710b7cde0e7a784da2fc5c8616b92f9f50b47a8e48a0bbb784ee06f8a",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.SchemaByDefinitionFetcherTest.xml": "f7ec809665238a3545fe91f69f4b9a2a28f23d3ad3e53003409f48149be3b767",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.common.UserAgentRequestInterceptorTest.xml": "67ea12bc6965dda8f2b289fe3bfb8c33707ac04e421f6316ea1adafdeaf87d8a",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.utils.AvroRecordTypeTest.xml": "cbe0cb68c04a98de3ea836b1956bfd047ca3ea7d200a0f5974b2b20e23f47d39",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.utils.GlueSchemaRegistryUtilsTest.xml": "69c13d56e648d096b7f936f773bcbf2d8199b1c7311a5f16ec7cd4f6db84f966",
+      "common\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.utils.ProtobufMessageTypeTest.xml": "79cd458b8597cba021d895e863778703acef19db0abfd0c2bc5d3a8df22f97dd",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.avro.AvroDeserializerTest.xml": "5abc2d8ff1a97486d6ae0cb52f6a59dd4453c5978e61810c08748800093375c8",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.avro.AvroRecordTypeTest.xml": "996a50ddea8a6a78d0d3692353d20ff6cedfcc2dce2d33a6e18fe854de2dbbce",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.avro.AWSKafkaAvroDeserializerTest.xml": "1e3b2e68308c05384844bd1412d59ce4ce793f0cf62a892610686c055c982736",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.GlueSchemaRegistryDeserializationFacadeTest.xml": "1f4671de1c852dcd30afcfd057e9d1a4b028d5c350b7eeca5b74cbc8503a6175",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.GlueSchemaRegistryDeserializerDataParserTest.xml": "a396156abe4e4b8e05c1163ce48bf63488848e9676954ef18730ac5c022a664b",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.GlueSchemaRegistryDeserializerFactoryTest.xml": "8dad5e4ca68733b3ebcd4d41c39cde60ed1cc152c26e79ffe1c46e55c12aca39",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.GlueSchemaRegistryDeserializerImplTest.xml": "b733d8164a7fdc0745309c9fdf9be67d584cb39ee6a4565e48dc0489e41062dd",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.GlueSchemaRegistryKafkaDeserializerTest.xml": "e865f947ca51479fb609b758fa7d768c72b3331e43c015a715140d51ab9fa9e6",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.json.JsonDeserializerTest.xml": "43db9a8006b31312cae2bbb0973d9baa6f1ed457c36e4e584977ce611906f0ec",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.protobuf.ProtobufClassNameTest.xml": "2802ac459bd566e1503cd5e3ab18b5f8283e887f5007cc4bd0fc80b06cd87fc0",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.protobuf.ProtobufDeserializerTest.xml": "4bd425c768c57522b25722962e171e32d9c9147ef6f0dd17819754c897ba86d6",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.protobuf.ProtobufWireFormatDecoderTest.xml": "69c7355a3f0a910634d7fb78060818d0411906181f79fa7383644f496dcbad3c",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.deserializers.SecondaryDeserializerTest.xml": "f9cd821667c2e2aa43ea228fda44f44fee43fe10b208d9e5a4a0a76207d2e3dd",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.avro.AvroSerializerTest.xml": "abbe28050f34d9ea7c189e2b64f82372be6752715ddb3b86919875920f9cee00",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.avro.AWSKafkaAvroSerializerTest.xml": "ae85a8f266df60389a61cfd9c0c731efa60fe54cb0480d488127c8192c38e9a9",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.avro.GlueSchemaRegistrySerializationFacadeTest.xml": "c272650160d320af8708a031010966856bfc6d7937eb49fdfdc4ddcb302de91e",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.GlueSchemaRegistryKafkaSerializerTest.xml": "7518f883e73b51eb49d9de3396345fd1b850e0ba2314f5b2d2784bf540ade808",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.GlueSchemaRegistrySerializerImplTest.xml": "115a6918091729d6e454338f0b5d3184c480998e943fbb39f6420db62ed3c4fe",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.json.JsonDataWithSchemaTest.xml": "36fa9e30bc83f27ee833789b7a015121ff3aecd95593d47b9c13af61cdd2af1b",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.json.JsonSerializerTest.xml": "6091d60fa02241500554275ed81a35acc393df8cac9bfb2ae9a5483bf3af7c51",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.json.JsonValidatorTest.xml": "804a4660b851539ed6fe0a1ecdb6634fdd58f69f57d549737278dc6169623cf1",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.protobuf.MessageIndexFinderTest.xml": "4dfbfa80f0d47f597617a15d779712dc464c6f3a324964ca5d6875ec14f8e5b8",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.protobuf.ProtobufSerializerTest.xml": "ed8879585a8dcc3ae7f10c0907b8b90e112da1bab922baf6812d241fefe19804",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.serializers.protobuf.ProtobufWireFormatEncoderTest.xml": "21599d07674a7c4016e7fb114c203f8f71516bb8c7b54a5b4ac67c4d79c78a2b",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.utils.apicurio.FileDescriptorUtilsTest.xml": "18ea4bee6e2b9d57bcf48cf2c6a78699736b5c8aa6b944c08bcd3c47ee3db7a8",
+      "serializer-deserializer\\target\\surefire-reports\\TEST-com.amazonaws.services.schemaregistry.utils.AVROUtilsTest.xml": "53edd0ea7822927629bb97c4fe1a2b37a1ad429566a3135e00537d1aad270bcc"
+    },
+    "artifacts": {
+      "build-tools\\target\\schema-registry-build-tools-1.1.24-cnc-wire6.4.jar": "b3bd639245ddf59668b49adbf7a6218eb35433b0ba1900ac9434a48edc5c9b5a",
+      "common\\target\\schema-registry-common-1.1.24-cnc-wire6.4.jar": "10a36b27a067dc5551076b9ffd45887a573ee379277895d2f096a58a56841c1b",
+      "serializer-deserializer\\target\\schema-registry-serde-1.1.24-cnc-wire6.4.jar": "e8e21ddd53bce7d602e21e031eb7182b31050caf3818ae8da2155c6461e242f3"
+    }
+  },
+  "stock_cold_api": {
+    "file": "stock-smoke-proof-4/cold-api-smoke.json",
+    "sha256": "9c36ca45682fba17ae7b2239604cfc08cc54a20417271fa2b6e2ec417c7716c6"
+  },
+  "reader_proof": {
+    "file": "wire6-readers-3/reader-proof.json",
+    "sha256": "a1391ce77f85031f5255aa88cc500d058760f95c4dde4b0614127f2adfc0a7fa",
+    "fixed_passed": true,
+    "old_control_failed": true
+  },
+  "cache_root": "C:\\Users\\unaiu\\.cache\\cnc-closeout-nifi-20261108",
+  "runtime_approved": false,
+  "serving_wire_assembly": "not-installed",
+  "normal_final_scan": "not-run",
+  "nested_final_scan": "not-run",
+  "pr119_ready": false
+}

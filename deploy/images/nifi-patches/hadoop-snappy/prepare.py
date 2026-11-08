@@ -6,7 +6,11 @@ import io
 import json
 import os
 import re
-import resource
+
+try:
+    import resource
+except ImportError:
+    resource = None
 import subprocess
 import tempfile
 import zipfile
@@ -119,6 +123,7 @@ def rebuild(original, replacement, provenance):
                     w.start_dir = w.fp.tell()
                     w._didModify = True
             info = zipfile.ZipInfo(PROVENANCE, (2026, 11, 4, 0, 0, 0))
+            info.create_system = 3
             info.external_attr = 0o100644 << 16
             w.writestr(info, json.dumps(provenance, sort_keys=True, indent=2).encode())
     return out.getvalue()
@@ -159,6 +164,8 @@ def external_fresh(output, forbidden):
 
 
 def limits():
+    if resource is None:
+        raise RuntimeError('bounded execution requires POSIX resource controls')
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     resource.setrlimit(resource.RLIMIT_CPU, (25, 25))
     os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})

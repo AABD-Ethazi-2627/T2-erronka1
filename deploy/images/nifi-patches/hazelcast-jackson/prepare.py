@@ -4,10 +4,11 @@ import argparse
 import hashlib
 import io
 import json
-from pathlib import Path
 import re
 import zipfile
-from bounded import run, FLAGS, JDK, digest
+from pathlib import Path
+
+from bounded import FLAGS, JDK, digest, run
 
 HERE = Path(__file__).resolve().parent
 TOOLS = ['maven-shade-plugin-3.6.2.jar','asm-9.9.1.jar','asm-commons-9.9.1.jar',
@@ -63,7 +64,7 @@ def assemble(original, remove, replacement, provenance):
     require(remove and replacement and remove <= set(entries(io.BytesIO(original))), 'invalid selected entries')
     with zipfile.ZipFile(io.BytesIO(original)) as z:
         require(len(z.namelist()) == len(set(z.namelist())), 'ambiguous original')
-        require(not any(re.match(r'META-INF/(?:[^/]+\.(?:SF|RSA|DSA|EC)|SIG-)', n, re.I) for n in z.namelist()), 'signed original')
+        require(not any(re.match(r'META-INF/(?:[^/]+\.(?:SF|RSA|DSA|EC)|SIG-)', n, re.IGNORECASE) for n in z.namelist()), 'signed original')
         require(not re.search(rb'(?im)^\S*-Digest:', z.read('META-INF/MANIFEST.MF')), 'manifest signatures')
         require(PROVENANCE not in z.namelist(), 'already patched')
         require(not (set(replacement)-remove) & set(z.namelist()), 'replacement collision')
@@ -85,8 +86,10 @@ def assemble(original, remove, replacement, provenance):
                 w.start_dir=w.fp.tell();w._didModify=True
             for n,b in sorted(replacement.items()):
                 i=zipfile.ZipInfo(n,(2026,11,5,0,0,0));i.external_attr=0o100644<<16
+                i.create_system=3
                 w.writestr(i,b)
             i=zipfile.ZipInfo(PROVENANCE,(2026,11,5,0,0,0));i.external_attr=0o100644<<16
+            i.create_system=3
             w.writestr(i,json.dumps(provenance,sort_keys=True,indent=2).encode())
     result=out.getvalue()
     new=entries(io.BytesIO(result));old=entries(io.BytesIO(original))

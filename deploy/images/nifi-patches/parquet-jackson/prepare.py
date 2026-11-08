@@ -119,8 +119,10 @@ def assemble(original, remove, replacement, provenance):
                 w.start_dir=w.fp.tell();w._didModify=True
             for n,b in sorted(replacement.items()):
                 i=zipfile.ZipInfo(n,(2026,11,5,0,0,0));i.external_attr=0o100644<<16
+                i.create_system=3
                 w.writestr(i,b)
             i=zipfile.ZipInfo(PROVENANCE,(2026,11,5,0,0,0));i.external_attr=0o100644<<16
+            i.create_system=3
             w.writestr(i,json.dumps(provenance,sort_keys=True,indent=2).encode())
     result=out.getvalue()
     new=entries(io.BytesIO(result));old=entries(io.BytesIO(original))

@@ -1,0 +1,17 @@
+[
+  {
+    "destination": "aws-original.tar.gz",
+    "url": "https://codeload.github.com/awslabs/aws-glue-schema-registry/tar.gz/c6a911301ea8ca72260bed3f2dfda83f3effcba2",
+    "sha256": "acd3b1ae461282698c3a3cb08842a5e6180660d5ad5427d2ab1932f10208bcfc"
+  },
+  {
+    "destination": "protobuf36-descriptor.proto",
+    "url": "https://raw.githubusercontent.com/protocolbuffers/protobuf/v36.1/src/google/protobuf/descriptor.proto",
+    "sha256": "c96db5406336ebcc82523c1dfb122721986a1f43c4aaed45a4a4ad6996efacc2"
+  },
+  {
+    "destination": "protobuf36-LICENSE",
+    "url": "https://raw.githubusercontent.com/protocolbuffers/protobuf/v36.1/LICENSE",
+    "sha256": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d"
+  }
+]

@@ -1,5 +1,13 @@
 # AWS Glue Wire 6 migration, source-built consumer
 
+The serving Dockerfile uses **`1.1.24-cnc-wire6.5`**, built with
+`--protobuf4-compatible` and the pinned Google36.1 descriptor/license inputs
+in `../closeout/aws-inputs.json`. The `.1` experiment described below established
+the Wire constructor migration but failed the real NiFi Protobuf4 ABI. It must
+not be installed alone. The `.5` implementation additionally preserves legacy
+PHP option42, uses the common protobuf `Message.Builder` interface, and supplies
+a private compatible descriptor to the AWS parser. All original tests remain.
+
 The actual stock NiFi 2.12.0 Wire 5.2 carrier is **nifi-aws-nar**, through
 `schema-registry-serde-1.1.24.jar`. Seven external AWS classes reference Wire.
 NiFi's separate Protobuf NAR already contains runtime/schema 6.4.7. Do not mix
@@ -30,7 +38,7 @@ Download the `SOURCE_URL` in `prepare.py` to a new private cache. Its exact
 SHA256 must match `SOURCE_SHA256` before extraction. Then run Python3.12:
 
 ```text
-python deploy/images/nifi-patches/wire6/prepare.py --source-archive /private/aws-original.tar.gz --output /private/new-source
+python deploy/images/nifi-patches/wire6/prepare.py --source-archive /private/aws-original.tar.gz --output /private/new-source --protobuf4-compatible --descriptor-source /private/protobuf36-descriptor.proto --descriptor-license /private/protobuf36-LICENSE
 ```
 
 The executed Linux builder is the official Maven3.9.11/Temurin17 image pinned to
@@ -77,16 +85,16 @@ Java21 patch level; both are identified separately in the closeout evidence.
 
 ## Assembly boundary
 
-The rebuilt Serde JAR is **not yet installed into the serving image**. A proper
-assembly must upgrade the entire AWS Wire family plus its required actual
-closure, not just runtime/schema. Wire6.4.7 declares newer JavaPoet0.12.0,
+The default Dockerfile installs the rebuilt Serde and the entire AWS Wire family
+with its required actual closure, preserving all NARs. Wire6.4.7 declares newer JavaPoet0.12.0,
 KotlinPoet2.2.0, SwiftPoet1.6.11, kotlinx-serialization1.10.0 and Kaml0.104.0;
-the AWS NAR has older copies. Existing parent Okio3.18.2/Kotlin2.4.20 must be
-included in the real NAR loader comparison. The successful isolated Maven
-closure cannot silently replace the mediated NiFi closure. Keep all NARs and
-all required capabilities; run actual consumer/NiFi controls and both image
-scans after assembly. No caller-written approval or relabelling of Wire5.2
-can substitute for that evidence. `runtime_approved:false` remains mandatory.
+the stock AWS NAR has older copies. The installed candidate retains parent
+Okio3.18.2/Kotlin2.4.20. Actual NarClassLoader controls execute against the served
+JARs: four AWS descriptor roundtrips and six Wire reader controls, with explicit
+code origins. The original SDK fails the Protobuf4 control; `.5` passes.
+`closeout/check_aws_build.py` requires all 1,445 original tests and checks every
+production JAR entry against that tested build. Full E2E acceptance remains
+separate, so provenance retains `runtime_approved:false`.
 
 See [closeout record](../../../../docs/evidence/NIFI_CLOSEOUT_20261108.md) for
 daemon/image identities, failed attempts, cache locations and current build state.

@@ -1,0 +1,110 @@
+[
+  {
+    "file": "wire-compiler-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-compiler/6.4.7/wire-compiler-6.4.7.jar",
+    "sha256": "69ae4fdb5439b3c1514af9f0ac2a9f54813e40525b0c334510b03ede29c0856b"
+  },
+  {
+    "file": "wire-grpc-client-jvm-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-grpc-client-jvm/6.4.7/wire-grpc-client-jvm-6.4.7.jar",
+    "sha256": "65c80c03f71577ed4aa2ad6c5b081aee46705bad3dcfa9300b94acab7a39ff74"
+  },
+  {
+    "file": "wire-java-generator-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-java-generator/6.4.7/wire-java-generator-6.4.7.jar",
+    "sha256": "5dc1105e4d3095ad7de68ae353f1c20031f9d06d14cf9e80fafae777e8ed6a82"
+  },
+  {
+    "file": "wire-kotlin-generator-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-kotlin-generator/6.4.7/wire-kotlin-generator-6.4.7.jar",
+    "sha256": "e74cba1267580999f76c4b4da27dea3ab5e5ea00c9364b9e65a0a52ac08e41f1"
+  },
+  {
+    "file": "wire-runtime-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-runtime/6.4.7/wire-runtime-6.4.7.jar",
+    "sha256": "6c8997423d5dd5e9fd01412a25f65d6bbea9497d531bf953354ac4305b0632e0"
+  },
+  {
+    "file": "wire-runtime-jvm-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-runtime-jvm/6.4.7/wire-runtime-jvm-6.4.7.jar",
+    "sha256": "83d56e2b348429ebc975aad62870c1b1e3dd1e9dc6eab6d618abacbeee66280f"
+  },
+  {
+    "file": "wire-schema-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-schema/6.4.7/wire-schema-6.4.7.jar",
+    "sha256": "2187d6f67875aca71c111ad6d8f002191253732f0a09132aa262ad7114b42d31"
+  },
+  {
+    "file": "wire-schema-jvm-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-schema-jvm/6.4.7/wire-schema-jvm-6.4.7.jar",
+    "sha256": "c676dc914a9ca64252c731f40ad1f9fe4cd263012272f326eaaba0b62cd1ba1a"
+  },
+  {
+    "file": "wire-swift-generator-6.4.7.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/wire/wire-swift-generator/6.4.7/wire-swift-generator-6.4.7.jar",
+    "sha256": "622c5cda05009e9fd1c67bef958cd42e3a6347ceb98d25f266817538e3ece74e"
+  },
+  {
+    "file": "javapoet-0.12.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/palantir/javapoet/javapoet/0.12.0/javapoet-0.12.0.jar",
+    "sha256": "74300a7c3674da3b3bbf05501310f6dafe72bf34d4fcf55764822c1c7e379e80"
+  },
+  {
+    "file": "kotlinpoet-jvm-2.2.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/squareup/kotlinpoet-jvm/2.2.0/kotlinpoet-jvm-2.2.0.jar",
+    "sha256": "87ba83576e2bbda929e2d4d83035eaf7984b9adc0798837b8e8d1eb4953a17da"
+  },
+  {
+    "file": "swiftpoet-1.6.11.jar",
+    "url": "https://repo.maven.apache.org/maven2/io/outfoxx/swiftpoet/1.6.11/swiftpoet-1.6.11.jar",
+    "sha256": "cc633541e2ef704e2274df392cf41496af0f3d977af482a3abc2656a7b60ef1d"
+  },
+  {
+    "file": "kotlinx-serialization-core-jvm-1.10.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-jvm/1.10.0/kotlinx-serialization-core-jvm-1.10.0.jar",
+    "sha256": "14d6f27ce28f61ebc4a516d562f911b7bc01cfbe5397fb884c45ea0db044c635"
+  },
+  {
+    "file": "kaml-jvm-0.104.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/charleskorn/kaml/kaml-jvm/0.104.0/kaml-jvm-0.104.0.jar",
+    "sha256": "639dd0503c24debbf0b6c3a4f98315c7109c13cf6ab2d9e1cda8f783030f0216"
+  },
+  {
+    "file": "snakeyaml-engine-kmp-jvm-4.0.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/it/krzeminski/snakeyaml-engine-kmp-jvm/4.0.1/snakeyaml-engine-kmp-jvm-4.0.1.jar",
+    "sha256": "0a139cd3d79b8be82a9f85a79e316d23f31fe074468d0680baf61bbef3bf8d85"
+  },
+  {
+    "file": "kotlinx-coroutines-core-jvm-1.10.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.10.2/kotlinx-coroutines-core-jvm-1.10.2.jar",
+    "sha256": "5ca175b38df331fd64155b35cd8cae1251fa9ee369709b36d42e0a288ccce3fd"
+  },
+  {
+    "file": "snappy-java-1.1.10.12.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.12/snappy-java-1.1.10.12.jar",
+    "sha256": "1c03ce77b3f2e926c25a952612e372404d80bc88c6c8052bede964804fabd732",
+    "repository_sha1": "c97fdfd953df72ae08be22384a1581ce665c2694"
+  },
+  {
+    "file": "snappy-java-1.1.10.12-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.12/snappy-java-1.1.10.12-sources.jar",
+    "sha256": "e1824abac0dd76c849b8b67291d6e465cd02306a211d562a34e73c83cc0b5ef2",
+    "repository_sha1": "47d13f77aaa77e1824246df7d3e8da7d7fe45ed4"
+  },
+  {
+    "file": "snappy-java-1.1.10.12.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.12/snappy-java-1.1.10.12.pom",
+    "sha256": "a7de2e8f79201ac427a360d9583dd5c1c07a6d000d5f131f4ba7e61afab70774",
+    "repository_sha1": "7274cc4951add6fb97a4d25617a651ee4db9006e"
+  },
+  {
+    "file": "hadoop-shaded-guava-1.6.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/thirdparty/hadoop-shaded-guava/1.6.0/hadoop-shaded-guava-1.6.0.jar",
+    "sha256": "f747a38003e7fd4c2e9219b39eb67025767a5794bec1874a4a0fc80170aab63d"
+  },
+  {
+    "file": "iceberg-build.gradle",
+    "url": "https://raw.githubusercontent.com/apache/iceberg/apache-iceberg-1.11.0/build.gradle",
+    "sha256": "3bedb86f800fb7a62ca2d7c2fc283b18771bfe5f6fd6d52eff7132b2456f2bac"
+  }
+]

@@ -80,3 +80,9 @@ def test_old_control_requires_working_valid_inputs_not_a_broken_classpath():
                'FAIL true positive-length-overflow java.lang.ArrayIndexOutOfBoundsException\n')
     assert readers.old_control_failed(SimpleNamespace(returncode=1, stdout=control))
     assert not readers.old_control_failed(SimpleNamespace(returncode=0, stdout=control))
+
+
+def test_protobuf4_compat_rejects_changed_upstream_getter(migration):
+    setter = 'FileOptions.newBuilder().setPhpGenericServices(phpGenericServices).build()'
+    with pytest.raises(ValueError, match='getter preimage'):
+        migration.protobuf4_compat(setter + '\nchanged upstream getter\n}')

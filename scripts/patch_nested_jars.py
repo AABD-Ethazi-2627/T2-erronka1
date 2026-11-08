@@ -8,7 +8,6 @@ import hashlib
 import json
 import os
 import re
-import resource
 import shutil
 import stat
 import struct
@@ -227,12 +226,12 @@ def validate_layout(z, entries, *, for_rewrite=False):
                     else: compressed = value
             if values:
                 raise ValueError('unconsumed local ZIP64 extra payload')
-        elif local_extra.get(1):
+        elif local_extra.get(1) and (
+                for_rewrite or local_extra[1] != struct.pack('<QQ',info.file_size,info.compress_size)):
             # Some Gradle JARs redundantly include both exact 64-bit sizes
             # beside ordinary local sizes. This carries no opaque bytes, but
             # can only remain inside an unchanged leaf, never be discarded.
-            if for_rewrite or local_extra[1] != struct.pack('<QQ',info.file_size,info.compress_size):
-                raise ValueError('unused local ZIP64 extra payload')
+            raise ValueError('unused local ZIP64 extra payload')
         end = info.header_offset + 30 + namesize + extrasize + info.compress_size
         gap = boundary - end
         if flags & 8:
@@ -613,6 +612,7 @@ def patch(source, output, plan, apply=False, **limits):
 
 
 def main():
+    import resource
     resource.setrlimit(resource.RLIMIT_AS, (512 * 1024**2, 512 * 1024**2))
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
