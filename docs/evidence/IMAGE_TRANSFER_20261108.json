@@ -100,6 +100,22 @@
         "Config": true,
         "RootFS": true
       }
+    },
+    {
+      "tag": "cnc-closeout-nifi:full-source-2",
+      "source_config_digest": "sha256:ce5cc16846311a7638412be695c8bceefb4799c28b62064afb8de0629e492fa5",
+      "target_oci_manifest_digest": "sha256:0a759f2ec32c5c9036051127dd255cf5ba2349c1138def99ed1efe16d41b08f7",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 20,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
     }
   ],
   "production_acceptance": false,
@@ -110,6 +126,14 @@
       "archive_sha256": "ed1ab300df887006043d5bc93aee2ea23f64bf35bf9bb34e7fd3210d0cf2cee1",
       "images": [
         "cnc-closeout-filebeat:final"
+      ]
+    },
+    {
+      "archive": "D:/github/_local/cnc-closeout-20261108/nifi-final.tar",
+      "archive_bytes": 1734850560,
+      "archive_sha256": "4330e93d4175fb2eaae2f6c46b9a9be358e467ddc038d9b9a62b3ac431079b1a",
+      "images": [
+        "cnc-closeout-nifi:full-source-2"
       ]
     }
   ]

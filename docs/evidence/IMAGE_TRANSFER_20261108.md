@@ -32,4 +32,13 @@ de campos y capas. Config de origen `aabe875e...`; manifiesto OCI de destino
 `aea160cd...`. El JSON contiene los digests completos y el inventario del
 archivo adicional. Crudo: `outputs/filebeat-transfer-inspection.json`.
 Esta imagen corresponde al binario con compress 1.20.2 ya escaneado y revisado;
-su E2E sigue pendiente. NiFi todavía no está transferido.
+su E2E sigue pendiente.
+
+## NiFi completo
+
+`nifi-final.tar`, SHA256
+`4330e93d4175fb2eaae2f6c46b9a9be358e467ddc038d9b9a62b3ac431079b1a`,
+ya está cargado y comprobado con el mismo procedimiento: config `ce5cc168...`,
+manifiesto destino `0a759f2e...`, campos y 20 capas idénticos. Digests completos
+y tamaño en JSON; crudo `outputs/nifi-transfer-inspection.json`. Se conservan
+el TAR y los recursos fuente. El E2E usa esta imagen completa, sin excluir NAR.
