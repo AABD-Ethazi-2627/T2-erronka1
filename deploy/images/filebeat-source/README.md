@@ -25,8 +25,8 @@ tienen CRLF y los blobs Git correspondientes tienen LF. No admite otras
 normalizaciones ni archivos ausentes/adicionales.
 
 Resultado y hash: [verification.json](verification.json). El Dockerfile cambia
-solo la procedencia de descarga y conserva la versión 9.5.5, el Go fijado, los
-dos ajustes de dependencias y el checksum obligatorio. Nuevo archivo:
+la procedencia de descarga y conserva la versión 9.5.5, el Go fijado y el
+checksum obligatorio. Nuevo archivo:
 
 ```text
 https://codeload.github.com/elastic/beats/tar.gz/b80bf8464fba72f582cefed91dd72909eb7116db
@@ -52,6 +52,31 @@ uv run --frozen --group dev --extra kafka python -m pytest -q tests/test_filebea
 Ocho casos verifican el origen válido y el rechazo de contenido modificado,
 extra, ausente, traversal, modo ejecutable cambiado, árbol truncado/ajeno y
 commit no verificado. Las 23 pruebas focalizadas de origen, infraestructura y
-gate, con 21 subpruebas, pasan. La construcción con el nuevo pin ya superó la
-descarga con checksum y sigue compilando Go al escribir este registro; no se
-le atribuye aún imagen final, escaneo o recorrido funcional.
+gate, con 21 subpruebas, pasan. La construcción inicial superó la descarga con
+checksum; la comprobación Go posterior detectó el defecto descrito a continuación.
+
+## Bloqueo adicional descubierto por la prueba Go
+
+La imagen inicial construida desde esta fuente, ID
+`sha256:62cf3c2121838ec9e83e9d08f00b059f1b71a688d681ef2c4782c84ca2ff15cf`,
+pasó Trivy con la única disposición preexistente GO-2026-5932. Su CLI real
+devuelve Filebeat 9.5.5. Sin embargo, `govulncheck v1.9.0 -mode=binary` detectó
+símbolos vulnerables de `github.com/klauspost/compress v1.20.0`:
+GO-2026-6865 / CVE-2026-116591 / GHSA-fpmh-frq8-7rj8. El reporte Go oficial
+descargado de `https://vuln.go.dev/ID/GO-2026-6865.json` y el
+[advisory del mantenedor](https://github.com/klauspost/compress/security/advisories/GHSA-fpmh-frq8-7rj8)
+identifican 1.20.2 como corrección. El gate no se rebaja ni se añade excepción.
+
+Se fija explícitamente `github.com/klauspost/compress@v1.20.2` junto a los dos
+ajustes existentes. La nueva compilación termina y el análisis binario real
+devuelve exit 0, **cero vulnerabilidades alcanzables**. La identidad de la imagen
+y el hash del binario extraído, el buildinfo con el hash Go de 1.20.2 y el hash
+del log se conservan en [runtime-result.json](runtime-result.json).
+Su nuevo Trivy sigue pendiente; no se reutiliza el reporte de la imagen anterior.
+La imagen previa y ambos binarios se conservan para contrastar el cambio.
+
+El primer intento del harness Go no pudo ejecutar su binario compilado porque
+el tmpfs temporal era noexec. El segundo habilitó ejecución solo en ese tmpfs,
+con raíz read-only, sin capacidades, 1 CPU, 1 GiB y 900 s de límite: es el que
+produjo el diagnóstico real de compresión. No se atribuye el primer fallo al
+producto ni se presenta como prueba superada.
