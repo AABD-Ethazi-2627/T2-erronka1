@@ -1,0 +1,364 @@
+{
+  "date": "2026-11-05",
+  "base_commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+  "scope": "Local checkout evidence and explicitly identified local research; no remote refresh",
+  "rubric_sha256": "e3e05d6fe408e163f6f8247cd7054f2a4ce4de6aa5757048ba432cd682139463",
+  "files": {
+    "ENUNTZIATUA.md": {
+      "sha256": "3ca6a3ae33c650a2aa1c2f60331995485f86e6b62b6a0277023003d459f9fd87",
+      "git_tracked": true
+    },
+    "contracts/telemetry.schema.json": {
+      "sha256": "c19b0d20fd03555a5acec9ded07831e6a10d1523d5bd917b5dce90b4fd4757f0",
+      "git_tracked": true
+    },
+    "docs/CG14_AUTOMATIC_GRAPH.md": {
+      "sha256": "e3100d90815a13b1db35fe87b256aa605883bbc775939a48d71cf830cb22fcd2",
+      "git_tracked": true
+    },
+    "docs/CG14_DURABLE_PIPELINE.md": {
+      "sha256": "b06b33d1972043933c5be5aae6da89e9191d54b1efe8618da8b552de4cc966d7",
+      "git_tracked": true
+    },
+    "docs/CG14_SECURITY_CHECKLIST.md": {
+      "sha256": "afd76270f57a89cefc2b9a8e4854c5f4b47173e4c760ba90c9c60094efde3636",
+      "git_tracked": true
+    },
+    "docs/DUCKDB_2_MIGRATION.md": {
+      "sha256": "216a4bfb9c58742234622c19cf4458097dc13fe8db8e5daa00483e837bbeb759",
+      "git_tracked": true
+    },
+    "docs/LAN_ACCESS.md": {
+      "sha256": "458c9bc35b45f34e3e69da0ee5db834bfa2a08632459404f26d12f055290a414",
+      "git_tracked": true
+    },
+    "docs/PLATFORM_SUPPORT.md": {
+      "sha256": "b90810cf3943b929e6efe023740c67543cfc022d6d69ce441b8fa5657790410f",
+      "git_tracked": true
+    },
+    "docs/REPOSITORY_LAYOUT.md": {
+      "sha256": "a9d749bfd94564c34b52ee5ab4d1e96eb2ab99d444fff7c39826943c41ae02cc",
+      "git_tracked": true
+    },
+    "docs/SCORING_REPLAY_CONTRACT.md": {
+      "sha256": "d23d33f488a468f7c0de5f22598c85d472e72f3ffdf788da404ee0bc315f9f76",
+      "git_tracked": true
+    },
+    "docs/SMB_FILEBEAT_LAB.md": {
+      "sha256": "c444e959aff9e7bbcfd1c5bf81b667a094bc0ce50eee3e9b250f1d66a438d9c0",
+      "git_tracked": true
+    },
+    "docs/demo/ACTA_PENDIENTE_20261022.md": {
+      "sha256": "99f30b7e33343adaa28d9b9c7fc030eb51bf73392c7c7c6fcc7f2d2060a4a1a7",
+      "git_tracked": true
+    },
+    "docs/demo/ENTSEGU_PRESTATUA_20261028.md": {
+      "sha256": "e2613df81e78bb911a271138e9d6b4dc54bb887dcfa792b5088381f6c1554d4d",
+      "git_tracked": true
+    },
+    "docs/demo/PENDING_HANDOFF_20261028.md": {
+      "sha256": "f6144257a6924d5eec0f9da9d1b624139e0fb3565f103394f5afb611bebf6b8d",
+      "git_tracked": true
+    },
+    "docs/evidence/CG04_split_membership.json": {
+      "sha256": "081f11bfe228d8a707a0817306e1e768f3991bf9b880fc1dc63c1b3980821873",
+      "git_tracked": true
+    },
+    "docs/evidence/CG06.md": {
+      "sha256": "ca8fc927970f5df34e60258808fa8c80d7e321a07cb74537dc6258ce9ac7fed3",
+      "git_tracked": true
+    },
+    "docs/evidence/CG07.md": {
+      "sha256": "3a98846597dfa0079f51dbc51cfb55727ad1bcb6782eb62b184c4fc5d32dddcf",
+      "git_tracked": true
+    },
+    "docs/evidence/CG08.md": {
+      "sha256": "1d5bba0747abfee3d40e1207a742330f49c42cdbddeb3beef01f6b70bca1c53a",
+      "git_tracked": true
+    },
+    "docs/evidence/CG10_PRECISION_20261022.md": {
+      "sha256": "68db07ba221fc300f67c18e62a2d8ce59f0c4b971cf0b700b4b4192dce76430a",
+      "git_tracked": true
+    },
+    "docs/evidence/CG10_results.json": {
+      "sha256": "40be1d3f3e8b1bc9f9cdacb2e1a8750aac1db30a5e8861a048070e977bd9ab59",
+      "git_tracked": true
+    },
+    "docs/evidence/CG15_ARCHIVE.md": {
+      "sha256": "1103bbb89fa6b6cb4f00f4fc37c3aab5967d2d84170cfe88f800fdc8f34e2e30",
+      "git_tracked": true
+    },
+    "docs/evidence/CG17_CURRENT_STATE_SCOPE.md": {
+      "sha256": "b3ab1397cdd5ae3a50ee7834186eab504884c57c6ec76a711d0f4322220a4fc0",
+      "git_tracked": true
+    },
+    "docs/evidence/CG19_2026-10-21.md": {
+      "sha256": "32acfd1dc30305bec47ab9b434aa104353b224d01854b7c7f074493274eda952",
+      "git_tracked": true
+    },
+    "docs/evidence/CG19_SVG_ARIA_20261022.md": {
+      "sha256": "c14ba808d62505c4412eccec670cf09668481ff9779904dd8236e9e8f8c73b44",
+      "git_tracked": true
+    },
+    "docs/evidence/CG19_render_2026-10-21.md": {
+      "sha256": "323202363087d859091cb29fab5a9dae2f14b123837f9dc6747cc3bf6d002b09",
+      "git_tracked": true
+    },
+    "docs/evidence/CG24.md": {
+      "sha256": "9f622b7db03c3fc52dea15aa59deeda87e03b0659153cb73bd3ec26d213b4fdc",
+      "git_tracked": true
+    },
+    "docs/evidence/CG30.md": {
+      "sha256": "c4a478883098c589fd409bb91635ff8c9ac02a3a9763da044ff6a4c0cfbb7517",
+      "git_tracked": true
+    },
+    "docs/evidence/CG32_CAMPAIGN_20261028.md": {
+      "sha256": "c275ab20956a6607fd764f70dba7436e27fb8e95c8eeb7f3c987b760a112d329",
+      "git_tracked": true
+    },
+    "docs/evidence/CG34_20261023/business-summary.json": {
+      "sha256": "d820c7c296297d4723e22bb1d03e369ae06399aef50a8c80aed94606a831f9f4",
+      "git_tracked": true
+    },
+    "docs/evidence/CG34_EXPLORACION_20261023.md": {
+      "sha256": "dd8a6c41c5da82b1296a587f8bf3cc0e1d7806ef89ac84b5c8b967df0b3bb56d",
+      "git_tracked": true
+    },
+    "docs/evidence/DOCENTE_FORO_20261023.md": {
+      "sha256": "6101c7bddebca6a0f6667d984b5845c47b3e5de69513b0c58202ec3cd6aa511f",
+      "git_tracked": true
+    },
+    "docs/memoria_teknikoa/arkitektura.svg": {
+      "sha256": "6378a47192eaccc384bcdc28db1eb90f877a532c4cff08d29ca9cbfef9768325",
+      "git_tracked": false
+    },
+    "docs/memoria_teknikoa/politikak.svg": {
+      "sha256": "e34bfef61ab2caa4f30e7c47faa6bbb0ec1f4e8ee835cc7f2cd84e94caf1bf46",
+      "git_tracked": false
+    },
+    "docs/rubrica/ACLARACIONES_20261023.md": {
+      "sha256": "2a4f73318f52fb8b411d2461ca11d64a2c57454db28d47fa1c1929e95d783ca7",
+      "git_tracked": true
+    },
+    "docs/rubrica/ESTADO_20261028.md": {
+      "sha256": "e28410d405d5bda7f5d5901f2caa8af5658930f4dd59d73f45322ebd086ee637",
+      "git_tracked": true
+    },
+    "docs/rubrica/OBJETIVOS_Y_ETAPAS.md": {
+      "sha256": "9328ed0be2628ea7cc2bdd66b9aa59002c1002b1982b77a1e0a02cb4e8ccf9dc",
+      "git_tracked": true
+    },
+    "docs/rubrica/fuente.json": {
+      "sha256": "d84d493e34479cfdbaac54d2fb53e7024fcad7b6c772bf04b0fa26572f0de2e2",
+      "git_tracked": true
+    },
+    "elasticsearch/README.md": {
+      "sha256": "62bd2c6194d1f3f58aba47f46b250792f9b8dccf3400f48139ae0279669ea8ff",
+      "git_tracked": true
+    },
+    "exports/estudio-multimodelo-2026-11-04/COMPARATIVA.md": {
+      "sha256": "cf753281b71311ed1da155ba28ea903c2b7b31d07b99a0877b7dcf11546a35e4",
+      "git_tracked": false
+    },
+    "exports/sincronizacion-2026-11-04/fuentes/S11-LOCAL_PIPELINE_BROWSER_20261103.md": {
+      "sha256": "fc823ceb43f0b0df5c2a2782f1468915a54089d0fb2f648e10c41261185ded02",
+      "git_tracked": false
+    },
+    "exports/sincronizacion-2026-11-04/fuentes/S12-READ_API.md": {
+      "sha256": "006f6a7d4bb1ce4b670100466b29f5df62f5349b219dc9a8cbf4d09f0250d4bd",
+      "git_tracked": false
+    },
+    "exports/sincronizacion-2026-11-04/fuentes/S15-NIFI_CI_BLOCKERS_20261104.md": {
+      "sha256": "69ab44f234b1247aff45aab8da365ed5cea1aecaac64acc2aa98b680b5faf6a0",
+      "git_tracked": false
+    },
+    "exports/sincronizacion-2026-11-04/fuentes/S16-WIRE5_REVIEW_STATUS_20261104.md": {
+      "sha256": "e88d0e17d5da5e7f8abdcf334b1af1999a5d16cec1b6bfafee78bd65a9c4e0bc",
+      "git_tracked": false
+    },
+    "pyproject.toml": {
+      "sha256": "7985c47365465de682b83cf8ebf28d00fe61992259803df46a084f13259d192b",
+      "git_tracked": true
+    },
+    "scoring/preparation.py": {
+      "sha256": "2578e9497dc16d8501d88c4fe472b0f4146dc4661548a5abfa0019251ee80c1d",
+      "git_tracked": true
+    },
+    "scoring/response_ledger.py": {
+      "sha256": "93355badf158753222b8c6fa6b1feb0327d03670fd93169e4b58c697344c43cd",
+      "git_tracked": true
+    },
+    "scoring/scope.py": {
+      "sha256": "f8f9443f96465fe96d922a380af6940928a863d21a2f7a26e8db19ca35e4d7e7",
+      "git_tracked": true
+    },
+    "scoring/score_api.py": {
+      "sha256": "013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e",
+      "git_tracked": true
+    },
+    "scripts/build_automatic_graph_flow.py": {
+      "sha256": "9ea541df4b3c859a92f194be7fbe54746c096984dfa1693db7ae8859446b174a",
+      "git_tracked": true
+    },
+    "scripts/build_cg19_evaluation.py": {
+      "sha256": "cc8e4def448e3880e214daec414bccfcb7197a07a990eb7eac0a5a525d9c171b",
+      "git_tracked": true
+    },
+    "scripts/build_es_ingest_pipeline.py": {
+      "sha256": "15bd402dae34c0c3a1a5a756e8cc3bd03d2518c396174b8f190211f771cec7cd",
+      "git_tracked": true
+    },
+    "scripts/business_ml_study.py": {
+      "sha256": "52ef68d85532176b3b8b72e06a399badfbb19d0c85405855aab79212f352b8db",
+      "git_tracked": true
+    },
+    "scripts/capture_smb.py": {
+      "sha256": "b620d24c1cd7dc524c5e0975eb9731e093aa8610b232f3c586f142f00734858b",
+      "git_tracked": true
+    },
+    "scripts/cg32_load.py": {
+      "sha256": "41291ae9f7a42bf52ac9825cda71e7974644ca5006ea6c19a0337a44b1467b4d",
+      "git_tracked": true
+    },
+    "scripts/create_lab_dashboard.py": {
+      "sha256": "ac4523a54c06e0f78d874c21d16afcb0b553b0bd74885f82f4effd5b90a42fd8",
+      "git_tracked": true
+    },
+    "scripts/durable_pipeline.py": {
+      "sha256": "c2823a058760f49c86659cc376763b6be4d8f5991ae292f96375fa0b1d2d2225",
+      "git_tracked": true
+    },
+    "scripts/ml_study.py": {
+      "sha256": "1e85024057548f08341fd3fc9dc08d70e46269cb5f578ccab3590b7c576c7618",
+      "git_tracked": true
+    },
+    "scripts/ml_study_models.py": {
+      "sha256": "78293fa87b0484803d8171206ab951201c1e569ec8f261765e67f101133b74d8",
+      "git_tracked": true
+    },
+    "scripts/private_files.py": {
+      "sha256": "47847e63d26be64434e3f5e4b01b2cf1b5802f48f3ac31bcf9b7ee231ed351a3",
+      "git_tracked": true
+    },
+    "scripts/report_thresholds.py": {
+      "sha256": "794c37b8a1546a28abecd767fad7c6a42c8f6b34c94ea51b143bc5178d2fb753",
+      "git_tracked": true
+    },
+    "scripts/run_automatic_graph.py": {
+      "sha256": "f213652531ee466aa39e6473f82aaf398985c4926de9b2b626ed2cac3548a456",
+      "git_tracked": true
+    },
+    "tests/research/test_business_ml_study.py": {
+      "sha256": "aa3580485d1f8b4c1052a9267e1257150efb7ef5f73412a5442f13c000c07d95",
+      "git_tracked": true
+    },
+    "tests/research/test_cg40_partitions.py": {
+      "sha256": "a5596bbf1357a0c435d911c6a8b0d18590ae82cba130ea0268ef7727f8f1e745",
+      "git_tracked": true
+    },
+    "tests/research/test_ml_study.py": {
+      "sha256": "a967462d98ff1bae7a2c60305bb95956e9b4a5015dc7d9c656098151dc3643c3",
+      "git_tracked": true
+    },
+    "tests/test_anomaly.py": {
+      "sha256": "8f91ae7595abff5fe31463ca40a1ae3974de00d3c92b4adfe702e6bf1a086389",
+      "git_tracked": true
+    },
+    "tests/test_api.py": {
+      "sha256": "e4317c82dcf62b215e1b9480867340b7ebd562f552615581a04be31f98f1281c",
+      "git_tracked": true
+    },
+    "tests/test_audit_cg02.py": {
+      "sha256": "6c37ebddd2afa290e979b8d6c23f74e77a75cd2c92b11f1f1df7e32235c5d2a1",
+      "git_tracked": true
+    },
+    "tests/test_automatic_graph.py": {
+      "sha256": "5d9a22faf72ce3f891a0099b202aef001d8c56c1d1014b9ca3f388a775edb035",
+      "git_tracked": true
+    },
+    "tests/test_cg14_durable_pipeline.py": {
+      "sha256": "f96476b480ec56bb254cd9fdd7ab87f258e26a86faacd6d0274aff1d73385105",
+      "git_tracked": true
+    },
+    "tests/test_cg14_hardening.py": {
+      "sha256": "156005594cb60cd6008899a9613be97e52e1206a5904308da7e1615ab835cc7b",
+      "git_tracked": true
+    },
+    "tests/test_cg32_observability.py": {
+      "sha256": "65ebe1d483fed5dc0a991f3421ebf01bcad374c0c5fb12099cf2aa0b827fe430",
+      "git_tracked": true
+    },
+    "tests/test_contract_validation.py": {
+      "sha256": "ee236f5aa3c3ee26de1e457483efd6421453a5aa0f9e5ede11e42667c8d164ac",
+      "git_tracked": true
+    },
+    "tests/test_current_state_scope.py": {
+      "sha256": "21be31e4d9ef3e6947af9cf17c8489a7784a6899eb443a53b89afb6ace0ed237",
+      "git_tracked": true
+    },
+    "tests/test_duckdb_output.py": {
+      "sha256": "6c6fc9c501965339712355498be046b46832abd33e84279b263a0e603cab9017",
+      "git_tracked": true
+    },
+    "tests/test_es_ingest_pipeline.py": {
+      "sha256": "51c06485c7414fec59432adb9fa960957e89b1851d7b5576a9754a52ca86f0e3",
+      "git_tracked": true
+    },
+    "tests/test_history.py": {
+      "sha256": "cdd5323b1bcc4a374c3aeab8aac43ec935405fa6b94f8b0bedcfb2133a0f1452",
+      "git_tracked": true
+    },
+    "tests/test_kafka_archive.py": {
+      "sha256": "b0be631ddebc61db4fcb97274e2b4184aaf88c0d13b014b57d19191104ed8017",
+      "git_tracked": true
+    },
+    "tests/test_lab_dashboard.py": {
+      "sha256": "529f147e9502fde0c5c4d683bd9f06797ae71ffbe801313128b9724b554e3163",
+      "git_tracked": true
+    },
+    "tests/test_lab_dashboard_contrast.py": {
+      "sha256": "2a2bd8057b5f83b58476788990cf7153bce3afc27125d47537988cf26ef4d160",
+      "git_tracked": true
+    },
+    "tests/test_policy.py": {
+      "sha256": "b7df522abe10562a845347a6852112f3e4e50b4874a338458724d34cab8778fc",
+      "git_tracked": true
+    },
+    "tests/test_preparation.py": {
+      "sha256": "c5fd77d03c747abf556ae61c4580be00f3f3ed40e24d2331788fb112ad020019",
+      "git_tracked": true
+    },
+    "tests/test_private_files.py": {
+      "sha256": "4669640370d993f6e17ef788c5d30cd3fb7c820e7abfe84ec4efbe57d4d89af8",
+      "git_tracked": true
+    },
+    "tests/test_report_thresholds.py": {
+      "sha256": "19615030dcb5caf8d31f5da203aa1c8a04d1d3d83b4243222629b5c517dc467e",
+      "git_tracked": true
+    },
+    "tests/test_retention_recovery.py": {
+      "sha256": "696563f75c6b08c1976ffc8bb810d6a2ea5fe8edd8b5f42801c749d375a6e009",
+      "git_tracked": true
+    },
+    "tests/test_scoring_replay.py": {
+      "sha256": "bb0c3a2daf88f64bca34579d0c3b5cd7dc8904b2943bfa4aa417a0725dc3b01f",
+      "git_tracked": true
+    },
+    "tests/test_smb_filebeat_contract.py": {
+      "sha256": "fe8d6d705af26385bffb0edb90632659334e605869ec70b5c59df6cb0d765f50",
+      "git_tracked": true
+    },
+    "tests/test_smotenc.py": {
+      "sha256": "528b927dd9e90f4b0a2c1dd0a623da54e869f92e96ba8066c322ac73ab156388",
+      "git_tracked": true
+    },
+    "tests/test_type_diagnostics.py": {
+      "sha256": "7aebd7e5a3b3f91d1c40cc1cb9db7d84c69049f06d2e73103a7d314ff5a8ab30",
+      "git_tracked": true
+    },
+    "uv.lock": {
+      "sha256": "8367a28e49a9b17035a1fd9c303db94a29113ca799dc67c5a0475d96593504d8",
+      "git_tracked": true
+    }
+  }
+}

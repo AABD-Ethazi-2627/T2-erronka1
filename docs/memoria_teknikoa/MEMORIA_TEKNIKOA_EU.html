@@ -1,0 +1,978 @@
+<!doctype html><html lang="eu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CNC Guard · Memoria teknikoa</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f0f4f7;color:#182f40;font:17px/1.72 system-ui,sans-serif}nav{position:fixed;inset:0 auto 0 0;width:290px;background:#142e40;padding:28px 20px;overflow:auto;color:white}nav strong{font-size:21px}nav a{display:block;color:#dbe8ef;text-decoration:none;font-size:13px;line-height:1.5;padding:6px 0;border-bottom:1px solid #ffffff18}nav a.depth-2{padding-left:12px;font-size:12px}main{margin:30px 35px 50px 325px;max-width:1000px;background:white;padding:50px 60px;border-radius:8px;box-shadow:0 3px 24px #1432470c}h1{font-size:30px;line-height:1.25;border-top:3px solid #196e83;padding-top:24px;margin-top:55px}h1:first-child{border:0;margin-top:0;font-size:39px}h2{font-size:23px;line-height:1.35;margin-top:38px}h3{font-size:19px}p{margin:12px 0 20px}a{color:#0c667f}code{font:0.84em/1.5 monospace;background:#edf2f5;padding:2px 4px;overflow-wrap:anywhere}pre{background:#edf2f5;padding:18px;white-space:pre-wrap}blockquote{border-left:4px solid #3d8094;margin:20px 0;padding:8px 20px;background:#f3f7fa;font-size:16px}table{border-collapse:collapse;width:100%;font-size:14px;margin:25px 0;table-layout:fixed}th,td{border:1px solid #d2dce3;padding:10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#e8f1f5}img{max-width:100%;height:auto}li{margin:8px 0}h1,h2,h3{scroll-margin-top:20px}@media(max-width:1000px){nav{position:relative;width:auto;max-height:260px}main{margin:18px;padding:25px;font-size:16px}}@media print{nav{display:none}main{margin:0;padding:0;box-shadow:none}h1{break-before:page}h1:first-child{break-before:auto}h1,h2,h3{break-after:avoid}tr,img{break-inside:avoid}}</style></head><body><nav aria-label="Aurkibidea"><strong>CNC Guard</strong><p>Memoria teknikoa · 2026-11-05</p><a class="depth-1" href="#atala-1">CNC Guard: memoria teknikoa eta errubrikaren justifikazioa</a><a class="depth-1" href="#atala-3">1. Helburua, irismena eta ekarpena</a><a class="depth-1" href="#atala-4">2. Ebidentziaren metodoa eta errubrikaren interpretazioa</a><a class="depth-1" href="#atala-5">3. Arkitektura eta teknologiak hautatzeko arrazoiak</a><a class="depth-1" href="#atala-9">4. Datuen jatorria, kalitatea eta historikoa</a><a class="depth-1" href="#atala-13">5. Ezaugarriak, partizioak eta datu-ihesaren prebentzioa</a><a class="depth-1" href="#atala-17">6. Ereduak, esperimentazioa eta hautaketa</a><a class="depth-1" href="#atala-21">7. Ebaluazio estatistikoa eta emaitzen interpretazioa</a><a class="depth-1" href="#atala-25">8. Kostuak, atalaseak eta mantentze-erabakia</a><a class="depth-1" href="#atala-29">9. APIa, kontratuak eta inferentzia errepikagarria</a><a class="depth-1" href="#atala-33">10. Ingesta automatikoa, iraunkortasuna eta berreskuratzea</a><a class="depth-1" href="#atala-37">11. Elasticsearch, Kibana eta BI</a><a class="depth-1" href="#atala-41">12. Karga, latentzia eta eskalagarritasuna</a><a class="depth-1" href="#atala-45">13. Segurtasuna, pribatutasuna eta erantzukizuna</a><a class="depth-1" href="#atala-49">14. Erreproduzigarritasuna, ingurunea eta kalitate-kontrola</a><a class="depth-1" href="#atala-56">15. Errubrikaren 40 irizpideen justifikazio xehea</a><a class="depth-2" href="#atala-57">Zereginak!G5 — Ikaskuntza, inferentzia eta autonomia</a><a class="depth-2" href="#atala-58">Zereginak!G10 — Eredu gainbegiratuak eta arrarotasun-ereduak</a><a class="depth-2" href="#atala-59">Zereginak!G14 — Kostua eta scoring-aren bideragarritasuna</a><a class="depth-2" href="#atala-60">Zereginak!G16 — Lege-arriskuak eta erantzukizunen banaketa</a><a class="depth-2" href="#atala-61">Zereginak!G17 — Pribatutasuna eta industria-sekretuak</a><a class="depth-2" href="#atala-62">Zereginak!G19 — Security by Design</a><a class="depth-2" href="#atala-63">Zereginak!G20 — Privacy by Design diseinu osoan</a><a class="depth-2" href="#atala-64">Zereginak!G23 — IA estua eta IA orokorra</a><a class="depth-2" href="#atala-65">Zereginak!G24 — Arau deterministak eta ikaskuntza estatistikoa</a><a class="depth-2" href="#atala-66">Zereginak!G31 — Ikaskuntza-motak eta datu-beharrak</a><a class="depth-2" href="#atala-67">Zereginak!G32 — Tresnen ekosistema eta integrazioa</a><a class="depth-2" href="#atala-68">Zereginak!G36 — EDA eta etiketadun datuen prestaketa</a><a class="depth-2" href="#atala-69">Zereginak!G38 — Feature engineering eta leakage prebentzioa</a><a class="depth-2" href="#atala-70">Zereginak!G39 — Baliozkotzea eta nahasmen-matrizea</a><a class="depth-2" href="#atala-71">Zereginak!G41 — Inferentzia-zerbitzu sendoa</a><a class="depth-2" href="#atala-72">Zereginak!G45 — Desoreka, recall eta egokitasun ekonomikoa</a><a class="depth-2" href="#atala-73">Zereginak!G46 — Sistema osoaren ebaluazio praktikoa</a><a class="depth-2" href="#atala-74">Zereginak!G49 — Informazio-erauzketa automatikoa</a><a class="depth-2" href="#atala-75">Zereginak!G52 — Python hautatzeko justifikazioa</a><a class="depth-2" href="#atala-76">Zereginak!G55 — Programa modularra eta kontratu zorrotzak</a><a class="depth-2" href="#atala-77">Zereginak!G60 — Ereduaren definizio matematiko eta operatiboa</a><a class="depth-2" href="#atala-78">Zereginak!G61 — Aplikazioaren inplementazioa eta alerta-politika</a><a class="depth-2" href="#atala-79">Zereginak!G62 — Feature engineering, CV eta doikuntzaren ebaluazioa</a><a class="depth-2" href="#atala-80">Zereginak!G65 — Telemetriatik informazio operatibora</a><a class="depth-2" href="#atala-81">Zereginak!G66 — Iturri eta formatuen koherentzia</a><a class="depth-2" href="#atala-82">Zereginak!G68 — Indizeak eta ingest pipeline-a</a><a class="depth-2" href="#atala-83">Zereginak!G71 — Bistaratze-tekniken hautaketa</a><a class="depth-2" href="#atala-84">Zereginak!G72 — Sentsoreak eta mantentze-helburua</a><a class="depth-2" href="#atala-85">Zereginak!G77 — Erauzketa eta biltegiratze sendoa</a><a class="depth-2" href="#atala-86">Zereginak!G80 — Karga eta baliabide/segurtasun ebaluazioa</a><a class="depth-2" href="#atala-87">Zereginak!G85 — Biltegiratze banatua eta erredundantzia</a><a class="depth-2" href="#atala-88">Zereginak!G87 — Aginte-koadro argia eta osoa</a><a class="depth-2" href="#atala-89">Zereginak!G90 — Kafka kontsumoa eta offset kudeaketa</a><a class="depth-2" href="#atala-90">Zereginak!G92 — Prozesamendu eta inferentziaren automatizazioa</a><a class="depth-2" href="#atala-91">Zereginak!G95 — Datu-kalitatearen ondorioak</a><a class="depth-2" href="#atala-92">Zereginak!G96 — Galera eta bikoizketen aurkako neurriak</a><a class="depth-2" href="#atala-93">Zereginak!G100 — BIrako datu-hautaketa</a><a class="depth-2" href="#atala-94">Zereginak!G101 — Garbiketa eta eraldaketaren koherentzia</a><a class="depth-2" href="#atala-95">Zereginak!G104 — Alerten interpretazio kritikoa eta kostua</a><a class="depth-2" href="#atala-96">Zereginak!G105 — BI simulazioa eta erabakiaren aurkezpena</a><a class="depth-1" href="#atala-97">16. Itxiera, mugak eta defentsa prestatzeko gida</a><a class="depth-1" href="#atala-102">17. Glosarioa eta iturri nagusiak</a></nav><main><h1 id="atala-1">CNC Guard: memoria teknikoa eta errubrikaren justifikazioa</h1><p><strong>B taldea · Proiektuaren amaierarako dokumentazio teknikoa · 2026-11-05</strong></p>
+<p><strong>Dokumentuaren egoera:</strong> berrikuspen teknikorako prestatua. Taldeak edukia, terminologia eta benetako ekarpenen esleipena berrikusi behar ditu entregatu aurretik. Agiri honek ez du sinadurarik, ahozko defentsarik edo irakaslearen onarpenik ordezkatzen.</p>
+<p><strong>Aztertutako kode-oinarria:</strong> <code>c34cabe0c851ba4b7688e1a3a4448d9898002f1e</code>; Git zuhaitza: <code>ff380a45bbb2dc358e95f7c156ab137f0e5ff2de</code>. Tokiko checkout-a aztertu da; urruneko adarrak eta uneko CI egoera ez dira kontsultatu. <code>exports/</code> eta <code>prototypes/</code> aurretik zeuden eta Git-en jarraipenetik kanpo daude. Azaroaren 4ko ikerketa osagarriak tokiko artefaktu gisa identifikatzen dira.</p>
+<p><strong>Irakurketa-gakoa:</strong> «inplementatua» kodean dagoena da; «historikoki probatua» datatutako txosten batek jasotakoa; «dokumentu honetan egiaztatua» amaierako egiaztapen-agiriak benetan frogatutakoa. «Giza baliozkotzea» taldearen edo irakaslearen ekintza erreala da. Maila horiek ez dira baliokideak.</p>
+<h2 id="atala-2">Aurkibidea</h2><ol>
+<li>Helburua, irismena eta ekarpena.</li>
+<li>Ebidentziaren metodoa eta errubrikaren interpretazioa.</li>
+<li>Arkitektura eta teknologiak hautatzeko arrazoiak.</li>
+<li>Datuen jatorria, kalitatea eta historikoa.</li>
+<li>Ezaugarriak, partizioak eta datu-ihesaren prebentzioa.</li>
+<li>Ereduak, esperimentazioa eta hautaketa.</li>
+<li>Ebaluazio estatistikoa eta emaitzen interpretazioa.</li>
+<li>Kostuak, atalaseak eta mantentze-erabakia.</li>
+<li>APIa, kontratuak eta inferentzia errepikagarria.</li>
+<li>Ingesta automatikoa, iraunkortasuna eta berreskuratzea.</li>
+<li>Elasticsearch, Kibana eta BI.</li>
+<li>Karga, latentzia eta eskalagarritasuna.</li>
+<li>Segurtasuna, pribatutasuna eta erantzukizuna.</li>
+<li>Erreproduzigarritasuna, ingurunea eta kalitate-kontrola.</li>
+<li>Errubrikaren 40 irizpideen justifikazio xehea.</li>
+<li>Itxiera, mugak eta defentsa prestatzeko gida.</li>
+<li>Glosarioa eta iturri nagusiak.</li>
+</ol>
+<h1 id="atala-3">1. Helburua, irismena eta ekarpena</h1><p>CNC Guard-ek telemetria tabularra jasotzeko, baliozkotzeko, sailkatzeko, gordetzeko eta erakusteko laborategiko sistema eraikitzen du. Erabiltzaileari sentsoreen neurketak eta ereduaren irteera batera aurkezten dizkio, ikuskapen-proposamen bat arrazoitu ahal izateko. Proiektuaren ekarpena kate osoaren koherentzia da: datu baten jatorria ezagutzea, inferentziaren bertsioa identifikatzea, birsaiakeretan emaitza kontserbatzea eta aginte-koadroko informazioaren esanahia azaltzea.</p>
+<p>Izen historikoak «mantentze prediktiboa» aipatzen badu ere, gauzatutako ML atazak <strong>uneko egoeraren sailkapena</strong> egiten du. Emandako AI4I datu sintetikoek une bereko sentsoreak eta <code>machine_failure</code> etiketa dituzte. Ez dute makina fisiko beraren denborazko jarraipen fidagarririk, etorkizuneko hutsegite-datarik edo esposizio-denborarik eskaintzen. Hortaz, ereduak ezin du 24 orduren barruko averia, ETA, RUL edo bizitza erabilgarria frogatu. <code>failure_score</code> ez da etorkizuneko hutsegite-probabilitate kalibratua.</p>
+<p>Muga hori softwarean ere loteslea da: <a href="../../scoring/scope.py">scoring/scope.py</a> fitxategiak <code>AI4I_CURRENT_STATE_ONLY</code>, <code>temporal_prediction_enabled=false</code>, sei sarrera onartuak eta entrenamendu-iturriaren SHA-256 finkatzen ditu. Manifestu okerra duen bundle-a baztertzen da. Honela, azalpen akademikoak eta APIaren kontratuak esanahi bera dute.</p>
+<p>Sistema IA estuaren adibidea da. Ereduak ataza mugatu bat ebazten du; ez du arrazoiketa orokorrik, helburu propiorik edo industria-prozesua kontrolatzeko baimenik. Offline ikaskuntzak parametroak doitzen ditu; online inferentziak parametro finkoak aplikatzen ditu. Alerta bat jasotzeak ez du eredua automatikoki berrentrenatzen. Erabakiaren azken urratsa pertsona batek egiten du; ez dago CNC, PLC edo aktuadore fisikoetara agindurik.</p>
+<p><strong>Oinarria:</strong> <a href="../../ENUNTZIATUA.md">enuntziatua</a>, <a href="../evidence/CG17_CURRENT_STATE_SCOPE.md">irismen aktiboa</a>, <a href="../evidence/CG30.md">justifikazio kontzeptuala</a>. Azken txostena historikoa da: autoencoderra ezarrita ez dagoela dioen pasartea CG34 ikerketak gainditu du; dokumentu honek bertsio horiek bereizten ditu.</p>
+<h1 id="atala-4">2. Ebidentziaren metodoa eta errubrikaren interpretazioa</h1><p>Erreferentzia <a href="../rubrica/fuente.json">fuente.json</a> da: <code>Erronka1_ikaslearen_errubrika.xlsx</code> kopia lokaletik ateratako <code>Zereginak</code> orriko <strong>40 deskribatzaile</strong>, G zutabeko maila aurreratua. Jatorrizko Excelaren SHA-256 hau da: <code>e3e05d6fe408e163f6f8247cd7054f2a4ce4de6aa5757048ba432cd682139463</code>. Ez da online bertsioa berriro egiaztatu. Irizpideen testua 15. kapituluan hitzez hitz mantentzen da, akats tipografikoak barne.</p>
+<p>Ez da notarik kalkulatzen. Pisu batzuek formatu anbiguoa dute (<code>15%%</code>), beste batzuk zenbakizkoak dira eta beste batzuk hutsik daude. Modulu arteko pisuak batzeak edo falta direnak asmatzeak zehaztasun faltsua emango luke. <a href="../rubrica/OBJETIVOS_Y_ETAPAS.md">Helburuen interpretazioa</a> eta <a href="../rubrica/ACLARACIONES_20261023.md">A01–A07 argibideak</a> erabiltzen dira zalantzak agerian uzteko.</p>
+<p>Ebidentzia-katea honela osatzen da: <strong>eskakizuna → erabaki teknikoa → kodea edo konfigurazioa → proba edo neurketa → interpretazioa → muga</strong>. Kodeak zer egin dezakeen azaltzen du; exekuzio-erregistroak, berriz, noiz eta zein bertsio/datuekin egin den. Test automatikoak kontratu bat egiazta dezake, baina ez du berez taldeko kide baten ulermena frogatzen. PM onarpen dokumentatua ez da irakaslearen kalifikazioa.</p>
+<p>Bi iturri-multzo erabiltzen dira. Lehenengoa checkout-eko kode eta dokumentazio versionatua da, batez ere <a href="../rubrica/ESTADO_20261028.md">2026-10-28ko matrizea</a> eta datatutako ebidentziak. Bigarrena <a href="../../exports/estudio-multimodelo-2026-11-04/COMPARATIVA.md">2026-11-04ko konparaketa lokala</a> da. Bigarren multzoa ikerketa osagarria da eta ez du APIan zerbitzatutako eredua ordezkatzen. Iturrien hashak <code>ITURRIAK.json</code> fitxategian daude.</p>
+<p>Matrize zahar batean «zain» agertzea ez da automatikoki uneko akatsa. Adibidez, CG32 karga-kanpaina geroago egin zen; hemen haren emaitza zehatza erabiltzen da, aurretiko zigilua aldatu gabe. Alderantziz, txosten berri batek ere ezin ditu atzeraeraginez sinadurak, bilerak edo entregak egiaztatu.</p>
+<h1 id="atala-5">3. Arkitektura eta teknologiak hautatzeko arrazoiak</h1><p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDU4MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2MiPjxzdHlsZT50ZXh0e2ZvbnQtZmFtaWx5OkFyaWFsLHNhbnMtc2VyaWY7ZmlsbDojMTUzMjQ3fSAubGFiZWx7Zm9udC1zaXplOjE4cHg7Zm9udC13ZWlnaHQ6NzAwfS5zdWJ7Zm9udC1zaXplOjE1cHh9IHJlY3R7cng6MTB9PC9zdHlsZT48dGl0bGUgaWQ9InRpdGxlIj5DTkMgR3VhcmQgYXJraXRla3R1cmE8L3RpdGxlPjxkZXNjIGlkPSJkZXNjIj5TTUIgZXRhIEZpbGViZWF0LCBLYWZrYSwgTmlGaSBiaWRleiBwcm9ncmFtYXR1dGFrbyB3b3JrZXItYSwgRmFzdEFQSSBldGEgaGVsbXVnYSBpcmF1bmtvcnJhay4gUGVydHNvbmFrIGVyYWJha2l0emVuIGR1LjwvZGVzYz48cmVjdCB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI1ODAiIGZpbGw9IiNmNWY4ZmIiLz48dGV4dCB4PSIzNSIgeT0iNDAiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI3MDAiPkluZ2VzdGEsIGluZmVyZW50emlhIGV0YSBlcmFiYWtpYXJlbiBtdWdhazwvdGV4dD48cmVjdCB4PSIzNSIgeT0iODAiIHdpZHRoPSIyODAiIGhlaWdodD0iODUiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM4ZGE2YmIiLz48dGV4dCBjbGFzcz0ibGFiZWwiIHg9IjUwIiB5PSIxMTIiPlNNQiAvIENTVjwvdGV4dD48dGV4dCBjbGFzcz0ic3ViIiB4PSI1MCIgeT0iMTM4Ij5qYXRvcnJpYXJlbiBieXRlYWs8L3RleHQ+PHJlY3QgeD0iMzU1IiB5PSI4MCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI4NSIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzhkYTZiYiIvPjx0ZXh0IGNsYXNzPSJsYWJlbCIgeD0iMzcwIiB5PSIxMTIiPkZpbGViZWF0IOKGkiBLYWZrYTwvdGV4dD48dGV4dCBjbGFzcz0ic3ViIiB4PSIzNzAiIHk9IjEzOCI+cmVnaXN0cnkgZXRhIG9mZnNldC1hazwvdGV4dD48cmVjdCB4PSIzNTUiIHk9IjIxMCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI4NSIgZmlsbD0id2hpdGUiIHN0cm9rZT0iIzhkYTZiYiIvPjx0ZXh0IGNsYXNzPSJsYWJlbCIgeD0iMzcwIiB5PSIyNDIiPk5pRmkg4oaSIHdvcmtlcjwvdGV4dD48dGV4dCBjbGFzcz0ic3ViIiB4PSIzNzAiIHk9IjI2OCI+b2Zmc2V0LWFyZW4gamFiZSBiYWthcnJhPC90ZXh0PjxyZWN0IHg9IjM1IiB5PSIzNDAiIHdpZHRoPSIyODAiIGhlaWdodD0iODUiIGZpbGw9IndoaXRlIiBzdHJva2U9IiM4ZGE2YmIiLz48dGV4dCBjbGFzcz0ibGFiZWwiIHg9IjUwIiB5PSIzNzIiPkZhc3RBUEkgwrcgUkYgLyBJRjwvdGV4dD48dGV4dCBjbGFzcz0ic3ViIiB4PSI1MCIgeT0iMzk4Ij5sZWRnZXIga2Fub25pa29hPC90ZXh0PjxyZWN0IHg9IjM1NSIgeT0iMzQwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9Ijg1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjOGRhNmJiIi8+PHRleHQgY2xhc3M9ImxhYmVsIiB4PSIzNzAiIHk9IjM3MiI+Q0cxNSDCtyBQYXJxdWV0PC90ZXh0Pjx0ZXh0IGNsYXNzPSJzdWIiIHg9IjM3MCIgeT0iMzk4Ij5yYXcgKyBwcmVkaWN0aW9uPC90ZXh0PjxyZWN0IHg9IjY3NSIgeT0iMzQwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9Ijg1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjOGRhNmJiIi8+PHRleHQgY2xhc3M9ImxhYmVsIiB4PSI2OTAiIHk9IjM3MiI+RWxhc3RpY3NlYXJjaDwvdGV4dD48dGV4dCBjbGFzcz0ic3ViIiB4PSI2OTAiIHk9IjM5OCI+bWFwcGluZyAvIGZpbmFsIHBpcGVsaW5lPC90ZXh0PjxyZWN0IHg9IjY3NSIgeT0iNDcwIiB3aWR0aD0iMjgwIiBoZWlnaHQ9Ijg1IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjOGRhNmJiIi8+PHRleHQgY2xhc3M9ImxhYmVsIiB4PSI2OTAiIHk9IjUwMiI+S2liYW5hIOKGkiBwZXJ0c29uYTwvdGV4dD48dGV4dCBjbGFzcz0ic3ViIiB4PSI2OTAiIHk9IjUyOCI+aWt1c2thcGVuLXByb3Bvc2FtZW5hPC90ZXh0PjxkZWZzPjxtYXJrZXIgaWQ9ImEiIG1hcmtlcldpZHRoPSI4IiBtYXJrZXJIZWlnaHQ9IjgiIHJlZlg9IjciIHJlZlk9IjQiIG9yaWVudD0iYXV0byI+PHBhdGggZD0iTTAgMCBMOCA0IEwwIDgiIGZpbGw9IiM0ZDZlODQiLz48L21hcmtlcj48L2RlZnM+PHBhdGggZD0iTTMxNSAxMjIgSDM1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNGQ2ZTg0IiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48cGF0aCBkPSJNNDk1IDE2NSBWMjA1IiBmaWxsPSJub25lIiBzdHJva2U9IiM0ZDZlODQiIHN0cm9rZS13aWR0aD0iMyIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik0zNTUgMjUyIEgxNzUgVjMzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNGQ2ZTg0IiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48cGF0aCBkPSJNNDk1IDI5NSBWMzM1IiBmaWxsPSJub25lIiBzdHJva2U9IiM0ZDZlODQiIHN0cm9rZS13aWR0aD0iMyIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjxwYXRoIGQ9Ik02MzUgMjUyIEg4MTUgVjMzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNGQ2ZTg0IiBzdHJva2Utd2lkdGg9IjMiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48cGF0aCBkPSJNODE1IDQyNSBWNDY1IiBmaWxsPSJub25lIiBzdHJva2U9IiM0ZDZlODQiIHN0cm9rZS13aWR0aD0iMyIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjx0ZXh0IGNsYXNzPSJzdWIiIHg9IjM1IiB5PSI0OTAiPkNvbW1pdC1hOiBBUEkgKyBhcnR4aWJvYSArIEVTIG9uZG9yZW4uPC90ZXh0Pjx0ZXh0IGNsYXNzPSJzdWIiIHg9IjM1IiB5PSI1MjAiPkV6IGRhZ28gQ05DIC8gUExDcmFrbyBhZ2luZHVyaWsuPC90ZXh0Pjx0ZXh0IGNsYXNzPSJzdWIiIHg9IjM1IiB5PSI1NTAiPkdlemllayBhcmR1cmEgbG9naWtvYWsgZXJha3VzdGVuIGRpdHV6dGUuPC90ZXh0Pjwvc3ZnPg==" alt="CNC Guard-en arkitektura eta konfiantza-mugak"></p>
+<h2 id="atala-6">3.1. Osagaien erantzukizunak</h2><table>
+<thead>
+<tr>
+<th>Osagaia</th>
+<th>Erantzukizuna</th>
+<th>Hautaketaren arrazoia eta muga</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SMB irakurketa / tokiko spool-a</td>
+<td>Sortutako CSV lotea kopiatu eta osotasuna kontrolatu</td>
+<td>Jatorria irakurketa hutsez tratatzen da. Sareko eskuragarritasuna eta kopia osoa bereizten dira; SMB ez da NFS.</td>
+</tr>
+<tr>
+<td>Filebeat</td>
+<td>Fitxategi-lerroak irakurri eta Kafka-ra bidali</td>
+<td>Registry iraunkorrak irakurketa-posizioa gordetzen du. Registry galtzeak replay-a eragin dezake.</td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>Ekoizlea eta kontsumitzailea desakoplatu</td>
+<td>Buffer eta offset-ak eskaintzen ditu. ACK batek ez du inferentzia edo ES dokumentua frogatzen.</td>
+</tr>
+<tr>
+<td>NiFi</td>
+<td>Ziklo mugatuak programatu eta diagnostikoak gorde</td>
+<td>Grafo automatikoak worker-a exekutatzen du. Ez da <code>ConsumeKafka</code>/<code>InvokeHTTP</code> natiboen exekuzio gisa aurkezten.</td>
+</tr>
+<tr>
+<td>Worker iraunkorra</td>
+<td>Baliozkotzea, proiekzioa, APIa, artxiboa eta ES koordinatu</td>
+<td>Offset-aren jabe bakarra eta egoera iraunkorra ditu; transakzio banatu bakarra ez dago.</td>
+</tr>
+<tr>
+<td>FastAPI + RF/IF</td>
+<td>Kontratu zorrotzeko inferentzia</td>
+<td>Ereduak abioan kargatzen dira; hutsegitean ez da emaitza ordezkorik asmatzen.</td>
+</tr>
+<tr>
+<td>Parquet + DuckDB</td>
+<td>Historikoa kontserbatu eta analisi tabularra egin</td>
+<td>Zutabe-biltegiratzea eta SQL lokala. Ez da kluster banatu edo HA sistema.</td>
+</tr>
+<tr>
+<td>Elasticsearch</td>
+<td>Telemetria eta inferentzia indexatu</td>
+<td>Mapping zorrotzak, identitate egonkorra eta pipeline finala.</td>
+</tr>
+<tr>
+<td>Kibana</td>
+<td>Bilaketa, agregazioak eta erabakirako aurkezpena</td>
+<td>Filtroen, hutsuneen eta datu-adinaren esanahia esplizitua da.</td>
+</tr>
+</tbody></table>
+<h2 id="atala-7">3.2. Python eta moduluen banaketa</h2><p>Python hautatu da pandas, NumPy, scikit-learn, PyArrow eta FastAPI ekosistemak datu-prestaketa, modelizazioa eta zerbitzua hizkuntza berean lotzen dituelako. Java egokia izan daiteke NiFi osagai natiboetarako, eta JVM ekosistemak fluxu-operazioa errazten du; hala ere, Python-eko estimatzailea beste hizkuntza batean berridazteak koherentzia eta mantentze-kostua handituko lituzke. SQLek agregazioa adierazteko balio du, baina ez du HTTP kontratua edo entrenamendu osoa ordezkatzen.</p>
+<p>Banaketak egiaztapena errazten du: <code>scoring/preparation.py</code> ezaugarriez arduratzen da; <code>scoring/scope.py</code> irismenaz; <code>scoring/score_api.py</code> HTTP interfazeaz; <code>scoring/response_ledger.py</code> erantzun kanonikoaz; <code>scripts/</code> direktorioak esperimentuak eta eragiketa-tresnak jasotzen ditu. Notebook-ak azalpen eta esploraziorako dira. APIak ez du eskaera bakoitzean entrenamendua exekutatzen. FastAPIren HTTP konkurrentzia erabiltzeak ez du RF inferentziaren CPU kostua desagerrarazten edo latentzia determinista bermatzen.</p>
+<h2 id="atala-8">3.3. Aukeratutako automatizazioaren baliokidetasuna</h2><p><a href="../CG14_AUTOMATIC_GRAPH.md">CG14 grafo automatikoak</a> NiFi 2.12 erabiltzen du <code>GenerateFlowFile → ExecuteStreamCommand</code> bidez worker-aren zikloa abiatzeko eta emaitzak gordetzeko. Kafka kontsumoa Python egokitzaileak egiten du. Horrela offset-aren jabetza eta artxibo/ES baldintzak puntu bakarrean bateratzen dira. Ordainetan, deploy-ak Python ingurune eta bide lokalen koherentzia behar du. PMren onarpena dokumentatuta egoteak ez du NFS edo InvokeHTTP literalaren balorazio akademikoa ebazten: A03 irekita dago.</p>
+<h1 id="atala-9">4. Datuen jatorria, kalitatea eta historikoa</h1><h2 id="atala-10">4.1. Bi jatorri bereizi</h2><p>Entrenamendua emandako AI4I CSV murriztuarekin bakarrik egiten da: <strong>8.000 errenkada</strong>, SHA-256 <code>1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce</code>. Fitxategiaren byteak eta eskema kontrolatzen dira, beste dataset bat isilean ordezka ez dadin. 271 etiketa positibo daude, %3,3875. «Beti negatiboa» iragartzen duen erreferentziak %96,6125 accuracy izango luke eta hutsegite positiboen recall-a zero: horregatik accuracy bakarrak ez du erabilgarritasuna azaltzen.</p>
+<p>Operazioko sarrera SMB lote/snapshot simulatuak dira. Entrenamendu-iturriaren eta lote operatiboen identitatea ez da nahasten. <code>machine_id</code>, igorpen-data eta fitxategiaren izena trazabilitaterako baliagarriak dira, baina ez dute makina fisiko beraren bizitza-zikloa frogatzen. Fitxategi batek elkarren antzeko errenkadak edukitzeak ez du datu berrien independentzia estatistikoa bermatzen.</p>
+<h2 id="atala-11">4.2. Kalitate-kontrolen eragina</h2><p>Kateak UTF-8/CSV framing-a, derrigorrezko eremuak, datu motak, zenbaki finituak eta sentsore-barruti kontraktualak egiaztatzen ditu. Tenperaturak Kelvin positiboak dira; rpm, momentua eta tresnaren erabilera-minutuak ez-negatiboak. Data UTC erreala izan behar da. <code>NaN</code>, infinitua edo derrigorrezko sentsore hutsa ez dira «normaltasun» bihurtzen. Ikaskuntza-pipeline bateko imputazio konfiguratua eta API zorrotzeko sarrera-bazterketa bi erabilera desberdin dira.</p>
+<p>Kopia laburra edo aldakorra onartzeak erregistro moztua sor lezake; formatua oker interpretatzeak unitate-aldaketa edo ezaugarri okerra; etiketa bat X-n sartzeak ebaluazio artifizialki ona. Horregatik egiaztapenak inferentziaren aurretik egiten dira, eta bazterketak jatorrizko edukiarekin lotuta kontserbatzen dira. Kopia atomikoak amaitu gabeko fitxategia kontsumitzea murrizten du; ez du berez sareko ekoizlearen aldaketa guztien aurkako edo elektrizitate-etenaren aurkako bermerik ematen.</p>
+<h2 id="atala-12">4.3. Bronze, Silver eta Gold</h2><p><a href="../evidence/CG06.md">CG06</a> historikoak hiru geruza ditu. <strong>Bronze</strong> geruzak jatorrizko byteak eta hashak gordetzen ditu; <strong>Silver</strong> geruzak normalizatutako errenkadak Parquet-en gordetzen ditu, igorpen-data UTCren arabera; <strong>Gold</strong> geruzak DuckDB bidezko agregazio deskriptiboak sortzen ditu. Jatorrizko artxiboa berriz prozesatzeak ez ditu errenkadak bikoiztu behar; hash berriko igorpen batek, ordea, bere jatorri propioa mantentzen du, balioak berdinak badira ere.</p>
+<p>Hasierako txostenak lau iturri eta 40 errenkadako kasua jasotzen du; eguneratzeak SMBtik deskargatutako bi lote eta 20 errenkada bereizi jasotzen ditu. Eskala horiek historikoaren koherentzia probatzen dute, ez industria-bolumen handien etengabeko atzematea. Gold-en <code>groupby</code> egitea analisi deskriptiboa da. Makina bakoitzeko rolling leiho kausalak eraikitzeko identitate fisikoa, benetako denbora-ordena eta baliozkotze tenporala beharko lirateke; hemen ez dira asmatu.</p>
+<h1 id="atala-13">5. Ezaugarriak, partizioak eta datu-ihesaren prebentzioa</h1><h2 id="atala-14">5.1. Sarrera eta adierazpen fisikoa</h2><table>
+<thead>
+<tr>
+<th>Sarrera</th>
+<th>Unitatea / mota</th>
+<th>Ekarpena eta interpretazio-muga</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>air_temp_K</code></td>
+<td>K</td>
+<td>Ingurune termikoaren egoera; ez da operadorearen datua.</td>
+</tr>
+<tr>
+<td><code>process_temp_K</code></td>
+<td>K</td>
+<td>Prozesuaren tenperatura eta airearekiko aldea.</td>
+</tr>
+<tr>
+<td><code>rpm</code></td>
+<td>bira/min</td>
+<td>Biraketa-erregimena; zero balio onartua da kontratuan.</td>
+</tr>
+<tr>
+<td><code>torque_Nm</code></td>
+<td>N·m</td>
+<td>Momentu mekanikoa; rpm-rekin interakzioa izan dezake.</td>
+</tr>
+<tr>
+<td><code>tool_wear_min</code></td>
+<td>min</td>
+<td>Datasetak emandako erabilera/desgaste kovariablea; ez RUL.</td>
+</tr>
+<tr>
+<td><code>machine_type</code></td>
+<td>H/M/L</td>
+<td>Kategoria; ez da eskala jarraitu gisa interpretatzen.</td>
+</tr>
+</tbody></table>
+<p><a href="../../scoring/preparation.py">Prestaketa partekatuak</a> hiru eratorri kalkulatzen ditu: <code>temp_diff = process_temp_K − air_temp_K</code>; <code>power_W = rpm × torque_Nm × 2π/60</code>; <code>wear_torque = tool_wear_min × torque_Nm</code>. Lehenak gradiente termikoa adierazten du. Bigarrenean momentua abiadura angeluarrarekin biderkatzen da: rpm=60 eta momentua=10 izanda, emaitza 20π W da. <code>rpm × torque</code> soilak ez ditu watt unitateak. Hirugarrena min·N·m unitateko proxy bat da, ez higadura fisikoaren neurketa edo kausa frogatua.</p>
+<p><code>machine_failure</code>, <code>failure_*</code> motako emaitzak, <code>machine_id</code> eta timestamp-ak ez dira estimatzailearen sarrerak. Etiketa y-ren parte da edo normal-proxy multzoa definitzeko erabiltzen da; ezaugarri bihurtuz gero, ereduak erantzuna ikusiko luke. Machine ID bateko zenbakietatik ez da egoerarik, kokapenik edo diagnostikorik sortzen.</p>
+<h2 id="atala-15">5.2. Partizioen kontratua</h2><p>8.000 errenkadak seed 42 eta estratifikazioarekin banatzen dira: <strong>5.600 fit</strong>, <strong>1.200 garapen-baliozkotze</strong>, <strong>1.200 aurretik ikuskatutako test baztertu</strong>. <a href="../evidence/CG04_split_membership.json">Indizeen zerrendak</a> kidetza gordetzen du. Azken 1.200ak ezin dira berriro test independente gisa aurkeztu, eta seed aldatzeak ez du galdutako independentzia berreskuratzen.</p>
+<p>Garapen-baliozkotzea lehenago atalase-hautaketan erabili da. Bertako metrikak garapen-emaitzak dira. CG34 ikerketak 5.600 fit errenkaden barruko 3 outer × 3 inner baliozkotze gurutzatua erabiltzen du; ez ditu gainerako bi multzoak berriro puntuatzen. Nested diseinuak hautaketa eta kanpoko ebaluazio-urratsa bereizten ditu, baina aurretik aztertutako dataset sintetikoaren domeinu-muga mantentzen da.</p>
+<h2 id="atala-16">5.3. Pipeline eta SMOTENC</h2><p>Imputazioa, eskalatzea, kategoria-kodeketa eta hautatutako tratamendua entrenamendu-zatiaren barruan doitzen dira. Baliozkotze-datuek ez dituzte medianak, eskalak, auzokide sintetikoak edo atalaseak erabakitzen. Zuhaitzek ez dute eskalatzea behar, baina beste algoritmoekin alderatzeko pipeline propioak koherentzia bermatzen du.</p>
+<p><code>class_weight</code>-ek akatsen pisua aldatzen du; ez du behaketa berririk sortzen. SMOTENC esperimentu bereizian erabili da, fold bakoitzeko train-ean soilik: H/M/L kategoria mantendu, jatorrizko sentsoreak sintetizatu eta eratorri fisikoak ondoren birkalkulatu dira. Horrela potentzia ez da beste ezaugarriekin batera modu fisikoki inkoherentean interpolatzen. <a href="../evidence/CG08.md">CG08</a> txostenak ez du hobekuntza orokorrik frogatzen eta ez du sobremuestreoa isilean APIra eramaten. Errubrikako «SMOTE» aipamena metodoa ulertu eta frogatzeko erabiltzen da, hobetu ez duen tratamendua derrigorrez sustatzeko ordez.</p>
+<h1 id="atala-17">6. Ereduak, esperimentazioa eta hautaketa</h1><h2 id="atala-18">6.1. Eredu-familien egokitasuna</h2><table>
+<thead>
+<tr>
+<th>Familia</th>
+<th>Zer ikasten du / zer datu behar ditu</th>
+<th>Zergatik aztertu da</th>
+<th>Kontuan hartu beharreko muga</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Random Forest</td>
+<td>Etiketadun adibideen zuhaitz-multzoa</td>
+<td>Erlazio ez-linealak eta sentsore-interakzioak, oinarri sendo tabularra</td>
+<td>Interpretazioak ez du kausalitatea frogatzen; score-a ez da automatikoki kalibratua.</td>
+</tr>
+<tr>
+<td>Gradient Boosting / XGBoost / LightGBM / CatBoost</td>
+<td>Akatsak sekuentzialki murrizten dituzten zuhaitzak</td>
+<td>Konplexutasun, kategoria eta kostu/recall konpromisoak alderatu</td>
+<td>Hiperparametro eta atalasearen hautaketak emaitzan eragiten du.</td>
+</tr>
+<tr>
+<td>Logistika / CART</td>
+<td>Erabaki-funtzio sinpleagoa</td>
+<td>Erreferentzia ulergarria eta konplexutasunaren kontrola</td>
+<td>Linealtasuna edo zuhaitz bakarraren bariantza.</td>
+</tr>
+<tr>
+<td>IF / LOF / One-Class SVM / PCA</td>
+<td>Erreferentziako datuetatik desbideratzea</td>
+<td>Etiketarik gabeko arrarotasun-kanala aztertu</td>
+<td>Arrarotasuna ez da hutsegitearen sinonimoa.</td>
+</tr>
+<tr>
+<td>Autoencoder</td>
+<td>Sarreraren berreraikuntza</td>
+<td>Adierazpen ez-lineala eta berreraikuntza-errorea aztertu</td>
+<td>Eskala, entrenamendua eta normal-proxy fidagarria behar ditu; anomalia ere ondo berreraiki dezake.</td>
+</tr>
+<tr>
+<td>Dummy erreferentziak</td>
+<td>Konstanteak / arau sinpleak</td>
+<td>Accuracy tranpa eta benetako balio erantsia erakutsi</td>
+<td>Ez dute erabilgarritasuna frogatzen.</td>
+</tr>
+</tbody></table>
+<p>RF/IF bikoteak bi galdera bereizten ditu: «etiketa positiboaren antzeko egoera al da?» eta «erreferentziarekin alderatuta arraroa al da?». Anomalia alerta bat ez da RFren ground truth alternatiboa. Anomalia-etiketa independenteak falta direnean, hutsegite-etiketarekiko gainjartzea diagnostikoa da, ez anomalia-detektorearen benetako precision/recall neurketa.</p>
+<h2 id="atala-19">6.2. CG34 azterketa sistematikoa</h2><p><a href="../../scripts/ml_study.py">Sarrera nagusia</a>, <a href="../../scripts/ml_study_models.py">eredu-katalogoa</a> eta <a href="../evidence/CG34_EXPLORACION_20261023.md">CG34 txostena</a> bereizten dira. Azterketak 40 konfigurazio gainbegiratu eta 10 arrarotasun-konfigurazio jasotzen ditu; 150 screening unitate, 600 nested unitate, 8 pilotu, 72 kalibrazio eta RF azken refit bat, guztira 831 entrenamendu-unitate. Hau ez da 831 eredu-familia desberdinen zenbaketa.</p>
+<p>Hautaketa-kostua eta gutxieneko recall baldintza inner scores OOFen bidez erabakitzen dira. Outer zatia prozedura horren emaitza neurtzeko erabiltzen da, ez haren atalasea optimizatzeko. A politikak atalase ikasia du; B politikak 0,15 finkoa; C politikak 0,70 finkoa. Hautatzaile batek outer bakoitzean eredu desberdina aukera dezake: haren emaitza agregatua ez da azken bundle finko baten errendimendu ziurtatua.</p>
+<p>Kalibrazioak score-en interpretazioa hobetu nahi du; bere ebaluazioa ere prestaketa/hautaketa barruan gorde behar da. Kalibratzea ez da etorkizuneko horizontea sortzea. Azterketako abisuak eta konbergentzia-mugak jatorrizko txostenean mantentzen dira. Ez dira ezkutatzen algoritmo bat errubrikaren izenarekin bat datorrelako.</p>
+<h2 id="atala-20">6.3. Azaroaren 4ko hedapena</h2><p><a href="../../exports/estudio-multimodelo-2026-11-04/COMPARATIVA.md">Konparaketa osagarriak</a> score historikoak berrerabiltzen ditu; oinarrizko ereduak ez dira berriro entrenatu hedapen horretan. 2.998 konfigurazio/arau aztertzen dira outer bakoitzeko: 40 banakako, 2.340 bikote ponderatu, 560 hirukote, 10 komite, 18 stacking eta RF+arrarotasuneko 30 arau. 54 meta-eredu logistiko berri entrenatu dira stacking-erako. Konfigurazio, politika eta entrenamendu-unitate kopuruak kontzeptu desberdinak dira.</p>
+<p>Stacking-ek oinarrizko OOF scores erabiltzen ditu, baina haren A atalasea meta-ereduaren entrenamenduko irteerekin doitzen da: barneko estimazioa baikorra izan daiteke. Outer urratsak prozedura hori neurtzen du. Milaka emaitza ikusi ondoren «onena» aukeratzeak hautaketa-alborapena sortzen du; ranking horren goiko lerroa hipotesi berri gisa erabil daiteke, ez baieztapen independente gisa.</p>
+<p>Dokumentu honetan ez da kandidaturik promozionatzen. Kontserbazioaren arrazoia ez da RF beti irabazlea izatea, baizik eta hobekuntzen tamaina, ziurgabetasuna, konplexutasuna eta ebaluazio/provenientzia gehigarriaren beharra batera baloratzea.</p>
+<h1 id="atala-21">7. Ebaluazio estatistikoa eta emaitzen interpretazioa</h1><h2 id="atala-22">7.1. Metrikak eta izendatzaileak</h2><p><code>Recall = TP/(TP+FN)</code> positiboetatik zenbat aurkitu diren da. <code>Precision = TP/(TP+FP)</code> alertetatik zenbat benetako positibo diren da. <code>F1 = 2PR/(P+R)</code> oreka simetrikoa da; <code>F2 = 5PR/(4P+R)</code> recall-ari pisu handiagoa ematen dion laburpena. FPRren izendatzailea negatibo guztiak dira; FNRrena positibo guztiak. Accuracy handiak positibo gutxiko dataset batean errore larrien kopurua ezkuta dezake.</p>
+<p>ROC-AUC-ek rankingaren diskriminazioa laburtzen du; average precision-ek precision/recall erlazioa eta prebalentziarekiko sentikortasuna hobeto erakusten ditu. AP ez da accuracy, eta PR kurbaren edozein integralekin ez da automatikoki zenbaki bera. Metrika global on batek ere ez du beste makina-erregimen bateko portaera edo denborazko generalizazioa frogatzen.</p>
+<h2 id="atala-23">7.2. Garapen-baliozkotzeko politika historikoak</h2><p><a href="../evidence/CG10_PRECISION_20261022.md">CG10 zuzenketak</a> eta <a href="../evidence/CG10_results.json">JSON aktiboak</a> 1.200 errenkadako kohorte bera erabiltzen dute: 41 positibo eta 1.159 negatibo.</p>
+<table>
+<thead>
+<tr>
+<th>Politika / score-atalasea</th>
+<th align="right">TP</th>
+<th align="right">FN</th>
+<th align="right">FP</th>
+<th align="right">TN</th>
+<th align="right">Recall</th>
+<th align="right">Precision</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVISO, ≥0,15</td>
+<td align="right">32</td>
+<td align="right">9</td>
+<td align="right">12</td>
+<td align="right">1.147</td>
+<td align="right">%78,05</td>
+<td align="right">%72,73</td>
+</tr>
+<tr>
+<td>CRITICA, ≥0,70</td>
+<td align="right">27</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">1.159</td>
+<td align="right">%65,85</td>
+<td align="right">%100,00</td>
+</tr>
+<tr>
+<td>F2 esploratzailea, ≥0,19082281465428477</td>
+<td align="right">32</td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">1.150</td>
+<td align="right">%78,05</td>
+<td align="right">%78,05</td>
+</tr>
+</tbody></table>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDQ4MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2MiPjx0aXRsZSBpZD0idGl0bGUiPkF0YWxhc2VlbiBha2F0c2FrPC90aXRsZT48ZGVzYyBpZD0iZGVzYyI+QVZJU086IDkgRk4gZXRhIDEyIEZQOyBDUklUSUNBOiAxNCBGTiBldGEgMCBGUDsgRjI6IDkgRk4gZXRhIDkgRlAuIEJhbGlvemtvdHplIGJlcnJlcmFiaWxpYSwgMTIwMCBiZWhha2V0YS48L2Rlc2M+PHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNDgwIiBmaWxsPSIjZjVmOGZiIi8+PGcgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZpbGw9IiMxNTMyNDciPjx0ZXh0IHg9IjM1IiB5PSI0MCIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiPlBvbGl0aWthIGJha29pdHphcmVuIGVycm9yZS10cnVrZWE8L3RleHQ+PHRleHQgeD0iMzUiIHk9IjcwIiBmb250LXNpemU9IjE3Ij4xLjIwMCBiZWhha2V0YSDCtyA0MSBwb3NpdGlibyDCtyBiYWxpb3prb3R6ZSBiZXJyZXJhYmlsaWE8L3RleHQ+PHRleHQgeD0iMzUiIHk9IjEzOCIgZm9udC1zaXplPSIxOSI+QVZJU08g4omlMCwxNTwvdGV4dD48cmVjdCB4PSIyNjAiIHk9IjExMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyNCIgcng9IjMiIGZpbGw9IiNiZDVjMzciLz48dGV4dCB4PSI2MzUiIHk9IjEyOSIgZm9udC1zaXplPSIxOCI+OTwvdGV4dD48cmVjdCB4PSIyNjAiIHk9IjE0MiIgd2lkdGg9IjQ4MCIgaGVpZ2h0PSIyNCIgcng9IjMiIGZpbGw9IiMzOTdlOWIiLz48dGV4dCB4PSI3NTUiIHk9IjE2MSIgZm9udC1zaXplPSIxOCI+MTI8L3RleHQ+PHRleHQgeD0iMzUiIHk9IjIzOCIgZm9udC1zaXplPSIxOSI+Q1JJVElDQSDiiaUwLDcwPC90ZXh0PjxyZWN0IHg9IjI2MCIgeT0iMjEwIiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjI0IiByeD0iMyIgZmlsbD0iI2JkNWMzNyIvPjx0ZXh0IHg9IjgzNSIgeT0iMjI5IiBmb250LXNpemU9IjE4Ij4xNDwvdGV4dD48cmVjdCB4PSIyNjAiIHk9IjI0MiIgd2lkdGg9IjAiIGhlaWdodD0iMjQiIHJ4PSIzIiBmaWxsPSIjMzk3ZTliIi8+PHRleHQgeD0iMjc1IiB5PSIyNjEiIGZvbnQtc2l6ZT0iMTgiPjA8L3RleHQ+PHRleHQgeD0iMzUiIHk9IjMzOCIgZm9udC1zaXplPSIxOSI+RjIgZXNwbG9yYXR6YWlsZWE8L3RleHQ+PHJlY3QgeD0iMjYwIiB5PSIzMTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iMjQiIHJ4PSIzIiBmaWxsPSIjYmQ1YzM3Ii8+PHRleHQgeD0iNjM1IiB5PSIzMjkiIGZvbnQtc2l6ZT0iMTgiPjk8L3RleHQ+PHJlY3QgeD0iMjYwIiB5PSIzNDIiIHdpZHRoPSIzNjAiIGhlaWdodD0iMjQiIHJ4PSIzIiBmaWxsPSIjMzk3ZTliIi8+PHRleHQgeD0iNjM1IiB5PSIzNjEiIGZvbnQtc2l6ZT0iMTgiPjk8L3RleHQ+PHJlY3QgeD0iMjYwIiB5PSI0MjUiIHdpZHRoPSIyNCIgaGVpZ2h0PSIxOCIgZmlsbD0iI2JkNWMzNyIvPjx0ZXh0IHg9IjI5NCIgeT0iNDQxIiBmb250LXNpemU9IjE3Ij5GTjogb21pdGl0dXRha28gcG9zaXRpYm9hazwvdGV4dD48cmVjdCB4PSI1OTAiIHk9IjQyNSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjE4IiBmaWxsPSIjMzk3ZTliIi8+PHRleHQgeD0iNjI0IiB5PSI0NDEiIGZvbnQtc2l6ZT0iMTciPkZQOiBhbGFybWEgZmFsdHN1YWs8L3RleHQ+PC9nPjwvc3ZnPg==" alt="Politikek eragindako akatsak, garapen-baliozkotze berrerabilia"></p>
+<p>CRITICAren precision %100 izateak kohorte honetako FP=0 adierazten du, ez errore gabeko sistema unibertsala. Gainera, 14 positibo galtzen ditu. F2 puntuak AVISOk baino hiru FP gutxiago ditu kohorte honetan, baina baliozkotzea atalasearen garapenean erabili zen. Ez da automatikoki atalase operatibo berri bihurtzen.</p>
+<p>Zehaztasun numerikoak benetako akats bat azaldu zuen: CSV parser lehenetsiak <code>0.19082281465428477</code> tokena balio apur bat txikiago bihurtzen zuen eta <code>&gt;=</code> alderaketan berdintasuna galtzen zen. <code>float_precision=&quot;round_trip&quot;</code> erabiliz eta mugako balioen erregresioarekin konpondu zen. Ez zen atalasea mugitu edo tolerantzia bat asmatu. Horrek erakusten du txosten/irudi eta kodearen arteko koherentzia ere lan teknikoaren parte dela.</p>
+<h2 id="atala-24">7.3. Nested ikerketaren kohorte bereizia</h2><p>CG34ko 5.600 train errenkaden outer scores-ek 190 positibo dituzte. Irakaslearen matrizearen kostu-eszenatokian RF B-k TP=168, FN=22, FP=63 eta TN=5.347 ditu: recall %88,42 eta precision %72,73. Ez da aurreko %78,05aren zuzeneko hobekuntza-seriea: kohorte, entrenamendu eta ebaluazio-prozedura desberdinak dira. Bi ehunekoak elkarren ondoan «lehen/ondoren» jartzeak ondorio okerra emango luke.</p>
+<p>Azaroaren 4ko B bikote-hautatzaileak TP=169, FN=21, FP=55 eta TN=5.355 ditu outer kohorte berean. RF B-ren aurrean positibo bat gehiago aurkitzen du netoan eta zortzi FP gutxiago sortzen ditu. «Netoan» hitza garrantzitsua da: bi positibo berreskuratzen ditu, baina RFk aurkitutako beste bat galtzen du. Emaitza agregatuak kasu bakoitzeko aldaketak ezkutatu ditzake.</p>
+<p>Predikzio finkoen bootstrap pareatu baldintzatuak bikote−RF kostu-diferentziaren %95 tarte deskriptiboa −4.410,71 eta +1.607,14 €/1.000 artean kokatzen du. Zero barne dago. Remuestreo horrek ez du entrenamendu, fold-menpekotasun edo milaka bilaketen ziurgabetasun guztia jasotzen; ezin da nagusitasun estatistiko ziurtatu gisa irakurri. Baliabide eta datu berri baimenduen ebaluazioa proposamena da, ez egindako proba.</p>
+<h1 id="atala-25">8. Kostuak, atalaseak eta mantentze-erabakia</h1><h2 id="atala-26">8.1. Bi kostu-markoren kronologia</h2><p>Hasierako enuntziatuak 1.200 €/h geldialdia aipatzen du. Eszenatoki horretan <code>C = FP × ikuskapen-kostua + FN × geldialdi-orduak × 1.200</code> kalkula daiteke, betiere orduak eta ikuskapen-kostua hipotesi gisa etiketatuta. Euro/ordu unitatea ezin da zuzenean FN bakoitzeko kostu finko bihurtu esposizio edo iraupen-suposiziorik gabe.</p>
+<p>Ondoren, erabiltzaileak irakasleari egotzitako foro-testua eman zuen: FN=5.000 €, FP=200 €, TP=300 €, TN=0 €. <a href="../evidence/DOCENTE_FORO_20261023.md">Iturri-erregistroak</a> eta <a href="../evidence/CG34_20261023/business-summary.json">business-summary.json</a> parametro horiek ariketarako gordetzen dituzte. Ez dira industria-kontuen auditoria edo benetan aurreztutako dirua. Txosten honek bi eszenatokien kronologia mantentzen du; ez ditu fitxategi historikoak berridazten.</p>
+<h2 id="atala-27">8.2. Kostu marginal zuzena</h2><p>Ariketako matrizearekin <code>C = 5.000 FN + 200 FP + 300 TP</code>. <code>TP + FN = P</code> konstantea denez, <code>C = 4.700 FN + 200 FP + 300 P</code>. FN bat TP bihurtzean 5.000 €ko emaitza 300 €ko mantentzearekin ordezkatzen da: hobekuntza <strong>4.700 €</strong> da, ez 5.000 €. Beste guztia berdina izanda, TP gehigarri batek 23,5 FPren kostua orekatzen du; 23 FPrekin konpentsatzen du, 24rekin ez.</p>
+<p>Hori da geldialdi programatuaren arrazoibidea: alerta zuzenak ere kostua du, baina programatutako ikuskapen/mantentzea hutsegite omitituaren ondorio hipotetikoa baino merkeagoa izan daiteke. Ez da «alerta gehiago beti hobe»; <code>4.700 × ΔTP &gt; 200 × ΔFP</code> erlazioa eta ikuskapen-gaitasuna batera aztertu behar dira.</p>
+<p>RF B-ren outer kostua <code>22×5.000 + 63×200 + 168×300 = 173.000 €</code> da, edo 30.892,86 €/1.000 behaketa. B bikote-hautatzailearena <code>21×5.000 + 55×200 + 169×300 = 166.700 €</code>: 6.300 €ko edo %3,64ko alde hipotetikoa kohorte horretan. Ez da %3,64ko precision-hobekuntza eta ez du industria-aurrezkia frogatzen.</p>
+<h2 id="atala-28">8.3. Alerta-politika eta ereduaren ebaketa</h2><p><code>OK</code> score&lt;0,15 denean, <code>AVISO</code> 0,15≤score&lt;0,70 denean eta <code>CRITICA</code> score≥0,70 denean kalkulatzen da. <code>risk_alert</code> manifestuko <code>risk_threshold</code>-arekin konparatutako beste booleanoa da; F2 ebaketa eta arrarotasunaren atalasea ere kontzeptu bereiziak dira. Panelak eremu horiek nahasten baditu, erabilgarritasunaren esanahia aldatu dezake.</p>
+<p>Score-a ondo kalibratutako posteriorra eta bi ekintzako kostu-matrizea osoa balira, ebaketa ekonomiko teorikoa <code>200/(5.000−300+200)=0,040816</code> izango litzateke. Baldintza horiek ez daude automatikoki beteta. Zenbaki hori ez da RF score gordinean ezarri, ez da 0,15/0,70 ordezkatu eta ez da atalase berri bat onartu.</p>
+<p>Pertsonak alertaren jatorria, sentsoreak, datuen adina, modeloa eta testuingurua aztertzen ditu. FP batek alferrikako ikuskapena eragin dezake; FN batek hutsegitea oharkabean utz dezake. Alertarik eza ez da segurtasun-egiaztagiria. Ikuskapen-kapazitatea, alerta errepikatuen taldekatzea eta benetako mantentze-emaitzak etorkizuneko baliozkotze baten parte izango lirateke.</p>
+<h1 id="atala-29">9. APIa, kontratuak eta inferentzia errepikagarria</h1><h2 id="atala-30">9.1. Sarreraren eta abioaren kontratua</h2><p><a href="../../scoring/score_api.py">APIak</a> <code>/health</code> eta <code>/predict</code> ditu. Pydantic eredu zorrotzek eremu gehigarriak debekatzen dituzte; horrek etiketa edo CSV crudoa isilean estimatzailera iristea eragozten du. <code>event_id</code>-k 64 karaktere hexadezimal behar ditu, <code>machine_id</code>-k <code>CNC-NNN</code> formatua, <code>machine_type</code>-k H/M/L eta timestamp-ak UTCko <code>Z</code> amaiera. Sintaxia ez ezik, dataren baliozkotasuna ere kontrolatzen da.</p>
+<p>Abioan manifestuko irismena, sklearn bertsioa, RF/IF hashak eta atalase finituak egiaztatzen dira, deserializazioaren aurretik. Gero proba nominal batek irteera finituak egiaztatzen ditu. Ereduak prozesuaren memorian mantentzen dira; eskaerak ez du berrentrenamendurik edo pickle-karga errepikaturik egiten. Joblib/pickle jatorri fidagarritik bakarrik kargatu behar da: hash batek byteak identifikatzen ditu, baina ez du fitxategi arrotz baten kode-exekuzio arriskua neutralizatzen.</p>
+<p><code>/health</code>-ek prest dagoen bundle-a adierazten du. Bundle-a falta edo baliogabea bada, 503 ematen du; ez du Kafka, ES, NiFi edo SMB kate osoaren osasuna frogatzen. Datu-produktu batek egoera degradatua erakutsi behar du iturria falta denean, balio sinesgarri sintetikoekin hutsunea estali ordez.</p>
+<h2 id="atala-31">9.2. Erantzunaren identitatea</h2><p>Erantzunak jatorrizko telemetria eta provenientziaz gain <code>failure_score</code>, <code>alert_level</code>, RF eta IF alertak, <code>policy</code>, <code>model_version</code>, <code>scored_at</code>, artefaktu-hasha eta score-aren semantika gordetzen ditu. <code>X-CNC-Manifest-SHA256</code> eta <code>X-CNC-Contracts-SHA256</code> aurrebaldintzek worker eta APIaren bertsio-desadostasuna detekta dezakete.</p>
+<p><a href="../../scoring/response_ledger.py">Erantzun-ledgerrak</a> SQLite iraunkorrean erantzun kanonikoa gordetzen du HTTP 200 baino lehen. Sareak erantzuna galtzen badu, eskaera berdinak byte berdinak eta <code>scored_at</code> bera berreskuratzen ditu. Ez da bigarren inferentzia bat emaitza «berri» gisa sortzen. ID bera beste payload edo inferentzia-identitate batekin berrerabiltzea 409 gatazka da.</p>
+<h2 id="atala-32">9.3. Erroreen semantika</h2><table>
+<thead>
+<tr>
+<th>Egoera</th>
+<th>Esanahia</th>
+<th>Jarduera arrazoitua</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>200</td>
+<td>Erantzun kanonikoa lortuta</td>
+<td>Ez du berez downstream artxiboa edo ES baieztatzen.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>ID, payload, manifestu edo kontratu-gatazka</td>
+<td>Blokeatu eta kausa aztertu; ID berria sortuz gatazka ez estali.</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Sarrera kontratuarekiko baliogabea</td>
+<td>Bazterketa trazagarria; ez erantzun arrunt faltsurik sortu.</td>
+</tr>
+<tr>
+<td>413</td>
+<td>Gorputz handiegia</td>
+<td>Ez tratatu 422 arrunt gisa; grafoaren blokeoa eta konfigurazioa aztertu.</td>
+</tr>
+<tr>
+<td>503 / 5xx / timeout</td>
+<td>Prestasunik eza edo akats iragankorra izan daiteke</td>
+<td>Saiakera mugatuak, jatorrizko identitatea eta byteak mantenduz.</td>
+</tr>
+</tbody></table>
+<p><a href="../SCORING_REPLAY_CONTRACT.md">Replay kontratuak</a> eta <a href="../../tests/test_scoring_replay.py">testek</a> semantika hori lotzen dute. SQLite lokala workers partekatuek erabil dezakete baldintza horietan; ez da SMB/NFS gaineko SQLite edo erreplika independenteen arteko koherentzia-berme gisa aurkezten.</p>
+<h1 id="atala-33">10. Ingesta automatikoa, iraunkortasuna eta berreskuratzea</h1><h2 id="atala-34">10.1. ACK mailak bereiztea</h2><p>Filebeat-en <code>required_acks: -1</code> ezarpenak Kafka-ren berrespena eskatzen du konfiguratutako erreplikazioaren arabera. Horrek ez du artxibo iraunkorra, inferentzia edo Elasticsearchen kontsultagarritasuna frogatzen. Kontsumitzailearen offset-a berrestea beste une bat da: aurreko mezuen derrigorrezko helmugak bete direla adierazi behar du.</p>
+<p>Grafo automatikoak auto-commit desgaitzen du. Worker-a taldearen offset-aren jabe bakarra da; NiFik haren zikloa programatzen du. <code>kafka-owner.lock</code> eta <code>automatic-owner.lock</code> tokiko prozesuen arteko bazterketa ematen dute. Konfigurazioa, namespace-a, manifestua eta kontratuak egoera iraunkorrari lotzen zaizkio. Beste erro batean kanpoko kontsumitzaile bat sortzea ez dute magikoki eragozten: operadoreak talde esklusiboa eta nodo bakarreko erroa mantendu behar ditu.</p>
+<h2 id="atala-35">10.2. Konpromisoaren ordena</h2><ol>
+<li>Jatorrizko edukia eta journal iraunkorra kontserbatu.</li>
+<li>Telemetria-proiekzioa baliozkotu, etiketa eta sarrera arriskutsuak kenduta.</li>
+<li>APIko erantzun kanonikoa eta worker-aren outbox/egoera gorde.</li>
+<li>Jatorrizko datuaren eta predikzioaren artxibo-jasotzeak <code>stored</code> edo <code>duplicate</code> eta hash zehatza dituztela egiaztatu.</li>
+<li>ES <code>_create</code> onartu, edo 409ren ondorengo GETean <code>_source</code> zehazki berdina dela egiaztatu.</li>
+<li>Job-a amaitutzat markatu, Kafka esleipena indarrean dagoela egiaztatu eta offset esplizitua berretsi.</li>
+</ol>
+<p>Horrela, downstream osatu aurretik offset-a aurreratzeak eragingo lukeen galera-arriskua murrizten da. Baina bitarteko egoerak existitzen dira: API erantzuna gordeta egon daiteke ES blokeatuta dagoen bitartean. Horregatik replay-ak aurretik egindako urratsak berrerabiltzen ditu eta helmugen egoera berriro kontrastatzen du. Artxiboaren <code>rejected</code> jasotze iraunkorra ez da hurrengo retry batean automatikoki onartutako emaitza bihurtzen.</p>
+<h2 id="atala-36">10.3. Bikoizketak, ustelkeria eta transakzio-muga</h2><p>Birsaiakerak espero diren egoerak dira. Identitate egonkorra, hashak eta <code>_create</code> idempotentzia erabiliz azken dokumentu bikoiztuak saihesten dira egiaztatutako kasuetan. ID bereko payload desberdinak gatazka izan behar du, ez azken-idazketa-isilaren bidezko ordezkapena. Fitxategi edo jasotze ustela aurkituz gero, sistema gelditzen da; hashak aldatzea ustelkeria «onartzeko» ez da konponketa.</p>
+<p>Kafka, API, SQLite, Parquet eta ES-k transakzio independenteak dituzte. Diseinu honek ez du exactly-once transakzio banatu bakarra, HA edo elikadura-etenaren aurkako iraunkortasun fisikoa frogatzen. Prozesu-etenetik berreskuratzea eta host osoa galtzea domeinu desberdinak dira. Retentzioa, disko fidagarria, namespace-a eta egoera-fitxategien kontserbazioa berreskuratze-baldintzak dira.</p>
+<p>Kontabilitatea <code>observed = saved + rejected + pending</code> da behatutako job bakarrentzat. Kafka-n oraindik irakurri gabeko mezuak ez dira observed barruan sartzen. <code>replay</code> ez da gertaera berri bat; <code>completed</code> zikloak ez du brokerreko lag-a zero dela esan nahi. Iturriaren, Kafka-ren, artxiboaren eta ESren ID multzoak alderatzea kontagailu orokor bat baino sendoagoa da.</p>
+<p><strong>Iturriak:</strong> <a href="../CG14_AUTOMATIC_GRAPH.md">grafo automatikoa</a>, <a href="../CG14_DURABLE_PIPELINE.md">protokolo iraunkorra</a>, <a href="../evidence/CG15_ARCHIVE.md">CG15 artxiboa</a>, <a href="../../tests/test_cg14_durable_pipeline.py">berreskuratze-probak</a>.</p>
+<h1 id="atala-37">11. Elasticsearch, Kibana eta BI</h1><h2 id="atala-38">11.1. Biltegiratze-kontratua</h2><p><a href="../../elasticsearch/README.md">ES prozedurak</a> ingest pipeline-a template-aren aurretik instalatzea eskatzen du. <code>index.final_pipeline</code> bidez baliozkotzea azken urratsean ezartzen da; default pipeline bat <code>_none</code> bidez saihesteko aukera ez da baliokidea. Mapping zorrotzak eremu, mota eta dataren interpretazioa kontrolatzen ditu. Indize baten existentziak ez du haren pipeline bertsioa eta mapping zuzena frogatzen; worker-aren preflight-ak biak egiaztatzen ditu.</p>
+<p>Telemetriak eta inferentziak identitatea, timestamp-a, iturria eta model/policy provenientzia partekatzen dituzte. Kontsulta batek bateragarriak diren jatorri, eredu eta politika multzoak aukeratu behar ditu. Bestela, eredu zaharren eta berrien score-ak batera agregatzeak konparazio faltsua sortuko luke. Replay-aren ES 409 bat berdintasun zehatzarekin bakarrik onartzen da.</p>
+<h2 id="atala-39">11.2. Bistaratze bakoitzaren zeregina</h2><p>Tenperatura-grafikoak airea eta prozesua K unitateetan erakusten ditu, UTC agregazioarekin eta identitate/iturri bereizketarekin. Datu-hutsuneak ez dira lerro jarraitu batekin lotzen. 31 edo 100 identitate aldi berean erakusteak irakurgarritasuna hondatzen duenez, iragazkia eta paginazioa erabiltzen dira. Serie simulatuak ez dira makina fisiko baten kausa-ondoriozko historia gisa aurkezten.</p>
+<p>Desgaste-bandaren eta H/M/L kategoriaren heatmap-ak baliozkotze offlineko etiketa maiztasuna deskribatzen du. «Ez dago laginik» eta «0/n positibo» ez dira egoera bera. Ez da denbora-unitateko hutsegite-tasa, eta ez du higaduraren kausalitatea frogatzen. Offline irudi finkoak horrela identifikatzen dira, erabiltzaileak filtro global batek haiek ere aldatu dituela pentsa ez dezan.</p>
+<p>Azken 50 gertaeren taulak ID osoa, timestamp-a, iturria eta inferentzia erakusten ditu; ordena <code>timestamp DESC, event_id ASC</code> da. KPIek alerta-kopurua eta behatutako identitateen kopurua erakuts ditzakete, baina cardinality agregazioak hurbilketa izan dezake. Datu-adinak azken timestamp filtratuarekiko distantzia adierazten du; leiho hutsa <code>N/D</code> da eta etorkizuneko data arazo gisa azaldu behar da. Etiketa operatibo errealik gabe ez dago online FP/FN edo benetako hutsegite-tasarik.</p>
+<h2 id="atala-40">11.3. Froga-mailak eta beste panelaren egoera</h2><p><a href="../evidence/CG19_2026-10-21.md">CG19ko jatorrizko hautaketak</a>, <a href="../evidence/CG19_render_2026-10-21.md">render zuzenketak</a>, <a href="../evidence/CG19_SVG_ARIA_20261022.md">ARIA eguneratzeak</a> eta <a href="../evidence/CG32_CAMPAIGN_20261028.md">CG32 Discover jasotzeak</a> froga desberdinak ematen dituzte. ES query baten arrakasta ez da Kibana render osoa; spec lokal bat renderizatzea ez da saved objects-ak benetako instantzian inportatzea. DOM/ARIA egiaztapenak ez du NVDA entzunezko proba edo WCAG auditoria osoa ordezkatzen.</p>
+<p><code>dashboard_laneki/</code> aparteko interfaze gisa dago. Dokumentu honek ez dio automatikoki Kibana-ren edo <code>/predict</code> kontratuaren onarpena transferitzen. Datuak ordezkatzen dituen demo modua, APIren kontsumo kanonikoa eta benetako integrazioa bereizita aztertu behar dira. UI erakargarri bat ez da jatorri- eta esanahi-koherentziaren froga.</p>
+<h1 id="atala-41">12. Karga, latentzia eta eskalagarritasuna</h1><h2 id="atala-42">12.1. Kanpaina integratuaren emaitzak</h2><p><a href="../evidence/CG32_CAMPAIGN_20261028.md">2026-10-28ko CG32 kanpainak</a> berreraikitako kandidatuaren identitatea gordetzen du. Ez ditu CG26 bundle historikoaren byteak ordezkatzen. Zazpi saiotan 1.860 gertaera nominal eskaini eta gorde ziren, azken ID bikoizturik, galerarik edo pending egoerarik gabe behatutako kasuetan. Pausaren eta SIGKILLaren kasuek 20/20 gertaera berreskuratu zituzten. Hori ez da hutsegite posible guztietarako galera-zero teorema.</p>
+<table>
+<thead>
+<tr>
+<th>Saioa</th>
+<th align="right">Eskaini/gorde</th>
+<th align="right">HTTP p95 (ms)</th>
+<th align="right">E2E p95 (s)</th>
+<th align="right">Lag max/amaiera</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>batch32-base-1</td>
+<td align="right">600/600</td>
+<td align="right">14,958</td>
+<td align="right">82,747</td>
+<td align="right">340/0</td>
+</tr>
+<tr>
+<td>batch32-base-2</td>
+<td align="right">600/600</td>
+<td align="right">15,116</td>
+<td align="right">83,859</td>
+<td align="right">340/0</td>
+</tr>
+<tr>
+<td>batch32-base-3</td>
+<td align="right">600/600</td>
+<td align="right">14,365</td>
+<td align="right">78,135</td>
+<td align="right">340/0</td>
+</tr>
+<tr>
+<td>batch32-kill</td>
+<td align="right">20/20</td>
+<td align="right">15,905</td>
+<td align="right">39,762</td>
+<td align="right">20/0</td>
+</tr>
+<tr>
+<td>batch32-pause</td>
+<td align="right">20/20</td>
+<td align="right">13,414</td>
+<td align="right">25,728</td>
+<td align="right">18/0</td>
+</tr>
+<tr>
+<td>batch32-pilot</td>
+<td align="right">10/10</td>
+<td align="right">13,577</td>
+<td align="right">12,162</td>
+<td align="right">9/0</td>
+</tr>
+<tr>
+<td>rebuilt-pilot</td>
+<td align="right">10/10</td>
+<td align="right">19,906</td>
+<td align="right">25,928</td>
+<td align="right">9/0</td>
+</tr>
+</tbody></table>
+<p>HTTP p95 zerbitzariaren denbora da. E2E neurketak CSV lerroaren fsync-etik ES dokumentua lehen polling-ean ikusi arte neurtzen du, refresh eta polling tartea barne. Ez dira bi zenbaki berdin edo batu beharreko percentile-ak. Corpusetako inguruneak eta Python bertsioak ere jatorrizko jasotzeetan bereizten dira.</p>
+<h2 id="atala-43">12.2. Zer frogatzen duen eta zer ez</h2><p>Hiru base saioak 10 gertaera/s × 60 s eskaintzen dute. HTTPren ≤100 ms helburua betetzen da; E2Eren ≤1 s helburua ez. Drenajea barne throughput-a 4,1–4,3 gertaera/s ingurukoa da, eta max_records=32 konfigurazioak backlog-a metatzen du. Beraz, «10/s bidali dira» eta «10/s jasaten dira etengabe» baieztapen desberdinak dira. Emaitza erabilgarria da botila-lepoa identifikatzeko: zerbitzu lokal azkarrak ez du kate osoaren gaitasuna bermatzen.</p>
+<p>50/s baldintzapeko fasea ez zen exekutatu, 10/s-k jada backlog-a sortzen zuelako. Ez da omititutako proba gainditutzat ematen. Batch1 eta batch32 pilotuen A/B konparaketak errepikapen bakarra du baldintza bakoitzean; behaketa deskriptiboa da. CPU laginketa eta Docker <code>MemUsage</code> maximoa ez dira CPU piko zehatz edo RSS neurketa zehatza.</p>
+<p>Hobekuntza posibleak zikloaren scheduling-a, batch tamaina, helmugen throughput-a eta polling/refresh politika neurtuz aztertuko lirateke. Paralelismoa gehitzeak offset-jabetza, ordena eta idempotentzia berrikustea eskatzen du. Ez da kontsumitzaile gehiago martxan jarri edo segurtasun-kontrolik kendu dokumentu honen bidez.</p>
+<h2 id="atala-44">12.3. Nodo bakarra eta klusterra</h2><p>Nodo bakarrean prozesu bat berrabiatzeak lokalki kontserbatutako journal eta diskoarekin funtziona dezake. Host edo disko bera galtzeak egoera guztia eraman dezake. Kluster erredundanteak failure domain bereiziak, erreplikazio-faktorea, quorum/ISR politika, biltegiratze erreplikatua, backup eta restore entsegua eta sare-zatiketen kudeaketa behar ditu. Kontainer anitz host berean egoteak ez ditu domeinu horiek bereizten.</p>
+<p>Kafka talde bereko kontsumitzaileek partizioak banatzen dituzte; ez dute artxibo osoaren erreplika bana sortzen. NiFi multinodoan tokiko lock-ak eta SQLite partekatzea ez dira jabetza banatu segururako nahikoak. Horregatik arkitektura honen nodo bakarreko kontratua esplizitua da. G85erako kluster baten garrantzia ulertu eta justifikatzen da, kluster industriala eraikita dagoela esan gabe.</p>
+<h1 id="atala-45">13. Segurtasuna, pribatutasuna eta erantzukizuna</h1><h2 id="atala-46">13.1. Diseinuko mehatxuak eta kontrolak</h2><table>
+<thead>
+<tr>
+<th>Arriskua</th>
+<th>Kontrola</th>
+<th>Geratzen den muga</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Etiketa edo sarrera ustela inferentzian</td>
+<td>Schema, Pydantic zorrotza, eremu gehigarrien debekua, finitudea eta irismen-kontratua</td>
+<td>Eskema betetzen duen datu faltsu batek jatorriaren autentikotasuna behar du.</td>
+</tr>
+<tr>
+<td>Modelo desegokia edo aldatua</td>
+<td>Artefaktu/manifestu hashak eta runtime bertsioa</td>
+<td>Hashak ez du fitxategi arrotzaren jatorri fidagarria ordezkatzen.</td>
+</tr>
+<tr>
+<td>Replay/gatazka isila</td>
+<td>ID egonkorra, ledger kanonikoa eta 409</td>
+<td>Egoera eta namespace-ak kontserbatu behar dira.</td>
+</tr>
+<tr>
+<td>Sareko esposizioa</td>
+<td>Loopback/barne-sarea, sarbidearen konfigurazio esplizitua</td>
+<td>Benetako hedapeneko autentikazioa eta TLS aparte egiaztatu behar dira.</td>
+</tr>
+<tr>
+<td>Birsaiakera infinitua edo gorputz kaltegarria</td>
+<td>Tamaina/sakonera mugak, saiakera mugatuak, diagnostiko kontrolatuak</td>
+<td>Muga aplikatzeak ez du DoS erresistentzia osoa ziurtatzen.</td>
+</tr>
+<tr>
+<td>Sekretuen filtrazioa</td>
+<td><code>.env</code> eta kredentzialak artxiboetatik kanpo, errore-sarrera mugatuak</td>
+<td>Log eta exporten edukia berrikusi behar da partekatu aurretik.</td>
+</tr>
+<tr>
+<td>Mendekotasun zaharkitua</td>
+<td>Lock-ak, bertsio-kontrola eta audit/scan prozedurak</td>
+<td>Scan historikoa ez da gaurko irudiaren garbitasun-ziurtagiria.</td>
+</tr>
+</tbody></table>
+<p><a href="../LAN_ACCESS.md">LAN gida</a>, <a href="../CG14_SECURITY_CHECKLIST.md">CG14 segurtasun-checklista</a> eta segurtasun-testak diseinuaren osagarriak dira. Dokumentu hau prestatzeko ez dira portuak ireki, ziurtagiriak aldatu edo sarbide-politikak aldatu.</p>
+<h2 id="atala-47">13.2. Privacy by Design eta erabilera-mugak</h2><p>Dataset sintetikoaren sensoreak ez dira berez operadore baten identitatea. Hala ere, benetako ingurunean timestamp, makina, txanda eta langileen zerrenda elkartzeak pertsonak identifikatzeko aukera sor lezake. Helburua mantentze-lana da; telemetria ez litzateke ezkutuan lan-errendimendua sailkatzeko edo langileak zigortzeko erabili behar. Beharrezko datuak bakarrik gordetzea, sarbideak rol bidez mugatzea, retentzioa zehaztea eta datu pertsonalen elkarketak kontrolatzea diseinu-irizpideak dira.</p>
+<p>Industria-sekretuen babesa eta datu pertsonalen babesa ez dira gauza bera. Produkzio-erritmo, prozesu-errezeta edo bezero baten trazak konfidentzialak izan daitezke pertsonalak ez izan arren. Artxibo teknikoen esportazioek eta errore-mezuek ere informazio hori ager dezakete. Horregatik jatorria kontserbatzea eta zabalkundea mugatzea batera diseinatzen dira.</p>
+<h2 id="atala-48">13.3. Araudiaren azterketaren kokapena</h2><p><a href="../evidence/CG24.md">CG24 txostenak</a> AI Act, CE makineriaren esparrua, pribatutasuna, industria-sekretuak eta fabrikatzaile/erabiltzailearen erantzukizunak aztertzen ditu, 2026-10-22ko bere iturri eta baldintzekin. Dokumentu honek lan horren existentzia, arrazoibidea eta irismena azaltzen ditu; ez du araudiaren egungo testua berriz egiaztatu eta ez du lege-irizpen berririk ematen. Entrega honetako segurtasun eta pribatutasunaren diseinu-justifikazioa ez da lege-betetze unibertsalaren ziurtagiria.</p>
+<p>Laborategiko aholku-sistema eta makina baten segurtasun-funtzioan integratutako produktu bat eszenatoki desberdinak dira. Bigarrenean erabilera-helburua, hornitzaile/integratzaile/erabiltzaile rolak, arrisku-analisiak eta aplikagarritasuna berriz aztertu behar dira. Ez dago CE adostasun-deklaraziorik edo makina fisikoaren onarpenik dokumentazio hau sortze hutsagatik. G16/G17/G19/G20ren defentsak kontrol zehatzak eta baldintzak azaldu behar ditu.</p>
+<h1 id="atala-49">14. Erreproduzigarritasuna, ingurunea eta kalitate-kontrola</h1><h2 id="atala-50">14.1. Inguruneen identitatea</h2><p><a href="../../pyproject.toml">pyproject.toml</a> eta <a href="../../uv.lock">uv.lock</a> dira checkout honetako paketeen erreferentzia. Python tartea ≥3.11 eta &lt;3.13 da. Tokiko fitxategiak, besteak beste, NumPy 1.26.4, sklearn 1.5.0, PyArrow 23.0.1 eta DuckDB 2.0.0 finkatzen ditu. Ikerketa zigilatuak bere requirements eta ingurunea izan ditzake; ez da aplikazioaren runtimearekin isilean nahasten. Historiako txosten bateko bertsioa haren neurketaren parte da.</p>
+<p><a href="../DUCKDB_2_MIGRATION.md">DuckDB migrazioak</a> timestamp UTC, unitatea, nanosegundoak eta NULL balioak kontserbatzeko Arrow bidezko bihurketa dokumentatzen du. Timestamp naive bati zona asmatzea edo ns zehaztasuna µs-ra moztea ez da onargarria. Parquet zaharraren byteak ez dira birsortzen ustelkeria edo bateragarritasun-arazoa ezkutatzeko. Datu-base iraunkor baten downgrade-a eta Parquet irakurketa bi kontratu desberdin dira.</p>
+<h2 id="atala-51">14.2. Proba-mailen piramidea</h2><p>Unitate-testek ezaugarri-formulak, eskema, atalasaren berdintasuna eta erantzunaren identitatea isolatzen dituzte. Fitxategi/SQLite probek benetako tokiko iraunkortasuna aztertzen dute. Protokolo-mockek Kafka bezeroaren portaera azter dezakete broker errealik gabe. Kontainer isolatuek zerbitzu errealekin laborategiko froga ematen dute. Nabigatzailearen erregistroak render konkretua frogatzen du. Maila bakoitzak aurrekoen gaineko osagarri bat ematen du, baina ez ditu gainerakoen mugak ezabatzen.</p>
+<p>Txosten zaharretako test kopuruak ez dira batzen froga independente gehiago baleude bezala: suiteek kasu berak parteka ditzakete. CI gainditzeak commit jakin baten workflowa gainditu dela esan nahi du; ez du SMB bizirik, edo erabiltzailea panelarekin moldatzen dela frogatzen. Dokumentu honen egiaztapen berriek dokumentua bera aztertzen dute; ez dira zerbitzuen berrentsegu gisa etiketatzen.</p>
+<h2 id="atala-52">14.3. Egiaztapen seguruen gida</h2><p>Jada prest dagoen eta lock-arekin bateragarria den ingurune batean, komando hauek erreferentziako egiaztapenak dira. Hemen erakusteak ez du exekuzioa frogatzen; benetako emaitzak <code>EGIAZTAPENA.json</code> fitxategian bereizten dira.</p>
+<pre><code class="language-bash">python -B -m scripts.check_cg25_memory
+python -B -m unittest discover -s tests -p &#39;test_preparation.py&#39; -v
+python -B -m unittest discover -s tests -p &#39;test_current_state_scope.py&#39; -v
+python -B -m unittest discover -s tests -p &#39;test_scoring_replay.py&#39; -v
+python -B -m unittest discover -s tests -p &#39;test_contract_validation.py&#39; -v
+git diff --check
+</code></pre>
+<p>Integrazio-laborategia martxan jartzea beste prozedura bat da: baliabide, namespace, portu eta helmuga propioak behar ditu. Dokumentuaren egiaztapenak ez du horrelako ingurunerik abiarazten. Kredentzialak ez dira txostenean sartzen. Entrenamendua, modeloen promozioa eta datu-iturri berrien erabilera ez dira dokumentazioaren azpiproduktu automatikoak.</p>
+<h2 id="atala-53">14.4. Azaroko irakurketa-API eta panelaren integrazio-lanak</h2><p>Biltegiko oinarri honetatik aparte, azaroaren 3–4ko lanen kopiak ere badaude tokiko exportetan. Ondoko azalpenak <strong>gordetako txostenen irismena</strong> jasotzen du; ez du beste adarreko kodea checkout honetara integratuta dagoela edo zerbitzuak gaur martxan daudela baieztatzen. Horrela azken integrazio-lana dokumentatzen da haren froga-maila galdu gabe.</p>
+<p><a href="../../exports/sincronizacion-2026-11-04/fuentes/S12-READ_API.md">Irakurketa-APIaren kontratu gordea</a> #106–#108 lanekin lotuta dago. Idazketa-APIa eta erantzun-ledgerra mantenduz, GET irakurketak modu esplizituan aktibatzeko diseinua azaltzen du: makina-zerrenda, KPIak, historikoa eta epe-agregazioak. Kontsulta-esparrua source URI, model hash, policy eta hautatutako risk threshold-ari lotzen zaio. Horrek modelo edo jatorri bateraezinetako emaitzak nahastea eragozteko balio du. Akats batek ez du demo-datuetarako fallback isilik sortzen.</p>
+<p>Makinen snapshot-ak eta KPIek <code>as_of</code> bera erabili dezakete hautaketa-denborak lerrokatzeko; ESko PIT independenteek, ordea, ez dute eskaera desberdinen arteko transakzio atomiko bakarra sortzen. Berandu iritsitako datuek edukia alda dezakete. Irakurketa-kontratuak ordena eta leihoa definitzen ditu, eta ES dataren milisegundo-ordenaren eta payloadeko mikrosegundoen aldea aitortzen du. Tenperaturak Kelvin-etik Celsius-era 273,15 kenduz proiektatzen dira; falta den sentsorea null da, ez zero. Ez da osasun-indize, bibrazio, korronte elektriko edo RUL sintetikorik sortzen.</p>
+<p>Historikoaren irakurleak ledgerrean konprometitutako predikzioak bakarrik aukeratzen ditu. Parquet objektua, Bronze byteak eta onartutako jasotzearen identitatea egiaztatzen ditu. Hautatutako objektuak egiaztatzeak ez du artxibo osoaren osotasuna ziurtatzen: beste iturri edo epeetako objektuak kontsulta horren irismenetik kanpo egon daitezke. Cursor-ak denbora, makina, esparrua eta emaitzaren hatz-marka lotzen ditu; emaitza aldatuz gero 409k paginazioa berrabiaraztea eskatzen du. Honek G65/G66/G77/G100/G101 irizpideetarako provenientzia eta kalitatearen justifikazioa zabaltzen du.</p>
+<h2 id="atala-54">14.5. Benetako tokiko zerbitzuen eta panelaren froga mugatuak</h2><p><a href="../../exports/sincronizacion-2026-11-04/fuentes/S11-LOCAL_PIPELINE_BROWSER_20261103.md">Azaroaren 3ko pipeline/nabigatzaile txostenak</a> hiru etapa bereizten ditu. Lehenak HTTP/API/CG15/ES/GET katearen datuak benetako Chromium-en erakusten ditu. Bigarrenak worker iraunkorra stdin bidez probatzen du: job bat, replay bat, inferentzia bakarra eta panelaren identitate kanoniko bera. Hirugarrenak Filebeat → Kafka → worker → API/artxibo/ES/GET kate erreala erabiltzen du eta offset 0 kontsumitu ondoren commit 1 egiaztatzen du. Hirugarreneko Kafka gertaera ez da nabigatzailean egiaztatu, eta staged replay-a ez da brokerreko berrentrega.</p>
+<p>Txostenak automatikoki eguneratutako RPM balioa, xehetasun-modalaren pausatzea eta berriz ekitea, mugikorreko scroll/eduki zuzenketak eta ES gelditu/berrabiarazi ondorengo egoera degradatu/berreskuratua jasotzen ditu. Hori G41/G46/G87/G90/G105erako lan erabilgarria da: erabiltzaileak benetako balioa, adina eta identitatea ikusi ahal izatea. Datuak sintetikoak eta eredua esplizituki tokiko probakoa dira. Ez dago SMB sarbidearen, NiFi scheduling-aren, onartutako industria-ereduaren edo irudi guztien segurtasun-itxieraren frogarik. Etapak sekuentzialak dira, ez pila osoaren aldibereko baliabide-proba.</p>
+<h2 id="atala-55">14.6. Mendekotasunen eta irudien bateragarritasun-lana</h2><p><a href="../../exports/sincronizacion-2026-11-04/fuentes/S15-NIFI_CI_BLOCKERS_20261104.md">NiFi blokeoen azterketa gordea</a> eta <a href="../../exports/sincronizacion-2026-11-04/fuentes/S16-WIRE5_REVIEW_STATUS_20261104.md">Wire kandidatuaren berrikuspena</a> G19/G55/G80ren osagarriak dira. Lanak azaleko pakete-zerrendaz harago jo du: nested JAR/NAR objektuak identifikatzea, byte-hashak gordetzea, kontsumitzailearen bytecode/ABI kontrastatzea eta input kaltegarrien erregresioak prestatzea. Major bertsio berri batek constructor bat kentzen badu, runtimea bakarrik ordezkatzeak kontsumitzailea hautsi dezake. Segurtasun-adabakiak konpilazio eta erabilera-kontratuari ere eutsi behar dio.</p>
+<p>Wire V2 hautagaiaren txostenak proba hedatuak, jatorrizko bertsioaren kontraadibideak, schema kontsumitzailearen roundtrip-a eta tresna/input/output pinak jasotzen ditu. Jatorrizkoaren portaera okerra erreproduzitzea eta hautagaiak kasu horiek gainditzea osagai-mailako ebidentzia dira. Ez dira NiFi osoaren classloader eta consumer guztien egiaztapena. Rootfs scan batek artefaktua identifikatzea ez da azken irudia osatu eta eskaneatzearen ordezkoa.</p>
+<p>Ondorio dokumentala prestaketa eta blokeoa bereiztea da: jatorrizko berrikuspenak promozioa blokeatu zuen; ondorengo hautagaiak ez du berrikuspen independentearen onespen berririk jasota txosten horretan. Irudiaren muntaketa, nested inbentario osoa, kontsumitzaile errealak eta azken scanak irekita daude. Dokumentu honek ez du gatea arindu, salbuespenik gehitu edo hautagaia integratutako konponketa gisa aurkeztu. Txostenak historikoak dira; ez da gaurko advisory edo CI egoera berriz egiaztatu.</p>
+<h1 id="atala-56">15. Errubrikaren 40 irizpideen justifikazio xehea</h1><p>Atal bakoitzak jatorrizko deskribatzailea, lanaren justifikazioa, diseinuaren arrazoia, kode/ebidentzia/proba eta ondorioaren muga lotzen ditu. Proba baten estekak haren existentzia adierazten du; ez du dokumentu hau sortzean exekutatu dela esan nahi. Zenbaketa dokumental hau ez da nota edo irizpide guztiak akademikoki gainditutzat ematea.</p>
+<h2 id="atala-57">Zereginak!G5 — Ikaskuntza, inferentzia eta autonomia</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikain identifikatu eta justifikatu ditu printzipio guztiak: denbora errealeko inferentziaren eta offline ikaskuntzaren bereizketa, itxitako kontrol-begizta eta erabakiak hartzeko autonomia-mailak xehetasunez aztertuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Offline entrenamenduak parametroak eta prestaketa doitzen ditu; online eskaerak bundle finkoarekin inferitzen du. Kafka/NiFi ingestak ez du berez ikaskuntza jarraitua esan nahi. Sentsoreak, score-a eta pertsonaren berrikuspena kate berean kokatzen dira, baina ez dago aktuadoreetara itzulitako agindurik. Horregatik kontrol fisikoaren begizta irekita dago.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Diseinuak inferentzia, alerta-politika eta mantentze-erabakia banatzen ditu: ereduaren score-ak ez du pertsonaren baimena ordezkatzen. Garapen tekniko osoa: 1, 3 eta 9. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/score_api.py">scoring/score_api.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG30.md">docs/evidence/CG30.md</a>. Egiaztapen-kasua: <a href="../../tests/test_current_state_scope.py">tests/test_current_state_scope.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Lau kideek bere hitzekin azaldu behar dute bereizketa. Guiona edukitzeak ez du azalpen hori egiaztatzen.</p>
+<h2 id="atala-58">Zereginak!G10 — Eredu gainbegiratuak eta arrarotasun-ereduak</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikain eta sakon sailkatu ditu ereduak: algoritmo gainbegiratuak (Random Forest, Gradient Boosting) eta anomalia-detekzioko eredu ez-gainbegiratuak (Isolation Forest, Autoencoder) alderatu ditu, bakoitzaren abantailak eta erabilera-kasuak CNC telemetrian zehaztuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> RF eta boosting familiak etiketadun sailkapenerako alderatu dira; IF, PCA, LOF, SVM eta autoencoderra arrarotasun-kanal gisa aztertu dira. CG34k 40 konfigurazio gainbegiratu eta 10 arrarotasun-konfigurazio jasotzen ditu. Familia, konfigurazio eta doikuntza-unitate kopuruak bereizten dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> RF/IF banaketak bi irteeren esanahia babesten du. Anomalia ez da etiketatutako hutsegitearen baliokidea eta ez zaio ground truth independentea asmatzen. Garapen tekniko osoa: 6 eta 7. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/ml_study_models.py">scripts/ml_study_models.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG34_EXPLORACION_20261023.md">docs/evidence/CG34_EXPLORACION_20261023.md</a>. Egiaztapen-kasua: <a href="../../tests/research/test_ml_study.py">tests/research/test_ml_study.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ikerketan algoritmo bat probatzeak ez du APIan erabiltzen dela esan nahi. CG30eko autoencoder ez inplementatuaren aipamena historikoa da.</p>
+<h2 id="atala-59">Zereginak!G14 — Kostua eta scoring-aren bideragarritasuna</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikain baloratu du sistemaren egokitasuna: hutsegite baten kostu ekonomikoa (1.200 €/h) eta mantentze-kostuak kuantifikatu ditu, probabilitate-atalaseak arriskuaren arabera doitu ditu eta denbora errealeko scoring-erako bideragarritasuna guztiz frogatu du.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Geldialdiaren 1.200 €/h agertokia eta ondoren jasotako FN/FP/TP/TN kostu-matrizea bereizita kalkulatu dira. APIaren eta kate integratuaren latentzia ere bereizi da: HTTP azkarra izan arren, CG32 E2E denborak askoz luzeagoak dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Bideragarritasuna erabaki ekonomikoaren eta baliabideen arteko baldintzapeko ebaluazioa da. Atalasea jaistea ez da automatikoki aukerarik onena: FP gehigarriak eta ikuskapen-gaitasuna kontatu behar dira. Garapen tekniko osoa: 8 eta 12. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/business_ml_study.py">scripts/business_ml_study.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG32_CAMPAIGN_20261028.md">docs/evidence/CG32_CAMPAIGN_20261028.md</a>. Egiaztapen-kasua: <a href="../../tests/research/test_business_ml_study.py">tests/research/test_business_ml_study.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ez da denbora erreal zorrotzeko bermerik edo industria-errentagarritasun egiaztaturik adierazten. E2E ≤1 s helburua ez da bete.</p>
+<h2 id="atala-60">Zereginak!G16 — Lege-arriskuak eta erantzukizunen banaketa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikain eta sakon argudiatu du: EBko AI Act-en sailkapena, CE markaketa eta erantzukizun zibilaren esleipena (fabrikatzailea vs erabiltzailea) xehetasunez jorratu ditu, eta mantentze prediktiboan langileen gaineko kontrol ezkutua ekiditeko irizpide etiko sendoak finkatu ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> CG24 azterketak erabilera akademikoa, produktu industriala eta segurtasun-funtzio batean txertatzea eszenatoki bereizi gisa tratatzen ditu. AI Act, CE eta fabrikatzaile/erabiltzaile rolak bere datatutako iturrietan arrazoitzen dira. Operadoreen kontrol ezkutua saihesteko erabilera-muga azaltzen da.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Aplikagarritasuna erabilera-helburuaren eta benetako integrazioaren araberakoa dela erakusten da; ez da algoritmoaren izenetik soilik ondorioztatzen. Garapen tekniko osoa: 13. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../docs/CG14_SECURITY_CHECKLIST.md">docs/CG14_SECURITY_CHECKLIST.md</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG24.md">docs/evidence/CG24.md</a>. Ez dago irizpide honetako argudio juridikoa automatikoki ziurtatzen duen unitate-testik; iturri eta baldintzen berrikuspena behar da.</p>
+<p><strong>Muga eta onarpena.</strong> Dokumentu honek ez du lege-testuen gaurkotasuna berriz egiaztatu. Azterketa historikoaren justifikazioa da, ez ziurtagiri edo lege-irizpen berria.</p>
+<h2 id="atala-61">Zereginak!G17 — Pribatutasuna eta industria-sekretuak</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikain ezagutu eta garatu du: Privacy by Design printzipioak txertatu ditu arkitekturan, industria-sekretuen babesa zorrotz definitu du, eta telemetria-datuak operadoreen lan-errendimenduarekin modu irregularrean ez gurutzatzeko berme legal eta teknikoak ezarri ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Sensore sintetikoak eta pertsona baten datuak bereizten dira. Hala ere, makina, timestamp eta langile-txanda elkartzeak identifikagarritasuna sor dezakeela azaltzen da. Helburu mugaketa, sarbide kontrolatua eta export/logetan sekreturik ez sartzea diseinuaren parte dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Datu-minimizazioak erabilera operatiboa mantentzen du, langileen errendimenduaren profilaketa ezkutua gehitu gabe. Industria-sekretuen konfidentzialtasuna pertsonen pribatutasunetik bereizten da. Garapen tekniko osoa: 13. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/private_files.py">scripts/private_files.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG24.md">docs/evidence/CG24.md</a>. Egiaztapen-kasua: <a href="../../tests/test_private_files.py">tests/test_private_files.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ez da benetako enpresa baten tratamendu-erregistro, retentzio edo sarbide-auditoria osoa egiaztatu.</p>
+<h2 id="atala-62">Zereginak!G19 — Security by Design</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Diseinuaren atal osoan kontuan hartu eta horrela jaso da da.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Arriskuak sarrera-baliozkotzean, bundlearen jatorrian, sareko esposizioan, replay gatazketan eta artxiboaren ustelkerian aztertzen dira. Kontrolak schema zorrotza, hashak, 409, saiakera mugatuak eta ACKaren aurreko helmuga-egiaztapena dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Segurtasuna katearen muga bakoitzean txertatuta dago; ez da amaierako pasahitz bakar batera mugatzen. Test zehatzek kontrol bat haustea erregresio gisa detektatzen dute. Garapen tekniko osoa: 9, 10 eta 13. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/score_api.py">scoring/score_api.py</a>. Emaitza edo testuingurua: <a href="../../docs/CG14_SECURITY_CHECKLIST.md">docs/CG14_SECURITY_CHECKLIST.md</a>. Egiaztapen-kasua: <a href="../../tests/test_cg14_hardening.py">tests/test_cg14_hardening.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Tokiko kontrolak ez dira irudi eta zerbitzu guztien egungo segurtasun-auditoria osoa. Ez da mendekotasunen gaurko kalteberatasun-egoera ziurtatzen.</p>
+<h2 id="atala-63">Zereginak!G20 — Privacy by Design diseinu osoan</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Diseinuaren atal osoan kontuan hartu eta horrela jaso da da.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Jatorrizko datua, inferentzia eta aurkezpena banatzean eremu bakoitzaren helburua zehazten da. Etiketa eta emaitza inferituaren arteko aldea, sarbideak eta langile-datuekin gurutzatzearen arriskua jasotzen dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Pribatutasuna ingestatik exportera mantendu behar da; panel bateko diagnostikoek edo errore-mezuek ere beharrezkoa ez den informazioa zabal dezakete. Garapen tekniko osoa: 4, 11 eta 13. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/private_files.py">scripts/private_files.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG24.md">docs/evidence/CG24.md</a>. Egiaztapen-kasua: <a href="../../tests/test_private_files.py">tests/test_private_files.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Errubrikaren betetze orokorraren literalak ez du froga gabeko adostasun unibertsala baimentzen; benetako erabilera berriak bere ebaluazioa behar du.</p>
+<h2 id="atala-64">Zereginak!G23 — IA estua eta IA orokorra</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Berezitasun kontzeptual eta teknikoak sakonki aztertzen ditu; CNC Guard AA ahularen (ataza espezifikorako eredu optimizatua) paradigma gisa bikain justifikatzen du, AA orokorraren egungo mugekin eta industria-errealitatearekin alderatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> RF-k sarrera tabular mugatuetatik uneko etiketa hurbiltzen du. Ez du helburu propiorik, jakintza orokorrik edo egoera ezezagun guztietan arrazoitzeko gaitasunik. Arrarotasun-detektorea gehitzeak ez du IA orokor bihurtzen.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Aplikazioaren adimena eredu estatistikoaren, arauen eta giza testuinguruaren arteko konposizioan kokatzen da, gaitasun orokorrak atribuitu gabe. Garapen tekniko osoa: 1 eta 6. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/scope.py">scoring/scope.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG30.md">docs/evidence/CG30.md</a>. Egiaztapen-kasua: <a href="../../tests/test_current_state_scope.py">tests/test_current_state_scope.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Kontzeptuen ulermen indibiduala defentsan frogatu behar da; dokumentuak ez du parte-hartzea ordezkatzen.</p>
+<h2 id="atala-65">Zereginak!G24 — Arau deterministak eta ikaskuntza estatistikoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>AI sinboliko/klasikoaren (arau estatikoak, atalase finkoak) eta Machine Learning-aren (patroi konplexuen ikaskuntza estatistikoa) arteko mugak, abantailak eta mugak sakonki arrazoitzen ditu CNC industriako mantentze-lanen ikuspegitik.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Schema eta alerta-mugak deterministak dira; RF-ren zuhaitzak datuetatik doitu dira. Arau batek Kelvin positiboa exijitu dezake etiketarik gabe; ML-k sentsoreen arteko eredu ez-lineala ikasten du. Bi mekanismoek errore mota desberdinak dituzte.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Arauak kontratu eta politika ulergarri gisa mantentzeak ML-ren erroreak datu-formatuaren erroreetatik bereizten ditu. Atalase finko bat erabiltzea ez da modeloaren ikaskuntza ezabatzea. Garapen tekniko osoa: 1, 6 eta 8. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/score_api.py">scoring/score_api.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG30.md">docs/evidence/CG30.md</a>. Egiaztapen-kasua: <a href="../../tests/test_policy.py">tests/test_policy.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Politika aldatzeak kostu/errore konpromisoa aldatzen du; ez da hobekuntza automatiko edo onartutako promozioa.</p>
+<h2 id="atala-66">Zereginak!G31 — Ikaskuntza-motak eta datu-beharrak</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Ikaskuntza mota bakoitzaren ezaugarriak, datu-beharrak eta industria-erabilerak sakonki zehazten ditu, CNC Guard-en zergatik aukeratu den ikaskuntza gainbegiratua (etiketatutako akats historikoak) beste moten aurrean bikain justifikatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Etiketa bitarrak sailkapen gainbegiratua ahalbidetzen du. IF/PCA moduko metodoek erreferentziako banaketa aztertzen dute; normal-proxyaren definizioak emaitzaren esanahia baldintzatzen du. Errefortzu bidezko ikaskuntzak ekintza, sari eta ingurune-interakzio egokiak beharko lituzke, hemen ez daudenak.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Datuen egiturari egokitzen zaio metodoa: ez da ikaskuntza tenporala edo politika autonomoa aukeratzen behar duen ground truth-rik ez badago. Garapen tekniko osoa: 4 eta 6. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/ml_study_models.py">scripts/ml_study_models.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG17_CURRENT_STATE_SCOPE.md">docs/evidence/CG17_CURRENT_STATE_SCOPE.md</a>. Egiaztapen-kasua: <a href="../../tests/test_anomaly.py">tests/test_anomaly.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Etiketatutako AI4I behaketak sintetikoak dira; ez dira automatikoki benetako hutsegite industrial historikoak.</p>
+<h2 id="atala-67">Zereginak!G32 — Tresnen ekosistema eta integrazioa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Tresnen ekosistema osoa (datuen analisia, desoreka zuzentzea, modelizazioa, serializazioa eta inferentzia-zerbitzua) eta algoritmoak sakonki xehatzen ditu, teknologiak hautatzeko irizpideak bikain arrazoituz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> pandas/NumPy datu-tratamenduan, sklearn pipeline eta estimatzaileetan, joblib serializazioan, FastAPI kontratuan, Parquet/DuckDB historikoan eta Kafka/NiFi garraioan erabiltzen dira. uv.lock-ek ingurunea identifikatzen du.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Tresna bakoitza ardura bati lotzeak notebook, esperimentu eta APIaren arteko bikoizketa murrizten du; prestaketa partekatua da formula fisikoen erreferentzia. Garapen tekniko osoa: 3, 5, 6 eta 14. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../pyproject.toml">pyproject.toml</a>. Emaitza edo testuingurua: <a href="../../docs/REPOSITORY_LAYOUT.md">docs/REPOSITORY_LAYOUT.md</a>. Egiaztapen-kasua: <a href="../../tests/test_preparation.py">tests/test_preparation.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ikerketa-ingurunea eta serving-ingurunea ez dira berdintzat hartzen; artxibo zigilatuak bere bertsioak ditu.</p>
+<h2 id="atala-68">Zereginak!G36 — EDA eta etiketadun datuen prestaketa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuen tratamendu eta azterketa sakona egin du (EDA), ezaugarriak ezin hobeto prestatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Eskema, null/inf balioak, klase-prebalentzia eta ezaugarri fisikoak aztertzen dira. Positibo gutxiko populazioak accuracy erreferentzia altu baina baliogabea sortzen duela erakusten da. Etiketa y gisa gordetzen da, X-tik kanpo.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Datuen jatorri baimendua eta partizioen kidetza prestaketaren parte dira; CSV irakurtze hutsak ez du EDA osoa ordezkatzen. Garapen tekniko osoa: 4 eta 5. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/preparation.py">scoring/preparation.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG06.md">docs/evidence/CG06.md</a>. Egiaztapen-kasua: <a href="../../tests/test_audit_cg02.py">tests/test_audit_cg02.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> EDA notebook-eko output historikoak ez dira DuckDB 2.0 ingurunean berriro exekutatutako emaitzatzat aurkezten.</p>
+<h2 id="atala-69">Zereginak!G38 — Feature engineering eta leakage prebentzioa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuen azterketa sakona egin du, feature engineering aurreratua garatu du (<code>temp_diff</code>, <code>power_est</code>), ezaugarrien garrantziaren interpretazio fisiko/industriala egin du eta datuen filtrazioa (data leakage) erabat saihestu du SMOTE entrenamenduan soilik aplikatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> temp_diff, power_W eta wear_torque formulak eta unitateak esplizituak dira. Etiketak, IDak eta datak estimatzailetik kanpo geratzen dira. Imputazioa, eskala eta SMOTENC train-foldaren barruan doitzen dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Sentsore originalen gaineko SMOTENCren ondoren eratorriak birkalkulatzeak ezaugarri fisikoen koherentzia mantentzen du. Ablazioak eratorrien ekarpena azter dezake, kausalitatea frogatu gabe. Garapen tekniko osoa: 5. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/preparation.py">scoring/preparation.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG07.md">docs/evidence/CG07.md</a>. Egiaztapen-kasua: <a href="../../tests/test_smotenc.py">tests/test_smotenc.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> SMOTENC probatua izateak ez du aukeratua denik esan nahi; RFren erreferentzia ez da haren ondorioz isilean aldatu.</p>
+<h2 id="atala-70">Zereginak!G39 — Baliozkotzea eta nahasmen-matrizea</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Ebaluazio ezin hobea: Recall, Precision eta Confusion Matrix sakonki interpretatu ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> CG10en hiru ebaketak kohorte berean alderatzen dira. Recall, precision, FPR eta FNRren izendatzaileak azaltzen dira. CRITICAren FP=0 emaitza eta FN=14 kostua batera aurkezten dira, metrika onena isolatu gabe.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> CSV round-trip zuzenketak kalkulu eta aurkezpenaren koherentzia egiaztatzen du; berdintasun zehatza testarekin lotzen da. Garapen tekniko osoa: 7. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/report_thresholds.py">scripts/report_thresholds.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG10_PRECISION_20261022.md">docs/evidence/CG10_PRECISION_20261022.md</a>. Egiaztapen-kasua: <a href="../../tests/test_report_thresholds.py">tests/test_report_thresholds.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Baliozkotzea berrerabilia da. Emaitzek ez dute test independente berririk edo populazio industrialaren bermerik ematen.</p>
+<h2 id="atala-71">Zereginak!G41 — Inferentzia-zerbitzu sendoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Inplementazio profesional eta sendoa garatu du: APIak eredua memorian behin kargatzen du abioan, sarrerak zorrotz baliozkotzen ditu, erroreak kudeatzen ditu, alerta-mailak kalkulatzen ditu (<code>OK</code>, <code>AVISO</code>, <code>CRITICA</code>) eta NiFi fluxuarekin denbora errealean integratuta dago.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Bundlea abioan baliozkotu eta kargatzen da; /predict-ek sei sarrera onartuak erabiltzen ditu. Schema, gorputz-muga eta erantzun kanonikoak erroreak eta retry-ak kontrolatzen dituzte. /health-ek prestasuna bereizten du.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> APIak score-a bakarrik ematea baino kontratu zabalagoa eskaintzen du: eredua, politika, iturria eta inferentziaren identitatea itzultzen ditu. Garapen tekniko osoa: 9 eta 10. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/score_api.py">scoring/score_api.py</a>. Emaitza edo testuingurua: <a href="../../docs/SCORING_REPLAY_CONTRACT.md">docs/SCORING_REPLAY_CONTRACT.md</a>. Egiaztapen-kasua: <a href="../../tests/test_api.py">tests/test_api.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> NiFi/worker integrazioak bere froga du; API unitate-testak ez dira SMBtik panelerainoko exekuzioa.</p>
+<h2 id="atala-72">Zereginak!G45 — Desoreka, recall eta egokitasun ekonomikoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Algoritmoen egokitasunaren balorazio bikaina: klase-desoreka larriaren aurrean Recall-a (%76+) lehenestea justifikatzen du, False Negative (1.200 €/h geldialdia) eta False Positive (alferrikako ikuskapena) kostu ekonomikoak alderatuz, eta ereduaren egokitasun industriala guztiz bermatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Recall %76+ erreferentzia literala eta FN/FP/TP kostuak batera interpretatzen dira. %96,6 accuracy duen beti-negatibo erreferentziak positibo guztiak galtzen ditu. RF B eta bikote-hautatzailearen konparaketak errore-truke zehatza erakusten du.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Egokitasuna kohortean, politika eta kostu-hipotesi jakinetan arrazoitzen da. 4.700 €/200 € erlazio marginalak recall gehiagoren prezioa neurtzen du. Garapen tekniko osoa: 7 eta 8. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/business_ml_study.py">scripts/business_ml_study.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG34_20261023/business-summary.json">docs/evidence/CG34_20261023/business-summary.json</a>. Egiaztapen-kasua: <a href="../../tests/research/test_business_ml_study.py">tests/research/test_business_ml_study.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Errubrikako egokitasun industriala guztiz bermatzearen adierazpena ez dago datu sintetikoekin frogatuta; balorazio akademikoa bereizita geratzen da.</p>
+<h2 id="atala-73">Zereginak!G46 — Sistema osoaren ebaluazio praktikoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Sistema adimendunaren aplikazio praktikoa bikain ebaluatu du: osagaien desakoplamendua (Kafka buffer), datu-galerarik gabeko transferentzia (NiFi), scoring-aren latentzia baxua, eta muturretik muturrerako fidagarritasuna (sentsoretik mantentze-alertara) sakonki baliozkotuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Kafka buffer-ak desakoplatzen du; worker-ak helmugak offsetaren aurretik egiaztatzen ditu; APIak inferentzia kanonikoa eskaintzen du. CG32k ID multzoak eta latentzia E2E neurtzen ditu.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Fidagarritasuna helmuga eta egoera-trantsizio bakoitzari lotzen zaio. HTTP p95 eta azken dokumentuaren eskuragarritasuna bereizteak botila-lepo erreala erakusten du. Garapen tekniko osoa: 3, 10 eta 12. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/run_automatic_graph.py">scripts/run_automatic_graph.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG32_CAMPAIGN_20261028.md">docs/evidence/CG32_CAMPAIGN_20261028.md</a>. Egiaztapen-kasua: <a href="../../tests/test_automatic_graph.py">tests/test_automatic_graph.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Behatutako galerarik eza ez da sare, host edo disko-hutsegite guztien aurrean zero galera bermatzea.</p>
+<h2 id="atala-74">Zereginak!G49 — Informazio-erauzketa automatikoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Ekoizpen-mailako ikaskuntza konputazional automatikoa garatu du: streaming etengabeko datu-bolumen handiak prozesatzen ditu (NFS -&gt; Filebeat -&gt; Kafka), NiFik atributuak automatikoki ateratzen ditu, ereduak denbora errealean balioesten du eta informazio egituratua (KPIak, agregazioak, alertak) indexatzen da Elasticsearchen giza esku-hartzerik gabe.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Loteak Filebeat/Kafka bidez iristen dira; NiFik worker-zikloa programatzen du, eta worker-ak proiekzioa, inferentzia eta ES idazketa koordinatzen ditu. Irteera egituratuak KPI eta alerta kontsultagarriak ahalbidetzen ditu.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Automatizazioak giza eskuzko urratsak kentzen ditu ziklo arruntean; hala ere, konfigurazioa, erroreen ebazpena eta mantentze-erabakia operadorearen ardurak dira. Garapen tekniko osoa: 3, 10 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/run_automatic_graph.py">scripts/run_automatic_graph.py</a>. Emaitza edo testuingurua: <a href="../../docs/CG14_AUTOMATIC_GRAPH.md">docs/CG14_AUTOMATIC_GRAPH.md</a>. Egiaztapen-kasua: <a href="../../tests/test_automatic_graph.py">tests/test_automatic_graph.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> SMB erabiltzen da, ez NFS. Ez da ekoizpen-mailako bolumen handiko zerbitzu etengabea ziurtatzen; A03 balorazio akademikoa ebazteke dago.</p>
+<h2 id="atala-75">Zereginak!G52 — Python hautatzeko justifikazioa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikaintasunez eta sakonki justifikatzen du Python-en egokitasuna: datuen aurreprozesamendurako eta modelizaziorako liburutegiak, FastAPI-k eskaintzen duen asinkronia eta REST integrazio azkarra, eta industria-ingurunean pipeline osoarekin (NiFi, Docker) konektatzeko malgutasuna aztertzen ditu, beste aukera batzuekin konparazio arrazoitua eginez.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Hizkuntza bakarrean prestaketa, estimatzailea eta HTTPa partekatzeak formula eta serializazio desadostasunak murrizten ditu. Java/NiFi eta SQL/DuckDB osagarri gisa erabiltzen dira, ardura egokietan.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Hautaketa ekosistema eta mantengarritasunaren araberakoa da; ez da Python hizkuntzarik azkarrena den baieztapenean oinarritzen. FastAPIren konkurrentzia ez da CPU inferentziaren kostuaren ezabaketa. Garapen tekniko osoa: 3 eta 14. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../pyproject.toml">pyproject.toml</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG30.md">docs/evidence/CG30.md</a>. Egiaztapen-kasua: <a href="../../tests/test_api.py">tests/test_api.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Benetako throughput-a neurtu behar da: hizkuntza edo frameworkaren aukerak ez du SLA bat frogatzen.</p>
+<h2 id="atala-76">Zereginak!G55 — Programa modularra eta kontratu zorrotzak</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikaintasunez egituratutako programa: arkitektura garbia eta modularra, entrenamendua eta ekoizpen-APIa erabat bereizita, Pydantic mota-egiaztapen sendoak, errore- eta salbuespen-kudeaketa aurreratua, eta kode-estilo garbia (PEP8 eta praktika onak errespetatuz).</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Prestaketa, irismena, inferentzia HTTPa eta ledgerra modulu bereizietan daude. Pydantic strict mode eta extra=forbid ereduak moten eta eremu osagarrien kontrola ematen du.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Arduren banaketak inferentzia-zerbitzua entrenamendu-scripten albo-ondorioetatik isolatzen du. Errore kudeaketak prestasunik eza eta gatazka identifikagarriak bihurtzen ditu. Garapen tekniko osoa: 3 eta 9. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/score_api.py">scoring/score_api.py</a>. Emaitza edo testuingurua: <a href="../../docs/REPOSITORY_LAYOUT.md">docs/REPOSITORY_LAYOUT.md</a>. Egiaztapen-kasua: <a href="../../tests/test_contract_validation.py">tests/test_contract_validation.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Estilo edo test historiko gaindituak ez dira uneko CI osorako baieztapen gisa erabiltzen.</p>
+<h2 id="atala-77">Zereginak!G60 — Ereduaren definizio matematiko eta operatiboa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikaintasunez eta sakontasunez definitutako eredua: adibidez, ereduaren egokitasuna hiperplano ez-linealetan, datu-desorekaren efektu larriak (laginen %3,4 bakarrik hutsegiteak), SMOTE eta klase-pisuen eragina, eta negozioaren errealitatearekin bat datozen erabakiak (threshold tuning) eta metrikak (Recall eta ROC-AUC vs Accuracy tranpa) modu zehatzean definitu ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> RF-k banaketa ez-linealak eta interakzioak ikasten ditu. Klase-pisuek eta SMOTENCk desoreka modu desberdinean tratatzen dute; atalaseak entrenatutako score-a erabaki bihurtzen du. Hiperparametroa eta politika ez dira gauza bera.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Accuracy, ROC-AUC, AP eta recall/cost konpromisoa bereizteak negozioaren helburua ebaluazioaren diseinuan sartzen du. Garapen tekniko osoa: 5, 6 eta 8. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/ml_study_models.py">scripts/ml_study_models.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG34_EXPLORACION_20261023.md">docs/evidence/CG34_EXPLORACION_20261023.md</a>. Egiaztapen-kasua: <a href="../../tests/research/test_ml_study.py">tests/research/test_ml_study.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ez da probabilitate kalibratua, etorkizuneko arriskua edo makina guztietarako muga fisiko unibertsala suposatzen.</p>
+<h2 id="atala-78">Zereginak!G61 — Aplikazioaren inplementazioa eta alerta-politika</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Bikaintasunez inplementatutako soluzioa: eredua hiperparametro egokiekin entrenatua, serializazio garbia, FastAPI zerbitzu sendoa <code>/health</code> eta <code>/predict</code> bideekin, alerta-atalase zehatzak (&gt;=0.15 AVISO, &gt;=0.7 CRITICA), eta denbora errealeko probekin egiaztatutako errendimendu sendoa. Threshold tuning egokiarekin findu du eredu matematikoa &quot;geldialdi programatuaren paradoxa&quot; justifikatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> /health eta /predict, hash bidezko karga eta 0,15/0,70 alerta-mailak inplementatuta daude. Programatutako mantentzearen kostua TP kasuan ere kontuan hartzen da; atalase ekonomiko teorikoak kalibrazio-baldintzak ditu.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> API kontratuak bundle, politika eta eredua bereizten ditu, eta hutsegitean 503 edo akatsa ematen du score ordezkorik asmatu gabe. Garapen tekniko osoa: 8 eta 9. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/score_api.py">scoring/score_api.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG10_PRECISION_20261022.md">docs/evidence/CG10_PRECISION_20261022.md</a>. Egiaztapen-kasua: <a href="../../tests/test_policy.py">tests/test_policy.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> F2 threshold tuning-a eta abisu-mailak ez dira isilean berdintzen. Kanpaina bateko errendimendua ez da produkzio-bermea.</p>
+<h2 id="atala-79">Zereginak!G62 — Feature engineering, CV eta doikuntzaren ebaluazioa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Ereduaren hasierako emaitzak (Nahasmen-matrizea) ikusi ondoren, emaitzak hobetzeko aplikatu dezaketen &quot;teknika desberdin&quot; onenetarikoa aldagai berriak sortzea da (Feature Engineering). Makina bakoitzaren historikoa groupby bidez kalkulatzea emaitzak hobetzeko eta ebaluazio borobil bat egiteko ezinbesteko tresna da. Datu ezazagunen aurreko portaera aztertzeko balidazio-gurutzatua egin du. Justifikatu ditu ebaluazioak. Fine tuning bidez eta teknika desberdinak baliatuz ereduaren hiperparametroak doitu ditu. Nahasmen-matrizeak eta eta sailkapen-txostenen emaitzak aztertu eta interpretatu ditu erabakiak justifikatzeko (threshold tuning). </p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Ezaugarri fisikoak, ablazioak eta nested CV erabili dira. Doikuntza eta ebaluazioa train multzoaren barruan bereizten dira. Nahasmen-matrizeak eta score finkoen interpretazioa txostenekin lotzen dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Groupby deskriptiboa erabil daiteke historikoaren laburpenetarako, baina identitate eta denbora fisikorik gabeko AI4In ez da rolling historia kausal bat asmatzen. Garapen tekniko osoa: 5, 6 eta 7. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/preparation.py">scoring/preparation.py</a>. Emaitza edo testuingurua: <a href="../../docs/rubrica/ACLARACIONES_20261023.md">docs/rubrica/ACLARACIONES_20261023.md</a>. Egiaztapen-kasua: <a href="../../tests/research/test_cg40_partitions.py">tests/research/test_cg40_partitions.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> G62ren makina bakoitzeko historikoaren literalaren baliokidetasuna A04n argitu gabe dago. Alternatiba fisiko/CV hori justifikatzen da; ez da eskakizuna isilean ezabatzen.</p>
+<h2 id="atala-80">Zereginak!G65 — Telemetriatik informazio operatibora</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuak automatikoki prozesatu eta informazio operatibo zein prediktibo bihurtzen ditu, sentsoreen datuak eta inferentziaren emaitzak uztartuz. Makinen arrisku-egoerak, joerak eta alertak identifikatzeko informazio erabilgarria eskaintzen du, mantentze-erabakiak errazteko.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Sentsoreak, score-a, alerta eta jatorria dokumentu kontsultagarri batean lotzen dira. KPIek alerta-banaketak eta leihoan ikusitako gertaerak laburtzen dituzte, ID eta timestamp bidez egiaztagarri.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Erabiltzaileak agregaziotik gertaera jakinera itzul daiteke; horrek ikuskapen-proposamena defendatzea ahalbidetzen du. Garapen tekniko osoa: 10 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/create_lab_dashboard.py">scripts/create_lab_dashboard.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG19_2026-10-21.md">docs/evidence/CG19_2026-10-21.md</a>. Egiaztapen-kasua: <a href="../../tests/test_lab_dashboard.py">tests/test_lab_dashboard.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Denbora-grafikoak igorpenaren deskribapena dira; ez dute etorkizuneko joera edo benetako makina baten degradazioa frogatzen.</p>
+<h2 id="atala-81">Zereginak!G66 — Iturri eta formatuen koherentzia</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuen egitura osoan koherentzia bermatzen du, eta telemetria eta inferentziaren emaitzak integratzeko formatu egokia definitu eta egiaztatzen du.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> CSV jatorritik JSON telemetriara eta predikzio egituratura pasatzean unitate, identitate eta jatorriaren eremuak mantentzen dira. Parquet historikoa eta ES indexazioa tratamendu desberdinetarako proiekzioak dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Telemetria eta inferentziaren join-a identitatearen bidez egiteak balioak makina-zenbakitik edo ausazko demo batetik asmatzea eragozten du. Garapen tekniko osoa: 4, 9 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../contracts/telemetry.schema.json">contracts/telemetry.schema.json</a>. Emaitza edo testuingurua: <a href="../../docs/SCORING_REPLAY_CONTRACT.md">docs/SCORING_REPLAY_CONTRACT.md</a>. Egiaztapen-kasua: <a href="../../tests/test_contract_validation.py">tests/test_contract_validation.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Schema bateragarriak ez du berez sareko iturriaren autentikotasuna edo panel guztien kontsumo kanonikoa egiaztatzen.</p>
+<h2 id="atala-82">Zereginak!G68 — Indizeak eta ingest pipeline-a</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Indizeak eta ingest-pipelineak ezin hobeto sortu ditu datuak zuzen gordetzeko.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Pipeline-a template-aren aurretik instalatzen da; index.final_pipeline ezarpenak azken baliozkotzea lotzen du. Mapping zorrotza eta identitate egonkorra egiaztatzen dira, eta proba-eskemek idazketa okerrak baztertzen dituzte.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> ES dokumentuaren sorreran guard bat izateak APIz kanpoko idazketa batek eremu okerrak sartzeko arriskua murrizten du. Garapen tekniko osoa: 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/build_es_ingest_pipeline.py">scripts/build_es_ingest_pipeline.py</a>. Emaitza edo testuingurua: <a href="../../elasticsearch/README.md">elasticsearch/README.md</a>. Egiaztapen-kasua: <a href="../../tests/test_es_ingest_pipeline.py">tests/test_es_ingest_pipeline.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Instalazio propioan egindako proba ez da indize partekatu baten migrazio edo gaurko zerbitzuaren egiaztapen automatikoa.</p>
+<h2 id="atala-83">Zereginak!G71 — Bistaratze-tekniken hautaketa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Kibanako bistaratze-teknikak modu arrazoituan alderatu eta hautatu ditu, denbora-serieak, makinen arteko konparazioak eta alerta-adierazleak irudikatzeko. Grafikoen konfigurazioa (denbora-tarteak, agregazioak eta iragazkiak) egokia dela egiaztatu eta justifikatu du.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Denbora-seriea tenperaturarako, heatmap-a desgaste/kategoria maiztasunerako, taula azken gertaeren trazabilitaterako eta KPIak laburpenerako erabiltzen dira. Hutsune, zero eta N/D egoerak bereizten dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Grafiko bakoitza galdera bati lotzen zaio. Serie gehiegi erakusteko paginazioa/filtroa erabiltzeak identifikagarritasuna eta irakurgarritasuna babesten ditu. Garapen tekniko osoa: 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/create_lab_dashboard.py">scripts/create_lab_dashboard.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG19_render_2026-10-21.md">docs/evidence/CG19_render_2026-10-21.md</a>. Egiaztapen-kasua: <a href="../../tests/test_lab_dashboard_contrast.py">tests/test_lab_dashboard_contrast.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Heatmap offlineak ez ditu filtro onlineak jarraitzen. DOM/ARIA egiaztapena ez da irisgarritasun-auditoria osoa.</p>
+<h2 id="atala-84">Zereginak!G72 — Sentsoreak eta mantentze-helburua</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Sentsoreen datuak eta negozio-helburua modu arrazoituan erlazionatzen ditu, eta monitorizazioaren emaitzetatik mantentze-erabaki erabilgarriak proposatzen ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Alerta bat azaldu aurretik neurketak, jatorria, datu-adina eta modelo/politika begiratzen dira. FP eta FN kasuek ikuskapenaren kostua eta isiltasunaren arriskua erakusten dute.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Mantentze-proposamena datuetan oinarritutako giza erabakia da: egiaztatu sentsorea eta testuingurua, ez bidali makina gelditzeko agindua score hutsetik. Garapen tekniko osoa: 8 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/build_cg19_evaluation.py">scripts/build_cg19_evaluation.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG19_2026-10-21.md">docs/evidence/CG19_2026-10-21.md</a>. Egiaztapen-kasua: <a href="../../tests/test_type_diagnostics.py">tests/test_type_diagnostics.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ez dago esku-hartze industrialaren onura behaturik edo etiketarik gabeko online alerten precision kalkulu fidagarririk.</p>
+<h2 id="atala-85">Zereginak!G77 — Erauzketa eta biltegiratze sendoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuen erauzketa eta biltegiratze-prozesu sendoa garatzen du, telemetria eta alertak hainbat tratamendu-agertokitarako antolatuz, eta datuen osotasuna eta erabilgarritasuna egiaztatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> SMB kopia irakurketa hutsez egiten da; Bronze byteak, Silver Parquet-a eta ledger/receipts kontserbatzen dira. Replay eta ustelkeria-kontrolak historikoaren identitatea babesten dute.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Jatorrizkoa eta proiekzio analitikoa bereizteak berreraikuntza ahalbidetzen du eta fitxategi berridatzi batek aurreko ebidentzia ordezkatzea eragozten du. Garapen tekniko osoa: 4 eta 10. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/capture_smb.py">scripts/capture_smb.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG15_ARCHIVE.md">docs/evidence/CG15_ARCHIVE.md</a>. Egiaztapen-kasua: <a href="../../tests/test_history.py">tests/test_history.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Snapshot bat eskuratzeak ez du SMBren etengabeko erabilgarritasuna edo epe luzeko retentzioa frogatzen.</p>
+<h2 id="atala-86">Zereginak!G80 — Karga eta baliabide/segurtasun ebaluazioa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Sistemaren portaera karga-proba sinpleekin egiaztatu du, hobekuntza egokiak proposatu ditu eta segurtasun-neurri oinarrizkoak justifikatu ditu (sarbideak, portuak, kredentzialak eta datuen babesa).</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> CG23 microbenchmark-a eta CG32 kate integratuaren kanpaina bereizten dira. CG32k HTTP, E2E, lag eta drenajea jaso ditu. Sarbideak, portuak, kredentzialak eta datuen babesa diseinuan aztertzen dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> 10/s eskaintzaren aurrean backlog-a eta azken drenajea neurtzeak gaitasunaren muga praktikoa identifikatzen du. Helburua huts egitea ere emaitza tekniko baliagarria da. Garapen tekniko osoa: 12 eta 13. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/cg32_load.py">scripts/cg32_load.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG32_CAMPAIGN_20261028.md">docs/evidence/CG32_CAMPAIGN_20261028.md</a>. Egiaztapen-kasua: <a href="../../tests/test_cg32_observability.py">tests/test_cg32_observability.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> 50/s ez da exekutatu; MemUsage lagina ez da RSS; ez dago SLA industrialik edo gaurko scan emaitza berririk.</p>
+<h2 id="atala-87">Zereginak!G85 — Biltegiratze banatua eta erredundantzia</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Soluzioaren mugak aztertzen ditu, eta nodo bakarreko ingurunearen eta kluster erredundante baten arteko desberdintasunak teknikoki justifikatzen ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Nodo bakarraren diskoko journal eta egoerak prozesuaren berreskuratzea ahalbidetzen dute, baina host beraren galera ez dute estaltzen. Klusterrak failure domain, quorum eta erreplikazio koherentea behar ditu.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Kafka talde bereko kontsumitzaileek lana banatzen dute; ez dute automatikoki artxibo osoaren kopia bana. Kontainer asko ez dira host independente asko. Garapen tekniko osoa: 12. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../docs/CG14_AUTOMATIC_GRAPH.md">docs/CG14_AUTOMATIC_GRAPH.md</a>. Emaitza edo testuingurua: <a href="../../docs/PLATFORM_SUPPORT.md">docs/PLATFORM_SUPPORT.md</a>. Egiaztapen-kasua: <a href="../../tests/test_retention_recovery.py">tests/test_retention_recovery.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> HA klusterra ez da desplegatu edo egiaztatutzat ematen. Tokiko lock/SQLite kontratua ez da multinodoa.</p>
+<h2 id="atala-88">Zereginak!G87 — Aginte-koadro argia eta osoa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Aginte-koadro oso eta argia garatu du, bistaratze egoki eta kalitatezkoekin.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Azken gertaerak, tenperaturak, offline heatmap-a, alerta-adierazleak eta interpretazio-panela lotzen dira. Rango huts eta identitate askoko egoeren zuzenketak daude; 50 gertaeren ordena esplizitua da.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Edukia eta irakurgarritasuna batera ebaluatzen dira: unitateak, UTC, iturria eta online/offline etiketa gabe grafiko eder batek esanahi okerra eman lezake. Garapen tekniko osoa: 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/create_lab_dashboard.py">scripts/create_lab_dashboard.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG19_SVG_ARIA_20261022.md">docs/evidence/CG19_SVG_ARIA_20261022.md</a>. Egiaztapen-kasua: <a href="../../tests/test_lab_dashboard.py">tests/test_lab_dashboard.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Benetako erabiltzailearen onarpena, NVDA entzunezko proba eta WCAG auditoria osoa ez dira dokumentu hau sortzean egin.</p>
+<h2 id="atala-89">Zereginak!G90 — Kafka kontsumoa eta offset kudeaketa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datu-irenste sistema sendoa garatu du, Kafka-ren desakoplamendu-funtzioa eta kontsumitzaile independenteak egoki erabiliz. Kontsumitzaileen etenaldiak eta berrabiarazteak probatu ditu, offset-en kudeaketa eta datuen jarraitutasuna egiaztatuz.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Ekoizlearen ACK eta kontsumitzailearen commit bereizten dira. Auto-commit desgaituta dago eta offset-a helmuga iraunkorren ondoren baieztatzen da. Talde esklusiboa eta jabe bakarra mantentzen dira.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Pausa eta berrabiatzeak jatorrizko identitatearekin berreskuratzea probatzen dute; ID multzoak eta lag amaiera konparatzeak jarraitutasuna defendatzen du. Garapen tekniko osoa: 10 eta 12. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/run_automatic_graph.py">scripts/run_automatic_graph.py</a>. Emaitza edo testuingurua: <a href="../../docs/CG14_AUTOMATIC_GRAPH.md">docs/CG14_AUTOMATIC_GRAPH.md</a>. Egiaztapen-kasua: <a href="../../tests/test_kafka_archive.py">tests/test_kafka_archive.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Mock protokoloaren emaitza eta Kafka errealeko kanpaina ez dira froga bera. Beste kanpoko kontsumitzaile bat konfiguratzearen arriskua operatiboa da.</p>
+<h2 id="atala-90">Zereginak!G92 — Prozesamendu eta inferentziaren automatizazioa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuen prozesamendu- eta inferentzia-fluxu osoa modu sendoan automatizatu du: datuak eraldatu eta balioztatzen ditu, InvokeHTTP bidez scoring-APIaren emaitzak jasotzen ditu, RouteOnAttribute edo baliokidea erabiliz arrisku-mailaren arabera bideratzen ditu, eta telemetria zein alertak Elasticsearch-en egoki biltegiratzen direla egiaztatzen du. Erroreen kudeaketa eta fluxuaren funtzionamendua probatu ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> NiFik ExecuteStreamCommand bidez zikloa abiatzen du; worker-ak baliozkotu, APIa deitu, emaitza gorde eta ESra bidaltzen du. Erroreak terminal eta iragankor gisa tratatzen dira identitatea mantenduz.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Ardura-banaketa esplizituak commit goiztiarra saihesteko koherentzia-puntua ematen du. Ez da InvokeHTTP/RouteOnAttribute natiboekin exekutatutako grafo gisa aurkezten. Garapen tekniko osoa: 3, 9 eta 10. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/build_automatic_graph_flow.py">scripts/build_automatic_graph_flow.py</a>. Emaitza edo testuingurua: <a href="../../docs/CG14_AUTOMATIC_GRAPH.md">docs/CG14_AUTOMATIC_GRAPH.md</a>. Egiaztapen-kasua: <a href="../../tests/test_automatic_graph.py">tests/test_automatic_graph.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> PMk onartutako baliokidetasuna eta errubrikaren balorazio akademikoa bereizten dira; A03ren erantzuna ez da asmatu.</p>
+<h2 id="atala-91">Zereginak!G95 — Datu-kalitatearen ondorioak</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datuen kalitate-kontrolak probatu eta dokumentatu ditu (balio falta direnak, formatu okerrak, bikoizketak), eta errore horiek ondorengo analisian eta inferentzian izan dezaketen eragina azaltzen du.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Balio falta, mota oker, CSV moztu eta bikoizketen kasuak aztertzen dira. Inferentziaren kontratuak datu baliogabea baztertzen du, eta bazterketak ez du predikzio faltsurik sortzen.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Kalitate-arazoak ez dira soilik analisiaren estetika: sentsore-unitate okerrak score-a alda dezake, etiketa sartzeak leakage-a eta replay-ak KPI inflazioa sor ditzake. Garapen tekniko osoa: 4, 5 eta 9. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/capture_smb.py">scripts/capture_smb.py</a>. Emaitza edo testuingurua: <a href="../../docs/SMB_FILEBEAT_LAB.md">docs/SMB_FILEBEAT_LAB.md</a>. Egiaztapen-kasua: <a href="../../tests/test_smb_filebeat_contract.py">tests/test_smb_filebeat_contract.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Tamaina/prefix berdina duen urruneko mutazioa ekoizlearen protokoloaren araberakoa izan daiteke; offline orakulua ez da sareko portaera guztien froga.</p>
+<h2 id="atala-92">Zereginak!G96 — Galera eta bikoizketen aurkako neurriak</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Etenaldi edo karga-probak egiten ditu, datu-galerak eta bikoizketa posibleak egiaztatzen ditu, eta horiek murrizteko neurri egokiak proposatu eta aplikatzen ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Pausa, SIGKILL, replay eta kargaren kasuek helmugen IDak kontrastatzen dituzte. ACK aurreko jasotze iraunkorra eta ES idempotentzia erabiltzen dira, erroreak ezkutatu gabe.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> At least once garraioarekin berrentrega espero da; helburua egoera bera berreskuratzea eta azken erregistro bikoiztua ez sortzea da egiaztatutako kontratuan. Garapen tekniko osoa: 10 eta 12. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/durable_pipeline.py">scripts/durable_pipeline.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG32_CAMPAIGN_20261028.md">docs/evidence/CG32_CAMPAIGN_20261028.md</a>. Egiaztapen-kasua: <a href="../../tests/test_cg14_durable_pipeline.py">tests/test_cg14_durable_pipeline.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ez da justu HTTP/commit arteko eten bat behatu dela esaten; txostenak benetako SIGKILL unea mantentzen du. Powercut/host-galera ez dira egiaztatu.</p>
+<h2 id="atala-93">Zereginak!G100 — BIrako datu-hautaketa</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Datu-hautaketa estrategikoa egin du, sentsoreen neurketak, makinen metadatuak eta inferentziaren emaitzak (hutsegite-probabilitatea eta alerta-maila) integratuz. Aldagai bakoitzaren erabilgarritasuna justifikatu du eta hautatutako datuek mantentze prediktiboaren analisian eta erabakiak hartzeko prozesuan duten ekarpena frogatu du.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Bost sentsore eta machine_type ereduaren sarrerak dira; ID, timestamp eta source trazabilitatea; score/alert/model/policy inferentziaren emaitzak. Etiketa offline ebaluazioan geratzen da.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Eremu bakoitzaren zeregina azaltzeak informazio operatiboa eta ground truth-a nahastea saihesten du. Identifikadore zenbakia ez da ezaugarri fisiko berria. Garapen tekniko osoa: 4, 5 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scoring/scope.py">scoring/scope.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/CG07.md">docs/evidence/CG07.md</a>. Egiaztapen-kasua: <a href="../../tests/test_current_state_scope.py">tests/test_current_state_scope.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Errubrikako probabilitate hitza score ez-kalibratu gisa zehazten da. Bost sentsore vs seigarren kategoria literalaren A04 balorazioa ebazteke dago.</p>
+<h2 id="atala-94">Zereginak!G101 — Garbiketa eta eraldaketaren koherentzia</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Garbiketa- eta eraldaketa-fluxu sendoa garatzen du, balio baliogabeak bereiziz eta datuen koherentzia egiaztatuz, biltegiratzean eta scoring-APIarekin integratzean.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> CSV proiekzioak kontratu bakarreko telemetria sortzen du; JSON validazioak eta ES pipelineak mota eta semantika kontrolatzen dituzte. UTC, null eta unitateen bihurketa prozedurak ez dira inprobisatzen.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Garbitzeak ez du jatorrizko edukia suntsitzen: Bronze eta bazterketa gordetzeak errore bat ondoren azaltzea ahalbidetzen du. Garapen tekniko osoa: 4, 9 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/build_es_ingest_pipeline.py">scripts/build_es_ingest_pipeline.py</a>. Emaitza edo testuingurua: <a href="../../docs/DUCKDB_2_MIGRATION.md">docs/DUCKDB_2_MIGRATION.md</a>. Egiaztapen-kasua: <a href="../../tests/test_duckdb_output.py">tests/test_duckdb_output.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> ES mapping egokia izateak ez du iturriaren egia fisikoa edo erabiltzaile bakoitzaren panelaren datu-kontsumoa frogatzen.</p>
+<h2 id="atala-95">Zereginak!G104 — Alerten interpretazio kritikoa eta kostua</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Alerten emaitzak kritikoki interpretatzen ditu, alerta okerren ondorioak eta geldialdien kostua aztertzen ditu, eta datuetan oinarritutako mantentze-jarduera arrazoituak proposatzen ditu.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> FP baten ikuskapen alferrikakoa eta FN baten hutsegite omititua aztertzen dira. TPren 300 € ere sartuta 4.700 €ko onura marginala kalkulatzen da; 23,5 FP/TP oreka ez da 25ekin nahasten.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Netoko hobekuntza eta kasu bakoitzeko aldaketa batera aztertzen dira. Bikote batek positibo bat gehiago detekta dezake netoan, baina aurrekoak aurkitutako positibo bat galdu. Garapen tekniko osoa: 7, 8 eta 11. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/business_ml_study.py">scripts/business_ml_study.py</a>. Emaitza edo testuingurua: <a href="../../docs/evidence/DOCENTE_FORO_20261023.md">docs/evidence/DOCENTE_FORO_20261023.md</a>. Egiaztapen-kasua: <a href="../../tests/research/test_business_ml_study.py">tests/research/test_business_ml_study.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Euroak ariketako eszenatokia dira. Ez dago mantentze-jarduera erreal baten aurrezki edo onura frogaturik.</p>
+<h2 id="atala-96">Zereginak!G105 — BI simulazioa eta erabakiaren aurkezpena</h2><p><strong>Jatorrizko deskribatzailea:</strong></p>
+<blockquote>
+<p>Erabakiak denbora errealean hartzea ahalbidetzen duen dashboard ikusgarri eta zehatza sortu du.</p>
+</blockquote>
+<p><strong>Azalpen teknikoa eta egindako lana.</strong> Aginte-koadroak alerta jakinaren datuak, jatorria eta testuingurua erakusteko balio du. Defentsa-gidoiak datuaren bidea, bazterketa, replay-a eta kostu-erabakia azaltzeko ordena prestatzen du.</p>
+<p><strong>Erabakiaren justifikazioa.</strong> Erabiltzaileari erabaki arrazoitua proposatzea da emaitza: datua identifikatu, muga ulertu eta ikuskapena proposatu. Grafikoak ezin du pertsonaren onarpena edo etorkizuneko segurtasuna ordezkatu. Garapen tekniko osoa: 8, 11 eta 16. kapituluak.</p>
+<p><strong>Trazabilitatea.</strong> Inplementazioa edo diseinua: <a href="../../scripts/create_lab_dashboard.py">scripts/create_lab_dashboard.py</a>. Emaitza edo testuingurua: <a href="../../docs/demo/ENTSEGU_PRESTATUA_20261028.md">docs/demo/ENTSEGU_PRESTATUA_20261028.md</a>. Egiaztapen-kasua: <a href="../../tests/test_lab_dashboard.py">tests/test_lab_dashboard.py</a>.</p>
+<p><strong>Muga eta onarpena.</strong> Ahozko defentsa, lau azalpen indibidualak eta entrega-jasotzea benetan egin ondoren bakarrik egiaztatu daitezke.</p>
+<h1 id="atala-97">16. Itxiera, mugak eta defentsa prestatzeko gida</h1><h2 id="atala-98">16.1. Dokumentazio honek defendatzen duen lana</h2><p>Dokumentazioak eskakizunaren, kodearen eta datatutako emaitzaren arteko bidea prestatzen du. Datuen jatorri baimendua, irismen garaikidearen kontrola, feature engineering fisikoa, leakage-aren prebentzioa, ereduen konparaketa, atalaseen ekonomia, kontratu zorrotza, replay kanonikoa, ACK ordena eta BI aurkezpena azaltzen dira. Ekarpenak ez dira soilik algoritmo batean metrika handia lortzea: jatorria, errorea eta interpretazioa kontrolatzen dituen sistema osatzea ere lanaren parte da.</p>
+<p>Ez da aurreko memoria edo haren manifestua ordezkatzen. Dokumentu honek eguneratutako azalpen-geruza ematen du; ebidentzia historikoak beren byte, data eta irismenarekin mantentzen dira. Beste adar edo worktree bateko hobekuntza bat ez da checkout honetako inplementazio gisa hartzen, bertako kode edo jasotze zehatzik gabe. Token, kredentzial eta <code>.env</code> edukirik ez da agiri honetara kopiatu.</p>
+<h2 id="atala-99">16.2. Zabalik dauden ateak</h2><table>
+<thead>
+<tr>
+<th>Atea</th>
+<th>Uneko ondorioa</th>
+<th>Itxierarako benetako ebidentzia</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A01/A02: errubrika eta pisuak</td>
+<td>Kopia lokala eta 40 literalak gordeta; kalifikaziorik ez</td>
+<td>Irakaslearen bertsio/pisu/modalitatearen erantzun atribuigarria.</td>
+</tr>
+<tr>
+<td>A03: SMB eta NiFi/worker</td>
+<td>Erabaki teknikoa eta PM onarpen-erreferentziak dokumentatuta</td>
+<td>NFS/InvokeHTTP literalaren balorazio akademiko zehatza.</td>
+</tr>
+<tr>
+<td>A04: historikoa eta sarrerak</td>
+<td>Ez dira historia fisikoa edo datak asmatu</td>
+<td>G62 eta machine_type-ren balorazio akademikoa.</td>
+</tr>
+<tr>
+<td>A05: politika eta recall</td>
+<td>Kostu-justifikazioa dago; 0,15/0,70 mantenduta</td>
+<td>Balorazio akademikoa; ez da beste modelo bat automatikoki aktibatu.</td>
+</tr>
+<tr>
+<td>A06: kostuak</td>
+<td>Ariketarako matrizea jasota</td>
+<td>Ez da berriro kostu berak egiaztatzeko eskaera orokorrik behar; benetako aurrezkia beste azterketa bat litzateke.</td>
+</tr>
+<tr>
+<td>#37: ulermen indibiduala</td>
+<td>Testua eta galderak prestatuta</td>
+<td>Lau kideen benetako azalpen eta galderei emandako erantzunak.</td>
+</tr>
+<tr>
+<td>#26: taldearen entsegua</td>
+<td>Ibilbidea prestatuta</td>
+<td>Pertsona, data, commit, ingurune eta behatutako emaitzekin akta.</td>
+</tr>
+<tr>
+<td>#27/A07: entrega</td>
+<td>Agiri hau eta irakurketa-formatuak lokalki prestatuta</td>
+<td>Eskatutako formatua/kanala, entregatutako bertsioaren hashak eta benetako jasotzea.</td>
+</tr>
+<tr>
+<td>Modelo berriaren promozioa</td>
+<td>Ikerketa osagarria dago, ez aktibazio berririk</td>
+<td>Protokolo zehaztua, ebaluazio egokia, baliabide-kontratua eta erabaki esplizitua.</td>
+</tr>
+</tbody></table>
+<h2 id="atala-100">16.3. Hamar minutuko azalpen teknikorako ordena</h2><p>Enuntziatuak hamar minutuko live demo aipatzen du; azken baldintzak A07n argitu behar dira. Gidoi hau prestaketa da eta ez du exekuzioa ordezkatzen.</p>
+<ol>
+<li><strong>0–1 min:</strong> helburua eta muga azaldu: uneko egoera, datu sintetikoak, giza erabakia.</li>
+<li><strong>1–3 min:</strong> sei sarrerak, hiru eratorriak eta 5.600/1.200/1.200 partizioaren esanahia erakutsi. Etiketa X-tik kanpo dagoela frogatu.</li>
+<li><strong>3–5 min:</strong> gertaera jakinaren identitatea jarraitu: sarrera, API erantzuna, artxibo-jasotzea eta ES/panela. Live ingurunea ez badago, erabili espresuki etiketatutako ebidentzia gordea.</li>
+<li><strong>5–6 min:</strong> replay, bazterketa eta 409/422/503 kasuak azaldu. Bereizi 200, artxibo-jasotzea eta Kafka commit-a.</li>
+<li><strong>6–8 min:</strong> nahasmen-matrize bat interpretatu eta TP/FN/FP kostu-aldaketa kalkulatu. Kohorte bakarra erabili adibidean.</li>
+<li><strong>8–9 min:</strong> CG32ren HTTP/E2E emaitza eta backlog-aren muga azaldu, huts egindako helburua ezkutatu gabe.</li>
+<li><strong>9–10 min:</strong> mantentze-proposamen arrazoitua, segurtasun/pribatutasun neurri bat eta irekita dagoen muga bat aurkeztu.</li>
+</ol>
+<h2 id="atala-101">16.4. Kide bakoitzak erantzun beharreko galderak</h2><ul>
+<li>Zergatik da %96,6 accuracy erreferentzia engainagarria dataset honetan?</li>
+<li>Zergatik ez dira etiketa, machine_id eta timestamp-a RF-ren sarrerak?</li>
+<li>Zer desberdintasun dago <code>failure_score</code>, <code>alert_level</code>, <code>risk_alert</code> eta <code>anomaly_alert</code> artean?</li>
+<li>Zer dago gordeta HTTP 200 jaso aurretik, eta zer falta da oraindik Kafka offset-a berresteko?</li>
+<li>Zer gertatzen da APIak erantzuna gorde eta sareak HTTP erantzuna galtzen badu?</li>
+<li>Zergatik da ES 409 bat kasu batzuetan replay zuzena eta beste batzuetan gatazka?</li>
+<li>Zergatik ez da 15 ms HTTP p95 bat 1 s azpiko E2Eren froga?</li>
+<li>Zergatik da FN→TP aldaketaren onura marginala 4.700 € eta ez 5.000 €?</li>
+<li>Zergatik ez du heatmap batek online hutsegite-tasa edo kausalitatea frogatzen?</li>
+<li>Zer beharko litzateke uneko score-a RUL edo etorkizuneko probabilitate bihurtzeko?</li>
+</ul>
+<p><strong>Erantzunen irizpidea:</strong> definizioa, kode edo datu adibide zehatza eta muga. Erantzunaren erregistroa benetako entseguaren ondoren bete behar da, kideen izenean adierazpenik asmatu gabe.</p>
+<h1 id="atala-102">17. Glosarioa eta iturri nagusiak</h1><table>
+<thead>
+<tr>
+<th>Terminoa</th>
+<th>Dokumentu honetako esanahia</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Inferentzia</td>
+<td>Eredu finko batekin sarrera berri bati score-a kalkulatzea.</td>
+</tr>
+<tr>
+<td>Etiketa / ground truth</td>
+<td>Ebaluazioan erabiltzen den emaitza ezaguna; online ez dagoela onartu behar da falta denean.</td>
+</tr>
+<tr>
+<td>TP / FN / FP / TN</td>
+<td>Positibo zuzena / positibo omititua / alarma faltsua / negatibo zuzena.</td>
+</tr>
+<tr>
+<td>Recall / precision</td>
+<td>Positiboetatik aurkitutako proportzioa / alertetatik positiboen proportzioa.</td>
+</tr>
+<tr>
+<td>OOF</td>
+<td>Behaketa entrenamendu-zatitik kanpo utzita kalkulatutako score-a dagokion fold-ean.</td>
+</tr>
+<tr>
+<td>Inner / outer</td>
+<td>Hautaketa/doikuntzarako barne-zatia / prozedura hautatuaren kanpo-ebaluazio zatia.</td>
+</tr>
+<tr>
+<td>Replay</td>
+<td>Jatorrizko identitate eta edukiarekin prozesamendu bat berriro saiatzea.</td>
+</tr>
+<tr>
+<td>Idempotentzia</td>
+<td>Eragiketa bera errepikatzeak azken efektu logiko berririk ez sortzea definitutako kontratuan.</td>
+</tr>
+<tr>
+<td>ACK / commit</td>
+<td>Maila jakin bateko berrespena; ez da kate osoaren onarpen unibertsala.</td>
+</tr>
+<tr>
+<td>Ledger / journal / outbox</td>
+<td>Erantzun, urrats edo bidalketa-pendienteen egoera iraunkorra.</td>
+</tr>
+<tr>
+<td>Provenientzia</td>
+<td>Datuaren, modeloaren, politikaren eta eraldaketaren jatorria.</td>
+</tr>
+<tr>
+<td>Backlog / lag / drenajea</td>
+<td>Prozesatzeke dagoen lana / Kafka atzerapena / eskaintza amaitu ondoren ilara hustea.</td>
+</tr>
+<tr>
+<td>p95</td>
+<td>Laginen %95 balio horren parean edo azpitik geratzen den percentilea, erabilitako metodoarekin.</td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>Definitutako hasieratik amaierara neurtutako denbora; CG32n CSV fsync → ES lehen behaketa.</td>
+</tr>
+<tr>
+<td>Kalibrazioa</td>
+<td>Score-maila eta gertakari-proportzioa lotzeko ebaluatutako doikuntza; ez du horizonte tenporala sortzen.</td>
+</tr>
+<tr>
+<td>RUL / ETA</td>
+<td>Geratzen den bizitza / gertakari baterainoko denbora; proiektu honetako ataza aktibotik kanpo.</td>
+</tr>
+</tbody></table>
+<h2 id="atala-103">Iturri nagusien mapa</h2><table>
+<thead>
+<tr>
+<th>Gaia</th>
+<th>Erreferentzia</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Errubrika literala</td>
+<td><a href="../rubrica/fuente.json">fuente.json</a> eta <a href="../rubrica/OBJETIVOS_Y_ETAPAS.md">interpretazioa</a>.</td>
+</tr>
+<tr>
+<td>Onarpen/ebazkizun dokumentatuak</td>
+<td><a href="../rubrica/ESTADO_20261028.md">ESTADO_20261028</a> eta <a href="../rubrica/ACLARACIONES_20261023.md">A01–A07</a>.</td>
+</tr>
+<tr>
+<td>Irismen loteslea</td>
+<td><a href="../../scoring/scope.py">scope.py</a> eta <a href="../evidence/CG17_CURRENT_STATE_SCOPE.md">CG17</a>.</td>
+</tr>
+<tr>
+<td>Datuak eta ezaugarriak</td>
+<td><a href="../evidence/CG06.md">CG06</a>, <a href="../evidence/CG07.md">CG07</a> eta <a href="../../scoring/preparation.py">preparation.py</a>.</td>
+</tr>
+<tr>
+<td>ML eta kostuak</td>
+<td><a href="../evidence/CG34_EXPLORACION_20261023.md">CG34</a>, <a href="../evidence/CG10_PRECISION_20261022.md">CG10</a>, <a href="../evidence/CG34_20261023/business-summary.json">business-summary</a>.</td>
+</tr>
+<tr>
+<td>Ikerketa osagarri lokala</td>
+<td><a href="../../exports/estudio-multimodelo-2026-11-04/COMPARATIVA.md">2026-11-04ko konparaketa</a>; ez da bundle operatiboa.</td>
+</tr>
+<tr>
+<td>API eta replay</td>
+<td><a href="../../scoring/score_api.py">score_api.py</a>, <a href="../../scoring/response_ledger.py">response_ledger.py</a>, <a href="../SCORING_REPLAY_CONTRACT.md">kontratua</a>.</td>
+</tr>
+<tr>
+<td>Ingesta eta iraunkortasuna</td>
+<td><a href="../CG14_AUTOMATIC_GRAPH.md">grafo automatikoa</a>, <a href="../evidence/CG15_ARCHIVE.md">CG15</a>, <a href="../evidence/CG32_CAMPAIGN_20261028.md">kanpaina CG32</a>.</td>
+</tr>
+<tr>
+<td>Bistaratzea</td>
+<td><a href="../evidence/CG19_2026-10-21.md">CG19 hautaketa</a>, <a href="../evidence/CG19_render_2026-10-21.md">renderra</a>, <a href="../evidence/CG19_SVG_ARIA_20261022.md">ARIA</a>.</td>
+</tr>
+<tr>
+<td>Segurtasuna eta araudiaren azterketa historikoa</td>
+<td><a href="../evidence/CG24.md">CG24</a>, <a href="../LAN_ACCESS.md">LAN gida</a>, <a href="../CG14_SECURITY_CHECKLIST.md">segurtasun-checklista</a>.</td>
+</tr>
+<tr>
+<td>Entsegua eta entrega</td>
+<td><a href="../demo/ENTSEGU_PRESTATUA_20261028.md">entsegu prestatua</a>, <a href="../demo/PENDING_HANDOFF_20261028.md">handoff</a>, <a href="../demo/ACTA_PENDIENTE_20261022.md">akta bete gabea</a>.</td>
+</tr>
+</tbody></table>
+<p>Iturri osoen bideak, SHA-256 balioak eta Git jarraipenaren egoera <code>ITURRIAK.json</code> fitxategian jasotzen dira. Egiaztapen berriak <code>EGIAZTAPENA.json</code> fitxategian daude. Iturri baten aldaketa geroago gertatzen bada, agiri hau berriz kontrastatu behar da; hash-desadostasun bat ez da automatikoki konpondu behar balio berria onartuta.</p>
+</main></body></html>
