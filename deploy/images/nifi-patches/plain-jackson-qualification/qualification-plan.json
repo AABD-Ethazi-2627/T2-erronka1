@@ -1,0 +1,422 @@
+{
+  "already_fixed_bootstrap_toolkit": [
+    {
+      "fixed_path": "opt/nifi/nifi-current/lib/bootstrap/jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "old_absent": true,
+      "old_path": "opt/nifi/nifi-current/lib/bootstrap/jackson-core-2.22.2.jar"
+    },
+    {
+      "fixed_path": "opt/nifi/nifi-current/lib/bootstrap/jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "old_absent": true,
+      "old_path": "opt/nifi/nifi-current/lib/bootstrap/jackson-databind-2.22.2.jar"
+    },
+    {
+      "fixed_path": "opt/nifi/nifi-toolkit-current/lib/jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "old_absent": true,
+      "old_path": "opt/nifi/nifi-toolkit-current/lib/jackson-core-2.22.2.jar"
+    },
+    {
+      "fixed_path": "opt/nifi/nifi-toolkit-current/lib/jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "old_absent": true,
+      "old_path": "opt/nifi/nifi-toolkit-current/lib/jackson-databind-2.22.2.jar"
+    }
+  ],
+  "inventory_sha256": "7bec2a9e8abedb456a9617d59a090e744ac0bb48465cff820f8d6f3bbbb00c6e",
+  "mandatory_remaining_gates": [
+    "Jetty/WAR delegation and actual WAR consumer runtime unverified",
+    "full JVM verifier/dynamic linkage/reflection/provider coverage is not proven",
+    "full family guard, independent QA and actual rebuilt image gates remain mandatory",
+    "actual NiFi/server/SMB/end-to-end and human acceptance not performed",
+    "79 static contexts remain incomplete, including AWS MemoryError under the preserved 400MiB address-space bound",
+    "preexisting optional Jackson references remain unresolved; zero new regressions does not establish full linkage",
+    "static consumer pass excludes internals of the four changed target JARs; their complete internal dynamic linkage is not established"
+  ],
+  "pins_sha256": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
+  "promotion_eligible": false,
+  "replacement": null,
+  "runtime_approved": false,
+  "source_commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+  "source_image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "status": "component-evidence-prepared-not-eligible",
+  "summary_sha256": "f56d96a486ead386ff9605599b8dea6fec331379f521ce04c2572d8f3d7ec343",
+  "targets": [
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-amqp-nar-2.12.0.nar",
+          "sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-amqp-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-core-2.22.2.jar",
+      "old": "jackson-core-2.22.2.jar",
+      "old_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-amqp-nar-2.12.0.nar",
+          "sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-amqp-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-databind-2.22.2.jar",
+      "old": "jackson-databind-2.22.2.jar",
+      "old_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar",
+          "sha256": "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-jetty-nar"
+      ],
+      "fixed": "jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-core-2.22.2.jar",
+      "old": "jackson-core-2.22.2.jar",
+      "old_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar",
+          "sha256": "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-jetty-nar"
+      ],
+      "fixed": "jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-databind-2.22.2.jar",
+      "old": "jackson-databind-2.22.2.jar",
+      "old_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+          "sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-shared-nar",
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-core-3.2.3.jar",
+      "fixed_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-core-3.2.2.jar",
+      "old": "jackson-core-3.2.2.jar",
+      "old_sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+          "sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-shared-nar",
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-databind-3.2.3.jar",
+      "fixed_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-databind-3.2.2.jar",
+      "old": "jackson-databind-3.2.2.jar",
+      "old_sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+          "sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
+        },
+        {
+          "path": "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+          "sha256": "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-core-3.2.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-shared-nar",
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-core-3.2.3.jar",
+      "fixed_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar!META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war!WEB-INF/lib/jackson-core-3.2.2.jar",
+      "old": "jackson-core-3.2.2.jar",
+      "old_sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar",
+          "sha256": "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138"
+        },
+        {
+          "path": "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+          "sha256": "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-databind-3.2.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-shared-nar",
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-databind-3.2.3.jar",
+      "fixed_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-jolt-nar-2.12.0.nar!META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war!WEB-INF/lib/jackson-databind-3.2.2.jar",
+      "old": "jackson-databind-3.2.2.jar",
+      "old_sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar",
+          "sha256": "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "declared_parent_chain": [],
+      "fixed": "jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-core-2.22.2.jar",
+      "old": "jackson-core-2.22.2.jar",
+      "old_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar",
+          "sha256": "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "declared_parent_chain": [],
+      "fixed": "jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-kafka-to-s3-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-databind-2.22.2.jar",
+      "old": "jackson-databind-2.22.2.jar",
+      "old_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-standard-nar-2.12.0.nar",
+          "sha256": "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-shared-nar",
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-core-3.2.3.jar",
+      "fixed_sha256": "a0c17e7e665a5e95c82f5fb45c0fec2ae3dc556c80f0016452c9c84cd23f3817",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-standard-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-core-3.2.2.jar",
+      "old": "jackson-core-3.2.2.jar",
+      "old_sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-standard-nar-2.12.0.nar",
+          "sha256": "383d4f7dcb3f2164ea9c2fbd0c22cd300aac5fab41d51120971744277b4dd3c8"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-shared-nar",
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-databind-3.2.3.jar",
+      "fixed_sha256": "235b72436af983857e44efa42449f4f0a2c571e69d6c5d9dd1253ae7d192dcf2",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-standard-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-databind-3.2.2.jar",
+      "old": "jackson-databind-3.2.2.jar",
+      "old_sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar",
+          "sha256": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-core-2.22.2.jar",
+      "old": "jackson-core-2.22.2.jar",
+      "old_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar",
+          "sha256": "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-standard-services-api-nar"
+      ],
+      "fixed": "jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-standard-shared-nar-2.12.0.nar!META-INF/bundled-dependencies/jackson-databind-2.22.2.jar",
+      "old": "jackson-databind-2.22.2.jar",
+      "old_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar",
+          "sha256": "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28"
+        },
+        {
+          "path": "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+          "sha256": "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-core-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-jetty-nar"
+      ],
+      "fixed": "jackson-core-2.22.3.jar",
+      "fixed_sha256": "8a501126a385b25841915d839508f8a66e2a0dbc8a6709d055ef3b3e852b094c",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar!META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war!WEB-INF/lib/jackson-core-2.22.2.jar",
+      "old": "jackson-core-2.22.2.jar",
+      "old_sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    },
+    {
+      "carrier_chain": [
+        {
+          "path": "opt/nifi/nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar",
+          "sha256": "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28"
+        },
+        {
+          "path": "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+          "sha256": "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093"
+        }
+      ],
+      "chain": [
+        "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+        "WEB-INF/lib/jackson-databind-2.22.2.jar"
+      ],
+      "declared_parent_chain": [
+        "nifi-jetty-nar"
+      ],
+      "fixed": "jackson-databind-2.22.3.jar",
+      "fixed_sha256": "556db5439e206114346043f68d200497dc96a0bca62a360a81784092ebd0e0a9",
+      "full_path": "opt/nifi/nifi-current/lib/nifi-update-attribute-nar-2.12.0.nar!META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war!WEB-INF/lib/jackson-databind-2.22.2.jar",
+      "old": "jackson-databind-2.22.2.jar",
+      "old_sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+      "promotion_eligible": false,
+      "replacement": null,
+      "runtime_approved": false
+    }
+  ]
+}

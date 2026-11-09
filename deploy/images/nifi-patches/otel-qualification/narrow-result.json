@@ -1,0 +1,34 @@
+{
+  "status": "narrow-api-replacements-not-eligible",
+  "replacement": null,
+  "runtime_approved": false,
+  "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "summary_sha256": "f58832af7bd1aa506e587c78874d849f047535dd2e6bf38cf1eab43346c7c094",
+  "evidence_archive_sha256": "ca64bb8eb65505093a22f0818f7f850d9b9fb9a34cca0663d32ede3165fe6a10",
+  "proof_vm": "/opt/cnc-guard/evidence/otel-qualification-20261106",
+  "proof_local": "/home/tears/.cache/cnc-benten-vm-20261105/otel-qualification-20261106",
+  "statistics": {
+    "actual_jar_count": 189,
+    "parsed_class_entries": 44499,
+    "consumer_class_entries": 740,
+    "constant_pool_reference_records": 8846
+  },
+  "both_variants_have_newly_broken_reference_records": 10,
+  "affected_class": "io/opentelemetry/api/internal/ConfigUtil",
+  "affected_sdk_modules": [
+    "sdk-common:1.62.0",
+    "sdk-extension-autoconfigure-spi:1.62.0",
+    "sdk-metrics:1.62.0"
+  ],
+  "runtime_gap": "Actual image java-version succeeded; mounted Ubuntu javac failed java.security config symlink; no compiler/SDK/NarClassLoader qualification completed",
+  "static_limits": [
+    "direct references and inheritance within io.opentelemetry class models only",
+    "not JVM access/invocation/method-handle/default-method/reflection verification",
+    "external subclasses and complete resource/SPI/linkage remain unproven",
+    "metadata parent order is checked by isolated actual NarClassLoader controls separately",
+    "descriptor-only references not fully modeled",
+    "parsed counts include physical class duplicates/shadowed definitions",
+    "static missing symbols do not prove reachable NiFi runtime path"
+  ],
+  "failed_attempts_preserved": true
+}

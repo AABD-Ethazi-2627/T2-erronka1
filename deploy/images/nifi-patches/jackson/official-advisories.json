@@ -1,0 +1,830 @@
+[
+  {
+    "id": "CVE-2026-68494",
+    "url": "https://api.github.com/repos/FasterXML/jackson-core/security-advisories/GHSA-r7wm-3cxj-wff9",
+    "file": "CVE-2026-68494.json",
+    "sha256": "80f5d8e4d5fe27fe0e6ba07c144d9d51c1e2d414e41aabdd6e3568ae1ac9f6f7",
+    "summary": "Async parser maxNumberLength bypass via chunked digit accumulation (incomplete fix for GHSA-72hv-8253-57qq)",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": "< 2.18.8",
+        "patched_versions": "2.18.8",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">=3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-89407",
+    "url": "https://api.github.com/repos/FasterXML/jackson-core/security-advisories/GHSA-p6pp-m3f8-5c89",
+    "file": "CVE-2026-89407.json",
+    "sha256": "44844b8931d918fe5b8ffca0da0a103310bbee598cffe16ca5a1efe090f0da93",
+    "summary": "ReDoS: quadratic backtracking in NumberInput.PATTERN_FLOAT via looksLikeValidNumber()",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.17.0, <= 2.18.10",
+        "patched_versions": "2.18.11",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.19.0, <= 2.21.6",
+        "patched_versions": "2.21.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.22.0, <= 2.22.2",
+        "patched_versions": "2.22.3",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 3.0.0, <= 3.1.6",
+        "patched_versions": "3.1.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 3.2.0, <= 3.2.1",
+        "patched_versions": "3.2.2",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-89425",
+    "url": "https://api.github.com/repos/FasterXML/jackson-core/security-advisories/GHSA-7hhh-6rmp-j9qf",
+    "file": "CVE-2026-89425.json",
+    "sha256": "b7891383e3f4a6d8e2deef85d2390d8b8b00ba8bd691b63fa15e99372fb4ed74",
+    "summary": "UTF8DataInputJsonParser._reportInvalidToken() missing maxErrorTokenLength limit -> unbounded StringBuilder growth (DoS)",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.8.0, <= 2.18.10",
+        "patched_versions": "2.18.11",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.19.0, <= 2.21.6",
+        "patched_versions": "2.21.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 2.22.0, <= 2.22.2",
+        "patched_versions": "2.22.3",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 3.0.0, <= 3.1.6",
+        "patched_versions": "3.1.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-core"
+        },
+        "vulnerable_version_range": ">= 3.2.0, <= 3.2.2",
+        "patched_versions": "3.2.3",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54512",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-j3rv-43j4-c7qm",
+    "file": "CVE-2026-54512.json",
+    "sha256": "cd5ba4fdf14764357a91eef64fa7eeb8966cae20c2b92579fe10f7beefbf3f20",
+    "summary": "PolymorphicTypeValidator bypass via generic type parameters in jackson-databind allows arbitrary class instantiation",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": "2.10.0 - 2.18.7",
+        "patched_versions": "2.18.8",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": "3.0.0 - 3.1.3",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": "2.19.0 - 2.21.3",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54513",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-rmj7-2vxq-3g9f",
+    "file": "CVE-2026-54513.json",
+    "sha256": "9b4a70e5884b99c9f5bdee73e20f64246bfc8d70f1b0a2d8a0544884bd2359d7",
+    "summary": "Array subtype allowlist bypass in BasicPolymorphicTypeValidator (allowIfSubTypeIsArray) in jackson-databind",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.10.0, < 2.18.8",
+        "patched_versions": "2.18.8",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-68497",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-q4xh-88c3-wmh7",
+    "file": "CVE-2026-68497.json",
+    "sha256": "1a0990182b54264d01794e4cbcabd5b4bec9c0b7c77536a5c7220035087f2002",
+    "summary": "Duration XMLGregorianCalendar Unbounded Number Parse DoS",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.2.0, < 3.2.2",
+        "patched_versions": "3.2.2",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.6",
+        "patched_versions": "3.1.6",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.14.0, < 2.18.10",
+        "patched_versions": "2.18.10",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.6",
+        "patched_versions": "2.21.6",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, < 2.22.2",
+        "patched_versions": "2.22.2",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-91776",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-wv8q-qhhj-9h54",
+    "file": "CVE-2026-91776.json",
+    "sha256": "ad0f07906a2c801b532698b4e0995d05b1613e6a4fac0a3be60a86516e7b64b5",
+    "summary": "jackson-databind retains every unknown raw type ID ",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.0.0, <= 2.18.10",
+        "patched_versions": "2.18.11",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, <= 2.21.6",
+        "patched_versions": "2.21.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, <= 2.22.2",
+        "patched_versions": "2.22.3",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, <= 3.1.6",
+        "patched_versions": "3.1.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.2.0, <= 3.2.2",
+        "patched_versions": "3.2.3",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-91777",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-cxp5-3px4-pw24",
+    "file": "CVE-2026-91777.json",
+    "sha256": "f2760cd51af44308d16c9cc20b8ed36b2a8919d21b8e797900ec5403dc8e6bb6",
+    "summary": "jackson-databind quadratic forward-reference completion ",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.5.0, <= 2.18.10",
+        "patched_versions": "2.18.11",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, <= 2.21.6",
+        "patched_versions": "2.21.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, <= 2.22.2",
+        "patched_versions": "2.22.3",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, <= 3.1.6",
+        "patched_versions": "3.1.7",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.2.0, <= 3.2.2",
+        "patched_versions": "3.2.3",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-19032",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-wjgm-6hv5-3cvf",
+    "file": "CVE-2026-19032.json",
+    "sha256": "e451fdaf2d57a844fcb6b635bb8fe0d94cbb55d5573060e041d88ba3f421eb45",
+    "summary": "Path Deserialization Missing Scheme Allowlist for FileSystemProvider Resolution",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.6",
+        "patched_versions": "3.1.6",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.2.0, < 3.2.2",
+        "patched_versions": "3.2.2",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.8.0, < 2.18.10",
+        "patched_versions": "2.18.10",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.6",
+        "patched_versions": "2.21.6",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, < 2.22.2",
+        "patched_versions": "2.22.2",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54514",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-hgj6-7826-r7m5",
+    "file": "CVE-2026-54514.json",
+    "sha256": "83e47666320d9ca50946faecba92812b585d091d71223c962771199c91c9a2b5",
+    "summary": "InetSocketAddress deserialization triggers eager DNS resolution (SSRF) in jackson-databind",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.0.0, < 2.18.8",
+        "patched_versions": "2.18.8",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54515",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-5jmj-h7xm-6q6v",
+    "file": "CVE-2026-54515.json",
+    "sha256": "23d9fddc00443e0fee26e58f3abc73b2674e385447b26a27a3e4a8781146153b",
+    "summary": "Case-insensitive deserialization bypasses per-property @JsonIgnoreProperties in jackson-databind",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.1.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.8.0, < 2.18.9",
+        "patched_versions": "2.18.9",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.5",
+        "patched_versions": "2.21.5",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, < 2.22.1",
+        "patched_versions": "2.22.1",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54516",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-9fxm-vc8v-hj55",
+    "file": "CVE-2026-54516.json",
+    "sha256": "0ab00ff41cc5cade9e3f0ca1a42d9e0b778a75cb596157bc1fafce3a0cc76f82",
+    "summary": "Renamed @JsonIgnore'd setters can deserialize via private fields in jackson-databind",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.21.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.0.0, <= 2.18.11",
+        "patched_versions": "2.18.12",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54517",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-5hh8-q8hv-fr38",
+    "file": "CVE-2026-54517.json",
+    "sha256": "36f478eac7b9fef2cd2f06667f46bc75eba5a30829041bc41bb366f3cd8964ab",
+    "summary": "@JsonView bypass for setterless creator properties in jackson-databind",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.21.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-54518",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-rcqc-6cw3-h962",
+    "file": "CVE-2026-54518.json",
+    "sha256": "1f74a86a44d4ef691ef0a29e7111ae698cbe363a914deadbd41bd1815ffbec6a",
+    "summary": "@JsonView bypass for unwrapped creator parameters in jackson-databind",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.21.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-59888",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-3pjw-73gf-8qr5",
+    "file": "CVE-2026-59888.json",
+    "sha256": "204fe2ab47b053d7bd2d579910a1f56335a957c9db2dae2be65f824bf959aa7e",
+    "summary": "`@JsonIgnore` on a Record property is bypassed with a PropertyNamingStrategy in jackson-databind [CVE-2026-59888]",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.15.0, < 2.18.8",
+        "patched_versions": "2.18.8",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.4",
+        "patched_versions": "2.21.4",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.4",
+        "patched_versions": "3.1.4",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-59889",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-5gvw-p9qm-jgwh",
+    "file": "CVE-2026-59889.json",
+    "sha256": "ad7f90c1d02d6ffa5fa7a3e842c8cf7fb4de037b71fc710e216844e2d5b22d5c",
+    "summary": "@JsonView bypassed for @JsonUnwrapped container properties on deserialization: a Setter/Field-backed property annotated @JsonView(PrivilegedView)+@JsonUnwrapped is populated from JSON under a less-privileged active view (mass-assignment / privilege escalation). Incomplete fix of #5971 (creator path)",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.21.0, <= 2.22.0",
+        "patched_versions": "2.21.5",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, <= 3.1.4",
+        "patched_versions": "3.1.5",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.18.0, <= 2.18.8",
+        "patched_versions": "2.18.9",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, < 2.22.1",
+        "patched_versions": "2.22.1",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">=3.2.0, <3.2.1",
+        "patched_versions": "3.2.1",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-77310",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-vvgp-rfg2-7rr6",
+    "file": "CVE-2026-77310.json",
+    "sha256": "c9f3e685b1c06f06de4045c4003a80c4eff3a76327dd2ee3a2ca0ad32d9e0e3d",
+    "summary": "Incomplete fix for CVE-2026-54514: eager DNS resolution (SSRF) still present in InetAddress deserialization (sibling of the patched InetSocketAddress branch)",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.0.0, < 2.18.9",
+        "patched_versions": "2.18.9",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">=2.19.0, < 2.21.5",
+        "patched_versions": "2.21.5",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, < 2.22.1",
+        "patched_versions": "2.21.1",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">=3.0.0, < 3.1.5",
+        "patched_versions": "3.1.5",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">=3.2.0, <3.2.1",
+        "patched_versions": "3.2.1",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "CVE-2026-83557",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-gx83-3vf8-gh7j",
+    "file": "CVE-2026-83557.json",
+    "sha256": "ee142980b608b87420b931dce3453c290d05ed03f517f204f293ee3881455b10",
+    "summary": "Comparable missing from DefaultBaseTypeLimitingValidator's unsafe base types (incomplete PolymorphicTypeValidator denylist)",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.0.0, < 3.1.6",
+        "patched_versions": "3.1.6",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "tools.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 3.2.0, < 3.2.2",
+        "patched_versions": "3.2.2",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.11.0, < 2.18.10",
+        "patched_versions": "2.18.10",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.19.0, < 2.21.6",
+        "patched_versions": "2.21.6",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.22.0, < 2.22.2",
+        "patched_versions": "2.22.2",
+        "vulnerable_functions": []
+      }
+    ]
+  },
+  {
+    "id": "GHSA-mhm7-754m-9p8w",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-mhm7-754m-9p8w",
+    "file": "GHSA-mhm7-754m-9p8w.json",
+    "sha256": "573a779c169ebf48553a45de3a0c147cf9425a13b0149abaf28dc090278c0017",
+    "summary": "`@JsonView` bypass for creator properties with `@JsonTypeInfo(include=As.EXTERNAL_PROPERTY)`",
+    "vulnerabilities": [
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.18.0, <= 2.18.8",
+        "patched_versions": "",
+        "vulnerable_functions": []
+      },
+      {
+        "package": {
+          "ecosystem": "maven",
+          "name": "com.fasterxml.jackson.core:jackson-databind"
+        },
+        "vulnerable_version_range": ">= 2.21.0, <= 2.21.4",
+        "patched_versions": "",
+        "vulnerable_functions": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "jetty_configuration_sources": {
+    "scope": "preConfigure resolves temp directory/unpacks; configure adds WEB-INF/classes and lib through installed WebAppClassLoader; not source-to-installed-bytecode equivalence",
+    "sha256": "1cb040cea2190e9e31476cc51e76f2224e16bb0e3e08e49663a0fcdd2c33e8d5",
+    "url": "https://repo.maven.apache.org/maven2/org/eclipse/jetty/ee11/jetty-ee11-webapp/12.1.13/jetty-ee11-webapp-12.1.13-sources.jar"
+  },
+  "official_configuration_observation": {
+    "scope": "loadWar constructs WebAppContext and WebAppClassLoader(parent,context); no parent-priority override; source is not proof of installed bytecode equivalence",
+    "sha256": "bae686fae83ec5f17c4c57cc24b9710c7f5677be062f74d7bff5984a0f0fdedf",
+    "url": "https://raw.githubusercontent.com/apache/nifi/rel/nifi-2.12.0/nifi-framework-bundle/nifi-framework/nifi-web/nifi-jetty/src/main/java/org/apache/nifi/web/server/JettyServer.java"
+  },
+  "promotion_eligible": false,
+  "proof_inputs": {
+    "inventory.json": "9a59bb0de97927ca731262477e32a3db6441f3c3000f6a78a6a2cc0abee540cb",
+    "pins.json": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149"
+  },
+  "replacement": null,
+  "runtime_approved": false,
+  "schema": 1,
+  "status": "prepared-not-executed",
+  "support_sources": {
+    "NarProbe.java": "e1cbd82a02c48f504db071f37df84c4fa1480101ba5f4e3cb0e3caee9226ba14",
+    "qualify.py": "fe3168853bedbb81b7232635e70207688e82df13394dceec7ec3f55452d82923"
+  },
+  "system_input_provenance": "Exact hashes of existing frozen 7ccc986 runtime-reviewfix proof; Ubuntu compiler21 and actual image JVM21 are separately pinned, not called identical distributions",
+  "system_inputs": {
+    "/etc/java-21-openjdk/security/java.security": "9108fb3a906e07d6692985cdda551fc1c6a6957c8241060b48f07de88e83f8bb",
+    "/jdk/bin/javac": "3214f94e6407fdf98909e67a976323e1f14353d65f5e672163c4a7d136efdb80",
+    "/jdk/lib/modules": "d179ebd0acd5c01f05e8eae93ad8a7fc072d24a500f838c208940253b0c2c4cd",
+    "/jdk/release": "b9e13ce6cefa91fdda9f7fe0ac88ddd34dc8b3c37c791667a579d16b1dae702d",
+    "/usr/lib/jvm/java-21-openjdk/bin/java": "5fce113a1f51aaac9bc609d4e6c2b55543cf0910c440ff4db318350c4af81a29",
+    "/usr/lib/jvm/java-21-openjdk/lib/modules": "e359e69eb5d1b862a8bc14220bc13160b51b7179a7cad46a3119cafb5a08d91e"
+  }
+}

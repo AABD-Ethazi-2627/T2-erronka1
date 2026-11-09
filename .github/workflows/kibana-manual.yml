@@ -1,0 +1,37 @@
+name: Kibana bounded audit (manual)
+on:
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  kibana:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build with an isolated 4 GiB builder
+        run: |
+          df -h / /var/lib/docker
+          free -m
+          sh scripts/build_kibana_bounded.sh "$RUNNER_TEMP/kibana.tar"
+          free -m
+      - name: Install checksum-pinned Trivy
+        run: |
+          sh scripts/install_trivy_release.sh "$RUNNER_TEMP/cnc-trivy-bin"
+          printf '%s\n' "$RUNNER_TEMP/cnc-trivy-bin" >> "$GITHUB_PATH"
+      - name: Scan and enforce the complete image report
+        env:
+          GOMEMLIMIT: 1GiB
+        run: |
+          trivy image --image-src docker --parallel 1 --scanners vuln --list-all-pkgs --timeout 15m --format json --output image-scan.json cnc-guard-audit:kibana
+          python3 -m scripts.enforce_image_scan kibana image-scan.json
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: kibana-bounded-scan
+          path: image-scan.json
+          if-no-files-found: error
+          retention-days: 30

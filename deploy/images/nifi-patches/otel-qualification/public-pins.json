@@ -1,0 +1,362 @@
+{
+  "provenance": "Official Maven Central HTTPS bytes fetched after coordinator Maven precondition92ff99e; measured hashes, no independent signature claim",
+  "files": [
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-api:1.62.0",
+      "file": "opentelemetry-api-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.62.0/opentelemetry-api-1.62.0.pom",
+      "sha256": "6d69339f6ac9afe87be1e018597bf088b9fe53194de7bd30c69a4d905954004a",
+      "size": 1779,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-context",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-context:1.62.0",
+      "file": "opentelemetry-context-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-context/1.62.0/opentelemetry-context-1.62.0.pom",
+      "sha256": "c37a9d7e220a2747c91bdaaa9648c8998315f2829d4aa01ef411fe1227d196ba",
+      "size": 1798,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-common",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-common:1.62.0",
+      "file": "opentelemetry-common-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-common/1.62.0/opentelemetry-common-1.62.0.pom",
+      "sha256": "b8cc3e8e671f7e8e3c52837eb00b71d4b891be4f49c78043e7146865e0a66600",
+      "size": 1563,
+      "has_parent": false,
+      "dependencies": []
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-api:1.62.0",
+      "file": "opentelemetry-api-1.62.0-sources.jar",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.62.0/opentelemetry-api-1.62.0-sources.jar",
+      "sha256": "182c0bdb355f189ff4286c6dd250c5b809275b71512ad49417dc35b98dca30a1",
+      "size": 132418
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-api:1.67.0",
+      "file": "opentelemetry-api-1.67.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.67.0/opentelemetry-api-1.67.0.pom",
+      "sha256": "8b9700627a7ff18a2415fe2b4cfe6f5b33c27e72cf36aa332e82c4b5be016f2b",
+      "size": 1779,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-context",
+          "version": "1.67.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-context:1.67.0",
+      "file": "opentelemetry-context-1.67.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-context/1.67.0/opentelemetry-context-1.67.0.pom",
+      "sha256": "e2788168fd666c5ea181ed6733635b4b8ee56697482585e5725fe8a2ee5e6f39",
+      "size": 1798,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-common",
+          "version": "1.67.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-common:1.67.0",
+      "file": "opentelemetry-common-1.67.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-common/1.67.0/opentelemetry-common-1.67.0.pom",
+      "sha256": "7a1ced21ec6f194488f4c06a8b3d99f286e703e49cb310e1d0bbab89431a9008",
+      "size": 1563,
+      "has_parent": false,
+      "dependencies": []
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-api:1.67.0",
+      "file": "opentelemetry-api-1.67.0-sources.jar",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-api/1.67.0/opentelemetry-api-1.67.0-sources.jar",
+      "sha256": "15494206fbc71b4807ed73e3d9c753f1ce5e34b1bb42558bb05cec4ef30d7b91",
+      "size": 134528
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-sdk:1.62.0",
+      "file": "opentelemetry-sdk-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk/1.62.0/opentelemetry-sdk-1.62.0.pom",
+      "sha256": "868ccd347afd902dce8f2fd0b729540dcd9dc471463d924e5812c984b4463767",
+      "size": 2549,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-common",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-trace",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-metrics",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-logs",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-sdk-common:1.62.0",
+      "file": "opentelemetry-sdk-common-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-common/1.62.0/opentelemetry-sdk-common-1.62.0.pom",
+      "sha256": "51022bc77fed54d166f6a7f29ec9e235cadd341cccb70b390cd0534a2607d9d5",
+      "size": 1789,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-sdk-trace:1.62.0",
+      "file": "opentelemetry-sdk-trace-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-trace/1.62.0/opentelemetry-sdk-trace-1.62.0.pom",
+      "sha256": "8f6f114878b36090c65b10bfe575d9e84890fd35da33840d746a38bfbc93b931",
+      "size": 1987,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-common",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-sdk-metrics:1.62.0",
+      "file": "opentelemetry-sdk-metrics-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-metrics/1.62.0/opentelemetry-sdk-metrics-1.62.0.pom",
+      "sha256": "d30113f1da2db379c3b6efd15df164d76c564e9a4e68c36518dbbc485b12250d",
+      "size": 1985,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-common",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-sdk-logs:1.62.0",
+      "file": "opentelemetry-sdk-logs-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-logs/1.62.0/opentelemetry-sdk-logs-1.62.0.pom",
+      "sha256": "7ebb00daf414332e8d52c19ca96356a878956d3072d40c504af0455ff968acda",
+      "size": 1978,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-common",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:1.62.0",
+      "file": "opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-sdk-extension-autoconfigure-spi/1.62.0/opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.pom",
+      "sha256": "97086d950590f90995a5fa9a2eabff89b6369c1cb9c12d8fa4e833779d03816a",
+      "size": 1826,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk",
+          "version": "1.62.0",
+          "scope": "compile",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry.contrib:opentelemetry-gcp-resources:1.37.0-alpha",
+      "file": "opentelemetry-gcp-resources-1.37.0-alpha.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/contrib/opentelemetry-gcp-resources/1.37.0-alpha/opentelemetry-gcp-resources-1.37.0-alpha.pom",
+      "sha256": "55238e485262f3f5ced894ff78f1acf696f814a0e4cdebe84ad6ad3fd7b88ca0",
+      "size": 2680,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.40.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk",
+          "version": "1.40.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "com.google.cloud.opentelemetry",
+          "artifactId": "detector-resources-support",
+          "version": "0.31.0",
+          "scope": "runtime",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry.semconv",
+          "artifactId": "opentelemetry-semconv",
+          "version": "1.25.0-alpha",
+          "scope": "runtime",
+          "optional": null
+        },
+        {
+          "groupId": "com.fasterxml.jackson.core",
+          "artifactId": "jackson-core",
+          "version": "2.17.2",
+          "scope": "runtime",
+          "optional": null
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry.semconv:opentelemetry-semconv:1.29.0-alpha",
+      "file": "opentelemetry-semconv-1.29.0-alpha.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/opentelemetry/semconv/opentelemetry-semconv/1.29.0-alpha/opentelemetry-semconv-1.29.0-alpha.pom",
+      "sha256": "ae2b561bf3ce747425c30d90315309b757d5fd09ff195ca4404e5749a766f21b",
+      "size": 1671,
+      "has_parent": false,
+      "dependencies": []
+    },
+    {
+      "coordinate": "io.grpc:grpc-opentelemetry:1.83.0",
+      "file": "grpc-opentelemetry-1.83.0.pom",
+      "url": "https://repo.maven.apache.org/maven2/io/grpc/grpc-opentelemetry/1.83.0/grpc-opentelemetry-1.83.0.pom",
+      "sha256": "606878c9ad84e6cd9459155e6bcd886952257bf9f7c747dcd1e225e5ae58315c",
+      "size": 2366,
+      "has_parent": false,
+      "dependencies": [
+        {
+          "groupId": "io.grpc",
+          "artifactId": "grpc-api",
+          "version": "1.83.0",
+          "scope": "compile",
+          "optional": null
+        },
+        {
+          "groupId": "com.google.guava",
+          "artifactId": "guava",
+          "version": "33.6.0-android",
+          "scope": "runtime",
+          "optional": null
+        },
+        {
+          "groupId": "io.grpc",
+          "artifactId": "grpc-core",
+          "version": "1.83.0",
+          "scope": "runtime",
+          "optional": null
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.63.0",
+          "scope": "runtime",
+          "optional": null
+        },
+        {
+          "groupId": "com.google.auto.value",
+          "artifactId": "auto-value-annotations",
+          "version": "1.11.0",
+          "scope": "runtime",
+          "optional": null
+        },
+        {
+          "groupId": "org.codehaus.mojo",
+          "artifactId": "animal-sniffer-annotations",
+          "version": "1.27",
+          "scope": "runtime",
+          "optional": null
+        }
+      ]
+    }
+  ]
+}

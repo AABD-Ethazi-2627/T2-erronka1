@@ -1,0 +1,157 @@
+{
+  "status": "preparation-only-snappy-consumer-blocked",
+  "child_commit": "7becad6c079435e883b95ce7f706f89201a189f3",
+  "cherry_pick": "c176080",
+  "source_base_before_cherry_pick": "cd811e35975a1823bc0003ca09738b4206e0e219",
+  "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428",
+  "source_before": {
+    "deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java": "d40f4ec1beb5011ad501bfa198b223520785cae09bdbe2b8472212676406b4c6",
+    "deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java": "534f36590c3747a770e33eb3a2efd3759a0d932a736c82ab2cb408f345404f02",
+    "deploy/images/nifi-patches/stock-occurrences/README.md": "4756384d51304bfff99d8ab811b9dc54b34b6822436902b8d378b4d56be3c50c",
+    "deploy/images/nifi-patches/stock-occurrences/acquire.py": "8242ca80a6dd451340e67c97f6c299c55385df2b071462c90dd2281d8d6ddaa6",
+    "deploy/images/nifi-patches/stock-occurrences/acquisition.json": "1693e65753a6a67fee2fdd58b757a0a2e3b5765247b1b4a744b36cdb5b4fd50a",
+    "deploy/images/nifi-patches/stock-occurrences/candidate-plan.json": "3532233a98ed044aa9486cbdbe040468ba9c71e3dc0c61d646e0a1ce73b2ebec",
+    "deploy/images/nifi-patches/stock-occurrences/consumer-execution.json": "38007ef77b91b52edd35bd0a5e09d4e2290d0c58095f168c8061633d9f7f2852",
+    "deploy/images/nifi-patches/stock-occurrences/consumer-summary.json": "0e830b5dbb08348afaaab9ff9804e71a3888949eecbf456c71273f5fb34eb3f9",
+    "deploy/images/nifi-patches/stock-occurrences/emit_plan.py": "b096485982d23b7b6f74114a98b2d3b6a2dcc7f1dc065e38e4b9f6745cf723ae",
+    "deploy/images/nifi-patches/stock-occurrences/handoff.json": "9c660a426a16d426bcf1c6da8bdf2290271ee358ee59e482435537f69d4c9d9d",
+    "deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "cd8440e5c20270c0909af6b5741067c73117cc305bae98f839c006de71a97a08",
+    "deploy/images/nifi-patches/stock-occurrences/probe_consumers.py": "68f56a518920e47f0c88504f2ac06393e0b7e533aba0e61735da245b451f9b0e",
+    "deploy/images/nifi-patches/stock-occurrences/source-lock.json": "abc31418ffa242b71dd97b319f5f22a5c626c372dac6b0868abb56741f4e5a5d",
+    "deploy/images/nifi-patches/stock-occurrences/source-review.json": "bdf2804add21ebabab965db124c1c9f76593a2bc56104569b1055c5542d25e74",
+    "tests/test_nifi_stock_occurrences.py": "1f1f6f33afb49170c245e41d0b12ad47af471534d45de566ac2fa2b5c3d18938",
+    "scripts/patch_nested_jars.py": "31f95b8befe94a657455db0fdd601db1e004a038f78538d9507482572e097143",
+    "deploy/images/nifi-patches/compatible-libraries/pins.json": "ab7f2a301ffab32002813576043923864ea4cdd5a3afef120b7e48f17f197c46"
+  },
+  "parent_source_changes": {
+    "deploy/images/nifi-patches/stock-occurrences/acquire.py": {
+      "child": "75f2052a5dc30a2c25e2b810c82934747325bb94378ca056df936ad9d9209ed8",
+      "parent": "8242ca80a6dd451340e67c97f6c299c55385df2b071462c90dd2281d8d6ddaa6"
+    },
+    "deploy/images/nifi-patches/stock-occurrences/map_candidates.py": {
+      "child": "f9b03a50541f4be86dd216475a5e350e4212154743f1eda7cf93df7a06fbe29f",
+      "parent": "cd8440e5c20270c0909af6b5741067c73117cc305bae98f839c006de71a97a08"
+    },
+    "deploy/images/nifi-patches/stock-occurrences/probe_consumers.py": {
+      "child": "386b793a0ccf5d074e0ec0e15231689bf2a618f02260885d3007b7ad1f9c8913",
+      "parent": "68f56a518920e47f0c88504f2ac06393e0b7e533aba0e61735da245b451f9b0e"
+    },
+    "deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java": {
+      "child": "8c88a6e4c4c51aa8872c96e27fc6cd5d146f3b399f710871bf220b15630453a5",
+      "parent": "534f36590c3747a770e33eb3a2efd3759a0d932a736c82ab2cb408f345404f02"
+    },
+    "deploy/images/nifi-patches/stock-occurrences/emit_plan.py": {
+      "child": "835d708b9df3c3179690cd92be391501faf8b0297da3b51aea71dcd57fd40e7a",
+      "parent": "b096485982d23b7b6f74114a98b2d3b6a2dcc7f1dc065e38e4b9f6745cf723ae"
+    },
+    "tests/test_nifi_stock_occurrences.py": {
+      "child": "52bd5c6f49c201a4fe3d26a99c395b9579d2f1439a681cbaacfb48bd91d1c733",
+      "parent": "1f1f6f33afb49170c245e41d0b12ad47af471534d45de566ac2fa2b5c3d18938"
+    }
+  },
+  "proof_sha256": {
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/classes/ConsumerProbe.class": "73ca55562c862ae726289459762a007ca0e3ded2414dce83a8f302e72ea5562d",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/classes/HadoopProbe.class": "9ff8ed5136c90f1e101e4d690e592482198b7e2547a1748a93a07d518f3149f4",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/execution.json": "0dc2b701b23ecef66bb9627dfaa456ff5fe0205835f6acbafd402dc4ee13146d",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/hadoop-common-3.5.0.jar": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/jimfs-1.1.jar": "c4828e28d7c0a930af9387510b3bada7daa5c04d7c25a75c7b8b081f1c257ddd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/kafka-clients-4.3.1.jar": "52501b7b47510c66f898871adaf6d2968ab7246561d44ced43643a8a587f0b36",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/summary.json": "079e5f39dc72c7137ae9ae12b44b410bb6be89d9e5408962335d3147e0e6b872",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/mapping.stdout": "84728f2ae34cff89dff07cdb7c1277ef25cd9ead77ce4d07be70a7509ef4e608",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/mapping.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/mapping-execution.json": "481729bf1716992fdb4ebe62d14827841b1da1d80713dcd90e77ed3ef069b1c4",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/consumers-execution.json": "a0f5463400913381618de07ad77dcd0deec231f3c477211846fc1707e06c4b2d",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/source-before.json": "ef213fd82430b2e3bfcb6befc5d0ae0396198f6c5f9bf88aaacb6acc24435956",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/bounded-map.py": "fdcaaf66587674aa98a9c8b785c248a433b1e29f11afcf370caddf255b24c560",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/run.py": "3971a9f010ed0a94699eeb58a21cbdcfd1cc0d996abd768f53ce2b06433a15ca"
+  },
+  "archive_count": 215,
+  "archive_occurrences": 2099,
+  "inventory_sha256": "5ef465917d5de6c50794c674f3866f22c8b604e4b7a9f7b5b8822ce773980e32",
+  "coverage": "public archives under /opt/nifi copied from never-started pinned stock image; excludes volumes, non-archive blobs and full final-runtime acceptance",
+  "selected_counts": {
+    "guava": 7,
+    "lz4": 3,
+    "snappy": 9
+  },
+  "parent_mapping_matches_child_except_replacement_cache_paths": true,
+  "mapping_execution": {
+    "command": [
+      ".venv/bin/python",
+      "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/bounded-map.py",
+      "deploy/images/nifi-patches/stock-occurrences/map_candidates.py",
+      "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source",
+      "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/component"
+    ],
+    "started_at_unix": 1793798209.048438,
+    "duration_seconds": 94.33595728874207,
+    "returncode": 0,
+    "max_child_rss_kib": 148776
+  },
+  "consumer_execution": {
+    "command": [
+      ".venv/bin/python",
+      "deploy/images/nifi-patches/stock-occurrences/probe_consumers.py",
+      "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source",
+      "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/component",
+      "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof"
+    ],
+    "started_at_unix": 1793798209.0508995,
+    "duration_seconds": 10.051815032958984,
+    "returncode": 0,
+    "max_child_rss_kib": 162816
+  },
+  "java_commands": 7,
+  "java_release_file": "/usr/lib/jvm/java-21-openjdk/release",
+  "hadoop_evidence": [
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-Djava.io.tmpdir=/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/hadoop-native-rkewcihj",
+        "-cp",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/classes:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/hadoop-common-3.5.0.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/component/snappy-java-1.1.10.8.jar",
+        "HadoopProbe",
+        "old"
+      ],
+      "returncode": 0,
+      "stdout": "old Hadoop normal 4096-byte roundtrip PASS\n",
+      "stderr": "SLF4J(W): No SLF4J providers were found.\nSLF4J(W): Defaulting to no-operation (NOP) logger implementation\nSLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.\n"
+    },
+    {
+      "argv": [
+        "java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:ActiveProcessorCount=1",
+        "-Djava.io.tmpdir=/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/hadoop-native-72b3_4n4",
+        "-cp",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/classes:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/proof/hadoop-common-3.5.0.jar:/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar:/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-stock-1793798208840664428/component/snappy-java-1.1.10.9.jar",
+        "HadoopProbe",
+        "new"
+      ],
+      "returncode": 0,
+      "stdout": "CONFIRMED new Snappy rejects Hadoop normal compression: java.lang.IllegalArgumentException: not enough space for output: need 4,810 bytes, but only 0 remaining\n",
+      "stderr": "SLF4J(W): No SLF4J providers were found.\nSLF4J(W): Defaulting to no-operation (NOP) logger implementation\nSLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.\n"
+    }
+  ],
+  "hadoop_object_sha256": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+  "snappy_all_nine_blocked": true,
+  "tests": {
+    "passed": 28,
+    "subtests": 14,
+    "python": "3.11.17",
+    "warning": "intentional duplicate ZIP fixture"
+  },
+  "committed_child_artifacts": "candidate-plan/consumer-summary/consumer-execution/handoff retain original child source attribution; parent proof is separate and source-bound",
+  "no_rooted_archive_patched": true,
+  "pending": [
+    "independent stock candidate QA",
+    "correct Hadoop output-buffer protocol without removing Snappy security guard",
+    "all missing consumer/classloader/native image acceptance",
+    "runtime image normal and nested scans",
+    "CI and protected review, Kibana, CG32/SMB/human gates"
+  ]
+}

@@ -1,0 +1,562 @@
+[
+  {
+    "file": "guava-33.4.8-jre.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar",
+    "sha256": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed",
+    "coordinate": "com.google.guava:guava:33.4.8-jre"
+  },
+  {
+    "file": "guava-33.4.8-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.pom",
+    "sha256": "04365d4b6ef22c8cf9349fe628069fc3e81a2c838351402ef4e95f9e757beebc",
+    "coordinate": "com.google.guava:guava:33.4.8-jre"
+  },
+  {
+    "file": "guava-33.4.8-jre-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre-sources.jar",
+    "sha256": "9d3c6aad893daac9d4812eb9fa4c3f7956a9f2e472eb7df2fea0e467fed7e766",
+    "coordinate": "com.google.guava:guava:33.4.8-jre"
+  },
+  {
+    "file": "guava-33.6.0-jre.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.jar",
+    "sha256": "dc573e1fca4fd5454f4a5fd3d7da2df03002876a4175bafc14a95980dd7713b3",
+    "coordinate": "com.google.guava:guava:33.6.0-jre"
+  },
+  {
+    "file": "guava-33.6.0-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre.pom",
+    "sha256": "b45b78944280054311c53da9270809fb40dcabc408ce66ce55730099b4f57d32",
+    "coordinate": "com.google.guava:guava:33.6.0-jre"
+  },
+  {
+    "file": "guava-33.6.0-jre-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.6.0-jre/guava-33.6.0-jre-sources.jar",
+    "sha256": "eff31867dd63a92d63ca856127a424a6836418d8bfa044162cac20430abd3500",
+    "coordinate": "com.google.guava:guava:33.6.0-jre"
+  },
+  {
+    "file": "guava-33.7.1-jre.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.1-jre/guava-33.7.1-jre.jar",
+    "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46",
+    "coordinate": "com.google.guava:guava:33.7.1-jre"
+  },
+  {
+    "file": "guava-33.7.1-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.1-jre/guava-33.7.1-jre.pom",
+    "sha256": "b5b380db232d8d956457f124a5ff8ed34958e074dcd20651404b522986aefedc",
+    "coordinate": "com.google.guava:guava:33.7.1-jre"
+  },
+  {
+    "file": "guava-33.7.1-jre-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.1-jre/guava-33.7.1-jre-sources.jar",
+    "sha256": "9d60f1613f9252d1f1bc89847466915cfe711af33b0847b885c9184a8602d166",
+    "coordinate": "com.google.guava:guava:33.7.1-jre"
+  },
+  {
+    "file": "guava-33.7.2-jre.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar",
+    "sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "coordinate": "com.google.guava:guava:33.7.2-jre"
+  },
+  {
+    "file": "guava-33.7.2-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.pom",
+    "sha256": "5d1501a97230f90df54ea33164831a61c6714a8b2a4c6a04e90bb729581bbabc",
+    "coordinate": "com.google.guava:guava:33.7.2-jre"
+  },
+  {
+    "file": "guava-33.7.2-jre-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre-sources.jar",
+    "sha256": "ab6a8934d352629e6d87087a79808b827b64ed18cff6c6b551be99cd8e03244c",
+    "coordinate": "com.google.guava:guava:33.7.2-jre"
+  },
+  {
+    "file": "amqp-client-5.35.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.35.0/amqp-client-5.35.0.jar",
+    "sha256": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6",
+    "coordinate": "com.rabbitmq:amqp-client:5.35.0"
+  },
+  {
+    "file": "amqp-client-5.35.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.35.0/amqp-client-5.35.0.pom",
+    "sha256": "6c27b87e2079e6e5eb8b4528576aeb05033f2a2d8124b9dd4e62c3efb806091a",
+    "coordinate": "com.rabbitmq:amqp-client:5.35.0"
+  },
+  {
+    "file": "amqp-client-5.35.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.35.0/amqp-client-5.35.0-sources.jar",
+    "sha256": "44177aa6e4aaa453e1c29a7b8b3e3d65547bf8e65bdb8852340913ba736fb493",
+    "coordinate": "com.rabbitmq:amqp-client:5.35.0"
+  },
+  {
+    "file": "amqp-client-5.36.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.36.0/amqp-client-5.36.0.jar",
+    "sha256": "333fd284b0166d2aeb7519f63860edfe1e0cbcdc915da22bf41f460f9ac7c872",
+    "coordinate": "com.rabbitmq:amqp-client:5.36.0"
+  },
+  {
+    "file": "amqp-client-5.36.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.36.0/amqp-client-5.36.0.pom",
+    "sha256": "264953f405c402cae974a769a1be0dcf55c05b6523a32b9b32232704e6556de2",
+    "coordinate": "com.rabbitmq:amqp-client:5.36.0"
+  },
+  {
+    "file": "amqp-client-5.36.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.36.0/amqp-client-5.36.0-sources.jar",
+    "sha256": "b31c9c78d021aff7a4795d28d16507ff340cfa750ebae6baf5e7ca21da115602",
+    "coordinate": "com.rabbitmq:amqp-client:5.36.0"
+  },
+  {
+    "file": "amqp-client-5.37.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.37.0/amqp-client-5.37.0.jar",
+    "sha256": "b27134820890c5e56ed57d27cc50b70742fa2c31b36a6e9e28e14a43f34ff96f",
+    "coordinate": "com.rabbitmq:amqp-client:5.37.0"
+  },
+  {
+    "file": "amqp-client-5.37.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.37.0/amqp-client-5.37.0.pom",
+    "sha256": "47e11487e18d65685b267c7b6ad2add3198a8bfa42f214466d8c49c91c1764ee",
+    "coordinate": "com.rabbitmq:amqp-client:5.37.0"
+  },
+  {
+    "file": "amqp-client-5.37.0-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/rabbitmq/amqp-client/5.37.0/amqp-client-5.37.0-sources.jar",
+    "sha256": "ddc8068949fb82d8c3c5b4872cca20b28266f5e3b04e8a44ebb2854935ecacce",
+    "coordinate": "com.rabbitmq:amqp-client:5.37.0"
+  },
+  {
+    "file": "lz4-java-1.11.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.2/lz4-java-1.11.2.jar",
+    "sha256": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2",
+    "coordinate": "at.yawk.lz4:lz4-java:1.11.2"
+  },
+  {
+    "file": "lz4-java-1.11.2.pom",
+    "url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.2/lz4-java-1.11.2.pom",
+    "sha256": "55fc6d02733ce223aa2ca737057f338fb23d588e52ed571a2645566006d9258f",
+    "coordinate": "at.yawk.lz4:lz4-java:1.11.2"
+  },
+  {
+    "file": "lz4-java-1.11.2-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.2/lz4-java-1.11.2-sources.jar",
+    "sha256": "c3eee1cec41e1607b87a9a97e479cdb312ab39f09dcf57262aa15ea66351fc5a",
+    "coordinate": "at.yawk.lz4:lz4-java:1.11.2"
+  },
+  {
+    "file": "lz4-java-1.11.4.jar",
+    "url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.4/lz4-java-1.11.4.jar",
+    "sha256": "58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325",
+    "coordinate": "at.yawk.lz4:lz4-java:1.11.4"
+  },
+  {
+    "file": "lz4-java-1.11.4.pom",
+    "url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.4/lz4-java-1.11.4.pom",
+    "sha256": "907477543a78c8eb3d55fd65a8ad9d7881b8bc3ec61c34f1f953220a6f551be3",
+    "coordinate": "at.yawk.lz4:lz4-java:1.11.4"
+  },
+  {
+    "file": "lz4-java-1.11.4-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/at/yawk/lz4/lz4-java/1.11.4/lz4-java-1.11.4-sources.jar",
+    "sha256": "e32b2809f070317520b6ebdbca730b8bf2c24b900265c702cd18f3f0bdd532b7",
+    "coordinate": "at.yawk.lz4:lz4-java:1.11.4"
+  },
+  {
+    "file": "snappy-java-1.1.10.8.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.8/snappy-java-1.1.10.8.jar",
+    "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc",
+    "coordinate": "org.xerial.snappy:snappy-java:1.1.10.8"
+  },
+  {
+    "file": "snappy-java-1.1.10.8.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.8/snappy-java-1.1.10.8.pom",
+    "sha256": "713d324f71f4fd6ecca3e1790a961f597d5d4d39702425fe6a9f92922699ffa3",
+    "coordinate": "org.xerial.snappy:snappy-java:1.1.10.8"
+  },
+  {
+    "file": "snappy-java-1.1.10.8-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.8/snappy-java-1.1.10.8-sources.jar",
+    "sha256": "18aa92797ea1adce7d9ec2e9e8b91d09a670a5ed600775455435b848f27c80f2",
+    "coordinate": "org.xerial.snappy:snappy-java:1.1.10.8"
+  },
+  {
+    "file": "snappy-java-1.1.10.9.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.9/snappy-java-1.1.10.9.jar",
+    "sha256": "35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d",
+    "coordinate": "org.xerial.snappy:snappy-java:1.1.10.9"
+  },
+  {
+    "file": "snappy-java-1.1.10.9.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.9/snappy-java-1.1.10.9.pom",
+    "sha256": "55d846e8019d2d86532504603bce2c5e2b22ed37570877abae4470b3dd6471c5",
+    "coordinate": "org.xerial.snappy:snappy-java:1.1.10.9"
+  },
+  {
+    "file": "snappy-java-1.1.10.9-sources.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.10.9/snappy-java-1.1.10.9-sources.jar",
+    "sha256": "48cf8a413369caba8f86b14a1a4a19399b75de50128051c648d73d20886c66a0",
+    "coordinate": "org.xerial.snappy:snappy-java:1.1.10.9"
+  },
+  {
+    "file": "b931fe9d6d5cf00bc55714ad3308d086f71850fe.patch",
+    "url": "https://github.com/google/guava/commit/b931fe9d6d5cf00bc55714ad3308d086f71850fe.patch",
+    "sha256": "e912bbf9cbdf1d329b86b80d44b5c47543413861cdaa9f4764748a33f00a85c3"
+  },
+  {
+    "file": "25fad817291feff3195c32620117d295598f8b41.patch",
+    "url": "https://github.com/rabbitmq/rabbitmq-java-client/commit/25fad817291feff3195c32620117d295598f8b41.patch",
+    "sha256": "0e6f653fc16f72c5eb1d3d9972cdacbda1106c4a15fcd60421d83beab3efb23d"
+  },
+  {
+    "file": "b8bd750fa8c90690e859b18d6343b34421309020.patch",
+    "url": "https://github.com/rabbitmq/rabbitmq-java-client/commit/b8bd750fa8c90690e859b18d6343b34421309020.patch",
+    "sha256": "c1b07a86f39618e0af3043d7b556d35cf38419359f625f3f1273e633c30eb861"
+  },
+  {
+    "file": "7a48b7f6b8099b9dab6541e4ac2ee0979dc55aa3.patch",
+    "url": "https://github.com/yawkat/lz4-java/commit/7a48b7f6b8099b9dab6541e4ac2ee0979dc55aa3.patch",
+    "sha256": "e7cf647e8cc98c0e1fb1505291e691df71975fe7b9a23cde7d756aea51072965"
+  },
+  {
+    "file": "2acc0ec1ead226145c62a817c18c8ed49233a283.patch",
+    "url": "https://github.com/yawkat/lz4-java/commit/2acc0ec1ead226145c62a817c18c8ed49233a283.patch",
+    "sha256": "e292e8647cc147e3e993c823b5b4ed24cf88c1efa16c3ff19193d8372b84d593"
+  },
+  {
+    "file": "c8ebf97d504fb34434fda46fc761e8202570e0d8.patch",
+    "url": "https://github.com/yawkat/lz4-java/commit/c8ebf97d504fb34434fda46fc761e8202570e0d8.patch",
+    "sha256": "5e1dd5ee33d5ac480b7ce536ecf1cbf06ed0700cddcce7734f802c580b19ee83"
+  },
+  {
+    "file": "943c6043a292568575e8347af4507d015e802c75.patch",
+    "url": "https://github.com/xerial/snappy-java/commit/943c6043a292568575e8347af4507d015e802c75.patch",
+    "sha256": "69fb9b6ea270d381e2088d02c7ce28896d6835989118965f762f0293adc11956"
+  },
+  {
+    "file": "2d7ca71c087a98f1219fb2d51909f3891c3ce77b.patch",
+    "url": "https://github.com/xerial/snappy-java/commit/2d7ca71c087a98f1219fb2d51909f3891c3ce77b.patch",
+    "sha256": "ab1c6bd3629dd6ca903fa2702c3af1db0c46e62f513f004334f1cc0ece86dacd"
+  },
+  {
+    "file": "guava-parent-33.4.8-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.4.8-jre/guava-parent-33.4.8-jre.pom",
+    "sha256": "a03c5199a1be14443df7fd40ba8673b1c6aae04deef6688ce7d573ea489e3a20",
+    "coordinate": "com.google.guava:guava-parent:33.4.8-jre"
+  },
+  {
+    "file": "guava-parent-33.6.0-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.6.0-jre/guava-parent-33.6.0-jre.pom",
+    "sha256": "374bd31f61b1cf612bee9ab2e4d70bbdf77dd85a49b431f809d4fbdc901f2dd4",
+    "coordinate": "com.google.guava:guava-parent:33.6.0-jre"
+  },
+  {
+    "file": "guava-parent-33.7.1-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.7.1-jre/guava-parent-33.7.1-jre.pom",
+    "sha256": "4015e615a5674755c88d8112d8bbd763e8afde561be76c6790699edb5d5608f5",
+    "coordinate": "com.google.guava:guava-parent:33.7.1-jre"
+  },
+  {
+    "file": "guava-parent-33.7.2-jre.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.7.2-jre/guava-parent-33.7.2-jre.pom",
+    "sha256": "a81570d53c8710355e0216a4405afa93834b17c4cdd0ed9aa8beede3a132bbbe",
+    "coordinate": "com.google.guava:guava-parent:33.7.2-jre"
+  },
+  {
+    "file": "failureaccess-1.0.3.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
+    "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+    "coordinate": "com.google.guava:failureaccess:1.0.3"
+  },
+  {
+    "file": "failureaccess-1.0.3.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.pom",
+    "sha256": "c54beff37f6d42d43e14722d54a522c9ad51ef97fc5b79277e62a3ebf882f3bb",
+    "coordinate": "com.google.guava:failureaccess:1.0.3"
+  },
+  {
+    "file": "listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+    "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+    "coordinate": "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
+  },
+  {
+    "file": "listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.pom",
+    "sha256": "18d4b1db26153d4e55079ce1f76bb1fe05cdb862ef9954a88cbcc4ff38b8679b",
+    "coordinate": "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
+  },
+  {
+    "file": "jspecify-1.0.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar",
+    "sha256": "070d75f261fe4c5b8202508366715f7f2d4660f88c8ef7e6d3575e48c9683b66",
+    "coordinate": "org.jspecify:jspecify:1.0.1"
+  },
+  {
+    "file": "jspecify-1.0.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.pom",
+    "sha256": "55b38bf1a7b1d8ea518cf2f4f3ae9aaa236e61bbf0b6bd31ffb49753a059dd5e",
+    "coordinate": "org.jspecify:jspecify:1.0.1"
+  },
+  {
+    "file": "error_prone_annotations-2.50.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.jar",
+    "sha256": "4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a",
+    "coordinate": "com.google.errorprone:error_prone_annotations:2.50.0"
+  },
+  {
+    "file": "error_prone_annotations-2.50.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.50.0/error_prone_annotations-2.50.0.pom",
+    "sha256": "71a0680d277324bab46bec4b00f6f111c1b794a931d0d8cda79bcb9246982f92",
+    "coordinate": "com.google.errorprone:error_prone_annotations:2.50.0"
+  },
+  {
+    "file": "j2objc-annotations-3.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.jar",
+    "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b",
+    "coordinate": "com.google.j2objc:j2objc-annotations:3.1"
+  },
+  {
+    "file": "j2objc-annotations-3.1.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.1/j2objc-annotations-3.1.pom",
+    "sha256": "14570838500034fc1b47c8205ce1c9d6b255c1ccdd2d1afdcdcbf75e89b24a33",
+    "coordinate": "com.google.j2objc:j2objc-annotations:3.1"
+  },
+  {
+    "file": "slf4j-api-1.7.36.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+    "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0",
+    "coordinate": "org.slf4j:slf4j-api:1.7.36"
+  },
+  {
+    "file": "slf4j-api-1.7.36.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",
+    "sha256": "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684",
+    "coordinate": "org.slf4j:slf4j-api:1.7.36"
+  },
+  {
+    "file": "slf4j-parent-1.7.36.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.7.36/slf4j-parent-1.7.36.pom",
+    "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812",
+    "coordinate": "org.slf4j:slf4j-parent:1.7.36"
+  },
+  {
+    "file": "error_prone_parent-2.50.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.50.0/error_prone_parent-2.50.0.pom",
+    "sha256": "abf45a019db125b50ff55134ec2af94ae3519761038adf0a60b9bd7b4b8b6254",
+    "coordinate": "com.google.errorprone:error_prone_parent:2.50.0"
+  },
+  {
+    "file": "guava-parent-26.0-android.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/26.0-android/guava-parent-26.0-android.pom",
+    "sha256": "f8698ab46ca996ce889c1afc8ca4f25eb8ac6b034dc898d4583742360016cc04",
+    "coordinate": "com.google.guava:guava-parent:26.0-android"
+  },
+  {
+    "file": "oss-parent-9.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/9/oss-parent-9.pom",
+    "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a",
+    "coordinate": "org.sonatype.oss:oss-parent:9"
+  },
+  {
+    "file": "guava-parent-33.4.0-android.pom",
+    "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.4.0-android/guava-parent-33.4.0-android.pom",
+    "sha256": "7220ede61026596fbc720ee4b93246fa2d14f328058532b59ef053de397c7d83",
+    "coordinate": "com.google.guava:guava-parent:33.4.0-android"
+  },
+  {
+    "file": "netty-parent-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.2.18.Final/netty-parent-4.2.18.Final.pom",
+    "sha256": "eaba8a01e7da7b913eacb9158f9529ac1c828f92ceebc5bc125dda913d936855",
+    "coordinate": "io.netty:netty-parent:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-transport-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.2.18.Final/netty-transport-4.2.18.Final.pom",
+    "sha256": "2849f57c33af4d775602bb161fad27bf02fb5cba92e37a7aedb5ebde54480470",
+    "coordinate": "io.netty:netty-transport:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.2.18.Final/netty-codec-4.2.18.Final.pom",
+    "sha256": "17c4a7699fc2a13b70a5c29b21861c7ac03bd82689a82863383cc7e8c0cd0e27",
+    "coordinate": "io.netty:netty-codec:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-handler-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.2.18.Final/netty-handler-4.2.18.Final.pom",
+    "sha256": "f480dd0ad6abce8a4ec64d590bc7f2fa67f0fb4bca18f811a54fa491176f2ddd",
+    "coordinate": "io.netty:netty-handler:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "nifi-amqp-nar-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-amqp-nar/2.12.0/nifi-amqp-nar-2.12.0.pom",
+    "sha256": "01bb158fc8e74eed170d6212e6be73bc1d568f3d0d997e58a0b0cff9b95aae33",
+    "coordinate": "org.apache.nifi:nifi-amqp-nar:2.12.0",
+    "role": "official-consumer-reference"
+  },
+  {
+    "file": "nifi-amqp-processors-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-amqp-processors/2.12.0/nifi-amqp-processors-2.12.0.pom",
+    "sha256": "8ed3a0dd498b67789dacde56d09ab7ab02e7a873dc39568bbfd3776f04c15d16",
+    "coordinate": "org.apache.nifi:nifi-amqp-processors:2.12.0",
+    "role": "official-consumer-reference"
+  },
+  {
+    "file": "netty-buffer-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.2.18.Final/netty-buffer-4.2.18.Final.pom",
+    "sha256": "de9fa8147013f4df75c28bba030fdc62a495a8331314b317efd027a51eab43c9",
+    "coordinate": "io.netty:netty-buffer:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-common-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-common/4.2.18.Final/netty-common-4.2.18.Final.pom",
+    "sha256": "d87194f803e1bdc84bb8d5a982a28b57b99da1d6e71ecc172f52e4cd00e46914",
+    "coordinate": "io.netty:netty-common:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-resolver-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.2.18.Final/netty-resolver-4.2.18.Final.pom",
+    "sha256": "d87958d9f5e2b5e62223f8c7af79870b96b91ebc8fb77b846432989fcb71af78",
+    "coordinate": "io.netty:netty-resolver:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-base-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-base/4.2.18.Final/netty-codec-base-4.2.18.Final.pom",
+    "sha256": "ecf23b1309430129f053e7e0036e3299b6ac2947966b2b52c648f604bfa536da",
+    "coordinate": "io.netty:netty-codec-base:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-compression-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-compression/4.2.18.Final/netty-codec-compression-4.2.18.Final.pom",
+    "sha256": "20970622925f5838e3b32c823ddc495dd5af063c829c1e3041b679fda895e8a3",
+    "coordinate": "io.netty:netty-codec-compression:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-marshalling-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-marshalling/4.2.18.Final/netty-codec-marshalling-4.2.18.Final.pom",
+    "sha256": "1e0fd3d8bcc9c3e39d8b6975c73f19b2821d35ed1e202022652388faca85ade7",
+    "coordinate": "io.netty:netty-codec-marshalling:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-codec-protobuf-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-codec-protobuf/4.2.18.Final/netty-codec-protobuf-4.2.18.Final.pom",
+    "sha256": "c86fd467c09cfe6c48c79479ce009a477e6cb4a96aad2ca6e0eb5a3b0a6dec1c",
+    "coordinate": "io.netty:netty-codec-protobuf:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "netty-transport-native-unix-common-4.2.18.Final.pom",
+    "url": "https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.2.18.Final/netty-transport-native-unix-common-4.2.18.Final.pom",
+    "sha256": "b2dff035c64795f3af1bfe4fc59ead2738e07bb94b284396c8c17f0ad3fb35de",
+    "coordinate": "io.netty:netty-transport-native-unix-common:4.2.18.Final",
+    "role": "candidate-closure"
+  },
+  {
+    "file": "nifi-standard-services-api-nar-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-services-api-nar/2.12.0/nifi-standard-services-api-nar-2.12.0.pom",
+    "sha256": "1fc08aa30432baf34b87c9ab4892c905b52402223bd463cc328b9776a68c586c",
+    "coordinate": "org.apache.nifi:nifi-standard-services-api-nar:2.12.0",
+    "role": "official-consumer-reference"
+  },
+  {
+    "file": "nifi-standard-services-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-services/2.12.0/nifi-standard-services-2.12.0.pom",
+    "sha256": "7f92ee076a6ed5d5a82d3ecfa4d9ed35264546deed051bff3bd85b5e6a1dddd3",
+    "coordinate": "org.apache.nifi:nifi-standard-services:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-standard-services-api-bom-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-services-api-bom/2.12.0/nifi-standard-services-api-bom-2.12.0.pom",
+    "sha256": "563a7e78828ceb4c6a02a8d6ee0b9542977435640648ed55b6bdddb92ad76286",
+    "coordinate": "org.apache.nifi:nifi-standard-services-api-bom:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-extension-bundles-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-extension-bundles/2.12.0/nifi-extension-bundles-2.12.0.pom",
+    "sha256": "5b1d6459c72546eee0a83ebfee863f8919c3a2885a206c6f512b608f498ad694",
+    "coordinate": "org.apache.nifi:nifi-extension-bundles:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-extension-bom-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-extension-bom/2.12.0/nifi-extension-bom-2.12.0.pom",
+    "sha256": "49b5db6eea3753d547d3e376ee50831dc4117a400313f46ea06396b1004d01b2",
+    "coordinate": "org.apache.nifi:nifi-extension-bom:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-bom-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-bom/2.12.0/nifi-bom-2.12.0.pom",
+    "sha256": "00be345b085731b7d64ed06db47ba6cf5349e08ad1acda03db3acbe7fdb7f8d8",
+    "coordinate": "org.apache.nifi:nifi-bom:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi/2.12.0/nifi-2.12.0.pom",
+    "sha256": "71541a6804e33b675c0a3e23d49b8078b42d6feff04d577dfece8d1bbc7bc743",
+    "coordinate": "org.apache.nifi:nifi:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "apache-39.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/apache/39/apache-39.pom",
+    "sha256": "71752ed4c2435a1d8385fe0a4d330f39d04efec89f0d1ba5d1598d39f7397a44",
+    "coordinate": "org.apache:apache:39",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "nifi-amqp-bundle-2.12.0.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-amqp-bundle/2.12.0/nifi-amqp-bundle-2.12.0.pom",
+    "sha256": "02e424d87f55ad8e2ffd80d12fd24e0a8f476fbce593e94388845f6b72a31b43",
+    "coordinate": "org.apache.nifi:nifi-amqp-bundle:2.12.0",
+    "role": "pom-ancestor"
+  },
+  {
+    "file": "bc-jdk18on-bom-1.84.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/bouncycastle/bc-jdk18on-bom/1.84/bc-jdk18on-bom-1.84.pom",
+    "sha256": "f0eee932bfb246b0dfbebc089261364c603dbadead18fc55fd6342c17c56f34c",
+    "coordinate": "org.bouncycastle:bc-jdk18on-bom:1.84",
+    "role": "imported-pom-bom"
+  },
+  {
+    "file": "junit-bom-5.14.4.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.14.4/junit-bom-5.14.4.pom",
+    "coordinate": "org.junit:junit-bom:5.14.4",
+    "sha256": "5706e8f29a0a07f56efbbea4a0670793414194bb8d24d8143ba1e787a2f32856",
+    "role": "inherited-or-imported-pom"
+  },
+  {
+    "file": "slf4j-api-2.0.19.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/2.0.19/slf4j-api-2.0.19.pom",
+    "sha256": "b04a4843eaa29966807cc9508a9f2513fa563d0d0794cb0edd6a8d2c8f4620d0",
+    "coordinate": "org.slf4j:slf4j-api:2.0.19",
+    "role": "nifi-managed-api-reference"
+  },
+  {
+    "file": "slf4j-parent-2.0.19.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/2.0.19/slf4j-parent-2.0.19.pom",
+    "sha256": "452831ef96fbebe64d855dd5c98ec6086d7478a9e568422c8343c6da00b2750d",
+    "coordinate": "org.slf4j:slf4j-parent:2.0.19",
+    "role": "nifi-managed-api-reference"
+  },
+  {
+    "file": "slf4j-bom-2.0.19.pom",
+    "url": "https://repo.maven.apache.org/maven2/org/slf4j/slf4j-bom/2.0.19/slf4j-bom-2.0.19.pom",
+    "sha256": "e14a9ab180f60247f347de369b7a44ccd591d0c47f4d96bc644056c4f83b51a0",
+    "coordinate": "org.slf4j:slf4j-bom:2.0.19",
+    "role": "nifi-managed-api-reference"
+  }
+]

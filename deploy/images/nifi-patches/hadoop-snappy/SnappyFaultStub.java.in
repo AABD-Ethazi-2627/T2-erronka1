@@ -1,0 +1,26 @@
+package org.xerial.snappy;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+/** Synthetic fault injector; no native implementation or library loading. */
+public final class Snappy {
+  private static String failure;
+  private static boolean partial;
+  private static int calls;
+  public static void arm(String kind, boolean writesPartialOutput) {
+    failure=kind; partial=writesPartialOutput; calls=0;
+  }
+  public static int maxCompressedLength(int n) { return 32+n+n/6; }
+  public static int compress(ByteBuffer input, ByteBuffer output) throws IOException {
+    if (++calls==2) {
+      if (partial) { output.clear(); output.put((byte)'S'); }
+      if (failure.equals("io")) throw new IOException("synthetic fault");
+      if (failure.equals("runtime")) throw new IllegalArgumentException("synthetic fault");
+      throw new AssertionError("synthetic fault");
+    }
+    output.limit(output.capacity());
+    for (int i=0;i<64;i++) output.put(output.position()+i,(byte)'S');
+    output.limit(output.position()+64);
+    return 64;
+  }
+}

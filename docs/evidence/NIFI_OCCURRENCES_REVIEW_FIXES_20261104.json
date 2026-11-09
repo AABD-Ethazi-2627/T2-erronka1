@@ -1,0 +1,962 @@
+{
+  "status": "preparation-tested-no-runtime-archive-modified",
+  "source_base": "9634705",
+  "source_dirty_at_test": true,
+  "evidence_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369",
+  "source_sha256": {
+    "scripts/patch_nested_jars.py": "31f95b8befe94a657455db0fdd601db1e004a038f78538d9507482572e097143",
+    "tests/test_patch_nested_jars.py": "9e0f808828124a511044b394648ddb115c7a5d90fabd11531529bd11f2721097",
+    "tests/test_nifi_dependency_guards.py": "83512a0f68e182907bd55254d2eb11e5ed9aa17bc8ce928bfa0fb196344f00b8",
+    "deploy/images/nifi-patches/compatible-libraries/verify.py": "9696c6d7d380baf4cea8936f8f5c47de134ed42ad4c6fb01b52060baa3576b90",
+    "deploy/images/nifi-patches/compatible-libraries/maven_closure.py": "651c05afdc7c438bbbfa5676dd5e4c69f8877bd345ef5435ef29918ac9be2a01",
+    "deploy/images/nifi-patches/compatible-libraries/verify_rabbit.py": "b99b1e6f4fc6c69711dc300083c04a60d29ce430f99d96d096742abac807d5a7",
+    "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java": "43fe0295818cf4239b368bc5649cb157acd6a57ace5c2a76c246e0ed6c7cc65b",
+    "deploy/images/nifi-patches/compatible-libraries/pins.json": "ab7f2a301ffab32002813576043923864ea4cdd5a3afef120b7e48f17f197c46",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-pins.json": "9dee8b0bddce9f359461ff04754ba11db72801208d067eb3b509bcd15d1f8cf9",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-closure-lock.json": "b5cb2471a39b72d7ddb95e8ad3b331264751889904a836920f28a7a580a6a702",
+    "deploy/images/nifi-patches/compatible-libraries/rabbit-tool-pins.json": "25eb33acec17ed138202c75fcfb27a69b5b4a2d196967a0ff5dfc86a990e0378",
+    "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9",
+    "deploy/images/nifi-patches/compatible-libraries/TransportFixture.java": "3c38f7fa0fdd4ddf697630b15f2f714f4e25ab9350f6cb4e58c3689f9dc4568c",
+    "deploy/images/nifi-patches/compatible-libraries/DefaultTransportProbe.java": "1a7743a529ac7774dc69dac47d50b3275af963fb77272cb01f5cb445b3aa5497",
+    "deploy/images/nifi-patches/compatible-libraries/NettyTransportProbe.java": "0006d1dcd6073b0547ac62bf922e814855926e3d78dc398ae7bfe477299f00f0",
+    "deploy/images/nifi-patches/compatible-libraries/test_rabbit.py": "4234b30e00d4c5796ee8c1790fc7a2d79ba47bf7eb8c62da6820df676bb43555",
+    "deploy/images/nifi-patches/compatible-libraries/test_verifier.py": "4849fe1c9c582f0b02ca3191dc008b5f757dfc54ab97924654e3278bce4b1376"
+  },
+  "artifacts_sha256": {
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/source-before.json": "b15d4c1ffde3caa0db7ff1138c5ac3cb4b794e4db9ba6938b728032a16df4fc0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/inventory.stdout": "ba7c03e835502cf3dca880fb53c1809d5493bd6187e8962ac664e1ebcdf819c2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/inventory.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/inventory-execution.json": "9917812cf2c6eeaf32a49c5fc7e09fb79f9dcd07f8a1b5f6489ac2daeb234243",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component-execution.json": "031809195aee9a6142a7477aa5446456d3402088c9fa7446e3c24427343f81b5",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit-execution.json": "d592fddab290015da62b358ba4db4816a7dab4565dea1e8b29dc179fd6407d70",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component.stdout": "d91a8c667e12b4865a52321026c87496538c5aaa8a6ed245690127787f206087",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit.stdout": "dbfb0be67017a1965fd00eb33fce8fa4660d257d1eeda7d6be27ad19e07fa388",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/focused-tests.log": "7b0693d4945e434dea263244545eb44e1ef95f8aa42abb425d611c456da05bc2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/legacy-preimage-regression.log": "30695ffc83d698801d278622e0bef578a4383bd8aef51d57c5512a62265bb3de",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/source-archives-unchanged.json": "3b7b61235e6773ae888c557bc455d8eb3c2d0eb7c6cef9978b6abd458640337a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/classes/LibraryProbe$1.class": "795a5645fa02a5a3133c84854e8a2131c7b85a0d7836340f23f7a74c607fed90",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/classes/LibraryProbe$Action.class": "8ca2bc93a8f767712324a522794a6e3e53dd9c51654898439c96d58ac530f5f9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/classes/LibraryProbe.class": "691635161c502a6a62b962f16ce6bf015dd6e911077c31060f5b06181b621081",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/compile.log": "cb116deb05f8906114d1ce0b7b6b9f955bf9a816a12901462c063941a67d51f3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/component-results.json": "2b2896ef2e881024ff45b76ef3d51a829324d0f21af7f284edb2dc2dc88e30dc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/guava-33.4.8-jre.log": "b2be97c9c797f859f69f9cd9d6b43b6c595d159c7c2f26c709a3a2c0578b361a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/guava-33.6.0-jre.log": "b2be97c9c797f859f69f9cd9d6b43b6c595d159c7c2f26c709a3a2c0578b361a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/guava-33.7.1-jre.log": "39cd0bfe2ad98703f6c9809c8a71d8da27cc30b267e967294d9997cf00b925e0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/guava-33.7.2-jre.log": "fe8ac99dbb1a7dae984867dd3e025f2c71ca811b0be15ee6adf55491c2a4f6a5",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/lz4-1.11.2.log": "d2965c2a13a8faeab8fb97abadbc8e3ceb31e362f371fb5070e17a803f2cbfd5",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/lz4-1.11.4.log": "c7704ce22b2c9b8c9d711a600be8208300763ad296543c4fbfd694243e75a65b",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/rabbit-5.35.0.log": "2852dd5e9c5a85fb05ff7af9177756387e46fed716ceca1af5f1c07c30d4a9d9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/rabbit-5.36.0-comment.log": "f1feb117d2f28271fc8e72e78d7f7f941eb145350bedad012ef1bc2d2917a611",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/rabbit-5.36.0-shortstr.log": "fe331d3939f664d1b9a8c5a4bb6b97c02c093ac86a6eefc2e437090a7e7cf873",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/rabbit-5.37.0.log": "a4f4116e7f1e81c026c075588375c8c7ed661fc610f5c169af03e846dc94214f",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/rabbit-comment-5.35.0.log": "f1feb117d2f28271fc8e72e78d7f7f941eb145350bedad012ef1bc2d2917a611",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/rabbit-comment-5.37.0.log": "bcb325b498c7b67fa279782daa5f350af72abbca6f1194f22270d39d5b1dc9a8",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/replacement-plan.json": "a9836f8f9623edccba515a6010c069cdf84e662af00e84024c5749e078e61982",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/resource-usage.json": "e8bc49147f1e8c81c1ab11244220da82405c06ab5998a7a67af0010353034416",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/snappy-1.1.10.8.log": "7509a1b0da4ea64469e2d50fa291804ef8ce98bd3650acc42bd60f3713e0e7f9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/snappy-1.1.10.9.log": "2cf1ba42616e3d06df0d8906452448866d1a70812c8be3fa2f6cbc79c9322b43",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/source-before.json": "afe611f3ac1e691ab4657a37e81fc254f5ae1b5f4883d57f57611b436dfba98f",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793795867987276344/toolchain.json": "5d189bfd12b4f797284d00cd0a182b4a8eba9dcd27f79144d0f4c1c89d0a7bd9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/bounded-abi.json": "4711c713be172ecc0d83f7ae9a7ef6abd78e3a206e829dff611b52af2050e9b3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/classes/DefaultTransportProbe$Factory.class": "cf9401a0510b1fe592fb012ee08540600087516cd623ba55ffe05f0db8057263",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/classes/DefaultTransportProbe.class": "382f69e5171a5b9289dc7dc8127c09fde3fb01b23651694516e0025fe28eb695",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/classes/NettyTransportProbe$Factory.class": "7cf8da52a83129527dbc52ea474cd6b249471f72ebc67fa43dcdddd04d25e2fb",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/classes/NettyTransportProbe.class": "e5f11ad55bfca28cba3ff972722bbe20af6766b4d3c2fca1501a5551e1798f42",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/classes/TransportFixture$Packet.class": "628ddaa57e7b4b184ac77d7633d8deda7e4713be23b4b08c97768a82b404c104",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/classes/TransportFixture.class": "99c2b45f48cee8be022d0a738c94c2f6a798ac699e2445fe3f0c724d0aeb840e",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/compile-transports.log": "dece862a32d4e989fd23df958ea691a7e58fa3157857498e3049c7e8b6c37239",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/default-no-netty-5.35.0.log": "82f66dd1216450776f39304cab9a69df68ef7a3ce1538b5a9f1428c48b9bb3fd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/default-no-netty-5.37.0.log": "82f66dd1216450776f39304cab9a69df68ef7a3ce1538b5a9f1428c48b9bb3fd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/default-no-netty-nifi-slf4j-2.0.19.log": "f63bf2f505eebb2e1ec8dcc6b10900a008a07cf710217dc6d9d599cf4f2654b6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/effective-required-closure.json": "1c4e00189d317dce465ca305855f62077da3fd5150e0ec5a1b73eaa614a2bdd0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/netty-declared-4.2.18-nifi-slf4j.log": "9ddaf931c71128b70ea479e7b69832b0a0c2d4597c7a1b205b8fd63f60857e0a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/netty-declared-4.2.18.log": "5816f21deaddb44a795e8ad6b64b1a87963a32ffe3c035ea00ac6832e4e37413",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/netty-reference-nar-4.2.17-nifi-slf4j.log": "9ddaf931c71128b70ea479e7b69832b0a0c2d4597c7a1b205b8fd63f60857e0a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/netty-reference-nar-4.2.17.log": "5816f21deaddb44a795e8ad6b64b1a87963a32ffe3c035ea00ac6832e4e37413",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/nifi-consumer-bytecode.log": "d4666b69713848b55e9cabb448780fa22c12c912b627cd6985afe70f53187f51",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-inventory.json": "761411d177e07e0c5ef9316401d2de32573a90b9d993fb2bac390673788eaca9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/amqp-client-5.35.0.jar": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/commons-lang3-3.20.0.jar": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/jackson-annotations-2.22.jar": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/jackson-core-2.22.2.jar": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/jackson-databind-2.22.2.jar": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-buffer-4.2.17.Final.jar": "0d249178ec0204b35a6ad3e5ac8a6c2ecb3eb496c6cdae40b8eca4fa3cb6a0c7",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-codec-4.2.17.Final.jar": "ac76f972446a2f72818441f746d0e73c58519a4687bf680d2b687d7dc5e28e2e",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-codec-base-4.2.17.Final.jar": "3b92bc3b7d231fa6f4889b2b9281cae6b634428b8121fb1b9b5fccba1543d352",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-codec-compression-4.2.17.Final.jar": "425b287a1f36986a5c8edd76379a49decdf99d284f3454f3fa607a073bfb2c18",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-codec-marshalling-4.2.17.Final.jar": "ee5ffed638da6b7e2b4567559bd5f78b18f635cdaa4f3b6d23aa27ccf6cb57c2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-codec-protobuf-4.2.17.Final.jar": "44b2fcc4bc1d6c01edafe6ae6c8a7de7c3c5bad59697a93b6b879a45a78a5387",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-common-4.2.17.Final.jar": "502aae2a6680e9bca3558a3fa098f06dc4d87340b8b714e925a6d690871c092a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-handler-4.2.17.Final.jar": "4df11c7520b556c5e2c84b939182699d48fcbb09e97a6bb5e1c0b6835227d126",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-resolver-4.2.17.Final.jar": "7a4b599b9c0c29a505d3b7311f142df883fb27d0f67495a7cbaf533b0e456623",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-transport-4.2.17.Final.jar": "d2409ce3a735cbab4188d0ea5d82abed823a6a07a8389f49af4a9e1243a562bc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/netty-transport-native-unix-common-4.2.17.Final.jar": "e01aa467b9104de54a57c08c290f70b22e53ec97cf5583c87c112170ef5832cc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-amqp-processors-2.12.0.jar": "3c640ed639588fc2269cb56c475e3d3d06c28a771573a1323660f253dafffb09",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-database-dialect-service-api-2.12.0.jar": "52023cabc1c559ebc302c88f4b9bc01c13d93981346f16302b2eb5295d80b395",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-dbcp-service-api-2.12.0.jar": "d74bfb1d13a3d7d12c871526f56cc419a91072abec3b6582ec04d243e10bc8fb",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-distributed-cache-client-service-api-2.12.0.jar": "81214c48928530ba942ae61d8a408358e61133aa1e55a2b50a84f12653667c42",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-file-resource-service-api-2.12.0.jar": "767fc348d403bfc87ae48aebd0f48e030e9b623142dc5c7368e99db805d75b23",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-http-context-map-api-2.12.0.jar": "e9848e7025429fc8088adfedb2486c8be42ad3f0784237eddcf9cf8260f1b0e4",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-json-schema-api-2.12.0.jar": "c6df6ddb59356c70a197380a7abf1038eec28ce54e3e50648b29a62d44683e9f",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-kerberos-user-service-api-2.12.0.jar": "63199d90d2eb8d3c9eeca41092d536c638b83ba2ba270efe975773b61ab867ff",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-key-service-api-2.12.0.jar": "b8d38fac8278723be3e9a8623dc73bd2ca1530c918b84ffc79f01554be47b472",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-lookup-service-api-2.12.0.jar": "1ec233ac5e0d86f7cbbc6fcb2cd41e4b2ff9aa12bbbd80416b346afcd316eb08",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-oauth2-provider-api-2.12.0.jar": "a198ac8a314e1e095fa97f735013655e81973e288bfab1147ca8d354361b8194",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-proxy-configuration-api-2.12.0.jar": "7c57628319573434defb743fa64ace100694b137bd89070c69344c9b9f8f8822",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-record-2.12.0.jar": "cdd5fa464d1c05eed42c1920b9b7261a6c3e49e85230f4e43b7e3efa8de884ea",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-record-serialization-service-api-2.12.0.jar": "9e600b44a221d1a1a77d0db7b7487c800039722a1f65de2c38b6e1884d3a12bf",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-record-sink-api-2.12.0.jar": "01cfdd5e941be7a6d69c0fd84461046eedb042ce91b1bcc10eb6a6490e11189c",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-schema-registry-service-api-2.12.0.jar": "25422cf7d45ffbb42d638de2125cd0fa92e586bcffb078e0de653c7e97eac448",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-security-kerberos-api-2.12.0.jar": "b482775d819261e20742eef31da1ec61fcb78ea19e8231072ee6ae922f014ea2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-security-utils-api-2.12.0.jar": "2d7a02b0e552346702ffcd27d73da0aa3ee6150582575b55cb32055708dece40",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-ssl-context-service-api-2.12.0.jar": "861358498728860b7266314219dc48bffa9cbc6317c3cfe49f3888e3717c46a0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-utils-2.12.0.jar": "ab1f11b84f074ee8ebde7f35398e1c2f0199282916eab884bfb7ba982cec331e",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-web-client-api-2.12.0.jar": "c26250be3c21c6559b2daab259effd65550c983c3457490997e5278791b218b9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/official-nar-jars/nifi-web-client-provider-api-2.12.0.jar": "f91a7388036276ba0afbd40652caa1ce0a8e2754812a5f7a3ba25f92fb0d8aa7",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/platform-constraints.json": "01c4b66ab7cfa56a032b5612c9206355c9f9cc50394dfb369badf0756c52947c",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/rabbit-transport-result.json": "dbfb0be67017a1965fd00eb33fce8fa4660d257d1eeda7d6be27ad19e07fa388",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793795868145075340/resource-usage.json": "567e4b16d474fde3d25fa2bd8eb9b30169d2081c5cb0981c93021181c10e404d",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/classes/LibraryProbe$1.class": "795a5645fa02a5a3133c84854e8a2131c7b85a0d7836340f23f7a74c607fed90",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/classes/LibraryProbe$Action.class": "8ca2bc93a8f767712324a522794a6e3e53dd9c51654898439c96d58ac530f5f9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/classes/LibraryProbe.class": "691635161c502a6a62b962f16ce6bf015dd6e911077c31060f5b06181b621081",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/compile.log": "cb116deb05f8906114d1ce0b7b6b9f955bf9a816a12901462c063941a67d51f3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/component-results.json": "2b2896ef2e881024ff45b76ef3d51a829324d0f21af7f284edb2dc2dc88e30dc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/guava-33.4.8-jre.log": "b2be97c9c797f859f69f9cd9d6b43b6c595d159c7c2f26c709a3a2c0578b361a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/guava-33.6.0-jre.log": "b2be97c9c797f859f69f9cd9d6b43b6c595d159c7c2f26c709a3a2c0578b361a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/guava-33.7.1-jre.log": "39cd0bfe2ad98703f6c9809c8a71d8da27cc30b267e967294d9997cf00b925e0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/guava-33.7.2-jre.log": "fe8ac99dbb1a7dae984867dd3e025f2c71ca811b0be15ee6adf55491c2a4f6a5",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/lz4-1.11.2.log": "2f56b928403de21d026779c3c4d2f80d832847507fbb4e98f5437885a642a215",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/lz4-1.11.4.log": "ffd57545a8ad7c0e40859df3fe7c29e104ee608e41990af6317da95450448c4f",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/rabbit-5.35.0.log": "2852dd5e9c5a85fb05ff7af9177756387e46fed716ceca1af5f1c07c30d4a9d9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/rabbit-5.36.0-comment.log": "f1feb117d2f28271fc8e72e78d7f7f941eb145350bedad012ef1bc2d2917a611",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/rabbit-5.36.0-shortstr.log": "fe331d3939f664d1b9a8c5a4bb6b97c02c093ac86a6eefc2e437090a7e7cf873",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/rabbit-5.37.0.log": "a4f4116e7f1e81c026c075588375c8c7ed661fc610f5c169af03e846dc94214f",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/rabbit-comment-5.35.0.log": "f1feb117d2f28271fc8e72e78d7f7f941eb145350bedad012ef1bc2d2917a611",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/rabbit-comment-5.37.0.log": "bcb325b498c7b67fa279782daa5f350af72abbca6f1194f22270d39d5b1dc9a8",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/replacement-plan.json": "a9836f8f9623edccba515a6010c069cdf84e662af00e84024c5749e078e61982",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/resource-usage.json": "5aff7d1b1d9ebf6b87f6ffe1cece23c314053c82a56b0cbf41bea8c7cef83415",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/snappy-1.1.10.8.log": "7509a1b0da4ea64469e2d50fa291804ef8ce98bd3650acc42bd60f3713e0e7f9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/snappy-1.1.10.9.log": "2cf1ba42616e3d06df0d8906452448866d1a70812c8be3fa2f6cbc79c9322b43",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/source-before.json": "d4d0b7183d7f20ddc2c86d69ea213395eec6e055498f8cf5b345db28ab03ed09",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/toolchain.json": "4f983d9de9119cbc154d86f6eca13ab3f3a81d297daf1da39d3e528cb956f976",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/bounded-abi.json": "4711c713be172ecc0d83f7ae9a7ef6abd78e3a206e829dff611b52af2050e9b3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/classes/DefaultTransportProbe$Factory.class": "cf9401a0510b1fe592fb012ee08540600087516cd623ba55ffe05f0db8057263",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/classes/DefaultTransportProbe.class": "382f69e5171a5b9289dc7dc8127c09fde3fb01b23651694516e0025fe28eb695",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/classes/NettyTransportProbe$Factory.class": "7cf8da52a83129527dbc52ea474cd6b249471f72ebc67fa43dcdddd04d25e2fb",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/classes/NettyTransportProbe.class": "e5f11ad55bfca28cba3ff972722bbe20af6766b4d3c2fca1501a5551e1798f42",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/classes/TransportFixture$Packet.class": "628ddaa57e7b4b184ac77d7633d8deda7e4713be23b4b08c97768a82b404c104",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/classes/TransportFixture.class": "99c2b45f48cee8be022d0a738c94c2f6a798ac699e2445fe3f0c724d0aeb840e",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/compile-transports.log": "dece862a32d4e989fd23df958ea691a7e58fa3157857498e3049c7e8b6c37239",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/default-no-netty-5.35.0.log": "82f66dd1216450776f39304cab9a69df68ef7a3ce1538b5a9f1428c48b9bb3fd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/default-no-netty-5.37.0.log": "82f66dd1216450776f39304cab9a69df68ef7a3ce1538b5a9f1428c48b9bb3fd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/default-no-netty-nifi-slf4j-2.0.19.log": "f63bf2f505eebb2e1ec8dcc6b10900a008a07cf710217dc6d9d599cf4f2654b6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/effective-required-closure.json": "f8d353de13091473e29577fe9d7c0635cf065ac52252fdf3c8da5ea97b7efdf3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/netty-declared-4.2.18-nifi-slf4j.log": "9ddaf931c71128b70ea479e7b69832b0a0c2d4597c7a1b205b8fd63f60857e0a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/netty-declared-4.2.18.log": "5816f21deaddb44a795e8ad6b64b1a87963a32ffe3c035ea00ac6832e4e37413",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/netty-reference-nar-4.2.17-nifi-slf4j.log": "9ddaf931c71128b70ea479e7b69832b0a0c2d4597c7a1b205b8fd63f60857e0a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/netty-reference-nar-4.2.17.log": "5816f21deaddb44a795e8ad6b64b1a87963a32ffe3c035ea00ac6832e4e37413",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/nifi-consumer-bytecode.log": "d4666b69713848b55e9cabb448780fa22c12c912b627cd6985afe70f53187f51",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-inventory.json": "761411d177e07e0c5ef9316401d2de32573a90b9d993fb2bac390673788eaca9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/amqp-client-5.35.0.jar": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/commons-lang3-3.20.0.jar": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/jackson-annotations-2.22.jar": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/jackson-core-2.22.2.jar": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/jackson-databind-2.22.2.jar": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-buffer-4.2.17.Final.jar": "0d249178ec0204b35a6ad3e5ac8a6c2ecb3eb496c6cdae40b8eca4fa3cb6a0c7",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-codec-4.2.17.Final.jar": "ac76f972446a2f72818441f746d0e73c58519a4687bf680d2b687d7dc5e28e2e",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-codec-base-4.2.17.Final.jar": "3b92bc3b7d231fa6f4889b2b9281cae6b634428b8121fb1b9b5fccba1543d352",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-codec-compression-4.2.17.Final.jar": "425b287a1f36986a5c8edd76379a49decdf99d284f3454f3fa607a073bfb2c18",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-codec-marshalling-4.2.17.Final.jar": "ee5ffed638da6b7e2b4567559bd5f78b18f635cdaa4f3b6d23aa27ccf6cb57c2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-codec-protobuf-4.2.17.Final.jar": "44b2fcc4bc1d6c01edafe6ae6c8a7de7c3c5bad59697a93b6b879a45a78a5387",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-common-4.2.17.Final.jar": "502aae2a6680e9bca3558a3fa098f06dc4d87340b8b714e925a6d690871c092a",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-handler-4.2.17.Final.jar": "4df11c7520b556c5e2c84b939182699d48fcbb09e97a6bb5e1c0b6835227d126",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-resolver-4.2.17.Final.jar": "7a4b599b9c0c29a505d3b7311f142df883fb27d0f67495a7cbaf533b0e456623",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-transport-4.2.17.Final.jar": "d2409ce3a735cbab4188d0ea5d82abed823a6a07a8389f49af4a9e1243a562bc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/netty-transport-native-unix-common-4.2.17.Final.jar": "e01aa467b9104de54a57c08c290f70b22e53ec97cf5583c87c112170ef5832cc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-amqp-processors-2.12.0.jar": "3c640ed639588fc2269cb56c475e3d3d06c28a771573a1323660f253dafffb09",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-database-dialect-service-api-2.12.0.jar": "52023cabc1c559ebc302c88f4b9bc01c13d93981346f16302b2eb5295d80b395",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-dbcp-service-api-2.12.0.jar": "d74bfb1d13a3d7d12c871526f56cc419a91072abec3b6582ec04d243e10bc8fb",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-distributed-cache-client-service-api-2.12.0.jar": "81214c48928530ba942ae61d8a408358e61133aa1e55a2b50a84f12653667c42",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-file-resource-service-api-2.12.0.jar": "767fc348d403bfc87ae48aebd0f48e030e9b623142dc5c7368e99db805d75b23",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-http-context-map-api-2.12.0.jar": "e9848e7025429fc8088adfedb2486c8be42ad3f0784237eddcf9cf8260f1b0e4",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-json-schema-api-2.12.0.jar": "c6df6ddb59356c70a197380a7abf1038eec28ce54e3e50648b29a62d44683e9f",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-kerberos-user-service-api-2.12.0.jar": "63199d90d2eb8d3c9eeca41092d536c638b83ba2ba270efe975773b61ab867ff",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-key-service-api-2.12.0.jar": "b8d38fac8278723be3e9a8623dc73bd2ca1530c918b84ffc79f01554be47b472",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-lookup-service-api-2.12.0.jar": "1ec233ac5e0d86f7cbbc6fcb2cd41e4b2ff9aa12bbbd80416b346afcd316eb08",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-oauth2-provider-api-2.12.0.jar": "a198ac8a314e1e095fa97f735013655e81973e288bfab1147ca8d354361b8194",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-proxy-configuration-api-2.12.0.jar": "7c57628319573434defb743fa64ace100694b137bd89070c69344c9b9f8f8822",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-record-2.12.0.jar": "cdd5fa464d1c05eed42c1920b9b7261a6c3e49e85230f4e43b7e3efa8de884ea",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-record-serialization-service-api-2.12.0.jar": "9e600b44a221d1a1a77d0db7b7487c800039722a1f65de2c38b6e1884d3a12bf",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-record-sink-api-2.12.0.jar": "01cfdd5e941be7a6d69c0fd84461046eedb042ce91b1bcc10eb6a6490e11189c",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-schema-registry-service-api-2.12.0.jar": "25422cf7d45ffbb42d638de2125cd0fa92e586bcffb078e0de653c7e97eac448",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-security-kerberos-api-2.12.0.jar": "b482775d819261e20742eef31da1ec61fcb78ea19e8231072ee6ae922f014ea2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-security-utils-api-2.12.0.jar": "2d7a02b0e552346702ffcd27d73da0aa3ee6150582575b55cb32055708dece40",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-ssl-context-service-api-2.12.0.jar": "861358498728860b7266314219dc48bffa9cbc6317c3cfe49f3888e3717c46a0",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-utils-2.12.0.jar": "ab1f11b84f074ee8ebde7f35398e1c2f0199282916eab884bfb7ba982cec331e",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-web-client-api-2.12.0.jar": "c26250be3c21c6559b2daab259effd65550c983c3457490997e5278791b218b9",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/official-nar-jars/nifi-web-client-provider-api-2.12.0.jar": "f91a7388036276ba0afbd40652caa1ce0a8e2754812a5f7a3ba25f92fb0d8aa7",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/platform-constraints.json": "01c4b66ab7cfa56a032b5612c9206355c9f9cc50394dfb369badf0756c52947c",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/rabbit-transport-result.json": "a24eaf60e27d55c7f0b6d682eb8ebc80d62c1a14cd0067894e065065433b172b",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/resource-usage.json": "bf5e5ddece3a1713f2b3a7814d59972da158a86fd8a581805110d5fe8a3be1fd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component-final-execution.json": "66652901d81bbf822dbc3f9c15bb7404b5110fb6f73eac081c5e13a1cea8b41b",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit-final-execution.json": "32079172a61be4c0cf6b50fad3a15cfbc6d291b157eff6820bc58c55a9eda4ca",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component-final.stdout": "8ab551aa8300eee758f68654538e6911c11cf88b58dea18e8f0e8df19a242b60",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit-final.stdout": "a24eaf60e27d55c7f0b6d682eb8ebc80d62c1a14cd0067894e065065433b172b",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/root-suite.log": "50f96ba6e7b94a1aa8bb2495ae203941be6c391e9ae873d68336d808355ada48"
+  },
+  "inventory": {
+    "occurrences": 2040,
+    "outer_archives": 156,
+    "inventory_sha256": "ce7f5a830051ff4c8da5672573e7005d58e739860e2be86c889cca6285445970",
+    "scope": "all 156 public lib archive files copied from pinned apache/nifi:2.12.0 image; not arbitrary non-archive blobs or entire image filesystem",
+    "source_unchanged": true,
+    "all_report_objects_mapped": true,
+    "objects": [
+      {
+        "package": "at.yawk.lz4:lz4-java",
+        "version": "1.11.2",
+        "occurrence_count": 3,
+        "occurrences": [
+          {
+            "outer": "nifi-aws-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/lz4-java-1.11.2.jar"
+            ],
+            "chain_sha256": [
+              "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+              "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2"
+            ],
+            "sha256": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2"
+          },
+          {
+            "outer": "nifi-kafka-3-service-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/lz4-java-1.11.2.jar"
+            ],
+            "chain_sha256": [
+              "6d0b9e7ebcb3ad080efe36070097b785ec133b1afab81e093cb3a12176480a2a",
+              "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2"
+            ],
+            "sha256": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2"
+          },
+          {
+            "outer": "nifi-kafka-service-aws-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/lz4-java-1.11.2.jar"
+            ],
+            "chain_sha256": [
+              "dd3bfc01580d20386ffb419e09d8798592825be5377b8de0fb77a77a6c609967",
+              "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2"
+            ],
+            "sha256": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2"
+          }
+        ]
+      },
+      {
+        "package": "com.fasterxml.jackson.core:jackson-core",
+        "version": "2.21.2",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+            ],
+            "chain_sha256": [
+              "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+              "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+            ],
+            "sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          }
+        ]
+      },
+      {
+        "package": "com.fasterxml.jackson.core:jackson-core",
+        "version": "2.22.2",
+        "occurrence_count": 7,
+        "occurrences": [
+          {
+            "outer": "bootstrap/jackson-core-2.22.2.jar",
+            "members": [],
+            "chain_sha256": [
+              "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+            ],
+            "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          },
+          {
+            "outer": "nifi-amqp-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+              "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+            ],
+            "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          },
+          {
+            "outer": "nifi-framework-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc",
+              "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+            ],
+            "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          },
+          {
+            "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
+            ],
+            "chain_sha256": [
+              "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+              "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+            ],
+            "sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+          },
+          {
+            "outer": "nifi-kafka-to-s3-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+              "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+            ],
+            "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          },
+          {
+            "outer": "nifi-standard-shared-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-core-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+              "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+            ],
+            "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          },
+          {
+            "outer": "nifi-update-attribute-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+              "WEB-INF/lib/jackson-core-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+              "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093",
+              "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+            ],
+            "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+          }
+        ]
+      },
+      {
+        "package": "com.fasterxml.jackson.core:jackson-databind",
+        "version": "2.21.2",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+            ],
+            "chain_sha256": [
+              "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+              "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+            ],
+            "sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          }
+        ]
+      },
+      {
+        "package": "com.fasterxml.jackson.core:jackson-databind",
+        "version": "2.22.2",
+        "occurrence_count": 7,
+        "occurrences": [
+          {
+            "outer": "bootstrap/jackson-databind-2.22.2.jar",
+            "members": [],
+            "chain_sha256": [
+              "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+            ],
+            "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          },
+          {
+            "outer": "nifi-amqp-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+              "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+            ],
+            "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          },
+          {
+            "outer": "nifi-framework-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc",
+              "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+            ],
+            "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          },
+          {
+            "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/parquet-jackson-1.18.1.jar"
+            ],
+            "chain_sha256": [
+              "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+              "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+            ],
+            "sha256": "1914fed4ed18999ce98ad844aa5d0b09f31027be329ffd82d861d6f7c6f097c7"
+          },
+          {
+            "outer": "nifi-kafka-to-s3-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "69164d20925d230b4cb67cde5b38fa24760259cb33092e5421a757dbceddd2fa",
+              "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+            ],
+            "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          },
+          {
+            "outer": "nifi-standard-shared-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "ea12dc872eb0c73ed80dbba84a58ae6be67432ee7499d3a296573d133811a7da",
+              "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+            ],
+            "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          },
+          {
+            "outer": "nifi-update-attribute-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war",
+              "WEB-INF/lib/jackson-databind-2.22.2.jar"
+            ],
+            "chain_sha256": [
+              "a31f040f7d31ae38b5295d75268ad6511957760fea23e4e562d5f614c49dac28",
+              "e2b36593bf684426646dcd62e4dc08573e0f13787c74b1c21527aabc41c99093",
+              "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+            ],
+            "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+          }
+        ]
+      },
+      {
+        "package": "com.google.guava:guava",
+        "version": "33.4.8-jre",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/hadoop-shaded-guava-1.5.0.jar"
+            ],
+            "chain_sha256": [
+              "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+              "70d5c152622df6fffbf8836af7833215dc7acdd5d9c881af11b8c0fbf30cdc0a"
+            ],
+            "sha256": "70d5c152622df6fffbf8836af7833215dc7acdd5d9c881af11b8c0fbf30cdc0a"
+          }
+        ]
+      },
+      {
+        "package": "com.google.guava:guava",
+        "version": "33.6.0-jre",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-iceberg-shared-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/iceberg-bundled-guava-1.11.0.jar"
+            ],
+            "chain_sha256": [
+              "3096009e01b71cb5f7124bc72a7b35b161a9e9e4f6321eebba48091aeda63b60",
+              "396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1"
+            ],
+            "sha256": "396d48d93ef5735f2ddef0cf9b3d6968ebd67b64b5cfe753d41c429d3f46a2a1"
+          }
+        ]
+      },
+      {
+        "package": "com.google.guava:guava",
+        "version": "33.7.1-jre",
+        "occurrence_count": 7,
+        "occurrences": [
+          {
+            "outer": "nifi-aws-service-api-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "1da44c6d8513c1442be0b3db55ece3eaff56d6c8e727381c38bac344ea2bcf19",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          },
+          {
+            "outer": "nifi-evtx-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "ac32f007dc5296099dcb418bed3a05631efcdf73dcc78e0ad6fcc18ca9fa046e",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          },
+          {
+            "outer": "nifi-framework-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "5d2adadb970c13e0a803c75d0145213122652f18768825fdf0ba795aa04a54fc",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          },
+          {
+            "outer": "nifi-gcp-services-api-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "e72584063582b5a95af45c0836b6122a76a693db9186065b82fa3c4856eaf7be",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          },
+          {
+            "outer": "nifi-opentelemetry-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "8aaf62d5418a5506d2089a6f09de6f3d97e9203c74aaf8ac81a93785410ef529",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          },
+          {
+            "outer": "nifi-protobuf-services-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "416751ab628622c9dc6f4e66af259bd6737af54e309f0cc4f6741bc788844c78",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          },
+          {
+            "outer": "nifi-standard-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/guava-33.7.1-jre.jar"
+            ],
+            "chain_sha256": [
+              "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+              "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+            ],
+            "sha256": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46"
+          }
+        ]
+      },
+      {
+        "package": "com.rabbitmq:amqp-client",
+        "version": "5.35.0",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-amqp-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/amqp-client-5.35.0.jar"
+            ],
+            "chain_sha256": [
+              "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+              "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6"
+            ],
+            "sha256": "c23f1dffc08e2c209035f8d22a48edfd83477b629477e9416a5d25e2c116f3f6"
+          }
+        ]
+      },
+      {
+        "package": "com.squareup.wire:wire-runtime",
+        "version": "5.2.0",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-aws-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/wire-runtime-5.2.0.jar"
+            ],
+            "chain_sha256": [
+              "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+              "a497c6a643234025da2dfe81b73eb3a0197b2c07eec699f1dca727f1aa64a288"
+            ],
+            "sha256": "a497c6a643234025da2dfe81b73eb3a0197b2c07eec699f1dca727f1aa64a288"
+          }
+        ]
+      },
+      {
+        "package": "com.squareup.wire:wire-runtime-jvm",
+        "version": "5.2.0",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-aws-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/wire-runtime-jvm-5.2.0.jar"
+            ],
+            "chain_sha256": [
+              "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+              "c247dbd0dc4f42546090cf203a928400bab5c561746b3ffa2fd3270502d7c5f1"
+            ],
+            "sha256": "c247dbd0dc4f42546090cf203a928400bab5c561746b3ffa2fd3270502d7c5f1"
+          }
+        ]
+      },
+      {
+        "package": "io.opentelemetry:opentelemetry-api",
+        "version": "1.62.0",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-gcp-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/opentelemetry-api-1.62.0.jar"
+            ],
+            "chain_sha256": [
+              "afdb93209e3f0a9eba7f49b5d4245e59706a1641dfee866b4ddf269b92349c4f",
+              "d58143928c049233653e6bf1282ff8a767ebdd5e6a82b3f336158c30e40b431d"
+            ],
+            "sha256": "d58143928c049233653e6bf1282ff8a767ebdd5e6a82b3f336158c30e40b431d"
+          }
+        ]
+      },
+      {
+        "package": "org.xerial.snappy:snappy-java",
+        "version": "1.1.10.8",
+        "occurrence_count": 9,
+        "occurrences": [
+          {
+            "outer": "nifi-avro-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "9c11c3f56a08dd0089b22a976251e82eef5f86b4fd69f5721ba083be57f0330d",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-aws-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-compress-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "4eb2857a3698494fb09c6cbe2c94a9c34c41b397f9e3b2bbe9157b2203c4590a",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-framework-zookeeper-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "c1d5cd945720ea81da0903a8cfd263e08655b3d84ee953c395b40f6123bcd5cf",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-iceberg-parquet-writer-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-kafka-3-service-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "6d0b9e7ebcb3ad080efe36070097b785ec133b1afab81e093cb3a12176480a2a",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-kafka-service-aws-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "dd3bfc01580d20386ffb419e09d8798592825be5377b8de0fb77a77a6c609967",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-record-serialization-services-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "263f71c6a4e463889e0634553fe5cc928be5f7be06eeae8019b5fe388a83e602",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          },
+          {
+            "outer": "nifi-standard-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/snappy-java-1.1.10.8.jar"
+            ],
+            "chain_sha256": [
+              "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+              "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+            ],
+            "sha256": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc"
+          }
+        ]
+      },
+      {
+        "package": "tools.jackson.core:jackson-core",
+        "version": "3.1.2",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+            ],
+            "chain_sha256": [
+              "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+              "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+            ],
+            "sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          }
+        ]
+      },
+      {
+        "package": "tools.jackson.core:jackson-core",
+        "version": "3.2.2",
+        "occurrence_count": 3,
+        "occurrences": [
+          {
+            "outer": "nifi-jolt-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+            ],
+            "chain_sha256": [
+              "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+              "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+            ],
+            "sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+          },
+          {
+            "outer": "nifi-jolt-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+              "WEB-INF/lib/jackson-core-3.2.2.jar"
+            ],
+            "chain_sha256": [
+              "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+              "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298",
+              "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+            ],
+            "sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+          },
+          {
+            "outer": "nifi-standard-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-core-3.2.2.jar"
+            ],
+            "chain_sha256": [
+              "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+              "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+            ],
+            "sha256": "93d9090b8c505b2f942ad85dd5821e8c401bfbafafff11708a3fbe2ef9da18ca"
+          }
+        ]
+      },
+      {
+        "package": "tools.jackson.core:jackson-databind",
+        "version": "3.1.2",
+        "occurrence_count": 1,
+        "occurrences": [
+          {
+            "outer": "nifi-hazelcast-services-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/hazelcast-5.7.0.jar"
+            ],
+            "chain_sha256": [
+              "b734da18bdcc393e410f4a8e018b9a966e4c73cc35e4e584410d6883f6f35e08",
+              "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+            ],
+            "sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33"
+          }
+        ]
+      },
+      {
+        "package": "tools.jackson.core:jackson-databind",
+        "version": "3.2.2",
+        "occurrence_count": 3,
+        "occurrences": [
+          {
+            "outer": "nifi-jolt-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+            ],
+            "chain_sha256": [
+              "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+              "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+            ],
+            "sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+          },
+          {
+            "outer": "nifi-jolt-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war",
+              "WEB-INF/lib/jackson-databind-3.2.2.jar"
+            ],
+            "chain_sha256": [
+              "d373a90145d1c861590973e2bb1599d205863b51abbe29d98896b5b168d98138",
+              "d6312bf50a051b3548daa575493b794db2084023b186e5ee1698e9e2ab9a6298",
+              "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+            ],
+            "sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+          },
+          {
+            "outer": "nifi-standard-nar-2.12.0.nar",
+            "members": [
+              "META-INF/bundled-dependencies/jackson-databind-3.2.2.jar"
+            ],
+            "chain_sha256": [
+              "d2cfa0e1bf666bcbcd82dee3e3cc881f365de140bdbe664446c80cbe0b184be3",
+              "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+            ],
+            "sha256": "d27509f990d990fc779a01f3f612005ff6c67dc3bb0a720f5f4d9b2f5c713401"
+          }
+        ]
+      }
+    ]
+  },
+  "component": {
+    "status": "passed",
+    "plan": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/replacement-plan.json",
+    "results": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/component-results.json",
+    "pins": 90,
+    "execution": {
+      "command": [
+        ".venv/bin/python",
+        "deploy/images/nifi-patches/compatible-libraries/verify.py",
+        "--cache",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component",
+        "--reports",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/artifact-2da877c",
+        "--objects",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/vulnerable-objects.json",
+        "--offline"
+      ],
+      "started_at_unix": 1793796146.9509833,
+      "duration_seconds": 13.52438497543335,
+      "returncode": 0,
+      "max_child_rss_kib": 109392
+    }
+  },
+  "rabbit": {
+    "status": "transport-component-tested-nar-mapping-pending",
+    "configurations": {
+      "default-no-netty-5.35.0": "passed",
+      "default-no-netty-5.37.0": "passed",
+      "default-no-netty-nifi-slf4j-2.0.19": "passed",
+      "declared-4.2.18": "passed",
+      "reference-nar-4.2.17": "passed",
+      "declared-4.2.18-nifi-slf4j": "passed",
+      "reference-nar-4.2.17-nifi-slf4j": "passed"
+    },
+    "execution": {
+      "command": [
+        ".venv/bin/python",
+        "deploy/images/nifi-patches/compatible-libraries/verify_rabbit.py",
+        "--cache",
+        "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit",
+        "--offline"
+      ],
+      "started_at_unix": 1793796160.5687582,
+      "duration_seconds": 19.42559242248535,
+      "returncode": 0,
+      "max_child_rss_kib": 110048
+    },
+    "image_amqp_nar_matches_official": true,
+    "image_amqp_nar_sha256": "4d43e10bcd08776abb1990dab8b7563559acfd5b44f10be63dd6366ec2469ca8",
+    "classloader_acceptance": false
+  },
+  "tests": {
+    "passed": 46,
+    "subtests": 18,
+    "warning": "duplicate ZIP name intentionally constructed by rejection test",
+    "root_suite": {
+      "passed": 935,
+      "skipped": 4,
+      "subtests": 395,
+      "duration_seconds": 73.92,
+      "immutable_head_claim": false,
+      "source_note": "Working-tree suite; an unused bool(missing) expression was removed during execution. Final library/transport proofs separately bind and re-execute the exact final program bytes."
+    }
+  },
+  "latest_ci_f80c37f": {
+    "run": 41816822549,
+    "job": 126529543749,
+    "normal_sha256": "9f15e9c00a4f6f3b5ade9ab538783095e9069a2016745d26c4bc0cfd03cd0c47",
+    "nested_sha256": "bb7b6625fac7d59118dd3e2f2f596aa38445f458ae36f6ddcb17265e722de2c1",
+    "distinct_nested_tuples": 59,
+    "runtime_changed": false
+  },
+  "pending": [
+    "independent review of corrected writer/resolver/transport code",
+    "classloader and consumer checks for each selected occurrence",
+    "final patched-image build and both scans",
+    "NiFi processor/runtime acceptance",
+    "fresh CI and required GitHub review",
+    "CG32 resources, SMB and human/academic acceptance"
+  ],
+  "source_binding": {
+    "original_whole_tree_before": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/source-before.json",
+    "final_component_before": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/proof-1793796147121684874/source-before.json",
+    "final_transport_unchanged_source_check": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/rabbit/proof-1793796160853554004/rabbit-transport-result.json"
+  }
+}

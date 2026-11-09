@@ -1,0 +1,11 @@
+{
+  "filename": "cnc-local-http-20261103.zip",
+  "sha256": "9427d66e685f50ac5696e74c8911420f8266ed4e8a6a592c66ccd900bfda41c6",
+  "bytes": 2711498,
+  "hash_listed_members": 70,
+  "crc": "passed",
+  "all_member_hashes": "passed",
+  "full_restore_hashes": "passed",
+  "source_revision": "0d9752632d2d2f88840ef1fa6c6bf09bae9ca456",
+  "limits": "bounded local HTTP and AppTest; no full Kafka/NiFi pipeline or browser acceptance"
+}

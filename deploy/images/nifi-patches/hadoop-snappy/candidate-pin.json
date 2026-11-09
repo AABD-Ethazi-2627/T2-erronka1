@@ -1,0 +1,7 @@
+{
+  "candidate_sha256": "e2ff7c642f17743f0816a941d93714a0ae413203112e6a7d2e5f5bcf876329d2",
+  "patched_source_sha256": "20d08bad66afebe51b8e661609504114c114a3e32d4d1084d2001acb06f287d6",
+  "replacement_class_sha256": "a2f96d7457257a50d4668bcf685abe3bcd6f36af73b7b5b52e867672f17dc1ed",
+  "original_sha256": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+  "snappy_sha256": "35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d"
+}

@@ -1,0 +1,140 @@
+{
+  "archive": "D:/github/_local/cnc-closeout-20261108/images-01.tar",
+  "archive_bytes": 5510876160,
+  "archive_sha256": "a99933c59371e5a3e8993332c633fa95476f7afbbae890b623bf4173b7e14770",
+  "source_daemon": "eab72f91-4cdf-4d18-a6dc-e1160f26af25",
+  "target_daemon": "8d5884a7-2b08-44af-9dec-ce45915df105",
+  "images": [
+    {
+      "tag": "cnc-closeout-api:final",
+      "source_config_digest": "sha256:df7334e2214dc7131dfa4c099dc4458e082d949fea669395517f0ebec370db51",
+      "target_oci_manifest_digest": "sha256:674872201c8abccad6332e343074b7b5e992478c6544b7aed953f9e5bd30f42a",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 20,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    },
+    {
+      "tag": "cnc-closeout-dashboard:final",
+      "source_config_digest": "sha256:82da949e2a74b6d57d61b7237c8ece7ac5524f66790302c4651f485ca9a2b1bf",
+      "target_oci_manifest_digest": "sha256:5ec617781cb3f9248bbe48338155a3b1c6a00748eb408e9ea7a240571d4b6804",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 17,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    },
+    {
+      "tag": "cnc-closeout-kafka:final",
+      "source_config_digest": "sha256:230b51d51ac5318bdce0a7f1af04d77f119bbf522852aa2fce0b38e152fdcb72",
+      "target_oci_manifest_digest": "sha256:221ef0dd165a6c24956387cfeab00103c0ad61aca108b9b6c336c8db32ec613f",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 13,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    },
+    {
+      "tag": "cnc-closeout-es:final",
+      "source_config_digest": "sha256:0519cbd228bc6fd0446c2946740556372f1da18e8bf690026b04b32aaedf8f99",
+      "target_oci_manifest_digest": "sha256:200dbc1793199afc54e93c09401dff5ec360e6d0de6d071fb06cd36112a9d8d1",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 54,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    },
+    {
+      "tag": "cnc-closeout-kibana:connected",
+      "source_config_digest": "sha256:2d52fc60f9ae3c12453004544bbe77b95472aa0e48bfab9ad546845aa958365c",
+      "target_oci_manifest_digest": "sha256:e987180c06719b0679c9cff32da70fd2085c3f4a65176be5cf4a4cc6b4c22222",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 87,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    },
+    {
+      "tag": "cnc-closeout-filebeat:final",
+      "source_config_digest": "sha256:aabe875ef120f50889e2c3b4043b69b61110c62ac69a885e3b525d92405039c2",
+      "target_oci_manifest_digest": "sha256:aea160cdd18f60e4488a3e4e5099ce79864a78734a91cf787c750d56cf29cefb",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 25,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    },
+    {
+      "tag": "cnc-closeout-nifi:full-source-2",
+      "source_config_digest": "sha256:ce5cc16846311a7638412be695c8bceefb4799c28b62064afb8de0629e492fa5",
+      "target_oci_manifest_digest": "sha256:0a759f2ec32c5c9036051127dd255cf5ba2349c1138def99ed1efe16d41b08f7",
+      "manifest_config_link_verified": true,
+      "manifest_and_config_bytes_rehashed": true,
+      "runtime_config_and_diff_ids_equal": true,
+      "layer_count": 20,
+      "inspect_equal_fields": {
+        "Created": true,
+        "Architecture": true,
+        "Os": true,
+        "Config": true,
+        "RootFS": true
+      }
+    }
+  ],
+  "production_acceptance": false,
+  "additional_archives": [
+    {
+      "archive": "D:/github/_local/cnc-closeout-20261108/filebeat-final.tar",
+      "archive_bytes": 532616192,
+      "archive_sha256": "ed1ab300df887006043d5bc93aee2ea23f64bf35bf9bb34e7fd3210d0cf2cee1",
+      "images": [
+        "cnc-closeout-filebeat:final"
+      ]
+    },
+    {
+      "archive": "D:/github/_local/cnc-closeout-20261108/nifi-final.tar",
+      "archive_bytes": 1734850560,
+      "archive_sha256": "4330e93d4175fb2eaae2f6c46b9a9be358e467ddc038d9b9a62b3ac431079b1a",
+      "images": [
+        "cnc-closeout-nifi:full-source-2"
+      ]
+    }
+  ]
+}

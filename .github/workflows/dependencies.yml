@@ -4,17 +4,26 @@ on:
   schedule:
     - cron: '23 6 * * 1'
   workflow_dispatch:
+    inputs:
+      kibana_bounded:
+        description: Run only the isolated Kibana build and complete scan
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
+  kibana-bounded:
+    if: github.event_name == 'workflow_dispatch' && inputs.kibana_bounded
+    uses: ./.github/workflows/kibana-manual.yml
   lock:
+    if: ${{ !inputs.kibana_bounded }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           version: '0.13.6'
           python-version: '3.11'
@@ -39,13 +48,17 @@ jobs:
           if-no-files-found: error
           retention-days: 30
   images:
+    if: ${{ !inputs.kibana_bounded }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     strategy:
       fail-fast: false
       max-parallel: 2
       matrix:
-        image: [api, kafka, nifi, elasticsearch, kibana, filebeat, python, mock-python, uv, go, haproxy, wolfi]
+        # Kibana hosted builds temporarily disabled at the owner's request.
+        # Local build, scan and restorable image: draft release
+        # kibana-local-021b371-20261108. This is not remote CI coverage.
+        image: [api, dashboard, kafka, nifi, elasticsearch, filebeat, python, mock-python, uv, go, haproxy, wolfi]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -67,13 +80,39 @@ jobs:
           PY
       - name: Build actual runtime image
         if: steps.image.outputs.dockerfile != ''
-        run: docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
+        run: |
+          # Preserve resource measurements in the job log even if the runner
+          # shuts down before an artifact upload can execute.
+          (
+            while true; do
+              date -u
+              df -h / /var/lib/docker
+              free -m
+              sleep 15
+            done
+          ) &
+          resource_monitor=$!
+          trap 'kill "$resource_monitor" 2>/dev/null || true' EXIT
+          docker build --file "${{ steps.image.outputs.dockerfile }}" --tag "${{ steps.image.outputs.ref }}" .
+      - name: Verify offline API query under runtime limits
+        if: matrix.image == 'api'
+        run: python3 -m scripts.check_runtime_image "${{ steps.image.outputs.ref }}"
+      - name: Verify isolated dashboard runtime offline
+        if: matrix.image == 'dashboard'
+        run: |
+          docker run --rm --network none --read-only --memory 512m --tmpfs /tmp:rw,nosuid,nodev,size=64m "${{ steps.image.outputs.ref }}" /usr/bin/python3.12 -c "import streamlit,requests,pandas,pyarrow,matplotlib,seaborn; assert streamlit.__version__ == '1.66.1'"
+      - name: Install checksum-pinned Trivy directly from GitHub Releases
+        run: |
+          sh scripts/install_trivy_release.sh "$RUNNER_TEMP/cnc-trivy-bin"
+          printf '%s\n' "$RUNNER_TEMP/cnc-trivy-bin" >> "$GITHUB_PATH"
       - name: Preserve the complete image scan
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           version: 'v0.76.1'
+          skip-setup-trivy: 'true'
           image-ref: ${{ steps.image.outputs.ref }}
           scanners: vuln
+          list-all-pkgs: true
           format: json
           output: image-scan.json
           timeout: 15m
@@ -81,6 +120,19 @@ jobs:
           ignore-unfixed: false
           severity: UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL
           cache: false
+      - name: Audit actual nested NiFi dependencies
+        if: matrix.image == 'nifi'
+        run: |
+          docker build --file deploy/images/nifi.Dockerfile --target archive-audit --tag cnc-guard-audit:nifi-archives .
+          # This GitHub-hosted job owns its Docker daemon. Intermediate Rust/uv
+          # build cache is no longer needed; retain both tagged images for Trivy.
+          df -h "$RUNNER_TEMP" /var/lib/docker
+          docker system df
+          docker builder prune --all --force
+          docker image inspect --format '{{.Id}}' cnc-guard-audit:nifi cnc-guard-audit:nifi-archives
+          df -h "$RUNNER_TEMP" /var/lib/docker
+          trivy image --scanners vuln --format json --list-all-pkgs --timeout 15m --output nested-archive-scan.json cnc-guard-audit:nifi-archives
+          python3 -m scripts.enforce_image_scan nifi-archives nested-archive-scan.json
       - name: Reject unverified image vulnerabilities
         env:
           IMAGE_KEY: ${{ matrix.image }}
@@ -97,6 +149,8 @@ jobs:
         if: always()
         with:
           name: image-${{ matrix.image }}
-          path: image-scan.json
+          path: |
+            image-scan.json
+            nested-archive-scan.json
           if-no-files-found: error
           retention-days: 30

@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.index.v1+json",
+  "digest": "sha256:5312d37032c079c4937d45ef63758852434351f3b425a3703521fd999837abcf",
+  "size": 10229,
+  "manifests": [
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:6746a50592aad0e8c670c2d97c6b76823599b7f9440a344a33cc5ee7243aefcf",
+      "size": 2101,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "amd64",
+        "org.opencontainers.image.base.digest": "sha256:0f49f331d9212aff11b932863be4eb01cdf962969aa86dab7d1ee21ac6f5f52b",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T18:55:36Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "amd64",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:7f7ac7995ca98c7fd8d0cec05877aaac4a6fe4639a170faf1d1e0c9dae88ab80",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "amd64",
+        "vnd.docker.reference.digest": "sha256:6746a50592aad0e8c670c2d97c6b76823599b7f9440a344a33cc5ee7243aefcf",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:883a84ff647129e3dd1328372f414908c0c4b0114ffb3cd9c04040e196f732f8",
+      "size": 2103,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "arm32v6",
+        "org.opencontainers.image.base.digest": "sha256:24744e247e00c323a54ca655da31f3ac39761bab0247939599b711d7f7a4b0e3",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T18:17:28Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "arm",
+        "os": "linux",
+        "variant": "v6"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:90c3c0ef2af0ce2fd79fdfdeb002129c0c9a5c85ff719412bb02b619c7dfdee2",
+      "size": 567,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "arm32v6",
+        "vnd.docker.reference.digest": "sha256:883a84ff647129e3dd1328372f414908c0c4b0114ffb3cd9c04040e196f732f8",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:02435e5080a9a76a2a6b1a802568c90e9f3c68a66cb9bfad557f4a69d060690f",
+      "size": 2103,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "arm32v7",
+        "org.opencontainers.image.base.digest": "sha256:d8d3f7634d0afcb22c20139248d0255a89cf7807c2e96a7c7ff0ab0217ef557b",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T18:17:00Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "arm",
+        "os": "linux",
+        "variant": "v7"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:47609eb63d5b8758880bb1094de809c5dc989be60c9a8d2706a61270d88ba725",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "arm32v7",
+        "vnd.docker.reference.digest": "sha256:02435e5080a9a76a2a6b1a802568c90e9f3c68a66cb9bfad557f4a69d060690f",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:1ef06972dff964a425693d070c2e63196a7a97a20ce3d4d9a4bdaf83803956c7",
+      "size": 2103,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "arm64v8",
+        "org.opencontainers.image.base.digest": "sha256:1829893486be257df5049ab3b7fc95afbd0fc09d89803cbc580bda1ba5386b29",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T18:51:13Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "arm64",
+        "os": "linux",
+        "variant": "v8"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:cc6d421a9af1dfd71746ac27a44564f0ec239cbe588ff7befe1effc1802ea38a",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "arm64v8",
+        "vnd.docker.reference.digest": "sha256:1ef06972dff964a425693d070c2e63196a7a97a20ce3d4d9a4bdaf83803956c7",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:ab9f428ade90730d3c756e0f64df1e12c0d4ab6e48e89a2ad21992995c50e9b6",
+      "size": 2100,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "i386",
+        "org.opencontainers.image.base.digest": "sha256:55d68c85222dd92297b0f8885354739d89f0dc17fc2f903c49dc1d9c129c3d6a",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T18:15:04Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "386",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:4ce5070744b263d66f2b7fbf89bb71249f0668411f36aec36de83c0cd2536dac",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "i386",
+        "vnd.docker.reference.digest": "sha256:ab9f428ade90730d3c756e0f64df1e12c0d4ab6e48e89a2ad21992995c50e9b6",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:87f73ac4b76601674b645e78633d6a8d9728074b019099b6dcaf7f43a5007f1c",
+      "size": 2103,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "ppc64le",
+        "org.opencontainers.image.base.digest": "sha256:7ed963991a76f3bec91d6d651756adc85b4f15d6c3465c2abb1a5ff8f6660a92",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T21:25:54Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "ppc64le",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:5e03f9f33dbe8b5932d7034a1c9ab1e1993fedc2e8e71a6ec3da0005dc0c5a0a",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "ppc64le",
+        "vnd.docker.reference.digest": "sha256:87f73ac4b76601674b645e78633d6a8d9728074b019099b6dcaf7f43a5007f1c",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:489c54235f7265f3a887fb92b5f798b6795395a41f9a7c0ac9c5c1c3382e9f75",
+      "size": 2103,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "riscv64",
+        "org.opencontainers.image.base.digest": "sha256:4451fbe20381b2a23da80f7a6f68f30f3ff0ff2f4a4a074505a52bd46423fb39",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-10-24T14:10:03Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "riscv64",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:d21ad35cbf8a46bf4d503e91385bd78a7e441944ebb0ae9be8b8586e13915494",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "riscv64",
+        "vnd.docker.reference.digest": "sha256:489c54235f7265f3a887fb92b5f798b6795395a41f9a7c0ac9c5c1c3382e9f75",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:4f4324752ac5833fdf7bb59f0847210313d9eda4f7a72fa3517cd32bc2a9ade7",
+      "size": 2101,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "s390x",
+        "org.opencontainers.image.base.digest": "sha256:5731f4bc195f1efc2807ea6a33a2d2bc0f5abbf5bfb799269129f67560209c22",
+        "org.opencontainers.image.base.name": "alpine:3.24",
+        "org.opencontainers.image.created": "2026-11-05T18:14:04Z",
+        "org.opencontainers.image.revision": "4e7137f24c5acd56b21adc01a6c993e36dc9dcd0",
+        "org.opencontainers.image.source": "https://github.com/docker-library/haproxy.git#4e7137f24c5acd56b21adc01a6c993e36dc9dcd0:3.4/alpine",
+        "org.opencontainers.image.url": "https://hub.docker.com/_/haproxy",
+        "org.opencontainers.image.version": "3.4.7-alpine"
+      },
+      "platform": {
+        "architecture": "s390x",
+        "os": "linux"
+      }
+    },
+    {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:aeef9e0e571da0e8a5f0e15d1974345ee03bf5a6b84a3e8c77db69a009ea6206",
+      "size": 840,
+      "annotations": {
+        "com.docker.official-images.bashbrew.arch": "s390x",
+        "vnd.docker.reference.digest": "sha256:4f4324752ac5833fdf7bb59f0847210313d9eda4f7a72fa3517cd32bc2a9ade7",
+        "vnd.docker.reference.type": "attestation-manifest"
+      },
+      "platform": {
+        "architecture": "unknown",
+        "os": "unknown"
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+local.cncguard:otel-oracle:jar:1
++- io.opentelemetry:opentelemetry-api:jar:1.67.0:compile
+|  \- (io.opentelemetry:opentelemetry-context:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-api-incubator:jar:1.60.1-alpha:compile
+|  \- (io.opentelemetry:opentelemetry-api:jar:1.60.1:compile - omitted for conflict with 1.67.0)
++- io.opentelemetry:opentelemetry-common:jar:1.67.0:compile
++- io.opentelemetry:opentelemetry-context:jar:1.67.0:compile
+|  \- (io.opentelemetry:opentelemetry-common:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry.contrib:opentelemetry-disk-buffering:jar:1.57.0-alpha:compile
+|  +- (io.opentelemetry:opentelemetry-sdk:jar:1.62.0:compile - omitted for conflict with 1.67.0)
+|  \- (io.opentelemetry:opentelemetry-exporter-otlp-common:jar:1.62.0:runtime - omitted for duplicate)
++- io.opentelemetry:opentelemetry-exporter-common:jar:1.62.0:compile
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.62.0:compile - omitted for conflict with 1.67.0)
+|  \- (io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:jar:1.62.0:compile - omitted for conflict with 1.67.0)
++- io.opentelemetry:opentelemetry-exporter-otlp:jar:1.62.0:compile
+|  +- (io.opentelemetry:opentelemetry-sdk-trace:jar:1.62.0:compile - omitted for conflict with 1.67.0)
+|  +- (io.opentelemetry:opentelemetry-sdk-metrics:jar:1.62.0:compile - omitted for conflict with 1.67.0)
+|  +- (io.opentelemetry:opentelemetry-sdk-logs:jar:1.62.0:compile - omitted for conflict with 1.67.0)
+|  +- (io.opentelemetry:opentelemetry-exporter-otlp-common:jar:1.62.0:runtime - omitted for duplicate)
+|  +- (io.opentelemetry:opentelemetry-exporter-sender-okhttp:jar:1.62.0:runtime - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:jar:1.62.0:runtime - omitted for conflict with 1.67.0)
++- io.opentelemetry:opentelemetry-exporter-otlp-common:jar:1.62.0:compile
+|  \- (io.opentelemetry:opentelemetry-exporter-common:jar:1.62.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-exporter-sender-okhttp:jar:1.62.0:compile
+|  +- (io.opentelemetry:opentelemetry-exporter-common:jar:1.62.0:runtime - omitted for duplicate)
+|  +- (io.opentelemetry:opentelemetry-sdk-common:jar:1.62.0:runtime - omitted for conflict with 1.67.0)
+|  \- (com.squareup.okhttp3:okhttp-jvm:jar:5.3.2:runtime - omitted for duplicate)
++- io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:jar:2.26.1:compile
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.60.1:compile - omitted for conflict with 1.67.0)
+|  +- (io.opentelemetry:opentelemetry-api-incubator:jar:1.60.1-alpha:runtime - omitted for duplicate)
+|  \- (io.opentelemetry.semconv:opentelemetry-semconv:jar:1.40.0:runtime - omitted for duplicate)
++- io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-incubator:jar:2.26.1-alpha:compile
+|  +- (io.opentelemetry.semconv:opentelemetry-semconv:jar:1.40.0:compile - omitted for duplicate)
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:jar:2.26.1:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-api-incubator:jar:1.60.1-alpha:compile - omitted for duplicate)
++- io.opentelemetry.instrumentation:opentelemetry-log4j-appender-2.17:jar:2.26.1-alpha:compile
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:jar:2.26.1:compile - omitted for duplicate)
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-incubator:jar:2.26.1-alpha:compile - omitted for duplicate)
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.60.1:compile - omitted for conflict with 1.67.0)
+|  \- (io.opentelemetry.instrumentation:opentelemetry-log4j-context-data-2.17-autoconfigure:jar:2.26.1-alpha:runtime - omitted for duplicate)
++- io.opentelemetry.instrumentation:opentelemetry-log4j-context-data-2.17-autoconfigure:jar:2.26.1-alpha:compile
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:jar:2.26.1:compile - omitted for duplicate)
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-incubator:jar:2.26.1-alpha:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-api:jar:1.60.1:compile - omitted for conflict with 1.67.0)
++- io.opentelemetry.instrumentation:opentelemetry-runtime-telemetry:jar:2.26.1-alpha:compile
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api:jar:2.26.1:compile - omitted for duplicate)
+|  +- (io.opentelemetry.instrumentation:opentelemetry-instrumentation-api-incubator:jar:2.26.1-alpha:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-api:jar:1.60.1:compile - omitted for conflict with 1.67.0)
++- io.opentelemetry:opentelemetry-sdk:jar:1.67.0:compile (scope not updated to compile)
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.67.0:compile - omitted for duplicate)
+|  +- (io.opentelemetry:opentelemetry-sdk-common:jar:1.67.0:compile - omitted for duplicate)
+|  +- (io.opentelemetry:opentelemetry-sdk-trace:jar:1.67.0:compile - omitted for duplicate)
+|  +- (io.opentelemetry:opentelemetry-sdk-metrics:jar:1.67.0:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-sdk-logs:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-sdk-common:jar:1.67.0:compile
+|  \- (io.opentelemetry:opentelemetry-api:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:jar:1.67.0:compile (scope not updated to compile)
+|  \- (io.opentelemetry:opentelemetry-sdk:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-sdk-logs:jar:1.67.0:compile (scope not updated to compile)
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.67.0:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-sdk-common:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-sdk-metrics:jar:1.67.0:compile (scope not updated to compile)
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.67.0:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-sdk-common:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry:opentelemetry-sdk-trace:jar:1.67.0:compile (scope not updated to compile)
+|  +- (io.opentelemetry:opentelemetry-api:jar:1.67.0:compile - omitted for duplicate)
+|  \- (io.opentelemetry:opentelemetry-sdk-common:jar:1.67.0:compile - omitted for duplicate)
++- io.opentelemetry.semconv:opentelemetry-semconv:jar:1.40.0:compile (scope not updated to compile)
++- org.jetbrains.kotlin:kotlin-stdlib:jar:2.2.21:compile
+|  \- org.jetbrains:annotations:jar:13.0:compile
++- com.squareup.okhttp3:okhttp-jvm:jar:5.3.2:compile
+|  +- (com.squareup.okio:okio-jvm:jar:3.16.4:compile - omitted for conflict with 3.17.0)
+|  \- (org.jetbrains.kotlin:kotlin-stdlib:jar:2.2.21:compile - omitted for duplicate)
++- com.squareup.okio:okio-jvm:jar:3.17.0:compile (scope not updated to compile)
+|  \- (org.jetbrains.kotlin:kotlin-stdlib:jar:2.1.21:compile - omitted for conflict with 2.2.21)
+\- com.squareup.wire:wire-runtime-jvm:jar:6.4.0:compile
+   +- (com.squareup.okio:okio-jvm:jar:3.17.0:compile - omitted for duplicate)
+   \- (org.jetbrains.kotlin:kotlin-stdlib:jar:2.0.21:compile - omitted for conflict with 2.2.21)

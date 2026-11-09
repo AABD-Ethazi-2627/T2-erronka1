@@ -1,0 +1,802 @@
+{
+  "captured_utc": "2026-11-08T10:04:37.125255+00:00",
+  "status": "recoverable-WIP-not-acceptance",
+  "branch": "integration/complete-project-20261103",
+  "base_local_head": "fe4dd914ad5c88cdb064d78cafbecc960133d8d3",
+  "remote_before": "6d67bc2ec72d931486174b906654bcc089250cba",
+  "pending_commits": 53,
+  "writer_session": "01a1b096-7a74-71f0-a3d5-6453e43d9f97",
+  "writer_completed_utc": "2026-11-08T10:00:27.846Z",
+  "native_interrupt_result": "live agent path /root/cnc_runtime_closure not found",
+  "shared_owner_pid": 1291571,
+  "signals_sent": [],
+  "completion_hash_matches": {
+    "scripts/nifi_runtime_profile.py": true,
+    "deploy/images/nifi-patches/cnc-runtime/profile.json": true,
+    "deploy/images/nifi-patches/cnc-runtime/README.md": true,
+    "deploy/images/nifi-cnc.Dockerfile": true,
+    "tests/test_nifi_runtime_profile.py": true
+  },
+  "observed_source_drift": [],
+  "backup": "/home/tears/.cache/cnc-recovery/20261108T100059Z",
+  "backup_tar_sha256": "97adfe4183d080af5aa9a74ef112497d3092d98b27519635d737ca9d56ebcfa4",
+  "files": [
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/EsLoaderProbe.java",
+      "size": 6277,
+      "mtime_ns": 1793971536524960484,
+      "sha256": "80b7960d26d55113a9d488f3bcdccd7db6b193c4d4954d5790a60a6e9210badb"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/NEXT_PHASE.md",
+      "size": 5965,
+      "mtime_ns": 1793971450907085796,
+      "sha256": "dcd535eb0cccc482013369182fd2937cc92b6a6d8dabe977bb3b3cf453963968"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/README.md",
+      "size": 8446,
+      "mtime_ns": 1793971607168697644,
+      "sha256": "1aea182d2133477e591b4cad37ecea4fa9ba511c1ec37d2130d60ea5e8d1b3d8"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/StageInputs.java",
+      "size": 4665,
+      "mtime_ns": 1793971304453489013,
+      "sha256": "dbb5692aa31ad1ba8fa14b4733136fa1eb768141001016b61fb4a8ad6f7e6c89"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/inventory-result.json",
+      "size": 2902,
+      "mtime_ns": 1793971516326158824,
+      "sha256": "63b611ffef764a0cde2a0161276191c85af7f6422afe32456bf398383858e224"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/next_phase.py",
+      "size": 3482,
+      "mtime_ns": 1793971516008764257,
+      "sha256": "53b857f56bc640038c2ad93245ec9c2d467357af59fa8922f534dca09b3876a7"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/origin-pins.properties",
+      "size": 2832,
+      "mtime_ns": 1793971516007235008,
+      "sha256": "85edad7557d011103dab7f57024a783c83e1cceaed89dd64543205c42613ceb7"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-api-1.67.0.pom",
+      "size": 1779,
+      "mtime_ns": 1793971190826719255,
+      "sha256": "8b9700627a7ff18a2415fe2b4cfe6f5b33c27e72cf36aa332e82c4b5be016f2b"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-api-incubator-1.60.1-alpha.pom",
+      "size": 1801,
+      "mtime_ns": 1793971190784340455,
+      "sha256": "27fb45d500615f6a720c780325d9c0a9f544c76f45fbf9d1b8b59ed91205700a"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-common-1.67.0.pom",
+      "size": 1563,
+      "mtime_ns": 1793971190870951907,
+      "sha256": "7a1ced21ec6f194488f4c06a8b3d99f286e703e49cb310e1d0bbab89431a9008"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-context-1.67.0.pom",
+      "size": 1798,
+      "mtime_ns": 1793971190915774129,
+      "sha256": "e2788168fd666c5ea181ed6733635b4b8ee56697482585e5725fe8a2ee5e6f39"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-disk-buffering-1.57.0-alpha.pom",
+      "size": 2639,
+      "mtime_ns": 1793971190427073266,
+      "sha256": "888b372e0b651139105a6d532e7c3d4198e857b18b22e29144fddab9053ed0f8"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-exporter-common-1.62.0.pom",
+      "size": 2014,
+      "mtime_ns": 1793971190957568099,
+      "sha256": "11a37162886ef902e03c0d676f6d2a76283c18decb85b6f4e67f30eb648a6967"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-exporter-otlp-1.62.0.pom",
+      "size": 2825,
+      "mtime_ns": 1793971191048310511,
+      "sha256": "0f34debd061f5bb71bbc4a9f1bd08b7edb671db81902375ed70f7fbdb3751b2f"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-exporter-otlp-common-1.62.0.pom",
+      "size": 1818,
+      "mtime_ns": 1793971191006742847,
+      "sha256": "4fdc493859fe57bc678ceb459dde532adf4b2a84c8f6eeb1301b4c22f9f3cb22"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-exporter-sender-okhttp-1.62.0.pom",
+      "size": 2194,
+      "mtime_ns": 1793971191093722854,
+      "sha256": "e40838830e012d4bd8c137a6bc3ed5356ce1947ac9e61a444bf7e021aff571f3"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-instrumentation-api-2.26.1.pom",
+      "size": 3018,
+      "mtime_ns": 1793971190526553501,
+      "sha256": "7bef41a931f89371a0445098c62c3079e5758214cbecc93fd9203f22ab8010a2"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-instrumentation-api-incubator-2.26.1-alpha.pom",
+      "size": 3066,
+      "mtime_ns": 1793971190473372599,
+      "sha256": "096634f849f74b6ef199863a80dd8ed1357fe2e781b7fedf3a1ad0173a83c3b8"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-log4j-appender-2.17-2.26.1-alpha.pom",
+      "size": 3536,
+      "mtime_ns": 1793971190585334418,
+      "sha256": "c15c9d81f9b3933ec74f1a2e179bcdf3b83d4258ac1b1678a3f48515710a55db"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-log4j-context-data-2.17-autoconfigure-2.26.1-alpha.pom",
+      "size": 3094,
+      "mtime_ns": 1793971190630333193,
+      "sha256": "729b0de6562bd11b81c9c74fc77b0015adaef409f74e3ff9a4a4b3c421a25922"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-runtime-telemetry-2.26.1-alpha.pom",
+      "size": 3074,
+      "mtime_ns": 1793971190682253390,
+      "sha256": "5c25cdff3cf5b37e10af557ca295420c9e67650b9197cabac794a0d436bc40bb"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-1.62.0.pom",
+      "size": 2549,
+      "mtime_ns": 1793971191601592343,
+      "sha256": "868ccd347afd902dce8f2fd0b729540dcd9dc471463d924e5812c984b4463767"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-1.67.0.pom",
+      "size": 2549,
+      "mtime_ns": 1793971191648438216,
+      "sha256": "d087dad68feb917f91b963103a0f3ee74a38b064ea6322a1b7c5134a4cec1537"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-common-1.62.0.pom",
+      "size": 1789,
+      "mtime_ns": 1793971191136675917,
+      "sha256": "51022bc77fed54d166f6a7f29ec9e235cadd341cccb70b390cd0534a2607d9d5"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-common-1.67.0.pom",
+      "size": 1789,
+      "mtime_ns": 1793971191185321207,
+      "sha256": "d931fd1a660901f6f300f181ff488d437052dbd58cafb062b2d74e457a3ea1f1"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.pom",
+      "size": 1826,
+      "mtime_ns": 1793971191230459475,
+      "sha256": "97086d950590f90995a5fa9a2eabff89b6369c1cb9c12d8fa4e833779d03816a"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-extension-autoconfigure-spi-1.67.0.pom",
+      "size": 1826,
+      "mtime_ns": 1793971191277553214,
+      "sha256": "e86482f9b820e9ee5a24c72418dd9347b3089131c35661eb7275135f9813c83d"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-logs-1.62.0.pom",
+      "size": 1978,
+      "mtime_ns": 1793971191322493889,
+      "sha256": "7ebb00daf414332e8d52c19ca96356a878956d3072d40c504af0455ff968acda"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-logs-1.67.0.pom",
+      "size": 1978,
+      "mtime_ns": 1793971191367193741,
+      "sha256": "2ece5dd994c3d5d9f354b63d967c00101b3fd7527d7a7d9fee21bdc5c8dc8d6e"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-metrics-1.62.0.pom",
+      "size": 1985,
+      "mtime_ns": 1793971191411739883,
+      "sha256": "d30113f1da2db379c3b6efd15df164d76c564e9a4e68c36518dbbc485b12250d"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-metrics-1.67.0.pom",
+      "size": 1985,
+      "mtime_ns": 1793971191463790677,
+      "sha256": "80c8f251ac62c01aa7c7076a8666045b2a56b2be6e604660d3dd9d2542d70437"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-trace-1.62.0.pom",
+      "size": 1987,
+      "mtime_ns": 1793971191513495864,
+      "sha256": "8f6f114878b36090c65b10bfe575d9e84890fd35da33840d746a38bfbc93b931"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-sdk-trace-1.67.0.pom",
+      "size": 1987,
+      "mtime_ns": 1793971191554724208,
+      "sha256": "bae1f7e83426a9a9defeb08f851f2fb249dc9cd9487098247de009ec92b738f3"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-poms/opentelemetry-semconv-1.40.0.pom",
+      "size": 1665,
+      "mtime_ns": 1793971190734573521,
+      "sha256": "549c13bc5105d6ec413e857df80c01c943cf15e774a889d5bf5d9f723d893cd3"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published-roots.json",
+      "size": 30997,
+      "mtime_ns": 1793971254188549064,
+      "sha256": "85ae5efc2a324c6c59ce57e94d181df16719dbd0b23fdf0b06219a6700d655ae"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/published_metadata.py",
+      "size": 2895,
+      "mtime_ns": 1793971383492348601,
+      "sha256": "0bc18bb3c625ce7fa686299fe988ca740f22ce07edf4e9d56aac385d8abddfb2"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/qualify.py",
+      "size": 12548,
+      "mtime_ns": 1793971383496803915,
+      "sha256": "bca5d83424ec61b756b5f71a431bc3279a467932ba769daee295c93187a92619"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/run_reserved.py",
+      "size": 8343,
+      "mtime_ns": 1793971383494348592,
+      "sha256": "ca63de67a87a530fe7a95b0a823bee0fd1593d0826fa8e950dd9aca9138dea6f"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/seal_inventory.py",
+      "size": 4656,
+      "mtime_ns": 1793971516009856866,
+      "sha256": "5556e67eecfc431f37953c864830a39f053b258ddc68d6a0560aec52726341b8"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/stage_manifest.py",
+      "size": 5017,
+      "mtime_ns": 1793971576520752351,
+      "sha256": "0a813593390f918e1ab0c334b67a0d584c428c9f47b95d8ebb7b5bcfe347c089"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/static_stage.py",
+      "size": 6630,
+      "mtime_ns": 1793971383495348588,
+      "sha256": "bd830eca6053e27bfaf0605b451da1dc3a3a232d261489e80fbde53e5037d638"
+    },
+    {
+      "path": "deploy/images/elasticsearch-patches/otel-qualification/symbolic.py",
+      "size": 5897,
+      "mtime_ns": 1793971383495348588,
+      "sha256": "0262a74dfa11a4675909805070fae2e6a4e5040af6b0d8fe52d1e9a198863ebe"
+    },
+    {
+      "path": "deploy/images/nifi-cnc.Dockerfile",
+      "size": 4855,
+      "mtime_ns": 1794131746720252176,
+      "sha256": "c563066affada2a2b08d1af8b0ed9193841a3f66db6094f3b70d952f65643a8b"
+    },
+    {
+      "path": "deploy/images/nifi-patches/cnc-runtime/README.md",
+      "size": 17794,
+      "mtime_ns": 1794131886025822031,
+      "sha256": "cf9169af268ed784317c422595ece4f69317e5767763193f8339bf993324912d"
+    },
+    {
+      "path": "deploy/images/nifi-patches/cnc-runtime/profile.json",
+      "size": 51874,
+      "mtime_ns": 1794131576244958396,
+      "sha256": "367ccbc4ee73954c0625f7310575a5d3cf73077a8225179f819b8e5bd33df259"
+    },
+    {
+      "path": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "size": 38877,
+      "mtime_ns": 1793971575115524507,
+      "sha256": "e80d8cc0b62381bc6ad0be0d642b7cb92abc65c8866242c9e29cfb8ff52537a7"
+    },
+    {
+      "path": "scripts/nifi_runtime_profile.py",
+      "size": 28309,
+      "mtime_ns": 1794131932398803092,
+      "sha256": "96ccaf812e0a78f0f980a263dd2b13582b8e9eb0ae15043fc7f6326b107615e8"
+    },
+    {
+      "path": "tests/test_es_otel_qualification.py",
+      "size": 14729,
+      "mtime_ns": 1793971576520752351,
+      "sha256": "cc764ecd9071d3ce684abdf2c530357bb878c1c9b6d27522a361bf531c719fcd"
+    },
+    {
+      "path": "tests/test_nifi_runtime_profile.py",
+      "size": 25627,
+      "mtime_ns": 1794131932778803990,
+      "sha256": "aa9fcbb092321d4fa1066c2ad2bbca2e9c41e9b9de3b8e8a7c0f2c3a94cb24ea"
+    }
+  ],
+  "historical_secret_triage": [
+    {
+      "commit": "3275369054199ead02a264be42afb71a54702970",
+      "file": "docs/evidence/BENTEN_VALIDATION_20261106.json",
+      "line": 1340,
+      "rule": "generic-api-key",
+      "key": "event_key",
+      "classification": "event-key-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 18,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/failureaccess-1.0.3.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 19,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/failureaccess.license",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 36,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/javax.annotation-api-1.3.2.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 37,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/javax.annotation-api.license",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 51,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/maven-plugin-api-3.9.11.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 53,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/maven-resolver-api-1.9.24.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 81,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/slf4j-api-1.7.36.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 82,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/slf4j-api.license",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/maven-oracle-inputs.json",
+      "line": 86,
+      "rule": "generic-api-key",
+      "key": "apache-maven-3.9.11/lib/wagon-provider-api-3.5.3.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "a6bddd08126045fbc07a8b4929bf8cb5f0443737",
+      "file": "deploy/images/nifi-patches/otel-qualification/known-inputs.json",
+      "line": 889,
+      "rule": "generic-api-key",
+      "key": "opentelemetry-api-1.62.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "3eb957aa0674631279463ee5e93429b9529c99fc",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 609,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/stock/ParquetJacksonReferenceProbe$Key.class",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "3eb957aa0674631279463ee5e93429b9529c99fc",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 619,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-parquet-reference-parent-20261105-03/candidate/ParquetJacksonReferenceProbe$Key.class",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "c1760804ac330273953ccc4bcfd2244bf628ab75",
+      "file": "deploy/images/nifi-patches/stock-occurrences/consumer-summary.json",
+      "line": 16,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "c1760804ac330273953ccc4bcfd2244bf628ab75",
+      "file": "deploy/images/nifi-patches/stock-occurrences/consumer-summary.json",
+      "line": 17,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "c1760804ac330273953ccc4bcfd2244bf628ab75",
+      "file": "deploy/images/nifi-patches/stock-occurrences/consumer-execution.json",
+      "line": 121,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "c1760804ac330273953ccc4bcfd2244bf628ab75",
+      "file": "deploy/images/nifi-patches/stock-occurrences/consumer-execution.json",
+      "line": 122,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "b5f158c9f4f00cc529bddf233e3a461e60356d69",
+      "file": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json",
+      "line": 130,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/writer-exercise-overlay/opt/nifi/nifi-current/lib/nifi-aws-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "b5f158c9f4f00cc529bddf233e3a461e60356d69",
+      "file": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json",
+      "line": 133,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/review-closure-1793804234684516195/immutable-263c464/writer-exercise-overlay/opt/nifi/nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "b5f158c9f4f00cc529bddf233e3a461e60356d69",
+      "file": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json",
+      "line": 327,
+      "rule": "generic-api-key",
+      "key": "opt/nifi/nifi-current/lib/nifi-aws-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "b5f158c9f4f00cc529bddf233e3a461e60356d69",
+      "file": "docs/evidence/NIFI_SECOND_REVIEW_CORRECTIONS_20261104.json",
+      "line": 330,
+      "rule": "generic-api-key",
+      "key": "opt/nifi/nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 2102,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-benten-vm-20261105/post-review-documentary-20261106-01/nifi-post-review-20261105/oracles-02/oracle-new13/N7d_inherited_mgmt_key_project_artifactId_/cache/parent-api-1.pom",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 2103,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-benten-vm-20261105/post-review-documentary-20261106-01/nifi-post-review-20261105/oracles-02/oracle-new13/N7d_inherited_mgmt_key_project_artifactId_/repo/x/parent-api/1/parent-api-1.pom",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 2289,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-benten-vm-20261105/post-review-documentary-20261106-01/nifi-post-review-20261105/oracles-02/oracle-frozen/rabbit/org/apache/nifi/nifi-standard-services-api-bom/2.12.0/nifi-standard-services-api-bom-2.12.0.pom",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 2291,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-benten-vm-20261105/post-review-documentary-20261106-01/nifi-post-review-20261105/oracles-02/oracle-frozen/rabbit/org/apache/nifi/nifi-standard-services-api-nar/2.12.0/nifi-standard-services-api-nar-2.12.0.pom",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 2299,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-benten-vm-20261105/post-review-documentary-20261106-01/nifi-post-review-20261105/oracles-02/oracle-frozen/rabbit/org/slf4j/slf4j-api/2.0.19/slf4j-api-2.0.19.pom",
+      "classification": "artifact-sha256"
+    },
+    {
+      "commit": "12ca2fa95c0e6e94665dc75923f3cbdaa2468b24",
+      "file": "docs/evidence/INTEGRATION_CANDIDATES_20261105.json",
+      "line": 2300,
+      "rule": "generic-api-key",
+      "key": "/home/tears/.cache/cnc-benten-vm-20261105/post-review-documentary-20261106-01/nifi-post-review-20261105/oracles-02/oracle-frozen/rabbit/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",
+      "classification": "artifact-sha256"
+    }
+  ],
+  "recovered_secret_triage": [
+    {
+      "file": "deploy/images/elasticsearch-patches/otel-qualification/origin-pins.properties",
+      "line": 3,
+      "key": "sha.opentelemetry-api-1.67.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 53,
+      "key": "nifi-current/lib/bootstrap/nifi-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 59,
+      "key": "nifi-current/lib/bootstrap/nifi-security-crypto-key-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 62,
+      "key": "nifi-current/lib/bootstrap/slf4j-api-2.0.19.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 70,
+      "key": "nifi-current/lib/nifi-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 71,
+      "key": "nifi-current/lib/nifi-apicurio-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 76,
+      "key": "nifi-current/lib/nifi-aws-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 78,
+      "key": "nifi-current/lib/nifi-azure-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 80,
+      "key": "nifi-current/lib/nifi-box-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 91,
+      "key": "nifi-current/lib/nifi-dropbox-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 93,
+      "key": "nifi-current/lib/nifi-elasticsearch-client-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 95,
+      "key": "nifi-current/lib/nifi-elasticsearch-restapi-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 101,
+      "key": "nifi-current/lib/nifi-framework-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 106,
+      "key": "nifi-current/lib/nifi-gcp-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 111,
+      "key": "nifi-current/lib/nifi-hashicorp-vault-client-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 113,
+      "key": "nifi-current/lib/nifi-hazelcast-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 124,
+      "key": "nifi-current/lib/nifi-iceberg-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 133,
+      "key": "nifi-current/lib/nifi-kafka-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 141,
+      "key": "nifi-current/lib/nifi-mongodb-client-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 152,
+      "key": "nifi-current/lib/nifi-pgp-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 161,
+      "key": "nifi-current/lib/nifi-python-framework-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 165,
+      "key": "nifi-current/lib/nifi-redis-service-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 170,
+      "key": "nifi-current/lib/nifi-server-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 176,
+      "key": "nifi-current/lib/nifi-smb-client-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 184,
+      "key": "nifi-current/lib/nifi-standard-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 187,
+      "key": "nifi-current/lib/nifi-stateless-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 191,
+      "key": "nifi-current/lib/nifi-websocket-services-api-nar-2.12.0.nar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 197,
+      "key": "nifi-current/lib/slf4j-api-2.0.19.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 199,
+      "key": "nifi-toolkit-current/lib/c2-protocol-component-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 208,
+      "key": "nifi-toolkit-current/lib/hk2-api-4.0.0-M3.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 215,
+      "key": "nifi-toolkit-current/lib/jakarta.activation-api-2.1.4.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 216,
+      "key": "nifi-toolkit-current/lib/jakarta.annotation-api-3.0.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 217,
+      "key": "nifi-toolkit-current/lib/jakarta.inject-api-2.0.1.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 218,
+      "key": "nifi-toolkit-current/lib/jakarta.servlet-api-6.1.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 219,
+      "key": "nifi-toolkit-current/lib/jakarta.validation-api-3.1.1.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 220,
+      "key": "nifi-toolkit-current/lib/jakarta.ws.rs-api-4.0.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 221,
+      "key": "nifi-toolkit-current/lib/jakarta.xml.bind-api-4.0.5.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 236,
+      "key": "nifi-toolkit-current/lib/nifi-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 239,
+      "key": "nifi-toolkit-current/lib/nifi-framework-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 246,
+      "key": "nifi-toolkit-current/lib/nifi-security-kerberos-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 249,
+      "key": "nifi-toolkit-current/lib/nifi-security-utils-api-2.12.0.jar",
+      "classification": "artifact-sha256"
+    },
+    {
+      "file": "deploy/images/nifi-patches/plain-jackson-qualification/assembly-profile.json",
+      "line": 254,
+      "key": "nifi-toolkit-current/lib/slf4j-api-2.0.19.jar",
+      "classification": "artifact-sha256"
+    }
+  ],
+  "validation": {
+    "pytest": "75 passed in 1.49s",
+    "ruff": "All checks passed",
+    "diff_check": "passed",
+    "json_xml": "all recovered JSON and 27 POM XML parse",
+    "published_poms": "27 exact pins and declaration structures verified; no mediation",
+    "seal": "seal_inventory.seal(local inventory-01-verified) equals inventory-result.json",
+    "compact_archive_sha256": "9187e9927179c9c5ec7c5e8530a7f0c1bf3b086aad6e087f460c39fdef6320f1"
+  },
+  "runtime_approved": false,
+  "acceptance": "pending zero findings and existing gates"
+}

@@ -110,17 +110,10 @@ def check(root=ROOT):
                 },
             )
         )
-    optional_image_files = {
-        "docker-compose.lan.yml": {"haproxy": "haproxy"},
-    }
-    for path, expected in optional_image_files.items():
-        file = root / path
-        if not file.is_file():
-            continue
-        text = file.read_text()
-        for service, key in expected.items():
-            if "image: " + images[key] not in text:
-                errors.append(f"{path}: {service} differs from deploy/images.json")
+    if (root / "docker-compose.lan.yml").is_file():
+        text = (root / "docker-compose.lan.yml").read_text()
+        if "dockerfile: " + build_targets["haproxy"] not in text:
+            errors.append("docker-compose.lan.yml: patched HAProxy build differs")
     for path, profiles, expected in specifications:
         actual = compose(root, path, profiles)
         for service, key in expected.items():
@@ -153,6 +146,8 @@ def check(root=ROOT):
         "nifi",
         "python",
         "wolfi",
+        "go",
+        "haproxy",
     ):
         dockerfile = (root / build_targets[key]).read_text()
         if "FROM " + images[key] not in dockerfile:
@@ -174,9 +169,14 @@ def check(root=ROOT):
     uv_version = images["uv"].split(":", 1)[1].split("@", 1)[0]
     if f"/refs/tags/{uv_version}.tar.gz" not in stage:
         errors.append("Patched uv source version differs from upstream inventory")
-    for key in ("api", "nifi", "uv"):
+    for key in ("api", "nifi", "uv", "dashboard"):
         if not (root / build_targets[key]).read_text().startswith(stage):
             errors.append(f"{build_targets[key]}: patched uv source stage differs")
+    if (
+        "FROM " + images["python"]
+        not in (root / build_targets["dashboard"]).read_text()
+    ):
+        errors.append("dashboard/Dockerfile: base differs from pinned inventory")
     return errors
 
 

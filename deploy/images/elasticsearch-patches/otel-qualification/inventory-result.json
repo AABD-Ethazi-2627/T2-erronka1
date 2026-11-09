@@ -1,0 +1,78 @@
+{
+  "executed_source_archive_sha256": "96d9a61b9fec92ba65f110eda7b0764486fc8f4c29f2a3874ccef09fc4461b22",
+  "executed_source_commit": "89f58fc",
+  "executed_source_sha256": {
+    "ModuleAudit.java": "6af0561ada913a775ce0814f769b09e3be2d83044c996bb4d6b884123fa921f8",
+    "README.md": "52a338db955eab2a1244c706add8c048babb9e09e3ca26490b0109197a46a079",
+    "exporter-pom-observation.json": "07395f4928e58c7792c19b829f5be3db5ecb4535029e31667a4a3be1bda48178",
+    "official-sources.json": "d2736657babb46eb934aedde114eba7c6c8d2567efe82c6d141ed07aa47d0786",
+    "qualify.py": "b78ad6ee5982478d9aa5e44662333843c50e5d81507460b9a9cbf7c6e077640f",
+    "reusable-official-pins.json": "aa5b69f3eb487572d6bc4b5a01162e8d02ae88f24affa4c012d48ae8d6044805",
+    "run_reserved.py": "f03dad9d78261cbedea4896ea84eabc13a433fd53deb736c9a353c6b1bba46aa",
+    "symbolic.py": "ca73c3a08e4deae17fac95790435d96ddcdb2a8e62f73a6a900bd0763771f808"
+  },
+  "executed_test_sha256": "af8275efb451b762724a263e29efd033f8197323d4773e329b773951ac4f7037",
+  "image_id": "sha256:2005cca9747e88288e27d18a2f7352486ab0e2a09acd46ee229e9d2bb889ccb4",
+  "java_feature": 27,
+  "loader": [
+    [
+      "elasticsearch-9.5.5.jar",
+      "d2008b1e62f6aab743303fee9519ea32214ee389f608e4a34ab29a651b546221",
+      "e5dc023a6a83979e2fd4a2332fa973413ae02639e53a3fa42e556a36104a1e2b"
+    ]
+  ],
+  "metadata_sha256": {
+    "audit.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "audit.tsv": "32d39b5dedd486afa9458f701dea470e6648758acc832597b707a4e821db7686",
+    "inventory.json": "24cbefa96985750a721ac8ef16d85efd93d42adedf02b98ea837b9b91ac79b5b",
+    "parse.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "run-result.json": "e810eb67e38aac1b7ab86dfe328e7a10504bfc8f4c3aa2ab491dda9442477324"
+  },
+  "missing_evidence": [
+    "published mediated closure",
+    "complete JVM ABI/access",
+    "actual ES loader consumer initialization",
+    "entitlement operation",
+    "APM functional behavior"
+  ],
+  "phase_elapsed_seconds": 2.465,
+  "realms": {
+    "apm": {
+      "bytes": 23292347,
+      "direct_jars": 27,
+      "extended_plugins": [],
+      "module": "org.elasticsearch.telemetry.apm"
+    },
+    "esql-datasource-gcs": {
+      "bytes": 13922264,
+      "direct_jars": 31,
+      "extended_plugins": [
+        "x-pack-esql",
+        "workload-identity"
+      ],
+      "module": null
+    },
+    "repository-gcs": {
+      "bytes": 15263160,
+      "direct_jars": 35,
+      "extended_plugins": [],
+      "module": null
+    }
+  },
+  "replacement": null,
+  "required_graph_closure": [
+    "apm",
+    "esql-datasource-gcs",
+    "lang-painless",
+    "repository-gcs",
+    "workload-identity",
+    "x-pack-autoscaling",
+    "x-pack-core",
+    "x-pack-encryption",
+    "x-pack-esql",
+    "x-pack-esql-core",
+    "x-pack-ml"
+  ],
+  "runtime_approved": false,
+  "status": "measured-inventory-only"
+}

@@ -1,0 +1,1086 @@
+{
+  "actual_nar_roots": 119,
+  "blockers": [
+    "Jetty/WAR delegation and actual WAR consumer runtime unverified",
+    "full JVM verifier/dynamic linkage/reflection/provider coverage is not proven",
+    "full family guard, independent QA and actual rebuilt image gates remain mandatory",
+    "actual NiFi/server/SMB/end-to-end and human acceptance not performed",
+    "79 static contexts remain incomplete, including AWS MemoryError under the preserved 400MiB address-space bound",
+    "preexisting optional Jackson references remain unresolved; zero new regressions does not establish full linkage",
+    "static consumer pass excludes internals of the four changed target JARs; their complete internal dynamic linkage is not established"
+  ],
+  "completed_static_contexts": 13,
+  "current_source_status": "review corrections prepared; actual VM denominator/AWS/Java rerun pending",
+  "failed_static_phases": [
+    {
+      "path": "analyze-jdk21-6-execution.json",
+      "returncode": 1,
+      "sha256": "9c6be862de3f98b482cd9f56b5bbeb04ce2027c539aa52d4b2185cdc9ae1049f"
+    }
+  ],
+  "frozen_tools": {
+    "NarProbe.java": "7dae299f862a044225a2776cf7caf2143bbc464bc6245ffc2cf76a40d469fec8",
+    "README.md": "07853197b46ac3adfffe01d6d0a55b31c98f25504b62c072b4e9ca053104e7c9",
+    "qualify.py": "ed4aa7e8badbb76f2e9a6bd78c12f8b2fe8f4c71bd593bf637394928ed8e285f",
+    "run_phase.py": "fc96e28095fb57a378641b15c7d1932b6c517f7669734da77e720b0e46826cb2",
+    "runtime.py": "08472a335bb5a4f0de59d7c13e6158e16b68624a67ee595c0755db7abfeeddc0"
+  },
+  "frozen_tools_scope": "Original runtime05 and 13-context static campaign, before parent lint cleanup; these hashes remain historical.",
+  "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "inventory_sha256": "7bec2a9e8abedb456a9617d59a090e744ac0bb48465cff820f8d6f3bbbb00c6e",
+  "occurrences": 16,
+  "parent_lint_repeat": {
+    "changes": "unused imports removed, imports sorted, equivalent startswith tuple, explicit default check=False, executable shebang modes",
+    "elapsed_seconds": 20.616,
+    "export_files_verified": 53,
+    "export_sha256": "1d56fa74407c3938a967f0b1a6cde6de89c329f74e841ce7215195ffa9461fcd",
+    "jvm_runs": 12,
+    "portable_tests_passed": 7,
+    "proof": "/home/tears/.cache/cnc-plain-jackson-qualification-20261106/parent-lint-repeat/runtime-lint-execution.json",
+    "proof_sha256": "5295180d245a4fc628b4521ea09b8e325650479e5124b4b0cddb95d0cf702f94",
+    "ruff": "passed",
+    "runtime_approved": false,
+    "runtime_exit": 0,
+    "source_sha256": {
+      "NarProbe.java": "7dae299f862a044225a2776cf7caf2143bbc464bc6245ffc2cf76a40d469fec8",
+      "qualify.py": "af69d73a0024d7b370f0bfb678a0891f9b1afff07da11e046255b2ba0e7a439e",
+      "run_phase.py": "1c8e689b28e00b8ddd0f704dbcfa70bba7b7c039ee616cd82b69b8cc8024525f",
+      "runtime.py": "05538ee7f46c2088a9e483bcb68c0b623f397d1c994f93da10e717955e3f2d9c"
+    },
+    "static_campaign_repeated": false
+  },
+  "pending_static_contexts": [
+    {
+      "id": "nifi-aws-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-aws-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-azure-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-azure-services-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-box-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-box-services-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-box-services-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-cdc-mysql-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-cipher-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-confluent-platform-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-dropbox-processors-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-dropbox-services-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-dropbox-services-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-elasticsearch-client-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-elasticsearch-client-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-elasticsearch-restapi-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-enrich-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-flow-registry-client-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-framework-kubernetes-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-framework-zookeeper-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-gcp-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-gcp-services-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-geohash-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-github-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-gitlab-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-groovyx-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-hashicorp-vault-client-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-hashicorp-vault-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-hubspot-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-aws-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-azure-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-gcs-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-parquet-writer-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-processors-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-rest-catalog-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-iceberg-shared-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-jms-cf-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-jms-processors-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-jslt-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-kafka-3-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-kafka-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-kafka-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-kafka-service-aws-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-key-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-lookup-services-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-mongodb-client-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-mongodb-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-mongodb-services-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-mqtt-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-network-processors-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-oauth2-provider-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-opentelemetry-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-pgp-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-pgp-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-pgp-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-poi-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-protobuf-services-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-py4j-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-record-serialization-services-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-record-sink-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-redis-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-redis-service-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-registry-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-salesforce-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-scripting-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-server-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-shopify-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-site-to-site-reporting-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-slack-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-smb-client-api-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-smb-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-smb-smbj-client-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-snmp-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-splunk-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-standard-content-viewer-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-web-client-provider-service-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-zendesk-nar",
+      "war": null
+    },
+    {
+      "id": "nifi-zendesk-services-nar",
+      "war": null
+    }
+  ],
+  "pins_sha256": "771b132e506e9c15d0625e20dd4d7ea22338c095ea38925b1d371f1a86444149",
+  "promotion_eligible": false,
+  "replacement": null,
+  "required_contexts": 92,
+  "review_corrections_prepared": {
+    "code_source_checks": "prepared, unverified in VM",
+    "historical_92_not_closure_criterion": true,
+    "implicit_Jetty_parent": true,
+    "inherited_WAR_and_WEB_INF_classes": true,
+    "inventory_schema": 2,
+    "original_854": "preexisting absent references, optionality unproven",
+    "portable_tests": 33,
+    "processor_Class_forName": "loading only, initialization false",
+    "promotion_eligible": false,
+    "ruff": "passed",
+    "runtime_approved": false,
+    "source_sha256": {
+      "NarProbe.java": "e1cbd82a02c48f504db071f37df84c4fa1480101ba5f4e3cb0e3caee9226ba14",
+      "qualify.py": "fe3168853bedbb81b7232635e70207688e82df13394dceec7ec3f55452d82923",
+      "run_phase.py": "e22348da8cb11b28ae080cccd0bfd174a5601882e80165946bf921e2a5eaca3b",
+      "runtime.py": "7e1fb8aef8aae07c96e2b56c86229809cee30b835cf00ba1590c94d163d9e3c7"
+    }
+  },
+  "runtime_approved": false,
+  "runtime_component_result_sha256": "8baa37e6d40a49309bd801cfbf45695d6c93cc76bbc9550b0fa2e7b17c7273fa",
+  "runtime_java_commands": [
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-version"
+      ],
+      "label": "actual-image-java-version",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/jdk/bin/javac",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:ActiveProcessorCount=1",
+        "-version"
+      ],
+      "label": "javac-version",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/jdk/bin/javac",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:ActiveProcessorCount=1",
+        "-d",
+        "/proof/runtime-05/classes",
+        "-cp",
+        "/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "/proof/tools/NarProbe.java"
+      ],
+      "label": "compile-nar-probe",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/jdk/bin/javap",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:ActiveProcessorCount=1",
+        "-p",
+        "-c",
+        "-cp",
+        "/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "org.apache.nifi.nar.NarClassLoader",
+        "org.apache.nifi.nar.AbstractNativeLibHandlingClassLoader"
+      ],
+      "label": "actual-nar-bytecode",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/jdk/bin/javac",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:ActiveProcessorCount=1",
+        "-d",
+        "/proof/runtime-05/probe2",
+        "-cp",
+        "/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/amqp-client-5.35.0.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-resolver-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-handler-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-codec-marshalling-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-codec-base-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-common-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-codec-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/jackson-databind-2.22.2.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/jackson-core-2.22.2.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/nifi-amqp-processors-2.12.0.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-transport-native-unix-common-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-codec-compression-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-buffer-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-transport-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/jackson-annotations-2.22.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/netty-codec-protobuf-4.2.17.Final.jar:/proof/runtime-05/old/nifi-amqp-nar/NAR-INF/bundled-dependencies/commons-lang3-3.20.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-record-sink-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-http-context-map-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-json-schema-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-kerberos-user-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-security-utils-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-web-client-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-distributed-cache-client-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-ssl-context-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-web-client-provider-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-utils-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-security-kerberos-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-record-serialization-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-lookup-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-oauth2-provider-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-database-dialect-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-file-resource-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-proxy-configuration-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-record-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-dbcp-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-key-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-schema-registry-service-api-2.12.0.jar",
+        "/proof/runtime-05/Jackson2Probe.java"
+      ],
+      "label": "compile-jackson2",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/jdk/bin/javac",
+        "-J-Xmx256m",
+        "-J-XX:MaxMetaspaceSize=96m",
+        "-J-XX:MaxDirectMemorySize=32m",
+        "-J-XX:ActiveProcessorCount=1",
+        "-d",
+        "/proof/runtime-05/probe3",
+        "-cp",
+        "/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/reactive-streams-1.0.4.jar:/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/nifi-jolt-processors-2.12.0.jar:/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/jolt-community-core-1.3.0.jar:/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/json-community-utils-1.3.0.jar:/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/jackson-databind-3.2.2.jar:/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/jackson-core-3.2.2.jar:/proof/runtime-05/old/nifi-jolt-nar/NAR-INF/bundled-dependencies/nifi-jolt-utils-2.12.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-resolver-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/okio-3.18.2.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-handler-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/bcpkix-jdk18on-1.85.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-marshalling-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/caffeine-3.2.4.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/zstd-jni-1.5.7-16.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/annotations-26.1.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/commons-codec-1.22.1.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-base-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/checker-qual-4.2.3.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-common-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/bcprov-jdk18on-1.85.2.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/commons-compress-1.28.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/commons-net-3.13.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/bcutil-jdk18on-1.85.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/commons-text-1.15.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/jackson-databind-2.22.2.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/jackson-core-2.22.2.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/commons-io-2.22.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/okhttp-5.5.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/kotlin-stdlib-2.4.20.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/jspecify-1.0.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-transport-native-unix-common-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-compression-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-buffer-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-http-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/kotlin-stdlib-jdk7-2.4.20.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-transport-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/jackson-annotations-2.22.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/okio-jvm-3.18.2.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-protobuf-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/error_prone_annotations-2.50.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/kotlin-stdlib-jdk8-2.4.20.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/netty-codec-http2-4.2.17.Final.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/okhttp-jvm-5.5.0.jar:/proof/runtime-05/old/nifi-standard-shared-nar/NAR-INF/bundled-dependencies/commons-lang3-3.20.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-record-sink-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-http-context-map-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-json-schema-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-kerberos-user-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-security-utils-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-web-client-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-distributed-cache-client-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-ssl-context-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-web-client-provider-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-utils-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-security-kerberos-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-record-serialization-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-lookup-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-oauth2-provider-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-database-dialect-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-file-resource-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-proxy-configuration-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-record-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-dbcp-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-key-service-api-2.12.0.jar:/proof/runtime-05/old/nifi-standard-services-api-nar/NAR-INF/bundled-dependencies/nifi-schema-registry-service-api-2.12.0.jar",
+        "/proof/runtime-05/Jackson3Probe.java"
+      ],
+      "label": "compile-jackson3",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/old",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-amqp-nar",
+        "2",
+        "2.22.2",
+        "false",
+        "org.apache.nifi.amqp.processors.ConsumeAMQP"
+      ],
+      "label": "old-nifi-amqp-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/old",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-framework-nar",
+        "2",
+        "2.22.2",
+        "false"
+      ],
+      "label": "old-nifi-framework-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/old",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-jolt-nar",
+        "3",
+        "3.2.2",
+        "false",
+        "org.apache.nifi.processors.jolt.JoltTransformJSON"
+      ],
+      "label": "old-nifi-jolt-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/old",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-kafka-to-s3-nar",
+        "2",
+        "2.22.2",
+        "false"
+      ],
+      "label": "old-nifi-kafka-to-s3-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/old",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-standard-nar",
+        "3",
+        "3.2.2",
+        "false"
+      ],
+      "label": "old-nifi-standard-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/old",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-standard-shared-nar",
+        "2",
+        "2.22.2",
+        "false"
+      ],
+      "label": "old-nifi-standard-shared-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/fixed",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-amqp-nar",
+        "2",
+        "2.22.3",
+        "true",
+        "org.apache.nifi.amqp.processors.ConsumeAMQP"
+      ],
+      "label": "fixed-nifi-amqp-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/fixed",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-framework-nar",
+        "2",
+        "2.22.3",
+        "true"
+      ],
+      "label": "fixed-nifi-framework-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/fixed",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-jolt-nar",
+        "3",
+        "3.2.3",
+        "true",
+        "org.apache.nifi.processors.jolt.JoltTransformJSON"
+      ],
+      "label": "fixed-nifi-jolt-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/fixed",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-kafka-to-s3-nar",
+        "2",
+        "2.22.3",
+        "true"
+      ],
+      "label": "fixed-nifi-kafka-to-s3-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/fixed",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-standard-nar",
+        "3",
+        "3.2.3",
+        "true"
+      ],
+      "label": "fixed-nifi-standard-nar",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/usr/lib/jvm/java-21-openjdk/bin/java",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=96m",
+        "-XX:MaxDirectMemorySize=32m",
+        "-XX:ActiveProcessorCount=1",
+        "-cp",
+        "/proof/runtime-05/classes:/proof/runtime-05/top/jul-to-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-runtime-2.12.0.jar:/proof/runtime-05/top/nifi-properties-2.12.0.jar:/proof/runtime-05/top/log4j-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-framework-api-2.12.0.jar:/proof/runtime-05/top/nifi-nar-utils-2.12.0.jar:/proof/runtime-05/top/nifi-server-api-2.12.0.jar:/proof/runtime-05/top/slf4j-api-2.0.19.jar:/proof/runtime-05/top/nifi-stateless-api-2.12.0.jar:/proof/runtime-05/top/nifi-property-utils-2.12.0.jar:/proof/runtime-05/top/jcl-over-slf4j-2.0.19.jar:/proof/runtime-05/top/nifi-per-process-group-logging-2.12.0.jar:/proof/runtime-05/top/nifi-api-2.12.0.jar:/proof/runtime-05/top/logback-core-1.6.3.jar:/proof/runtime-05/top/logback-classic-1.6.3.jar:/proof/runtime-05/top/nifi-python-framework-api-2.12.0.jar",
+        "NarProbe",
+        "/proof/runtime-05/fixed",
+        "/proof/runtime-05/parents.tsv",
+        "nifi-standard-shared-nar",
+        "2",
+        "2.22.3",
+        "true"
+      ],
+      "label": "fixed-nifi-standard-shared-nar",
+      "returncode": 0
+    }
+  ],
+  "source_before_after_verified_contexts": 13,
+  "static_context_results": [
+    {
+      "abi_changes": 43,
+      "classes_scanned": 16497,
+      "context": {
+        "id": "nifi-airtable-nar",
+        "war": null
+      },
+      "external_target_consumers": 2,
+      "negative_controls": [
+        {
+          "consumer": "org/apache/nifi/processors/airtable/parse/AirtableRecordSetFlowFileWriter",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/core/JsonGenerator",
+            "",
+            "",
+            "descriptor"
+          ],
+          "removed_owner": "com/fasterxml/jackson/core/JsonGenerator"
+        }
+      ],
+      "path": "analyze-jdk21-0.json",
+      "preexisting_unresolved": 0,
+      "references": 672,
+      "regressions": 0,
+      "sha256": "cc6e558c8de9ed1d83054e993dbcf7556691aa3ae9a131b2cccf210c369ee526",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 35
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 4692,
+      "context": {
+        "id": "nifi-amqp-nar",
+        "war": null
+      },
+      "external_target_consumers": 3,
+      "negative_controls": [
+        {
+          "consumer": "com/rabbitmq/client/impl/OAuth2ClientCredentialsGrantCredentialsProvider$JacksonTokenLookup",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/databind/ObjectMapper",
+            "<init>",
+            "()V",
+            "method"
+          ],
+          "removed_owner": "com/fasterxml/jackson/databind/ObjectMapper"
+        }
+      ],
+      "path": "analyze-jdk21-1.json",
+      "preexisting_unresolved": 0,
+      "references": 689,
+      "regressions": 0,
+      "sha256": "e86d3040f79eee98caffdf5ddac84ea62c60d521d5b6fd36de60f3b69e78d729",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 52
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 17024,
+      "context": {
+        "id": "nifi-apicurio-nar",
+        "war": null
+      },
+      "external_target_consumers": 43,
+      "negative_controls": [
+        {
+          "consumer": "org/apache/avro/JsonProperties$1",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/databind/JsonNode",
+            "",
+            "",
+            "descriptor"
+          ],
+          "removed_owner": "com/fasterxml/jackson/databind/JsonNode"
+        }
+      ],
+      "path": "analyze-jdk21-2.json",
+      "preexisting_unresolved": 0,
+      "references": 1076,
+      "regressions": 0,
+      "sha256": "7a30a9cec8cc7eacd2d855bdf043c8f7e54cad1dd5baaae676a6ff29a6bc7079",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 430
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 48645,
+      "context": {
+        "id": "nifi-framework-nar",
+        "war": null
+      },
+      "external_target_consumers": 194,
+      "negative_controls": [
+        {
+          "consumer": "org/glassfish/jersey/jackson/JacksonFeature",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/core/StreamReadConstraints",
+            "",
+            "",
+            "class"
+          ],
+          "removed_owner": "com/fasterxml/jackson/core/StreamReadConstraints"
+        }
+      ],
+      "path": "analyze-jdk21-25.json",
+      "preexisting_unresolved": 767,
+      "references": 7095,
+      "regressions": 0,
+      "sha256": "2d1b9317866b3c710dcaaa95f5f812f5bde984d7dc79852d875e723bb292f2ac",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 5135
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 16687,
+      "context": {
+        "id": "nifi-atlassian-nar",
+        "war": null
+      },
+      "external_target_consumers": 10,
+      "negative_controls": [
+        {
+          "consumer": "org/apache/nifi/atlassian/bitbucket/BitbucketRepositoryClient",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/databind/JsonNode",
+            "iterator",
+            "()Ljava/util/Iterator;",
+            "method"
+          ],
+          "removed_owner": "com/fasterxml/jackson/databind/JsonNode"
+        }
+      ],
+      "path": "analyze-jdk21-3.json",
+      "preexisting_unresolved": 0,
+      "references": 1151,
+      "regressions": 0,
+      "sha256": "7443a3e0c36066c12a0171a281a745c8cb80ce9765b906c5be0b2905517e5ff7",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 440
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 17010,
+      "context": {
+        "id": "nifi-avro-nar",
+        "war": null
+      },
+      "external_target_consumers": 41,
+      "negative_controls": [
+        {
+          "consumer": "org/apache/avro/JsonProperties$1",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/databind/JsonNode",
+            "",
+            "",
+            "descriptor"
+          ],
+          "removed_owner": "com/fasterxml/jackson/databind/JsonNode"
+        }
+      ],
+      "path": "analyze-jdk21-4.json",
+      "preexisting_unresolved": 0,
+      "references": 1065,
+      "regressions": 0,
+      "sha256": "807fde9459f3f0cd94c32e582702c33b8cf04fa018c3ec5052ba395a8426bcff",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 419
+    },
+    {
+      "abi_changes": 50,
+      "classes_scanned": 16718,
+      "context": {
+        "id": "nifi-jolt-nar",
+        "war": null
+      },
+      "external_target_consumers": 6,
+      "negative_controls": [
+        {
+          "consumer": "io/joltcommunity/jolt/JsonUtil",
+          "detected": "missing-class",
+          "reference": [
+            "tools/jackson/core/type/TypeReference",
+            "",
+            "",
+            "descriptor"
+          ],
+          "removed_owner": "tools/jackson/core/type/TypeReference"
+        }
+      ],
+      "path": "analyze-jdk21-46.json",
+      "preexisting_unresolved": 0,
+      "references": 721,
+      "regressions": 0,
+      "sha256": "1d36ac7efe073179f7e491eeb15905dc886d53baef02e0ceee2407ac6fe8e9c4",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 84
+    },
+    {
+      "abi_changes": 50,
+      "classes_scanned": 20868,
+      "context": {
+        "id": "nifi-jolt-nar",
+        "war": "META-INF/bundled-dependencies/nifi-jolt-transform-json-ui-2.12.0.war"
+      },
+      "external_target_consumers": 44,
+      "negative_controls": [
+        {
+          "consumer": "io/joltcommunity/jolt/JsonUtil",
+          "detected": "missing-class",
+          "reference": [
+            "tools/jackson/core/type/TypeReference",
+            "",
+            "",
+            "descriptor"
+          ],
+          "removed_owner": "tools/jackson/core/type/TypeReference"
+        }
+      ],
+      "path": "analyze-jdk21-47.json",
+      "preexisting_unresolved": 0,
+      "references": 1757,
+      "regressions": 0,
+      "sha256": "19e35f22663ed0ab6dd0b1237e60548e9ee63d8e199e8769811cf0e9e119a929",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 1045
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 31863,
+      "context": {
+        "id": "nifi-aws-kinesis-nar",
+        "war": null
+      },
+      "external_target_consumers": 0,
+      "negative_controls": [],
+      "path": "analyze-jdk21-5.json",
+      "preexisting_unresolved": 0,
+      "references": 637,
+      "regressions": 0,
+      "sha256": "5bb36e3ac8b6085263072ee46508c000c59504fc9c82177ccc12cfe7f6bd5fc0",
+      "status": "component-static-no-external-target-consumer-evidence",
+      "target_references": 0
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 2111,
+      "context": {
+        "id": "nifi-kafka-to-s3-nar",
+        "war": null
+      },
+      "external_target_consumers": 1,
+      "negative_controls": [
+        {
+          "consumer": "org/apache/nifi/components/connector/util/VersionedFlowUtils",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/databind/ObjectMapper",
+            "readValue",
+            "(Ljava/io/InputStream;Ljava/lang/Class;)Ljava/lang/Object;",
+            "method"
+          ],
+          "removed_owner": "com/fasterxml/jackson/databind/ObjectMapper"
+        }
+      ],
+      "path": "analyze-jdk21-53.json",
+      "preexisting_unresolved": 0,
+      "references": 645,
+      "regressions": 0,
+      "sha256": "7545041926881f891dad8d3e58b81d5507498db1f16391467a095af8adebbcfb",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 8
+    },
+    {
+      "abi_changes": 50,
+      "classes_scanned": 42306,
+      "context": {
+        "id": "nifi-standard-nar",
+        "war": null
+      },
+      "external_target_consumers": 206,
+      "negative_controls": [
+        {
+          "consumer": "org/apache/calcite/avatica/remote/JsonHandler",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/databind/ObjectMapper",
+            "readValue",
+            "(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;",
+            "method"
+          ],
+          "removed_owner": "com/fasterxml/jackson/databind/ObjectMapper"
+        }
+      ],
+      "path": "analyze-jdk21-86.json",
+      "preexisting_unresolved": 0,
+      "references": 3255,
+      "regressions": 0,
+      "sha256": "38ffd4e5a9ef9edcf4a685fcfa4a223dd9ae1b506a4e5d67364d60a26a185209",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 2305
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 16488,
+      "context": {
+        "id": "nifi-standard-shared-nar",
+        "war": null
+      },
+      "external_target_consumers": 0,
+      "negative_controls": [],
+      "path": "analyze-jdk21-87.json",
+      "preexisting_unresolved": 0,
+      "references": 637,
+      "regressions": 0,
+      "sha256": "9654dad101fbb68d5b8efa5a8b1f468408b7210fed83f554f4753293135efc28",
+      "status": "component-static-no-external-target-consumer-evidence",
+      "target_references": 0
+    },
+    {
+      "abi_changes": 43,
+      "classes_scanned": 16963,
+      "context": {
+        "id": "nifi-update-attribute-nar",
+        "war": "META-INF/bundled-dependencies/nifi-update-attribute-ui-2.12.0.war"
+      },
+      "external_target_consumers": 38,
+      "negative_controls": [
+        {
+          "consumer": "org/glassfish/jersey/jackson/JacksonFeature",
+          "detected": "missing-class",
+          "reference": [
+            "com/fasterxml/jackson/core/StreamReadConstraints",
+            "",
+            "",
+            "class"
+          ],
+          "removed_owner": "com/fasterxml/jackson/core/StreamReadConstraints"
+        }
+      ],
+      "path": "analyze-jdk21-88.json",
+      "preexisting_unresolved": 87,
+      "references": 1616,
+      "regressions": 0,
+      "sha256": "b3831294529e2203a0fc7ee0849933c6bc65c529ab33e2de167a8a78949bef7f",
+      "status": "component-static-no-new-reference-regressions",
+      "target_references": 904
+    }
+  ]
+}

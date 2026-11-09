@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "daemon_id": "eab72f91-4cdf-4d18-a6dc-e1160f26af25",
+  "runtime_image": "cnc-closeout-nifi:full-source-2",
+  "audit_image": "cnc-closeout-nifi:full-source-exact-audit-2",
+  "runtime_image_id": "sha256:ce5cc16846311a7638412be695c8bceefb4799c28b62064afb8de0629e492fa5",
+  "audit_image_id": "sha256:2ec71eb0a8a3ed80e685dce1ec3f5bbf0eeeba719c2db155f30d421950bb3a24",
+  "runtime_approved": false,
+  "external_integrations_verified": false,
+  "processor_scheduling_verified": false,
+  "cache": "C:\\Users\\unaiu\\.cache\\cnc-closeout-nifi-20261108",
+  "reports": {
+    "nifi": {
+      "file": "full-source-normal-scan-2.json",
+      "sha256": "f4d5b0d2c87218413c4d9dce876d02d5e31c55add0849023a81db5596c14f535",
+      "image_id": "sha256:ce5cc16846311a7638412be695c8bceefb4799c28b62064afb8de0629e492fa5",
+      "gate": [],
+      "findings": 0
+    },
+    "nifi-archive-audit": {
+      "file": "full-source-nested-scan-2.json",
+      "sha256": "61a1d2e061f496eba514f265895b8ef21c2b67f0238e73b890ffc90b92752081",
+      "image_id": "sha256:2ec71eb0a8a3ed80e685dce1ec3f5bbf0eeeba719c2db155f30d421950bb3a24",
+      "gate": [],
+      "findings": 0
+    }
+  },
+  "bounded_component_proofs": {
+    "wire6-installed-2": {
+      "commands.json": "cf9a31d63325902b29d733aeb35b273cc2bf9fade12e433b463def2e484fb2b7"
+    },
+    "installed-families-source-2": {
+      "compile-launcher.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compile-nifi-amqp-nar.log": "74520f7785d182ecfcee8c42a0c050484734cf9c74614b75c48174b539c845c8",
+      "compile-nifi-gcp-nar.log": "e9379fa7b06c4cc942a37c38711fbfd87ef77a6a4c407f6576dd5263fea498b8",
+      "copy-launcher.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy-origins-nifi-amqp-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy-origins-nifi-gcp-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy-parents.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy-probes-nifi-amqp-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy-probes-nifi-gcp-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-amqp-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-gcp-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-gcp-services-api-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-jetty-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-standard-services-api-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-standard-shared-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mkdir.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run-nifi-amqp-nar.log": "58959457c9cb217ae49d0c30f869da78b9a6b5ca42c2c1b335fced5b95232e59",
+      "run-nifi-gcp-nar.log": "269158caa677957fef8d31c854d97db171285370476f751d5470d7fa3c81591a",
+      "commands.json": "b956ec07a427a56e98f12fa01cc91508ca4538a44d2ae0b39eda0246c8372e4c"
+    },
+    "hadoop-installed-2": {
+      "compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "copy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-iceberg-parquet-writer-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-iceberg-service-api-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-iceberg-shared-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-standard-services-api-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "link-nifi-standard-shared-nar.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origins.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run.log": "065a3c3707e8066f6303effd8bc08406712fe291a2608ac948e60e9fd1d391b2",
+      "sha-hadoop-common-3.5.0-cnc-capacity-v3.jar.log": "3389fa5ddefebeba3cb41f97bfcc53f8a0e05359e902e8124a64cb0f275c31ed",
+      "sha-snappy-java-1.1.10.12.jar.log": "d284b2f556a2fb88ee6a95874909562994bf2785831b6e0db457d9686994b9b4",
+      "commands.json": "3729497647c30f3e8ccc268f724fa6b78989a4aff362fb4156aea6a28cc2ee98"
+    },
+    "libraries-installed-3": {
+      "compile.log": "2a052497ba9137671e7a235ec86d36a3e262fdf638eefb5faf895bdedd38bb9d",
+      "copy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origins.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run.log": "580693b0c8b63ecded51c4d435542d0c1e6303d75eaaf1f91f7b6e9603ff754b",
+      "sha-guava-33.7.2-jre.jar.log": "42434ffb19f9623d93e343610247e49dcc642de54c5b0328f3d4c5fd0391e95d",
+      "sha-lz4-java-1.11.4.jar.log": "c384c3f7f203252d4b8834d52353c1fc1f5734b18db034cabb6efc7bffbdf2c9",
+      "sha-snappy-java-1.1.10.12.jar.log": "6827206a162e9d452cf059b82425be5797cefd10fdb85f217d933a251f1a9111",
+      "commands.json": "5c90d97b4fae6f5b17d660c39f30f7119d4f9e1f65efb7a4cd5e8096075796dc"
+    },
+    "wrapper-content-source-2": {
+      "result.json": "4f80afc67fb71609dbedba312a6236cae39b14843674739cfd238a749e3a8a60"
+    }
+  },
+  "api_checks": {
+    "about": 200,
+    "controller-service-types": 200,
+    "invalid_credentials": 400,
+    "login": 201,
+    "parameter-provider-types": 200,
+    "processor-types": 200,
+    "registry-types": 200,
+    "reporting-task-types": 200,
+    "ui": 200,
+    "unauthenticated_api": 401
+  },
+  "registry_preservation": {
+    "controller-service-types": {
+      "baseline": 125,
+      "candidate": 125,
+      "missing": [],
+      "added": []
+    },
+    "parameter-provider-types": {
+      "baseline": 8,
+      "candidate": 8,
+      "missing": [],
+      "added": []
+    },
+    "processor-types": {
+      "baseline": 294,
+      "candidate": 294,
+      "missing": [],
+      "added": []
+    },
+    "registry-types": {
+      "baseline": 5,
+      "candidate": 5,
+      "missing": [],
+      "added": []
+    },
+    "reporting-task-types": {
+      "baseline": 10,
+      "candidate": 10,
+      "missing": [],
+      "added": []
+    }
+  },
+  "evidence_files": {
+    "full-source-build-4.log": "e8f4ee2304d0aff504175e6c0951e117a7af317515c041402c844b80de48c5a6",
+    "full-source-audit-build-2.log": "c287a3995b96bfeb8c2df8cb5b6cdfc9614dcc4b7fe880873e2f98fce37b8e4e",
+    "full-source-smoke-proof-2/cold-api-smoke.json": "53716827a7c48e061bbcd86e18942a76c307b3ef4eaf7c14cdac24098a789a79",
+    "snappy-official-1/hadoop-original.log": "2a5f096293d7b17ea748e64d0a92e2569752e892ac04bdeabbeba506b17fa041",
+    "snappy-official-1/hadoop-capacity.log": "168d207e8796ec69f56ea26cf037db258ee4b0a873ffabdbcb2e359dd3c0e347"
+  },
+  "nar_preservation": {
+    "original": 119,
+    "candidate": 119,
+    "missing": []
+  },
+  "startup_error_count": 0
+}

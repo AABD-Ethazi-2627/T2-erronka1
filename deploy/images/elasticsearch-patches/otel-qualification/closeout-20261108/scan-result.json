@@ -1,0 +1,13 @@
+{
+  "artifact": "sha256:0519cbd228bc6fd0446c2946740556372f1da18e8bf690026b04b32aaedf8f99",
+  "image_id": "sha256:0519cbd228bc6fd0446c2946740556372f1da18e8bf690026b04b32aaedf8f99",
+  "trivy": "0.76.1",
+  "all_severities": true,
+  "ignore_unfixed": false,
+  "results": 2,
+  "packages": 1026,
+  "findings": [],
+  "gate": [],
+  "scan_sha256": "535f6269d381a185d54be5ee6d6d2d6b43aeafa9ae1fe4666c8f4177fa52ffd6",
+  "scan_bytes": 709398
+}

@@ -1,80 +1,119 @@
-"""Datuen analisi teknikorako osagai osagarriak."""
+"""Committed history and separately identified offline binary evaluation."""
 
+import altair as alt
+import pandas as pd
 import streamlit as st
+from read_contracts import COLUMNS, evaluation, history
 
-OSASUN_MAILAK = (
-    ("CNC-004", 19, "#E86B86"),
-    ("CNC-012", 44, "#E5AE50"),
-    ("CNC-021", 72, "#4DA9DC"),
-    ("CNC-035", 96, "#49BE98"),
-)
+from orriak.shared import measurements, pause_live_reads
 
 
-def osasun_mailak_erakutsi() -> None:
-    """Makinen osasun-mailak barra horizontaletan erakutsi."""
-    errenkadak = []
-    for makina_id, ehunekoa, kolorea in OSASUN_MAILAK:
-        errenkadak.append(f"""
-        <div class="health-row">
-            <div class="health-row-heading">
-                <strong>{makina_id}</strong><span>{ehunekoa}%</span>
-            </div>
-            <div class="health-track" role="progressbar"
-                 aria-label="{makina_id} osasun-maila"
-                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="{ehunekoa}">
-                <div class="health-fill"
-                     style="width:{ehunekoa}%; background:{kolorea};"></div>
-            </div>
-        </div>
-        """)
+def show_history(payload, aggregate=False):
+    try:
+        frame = history(payload)
+    except (ValueError, TypeError, OverflowError):
+        st.warning(
+            "Historikoa degradatuta edo ez dago eskuragarri; ez da simulaziorik sortu."
+        )
+        return
+    st.caption(
+        "Predikzio-erregistroen batezbesteko agregatuak · n eta azken erreferentzia metadatuetan"
+        if aggregate
+        else "Artxibatutako predikzio-erregistroen banakako laginak"
+    )
+    st.write("Estaldura, UTC mugak eta jatorria")
+    st.json(frame.attrs["metadata"])
+    if frame.empty:
+        st.info("Ez dago laginik leiho honetan.")
+    else:
+        st.dataframe(frame, hide_index=True)
+        for name in COLUMNS[1:]:
+            if frame[name].notna().any():
+                st.altair_chart(
+                    alt.Chart(frame)
+                    .mark_line(point=True)
+                    .encode(
+                        x=alt.X("Ordua:T", title="Ordua (UTC)"),
+                        y=alt.Y(f"{name}:Q", title=name),
+                        tooltip=["Ordua:T", alt.Tooltip(f"{name}:Q")],
+                    ),
+                    width="stretch",
+                )
+    if frame.attrs["next_cursor"]:
+        st.warning("Orrialde partziala · emaitza gehiago daude; ez da leiho osoa.")
 
-    st.html(f"""
-    <style>
-    .machine-health-panel {{
-        margin-top: 12px;
-        padding: 14px 16px 13px;
-        border: 1px solid var(--panel-border, #D9E3EC);
-        border-radius: 14px;
-        background: var(--panel-bg, #FFFFFF);
-        color: var(--main-text, #142A40);
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }}
-    .health-panel-heading {{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 11px;
-    }}
-    .health-panel-heading strong {{ font-size: 15px; font-weight: 800; }}
-    .health-panel-heading span {{
-        color: var(--secondary-text, #526578); font-size: 10px;
-    }}
-    .health-row {{ margin-bottom: 10px; }}
-    .health-row:last-child {{ margin-bottom: 0; }}
-    .health-row-heading {{
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 5px;
-        font-size: 11px;
-    }}
-    .health-row-heading strong,
-    .health-row-heading span {{
-        color: var(--main-text, #142A40); font-weight: 800;
-    }}
-    .health-track {{
-        width: 100%;
-        height: 8px;
-        overflow: hidden;
-        border-radius: 999px;
-        background: var(--surface-muted, #E6ECF1);
-    }}
-    .health-fill {{ height: 100%; border-radius: inherit; }}
-    </style>
-    <section class="machine-health-panel">
-        <div class="health-panel-heading">
-            <strong>Makinen osasun-maila</strong><span>Adibidea</span>
-        </div>
-        {''.join(errenkadak)}
-    </section>
-    """)
+
+def datuak_erakutsi(machine, fetch, mode):
+    st.subheader(f"{machine['id']} · Datuak")
+    with st.expander("Azken neurketa", expanded=True):
+        measurements(machine)
+    label = (
+        st.segmented_control(
+            "Denbora-tartea",
+            ["Laginak", "Astea", "Hilabetea", "Sei hilabete"],
+            default="Astea",
+            key="datuak_periodoa",
+        )
+        or "Astea"
+    )
+    if mode == "api":
+        if label == "Laginak":
+            # Page explicitly; never imply that the first 1000 rows cover all events.
+            cursor_key = f"history_cursor_{machine['id']}"
+            cursor = st.session_state.get(cursor_key)
+            from urllib.parse import urlencode
+
+            endpoint = f"historikoa/{machine['id']}" + (
+                "?" + urlencode({"cursor": cursor}) if cursor else ""
+            )
+            payload = fetch(endpoint)
+            show_history(payload)
+            next_cursor = (
+                payload.get("next_cursor") if isinstance(payload, dict) else None
+            )
+            if next_cursor or cursor:
+                st.caption("Orrialdez aldatzean zuzeneko eguneratzea pausatzen da.")
+            if next_cursor and st.button(
+                "Hurrengo orrialdea", on_click=pause_live_reads
+            ):
+                st.session_state[cursor_key] = next_cursor
+                st.rerun()
+            if cursor and st.button("Lehen orrialdea", on_click=pause_live_reads):
+                st.session_state.pop(cursor_key, None)
+                st.rerun()
+        else:
+            periods = fetch(f"historikoa/{machine['id']}/periodoak")
+            key = {
+                "Astea": "astea",
+                "Hilabetea": "hilabetea",
+                "Sei hilabete": "sei_hilabete",
+            }[label]
+            show_history(
+                periods.get(key) if isinstance(periods, dict) else None, aggregate=True
+            )
+    else:
+        st.info("DEMO · ez dago artxibatutako historiko egiaztaturik.")
+    st.subheader("Ereduaren offline ebaluazio bitarra")
+    st.caption(
+        "Ez da makinaren uneko ebaluazioa. Balidazioa atalasea doitzeko berrerabili bada, ez da azken testa."
+    )
+    payload = fetch("model-evaluation") if mode == "api" else None
+    try:
+        metrics = evaluation(payload, machine)
+    except (ValueError, TypeError, OverflowError) as exc:
+        st.info(f"Ebaluazioa ez dago eskuragarri edo bateraezina da: {exc}")
+        return
+    st.write("Ebaluatutako erabaki-araua:", payload["decision_rule"])
+    st.write("Ebaluazioaren atalase zehatza:", payload["threshold"])
+    st.caption(
+        "AVISO / CRITICA aurkezpen-mailak (0.15 / 0.70) bereiziak dira; matrize hau goiko erabaki-arauari dagokio."
+    )
+    st.dataframe(
+        pd.DataFrame(
+            payload["confusion_matrix"],
+            index=["Benetakoa 0", "Benetakoa 1"],
+            columns=["Inferitua 0", "Inferitua 1"],
+        )
+    )
+    st.write(metrics)
+    st.json(payload)

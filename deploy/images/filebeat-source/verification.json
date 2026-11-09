@@ -1,0 +1,26 @@
+{
+  "commit": "b80bf8464fba72f582cefed91dd72909eb7116db",
+  "tree": "e004fcc3964d3da18e5d77973613d0559cc073b8",
+  "github_commit_signature_verified": true,
+  "files": 16101,
+  "bytes": 315311074,
+  "archive_sha256": "9174fdb1d926bcf717e90338538746026a44216a4690a5a1b8a30015ebe1b2bf",
+  "all_git_blobs_and_executable_modes_match": true,
+  "official_gitattributes_crlf_to_git_lf": [
+    "auditbeat/make.bat",
+    "filebeat/make.bat",
+    "heartbeat/make.bat",
+    "libbeat/make.bat",
+    "make.bat",
+    "metricbeat/make.bat",
+    "packetbeat/make.bat",
+    "winlogbeat/make.bat",
+    "x-pack/filebeat/make.bat",
+    "x-pack/heartbeat/make.bat",
+    "x-pack/winlogbeat/make.bat"
+  ],
+  "extracted_files": 0,
+  "archive_url": "https://codeload.github.com/elastic/beats/tar.gz/b80bf8464fba72f582cefed91dd72909eb7116db",
+  "tree_url": "https://api.github.com/repos/elastic/beats/git/trees/e004fcc3964d3da18e5d77973613d0559cc073b8?recursive=1",
+  "previous_tag_download_not_accepted": true
+}

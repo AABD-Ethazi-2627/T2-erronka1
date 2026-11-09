@@ -1,0 +1,38 @@
+{
+  "status": "Kafka-and-Jimfs-normal-roundtrip-only",
+  "inputs": {
+    "/usr/lib/jvm/java-21-openjdk/bin/java": "8974a711edb55de716f1b396a3178ab98775fb1077b41440ba8e128a8404707a",
+    "/usr/lib/jvm/java-21-openjdk/bin/javac": "5d9371a81bc789e32b8886dd29be8df68ba14fee27c56ebece035f02b0b0faa3",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.1-jre.jar": "796d8e28ac64e83a47c4c5935a8fecc4682650a04bbdead738ef0f5a3a0e6c46",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/guava-33.7.2-jre.jar": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.2.jar": "8a7458657938e9b692224db83aac458c13abd7a59ab75c3d3b08bd2233a646a2",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/lz4-java-1.11.4.jar": "58c8e0b813960d2a248e050c353baea73139b48a2ffc55382d42c69707e17325",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.8.jar": "50485d06037fea3d6e40c968386feeca6338cc9872e25549593ff3eb352cefcc",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/snappy-java-1.1.10.9.jar": "35228628442e4b9797681c7cbd3b26594f6da3379159dbd0cb07094ed3aece0d",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/nifi-kafka-3-service-nar-2.12.0.nar": "6d0b9e7ebcb3ad080efe36070097b785ec133b1afab81e093cb3a12176480a2a",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/kafka-clients-4.3.1.jar": "52501b7b47510c66f898871adaf6d2968ab7246561d44ced43643a8a587f0b36",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/nifi-aws-nar-2.12.0.nar": "d287520c8af0871ca7d649a60f37c2618f5ef7b7e68bba83650ea3c61cf965fb",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/jimfs-1.1.jar": "c4828e28d7c0a930af9387510b3bada7daa5c04d7c25a75c7b8b081f1c257ddd",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-verified-1793795867722215369/component/failureaccess-1.0.3.jar": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/slf4j-api-2.0.19.jar": "e91ff6d720609e7a194ffe758c3ed5c84e798617ae07b0a0f6a4fe229741b4bb",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/ConsumerProbe.java": "d40f4ec1beb5011ad501bfa198b223520785cae09bdbe2b8472212676406b4c6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/probe_consumers.py": "386b793a0ccf5d074e0ec0e15231689bf2a618f02260885d3007b7ad1f9c8913",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/map_candidates.py": "f9b03a50541f4be86dd216475a5e350e4212154743f1eda7cf93df7a06fbe29f",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/source/opt/nifi/nifi-current/lib/nifi-iceberg-parquet-writer-nar-2.12.0.nar": "d8c2a22419cf91e483d2fa46cf242aaed5571d8af6f4afb0fa75626bd59ef82e",
+    "/home/tears/.cache/cnc-stock-occurrences-20261104-e3888d81/java21-probes/hadoop-common-3.5.0.jar": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+    "/home/tears/.t3/worktrees/B-taldea/t3-e3888d81/deploy/images/nifi-patches/stock-occurrences/HadoopProbe.java": "8c88a6e4c4c51aa8872c96e27fc6cd5d146f3b399f710871bf220b15630453a5"
+  },
+  "outputs": {
+    "kafka-clients-4.3.1.jar": "52501b7b47510c66f898871adaf6d2968ab7246561d44ced43643a8a587f0b36",
+    "jimfs-1.1.jar": "c4828e28d7c0a930af9387510b3bada7daa5c04d7c25a75c7b8b081f1c257ddd",
+    "execution.json": "38007ef77b91b52edd35bd0a5e09d4e2290d0c58095f168c8061633d9f7f2852",
+    "hadoop-common-3.5.0.jar": "dad07af66b59454e71b046a2fce0c0fddb9c522eadd146075e6add82aad86ce6",
+    "classes/ConsumerProbe.class": "73ca55562c862ae726289459762a007ca0e3ded2414dce83a8f302e72ea5562d",
+    "classes/HadoopProbe.class": "f89499565a140fd49f9fc56a1e4fedd5f62c26c9632cd54d5974a04c23d550fc"
+  },
+  "limits": "single CPU; heap 256 MiB; metaspace 96 MiB; CPU 25 s; wall 40 s; no core dumps",
+  "gaps": [
+    "Other actual consumers untested by this probe",
+    "NiFi classloader and image-native behavior untested"
+  ]
+}

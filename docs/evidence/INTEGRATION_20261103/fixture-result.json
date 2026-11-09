@@ -1,0 +1,87 @@
+{
+  "created_utc": "2026-11-03T08:10:47.043035+00:00",
+  "code_sha": "75fb2f0345c52f4d769c05f334881a510e939c15",
+  "tool_hashes": {
+    "integration_preflight.py": "08c5f62016966b9a87dad23759a91fb822c6d51b4d32aaa5f48ce96bc92f40d5",
+    "integration_lab.py": "a1aec4e91423ad60e0436c4a7b0a9fa829822862e9d350725cebc2135b930eeb",
+    "integration_verify.py": "cc2725f0c9ad209335eb8dabb77ebf2509f4b4b4cc6138bdb96440ad261565c4",
+    "integration_fixture.py": "3978c69859943616710e45efe56da559175f06242b23039b310e1aa2c5af3afc",
+    "integration_bundle.py": "19c5666d6ebaeb50936b1331c34a6d143c1645a7967839d4319d12e725a93869"
+  },
+  "contracts": {
+    "common.schema.json": "149f53de0e5c210a26d2aa75a23c8eeac3cf94fc0f024fbe7a2258b1ffc3d9e2",
+    "log.schema.json": "a867860c246703dc13628b2fbf8668d398aec53289536bde31378b954fbc0f95",
+    "maintenance.schema.json": "1ffefc1f8c96f32af9f32b622e7017d2bb5fedd0a9c9aeffe96087319adc8796",
+    "prediction.schema.json": "bcf7fc02aa50e50538bf97f16226435a37eb213be067949c6c0a57351fbecb32",
+    "telemetry.schema.json": "c19b0d20fd03555a5acec9ded07831e6a10d1523d5bd917b5dce90b4fd4757f0"
+  },
+  "model": {
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "temporal_prediction_enabled": false,
+    "training_source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+    "input_features": [
+      "air_temp_K",
+      "process_temp_K",
+      "rpm",
+      "torque_Nm",
+      "tool_wear_min",
+      "machine_type"
+    ],
+    "score_semantics": "uncalibrated_current_state_score",
+    "model_version": "synthetic-integration-only",
+    "policy": "f2",
+    "versions": {
+      "sklearn": "synthetic"
+    },
+    "files": {
+      "rf.pkl": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "if.pkl": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "risk_threshold": 0.5,
+    "anomaly_threshold": 0.4
+  },
+  "resources": {
+    "available_ram_gib": 1.4119071960449219,
+    "available_disk_gib": 2.1867828369140625,
+    "required_ram_gib": 6,
+    "required_disk_gib": 20,
+    "real_lab": "blocked_resources"
+  },
+  "scenarios": {
+    "normal": "passed_ASGI",
+    "replay_uncertain_http": "passed_ASGI",
+    "invalid": "passed_contract_rejection; CSV worker covered separately",
+    "es_down": "passed_reader_double_503",
+    "api_down": "passed_model_unready_503; transport outage covered separately",
+    "corruption": "passed_no_ACK_and_GET_503"
+  },
+  "reconciliation_before_corruption": {
+    "event_key": "f88d15f28c5bf88a508affc4815df855d0771d04e4b3d392192c6c030934d1b7",
+    "canonical_sha256": "c648789839216ac28dd33a1e720225105930efcc8d4fb2f86211357eb7ea6c7f",
+    "ui": "pending_browser",
+    "same_event_storage_get": true
+  },
+  "boundaries": {
+    "prediction_requests": {
+      "sent": 4,
+      "accepted": 2,
+      "rejected": 1,
+      "pending": 1
+    },
+    "definition": "replay counted as a request; unready request pending; not Kafka offsets"
+  },
+  "doubles": [
+    "model",
+    "ES reader",
+    "ASGI transport"
+  ],
+  "not_run": [
+    "Filebeat",
+    "Kafka",
+    "NiFi",
+    "Docker images",
+    "browser",
+    "SMB"
+  ],
+  "archive_final_state": "intentionally_corrupt_own_fixture"
+}

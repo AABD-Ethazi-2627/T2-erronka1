@@ -1,0 +1,104 @@
+{
+  "replacement": null,
+  "runtime_approved": false,
+  "status": "metadata-only-jar-bytes-not-fetched-or-qualified",
+  "files": [
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-exporter-common:1.67.0",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-common/1.67.0/opentelemetry-exporter-common-1.67.0.pom",
+      "pom_sha256": "60416280a92b91949df63cb73c15e91bbd0e2f2a257c82789a21c4036fcedb2a",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-common/1.67.0/opentelemetry-exporter-common-1.67.0.jar",
+      "jar_sha256_published": "eb61aab6d20bf105102dfa061b478b659cec17e82a50969898046456768ba09b",
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-api",
+          "version": "1.67.0",
+          "scope": "compile"
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-exporter-otlp:1.67.0",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-otlp/1.67.0/opentelemetry-exporter-otlp-1.67.0.pom",
+      "pom_sha256": "a3ad948d55d27a6f564a8f0a3fd908bf8de4daa0f3c897c89e7d159a356fc17b",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-otlp/1.67.0/opentelemetry-exporter-otlp-1.67.0.jar",
+      "jar_sha256_published": "6724a9c8f9f42de757682c6194c48d9fee4670cd19a85c37954eba526c58b836",
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-trace",
+          "version": "1.67.0",
+          "scope": "compile"
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-metrics",
+          "version": "1.67.0",
+          "scope": "compile"
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-logs",
+          "version": "1.67.0",
+          "scope": "compile"
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-exporter-otlp-common",
+          "version": "1.67.0",
+          "scope": "runtime"
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-exporter-sender-okhttp",
+          "version": "1.67.0",
+          "scope": "runtime"
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-exporter-otlp-common:1.67.0",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-otlp-common/1.67.0/opentelemetry-exporter-otlp-common-1.67.0.pom",
+      "pom_sha256": "37e25fa4e5787be2a2c571af20f9029440dc574b3772fd979ebc36ce28cac700",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-otlp-common/1.67.0/opentelemetry-exporter-otlp-common-1.67.0.jar",
+      "jar_sha256_published": "75530ab4d93e6fdef478d3e112713337625e70a63df357e6e7b9060c13788015",
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-exporter-common",
+          "version": "1.67.0",
+          "scope": "compile"
+        }
+      ]
+    },
+    {
+      "coordinate": "io.opentelemetry:opentelemetry-exporter-sender-okhttp:1.67.0",
+      "pom_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-sender-okhttp/1.67.0/opentelemetry-exporter-sender-okhttp-1.67.0.pom",
+      "pom_sha256": "3cd0b287f2c6b2828cf56fa19bc9f1d756d5c0c1a95d6103eef13f92843c5bd5",
+      "jar_url": "https://repo.maven.apache.org/maven2/io/opentelemetry/opentelemetry-exporter-sender-okhttp/1.67.0/opentelemetry-exporter-sender-okhttp-1.67.0.jar",
+      "jar_sha256_published": "0ccb54e5e1db24680b0b7b818299552477dcc7114de7ca0f7b054e6e20958b83",
+      "dependencies": [
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-exporter-common",
+          "version": "1.67.0",
+          "scope": "runtime"
+        },
+        {
+          "groupId": "io.opentelemetry",
+          "artifactId": "opentelemetry-sdk-common",
+          "version": "1.67.0",
+          "scope": "runtime"
+        },
+        {
+          "groupId": "com.squareup.okhttp3",
+          "artifactId": "okhttp-jvm",
+          "version": "5.5.0",
+          "scope": "runtime"
+        }
+      ]
+    }
+  ],
+  "constraint": "exporter-sender-okhttp1.67 requests okhttp-jvm5.5.0; installed5.3.2 remains unchanged; no unrelated upgrade authorized by this preparation"
+}

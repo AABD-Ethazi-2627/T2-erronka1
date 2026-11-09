@@ -1,0 +1,907 @@
+# Conciliación documental de la candidatura local — 03/11/2026
+
+Este documento relaciona el corte histórico de la memoria con la integración local
+`77903937fde925e00bb46e8c32395e9f94f2f802`. Se han leído el manifiesto, el verificador,
+los cambios de código/configuración indicados abajo y sus informes de procedencia.
+Esta conciliación no ejecuta servicios, modelos, builds ni suites técnicas; ejecuta
+solo la comprobación documental. El coordinador realiza otros ensayos por separado.
+
+## Qué significa cada identidad
+
+- `base_commit=f770932…` y `base_tree` siguen siendo la base histórica de las 40
+  filas de la matriz. Sus comandos `git show` y revisores `Pendiente` se conservan.
+- `historical_snapshot` conserva sin modificar sus 18 hashes, comprobados leyendo
+  la revisión histórica con Git. Tampoco se reescribe el registro PR68 al corte de
+  octubre: `not_integrated` es metadata histórica, no el estado remoto de noviembre.
+- `files` es un inventario seleccionado de los bytes **actuales** usados por esta
+  memoria; no es una firma, aceptación humana ni inventario completo del repositorio.
+  Ya se había ampliado después de la base histórica. Tenía 25 discrepancias ajenas
+  a estos documentos, enumeradas al final, además de las modificaciones documentales
+  de esta conciliación. Se registran los hashes anteriores para poder revisar el delta.
+- `local_reconciliation_20261103` fija el commit de código inspeccionado y el alcance
+  de esta actualización. Un cambio posterior en un fichero inventariado debe volver
+  a examinarse y documentarse: no se desactiva el verificador para evitar esa deriva.
+
+El alcance de entrenamiento activo permanece en 8000 filas, con 5600 fit, 1200
+validación de desarrollo y 1200 excluidas por inspección previa. Este cambio no
+vuelve a evaluar el test ni altera la definición de clasificación contemporánea.
+
+## Cambios clasificados antes de actualizar hashes
+
+| Grupo de ficheros con deriva | Cambio inspeccionado y efecto documental | Evidencia y límite |
+| --- | --- | --- |
+| `pyproject.toml`, `uv.lock`, `scoring/requirements.txt` | La clausura runtime incorpora DuckDB/PyArrow/HTTPX y concilia dependencias de servicio; se mantiene el entorno científico fijado en lugar de adoptar PyArrow 26 incompatible con NumPy 1.26. | [Conciliación de dependencias](../evidence/DEPENDENCY_RECONCILIATION_20261103.md). Un lock/export comprobado no certifica todas las imágenes. |
+| `scoring/score_api.py`, `scripts/cg32_lab.py` | Router GET opt-in y punto de extensión del laboratorio. No sustituyen la respuesta canónica POST ni prueban por sí solos un recorrido vivo. | [Contrato de lectura](../backend/READ_API.md), [candidato de integración](../integration/README.md). |
+| Cuatro Dockerfiles de uv/API/NiFi, inventarios `images.json`/`build-targets.json`, `image_inventory.py` y su test | Pins reconciliados, dashboard dedicado, runtime de lectura y etapa uv común con concurrencia acotable. Los inputs se comprueban; el éxito de construcción/arranque requiere su propia evidencia. | [Builds seriales](../integration/LOCAL_IMAGE_BUILDS.md), informe de dependencias. No se reduce el preflight del laboratorio completo. |
+| Cinco workflows (`dashboard`, `dependencies`, `es-bind-safety`, `ml-study`, `validate`) | setup-uv fijado actualizado; descubrimiento de pruebas del dashboard, probes de imagen y cobertura de archivos NiFi anidados. | Código versionado de CI; esta actualización no ejecuta ni declara verde el CI de un SHA nuevo. |
+| Dockerfiles ES/Filebeat/Kibana y `kibana-patches/package*.json` | Candidatos de bytes JAR/npm, diagnóstico OS separado de Filebeat y controles de consumidores. | [Seguimiento acotado](../evidence/KIBANA_FILEBEAT_BOUNDED_20261103.md); los ensayos posteriores se atribuyen aparte, sin convertir preparación de fuentes en build final. |
+| `enforce_image_scan.py`, `test_image_scan_gate.py` | Cobertura de paquetes exigida para dashboard y archivos anidados NiFi. | El gate sigue rechazando vulnerabilidades no verificadas; un hash actualizado no concede excepciones nuevas. |
+
+Se añaden al inventario las implementaciones y documentos de lectura/integración
+que soportan esta candidatura. Los informes antiguos conservan sus fechas y sus
+propias advertencias: los resultados posteriores amplían evidencia concreta, no
+corrigen retrospectivamente un fallo ni convierten una ejecución anterior en otra.
+
+## Resultado local atribuido y puertas pendientes
+
+La [evidencia fechada del coordinador](../evidence/LOCAL_PIPELINE_BROWSER_20261103.md)
+separa tres recorridos con datos sintéticos:
+
+1. HTTP/API/CG15/ES → Chromium: cuatro páginas, modal, refresco, escritorio/móvil y
+   degradación/recuperación de ES dentro de la misma sesión del navegador.
+2. Worker durable por stdin → API/CG15/ES/GET → navegador: identidad canónica de
+   ese evento y sensores contrastados; no hay ACK de Kafka en ese recorrido.
+3. Filebeat vendor fijado por digest → Kafka candidato → worker → API/CG15/ES/GET:
+   captura vinculada por bytes y clave, offset 0 consumido y commit 1 observado.
+   Su replay posterior usa stdin. El evento Kafka de ese informe permanece
+   pendiente de reconciliación propia en navegador.
+
+El modelo es un bundle de prueba local. La matriz offline de octubre no queda
+ligada automáticamente a él: la lectura de evaluación exige procedencia verificable,
+hash de modelo y umbral coincidente, y falla cerrada cuando faltan. AVISO/CRITICA
+0,15/0,70 y la regla de decisión del modelo son políticas distintas. El panel muestra
+estado inferido actual y antigüedad; no predice siete días, ETA o RUL ni pérdidas
+como score multiplicado por coste.
+
+El informe registra una imagen Kafka construida y con gate de escaneo pasado, y
+un target **OS** de Filebeat construido. El productor del ensayo fue Filebeat vendor;
+no acredita la imagen final parcheada. Las builds API/dashboard en curso al elaborar
+este documento no se cuentan como terminadas. NiFi/Kibana de esta candidatura,
+escaneos/runtime finales, RSS/concurrencia, capacidad del conjunto simultáneo y
+recorrido SMB actual siguen requiriendo evidencia propia. No se repiten ni se
+invalidan aquí los ensayos históricos SMB/Kibana de octubre.
+
+Para los descriptores G39/G61/G62 falta una vinculación y aceptación independiente
+de evaluación/modelo cuando proceda. G41/G49/G65/G66/G71/G77/G90/G92/G96 requieren
+valorar el recorrido exacto y su cobertura, no sumar las etapas como si fueran una
+campaña simultánea. G14/G46/G80/G85/G100 no se cierran con un microbenchmark ni con
+estas pruebas de un evento. G87 necesita su alcance de accesibilidad y revisión
+humana; una captura móvil no acredita conformidad global. Todas las 40 filas
+conservan la revisión educativa pendiente. Explicación de los integrantes, acuerdos,
+firmas, equivalencia SMB/NFS, defensa, Moodle y entrega siguen siendo actos humanos.
+
+## Reproducción documental
+
+Desde el checkout de esta candidatura:
+
+```sh
+python3 scripts/check_cg25_memory.py
+git diff --check -- docs/memoria
+```
+
+El primer comando exige las 40 celdas, revisores pendientes, enlaces/anchors,
+hashes actuales/históricos y alcance activo. Su salida no es un resultado de CI,
+una repetición de las suites técnicas ni una aprobación de la rúbrica. Los comandos
+de ensayo están en los runbooks enlazados, con sus modelos y recursos requeridos.
+
+## Inventario de la deriva previa
+
+Hashes del inventario anterior frente a los bytes inspeccionados en `7790393`.
+La actualización de README/ANEXO4 y este documento se registra además en `files`;
+ninguno de estos cambios altera `historical_snapshot`.
+
+| Fichero | SHA-256 anterior del inventario | SHA-256 actual inspeccionado |
+| --- | --- | --- |
+| `pyproject.toml` | `7985c47365465de682b83cf8ebf28d00fe61992259803df46a084f13259d192b` | `034084d48b7cee67f32ee042bca7fa8fa5f7bc709d163da26cd71acb04b416d2` |
+| `uv.lock` | `8367a28e49a9b17035a1fd9c303db94a29113ca799dc67c5a0475d96593504d8` | `023da35f63b547e4cd09c0529d8d9cb8bf50827b626e61648e8b73bb15b4f149` |
+| `scoring/requirements.txt` | `0e95d2a105d536b5cfb781ff7fb87e860678c3c0941c3306526015fd1e72da9a` | `d33ff0616388dcc56aeeea134732172cbb46980e64e227a19c3b77a8092e1381` |
+| `scoring/score_api.py` | `013b6f8499e8dc555456d5548c67512bd99f27bd104e79d72a7e5ed1c099014e` | `7673b38ad5ab064e3eca2f34069ce741d27537d50b8717de372424f68fb359f4` |
+| `scripts/cg32_lab.py` | `b0c23cc14964e1ef41124bb34dba508b7414a89d2401000937b2456586acea54` | `0498ecd63b9d81b7026b2d0bec8231c29ae7fb81c207380b4b6e1e916c396f8b` |
+| `deploy/images/uv-stage.Dockerfile` | `7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf` | `de1fd7afab25cc118c90bf7805d8a0d0034a4d6f7e0f3641609a70b5d6eb102c` |
+| `deploy/images/uv.Dockerfile` | `7a0acdb7396c790e1743ebcaeb905510324923d61c62fc65fd309578285637cf` | `de1fd7afab25cc118c90bf7805d8a0d0034a4d6f7e0f3641609a70b5d6eb102c` |
+| `scoring/Dockerfile` | `cc2059c9fc5f05e30b7de64dd6506886997bbc81c1cd5243e269a577f155a047` | `17a843475a66da46fd1706bccac43e63337297d46bd0e63b435e76b4c8c5f1c9` |
+| `deploy/images/nifi.Dockerfile` | `ea18c3b07f8854dbb4f19e00e713ceeec92a0ac852eea162ce912036d3ade99e` | `a6e0c009b0656fa8c709511e132449f4c49b4dc14ba4c7dac5757f6c1f9f4b83` |
+| `deploy/images.json` | `70316311bb25a12199c0537b41c79e45bdf7d88f8061d4d301117b1aa9975789` | `3251117ba04ef51276740ac0ef2553c604fad2a1ab762cdb3830ccfee0995cc1` |
+| `deploy/build-targets.json` | `ce5c4c8f0d30dfc554e5967b86bfbc77f16c616f4ac1ec46f03c37426893e593` | `5852a393ca394f08c7351cb20ad30ee77d398ac89395ca92b9d96e89fbe449f2` |
+| `scripts/image_inventory.py` | `2b47caac6bff09eff606224299d84e4498349933caa992502ffda179402e068e` | `5f4ea60005ce08e3f76cf56b05c4507dbde0a14822159aa07ddcb7101dd480ba` |
+| `tests/test_dependency_infra.py` | `b22aaa323f24286a54cd0bce497db0a3c86d385d0fb375188373719614506a5d` | `a387b9477014e1677deb153fdb4aa3b8a572aec09084563f31f6cda43e426550` |
+| `.github/workflows/dashboard.yml` | `272829e339478d6b0319566e17e5aedd5439785056ad3713f18e536281413095` | `b7e8f5c6b81b87af701efbd095928e3d770cf9477e50209352ff8f2a54161a37` |
+| `.github/workflows/dependencies.yml` | `69077b9a8b629a3b7735a65eb59dee7e3d4f2cb273bef62c60bb1ffb2629854b` | `bd8a367fb270594f3a664f13dab0501f0f0ef30b3aef5277dc0982c63006a878` |
+| `.github/workflows/es-bind-safety.yml` | `c7dd6a94ee45812cf05d7448d4744e621a56b75289992cef5a44516d6da2f734` | `95553c0af814f5bba1ccbe40cc0c17f0edcce57c9d7e6b3cfd835c2ec43626a7` |
+| `.github/workflows/ml-study.yml` | `0c00ed281375a5c6ee170f829e4a1c2b88005eb92c1cfbad50c23397bd575018` | `22fe2429f482a008727cc2ae8bc03eeb61f84774ebaa6cb17e35053887c5ab1e` |
+| `.github/workflows/validate.yml` | `b7029429a7b678a7baaf2a1861b1ca5c7c6d37950bfef3e767f9ebdffa8ceefd` | `6c5c1af017f0104e3c27fad29be8a94c9e6efe0b72c6897e4607105337d8113e` |
+| `deploy/images/elasticsearch.Dockerfile` | `188e64e8d404ba8be0f40fb1b776d6cf432c4cf755b04464aa72cbd578e47d3c` | `7cf7364680690a560ee5004d0ef4e2a7a6c3222159c62556da4568136d4fc73a` |
+| `deploy/images/filebeat.Dockerfile` | `01b40d29f663174315c96f9cb46b82c0b81d4a564ca7f5b423da502f169de6b2` | `e0947e3fa4030ba55a60541dfd3d8de3642d6577ee27867e8635c8968a575ad6` |
+| `deploy/images/kibana-patches/package-lock.json` | `ab294885dd369f387fcb00aa9c4cacb0a39b77c9256a9298e7387612e52aedfe` | `e90fbb8f5cfc7d4e68829a2941aa9a8d50e2908317f5309c8fe3fa0b16f4b855` |
+| `deploy/images/kibana-patches/package.json` | `8869584ee2528db729eea4b568fcdc3a2caffa8a69c51e0a09e9a6fa64936d23` | `76adab4ad02ee6b4673b9715a74e30caf3af7d7229c3de4015118bd48fe2783b` |
+| `deploy/images/kibana.Dockerfile` | `90d25722f7539564a027e141c4b1fe1daaad66e5865f353fbe20947bc30e04da` | `331658ec32c0193e9d71cd82739b164f00fa5efb85063a769a6f56bab5d7d3a6` |
+| `scripts/enforce_image_scan.py` | `2e987ddbf5043bb7ec4a636328424bf17305ad05c76592bc8489f9afe463b587` | `a7f6486085b229f3f7e92d27eab01890edfaf8d3567f82a94692fb1e7570eb41` |
+| `tests/test_image_scan_gate.py` | `11697399c1a620ea59d4cab7963f71c9d7d7cacc8d0854de2cbe3743a5705afe` | `65ca31fd654b2a4b1eeb39ed141d8ce5a058c94ca77a3914b79d384bf418d131` |
+
+## Ajuste posterior de espera de metadatos
+
+Tras la conciliación de `f9a949d`, se acota también la consulta inicial de
+particiones del observador Kafka. La función pública del fork usaba una espera
+sin plazo; el adaptador explícito conserva su comportamiento y limita cada
+espera de refresco a 15 segundos, restaurando el estado en caso de error. Se
+añaden tres regresiones sin servicios (48 pruebas de ambos runners pasan).
+Los runbooks aclaran dónde obtener el nombre del contenedor y enlazan la
+preparación Filebeat desde el ensayo Kafka. No cambia ningún contrato, modelo,
+resultado histórico ni aceptación humana. El inventario actual actualiza solo
+el runner Kafka, su test, esos dos runbooks y este documento, tras revisarlos.
+
+
+## Ajuste posterior de selección del archivo comprometido
+
+Sobre el padre `723ab6b29451578b27d7befdb4c8526310e6ae23`, se inspecciona el delta
+local del índice de lectura CG15. El escritor añade la selección por fuente,
+modelo, política, umbral, máquina y ventana UTC en la misma transacción que los
+recibos aceptados. El lector toma un snapshot breve de SQLite en `mode=ro`, cierra
+la conexión y comprueba los hashes del Parquet seleccionado y de su bronze original,
+además del evento y recibo aceptado. Los objetos ajenos a esa selección dejan de
+consumir el presupuesto de la petición. El test de existencia distingue una máquina
+desconocida de una conocida sin observaciones dentro de la ventana.
+
+Esta implementación no certifica la integridad de todos los objetos retenidos.
+Los archivos anteriores sin cobertura completa del índice devuelven 503. La vía
+recomendada es la migración **offline y explícita**, con todos los escritores detenidos:
+`python -m scripts.archive_read_index /owned/archive --writer-stopped`.
+La migración verifica recibos/predicciones y conserva los bytes de los objetos y
+las tablas originales; GET nunca crea ni repara el índice. El Dockerfile de API
+incorpora el helper de lectura. Esto describe el código inspeccionado, no demuestra
+que una imagen reconstruida lo contenga ni que se haya migrado un archivo vivo.
+También pueden completar la cobertura las predicciones duplicadas aceptadas con
+nuevos identificadores de entrega por el escritor actual, si llegan a cubrir todos
+los objetos y el índice no está sucio. GET sigue verificando cada entrada elegida.
+
+El agente implementador informa de 129 pruebas y 126 subtests en ocho suites
+focalizadas, más una regresión posterior de replay/bronze no canónico; también
+informa Ruff y `git diff --check` correctos. Son pruebas locales con SQLite,
+Parquet y ASGI, sin servicios ni red. Esta conciliación documental no las vuelve
+a ejecutar: la comprobación independiente del coordinador y la validación de la
+imagen corresponden a evidencias separadas. Los límites siguen siendo 20 000
+objetos seleccionados (dos por predicción, máximo 10 000 predicciones) y 64 MiB;
+la paginación no evita validar toda la selección. Los periodos densos todavía
+pueden devolver 503. El escaneo global del escritor no cambia y no se afirma
+caudal sostenido, RSS/concurrencia, SMB ni aceptación humana.
+
+Se actualizan únicamente los hashes de `scripts/archive_consumer.py`,
+`scoring/read_storage.py`, `scoring/read_api.py`, `scoring/Dockerfile`,
+`tests/test_read_api.py` y `docs/backend/READ_API.md`, y se añaden
+`scripts/archive_read_index.py` y `tests/test_archive_read_index.py`.
+También se actualiza el hash de este apéndice. Los valores anteriores quedan en
+`local_archive_index_followup.previous_current_hashes`; la base histórica,
+`historical_snapshot`, el alcance del modelo y los revisores pendientes no cambian.
+
+
+## Comprobación posterior en imágenes locales
+
+El coordinador ejecutó en `b5d5d54` 894 pruebas y 374 subtests (4 omitidas),
+y 29 pruebas del dashboard con `-W error`. El informe
+`docs/evidence/LOCAL_CONTAINERS_20261103.md` distingue las imágenes API/dashboard
+construidas y escaneadas, la copia migrada del archivo del ensayo Kafka, el replay
+HTTP idéntico y la identidad visible en Chromium. Conserva también los intentos
+fallidos (permisos del montaje, URL de prueba errónea y revisión Claude interrumpida
+por memoria). No se modifica ninguna aceptación humana ni el alcance del modelo.
+
+El README de integración enlaza esa evidencia; el generador de ZIP incluye el
+informe. Se revisan solo esos tres inputs y este apéndice. Las afirmaciones sobre
+NiFi/Kibana, SMB, campaña completa y modelo aprobado siguen pendientes.
+
+
+## Preparación acotada de Filebeat
+
+Se revisó `GO_BUILD_JOBS`: entero decimal positivo, exportado como GOMAXPROCS
+y pasado a `go build -p`; no cambia las versiones fijadas ni el gate de imagen.
+El coordinador ejecutó 22 tests y 18 subtests de guardia/escaneo, y verificó
+el inventario de imágenes. Esto prepara una compilación local con un trabajo;
+no demuestra todavía la imagen final ni su publicación Kafka. Se registran solo
+Dockerfile, runbook, test nuevo y este apéndice; la base histórica permanece.
+
+
+## Imágenes posteriores y TLS, alcance acotado
+
+El informe local incorpora la imagen ES construida y sus dos análisis (feed
+Chainguard y complemento Wolfi), 12 operaciones de compatibilidad en tmpfs
+acotado, y el bloqueo real por espacio del ensayo en disco. No se cambian los
+watermarks. Filebeat final compila con un trabajo, pasa el gate conservando la
+excepción de módulo prevista y govulncheck confirma cero símbolos vulnerables
+alcanzables en el binario; publica un evento real confirmado por Kafka. Ese
+nuevo evento no se presenta como otro recorrido completo por modelo/UI.
+La rotación TLS aislada pasa 1 test y 60 subtests. Claude no pudo completar
+la revisión final (memoria y después límite API); no se inventa aprobación.
+
+Se actualizan exclusivamente el informe, sus dos runbooks enlazados y este
+apéndice. NiFi/Kibana y campaña completa siguen pendientes de recursos y
+verificación; SMB, modelo aprobado y revisión humana continúan abiertos.
+
+
+## Revisión Claude reanudada y completada
+
+La revisión acotada del índice `b5d5d54` frente a `723ab6b` terminó tras
+reanudarse el proveedor. No encontró errores de corrección bloqueantes. Leyó
+cinco fuentes (de los tests solo los nombres); no ejecutó pruebas, Docker ni red,
+ni revisó los helpers de contrato/plataforma o el modo de journal en ejecución.
+No sustituye la evidencia de pruebas del coordinador ni la aceptación humana.
+Se aclara que los duplicados aceptados con nuevos identificadores de entrega
+pueden completar el índice antiguo, y que el acceso SQL directo permanece dentro
+de la frontera de confianza. Esta aclaración modifica documentación, no código.
+El ZIP anterior se conserva íntegro como evidencia histórica anterior a esta entrega
+tardía del informe; la revisión se distribuye en una adenda separada.
+
+
+## Seguimiento del PR119, 2026-11-04
+
+CI de `6a11161` pasa 906 pruebas y 374 subtests, con cuatro omisiones, en
+Python 3.11 y 3.12. La repetición local previa se interrumpió por memoria;
+se conserva como intento sin resultado completo. El PR exige además revisión
+de GitHub; no se cambia ninguna protección ni gate para permitir merge.
+
+Se revisan cinco sustituciones acotadas de paquetes Kibana (systeminformation,
+re2js raíz, decode-uri-component, Joi y @hapi/content), con lock SHA512 y borrado
+de directorios viejos antes de COPY. El coordinador repitió las cinco regresiones
+tanto con alias npm como con las versiones transitivas de la imagen vendor.
+El Dockerfile las repite con el Node real de la imagen. Todavía falta construir
+y escanear esa imagen: Hono, glob, minimatch y copias prebundled siguen abiertos.
+Los paquetes nuevos conservan sus dependencias declaradas y los rangos comprobados
+se satisfacen con las versiones vendor; el re2js anidado 1.4 queda fuera del rango
+afectado y no se cambia de major sin necesidad.
+
+El informe NiFi identifica 59 tuplas vulnerables anidadas y prueba mediante
+bytecode oficial que actualizar solo Wire runtime a 6.3 rompería un constructor
+que consume Wire schema 5.2. Es diagnóstico, no reparación ni excepción de gate.
+Un backport separado está en investigación y no forma parte de esta entrega.
+Estos informes y los inputs Kibana revisados actualizan el inventario actual;
+la base histórica, el alcance del modelo y la aceptación humana no cambian.
+
+
+## Adaptador Hono compatible con MCP
+
+Se incorpora @hono/node-server2.1.3 porque el consumidor MCP1.32 admite
+explícitamente esa rama, el peerHono4 existe y el Node de Kibana satisface
+su requisito. El coordinador repite pruebas HTTP y MCPinitialize CJS/ESM y
+controles de archivos estáticos codificados; el original1.19.17 reproduce200
+frente al404 esperado. El Dockerfile repite estas pruebas con los módulos
+y Node finales. No se añaden dependencias runtime; el lock conserva el resto
+de entradas. Glob/minimatch, las imágenes finales y NiFi siguen pendientes.
+La revisión independiente ha bloqueado promover el candidatoWire inicial;
+el trabajo de lectores ampliados sigue separado de la imagen y del gate.
+
+
+## Candidato Wire separado de la imagen
+
+La revisión independiente bloqueó promover Wirev1. El implementador se detuvo
+por autenticación de clavehardware; el coordinador conservó sus cambios y amplió
+la prueba a44casos (original falla9), con pins de entradas, herramientas y salida.
+El scanrootfs reconoce el fork renombrado por hash y conserva el hallazgo visible;
+se rechazan inventarios sin cobertura. La varianteKMP se identificó sin clasesJVM.
+Todo ello prepara revisión: no cambia NiFi, su classpath ni el gate. Faltan
+comparación completa, inventario/classloaders reales, consumidores NiFi, nuevas
+revisiones y ambos escaneos de imagen. El resultado de Claudev1 no se atribuye aV2.
+El bundle incluye fuentes.java para que conserve la regresión del candidato.
+Los archivos nuevos y documentos revisados actualizan el inventario; no cambian
+la aceptación humana, la base histórica ni el alcance del modelo.
+
+
+## Transporte del instalador Trivy
+
+Los jobsAPI/Kafka en d7cfa18 construyeron sus imágenes, pero fallaron al
+instalar Trivyv0.76.1 con curl exit6, antes de escanear. La falta de artefacto
+fue consecuencia, no hallazgo de vulnerabilidad. El workflow añade un wrapper
+curl local al job con reintentos y tiempos acotados; mantiene argumentos,
+checksums, pins, severidades y gate. La prueba usa curl real contra503/503/200
+en loopback y verifica tres peticiones, bytes finales y estado200. Pasan16tests
+y18subtests. La recuperación del runner requiere la nueva ejecuciónCI.
+No se afirma todavía escaneo verde ni se modifican las aprobaciones de GitHub.
+
+
+## Instalación directa del escáner
+
+El dashboard21ecb04 falló pese a reintentos. La URLreal del tarball del
+instalador es get.trivy.dev: su resolución falla también desde la comprobación
+local. La URLdirecta GitHub que se había probado no era la usada por el script.
+Se instala ahora Trivy0.76.1 desde su release oficial con SHA256 fijo, coincidente
+con digestAPI y checksum publicado; se omite solo el setup de la action, no su
+escaneo. Se mantiene el binario para el gate anidado NiFi. La instalación directa
+y un scanreal del candidatoWire funcionan y conservan el hallazgo. Pasan17tests
+y18subtests, con rechazo de descarga corrupta antes de instalar. CI nuevo debe
+validar el runner; no se cambia ninguna aceptación ni gate de vulnerabilidades.
+
+
+## Inventario real de Forge tras el escaneo CI
+
+En ea0a89e, Kibana construye y Trivy se instala y escanea correctamente. El
+inventario confirma solo Forge1.4.1. Se retira la excepción antigua1.4.0 y se
+exige el inventario1.4.1; copias ausentes, antiguas o mezcladas fallan. Los15tests
+y21subtests focalizados pasan. El artefacto real sigue fallando con cuatro
+hallazgosGlob/Minimatch; no se añaden excepciones ni se afirma aceptación de
+Kibana. El informe enlaza el job, identifica artefacto e imagen y conserva los
+límites de la prueba. La base histórica y la aceptación humana no cambian.
+
+
+## Imagen Kibana: Glob y Minimatch
+
+La imagen candidata sustituye Glob por 14.0.3 con Rimraf 6.1.4 y una clausura
+fijada separada. Minimatch 10 conserva su API mediante un backport explícito
+con hashes y pruebas CJS/ESM. Las regresiones finales usan Node 24.21 de Kibana;
+el guard del stage de construcción usa Node 26.13 instalado con npm. Se verifican
+96 000 comparaciones ordinarias y 2048 propiedades de los bytes instalados de
+Minimatch 3, además de las guardas del parche, con el alcance de cada prueba
+registrado en la evidencia.
+
+La construcción acotada termina y el scan identifica la misma imagen.
+Permanecen dos hallazgos de Minimatch y el gate sigue rojo; no hay excepciones
+nuevas. Los 68 paquetes APK instalados están en el inventario del escáner.
+El candidato inicia el setup de 203 plugins y agota el heap de 512 MiB durante
+esa fase, sin completar setup ni llegar a start. Solo se trazan los cinco
+importadores @kbn de Minimatch raíz; no los tres bundles just-bash, ni Glob
+ni Rimraf raíz. La base original también agota el heap, pero traza solo tres
+de esos importadores. Esa comparación no prueba el comportamiento posterior.
+Los contenedores se limpian. No hay aceptación de servicio listo, ES, campaña
+completa ni reducción del presupuesto CG32.
+
+La revisión independiente de f80c37f no establece roturas de runtime ni hallazgos
+altos; sí detecta dos errores documentales, corregidos aquí, y siete bajos.
+El control de punto en Glob coincide con la base y no demuestra un cambio de
+comportamiento. La revisión verifica 2 816 000 coincidencias y 528 ficheros de
+la clausura; son sondas acotadas del revisor. La evidencia diferencia el Node
+del guard, el ámbito de las trazas y los límites de procedencia del comando
+Trivy. Los cambios bajos de código quedan para una próxima reconstrucción.
+CI fresco, las aceptaciones externas y la aprobación de GitHub siguen pendientes.
+Los hashes previos quedan registrados y no cambia la base histórica, la revisión
+humana ni el alcance del modelo.
+
+
+## Candidatos de bibliotecas NiFi
+
+Se incorpora el código de comprobación del hijo 98eb0dc como 107edda. El padre
+repite las pruebas offline con una caché nueva y cuatro negativos de integridad.
+Pasan las sondas A/B de Guava 33.7.1, LZ4 y Snappy, con las limitaciones de ABI,
+plataforma y recursos registradas. El plan de seis objetos coincide con el hijo.
+Las dos copias antiguas de Guava tienen hashes distintos de los JAR oficiales;
+RabbitMQ necesita además validar la clausura Netty. Permanecen bloqueados.
+
+No se ha modificado ningún archivo NAR ni runtime. Faltan el inventario completo
+de ocurrencias, la validación por classloader, un escritor verificado de archivos,
+la revisión independiente y los escaneos y pruebas NiFi finales. El job nuevo
+confirma las mismas 59 tuplas anidadas, sin añadidas ni retiradas. El scan normal
+sin hallazgos no cierra esa deuda. No cambian el gate, sus excepciones, la base
+histórica, la aprobación humana ni el alcance del modelo.
+
+
+## Inventario completo NiFi y correcciones de revisión
+
+Se integran el escritor por ocurrencia y el suplemento de transporte RabbitMQ.
+El padre corrige los dos defectos medios del verificador: la mera presencia de
+JARs no habilita RabbitMQ y los POM sin namespace o con ancestros no fijados
+fallan. Se fijan los POM adicionales y los hashes del agrupado del scan. Las
+salidas nuevas conservan los reemplazos shaded como nulos y los bloqueos.
+
+Tras admitir solo la representación exacta de directorios ZIP vacíos observada
+en la imagen, el inventario completo devuelve 2040 ocurrencias en 156 archivos
+lib. Los 17 grupos del scan tienen correspondencia por hash. Se comprueba que
+los originales siguen idénticos; ningún archivo NAR se modifica. El padre repite
+las sondas de biblioteca y las siete configuraciones RabbitMQ, y pasan 46 tests
+y 18 subtests focalizados. La evidencia enlazada fija los bytes antes de ejecutar
+y distingue las pruebas del hijo. El NAR AMQP de la imagen coincide con el oficial.
+
+Faltan revisión independiente de estas correcciones y del escritor, validación
+de consumidores y classloaders por ocurrencia, imagen final, scans y aceptación
+NiFi. Siguen 59 tuplas anidadas en el job f80c37f. No cambian las excepciones,
+la base histórica, los hashes históricos, la revisión humana ni el alcance del
+modelo. Las puertas de Kibana, CI, aprobación GitHub, SMB y CG32 siguen abiertas.
+
+
+## NiFi: disco agotado al exportar la imagen de auditoría en CI
+
+El job 126549608040 de ea9e84f construye las imágenes y termina el scan normal
+sin hallazgos, pero Trivy no puede exportar la imagen de auditoría por falta de
+disco. No hay informe anidado completo de ese job, por lo que no se presenta
+como una nueva comparación de las 59 tuplas. El workflow libera únicamente
+la caché de construcción del runner efímero tras construir ambas imágenes,
+comprueba que las dos etiquetas siguen presentes e imprime el espacio antes
+y después. Mantiene el scan completo y el gate bloqueante sin excepciones.
+
+actionlint y 17 tests/23 subtests focalizados pasan. No se ha borrado caché
+local ni reconstruido una imagen aquí. Los bytes liberados y la exportación
+correcta quedan pendientes del CI fresco. Se preservan los hashes históricos,
+la base, la revisión humana y todas las aceptaciones externas pendientes.
+
+
+## Jackson: candidato local reproducido por el padre
+
+Se incorpora el candidato del hijo 06c2b21 como 16b86b5. El padre repite offline
+15 comandos Java/javac con 86 inputs Maven fijados, y pasan 12 tests de guardas
+(24 tests y 4 subtests junto con las guardas de dependencias existentes). Añade
+las cadenas de hashes al plan, acota las descargas y refuerza el control antiguo
+y corregido de record-ignore. La evidencia registra fuentes antes/después y
+confirma los 156 archivos lib originales idénticos a su adquisición.
+
+Cuatro objetos son JAR oficiales; Hazelcast y Parquet siguen bloqueados con
+reemplazos nulos. No se modifica runtime ni se aprueban ABI, clausuras completas,
+consumidores, classloaders, wrappers ni imagen final. Hay tres avisos con sonda
+local y dieciséis con evidencia upstream sin reproducción local. No se afirma
+cierre de las 59 tuplas, Kibana, CI, CG32, SMB ni aceptación humana. Los hashes
+históricos, la base y el estado de revisión humana permanecen intactos.
+
+
+## Guava/LZ4/Snappy: mapeo ampliado y bloqueo Hadoop confirmado
+
+Se incorpora el mapeo del hijo 7becad6 como c176080. La adquisición pública
+abarca 215 archivos (156 lib y 59 toolkit) y 2099 ocurrencias. No aparecen
+copias adicionales de las tres familias en toolkit: siguen siete Guava, tres
+LZ4 y nueve Snappy. El padre reproduce el mapeo completo con 512 MiB de espacio
+virtual y siete comandos Java con el JDK21 registrado, y pasan 28 tests y
+14 subtests. Las fuentes permanecen idénticas durante las pruebas.
+
+Hadoop3.5.0 comprime una entrada normal de 4096 bytes con Snappy1.1.10.8, pero
+1.1.10.9 rechaza su buffer por la nueva precondición de espacio. El padre
+confirma ese error concreto, no cualquier IllegalArgumentException. Las nueve
+ocurrencias siguen bloqueadas; no se omite la incompatible ni se elimina la
+guarda de seguridad. Guava/LZ4 conservan cobertura parcial y QA pendiente.
+
+Las salidas del hijo mantienen su atribución; la evidencia del padre separa
+comandos, cambios de fuente, hashes y límites. No se ha parcheado ningún NAR,
+creado imagen o afirmado aceptación de classloader, NiFi, SMB, CI ni humana.
+Los gates, excepciones, base histórica, modelo y revisiones humanas no cambian.
+
+
+## Segunda revisión NiFi: Maven, archivos, Jackson y candidato Hadoop
+
+Se archivan las revisiones inmutables de f4e32bf y cd811e3, sin extender sus
+veredictos a cambios posteriores. Se corrigen la semántica de exclusiones y
+optional gestionado; las interpolaciones/herencias no modeladas fallan. Los
+30 fixtures del revisor coinciden con Maven real o se rechazan sin un cierre
+divergente. El escritor valida hermanos y metadatos, bloqueos completos y
+representaciones ZIP ambiguas antes de publicar.
+
+Jackson impone los hashes de todos los archivos, registra copias reubicadas
+AWS/Azure, mantiene bloqueos ABI y hace atómica cada pareja core/databind. Se
+fija JDK21 y se refuerzan versiones y entornos. Los tests cubren las regresiones
+reportadas, sin prometer exhaustividad de mutantes ni ausencia de otras copias.
+
+Se incorpora 5df3ca8 como 7b6f3b6. El candidato Hadoop independiente corrige la
+capacidad y el ciclo del buffer; el padre reproduce 20 comandos y 70 casos por
+cada Snappy, con controles de media corrección y la guarda fija intacta. No se
+modifican originales ni se desbloquean las nueve ocurrencias. Falta QA, montaje,
+classloaders, imágenes y gates externos. La verificación final sobre fuente
+inmutable queda pendiente en esta entrada. No cambian la base, los hashes
+históricos, el modelo, las excepciones ni la revisión humana.
+
+
+## Repetición final sobre 263c464 inmutable
+
+La fuente se congela limpia en 263c464 y conserva sus hashes durante la prueba.
+Pasan 993 tests, 416 subtests y cuatro omitidos; dos warnings son fixtures ZIP
+duplicados intencionales. Pasan las bibliotecas originales, siete transportes
+RabbitMQ, quince comandos Jackson con JDK21 fijado y veinte comandos Hadoop
+con setenta casos por Snappy y controles de media corrección. El inventario
+público completo conserva 215 archivos/2099 ocurrencias. El ejercicio aislado
+del escritor con diez objetivos Guava/LZ4 conserva originales y hermanos; no es
+aprobación de familias ni una imagen. Snappy queda fuera de ese ejercicio.
+
+Los dos resúmenes de salida se regeneran después y se separan explícitamente
+de la fuente ejecutable. La evidencia enlaza commit/tree, hashes antes/después,
+comandos, resultados y el alcance de cada prueba. Continúan pendientes una
+revisión independiente nueva, wrappers/SDKs, ABI/classloaders, imagen/scans y
+todos los gates externos. Ninguna aceptación humana, excepción, base histórica
+o contrato de clasificación actual se modifica.
+
+## Preparación Hazelcast y diagnóstico Kibana del 5 de noviembre
+
+Se incorpora el candidato experimental Hazelcast de `f5fadedd` y se verifica
+por separado en el padre sobre fuente limpia `6b8d4fd`. Primero se reproduce
+el hash del hijo; tras limpiar cuatro incidencias de lint, cambia únicamente
+la entrada de procedencia del JAR. Pasan 21 comandos Java acotados, 97 tests y
+43 subtests focalizados; no se repite la suite completa. Los 215 originales
+permanecen intactos. El análisis directo no resuelve herencia, multi-release,
+reflexión ni classloaders; seis de las 37 tuplas tienen sondas y 31 solo
+evidencia upstream. No se selecciona reemplazo ni se aprueba runtime.
+
+El diagnóstico Kibana incorporado en `a0126da` se repite desde el padre y
+confirma 216 diferencias en 36.000 comparaciones, incluida una invocación real
+de just-bash. No se instala esa migración. El CI de `6d67bc2` ya no falla por
+espacio, pero siguen abiertos NiFi 59/Kibana 2. La revisión nueva, las imágenes,
+CG32, SMB y las aceptaciones externas continúan pendientes. Se añaden hashes
+de las nuevas fuentes y evidencias; base, matriz, histórico y revisión humana
+no cambian. Los hashes antiguos del hijo se conservan como históricos.
+
+## Ensamblado candidato acotado del 5 de noviembre
+
+El padre corrige las nuevas guardas Maven, el estado de error de Hadoop y la
+selección atómica de Hadoop más nueve Snappy. La comparación con Maven real da
+20 cierres iguales, siete rechazos y cero éxitos divergentes. Pasan 24 comandos
+Hadoop v2 con fallos sintéticos sin nativos, once comandos Parquet con un archivo
+real de tres filas y 99 controles del nuevo del. Los 135 tests/82 subtests son
+focalizados; no se presentan como una repetición completa ni aceptación viva.
+
+Se ensambla una única copia privada: 22 sustituciones en 16 NAR y un contexto
+verificado ligado a las 215 raíces/2099 ocurrencias originales. Los originales
+no cambian. El registro del coordinador selecciona solo este ensamblado
+reversible; no afirma QA final independiente, aprobación runtime ni humana.
+Las fuentes Hazelcast revisadas y su JAR se conservan congelados. Parquet y los
+arreglos combinados requieren revisiones nuevas; las mejoras documentadas de
+Hazelcast quedan para una reconstrucción posterior.
+
+Se distingue el total del escaneo: 63 registros representan 59 tuplas únicas,
+con cuatro repeticiones de Jackson 2.22.2. No hay un escaneo nuevo que reduzca
+ese gate ni los dos hallazgos Kibana. No se construye/arranca la imagen candidata;
+los targets nuevos son opt-in. Permanecen los gates CG32, NAR/NiFi/SMB, CI/review
+protegidas y aceptación humana. Base, matriz, histórico, alcance de clasificación
+actual y excepciones no cambian. Se conservan evidencias históricas sin reetiquetar.
+La fuente y los límites están en [la evidencia del ensamblado candidato](../evidence/INTEGRATION_CANDIDATES_20261105.md).
+
+## Migración candidata Minimatch 11 del 5 de noviembre
+
+El padre integra `a48683c` y repite los tres pasos con las fuentes de `80a1909`:
+90 ficheros oficiales, cinco consumidores compilados de Kibana, tres bundles
+just-bash en Node y coexistencia con del. Se adoptan explícitamente 216 cambios
+semánticos en 36.000 comparaciones; 9.000 comparaciones ordinarias coinciden.
+No se afirma compatibilidad exacta con MM10. La revisión conjunta, la imagen
+y el escaneo nuevos siguen pendientes. El ZIP de `ffd31f4` pasa sus seis
+fixtures restaurados y se conserva como evidencia histórica anterior a MM11.
+No cambian la matriz, la base, el histórico, las excepciones, el alcance del
+modelo ni el estado pendiente de aceptación humana.
+
+## Revisión Parquet y regresiones del padre
+
+La revisión independiente de `0dafc5d` reproduce el JAR Parquet sin defectos
+de bytes ni hallazgos Critical/High. Permite continuar el ensamblado privado,
+sin aceptación runtime. El padre añade 27 pruebas y detecta las 21 mutaciones
+seleccionadas. Cuatro comandos JDK21 con los wrappers congelados verifican
+8384 frente a 128 llamadas Key.equals y conservan identidad/orden y origen.
+Los cambios de metadatos/licencias y otras mejoras siguen pendientes. Otros
+portadores simples conservan las cuatro tuplas: no se afirma reducción del
+gate ni aprobación de imágenes/NiFi/SMB/humana. Los originales no cambian.
+
+## Presupuesto real de expansión MM11
+
+La revisión conjunta de `0dafc5d` descubre retención por la caché compilada.
+El padre la corrige en `6e54f11` pasando 1024 en las ocho ubicaciones reales,
+sin modificar los 90 ficheros oficiales. Pasan los tres bundles físicos y las
+252 comparaciones de seguridad por defecto; 24 patrones retienen 7.239.936 bytes.
+La cota es de esta prueba, no garantía global de memoria. Se documentan truncado,
+excepciones y diferencias fuera del corpus Fleet. Se construye solo una imagen
+auxiliar de componentes tras recuperar la base por digest; no una imagen de
+servicio aceptada. Nueva QA focal, escaneos, CI, servicios y aceptación humana
+siguen pendientes. Matriz, base, histórico y excepciones permanecen intactos.
+
+
+## Benten: entorno preparado, guardas y build Kibana — 05/11/2026
+
+Se concilia el código de `0561cca51f6cf1fca8a02206276998d468464e9d` con los
+inputs documentales preparados después. La [VM 9600 de Benten](../evidence/BENTEN_VM_20261105.md)
+y su [runbook](../integration/BENTEN_VM.md) registran el nuevo entorno de
+4 CPU, 8 GiB y 120 GiB. El preflight real de la VM supera los mínimos intactos
+de 6 GiB disponibles y 20 GiB libres; no acredita carga simultánea ni campaña.
+
+Las [correcciones de guardas NiFi](../evidence/NIFI_GUARD_CORRECTIONS_20261105.md)
+comparten la política entre escritor/contexto, fijan los reemplazos y rechazan
+mediaciones Maven no modeladas de forma segura. Sobre `ce3c1d7`, pasan **111 tests
+y 65 subtests en cada uno de Python 3.11.17 y 3.12.14**. Los 18 fixtures frente a
+Maven 3.9.11 dan nueve cierres iguales, nueve rechazos y cero éxitos divergentes;
+los ocho cierres Jackson fijados y las trece coordenadas RabbitMQ 5.37.0 coinciden.
+Es una selección focalizada, no suite completa ni CI nueva. La [revisión del
+contexto anterior](../evidence/CLAUDE_NIFI_ATOMIC_CONTEXT_RECHECK_20261105.md)
+queda archivada con su revisión exacta, sin extenderla a correcciones posteriores.
+
+La imagen completa candidata de Kibana se construyó en Benten desde `2829a6f`:
+`sha256:f331e91ef0c80171e0663aad6c0b5f1aad0834f80e681e4122092976168fd006`.
+El escaneo y el gate existente pasan para la etiqueta exigida. Permanecen solo
+los dos hallazgos extract-zip ya permitidos; no se añade una excepción. El primer
+scan por digest falló la guarda de nombre y se conserva. El resultado de la imagen
+no es un resultado de CI protegida ni aceptación de arranque/servicio.
+
+La entrada anterior sobre la cota MM11 solo probaba patrones cortos. La
+[recomprobación independiente](../evidence/CLAUDE_MM11_RETENTION_RECHECK_20261105.md)
+mostró que el riesgo seguía abierto para patrones largos. El adaptador posterior
+usa `new Minimatch` sin caché compartida y rechaza el exceso de 1024 expansiones
+antes de compilar, también en listas negadas. Conserva 90 ficheros oficiales y
+107 salidas preparadas. **La repetibilidad de retención sigue sin resolver**:
+la primera ejecución 03 pasa, la 05 falla y la diagnóstica 07, tras un límite de
+job JavaScript, vuelve a detenerse en 10.042.616 bytes. Las 04/06 son contención
+del candado. No se eleva el presupuesto ni se convierte el primer pase en cierre.
+
+El [registro del coordinador](../evidence/INTEGRATION_CANDIDATES_20261105.json)
+vincula 70 fuentes activas y 812 artefactos; esta conciliación recalcula todos
+sus SHA-256, sin faltantes ni discrepancias. El inventario académico añade seis
+rutas y registra los hashes anteriores y nuevos de 19 entradas, incluida esta
+conciliación, en `benten_vm_guard_followup_20261105`. La allowlist del bundle
+incorpora explícitamente estos documentos; eso no demuestra un nuevo ZIP
+restaurado ni una imagen construida a partir de él.
+
+NiFi no tiene todavía imagen candidata nueva ni escaneo anidado fresco: el último
+CI atribuido sigue siendo `6d67bc2`, con 59 tuplas distintas y 63 registros. La
+prefetch de su base no se presenta como terminada ni como build. Quedan pendientes
+QA nueva, la suite completa actual, servicios y classloaders NAR, CG32 completo,
+SMB, aprobación protegida y aceptación humana. No se afirma nota 10 ni rúbrica
+aprobada. Base/matriz, 18 hashes históricos, alcance de clasificación actual,
+revisores pendientes y compuertas permanecen sin cambios.
+
+
+## Correcciones tras revisión y MM11.4 — conciliación del 06/11/2026
+
+Las revisiones de [política NiFi](../evidence/CLAUDE_NIFI_SHARED_POLICY_BENTEN_RECHECK_20261105.md)
+y [MM11 sin caché](../evidence/CLAUDE_MM11_UNCACHED_BENTEN_RECHECK_20261105.md)
+se conservan literalmente con su fecha del 5 de noviembre y fuente inmutable
+`a098a86`. No revisan los cambios posteriores. El código actual inspeccionado es
+`06e7e46cf05db6008a64eefc871af3de7f676668`, con la corrección NiFi `caec8a9`.
+
+El padre corrige los casos reproducidos de ámbito heredado antes de la exclusión,
+claves heredadas que cambian por interpolación y type/classifier requeridos con
+propiedades, y repinea el support-lock. Contexto e inventario deben coincidir y
+solo se admite el perfil completo de seis familias/22 objetivos. Los tests fijan
+los hashes literales, el grupo atómico y los bloqueos, y ejercitan corrupción de
+hermanos. Ocho tests fallan antes; después pasan **122 tests y 71 subtests en cada
+Python**, con el warning ZIP deliberado. Se ejecutaron en scratch y cinco fuentes
+se vinculan al commit después: no se fabrica un certificado de ejecución
+inmutable contemporáneo. Los 18 casos Maven anteriores dan 9 iguales/9 rechazos;
+los nuevos drivers dan 11 iguales/4 rechazos y 13 rechazos. Hay cuatro filas
+repetidas entre los 28 registros nuevos. Los ocho cierres Jackson y trece
+coordenadas RabbitMQ 5.37.0 coinciden; 5.35.0 falla por su viejo POM sin pin.
+No hay éxito divergente en los casos elegidos. Esto no garantiza cubrir Maven
+completo ni rechazar toda forma no modelada. Se conserva el primer fallo del
+harness, que esperaba una línea TALLY ausente.
+
+La revisión identifica jobs de optimización V8 como causa de los falsos rojos de
+retención previos, y un nuevo fallo abierto en patrones negados con llaves. El
+adaptador MM11.4 rechaza toda esa clase con negación efectiva salvo `nonegate` o
+`nobrace`, preserva comentarios/negación ordinaria y mantiene la cota de 1024.
+Los patrones positivos conservan truncados internos upstream (P1): no se promete
+ausencia general de truncado. Sus 90 ficheros oficiales y 107 salidas se verifican.
+La prueba espera como máximo dos segundos sin compilar otro patrón, conserva la
+parada de 8 MiB y registra deltas crudos/finales y plazo. Tres repeticiones dan
+576, -12640 y -9720 bytes agregados para patrones de 1023/3800 caracteres, mientras
+el control de caché oficial retiene unos 10 MB tras dos segundos. Cada ejecución
+conserva 225 hashes de artefacto y las mismas 20 fuentes actuales. No se afirma
+una cota de memoria transitoria/concurrencia ni disponibilidad del servicio.
+Los intentos 05/07 y las contenciones anteriores no se borran ni reetiquetan.
+
+La regresión completa 04 corresponde solo a **`a098a86`**: en cada Python pasan
+1096 pytest y 479 subtests, con cuatro omitidos y dos warnings deliberados;
+unittest da 574 tests y cuatro omitidos; pasan auditorías y 29 pruebas de
+dashboard con `-W error`. Se comprueban 26 hashes de evidencia, 1345 de fuentes
+Git y nueve de modelos/report/manifest sin cambios. SQLite de replay mutable se
+registra aparte; el modelo sigue siendo de prueba. Compose 5.6.1 usa configuración
+Docker aislada y la matriz mantiene el candado exterior completo. Los intentos
+01/03 son contención; 02 conserva el fallo Compose 2.40 y el falso diagnóstico
+del harness sobre SQLite. Los cambios posteriores tienen pruebas focales y de
+componentes, sin atribuirles esa suite completa anterior.
+
+La nueva imagen Kibana `06e7e46`, ID
+`sha256:15d5723a25cf02baa9785d7213a5850c240d653ad623a4a8e4f2a444cd791e64`,
+pasa build y scan/gate existentes, con 68 paquetes OS y 2307 Node. Solo siguen
+los dos hallazgos extract-zip ya permitidos, sin excepciones nuevas. La imagen
+`f331e91e…` anterior conserva su revisión y scan históricos. No se afirma arranque
+de servicios ni aceptación runtime de ninguna de ellas.
+
+El [registro actualizado](../evidence/INTEGRATION_CANDIDATES_20261105.json)
+conserva los 812 artefactos previos y añade las nuevas pruebas/build/scan. Esta
+conciliación comprueba **72 fuentes activas y 2161 artefactos**, sin discrepancias,
+y añade ambos informes al inventario y allowlist documental. Los 18 pares exactos
+de hash anterior/nuevo, incluida esta conciliación, quedan en
+`post_review_mm114_reconciliation_20261106`; los 19 pares de la etapa Benten previa
+se conservan intactos. No se afirma un nuevo ZIP restaurado por añadir su allowlist.
+
+P1 de NiFi (`verify`/`install` real con las guardas actuales), su imagen y nuevo
+scan anidado siguen pendientes; la descarga de base interrumpida no se presenta
+como integración. El CI atribuido sigue en `6d67bc2`, con 59 tuplas/63 registros.
+Siguen pendientes nueva QA del código corregido, servicios/NAR/classloaders,
+CG32 completo, SMB, aprobación protegida y aceptación humana. La verificación
+CG25 es documental: no cambia base, matriz, 18 hashes históricos, alcance activo,
+gates, excepciones, revisores ni nota de rúbrica.
+
+
+## Benten: suites, instalación e imágenes medidas — 06/11/2026
+
+La [validación atribuida](../evidence/BENTEN_VALIDATION_20261106.md) y su
+[registro con hashes](../evidence/BENTEN_VALIDATION_20261106.json) incorporan
+resultados nuevos sin reescribir los cortes anteriores. Se inspecciona `92ff99e`;
+la regresión completa y las imágenes nuevas pertenecen a `12ca2fa`, antes de la
+última corrección Maven. Cada Python 3.11/3.12 pasa 1107 pytest + 485 subtests
+(4 omisiones/2 warnings intencionales), unittest 577 (4 omisiones) y auditoría;
+dashboard 29 con `-W error`. Se comprueban documentalmente sus 27 miembros de
+prueba y 1347 hashes fuente contra Git, sin volver a ejecutar la suite.
+
+P1 stock original en `06e7e46` verifica/instala 22 objetivos/16 NARs como UID1000,
+sin Java/NiFi. La build real NiFi `12ca2fa` cierra además la variante Wolfi/root:
+instala esos 22 objetivos/16 NARs en 25,82 s. La imagen normal pasa scan/gate;
+la auditoría anidada nueva mide **15 hallazgos y gate exit 1**. El informe histórico
+conserva 63 registros/59 tuplas distintas. No se añade excepción ni se afirma NiFi
+en servicio. API y dashboard se construyen/escanean y pasan sus gates con cero
+vulnerabilidades; la imagen Kibana ya comprobada conserva solo las dos excepciones
+extract-zip existentes.
+
+El smoke offline de ambas imágenes pasa como UID65532, rootfs solo lectura,
+sin red, memoria 512 MiB y tmpfs 64 MiB. Verifica imports, consulta JSON builtin
+DuckDB y UTC/null con Arrow. Un ensayo posterior arranca ambos servicios en bridge
+interno propio, sin puertos host: TCP directo confirma health ready, POST, replay
+idéntico, conflicto 409 y health Streamlit. GET opt-in permanece deshabilitado
+(404 esperado). No hay navegador/render UI ni aceptación de datos del dashboard.
+El modelo público es de desarrollo; se conservan manifests/hashes, sin cambiar
+alcance ni afirmar evaluación nueva. Los contenedores/red propios se retiran;
+no hay errores de limpieza. Los intentos previos de harness se conservan.
+
+La [revisión final archivada](../evidence/CLAUDE_FINAL_GUARDS_MM114_RECHECK_20261106.md)
+cubre solo `12ca2fa`: no encuentra Critical/High/Medium del candidato fijado.
+Sus hipótesis Maven fueron medidas después con controles de padre válidos,
+conservando las formas originales sin `packaging=pom`. La
+[corrección Maven](../evidence/MAVEN_H_GUARDS_20261106.md) `92ff99e` rechaza las cinco
+formas escogidas, conserva ocho cierres Jackson y 13 coordenadas RabbitMQ iguales
+al Maven real y pasa 36 tests/27 subtests por intérprete. La falsa exclusión Rabbit
+v1 sigue registrada. El manifiesto final export02 verifica 419 miembros; el hash
+obsoleto del primer log en crecimiento no se oculta. Esto no vuelve a atribuir la
+suite completa a `92ff99e` ni amplía el alcance de aquella revisión.
+
+### Vinculación con descriptores avanzados, sin nota ni aceptación
+
+| Celdas de la fuente de rúbrica | Evidencia añadida y alcance que puede defenderse | Parte todavía pendiente |
+| --- | --- | --- |
+| G19 | Guardas de contexto/Maven, fallos cerrados, aislamiento del smoke y gate anidado que sigue bloqueando los 15 hallazgos. | Seguridad de la solución completa y aceptación independiente; no basta con scans de componentes. |
+| G32/G52/G55 | Dependencias concretas importadas en las imágenes y regresiones/bytes reproducibles; separación del entrenamiento y del servicio. | Justificación académica de herramientas/lenguaje/arquitectura y revisión del descriptor completo. |
+| G41/G61 | Arranque API con modelo público de desarrollo; health/POST/replay/conflicto medidos por TCP. | NiFi/InvokeHTTP, validación industrial, latencia/carga y vinculación del modelo aprobado. El umbral del modelo y AVISO/CRITICA son políticas distintas. |
+| G66/G95/G101 | UTC/null en Arrow y contrato de evento/predicción/replay en ensayo sintético, junto a tests locales atribuidos. | Calidad e integridad en el recorrido vivo completo y almacenamiento distribuido; no se infiere de un smoke. |
+| G71/G87/G105 | Imagen dashboard construida/escaneada, imports y health Streamlit reales. | Render por navegador, datos/gráficos, visualización/accesibilidad y valoración humana. Un health no evalúa un dashboard. |
+| G39/G45/G60/G62 | Se preserva la procedencia de nueve ficheros de modelo/prueba, sin nueva evaluación final. | Métricas, explicación/adecuación y aceptación independiente del modelo; no cambia su estado por pasar HTTP. |
+| G14/G46/G49/G65/G68/G72/G77/G80/G85/G90/G92/G96/G100/G104 | Se delimitan explícitamente los resultados parciales; no se suman como campaña simultánea. | ES/Kafka/CG15/NiFi/SMB, caudal/pérdidas/reinicio/carga, BI y justificaciones del descriptor. No ETA/RUL, forecast ni pérdidas calculadas a partir del score. |
+
+Las demás celdas no adquieren nueva aceptación por esta actualización. Las 40
+filas de la matriz, su base histórica, comandos `git show`, revisores `Pendiente`,
+`historical_snapshot`, alcance activo y todos los mapas de hashes anteriores se
+conservan. CG32 completo mantiene 6 GiB/20 GiB; preflight o arranque parcial no
+son campaña. CI protegido, merge, SMB, modelo, defensa, firmas y entrega siguen
+sus propias puertas.
+
+### Deriva exacta del inventario actual
+
+Se inspeccionan únicamente tres cambios técnicos ya incorporados en `92ff99e`:
+parser Maven, tests y su support-lock. No cambian pines de bibliotecas ni bytes
+del overlay de `12ca2fa`. Los hashes previos quedan en
+`benten_validation_reconciliation_20261106.previous_current_hashes`, incluidos
+los tres documentos editados de esta conciliación. El nuevo mapa
+`inspected_current_hashes` fija los bytes revisados; no reemplaza mapas históricos.
+Se añaden solo este informe Benten MD/JSON, la copia exacta de revisión y el informe
+Maven del coordinador. Las cualificaciones aún sin integrar no se inventarían.
+La comprobación CG25 sigue verificando enlaces, 40 celdas, hashes actuales e
+históricos y revisión humana pendiente; no concede una nota ni una aprobación.
+
+
+### Preparación posterior de inclusión documental en el ZIP
+
+Sobre `92ff99e`, el coordinador modifica solo cuatro strings del allowlist de
+`scripts/integration_bundle.py`, para incluir Benten MD/JSON, el informe Maven
+y la copia de revisión final. Se añade una deriva técnica separada, sin modificar
+los seis registros anteriores ni sus mapas históricos:
+
+| Fichero | SHA-256 en `92ff99e` | SHA-256 actual inspeccionado |
+| --- | --- | --- |
+| `scripts/integration_bundle.py` | `af39c4e4fa7732c70aed7b35a33ff3ceb646fcc859ade153e27efc63f09813b1` | `7d737f47f58d69c5c6427acd077aa2be83685274a5cf0c4d0fe2f4df6f8ffe0b` |
+
+El registro `bundle_document_inclusion_followup_20261106` conserva ese delta
+respecto a la base y actualiza los hashes documentales derivados. La inclusión
+está preparada; el coordinador realiza la prueba focalizada y comprobará los
+cuatro miembros de un ZIP creado tras registrar los documentos. Esta conciliación
+no afirma ese resultado todavía ni publicación del ZIP final. No cambia ninguna
+suite histórica, entrega, evaluación de rúbrica o aceptación runtime/humana.
+
+
+## Corte de integración fixture y navegador, posterior a `e4c5751`
+
+La [validación Benten ampliada](../evidence/BENTEN_VALIDATION_20261106.md) y su
+[JSON](../evidence/BENTEN_VALIDATION_20261106.json) añaden un recorrido vivo
+acotado. La VM configurada con 10 GiB pasa preflight manteniendo 6 GiB/20 GiB.
+El primer run falla por historia por defecto de un día frente a snapshot de
+185 días; queda conservado. El segundo usa worker/imágenes `12ca2fa` y solo el
+selector de historia `a1ed9d4`, fijado por hash y probado con recursos propios
+nuevos. No se presenta como ejecución íntegra de `e4c5751`.
+
+Se ofrecen seis eventos públicos AI4I como `lab_fixture`, con modelo de desarrollo.
+El recorrido Filebeat/Kafka/ciclo de worker programado por NiFi/API/CG15/ES/GET
+reconcilia 6/6/6/6 y Kafka committed/end 6/6, lag final 0, cero pérdida/pendiente/
+rechazo/duplicado ES. El p95 HTTP 28,66 ms y fin a fin 24 533,51 ms describen solo
+seis muestras; no acreditan carga, disponibilidad o latencia industrial.
+El navegador real verifica 26 campos visibles contra GET del mismo evento,
+escritorio/móvil, modal, página de datos y temporizador. La semana vacía no se
+rellena; seis meses muestran un evento y su cobertura/procedencia. No hay
+inspección exhaustiva de consola/red ni aceptación global de accesibilidad.
+El modelo no recibe aceptación ni nueva evaluación final.
+
+El archivo local público tiene SHA-256
+`d172c47fd26408c37ca715b467ea9f0701b408f7da6f4b8ec4294905c541e308`:
+82 payloads verificados, más su manifiesto; se verifican aparte siete artefactos
+browser. Las marcas anteriores `pending_browser` conservan su fecha; la prueba
+posterior se añade por separado. Todas las puertas normales de imagen y la
+puerta anidada NiFi se distinguen: los **15 hallazgos anidados siguen bloqueando**,
+sin excepción nueva. El servicio NiFi usado por el fixture no prueba todos los
+NARs, Jetty, providers, futuros overlays o una remediación de esos hallazgos.
+
+La cobertura Plain Jackson nueva pertenece a `7ccc986`, esquema 2: **2/95**
+contextos estáticos, 93 pendientes. Los 13/92 históricos no se suman ni se
+reetiquetan. Hay doce casos JVM con loader/CodeSource corregidos y control negativo
+de origen, sin aprobación Jetty real; las 767 ausencias WAR preexistentes siguen
+sin probar opcionalidad. Sus 84 miembros de prueba se comprueban por hash.
+OTel actual `e4c5751` es preparación de experimento corregido; su nueva ejecución
+sigue pendiente. El resultado aligned antiguo no ejerció consumidores GCP reales;
+el README lo corrige y este informe no lo convierte en el experimento nuevo.
+
+### Alcance adicional defendible frente a la rúbrica
+
+| Celdas | Evidencia concreta añadida | Límite de la ampliación |
+| --- | --- | --- |
+| G41/G61 | API real integrada con el worker programado por NiFi y seis eventos válidos. | Modelo de desarrollo; no garantía industrial, InvokeHTTP genérico o carga completa. |
+| G46/G49/G66/G68/G77/G90/G92/G95/G101 | Continuidad y procedencia del mismo lote Filebeat/Kafka/worker/API/CG15/ES/GET; seis registros sin pérdida/duplicado ES, offset final comprobado. | No SMB/CNC físico, volúmenes grandes, pausa/reinicio/fallo ni campaña sostenida; no todos los escenarios del descriptor. |
+| G71/G87/G105 | Navegador real con modal, datos, escritorio/móvil y refresco; 26 campos coincidentes y ventana vacía honesta. | No valoración humana, accesibilidad global, consola/red exhaustivas ni BI industrial validado. |
+| G19/G80 | Preflight preservado y límites/consumo observados con puertas de seguridad separadas. | Los 15 hallazgos NiFi siguen rojos; seis eventos no acreditan capacidad o seguridad integral. |
+| G39/G45/G60/G62 | Procedencia del modelo conservada y evaluación offline no disponible declarada. | Sin aceptación del modelo ni métricas nuevas de evaluación final. |
+
+Las 40 filas históricas, la base, `historical_snapshot`, todos los mapas previos,
+los revisores `Pendiente`, la clasificación contemporánea y la entrega humana
+siguen intactos. La nueva conciliación técnica actualiza dos bindings existentes:
+`scripts/integration_lab.py` y `tests/test_integration_wiring.py`, ambos por el
+selector explícito `desde=timestamp` de `a1ed9d4` y su regresión. Se añaden las
+fuentes/tests de cualificación ya versionados como **preparación**; sus pines,
+resultados y revisiones propios mantienen su ámbito. No se añade código ni se
+repite runtime desde esta conciliación. El mapa anterior queda en
+`cg32_browser_qualification_followup_20261106.previous_current_hashes`; no se
+sobrescribe ninguna evidencia anterior ni se inventa aceptación humana/CI/merge.
+
+Se comprueban además 33 hashes de los scans/builds/gates normales ES/Kafka/Filebeat:
+todos exit 0 para las imágenes `12ca2fa` del recorrido. Filebeat conserva un
+hallazgo Go permitido existente; ES/Kafka ninguno. Con las cuatro pruebas normales
+anteriores, los siete gates normales pasan sin añadir excepciones; NiFi anidado
+sigue rojo. El coordinador informa que el primer batch OTel corregido se detiene
+cerrado por ocho símbolos originales aún no clasificados; el diagnóstico y la
+prueba final siguen pendientes, sin cualificación nueva atribuida.
+
+Al fijar hashes, el HEAD ya es `8429e12`; sus fuentes OTel actualizan la resolución
+de declaraciones JDK heredadas como preparación. No hay fuentes dirty en ese
+instante ni resultado VM nuevo atribuido. Se conserva por separado el fallo de
+`e4c5751` y la fuente de imágenes/worker `12ca2fa`.
+
+
+### Resultado OTel corregido posterior, sin promoción
+
+La prueba nueva congelada `8429e12`, documentada después en `6d064ce` sin cambio
+runtime, pasa 52 tests/3 subtests, Maven, análisis estático y controles de loader
+real. Nueve consumidores externos seleccionados inicializan en old/aligned;
+un ResourceProvider se instancia mediante loader NAR explícito en cada variante.
+Narrow falla antes en ConfigUtil. No se ejercitan exporter/GCP, atributos del
+provider, processor TCCL/InstanceClassLoader ni servidor/scheduling NiFi.
+No se convierte el antiguo `aligned-result.json` SDK en esta ejecución nueva.
+
+Se verifican 54 payloads más manifiesto de la exportación SHA-256
+`54896f8f44cf5c3d142055387bb0dbe52a3c7a2120810438e5050af1396a4749`
+y 20 fuentes contra Git `8429e12`. El intento fallido de `e4c5751`, con ocho
+referencias sin clasificar y dos diagnósticos, conserva sus 37 payloads más
+manifiesto y SHA-256
+`8d97be9bb82377ad39dc52e0e02f65864a0337b41f1fb20b9fdb99b2900be7fd`.
+No se corrigen retrospectivamente sus resultados.
+
+Las 205 referencias actuales se clasifican 155 JDK/50 incubator opcionales;
+old 228 se clasifica 161/66 más una llamada heredada interna antigua exacta.
+No quedan sin clasificar; las rutas opcionales siguen sin ejecutarse. Ocho
+referencias ConfigUtil del control inverso fallan. Se declaran diez abstractos,
+29 removals, 22 restricciones y un cambio static, con cero impactos externos
+modelados. Las 144 clases externas incluyen descriptor-only frente a 110 CP de
+la revisión antigua; no se mezclan denominadores. El modelo JDK procede del
+compilador Ubuntu21 montado, no verifica toda la JVM de imagen. Fuente/bytecode
+encoding y pruebas benignas no acreditan cierre CVE.
+
+Se conservan las comprobaciones before/after de 189 JARs, 16 launcher, fuentes,
+NARs e imagen. No se promociona overlay ni reconstruye imagen, no se añade
+excepción ni se reduce el gate NiFi anidado de 15 hallazgos. Sigue pendiente
+QA independiente del resultado corregido y el resto de aceptación. El manifiesto
+actualiza aparte README OTel de resultado y hashes documentales; incorpora el
+verificador portable ya versionado `tests/test_nifi_otel_proof_guards.py` como
+fuente, sin inventar nueva suite completa. Todos los mapas anteriores, base,
+matriz, snapshots y revisión humana pendiente quedan intactos.

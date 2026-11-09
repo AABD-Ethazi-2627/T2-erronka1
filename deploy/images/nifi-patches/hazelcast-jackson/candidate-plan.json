@@ -1,0 +1,768 @@
+{
+  "status": "experimental-wrapper-prepared-independent-QA-required",
+  "runtime_approved": false,
+  "replacement": null,
+  "original_sha256": "241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33",
+  "candidate_sha256": "73e56b7bb0565be3feeaaec611e8290f527b15ff97229de40e1e59ae40faabc0",
+  "candidate_path": "/home/tears/.cache/cnc-hazelcast-recovery-20261105T072902Z-final2/hazelcast-5.7.0-cnc-jackson.jar",
+  "scan_sha256": "670afc98bdf35dd441e6cc34c0afe791d170e2e1632f2b052df22b917547f20c",
+  "scan_head": "6d67bc2ec72d931486174b906654bcc089250cba",
+  "ci_run": 41833235278,
+  "tuples": [
+    {
+      "VulnerabilityID": "CVE-2026-68494",
+      "PkgName": "com.fasterxml.jackson.core:jackson-core",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.8, 2.21.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/050b429804dce2a7e08f0be1b0b4c3d040fdb9cd",
+        "https://github.com/FasterXML/jackson-core/commit/4cdd529749da396cc7edf6d4a2aad41d47902641",
+        "https://github.com/FasterXML/jackson-core/commit/c5941e5aae7fd5aeac55d66933cfb82b9aabeef8",
+        "https://github.com/FasterXML/jackson-core/pull/1611",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-r7wm-3cxj-wff9"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-89407",
+      "PkgName": "com.fasterxml.jackson.core:jackson-core",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.11, 2.21.7, 2.22.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/731e794f62623aa0d86ced52490166be903fbb1d",
+        "https://github.com/FasterXML/jackson-core/commit/e7acd64cc99bd346704423dc2bfea1ab0a08ddff",
+        "https://github.com/FasterXML/jackson-core/issues/1649",
+        "https://github.com/FasterXML/jackson-core/pull/1650",
+        "https://github.com/FasterXML/jackson-core/pull/1701",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-p6pp-m3f8-5c89"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-89425",
+      "PkgName": "com.fasterxml.jackson.core:jackson-core",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.21.7, 2.22.3, 2.18.11",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "bounded old/fixed probe on actual wrapper + primary advisory",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/211cf2c5d91abbec38067f37efc1363cd4e88ee3",
+        "https://github.com/FasterXML/jackson-core/pull/1698",
+        "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-2.18.11",
+        "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-3.2.3",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-7hhh-6rmp-j9qf"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54512",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.8, 3.1.4, 2.21.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/434d6c511de7fdd9872f29157aafb6162d12d8d5",
+        "https://github.com/FasterXML/jackson-databind/commit/434d6c511de7fdd9872f29157aafb6162d12d8d5%20%28jackson-databind-2.18.8%29",
+        "https://github.com/FasterXML/jackson-databind/issues/5988",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54513",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.8, 2.21.4, 3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/01d1692c8d0ed03e51a0e3c4f8a9e6908e4931e5",
+        "https://github.com/FasterXML/jackson-databind/commit/24529da29fdf46ff94ca38de9ebf31cd188f5e8e",
+        "https://github.com/FasterXML/jackson-databind/issues/5981",
+        "https://github.com/FasterXML/jackson-databind/issues/5983",
+        "https://github.com/FasterXML/jackson-databind/pull/5984",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rmj7-2vxq-3g9f"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-68497",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.10, 2.21.6, 2.22.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/a99b7e74c8928f43f6975773a8c862c8316178bd",
+        "https://github.com/FasterXML/jackson-databind/pull/6127",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.10",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.2",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-q4xh-88c3-wmh7"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-91776",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.11, 2.21.7, 2.22.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "bounded old/fixed probe on actual wrapper + primary advisory",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/2870d1d6dc1b7e1c07ee11dd5b04ab71cddbb577",
+        "https://github.com/FasterXML/jackson-databind/issues/6203",
+        "https://github.com/FasterXML/jackson-databind/pull/6203",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.11",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.3",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wv8q-qhhj-9h54"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-91777",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.21.7, 2.18.11, 2.22.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/37ad9b81712cbb9fb62c2d2c1813593252a24b67",
+        "https://github.com/FasterXML/jackson-databind/issues/6204",
+        "https://github.com/FasterXML/jackson-databind/pull/6204",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.11",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.3",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-cxp5-3px4-pw24"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-19032",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.10, 2.21.6, 2.22.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/cc6756b61ed90b6b9227f670e0408d5d9bd48551",
+        "https://github.com/FasterXML/jackson-databind/commit/ce26eda3481cd796f76ba4c53ffe1da23b53f166",
+        "https://github.com/FasterXML/jackson-databind/commit/d94bb632becfe0ba96926b9909ab06d1f87aad6d",
+        "https://github.com/FasterXML/jackson-databind/pull/6129",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.10",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.2",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wjgm-6hv5-3cvf"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54514",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.8, 2.21.4, 3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/1f5a1037b1e9e05920e755cb35f198bcd46667e4",
+        "https://github.com/FasterXML/jackson-databind/pull/5951",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-hgj6-7826-r7m5"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54515",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "3.1.4, 2.18.9, 2.21.5, 2.22.1",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/0e1b0b211f7a53baa62ba2f4c9bd006c7bf4d5fa",
+        "https://github.com/FasterXML/jackson-databind/issues/5962",
+        "https://github.com/FasterXML/jackson-databind/issues/5964",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5jmj-h7xm-6q6v"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54516",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.21.4, 3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/c3d56dd25d52319828147c5b9aeabf2d485c250a",
+        "https://github.com/FasterXML/jackson-databind/commit/e88cb17006b6af4883b973058f0bb6486e5074af",
+        "https://github.com/FasterXML/jackson-databind/pull/5967",
+        "https://github.com/FasterXML/jackson-databind/pull/5968",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-9fxm-vc8v-hj55"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54517",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.21.4, 3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/5bf23edb4221f7dd2ec8e71ff6d26c61640f261d",
+        "https://github.com/FasterXML/jackson-databind/commit/94c5d215b3af1505098c686405d9641f041a9962",
+        "https://github.com/FasterXML/jackson-databind/pull/5969",
+        "https://github.com/FasterXML/jackson-databind/pull/5970",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5hh8-q8hv-fr38"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54518",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.21.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/721fa07ebbd4aab4a659a1a68940878315c3e341",
+        "https://github.com/FasterXML/jackson-databind/commit/d633bc038f200c1397c07f1a2b46f58e72c91eea",
+        "https://github.com/FasterXML/jackson-databind/pull/5971",
+        "https://github.com/FasterXML/jackson-databind/pull/5973",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rcqc-6cw3-h962"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-59888",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.8, 2.21.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "bounded old/fixed probe on actual wrapper + primary advisory",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/baa2cdf5ca2b2717fbb88d91955d69d8651df3e4",
+        "https://github.com/FasterXML/jackson-databind/commit/c7c678360624da5bc7eed2152789fa522880db9d",
+        "https://github.com/FasterXML/jackson-databind/pull/5974",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-3pjw-73gf-8qr5"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-59889",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.21.5, 2.18.9, 2.22.1",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/d627a8a86fcb062429282f79f3f256f181ed2c7b",
+        "https://github.com/FasterXML/jackson-databind/issues/6060",
+        "https://github.com/FasterXML/jackson-databind/pull/6056",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5gvw-p9qm-jgwh"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-77310",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.9, 2.21.5, 2.22.1",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/2fc7bd9057dd051d7dea0e5fcad89822d0fa5ebd",
+        "https://github.com/FasterXML/jackson-databind/pull/6058",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.9",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.5",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.1",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.5",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.1",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-vvgp-rfg2-7rr6"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-83557",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.10, 2.21.6, 2.22.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/eb3b7fc0f9c0d27f471550ac3316b17d1987388f",
+        "https://github.com/FasterXML/jackson-databind/issues/6156",
+        "https://github.com/FasterXML/jackson-databind/pull/6155",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.10",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.2",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-gx83-3vf8-gh7j"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "GHSA-mhm7-754m-9p8w",
+      "PkgName": "com.fasterxml.jackson.core:jackson-databind",
+      "InstalledVersion": "2.21.2",
+      "FixedVersion": "2.18.9, 2.21.5",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "2.21.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/c628b357ed143d8492756d5c1458cfb9fbeb29ed",
+        "https://github.com/FasterXML/jackson-databind/commit/dea7eb466e98cc226c4ac65587581fb49926820c",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-mhm7-754m-9p8w"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-68494",
+      "PkgName": "tools.jackson.core:jackson-core",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/050b429804dce2a7e08f0be1b0b4c3d040fdb9cd",
+        "https://github.com/FasterXML/jackson-core/commit/4cdd529749da396cc7edf6d4a2aad41d47902641",
+        "https://github.com/FasterXML/jackson-core/commit/c5941e5aae7fd5aeac55d66933cfb82b9aabeef8",
+        "https://github.com/FasterXML/jackson-core/pull/1611",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-r7wm-3cxj-wff9"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-89407",
+      "PkgName": "tools.jackson.core:jackson-core",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.7, 3.2.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/731e794f62623aa0d86ced52490166be903fbb1d",
+        "https://github.com/FasterXML/jackson-core/commit/e7acd64cc99bd346704423dc2bfea1ab0a08ddff",
+        "https://github.com/FasterXML/jackson-core/issues/1649",
+        "https://github.com/FasterXML/jackson-core/pull/1650",
+        "https://github.com/FasterXML/jackson-core/pull/1701",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-p6pp-m3f8-5c89"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-89425",
+      "PkgName": "tools.jackson.core:jackson-core",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.7, 3.2.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "bounded old/fixed probe on actual wrapper + primary advisory",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-core",
+        "https://github.com/FasterXML/jackson-core/commit/211cf2c5d91abbec38067f37efc1363cd4e88ee3",
+        "https://github.com/FasterXML/jackson-core/pull/1698",
+        "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-2.18.11",
+        "https://github.com/FasterXML/jackson-core/releases/tag/jackson-core-3.2.3",
+        "https://github.com/FasterXML/jackson-core/security/advisories/GHSA-7hhh-6rmp-j9qf"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54512",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/434d6c511de7fdd9872f29157aafb6162d12d8d5",
+        "https://github.com/FasterXML/jackson-databind/commit/434d6c511de7fdd9872f29157aafb6162d12d8d5%20%28jackson-databind-2.18.8%29",
+        "https://github.com/FasterXML/jackson-databind/issues/5988",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-j3rv-43j4-c7qm"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54513",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/01d1692c8d0ed03e51a0e3c4f8a9e6908e4931e5",
+        "https://github.com/FasterXML/jackson-databind/commit/24529da29fdf46ff94ca38de9ebf31cd188f5e8e",
+        "https://github.com/FasterXML/jackson-databind/issues/5981",
+        "https://github.com/FasterXML/jackson-databind/issues/5983",
+        "https://github.com/FasterXML/jackson-databind/pull/5984",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rmj7-2vxq-3g9f"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-68497",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.2.2, 3.1.6",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/a99b7e74c8928f43f6975773a8c862c8316178bd",
+        "https://github.com/FasterXML/jackson-databind/pull/6127",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.10",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.2",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-q4xh-88c3-wmh7"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-91776",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.7, 3.2.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "bounded old/fixed probe on actual wrapper + primary advisory",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/2870d1d6dc1b7e1c07ee11dd5b04ab71cddbb577",
+        "https://github.com/FasterXML/jackson-databind/issues/6203",
+        "https://github.com/FasterXML/jackson-databind/pull/6203",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.11",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.3",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wv8q-qhhj-9h54"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-91777",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.7, 3.2.3",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/37ad9b81712cbb9fb62c2d2c1813593252a24b67",
+        "https://github.com/FasterXML/jackson-databind/issues/6204",
+        "https://github.com/FasterXML/jackson-databind/pull/6204",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.11",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.3",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.7",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.3",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-cxp5-3px4-pw24"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-19032",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.6, 3.2.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/cc6756b61ed90b6b9227f670e0408d5d9bd48551",
+        "https://github.com/FasterXML/jackson-databind/commit/ce26eda3481cd796f76ba4c53ffe1da23b53f166",
+        "https://github.com/FasterXML/jackson-databind/commit/d94bb632becfe0ba96926b9909ab06d1f87aad6d",
+        "https://github.com/FasterXML/jackson-databind/pull/6129",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.10",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.2",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-wjgm-6hv5-3cvf"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54514",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "2.21.4, 3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/1f5a1037b1e9e05920e755cb35f198bcd46667e4",
+        "https://github.com/FasterXML/jackson-databind/pull/5951",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-hgj6-7826-r7m5"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54515",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/0e1b0b211f7a53baa62ba2f4c9bd006c7bf4d5fa",
+        "https://github.com/FasterXML/jackson-databind/issues/5962",
+        "https://github.com/FasterXML/jackson-databind/issues/5964",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5jmj-h7xm-6q6v"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54516",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/c3d56dd25d52319828147c5b9aeabf2d485c250a",
+        "https://github.com/FasterXML/jackson-databind/commit/e88cb17006b6af4883b973058f0bb6486e5074af",
+        "https://github.com/FasterXML/jackson-databind/pull/5967",
+        "https://github.com/FasterXML/jackson-databind/pull/5968",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-9fxm-vc8v-hj55"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54517",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/5bf23edb4221f7dd2ec8e71ff6d26c61640f261d",
+        "https://github.com/FasterXML/jackson-databind/commit/94c5d215b3af1505098c686405d9641f041a9962",
+        "https://github.com/FasterXML/jackson-databind/pull/5969",
+        "https://github.com/FasterXML/jackson-databind/pull/5970",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5hh8-q8hv-fr38"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-54518",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/721fa07ebbd4aab4a659a1a68940878315c3e341",
+        "https://github.com/FasterXML/jackson-databind/commit/d633bc038f200c1397c07f1a2b46f58e72c91eea",
+        "https://github.com/FasterXML/jackson-databind/pull/5971",
+        "https://github.com/FasterXML/jackson-databind/pull/5973",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-rcqc-6cw3-h962"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-59888",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.4",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "bounded old/fixed probe on actual wrapper + primary advisory",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/baa2cdf5ca2b2717fbb88d91955d69d8651df3e4",
+        "https://github.com/FasterXML/jackson-databind/commit/c7c678360624da5bc7eed2152789fa522880db9d",
+        "https://github.com/FasterXML/jackson-databind/pull/5974",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-3pjw-73gf-8qr5"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-59889",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.5, 3.2.1",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/d627a8a86fcb062429282f79f3f256f181ed2c7b",
+        "https://github.com/FasterXML/jackson-databind/issues/6060",
+        "https://github.com/FasterXML/jackson-databind/pull/6056",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-5gvw-p9qm-jgwh"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-77310",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.5, 3.2.1",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/2fc7bd9057dd051d7dea0e5fcad89822d0fa5ebd",
+        "https://github.com/FasterXML/jackson-databind/pull/6058",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.9",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.5",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.1",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.5",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.1",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-vvgp-rfg2-7rr6"
+      ],
+      "closure_approved": false
+    },
+    {
+      "VulnerabilityID": "CVE-2026-83557",
+      "PkgName": "tools.jackson.core:jackson-databind",
+      "InstalledVersion": "3.1.2",
+      "FixedVersion": "3.1.6, 3.2.2",
+      "PkgPath": "usr/share/cnc-guard/nested-jars/241ec66cea8491787f68c3336f069ac463877af50bdb7676cd9d538f1940dc33.jar",
+      "proposed_component_version": "3.1.7",
+      "actual_code": "complete pinned core/databind library transformed with verified official wrapper rules",
+      "evidence": "primary advisory only; no local CVE reproduction",
+      "primary_refs": [
+        "https://github.com/FasterXML/jackson-databind",
+        "https://github.com/FasterXML/jackson-databind/commit/eb3b7fc0f9c0d27f471550ac3316b17d1987388f",
+        "https://github.com/FasterXML/jackson-databind/issues/6156",
+        "https://github.com/FasterXML/jackson-databind/pull/6155",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.18.10",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.21.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-2.22.2",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.1.6",
+        "https://github.com/FasterXML/jackson-databind/releases/tag/jackson-databind-3.2.2",
+        "https://github.com/FasterXML/jackson-databind/security/advisories/GHSA-gx83-3vf8-gh7j"
+      ],
+      "closure_approved": false
+    }
+  ],
+  "parent_coverage_sha256": "d2fefc251e08cc72f66d1c833bde5b1b8aaa1ba33546b34be1d915d94af32d1d",
+  "remaining_gates": [
+    "parent independent QA",
+    "complete symbolic/inherited/MR linkage",
+    "full dependency and NAR/classloader closure",
+    "NiFi/final-image scans",
+    "unchanged CG32 resources",
+    "real NiFi/SMB",
+    "protected checks/review and human acceptance"
+  ],
+  "excluded": [
+    "Parquet wrapper",
+    "four plain Jackson objects",
+    "unmanifested AWS/Azure Jackson",
+    "Kibana"
+  ]
+}

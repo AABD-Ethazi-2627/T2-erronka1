@@ -1,0 +1,21 @@
+{
+  "version": "9.5.5",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/elastic/elasticsearch/v9.5.5/server/src/main/java/org/elasticsearch/plugins/PluginsLoader.java",
+      "sha256": "8bc333efa7e1fba279dd45bcf780d97229826f95c8c13abcbe2e4467e09a7092",
+      "bytes": 23257
+    },
+    {
+      "url": "https://raw.githubusercontent.com/elastic/elasticsearch/v9.5.5/server/src/main/java/org/elasticsearch/plugins/PluginBundle.java",
+      "sha256": "ccddcc6d76f4178ef2ea051d44d60e2f9df364925600063f3c395dbbebd122e2",
+      "bytes": 2845
+    },
+    {
+      "url": "https://raw.githubusercontent.com/elastic/elasticsearch/v9.5.5/server/src/main/java/org/elasticsearch/plugins/ExtendedPluginsClassLoader.java",
+      "sha256": "f0d69748096248f85148e3962c7eea5827457d6c90871e0e02b517a248d15022",
+      "bytes": 1680
+    }
+  ],
+  "status": "source-inspected-not-installed-bytecode-equivalence"
+}

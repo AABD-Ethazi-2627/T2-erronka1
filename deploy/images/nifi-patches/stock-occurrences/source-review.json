@@ -1,0 +1,688 @@
+[
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-compress-processors/2.12.0/nifi-compress-processors-2.12.0-sources.jar",
+    "file": "nifi-compress-processors-2.12.0-sources.jar",
+    "sha256": "873d794cabc3ca6e3b9482fb2cca15e124d8575faa9489c98a354935b6ba9d6e",
+    "consumer_lines": {
+      "org/apache/nifi/processors/compress/ModifyCompression.java": [
+        {
+          "line": 58,
+          "text": "import org.xerial.snappy.SnappyFramedInputStream;"
+        },
+        {
+          "line": 59,
+          "text": "import org.xerial.snappy.SnappyFramedOutputStream;"
+        },
+        {
+          "line": 60,
+          "text": "import org.xerial.snappy.SnappyHadoopCompatibleOutputStream;"
+        },
+        {
+          "line": 61,
+          "text": "import org.xerial.snappy.SnappyInputStream;"
+        },
+        {
+          "line": 62,
+          "text": "import org.xerial.snappy.SnappyOutputStream;"
+        },
+        {
+          "line": 84,
+          "text": "@Tags({\"content\", \"compress\", \"recompress\", \"gzip\", \"bzip2\", \"lzma\", \"xz-lzma2\", \"snappy\", \"snappy-hadoop\", \"snappy framed\", \"lz4-framed\", \"deflate\", \"zstd\", \"brotli\"})"
+        },
+        {
+          "line": 290,
+          "text": "            case SNAPPY -> new SnappyInputStream(parentInputStream);"
+        },
+        {
+          "line": 291,
+          "text": "            case SNAPPY_HADOOP -> throw new IOException(\"Cannot decompress snappy-hadoop\");"
+        },
+        {
+          "line": 292,
+          "text": "            case SNAPPY_FRAMED -> new SnappyFramedInputStream(parentInputStream);"
+        },
+        {
+          "line": 336,
+          "text": "                compressionOut = new SnappyOutputStream(parentOutputStream);"
+        },
+        {
+          "line": 340,
+          "text": "                compressionOut = new SnappyHadoopCompatibleOutputStream(parentOutputStream);"
+        },
+        {
+          "line": 344,
+          "text": "                compressionOut = new SnappyFramedOutputStream(parentOutputStream);"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-standard-processors/2.12.0/nifi-standard-processors-2.12.0-sources.jar",
+    "file": "nifi-standard-processors-2.12.0-sources.jar",
+    "sha256": "d033a1021e48c20e7764c0c8c6f02de7f201a422bf2793763c3b4f59561667d1",
+    "consumer_lines": {
+      "org/apache/nifi/processors/standard/CompressContent.java": [
+        {
+          "line": 62,
+          "text": "import org.xerial.snappy.SnappyFramedInputStream;"
+        },
+        {
+          "line": 63,
+          "text": "import org.xerial.snappy.SnappyFramedOutputStream;"
+        },
+        {
+          "line": 64,
+          "text": "import org.xerial.snappy.SnappyHadoopCompatibleOutputStream;"
+        },
+        {
+          "line": 65,
+          "text": "import org.xerial.snappy.SnappyInputStream;"
+        },
+        {
+          "line": 66,
+          "text": "import org.xerial.snappy.SnappyOutputStream;"
+        },
+        {
+          "line": 88,
+          "text": "@Tags({\"content\", \"compress\", \"decompress\", \"gzip\", \"bzip2\", \"lzma\", \"xz-lzma2\", \"snappy\", \"snappy-hadoop\", \"snappy framed\", \"lz4-framed\", \"deflate\", \"zstd\", \"brotli\"})"
+        },
+        {
+          "line": 143,
+          "text": "    public static final String COMPRESSION_FORMAT_SNAPPY = \"snappy\";"
+        },
+        {
+          "line": 144,
+          "text": "    public static final String COMPRESSION_FORMAT_SNAPPY_HADOOP = \"snappy-hadoop\";"
+        },
+        {
+          "line": 145,
+          "text": "    public static final String COMPRESSION_FORMAT_SNAPPY_FRAMED = \"snappy framed\";"
+        },
+        {
+          "line": 155,
+          "text": "        .description(\"The compression format to use. Valid values are: GZIP, Deflate, ZSTD, BZIP2, XZ-LZMA2, LZMA, Brotli, Snappy, Snappy Hadoop, Snappy Framed, and LZ4-Framed\")"
+        },
+        {
+          "line": 221,
+          "text": "        Map.entry(\"application/x-snappy\", COMPRESSION_FORMAT_SNAPPY),"
+        },
+        {
+          "line": 222,
+          "text": "        Map.entry(\"application/x-snappy-hadoop\", COMPRESSION_FORMAT_SNAPPY_HADOOP),"
+        },
+        {
+          "line": 223,
+          "text": "        Map.entry(\"application/x-snappy-framed\", COMPRESSION_FORMAT_SNAPPY_FRAMED),"
+        },
+        {
+          "line": 248,
+          "text": "                .explanation(\"<Compression Format> set to <snappy-hadoop> and <MODE> set to <decompress> is not permitted. \" +"
+        },
+        {
+          "line": 249,
+          "text": "                    \"Data that is compressed with Snappy Hadoop can not be decompressed using this processor.\")"
+        },
+        {
+          "line": 295,
+          "text": "            case COMPRESSION_FORMAT_SNAPPY, COMPRESSION_FORMAT_SNAPPY_HADOOP -> \".snappy\";"
+        },
+        {
+          "line": 338,
+          "text": "                                compressionOut = new SnappyOutputStream(bufferedOut);"
+        },
+        {
+          "line": 339,
+          "text": "                                mimeTypeRef.set(\"application/x-snappy\");"
+        },
+        {
+          "line": 342,
+          "text": "                                compressionOut = new SnappyHadoopCompatibleOutputStream(bufferedOut);"
+        },
+        {
+          "line": 343,
+          "text": "                                mimeTypeRef.set(\"application/x-snappy-hadoop\");"
+        },
+        {
+          "line": 346,
+          "text": "                                compressionOut = new SnappyFramedOutputStream(bufferedOut);"
+        },
+        {
+          "line": 347,
+          "text": "                                mimeTypeRef.set(\"application/x-snappy-framed\");"
+        },
+        {
+          "line": 382,
+          "text": "                            case COMPRESSION_FORMAT_SNAPPY -> new SnappyInputStream(bufferedIn);"
+        },
+        {
+          "line": 383,
+          "text": "                            case COMPRESSION_FORMAT_SNAPPY_HADOOP -> throw new Exception(\"Cannot decompress snappy-hadoop.\");"
+        },
+        {
+          "line": 384,
+          "text": "                            case COMPRESSION_FORMAT_SNAPPY_FRAMED -> new SnappyFramedInputStream(bufferedIn);"
+        },
+        {
+          "line": 401,
+          "text": "                    final byte[] buffer = new byte[8192];"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/nifi/nifi-record-serialization-services/2.12.0/nifi-record-serialization-services-2.12.0-sources.jar",
+    "file": "nifi-record-serialization-services-2.12.0-sources.jar",
+    "sha256": "6391b1f36a7212f91c98782898e54d9d3f54ef236027e02130545f9e74be1592",
+    "consumer_lines": {
+      "org/apache/nifi/json/JsonRecordSetWriter.java": [
+        {
+          "line": 43,
+          "text": "import org.xerial.snappy.SnappyFramedOutputStream;"
+        },
+        {
+          "line": 44,
+          "text": "import org.xerial.snappy.SnappyOutputStream;"
+        },
+        {
+          "line": 83,
+          "text": "    public static final String COMPRESSION_FORMAT_SNAPPY = \"snappy\";"
+        },
+        {
+          "line": 84,
+          "text": "    public static final String COMPRESSION_FORMAT_SNAPPY_FRAMED = \"snappy framed\";"
+        },
+        {
+          "line": 121,
+          "text": "            .description(\"The compression format to use. Valid values are: GZIP, BZIP2, ZSTD, XZ-LZMA2, LZMA, Snappy, and Snappy Framed\")"
+        },
+        {
+          "line": 260,
+          "text": "                    compressionOut = new SnappyOutputStream(bufferedOut);"
+        },
+        {
+          "line": 261,
+          "text": "                    mimeType = \"application/x-snappy\";"
+        },
+        {
+          "line": 264,
+          "text": "                    compressionOut = new SnappyFramedOutputStream(bufferedOut);"
+        },
+        {
+          "line": 265,
+          "text": "                    mimeType = \"application/x-snappy-framed\";"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/avro/avro/1.12.2/avro-1.12.2-sources.jar",
+    "file": "avro-1.12.2-sources.jar",
+    "sha256": "2f0ce1e25ea35b542c5dc8087bad960614b549ebe21063d9838f96e1105669af",
+    "consumer_lines": {
+      "org/apache/avro/file/SnappyCodec.java": [
+        {
+          "line": 25,
+          "text": "import org.xerial.snappy.Snappy;"
+        },
+        {
+          "line": 29,
+          "text": "/** * Implements Snappy compression and decompression. */"
+        },
+        {
+          "line": 30,
+          "text": "public class SnappyCodec extends Codec {"
+        },
+        {
+          "line": 35,
+          "text": "      // if snappy isn't available, this will throw an exception which we"
+        },
+        {
+          "line": 37,
+          "text": "      Snappy.getNativeLibraryVersion();"
+        },
+        {
+          "line": 42,
+          "text": "      return new SnappyCodec();"
+        },
+        {
+          "line": 46,
+          "text": "  private SnappyCodec() {"
+        },
+        {
+          "line": 57,
+          "text": "    ByteBuffer out = ByteBuffer.allocate(Snappy.maxCompressedLength(in.remaining()) + 4);"
+        },
+        {
+          "line": 58,
+          "text": "    int size = Snappy.compress(in.array(), offset, in.remaining(), out.array(), 0);"
+        },
+        {
+          "line": 71,
+          "text": "    final int uncompressedLength = Snappy.uncompressedLength(in.array(), offset, in.remaining() - 4);"
+        },
+        {
+          "line": 73,
+          "text": "    ByteBuffer out = ByteBuffer.allocate(uncompressedLength);"
+        },
+        {
+          "line": 74,
+          "text": "    int size = Snappy.uncompress(in.array(), offset, in.remaining() - 4, out.array(), 0);"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/4.3.1/kafka-clients-4.3.1-sources.jar",
+    "file": "kafka-clients-4.3.1-sources.jar",
+    "sha256": "074a971220d7dd862a2485eda8d9f2530bff977bd1e74ea944d8cc80b34b0d2e",
+    "consumer_lines": {
+      "org/apache/kafka/common/compress/SnappyCompression.java": [
+        {
+          "line": 27,
+          "text": "import org.xerial.snappy.SnappyInputStream;"
+        },
+        {
+          "line": 28,
+          "text": "import org.xerial.snappy.SnappyOutputStream;"
+        },
+        {
+          "line": 34,
+          "text": "public class SnappyCompression implements Compression {"
+        },
+        {
+          "line": 36,
+          "text": "    private SnappyCompression() {}"
+        },
+        {
+          "line": 46,
+          "text": "            return new SnappyOutputStream(bufferStream);"
+        },
+        {
+          "line": 54,
+          "text": "        // SnappyInputStream uses default implementation of InputStream for skip. Default implementation of"
+        },
+        {
+          "line": 55,
+          "text": "        // SnappyInputStream allocates a new skip buffer every time, hence, we prefer our own implementation."
+        },
+        {
+          "line": 57,
+          "text": "            return new ChunkedBytesStream(new SnappyInputStream(new ByteBufferInputStream(buffer)),"
+        },
+        {
+          "line": 68,
+          "text": "        // SnappyInputStream already uses an intermediate buffer internally. The size"
+        },
+        {
+          "line": 76,
+          "text": "        return o instanceof SnappyCompression;"
+        },
+        {
+          "line": 84,
+          "text": "    public static class Builder implements Compression.Builder<SnappyCompression> {"
+        },
+        {
+          "line": 87,
+          "text": "        public SnappyCompression build() {"
+        },
+        {
+          "line": 88,
+          "text": "            return new SnappyCompression();"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.9.5/zookeeper-3.9.5-sources.jar",
+    "file": "zookeeper-3.9.5-sources.jar",
+    "sha256": "609e3a676e96babff4b00a5fe49f337b92e69f6e23418bda8a4fa79bdc37383b",
+    "consumer_lines": {
+      "org/apache/zookeeper/server/persistence/SnapStream.java": [
+        {
+          "line": 43,
+          "text": "import org.xerial.snappy.SnappyCodec;"
+        },
+        {
+          "line": 44,
+          "text": "import org.xerial.snappy.SnappyInputStream;"
+        },
+        {
+          "line": 45,
+          "text": "import org.xerial.snappy.SnappyOutputStream;"
+        },
+        {
+          "line": 66,
+          "text": "        SNAPPY(\"snappy\"),"
+        },
+        {
+          "line": 111,
+          "text": "                    is = new SnappyInputStream(fis);"
+        },
+        {
+          "line": 145,
+          "text": "            // Unlike SnappyInputStream, the SnappyOutputStream"
+        },
+        {
+          "line": 147,
+          "text": "            os = new SnappyOutputStream(fos);"
+        },
+        {
+          "line": 204,
+          "text": "            isValid = isValidSnappyStream(file);"
+        },
+        {
+          "line": 248,
+          "text": "        byte[] byteArray = new byte[2];"
+        },
+        {
+          "line": 255,
+          "text": "            byte[] magicHeader = new byte[2];"
+        },
+        {
+          "line": 266,
+          "text": "     * Certify the Snappy stream integrity by checking the header"
+        },
+        {
+          "line": 267,
+          "text": "     * for the Snappy magic string"
+        },
+        {
+          "line": 270,
+          "text": "     * @return true if it has the correct Snappy magic string"
+        },
+        {
+          "line": 273,
+          "text": "    private static boolean isValidSnappyStream(File f) throws IOException {"
+        },
+        {
+          "line": 274,
+          "text": "        byte[] byteArray = new byte[SnappyCodec.MAGIC_LEN];"
+        },
+        {
+          "line": 276,
+          "text": "            if (SnappyCodec.MAGIC_LEN != fis.read(byteArray, 0, SnappyCodec.MAGIC_LEN)) {"
+        },
+        {
+          "line": 281,
+          "text": "            byte[] magicHeader = new byte[SnappyCodec.MAGIC_LEN];"
+        },
+        {
+          "line": 282,
+          "text": "            bb.get(magicHeader, 0, SnappyCodec.MAGIC_LEN);"
+        },
+        {
+          "line": 283,
+          "text": "            return Arrays.equals(magicHeader, SnappyCodec.getMagicHeader());"
+        },
+        {
+          "line": 307,
+          "text": "            byte[] bytes = new byte[5];"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/parquet/parquet-hadoop/1.18.1/parquet-hadoop-1.18.1-sources.jar",
+    "file": "parquet-hadoop-1.18.1-sources.jar",
+    "sha256": "b654080f6b3725d32deb944a20c5afa80bab9ce27f7b726942fdb0a82b1ea4c8",
+    "consumer_lines": {
+      "org/apache/parquet/hadoop/DirectCodecFactory.java": [
+        {
+          "line": 48,
+          "text": "import org.xerial.snappy.Snappy;"
+        },
+        {
+          "line": 102,
+          "text": "        // avoid using the default Snappy codec since it allocates direct buffers at awkward spots."
+        },
+        {
+          "line": 103,
+          "text": "        return new SnappyCompressor();"
+        },
+        {
+          "line": 106,
+          "text": "        // todo: create class similar to the SnappyCompressor for zlib and exclude it as"
+        },
+        {
+          "line": 107,
+          "text": "        // snappy is above since it also generates allocateDirect calls."
+        },
+        {
+          "line": 117,
+          "text": "        // Snappy has no compression level; keep using the direct compressor."
+        },
+        {
+          "line": 119,
+          "text": "        return new SnappyCompressor();"
+        },
+        {
+          "line": 131,
+          "text": "        return new SnappyDecompressor();"
+        },
+        {
+          "line": 172,
+          "text": "      byte[] output = new byte[decompressedSize];"
+        },
+        {
+          "line": 182,
+          "text": "      byte[] inputBytes = new byte[compressedSize];"
+        },
+        {
+          "line": 185,
+          "text": "      byte[] outputBytes = new byte[decompressedSize];"
+        },
+        {
+          "line": 212,
+          "text": "        ByteBuffer output = outputAllocator.allocate(decompressedSize);"
+        },
+        {
+          "line": 267,
+          "text": "        ByteBuffer output = outputAllocator.allocate(maxCompressedSize(Math.toIntExact(bytes.size())));"
+        },
+        {
+          "line": 369,
+          "text": "  public class SnappyDecompressor extends BaseDecompressor {"
+        },
+        {
+          "line": 372,
+          "text": "      return Snappy.uncompress(input, output);"
+        },
+        {
+          "line": 381,
+          "text": "  public class SnappyCompressor extends BaseCompressor {"
+        },
+        {
+          "line": 385,
+          "text": "      return Snappy.compress(input, output);"
+        },
+        {
+          "line": 390,
+          "text": "      return Snappy.maxCompressedLength(size);"
+        }
+      ],
+      "org/apache/parquet/hadoop/codec/SnappyCompressor.java": [
+        {
+          "line": 23,
+          "text": "import org.xerial.snappy.Snappy;"
+        },
+        {
+          "line": 25,
+          "text": "public class SnappyCompressor extends NonBlockedCompressor {"
+        },
+        {
+          "line": 28,
+          "text": "  protected int maxCompressedLength(int byteSize) {"
+        },
+        {
+          "line": 29,
+          "text": "    return Snappy.maxCompressedLength(byteSize);"
+        },
+        {
+          "line": 34,
+          "text": "    return Snappy.compress(uncompressed, compressed);"
+        }
+      ],
+      "org/apache/parquet/hadoop/codec/SnappyDecompressor.java": [
+        {
+          "line": 23,
+          "text": "import org.xerial.snappy.Snappy;"
+        },
+        {
+          "line": 25,
+          "text": "public class SnappyDecompressor extends NonBlockedDecompressor {"
+        },
+        {
+          "line": 29,
+          "text": "    return Snappy.uncompress(compressed, uncompressed);"
+        },
+        {
+          "line": 34,
+          "text": "    return Snappy.uncompressedLength(compressed);"
+        },
+        {
+          "line": 36,
+          "text": "} // class SnappyDecompressor"
+        }
+      ]
+    }
+  },
+  {
+    "url": "https://repo.maven.apache.org/maven2/org/apache/hadoop/hadoop-common/3.5.0/hadoop-common-3.5.0-sources.jar",
+    "file": "hadoop-common-3.5.0-sources.jar",
+    "sha256": "188fbb7cbc70cdc3868bf8bcdb6a04ca7a22038e137be5ef5d4c0521cb844b1b",
+    "consumer_lines": {
+      "org/apache/hadoop/io/compress/snappy/SnappyCompressor.java": [
+        {
+          "line": 19,
+          "text": "package org.apache.hadoop.io.compress.snappy;"
+        },
+        {
+          "line": 29,
+          "text": "import org.xerial.snappy.Snappy;"
+        },
+        {
+          "line": 32,
+          "text": " * A {@link Compressor} based on the snappy compression algorithm."
+        },
+        {
+          "line": 33,
+          "text": " * http://code.google.com/p/snappy/"
+        },
+        {
+          "line": 35,
+          "text": "public class SnappyCompressor implements Compressor {"
+        },
+        {
+          "line": 37,
+          "text": "      LoggerFactory.getLogger(SnappyCompressor.class.getName());"
+        },
+        {
+          "line": 56,
+          "text": "  public SnappyCompressor(int directBufferSize) {"
+        },
+        {
+          "line": 59,
+          "text": "    uncompressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);"
+        },
+        {
+          "line": 60,
+          "text": "    compressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);"
+        },
+        {
+          "line": 67,
+          "text": "  public SnappyCompressor() {"
+        },
+        {
+          "line": 118,
+          "text": "    // Note how much data is being fed to snappy"
+        },
+        {
+          "line": 196,
+          "text": "    // Re-initialize the snappy's output direct-buffer"
+        },
+        {
+          "line": 212,
+          "text": "    uncompressedDirectBuf.clear(); // snappy consumes all buffer input"
+        },
+        {
+          "line": 282,
+          "text": "      int size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,"
+        }
+      ],
+      "org/apache/hadoop/io/compress/snappy/SnappyDecompressor.java": [
+        {
+          "line": 19,
+          "text": "package org.apache.hadoop.io.compress.snappy;"
+        },
+        {
+          "line": 29,
+          "text": "import org.xerial.snappy.Snappy;"
+        },
+        {
+          "line": 32,
+          "text": " * A {@link Decompressor} based on the snappy compression algorithm."
+        },
+        {
+          "line": 33,
+          "text": " * http://code.google.com/p/snappy/"
+        },
+        {
+          "line": 35,
+          "text": "public class SnappyDecompressor implements Decompressor {"
+        },
+        {
+          "line": 37,
+          "text": "      LoggerFactory.getLogger(SnappyDecompressor.class.getName());"
+        },
+        {
+          "line": 53,
+          "text": "  public SnappyDecompressor(int directBufferSize) {"
+        },
+        {
+          "line": 56,
+          "text": "    compressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);"
+        },
+        {
+          "line": 57,
+          "text": "    uncompressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);"
+        },
+        {
+          "line": 65,
+          "text": "  public SnappyDecompressor() {"
+        },
+        {
+          "line": 98,
+          "text": "    // Reinitialize snappy's output direct-buffer"
+        },
+        {
+          "line": 111,
+          "text": "    // Reinitialize snappy's input direct buffer"
+        },
+        {
+          "line": 116,
+          "text": "    // Note how much data is being fed to snappy"
+        },
+        {
+          "line": 145,
+          "text": "    // Check if snappy has consumed all input"
+        },
+        {
+          "line": 212,
+          "text": "      // Re-initialize the snappy's output direct buffer"
+        },
+        {
+          "line": 267,
+          "text": "      int size = Snappy.uncompress((ByteBuffer) compressedDirectBuf,"
+        },
+        {
+          "line": 276,
+          "text": "    assert (this instanceof SnappyDirectDecompressor);"
+        },
+        {
+          "line": 307,
+          "text": "  public static class SnappyDirectDecompressor extends SnappyDecompressor implements"
+        }
+      ]
+    }
+  }
+]

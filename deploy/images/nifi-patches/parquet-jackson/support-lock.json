@@ -1,0 +1,6 @@
+{
+  "stock-occurrences/source-lock.json": "abc31418ffa242b71dd97b319f5f22a5c626c372dac6b0868abb56741f4e5a5d",
+  "jackson/jdk21-pins.json": "e28c21e719337f5610fefcc4dcba71c10ee24ea517d4bc8089107bea78f874b0",
+  "jackson/coverage.json": "d2fefc251e08cc72f66d1c833bde5b1b8aaa1ba33546b34be1d915d94af32d1d",
+  "jackson/upstream-pins.json": "f8da6de54446b14eaf5d2815da4957a3d3ca6251a79cf47ca2b155ce021c9b09"
+}

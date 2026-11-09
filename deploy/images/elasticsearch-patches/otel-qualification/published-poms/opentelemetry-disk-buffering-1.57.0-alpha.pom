@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.opentelemetry.contrib</groupId>
+  <artifactId>opentelemetry-disk-buffering</artifactId>
+  <version>1.57.0-alpha</version>
+  <name>OpenTelemetry Java Contrib</name>
+  <description>Exporter implementations that store signals on disk</description>
+  <url>https://github.com/open-telemetry/opentelemetry-java-contrib</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>opentelemetry</id>
+      <name>OpenTelemetry</name>
+      <url>https://github.com/open-telemetry/opentelemetry-java-contrib/discussions</url>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git@github.com:open-telemetry/opentelemetry-java-contrib.git</connection>
+    <developerConnection>scm:git:git@github.com:open-telemetry/opentelemetry-java-contrib.git</developerConnection>
+    <tag>v1.57.0</tag>
+    <url>https://github.com/open-telemetry/opentelemetry-java-contrib/tree/v1.57.0</url>
+  </scm>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/open-telemetry/opentelemetry-java-contrib/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/open-telemetry/opentelemetry-java-contrib/actions</url>
+  </ciManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.opentelemetry</groupId>
+      <artifactId>opentelemetry-sdk</artifactId>
+      <version>1.62.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.squareup.wire</groupId>
+      <artifactId>wire-runtime</artifactId>
+      <version>6.4.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.opentelemetry</groupId>
+      <artifactId>opentelemetry-exporter-otlp-common</artifactId>
+      <version>1.62.0</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>

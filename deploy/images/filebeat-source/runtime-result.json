@@ -1,0 +1,23 @@
+{
+  "image_id": "sha256:aabe875ef120f50889e2c3b4043b69b61110c62ac69a885e3b525d92405039c2",
+  "compress_buildinfo": "dep\tgithub.com/klauspost/compress\tv1.20.2\th1:v5tiZvm1KGLyg5d5oXdXe3lsSPrbEUiKoXGia//I7Qo=",
+  "binary_sha256": "2c106d48cad2649fea88ee67a2d65acdb172f3eccaf5c8da601d5424d918923c",
+  "govulncheck": "v1.9.0",
+  "govulncheck_exit": 0,
+  "reachable_vulnerabilities": 0,
+  "govulncheck_log_sha256": "4243d498861d922e5d5b042382fb88a7e993c6b44b4e1c25618048d0f68f20cc",
+  "go_buildinfo_sha256": "cb95fa86136d5be03bef68d3f765de8f8ef4dccad4820dfa768e78e37126b854",
+  "trivy_scan": {
+    "image_id": "sha256:aabe875ef120f50889e2c3b4043b69b61110c62ac69a885e3b525d92405039c2",
+    "raw_findings": [
+      [
+        "GO-2026-5932",
+        "golang.org/x/crypto",
+        "v0.58.0"
+      ]
+    ],
+    "gate": [],
+    "sha256": "13736e33ca83994dc6915e6340775da147c0d92a3d6cb8634d9a0b2edbe9ac65"
+  },
+  "production_acceptance": false
+}

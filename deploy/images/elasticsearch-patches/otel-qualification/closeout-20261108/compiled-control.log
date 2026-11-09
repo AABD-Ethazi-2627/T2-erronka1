@@ -1,0 +1,31 @@
+JAVAC-PASS
+CONSUMER-LOAD	apm	org.elasticsearch.telemetry.apm.APM	org.elasticsearch.telemetry.apm
+ORIGIN	apm	io.opentelemetry.api.OpenTelemetry	io.opentelemetry.api	/usr/share/elasticsearch/modules/apm/opentelemetry-api-1.67.0.jar	538d1dff2f9a37aecbc0ef98fd17273a3affb058e734e6763a3a07a38a5fdc59
+ORIGIN	apm	io.opentelemetry.context.Context	io.opentelemetry.context	/usr/share/elasticsearch/modules/apm/opentelemetry-context-1.67.0.jar	40fb813fb5e27ec2691daa29c81b572b5b1541ef9b41e62490c3ee3e6407c55e
+ORIGIN	apm	io.opentelemetry.common.ComponentLoader	io.opentelemetry.common	/usr/share/elasticsearch/modules/apm/opentelemetry-common-1.67.0.jar	da97bdb395418e16ecdcbe7ad3497f45b9e767ceda4ae7e86133e7a757ac377f
+ORIGIN	apm	io.opentelemetry.sdk.autoconfigure.spi.ConfigProperties	io.opentelemetry.sdk.autoconfigure.spi	/usr/share/elasticsearch/modules/apm/opentelemetry-sdk-extension-autoconfigure-spi-1.62.0.jar	220c22bcf420faae59b7225c789f572eaa22e7af2304d55508aaf2a3efcfecf8
+ORIGIN	apm	io.opentelemetry.sdk.OpenTelemetrySdk	io.opentelemetry.sdk	/usr/share/elasticsearch/modules/apm/opentelemetry-sdk-1.62.0.jar	99d421ea0e5a1ca8e45cb67f1d5db7f0e8a718dd55eeb86c1323597e1f10aed3
+ORIGIN	apm	io.opentelemetry.sdk.trace.SdkTracerProvider	io.opentelemetry.sdk.trace	/usr/share/elasticsearch/modules/apm/opentelemetry-sdk-trace-1.62.0.jar	fb6c0953b229a6da1db813135ae11a621bf9da56b7356c1e93049ed4b088c232
+ORIGIN	apm	io.opentelemetry.sdk.common.Clock	io.opentelemetry.sdk.common	/usr/share/elasticsearch/modules/apm/opentelemetry-sdk-common-1.62.0.jar	bf9d13df9a50e49a5db664ba8ebfad79f73f03219d2ac6f6709d432f6896eba0
+ORIGIN	apm	io.opentelemetry.sdk.metrics.SdkMeterProvider	io.opentelemetry.sdk.metrics	/usr/share/elasticsearch/modules/apm/opentelemetry-sdk-metrics-1.62.0.jar	50b057fbf063f6801f623212f4b51b6a3fefc77837314a1316b2f54894c8b5d4
+ORIGIN	apm	io.opentelemetry.sdk.logs.SdkLoggerProvider	io.opentelemetry.sdk.logs	/usr/share/elasticsearch/modules/apm/opentelemetry-sdk-logs-1.62.0.jar	51c94329bc8e335ed79027d29d49c075c11b91b39e48679edf590e784a392406
+SDK-CONFIG	observed-current-ConfigUtil-failure
+EXPORTER-LOAD	io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter
+EXPORTER-LOAD	io.opentelemetry.exporter.otlp.http.metrics.OtlpHttpMetricExporter
+EXPORTER-LOAD	io.opentelemetry.exporter.otlp.http.logs.OtlpHttpLogRecordExporter
+Exception in thread "main" java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:119)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:583)
+	at EsLoaderProbe.call(EsLoaderProbe.java:32)
+	at EsLoaderProbe.components(EsLoaderProbe.java:39)
+	at EsLoaderProbe.main(EsLoaderProbe.java:128)
+Caused by: java.lang.NoClassDefFoundError: io/opentelemetry/api/internal/ConfigUtil
+	at io.opentelemetry.sdk.common@1.62.0/io.opentelemetry.sdk.common.internal.ExceptionAttributeResolver.getDefault(ExceptionAttributeResolver.java:36)
+	at io.opentelemetry.sdk.trace@1.62.0/io.opentelemetry.sdk.trace.SdkTracerProviderBuilder.<init>(SdkTracerProviderBuilder.java:41)
+	at io.opentelemetry.sdk.trace@1.62.0/io.opentelemetry.sdk.trace.SdkTracerProvider.builder(SdkTracerProvider.java:46)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: io.opentelemetry.api.internal.ConfigUtil
+	at java.base/jdk.internal.loader.Loader.loadClass(Loader.java:510)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:502)
+	... 8 more

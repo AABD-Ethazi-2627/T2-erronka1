@@ -1,0 +1,24 @@
+{
+  "daemon_id": "eab72f91-4cdf-4d18-a6dc-e1160f26af25",
+  "base_commit": "481b6936e8a090b79e7e83d3b0e38bd1f21a1109",
+  "image_id": "sha256:0519cbd228bc6fd0446c2946740556372f1da18e8bf690026b04b32aaedf8f99",
+  "tag": "cnc-closeout-es:final",
+  "jdk_feature": 27,
+  "es_version": "9.5.5",
+  "health_green": true,
+  "synthetic_roundtrip": true,
+  "entitlements_agent_attached": true,
+  "apm_policy_and_descriptor_unchanged": true,
+  "collector_metrics_received": true,
+  "collector_traces_received": true,
+  "api_usage_warning_absent_after_null_guard": true,
+  "java_probe_compile_and_execute_exit": 0,
+  "maven_current_sdk_six_aligned_exit": 0,
+  "production_acceptance": false,
+  "scanner": "passed-zero-findings-exact-image",
+  "logs_sha256": {
+    "live-final.log": "25791d772f0b3ad55c8b685e02a026183674791b2e5c7326d7f916f8f2c3f58d",
+    "collector-final-patched.log": "384331829072bd59f7997d34f358490e6a8bf5bb06134531207b7f93dabe0676",
+    "compiled-final.log": "a3e258ef7f65baa2d6d0ae730110e7505d56f9801d1c4315baf15861dbe1e895"
+  }
+}

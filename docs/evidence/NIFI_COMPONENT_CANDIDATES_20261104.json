@@ -1,0 +1,60 @@
+{
+  "source_commit": "107edda",
+  "child_source_commit": "98eb0dc4593c12e7c9837804f78efb4da6c1d967",
+  "source_sha256": {
+    "deploy/images/nifi-patches/compatible-libraries/LibraryProbe.java": "71642c704477b86189e843edd05228fcd1ad0ac8e7fc45a7d402e1684b9646d8",
+    "deploy/images/nifi-patches/compatible-libraries/README.md": "29a838a8fc079c33818e84c2d369bbf4a3671f08ee861e62ab9af908d69fddca",
+    "deploy/images/nifi-patches/compatible-libraries/candidate-plan.json": "63a7860a3b20d5b08db4a891c589c09874080c26a892dc78a9c0d0e6df06e203",
+    "deploy/images/nifi-patches/compatible-libraries/pins.json": "22d1819e20f318b8956f9b26c160590b5ab4c634762990973ce886d464c4e621",
+    "deploy/images/nifi-patches/compatible-libraries/test_verifier.py": "87fe5468a1d96214667784230695fa8f070421b01a210206892af7368a93075d",
+    "deploy/images/nifi-patches/compatible-libraries/toolchain-pins.json": "5e70754109b7549e6214d5b5cbfd02c9d93b22cfbf52064f637376095a76abb9",
+    "deploy/images/nifi-patches/compatible-libraries/verification-summary.json": "761b0e1471673636d746b9c44cd3132a52d4bdfeeda4ace784559b3519df746f",
+    "deploy/images/nifi-patches/compatible-libraries/verify.py": "b0815c81225595ad4aea4a227dd62d4f943560a4d8afcb26d9ae4a53358d8503"
+  },
+  "proof_directory": "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-compatible-libraries/proof-1793791569206013412",
+  "proof_artifact_sha256": {
+    "compile.log": "cb116deb05f8906114d1ce0b7b6b9f955bf9a816a12901462c063941a67d51f3",
+    "component-results.json": "a4287cb2769500ff9f974892ec643c4e85f0788b9a3ac9cd433a538cc246cfa7",
+    "guava-33.4.8-jre.log": "b2be97c9c797f859f69f9cd9d6b43b6c595d159c7c2f26c709a3a2c0578b361a",
+    "guava-33.6.0-jre.log": "b2be97c9c797f859f69f9cd9d6b43b6c595d159c7c2f26c709a3a2c0578b361a",
+    "guava-33.7.1-jre.log": "39cd0bfe2ad98703f6c9809c8a71d8da27cc30b267e967294d9997cf00b925e0",
+    "guava-33.7.2-jre.log": "fe8ac99dbb1a7dae984867dd3e025f2c71ca811b0be15ee6adf55491c2a4f6a5",
+    "lz4-1.11.2.log": "769b50a049b847bcc0dd59936c86e76a74e2f1ffe09092e3f79d60fa09c96d43",
+    "lz4-1.11.4.log": "0b6d82a8ecbcee6af2c5fa3af11af0097e3091da255792162acc1e1d086bc8e6",
+    "rabbit-5.35.0.log": "2852dd5e9c5a85fb05ff7af9177756387e46fed716ceca1af5f1c07c30d4a9d9",
+    "rabbit-5.36.0-comment.log": "f9fd77d803751104f79ae08dc9e55fc99264df835ff2942416d634e1d22dd146",
+    "rabbit-5.36.0-shortstr.log": "fe331d3939f664d1b9a8c5a4bb6b97c02c093ac86a6eefc2e437090a7e7cf873",
+    "rabbit-5.37.0.log": "a4f4116e7f1e81c026c075588375c8c7ed661fc610f5c169af03e846dc94214f",
+    "rabbit-comment-5.35.0.log": "f9fd77d803751104f79ae08dc9e55fc99264df835ff2942416d634e1d22dd146",
+    "rabbit-comment-5.37.0.log": "92f505575b8e9bb29bd5f8ff53306c22acd53e50b3f99c113947fce945018170",
+    "replacement-plan.json": "63a7860a3b20d5b08db4a891c589c09874080c26a892dc78a9c0d0e6df06e203",
+    "resource-usage.json": "c1886ba4b13a71a5a99353d6292925982a5cad4c4e612e1121c2af1764dcd9ae",
+    "snappy-1.1.10.8.log": "7509a1b0da4ea64469e2d50fa291804ef8ce98bd3650acc42bd60f3713e0e7f9",
+    "snappy-1.1.10.9.log": "2cf1ba42616e3d06df0d8906452448866d1a70812c8be3fa2f6cbc79c9322b43",
+    "toolchain.json": "2067ec3ae44f49cf852b03bfcc85d1078ae0a65df8990088a73f3ad41cd2d728"
+  },
+  "component_verifier": "passed",
+  "negative_integrity_tests": 4,
+  "plan_matches_child": true,
+  "original_nar_occurrence_map": "pending",
+  "patched_objects": 0,
+  "runtime_wiring": false,
+  "final_image_scan": "pending",
+  "independent_code_review": "pending",
+  "exceptions_added": false,
+  "parent_command": [
+    ".venv/bin/python",
+    "deploy/images/nifi-patches/compatible-libraries/verify.py",
+    "--cache",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/parent-compatible-libraries",
+    "--reports",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/artifact-2da877c",
+    "--objects",
+    "/home/tears/.cache/cnc-nifi-ci-remediation-20261104/vulnerable-objects.json",
+    "--offline"
+  ],
+  "parent_log_sha256": {
+    "parent-compatible-libraries-verify.log": "8af73ab6682f4f27a7d20eff65ddab7841f5137523fa7b79f254dedd30545f95",
+    "parent-compatible-libraries-negative.log": "037993523460af7fa913ff7752e75a67ad4f52459f4b37cf8224d14e0cce1e5c"
+  }
+}

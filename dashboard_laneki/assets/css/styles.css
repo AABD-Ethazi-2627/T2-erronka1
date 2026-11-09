@@ -5,11 +5,11 @@
    ========================================== */
 
 :root {
-    --pastel-blue: #DCEBFA;
-    --pastel-pink: #F9E2E4;
-    --pastel-ice: #E7F0F5;
-    --pastel-slate: #E5EDF5;
-    --pastel-green: #DFF4E9;
+    --pastel-blue: #C5DCF3;
+    --pastel-pink: #F5B8B8;
+    --pastel-ice: #D1E2EB;
+    --pastel-slate: #CFDCE8;
+    --pastel-green: #C6E7D6;
 
     --dark-blue: #142A40;
     --muted-blue: #435970;
@@ -17,22 +17,53 @@
     --machine-green: #23856C;
     --machine-yellow: #D4A63E;
     --machine-red: #DE4651;
+    --dashboard-font-family: Verdana, Arial, sans-serif;
+    --kpi-font-family: Verdana, Arial, sans-serif;
+    --kpi-title-size: 17px;
+    --kpi-value-size: clamp(32px, 2.2vw, 40px);
+    --kpi-description-size: 14px;
 }
 
 /* ==========================================
    TIPOGRAFIA OROKORRA
    ========================================== */
 
-html, body, .stApp, button, input {
-    font-family: Verdana, Arial, sans-serif !important;
+html, body, .stApp,
+.stApp p, .stApp span, .stApp strong, .stApp small,
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+.stApp button, .stApp input, .stApp select, .stApp textarea,
+.stApp table, .stApp th, .stApp td, .stApp label,
+[role="dialog"], [role="dialog"] button, [role="dialog"] input,
+svg text {
+    font-family: var(--dashboard-font-family) !important;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .stApp {
     line-height: 1.5;
+    letter-spacing: 0.005em;
+}
+
+.stApp small,
+.stApp caption {
+    line-height: 1.4;
+}
+
+/* Mantendu Material ikonoen berezko letra-tipoa. */
+.stApp [data-testid="stIconMaterial"],
+.stApp .material-symbols-rounded,
+.stApp .material-icons {
+    font-family: "Material Symbols Rounded", "Material Icons" !important;
+    font-variant-numeric: normal;
+    font-feature-settings: normal;
 }
 
 .block-container {
@@ -49,10 +80,12 @@ html, body, .stApp,
 
 [data-testid="stMain"] {
     height: calc(100vh - 38px);
-    overflow: hidden !important;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
 }
 
 [data-testid="stMainBlockContainer"] {
+    min-height: 100%;
     height: 100%;
     overflow: hidden !important;
 }
@@ -135,8 +168,8 @@ input:focus-visible {
 .sidebar-logo {
     position: relative;
     width: 100%;
-    height: 78px;
-    margin: 0 0 58px;
+    height: 84px;
+    margin: 0 0 52px;
     transform: translateY(-38px);
 }
 
@@ -145,7 +178,7 @@ input:focus-visible {
     position: absolute;
     top: 0;
     left: 50%;
-    width: 170px;
+    width: 185px;
     height: auto;
     object-fit: contain;
     transform: translateX(-50%);
@@ -156,7 +189,7 @@ input:focus-visible {
     left: 0;
     right: 0;
     bottom: 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 800;
     color: #D4E3F0;
     line-height: 1.25;
@@ -248,17 +281,29 @@ input:focus-visible {
     margin-bottom: 16px;
 }
 
+.alerts-header-title {
+    font-size: 29px;
+    line-height: 1.2;
+    margin-bottom: 5px;
+}
+
+.alerts-header-subtitle {
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
 .sidebar-user-card {
     position: fixed;
     left: 12px;
     bottom: 16px;
     width: 166px;
-    min-height: 62px;
+    min-height: 74px;
     display: grid;
-    grid-template-columns: 40px minmax(0, 1fr) 14px;
+    grid-template-columns: 46px minmax(0, 1fr) 14px;
     align-items: center;
     gap: 9px;
-    padding: 10px;
+    padding: 11px 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.08);
@@ -270,9 +315,9 @@ input:focus-visible {
 .sidebar-system-card {
     position: fixed;
     left: 12px;
-    bottom: 90px;
+    bottom: 102px;
     width: 166px;
-    min-height: 70px;
+    min-height: 82px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -290,7 +335,7 @@ input:focus-visible {
     align-items: center;
     gap: 7px;
     color: #FFFFFF !important;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 .sidebar-system-card strong i {
@@ -304,18 +349,18 @@ input:focus-visible {
 
 .sidebar-system-card span {
     color: #9FC4E0 !important;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .sidebar-user-avatar {
-    width: 40px;
-    height: 40px;
+    width: 46px;
+    height: 46px;
     display: grid;
     place-items: center;
     border-radius: 50%;
     background: #3498DB;
     color: #FFFFFF !important;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 800;
 }
 
@@ -329,7 +374,7 @@ input:focus-visible {
 .sidebar-user-info strong {
     overflow: hidden;
     color: #FFFFFF !important;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.2;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -340,7 +385,7 @@ input:focus-visible {
     align-items: center;
     gap: 5px;
     color: #CFE0EC !important;
-    font-size: 9px;
+    font-size: 10px;
     white-space: nowrap;
 }
 
@@ -354,7 +399,7 @@ input:focus-visible {
 
 .sidebar-user-menu {
     color: #CFE0EC !important;
-    font-size: 17px;
+    font-size: 19px;
     line-height: 1;
     text-align: center;
 }
@@ -363,13 +408,49 @@ input:focus-visible {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 9px;
-    height: 36px;
+    gap: 0;
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 0 7px;
+    border: 1px solid var(--panel-border);
+    border-radius: 9px;
+    background: var(--panel-bg);
     color: var(--main-text);
     font-size: 14px;
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
+    box-shadow: 0 2px 7px rgba(20, 42, 64, 0.07);
+}
+
+.header-data-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 26px;
+    padding: 0 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.header-data-item + .header-data-item {
+    border-left: 1px solid var(--panel-border);
+}
+
+.header-data-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: #276FA6;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.header-temperature .header-data-icon {
+    color: #C65E36;
 }
 
 .panel-heading {
@@ -382,6 +463,15 @@ input:focus-visible {
 .panel-description {
     font-size: 13px;
     margin-bottom: 11px;
+}
+
+/* Hasiera: azpititulu eta azalpen guztiak irakurgarriago. */
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .dashboard-subtitle,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .panel-description,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .calendar-heading small,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel [data-testid="stCaptionContainer"] p {
+    font-weight: 700 !important;
 }
 
 /* ==========================================
@@ -407,6 +497,19 @@ input:focus-visible {
 
 .kpi-card:hover {
     box-shadow: 0 4px 12px rgba(20, 42, 64, 0.10);
+}
+
+.kpi-card span,
+.kpi-card strong,
+.kpi-card small,
+.kpi-card i {
+    font-weight: 700 !important;
+}
+
+.kpi-card .kpi-heading,
+.kpi-card .kpi-number,
+.kpi-card .donut-center strong {
+    font-weight: 800 !important;
 }
 
 /* Kolore hauek finkoak dira */
@@ -436,7 +539,8 @@ input:focus-visible {
     justify-content: center;
     width: 100%;
     gap: 9px;
-    font-size: 17px;
+    font-family: var(--kpi-font-family) !important;
+    font-size: var(--kpi-title-size);
     line-height: 1.4;
     font-weight: 700;
     color: var(--semantic-text);
@@ -450,8 +554,8 @@ input:focus-visible {
     height: 28px;
     padding: 4px;
     border-radius: 7px;
-    background: rgba(20, 42, 64, 0.08);
-    color: #153B5C;
+    background: var(--kpi-icon-bg, rgba(20, 42, 64, 0.08));
+    color: var(--kpi-icon-color, #153B5C);
     flex-shrink: 0;
     box-sizing: border-box;
 }
@@ -482,7 +586,8 @@ input:focus-visible {
 
 .kpi-number {
     color: var(--semantic-text);
-    font-size: clamp(32px, 2.2vw, 40px);
+    font-family: var(--kpi-font-family) !important;
+    font-size: var(--kpi-value-size);
     font-weight: 800;
     letter-spacing: -1px;
     line-height: 1.2;
@@ -490,7 +595,8 @@ input:focus-visible {
 }
 
 .kpi-description {
-    font-size: 14px;
+    font-family: var(--kpi-font-family) !important;
+    font-size: var(--kpi-description-size);
     line-height: 1.4;
     font-weight: 500;
     color: var(--semantic-muted);
@@ -634,13 +740,20 @@ input:focus-visible {
 }
 
 .st-key-history_panel [data-testid="stImage"] img {
+    display: block;
     width: 100% !important;
     height: 285px !important;
     object-fit: contain;
 }
 
 .st-key-history_panel [data-testid="stImage"] {
+    width: 100% !important;
     margin: 0 !important;
+}
+
+.st-key-history_panel [data-testid="stElementContainer"]:has([data-testid="stImage"]),
+.st-key-history_panel figure {
+    width: 100% !important;
 }
 
 /* ==========================================
@@ -750,8 +863,8 @@ input:focus-visible {
    ========================================== */
 
 .sensor-row {
-    margin-top: 8px;
-    margin-bottom: 10px;
+    margin-top: 3px;
+    margin-bottom: 5px;
 }
 
 .sensor-heading {
@@ -761,7 +874,7 @@ input:focus-visible {
     gap: 8px;
     font-size: 14px;
     color: var(--main-text);
-    margin-bottom: 7px;
+    margin-bottom: 3px;
 }
 
 .sensor-heading strong {
@@ -770,7 +883,7 @@ input:focus-visible {
 
 .sensor-track {
     width: 100%;
-    height: 12px;
+    height: 9px;
     border-radius: 20px;
     background: #D8E0E7;
     overflow: hidden;
@@ -779,6 +892,21 @@ input:focus-visible {
 .sensor-fill {
     height: 100%;
     border-radius: 20px;
+}
+
+/* Neurketa-panelaren edukia osorik erakutsi, beheko abisua moztu gabe. */
+.st-key-measure_panel [data-testid="stVerticalBlock"] {
+    gap: 0.3rem !important;
+}
+
+.st-key-measure_panel [data-testid="stCaptionContainer"] p {
+    margin: 2px 0 0 !important;
+    line-height: 1.35 !important;
+}
+
+.st-key-measure_panel [data-testid="stHtml"] > div {
+    margin-top: 4px !important;
+    padding: 8px 12px !important;
 }
 
 .st-key-active_fault_alert [data-testid="stAlertIcon"],
@@ -834,7 +962,7 @@ div[class*="st-key-machine_"] button {
 }
 
 div[class*="st-key-machine_normal_"] button {
-    background: #23856C !important;
+    background: var(--map-green-bg) !important;
 }
 
 div[class*="st-key-machine_warning_"] button {
@@ -881,9 +1009,9 @@ div[class*="st-key-machine_"] button:focus-visible {
     display: inline-block;
 }
 
-.state-normal { background: #23856C; }
-.state-warning { background: #D4A63E; }
-.state-fault { background: #DE4651; }
+.state-normal { background: var(--map-green-bg); }
+.state-warning { background: var(--map-amber-bg); }
+.state-fault { background: var(--map-red-bg); }
 
 .machine-legend strong {
     margin-left: auto;
@@ -945,11 +1073,11 @@ div[class*="st-key-machine_"] button:focus-visible {
     font-weight: 800 !important;
 }
 
-div[class*="st-key-machine_normal_"] button { background: #29B58F !important; }
-div[class*="st-key-machine_recommended_"] button { background: #3E8FDB !important; }
-div[class*="st-key-machine_necessary_"] button { background: #EDC463 !important; color: #593D0B !important; }
-div[class*="st-key-machine_accelerated_"] button { background: #F29550 !important; }
-div[class*="st-key-machine_emergency_"] button { background: #DD4656 !important; }
+div[class*="st-key-machine_normal_"] button { background: var(--map-green-bg) !important; }
+div[class*="st-key-machine_recommended_"] button { background: var(--map-blue-bg) !important; }
+div[class*="st-key-machine_necessary_"] button { background: var(--map-amber-bg) !important; color: #593D0B !important; }
+div[class*="st-key-machine_accelerated_"] button { background: var(--map-orange-bg) !important; }
+div[class*="st-key-machine_emergency_"] button { background: var(--map-red-bg) !important; }
 div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 
 .st-key-machine_panel div[class*="_selected"] button {
@@ -982,11 +1110,11 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     height: 7px;
 }
 
-.state-normal { background: #29B58F; }
-.state-recommended { background: #3E8FDB; }
-.state-necessary { background: #EDC463; }
-.state-accelerated { background: #F29550; }
-.state-emergency { background: #DD4656; }
+.state-normal { background: var(--map-green-bg); }
+.state-recommended { background: var(--map-blue-bg); }
+.state-necessary { background: var(--map-amber-bg); }
+.state-accelerated { background: var(--map-orange-bg); }
+.state-emergency { background: var(--map-red-bg); }
 .state-nodata { background: #9EADBD; }
 
 /* ==========================================
@@ -1031,6 +1159,7 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     color: #922535;
     font-size: 12px;
     font-weight: 700;
+    text-align: center;
 }
 
 .st-key-calendar_open button {
@@ -1145,7 +1274,7 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 
 .calendar-grid + .calendar-alert small {
     display: block;
-    margin: 3px 0 0 17px;
+    margin: 3px 0 0;
     font-size: 10px;
     font-weight: 500;
 }
@@ -1505,34 +1634,54 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 3px 8px;
-    min-height: 82px;
-    padding: 11px 14px;
-    border: 1px solid var(--panel-border);
-    border-radius: 10px;
+    min-height: 120px;
+    height: 120px;
+    padding: 14px 15px;
+    border: 1px solid rgba(38, 64, 85, 0.10);
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(20, 42, 64, 0.04);
     box-sizing: border-box;
+}
+
+.alerts-summary-card span,
+.alerts-summary-card strong,
+.alerts-summary-card small {
+    font-weight: 700 !important;
+}
+
+.alerts-summary-card strong {
+    font-weight: 800 !important;
 }
 
 .alerts-summary-card span {
     align-self: center;
-    font-size: 13px;
+    font-family: var(--kpi-font-family) !important;
+    font-size: var(--kpi-title-size);
 }
 
 .alerts-summary-card strong {
     grid-row: 1 / 3;
     grid-column: 2;
     align-self: center;
-    font-size: 25px;
+    font-family: var(--kpi-font-family) !important;
+    font-size: var(--kpi-value-size);
+    line-height: 1.2;
+    letter-spacing: -1px;
 }
 
 .alerts-summary-card small {
-    color: #536A80;
-    font-size: 10px;
+    color: var(--semantic-muted, #475569);
+    font-family: var(--kpi-font-family) !important;
+    font-size: var(--kpi-description-size);
+    line-height: 1.4;
 }
 
 .summary-red { background: var(--state-red-bg); color: var(--semantic-text); }
 .summary-amber { background: var(--state-amber-bg); color: var(--semantic-text); }
 .summary-money { background: var(--state-green-bg); color: var(--semantic-text); }
 .summary-risk { background: var(--state-blue-bg); color: var(--semantic-text); }
+.summary-high { background: var(--alert-high-bg, #F6D9C4); color: var(--semantic-text); }
+.summary-medium { background: var(--alert-review-bg, #F5E4B8); color: var(--semantic-text); }
 
 .alerts-section-heading {
     margin-bottom: 7px;
@@ -1563,9 +1712,23 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     box-sizing: border-box;
 }
 
-.alert-critical { border-left-color: #DE4651; }
-.alert-high { border-left-color: #F0924B; }
-.alert-review { border-left-color: #D9A72E; }
+.alert-critical {
+    border-color: #DE7A84;
+    border-left-color: #DE4651;
+    background: var(--alert-critical-bg, #F5B8B8);
+}
+
+.alert-high {
+    border-color: #E7A978;
+    border-left-color: #E87E36;
+    background: var(--alert-high-bg, #F6D9C4);
+}
+
+.alert-review {
+    border-color: #DEBE61;
+    border-left-color: #D9A72E;
+    background: var(--alert-review-bg, #F5E4B8);
+}
 
 .alert-rank {
     display: grid;
@@ -1577,6 +1740,10 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     color: #264B6D;
     font-size: 12px;
 }
+
+.alert-critical .alert-rank { background: #EFAAB2; color: #7F1D2D; }
+.alert-high .alert-rank { background: #F2BC94; color: #7C3515; }
+.alert-review .alert-rank { background: #EDD27E; color: #684B08; }
 
 .alert-machine-name,
 .alert-level,
@@ -1592,12 +1759,12 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 .alert-cost small {
     overflow: hidden;
     color: var(--secondary-text);
-    font-size: 9px;
+    font-size: 11px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.alert-level span { font-size: 12px; }
+.alert-level span { font-size: 13px; }
 
 .alert-readings {
     display: flex;
@@ -1605,12 +1772,19 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     gap: 4px;
 }
 
+.alert-readings small {
+    flex-basis: 100%;
+    color: var(--secondary-text);
+    font-size: 10px;
+    font-weight: 800;
+}
+
 .alert-readings span {
     padding: 2px 5px;
     border-radius: 4px;
     background: #EDF3F7;
     color: #36546F;
-    font-size: 9px;
+    font-size: 10px;
 }
 
 .alert-cost {
@@ -1623,16 +1797,25 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     font-size: 15px;
 }
 
+.alert-cost > span {
+    margin-top: 2px;
+    color: var(--secondary-text);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.15;
+    white-space: normal;
+}
+
 .cost-panel {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 751px;
     min-height: 751px;
-    padding: 20px;
+    padding: 28px;
     border: 1px solid var(--panel-border);
     border-radius: 12px;
-    background: var(--panel-bg);
+    background: var(--alert-critical-bg, #F5B8B8);
     color: var(--main-text);
     box-sizing: border-box;
 }
@@ -1640,45 +1823,50 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 .cost-panel-icon {
     display: grid;
     place-items: center;
-    width: 45px;
-    height: 45px;
-    margin-bottom: 14px;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 16px;
     border-radius: 11px;
     background: #E2F4EC;
     color: #187159;
-    font-size: 25px;
+    font-size: 28px;
 }
 
 .cost-panel > span {
+    display: block;
+    text-align: center;
     color: var(--secondary-text);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.55px;
 }
 
 .cost-panel > strong {
     display: block;
-    margin: 8px 0 2px;
+    margin: 10px 0 4px;
     color: #C23845;
-    font-size: 34px;
+    font-size: 38px;
+    text-align: center;
 }
 
 .cost-panel > small {
+    display: block;
     color: var(--secondary-text);
-    font-size: 10px;
+    font-size: 12px;
+    text-align: center;
 }
 
 .cost-formula {
-    margin: 17px 0;
-    padding: 10px;
+    margin: 20px 0;
+    padding: 12px;
     border-radius: 7px;
     background: #F2F6F9;
     color: #38546D;
-    font-size: 11px;
+    font-size: 12px;
     text-align: center;
 }
 
 .cost-panel hr {
-    margin: 14px 0;
+    margin: 17px 0;
     border: 0;
     border-top: 1px solid var(--panel-border);
 }
@@ -1686,17 +1874,17 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 .cost-detail {
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
+    padding: 10px 0;
     color: var(--secondary-text);
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .cost-detail b { color: var(--main-text); }
 
 .cost-panel p {
-    margin-top: 18px;
+    margin-top: 22px;
     color: var(--secondary-text);
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.5;
 }
 
@@ -1732,6 +1920,150 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     }
 }
 
+/* Tablet: 768–1180 px. Ez da mugikorrerako diseinua. */
+@media (min-width: 768px) and (max-width: 1180px) {
+    html {
+        font-size: 14px;
+    }
+
+    [data-testid="stSidebar"] {
+        width: 160px !important;
+        min-width: 160px !important;
+    }
+
+    [data-testid="stSidebar"] .block-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .sidebar-logo-image {
+        width: 150px;
+    }
+
+    .sidebar-nav-link {
+        padding-left: 14px;
+        padding-right: 10px;
+        font-size: 15px;
+    }
+
+    [data-testid="stMainBlockContainer"] {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0.65rem 0.75rem 0.5rem !important;
+        overflow-x: hidden !important;
+    }
+
+    .dashboard-title {
+        font-size: 20px;
+        letter-spacing: -0.3px;
+    }
+
+    .dashboard-subtitle {
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .header-datetime {
+        font-size: 11px;
+        padding: 0 3px;
+    }
+
+    .header-data-item {
+        gap: 3px;
+        padding: 0 5px;
+    }
+
+    .kpi-card {
+        min-height: 96px;
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .kpi-heading {
+        gap: 5px;
+        font-size: 11px;
+    }
+
+    .kpi-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .kpi-number {
+        font-size: clamp(22px, 3vw, 29px);
+    }
+
+    .kpi-description {
+        font-size: 10px;
+    }
+
+    .panel-heading {
+        font-size: 14px;
+    }
+
+    .panel-description {
+        margin-bottom: 7px;
+        font-size: 11px;
+    }
+
+    .alerts-summary {
+        gap: 6px;
+    }
+
+    .alerts-summary-card {
+        min-height: 84px;
+        padding: 8px 10px;
+    }
+
+    .alert-machine-row {
+        grid-template-columns: 28px minmax(95px, 1fr) minmax(135px, 1.3fr) minmax(130px, 1fr) minmax(105px, .8fr);
+        gap: 7px;
+        padding: 7px;
+    }
+
+    .cost-panel {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .calendar-grid {
+        gap: 5px;
+    }
+
+    img, svg, canvas, iframe {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 900px) and (orientation: portrait) {
+    [data-testid="stSidebar"] {
+        width: 150px !important;
+        min-width: 150px !important;
+    }
+
+    .sidebar-logo-image {
+        width: 140px;
+    }
+
+    .header-datetime span:first-child {
+        display: none;
+    }
+
+    .kpi-card {
+        min-height: 90px;
+        padding: 7px 5px;
+    }
+
+    .kpi-heading,
+    .kpi-description {
+        font-size: 9px;
+    }
+
+    .alerts-summary-card small {
+        font-size: 10px;
+    }
+}
+
 @media (max-width: 700px) {
     .block-container {
         padding-left: 0.6rem !important;
@@ -1754,13 +2086,458 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 }
 
 /* Diseinu osoa proportzio berean eskalatu, blokeak deformatu gabe. */
+@media (min-height: 1001px) {
+    [data-testid="stMainBlockContainer"] { zoom: 0.95; }
+}
 
+@media (min-height: 901px) and (max-height: 1000px) {
+    [data-testid="stMainBlockContainer"] { zoom: 0.87; }
 
+    [data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) {
+        zoom: 0.85;
+    }
 
+    [data-testid="stMainBlockContainer"]:has(.makinak-page-marker) {
+        zoom: 0.81;
+    }
+}
 
+@media (min-height: 801px) and (max-height: 900px) {
+    [data-testid="stMainBlockContainer"] { zoom: 0.77; }
+}
 
+@media (max-height: 800px) {
+    [data-testid="stMainBlockContainer"] { zoom: 0.68; }
+}
 
+/* Analisi teknikoaren orria pantaila bakarrean mantendu. */
+[data-testid="stElementContainer"]:has(.hasiera-page-marker),
+[data-testid="stElementContainer"]:has(.makinak-page-marker),
+[data-testid="stElementContainer"]:has(.datuak-page-marker) {
+    display: none;
+}
 
+[data-testid="stMain"]:has(.datuak-page-marker) {
+    height: calc(100vh - 38px);
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden !important;
+    zoom: 1 !important;
+    padding-bottom: 0.5rem !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .st-key-machine_panel {
+    height: calc((100vh - 230px) / 2) !important;
+    min-height: calc((100vh - 230px) / 2) !important;
+    max-height: calc((100vh - 230px) / 2) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .st-key-history_panel {
+    height: calc((100vh - 230px) / 2) !important;
+    min-height: calc((100vh - 230px) / 2) !important;
+    max-height: calc((100vh - 230px) / 2) !important;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .st-key-measure_panel,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .machine-health-panel {
+    height: calc((100vh - 300px) / 2) !important;
+    min-height: calc((100vh - 300px) / 2) !important;
+    max-height: calc((100vh - 300px) / 2) !important;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .machine-health-panel {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    gap: 12px;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    .st-key-measure_panel [data-testid="stVerticalBlock"] {
+    height: 100%;
+    justify-content: flex-start;
+    gap: 0.75rem !important;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .health-panel-heading,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .health-row {
+    margin-bottom: 0;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    .st-key-history_panel [data-testid="stImage"] img {
+    height: calc((100vh - 370px) / 2) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    .st-key-history_panel iframe {
+    height: calc(100% - 28px) !important;
+}
+
+/* Hasiera: grafikoa eta azken neurketa altuera berean lerrokatu. */
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .st-key-history_panel,
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .st-key-measure_panel {
+    height: 355px !important;
+    min-height: 355px !important;
+    max-height: 355px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker) .st-key-measure_panel {
+    position: relative !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel [data-testid="stVerticalBlock"] {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    gap: 0.35rem !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .sensor-row {
+    margin: 0 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .sensor-track {
+    height: 11px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel [data-testid="stHtml"]:has(.latest-measure-layout) {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .latest-measure-layout {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    width: 100% !important;
+    flex-direction: column !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .latest-measure-sensors {
+    display: grid !important;
+    gap: 8px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .latest-measure-caption {
+    margin-top: 10px !important;
+    color: var(--text-muted) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1.3 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.hasiera-page-marker)
+    .st-key-measure_panel .measurement-status {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-top: auto !important;
+    transform: translateY(8px) !important;
+    padding: 10px 14px !important;
+    border: 1.5px solid !important;
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+}
+
+/* Datuak: espazio erabilgarria bete eta lau panelak proportzio berean handitu. */
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .panel-heading,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .health-panel-heading strong {
+    font-size: 18px !important;
+}
+
+/* Datuak: hautatzailea eta denbora-tarteak uneko gaiaren koloreekin. */
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] > div {
+    background: var(--input-bg) !important;
+    border-color: var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"],
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] > div,
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] input {
+    background-color: var(--input-bg) !important;
+    color: var(--main-text) !important;
+}
+
+/* Datuak: hautatzaile itxiaren kanpoko azalera. */
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"],
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [role="combobox"] {
+    background: var(--input-bg) !important;
+    background-color: var(--input-bg) !important;
+    color: var(--main-text) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    position: relative !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 0 0 auto !important;
+    width: 34px !important;
+    border-radius: 0 7px 7px 0 !important;
+    background: var(--pastel-blue) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div > div {
+    background-color: transparent !important;
+    color: var(--main-text) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div > div:last-child {
+    background-color: var(--pastel-blue) !important;
+    border-radius: 0 7px 7px 0 !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] svg {
+    color: var(--main-text) !important;
+    fill: var(--main-text) !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+/* Ezabatu BaseWeb-ek geziaren inguruan gehitzen duen geruza iluna. */
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div {
+    background: linear-gradient(
+        to right,
+        var(--input-bg) 0,
+        var(--input-bg) calc(100% - 34px),
+        var(--pastel-blue) calc(100% - 34px),
+        var(--pastel-blue) 100%
+    ) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div * {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+.st-key-datuak_makina_hautatzailea {
+    width: 220px !important;
+    max-width: 220px !important;
+}
+
+/* Geziaren kutxa: estali Streamlit-en geruza beltza erabat. */
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] {
+    position: relative !important;
+    isolation: isolate !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"]::after {
+    content: "⌄" !important;
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 34px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    border-left: 1px solid #80B7E8 !important;
+    border-radius: 0 7px 7px 0 !important;
+    background: var(--pastel-blue) !important;
+    color: var(--main-text) !important;
+    font-size: 18px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    pointer-events: none !important;
+    z-index: 2147483647 !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] svg {
+    opacity: 0 !important;
+}
+
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] span,
+.st-key-datuak_makina_hautatzailea [data-baseweb="select"] svg,
+.st-key-datuak_makina_hautatzailea label,
+.st-key-datuak_makina_hautatzailea label p {
+    color: var(--main-text) !important;
+    fill: var(--main-text) !important;
+}
+
+/* BaseWeb-ek hautatzailearen zerrenda orritik kanpoko portal batean sortzen du. */
+body:has(.datuak-page-marker) div[data-baseweb="popover"] {
+    width: 220px !important;
+    max-width: 220px !important;
+    background: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] > div,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] ul[role="listbox"] {
+    width: 220px !important;
+    max-width: 220px !important;
+    max-height: 260px !important;
+    background: var(--panel-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] ul,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li > div {
+    background-color: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li span {
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"] {
+    background: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"]:hover,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"][aria-selected="true"] {
+    background: var(--surface-muted) !important;
+    color: var(--main-text) !important;
+}
+
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"]:hover > div,
+body:has(.datuak-page-marker) div[data-baseweb="popover"] li[role="option"][aria-selected="true"] > div {
+    background-color: var(--surface-muted) !important;
+}
+
+/* Streamlit/BaseWeb bertsio batzuetan menua popover-etik kanpo muntatzen da. */
+div[data-baseweb="menu"],
+ul[role="listbox"],
+div[role="listbox"] {
+    background-color: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+    border-color: var(--panel-border) !important;
+}
+
+li[role="option"],
+div[role="option"] {
+    background-color: var(--panel-bg) !important;
+    color: var(--main-text) !important;
+}
+
+li[role="option"] *,
+div[role="option"] * {
+    color: var(--main-text) !important;
+}
+
+li[role="option"]:hover,
+li[role="option"][aria-selected="true"],
+div[role="option"]:hover,
+div[role="option"][aria-selected="true"] {
+    background-color: var(--surface-muted) !important;
+    color: var(--main-text) !important;
+}
+
+.st-key-datuak_periodoa [data-testid="stSegmentedControl"] {
+    background: transparent !important;
+}
+
+.st-key-datuak_periodoa button {
+    background: var(--panel-bg) !important;
+    border: 1.5px solid #9CCBF2 !important;
+    color: var(--main-text) !important;
+    transition: background-color .16s ease, border-color .16s ease,
+                box-shadow .16s ease, transform .12s ease !important;
+}
+
+.st-key-datuak_periodoa button p,
+.st-key-datuak_periodoa button span {
+    color: var(--main-text) !important;
+}
+
+.st-key-datuak_periodoa button[aria-pressed="true"] {
+    background: var(--state-blue-bg) !important;
+    border-color: #5EA7E3 !important;
+    box-shadow: inset 0 0 0 1px rgba(37, 118, 189, .2) !important;
+}
+
+.st-key-datuak_periodoa button:hover {
+    background: var(--pastel-blue) !important;
+    border-color: #5EA7E3 !important;
+    box-shadow: 0 3px 8px rgba(37, 118, 189, .18) !important;
+    transform: translateY(-1px) !important;
+}
+
+.st-key-datuak_periodoa button:active {
+    box-shadow: inset 0 2px 5px rgba(37, 118, 189, .18) !important;
+    transform: translateY(0) scale(.995) !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .panel-description,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .sensor-heading,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .health-row-heading {
+    font-size: 14px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    .st-key-machine_panel div[class*="st-key-machine_"] button {
+    min-height: 31px !important;
+    height: 31px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker)
+    .st-key-machine_panel div[class*="st-key-machine_"] button p,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .machine-line-label strong {
+    font-size: 11px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .machine-line-label small,
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .machine-map-top {
+    font-size: 9px !important;
+}
+
+[data-testid="stMainBlockContainer"]:has(.datuak-page-marker) .machine-legend {
+    font-size: 12px !important;
+}
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -1795,8 +2572,7 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
    ========================================== */
 
 .telemetria-taula-wrap,
-.st-key-machine_panel,
-.alert-machine-row {
+.st-key-machine_panel {
     background: var(--panel-bg) !important;
     border-color: var(--panel-border) !important;
     color: var(--main-text) !important;
@@ -1807,7 +2583,6 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
 }
 
 .telemetria-taula thead,
-.alert-rank,
 .alert-readings span,
 .cost-formula {
     background: var(--surface-muted) !important;
@@ -1889,17 +2664,98 @@ div[class*="st-key-machine_nodata_"] button { background: #9EADBD !important; }
     color: var(--main-text);
 }
 
-/* Keep text at normal scale and allow vertical navigation on smaller screens. */
-html, body, .stApp, [data-testid="stAppViewContainer"],
-[data-testid="stMain"], [data-testid="stMainBlockContainer"] {
-    height: auto !important;
-    min-height: 100%;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
+/* KPI txartelen testuak gainerako arau globalen gainetik loditu. */
+.stApp .kpi-card,
+.stApp .kpi-card *,
+.stApp .alerts-summary-card,
+.stApp .alerts-summary-card * {
+    font-family: var(--kpi-font-family) !important;
+    font-weight: 800 !important;
 }
-[data-testid="stSidebar"] { overflow-y: auto !important; }
-@media (max-width: 640px) {
-    .alerts-summary { grid-template-columns: 1fr !important; }
-    .alert-machine-row { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-    .alerts-summary-card, .alert-machine-row { min-width: 0; }
+
+.stApp .kpi-card .kpi-heading,
+.stApp .kpi-card .kpi-number,
+.stApp .kpi-card .donut-center strong,
+.stApp .alerts-summary-card strong {
+    font-weight: 900 !important;
+}
+
+.stApp .kpi-card .kpi-heading,
+.stApp .alerts-summary-card > span {
+    font-size: var(--kpi-title-size) !important;
+    line-height: 1.4 !important;
+}
+
+.stApp .kpi-card .kpi-number,
+.stApp .alerts-summary-card > strong {
+    font-size: var(--kpi-value-size) !important;
+    line-height: 1.2 !important;
+}
+
+.stApp .kpi-card .kpi-description,
+.stApp .alerts-summary-card > small {
+    font-size: var(--kpi-description-size) !important;
+    line-height: 1.4 !important;
+}
+
+/* Irakurgarritasun orokorra: letra bakarra eta zenbaki lerrokatuak. */
+.stApp,
+.stApp div,
+.stApp section,
+.stApp article,
+.stApp p,
+.stApp small,
+.stApp strong,
+.stApp label,
+.stApp button,
+.stApp input,
+.stApp select,
+.stApp textarea,
+.stApp th,
+.stApp td,
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp h5,
+.stApp h6 {
+    font-family: Verdana, Arial, sans-serif !important;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
+/* Egutegiko ekintzak: panela ukitzean bakarrik erakutsi. */
+.st-key-calendar_panel .st-key-calendar_open,
+.st-key-calendar_panel .st-key-calendar_download {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+}
+
+.st-key-calendar_panel:hover .st-key-calendar_open,
+.st-key-calendar_panel:hover .st-key-calendar_download,
+.st-key-calendar_panel .st-key-calendar_open:focus-within,
+.st-key-calendar_panel .st-key-calendar_download:focus-within {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.st-key-calendar_panel .st-key-calendar_open button,
+.st-key-calendar_panel .st-key-calendar_download button {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    padding: 0 !important;
+    border: 1px solid #3C4E60 !important;
+    border-radius: 7px !important;
+    background: #111820 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.24) !important;
+}
+
+.st-key-calendar_panel .st-key-calendar_open button p,
+.st-key-calendar_panel .st-key-calendar_download button p {
+    font-size: 18px !important;
+    line-height: 1 !important;
 }

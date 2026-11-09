@@ -27,6 +27,8 @@ class InfrastructureRefreshTests(unittest.TestCase):
                 "deploy/build-targets.json",
                 "deploy/images/elasticsearch.Dockerfile",
                 "deploy/images/filebeat.Dockerfile",
+                "deploy/images/go.Dockerfile",
+                "deploy/images/haproxy.Dockerfile",
                 "deploy/images/kafka.Dockerfile",
                 "deploy/images/kibana.Dockerfile",
                 "deploy/images/mock-python.Dockerfile",
@@ -38,6 +40,7 @@ class InfrastructureRefreshTests(unittest.TestCase):
                 "docker-compose.yml",
                 "deploy/cg14/compose.yaml",
                 "scoring/Dockerfile",
+                "dashboard_laneki/Dockerfile",
             ):
                 destination = root / name
                 destination.parent.mkdir(parents=True, exist_ok=True)
@@ -61,6 +64,18 @@ class InfrastructureRefreshTests(unittest.TestCase):
             inventory.write_text(json.dumps(images))
             with self.assertRaisesRegex(ValueError, "digest"):
                 read_images(root)
+
+    def test_auxiliary_builds_preserve_reviewed_bases_and_security_update(self):
+        images = read_images()
+        targets = json.loads((ROOT / "deploy/build-targets.json").read_text())
+        for key in ("haproxy", "go"):
+            with self.subTest(image=key):
+                contents = (ROOT / targets[key]).read_text()
+                self.assertIn("FROM " + images[key], contents)
+                self.assertIn("zlib=1.4-r0", contents)
+        workflow = (ROOT / ".github/workflows/lan-rotation.yml").read_text()
+        self.assertIn("docker build -f " + targets["haproxy"], workflow)
+        self.assertIn("CNC_LAN_TLS_IMAGE: cnc-lan-test:haproxy", workflow)
 
     def test_new_lan_and_cg32_images_are_in_the_scan_matrix(self):
         images = read_images()

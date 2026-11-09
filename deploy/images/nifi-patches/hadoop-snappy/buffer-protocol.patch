@@ -1,0 +1,20 @@
+--- upstream-3.5.0/SnappyCompressor.java
++++ cnc-local-buffer-v2/SnappyCompressor.java
+@@ -60,2 +60,3 @@
+-    compressedDirectBuf = ByteBuffer.allocateDirect(directBufferSize);
+-    compressedDirectBuf.position(directBufferSize);
++    compressedDirectBuf = ByteBuffer.allocateDirect(
++        Snappy.maxCompressedLength(directBufferSize));
++    compressedDirectBuf.limit(0);
+@@ -282,2 +283,9 @@
+-      int size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,
+-              (ByteBuffer) compressedDirectBuf);
++      compressedDirectBuf.clear(); // full writable worst-case output capacity
++      int size;
++      try {
++        size = Snappy.compress((ByteBuffer) uncompressedDirectBuf,
++            (ByteBuffer) compressedDirectBuf);
++      } catch (IOException | RuntimeException | Error failure) {
++        compressedDirectBuf.limit(0); // never expose stale output after failure
++        throw failure;
++      }

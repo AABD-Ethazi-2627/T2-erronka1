@@ -1,0 +1,112 @@
+[
+  {
+    "file": "CVE-2026-68494.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-core/security-advisories/GHSA-r7wm-3cxj-wff9",
+    "sha256": "80f5d8e4d5fe27fe0e6ba07c144d9d51c1e2d414e41aabdd6e3568ae1ac9f6f7"
+  },
+  {
+    "file": "CVE-2026-89407.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-core/security-advisories/GHSA-p6pp-m3f8-5c89",
+    "sha256": "44844b8931d918fe5b8ffca0da0a103310bbee598cffe16ca5a1efe090f0da93"
+  },
+  {
+    "file": "CVE-2026-89425.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-core/security-advisories/GHSA-7hhh-6rmp-j9qf",
+    "sha256": "b7891383e3f4a6d8e2deef85d2390d8b8b00ba8bd691b63fa15e99372fb4ed74"
+  },
+  {
+    "file": "CVE-2026-54512.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-j3rv-43j4-c7qm",
+    "sha256": "cd5ba4fdf14764357a91eef64fa7eeb8966cae20c2b92579fe10f7beefbf3f20"
+  },
+  {
+    "file": "CVE-2026-54513.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-rmj7-2vxq-3g9f",
+    "sha256": "9b4a70e5884b99c9f5bdee73e20f64246bfc8d70f1b0a2d8a0544884bd2359d7"
+  },
+  {
+    "file": "CVE-2026-68497.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-q4xh-88c3-wmh7",
+    "sha256": "1a0990182b54264d01794e4cbcabd5b4bec9c0b7c77536a5c7220035087f2002"
+  },
+  {
+    "file": "CVE-2026-91776.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-wv8q-qhhj-9h54",
+    "sha256": "ad0f07906a2c801b532698b4e0995d05b1613e6a4fac0a3be60a86516e7b64b5"
+  },
+  {
+    "file": "CVE-2026-91777.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-cxp5-3px4-pw24",
+    "sha256": "f2760cd51af44308d16c9cc20b8ed36b2a8919d21b8e797900ec5403dc8e6bb6"
+  },
+  {
+    "file": "CVE-2026-19032.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-wjgm-6hv5-3cvf",
+    "sha256": "e451fdaf2d57a844fcb6b635bb8fe0d94cbb55d5573060e041d88ba3f421eb45"
+  },
+  {
+    "file": "CVE-2026-54514.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-hgj6-7826-r7m5",
+    "sha256": "83e47666320d9ca50946faecba92812b585d091d71223c962771199c91c9a2b5"
+  },
+  {
+    "file": "CVE-2026-54515.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-5jmj-h7xm-6q6v",
+    "sha256": "23d9fddc00443e0fee26e58f3abc73b2674e385447b26a27a3e4a8781146153b"
+  },
+  {
+    "file": "CVE-2026-54516.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-9fxm-vc8v-hj55",
+    "sha256": "0ab00ff41cc5cade9e3f0ca1a42d9e0b778a75cb596157bc1fafce3a0cc76f82"
+  },
+  {
+    "file": "CVE-2026-54517.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-5hh8-q8hv-fr38",
+    "sha256": "36f478eac7b9fef2cd2f06667f46bc75eba5a30829041bc41bb366f3cd8964ab"
+  },
+  {
+    "file": "CVE-2026-54518.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-rcqc-6cw3-h962",
+    "sha256": "1f74a86a44d4ef691ef0a29e7111ae698cbe363a914deadbd41bd1815ffbec6a"
+  },
+  {
+    "file": "CVE-2026-59888.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-3pjw-73gf-8qr5",
+    "sha256": "204fe2ab47b053d7bd2d579910a1f56335a957c9db2dae2be65f824bf959aa7e"
+  },
+  {
+    "file": "CVE-2026-59889.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-5gvw-p9qm-jgwh",
+    "sha256": "ad7f90c1d02d6ffa5fa7a3e842c8cf7fb4de037b71fc710e216844e2d5b22d5c"
+  },
+  {
+    "file": "CVE-2026-77310.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-vvgp-rfg2-7rr6",
+    "sha256": "c9f3e685b1c06f06de4045c4003a80c4eff3a76327dd2ee3a2ca0ad32d9e0e3d"
+  },
+  {
+    "file": "CVE-2026-83557.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-gx83-3vf8-gh7j",
+    "sha256": "ee142980b608b87420b931dce3453c290d05ed03f517f204f293ee3881455b10"
+  },
+  {
+    "file": "GHSA-mhm7-754m-9p8w.json",
+    "url": "https://api.github.com/repos/FasterXML/jackson-databind/security-advisories/GHSA-mhm7-754m-9p8w",
+    "sha256": "573a779c169ebf48553a45de3a0c147cf9425a13b0149abaf28dc090278c0017"
+  },
+  {
+    "file": "CVE-2026-89425.patch",
+    "url": "https://github.com/FasterXML/jackson-core/commit/211cf2c5d91abbec38067f37efc1363cd4e88ee3.patch",
+    "sha256": "bd0825de2c350df862d9e86f476d5a56cd58d2f17dccbeb64859cfcd2e1a461c"
+  },
+  {
+    "file": "CVE-2026-91776.patch",
+    "url": "https://github.com/FasterXML/jackson-databind/commit/2870d1d6dc1b7e1c07ee11dd5b04ab71cddbb577.patch",
+    "sha256": "18a08970528b253679b216467c604165f1a12963f4ed85df06dcedbbad02a2ae"
+  },
+  {
+    "file": "CVE-2026-59888.patch",
+    "url": "https://github.com/FasterXML/jackson-databind/commit/baa2cdf5ca2b2717fbb88d91955d69d8651df3e4.patch",
+    "sha256": "e47ed8b0eda9928ec2cd82e2cbf9b6a16ccf22af00ab2927dd2ef1bf83634f9d"
+  }
+]

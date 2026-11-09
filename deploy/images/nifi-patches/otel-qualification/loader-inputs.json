@@ -1,0 +1,887 @@
+{
+  "basis": {
+    "inventory.json": "5adda883a4a16eb593fde425229eba9227f56a4a4de0b663285f8c1592d49f16",
+    "manifest.json": "82e435f7f0a54ce76b8ab2d173817a6b5c4d1a94191025a66b2050b59f44ce0c"
+  },
+  "image_id": "sha256:03f3e9a19dbce166304ec63a685c44f2da07239e5659d843c798c7f32f7012d5",
+  "instance_loader": {
+    "direct_jars": [
+      {
+        "entry": "META-INF/bundled-dependencies/accessors-smart-2.6.0.jar",
+        "sha256": "222c9f547bb20a99fc486403a398352d1306fb671b38abd7ecab6401df170e61"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/angus-activation-2.0.3.jar",
+        "sha256": "a6bd35c538cf90fff941ad6258c40c08fca0b5c9c3f536c657114f27ce0527a7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/annotations-13.0.jar",
+        "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/antlr-runtime-3.5.3.jar",
+        "sha256": "68bf9f5a33dfcb34033495c587e6236bef4e37aa6612919f5b1e843b90669fb9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/aopalliance-repackaged-4.0.0-M3.jar",
+        "sha256": "65c0abb946d2ab3a1237c610f24bf15f04696151e9cafbe1afa6cee52fbed5ed"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/aspectjweaver-1.9.25.1.jar",
+        "sha256": "4fe86fdc18faea571f29129c70eaad5d121363504a06d7907be88f6c60ba3116"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/bcpkix-jdk18on-1.85.jar",
+        "sha256": "c9f82b2d4e99c4bbdfccf684e52cc06ea06a0b567bfd0d08f9c5a3f417055996"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/bcprov-jdk18on-1.85.2.jar",
+        "sha256": "986b0fb92ec10e0c66b43e036ce0077e6150cfaecd1db9fb92b56672e157afe5"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/bcutil-jdk18on-1.85.jar",
+        "sha256": "590f55ed5d68529239898a4a5c4f730b6e37f45d1cfa3fbe51f8485abe32c42d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/c2-protocol-component-api-2.12.0.jar",
+        "sha256": "8bddc6c3a6e5b25929bfb5c31b2d6685d1e6fcda25a77387eb12a10091c45777"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/caffeine-3.2.4.jar",
+        "sha256": "9d9d2cfd681fd9272ded3d27c9930db12f89f732345975aa113ebc223bbf1224"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-codec-1.22.1.jar",
+        "sha256": "78a5d732fbd715e2d10bd7150d2f8030bae57267f8aacc5c88f642cb6c2e5d3f"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-collections4-4.6.0.jar",
+        "sha256": "4e0d0896bac5356cead277bac0283f09813e14417e3e84e0c86b573b54d218a3"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-compress-1.28.0.jar",
+        "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-io-2.22.0.jar",
+        "sha256": "2b9a7b1f726fb86216dbd2c8321eabe0221dbd5b1be81c18e1cb53811b104758"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-lang3-3.20.0.jar",
+        "sha256": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-math3-3.6.1.jar",
+        "sha256": "1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-net-3.13.0.jar",
+        "sha256": "9e88444afadc9467f0bf3d328f93b9538da35a9be05cdee430766e64fddbd6c5"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/commons-text-1.15.0.jar",
+        "sha256": "58d2da30f058512a1e7f914e39241deca4dff5c27a085b4ed2faa9e7208067f6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/content-type-2.3.jar",
+        "sha256": "60349793e006fba96b532cb0c21e10e969fe0db8d87f91c3b9eaf82ba2998895"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/cryptacular-1.3.0.jar",
+        "sha256": "5bef5b396aba0607bd972365991f833f7d8f16af506f2ade1f589fe344105123"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/error_prone_annotations-2.49.0.jar",
+        "sha256": "3b1003e51b8ae56fdbd7c71073e81d1683b97e6c4dff5a9151164d59b769d13c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/failureaccess-1.0.3.jar",
+        "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/guava-33.7.1-jre.jar",
+        "sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/hk2-api-4.0.0-M3.jar",
+        "sha256": "66f859916e6a7de3622973acf7f672a895c9bac81622080dfbb95ac9b021b1f8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/hk2-locator-4.0.0-M3.jar",
+        "sha256": "290027395d95bfcbb5f40c992376a6f21c75bf63c9c8d4df3cfc034ba1a85ded"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/hk2-utils-4.0.0-M3.jar",
+        "sha256": "ba7087827fe89af3d824fc26556c985ce9afa0cc30faa24e8b65145ca0fefcf1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/httpclient5-5.6.4.jar",
+        "sha256": "bdef5f8841145cd76c4c605ff301bc840eea0d5292332b7b892a93316c0d8ee1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/httpclient5-cache-5.6.4.jar",
+        "sha256": "c425cb6db4863480982899092d1d283f84c0f32914a59bf2de479e69daa8fa11"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/httpcore5-5.4.3.jar",
+        "sha256": "18bfbbabb478dfb67f31aeaf428c387f3c3df654582e1309f708ee1f3086830a"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/httpcore5-h2-5.4.3.jar",
+        "sha256": "c7db7026b8e2dea39132b04a6069f6671e2858309b20a146ec5c7dd6ed73a0b6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/istack-commons-runtime-4.1.2.jar",
+        "sha256": "7fd6792361f4dd00f8c56af4a20cecc0066deea4a8f3dec38348af23fc2296ee"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/j2objc-annotations-3.1.jar",
+        "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jackson-annotations-2.22.jar",
+        "sha256": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jackson-core-2.22.2.jar",
+        "sha256": "ff167a6317be15895706c26668f45b898efe40ab8780970658210fe1393d52a6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jackson-databind-2.22.2.jar",
+        "sha256": "d0da14c12b16b5d54719aa172d83b542ff4abeb8b0fb7db476fde8ceece760ca"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jackson-datatype-jsr310-2.22.2.jar",
+        "sha256": "9df71cc7fb3781fd0bed6c05eebbfa8b39292a49f5619e76fdd0d889f64c8f33"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jackson-module-jakarta-xmlbind-annotations-2.22.2.jar",
+        "sha256": "e5f7efb6086f5036ae4c64d3c2059cf193a980099d7079d562006275c60badb7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.activation-api-2.1.4.jar",
+        "sha256": "c9db52100ce6c8aac95cc39075f95720d2e561b11f8051b81c121ad4effd7004"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.validation-api-3.1.0.jar",
+        "sha256": "1a18593d8ba9b48215ca4993e51a4451c804a82f89e8d0d4a31a5e6b8731d4a7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.ws.rs-api-4.0.0.jar",
+        "sha256": "6368b126cbcf34e694bb9ba5b9fe3e5040b7acea7ce622e636d698bb085fd2a6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.xml.bind-api-4.0.5.jar",
+        "sha256": "5e489b6c874c4119e003ff1403db523ee3a8959ec499f3de29e77245efccf216"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/javassist-3.30.2-GA.jar",
+        "sha256": "eba37290994b5e4868f3af98ff113f6244a6b099385d9ad46881307d3cb01aaf"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jaxb-core-4.0.9.jar",
+        "sha256": "6b014df25d22c8446cc2df0a378c5b2137747f197a731d99eb24c756b26f7e8d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jaxb-runtime-4.0.9.jar",
+        "sha256": "93e09b7316b6af68d6e2083e4c297daf28e8957f45d725077af812c0b12c39ab"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jcip-annotations-1.0-1.jar",
+        "sha256": "4fccff8382aafc589962c4edb262f6aa595e34f1e11e61057d1c6a96e8fc7323"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-client-4.0.2.jar",
+        "sha256": "91fd986ee7c7fa468b2f601d7a2cdf9bfad6ce4fa0fbf5d4f7e6d0c07c12a023"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-common-4.0.2.jar",
+        "sha256": "83466815c46d8f813509411986a22d1d3a2abe572b15b03078f98bc020154538"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-container-servlet-4.0.2.jar",
+        "sha256": "9317b4c9cc8f86906fe6f64b2ae613d7b586d7fb396cd13eaf615a2d5bb142ae"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-entity-filtering-4.0.2.jar",
+        "sha256": "633afbf5f3c1ae53aeffbec1f486a878446f19ec8df42b2f795cb06620d1db90"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-hk2-4.0.2.jar",
+        "sha256": "5df758fc55d0d7cdb431b4c9ab50fbf613965ce0a7898d1a923d957e3a93df2c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-media-json-jackson-4.0.2.jar",
+        "sha256": "efa2fdad26e994adde4f827c11e44ab5fd3cf3c3e0aa4f99e8eefd1b83449fa7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-media-multipart-4.0.2.jar",
+        "sha256": "b9bbd74fa5337753c1f96e2ef1e9ab5c7ab1ad3b8fe1c4f719a311e8f3821aed"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jersey-server-4.0.2.jar",
+        "sha256": "c92030c36d6b72cea53464f954e23260ed1ad3559cbb653264497d83882a9aba"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/json-path-3.0.0.jar",
+        "sha256": "e4e49440701674ace75af44a98840d9e13f53b34aab280446707661318405dc8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/json-smart-2.6.0.jar",
+        "sha256": "1ae4b561458afb540be8ec5c6dbb4f2e715a319a7ae64854998aaf924770d61b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jspecify-1.0.0.jar",
+        "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jsr305-3.0.2.jar",
+        "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/kotlin-logging-1.7.9.jar",
+        "sha256": "2a2c044da3e8da5995ab199b3b70899881ce2d816ba29c2e8053a2402a97cf16"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/kotlin-stdlib-2.4.20.jar",
+        "sha256": "2226de463d309d4a5500a481320b3dea515a6981dcae1def531fbc158884e25f"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/kotlin-stdlib-common-1.3.70.jar",
+        "sha256": "6e2377cfc4898f2fb24429951b133b570b250e3f860a8458b2a1f8a63cf53a50"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/lang-tag-1.7.jar",
+        "sha256": "e8c1c594e2425bdbea2d860de55c69b69fc5d59454452449a0f0913c2a5b8a31"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+        "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/metrics-core-4.2.39.jar",
+        "sha256": "cc7b1352cd8077974b70b3e365c4f13aa93f5786ce1dea538be5451ed23600c9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/metrics-json-4.2.39.jar",
+        "sha256": "8726b15affd61992a4ecd0ed1dc3936782781e7fa0fdc47be04d338f9341dd46"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/micrometer-commons-1.16.7.jar",
+        "sha256": "cd1ad64a94650a2ed3988a4ab48c9a7fad40c4986a81e328194dd757b5170273"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/micrometer-observation-1.16.7.jar",
+        "sha256": "74f9e4d51ef30c141de8a2409879282e572eef98665e033e8922c2fbee16862d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/mimepull-1.9.15.jar",
+        "sha256": "b9f586bf8844b14a33e75fe7a4b94896dc80d80b732d128777e287af14c836fa"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-administration-2.12.0.jar",
+        "sha256": "afc5dc8cefb1257bb3b996c6c357e8a838ec7268fcb1ec75f5bd11651df7d97c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-authorizer-2.12.0.jar",
+        "sha256": "c346cce73a98decb54f1fd39d9f38d12fa299176b187d3daa7a91c2744262cd1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-client-dto-2.12.0.jar",
+        "sha256": "ce102f5a6aa04d7a6558de05204c7da06b3ce82309fad9390e3929a9dc652a81"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-data-provenance-utils-2.12.0.jar",
+        "sha256": "2e8f4203fded51db2d09a48331a19c0c75f412e36d08bbbab99ce9174ab8da0b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-deprecation-log-2.12.0.jar",
+        "sha256": "1255fb9d929adf10549d7c6a2e0772c7c5b5c0d992f73c85a1f996da0d349cee"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-expression-language-2.12.0.jar",
+        "sha256": "86eafdce4b8c5294fffdf20038c906b90fab9f63583a7eb6982fee6321b2485e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-extension-manifest-model-2.12.0.jar",
+        "sha256": "c48927af17fefa96e3a35628ddf5f11ff73a99d842c95472644ad7ef3a540aa0"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-extension-manifest-parser-2.12.0.jar",
+        "sha256": "3d82200681eb449d6776097046ad732639fb48d749aa023b2665f683dd1fe22d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-file-authorizer-2.12.0.jar",
+        "sha256": "d4419d710e673fb20b1c274417a5dc25cc16b8489134fda3be581299d1ab50b1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-flowfile-repo-serialization-2.12.0.jar",
+        "sha256": "3c76907a9606d664a9ae980211ca4805bfc6abca0cf78a33801a56008e1b4a28"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-authorization-2.12.0.jar",
+        "sha256": "30cae0ae15f32c8c16248c092da1e0331778c730c9121503c9e03306508c0ad1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-authorization-providers-2.12.0.jar",
+        "sha256": "f1f8a2e5d6a971fa0eef4954223876ff5227bb651fbc4fa083bab3125f5cf0a3"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-cluster-2.12.0.jar",
+        "sha256": "3b85bf7457fcc6544c52aa823aa99c5af7eee1489d555f29d38d69a8a4598288"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-cluster-protocol-2.12.0.jar",
+        "sha256": "c9aa345313c15b1752837f591e45ef7bbbaee654c3a7078b7714f98ca7d6c20e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-components-2.12.0.jar",
+        "sha256": "7167d17e8e8a7dac0039be38f65dbe5670929dbf4507589dafa3ecaebed34a93"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-core-2.12.0.jar",
+        "sha256": "ed57c4866f200b5757b99e5b6eeaeb35aafb9353251c759e9a954010aabb5418"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-core-api-2.12.0.jar",
+        "sha256": "caa3afee722721f724fcdd1cf4c058c0a0faaba16886b12945b581159110fee1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-nar-loading-utils-2.12.0.jar",
+        "sha256": "c030ff72c9054782953e7bc4811a2bed6a3fdcc858b96b94135168e66f659216"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-nar-utils-2.12.0.jar",
+        "sha256": "6486f071d2f8c4e265cce6de14b5d5ea6fde4f0be6243e3012c48522d8f446d4"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-framework-status-history-shared-2.12.0.jar",
+        "sha256": "3dfb67e0b23de7f731ac1010506f204e88eaf85b1ab59f226c07919feb7afd9d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-parameter-2.12.0.jar",
+        "sha256": "0e42848a8d7eceecd894bbefdb3f4d4da38ba23ece99adbc22fa0dc30df91587"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-properties-loader-2.12.0.jar",
+        "sha256": "f6cad6d36efca2e82532a85adf72469083f32bcb28de115098282530f9fb740c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-property-encryptor-2.12.0.jar",
+        "sha256": "cd2b19dc38b7958105fa94bea10e235fc0f0ef4b08590350e90f38078e2d39ee"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-registry-data-model-2.12.0.jar",
+        "sha256": "d36c5fd85dc5e0175ed82e148b0c4f945f84d2b3840b35e28d8ed987e4051b67"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-registry-flow-diff-2.12.0.jar",
+        "sha256": "b7aaca106f7711840ea3c5b918ef2f563d8830663cb830cd2ab6d67f3c79a0a9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-registry-revision-entity-model-2.12.0.jar",
+        "sha256": "033c5a5e53437293f69295c4a2ad41d47d5f5865e3fc613302dfca270b16e42e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-repository-models-2.12.0.jar",
+        "sha256": "5f1f455b79399a0e498749e1ec649146bd1a491abf7801ac6b8353f8bb4903f9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-runtime-manifest-core-2.12.0.jar",
+        "sha256": "4f4c9a7bb3f725bb14ebfaef9468deaa63732f8ad7966acd2327238da6b8b294"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-schema-utils-2.12.0.jar",
+        "sha256": "b1650a744a34ab5d3c09e5ac562b21c67241971dbe682f372f2d7a4d30fd719d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-security-cert-2.12.0.jar",
+        "sha256": "8c254049da84dbb6bda2e1188033f057369ad09669d71bfa6e78b916299ad079"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-security-crypto-key-2.12.0.jar",
+        "sha256": "6e0495ba9847c58624977738820d7ca747b6591fc853c0dcb56ce71f898ecb36"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-security-identity-2.12.0.jar",
+        "sha256": "25657c52ebe6fbfb43540a32a6e44d113292c4587c9614768dee5509bfaedf4d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-security-proxied-entity-2.12.0.jar",
+        "sha256": "d2c74f08bd6531aeab1044df171e354268eb6f6f5cad0a43bb891754c31fc6f2"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-security-ssl-2.12.0.jar",
+        "sha256": "aecf9074e7d3a331d4448164f327c8669c3abf78a893f854da3dd88c944408d5"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-security-utils-api-2.12.0.jar",
+        "sha256": "2d7a02b0e552346702ffcd27d73da0aa3ee6150582575b55cb32055708dece40"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-site-to-site-2.12.0.jar",
+        "sha256": "1d971b6a5a59a9d3e5d468069b84647c8ae0c9e6a1252ae138b8910a48e11739"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-site-to-site-client-2.12.0.jar",
+        "sha256": "5a4c413f48f255e8f6ce306cf55671e2a9e38679df99818185b05752932432a6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-standard-prioritizers-2.12.0.jar",
+        "sha256": "91a0db62f39ab0a150c70627cbd600c470ce3d59621ee4281cf48e94a4c75c55"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-stateless-engine-2.12.0.jar",
+        "sha256": "63acfd81611be812b9de694e16ab9ffd2c23be11712f35ad076f5a9b7dd158a8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-user-actions-2.12.0.jar",
+        "sha256": "ca95ff7c51ab73a719148f507243694f665d05133365e4d88b96923ec9dd2e06"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-utils-2.12.0.jar",
+        "sha256": "ab1f11b84f074ee8ebde7f35398e1c2f0199282916eab884bfb7ba982cec331e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-uuid5-2.12.0.jar",
+        "sha256": "9509572a1131dd9bc321a802eeda1b11c81ef1e1964bd365648efe1fbdbfbe96"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-web-client-2.12.0.jar",
+        "sha256": "c857c8aae15468a19b93834cc3318b065800b70975c70f9c9aa6b895e5f1465a"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-web-client-api-2.12.0.jar",
+        "sha256": "c26250be3c21c6559b2daab259effd65550c983c3457490997e5278791b218b9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-web-security-2.12.0.jar",
+        "sha256": "65bf86773aceeea5a7f986c734eaa2220338f142a7600459f67ad9914beb4c11"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-web-servlet-shared-2.12.0.jar",
+        "sha256": "e7cf7cb1b576a0427c25edec3824abe07745b1412ddae7ad504e836a55eeb3a9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-write-ahead-log-2.12.0.jar",
+        "sha256": "2838933fcdce2cd4f9d54a0f1ef061fa5c00bbcf9ea2a89ec619ce1827825e67"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nifi-xml-processing-2.12.0.jar",
+        "sha256": "282d6f17d4f01b9b9e04c0f76fd3207790dd2123606ca857c8229c46798a9cf7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/nimbus-jose-jwt-10.9.1.jar",
+        "sha256": "33152ea83ec50d22706fdaf3b07acbcd716f9a68edcabdd7c4d02843cbdcdcf6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/oauth2-oidc-sdk-11.38.2.jar",
+        "sha256": "30e63220c15bd93006c557bd0d614bb57a5f00232188693577c222383ea4bbe7"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-core-api-5.2.3.jar",
+        "sha256": "40ed25f0892dfb833aa2b917bd2be1e10cb7c788efb3276b66b19338b80c29f6"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-core-impl-5.2.3.jar",
+        "sha256": "af8604462837a7931d4688ccca3404db325ef7abff7a70a36206a9c4dd7fe953"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-messaging-api-5.2.3.jar",
+        "sha256": "53e9a343afcdefdfaad4987d63598a2284c1bf98b99761c8baea1a69c2f7ebcd"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-profile-api-5.2.3.jar",
+        "sha256": "3c150e2db1dee689b776c604d601adcc060d0305c6eabffa17f213509f5587f8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-saml-api-5.2.3.jar",
+        "sha256": "cce72578ec8df5dd18cb71c88bba89bd196c640281c199ce875e2aa44154f93f"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-saml-impl-5.2.3.jar",
+        "sha256": "9f04221e172dc426f90fb3873d0148a0744edbf9e7a37de7ee0e6a34f7b74581"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-security-api-5.2.3.jar",
+        "sha256": "2053f9ae1f37a87cf94117ea61395080eb3ec71c631aa71dd2a6c386dd8ff3af"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-security-impl-5.2.3.jar",
+        "sha256": "21cc4cc73551f4ded22e8390286b9a4202b48c5054498bcd263f393f30d441a1"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-soap-api-5.2.3.jar",
+        "sha256": "1b503de27e275bbe9014b4d503ce80a8b8dcfcb0c47fff9e48f14b05cb2788ab"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-soap-impl-5.2.3.jar",
+        "sha256": "b6a38b04741401de8b697ca773f200edb2421347e1eb0aa220355596d5675bf9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-storage-api-5.2.3.jar",
+        "sha256": "07402db8880c7da7143c57f1c2ea3cf08e1e80e1470d86409e2db56e1d3fb02a"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-xmlsec-api-5.2.3.jar",
+        "sha256": "3401e9e309fd170f4b9ea0d8fc68b5b778c2374bf654371378bce21952d6c6b9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/opensaml-xmlsec-impl-5.2.3.jar",
+        "sha256": "cc67fc1bd9cb435cdbe7483ef04513c83cc9619a3015c04ad41bb6cc0eb6e68e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/osgi-resource-locator-3.0.0.jar",
+        "sha256": "a1866ccfddaa29f18da5d39df662894ab2dd9902994a5000e7644f6cc1e37e55"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/shib-networking-9.2.3.jar",
+        "sha256": "cca1d53b5a5bfab21320ed68ee77c5e0f87af53753d69711a52af87cced94861"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/shib-security-9.2.3.jar",
+        "sha256": "46c53c48a6e1930f145add7f65ed51ab9273de9e3dc746b82e5d695d25bb0ba8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/shib-support-9.2.3.jar",
+        "sha256": "c68f5668d23aa30a2a5b672dd03b46882bb0ce1185cf02240c4c99eee9bd94b0"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/shib-velocity-9.2.3.jar",
+        "sha256": "42f0fc3c53eae0b7d241b6e7c5a4c782100c78fe67d3527c1df67ba513a830c8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-aop-7.0.9.jar",
+        "sha256": "b8c5d6bfcb1f4993f2cc124f7ab7fac40edf5256b9e43c2f7250a733cb5510e9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-beans-7.0.9.jar",
+        "sha256": "ff218b827a25c9e8929b0cd56dfb56916cea9d5b669ed97dc7cb262508ff548b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-context-7.0.9.jar",
+        "sha256": "7552a2fcfa30cea53eb14d7a65a7a8e1b1dd82e832a7164fb7e6fb105f438858"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-context-support-7.0.9.jar",
+        "sha256": "3c0c35a0371539f5e7d4e9d0226b9a009a4109cd0e20e805e27132dd6ae0727d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-core-7.0.9.jar",
+        "sha256": "5195f4722699b39878d99a832549fe65df2890b159d063b88fff31b1ca65ae36"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-expression-7.0.9.jar",
+        "sha256": "046434c40f43819729b9b1db0e6c659dfa68184c1c2c2efa5f7b3a5b27c4e2e2"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-config-7.1.1.jar",
+        "sha256": "1f947c853f14cab76563464ee22e72f6672f3913db52647d2f5d1df5f2b1e5a5"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-core-7.1.1.jar",
+        "sha256": "98a5011baa78df36fb184e6ce0e8e086ca9a64fcdd8f161c0a96475a3a0907bd"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-crypto-7.1.1.jar",
+        "sha256": "6e8bb2337faccabd30626f917ed1d2bfa9dde982229b6b373b644d1a01635403"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-oauth2-client-7.1.1.jar",
+        "sha256": "d871b3571201c69e0142cca3a61fbcca4fd4ec9c0dedb21fdd4fe4a77ff9991d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-oauth2-core-7.1.1.jar",
+        "sha256": "29140d71b37cf1246bf16e33619e88e7baaa1c66bf5574e3c3e9a9f225f0ef6e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-oauth2-jose-7.1.1.jar",
+        "sha256": "e07d47cac04de4f01be6a6c3f8be249472444b24fd4fad8ff030b45bfe6c5b9c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-oauth2-resource-server-7.1.1.jar",
+        "sha256": "d8e2d24d2829ec4e2f8212c2c465c5abb30463f550d650080cc8f1d71d0daa6c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-saml2-service-provider-7.1.1.jar",
+        "sha256": "a2c71d460befb5e7f3773fb8ad79892aa253176d75c109ad8cd5a27f83869b0b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-security-web-7.1.1.jar",
+        "sha256": "dece134a2332c976a2c94ecf13f816c64e8ea7f2139795485afe655fba0408f3"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/spring-web-7.0.9.jar",
+        "sha256": "941ced476427bde2533872f293da535fd0258de3f3a650a7f1bfe01ed2927302"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/swagger-annotations-2.2.55.jar",
+        "sha256": "7e12244732b10d831eabb58c038c8e604cd8d828d4ae1ace4dd589da543c6261"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/txw2-4.0.9.jar",
+        "sha256": "d6343e5945d87266ca4e8974a0a2a876e1bd147a00fb65ed3f2e1a3a00f3a82a"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/velocity-engine-core-2.4.1.jar",
+        "sha256": "1c19157d1171d560088e485be97c93a7a2f7e9f56e517f0a30273c5c39df6231"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xmlsec-4.0.4.jar",
+        "sha256": "8b2f8483b662ba5462126074dadf4d4f33966d8e8244889c6a81d53789da5402"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xodus-compress-2.0.1.jar",
+        "sha256": "738bad08a5e59ed23246b336cbc48a0ddf5cb6d11a9cf27d7152fd9bbcf6f970"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xodus-entity-store-2.0.1.jar",
+        "sha256": "2b5d92dac3b2ba43e272f9e8bd7047f112c7fb2c1e0615997c13f17ad5834e62"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xodus-environment-2.0.1.jar",
+        "sha256": "2b763287f650bb8b95e3190264343ec2471ee614f320ea15a24d7525c51e781b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xodus-openAPI-2.0.1.jar",
+        "sha256": "a1c8ba48cfdf377c9829710671a0166bba5c3636f085225f05859b2255398c8c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xodus-utils-2.0.1.jar",
+        "sha256": "5c093cc7eab53ff34f050e3090d8c63f0006d79c82a26f6a41d70873b0ca0561"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/xodus-vfs-2.0.1.jar",
+        "sha256": "6e4dbac6e6bf3755967613c8b04ec219a6f5c2cffc34ff8663cf9e38bc5e8997"
+      }
+    ],
+    "entry": "META-INF/bundled-dependencies/nifi-framework-nar-utils-2.12.0.jar",
+    "jar_sha256": "6486f071d2f8c4e265cce6de14b5d5ea6fde4f0be6243e3012c48522d8f446d4",
+    "manifest": {
+      "Build-Jdk-Spec": "21",
+      "Build-Tag": "rel/nifi-2.12.0",
+      "Build-Timestamp": "2026-09-10T19:06:37Z",
+      "Clone-During-Instance-Class-Loading": "false",
+      "Created-By": "Apache NiFi Nar Maven Plugin 2.4.0",
+      "Java-Version": "21",
+      "Manifest-Version": "1.0",
+      "Nar-Dependency-Group": "org.apache.nifi",
+      "Nar-Dependency-Id": "nifi-jetty-nar",
+      "Nar-Dependency-Version": "2.12.0",
+      "Nar-Group": "org.apache.nifi",
+      "Nar-Id": "nifi-framework-nar",
+      "Nar-Version": "2.12.0"
+    },
+    "path": "opt/nifi/nifi-current/lib/nifi-framework-nar-2.12.0.nar",
+    "sha256": "53882f6547532639dff7fc9e3d712d69d853f3900583b9d1882e9831c6c96293"
+  },
+  "java_base_jmod": "b559cf2dba8f036c7ea51499a01dafd47040aa540f769797cae53bacf7686500",
+  "jetty": {
+    "direct_jars": [
+      {
+        "entry": "META-INF/bundled-dependencies/asm-9.10.1.jar",
+        "sha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/asm-commons-9.10.1.jar",
+        "sha256": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/asm-tree-9.10.1.jar",
+        "sha256": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/ecj-3.46.100.jar",
+        "sha256": "74c93172475fee0cd4e6eefb44233516dd40525642da35d009146d97ea598229"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.annotation-api-3.0.0.jar",
+        "sha256": "b01f55552284cfb149411e64eabca75e942d26d2e1786b32914250e4330afaa2"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.el-api-6.0.1.jar",
+        "sha256": "7e84b5bed49de32b79cc5e85d90b6f5adb1a953ac67283adbb41c1e297f9c605"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.enterprise.cdi-api-4.1.0.jar",
+        "sha256": "c42c808f17925129a0800f618febe050d966e181a4c7384c8a5e7a0283d68699"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.enterprise.lang-model-4.1.0.jar",
+        "sha256": "bb56f571f60d2862b2387d5468fe8f5540f8094727283ed991f89082708095ee"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.inject-api-2.0.1.jar",
+        "sha256": "f7dc98062fccf14126abb751b64fab12c312566e8cbdc8483598bffcea93af7c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.interceptor-api-2.2.0.jar",
+        "sha256": "d240d72b4dd38a2e431c804079810010cb97903678fa5f987fb7434878b04398"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.servlet-api-6.1.0.jar",
+        "sha256": "8a31f465f3593bf2351531a5c952014eb839da96a605b5825b93dd54714c48c4"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.servlet.jsp-api-4.0.0.jar",
+        "sha256": "873b7d0c2b5734ef8847634299b67ce879080cdece8426147522c4db8e37c14e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.servlet.jsp.jstl-3.0.1.jar",
+        "sha256": "5cc6e60b9e74d38c25fe4f2d22dfd40577f5b8396bc885f7061cd2c525a43b86"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.servlet.jsp.jstl-api-3.0.2.jar",
+        "sha256": "d55951aefedb543cb16193a873b92d22c40c3b8ba26cfa7ed9229eb118bb9c9b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jakarta.transaction-api-2.0.1.jar",
+        "sha256": "50c0a7c760c13ae6c042acf182b28f0047413db95b4636fb8879bcffab5ba875"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-alpn-java-server-12.1.13.jar",
+        "sha256": "746df9c84a60d865d33d90fe69b8f09c010a2b55f1979147357a90172ec1e07f"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-alpn-server-12.1.13.jar",
+        "sha256": "e282181358dcb5a4872c9363c926c856564c94e5432a91e67e1b2ae309c7d50a"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-annotations-12.1.13.jar",
+        "sha256": "386524d7a5211ce454e5043a9afc55c1f6f23decd743a0d9764ee3e56e86a1b9"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-compression-common-12.1.13.jar",
+        "sha256": "91bf7b735619870fd369aed9d79372ed8e6cdba2e4b4c44131a2a78fa15d4737"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-compression-gzip-12.1.13.jar",
+        "sha256": "987afca3706a82595533ab49b60281f77daba688a46f2a7b2ac9498c9484be7d"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-compression-server-12.1.13.jar",
+        "sha256": "69e69cd1ee46139a2abbe16abd2f98342e6e50ac82651ed0859dcd0c515e3a53"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-deploy-12.1.13.jar",
+        "sha256": "d01fd95e68abd07cf3ef20129349c6c2e562df59f99d4eb8d057f9eaf71c3cd3"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee-webapp-12.1.13.jar",
+        "sha256": "15c82c0ecd1be08ef776a06bf138f5351c2554d84fd02bd72aa1d0dc88c10a0e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-annotations-12.1.13.jar",
+        "sha256": "f2476c80785ff4feb2508c847933c16e6a615dc892be7967cb874d99e13bf656"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-apache-jsp-12.1.13.jar",
+        "sha256": "538d5bca7b05bb172c838f2187d3345b756110fb508ff3d92e2b6becd4323d52"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-glassfish-jstl-12.1.13.jar",
+        "sha256": "8d4f8b84235ddc2e9e4447024913e5804e56a3b2ea51b4fd6834979412571ea2"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-plus-12.1.13.jar",
+        "sha256": "9cee89b657538d445bdc597444494918fd3bd17a344a1b4e2dc6ed3c891860aa"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-servlet-12.1.13.jar",
+        "sha256": "c6fb3047015c4ba543e869056e68451574417af0ab3fc0a28a9c73993499f45e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-servlets-12.1.13.jar",
+        "sha256": "3fa64ffe3bc0b30c8c511e6f2b0a2a4aa5421d2a41bf44425e9a50a380109b70"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-ee11-webapp-12.1.13.jar",
+        "sha256": "de7c17288e1374698ec464018ac4106e38c87e407fd72991c10fc2fa5e438eea"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-http-12.1.13.jar",
+        "sha256": "3bb84bfdd0992453986a8f7422dbf55cf779a0a780ff8a68041bb6119fb997fd"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-http2-common-12.1.13.jar",
+        "sha256": "611bcccb69ec472af076f356667a53d75e75a61a4c213d15928a65e4342d452e"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-http2-hpack-12.1.13.jar",
+        "sha256": "d96a2e7c902a33206b3181d5e5c10855367f5305a45c5bcf7bb7c52959638350"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-http2-server-12.1.13.jar",
+        "sha256": "608f849b824d8f8ee0c34a704651157fe793ab73f7d793d86dbd84c04e1d79f2"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-io-12.1.13.jar",
+        "sha256": "946338a5db4e906ba0698dcdae350394736062cf915b5f16ebf787bcee7fffae"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-jndi-12.1.13.jar",
+        "sha256": "3cd388f18cf7da3551f164b2a44506229cd3f04e0e7e9379f4bef178f1f3003c"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-plus-12.1.13.jar",
+        "sha256": "2b8e399ba811951c44aca506de1c35df7700210673b542dfc059b7a393785cbf"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-rewrite-12.1.13.jar",
+        "sha256": "5c0379d381dbb77ec556a17bf364b4c52550802fee98ec2a8bb626e87e65e406"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-schemas-5.2.jar",
+        "sha256": "1ff442f8de5d09a6653991bfd95fc03b3344fc0de2c6e87ce17ada2c1405bc88"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-security-12.1.13.jar",
+        "sha256": "64b15214158097af40db345a31bb71cfe0d4a6c7c19cb59cd4c0a97245999ee8"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-server-12.1.13.jar",
+        "sha256": "978265f1ac637c504b537f5d56e07d4a47e7c4bb0752d9dd66b79f5be754abfa"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-session-12.1.13.jar",
+        "sha256": "30ebd5d63895f97aad0d626a567b40552d4c2bd9978adedc46e7a23b4652f595"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-util-12.1.13.jar",
+        "sha256": "3e408e60fe71a337979004fc4e47bfd3c08a931cf33b46b6a5dc4dbdd088c2fd"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/jetty-xml-12.1.13.jar",
+        "sha256": "ccf30ddde0326b9691818a3f797a1fc443a0633bf1b04989ed2387b7574f1e01"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/mortbay-apache-el-11.0.23.jar",
+        "sha256": "7260053cb50e0060aed758d64398ff570571a784903d7b6260f9d869055b8d27"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/mortbay-apache-jsp-11.0.23.jar",
+        "sha256": "e620e88449d8c0bb3c06e88c2f9aaf61b3f8cf8ad28aec45f2b6617bcb5ce63b"
+      },
+      {
+        "entry": "META-INF/bundled-dependencies/wasp-4.0.0.jar",
+        "sha256": "dd322cb7caf609f96d7b4b95e7556737385d48fe0c83eec02e92ff847018a8a1"
+      }
+    ],
+    "manifest": {
+      "Build-Jdk-Spec": "21",
+      "Build-Tag": "rel/nifi-2.12.0",
+      "Build-Timestamp": "2026-09-10T19:06:37Z",
+      "Clone-During-Instance-Class-Loading": "false",
+      "Created-By": "Apache NiFi Nar Maven Plugin 2.4.0",
+      "Java-Version": "21",
+      "Manifest-Version": "1.0",
+      "Nar-Group": "org.apache.nifi",
+      "Nar-Id": "nifi-jetty-nar",
+      "Nar-Version": "2.12.0"
+    },
+    "path": "opt/nifi/nifi-current/lib/nifi-jetty-nar-2.12.0.nar",
+    "sha256": "3506b30b3f45fe8d57fe6fc25625420f9863aaa881fee32861010889538ff890"
+  },
+  "replacement": null,
+  "runtime_approved": false
+}

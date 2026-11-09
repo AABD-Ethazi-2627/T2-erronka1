@@ -1,0 +1,26 @@
+{
+  "haproxy-final-scan.json": {
+    "artifact": "cnc-guard-audit:haproxy",
+    "image_id": "sha256:2730e7202bfda923dd8d16c37099ed4846bc995cc66307ae85573b6d7a0b8e1c",
+    "packages": 24,
+    "findings": 0
+  },
+  "go-final-scan.json": {
+    "artifact": "cnc-guard-audit:go",
+    "image_id": "sha256:94e9d23cf1880d6ec0dcdaa764933aa9a1d1ab17c7a4811b239bce8edfd4d997",
+    "packages": 27,
+    "findings": 0
+  },
+  "haproxy-scan.json": {
+    "artifact": "haproxy:3.4.7-alpine@sha256:5312d37032c079c4937d45ef63758852434351f3b425a3703521fd999837abcf",
+    "image_id": "sha256:49c6afb26f0212d40f175916927fcedd19c8f8f3d408be3580aea40eb5144bd4",
+    "packages": 24,
+    "findings": 1
+  },
+  "haproxy-debian-scan.json": {
+    "artifact": "haproxy:3.4.7@sha256:f6d2ee87b47192d9cc8c22e88fef405122ff339859644883edc2a7d1827f87b3",
+    "image_id": "sha256:e29e7d039a7927217f2c15e3b7644e536b8b3043da000060c785eb71f04810aa",
+    "packages": 83,
+    "findings": 187
+  }
+}
