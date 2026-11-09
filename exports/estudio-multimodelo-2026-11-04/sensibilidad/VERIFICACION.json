@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "selections_checked": 81,
+  "aggregate_rows_checked": 27,
+  "four_cell_costs_recomputed": true,
+  "inner_recall_constraints_checked": true,
+  "limits": "Arithmetic/coverage checks by same agent; not independent generalization evidence",
+  "threshold_boundary_scenario_tests": 27
+}

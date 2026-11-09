@@ -1,0 +1,70 @@
+{
+  "imbalanced_learn": "0.12.4",
+  "seed": 42,
+  "sampling_strategy": 0.2,
+  "k_neighbors": 3,
+  "same_train_folds_as_CG08": true,
+  "oof_development": {
+    "threshold": 0.5717962835018648,
+    "precision": 0.875,
+    "recall": 0.8473684210526315,
+    "f1": 0.8609625668449198,
+    "f2": 0.8527542372881356,
+    "roc_auc": 0.9703891429127348,
+    "average_precision": 0.8929279704546683,
+    "confusion_matrix": [
+      [
+        5387,
+        23
+      ],
+      [
+        29,
+        161
+      ]
+    ]
+  },
+  "validation_diagnostic": {
+    "threshold": 0.3425670781920782,
+    "precision": 0.6226415094339622,
+    "recall": 0.8048780487804879,
+    "f1": 0.7021276595744681,
+    "f2": 0.7603686635944701,
+    "roc_auc": 0.9721374608051516,
+    "average_precision": 0.8162815634009676,
+    "confusion_matrix": [
+      [
+        1139,
+        20
+      ],
+      [
+        8,
+        33
+      ]
+    ]
+  },
+  "previous_winner_oof": {
+    "threshold": 0.3025667388167388,
+    "precision": 0.8691099476439791,
+    "recall": 0.8736842105263158,
+    "f1": 0.8713910761154856,
+    "f2": 0.8727655099894848,
+    "roc_auc": 0.9672468138924021,
+    "average_precision": 0.9089647747455067,
+    "confusion_matrix": [
+      [
+        5385,
+        25
+      ],
+      [
+        24,
+        166
+      ]
+    ]
+  },
+  "limitations": [
+    "Supplementary exploratory experiment; selection/tuning scores optimistic.",
+    "No new independent final test. Existing API model is not changed by this experiment.",
+    "SMOTENC samples original sensors and true categorical types; derived physics recomputed afterward.",
+    "Synthetic interpolated sensors need physical plausibility scrutiny; not new observed failures."
+  ]
+}

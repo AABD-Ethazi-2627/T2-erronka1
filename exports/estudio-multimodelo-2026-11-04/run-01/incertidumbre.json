@@ -1,0 +1,13 @@
+{
+  "method": "paired stratified bootstrap, 2000 resamples, fixed OOF predictions, seed20261104; conditional/descriptive only, dependent folds and search multiplicity not covered",
+  "challenger_minus_rf_cost_per_1000_95": [
+    -4410.714285714285,
+    1607.142857142857
+  ],
+  "improvement_percent": 3.6416184971098264,
+  "rf_missed_recovered": 2,
+  "rf_hits_lost": 1,
+  "false_alarms_removed": 28,
+  "false_alarms_added": 20,
+  "disagreements": 51
+}

@@ -1,0 +1,220 @@
+{
+  "headRefOid": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+  "number": 119,
+  "reviewDecision": "REVIEW_REQUIRED",
+  "state": "OPEN",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:16:19Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467168835",
+      "name": "lock",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:16:15Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173780/job/126467168717",
+      "name": "engine-paths",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "ES bind storage safety"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:16:23Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173772/job/126467168822",
+      "name": "lan-rotation",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "LAN certificate rotation"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:16:20Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173762/job/126467168671",
+      "name": "dashboard",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "Laneki prototype"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:16:29Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173912/job/126467169280",
+      "name": "synthetic-research",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "ML research smoke"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:16:10Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173853/job/126467169144",
+      "name": "paths",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "Repository layout"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:18:09Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173757/job/126467168797",
+      "name": "test (3.11)",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "Validate CNC Guard"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:17:58Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173757/job/126467169177",
+      "name": "test (3.12)",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "Validate CNC Guard"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:35:29Z",
+      "conclusion": "FAILURE",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169141",
+      "name": "images (api)",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "COMPLETED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169278",
+      "name": "images (dashboard)",
+      "startedAt": "2026-11-04T08:16:03Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-11-04T08:35:55Z",
+      "conclusion": "FAILURE",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169029",
+      "name": "images (kafka)",
+      "startedAt": "2026-11-04T08:35:31Z",
+      "status": "COMPLETED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169261",
+      "name": "images (nifi)",
+      "startedAt": "2026-11-04T08:35:57Z",
+      "status": "IN_PROGRESS",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169117",
+      "name": "images (elasticsearch)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169391",
+      "name": "images (kibana)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169208",
+      "name": "images (filebeat)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169395",
+      "name": "images (python)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169191",
+      "name": "images (mock-python)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169289",
+      "name": "images (uv)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169246",
+      "name": "images (go)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467169327",
+      "name": "images (haproxy)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "0001-01-01T00:00:00Z",
+      "conclusion": "",
+      "detailsUrl": "https://github.com/AABD-Ethazi-2627/T2-erronka1/actions/runs/41798173890/job/126467171013",
+      "name": "images (wolfi)",
+      "startedAt": "2026-11-04T08:16:00Z",
+      "status": "QUEUED",
+      "workflowName": "Dependency audit"
+    }
+  ],
+  "title": "feat: integrate canonical live dashboard, committed history and runtime verification",
+  "url": "https://github.com/AABD-Ethazi-2627/T2-erronka1/pull/119"
+}

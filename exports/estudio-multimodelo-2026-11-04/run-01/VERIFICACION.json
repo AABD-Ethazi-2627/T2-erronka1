@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "oof_procedures_checked": 21,
+  "global_policy_rows_checked": 8934,
+  "fold_rows_checked": 26802,
+  "selection_minima_verified": 54,
+  "threshold_boundary_tests": 3,
+  "historical_rf_aviso_exact": true,
+  "independent_arithmetic": "csv and Python integer counts; all reported procedures and aggregate configurations checked",
+  "limit": "same agent, distinct calculation path; not independent human acceptance"
+}

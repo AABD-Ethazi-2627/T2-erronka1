@@ -1,0 +1,120 @@
+{
+  "rows": 5600,
+  "positives": 190,
+  "negative_rows": 5410,
+  "columns": [
+    "machine_id",
+    "machine_type",
+    "air_temp_K",
+    "process_temp_K",
+    "rpm",
+    "torque_Nm",
+    "tool_wear_min",
+    "machine_failure",
+    "failure_TWF",
+    "failure_HDF",
+    "failure_PWF",
+    "failure_OSF",
+    "failure_RNF"
+  ],
+  "allowed_inputs": [
+    "air_temp_K",
+    "process_temp_K",
+    "rpm",
+    "torque_Nm",
+    "tool_wear_min",
+    "machine_type"
+  ],
+  "excluded_columns": [
+    "machine_id",
+    "failure_TWF",
+    "failure_HDF",
+    "failure_PWF",
+    "failure_OSF",
+    "failure_RNF"
+  ],
+  "nulls": {
+    "machine_id": 0,
+    "machine_type": 0,
+    "air_temp_K": 0,
+    "process_temp_K": 0,
+    "rpm": 0,
+    "torque_Nm": 0,
+    "tool_wear_min": 0,
+    "machine_failure": 0,
+    "failure_TWF": 0,
+    "failure_HDF": 0,
+    "failure_PWF": 0,
+    "failure_OSF": 0,
+    "failure_RNF": 0
+  },
+  "duplicate_predictor_rows": 0,
+  "nonfinite_sensor_cells": 0,
+  "sensor_ranges": {
+    "air_temp_K": {
+      "min": 295.3,
+      "max": 304.5,
+      "unit": "K"
+    },
+    "process_temp_K": {
+      "min": 305.7,
+      "max": 313.8,
+      "unit": "K"
+    },
+    "rpm": {
+      "min": 1168.0,
+      "max": 2861.0,
+      "unit": "RPM"
+    },
+    "torque_Nm": {
+      "min": 4.6,
+      "max": 76.2,
+      "unit": "Nm"
+    },
+    "tool_wear_min": {
+      "min": 0.0,
+      "max": 253.0,
+      "unit": "min"
+    }
+  },
+  "type_support": {
+    "H": {
+      "n": 543,
+      "positives": 13
+    },
+    "L": {
+      "n": 3390,
+      "positives": 132
+    },
+    "M": {
+      "n": 1667,
+      "positives": 45
+    }
+  },
+  "derived": {
+    "temp_diff": {
+      "min": 7.599999999999966,
+      "max": 12.100000000000023
+    },
+    "power_W": {
+      "min": 1378.1748092277944,
+      "max": 10112.074657570729
+    },
+    "wear_torque": {
+      "min": 0.0,
+      "max": 16497.0
+    }
+  },
+  "forbidden_features": "row/product/machine IDs, timestamps without valid history, target, failure subtypes, post-outcome columns; never used by new meta-models",
+  "time_and_entity_limit": "Rows are snapshots from approved tabular source. No physical chronological trajectory is established by an ID or repeated playback.",
+  "membership_sizes": {
+    "train": 5600,
+    "validation": 1200,
+    "excluded": 1200
+  },
+  "distinct_machine_id": 50,
+  "target_subtypes_inconsistency_counts": {
+    "negative_with_any_subtype": 8,
+    "positive_without_subtype": 6
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "created_utc": "2026-11-04T08:39:37.547694+00:00",
+  "main": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+  "candidate": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+  "pr_head_observed": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+  "source_records": [
+    {
+      "id": "S01",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/rubrica/fuente.json"
+    },
+    {
+      "id": "S02",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/rubrica/ESTADO_20261028.md"
+    },
+    {
+      "id": "S03",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/rubrica/ACLARACIONES_20261023.md"
+    },
+    {
+      "id": "S04",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "README.md"
+    },
+    {
+      "id": "S05",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/CG14_AUTOMATIC_GRAPH.md"
+    },
+    {
+      "id": "S06",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/evidence/CG10_PRECISION_20261022.md"
+    },
+    {
+      "id": "S07",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/evidence/CG32_CAMPAIGN_20261028.md"
+    },
+    {
+      "id": "S08",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/demo/PENDING_HANDOFF_20261028.md"
+    },
+    {
+      "id": "S09",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "dashboard_laneki/README.md"
+    },
+    {
+      "id": "S10",
+      "commit": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+      "path": "docs/evidence/LOCAL_CONTAINERS_20261103.md"
+    },
+    {
+      "id": "S11",
+      "commit": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+      "path": "docs/evidence/LOCAL_PIPELINE_BROWSER_20261103.md"
+    },
+    {
+      "id": "S12",
+      "commit": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+      "path": "docs/backend/READ_API.md"
+    },
+    {
+      "id": "S13",
+      "commit": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+      "path": "docs/memoria/RECONCILIACION_20261103.md"
+    },
+    {
+      "id": "S14",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/evidence/ML_DECISION_REVIEW_20261023.md"
+    },
+    {
+      "id": "S15",
+      "commit": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+      "path": "docs/evidence/NIFI_CI_BLOCKERS_20261104.md"
+    },
+    {
+      "id": "S16",
+      "commit": "d7cfa18f13b9f2cfd585c1f00d2d4cf71f4c80a9",
+      "path": "docs/evidence/WIRE5_REVIEW_STATUS_20261104.md"
+    },
+    {
+      "id": "S17",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/evidence/DOCENTE_FORO_20261023.md"
+    },
+    {
+      "id": "S18",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docs/demo/ENTSEGU_PRESTATUA_20261028.md"
+    },
+    {
+      "id": "S19",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "docker-compose.yml"
+    },
+    {
+      "id": "S20",
+      "commit": "c34cabe0c851ba4b7688e1a3a4448d9898002f1e",
+      "path": "scoring/alert_policy.py"
+    }
+  ],
+  "capture_records": [
+    {
+      "file": "imagenes/laneki-escritorio.png",
+      "source": "/home/tears/.cache/cnc-local-container-integration-20261103/desktop.png",
+      "caption": "Laneki en imagen local, 03/11; CSV sintético y modelo de prueba. No captura del main ni de sensores industriales."
+    },
+    {
+      "file": "imagenes/laneki-detalle.png",
+      "source": "/home/tears/.cache/cnc-local-container-integration-20261103/modal-visible.png",
+      "caption": "Detalle visible en la sesión local de imagen; captura exitosa documentada, distinta del clic inicial fallido."
+    },
+    {
+      "file": "imagenes/laneki-historico.png",
+      "source": "/home/tears/.cache/cnc-local-container-integration-20261103/period-six-month.png",
+      "caption": "Selección de seis meses; elegir una ventana no acredita seis meses de cobertura."
+    },
+    {
+      "file": "imagenes/laneki-movil.png",
+      "source": "/home/tears/.cache/cnc-local-container-integration-20261103/mobile.png",
+      "caption": "Vista móvil del ensayo local de la imagen, 390 × 844."
+    },
+    {
+      "file": "imagenes/kibana-historico.png",
+      "source": "main docs/evidence/CG20_SAME_EVENT_20261022/dashboard-verified.png",
+      "caption": "CG20 con dobles, 22/10"
+    }
+  ],
+  "reexecuted_technical_services": false,
+  "score_main": 8.1125,
+  "score_candidate": 8.325
+}

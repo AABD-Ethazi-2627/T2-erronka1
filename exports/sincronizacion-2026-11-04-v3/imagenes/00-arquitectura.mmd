@@ -1,0 +1,12 @@
+graph TD
+ A["CSV por SMB o fixture local"] --> B["Captura local y Filebeat"] --> C["Kafka: cola y offsets"]
+ N["NiFi: programa ciclos"] --> W["Worker durable: único dueño del offset"]
+ C --> W
+ W --> P["POST FastAPI: RF e IF"]
+ W --> H["CG15: raw, Parquet y recibos"]
+ W --> E["Elasticsearch: índice consultable"]
+ E --> K["Kibana: análisis CG19"]
+ E --> G["GET opt-in: candidatura PR119"]
+ H --> D["DuckDB: histórico verificado"] --> G
+ G --> L["Laneki: candidatura PR119"]
+ H -. "recibos antes de confirmar" .-> W

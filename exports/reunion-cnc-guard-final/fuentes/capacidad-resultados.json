@@ -1,0 +1,1086 @@
+{
+  "rows": [
+    {
+      "budget": 10,
+      "procedure": "RF",
+      "feasible_folds": 0,
+      "available": false
+    },
+    {
+      "budget": 10,
+      "procedure": "single",
+      "feasible_folds": 0,
+      "available": false
+    },
+    {
+      "budget": 10,
+      "procedure": "pair",
+      "feasible_folds": 0,
+      "available": false
+    },
+    {
+      "budget": 20,
+      "procedure": "RF",
+      "feasible_folds": 0,
+      "available": false
+    },
+    {
+      "budget": 20,
+      "procedure": "single",
+      "feasible_folds": 0,
+      "available": false
+    },
+    {
+      "budget": 20,
+      "procedure": "pair",
+      "feasible_folds": 0,
+      "available": false
+    },
+    {
+      "budget": 30,
+      "procedure": "RF",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 155,
+      "fp": 8,
+      "fn": 35,
+      "tn": 5402,
+      "cost": 223100,
+      "recall": 0.8157894736842105,
+      "marked_per_1000": 29.107142857142858,
+      "cost_per_1000": 39839.28571428572
+    },
+    {
+      "budget": 30,
+      "procedure": "single",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 160,
+      "fp": 6,
+      "fn": 30,
+      "tn": 5404,
+      "cost": 199200,
+      "recall": 0.8421052631578947,
+      "marked_per_1000": 29.642857142857142,
+      "cost_per_1000": 35571.42857142857
+    },
+    {
+      "budget": 30,
+      "procedure": "pair",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 158,
+      "fp": 1,
+      "fn": 32,
+      "tn": 5409,
+      "cost": 207600,
+      "recall": 0.8315789473684211,
+      "marked_per_1000": 28.392857142857142,
+      "cost_per_1000": 37071.42857142857
+    },
+    {
+      "budget": 50,
+      "procedure": "RF",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 168,
+      "fp": 50,
+      "fn": 22,
+      "tn": 5360,
+      "cost": 170400,
+      "recall": 0.8842105263157894,
+      "marked_per_1000": 38.92857142857143,
+      "cost_per_1000": 30428.571428571428
+    },
+    {
+      "budget": 50,
+      "procedure": "single",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 167,
+      "fp": 67,
+      "fn": 23,
+      "tn": 5343,
+      "cost": 178500,
+      "recall": 0.8789473684210526,
+      "marked_per_1000": 41.785714285714285,
+      "cost_per_1000": 31875.0
+    },
+    {
+      "budget": 50,
+      "procedure": "pair",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 169,
+      "fp": 76,
+      "fn": 21,
+      "tn": 5334,
+      "cost": 170900,
+      "recall": 0.8894736842105263,
+      "marked_per_1000": 43.75,
+      "cost_per_1000": 30517.85714285714
+    },
+    {
+      "budget": 100,
+      "procedure": "RF",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 168,
+      "fp": 95,
+      "fn": 22,
+      "tn": 5315,
+      "cost": 179400,
+      "recall": 0.8842105263157894,
+      "marked_per_1000": 46.964285714285715,
+      "cost_per_1000": 32035.714285714286
+    },
+    {
+      "budget": 100,
+      "procedure": "single",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 167,
+      "fp": 112,
+      "fn": 23,
+      "tn": 5298,
+      "cost": 187500,
+      "recall": 0.8789473684210526,
+      "marked_per_1000": 49.82142857142857,
+      "cost_per_1000": 33482.142857142855
+    },
+    {
+      "budget": 100,
+      "procedure": "pair",
+      "feasible_folds": 3,
+      "available": true,
+      "n": 5600,
+      "tp": 170,
+      "fp": 135,
+      "fn": 20,
+      "tn": 5275,
+      "cost": 178000,
+      "recall": 0.8947368421052632,
+      "marked_per_1000": 54.464285714285715,
+      "cost_per_1000": 31785.714285714286
+    }
+  ],
+  "selections": [
+    {
+      "fold": 0,
+      "budget": 10,
+      "procedure": "RF",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 0,
+      "budget": 10,
+      "procedure": "single",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 0,
+      "budget": 10,
+      "procedure": "pair",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 0,
+      "budget": 20,
+      "procedure": "RF",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 0,
+      "budget": 20,
+      "procedure": "single",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 0,
+      "budget": 20,
+      "procedure": "pair",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 0,
+      "budget": 30,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.525,
+      "inner": {
+        "tp": 104,
+        "fp": 7,
+        "fn": 23,
+        "tn": 3599,
+        "n": 3733,
+        "recall": 0.8188976377952756,
+        "precision": 0.9369369369369369,
+        "cost": 147600
+      },
+      "outer": {
+        "tp": 48,
+        "fp": 4,
+        "fn": 15,
+        "tn": 1800,
+        "n": 1867,
+        "recall": 0.7619047619047619,
+        "precision": 0.9230769230769231,
+        "cost": 90200
+      },
+      "inner_marked_per_1000": 29.73479774979909,
+      "outer_marked_per_1000": 27.85216925549009
+    },
+    {
+      "fold": 0,
+      "budget": 30,
+      "procedure": "single",
+      "name": "single:gb_depth3",
+      "threshold": 0.8017167662154674,
+      "inner": {
+        "tp": 107,
+        "fp": 4,
+        "fn": 20,
+        "tn": 3602,
+        "n": 3733,
+        "recall": 0.84251968503937,
+        "precision": 0.963963963963964,
+        "cost": 132900
+      },
+      "outer": {
+        "tp": 51,
+        "fp": 0,
+        "fn": 12,
+        "tn": 1804,
+        "n": 1867,
+        "recall": 0.8095238095238095,
+        "precision": 1.0,
+        "cost": 75300
+      },
+      "inner_marked_per_1000": 29.73479774979909,
+      "outer_marked_per_1000": 27.316550615961436
+    },
+    {
+      "fold": 0,
+      "budget": 30,
+      "procedure": "pair",
+      "name": "pair:cart_depth8+gam_5@0.5",
+      "threshold": 0.5138506814677003,
+      "inner": {
+        "tp": 108,
+        "fp": 2,
+        "fn": 19,
+        "tn": 3604,
+        "n": 3733,
+        "recall": 0.8503937007874016,
+        "precision": 0.9818181818181818,
+        "cost": 127800
+      },
+      "outer": {
+        "tp": 49,
+        "fp": 0,
+        "fn": 14,
+        "tn": 1804,
+        "n": 1867,
+        "recall": 0.7777777777777778,
+        "precision": 1.0,
+        "cost": 84700
+      },
+      "inner_marked_per_1000": 29.46691668899009,
+      "outer_marked_per_1000": 26.245313336904125
+    },
+    {
+      "fold": 0,
+      "budget": 50,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.1751190476190476,
+      "inner": {
+        "tp": 116,
+        "fp": 33,
+        "fn": 11,
+        "tn": 3573,
+        "n": 3733,
+        "recall": 0.9133858267716536,
+        "precision": 0.7785234899328859,
+        "cost": 96400
+      },
+      "outer": {
+        "tp": 53,
+        "fp": 14,
+        "fn": 10,
+        "tn": 1790,
+        "n": 1867,
+        "recall": 0.8412698412698413,
+        "precision": 0.7910447761194029,
+        "cost": 68700
+      },
+      "inner_marked_per_1000": 39.91427806054112,
+      "outer_marked_per_1000": 35.886448848419924
+    },
+    {
+      "fold": 0,
+      "budget": 50,
+      "procedure": "single",
+      "name": "single:ada_depth1",
+      "threshold": 0.4156335846567375,
+      "inner": {
+        "tp": 117,
+        "fp": 45,
+        "fn": 10,
+        "tn": 3561,
+        "n": 3733,
+        "recall": 0.9212598425196851,
+        "precision": 0.7222222222222222,
+        "cost": 94100
+      },
+      "outer": {
+        "tp": 52,
+        "fp": 31,
+        "fn": 11,
+        "tn": 1773,
+        "n": 1867,
+        "recall": 0.8253968253968254,
+        "precision": 0.6265060240963856,
+        "cost": 76800
+      },
+      "inner_marked_per_1000": 43.39673185105813,
+      "outer_marked_per_1000": 44.456347080878416
+    },
+    {
+      "fold": 0,
+      "budget": 50,
+      "procedure": "pair",
+      "name": "pair:cart_depth5+ada_depth1@0.5",
+      "threshold": 0.21405549763551399,
+      "inner": {
+        "tp": 118,
+        "fp": 45,
+        "fn": 9,
+        "tn": 3561,
+        "n": 3733,
+        "recall": 0.9291338582677166,
+        "precision": 0.7239263803680982,
+        "cost": 89400
+      },
+      "outer": {
+        "tp": 52,
+        "fp": 24,
+        "fn": 11,
+        "tn": 1780,
+        "n": 1867,
+        "recall": 0.8253968253968254,
+        "precision": 0.6842105263157895,
+        "cost": 75400
+      },
+      "inner_marked_per_1000": 43.66461291186713,
+      "outer_marked_per_1000": 40.707016604177824
+    },
+    {
+      "fold": 0,
+      "budget": 100,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.1751190476190476,
+      "inner": {
+        "tp": 116,
+        "fp": 33,
+        "fn": 11,
+        "tn": 3573,
+        "n": 3733,
+        "recall": 0.9133858267716536,
+        "precision": 0.7785234899328859,
+        "cost": 96400
+      },
+      "outer": {
+        "tp": 53,
+        "fp": 14,
+        "fn": 10,
+        "tn": 1790,
+        "n": 1867,
+        "recall": 0.8412698412698413,
+        "precision": 0.7910447761194029,
+        "cost": 68700
+      },
+      "inner_marked_per_1000": 39.91427806054112,
+      "outer_marked_per_1000": 35.886448848419924
+    },
+    {
+      "fold": 0,
+      "budget": 100,
+      "procedure": "single",
+      "name": "single:ada_depth1",
+      "threshold": 0.4156335846567375,
+      "inner": {
+        "tp": 117,
+        "fp": 45,
+        "fn": 10,
+        "tn": 3561,
+        "n": 3733,
+        "recall": 0.9212598425196851,
+        "precision": 0.7222222222222222,
+        "cost": 94100
+      },
+      "outer": {
+        "tp": 52,
+        "fp": 31,
+        "fn": 11,
+        "tn": 1773,
+        "n": 1867,
+        "recall": 0.8253968253968254,
+        "precision": 0.6265060240963856,
+        "cost": 76800
+      },
+      "inner_marked_per_1000": 43.39673185105813,
+      "outer_marked_per_1000": 44.456347080878416
+    },
+    {
+      "fold": 0,
+      "budget": 100,
+      "procedure": "pair",
+      "name": "pair:cart_depth5+ada_depth1@0.5",
+      "threshold": 0.21405549763551399,
+      "inner": {
+        "tp": 118,
+        "fp": 45,
+        "fn": 9,
+        "tn": 3561,
+        "n": 3733,
+        "recall": 0.9291338582677166,
+        "precision": 0.7239263803680982,
+        "cost": 89400
+      },
+      "outer": {
+        "tp": 52,
+        "fp": 24,
+        "fn": 11,
+        "tn": 1780,
+        "n": 1867,
+        "recall": 0.8253968253968254,
+        "precision": 0.6842105263157895,
+        "cost": 75400
+      },
+      "inner_marked_per_1000": 43.66461291186713,
+      "outer_marked_per_1000": 40.707016604177824
+    },
+    {
+      "fold": 1,
+      "budget": 10,
+      "procedure": "RF",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 1,
+      "budget": 10,
+      "procedure": "single",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 1,
+      "budget": 10,
+      "procedure": "pair",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 1,
+      "budget": 20,
+      "procedure": "RF",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 1,
+      "budget": 20,
+      "procedure": "single",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 1,
+      "budget": 20,
+      "procedure": "pair",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 1,
+      "budget": 30,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.47527777777777785,
+      "inner": {
+        "tp": 100,
+        "fp": 10,
+        "fn": 26,
+        "tn": 3597,
+        "n": 3733,
+        "recall": 0.7936507936507936,
+        "precision": 0.9090909090909091,
+        "cost": 162000
+      },
+      "outer": {
+        "tp": 55,
+        "fp": 3,
+        "fn": 9,
+        "tn": 1800,
+        "n": 1867,
+        "recall": 0.859375,
+        "precision": 0.9482758620689655,
+        "cost": 62100
+      },
+      "inner_marked_per_1000": 29.46691668899009,
+      "outer_marked_per_1000": 31.065881092662025
+    },
+    {
+      "fold": 1,
+      "budget": 30,
+      "procedure": "single",
+      "name": "single:gb_depth3",
+      "threshold": 0.4697963063546615,
+      "inner": {
+        "tp": 104,
+        "fp": 7,
+        "fn": 22,
+        "tn": 3600,
+        "n": 3733,
+        "recall": 0.8253968253968254,
+        "precision": 0.9369369369369369,
+        "cost": 142600
+      },
+      "outer": {
+        "tp": 55,
+        "fp": 4,
+        "fn": 9,
+        "tn": 1799,
+        "n": 1867,
+        "recall": 0.859375,
+        "precision": 0.9322033898305084,
+        "cost": 62300
+      },
+      "inner_marked_per_1000": 29.73479774979909,
+      "outer_marked_per_1000": 31.601499732190682
+    },
+    {
+      "fold": 1,
+      "budget": 30,
+      "procedure": "pair",
+      "name": "pair:gb_depth3+lgb_15_False@0.75",
+      "threshold": 0.5596629498741695,
+      "inner": {
+        "tp": 105,
+        "fp": 5,
+        "fn": 21,
+        "tn": 3602,
+        "n": 3733,
+        "recall": 0.8333333333333334,
+        "precision": 0.9545454545454546,
+        "cost": 137500
+      },
+      "outer": {
+        "tp": 55,
+        "fp": 1,
+        "fn": 9,
+        "tn": 1802,
+        "n": 1867,
+        "recall": 0.859375,
+        "precision": 0.9821428571428571,
+        "cost": 61700
+      },
+      "inner_marked_per_1000": 29.46691668899009,
+      "outer_marked_per_1000": 29.994643813604714
+    },
+    {
+      "fold": 1,
+      "budget": 50,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.15759879606653798,
+      "inner": {
+        "tp": 111,
+        "fp": 45,
+        "fn": 15,
+        "tn": 3562,
+        "n": 3733,
+        "recall": 0.8809523809523809,
+        "precision": 0.7115384615384616,
+        "cost": 117300
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 17,
+        "fn": 5,
+        "tn": 1786,
+        "n": 1867,
+        "recall": 0.921875,
+        "precision": 0.7763157894736842,
+        "cost": 46100
+      },
+      "inner_marked_per_1000": 41.78944548620412,
+      "outer_marked_per_1000": 40.707016604177824
+    },
+    {
+      "fold": 1,
+      "budget": 50,
+      "procedure": "single",
+      "name": "single:rf_reference",
+      "threshold": 0.15759879606653798,
+      "inner": {
+        "tp": 111,
+        "fp": 45,
+        "fn": 15,
+        "tn": 3562,
+        "n": 3733,
+        "recall": 0.8809523809523809,
+        "precision": 0.7115384615384616,
+        "cost": 117300
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 17,
+        "fn": 5,
+        "tn": 1786,
+        "n": 1867,
+        "recall": 0.921875,
+        "precision": 0.7763157894736842,
+        "cost": 46100
+      },
+      "inner_marked_per_1000": 41.78944548620412,
+      "outer_marked_per_1000": 40.707016604177824
+    },
+    {
+      "fold": 1,
+      "budget": 50,
+      "procedure": "pair",
+      "name": "pair:rf_reference+cart_depth5@0.5",
+      "threshold": 0.08495065928293494,
+      "inner": {
+        "tp": 112,
+        "fp": 61,
+        "fn": 14,
+        "tn": 3546,
+        "n": 3733,
+        "recall": 0.8888888888888888,
+        "precision": 0.6473988439306358,
+        "cost": 115800
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 27,
+        "fn": 5,
+        "tn": 1776,
+        "n": 1867,
+        "recall": 0.921875,
+        "precision": 0.686046511627907,
+        "cost": 48100
+      },
+      "inner_marked_per_1000": 46.34342351995714,
+      "outer_marked_per_1000": 46.06320299946438
+    },
+    {
+      "fold": 1,
+      "budget": 100,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.15759879606653798,
+      "inner": {
+        "tp": 111,
+        "fp": 45,
+        "fn": 15,
+        "tn": 3562,
+        "n": 3733,
+        "recall": 0.8809523809523809,
+        "precision": 0.7115384615384616,
+        "cost": 117300
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 17,
+        "fn": 5,
+        "tn": 1786,
+        "n": 1867,
+        "recall": 0.921875,
+        "precision": 0.7763157894736842,
+        "cost": 46100
+      },
+      "inner_marked_per_1000": 41.78944548620412,
+      "outer_marked_per_1000": 40.707016604177824
+    },
+    {
+      "fold": 1,
+      "budget": 100,
+      "procedure": "single",
+      "name": "single:rf_reference",
+      "threshold": 0.15759879606653798,
+      "inner": {
+        "tp": 111,
+        "fp": 45,
+        "fn": 15,
+        "tn": 3562,
+        "n": 3733,
+        "recall": 0.8809523809523809,
+        "precision": 0.7115384615384616,
+        "cost": 117300
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 17,
+        "fn": 5,
+        "tn": 1786,
+        "n": 1867,
+        "recall": 0.921875,
+        "precision": 0.7763157894736842,
+        "cost": 46100
+      },
+      "inner_marked_per_1000": 41.78944548620412,
+      "outer_marked_per_1000": 40.707016604177824
+    },
+    {
+      "fold": 1,
+      "budget": 100,
+      "procedure": "pair",
+      "name": "pair:cart_depth5+xgb_d6_True@0.75",
+      "threshold": 0.05887672484719327,
+      "inner": {
+        "tp": 113,
+        "fp": 81,
+        "fn": 13,
+        "tn": 3526,
+        "n": 3733,
+        "recall": 0.8968253968253969,
+        "precision": 0.5824742268041238,
+        "cost": 115100
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 37,
+        "fn": 5,
+        "tn": 1766,
+        "n": 1867,
+        "recall": 0.921875,
+        "precision": 0.6145833333333334,
+        "cost": 50100
+      },
+      "inner_marked_per_1000": 51.96892579694616,
+      "outer_marked_per_1000": 51.41938939475094
+    },
+    {
+      "fold": 2,
+      "budget": 10,
+      "procedure": "RF",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 2,
+      "budget": 10,
+      "procedure": "single",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 2,
+      "budget": 10,
+      "procedure": "pair",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 2,
+      "budget": 20,
+      "procedure": "RF",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 2,
+      "budget": 20,
+      "procedure": "single",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 2,
+      "budget": 20,
+      "procedure": "pair",
+      "unavailable": true,
+      "reason": "no inner cutoff satisfies recall and marked-observation budget"
+    },
+    {
+      "fold": 2,
+      "budget": 30,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.4526047178130511,
+      "inner": {
+        "tp": 100,
+        "fp": 12,
+        "fn": 27,
+        "tn": 3595,
+        "n": 3734,
+        "recall": 0.7874015748031497,
+        "precision": 0.8928571428571429,
+        "cost": 167400
+      },
+      "outer": {
+        "tp": 52,
+        "fp": 1,
+        "fn": 11,
+        "tn": 1802,
+        "n": 1866,
+        "recall": 0.8253968253968254,
+        "precision": 0.9811320754716981,
+        "cost": 70800
+      },
+      "inner_marked_per_1000": 29.994643813604714,
+      "outer_marked_per_1000": 28.40300107181136
+    },
+    {
+      "fold": 2,
+      "budget": 30,
+      "procedure": "single",
+      "name": "single:cart_depth5",
+      "threshold": 0.4444444444444444,
+      "inner": {
+        "tp": 103,
+        "fp": 7,
+        "fn": 24,
+        "tn": 3600,
+        "n": 3734,
+        "recall": 0.8110236220472441,
+        "precision": 0.9363636363636364,
+        "cost": 152300
+      },
+      "outer": {
+        "tp": 54,
+        "fp": 2,
+        "fn": 9,
+        "tn": 1801,
+        "n": 1866,
+        "recall": 0.8571428571428571,
+        "precision": 0.9642857142857143,
+        "cost": 61600
+      },
+      "inner_marked_per_1000": 29.459025174076057,
+      "outer_marked_per_1000": 30.010718113612004
+    },
+    {
+      "fold": 2,
+      "budget": 30,
+      "procedure": "pair",
+      "name": "pair:cart_depth5+lgb_15_False@0.5",
+      "threshold": 0.5000168826261487,
+      "inner": {
+        "tp": 107,
+        "fp": 0,
+        "fn": 20,
+        "tn": 3607,
+        "n": 3734,
+        "recall": 0.84251968503937,
+        "precision": 1.0,
+        "cost": 132100
+      },
+      "outer": {
+        "tp": 54,
+        "fp": 0,
+        "fn": 9,
+        "tn": 1803,
+        "n": 1866,
+        "recall": 0.8571428571428571,
+        "precision": 1.0,
+        "cost": 61200
+      },
+      "inner_marked_per_1000": 28.655597214783075,
+      "outer_marked_per_1000": 28.938906752411576
+    },
+    {
+      "fold": 2,
+      "budget": 50,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.17083333333333334,
+      "inner": {
+        "tp": 110,
+        "fp": 43,
+        "fn": 17,
+        "tn": 3564,
+        "n": 3734,
+        "recall": 0.8661417322834646,
+        "precision": 0.7189542483660131,
+        "cost": 126600
+      },
+      "outer": {
+        "tp": 56,
+        "fp": 19,
+        "fn": 7,
+        "tn": 1784,
+        "n": 1866,
+        "recall": 0.8888888888888888,
+        "precision": 0.7466666666666667,
+        "cost": 55600
+      },
+      "inner_marked_per_1000": 40.974825923942156,
+      "outer_marked_per_1000": 40.19292604501608
+    },
+    {
+      "fold": 2,
+      "budget": 50,
+      "procedure": "single",
+      "name": "single:rf_reference",
+      "threshold": 0.17083333333333334,
+      "inner": {
+        "tp": 110,
+        "fp": 43,
+        "fn": 17,
+        "tn": 3564,
+        "n": 3734,
+        "recall": 0.8661417322834646,
+        "precision": 0.7189542483660131,
+        "cost": 126600
+      },
+      "outer": {
+        "tp": 56,
+        "fp": 19,
+        "fn": 7,
+        "tn": 1784,
+        "n": 1866,
+        "recall": 0.8888888888888888,
+        "precision": 0.7466666666666667,
+        "cost": 55600
+      },
+      "inner_marked_per_1000": 40.974825923942156,
+      "outer_marked_per_1000": 40.19292604501608
+    },
+    {
+      "fold": 2,
+      "budget": 50,
+      "procedure": "pair",
+      "name": "pair:cart_depth8+lgb_15_True@0.5",
+      "threshold": 0.10009438181817325,
+      "inner": {
+        "tp": 114,
+        "fp": 66,
+        "fn": 13,
+        "tn": 3541,
+        "n": 3734,
+        "recall": 0.8976377952755905,
+        "precision": 0.6333333333333333,
+        "cost": 112400
+      },
+      "outer": {
+        "tp": 58,
+        "fp": 25,
+        "fn": 5,
+        "tn": 1778,
+        "n": 1866,
+        "recall": 0.9206349206349206,
+        "precision": 0.6987951807228916,
+        "cost": 47400
+      },
+      "inner_marked_per_1000": 48.205677557579,
+      "outer_marked_per_1000": 44.48017148981779
+    },
+    {
+      "fold": 2,
+      "budget": 100,
+      "procedure": "RF",
+      "name": "single:rf_reference",
+      "threshold": 0.07041666666666667,
+      "inner": {
+        "tp": 115,
+        "fp": 151,
+        "fn": 12,
+        "tn": 3456,
+        "n": 3734,
+        "recall": 0.905511811023622,
+        "precision": 0.4323308270676692,
+        "cost": 124700
+      },
+      "outer": {
+        "tp": 56,
+        "fp": 64,
+        "fn": 7,
+        "tn": 1739,
+        "n": 1866,
+        "recall": 0.8888888888888888,
+        "precision": 0.4666666666666667,
+        "cost": 64600
+      },
+      "inner_marked_per_1000": 71.2372790573112,
+      "outer_marked_per_1000": 64.30868167202573
+    },
+    {
+      "fold": 2,
+      "budget": 100,
+      "procedure": "single",
+      "name": "single:rf_reference",
+      "threshold": 0.07041666666666667,
+      "inner": {
+        "tp": 115,
+        "fp": 151,
+        "fn": 12,
+        "tn": 3456,
+        "n": 3734,
+        "recall": 0.905511811023622,
+        "precision": 0.4323308270676692,
+        "cost": 124700
+      },
+      "outer": {
+        "tp": 56,
+        "fp": 64,
+        "fn": 7,
+        "tn": 1739,
+        "n": 1866,
+        "recall": 0.8888888888888888,
+        "precision": 0.4666666666666667,
+        "cost": 64600
+      },
+      "inner_marked_per_1000": 71.2372790573112,
+      "outer_marked_per_1000": 64.30868167202573
+    },
+    {
+      "fold": 2,
+      "budget": 100,
+      "procedure": "pair",
+      "name": "pair:cart_depth5+lgb_15_True@0.75",
+      "threshold": 0.036408910336065685,
+      "inner": {
+        "tp": 119,
+        "fp": 170,
+        "fn": 8,
+        "tn": 3437,
+        "n": 3734,
+        "recall": 0.937007874015748,
+        "precision": 0.4117647058823529,
+        "cost": 109700
+      },
+      "outer": {
+        "tp": 59,
+        "fp": 74,
+        "fn": 4,
+        "tn": 1729,
+        "n": 1866,
+        "recall": 0.9365079365079365,
+        "precision": 0.44360902255639095,
+        "cost": 52500
+      },
+      "inner_marked_per_1000": 77.39689341189073,
+      "outer_marked_per_1000": 71.27545551982851
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "scope": "AI4I_CURRENT_STATE_ONLY; development-only post-hoc extension; no independent final test",
+  "source_archive": "docs/evidence/CG34_20261023/raw-evidence.zip",
+  "archive_sha256": "640d75114324df4d8bafa20461cccf20da3850552c3bd6fa48080b9584e97896",
+  "population": "Original 5600 train rows; 1200 reused-validation and 1200 excluded test never scored/fitted",
+  "base_models": "All 40 supervised historical configurations; raw anomaly scores kept separate",
+  "new_candidates": {
+    "pairs": "all unordered supervised pairs, weights 0.25/0.50/0.75 (2340)",
+    "triples": "equal weighting of all unordered triples of 16 non-dummy families; best configuration per family selected inside each outer-train (560)",
+    "committees": "top2/top3/top5/top8/top16, uniform and reciprocal-rank weights, using inner ranking",
+    "stacking": "top3/top5/top8 from inner ranking; LogisticRegression C=0.1/1/10, class_weight=None/balanced; base inputs are historical inner-OOF predictions; final meta fit excludes outer-held. Threshold learned on meta training scores, not an independent meta-OOF sample; outer evaluation measures that procedure.",
+    "anomaly_unions": "RF AVISO OR top 1%/3%/5% inner-normal-proxy anomaly tail for all ten detectors; rarety diagnostic, not calibrated probability"
+  },
+  "cost": {
+    "fn": 5000,
+    "fp": 200,
+    "tp": 300,
+    "tn": 0
+  },
+  "policies": [
+    "A: threshold learned inside outer-train for cost, inner recall >=0.76",
+    "B: fixed AVISO >=0.15",
+    "C: fixed CRITICA >=0.70 diagnostic, not replacement for AVISO"
+  ],
+  "selection": "inner score only; deterministic cost, FN, name tie break. Report nested procedure separately from post-hoc outer best. All previously explored folds remain development evidence.",
+  "uncertainty": "paired stratified bootstrap 2000 fixed OOF predictions; conditional/descriptive only; no correction for thousands of searches",
+  "resources": "serial CPU, BLAS/OpenMP one thread; no original base refits; no new dependencies; no API/model promotion",
+  "feature_audit": "source hash and exact memberships; train-only profile; leakage columns excluded; physical derivations, subgroup errors and disagreement diagnostics"
+}

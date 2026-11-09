@@ -1,0 +1,20 @@
+{
+  "budgets_per_1000": [
+    10,
+    20,
+    30,
+    50,
+    100
+  ],
+  "min_inner_recall": 0.76,
+  "cost": {
+    "fn": 5000,
+    "fp": 200,
+    "tp": 300,
+    "tn": 0
+  },
+  "pool": "40 individual configurations + 2340 weighted pairs; inner-only selection of model/weights/cutoff; historical folds only",
+  "scope": "Budget of marked observations per 1000 scored observations, not inspections/hour or unique machines. No arrival rate or operational episode grouping known. Inner budget does not guarantee outer or live budget.",
+  "infeasible": "Preserve unavailable if any fold has no eligible policy; never aggregate partial folds as complete population.",
+  "no_new_fits": true
+}

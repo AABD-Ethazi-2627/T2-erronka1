@@ -1,0 +1,12 @@
+{
+  "code_sha256": "78e17282d3576c1873a81547650bc3693bf538bdca629e8afcf19a24170be7cb",
+  "protocol_sha256": "666a49d726bad6ad50e04dd6b0fdde704e3d0113b290a16a5fd432cf1e7d5881",
+  "source_units_verified": 600,
+  "scenarios": 9,
+  "configurations_per_scenario": 2380,
+  "folds": 3,
+  "selections": 81,
+  "no_new_fits": true,
+  "no_validation_or_test_scoring": true,
+  "wall_seconds": 110.76265943700128
+}

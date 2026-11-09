@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "pdf_pages": 9,
+  "diagrams": 13,
+  "captures": 5,
+  "rubric_rows": 40,
+  "html_links_and_images_checked": 77,
+  "sensitivity_scenarios": 9,
+  "candidate_configurations_per_scenario": 2380,
+  "outer_folds": 3,
+  "aggregate_rows": 27,
+  "selections_checked": 81,
+  "threshold_boundary_scenario_tests": 27,
+  "arithmetic_four_cell_costs_checked": true,
+  "visual_pdf_review": "modified pages 2–9 rendered and inspected; pages 7–9 inspected individually before final wording update",
+  "technical_scope": "post-hoc historical development scores, no new base fits or validation/test scoring, no serving changes"
+}

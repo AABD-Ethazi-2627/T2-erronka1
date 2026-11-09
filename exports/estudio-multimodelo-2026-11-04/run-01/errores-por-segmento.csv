@@ -1,0 +1,11 @@
+segment,n,positives,rf_fn,pair_fn,rf_fp,pair_fp
+tipo H,543,13,4,3,10,9
+tipo L,3390,132,10,10,33,30
+tipo M,1667,45,8,8,20,16
+failure_TWF = 1,17,17,16,14,0,0
+failure_HDF = 1,67,67,0,0,0,0
+failure_PWF = 1,53,53,0,1,0,0
+failure_OSF = 1,59,59,0,0,0,0
+failure_RNF = 1,9,1,1,1,0,0
+positivo sin subtipo marcado,6,6,6,6,0,0
+positivo con desgaste >= 200,58,58,16,14,0,0

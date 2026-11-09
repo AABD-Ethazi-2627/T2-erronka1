@@ -1,0 +1,8 @@
+{
+  "code_sha256": "93ffb0c6f8b2881fa4142e945cd6f012d439750698f0c190d31378c2078e9bcf",
+  "protocol_sha256": "f72564699fd2f2d177b78d2025c1ce88b7dec6a51f47ec0bce5f5c8f23383c0a",
+  "source_units": 600,
+  "wall_seconds": 10.97744050899928,
+  "no_new_fits": true,
+  "no_validation_or_test_scoring": true
+}
