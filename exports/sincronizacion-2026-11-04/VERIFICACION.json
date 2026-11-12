@@ -1,0 +1,11 @@
+{
+  "checks": "passed",
+  "diagramas_renderizados": 13,
+  "capturas_con_procedencia": 5,
+  "criterios": 40,
+  "paginas_pdf": 6,
+  "local_html_targets": "all exist",
+  "zip_check": "CRC and extracted hashes checked after packaging",
+  "technical_tests_reexecuted": false,
+  "visual_review": "contact sheet of PDF pages and selected diagrams/screenshots inspected"
+}

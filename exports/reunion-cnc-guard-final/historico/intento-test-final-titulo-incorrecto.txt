@@ -1,0 +1,3 @@
+Error: Print PDF includes Acuerdos
+    at assert (file:///home/tears/bigdata/01_Erronka1_CNC_Guard/B-taldea/exports/reunion-cnc-guard-final/verificar-navegador.mjs:12:38)
+    at file:///home/tears/bigdata/01_Erronka1_CNC_Guard/B-taldea/exports/reunion-cnc-guard-final/verificar-navegador.mjs:67:101

@@ -1,0 +1,272 @@
+[
+  {
+    "fold": 0,
+    "model": "stack3:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack3:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack3:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack3:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack3:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack3:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack5:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack5:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack5:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack5:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack5:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack5:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack8:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack8:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack8:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack8:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack8:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 0,
+    "model": "stack8:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack3:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack3:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack3:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack3:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack3:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack3:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack5:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack5:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack5:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack5:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack5:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack5:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack8:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack8:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack8:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack8:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack8:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 1,
+    "model": "stack8:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack3:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack3:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack3:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack3:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack3:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack3:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack5:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack5:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack5:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack5:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack5:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack5:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack8:0.1:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack8:0.1:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack8:1.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack8:1.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack8:10.0:False",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  },
+  {
+    "fold": 2,
+    "model": "stack8:10.0:True",
+    "message": "scipy.optimize: The `disp` and `iprint` options of the L-BFGS-B solver are deprecated and will be removed in SciPy 1.18.0."
+  }
+]

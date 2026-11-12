@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "browser_checks": 66,
+  "scenarios_costs_checked": 27,
+  "methods_policy_rows_checked": 21,
+  "rubric_rows": 40,
+  "self_contained_images": 18,
+  "conditional_uncertainty_A_comparisons": 6,
+  "marked_budget_rows": 15,
+  "cases": 4,
+  "no_serving_change": true,
+  "scope": "offline decision/report improvement, historical development only",
+  "artifact_sha256": "0ebcc3c1a49daa1d8384be2a1206cb53d194d8d317250960364c8326d915452f"
+}

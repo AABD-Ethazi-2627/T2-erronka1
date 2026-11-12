@@ -1,0 +1,3 @@
+graph LR
+ A["Petición validada"] --> B["FastAPI<br/>Modelo y respuesta canónica"] --> C["POST y GET opt-in"]
+ D["Main no incorpora aún el nuevo router. 409, 422 y 503 significan cosas diferentes."] -. "límite" .-> B

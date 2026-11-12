@@ -1,0 +1,89 @@
+{
+  "scenarios": [
+    {
+      "id": "base",
+      "label": "Costes del ejercicio; recall interno ≥76 %",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0.76
+    },
+    {
+      "id": "sin_minimo",
+      "label": "Mismos costes; sin mínimo de recall",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0
+    },
+    {
+      "id": "recall85",
+      "label": "Mismos costes; recall interno ≥85 %",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0.85
+    },
+    {
+      "id": "recall90",
+      "label": "Mismos costes; recall interno ≥90 %",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0.9
+    },
+    {
+      "id": "recall95",
+      "label": "Mismos costes; recall interno ≥95 %",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0.95
+    },
+    {
+      "id": "fn_alto",
+      "label": "Hipótesis: FN cuesta 10.000 €",
+      "fn": 10000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0.76
+    },
+    {
+      "id": "fp_alto",
+      "label": "Hipótesis: FP cuesta 500 €",
+      "fn": 5000,
+      "fp": 500,
+      "tp": 300,
+      "tn": 0,
+      "min_recall": 0.76
+    },
+    {
+      "id": "tp_alto",
+      "label": "Hipótesis: TP cuesta 600 €",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 600,
+      "tn": 0,
+      "min_recall": 0.76
+    },
+    {
+      "id": "tn_no_nulo",
+      "label": "Hipótesis: TN cuesta 50 €",
+      "fn": 5000,
+      "fp": 200,
+      "tp": 300,
+      "tn": 50,
+      "min_recall": 0.76
+    }
+  ],
+  "scope": "Sensitivity extension, same historical development folds; not new validation. Cost changes and recall floors are engineering hypotheses, not new teacher requirements.",
+  "pool": "40 historical singles and all 2340 weighted pairs. Threshold exhaustive over inner score breakpoints plus no-alert option. No new base fits.",
+  "selection": "Choose cost/model/weights/threshold with inner only; evaluate outer afterward; report RF, selected single and selected pair. No blind-test or runtime changes.",
+  "representation": "Same original sensors + type and historical configurations/physical ablations; no new measured variables or failure labels as features."
+}

@@ -1,0 +1,1027 @@
+CNC Guard
+Mesa de sincronización · informe offline · corte 04/11/2026
+
+Preparar una decisión compartida
+
+
+Qué sabemos, qué elegir y
+qué falta demostrar.
+El proyecto clasifica el estado de una observación. Comparamos alternativas
+para decidir qué merece revisión humana y con qué coste.
+  Las cifras proceden de 5.600 filas del CSV docente AI4I sintético, con 190 positivos. No validan 50
+  máquinas industriales. Una observación marcada no equivale a una avería nueva ni a una orden de
+  mantenimiento.
+Tres acuerdos que la reunión debe producir
+
+     Referencia para el ensayo
+1
+     Propuesta: mantener identificado el contrato RF y sus referencias documentadas (AVISO 0,15 y
+     CRITICA 0,70), y contrastarlo con procedimientos de corte aprendido. Ningún corte se presupone
+     óptimo universal. El servicio vivo no se consulta en este informe.
+
+     Alternativa: ensayar un candidato de investigación, separado del servicio. Falta verificar modelo fijo,
+     runtime, recorrido integrado y aceptación humana. Responsable por confirmar: dev + sistemas + PM.
+     Criterios relacionados: G41/G61/G92.
+
+
+
+
+     Qué errores estamos dispuestos a asumir
+2
+     Propuesta: defender primero la matriz del ejercicio y una restricción de detección justificada.
+     Examinar también cuántas observaciones se marcarían. En este estudio, base, sin mínimo y mínimo
+     85 % producen las mismas decisiones: cambiar solo de 76 % a 85 % no modifica el resultado.
+
+     Alternativa: priorizar más detección o menos avisos. Los costes hipotéticos y los presupuestos del
+     explorador no son nuevos requisitos docentes. Responsable por confirmar: PM + ML + dashboard.
+     Criterios relacionados: G14/G39/G45/G60/G104.
+
+
+
+
+     Qué prueba permitiría cambiar la elección
+3
+     Propuesta: fijar modelo y política, métrica primaria de coste, margen mínimo de mejora y máximo de
+     observaciones marcadas antes de evaluar. Exigir estabilidad, calibración cuando proceda y
+     recursos/contratos comprobados. La validación cruzada repetida y preespecificada de estabilidad
+     sigue propuesta, sin ejecutar; no reemplaza una evaluación independiente.
+
+     La validación de promoción requiere observaciones nuevas y autorizadas, sin solapamiento con datos
+     usados para elegir. La validación reutilizada y el test inspeccionado siguen excluidos. Con los datos
+     actuales no podemos ejecutar una evaluación verdaderamente independiente. Responsables y margen
+     mínimo por confirmar: equipo completo. Criterios G39/G45/G61/G62.
+ Conclusión que sí podemos defender
+ RF es una referencia sólida. Hay mezclas con resultados mejores en algunos criterios, pero su ventaja
+ cambia con la política y la partición. No está demostrada una superioridad industrial de un candidato fijo.
+
+ Con la matriz base, ningún procedimiento A baja del coste observado de RF@0,15: el mejor A da 31.321
+ frente a 30.893 €/1.000. Esto no demuestra que 0,15 sea superior ni el corte óptimo para otros costes o
+ restricciones.
+
+
+     Comparar los resultados
+
+
+
+ La incertidumbre importa
+ Con cortes ajustados, la selección de pareja A mejora el coste observado frente a RF A (también con corte
+ aprendido) en una de las tres particiones. Su intervalo descriptivo de diferencia incluye mejora y
+ empeoramiento: -4162 a 3179 €/1.000.
+
+ Intervalo descriptivo de predicciones fijas; no incorpora el entrenamiento, la elección entre miles de candidatos ni
+ nuevas máquinas.
+
+
+
+     Diccionario antes de empezar
+
+ TP: positivo detectado; FN: positivo omitido; FP: aviso con etiqueta negativa; TN: negativo sin aviso. Se
+ refieren a etiquetas sintéticas, no a averías industriales confirmadas. RF: Random Forest, un conjunto de
+ árboles de decisión. AP: precisión media, métrica de ordenación de scores; no porcentaje de acierto.
+
+ A: corte elegido internamente para minimizar coste con el mínimo de detección indicado. B: referencia de
+ corte fijo 0,15. C: referencia de corte fijo 0,70. Los procedimientos A pueden elegir miembros y cortes
+ diferentes entre particiones.
+
+ Detección o recall: proporción de positivos etiquetados que se marcan. Precision: proporción de
+ observaciones marcadas que tienen etiqueta positiva. Inner: parte interna usada para elegir. Outer: parte
+ externa usada después para comprobar. Calibración: que scores y frecuencias observadas tengan una
+ correspondencia demostrada. Stacking: otro modelo aprende a combinar salidas de modelos base.
+
+
+
+
+Identidades que no deben mezclarse
+Identidad                Qué demuestra                                               Qué no demuestra
+
+
+Referencia de código     Contrato y evidencias históricas identificados; versiones   Estado vivo del servicio o rendimiento
+RF                       exactas en Fuentes.                                         industrial actual.
+
+
+Selectores comparados    Elegir miembros, pesos y cortes internamente y              Rendimiento de un único paquete fijo
+                         comprobarlos después; pueden cambiar entre particiones.     desplegable.
+Identidad             Qué demuestra                                                 Qué no demuestra
+
+
+Candidato fijo        Mezcla 75/25 ajustada en train con referencia 0,15; recarga   Ventaja independiente sobre RF; los ejemplos
+CART/LightGBM         e inferencia de 32 ejemplos comprobadas.                      son filas de train.
+
+
+Candidatura de        Informes y capturas con sus propias versiones y límites. La   Que esos ensayos acrediten cualquier versión
+integración           instantánea de integración está en Fuentes.                   posterior o el estado vivo actual.
+
+
+
+
+  Optimizado y pendiente son estados distintos. Se han optimizado costes, detección interna y, en la
+  ampliación de capacidad, límite de observaciones marcadas. La latencia y memoria de un ensemble fijo, la
+  integración completa y la aceptación humana siguen requiriendo sus propias pruebas.
+Mismo objetivo, políticas diferentes
+
+
+Modelo, mezcla, umbral y
+costes se eligen juntos.
+  Desarrollo histórico: 5.600 observaciones sintéticas, 190 positivas, tres particiones externas. Los
+  miembros, pesos y cortes se eligen con datos internos y se evalúan después en externos. Las
+  particiones ya se han explorado; no son un nuevo test independiente.
+
+
+
+   Qué estamos comparando: A aprende el corte dentro del entrenamiento. RF@0,15 conserva un punto de
+   contraste histórico; no limita la búsqueda ni se declara óptimo. La mejora frente a RF A no es necesariamente
+   una mejora frente a RF@0,15.
+
+
+Costes del ejercicio; recall interno ≥76 %. Optimización interna de costes con detección mínima 76 %.
+
+
+ FN 5000 €    FP 200 €     TP 300 €     TN 0 €
+
+
+
+30.893 €                                  32.036 €                                31.786 €
+RF@0,15 · contraste histórico · coste     RF A · corte aprendido · coste de       Selección de pareja A · coste de este
+de este escenario /1.000                  este escenario /1.000                   escenario /1.000
+
+
+
+     Escala económica para interpretar diferencias pequeñas
+
+  Con los costes base, convertir un FN en TP evita 4.700 € netos hipotéticos: compensa 23,5 FP de 200 €,
+  si todo lo demás permanece igual. Un solo cambio FN→TP en estas 5.600 filas mueve unos 839 €/1.000;
+  la diferencia entre la selección de pareja A y RF A es de solo 250 €/1.000.
+
+  Referencias aritméticas, no modelos alcanzados: un oráculo perfecto costaría 10.179 €/1.000 por sus 190
+  TP; no marcar nada, 169.643; marcarlo todo, 203.393. Son escalas con la matriz base, no resultados
+  independientes.
+Resultado por procedimiento
+  Procedimiento                TP       FN      FP        TN       Detección     Precision   Marcadas/1.000        €/1.000
+
+
+  RF@0,15 · histórico          168      22      63        5347     88,42 %       72,73 %     41,3                  30.893
+
+
+  RF A · corte aprendido       168      22      95        5315     88,42 %       63,88 %     47,0                  32.036
+
+
+  Selección individual A       167      23      112       5298     87,89 %       59,86 %     49,8                  33.482
+
+
+  Selección de pareja A        170      20      135       5275     89,47 %       55,74 %     54,5                  31.786
+
+
+
+RF@0,15 · histórico                                                                                           30.893 €
+
+RF A · corte aprendido                                                                                        32.036 €
+
+Selección individual A                                                                                        33.482 €
+
+Selección de pareja A                                                                                         31.786 €
+
+Barras desde cero; escala máxima de esta vista: 33.482 €/1.000.
+
+Los costes incluyen TP, FP, FN y TN. Comparar dentro del mismo escenario; cambiar la matriz cambia el
+objetivo económico. RF@0,15 es un contraste con decisiones congeladas: no se reoptimiza ni se
+garantiza que satisfaga el mínimo de detección de este escenario.
+
+
+
+
+   Cómo se eligieron los miembros y cortes de este escenario
+
+
+  Partición      Procedimiento A             Configuración                        Corte      Detección        Detección
+                                                                                             interna          externa
+
+
+  1              Selección individual        single:ada_depth1                    0,415634   92,1 %           82,5 %
+
+
+  1              RF · corte aprendido        single:rf_reference                  0,175119   91,3 %           84,1 %
+                 según presupuesto
+
+
+  1              Selección de pareja         pair:cart_depth5+ada_depth1@0.5      0,214055   92,9 %           82,5 %
+
+
+  2              Selección individual        single:rf_reference                  0,157599   88,1 %           92,2 %
+
+
+  2              RF · corte aprendido        single:rf_reference                  0,157599   88,1 %           92,2 %
+                 según presupuesto
+
+
+  2              Selección de pareja         pair:cart_depth5+xgb_d6_True@0.75    0,058877   89,7 %           92,2 %
+
+
+  3              Selección individual        single:rf_reference                  0,070417   90,6 %           88,9 %
+
+
+  3              RF · corte aprendido        single:rf_reference                  0,070417   90,6 %           88,9 %
+                 según presupuesto
+  Partición        Procedimiento A         Configuración                          Corte      Detección           Detección
+                                                                                             interna             externa
+
+
+  3                Selección de pareja     pair:cart_depth5+lgb_15_True@0.75      0,036409   93,7 %              93,7 %
+
+
+
+El mínimo de detección se exige internamente; no es una garantía sobre la siguiente muestra. Cada
+partición puede elegir miembros distintos. Promediar los cortes no crea una política validada.
+
+
+
+
+Configuración fija: diagnóstico posterior a su selección
+  Identidad de evidencia                                                   Corte      TP     FN        FP   TN         €/1.000
+
+
+  CART depth3 + LightGBM7 balanceado, pesos 75/25 · scores históricos      0,15       168    22        40   5370       30.071
+  post-selección
+
+
+  RF histórico · contraste                                                 0,15       168    22        63   5347       30.893
+
+
+
+Δ coste frente al contraste RF@0,15: -821 €/1.000. Intervalo descriptivo post-selección: [-1321, -321]
+€/1.000. Los intervalos de los selectores A no le aplican.
+
+El artefacto refiteado mantiene únicamente sus pruebas propias de funcionamiento y recarga sobre 32
+filas de train. Su evaluación independiente sigue pendiente de datos nuevos autorizados.
+
+La diferencia histórica se limita a 23 FP netos menos (38 retirados y 15 añadidos), sin cambios en las
+decisiones de los positivos. Su ahorro de 821 €/1.000 es menor que los 839 €/1.000 de un solo FN→TP
+con la matriz base.
+
+
+      La configuración se eligió entre 2.340 parejas usando las mismas filas originales. Este intervalo
+      condicional no corrige esa selección. Los scores históricos no evalúan los bytes del paquete
+      refiteado en otro entorno. No son un nuevo test independiente ni una ventaja ya validada para
+      desplegar.
+Comprobar estabilidad de la política principal A
+Procedimiento comparado con RF             Selección de pareja
+
+Diferencia con RF A (corte aprendido): -250 €/1.000. Negativo favorece al procedimiento comparado.
+Intervalo descriptivo 95 %: [-4162, 3179] €/1.000.
+
+
+      El intervalo incluye mejora y empeoramiento. No hay una ventaja concluyente demostrada. No
+      incorpora la variabilidad de selección, ajuste o nueva población.
+
+
+
+  Partición       Δ coste /1.000     FN procedimiento         FP procedimiento       AP procedimiento    AP RF A
+
+
+  1               3589 €             11                       24                     0,866               0,881
+
+
+  2               2142 €             5                        37                     0,939               0,940
+
+
+  3               -6484 €            4                        74                     0,924               0,902
+
+
+
+Media de AP por partición del procedimiento: 0,910. Estos intervalos no comparan con RF@0,15 ni evalúan el
+candidato fijo refiteado.
+
+Intervalos calculados específicamente para A. Bootstrap pareado estratificado, 2.000 remuestras de
+predicciones fijas. No corrige búsquedas repetidas ni dependencia entre particiones. El valor agrupado de
+AP puede mezclar escalas; aquí se muestran AP por partición y su media.
+
+
+
+
+   Todos los procedimientos y las referencias de corte fijo
+
+Política      A · corte aprendido por coste
+
+
+  Procedimiento                      TP        FN       FP       TN      Detección      Marcadas/1.000   €/1.000
+
+
+  RF de referencia                   168       22       95       5315    88,42 %        47,0             32.036
+
+
+  Selección en todo el conjunto      170       20       160      5250    89,47 %        58,9             32.679
+
+
+  Selección individual               167       23       112      5298    87,89 %        49,8             33.482
+
+
+  Selección de pareja                170       20       135      5275    89,47 %        54,5             31.786
+
+
+  Selección de tres familias         172       18       169      5241    90,53 %        60,9             31.321
+
+
+  Selección de comité                166       24       108      5302    87,37 %        48,9             34.179
+
+
+  Selección de stacking              168       22       151      5259    88,42 %        57,0             34.036
+
+
+
+Los colores 0,15/0,70 conservan su contexto histórico; no son óptimos universales ni significan
+probabilidades calibradas iguales entre modelos. C es diagnóstico, no sustituye AVISO.
+Este stacking usa scores base fuera de muestra, pero ajusta su corte sobre salidas del meta-modelo en
+su propio ajuste. Su comparación describe ese procedimiento concreto; no permite descartar todo
+stacking.
+
+
+
+
+Simulador: revalorar decisiones ya calculadas
+Modificar estos cuatro costes recalcula cuánto costarían las mismas decisiones de A. No vuelve a elegir
+modelos, pesos o cortes. Los escenarios de arriba sí contienen optimización ejecutada bajo sus
+supuestos.
+
+
+  Decisión congelada de A                                     Coste recalculado /1.000
+
+
+  RF A · corte aprendido                                      32.036 €
+
+
+  Selección en todo el conjunto                               32.679 €
+
+
+  Selección individual                                        33.482 €
+
+
+  Selección de pareja                                         31.786 €
+
+
+  Selección de tres familias                                  31.321 €
+
+
+  Selección de comité                                         34.179 €
+
+
+  Selección de stacking                                       34.036 €
+
+
+
+Revaloración aritmética. No se vuelven a optimizar umbrales ni se escoge una política para el servicio.
+La carga cuenta tanto como las falsas alarmas
+
+
+¿Cuántas observaciones
+podemos marcar?
+La carga es TP + FP, no solo FP. RF A marca 263 de 5.600 observaciones; el procedimiento de selección
+de pareja A marca 305. Son 47,0 y 54,5 por 1.000, respectivamente.
+
+  Sin tasa de llegada, agrupación de episodios y deduplicación operativa, no convertimos estas cifras en
+  inspecciones por hora o máquinas averiadas. El presupuesto es una hipótesis sobre observaciones
+  marcadas.
+
+
+
+   Hay procedimientos con política factible en las tres particiones internas. La tabla muestra lo
+   ocurrido después en las externas.
+
+
+
+
+  Límite interno y resultado externo son distintos
+    Procedimiento                  Particiones   FN            FP            Marcadas          Detección        €/1.000
+                                   factibles     externos      externos      externas /1.000   externa
+
+
+    RF · corte aprendido           3/3           22            50            38,9              88,42 %          30.429
+    según presupuesto
+
+
+    Selección individual           3/3           23            67            41,8              87,89 %          31.875
+
+
+    Selección de pareja            3/3           21            76            43,8              88,95 %          30.518
+
+
+
+  RF · corte aprendido
+                                                                                                           30.429 €
+  según presupuesto
+
+  Selección individual                                                                                     31.875 €
+
+  Selección de pareja                                                                                      30.518 €
+
+  Barras desde cero; escala máxima de esta vista: 31.875 €/1.000.
+
+  Detección interna mínima 76 %, matriz del ejercicio, 40 individuales y 2.340 pares. Si falta una política factible en
+  alguna partición, no se presenta un total parcial como si cubriese 5.600 filas.
+
+
+
+
+     Cumplimiento por partición
+
+
+    Partición      Procedimiento                       Corte        Marcadas internas          Marcadas externas
+                                                                    /1.000                     /1.000
+
+
+    1              RF · corte aprendido según          0,175119     39,9                       35,9
+                   presupuesto
+    Partición    Procedimiento                       Corte       Marcadas internas         Marcadas externas
+                                                                 /1.000                    /1.000
+
+
+    1            Selección individual                0,415634    43,4                      44,5
+
+
+    1            Selección de pareja                 0,214055    43,7                      40,7
+
+
+    2            RF · corte aprendido según          0,157599    41,8                      40,7
+                 presupuesto
+
+
+    2            Selección individual                0,157599    41,8                      40,7
+
+
+    2            Selección de pareja                 0,084951    46,3                      46,1
+
+
+    3            RF · corte aprendido según          0,170833    41,0                      40,2
+                 presupuesto
+
+
+    3            Selección individual                0,170833    41,0                      40,2
+
+
+    3            Selección de pareja                 0,100094    48,2                      44,5
+
+
+
+
+   Con la prevalencia global de esta cohorte, detectar el 76 % de sus positivos exigiría marcar al menos unas
+   25,8 observaciones por 1.000, incluso con cero falsas alarmas. Los presupuestos 10 y 20 no satisfacen
+   ambos requisitos. Esto explica una incompatibilidad, no una carencia de un algoritmo concreto.
+
+
+
+
+  Qué está cambiando realmente
+  Con estos scores, los escenarios base, sin mínimo y mínimo 85 % devuelven las mismas decisiones: el
+  límite 76 % no está activo en esos resultados. G45 contiene la referencia literal de detección ≥76 % y el
+  escenario histórico 1.200 €/h; la matriz actual del ejercicio conserva FN 5.000/FP 200/TP 300/TN 0. No
+  son parámetros intercambiables.
+
+  Al imponer presupuesto interno 50, RF pasa de 179.400 a 170.400 € observados sin perder TP: retira 45
+  FP, con un corte distinto en una partición. Esto revela sensibilidad de la selección y es compatible con
+  efectos de regularización y variabilidad; no demuestra por sí solo que restringir siempre mejore ni que una
+  política sea superior.
+
+  No hay intervalos calculados para cada escenario o presupuesto. Sus diferencias son descriptivas y no
+  heredan los intervalos de A.
+
+
+
+
+Qué mejora de resultados podemos afirmar
+El nuevo análisis encuentra políticas bajo restricciones distintas. Puede mejorar el coste observado de
+una opción en estas particiones; no convierte un escenario elegido después en una mejora de
+generalización demostrada. Para cambiar el servicio hay que fijar antes los requisitos y validar el
+candidato que realmente se utilizará.
+Cada área explica una pieza y su contrato
+
+
+Seguir una observación de
+origen a pantalla.
+    Mapa completo del recorrido
+
+
+
+
+  Diagrama explicativo, no captura de ejecución simultánea. GET e integración Laneki corresponden a una
+  candidatura identificada; no demuestran su despliegue.
+  Dev + sistemas
+
+
+
+
+ Worker durable
+ El repartidor con recibos
+
+
+ Entrada y salida: Consume → valida → scoring → destinos → commit del offset.
+
+
+
+
+    Exige recibos antes de confirmar. Replay idempotente no equivale a exactly-once distribuido.
+
+
+ Fuente documental S05. Diagrama, no captura de ejecución.
+
+
+
+
+Capturas conservadas con su contexto
+
+
+
+
+ CG20, 22/10, recorrido histórico con RiskDouble/AnomalyDouble. No es RF industrial ni captura nueva. S02.
+No hay capturas nuevas de todas las consolas. Las fichas son esquemas y las pantallas son evidencia
+histórica local con datos sintéticos o dobles, según su pie.
+Qué información tenemos y qué no podemos reconstruir
+
+
+Las variables importan más
+que acumular nombres de
+modelos.
+ Entradas disponibles
+ Temperatura de aire y proceso en K, velocidad en rpm, torque en Nm, desgaste de herramienta en
+ minutos y tipo H/M/L.
+
+ Derivadas: diferencia térmica; potencia mecánica aproximada rpm × torque × 2π/60, en W; carga
+ combinada desgaste × torque, en min·Nm. Esta última es un proxy, no desgaste físico medido.
+
+
+
+
+ Evidencia de utilidad
+    Modelo                                  Con derivadas                         Sin derivadas
+
+
+    RF                                      0,906                                 0,749
+
+
+    GradientBoosting                        0,909                                 0,785
+
+
+
+ AP externa agrupada del experimento histórico. Es una métrica de ordenación, no porcentaje de acierto.
+ Las derivadas facilitan relaciones presentes en sensores; no crean datos nuevos. La AP agrupada
+ también puede mezclar escalas entre particiones: es un diagnóstico histórico, no evidencia independiente
+ de utilidad universal de las variables. No mezclar sus antiguos conteos optimizados con la matriz de
+ costes nueva.
+
+
+
+
+   La calidad de etiquetas también limita. En el train hay 8 filas negativas con algún subtipo de fallo marcado
+   y 6 positivas sin subtipo. Se conservan las etiquetas originales; no se corrigen por inferencia para mejorar las
+   métricas. Los subtipos sirven para diagnóstico posterior y nunca entran como sensores.
+
+
+
+ Comprobación del train                                                             Resultado
+
+
+ Filas / positivos                                                                  5.600 / 190
+
+
+ Nulos / sensores no finitos                                                        0/0
+
+
+ Duplicados en las seis entradas                                                    0
+
+
+ IDs distintos                                                                      50
+
+
+ Negativos con algún subtipo                                                        8
+  Comprobación del train                                                                                 Resultado
+
+
+  Positivos sin subtipo                                                                                  6
+
+
+
+
+Casos concretos para explicarlo con las seis entradas
+Ejemplos elegidos después del análisis para explicar aciertos y errores de A. Son filas externas dentro del
+train histórico, no nuevas máquinas ni una evaluación independiente.
+
+
+
+  Aviso innecesario de la pareja
+  Fila de origen 47 · partición externa 3 · etiqueta observada del dataset: 0 · subtipos marcados: ninguno.
+
+
+    Tipo                                                                    Aire (K)
+    L                                                                       298.6
+
+
+    Proceso (K)                                                             Velocidad (rpm)
+    309.8                                                                   1637
+
+
+    Torque (Nm)                                                             Desgaste (min)
+    34.6                                                                    207
+
+
+    Procedimiento                                    Score                   Corte                  Marca para revisión
+
+
+    RF A · corte aprendido                           0,03625                 0,07042                No
+
+
+    Selección de pareja A                            0,04636                 0,03641                Sí
+
+
+
+  Una etiqueta sintética no es una avería industrial confirmada. La pareja y su corte corresponden a la partición, no
+  al candidato fijo refiteado.
+
+
+
+
+Qué información nueva sería útil conseguir
+  Dato o prueba                                   Qué permitiría comprobar                                   Situación
+
+
+  Identidad estable, ciclo y trayectoria física   Separar observaciones de una misma máquina y               No se crea a partir de IDs de filas.
+                                                  evaluar generalización temporal o a máquinas
+                                                  nuevas.
+
+
+  Intervención, resultado y tiempo de             Etiquetas industriales y objetivo futuro bien              No disponible como evidencia
+  operación                                       definido.                                                  causal en este estudio.
+
+
+  Contexto de carga, herramienta, vibración       Investigar señales que faltan en los modos peor            Hipótesis de adquisición; no datos
+  o corriente si se miden antes del resultado     detectados.                                                existentes ni mejora garantizada.
+  Dato o prueba                                Qué permitiría comprobar                         Situación
+
+
+  Modelo fijo con política y meta-validación   Comprobar si el ensemble o stacking aporta una   No reabrir el test previamente
+  separados                                    ventaja fuera de su elección.                    inspeccionado.
+
+
+
+El dataset es sintético y el objetivo es estado actual. Los componentes aleatorios y la ausencia de
+contexto limitan lo inferible. No hay fundamento para prometer detección perfecta, ETA, RUL o
+probabilidad de fallo mañana.
+Preparación académica con puertas explícitas
+
+
+La evidencia técnica prepara
+la defensa; la persona tiene
+que explicarla.
+Priorizar los criterios y los actos humanos que faltan permite preparar la
+defensa. La fuente incompleta no permite calcular una nota docente fiable.
+
+   La copia tiene 40 descriptores del nivel avanzado, el literal anómalo «15%%» en la celda H5 y otros pesos
+   ausentes; su interpretación está pendiente en A02. No contiene aquí toda la escala inferior ni una
+   ponderación global confirmada. Los decimales de la media heurística anterior no añaden precisión real.
+
+
+
+
+  Ya hay evidencia documental
+  Contratos, estudio de modelos, errores, archivo, recuperación y recorridos locales identificados. Las
+  fuentes conservan versión y límites.
+
+
+
+
+  Quedan puertas separadas
+  Comprensión individual, ensayo humano, equivalencias docentes, requisitos finales de entrega y recibo
+  real. Más combinaciones no cierran esos actos.
+
+
+
+Puertas prioritarias: G49/G92, valoración docente de SMB y reparto NiFi/worker; G62, interpretación del
+histórico por máquina; G39/G61, evaluación y política identificadas; G104/G105, explicación de decisión y
+defensa humana. El listado conserva reservas originales; no registra cierres nuevos.
+
+Estado y prioridad son una propuesta documental para conducir la reunión, derivada de las reservas
+originales. No son cierres de issues, nuevas aceptaciones PM/docentes ni reasignaciones personales.
+
+40 de 40 criterios · área principal propuesta para explicar, no reasignación de tareas
+
+
+  Celda    Criterio             Área          Estado documental      Prioridad     Evidencia / reserva original
+                                                                     propuesta
+
+
+  G5       Principios y         ML            Explicación o ensayo   Alta          S02/S04 · Explicar aprendizaje offline,
+           autonomía                          humano pendiente                     inferencia actual y decisión humana;
+                                                                                   comprobar comprensión individual.
+
+
+  G10      Clasificación y      ML            Explicación o ensayo   Alta          S14 · RF, boosting, IF y AE investigados;
+           comparación de                     humano pendiente                     justificar límites y por qué no se promueve
+           modelos                                                                 un ganador por una sola métrica.
+Celda   Criterio               Área       Estado documental        Prioridad   Evidencia / reserva original
+                                                                   propuesta
+
+
+G14     Costes, umbrales y     ML         Explicación o ensayo     Alta        S03/S07/S17 · Separar costes del ejercicio,
+        viabilidad                        humano pendiente                     score y latencia total. La meta E2E de 1 s
+                                                                               no se alcanzó.
+
+
+G16     Riesgos legales y      PM         Evidencia                Media       S02 · Análisis documental aceptado por
+        éticos                            documental                           PM; defensa pendiente. No equivale a
+                                          disponible; sin cierre               certificación.
+                                          humano nuevo
+
+
+G17     Privacidad y           PM         Evidencia                Media       S02 · Finalidad y separación del control
+        secretos                          documental                           laboral documentadas; conservar límites
+                                          disponible; sin cierre               del laboratorio.
+                                          humano nuevo
+
+
+G19     Seguridad desde el     Sistemas   Revalidar alcance        Alta        S02/S15/S16 · Controles de laboratorio;
+        diseño                            para la versión del                  candidatura con cierre de imágenes
+                                          ensayo                               NiFi/Kibana pendiente.
+
+
+G20     Privacidad en el       PM         Evidencia                Media       S02 · Documentación aceptada; no
+        conjunto del diseño               documental                           demuestra cumplimiento universal de
+                                          disponible; sin cierre               cualquier uso futuro.
+                                          humano nuevo
+
+
+G23     IA específica frente   ML         Explicación o ensayo     Alta        S02/S08 · Contenido preparado,
+        a general                         humano pendiente                     explicación personal sin acreditar. El LLM
+                                                                               no es el modelo CNC.
+
+
+G24     Reglas frente a ML     ML         Explicación o ensayo     Alta        S02/S08 · Distinguir score aprendido y
+                                          humano pendiente                     reglas fijas de aviso en la exposición.
+
+
+G31     Tipos de               ML         Explicación o ensayo     Alta        S14/S08 · Investigación amplia; rareza no
+        aprendizaje y datos               humano pendiente                     es fallo confirmado, y falta explicación
+                                                                               individual.
+
+
+G32     Técnicas y             ML         Explicación o ensayo     Alta        S04/S14 · Ecosistema y alternativas
+        herramientas                      humano pendiente                     documentados; evitar defensa basada solo
+        elegidas                                                               en nombres de herramientas.
+
+
+G36     EDA y preparación      ML         Evidencia                Media       S02 · Tratamiento reproducible del CSV
+                                          documental                           reducido; no crear cronología física.
+                                          disponible; sin cierre
+                                          humano nuevo
+
+
+G38     Features y fuga de     ML         Evidencia                Media       S02/S14 · Features físicas y aislamiento
+        información                       documental                           del ajuste; no atribuir al runtime técnicas
+                                          disponible; sin cierre               solo investigadas.
+                                          humano nuevo
+
+
+G39     Evaluación e           ML         Explicación o ensayo     Alta        S06/S10 · Matriz conciliada sobre
+        interpretación                    humano pendiente                     desarrollo reutilizado; evaluación del
+                                                                               modelo local de prueba no vinculada.
+Celda   Criterio             Área        Estado documental        Prioridad   Evidencia / reserva original
+                                                                  propuesta
+
+
+G41     API y servicio       Sistemas    Revalidar alcance        Alta        S04/S10/S12 · Candidatura añade GET e
+        robusto                          para la versión del                  imagen verificada localmente; merge y
+                                         ensayo                               campaña completa separados.
+
+
+G45     Adecuación y         ML          Explicación o ensayo     Alta        S06/S17 · Recall de desarrollo supera
+        desbalance                       humano pendiente                     referencia literal; adecuación industrial no
+                                                                              demostrada.
+
+
+G46     Fiabilidad de        Sistemas    Revalidar alcance        Alta        S07/S10 · Recuperación y balances
+        extremo a extremo                para la versión del                  históricos; ensayo nuevo acotado no
+                                         ensayo                               demuestra todo el stack simultáneo.
+
+
+G49     Automatización del   Sistemas    Interpretación           Alta        S03/S05/S10 · SMB y worker aceptados
+        streaming                        docente pendiente                    por PM; literal NFS y valoración docente
+                                                                              pendientes; SMB nuevo no probado.
+
+
+G52     Elección de Python   PM          Evidencia                Media       S02/S04 · Justificación y uso coherentes;
+                                         documental                           preparar comparación breve y limitaciones.
+                                         disponible; sin cierre
+                                         humano nuevo
+
+
+G55     Estructura modular   PM          Evidencia                Media       S04/S12 · Separación
+        y validación                     documental                           entrenamiento/servicio y contratos;
+                                         disponible; sin cierre               candidatura añade lectura acotada.
+                                         humano nuevo
+
+
+G60     Modelo, desbalance   ML          Explicación o ensayo     Alta        S14/S06 · Estudios comparables; explicar
+        y métricas                       humano pendiente                     accuracy engañosa y no llamar calibrado al
+                                                                              score sin evidencia.
+
+
+G61     Implementación y     ML          Explicación o ensayo     Alta        S06/S20/S03 · 0,15/0,70 preservados;
+        umbrales                         humano pendiente                     distinguir regla binaria de evaluación y
+                                                                              modelo exacto desplegado.
+
+
+G62     Mejoras, CV e        ML          Interpretación           Alta        S03/S14/S12 · Histórico de observaciones
+        histórico                        docente pendiente                    no es histórico causal por máquina para
+                                                                              entrenar; literal G62 pendiente.
+
+
+G65     Información útil     Dashboard   Explicación o ensayo     Alta        S02/S10 · Nuevo panel con evento visible;
+        para mantenimiento               humano pendiente                     falta ensayo de equipo y decisión simulada
+                                                                              explicada.
+
+
+G66     Coherencia de        Dashboard   Revalidar alcance        Alta        S02/S10/S12 · Contratos y procedencia;
+        formatos                         para la versión del                  candidatura conserva identidad y nulls,
+                                         ensayo                               comprobados en recorrido local.
+
+
+G68     Índices e ingest     Sistemas    Evidencia                Media       S02/S10 · Instalación y validación
+        pipelines                        documental                           documentadas; no implica migración de
+                                         disponible; sin cierre               índices compartidos.
+                                         humano nuevo
+Celda   Criterio               Área        Estado documental        Prioridad   Evidencia / reserva original
+                                                                    propuesta
+
+
+G71     Gráficas, filtros y    Dashboard   Explicación o ensayo     Alta        S02/S10 · Kibana histórico y nuevo panel
+        agregaciones                       humano pendiente                     tienen evidencias distintas; explicar
+                                                                                denominadores y ventanas.
+
+
+G72     Sensores y decisión    Dashboard   Explicación o ensayo     Alta        S08/S17/S10 · Decisiones simuladas y
+        de mantenimiento                   humano pendiente                     costes; no se acredita intervención ni
+                                                                                ahorro real.
+
+
+G77     Extracción y archivo   Sistemas    Revalidar alcance        Alta        S02/S10/S12 · Archivo/recibos; candidatura
+        íntegro                            para la versión del                  verifica índice, bronze y Parquet; no prueba
+                                           ensayo                               pérdida de host.
+
+
+G80     Carga y eficiencia     Sistemas    Revalidar alcance        Alta        S07/S15 · Carga real medida con límites y
+        segura                             para la versión del                  mejora; no cumple meta E2E, quedan
+                                           ensayo                               gates de imágenes.
+
+
+G85     Mononodo frente a      Sistemas    Explicación o ensayo     Alta        S02/S07 · Límites documentados; falta
+        redundancia                        humano pendiente                     demostración de comprensión oral; no
+                                                                                hace falta inventar HA.
+
+
+G87     Dashboard claro y      Dashboard   Explicación o ensayo     Alta        S02/S09/S10 · Main conserva prototipo
+        completo                           humano pendiente                     Laneki; candidato tiene imágenes y
+                                                                                navegación local verificadas.
+
+
+G90     Kafka, offsets y       Sistemas    Revalidar alcance        Alta        S07/S10 · ACK tras persistencia; replay
+        reinicios                          para la versión del                  nuevo por stdin no es redelivery forzada
+                                           ensayo                               del broker.
+
+
+G92     Transformación,        Sistemas    Interpretación           Alta        S03/S05/S10 · NiFi programa worker; no
+        API y rutas                        docente pendiente                    se presenta InvokeHTTP/ConsumeKafka
+                                                                                nativo como ejecutado.
+
+
+G95     Calidad de datos       Sistemas    Evidencia                Media       S02/S12 · Rechazos y coherencia
+                                           documental                           documentados; explicar nulo, formato
+                                           disponible; sin cierre               inválido y duplicado.
+                                           humano nuevo
+
+
+G96     Interrupciones y       Sistemas    Revalidar alcance        Alta        S07/S10 · Cero pérdidas en campaña
+        duplicados                         para la versión del                  acotada y replay; no equivale a exactly-
+                                           ensayo                               once distribuido.
+
+
+G100    Selección de           Dashboard   Evidencia                Media       S02/S10 · Identidad y sensores
+        señales y                          documental                           preservados; score no es riesgo futuro ni
+        resultados                         disponible; sin cierre               medida de desgaste.
+                                           humano nuevo
+
+
+G101    Limpieza y             Dashboard   Evidencia                Media       S02/S12 · Validación y archivo; no rellenar
+        transformación                     documental                           faltantes con datos plausibles.
+                                           disponible; sin cierre
+                                           humano nuevo
+Celda   Criterio                Área        Estado documental      Prioridad   Evidencia / reserva original
+                                                                   propuesta
+
+
+G104    Interpretar alertas y   Dashboard   Explicación o ensayo   Alta        S17/S08/S10 · Casos preparados; ahorro,
+        costes                              humano pendiente                   coste esperado y decisión operativa real no
+                                                                               demostrados.
+
+
+G105    BI y presentación       Dashboard   Explicación o ensayo   Alta        S08/S10 · Material y panel preparados;
+                                            humano pendiente                   explicación humana y entrega aún no
+                                                                               acreditadas.
+
+
+
+
+   Media heurística histórica y límites
+
+La orientación histórica era alrededor de 8/10, con banda subjetiva 7–8,5; no es una predicción validada.
+La media simple anterior era 8,1125 para main y 8,325 para la candidatura estudiada. Pesos iguales 1/40,
+valoraciones subjetivas de preparación; no nota individual ni cálculo docente. Se conserva como histórico
+y no sube por esta nueva página.
+Cerrar con acuerdos revisables
+
+
+Una reunión útil termina con
+decisiones y evidencia
+pendiente.
+  Recorrido propuesto · 60 minutos
+      1. 10 min: objetivo, población, identidades y tres acuerdos.
+
+      2. 10 min: sistemas/dev siguen una observación hasta pantalla.
+
+      3. 15 min: ML/PM comparan costes, errores, variables y cortes.
+
+      4. 10 min: presupuesto de observaciones marcadas y casos concretos.
+
+      5. 10 min: cada persona explica una decisión de otra área.
+
+      6. 5 min: responsables, versión de ensayo y evidencia pendiente.
+
+
+
+
+  Preguntas que todos deben responder
+  ¿Por qué recibir en Kafka no acredita todavía la predicción archivada?
+
+  ¿Cuántas observaciones se marcan, y por qué no son inspecciones por hora?
+
+  ¿Qué distingue un caso observado, un score inferido y un modelo fijo validado?
+
+  ¿Qué prueba haría cambiar nuestra recomendación?
+  Borrador de acuerdos · sin celebrar ni aprobar
+  Versión y modelo que se ensayarán
+
+    Por confirmar
+
+
+  Costes, detección y presupuesto acordados
+
+    Rellenar tras la conversación; no se presupone un acuerdo.
+
+
+
+
+  Responsables confirmados, evidencias y fechas
+
+    Decisión · responsable · evidencia esperada · fecha
+
+
+
+
+    Descargar borrador de acuerdos
+
+
+  No se guardan nombres ni acuerdos en un servidor. El contenido permanece en esta página hasta
+  descargarlo.
+
+
+
+
+Feedback independiente y estado de esta revisión
+Claude evaluó la v4 como «necesita cambios»: rigor 7/10, claridad no técnica 6/10 y utilidad de reunión
+7/10. La v5 incorporó una parte del feedback. Esta v6 completa la ficha de la configuración fija,
+estados/prioridades de rúbrica y ampliación de imágenes. Claude revisó la v6 y confirmó H1–H7 en
+pantalla; encontró una omisión al imprimir desplegables y residuos de nombres, procedencia y texto. Esta
+entrega incorpora sus ajustes finales y se verifica localmente por el coordinador. El veredicto de Claude
+corresponde a la v6, no a estos bytes finales. Revisión de cierre de Claude · Ajustes finales y verificación.
+Feedback original completo · Cambios v5 · Estado H1–H7 y reservas.
+
+
+
+Fuentes y estado de la información
+Main documental c34cabe. Instantánea de PR119: OPEN / REVIEW_REQUIRED; head
+ea0a89edf73c764a9a8827286f086de5d37d6b65. Las evidencias locales históricas conservan sus propias
+identidades. No se consulta /health, ES, SMB ni el dashboard vivo desde este HTML.
+
+Las imágenes y los datos necesarios para explorar este informe están embebidos. No se realizan
+consultas de red. Los JSON descargables conservan los números; los CSV, código y verificadores están
+en el ZIP. Se requiere el archivo histórico sellado del repositorio para repetir el análisis original.
+     Qué ha mejorado respecto al HTML anterior
+
+   Decisiones y población al inicio; vocabulario antes de resultados; capacidad TP+FP con factibilidad
+   explícita; incertidumbre propia de A y dispersión por partición; candidatos y referencia separados;
+   evidencia de variables y anomalías de etiquetas visibles; imágenes explorables; filtros y exportación de un
+   borrador. Se revisaron por separado metodología y utilidad para la reunión.
+
+   Estos cambios mejoran información y uso. No acreditan un nuevo rendimiento industrial, un despliegue o
+   una aceptación humana. Tampoco agotan todas las familias e hiperparámetros posibles.
+
+
+
+
+Preparación local · datos de desarrollo ya explorados · sin actuación física · sin cambios en API/modelo de servicio · la fecha del
+informe no rejuvenece las evidencias históricas.
+

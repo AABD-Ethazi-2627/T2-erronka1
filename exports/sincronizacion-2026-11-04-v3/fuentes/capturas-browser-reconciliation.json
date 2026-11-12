@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "event_key": "cf2431835bd7bf3c426ba8f0097ec0371a2820bcd1f02b36a015ece321185745",
+  "event_id": "b872e51a8980ba9623fe8f83d5152becbc286ce09d5f8103fbaf28ff347e9e93",
+  "event_identity_extracted_from_visible_DOM": true,
+  "snapshot": {
+    "id": "CNC-004",
+    "zenbakia": 4,
+    "machine_type": "L",
+    "tenperatura": 36.650000000000034,
+    "giro_tenperatura": 27.350000000000023,
+    "rpm": 1345.0,
+    "torque": 62.7,
+    "higadura": 153.0,
+    "egoera": "Normala",
+    "event_id": "b872e51a8980ba9623fe8f83d5152becbc286ce09d5f8103fbaf28ff347e9e93",
+    "timestamp": "2026-11-03T11:07:50.531000Z",
+    "scored_at": "2026-11-03T11:47:45.076421Z",
+    "model_version": "ai4i-current-state-v4",
+    "model_artifact_sha256": "67c98ff5c9c265d956e686f151a507f255f0a2bb8864cd259c5736c08d9d0dfc",
+    "policy": "f2",
+    "quality_flag": "OK",
+    "source": {
+      "kind": "lab_fixture",
+      "uri": "kafka://local-kafka-b45c3ca8fb4442bdb687d5e05d7ea9b0/cnc-local-raw-b45c3ca8fb4442bdb687d5e05d7ea9b0",
+      "record_ref": "cnc-local-raw-b45c3ca8fb4442bdb687d5e05d7ea9b0/0/0"
+    },
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "score_semantics": "uncalibrated_current_state_score",
+    "temporal_prediction_enabled": false,
+    "failure_score": 0.039654372016458495,
+    "risk_alert": false,
+    "risk_threshold": 0.19082281465428477,
+    "decision_rule": "risk_alert@f2: failure_score >= risk_threshold",
+    "event_key": "cf2431835bd7bf3c426ba8f0097ec0371a2820bcd1f02b36a015ece321185745",
+    "alert_level": "OK"
+  },
+  "artifact_sha256": "042f02cad890b5bdc718e29f5b095b494591e9e8e70987c30bc0c951cb8106f8",
+  "desktop_viewport": {
+    "width": 1400,
+    "height": 1000
+  },
+  "mobile_viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "no_horizontal_overflow_mobile": true,
+  "pages": [
+    "Hasiera",
+    "Makinak",
+    "Datuak",
+    "Abisuak"
+  ],
+  "modal_sensors_verified": true,
+  "six_month_period_selected": true,
+  "real_timer": {
+    "before": {
+      "cutoff": "2026-11-03T12:10:13.681046Z",
+      "checked": true
+    },
+    "after": {
+      "cutoff": "2026-11-03T12:10:24.130836Z",
+      "checked": true
+    }
+  },
+  "limits": [
+    "single locally generated event",
+    "no new telemetry published during this browser run",
+    "not SMB or model acceptance"
+  ]
+}

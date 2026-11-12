@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "html_targets_checked": 59,
+  "aggregate_policy_rows_verified": 8934,
+  "fold_rows_verified": 26802,
+  "oof_procedures_verified": 21,
+  "historical_policy_rows_matched": 120,
+  "source_units_verified_initial": 600,
+  "additional_screening_units_verified": 120,
+  "selection_minima_verified": 54,
+  "candidate_new_base_fits": 2,
+  "candidate_reload_exact_rows": 32,
+  "candidate_invalid_input_cases": 4,
+  "candidate_cli_inference_rows": 32,
+  "pdf_pages_with_models": 8,
+  "notes": [
+    "Cálculo por otra vía dentro del mismo agente; no revisión humana independiente.",
+    "Se preserva ZIP original. No tests de producción, CI, SMB o modelos industriales nuevos."
+  ]
+}

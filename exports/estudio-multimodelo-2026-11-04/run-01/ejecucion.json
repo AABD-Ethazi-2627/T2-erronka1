@@ -1,0 +1,32 @@
+{
+  "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "archive_sha256": "640d75114324df4d8bafa20461cccf20da3850552c3bd6fa48080b9584e97896",
+  "protocol_sha256": "ee9ed1ed416938776fa10bcadde7a0299ee5528bd19d458e3bc27340d627969a",
+  "code_sha256": "89e7a3ed3ae02ad3480ca05dd034c39318ec2b9080921628300a687949493bc0",
+  "python": "3.12.14",
+  "sklearn": "1.5.0",
+  "numpy": "1.26.4",
+  "pandas": "2.2.2",
+  "base_configurations": 40,
+  "anomaly_configurations": 10,
+  "pairs": 2340,
+  "family_triples": 560,
+  "committees": 10,
+  "stacking_configurations": 18,
+  "new_meta_fits": 54,
+  "rarety_unions": 30,
+  "configurations_per_outer": 2998,
+  "verified_source_units": 600,
+  "wall_seconds": 41.88123077099954,
+  "no_base_refits": true,
+  "no_served_changes": true,
+  "no_validation_or_test_scoring": true,
+  "caveats": [
+    "All folds historically explored; post-hoc development evidence, not independent final test.",
+    "Family/top-k/member and policy selection excludes outer-held labels in this execution.",
+    "Stack base inputs OOF; meta threshold learned on meta training outputs, so internal stacking estimates are optimistic. Outer metrics evaluate that procedure.",
+    "Fixed .15/.70 applied for comparison, not claimed calibrated or interchangeable across models.",
+    "No measured runtime latency of a fitted ensemble serving package; no model deployed.",
+    "Raw anomaly scores never averaged as probabilities; union is a separate normality-proxy diagnostic."
+  ]
+}

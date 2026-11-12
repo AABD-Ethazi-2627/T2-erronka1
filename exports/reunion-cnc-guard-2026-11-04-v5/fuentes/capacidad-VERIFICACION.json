@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "budget_fold_selections": 45,
+  "budget_aggregate_rows": 15,
+  "inner_constraints_checked": true,
+  "partial_fold_totals_suppressed": true,
+  "four_cell_costs_checked": true
+}

@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "artifact_sha256": "dcc8fde21c2cb3992bb2142edb6ff874d764d87b33397038ba7d9392accb4b68",
+  "browser_checks": 80,
+  "offline": true,
+  "local_links_checked": 3,
+  "rubric_states": 40,
+  "fixed_configuration": "post-selection diagnostic with own conditional interval; not refit or independent evaluation",
+  "print_generated_and_layout_text_checked": true,
+  "visual_checks": [
+    "fixed historical configuration",
+    "rubric",
+    "first print page"
+  ],
+  "claude_status": "Review of v4 preserved. v6 coordinator verification completed; new Claude review pending.",
+  "no_new_fits": true,
+  "no_serving_changes": true
+}

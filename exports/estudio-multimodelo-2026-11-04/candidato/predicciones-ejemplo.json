@@ -1,0 +1,367 @@
+{
+  "scope": "AI4I_CURRENT_STATE_ONLY",
+  "model_sha256": "a19f1e4c894134063e5ee207aba1af03636212fc5179e6095ca8ec1e9dde9a2c",
+  "score_semantics": "uncalibrated current-state score; research only",
+  "temporal_prediction_enabled": false,
+  "rows": [
+    {
+      "row_position": 0,
+      "research_current_failure_score": 0.028800972232876913,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.07031337798260255
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 1,
+      "research_current_failure_score": 0.011584845617064412,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.001448871519352537
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 2,
+      "research_current_failure_score": 0.12916698116569236,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.47177741371386434
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 3,
+      "research_current_failure_score": 0.012553564928087776,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.005323748763445999
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 4,
+      "research_current_failure_score": 0.01744442397685864,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.02488718495852945
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 5,
+      "research_current_failure_score": 0.012040570776347456,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0032717721564847115
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 6,
+      "research_current_failure_score": 0.011798776465702153,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.002304594913903504
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 7,
+      "research_current_failure_score": 0.013538458572707784,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.009263323341926024
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 8,
+      "research_current_failure_score": 0.0114353831662155,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0008510217159568927
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 9,
+      "research_current_failure_score": 0.018478512386400026,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.029023538596695
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 10,
+      "research_current_failure_score": 0.012250109554804711,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.004109927270313738
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 11,
+      "research_current_failure_score": 0.012361942941158346,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.004557260815728276
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 12,
+      "research_current_failure_score": 0.012499322315880447,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.005106778314616683
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 13,
+      "research_current_failure_score": 0.013536559394235908,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.009255726628038525
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 14,
+      "research_current_failure_score": 0.011370156445445128,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0005901148328754014
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 15,
+      "research_current_failure_score": 0.011816008785971633,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.002373524194981423
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 16,
+      "research_current_failure_score": 0.011839912071887514,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.002469137338644947
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 17,
+      "research_current_failure_score": 0.011836282730486094,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.002454619973039264
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 18,
+      "research_current_failure_score": 0.01211647444218918,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.003575386819851609
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 19,
+      "research_current_failure_score": 0.03809096745017639,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.10747335885180047
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 20,
+      "research_current_failure_score": 0.013743777976731859,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.010084600958022326
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 21,
+      "research_current_failure_score": 0.011628861375849274,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0016249345544919864
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 22,
+      "research_current_failure_score": 0.012944087645582731,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.006885839633425818
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 23,
+      "research_current_failure_score": 0.01156420230192462,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0013662982587933725
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 24,
+      "research_current_failure_score": 0.03546200585438141,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.09695751246862053
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 25,
+      "research_current_failure_score": 0.01181586514256612,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0023729496213593716
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 26,
+      "research_current_failure_score": 0.011543180722274294,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0012822119401920697
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 27,
+      "research_current_failure_score": 0.012822077267837887,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.006397798122446439
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 28,
+      "research_current_failure_score": 0.01160898224775419,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0015454180421116545
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 29,
+      "research_current_failure_score": 0.01462869079342747,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.013624252224804767
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 30,
+      "research_current_failure_score": 0.011966713665133232,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.0029763437116278216
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    },
+    {
+      "row_position": 31,
+      "research_current_failure_score": 0.013558225264610988,
+      "member_scores": {
+        "cart_depth3": 0.014963503649635036,
+        "lgb_7_True": 0.009342390109538842
+      },
+      "research_review_ge_015": false,
+      "research_alert_level": "OK",
+      "outside_training_sensor_support": []
+    }
+  ],
+  "limits": [
+    "Refit in recorded local versions, distinct from original historical fitted artifacts.",
+    "No evaluation on validation or excluded test. Example predictions are training rows, not performance evidence.",
+    "Weighted score is uncalibrated current-state evidence, no future failure probability, ETA or RUL.",
+    "No serving API, policy, model or runtime environment was modified.",
+    "No integrated inference latency, external data or human acceptance is demonstrated."
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "status": "passed",
+  "criteria": 40,
+  "literal_descriptors": 40,
+  "local_targets": 109,
+  "source_hashes": 89,
+  "word_count": 11951,
+  "numerical_checks": "CG10 matrices, RF B cost/counts, pair cost, marginal cost; displayed metrics/load rows",
+  "limits": "Documentation checks only; no model training, live integration, current CI, legal revalidation or human acceptance.",
+  "date": "2026-11-05",
+  "pdf": {
+    "pages": 55,
+    "size_bytes": 799846,
+    "criteria_in_extracted_text": 40,
+    "out_of_page_text_words": 0,
+    "visual_review": "Final cover and November-work page inspected; architecture, metrics and rubric samples inspected after renderer correction."
+  },
+  "html": {
+    "internal_navigation_targets": 58,
+    "embedded_figures": 2,
+    "tables": 10,
+    "remote_assets": 0,
+    "verification": "Static HTML and anchor checks; no live application/browser acceptance claimed."
+  },
+  "existing_memory_check": {
+    "command": "python -B -m scripts.check_cg25_memory",
+    "status": "passed",
+    "criteria": 40,
+    "links": 90,
+    "current_hashes": 264,
+    "historical_hashes": 18
+  },
+  "git_diff_check": "passed; previous tracked files unchanged; documentation directory is new and uncommitted",
+  "pdf_renderer_repair": {
+    "path": "/home/tears/.agents/skills/make-pdf/bin/md2pdf.mjs",
+    "backup": "/tmp/cnc-md2pdf-before-20261105.mjs",
+    "changes": [
+      "Preserve Markdown pipe-table syntax during typography conversion",
+      "Embed local images as data URLs for offline Chromium rendering",
+      "Wrap long inline code and avoid splitting table rows"
+    ],
+    "sha256": "6020338f83a724f8b2ec9a1d62fe7fa96d676174692ddc94932c520a73a74768"
+  },
+  "artifacts": {
+    "ITURRIAK.json": "e6c014a173632029d75b0558cd3d9614c772d158e7189764765afc9a9fa5928c",
+    "MEMORIA_TEKNIKOA_EU.html": "d3f2705627e2f7a60b9e89e5c318e7b2fc1d0f3c334de9d4ed7b60cab50d097a",
+    "MEMORIA_TEKNIKOA_EU.md": "c2ddcaadaf4b88b2e767bd0a77c33d7476f63af16e65daf80e8b7baa9ad59241",
+    "MEMORIA_TEKNIKOA_EU.pdf": "aad5b09f699ffe0ab9e56782b57da3ff9ddf5a0b4b3ddbf664eb5b1ec733fe6f",
+    "README.md": "40c7106fd901cb895fb8fd0f8521712100e8a38fa60d6b88cc9fe4b4aac62b4f",
+    "arkitektura.svg": "6378a47192eaccc384bcdc28db1eb90f877a532c4cff08d29ca9cbfef9768325",
+    "build_reading.mjs": "c926da6bc32671a2e7c0fc7dc576413ea0972ebdb18569af97e2f4c1463ba3da",
+    "politikak.svg": "e34bfef61ab2caa4f30e7c47faa6bbb0ec1f4e8ee835cc7f2cd84e94caf1bf46",
+    "verify_document.py": "67919b218a9da958c9798859e31a7c11e69606a36f9ef7c51df859c10b1b532a"
+  }
+}

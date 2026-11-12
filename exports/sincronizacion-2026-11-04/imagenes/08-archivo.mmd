@@ -1,0 +1,3 @@
+graph LR
+ A["Raw y predicción"] --> B["CG15: SQLite, Parquet y DuckDB<br/>Parquet y recibos"] --> C["Lectura histórica verificada"]
+ D["GET no repara archivos; migración del índice antiguo es explícita y offline."] -. "límite" .-> B

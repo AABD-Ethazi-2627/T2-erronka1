@@ -1,0 +1,327 @@
+{
+  "method": "juicio heurístico, media simple de 40 criterios; no pesos docentes ni predicción estadística",
+  "main": 8.1125,
+  "candidate": 8.325,
+  "rows": [
+    [
+      5,
+      "Principios y autonomía",
+      8,
+      8,
+      "S02/S04",
+      "Explicar aprendizaje offline, inferencia actual y decisión humana; comprobar comprensión individual."
+    ],
+    [
+      10,
+      "Clasificación y comparación de modelos",
+      9,
+      9,
+      "S14",
+      "RF, boosting, IF y AE investigados; justificar límites y por qué no se promueve un ganador por una sola métrica."
+    ],
+    [
+      14,
+      "Costes, umbrales y viabilidad",
+      8,
+      8,
+      "S03/S07/S17",
+      "Separar costes del ejercicio, score y latencia total. La meta E2E de 1 s no se alcanzó."
+    ],
+    [
+      16,
+      "Riesgos legales y éticos",
+      8,
+      8,
+      "S02",
+      "Análisis documental aceptado por PM; defensa pendiente. No equivale a certificación."
+    ],
+    [
+      17,
+      "Privacidad y secretos",
+      8.5,
+      8.5,
+      "S02",
+      "Finalidad y separación del control laboral documentadas; conservar límites del laboratorio."
+    ],
+    [
+      19,
+      "Seguridad desde el diseño",
+      8,
+      8,
+      "S02/S15/S16",
+      "Controles de laboratorio; candidatura con cierre de imágenes NiFi/Kibana pendiente."
+    ],
+    [
+      20,
+      "Privacidad en el conjunto del diseño",
+      8,
+      8,
+      "S02",
+      "Documentación aceptada; no demuestra cumplimiento universal de cualquier uso futuro."
+    ],
+    [
+      23,
+      "IA específica frente a general",
+      7.5,
+      7.5,
+      "S02/S08",
+      "Contenido preparado, explicación personal sin acreditar. El LLM no es el modelo CNC."
+    ],
+    [
+      24,
+      "Reglas frente a ML",
+      7.5,
+      7.5,
+      "S02/S08",
+      "Distinguir score aprendido y reglas fijas de aviso en la exposición."
+    ],
+    [
+      31,
+      "Tipos de aprendizaje y datos",
+      8,
+      8,
+      "S14/S08",
+      "Investigación amplia; rareza no es fallo confirmado, y falta explicación individual."
+    ],
+    [
+      32,
+      "Técnicas y herramientas elegidas",
+      8.5,
+      8.5,
+      "S04/S14",
+      "Ecosistema y alternativas documentados; evitar defensa basada solo en nombres de herramientas."
+    ],
+    [
+      36,
+      "EDA y preparación",
+      9,
+      9,
+      "S02",
+      "Tratamiento reproducible del CSV reducido; no crear cronología física."
+    ],
+    [
+      38,
+      "Features y fuga de información",
+      8.5,
+      8.5,
+      "S02/S14",
+      "Features físicas y aislamiento del ajuste; no atribuir al runtime técnicas solo investigadas."
+    ],
+    [
+      39,
+      "Evaluación e interpretación",
+      8,
+      8,
+      "S06/S10",
+      "Matriz conciliada sobre desarrollo reutilizado; evaluación del modelo local de prueba no vinculada."
+    ],
+    [
+      41,
+      "API y servicio robusto",
+      8.5,
+      9,
+      "S04/S10/S12",
+      "Candidatura añade GET e imagen verificada localmente; merge y campaña completa separados."
+    ],
+    [
+      45,
+      "Adecuación y desbalance",
+      8,
+      8,
+      "S06/S17",
+      "Recall de desarrollo supera referencia literal; adecuación industrial no demostrada."
+    ],
+    [
+      46,
+      "Fiabilidad de extremo a extremo",
+      7.5,
+      8,
+      "S07/S10",
+      "Recuperación y balances históricos; ensayo nuevo acotado no demuestra todo el stack simultáneo."
+    ],
+    [
+      49,
+      "Automatización del streaming",
+      7,
+      7.5,
+      "S03/S05/S10",
+      "SMB y worker aceptados por PM; literal NFS y valoración docente pendientes; SMB nuevo no probado."
+    ],
+    [
+      52,
+      "Elección de Python",
+      8.5,
+      8.5,
+      "S02/S04",
+      "Justificación y uso coherentes; preparar comparación breve y limitaciones."
+    ],
+    [
+      55,
+      "Estructura modular y validación",
+      9,
+      9,
+      "S04/S12",
+      "Separación entrenamiento/servicio y contratos; candidatura añade lectura acotada."
+    ],
+    [
+      60,
+      "Modelo, desbalance y métricas",
+      8.5,
+      8.5,
+      "S14/S06",
+      "Estudios comparables; explicar accuracy engañosa y no llamar calibrado al score sin evidencia."
+    ],
+    [
+      61,
+      "Implementación y umbrales",
+      8.5,
+      8.5,
+      "S06/S20/S03",
+      "0,15/0,70 preservados; distinguir regla binaria de evaluación y modelo exacto desplegado."
+    ],
+    [
+      62,
+      "Mejoras, CV e histórico",
+      7,
+      7.5,
+      "S03/S14/S12",
+      "Histórico de observaciones no es histórico causal por máquina para entrenar; literal G62 pendiente."
+    ],
+    [
+      65,
+      "Información útil para mantenimiento",
+      7.5,
+      8,
+      "S02/S10",
+      "Nuevo panel con evento visible; falta ensayo de equipo y decisión simulada explicada."
+    ],
+    [
+      66,
+      "Coherencia de formatos",
+      8.5,
+      9,
+      "S02/S10/S12",
+      "Contratos y procedencia; candidatura conserva identidad y nulls, comprobados en recorrido local."
+    ],
+    [
+      68,
+      "Índices e ingest pipelines",
+      9,
+      9,
+      "S02/S10",
+      "Instalación y validación documentadas; no implica migración de índices compartidos."
+    ],
+    [
+      71,
+      "Gráficas, filtros y agregaciones",
+      8,
+      8.5,
+      "S02/S10",
+      "Kibana histórico y nuevo panel tienen evidencias distintas; explicar denominadores y ventanas."
+    ],
+    [
+      72,
+      "Sensores y decisión de mantenimiento",
+      7.5,
+      8,
+      "S08/S17/S10",
+      "Decisiones simuladas y costes; no se acredita intervención ni ahorro real."
+    ],
+    [
+      77,
+      "Extracción y archivo íntegro",
+      8.5,
+      9,
+      "S02/S10/S12",
+      "Archivo/recibos; candidatura verifica índice, bronze y Parquet; no prueba pérdida de host."
+    ],
+    [
+      80,
+      "Carga y eficiencia segura",
+      8,
+      8,
+      "S07/S15",
+      "Carga real medida con límites y mejora; no cumple meta E2E, quedan gates de imágenes."
+    ],
+    [
+      85,
+      "Mononodo frente a redundancia",
+      8,
+      8,
+      "S02/S07",
+      "Límites documentados; falta demostración de comprensión oral; no hace falta inventar HA."
+    ],
+    [
+      87,
+      "Dashboard claro y completo",
+      8,
+      8.5,
+      "S02/S09/S10",
+      "Main conserva prototipo Laneki; candidato tiene imágenes y navegación local verificadas."
+    ],
+    [
+      90,
+      "Kafka, offsets y reinicios",
+      8.5,
+      9,
+      "S07/S10",
+      "ACK tras persistencia; replay nuevo por stdin no es redelivery forzada del broker."
+    ],
+    [
+      92,
+      "Transformación, API y rutas",
+      7.5,
+      8,
+      "S03/S05/S10",
+      "NiFi programa worker; no se presenta InvokeHTTP/ConsumeKafka nativo como ejecutado."
+    ],
+    [
+      95,
+      "Calidad de datos",
+      8.5,
+      8.5,
+      "S02/S12",
+      "Rechazos y coherencia documentados; explicar nulo, formato inválido y duplicado."
+    ],
+    [
+      96,
+      "Interrupciones y duplicados",
+      8.5,
+      9,
+      "S07/S10",
+      "Cero pérdidas en campaña acotada y replay; no equivale a exactly-once distribuido."
+    ],
+    [
+      100,
+      "Selección de señales y resultados",
+      8,
+      8.5,
+      "S02/S10",
+      "Identidad y sensores preservados; score no es riesgo futuro ni medida de desgaste."
+    ],
+    [
+      101,
+      "Limpieza y transformación",
+      8.5,
+      9,
+      "S02/S12",
+      "Validación y archivo; no rellenar faltantes con datos plausibles."
+    ],
+    [
+      104,
+      "Interpretar alertas y costes",
+      7.5,
+      8,
+      "S17/S08/S10",
+      "Casos preparados; ahorro, coste esperado y decisión operativa real no demostrados."
+    ],
+    [
+      105,
+      "BI y presentación",
+      7.5,
+      8,
+      "S08/S10",
+      "Material y panel preparados; explicación humana y entrega aún no acreditadas."
+    ]
+  ]
+}

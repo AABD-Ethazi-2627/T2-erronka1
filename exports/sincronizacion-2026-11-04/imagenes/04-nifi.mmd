@@ -1,0 +1,3 @@
+graph LR
+ A["Trigger periódico"] --> B["NiFi<br/>Ejecuta ciclo worker"] --> C["Diagnóstico del ciclo"]
+ D["No afirmar que ConsumeKafka o InvokeHTTP nativos realizaron ese recorrido."] -. "límite" .-> B

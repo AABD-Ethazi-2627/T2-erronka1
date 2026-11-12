@@ -1,0 +1,3 @@
+graph LR
+ A["Consume Kafka"] --> B["Worker durable<br/>API y destinos durables"] --> C["Confirma offset"]
+ D["Reintentos al menos una vez con deduplicación; no exactly-once global."] -. "límite" .-> B

@@ -1,0 +1,370 @@
+{
+  "status": "pass",
+  "method": "stdlib csv/float and independent tied-score AP",
+  "manifest_sha256": "d881aa24d43a1f44e98956c37a4e88cacb21989a1fe0c205ed9e8d67aa72187b",
+  "summary_sha256": "e874fc3fa7e1560d63ba830f2467d8fc4ee1257488f453e489bc6cdff2fb629e",
+  "cpu_seconds": {
+    "screening": 716.0406249999991,
+    "nested": 2857.9812500000085,
+    "secondary": 262.86875000000015,
+    "benchmark": 1175.228125
+  },
+  "gpu_seconds": 138.8079093999695,
+  "pilot_sum_process_wall_seconds": 167.55414410005324,
+  "observed_peak_rss_bytes": 856993792,
+  "evidence_bytes": 164309031,
+  "states": {
+    "complete": 831,
+    "complete_analysis": 10,
+    "complete_reserve": 2,
+    "complete_preflight": 1
+  },
+  "audit_self_accounting_finalized_after_this_output": [],
+  "verified_models": {
+    "rf_reference": {
+      "n": 5600,
+      "independent_ap": 0.9056729757022486,
+      "counts_and_costs": true
+    },
+    "gb_depth3": {
+      "n": 5600,
+      "independent_ap": 0.9094361241047051,
+      "counts_and_costs": true
+    },
+    "hist_reference": {
+      "n": 5600,
+      "independent_ap": 0.8665063011781958,
+      "counts_and_costs": true
+    },
+    "logistic_reference": {
+      "n": 5600,
+      "independent_ap": 0.4936703082499143,
+      "counts_and_costs": true
+    },
+    "always0": {
+      "n": 5600,
+      "independent_ap": 0.033928571428571426,
+      "counts_and_costs": true
+    },
+    "always1": {
+      "n": 5600,
+      "independent_ap": 0.033928571428571426,
+      "counts_and_costs": true
+    },
+    "rf_no_derived": {
+      "n": 5600,
+      "independent_ap": 0.7485576739575581,
+      "counts_and_costs": true
+    },
+    "gb_no_derived": {
+      "n": 5600,
+      "independent_ap": 0.7849067693378801,
+      "counts_and_costs": true
+    },
+    "cart_depth3": {
+      "n": 5600,
+      "independent_ap": 0.5671385889911578,
+      "counts_and_costs": true
+    },
+    "cart_depth5": {
+      "n": 5600,
+      "independent_ap": 0.8822941418850324,
+      "counts_and_costs": true
+    },
+    "cart_depth8": {
+      "n": 5600,
+      "independent_ap": 0.8787579672888229,
+      "counts_and_costs": true
+    },
+    "nb_1e-09": {
+      "n": 5600,
+      "independent_ap": 0.4813283703666247,
+      "counts_and_costs": true
+    },
+    "nb_1e-07": {
+      "n": 5600,
+      "independent_ap": 0.48132864675565723,
+      "counts_and_costs": true
+    },
+    "lda": {
+      "n": 5600,
+      "independent_ap": 0.4794004382593441,
+      "counts_and_costs": true
+    },
+    "qda_0.1": {
+      "n": 5600,
+      "independent_ap": 0.4480086441381366,
+      "counts_and_costs": true
+    },
+    "qda_0.5": {
+      "n": 5600,
+      "independent_ap": 0.4796426356501461,
+      "counts_and_costs": true
+    },
+    "knn5": {
+      "n": 5600,
+      "independent_ap": 0.5484655638030999,
+      "counts_and_costs": true
+    },
+    "knn15": {
+      "n": 5600,
+      "independent_ap": 0.6094013377654094,
+      "counts_and_costs": true
+    },
+    "knn35": {
+      "n": 5600,
+      "independent_ap": 0.6111964954581643,
+      "counts_and_costs": true
+    },
+    "ada_depth1": {
+      "n": 5600,
+      "independent_ap": 0.773016454868369,
+      "counts_and_costs": true
+    },
+    "ada_depth2": {
+      "n": 5600,
+      "independent_ap": 0.8884628253656056,
+      "counts_and_costs": true
+    },
+    "cat_d4_False": {
+      "n": 5600,
+      "independent_ap": 0.8537787771666783,
+      "counts_and_costs": true
+    },
+    "cat_d4_True": {
+      "n": 5600,
+      "independent_ap": 0.8322554899638571,
+      "counts_and_costs": true
+    },
+    "cat_d6_False": {
+      "n": 5600,
+      "independent_ap": 0.8509259263312906,
+      "counts_and_costs": true
+    },
+    "cat_d6_True": {
+      "n": 5600,
+      "independent_ap": 0.837392749830478,
+      "counts_and_costs": true
+    },
+    "xgb_d3_False": {
+      "n": 5600,
+      "independent_ap": 0.8969240399458945,
+      "counts_and_costs": true
+    },
+    "xgb_d3_True": {
+      "n": 5600,
+      "independent_ap": 0.8800747040599766,
+      "counts_and_costs": true
+    },
+    "xgb_d6_False": {
+      "n": 5600,
+      "independent_ap": 0.8806247142391698,
+      "counts_and_costs": true
+    },
+    "xgb_d6_True": {
+      "n": 5600,
+      "independent_ap": 0.8758685670118046,
+      "counts_and_costs": true
+    },
+    "lgb_7_False": {
+      "n": 5600,
+      "independent_ap": 0.8958302322416897,
+      "counts_and_costs": true
+    },
+    "lgb_7_True": {
+      "n": 5600,
+      "independent_ap": 0.883987067074469,
+      "counts_and_costs": true
+    },
+    "lgb_15_False": {
+      "n": 5600,
+      "independent_ap": 0.8940391749109261,
+      "counts_and_costs": true
+    },
+    "lgb_15_True": {
+      "n": 5600,
+      "independent_ap": 0.8946749518407816,
+      "counts_and_costs": true
+    },
+    "ebm_0": {
+      "n": 5600,
+      "independent_ap": 0.6199050562830017,
+      "counts_and_costs": true
+    },
+    "ebm_3": {
+      "n": 5600,
+      "independent_ap": 0.7226927807081028,
+      "counts_and_costs": true
+    },
+    "gam_3": {
+      "n": 5600,
+      "independent_ap": 0.5960531283688536,
+      "counts_and_costs": true
+    },
+    "gam_5": {
+      "n": 5600,
+      "independent_ap": 0.6291875688589293,
+      "counts_and_costs": true
+    },
+    "mlp_16": {
+      "n": 5600,
+      "independent_ap": 0.1422955555958561,
+      "counts_and_costs": true
+    },
+    "mlp_32": {
+      "n": 5600,
+      "independent_ap": 0.1610358001849736,
+      "counts_and_costs": true
+    },
+    "mlp_32_16": {
+      "n": 5600,
+      "independent_ap": 0.12459944845311231,
+      "counts_and_costs": true
+    }
+  },
+  "warnings": [
+    {
+      "unit": "08a23fdc1158d239d42d1b81d46d939db23271a44f3be1e74b883c8a6fbe505c",
+      "category": "UserWarning",
+      "message": "[10:31:57] WARNING: C:\\actions-runner\\_work\\xgboost\\xgboost\\src\\common\\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.\nPotential solutions:\n- Use a data structure that matches the device ordinal in the booster.\n- Set the device for booster before call to inplace_predict.\n\nThis warning will only be shown once.\n"
+    },
+    {
+      "unit": "0d8625e796d1a84a9a129fe580c8028cf11b82308b7e8e914ae725813227aba4",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "0d8625e796d1a84a9a129fe580c8028cf11b82308b7e8e914ae725813227aba4",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "229b080d070cf34b4e30f472706ab315897a7a62fae5fac02bc730841e612c91",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "229b080d070cf34b4e30f472706ab315897a7a62fae5fac02bc730841e612c91",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "31374c047738f1ea75a00d1fdcbc4f54e276a42e2a2b6df3ac7a2c103c494119",
+      "category": "ConvergenceWarning",
+      "message": "Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet."
+    },
+    {
+      "unit": "4191e0ed1ef1e199dd885b09202ee7cd25d9a767fd0730f2c12b45395f825733",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "4191e0ed1ef1e199dd885b09202ee7cd25d9a767fd0730f2c12b45395f825733",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "4351080e1d3f3054b2840c43cf6eb6564ea2eb311d557f05785de77a72bc8b41",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "4351080e1d3f3054b2840c43cf6eb6564ea2eb311d557f05785de77a72bc8b41",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "6524e1fca83e4a258a135e2b60cad5470dcbbe016f3dcc476006239f643b3f75",
+      "category": "UserWarning",
+      "message": "[10:31:15] WARNING: C:\\actions-runner\\_work\\xgboost\\xgboost\\src\\common\\error_msg.cc:62: Falling back to prediction using DMatrix due to mismatched devices. This might lead to higher memory usage and slower performance. XGBoost is running on: cuda:0, while the input data is on: cpu.\nPotential solutions:\n- Use a data structure that matches the device ordinal in the booster.\n- Set the device for booster before call to inplace_predict.\n\nThis warning will only be shown once.\n"
+    },
+    {
+      "unit": "9271143ccc8705b18df9c00bf11883a6069e7cb2afdd3941c2ab9d0b154d4fca",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "9271143ccc8705b18df9c00bf11883a6069e7cb2afdd3941c2ab9d0b154d4fca",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "9772e4a55118b52428a125c83223784329bf7353e59dcc998a0cc835f55344f3",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "9772e4a55118b52428a125c83223784329bf7353e59dcc998a0cc835f55344f3",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "9f999920f9c98de47f9917adfc73931325ae474de12dfa604717e1c110de4e46",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "9f999920f9c98de47f9917adfc73931325ae474de12dfa604717e1c110de4e46",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "a737396ec9d30807a278563aa804cb292433280d373093e212e1db03e9870f1f",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "a737396ec9d30807a278563aa804cb292433280d373093e212e1db03e9870f1f",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "b3971a9b1fb7e7dc457ed4e2421b282954b128626119e1f65daf518d78288b6a",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "b3971a9b1fb7e7dc457ed4e2421b282954b128626119e1f65daf518d78288b6a",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "b4883ba6f8ab1e9ef9e5be237ec54422266ebf9fb8e9198cd5efab7bd4d749f9",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "b4883ba6f8ab1e9ef9e5be237ec54422266ebf9fb8e9198cd5efab7bd4d749f9",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "cfba3a451c64462a8620948b2bdd3e6f31ffa97209e57f9d30f339e500d9cfb6",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "cfba3a451c64462a8620948b2bdd3e6f31ffa97209e57f9d30f339e500d9cfb6",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "e4d19db53255951072f5e35c77d2ef472abb0f55431e2c97370a886a952a53d6",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    },
+    {
+      "unit": "e4d19db53255951072f5e35c77d2ef472abb0f55431e2c97370a886a952a53d6",
+      "category": "UserWarning",
+      "message": "Variables are collinear"
+    }
+  ],
+  "limits": [
+    "Self-run technical audit; no independent human review",
+    "RSS sampled; not a hardware memory peak guarantee",
+    "No final test, industrial acceptance or deployment"
+  ],
+  "hashes_count": 5163,
+  "full_audit_sha256": "87517623c8924c3f9803bb4bdf8aa86e1902f746451affcb0d7f8e9f5b741eaf",
+  "full_audit_path": "/home/admin/labs/cg34-closeout-audit-20261028.json"
+}

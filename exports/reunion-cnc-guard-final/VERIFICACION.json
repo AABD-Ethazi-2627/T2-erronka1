@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "artifact_sha256": "d25dc5e09097f63837a60aca83ef8bcc4e6f5bbf4c0dce20d29b966228ea365d",
+  "browser_checks": 96,
+  "offline": true,
+  "external_requests": [],
+  "runtime_errors": [],
+  "embedded_images": 18,
+  "method_cost_rows_recalculated": 21,
+  "local_links_checked": 5,
+  "rubric_states": 40,
+  "print_checks": {
+    "all_seven_sections_in_pdf": true,
+    "glossary_and_economic_terms_in_pdf": [
+      "839",
+      "23,5",
+      "4.700",
+      "positivo detectado"
+    ],
+    "all_details_opened": true,
+    "all_details_original_states_restored": true,
+    "pdf_text": "verificacion/impresion-texto.txt"
+  },
+  "visual_checks": [
+    "PDF page 3: complete glossary and opening comparison",
+    "PDF page 5: complete economic scale and three parallel KPIs"
+  ],
+  "source_reference_hash_verified": true,
+  "fixed_decision_changes": {
+    "negative_flags_removed": 38,
+    "negative_flags_added": 15,
+    "positive_decisions_changed": 0
+  },
+  "claude_status": "v6 reviewed independently; final small fixes verified locally by coordinator, not re-reviewed by Claude",
+  "no_new_fits": true,
+  "no_serving_changes": true,
+  "limits": [
+    "conditional post-selection development analysis, not independent evaluation",
+    "not live service integration or human acceptance",
+    "not full WCAG audit or full source-by-source rubric audit"
+  ]
+}

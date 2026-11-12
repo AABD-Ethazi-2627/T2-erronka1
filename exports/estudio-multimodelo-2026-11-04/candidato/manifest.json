@@ -1,0 +1,79 @@
+{
+  "scope": "AI4I_CURRENT_STATE_ONLY",
+  "status": "research candidate fitted; not served or independently validated",
+  "members": [
+    "cart_depth3",
+    "lgb_7_True"
+  ],
+  "weights": [
+    0.75,
+    0.25
+  ],
+  "inputs": [
+    "air_temp_K",
+    "process_temp_K",
+    "rpm",
+    "torque_Nm",
+    "tool_wear_min",
+    "machine_type"
+  ],
+  "python": "3.12.14",
+  "versions": {
+    "numpy": "1.26.4",
+    "pandas": "2.2.2",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.5.0",
+    "joblib": "1.5.3",
+    "lightgbm": "4.6.0"
+  },
+  "source_sha256": "1cce2859f4833b63dbf0992868884e5deac6f79e4d74a245abbc484d34e396ce",
+  "train_rows": 5600,
+  "train_positives": 190,
+  "train_index_sha256": "cdc6374b1a6e9c614f0c9f76b493a09109f125ae57f5fef66e2db9e078744c51",
+  "code": {
+    "scripts/ml_study_models.py": "78293fa87b0484803d8171206ab951201c1e569ec8f261765e67f101133b74d8",
+    "scoring/preparation.py": "2578e9497dc16d8501d88c4fe472b0f4146dc4661548a5abfa0019251ee80c1d",
+    "scoring/scope.py": "f8f9443f96465fe96d922a380af6940928a863d21a2f7a26e8db19ca35e4d7e7"
+  },
+  "runner_sha256": "ac18414511748ca61587d2b34518a0ff0c0a39682484c5f00eff176e443ed545",
+  "model_sha256": "a19f1e4c894134063e5ee207aba1af03636212fc5179e6095ca8ec1e9dde9a2c",
+  "selection_sha256": "636b581e45a8c2b1bf8b6d0456846efcf9ee0bde91cc1553e9709f5ce1d21468",
+  "selection": "Minimum cost among 2340 pairs on historical screening OOF train; not chosen from outer results.",
+  "policies": {
+    "research_review": 0.15,
+    "research_critical": 0.7
+  },
+  "sensor_support": {
+    "air_temp_K": {
+      "min": 295.3,
+      "max": 304.5
+    },
+    "process_temp_K": {
+      "min": 305.7,
+      "max": 313.8
+    },
+    "rpm": {
+      "min": 1168.0,
+      "max": 2861.0
+    },
+    "torque_Nm": {
+      "min": 4.6,
+      "max": 76.2
+    },
+    "tool_wear_min": {
+      "min": 0.0,
+      "max": 253.0
+    }
+  },
+  "fit_and_reload_wall_seconds": 0.5268909229998826,
+  "reload_max_abs_difference": 0.0,
+  "invalid_input_tests": 4,
+  "warnings": [],
+  "limits": [
+    "Refit in recorded local versions, distinct from original historical fitted artifacts.",
+    "No evaluation on validation or excluded test. Example predictions are training rows, not performance evidence.",
+    "Weighted score is uncalibrated current-state evidence, no future failure probability, ETA or RUL.",
+    "No serving API, policy, model or runtime environment was modified.",
+    "No integrated inference latency, external data or human acceptance is demonstrated."
+  ]
+}
