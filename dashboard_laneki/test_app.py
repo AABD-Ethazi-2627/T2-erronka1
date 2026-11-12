@@ -23,7 +23,7 @@ class AppTests(unittest.TestCase):
     def test_timer_requests_full_rerun_only_outside_inline_render(self):
         # Execute the real control body with UI/time doubles. AppTest alone runs
         # fragments inline and cannot exercise their independent timer context.
-        tree = ast.parse(Path(__file__).with_name("app.py").read_text())
+        tree = ast.parse(Path(__file__).with_name("app.py").read_text(encoding="utf-8"))
         function = next(
             node
             for node in tree.body
@@ -374,10 +374,10 @@ class CanonicalAppTests(unittest.TestCase):
             ):
                 self.assertNotIn(misleading, text)
             self.assertIn("sentinel", text)
-        self.assertEqual(len(app.number_input), 3)
-        app.number_input[0].set_value(20).run()
-        app.number_input[1].set_value(2).run()
-        app.number_input[2].set_value(100).run()
+        self.assertEqual(len(app.number_input), 4)
+        app.number_input[1].set_value(20).run()
+        app.number_input[2].set_value(2).run()
+        app.number_input[3].set_value(100).run()
         self.assertTrue(
             any(
                 m.label == "Eszenarioaren esposizioa (€)" and m.value == "220"
