@@ -115,5 +115,10 @@ def datuak_erakutsi(machine, fetch, mode):
             columns=["Inferitua 0", "Inferitua 1"],
         )
     )
+    from operating_costs import classified_cost
+    total_cost = classified_cost(metrics)
+    baseline = (metrics['FN'] + metrics['TP']) * 5000
+    st.metric('Balidazioaren kostua · taula ofiziala', f'{total_cost:,.0f} €')
+    st.caption(f"5.000 × {metrics['FN']} FN + 200 × {metrics['FP']} FP + 300 × {metrics['TP']} TP = {total_cost:,.0f} €. Beti negatiboaren agertokia: {baseline:,.0f} €; aldea: {baseline-total_cost:,.0f} €. Balidazio-multzo bereko ariketa ekonomikoa da, ez zuzeneko gastua edo frogatutako aurrezkia.")
     st.write(metrics)
     st.json(payload)

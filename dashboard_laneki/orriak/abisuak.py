@@ -2,11 +2,13 @@
 
 import streamlit as st
 from read_contracts import scenario
+from orriak.costs import render_costs
 
 from orriak.shared import measurements
 
 
 def abisuak_erakutsi(makinak):
+    render_costs(makinak)
     st.subheader("Uneko abisu inferituak")
     st.caption(
         "Maila inferitua ez da behatutako matxura edo etorkizuneko probabilitatea."

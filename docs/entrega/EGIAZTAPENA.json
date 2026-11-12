@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-11-12T10:49:38.772322+00:00",
+  "health": {
+    "status": "ready",
+    "model_version": "ai4i-current-state-v4",
+    "prediction_scope": "AI4I_CURRENT_STATE_ONLY",
+    "temporal_prediction_enabled": false
+  },
+  "model_hashes_verified": true,
+  "notebook_code_cells_executed": 3,
+  "training_reexecuted": false,
+  "human_defense_verified": false,
+  "submitted": false
+}
